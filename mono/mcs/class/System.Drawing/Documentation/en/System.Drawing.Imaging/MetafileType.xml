@@ -16,7 +16,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies types of metafiles. The <see cref="P:System.Drawing.Imaging.MetafileHeader.Type" /> property returns a member of this enumeration.</para>
+      <para
+        >Specifies types of metafiles. The <see
+         cref="P:System.Drawing.Imaging.MetafileHeader.Type" />
+
+         property returns a member of this enumeration.</para
+      >
     </summary>
   </Docs>
   <Members>

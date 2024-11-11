@@ -20,7 +20,14 @@
     </table>
   </div>
   <div tabindex="5" id="GHTSubTest2" style="height:40px;width:277px">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" cellpadding="5" rules="all" id="DataGrid2">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      cellpadding="5"
+      rules="all"
+      id="DataGrid2"
+    >
       <tr>
         <td>col a</td>
         <td>col b</td>
@@ -59,20 +66,47 @@
   </div>
   <div tabindex="5" id="GHTSubTest4" style="height:40px;width:215px">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest5" style="width:86px">
     <table id="DataList1" border="1" rules="all">
       <tr>
         <td>
-          <input value="row 1" style="width:39px" type="text" name="DataList1:_ctl0:TextBox1" id="DataList1__ctl0_TextBox1" />
-          <input value="11111" style="width:31px" type="text" name="DataList1:_ctl0:TextBox2" id="DataList1__ctl0_TextBox2" />
+          <input
+            value="row 1"
+            style="width:39px"
+            type="text"
+            name="DataList1:_ctl0:TextBox1"
+            id="DataList1__ctl0_TextBox1"
+          />
+          <input
+            value="11111"
+            style="width:31px"
+            type="text"
+            name="DataList1:_ctl0:TextBox2"
+            id="DataList1__ctl0_TextBox2"
+          />
         </td>
       </tr>
       <tr>
         <td>
-          <input value="row 22222" style="width:39px" type="text" name="DataList1:_ctl1:TextBox1" id="DataList1__ctl1_TextBox1" />
-          <input value="2" style="width:31px" type="text" name="DataList1:_ctl1:TextBox2" id="DataList1__ctl1_TextBox2" />
+          <input
+            value="row 22222"
+            style="width:39px"
+            type="text"
+            name="DataList1:_ctl1:TextBox1"
+            id="DataList1__ctl1_TextBox1"
+          />
+          <input
+            value="2"
+            style="width:31px"
+            type="text"
+            name="DataList1:_ctl1:TextBox2"
+            id="DataList1__ctl1_TextBox2"
+          />
         </td>
       </tr>
     </table>
@@ -81,14 +115,38 @@
     <table id="DataList2" cellspacing="0" border="1" style="border-collapse:collapse" rules="all">
       <tr>
         <td>
-          <input value="row 1" style="width:39px" type="text" name="DataList2:_ctl0:TextBox1" id="DataList2__ctl0_TextBox1" />
-          <input value="11111" style="width:31px" type="text" name="DataList2:_ctl0:TextBox2" id="DataList2__ctl0_TextBox2" />
+          <input
+            value="row 1"
+            style="width:39px"
+            type="text"
+            name="DataList2:_ctl0:TextBox1"
+            id="DataList2__ctl0_TextBox1"
+          />
+          <input
+            value="11111"
+            style="width:31px"
+            type="text"
+            name="DataList2:_ctl0:TextBox2"
+            id="DataList2__ctl0_TextBox2"
+          />
         </td>
       </tr>
       <tr>
         <td>
-          <input value="row 22222" style="width:39px" type="text" name="DataList2:_ctl1:TextBox1" id="DataList2__ctl1_TextBox1" />
-          <input value="2" style="width:31px" type="text" name="DataList2:_ctl1:TextBox2" id="DataList2__ctl1_TextBox2" />
+          <input
+            value="row 22222"
+            style="width:39px"
+            type="text"
+            name="DataList2:_ctl1:TextBox1"
+            id="DataList2__ctl1_TextBox1"
+          />
+          <input
+            value="2"
+            style="width:31px"
+            type="text"
+            name="DataList2:_ctl1:TextBox2"
+            id="DataList2__ctl1_TextBox2"
+          />
         </td>
       </tr>
     </table>
@@ -97,20 +155,47 @@
     <table id="DataList3" cellspacing="2" border="1" rules="all" designtimedragdrop="258">
       <tr>
         <td>
-          <input value="row 1" style="width:39px" type="text" name="DataList3:_ctl0:TextBox1" id="DataList3__ctl0_TextBox1" />
-          <input value="11111" style="width:31px" type="text" name="DataList3:_ctl0:TextBox2" id="DataList3__ctl0_TextBox2" />
+          <input
+            value="row 1"
+            style="width:39px"
+            type="text"
+            name="DataList3:_ctl0:TextBox1"
+            id="DataList3__ctl0_TextBox1"
+          />
+          <input
+            value="11111"
+            style="width:31px"
+            type="text"
+            name="DataList3:_ctl0:TextBox2"
+            id="DataList3__ctl0_TextBox2"
+          />
         </td>
       </tr>
       <tr>
         <td>
-          <input value="row 22222" style="width:39px" type="text" name="DataList3:_ctl1:TextBox1" id="DataList3__ctl1_TextBox1" />
-          <input value="2" style="width:31px" type="text" name="DataList3:_ctl1:TextBox2" id="DataList3__ctl1_TextBox2" />
+          <input
+            value="row 22222"
+            style="width:39px"
+            type="text"
+            name="DataList3:_ctl1:TextBox1"
+            id="DataList3__ctl1_TextBox1"
+          />
+          <input
+            value="2"
+            style="width:31px"
+            type="text"
+            name="DataList3:_ctl1:TextBox2"
+            id="DataList3__ctl1_TextBox2"
+          />
         </td>
       </tr>
     </table>
   </div>
   <div id="GHTSubTest8" style="width:93px">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

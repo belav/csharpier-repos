@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CONNECTDATA" FullName="System.Runtime.InteropServices.ComTypes.CONNECTDATA">
   <TypeSignature Language="C#" Value="public struct CONNECTDATA" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential sealed beforefieldinit CONNECTDATA extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential sealed beforefieldinit CONNECTDATA extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,9 +18,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The CONNECTDATA structure is the type enumerated through the <see cref="M:System.Runtime.InteropServices.ComTypes.IEnumConnections.Next(System.Int32,System.Runtime.InteropServices.ComTypes.CONNECTDATA[],System.IntPtr)" /> method.</para>
+      <para
+        >The CONNECTDATA structure is the type enumerated through the <see
+         cref="M:System.Runtime.InteropServices.ComTypes.IEnumConnections.Next(System.Int32,System.Runtime.InteropServices.ComTypes.CONNECTDATA[],System.IntPtr)" />
+
+         method.</para
+      >
       <para>For more information about CONNECTDATA, see the MSDN Library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -41,7 +56,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents a connection token that is returned from a call to <see cref="M:System.Runtime.InteropServices.ComTypes.IConnectionPoint.Advise(System.Object,System.Int32@)" />.</para>
+          <para
+            >Represents a connection token that is returned from a call to <see
+             cref="M:System.Runtime.InteropServices.ComTypes.IConnectionPoint.Advise(System.Object,System.Int32@)" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

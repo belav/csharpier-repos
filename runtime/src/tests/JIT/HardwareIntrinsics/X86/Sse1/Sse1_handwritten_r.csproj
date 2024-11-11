@@ -9,7 +9,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="HandwrittenProgram.cs" />
-
     <Compile Include="ConvertToInt32WithTruncation.cs" />
     <Compile Include="ConvertToInt32.cs" />
     <Compile Include="LoadAlignedVector128.cs" />

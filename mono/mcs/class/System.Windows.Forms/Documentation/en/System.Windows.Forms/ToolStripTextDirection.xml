@@ -13,7 +13,12 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the text orientation to use with a particular <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />.</para>
+      <para
+        >Specifies the text orientation to use with a particular <see
+         cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>

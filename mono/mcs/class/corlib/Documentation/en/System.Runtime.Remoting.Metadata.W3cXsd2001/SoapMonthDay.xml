@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SoapMonthDay" FullName="System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class SoapMonthDay : System.Runtime.Remoting.Metadata.W3cXsd2001.ISoapXsd" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit SoapMonthDay extends System.Object implements class System.Runtime.Remoting.Metadata.W3cXsd2001.ISoapXsd" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class SoapMonthDay : System.Runtime.Remoting.Metadata.W3cXsd2001.ISoapXsd"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit SoapMonthDay extends System.Object implements class System.Runtime.Remoting.Metadata.W3cXsd2001.ISoapXsd"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -26,7 +33,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information about XSD data types, see the "XML Data Types Reference" in the MSDN Library at <see cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>. </para>
+      <para
+        >For more information about XSD data types, see the "XML Data Types Reference" in the MSDN Library at <see
+         cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+        . </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -36,7 +48,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SoapMonthDay ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -49,13 +64,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SoapMonthDay (DateTime value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.DateTime value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.DateTime value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -70,15 +93,32 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" /> class with a specified <see cref="T:System.DateTime" /> object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+
+             class with a specified <see
+             cref="T:System.DateTime" />
+
+             object.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.DateTime" /> object to initialize the current instance. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.DateTime" />
+
+           object to initialize the current instance. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetXsdType">
       <MemberSignature Language="C#" Value="public string GetXsdType ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetXsdType() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string GetXsdType() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -97,13 +137,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that indicates the XSD of the current SOAP type.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that indicates the XSD of the current SOAP type.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public static System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay Parse (string value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay Parse(string value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay Parse (string value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay Parse(string value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -119,7 +170,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Parse(System.String)" /> method is capable of parsing strings in various formats. The recognizable string formats are composed out of the format patterns shown in the following table.</para>
+          <para
+            >The <see
+             cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Parse(System.String)" />
+
+             method is capable of parsing strings in various formats. The recognizable string formats are composed out of the format patterns shown in the following table.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -171,19 +227,44 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts the specified <see cref="T:System.String" /> into a <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" /> object.</para>
+          <para
+            >Converts the specified <see
+             cref="T:System.String" />
+
+             into a <see
+             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" /> object that is obtained from <paramref name="value" />.</para>
+          <para
+            >A <see
+             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+
+             object that is obtained from <paramref
+             name="value" />
+
+            .</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -198,17 +279,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" /> as a <see cref="T:System.String" />.</para>
+          <para
+            >Returns <see
+             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" />
+
+             as a <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that is obtained from <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" /> in the format "'--'MM'-'dd".</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that is obtained from <see
+             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" />
+
+             in the format "'--'MM'-'dd".</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Value">
       <MemberSignature Language="C#" Value="public DateTime Value { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime Value" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.DateTime Value"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

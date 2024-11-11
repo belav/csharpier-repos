@@ -1,6 +1,12 @@
 <Type Name="Fstab" FullName="Mono.Unix.Native.Fstab">
-  <TypeSignature Language="C#" Value="public sealed class Fstab : IEquatable&lt;Mono.Unix.Native.Fstab&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit Fstab extends System.Object implements class System.IEquatable`1&lt;class Mono.Unix.Native.Fstab&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class Fstab : IEquatable<Mono.Unix.Native.Fstab>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit Fstab extends System.Object implements class System.IEquatable`1<class Mono.Unix.Native.Fstab>"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -21,7 +27,12 @@
   </Interfaces>
   <Docs>
     <summary>File system descriptor file entry.</summary>
-    <remarks>This class contains the broken-out fields of a line in the file system description file <c>/etc/fstab</c>.</remarks>
+    <remarks
+      >This class contains the broken-out fields of a line in the file system description file <c
+      >/etc/fstab</c>
+
+      .</remarks
+    >
     <altmember cref="M:Mono.Unix.Native.Syscall.getfsent" />
     <altmember cref="M:Mono.Unix.Native.Syscall.getfsfile" />
     <altmember cref="M:Mono.Unix.Native.Syscall.getfsspec" />
@@ -29,7 +40,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Fstab ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -44,7 +58,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public bool Equals (Mono.Unix.Native.Fstab value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(class Mono.Unix.Native.Fstab value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Equals(class Mono.Unix.Native.Fstab value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -66,7 +83,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -207,7 +227,10 @@
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -225,8 +248,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Mono.Unix.Native.Fstab lhs, Mono.Unix.Native.Fstab rhs);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(class Mono.Unix.Native.Fstab lhs, class Mono.Unix.Native.Fstab rhs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Mono.Unix.Native.Fstab lhs, Mono.Unix.Native.Fstab rhs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Equality(class Mono.Unix.Native.Fstab lhs, class Mono.Unix.Native.Fstab rhs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -249,8 +278,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Mono.Unix.Native.Fstab lhs, Mono.Unix.Native.Fstab rhs);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(class Mono.Unix.Native.Fstab lhs, class Mono.Unix.Native.Fstab rhs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Mono.Unix.Native.Fstab lhs, Mono.Unix.Native.Fstab rhs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Inequality(class Mono.Unix.Native.Fstab lhs, class Mono.Unix.Native.Fstab rhs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -274,7 +309,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

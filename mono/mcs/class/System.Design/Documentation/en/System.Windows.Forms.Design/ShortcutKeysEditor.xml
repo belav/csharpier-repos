@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ShortcutKeysEditor" FullName="System.Windows.Forms.Design.ShortcutKeysEditor">
-  <TypeSignature Language="C#" Value="public class ShortcutKeysEditor : System.Drawing.Design.UITypeEditor" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ShortcutKeysEditor : System.Drawing.Design.UITypeEditor"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -28,12 +31,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ShortcutKeysEditor" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Design.ShortcutKeysEditor" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EditValue">
-      <MemberSignature Language="C#" Value="public override object EditValue (System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object EditValue (System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -50,22 +61,53 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Edits the given object value using the editor style provided by the <see cref="M:System.Windows.Forms.Design.ShortcutKeysEditor.GetEditStyle(System.ComponentModel.ITypeDescriptorContext)" /> method.</para>
+          <para
+            >Edits the given object value using the editor style provided by the <see
+             cref="M:System.Windows.Forms.Design.ShortcutKeysEditor.GetEditStyle(System.ComponentModel.ITypeDescriptorContext)" />
+
+             method.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The new value of the <see cref="T:System.Object" />.</para>
+          <para
+            >The new value of the <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that can be used to gain additional context information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that can be used to gain additional context information.</param
+        >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.IServiceProvider" /> that this editor can use to obtain services.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.IServiceProvider" />
+
+           that this editor can use to obtain services.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> to edit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           to edit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetEditStyle">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Design.UITypeEditorEditStyle GetEditStyle (System.ComponentModel.ITypeDescriptorContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Design.UITypeEditorEditStyle GetEditStyle (System.ComponentModel.ITypeDescriptorContext context);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -79,18 +121,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the method is not supported, this method will return <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />.</para>
+          <para
+            >If the method is not supported, this method will return <see
+             cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the editor style used by the <see cref="Overload:System.Windows.Forms.Design.ShortcutKeysEditor.EditValue" /> method.</para>
+          <para
+            >Gets the editor style used by the <see
+             cref="Overload:System.Windows.Forms.Design.ShortcutKeysEditor.EditValue" />
+
+             method.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Design.UITypeEditorEditStyle" /> value that indicates the style of editor used by the <see cref="Overload:System.Windows.Forms.Design.ShortcutKeysEditor.EditValue" /> method.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+
+             value that indicates the style of editor used by the <see
+             cref="Overload:System.Windows.Forms.Design.ShortcutKeysEditor.EditValue" />
+
+             method.</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that can be used to gain additional context information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that can be used to gain additional context information.</param
+        >
       </Docs>
     </Member>
   </Members>

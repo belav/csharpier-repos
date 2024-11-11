@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="CodeDomSerializerException" FullName="System.ComponentModel.Design.Serialization.CodeDomSerializerException">
+<Type
+  Name="CodeDomSerializerException"
+  FullName="System.ComponentModel.Design.Serialization.CodeDomSerializerException"
+>
   <TypeSignature Language="C#" Value="public class CodeDomSerializerException : SystemException" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -22,7 +25,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CodeDomSerializerException (Exception ex, System.CodeDom.CodeLinePragma linePragma);" />
+      <MemberSignature
+        Language="C#"
+        Value="public CodeDomSerializerException (Exception ex, System.CodeDom.CodeLinePragma linePragma);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="ex" Type="System.Exception" />
@@ -32,12 +38,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" /> class using the specified exception and line information.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" />
+
+             class using the specified exception and line information.</para
+          >
         </summary>
         <param name="ex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception to throw. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception to throw. </param
+        >
         <param name="linePragma">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.CodeDom.CodeLinePragma" /> that indicates where the exception occurred. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.CodeDom.CodeLinePragma" />
+
+           that indicates where the exception occurred. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -45,29 +65,52 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CodeDomSerializerException (Exception ex, System.ComponentModel.Design.Serialization.IDesignerSerializationManager manager);" />
+      <MemberSignature
+        Language="C#"
+        Value="public CodeDomSerializerException (Exception ex, System.ComponentModel.Design.Serialization.IDesignerSerializationManager manager);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="ex" Type="System.Exception" />
-        <Parameter Name="manager" Type="System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+        <Parameter
+          Name="manager"
+          Type="System.ComponentModel.Design.Serialization.IDesignerSerializationManager"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" />
+
+             class. </para
+          >
         </summary>
         <param name="ex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception to throw. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception to throw. </param
+        >
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" /> object from which to extract the context.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+           object from which to extract the context.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected CodeDomSerializerException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected CodeDomSerializerException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="info" Type="System.Runtime.Serialization.SerializationInfo" />
@@ -77,12 +120,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" /> class using the specified serialization data and context.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" />
+
+             class using the specified serialization data and context.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />Stores the data that was being used to serialize or deserialize the object that the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> was serializing or deserializing. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Stores the data that was being used to serialize or deserialize the object that the <see
+           cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+           was serializing or deserializing. </param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Describes the source and destination of the stream that generated the exception, as well as a means for serialization to retain that context and an additional caller-defined context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Describes the source and destination of the stream that generated the exception, as well as a means for serialization to retain that context and an additional caller-defined context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -90,7 +147,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CodeDomSerializerException (string message, System.CodeDom.CodeLinePragma linePragma);" />
+      <MemberSignature
+        Language="C#"
+        Value="public CodeDomSerializerException (string message, System.CodeDom.CodeLinePragma linePragma);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -100,12 +160,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" /> class using the specified message and line information.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" />
+
+             class using the specified message and line information.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message describing the exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A message describing the exception. </param
+        >
         <param name="linePragma">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.CodeDom.CodeLinePragma" /> that indicates where the exception occurred. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.CodeDom.CodeLinePragma" />
+
+           that indicates where the exception occurred. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -113,29 +187,52 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CodeDomSerializerException (string message, System.ComponentModel.Design.Serialization.IDesignerSerializationManager manager);" />
+      <MemberSignature
+        Language="C#"
+        Value="public CodeDomSerializerException (string message, System.ComponentModel.Design.Serialization.IDesignerSerializationManager manager);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
-        <Parameter Name="manager" Type="System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+        <Parameter
+          Name="manager"
+          Type="System.ComponentModel.Design.Serialization.IDesignerSerializationManager"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerException" />
+
+             class. </para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message describing the exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A message describing the exception. </param
+        >
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" /> object from which to extract the context.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+           object from which to extract the context.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -148,12 +245,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the parameter name and additional exception information.</para>
+          <para
+            >Sets the <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             object with the parameter name and additional exception information.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />Stores the data that was being used to serialize or deserialize the object that the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> was serializing or deserializing. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Stores the data that was being used to serialize or deserialize the object that the <see
+           cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+           was serializing or deserializing. </param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Describes the source and destination of the stream that generated the exception, as well as a means for serialization to retain that context and an additional caller-defined context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Describes the source and destination of the stream that generated the exception, as well as a means for serialization to retain that context and an additional caller-defined context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -161,7 +272,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LinePragma">
-      <MemberSignature Language="C#" Value="public System.CodeDom.CodeLinePragma LinePragma { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.CodeDom.CodeLinePragma LinePragma { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.CodeDom.CodeLinePragma</ReturnType>

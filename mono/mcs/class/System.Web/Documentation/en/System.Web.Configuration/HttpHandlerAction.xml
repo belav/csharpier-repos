@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpHandlerAction" FullName="System.Web.Configuration.HttpHandlerAction">
-  <TypeSignature Language="C#" Value="public sealed class HttpHandlerAction : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class HttpHandlerAction : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,21 +16,53 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class provides a way to programmatically access and modify the add element of the httpHandlers configuration section. </para>
-      <para>This type is part of a group that includes the <see cref="T:System.Web.Configuration.HttpHandlerActionCollection" /> and the <see cref="T:System.Web.Configuration.HttpHandlersSection" /> types. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+         class provides a way to programmatically access and modify the add element of the httpHandlers configuration section. </para
+      >
+      <para
+        >This type is part of a group that includes the <see
+         cref="T:System.Web.Configuration.HttpHandlerActionCollection" />
+
+         and the <see
+         cref="T:System.Web.Configuration.HttpHandlersSection" />
+
+         types. </para
+      >
       <block subset="none" type="note">
-        <para>The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />. </para>
+        <para
+          >The <see
+           cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+           can read and write information from and to the related section of the configuration file according to the section property <see
+           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+
+           whose value is <see
+           cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          . </para
+        >
       </block>
       <para>ASP.NET searches for the handler assembly DLL in the application's private \bin directory first, and then it searches in the system assembly cache.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Configures an <see cref="T:System.Web.Configuration.HttpHandlersSection" /> configuration section. This class cannot be inherited.</para>
+      <para
+        >Configures an <see
+         cref="T:System.Web.Configuration.HttpHandlersSection" />
+
+         configuration section. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HttpHandlerAction (string path, string type, string verb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public HttpHandlerAction (string path, string type, string verb);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="path" Type="System.String" />
@@ -38,25 +73,56 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Configuration.HttpHandlerAction.#ctor(System.String,System.String,System.String)" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class by using the <see cref="P:System.Web.Configuration.HttpHandlersSection.Handlers" /> property.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Configuration.HttpHandlerAction.#ctor(System.String,System.String,System.String)" />
+
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
+             cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+             class by using the <see
+             cref="P:System.Web.Configuration.HttpHandlersSection.Handlers" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class using the passed parameters. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+             class using the passed parameters. </para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> URL path.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+           URL path.</param
+        >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />A comma-separated class/assembly combination consisting of version, culture, and public-key tokens.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A comma-separated class/assembly combination consisting of version, culture, and public-key tokens.</param
+        >
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />A comma-separated list of HTTP verbs (for example, "GET, PUT, POST").</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A comma-separated list of HTTP verbs (for example, "GET, PUT, POST").</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HttpHandlerAction (string path, string type, string verb, bool validate);" />
+      <MemberSignature
+        Language="C#"
+        Value="public HttpHandlerAction (string path, string type, string verb, bool validate);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="path" Type="System.String" />
@@ -68,20 +134,51 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Configuration.HttpHandlerAction.#ctor(System.String,System.String,System.String,System.Boolean)" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class by using the <see cref="P:System.Web.Configuration.HttpHandlersSection.Handlers" /> property.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Configuration.HttpHandlerAction.#ctor(System.String,System.String,System.String,System.Boolean)" />
+
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
+             cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+             class by using the <see
+             cref="P:System.Web.Configuration.HttpHandlersSection.Handlers" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class using the passed parameters.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+             class using the passed parameters.</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> URL path.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+           URL path.</param
+        >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />A comma-separated class/assembly combination consisting of version, culture, and public-key tokens.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A comma-separated class/assembly combination consisting of version, culture, and public-key tokens.</param
+        >
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />A comma-separated list of HTTP verbs (for example, "GET, PUT, POST").</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A comma-separated list of HTTP verbs (for example, "GET, PUT, POST").</param
+        >
         <param name="validate">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to allow validation; otherwise, false. If false, ASP.NET will not attempt to load the class until the actual matching request comes, potentially delaying the error but improving the startup time.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to allow validation; otherwise, false. If false, ASP.NET will not attempt to load the class until the actual matching request comes, potentially delaying the error but improving the startup time.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -103,11 +200,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpHandlerAction.Path" /> property can contain either a single URL or a wildcard string. </para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpHandlerAction.Path" />
+
+             property can contain either a single URL or a wildcard string. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> path. </para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+             path. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -115,7 +222,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -146,14 +256,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpHandlerAction.Type" /> property is a comma-separated class/assembly combination consisting of version, culture, and public-key tokens. </para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpHandlerAction.Type" />
+
+             property is a comma-separated class/assembly combination consisting of version, culture, and public-key tokens. </para
+          >
           <block subset="none" type="note">
             <para>ASP.NET searches for the handler assembly DLL in the application's private \bin directory first, and then it searches in the system assembly cache.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> type.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+             type.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -176,11 +296,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Web.Configuration.HttpHandlerAction.Validate" /> property is false, ASP.NET will not attempt to load the class until the actual matching request comes, potentially delaying the error but improving the startup time.</para>
+          <para
+            >If the <see
+             cref="P:System.Web.Configuration.HttpHandlerAction.Validate" />
+
+             property is false, ASP.NET will not attempt to load the class until the actual matching request comes, potentially delaying the error but improving the startup time.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> validation.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+             validation.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -203,11 +333,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This <see cref="P:System.Web.Configuration.HttpHandlerAction.Verb" /> property can be a comma-separated list of HTTP verbs (for example, "GET, PUT, POST").</para>
+          <para
+            >This <see
+             cref="P:System.Web.Configuration.HttpHandlerAction.Verb" />
+
+             property can be a comma-separated list of HTTP verbs (for example, "GET, PUT, POST").</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the verb allowed by the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object.</para>
+          <para
+            >Gets or sets the verb allowed by the <see
+             cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

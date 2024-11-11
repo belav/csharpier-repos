@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="CodeDomLocalizationModel" FullName="System.ComponentModel.Design.Serialization.CodeDomLocalizationModel">
+<Type
+  Name="CodeDomLocalizationModel"
+  FullName="System.ComponentModel.Design.Serialization.CodeDomLocalizationModel"
+>
   <TypeSignature Language="C#" Value="public enum CodeDomLocalizationModel" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -60,7 +63,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The localization provider will write localized property values into a resource file and use the <see cref="T:System.ComponentModel.ComponentResourceManager" /> class to reflect on properties by name to fill them at runtime. This uses reflection at runtime so it can be slow, but it scales better for large numbers of properties with default values.</para>
+          <para
+            >The localization provider will write localized property values into a resource file and use the <see
+             cref="T:System.ComponentModel.ComponentResourceManager" />
+
+             class to reflect on properties by name to fill them at runtime. This uses reflection at runtime so it can be slow, but it scales better for large numbers of properties with default values.</para
+          >
         </summary>
       </Docs>
     </Member>

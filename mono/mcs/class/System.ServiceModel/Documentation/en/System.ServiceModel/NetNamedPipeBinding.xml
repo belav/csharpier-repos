@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NetNamedPipeBinding" FullName="System.ServiceModel.NetNamedPipeBinding">
-  <TypeSignature Language="C#" Value="public class NetNamedPipeBinding : System.ServiceModel.Channels.Binding, System.ServiceModel.Channels.IBindingRuntimePreferences" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NetNamedPipeBinding extends System.ServiceModel.Channels.Binding implements class System.ServiceModel.Channels.IBindingRuntimePreferences" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NetNamedPipeBinding : System.ServiceModel.Channels.Binding, System.ServiceModel.Channels.IBindingRuntimePreferences"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit NetNamedPipeBinding extends System.ServiceModel.Channels.Binding implements class System.ServiceModel.Channels.IBindingRuntimePreferences"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,8 +23,36 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> generates a run-time communication stack by default, which uses transport security, named pipes for message delivery, and a binary message encoding. This binding is an appropriate indigo1 system-provided choice for on-machine communication. It also supports transactions.</para>
-      <para>The default configuration for the <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> is similar to the configuration provided by the <see cref="T:System.ServiceModel.NetTcpBinding" />, but it is simpler because the indigo2 implementation is only meant for on-machine use and consequently there are fewer exposed features. The most notable difference is that the <see cref="T:System.ServiceModel.SecurityMode" /> setting only offers the <see cref="F:System.ServiceModel.SecurityMode.None" /> and <see cref="F:System.ServiceModel.SecurityMode.Transport" /> options. SOAP security support is not an included option. The security behavior is configurable using the optional <paramref name="securityMode" /> parameter in <see cref="M:System.ServiceModel.NetNamedPipeBinding.#ctor(System.ServiceModel.NetNamedPipeSecurityMode)" /> the constructor. </para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+         generates a run-time communication stack by default, which uses transport security, named pipes for message delivery, and a binary message encoding. This binding is an appropriate indigo1 system-provided choice for on-machine communication. It also supports transactions.</para
+      >
+      <para
+        >The default configuration for the <see
+         cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+         is similar to the configuration provided by the <see
+         cref="T:System.ServiceModel.NetTcpBinding" />
+
+        , but it is simpler because the indigo2 implementation is only meant for on-machine use and consequently there are fewer exposed features. The most notable difference is that the <see
+         cref="T:System.ServiceModel.SecurityMode" />
+
+         setting only offers the <see
+         cref="F:System.ServiceModel.SecurityMode.None" />
+
+         and <see
+         cref="F:System.ServiceModel.SecurityMode.Transport" />
+
+         options. SOAP security support is not an included option. The security behavior is configurable using the optional <paramref
+         name="securityMode" />
+
+         parameter in <see
+         cref="M:System.ServiceModel.NetNamedPipeBinding.#ctor(System.ServiceModel.NetNamedPipeSecurityMode)" />
+
+         the constructor. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +62,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NetNamedPipeBinding ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,17 +74,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The default security mode used is <see cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" />.</para>
+          <para
+            >The default security mode used is <see
+             cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NetNamedPipeBinding (System.ServiceModel.NetNamedPipeSecurityMode securityMode);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.NetNamedPipeSecurityMode securityMode) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public NetNamedPipeBinding (System.ServiceModel.NetNamedPipeSecurityMode securityMode);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.NetNamedPipeSecurityMode securityMode) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,19 +111,41 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this constructor when you want to configure the security explicitly. The default is <see cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" /> when using the default constructor.</para>
+          <para
+            >Use this constructor when you want to configure the security explicitly. The default is <see
+             cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" />
+
+             when using the default constructor.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> class with a specified security mode.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+             class with a specified security mode.</para
+          >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.NetNamedPipeSecurityMode" /> value that specifies whether Windows security is used with named pipes.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.NetNamedPipeSecurityMode" />
+
+           value that specifies whether Windows security is used with named pipes.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NetNamedPipeBinding (string configurationName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string configurationName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public NetNamedPipeBinding (string configurationName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string configurationName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -85,15 +160,34 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> class with a specified configuration name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+             class with a specified configuration name.</para
+          >
         </summary>
         <param name="configurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding configuration name for the <format type="text/html"><a href="00a8580b-face-47a4-838d-b9fed48e72df">netNamedPipeBinding Element</a></format>.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The binding configuration name for the <format
+           type="text/html">
+            <a href="00a8580b-face-47a4-838d-b9fed48e72df">netNamedPipeBinding Element</a>
+          </format>
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElements">
-      <MemberSignature Language="C#" Value="public override System.ServiceModel.Channels.BindingElementCollection CreateBindingElements ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.BindingElementCollection CreateBindingElements() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ServiceModel.Channels.BindingElementCollection CreateBindingElements ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.BindingElementCollection CreateBindingElements() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -110,13 +204,27 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Collections.Generic.ICollection`1" /> of type <see cref="T:System.ServiceModel.Channels.BindingElement" /> that makes up the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Collections.Generic.ICollection`1" />
+
+             of type <see
+             cref="T:System.ServiceModel.Channels.BindingElement" />
+
+             that makes up the binding.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="EnvelopeVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.EnvelopeVersion EnvelopeVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EnvelopeVersion EnvelopeVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.EnvelopeVersion EnvelopeVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EnvelopeVersion EnvelopeVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -137,8 +245,14 @@
       </Docs>
     </Member>
     <Member MemberName="HostNameComparisonMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -257,8 +371,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReaderQuotas">
-      <MemberSignature Language="C#" Value="public System.Xml.XmlDictionaryReaderQuotas ReaderQuotas { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlDictionaryReaderQuotas ReaderQuotas" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.XmlDictionaryReaderQuotas ReaderQuotas { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.XmlDictionaryReaderQuotas ReaderQuotas"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -274,23 +394,38 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxDepth" /> = 32</para>
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxDepth" />
+
+                 = 32</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" /> = 8192</para>
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" />
+
+                 = 8192</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxArrayLength" /> = 16384</para>
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxArrayLength" />
+
+                 = 16384</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" /> = 4096</para>
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" />
+
+                 = 4096</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" /> = 16384</para>
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" />
+
+                 = 16384</para
+              >
             </item>
           </list>
         </remarks>
@@ -320,8 +455,14 @@
       </Docs>
     </Member>
     <Member MemberName="Security">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.NetNamedPipeSecurity Security { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.NetNamedPipeSecurity Security" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.NetNamedPipeSecurity Security { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.NetNamedPipeSecurity Security"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -333,7 +474,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.NetNamedPipeSecurity" /> provides the types of security and settings available to the <see cref="T:System.ServiceModel.NetNamedPipeBinding" />. </para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.NetNamedPipeSecurity" />
+
+             provides the types of security and settings available to the <see
+             cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -342,8 +491,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously">
-      <MemberSignature Language="C#" Value="bool System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.ServiceModel.Channels.IBindingRuntimePreferences.ReceiveSynchronously"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -374,7 +529,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ServiceModel.NetNamedPipeBinding.TransactionFlow" /> property enables you to specify whether this binding should support flowing transactions. </para>
+          <para
+            >The <see
+             cref="P:System.ServiceModel.NetNamedPipeBinding.TransactionFlow" />
+
+             property enables you to specify whether this binding should support flowing transactions. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -383,8 +543,14 @@
       </Docs>
     </Member>
     <Member MemberName="TransactionProtocol">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.TransactionProtocol TransactionProtocol { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.TransactionProtocol TransactionProtocol" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.TransactionProtocol TransactionProtocol { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.TransactionProtocol TransactionProtocol"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -396,7 +562,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The WS-Atomic Transaction protocol can also be used by setting the <see cref="P:System.ServiceModel.TransactionProtocol.WSAtomicTransactionOctober2004" /> value.</para>
+          <para
+            >The WS-Atomic Transaction protocol can also be used by setting the <see
+             cref="P:System.ServiceModel.TransactionProtocol.WSAtomicTransactionOctober2004" />
+
+             value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -405,8 +576,14 @@
       </Docs>
     </Member>
     <Member MemberName="TransferMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.TransferMode TransferMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.TransferMode TransferMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.TransferMode TransferMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.TransferMode TransferMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -418,7 +595,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>It is possible to stream only the incoming or the outgoing messages by specifying, respectively, <see cref="F:System.ServiceModel.TransferMode.StreamedRequest" /> or <see cref="F:System.ServiceModel.TransferMode.StreamedResponse" />.</para>
+          <para
+            >It is possible to stream only the incoming or the outgoing messages by specifying, respectively, <see
+             cref="F:System.ServiceModel.TransferMode.StreamedRequest" />
+
+             or <see
+             cref="F:System.ServiceModel.TransferMode.StreamedResponse" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

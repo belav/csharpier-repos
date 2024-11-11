@@ -1,8 +1,17 @@
 <?xml version="1.0"?>
 <clause number="17.2.6.2" title="Declared accessibility">
-  <paragraph>Non-nested types can have public or internal declared accessibility and they have internal declared accessibility by default. Nested types can have these forms of declared accessibility too, plus one or more additional forms of declared accessibility, depending on whether the containing type is a class or struct: <list><list_item> A nested type that is declared in a class can have any of five forms of declared accessibility (public, protected internal, protected, internal, or private) and, like other class members, defaults to private declared accessibility. </list_item><list_item> A nested type that is declared in a struct can have any of three forms of declared accessibility (public, internal, or private) and, like other struct members, defaults to private declared accessibility. </list_item></list></paragraph>
+  <paragraph
+    >Non-nested types can have public or internal declared accessibility and they have internal declared accessibility by default. Nested types can have these forms of declared accessibility too, plus one or more additional forms of declared accessibility, depending on whether the containing type is a class or struct: <list
+    >
+      <list_item> A nested type that is declared in a class can have any of five forms of declared accessibility (public, protected internal, protected, internal, or private) and, like other class members, defaults to private declared accessibility. </list_item>
+      <list_item> A nested type that is declared in a struct can have any of three forms of declared accessibility (public, internal, or private) and, like other struct members, defaults to private declared accessibility. </list_item>
+    </list>
+  </paragraph>
   <paragraph>
-    <example>[Example: The example <code_example><![CDATA[
+    <example
+      >[Example: The example <code_example
+      >
+        <![CDATA[
 public class List  
 {  
    // Private data structure  
@@ -24,6 +33,10 @@ public class List
    public object AddToFront() {...}  
    public int Count { get {...} }  
 }  
-]]></code_example>declares a private nested class Node. end example]</example>
+]]>
+      </code_example>
+
+      declares a private nested class Node. end example]</example
+    >
   </paragraph>
 </clause>

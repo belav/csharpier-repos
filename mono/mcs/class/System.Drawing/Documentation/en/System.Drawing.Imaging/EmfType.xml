@@ -19,7 +19,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the nature of the records that are placed in an Enhanced Metafile (EMF) file. This enumeration is used by several constructors in the <see cref="T:System.Drawing.Imaging.Metafile" /> class.</para>
+      <para
+        >Specifies the nature of the records that are placed in an Enhanced Metafile (EMF) file. This enumeration is used by several constructors in the <see
+         cref="T:System.Drawing.Imaging.Metafile" />
+
+         class.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -53,7 +58,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that all EMF+ records in the metafile are associated with an alternate EMF record. Metafiles of type <see cref="F:System.Drawing.Imaging.EmfType.EmfPlusDual" /> can be displayed by GDI or by GDI+.</para>
+          <para
+            >Specifies that all EMF+ records in the metafile are associated with an alternate EMF record. Metafiles of type <see
+             cref="F:System.Drawing.Imaging.EmfType.EmfPlusDual" />
+
+             can be displayed by GDI or by GDI+.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

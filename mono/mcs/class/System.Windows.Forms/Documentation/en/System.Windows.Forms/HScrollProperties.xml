@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HScrollProperties" FullName="System.Windows.Forms.HScrollProperties">
-  <TypeSignature Language="C#" Value="public class HScrollProperties : System.Windows.Forms.ScrollProperties" />
+  <TypeSignature
+    Language="C#"
+    Value="public class HScrollProperties : System.Windows.Forms.ScrollProperties"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,12 +16,18 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides basic properties for the <see cref="T:System.Windows.Forms.HScrollBar" /> </para>
+      <para
+        >Provides basic properties for the <see
+         cref="T:System.Windows.Forms.HScrollBar" />
+      </para>
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HScrollProperties (System.Windows.Forms.ScrollableControl container);" />
+      <MemberSignature
+        Language="C#"
+        Value="public HScrollProperties (System.Windows.Forms.ScrollableControl container);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -30,10 +39,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.HScrollProperties" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.HScrollProperties" />
+
+             class. </para
+          >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.ScrollableControl" /> that contains the scroll bar.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.ScrollableControl" />
+
+           that contains the scroll bar.</param
+        >
       </Docs>
     </Member>
   </Members>

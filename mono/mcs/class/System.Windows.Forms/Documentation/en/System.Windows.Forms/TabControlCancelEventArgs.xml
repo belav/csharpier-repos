@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TabControlCancelEventArgs" FullName="System.Windows.Forms.TabControlCancelEventArgs">
-  <TypeSignature Language="C#" Value="public class TabControlCancelEventArgs : System.ComponentModel.CancelEventArgs" />
+  <TypeSignature
+    Language="C#"
+    Value="public class TabControlCancelEventArgs : System.ComponentModel.CancelEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,19 +16,64 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="P:System.Windows.Forms.TabControlCancelEventArgs.Action" /> property to determine which event is occurring. This enables you to handle multiple event types with one event handler.</para>
-      <para>Use the <see cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPage" /> and <see cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPageIndex" /> properties to determine which <see cref="T:System.Windows.Forms.TabPage" /> the event is occurring for. </para>
-      <para>To cancel a tab change in a <see cref="T:System.Windows.Forms.TabControl" />, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true.</para>
-      <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+      <para
+        >Use the <see
+         cref="P:System.Windows.Forms.TabControlCancelEventArgs.Action" />
+
+         property to determine which event is occurring. This enables you to handle multiple event types with one event handler.</para
+      >
+      <para
+        >Use the <see
+         cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPage" />
+
+         and <see
+         cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPageIndex" />
+
+         properties to determine which <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         the event is occurring for. </para
+      >
+      <para
+        >To cancel a tab change in a <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+        , set the <see
+         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+         property to true.</para
+      >
+      <para
+        >For more information about handling events, see <format
+         type="text/html">
+          <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+        </format>
+
+        . </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.TabControl.Selecting" /> and <see cref="E:System.Windows.Forms.TabControl.Deselecting" /> events of a <see cref="T:System.Windows.Forms.TabControl" /> control. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.TabControl.Selecting" />
+
+         and <see
+         cref="E:System.Windows.Forms.TabControl.Deselecting" />
+
+         events of a <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+         control. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TabControlCancelEventArgs (System.Windows.Forms.TabPage tabPage, int tabPageIndex, bool cancel, System.Windows.Forms.TabControlAction action);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TabControlCancelEventArgs (System.Windows.Forms.TabPage tabPage, int tabPageIndex, bool cancel, System.Windows.Forms.TabControlAction action);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="tabPage" Type="System.Windows.Forms.TabPage" />
@@ -41,23 +89,55 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.TabControlCancelEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.TabControlCancelEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="tabPage">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.TabPage" /> the event is occurring for.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.TabPage" />
+
+           the event is occurring for.</param
+        >
         <param name="tabPageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index of <paramref name="tabPage" /> in the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index of <paramref
+           name="tabPage" />
+
+           in the <see
+           cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+           collection.</param
+        >
         <param name="cancel">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to cancel the tab change by default; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to cancel the tab change by default; otherwise, false.</param
+        >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.TabControlAction" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.TabControlAction" />
+
+           values.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Action">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.TabControlAction Action { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.TabControlAction Action { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.TabControlAction</ReturnType>
@@ -87,7 +167,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.TabPage" /> the event is occurring for.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             the event is occurring for.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -106,7 +191,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the zero-based index of the <see cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPage" /> in the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> collection.</para>
+          <para
+            >Gets the zero-based index of the <see
+             cref="P:System.Windows.Forms.TabControlCancelEventArgs.TabPage" />
+
+             in the <see
+             cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

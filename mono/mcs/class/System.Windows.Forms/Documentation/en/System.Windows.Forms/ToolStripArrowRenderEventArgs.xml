@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripArrowRenderEventArgs" FullName="System.Windows.Forms.ToolStripArrowRenderEventArgs">
+<Type
+  Name="ToolStripArrowRenderEventArgs"
+  FullName="System.Windows.Forms.ToolStripArrowRenderEventArgs"
+>
   <TypeSignature Language="C#" Value="public class ToolStripArrowRenderEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -14,12 +17,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripArrowRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStripItem toolStripItem, System.Drawing.Rectangle arrowRectangle, System.Drawing.Color arrowColor, System.Windows.Forms.ArrowDirection arrowDirection);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripArrowRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStripItem toolStripItem, System.Drawing.Rectangle arrowRectangle, System.Drawing.Color arrowColor, System.Windows.Forms.ArrowDirection arrowDirection);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="g" Type="System.Drawing.Graphics" />
@@ -33,18 +44,53 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The graphics used to paint the <see cref="T:System.Windows.Forms.ToolStrip" /> arrow.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The graphics used to paint the <see
+           cref="T:System.Windows.Forms.ToolStrip" />
+
+           arrow.</param
+        >
         <param name="toolStripItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStripItem" /> on which to paint the arrow.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStripItem" />
+
+           on which to paint the arrow.</param
+        >
         <param name="arrowRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />The bounding area of the <see cref="T:System.Windows.Forms.ToolStrip" /> arrow.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The bounding area of the <see
+           cref="T:System.Windows.Forms.ToolStrip" />
+
+           arrow.</param
+        >
         <param name="arrowColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />The color of the <see cref="T:System.Windows.Forms.ToolStrip" /> arrow.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The color of the <see
+           cref="T:System.Windows.Forms.ToolStrip" />
+
+           arrow.</param
+        >
         <param name="arrowDirection">
-          <attribution license="cc4" from="Microsoft" modified="false" />The direction in which the <see cref="T:System.Windows.Forms.ToolStrip" /> arrow points.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The direction in which the <see
+           cref="T:System.Windows.Forms.ToolStrip" />
+
+           arrow points.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,7 +108,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the color of the <see cref="T:System.Windows.Forms.ToolStrip" /> arrow.</para>
+          <para
+            >Gets or sets the color of the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             arrow.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -70,7 +121,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ArrowRectangle">
-      <MemberSignature Language="C#" Value="public System.Drawing.Rectangle ArrowRectangle { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Rectangle ArrowRectangle { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -81,7 +135,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the bounding area of the <see cref="T:System.Windows.Forms.ToolStrip" /> arrow.</para>
+          <para
+            >Gets or sets the bounding area of the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             arrow.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -89,7 +148,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Direction">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ArrowDirection Direction { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ArrowDirection Direction { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ArrowDirection</ReturnType>
@@ -100,7 +162,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the direction in which the <see cref="T:System.Windows.Forms.ToolStrip" /> arrow points.</para>
+          <para
+            >Gets or sets the direction in which the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             arrow points.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -119,7 +186,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the graphics used to paint the <see cref="T:System.Windows.Forms.ToolStrip" /> arrow.</para>
+          <para
+            >Gets the graphics used to paint the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             arrow.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -127,7 +199,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripItem Item { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripItem Item { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStripItem</ReturnType>
@@ -138,7 +213,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.ToolStripItem" /> on which to paint the arrow.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+             on which to paint the arrow.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TYPEATTR" FullName="System.Runtime.InteropServices.TYPEATTR">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct TYPEATTR" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential sealed beforefieldinit TYPEATTR extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential sealed beforefieldinit TYPEATTR extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -26,7 +29,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use <see cref="T:System.Runtime.InteropServices.ComTypes.TYPEATTR" /> instead.</para>
+      <para
+        >Use <see
+         cref="T:System.Runtime.InteropServices.ComTypes.TYPEATTR" />
+
+         instead.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -223,8 +231,14 @@
       </Docs>
     </Member>
     <Member MemberName="idldescType">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.IDLDESC idldescType;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.IDLDESC idldescType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.IDLDESC idldescType;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.IDLDESC idldescType"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -296,7 +310,10 @@
     </Member>
     <Member MemberName="MEMBER_ID_NIL">
       <MemberSignature Language="C#" Value="public const int MEMBER_ID_NIL = -1;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal int32 MEMBER_ID_NIL = (-1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal int32 MEMBER_ID_NIL = (-1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -315,7 +332,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant used with the <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidConstructor" /> and <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" /> fields.</para>
+          <para
+            >A constant used with the <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.memidConstructor" />
+
+             and <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" />
+
+             fields.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -339,7 +364,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>ID of constructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" /> if none.</para>
+          <para
+            >ID of constructor, or <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
+
+             if none.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -363,13 +393,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>ID of destructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" /> if none.</para>
+          <para
+            >ID of destructor, or <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
+
+             if none.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="tdescAlias">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.TYPEDESC tdescAlias;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.TYPEDESC tdescAlias" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.TYPEDESC tdescAlias;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.TYPEDESC tdescAlias"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -387,13 +428,27 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <see cref="F:System.Runtime.InteropServices.TYPEATTR.typekind" /> == <see cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />, specifies the type for which this type is an alias.</para>
+          <para
+            >If <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.typekind" />
+
+             == <see
+             cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />
+
+            , specifies the type for which this type is an alias.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="typekind">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.TYPEKIND typekind;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.TYPEKIND typekind" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.TYPEKIND typekind;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.TYPEKIND typekind"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -411,7 +466,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Runtime.InteropServices.TYPEKIND" /> value describing the type this information describes.</para>
+          <para
+            >A <see
+             cref="T:System.Runtime.InteropServices.TYPEKIND" />
+
+             value describing the type this information describes.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -464,8 +524,14 @@
       </Docs>
     </Member>
     <Member MemberName="wTypeFlags">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.TYPEFLAGS wTypeFlags;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.TYPEFLAGS wTypeFlags" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.TYPEFLAGS wTypeFlags;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.TYPEFLAGS wTypeFlags"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -483,7 +549,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Runtime.InteropServices.TYPEFLAGS" /> value describing this information.</para>
+          <para
+            >A <see
+             cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
+
+             value describing this information.</para
+          >
         </summary>
       </Docs>
     </Member>

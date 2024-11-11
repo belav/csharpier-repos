@@ -1,6 +1,12 @@
 <Type Name="ArrayMirror" FullName="Mono.Debugger.Soft.ArrayMirror">
-  <TypeSignature Language="C#" Value="public class ArrayMirror : Mono.Debugger.Soft.ObjectMirror, System.Collections.IEnumerable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ArrayMirror extends Mono.Debugger.Soft.ObjectMirror implements class System.Collections.IEnumerable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ArrayMirror : Mono.Debugger.Soft.ObjectMirror, System.Collections.IEnumerable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ArrayMirror extends Mono.Debugger.Soft.ObjectMirror implements class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -15,13 +21,15 @@
   </Interfaces>
   <Docs>
     <summary>Represents an array object in the debuggee.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName="GetLength">
       <MemberSignature Language="C#" Value="public int GetLength (int dimension);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetLength(int32 dimension) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int32 GetLength(int32 dimension) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -41,7 +49,10 @@
     </Member>
     <Member MemberName="GetLowerBound">
       <MemberSignature Language="C#" Value="public int GetLowerBound (int dimension);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetLowerBound(int32 dimension) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int32 GetLowerBound(int32 dimension) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -60,8 +71,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetValues">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Mono.Debugger.Soft.Value&gt; GetValues (int index, int length);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IList`1&lt;class Mono.Debugger.Soft.Value&gt; GetValues(int32 index, int32 length) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IList<Mono.Debugger.Soft.Value> GetValues (int index, int length);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IList`1<class Mono.Debugger.Soft.Value> GetValues(int32 index, int32 length) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -82,8 +99,14 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Value this[int index] { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.Value Item(int32)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.Value this[int index] { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.Value Item(int32)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -179,8 +202,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetValues">
-      <MemberSignature Language="C#" Value="public void SetValues (int index, Mono.Debugger.Soft.Value[] values);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetValues(int32 index, class Mono.Debugger.Soft.Value[] values) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetValues (int index, Mono.Debugger.Soft.Value[] values);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetValues(int32 index, class Mono.Debugger.Soft.Value[] values) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -200,8 +229,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

@@ -2,6 +2,9 @@
 <testresults name="">
   <div id="GHTSubTest1" testname="System.Web.UI.WebControls.ValidationSummaryDisplayMode">
     <span>
-      <br />List; BulletList; SingleParagraph; 0; 1; 2; </span>
+      <br />
+
+      List; BulletList; SingleParagraph; 0; 1; 2; </span
+    >
   </div>
 </testresults>

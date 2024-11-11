@@ -17,8 +17,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by members such as the constructor for <see cref="T:System.Windows.Forms.UICuesEventArgs" />.</para>
-      <para>This enumeration is used to specify which user interface cues will be displayed or changed. For example, when the user presses the ALT key, the keyboard shortcuts on the menu are displayed by underlining the appropriate character. The bitwise combination of <see cref="T:System.Windows.Forms.UICues" /> for this example would be <see cref="F:System.Windows.Forms.UICues.ShowKeyboard" /> and <see cref="F:System.Windows.Forms.UICues.ChangeKeyboard" />.</para>
+      <para
+        >This enumeration is used by members such as the constructor for <see
+         cref="T:System.Windows.Forms.UICuesEventArgs" />
+
+        .</para
+      >
+      <para
+        >This enumeration is used to specify which user interface cues will be displayed or changed. For example, when the user presses the ALT key, the keyboard shortcuts on the menu are displayed by underlining the appropriate character. The bitwise combination of <see
+         cref="T:System.Windows.Forms.UICues" />
+
+         for this example would be <see
+         cref="F:System.Windows.Forms.UICues.ShowKeyboard" />
+
+         and <see
+         cref="F:System.Windows.Forms.UICues.ChangeKeyboard" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

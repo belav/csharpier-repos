@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BINDPTR" FullName="System.Runtime.InteropServices.BINDPTR">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct BINDPTR" />
-  <TypeSignature Language="ILAsm" Value=".class public sealed beforefieldinit BINDPTR extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sealed beforefieldinit BINDPTR extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -26,7 +29,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use <see cref="T:System.Runtime.InteropServices.ComTypes.BINDPTR" /> instead.</para>
+      <para
+        >Use <see
+         cref="T:System.Runtime.InteropServices.ComTypes.BINDPTR" />
+
+         instead.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -47,7 +55,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents a pointer to a <see cref="T:System.Runtime.InteropServices.FUNCDESC" /> structure.</para>
+          <para
+            >Represents a pointer to a <see
+             cref="T:System.Runtime.InteropServices.FUNCDESC" />
+
+             structure.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -68,7 +81,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents a pointer to a <see cref="F:System.Runtime.InteropServices.BINDPTR.lptcomp" /> interface.</para>
+          <para
+            >Represents a pointer to a <see
+             cref="F:System.Runtime.InteropServices.BINDPTR.lptcomp" />
+
+             interface.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -89,7 +107,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents a pointer to a <see cref="T:System.Runtime.InteropServices.VARDESC" /> structure.</para>
+          <para
+            >Represents a pointer to a <see
+             cref="T:System.Runtime.InteropServices.VARDESC" />
+
+             structure.</para
+          >
         </summary>
       </Docs>
     </Member>

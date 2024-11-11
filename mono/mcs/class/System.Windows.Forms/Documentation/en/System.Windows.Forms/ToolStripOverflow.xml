@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ToolStripOverflow" FullName="System.Windows.Forms.ToolStripOverflow">
-  <TypeSignature Language="C#" Value="public class ToolStripOverflow : System.Windows.Forms.ToolStripDropDown" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripOverflow : System.Windows.Forms.ToolStripDropDown"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,16 +23,31 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>If there are more overflow items than can be displayed on the form, use the <format type="text/html"><a href="e681f3ab-94ba-4b2b-ac64-1dfad46caa25">ToolStrip Items Collection Editor</a></format> to manage this situation.</para>
+      <para
+        >If there are more overflow items than can be displayed on the form, use the <format
+         type="text/html">
+          <a href="e681f3ab-94ba-4b2b-ac64-1dfad46caa25">ToolStrip Items Collection Editor</a>
+        </format>
+
+         to manage this situation.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Manages the overflow behavior of a <see cref="T:System.Windows.Forms.ToolStrip" />.</para>
+      <para
+        >Manages the overflow behavior of a <see
+         cref="T:System.Windows.Forms.ToolStrip" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripOverflow (System.Windows.Forms.ToolStripItem parentItem);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripOverflow (System.Windows.Forms.ToolStripItem parentItem);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -41,14 +59,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripOverflow" /> class derived from a base <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripOverflow" />
+
+             class derived from a base <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+            .</para
+          >
         </summary>
         <param name="parentItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStripItem" /> from which to derive this <see cref="T:System.Windows.Forms.ToolStripOverflow" /> instance. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStripItem" />
+
+           from which to derive this <see
+           cref="T:System.Windows.Forms.ToolStripOverflow" />
+
+           instance. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateAccessibilityInstance">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.AccessibleObject CreateAccessibilityInstance ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.AccessibleObject CreateAccessibilityInstance ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -60,9 +98,22 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you do not explicitly call the <see cref="M:System.Windows.Forms.ToolStripOverflow.CreateAccessibilityInstance" /> method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property is referenced.</para>
+          <para
+            >If you do not explicitly call the <see
+             cref="M:System.Windows.Forms.ToolStripOverflow.CreateAccessibilityInstance" />
+
+             method, it will be called when the <see
+             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+             property is referenced.</para
+          >
           <block subset="none" type="note">
-            <para>To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property, you must add a reference to the Accessibility assembly installed with the dnprdnshort.</para>
+            <para
+              >To get or set the <see
+               cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+               property, you must add a reference to the Accessibility assembly installed with the dnprdnshort.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -71,12 +122,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Windows.Forms.AccessibleObject" /> for the control.</para>
+          <para
+            >A new <see
+             cref="T:System.Windows.Forms.AccessibleObject" />
+
+             for the control.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="DisplayedItems">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.ToolStripItemCollection DisplayedItems { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.ToolStripItemCollection DisplayedItems { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -88,16 +147,41 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.ToolStripOverflow.DisplayedItems" /> property to get everything the <see cref="T:System.Windows.Forms.ToolStrip" /> currently displays, including items the user did not add, such as a <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />. Use the <see cref="P:System.Windows.Forms.ToolStripOverflow.Items" /> property to get all items on the <see cref="T:System.Windows.Forms.ToolStrip" />, including those not being displayed.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.ToolStripOverflow.DisplayedItems" />
+
+             property to get everything the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             currently displays, including items the user did not add, such as a <see
+             cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+
+            . Use the <see
+             cref="P:System.Windows.Forms.ToolStripOverflow.Items" />
+
+             property to get all items on the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , including those not being displayed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets all of the items that are currently being displayed on the <see cref="T:System.Windows.Forms.ToolStrip" />.</para>
+          <para
+            >Gets all of the items that are currently being displayed on the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetPreferredSize">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Size GetPreferredSize (System.Drawing.Size constrainingSize);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Size GetPreferredSize (System.Drawing.Size constrainingSize);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -116,14 +200,25 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An ordered pair of type <see cref="T:System.Drawing.Size" /> representing the width and height of a rectangle.</para>
+          <para
+            >An ordered pair of type <see
+             cref="T:System.Drawing.Size" />
+
+             representing the width and height of a rectangle.</para
+          >
         </returns>
         <param name="constrainingSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />The custom-sized area for a control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The custom-sized area for a control.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Items">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.ToolStripItemCollection Items { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.ToolStripItemCollection Items { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -135,16 +230,38 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.ToolStripOverflow.Items" /> property to get all items on the <see cref="T:System.Windows.Forms.ToolStrip" />, including those not being displayed. Use the <see cref="P:System.Windows.Forms.ToolStripOverflow.DisplayedItems" /> property to get only those items that are currently displayed on the <see cref="T:System.Windows.Forms.ToolStrip" />.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.ToolStripOverflow.Items" />
+
+             property to get all items on the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , including those not being displayed. Use the <see
+             cref="P:System.Windows.Forms.ToolStripOverflow.DisplayedItems" />
+
+             property to get only those items that are currently displayed on the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets all of the items on the <see cref="T:System.Windows.Forms.ToolStrip" />, whether they are currently being displayed or not.</para>
+          <para
+            >Gets all of the items on the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , whether they are currently being displayed or not.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="LayoutEngine">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.Layout.LayoutEngine LayoutEngine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.Layout.LayoutEngine LayoutEngine { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -159,7 +276,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnLayout">
-      <MemberSignature Language="C#" Value="protected override void OnLayout (System.Windows.Forms.LayoutEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnLayout (System.Windows.Forms.LayoutEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -173,15 +293,38 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.ToolStripOverflow.OnLayout(System.Windows.Forms.LayoutEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.ToolStripOverflow.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.Layout" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.Layout" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetDisplayedItems">

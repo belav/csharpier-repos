@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ApplicationSecurityInfo" FullName="System.Security.Policy.ApplicationSecurityInfo">
   <TypeSignature Language="C#" Value="public sealed class ApplicationSecurityInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ApplicationSecurityInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ApplicationSecurityInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -21,7 +24,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Security.Policy.ApplicationSecurityInfo" /> provides security information about a manifest-activated application using information obtained from the application's manifests and its <see cref="T:System.ActivationContext" />.</para>
+        <see cref="T:System.Security.Policy.ApplicationSecurityInfo" />
+
+         provides security information about a manifest-activated application using information obtained from the application's manifests and its <see
+         cref="T:System.ActivationContext" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,8 +39,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ApplicationSecurityInfo (ActivationContext activationContext);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ActivationContext activationContext) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ApplicationSecurityInfo (ActivationContext activationContext);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ActivationContext activationContext) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,19 +59,44 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ActivationContext" /> object contains an <see cref="T:System.ApplicationIdentity" /> object that uniquely identifies an application by its full name and location.</para>
+          <para
+            >The <see
+             cref="T:System.ActivationContext" />
+
+             object contains an <see
+             cref="T:System.ApplicationIdentity" />
+
+             object that uniquely identifies an application by its full name and location.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationSecurityInfo" /> class using the provided activation context. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Policy.ApplicationSecurityInfo" />
+
+             class using the provided activation context. </para
+          >
         </summary>
         <param name="activationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ActivationContext" /> object that uniquely identifies the target application.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ActivationContext" />
+
+           object that uniquely identifies the target application.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ApplicationEvidence">
-      <MemberSignature Language="C#" Value="public System.Security.Policy.Evidence ApplicationEvidence { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Policy.Evidence ApplicationEvidence" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Policy.Evidence ApplicationEvidence { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Policy.Evidence ApplicationEvidence"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -80,7 +120,10 @@
     </Member>
     <Member MemberName="ApplicationId">
       <MemberSignature Language="C#" Value="public ApplicationId ApplicationId { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ApplicationId ApplicationId" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ApplicationId ApplicationId"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -103,8 +146,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultRequestSet">
-      <MemberSignature Language="C#" Value="public System.Security.PermissionSet DefaultRequestSet { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.PermissionSet DefaultRequestSet" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.PermissionSet DefaultRequestSet { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.PermissionSet DefaultRequestSet"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -118,7 +167,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the property has not been set, the get accessor returns a <see cref="T:System.Security.PermissionSet" /> with a permission state of <see cref="F:System.Security.Permissions.PermissionState.None" />.</para>
+          <para
+            >If the property has not been set, the get accessor returns a <see
+             cref="T:System.Security.PermissionSet" />
+
+             with a permission state of <see
+             cref="F:System.Security.Permissions.PermissionState.None" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -128,7 +185,10 @@
     </Member>
     <Member MemberName="DeploymentId">
       <MemberSignature Language="C#" Value="public ApplicationId DeploymentId { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ApplicationId DeploymentId" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ApplicationId DeploymentId"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

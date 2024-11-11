@@ -14,12 +14,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for <see cref="T:System.Windows.Forms.ToolStripItem" /> events.</para>
+      <para
+        >Provides data for <see
+         cref="T:System.Windows.Forms.ToolStripItem" />
+
+         events.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripItemEventArgs (System.Windows.Forms.ToolStripItem item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripItemEventArgs (System.Windows.Forms.ToolStripItem item);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="item" Type="System.Windows.Forms.ToolStripItem" />
@@ -29,17 +37,34 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemEventArgs" /> class, specifying a <see cref="T:System.Windows.Forms.ToolStripItem" />. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripItemEventArgs" />
+
+             class, specifying a <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+            . </para
+          >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStripItem" /> for which to specify events.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStripItem" />
+
+           for which to specify events.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripItem Item { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripItem Item { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStripItem</ReturnType>
@@ -50,7 +75,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Windows.Forms.ToolStripItem" /> for which to handle events.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+             for which to handle events.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

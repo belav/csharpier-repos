@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DisplayNameAttribute" FullName="System.ComponentModel.DisplayNameAttribute">
   <TypeSignature Language="C#" Value="public class DisplayNameAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DisplayNameAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit DisplayNameAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,7 +23,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The default is the name of the property or event. The default implementation of <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" /> uses reflection to search the public properties and public void methods that take no arguments. <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" /> searches for the <see cref="T:System.ComponentModel.DisplayNameAttribute" /> on each property and method and, if found, uses that string instead of the property or method name.</para>
+      <para
+        >The default is the name of the property or event. The default implementation of <see
+         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+         uses reflection to search the public properties and public void methods that take no arguments. <see
+         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+         searches for the <see
+         cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+         on each property and method and, if found, uses that string instead of the property or method name.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +44,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DisplayNameAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -42,13 +59,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DisplayNameAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DisplayNameAttribute (string displayName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string displayName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string displayName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,15 +87,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DisplayNameAttribute" /> class using the display name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+             class using the display name.</para
+          >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The display name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The display name.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Default">
-      <MemberSignature Language="C#" Value="public static readonly System.ComponentModel.DisplayNameAttribute Default;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class System.ComponentModel.DisplayNameAttribute Default" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.ComponentModel.DisplayNameAttribute Default;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class System.ComponentModel.DisplayNameAttribute Default"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -84,7 +123,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the default value for the <see cref="T:System.ComponentModel.DisplayNameAttribute" />. This field is read-only.</para>
+          <para
+            >Specifies the default value for the <see
+             cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+            . This field is read-only.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -132,7 +176,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -149,19 +196,33 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether two <see cref="T:System.ComponentModel.DisplayNameAttribute" /> instances are equal.</para>
+          <para
+            >Determines whether two <see
+             cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+             instances are equal.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the value of the given object is equal to that of the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.DisplayNameAttribute" /> to test the value equality of.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+           to test the value equality of.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -180,13 +241,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A hash code for the current <see cref="T:System.ComponentModel.DisplayNameAttribute" />.</para>
+          <para
+            >A hash code for the current <see
+             cref="T:System.ComponentModel.DisplayNameAttribute" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="IsDefaultAttribute">
       <MemberSignature Language="C#" Value="public override bool IsDefaultAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsDefaultAttribute() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsDefaultAttribute() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

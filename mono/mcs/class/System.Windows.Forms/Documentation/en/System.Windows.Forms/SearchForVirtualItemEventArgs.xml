@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SearchForVirtualItemEventArgs" FullName="System.Windows.Forms.SearchForVirtualItemEventArgs">
+<Type
+  Name="SearchForVirtualItemEventArgs"
+  FullName="System.Windows.Forms.SearchForVirtualItemEventArgs"
+>
   <TypeSignature Language="C#" Value="public class SearchForVirtualItemEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -13,16 +16,41 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.SearchForVirtualItemEventArgs" /> is constructed and passed to the <see cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" /> event when you call the <see cref="Overload:System.Windows.Forms.ListView.FindItemWithText" /> or <see cref="Overload:System.Windows.Forms.ListView.FindNearestItem" /> methods on a <see cref="T:System.Windows.Forms.ListView" /> control in virtual mode.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.SearchForVirtualItemEventArgs" />
+
+         is constructed and passed to the <see
+         cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" />
+
+         event when you call the <see
+         cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+         or <see
+         cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
+
+         methods on a <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         control in virtual mode.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SearchForVirtualItemEventArgs (bool isTextSearch, bool isPrefixSearch, bool includeSubItemsInSearch, string text, System.Drawing.Point startingPoint, System.Windows.Forms.SearchDirectionHint direction, int startIndex);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SearchForVirtualItemEventArgs (bool isTextSearch, bool isPrefixSearch, bool includeSubItemsInSearch, string text, System.Drawing.Point startingPoint, System.Windows.Forms.SearchDirectionHint direction, int startIndex);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="isTextSearch" Type="System.Boolean" />
@@ -38,29 +66,67 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.SearchForVirtualItemEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.SearchForVirtualItemEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="isTextSearch">
-          <attribution license="cc4" from="Microsoft" modified="false" />A value indicating whether the search is a text search.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A value indicating whether the search is a text search.</param
+        >
         <param name="isPrefixSearch">
-          <attribution license="cc4" from="Microsoft" modified="false" />A value indicating whether the search is a prefix search.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A value indicating whether the search is a prefix search.</param
+        >
         <param name="includeSubItemsInSearch">
-          <attribution license="cc4" from="Microsoft" modified="false" />A value indicating whether to include subitems of list items in the search.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A value indicating whether to include subitems of list items in the search.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text of the item to search for.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text of the item to search for.</param
+        >
         <param name="startingPoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> at which to start the search.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           at which to start the search.</param
+        >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.SearchDirectionHint" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.SearchDirectionHint" />
+
+           values.</param
+        >
         <param name="startIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the <see cref="T:System.Windows.Forms.ListViewItem" /> at which to start the search.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the <see
+           cref="T:System.Windows.Forms.ListViewItem" />
+
+           at which to start the search.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Direction">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.SearchDirectionHint Direction { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.SearchDirectionHint Direction { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.SearchDirectionHint</ReturnType>
@@ -70,7 +136,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Identifying the nearest item in a <see cref="T:System.Windows.Forms.ListView" /> control can vary depending on the operating system the application is running on; therefore, the search direction is a hint, and not an absolute guarantee of results.</para>
+          <para
+            >Identifying the nearest item in a <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control can vary depending on the operating system the application is running on; therefore, the search direction is a hint, and not an absolute guarantee of results.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -92,7 +163,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Subitems are typically used when a <see cref="T:System.Windows.Forms.ListView" /> is in <see cref="F:System.Windows.Forms.View.Details" /> view.</para>
+          <para
+            >Subitems are typically used when a <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             is in <see
+             cref="F:System.Windows.Forms.View.Details" />
+
+             view.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -114,11 +193,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Set the <see cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.Index" /> property to the index of the item matching the search criteria when handling the <see cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" /> event.</para>
+          <para
+            >Set the <see
+             cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.Index" />
+
+             property to the index of the item matching the search criteria when handling the <see
+             cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" />
+
+             event.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the index of the <see cref="T:System.Windows.Forms.ListViewItem" /> found in the <see cref="T:System.Windows.Forms.ListView" /> .</para>
+          <para
+            >Gets or sets the index of the <see
+             cref="T:System.Windows.Forms.ListViewItem" />
+
+             found in the <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -136,7 +231,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.Text" /> property can specify a substring of the desired text. The <see cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.IsPrefixSearch" /> property indicates whether the search should match items that start with the search text. </para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.Text" />
+
+             property can specify a substring of the desired text. The <see
+             cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.IsPrefixSearch" />
+
+             property indicates whether the search should match items that start with the search text. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -158,7 +261,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can search a <see cref="T:System.Windows.Forms.ListView" /> control by location by using the <see cref="Overload:System.Windows.Forms.ListView.FindNearestItem" /> method, or you can perform a text search by using the <see cref="Overload:System.Windows.Forms.ListView.FindItemWithText" /> method.</para>
+          <para
+            >You can search a <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control by location by using the <see
+             cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
+
+             method, or you can perform a text search by using the <see
+             cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -184,7 +298,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the index of the <see cref="T:System.Windows.Forms.ListViewItem" /> where the search starts.</para>
+          <para
+            >Gets the index of the <see
+             cref="T:System.Windows.Forms.ListViewItem" />
+
+             where the search starts.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -202,7 +321,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can search a <see cref="T:System.Windows.Forms.ListView" /> control by location by using the <see cref="Overload:System.Windows.Forms.ListView.FindNearestItem" /> method, or you can perform a text search by using the <see cref="Overload:System.Windows.Forms.ListView.FindItemWithText" /> method.</para>
+          <para
+            >You can search a <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control by location by using the <see
+             cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
+
+             method, or you can perform a text search by using the <see
+             cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -224,11 +354,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can search a <see cref="T:System.Windows.Forms.ListView" /> control by location by using the <see cref="Overload:System.Windows.Forms.ListView.FindNearestItem" /> method, or you can perform a text search by using the <see cref="Overload:System.Windows.Forms.ListView.FindItemWithText" /> method.</para>
+          <para
+            >You can search a <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control by location by using the <see
+             cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
+
+             method, or you can perform a text search by using the <see
+             cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the text used to find an item in the <see cref="T:System.Windows.Forms.ListView" /> control.</para>
+          <para
+            >Gets the text used to find an item in the <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

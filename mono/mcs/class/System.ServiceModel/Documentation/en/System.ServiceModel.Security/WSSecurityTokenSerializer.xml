@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WSSecurityTokenSerializer" FullName="System.ServiceModel.Security.WSSecurityTokenSerializer">
-  <TypeSignature Language="C#" Value="public class WSSecurityTokenSerializer : System.IdentityModel.Selectors.SecurityTokenSerializer" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit WSSecurityTokenSerializer extends System.IdentityModel.Selectors.SecurityTokenSerializer" />
+<Type
+  Name="WSSecurityTokenSerializer"
+  FullName="System.ServiceModel.Security.WSSecurityTokenSerializer"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class WSSecurityTokenSerializer : System.IdentityModel.Selectors.SecurityTokenSerializer"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit WSSecurityTokenSerializer extends System.IdentityModel.Selectors.SecurityTokenSerializer"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public WSSecurityTokenSerializer ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +42,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WSSecurityTokenSerializer (bool emitBspRequiredAttributes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool emitBspRequiredAttributes) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public WSSecurityTokenSerializer (bool emitBspRequiredAttributes);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool emitBspRequiredAttributes) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -49,13 +72,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -68,13 +102,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -89,13 +134,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, System.IdentityModel.Tokens.SamlSerializer samlSerializer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, class System.IdentityModel.Tokens.SamlSerializer samlSerializer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, System.IdentityModel.Tokens.SamlSerializer samlSerializer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, class System.IdentityModel.Tokens.SamlSerializer samlSerializer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -112,13 +168,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, System.IdentityModel.Tokens.SamlSerializer samlSerializer, System.ServiceModel.Security.SecurityStateEncoder securityStateEncoder, System.Collections.Generic.IEnumerable&lt;Type&gt; knownTypes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, class System.IdentityModel.Tokens.SamlSerializer samlSerializer, class System.ServiceModel.Security.SecurityStateEncoder securityStateEncoder, class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; knownTypes) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, System.IdentityModel.Tokens.SamlSerializer samlSerializer, System.ServiceModel.Security.SecurityStateEncoder securityStateEncoder, System.Collections.Generic.IEnumerable<Type> knownTypes);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, class System.IdentityModel.Tokens.SamlSerializer samlSerializer, class System.ServiceModel.Security.SecurityStateEncoder securityStateEncoder, class System.Collections.Generic.IEnumerable`1<class System.Type> knownTypes) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -127,8 +194,11 @@
         <Parameter Name="securityVersion" Type="System.ServiceModel.Security.SecurityVersion" />
         <Parameter Name="emitBspRequiredAttributes" Type="System.Boolean" />
         <Parameter Name="samlSerializer" Type="System.IdentityModel.Tokens.SamlSerializer" />
-        <Parameter Name="securityStateEncoder" Type="System.ServiceModel.Security.SecurityStateEncoder" />
-        <Parameter Name="knownTypes" Type="System.Collections.Generic.IEnumerable&lt;System.Type&gt;" />
+        <Parameter
+          Name="securityStateEncoder"
+          Type="System.ServiceModel.Security.SecurityStateEncoder"
+        />
+        <Parameter Name="knownTypes" Type="System.Collections.Generic.IEnumerable<System.Type>" />
       </Parameters>
       <Docs>
         <param name="securityVersion">To be added.</param>
@@ -139,13 +209,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, System.IdentityModel.Tokens.SamlSerializer samlSerializer, System.ServiceModel.Security.SecurityStateEncoder securityStateEncoder, System.Collections.Generic.IEnumerable&lt;Type&gt; knownTypes, int maximumKeyDerivationOffset, int maximumKeyDerivationLabelLength, int maximumKeyDerivationNonceLength);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, class System.IdentityModel.Tokens.SamlSerializer samlSerializer, class System.ServiceModel.Security.SecurityStateEncoder securityStateEncoder, class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; knownTypes, int32 maximumKeyDerivationOffset, int32 maximumKeyDerivationLabelLength, int32 maximumKeyDerivationNonceLength) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public WSSecurityTokenSerializer (System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, System.IdentityModel.Tokens.SamlSerializer samlSerializer, System.ServiceModel.Security.SecurityStateEncoder securityStateEncoder, System.Collections.Generic.IEnumerable<Type> knownTypes, int maximumKeyDerivationOffset, int maximumKeyDerivationLabelLength, int maximumKeyDerivationNonceLength);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.SecurityVersion securityVersion, bool emitBspRequiredAttributes, class System.IdentityModel.Tokens.SamlSerializer samlSerializer, class System.ServiceModel.Security.SecurityStateEncoder securityStateEncoder, class System.Collections.Generic.IEnumerable`1<class System.Type> knownTypes, int32 maximumKeyDerivationOffset, int32 maximumKeyDerivationLabelLength, int32 maximumKeyDerivationNonceLength) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -154,8 +235,11 @@
         <Parameter Name="securityVersion" Type="System.ServiceModel.Security.SecurityVersion" />
         <Parameter Name="emitBspRequiredAttributes" Type="System.Boolean" />
         <Parameter Name="samlSerializer" Type="System.IdentityModel.Tokens.SamlSerializer" />
-        <Parameter Name="securityStateEncoder" Type="System.ServiceModel.Security.SecurityStateEncoder" />
-        <Parameter Name="knownTypes" Type="System.Collections.Generic.IEnumerable&lt;System.Type&gt;" />
+        <Parameter
+          Name="securityStateEncoder"
+          Type="System.ServiceModel.Security.SecurityStateEncoder"
+        />
+        <Parameter Name="knownTypes" Type="System.Collections.Generic.IEnumerable<System.Type>" />
         <Parameter Name="maximumKeyDerivationOffset" Type="System.Int32" />
         <Parameter Name="maximumKeyDerivationLabelLength" Type="System.Int32" />
         <Parameter Name="maximumKeyDerivationNonceLength" Type="System.Int32" />
@@ -172,13 +256,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.WSSecurityTokenSerializer" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CanReadKeyIdentifierClauseCore">
-      <MemberSignature Language="C#" Value="protected override bool CanReadKeyIdentifierClauseCore (System.Xml.XmlReader reader);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool CanReadKeyIdentifierClauseCore(class System.Xml.XmlReader reader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool CanReadKeyIdentifierClauseCore (System.Xml.XmlReader reader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool CanReadKeyIdentifierClauseCore(class System.Xml.XmlReader reader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -203,8 +298,14 @@
       </Docs>
     </Member>
     <Member MemberName="CanReadKeyIdentifierCore">
-      <MemberSignature Language="C#" Value="protected override bool CanReadKeyIdentifierCore (System.Xml.XmlReader reader);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool CanReadKeyIdentifierCore(class System.Xml.XmlReader reader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool CanReadKeyIdentifierCore (System.Xml.XmlReader reader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool CanReadKeyIdentifierCore(class System.Xml.XmlReader reader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -229,8 +330,14 @@
       </Docs>
     </Member>
     <Member MemberName="CanReadTokenCore">
-      <MemberSignature Language="C#" Value="protected override bool CanReadTokenCore (System.Xml.XmlReader reader);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool CanReadTokenCore(class System.Xml.XmlReader reader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool CanReadTokenCore (System.Xml.XmlReader reader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool CanReadTokenCore(class System.Xml.XmlReader reader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -255,8 +362,14 @@
       </Docs>
     </Member>
     <Member MemberName="CanWriteKeyIdentifierClauseCore">
-      <MemberSignature Language="C#" Value="protected override bool CanWriteKeyIdentifierClauseCore (System.IdentityModel.Tokens.SecurityKeyIdentifierClause keyIdentifierClause);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool CanWriteKeyIdentifierClauseCore(class System.IdentityModel.Tokens.SecurityKeyIdentifierClause keyIdentifierClause) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool CanWriteKeyIdentifierClauseCore (System.IdentityModel.Tokens.SecurityKeyIdentifierClause keyIdentifierClause);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool CanWriteKeyIdentifierClauseCore(class System.IdentityModel.Tokens.SecurityKeyIdentifierClause keyIdentifierClause) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -265,7 +378,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="keyIdentifierClause" Type="System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
+        <Parameter
+          Name="keyIdentifierClause"
+          Type="System.IdentityModel.Tokens.SecurityKeyIdentifierClause"
+        />
       </Parameters>
       <Docs>
         <param name="keyIdentifierClause">To be added.</param>
@@ -281,8 +397,14 @@
       </Docs>
     </Member>
     <Member MemberName="CanWriteKeyIdentifierCore">
-      <MemberSignature Language="C#" Value="protected override bool CanWriteKeyIdentifierCore (System.IdentityModel.Tokens.SecurityKeyIdentifier keyIdentifier);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool CanWriteKeyIdentifierCore(class System.IdentityModel.Tokens.SecurityKeyIdentifier keyIdentifier) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool CanWriteKeyIdentifierCore (System.IdentityModel.Tokens.SecurityKeyIdentifier keyIdentifier);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool CanWriteKeyIdentifierCore(class System.IdentityModel.Tokens.SecurityKeyIdentifier keyIdentifier) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -307,8 +429,14 @@
       </Docs>
     </Member>
     <Member MemberName="CanWriteTokenCore">
-      <MemberSignature Language="C#" Value="protected override bool CanWriteTokenCore (System.IdentityModel.Tokens.SecurityToken token);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool CanWriteTokenCore(class System.IdentityModel.Tokens.SecurityToken token) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool CanWriteTokenCore (System.IdentityModel.Tokens.SecurityToken token);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool CanWriteTokenCore(class System.IdentityModel.Tokens.SecurityToken token) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -333,8 +461,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateKeyIdentifierClauseFromTokenXml">
-      <MemberSignature Language="C#" Value="public virtual System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXml (System.Xml.XmlElement tokenXml, System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXml(class System.Xml.XmlElement tokenXml, valuetype System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXml (System.Xml.XmlElement tokenXml, System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXml(class System.Xml.XmlElement tokenXml, valuetype System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -344,7 +478,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="tokenXml" Type="System.Xml.XmlElement" />
-        <Parameter Name="referenceStyle" Type="System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />
+        <Parameter
+          Name="referenceStyle"
+          Type="System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle"
+        />
       </Parameters>
       <Docs>
         <param name="tokenXml">To be added.</param>
@@ -361,8 +498,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultInstance">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.WSSecurityTokenSerializer DefaultInstance { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.WSSecurityTokenSerializer DefaultInstance" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.WSSecurityTokenSerializer DefaultInstance { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.WSSecurityTokenSerializer DefaultInstance"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -399,8 +542,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetTokenTypeUri">
-      <MemberSignature Language="C#" Value="protected virtual string GetTokenTypeUri (Type tokenType);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance string GetTokenTypeUri(class System.Type tokenType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual string GetTokenTypeUri (Type tokenType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance string GetTokenTypeUri(class System.Type tokenType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -426,7 +575,10 @@
     </Member>
     <Member MemberName="MaximumKeyDerivationLabelLength">
       <MemberSignature Language="C#" Value="public int MaximumKeyDerivationLabelLength { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 MaximumKeyDerivationLabelLength" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 MaximumKeyDerivationLabelLength"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -445,7 +597,10 @@
     </Member>
     <Member MemberName="MaximumKeyDerivationNonceLength">
       <MemberSignature Language="C#" Value="public int MaximumKeyDerivationNonceLength { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 MaximumKeyDerivationNonceLength" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 MaximumKeyDerivationNonceLength"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -464,7 +619,10 @@
     </Member>
     <Member MemberName="MaximumKeyDerivationOffset">
       <MemberSignature Language="C#" Value="public int MaximumKeyDerivationOffset { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 MaximumKeyDerivationOffset" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 MaximumKeyDerivationOffset"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -482,8 +640,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReadKeyIdentifierClauseCore">
-      <MemberSignature Language="C#" Value="protected override System.IdentityModel.Tokens.SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore (System.Xml.XmlReader reader);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(class System.Xml.XmlReader reader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.IdentityModel.Tokens.SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore (System.Xml.XmlReader reader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(class System.Xml.XmlReader reader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -499,7 +663,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Reads the key identifier clause core using the specified <see cref="T:System.Xml.XmlReader" />.</para>
+          <para
+            >Reads the key identifier clause core using the specified <see
+             cref="T:System.Xml.XmlReader" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -508,8 +677,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReadKeyIdentifierCore">
-      <MemberSignature Language="C#" Value="protected override System.IdentityModel.Tokens.SecurityKeyIdentifier ReadKeyIdentifierCore (System.Xml.XmlReader reader);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifier ReadKeyIdentifierCore(class System.Xml.XmlReader reader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.IdentityModel.Tokens.SecurityKeyIdentifier ReadKeyIdentifierCore (System.Xml.XmlReader reader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifier ReadKeyIdentifierCore(class System.Xml.XmlReader reader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -525,7 +700,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Reads the key identifier core using the specified <see cref="T:System.Xml.XmlReader" />.</para>
+          <para
+            >Reads the key identifier core using the specified <see
+             cref="T:System.Xml.XmlReader" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -534,8 +714,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReadTokenCore">
-      <MemberSignature Language="C#" Value="protected override System.IdentityModel.Tokens.SecurityToken ReadTokenCore (System.Xml.XmlReader reader, System.IdentityModel.Selectors.SecurityTokenResolver tokenResolver);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityToken ReadTokenCore(class System.Xml.XmlReader reader, class System.IdentityModel.Selectors.SecurityTokenResolver tokenResolver) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.IdentityModel.Tokens.SecurityToken ReadTokenCore (System.Xml.XmlReader reader, System.IdentityModel.Selectors.SecurityTokenResolver tokenResolver);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityToken ReadTokenCore(class System.Xml.XmlReader reader, class System.IdentityModel.Selectors.SecurityTokenResolver tokenResolver) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -545,7 +731,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="reader" Type="System.Xml.XmlReader" />
-        <Parameter Name="tokenResolver" Type="System.IdentityModel.Selectors.SecurityTokenResolver" />
+        <Parameter
+          Name="tokenResolver"
+          Type="System.IdentityModel.Selectors.SecurityTokenResolver"
+        />
       </Parameters>
       <Docs>
         <param name="reader">To be added.</param>
@@ -553,7 +742,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Reads the token core using the specified <see cref="T:System.Xml.XmlReader" />.</para>
+          <para
+            >Reads the token core using the specified <see
+             cref="T:System.Xml.XmlReader" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -562,8 +756,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityVersion SecurityVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecurityVersion SecurityVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityVersion SecurityVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecurityVersion SecurityVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -581,8 +781,14 @@
       </Docs>
     </Member>
     <Member MemberName="WriteKeyIdentifierClauseCore">
-      <MemberSignature Language="C#" Value="protected override void WriteKeyIdentifierClauseCore (System.Xml.XmlWriter writer, System.IdentityModel.Tokens.SecurityKeyIdentifierClause keyIdentifierClause);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void WriteKeyIdentifierClauseCore(class System.Xml.XmlWriter writer, class System.IdentityModel.Tokens.SecurityKeyIdentifierClause keyIdentifierClause) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void WriteKeyIdentifierClauseCore (System.Xml.XmlWriter writer, System.IdentityModel.Tokens.SecurityKeyIdentifierClause keyIdentifierClause);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void WriteKeyIdentifierClauseCore(class System.Xml.XmlWriter writer, class System.IdentityModel.Tokens.SecurityKeyIdentifierClause keyIdentifierClause) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -592,7 +798,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="writer" Type="System.Xml.XmlWriter" />
-        <Parameter Name="keyIdentifierClause" Type="System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
+        <Parameter
+          Name="keyIdentifierClause"
+          Type="System.IdentityModel.Tokens.SecurityKeyIdentifierClause"
+        />
       </Parameters>
       <Docs>
         <param name="writer">To be added.</param>
@@ -600,13 +809,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the key identifier clause core with a specified key identifier clause using the specified <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Writes the key identifier clause core with a specified key identifier clause using the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="WriteKeyIdentifierCore">
-      <MemberSignature Language="C#" Value="protected override void WriteKeyIdentifierCore (System.Xml.XmlWriter writer, System.IdentityModel.Tokens.SecurityKeyIdentifier keyIdentifier);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void WriteKeyIdentifierCore(class System.Xml.XmlWriter writer, class System.IdentityModel.Tokens.SecurityKeyIdentifier keyIdentifier) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void WriteKeyIdentifierCore (System.Xml.XmlWriter writer, System.IdentityModel.Tokens.SecurityKeyIdentifier keyIdentifier);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void WriteKeyIdentifierCore(class System.Xml.XmlWriter writer, class System.IdentityModel.Tokens.SecurityKeyIdentifier keyIdentifier) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -624,13 +844,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the key identifier core with a specified key identifier clause using the specified <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Writes the key identifier core with a specified key identifier clause using the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="WriteTokenCore">
-      <MemberSignature Language="C#" Value="protected override void WriteTokenCore (System.Xml.XmlWriter writer, System.IdentityModel.Tokens.SecurityToken token);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void WriteTokenCore(class System.Xml.XmlWriter writer, class System.IdentityModel.Tokens.SecurityToken token) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void WriteTokenCore (System.Xml.XmlWriter writer, System.IdentityModel.Tokens.SecurityToken token);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void WriteTokenCore(class System.Xml.XmlWriter writer, class System.IdentityModel.Tokens.SecurityToken token) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -648,7 +879,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the token core with a specified security token using the specified <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Writes the token core with a specified security token using the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

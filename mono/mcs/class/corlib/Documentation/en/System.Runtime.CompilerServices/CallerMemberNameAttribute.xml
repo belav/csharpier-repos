@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="CallerMemberNameAttribute" FullName="System.Runtime.CompilerServices.CallerMemberNameAttribute">
+<Type
+  Name="CallerMemberNameAttribute"
+  FullName="System.Runtime.CompilerServices.CallerMemberNameAttribute"
+>
   <TypeSignature Language="C#" Value="public sealed class CallerMemberNameAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit CallerMemberNameAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit CallerMemberNameAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,18 +24,53 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You apply the <unmanagedCodeEntityReference>CallerMemberName</unmanagedCodeEntityReference> attribute to an optional parameter that has a default value. You must specify an explicit default value for the optional parameter. You can't apply this attribute to parameters that aren't specified as optional.</para>
-      <para>For more information, see <format type="text/html"><a href="9cb2b8c0-c4f6-44b8-9c90-38948455b373">Caller Information (C# and Visual Basic)</a></format>.</para>
-      <para>You can use the <unmanagedCodeEntityReference>CallerMemberName</unmanagedCodeEntityReference> attribute to avoid specifying the member name as a String argument to the called method. By using this technique, you avoid the problem that <ui>Rename Refactoring</ui> doesn't change the String values. This is especially useful for the following tasks:</para>
+      <para
+        >You apply the <unmanagedCodeEntityReference
+        >CallerMemberName</unmanagedCodeEntityReference>
+
+         attribute to an optional parameter that has a default value. You must specify an explicit default value for the optional parameter. You can't apply this attribute to parameters that aren't specified as optional.</para
+      >
+      <para
+        >For more information, see <format
+         type="text/html">
+          <a href="9cb2b8c0-c4f6-44b8-9c90-38948455b373"
+            >Caller Information (C# and Visual Basic)</a
+          >
+        </format>
+
+        .</para
+      >
+      <para
+        >You can use the <unmanagedCodeEntityReference
+        >CallerMemberName</unmanagedCodeEntityReference>
+
+         attribute to avoid specifying the member name as a String argument to the called method. By using this technique, you avoid the problem that <ui
+        >Rename Refactoring</ui>
+
+         doesn't change the String values. This is especially useful for the following tasks:</para
+      >
       <list type="bullet">
         <item>
           <para>Using tracing and diagnostic routines.</para>
         </item>
         <item>
-          <para>Implementing the <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> interface when binding data. This interface allows the property of an object to notify a bound control that the property has changed, so that the control can display the updated information. Without the <unmanagedCodeEntityReference>CallerMemberName</unmanagedCodeEntityReference> attribute, you must specify the property name as a literal.</para>
+          <para
+            >Implementing the <see
+             cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+             interface when binding data. This interface allows the property of an object to notify a bound control that the property has changed, so that the control can display the updated information. Without the <unmanagedCodeEntityReference
+            >CallerMemberName</unmanagedCodeEntityReference>
+
+             attribute, you must specify the property name as a literal.</para
+          >
         </item>
       </list>
-      <para>The following chart shows the member names that are returned when you use the <unmanagedCodeEntityReference>CallerMemberName</unmanagedCodeEntityReference> attribute.</para>
+      <para
+        >The following chart shows the member names that are returned when you use the <unmanagedCodeEntityReference
+        >CallerMemberName</unmanagedCodeEntityReference>
+
+         attribute.</para
+      >
       <list type="table">
         <item>
           <term>
@@ -105,7 +146,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CallerMemberNameAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,7 +159,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>

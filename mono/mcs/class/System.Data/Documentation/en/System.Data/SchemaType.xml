@@ -15,11 +15,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.SchemaType" /> usually should be set to Mapped, because any established table and column mappings are used.</para>
+      <para
+        >The <see
+         cref="T:System.Data.SchemaType" />
+
+         usually should be set to Mapped, because any established table and column mappings are used.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies how to handle existing schema mappings when performing a <see cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" /> operation.</para>
+      <para
+        >Specifies how to handle existing schema mappings when performing a <see
+         cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+
+         operation.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -34,7 +44,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Apply any existing table mappings to the incoming schema. Configure the <see cref="T:System.Data.DataSet" /> with the transformed schema.</para>
+          <para
+            >Apply any existing table mappings to the incoming schema. Configure the <see
+             cref="T:System.Data.DataSet" />
+
+             with the transformed schema.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -53,7 +68,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Ignore any table mappings on the DataAdapter. Configure the <see cref="T:System.Data.DataSet" /> using the incoming schema without applying any transformations.</para>
+          <para
+            >Ignore any table mappings on the DataAdapter. Configure the <see
+             cref="T:System.Data.DataSet" />
+
+             using the incoming schema without applying any transformations.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

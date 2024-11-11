@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AssemblyCollection" FullName="System.Web.Configuration.AssemblyCollection">
-  <TypeSignature Language="C#" Value="public sealed class AssemblyCollection : System.Configuration.ConfigurationElementCollection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class AssemblyCollection : System.Configuration.ConfigurationElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,11 +21,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.AssemblyCollection" /> class does not refer to any actual element in the underlying configuration file. It is a construct that allows access to the assembly information it contains. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.AssemblyCollection" />
+
+         class does not refer to any actual element in the underlying configuration file. It is a construct that allows access to the assembly information it contains. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a collection of <see cref="T:System.Web.Configuration.AssemblyInfo" /> objects. This class cannot be inherited.</para>
+      <para
+        >Represents a collection of <see
+         cref="T:System.Web.Configuration.AssemblyInfo" />
+
+         objects. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -35,7 +48,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.AssemblyCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.AssemblyCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -43,7 +61,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Web.Configuration.AssemblyInfo info);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Web.Configuration.AssemblyInfo info);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -56,11 +77,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an <see cref="T:System.Web.Configuration.AssemblyInfo" /> object to the collection. If the assembly object is not initialized with assembly information, an exception is thrown. If the assembly object already exists in the collection, the statement is ignored.</para>
+          <para
+            >Adds an <see
+             cref="T:System.Web.Configuration.AssemblyInfo" />
+
+             object to the collection. If the assembly object is not initialized with assembly information, an exception is thrown. If the assembly object already exists in the collection, the statement is ignored.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an <see cref="T:System.Web.Configuration.AssemblyInfo" /> object to the <see cref="T:System.Web.Configuration.AssemblyCollection" /> collection.</para>
+          <para
+            >Adds an <see
+             cref="T:System.Web.Configuration.AssemblyInfo" />
+
+             object to the <see
+             cref="T:System.Web.Configuration.AssemblyCollection" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -79,7 +113,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Clears all the <see cref="T:System.Web.Configuration.AssemblyInfo" /> objects from the <see cref="T:System.Web.Configuration.AssemblyCollection" /> collection.</para>
+          <para
+            >Clears all the <see
+             cref="T:System.Web.Configuration.AssemblyInfo" />
+
+             objects from the <see
+             cref="T:System.Web.Configuration.AssemblyCollection" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -87,7 +129,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElement</ReturnType>
@@ -104,7 +149,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -124,7 +172,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AssemblyInfo this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AssemblyInfo this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.AssemblyInfo</ReturnType>
@@ -144,7 +195,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AssemblyInfo this[string assemblyName] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AssemblyInfo this[string assemblyName] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.AssemblyInfo</ReturnType>
@@ -164,7 +218,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -196,10 +253,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Web.Configuration.AssemblyInfo" /> object from the <see cref="T:System.Web.Configuration.AssemblyCollection" /> collection.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Web.Configuration.AssemblyInfo" />
+
+             object from the <see
+             cref="T:System.Web.Configuration.AssemblyCollection" />
+
+             collection.</para
+          >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string value specifying the assembly reference.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string value specifying the assembly reference.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -222,10 +290,27 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes an <see cref="T:System.Web.Configuration.AssemblyInfo" /> object from the <see cref="T:System.Web.Configuration.AssemblyCollection" /> collection.</para>
+          <para
+            >Removes an <see
+             cref="T:System.Web.Configuration.AssemblyInfo" />
+
+             object from the <see
+             cref="T:System.Web.Configuration.AssemblyCollection" />
+
+             collection.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />An integer value specifying an <see cref="T:System.Web.Configuration.AssemblyInfo" /> object within the <see cref="T:System.Web.Configuration.AssemblyCollection" /> collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An integer value specifying an <see
+           cref="T:System.Web.Configuration.AssemblyInfo" />
+
+           object within the <see
+           cref="T:System.Web.Configuration.AssemblyCollection" />
+
+           collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

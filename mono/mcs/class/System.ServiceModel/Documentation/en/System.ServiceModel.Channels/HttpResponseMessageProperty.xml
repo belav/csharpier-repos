@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="HttpResponseMessageProperty" FullName="System.ServiceModel.Channels.HttpResponseMessageProperty">
-  <TypeSignature Language="C#" Value="public sealed class HttpResponseMessageProperty : System.ServiceModel.Channels.IMessageProperty" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit HttpResponseMessageProperty extends System.Object implements class System.ServiceModel.Channels.IMessageProperty" />
+<Type
+  Name="HttpResponseMessageProperty"
+  FullName="System.ServiceModel.Channels.HttpResponseMessageProperty"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class HttpResponseMessageProperty : System.ServiceModel.Channels.IMessageProperty"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit HttpResponseMessageProperty extends System.Object implements class System.ServiceModel.Channels.IMessageProperty"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,7 +39,12 @@
           <para>Varies the status code and status description used for each response.</para>
         </item>
       </list>
-      <para>This class can be used by <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> and related classes.</para>
+      <para
+        >This class can be used by <see
+         cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+
+         and related classes.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -40,7 +54,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public HttpResponseMessageProperty ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -53,27 +70,50 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Channels.HttpResponseMessageProperty.StatusCode" /> = <see cref="F:System.Net.HttpStatusCode.OK" />.</para>
+                <see cref="P:System.ServiceModel.Channels.HttpResponseMessageProperty.StatusCode" />
+
+                 = <see
+                 cref="F:System.Net.HttpStatusCode.OK" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Channels.HttpResponseMessageProperty.StatusDescription" /> is set to null.</para>
+                <see cref="P:System.ServiceModel.Channels.HttpResponseMessageProperty.StatusDescription" />
+
+                 is set to null.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Channels.HttpResponseMessageProperty.SuppressEntityBody" /> = false.</para>
+                <see cref="P:System.ServiceModel.Channels.HttpResponseMessageProperty.SuppressEntityBody" />
+
+                 = false.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Headers">
-      <MemberSignature Language="C#" Value="public System.Net.WebHeaderCollection Headers { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.WebHeaderCollection Headers" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.WebHeaderCollection Headers { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.WebHeaderCollection Headers"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -105,13 +145,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the name of the message property associated with the <see cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" /> class.</para>
+          <para
+            >Gets the name of the message property associated with the <see
+             cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="StatusCode">
-      <MemberSignature Language="C#" Value="public System.Net.HttpStatusCode StatusCode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.HttpStatusCode StatusCode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.HttpStatusCode StatusCode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.HttpStatusCode StatusCode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -123,7 +174,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property has one of the values in the <see cref="T:System.Net.HttpStatusCode" /> enumeration.</para>
+          <para
+            >This property has one of the values in the <see
+             cref="T:System.Net.HttpStatusCode" />
+
+             enumeration.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -167,7 +223,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is used for empty message responses, for example, a service that accepts a POST request and returns a response that contains no message body with StatusCode = 200 and StatusDescription = OK. The <see cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" /> associated with this response has this property set to true.</para>
+          <para
+            >This property is used for empty message responses, for example, a service that accepts a POST request and returns a response that contains no message body with StatusCode = 200 and StatusDescription = OK. The <see
+             cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
+
+             associated with this response has this property set to true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -176,8 +237,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IMessageProperty.CreateCopy">
-      <MemberSignature Language="C#" Value="System.ServiceModel.Channels.IMessageProperty IMessageProperty.CreateCopy ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.ServiceModel.Channels.IMessageProperty System.ServiceModel.Channels.IMessageProperty.CreateCopy() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ServiceModel.Channels.IMessageProperty IMessageProperty.CreateCopy ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.ServiceModel.Channels.IMessageProperty System.ServiceModel.Channels.IMessageProperty.CreateCopy() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -194,7 +261,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A newly created copy of type <see cref="T:System.ServiceModel.Channels.IMessageProperty" /> of the current instance.</para>
+          <para
+            >A newly created copy of type <see
+             cref="T:System.ServiceModel.Channels.IMessageProperty" />
+
+             of the current instance.</para
+          >
         </returns>
       </Docs>
     </Member>

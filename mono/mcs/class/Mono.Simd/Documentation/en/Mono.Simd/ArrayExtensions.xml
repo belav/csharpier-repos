@@ -14,7 +14,10 @@
   </Docs>
   <Members>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b GetVector (this byte[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b GetVector (this byte[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,7 +46,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d GetVector (this double[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d GetVector (this double[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -72,7 +78,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s GetVector (this short[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s GetVector (this short[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,7 +110,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i GetVector (this int[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i GetVector (this int[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -130,7 +142,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l GetVector (this long[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2l GetVector (this long[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -159,7 +174,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb GetVector (this sbyte[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb GetVector (this sbyte[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -188,7 +206,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f GetVector (this float[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f GetVector (this float[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -217,7 +238,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us GetVector (this ushort[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us GetVector (this ushort[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -246,7 +270,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui GetVector (this uint[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui GetVector (this uint[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -275,7 +302,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVector">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul GetVector (this ulong[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2ul GetVector (this ulong[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -304,7 +334,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b GetVectorAligned (this byte[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b GetVectorAligned (this byte[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -333,7 +366,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d GetVectorAligned (this double[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d GetVectorAligned (this double[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -362,7 +398,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s GetVectorAligned (this short[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s GetVectorAligned (this short[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -391,7 +430,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i GetVectorAligned (this int[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i GetVectorAligned (this int[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -420,7 +462,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l GetVectorAligned (this long[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2l GetVectorAligned (this long[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -449,7 +494,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb GetVectorAligned (this sbyte[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb GetVectorAligned (this sbyte[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -478,7 +526,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f GetVectorAligned (this float[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f GetVectorAligned (this float[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -507,7 +558,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us GetVectorAligned (this ushort[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us GetVectorAligned (this ushort[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -536,7 +590,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui GetVectorAligned (this uint[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui GetVectorAligned (this uint[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -565,7 +622,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetVectorAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul GetVectorAligned (this ulong[] array, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2ul GetVectorAligned (this ulong[] array, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -593,8 +653,11 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="IsAligned&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static bool IsAligned&lt;T&gt; (this T[] vect, int index) where T : struct;" />
+    <Member MemberName="IsAligned<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsAligned<T> (this T[] vect, int index) where T : struct;"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -625,7 +688,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this byte[] array, Mono.Simd.Vector16b val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this byte[] array, Mono.Simd.Vector16b val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -655,7 +721,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this double[] array, Mono.Simd.Vector2d val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this double[] array, Mono.Simd.Vector2d val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -685,7 +754,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this short[] array, Mono.Simd.Vector8s val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this short[] array, Mono.Simd.Vector8s val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -715,7 +787,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this int[] array, Mono.Simd.Vector4i val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this int[] array, Mono.Simd.Vector4i val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -745,7 +820,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this long[] array, Mono.Simd.Vector2l val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this long[] array, Mono.Simd.Vector2l val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -775,7 +853,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this sbyte[] array, Mono.Simd.Vector16sb val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this sbyte[] array, Mono.Simd.Vector16sb val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -805,7 +886,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this float[] array, Mono.Simd.Vector4f val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this float[] array, Mono.Simd.Vector4f val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -835,7 +919,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this ushort[] array, Mono.Simd.Vector8us val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this ushort[] array, Mono.Simd.Vector8us val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -865,7 +952,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this uint[] array, Mono.Simd.Vector4ui val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this uint[] array, Mono.Simd.Vector4ui val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -895,7 +985,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVector">
-      <MemberSignature Language="C#" Value="public static void SetVector (this ulong[] array, Mono.Simd.Vector2ul val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVector (this ulong[] array, Mono.Simd.Vector2ul val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -925,7 +1018,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this byte[] array, Mono.Simd.Vector16b val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this byte[] array, Mono.Simd.Vector16b val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -955,7 +1051,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this double[] array, Mono.Simd.Vector2d val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this double[] array, Mono.Simd.Vector2d val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -985,7 +1084,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this short[] array, Mono.Simd.Vector8s val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this short[] array, Mono.Simd.Vector8s val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1015,7 +1117,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this int[] array, Mono.Simd.Vector4i val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this int[] array, Mono.Simd.Vector4i val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1045,7 +1150,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this long[] array, Mono.Simd.Vector2l val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this long[] array, Mono.Simd.Vector2l val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1075,7 +1183,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this sbyte[] array, Mono.Simd.Vector16sb val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this sbyte[] array, Mono.Simd.Vector16sb val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1105,7 +1216,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this float[] array, Mono.Simd.Vector4f val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this float[] array, Mono.Simd.Vector4f val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1135,7 +1249,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this ushort[] array, Mono.Simd.Vector8us val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this ushort[] array, Mono.Simd.Vector8us val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1165,7 +1282,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this uint[] array, Mono.Simd.Vector4ui val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this uint[] array, Mono.Simd.Vector4ui val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1195,7 +1315,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetVectorAligned">
-      <MemberSignature Language="C#" Value="public static void SetVectorAligned (this ulong[] array, Mono.Simd.Vector2ul val, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetVectorAligned (this ulong[] array, Mono.Simd.Vector2ul val, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

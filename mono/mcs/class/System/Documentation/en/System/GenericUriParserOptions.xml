@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="GenericUriParserOptions" FullName="System.GenericUriParserOptions">
   <TypeSignature Language="C#" Value="public enum GenericUriParserOptions" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed GenericUriParserOptions extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed GenericUriParserOptions extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,21 +22,55 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You can combine any of these options to configure a generic URI parser by passing the options as a parameter to the <see cref="M:System.GenericUriParser.#ctor(System.GenericUriParserOptions)" /> constructor.</para>
-      <para>The existing <see cref="T:System.Uri" /> class has been extended to provide support for International Resource Identifiers (IRI) based on RFC 3987. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI. This ensures application compatibility with prior versions of the .NET Framework.</para>
-      <para>The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> is indirectly controlled by the <see cref="T:System.Configuration.IriParsingElement" /> configuration setting that controls IRI processing in the <see cref="T:System.Uri" /> class. IRI processing must be enabled for IDN processing to be possible. If IRI processing is disabled, then IDN processing will be set to the default setting where the .NET Framework 2.0 behavior is used for compatibility and IDN names are not used.</para>
+      <para
+        >You can combine any of these options to configure a generic URI parser by passing the options as a parameter to the <see
+         cref="M:System.GenericUriParser.#ctor(System.GenericUriParserOptions)" />
+
+         constructor.</para
+      >
+      <para
+        >The existing <see
+         cref="T:System.Uri" />
+
+         class has been extended to provide support for International Resource Identifiers (IRI) based on RFC 3987. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI. This ensures application compatibility with prior versions of the .NET Framework.</para
+      >
+      <para
+        >The configuration setting for the <see
+         cref="T:System.Configuration.IdnElement" />
+
+         is indirectly controlled by the <see
+         cref="T:System.Configuration.IriParsingElement" />
+
+         configuration setting that controls IRI processing in the <see
+         cref="T:System.Uri" />
+
+         class. IRI processing must be enabled for IDN processing to be possible. If IRI processing is disabled, then IDN processing will be set to the default setting where the .NET Framework 2.0 behavior is used for compatibility and IDN names are not used.</para
+      >
       <para>The Internationalized Domain Name (IDN) attribute only controls IDN processing. All other IRI processing (character normalization, for example) is performed by default.</para>
-      <para>For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" /> class.</para>
+      <para
+        >For more information on IRI support, see the Remarks section for the <see
+         cref="T:System.Uri" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies options for a <see cref="T:System.UriParser" />.</para>
+      <para
+        >Specifies options for a <see
+         cref="T:System.UriParser" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="AllowEmptyAuthority">
       <MemberSignature Language="C#" Value="AllowEmptyAuthority" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions AllowEmptyAuthority = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions AllowEmptyAuthority = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -52,7 +89,10 @@
     </Member>
     <Member MemberName="Default">
       <MemberSignature Language="C#" Value="Default" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions Default = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions Default = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -85,7 +125,10 @@
     </Member>
     <Member MemberName="DontCompressPath">
       <MemberSignature Language="C#" Value="DontCompressPath" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions DontCompressPath = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions DontCompressPath = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -104,7 +147,10 @@
     </Member>
     <Member MemberName="DontConvertPathBackslashes">
       <MemberSignature Language="C#" Value="DontConvertPathBackslashes" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions DontConvertPathBackslashes = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions DontConvertPathBackslashes = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -123,7 +169,10 @@
     </Member>
     <Member MemberName="DontUnescapePathDotsAndSlashes">
       <MemberSignature Language="C#" Value="DontUnescapePathDotsAndSlashes" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions DontUnescapePathDotsAndSlashes = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions DontUnescapePathDotsAndSlashes = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -142,7 +191,10 @@
     </Member>
     <Member MemberName="GenericAuthority">
       <MemberSignature Language="C#" Value="GenericAuthority" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions GenericAuthority = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions GenericAuthority = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -161,7 +213,10 @@
     </Member>
     <Member MemberName="Idn">
       <MemberSignature Language="C#" Value="Idn" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions Idn = int32(512)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions Idn = int32(512)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -178,7 +233,10 @@
     </Member>
     <Member MemberName="IriParsing">
       <MemberSignature Language="C#" Value="IriParsing" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions IriParsing = int32(1024)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions IriParsing = int32(1024)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -195,7 +253,10 @@
     </Member>
     <Member MemberName="NoFragment">
       <MemberSignature Language="C#" Value="NoFragment" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions NoFragment = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions NoFragment = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -214,7 +275,10 @@
     </Member>
     <Member MemberName="NoPort">
       <MemberSignature Language="C#" Value="NoPort" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions NoPort = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions NoPort = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -233,7 +297,10 @@
     </Member>
     <Member MemberName="NoQuery">
       <MemberSignature Language="C#" Value="NoQuery" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions NoQuery = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions NoQuery = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -252,7 +319,10 @@
     </Member>
     <Member MemberName="NoUserInfo">
       <MemberSignature Language="C#" Value="NoUserInfo" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.GenericUriParserOptions NoUserInfo = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.GenericUriParserOptions NoUserInfo = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

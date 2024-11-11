@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlSignificantWhitespace" FullName="System.Xml.XmlSignificantWhitespace">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class XmlSignificantWhitespace : System.Xml.XmlCharacterData" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlSignificantWhitespace extends System.Xml.XmlCharacterData" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class XmlSignificantWhitespace : System.Xml.XmlCharacterData"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XmlSignificantWhitespace extends System.Xml.XmlCharacterData"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -13,8 +20,7 @@
   <Base>
     <BaseTypeName>System.Xml.XmlCharacterData</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,8 +33,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected XmlSignificantWhitespace (string strData, System.Xml.XmlDocument doc);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig specialname rtspecialname instance void .ctor(string strData, class System.Xml.XmlDocument doc) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected XmlSignificantWhitespace (string strData, System.Xml.XmlDocument doc);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig specialname rtspecialname instance void .ctor(string strData, class System.Xml.XmlDocument doc) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -46,17 +58,37 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.XmlSignificantWhitespace" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.XmlSignificantWhitespace" />
+
+             class.</para
+          >
         </summary>
         <param name="strData">
-          <attribution license="cc4" from="Microsoft" modified="false" />The white space characters of the node.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The white space characters of the node.</param
+        >
         <param name="doc">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlDocument" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlDocument" />
+
+           object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CloneNode">
-      <MemberSignature Language="C#" Value="public override System.Xml.XmlNode CloneNode (bool deep);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Xml.XmlNode CloneNode(bool deep) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Xml.XmlNode CloneNode (bool deep);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Xml.XmlNode CloneNode(bool deep) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -72,8 +104,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />.</para>
-          <para>The cloned node has no parent. <see cref="P:System.Xml.XmlNode.ParentNode" /> returns null.</para>
+          <para
+            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see
+             cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+
+            .</para
+          >
+          <para
+            >The cloned node has no parent. <see
+             cref="P:System.Xml.XmlNode.ParentNode" />
+
+             returns null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -84,7 +126,10 @@
           <para>The cloned node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to recursively clone the subtree under the specified node; false to clone only the node itself. For significant white space nodes, the cloned node always includes the data value, regardless of the parameter setting. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to recursively clone the subtree under the specified node; false to clone only the node itself. For significant white space nodes, the cloned node always includes the data value, regardless of the parameter setting. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="LocalName">
@@ -130,8 +175,14 @@
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override System.Xml.XmlNodeType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.XmlNodeType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Xml.XmlNodeType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.XmlNodeType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -151,8 +202,14 @@
       </Docs>
     </Member>
     <Member MemberName="ParentNode">
-      <MemberSignature Language="C#" Value="public override System.Xml.XmlNode ParentNode { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlNode ParentNode" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Xml.XmlNode ParentNode { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.XmlNode ParentNode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -197,8 +254,14 @@
       </Docs>
     </Member>
     <Member MemberName="WriteContentTo">
-      <MemberSignature Language="C#" Value="public override void WriteContentTo (System.Xml.XmlWriter w);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void WriteContentTo(class System.Xml.XmlWriter w) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void WriteContentTo (System.Xml.XmlWriter w);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void WriteContentTo(class System.Xml.XmlWriter w) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -218,15 +281,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Saves all the children of the node to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XmlWriter to which you want to save. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The XmlWriter to which you want to save. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
-      <MemberSignature Language="C#" Value="public override void WriteTo (System.Xml.XmlWriter w);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void WriteTo(class System.Xml.XmlWriter w) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void WriteTo (System.Xml.XmlWriter w);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void WriteTo(class System.Xml.XmlWriter w) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -246,10 +323,18 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Saves the node to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XmlWriter to which you want to save. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The XmlWriter to which you want to save. </param
+        >
       </Docs>
     </Member>
   </Members>

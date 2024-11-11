@@ -17,7 +17,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration in controls that provide the <see cref="P:System.Windows.Forms.CheckBox.Appearance" /> property to set its value.</para>
+      <para
+        >Use the members of this enumeration in controls that provide the <see
+         cref="P:System.Windows.Forms.CheckBox.Appearance" />
+
+         property to set its value.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

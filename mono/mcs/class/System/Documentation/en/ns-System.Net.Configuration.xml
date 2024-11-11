@@ -4,7 +4,15 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:System.Net.Configuration" /> namespace contains classes that applications use to programmatically access and update configuration settings for the <see cref="N:System.Net" /> namespaces.</para>
+      <para
+        >The <see
+         cref="N:System.Net.Configuration" />
+
+         namespace contains classes that applications use to programmatically access and update configuration settings for the <see
+         cref="N:System.Net" />
+
+         namespaces.</para
+      >
     </summary>
   </Docs>
 </Namespace>

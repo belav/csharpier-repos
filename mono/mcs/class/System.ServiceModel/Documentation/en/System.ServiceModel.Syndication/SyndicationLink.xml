@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SyndicationLink" FullName="System.ServiceModel.Syndication.SyndicationLink">
-  <TypeSignature Language="C#" Value="public class SyndicationLink : System.ServiceModel.Syndication.ISyndicationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SyndicationLink extends System.Object implements class System.ServiceModel.Syndication.ISyndicationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public class SyndicationLink : System.ServiceModel.Syndication.ISyndicationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SyndicationLink extends System.Object implements class System.ServiceModel.Syndication.ISyndicationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,7 +24,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> can be added to a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> or <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />. When serialized to Atom 1.0 a <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> is written out as a &lt;link&gt; element, with the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> properties written out as attributes of the &lt;link&gt; element. When serialized to RSS 2.0, the first <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with a relationship value of ‘alternate’ is written out as a &lt;link&gt; element. Any additional links are written out as a &lt;a10:link&gt; elements.</para>
+        <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+         can be added to a <see
+         cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+         or <see
+         cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+        . When serialized to Atom 1.0 a <see
+         cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+         is written out as a &lt;link&gt; element, with the <see
+         cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+         properties written out as attributes of the &lt;link&gt; element. When serialized to RSS 2.0, the first <see
+         cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+         with a relationship value of ‘alternate’ is written out as a &lt;link&gt; element. Any additional links are written out as a &lt;a10:link&gt; elements.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +52,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SyndicationLink ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -38,13 +65,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected SyndicationLink (System.ServiceModel.Syndication.SyndicationLink source);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Syndication.SyndicationLink source) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected SyndicationLink (System.ServiceModel.Syndication.SyndicationLink source);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Syndication.SyndicationLink source) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -57,13 +95,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified instance.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             class with the specified instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SyndicationLink (Uri uri);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri uri) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri uri) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -76,13 +122,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified <see cref="T:System.Uri" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             class with the specified <see
+             cref="T:System.Uri" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SyndicationLink (Uri uri, string relationshipType, string title, string mediaType, long length);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri uri, string relationshipType, string title, string mediaType, int64 length) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SyndicationLink (Uri uri, string relationshipType, string title, string mediaType, long length);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri uri, string relationshipType, string title, string mediaType, int64 length) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -123,13 +183,27 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified <see cref="T:System.Uri" />, relation type, title, media type, and length.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             class with the specified <see
+             cref="T:System.Uri" />
+
+            , relation type, title, media type, and length.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AttributeExtensions">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.Dictionary&lt;System.Xml.XmlQualifiedName,string&gt; AttributeExtensions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.Dictionary`2&lt;class System.Xml.XmlQualifiedName, string&gt; AttributeExtensions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName,string> AttributeExtensions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.Dictionary`2<class System.Xml.XmlQualifiedName, string> AttributeExtensions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -142,7 +216,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.ServiceModel.Syndication.SyndicationLink.AttributeExtensions" /> allows you to add custom attributes to the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />. When serialized to Atom 1.0, the custom attributes appear within the &lt;link&gt; element. When serialized to RSS 2.0, the custom attributes appear in the &lt;a10:link&gt; element. Any valid XML attribute can be added.</para>
+            <see cref="P:System.ServiceModel.Syndication.SyndicationLink.AttributeExtensions" />
+
+             allows you to add custom attributes to the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            . When serialized to Atom 1.0, the custom attributes appear within the &lt;link&gt; element. When serialized to RSS 2.0, the custom attributes appear in the &lt;a10:link&gt; element. Any valid XML attribute can be added.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -170,8 +250,14 @@
       </Docs>
     </Member>
     <Member MemberName="Clone">
-      <MemberSignature Language="C#" Value="public virtual System.ServiceModel.Syndication.SyndicationLink Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Syndication.SyndicationLink Clone() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.ServiceModel.Syndication.SyndicationLink Clone ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Syndication.SyndicationLink Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -184,17 +270,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a copy of the current <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
+          <para
+            >Creates a copy of the current <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
+          <para
+            >A new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateAlternateLink">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink (Uri uri);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink(class System.Uri uri) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink (Uri uri);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink(class System.Uri uri) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -210,17 +312,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object with the specified <see cref="T:System.Uri" />.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             object with the specified <see
+             cref="T:System.Uri" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
+          <para
+            >A new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateAlternateLink">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink (Uri uri, string mediaType);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink(class System.Uri uri, string mediaType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink (Uri uri, string mediaType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateAlternateLink(class System.Uri uri, string mediaType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -238,17 +359,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object with the specified <see cref="T:System.Uri" /> and media type.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             object with the specified <see
+             cref="T:System.Uri" />
+
+             and media type.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
+          <para
+            >A new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateMediaEnclosureLink">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Syndication.SyndicationLink CreateMediaEnclosureLink (Uri uri, string mediaType, long length);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateMediaEnclosureLink(class System.Uri uri, string mediaType, int64 length) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Syndication.SyndicationLink CreateMediaEnclosureLink (Uri uri, string mediaType, long length);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateMediaEnclosureLink(class System.Uri uri, string mediaType, int64 length) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -267,7 +407,15 @@
         <param name="length">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object and sets <see cref="P:System.ServiceModel.Syndication.SyndicationLink.RelationshipType" /> to enclosure.</para>
+          <para
+            >This method creates a new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             object and sets <see
+             cref="P:System.ServiceModel.Syndication.SyndicationLink.RelationshipType" />
+
+             to enclosure.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -275,13 +423,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
+          <para
+            >A new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateSelfLink">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Syndication.SyndicationLink CreateSelfLink (Uri uri);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateSelfLink(class System.Uri uri) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Syndication.SyndicationLink CreateSelfLink (Uri uri);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateSelfLink(class System.Uri uri) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -297,17 +456,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with the specified URI and relationship type set to self.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             with the specified URI and relationship type set to self.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
+          <para
+            >A <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateSelfLink">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Syndication.SyndicationLink CreateSelfLink (Uri uri, string mediaType);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateSelfLink(class System.Uri uri, string mediaType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Syndication.SyndicationLink CreateSelfLink (Uri uri, string mediaType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Syndication.SyndicationLink CreateSelfLink(class System.Uri uri, string mediaType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -325,17 +500,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with the specified URI, media type, and relationship type set to self.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             with the specified URI, media type, and relationship type set to self.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
+          <para
+            >A <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="ElementExtensions">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Syndication.SyndicationElementExtensionCollection ElementExtensions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Syndication.SyndicationElementExtensionCollection ElementExtensions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Syndication.SyndicationElementExtensionCollection ElementExtensions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Syndication.SyndicationElementExtensionCollection ElementExtensions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -351,13 +542,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the element extensions for the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para>
+          <para
+            >Gets the element extensions for the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetAbsoluteUri">
       <MemberSignature Language="C#" Value="public Uri GetAbsoluteUri ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Uri GetAbsoluteUri() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Uri GetAbsoluteUri() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -370,11 +569,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the absolute URI for the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para>
+          <para
+            >Gets the absolute URI for the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Uri" /> instance that contains the absolute URI of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para>
+          <para
+            >A <see
+             cref="T:System.Uri" />
+
+             instance that contains the absolute URI of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -392,7 +604,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When serialized to Atom 1.0 the <see cref="P:System.ServiceModel.Syndication.SyndicationLink.Length" /> property is written as a length attribute in the &lt;link&gt; element.</para>
+          <para
+            >When serialized to Atom 1.0 the <see
+             cref="P:System.ServiceModel.Syndication.SyndicationLink.Length" />
+
+             property is written as a length attribute in the &lt;link&gt; element.</para
+          >
           <para>When serialized to RSS 2.0 this value is written as the length attribute of the &lt;a10:link&gt; element.</para>
         </remarks>
         <summary>
@@ -487,8 +704,14 @@
       </Docs>
     </Member>
     <Member MemberName="TryParseAttribute">
-      <MemberSignature Language="C#" Value="protected virtual bool TryParseAttribute (string name, string ns, string value, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance bool TryParseAttribute(string name, string ns, string value, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual bool TryParseAttribute (string name, string ns, string value, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance bool TryParseAttribute(string name, string ns, string value, string version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -509,7 +732,12 @@
         <param name="version">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;link&gt; element. This method is an extension point that allows you to handle the deserialization of a custom attribute extension. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized attribute extensions.</para>
+          <para
+            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;link&gt; element. This method is an extension point that allows you to handle the deserialization of a custom attribute extension. To do this, you must derive a class from <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             and override this method. This method is called for all unrecognized attribute extensions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -522,8 +750,14 @@
       </Docs>
     </Member>
     <Member MemberName="TryParseElement">
-      <MemberSignature Language="C#" Value="protected virtual bool TryParseElement (System.Xml.XmlReader reader, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance bool TryParseElement(class System.Xml.XmlReader reader, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual bool TryParseElement (System.Xml.XmlReader reader, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance bool TryParseElement(class System.Xml.XmlReader reader, string version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -540,7 +774,12 @@
         <param name="version">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the deserialization of a custom element extension. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized element extensions.</para>
+          <para
+            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the deserialization of a custom element extension. To do this, you must derive a class from <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             and override this method. This method is called for all unrecognized element extensions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -576,8 +815,14 @@
       </Docs>
     </Member>
     <Member MemberName="WriteAttributeExtensions">
-      <MemberSignature Language="C#" Value="protected virtual void WriteAttributeExtensions (System.Xml.XmlWriter writer, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance void WriteAttributeExtensions(class System.Xml.XmlWriter writer, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void WriteAttributeExtensions (System.Xml.XmlWriter writer, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance void WriteAttributeExtensions(class System.Xml.XmlWriter writer, string version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -594,17 +839,33 @@
         <param name="version">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;link&gt; element. This method is an extension point that allows you to handle the serialization of custom attribute extensions. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized attribute extensions.</para>
+          <para
+            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;link&gt; element. This method is an extension point that allows you to handle the serialization of custom attribute extensions. To do this, you must derive a class from <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             and override this method. This method is called for all unrecognized attribute extensions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
+          <para
+            >Writes the attribute extensions to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+             using the specified syndication version.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="WriteElementExtensions">
-      <MemberSignature Language="C#" Value="protected virtual void WriteElementExtensions (System.Xml.XmlWriter writer, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance void WriteElementExtensions(class System.Xml.XmlWriter writer, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void WriteElementExtensions (System.Xml.XmlWriter writer, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance void WriteElementExtensions(class System.Xml.XmlWriter writer, string version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -621,11 +882,21 @@
         <param name="version">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the serialization of custom element extensions. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized element extensions.</para>
+          <para
+            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the serialization of custom element extensions. To do this, you must derive a class from <see
+             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+             and override this method. This method is called for all unrecognized element extensions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
+          <para
+            >Writes the element extensions to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+             using the specified syndication version.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -13,7 +13,15 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the mode for the automatic completion feature used in the <see cref="T:System.Windows.Forms.ComboBox" /> and <see cref="T:System.Windows.Forms.TextBox" /> controls.</para>
+      <para
+        >Specifies the mode for the automatic completion feature used in the <see
+         cref="T:System.Windows.Forms.ComboBox" />
+
+         and <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         controls.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -44,7 +52,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Disables the automatic completion feature for the <see cref="T:System.Windows.Forms.ComboBox" /> and <see cref="T:System.Windows.Forms.TextBox" /> controls.</para>
+          <para
+            >Disables the automatic completion feature for the <see
+             cref="T:System.Windows.Forms.ComboBox" />
+
+             and <see
+             cref="T:System.Windows.Forms.TextBox" />
+
+             controls.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

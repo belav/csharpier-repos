@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SecurityCriticalScope" FullName="System.Security.SecurityCriticalScope">
   <TypeSignature Language="C#" Value="public enum SecurityCriticalScope" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SecurityCriticalScope extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SecurityCriticalScope extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -23,13 +26,21 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the scope of a <see cref="T:System.Security.SecurityCriticalAttribute" />.</para>
+      <para
+        >Specifies the scope of a <see
+         cref="T:System.Security.SecurityCriticalAttribute" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Everything">
       <MemberSignature Language="C#" Value="Everything" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.SecurityCriticalScope Everything = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.SecurityCriticalScope Everything = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,7 +59,10 @@
     </Member>
     <Member MemberName="Explicit">
       <MemberSignature Language="C#" Value="Explicit" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.SecurityCriticalScope Explicit = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.SecurityCriticalScope Explicit = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

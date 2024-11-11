@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="UTF8Encoding" FullName="System.Text.UTF8Encoding" FullNameSP="System_Text_UTF8Encoding" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public serializable UTF8Encoding extends System.Text.Encoding" />
+<Type
+  Name="UTF8Encoding"
+  FullName="System.Text.UTF8Encoding"
+  FullNameSP="System_Text_UTF8Encoding"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public serializable UTF8Encoding extends System.Text.Encoding"
+  />
   <TypeSignature Language="C#" Value="public class UTF8Encoding : System.Text.Encoding" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit UTF8Encoding extends System.Text.Encoding" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit UTF8Encoding extends System.Text.Encoding"
+  />
   <MemberOfLibrary>BCL</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
@@ -25,15 +36,69 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Encoding is the process of transforming a set of Unicode characters into a sequence of bytes. Decoding is the process of transforming a sequence of encoded bytes into a set of Unicode characters.</para>
-      <para>UTF-8 is a Unicode encoding that represents each code point as a sequence of one to four bytes. For more information about the UTFs and other encodings supported by <see cref="N:System.Text" />, see <format type="text/html"><a href="bf6d9823-4c2d-48af-b280-919c5af66ae9">Understanding Encodings</a></format>.</para>
-      <para>The <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> method performs the actual encoding.</para>
-      <para>Likewise, the <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> and <see cref="M:System.Text.UTF8Encoding.GetString(System.Byte[],System.Int32,System.Int32)" /> methods perform the actual decoding.</para>
+      <para
+        >UTF-8 is a Unicode encoding that represents each code point as a sequence of one to four bytes. For more information about the UTFs and other encodings supported by <see
+         cref="N:System.Text" />
+
+        , see <format
+         type="text/html">
+          <a href="bf6d9823-4c2d-48af-b280-919c5af66ae9">Understanding Encodings</a>
+        </format>
+
+        .</para
+      >
+      <para
+        >The <see
+         cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+         method determines how many bytes result in encoding a set of Unicode characters, and the <see
+         cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+         method performs the actual encoding.</para
+      >
+      <para
+        >Likewise, the <see
+         cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+         method determines how many characters result in decoding a sequence of bytes, and the <see
+         cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+         and <see
+         cref="M:System.Text.UTF8Encoding.GetString(System.Byte[],System.Int32,System.Int32)" />
+
+         methods perform the actual decoding.</para
+      >
       <para>
-        <see cref="T:System.Text.UTF8Encoding" /> corresponds to the Windows code page 65001.</para>
+        <see cref="T:System.Text.UTF8Encoding" />
+
+         corresponds to the Windows code page 65001.</para
+      >
       <para>The encoder can use the big endian byte order (most significant byte first) or the little endian byte order (least significant byte first). It is generally more efficient to store Unicode characters using the native byte order. For example, it is better to use the little endian byte order on little endian platforms, such as Intel computers.</para>
-      <para>Optionally, the <see cref="T:System.Text.UTF8Encoding" /> object provides a preamble, which is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (BOM), it helps the decoder determine the byte order and the transformation format or UTF. The <see cref="M:System.Text.UTF8Encoding.GetPreamble" /> method retrieves an array of bytes that can include the BOM. For more information on byte order and the byte order mark, see The Unicode Standard at the <see cref="http://go.microsoft.com/fwlink/?LinkId=37123">Unicode home page</see>.</para>
+      <para
+        >Optionally, the <see
+         cref="T:System.Text.UTF8Encoding" />
+
+         object provides a preamble, which is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (BOM), it helps the decoder determine the byte order and the transformation format or UTF. The <see
+         cref="M:System.Text.UTF8Encoding.GetPreamble" />
+
+         method retrieves an array of bytes that can include the BOM. For more information on byte order and the byte order mark, see The Unicode Standard at the <see
+         cref="http://go.microsoft.com/fwlink/?LinkId=37123">Unicode home page</see>
+
+        .</para
+      >
       <block subset="none" type="note">
-        <para>To enable error detection and to make the class instance more secure, the application should use the <see cref="M:System.Text.UTF8Encoding.#ctor" /> constructor that takes a <paramref name="throwOnInvalidBytes" /> parameter and set that parameter to true. With error detection, a method that detects an invalid sequence of characters or bytes throws a <see cref="T:System.ArgumentException" />. Without error detection, no exception is thrown, and the invalid sequence is generally ignored.</para>
+        <para
+          >To enable error detection and to make the class instance more secure, the application should use the <see
+           cref="M:System.Text.UTF8Encoding.#ctor" />
+
+           constructor that takes a <paramref
+           name="throwOnInvalidBytes" />
+
+           parameter and set that parameter to true. With error detection, a method that detects an invalid sequence of characters or bytes throws a <see
+           cref="T:System.ArgumentException" />
+
+          . Without error detection, no exception is thrown, and the invalid sequence is generally ignored.</para
+        >
       </block>
       <block subset="none" type="note">
         <para>The state of a UTF-8 encoded object is not preserved if the object is serialized and deserialized using different .NET Framework versions.</para>
@@ -46,9 +111,15 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor()" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor()"
+      />
       <MemberSignature Language="C#" Value="public UTF8Encoding ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -62,20 +133,39 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates an instance that does not provide a Unicode byte order mark and does not throw an exception when an invalid encoding is detected.</para>
           <block subset="none" type="note">
-            <para>For security reasons, your applications are recommended to enable error detection by using the constructor that accepts a <paramref name="throwOnInvalidBytes" /> parameter and setting that parameter to true.</para>
+            <para
+              >For security reasons, your applications are recommended to enable error detection by using the constructor that accepts a <paramref
+               name="throwOnInvalidBytes" />
+
+               parameter and setting that parameter to true.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Text.UTF8Encoding" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Text.UTF8Encoding" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(bool encoderShouldEmitUTF8Identifier)" />
-      <MemberSignature Language="C#" Value="public UTF8Encoding (bool encoderShouldEmitUTF8Identifier);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool encoderShouldEmitUTF8Identifier) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(bool encoderShouldEmitUTF8Identifier)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public UTF8Encoding (bool encoderShouldEmitUTF8Identifier);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool encoderShouldEmitUTF8Identifier) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -91,22 +181,44 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates an instance that does not throw an exception when an invalid encoding is detected.</para>
           <block subset="none" type="note">
-            <para>For security reasons, your applications are recommended to enable error detection by using the constructor that accepts a <paramref name="throwOnInvalidBytes" /> parameter and setting that parameter to true.</para>
+            <para
+              >For security reasons, your applications are recommended to enable error detection by using the constructor that accepts a <paramref
+               name="throwOnInvalidBytes" />
+
+               parameter and setting that parameter to true.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Text.UTF8Encoding" /> class. A parameter specifies whether to provide a Unicode byte order mark.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Text.UTF8Encoding" />
+
+             class. A parameter specifies whether to provide a Unicode byte order mark.</para
+          >
         </summary>
         <param name="encoderShouldEmitUTF8Identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to specify that a Unicode byte order mark is provided; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to specify that a Unicode byte order mark is provided; otherwise, false. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes)" />
-      <MemberSignature Language="C#" Value="public UTF8Encoding (bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public UTF8Encoding (bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool encoderShouldEmitUTF8Identifier, bool throwOnInvalidBytes) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -120,29 +232,65 @@
       </Parameters>
       <Docs>
         <param name="throwOnInvalidBytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to specify that an exception be thrown when an invalid encoding is detected; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to specify that an exception be thrown when an invalid encoding is detected; otherwise, false. </param
+        >
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="throwOnInvalidBytes" /> is true, a method that detects an invalid byte sequence throws <see cref="T:System.ArgumentException" />. Otherwise, the method does not throw an exception, and the invalid sequence is ignored.</para>
+          <para
+            >If <paramref
+             name="throwOnInvalidBytes" />
+
+             is true, a method that detects an invalid byte sequence throws <see
+             cref="T:System.ArgumentException" />
+
+            . Otherwise, the method does not throw an exception, and the invalid sequence is ignored.</para
+          >
           <block subset="none" type="note">
-            <para>For security reasons, your applications are recommended to use this constructor to create an instance of the <see cref="T:System.Text.UTF8Encoding" /> class and turn on error detection by setting <paramref name="throwOnInvalidBytes" /> to true.</para>
+            <para
+              >For security reasons, your applications are recommended to use this constructor to create an instance of the <see
+               cref="T:System.Text.UTF8Encoding" />
+
+               class and turn on error detection by setting <paramref
+               name="throwOnInvalidBytes" />
+
+               to true.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Text.UTF8Encoding" /> class. Parameters specify whether to provide a Unicode byte order mark and whether to throw an exception when an invalid encoding is detected.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Text.UTF8Encoding" />
+
+             class. Parameters specify whether to provide a Unicode byte order mark and whether to throw an exception when an invalid encoding is detected.</para
+          >
         </summary>
         <param name="encoderShouldEmitUTF8Identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to specify that a Unicode byte order mark is provided; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to specify that a Unicode byte order mark is provided; otherwise, false. </param
+        >
         <param name="throwOnInvalidBytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to specify that an exception be thrown when an invalid encoding is detected; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to specify that an exception be thrown when an invalid encoding is detected; otherwise, false. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual bool Equals(object value)" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual bool Equals(object value)"
+      />
       <MemberSignature Language="C#" Value="public override bool Equals (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -158,7 +306,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Two <see cref="T:System.Text.UTF8Encoding" /> objects are considered equal if all of the following conditions are true: </para>
+          <para
+            >Two <see
+             cref="T:System.Text.UTF8Encoding" />
+
+             objects are considered equal if all of the following conditions are true: </para
+          >
           <list type="bullet">
             <item>
               <para>Both objects use the same byte order.</para>
@@ -173,21 +326,49 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Text.UTF8Encoding" /> object.</para>
+          <para
+            >Determines whether the specified <see
+             cref="T:System.Object" />
+
+             is equal to the current <see
+             cref="T:System.Text.UTF8Encoding" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="value" /> is an instance of <see cref="T:System.Text.UTF8Encoding" /> and is equal to the current object; otherwise, false.</para>
+          <para
+            >true if <paramref
+             name="value" />
+
+             is an instance of <see
+             cref="T:System.Text.UTF8Encoding" />
+
+             and is equal to the current object; otherwise, false.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> to compare with the current instance. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           to compare with the current instance. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetByteCount">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetByteCount(string chars)" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetByteCount(string chars)"
+      />
       <MemberSignature Language="C#" Value="public override int GetByteCount (string chars);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetByteCount(string chars) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetByteCount(string chars) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -202,37 +383,92 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " />is <see langword="null" />. </exception>
+          <paramref name="chars " />
+
+          is <see
+           langword="null" />
+
+          . </exception
+        >
         <exception cref="T:System.ArgumentException">
-          <para>Error-checking is turned on for the current instance and <paramref name="chars" /> contains an invalid surrogate sequence.</para>
+          <para
+            >Error-checking is turned on for the current instance and <paramref
+             name="chars" />
+
+             contains an invalid surrogate sequence.</para
+          >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>The return value is greater than <see cref="F:System.Int32.MaxValue" />.</para>
+          <para
+            >The return value is greater than <see
+             cref="F:System.Int32.MaxValue" />
+
+            .</para
+          >
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> to store the resulting bytes, the application uses <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+             to store the resulting bytes, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
           <block subset="none" type="note">
             <para>To ensure that the encoded bytes are decoded properly, the application should prefix encoded bytes with a preamble.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Calculates the number of bytes produced by encoding the characters in the specified <see cref="T:System.String" />.</para>
+          <para
+            >Calculates the number of bytes produced by encoding the characters in the specified <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The number of bytes produced by encoding the specified characters.</para>
         </returns>
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> containing the set of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           containing the set of characters to encode. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetByteCount">
-      <MemberSignature Language="C#" Value="public override int GetByteCount (char* chars, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetByteCount(char* chars, int32 count) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetByteCount (char* chars, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetByteCount(char* chars, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -257,8 +493,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> to store the resulting bytes, the application uses <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+             to store the resulting bytes, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
           <block subset="none" type="note">
             <para>To ensure that the encoded bytes are decoded properly, the application should prefix encoded bytes with a preamble.</para>
           </block>
@@ -272,15 +530,30 @@
           <para>The number of bytes produced by encoding the specified characters.</para>
         </returns>
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the first character to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the first character to encode. </param
+        >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to encode. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetByteCount">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetByteCount(class System.Char[] chars, int32 index, int32 count)" />
-      <MemberSignature Language="C#" Value="public override int GetByteCount (char[] chars, int index, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetByteCount(char[] chars, int32 index, int32 count) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetByteCount(class System.Char[] chars, int32 index, int32 count)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetByteCount (char[] chars, int index, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetByteCount(char[] chars, int32 index, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -297,23 +570,85 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " /> is <see langword="null" /> . </exception>
+          <paramref name="chars " />
+
+           is <see
+           langword="null" />
+
+           . </exception
+        >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>The return value is greater than <see cref="F:System.Int32.MaxValue" />.</para>
+          <para
+            >The return value is greater than <see
+             cref="F:System.Int32.MaxValue" />
+
+            .</para
+          >
           <para>-or-</para>
           <para>
-            <paramref name="index" /> or <paramref name="count" /> is less than zero. </para>
+            <paramref name="index" />
+
+             or <paramref
+             name="count" />
+
+             is less than zero. </para
+          >
           <para>-or-</para>
           <para>
-            <paramref name="index" /> and <paramref name="count" /> do not specify a valid range in <paramref name="chars" /> (i.e. (<paramref name="index" /> + <paramref name="count" />) &gt; <paramref name="chars" />.Length).</para>
+            <paramref name="index" />
+
+             and <paramref
+             name="count" />
+
+             do not specify a valid range in <paramref
+             name="chars" />
+
+             (i.e. (<paramref
+             name="index" />
+
+             + <paramref
+             name="count" />
+
+            ) &gt; <paramref
+             name="chars" />
+
+            .Length).</para
+          >
         </exception>
         <exception cref="T:System.ArgumentException">
-          <para>Error-checking is turned on for the current instance and <paramref name="chars" /> contains an invalid surrogate sequence.</para>
+          <para
+            >Error-checking is turned on for the current instance and <paramref
+             name="chars" />
+
+             contains an invalid surrogate sequence.</para
+          >
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> to store the resulting bytes, the application uses <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+             to store the resulting bytes, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
           <block subset="none" type="note">
             <para>To ensure that the encoded bytes are decoded properly, the application should prefix encoded bytes with a preamble.</para>
           </block>
@@ -327,16 +662,28 @@
           <para>The number of bytes produced by encoding the specified characters.</para>
         </returns>
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />The character array containing the set of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The character array containing the set of characters to encode. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the first character to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the first character to encode. </param
+        >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to encode. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetBytes">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual class System.Byte[] GetBytes(string s)" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual class System.Byte[] GetBytes(string s)"
+      />
       <MemberSignature Language="C#" Value="public override byte[] GetBytes (string s);" />
       <MemberType>Method</MemberType>
       <ReturnValue>
@@ -347,29 +694,63 @@
       </Parameters>
       <Docs>
         <remarks>
-          <para>If error-checking is turned off and an invalid surrogate
+          <para
+            >If error-checking is turned off and an invalid surrogate
       sequence is detected, the invalid characters are ignored and are not encoded
-      into the returned <see cref="T:System.Byte" /> array, and no exception is
-      thrown.</para>
+      into the returned <see
+             cref="T:System.Byte" />
+
+             array, and no exception is
+      thrown.</para
+          >
           <para>
-            <block subset="none" type="note">This method overrides <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" />.</block>
+            <block subset="none" type="note"
+              >This method overrides <see
+               cref="M:System.Text.Encoding.GetBytes(System.Char[])" />
+
+              .</block
+            >
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
-          <para>Error-checking is turned on for the current instance and <paramref name="s" /> contains an invalid surrogate sequence.</para>
+          <para
+            >Error-checking is turned on for the current instance and <paramref
+             name="s" />
+
+             contains an invalid surrogate sequence.</para
+          >
         </exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="s" /> is <see langword="null" />.</exception>
+          <paramref name="s" />
+
+           is <see
+           langword="null" />
+
+          .</exception
+        >
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Encodes the characters in a specified <see cref="T:System.String" /> object into a sequence of bytes.</para>
+          <para
+            >Encodes the characters in a specified <see
+             cref="T:System.String" />
+
+             object into a sequence of bytes.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A byte array that contains the encoded characters in the string specified by the <paramref name="s" /> parameter.</para>
+          <para
+            >A byte array that contains the encoded characters in the string specified by the <paramref
+             name="s" />
+
+             parameter.</para
+          >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />The character string to encode.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The character string to encode.</param
+        >
       </Docs>
       <Excluded>0</Excluded>
       <AssemblyInfo>
@@ -377,8 +758,14 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetBytes">
-      <MemberSignature Language="C#" Value="public override int GetBytes (char* chars, int charCount, byte* bytes, int byteCount);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetBytes(char* chars, int32 charCount, unsigned int8* bytes, int32 byteCount) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetBytes (char* chars, int charCount, byte* bytes, int byteCount);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetBytes(char* chars, int32 charCount, unsigned int8* bytes, int32 byteCount) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -405,9 +792,45 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> to store the resulting bytes, the application uses <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
-          <para>Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.UTF8Encoding.GetDecoder" /> method or the <see cref="M:System.Text.UTF8Encoding.GetEncoder" /> method, respectively.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+             to store the resulting bytes, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
+          <para
+            >Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see
+             cref="T:System.Text.Decoder" />
+
+             or the <see
+             cref="T:System.Text.Encoder" />
+
+             provided by the <see
+             cref="M:System.Text.UTF8Encoding.GetDecoder" />
+
+             method or the <see
+             cref="M:System.Text.UTF8Encoding.GetEncoder" />
+
+             method, respectively.</para
+          >
           <block subset="none" type="note">
             <para>To ensure that the encoded bytes are decoded properly, the application should prefix encoded bytes with a preamble.</para>
           </block>
@@ -418,22 +841,48 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The actual number of bytes written at the location indicated by <paramref name="bytes" />.</para>
+          <para
+            >The actual number of bytes written at the location indicated by <paramref
+             name="bytes" />
+
+            .</para
+          >
         </returns>
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the first character to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the first character to encode. </param
+        >
         <param name="charCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to encode. </param
+        >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the location at which to start writing the resulting sequence of bytes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the location at which to start writing the resulting sequence of bytes. </param
+        >
         <param name="byteCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of bytes to write. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of bytes to write. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetBytes(class System.Char[] chars, int32 charIndex, int32 charCount, class System.Byte[] bytes, int32 byteIndex)" />
-      <MemberSignature Language="C#" Value="public override int GetBytes (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetBytes(char[] chars, int32 charIndex, int32 charCount, unsigned int8[] bytes, int32 byteIndex) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetBytes(class System.Char[] chars, int32 charIndex, int32 charCount, class System.Byte[] bytes, int32 byteIndex)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetBytes (char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetBytes(char[] chars, int32 charIndex, int32 charCount, unsigned int8[] bytes, int32 byteIndex) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -453,26 +902,105 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="bytes" /> does not contain sufficient space to store the encoded characters.</para>
+            <paramref name="bytes" />
+
+             does not contain sufficient space to store the encoded characters.</para
+          >
           <para>-or-</para>
-          <para>Error-checking is turned on for the current instance and <paramref name="chars" /> contains an invalid surrogate sequence.</para>
+          <para
+            >Error-checking is turned on for the current instance and <paramref
+             name="chars" />
+
+             contains an invalid surrogate sequence.</para
+          >
         </exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars" /> or <paramref name="bytes" /> is <see langword="null" />. </exception>
+          <paramref name="chars" />
+
+           or <paramref
+           name="bytes" />
+
+           is <see
+           langword="null" />
+
+          . </exception
+        >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="charIndex" />, <paramref name="charCount" />, or <paramref name="byteIndex" /> is less than zero.</para>
+            <paramref name="charIndex" />
+
+            , <paramref
+             name="charCount" />
+
+            , or <paramref
+             name="byteIndex" />
+
+             is less than zero.</para
+          >
           <para>-or-</para>
-          <para>(<paramref name="chars" />.Length - <paramref name="charIndex" />) &lt; <paramref name="charCount" />.</para>
+          <para
+            >(<paramref
+             name="chars" />
+
+            .Length - <paramref
+             name="charIndex" />
+
+            ) &lt; <paramref
+             name="charCount" />
+
+            .</para
+          >
           <para>-or-</para>
           <para>
-            <paramref name="byteIndex" /> &gt; <paramref name="bytes" />.Length.</para>
+            <paramref name="byteIndex" />
+
+             &gt; <paramref
+             name="bytes" />
+
+            .Length.</para
+          >
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> to store the resulting bytes, the application uses <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
-          <para>Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.UTF8Encoding.GetDecoder" /> method or the <see cref="M:System.Text.UTF8Encoding.GetEncoder" /> method, respectively.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+             to store the resulting bytes, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
+          <para
+            >Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see
+             cref="T:System.Text.Decoder" />
+
+             or the <see
+             cref="T:System.Text.Encoder" />
+
+             provided by the <see
+             cref="M:System.Text.UTF8Encoding.GetDecoder" />
+
+             method or the <see
+             cref="M:System.Text.UTF8Encoding.GetEncoder" />
+
+             method, respectively.</para
+          >
           <block subset="none" type="note">
             <para>To ensure that the encoded bytes are decoded properly, the application should prefix encoded bytes with a preamble.</para>
           </block>
@@ -483,25 +1011,54 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The actual number of bytes written into <paramref name="bytes" />.</para>
+          <para
+            >The actual number of bytes written into <paramref
+             name="bytes" />
+
+            .</para
+          >
         </returns>
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />The character array containing the set of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The character array containing the set of characters to encode. </param
+        >
         <param name="charIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the first character to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the first character to encode. </param
+        >
         <param name="charCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to encode. </param
+        >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array to contain the resulting sequence of bytes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array to contain the resulting sequence of bytes. </param
+        >
         <param name="byteIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index at which to start writing the resulting sequence of bytes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index at which to start writing the resulting sequence of bytes. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetBytes">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetBytes(string s, int32 charIndex, int32 charCount, class System.Byte[] bytes, int32 byteIndex)" />
-      <MemberSignature Language="C#" Value="public override int GetBytes (string s, int charIndex, int charCount, byte[] bytes, int byteIndex);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetBytes(string s, int32 charIndex, int32 charCount, unsigned int8[] bytes, int32 byteIndex) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetBytes(string s, int32 charIndex, int32 charCount, class System.Byte[] bytes, int32 byteIndex)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetBytes (string s, int charIndex, int charCount, byte[] bytes, int byteIndex);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetBytes(string s, int32 charIndex, int32 charCount, unsigned int8[] bytes, int32 byteIndex) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -521,64 +1078,195 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="bytes" /> does not contain sufficient space to store the encoded characters.</para>
+            <paramref name="bytes" />
+
+             does not contain sufficient space to store the encoded characters.</para
+          >
           <para>-or-</para>
-          <para>Error-checking is turned on for the current instance and <paramref name="chars" /> contains an invalid surrogate sequence.</para>
+          <para
+            >Error-checking is turned on for the current instance and <paramref
+             name="chars" />
+
+             contains an invalid surrogate sequence.</para
+          >
         </exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " /> or <paramref name="bytes " />is <see langword="null" /> . </exception>
+          <paramref name="chars " />
+
+           or <paramref
+           name="bytes " />
+
+          is <see
+           langword="null" />
+
+           . </exception
+        >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="charIndex" />, <paramref name="charCount" />, or <paramref name="byteIndex" /> is less than zero.</para>
+            <paramref name="charIndex" />
+
+            , <paramref
+             name="charCount" />
+
+            , or <paramref
+             name="byteIndex" />
+
+             is less than zero.</para
+          >
           <para>-or-</para>
-          <para>(<paramref name="s" />.Length - <paramref name="charIndex" />) &lt; <paramref name="charCount" />.</para>
+          <para
+            >(<paramref
+             name="s" />
+
+            .Length - <paramref
+             name="charIndex" />
+
+            ) &lt; <paramref
+             name="charCount" />
+
+            .</para
+          >
           <para>-or-</para>
           <para>
-            <paramref name="byteIndex" /> &gt;= <paramref name="bytes" />.Length.</para>
+            <paramref name="byteIndex" />
+
+             &gt;= <paramref
+             name="bytes" />
+
+            .Length.</para
+          >
         </exception>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> containing the set of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           containing the set of characters to encode. </param
+        >
         <param name="charIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the first character to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the first character to encode. </param
+        >
         <param name="charCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to encode. </param
+        >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array to contain the resulting sequence of bytes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array to contain the resulting sequence of bytes. </param
+        >
         <param name="byteIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index at which to start writing the resulting sequence of bytes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index at which to start writing the resulting sequence of bytes. </param
+        >
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> to store the resulting bytes, the application uses <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
-          <para>Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.UTF8Encoding.GetDecoder" /> method or the <see cref="M:System.Text.UTF8Encoding.GetEncoder" /> method, respectively.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+             to store the resulting bytes, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
+          <para
+            >Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see
+             cref="T:System.Text.Decoder" />
+
+             or the <see
+             cref="T:System.Text.Encoder" />
+
+             provided by the <see
+             cref="M:System.Text.UTF8Encoding.GetDecoder" />
+
+             method or the <see
+             cref="M:System.Text.UTF8Encoding.GetEncoder" />
+
+             method, respectively.</para
+          >
           <block subset="none" type="note">
             <para>To ensure that the encoded bytes are decoded properly, the application should prefix encoded bytes with a preamble.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Encodes a set of characters from the specified <see cref="T:System.String" /> into the specified byte array.</para>
+          <para
+            >Encodes a set of characters from the specified <see
+             cref="T:System.String" />
+
+             into the specified byte array.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The actual number of bytes written into <paramref name="bytes" />.</para>
+          <para
+            >The actual number of bytes written into <paramref
+             name="bytes" />
+
+            .</para
+          >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> containing the set of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           containing the set of characters to encode. </param
+        >
         <param name="charIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the first character to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the first character to encode. </param
+        >
         <param name="charCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to encode. </param
+        >
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array to contain the resulting sequence of bytes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array to contain the resulting sequence of bytes. </param
+        >
         <param name="byteIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index at which to start writing the resulting sequence of bytes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index at which to start writing the resulting sequence of bytes. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetCharCount">
-      <MemberSignature Language="C#" Value="public override int GetCharCount (byte* bytes, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetCharCount(unsigned int8* bytes, int32 count) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetCharCount (byte* bytes, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetCharCount(unsigned int8* bytes, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -603,8 +1291,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> to store the resulting characters, the application uses <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+             to store the resulting characters, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -615,15 +1325,30 @@
           <para>The number of characters produced by decoding the specified sequence of bytes.</para>
         </returns>
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the first byte to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the first byte to decode. </param
+        >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to decode. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetCharCount">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetCharCount(class System.Byte[] bytes, int32 index, int32 count)" />
-      <MemberSignature Language="C#" Value="public override int GetCharCount (byte[] bytes, int index, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetCharCount(unsigned int8[] bytes, int32 index, int32 count) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetCharCount(class System.Byte[] bytes, int32 index, int32 count)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetCharCount (byte[] bytes, int index, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetCharCount(unsigned int8[] bytes, int32 index, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -640,21 +1365,78 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes " /> is <see langword="null" />. </exception>
+          <paramref name="bytes " />
+
+           is <see
+           langword="null" />
+
+          . </exception
+        >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="index " /> or <paramref name="count " /> is less than zero.</para>
+            <paramref name="index " />
+
+             or <paramref
+             name="count " />
+
+             is less than zero.</para
+          >
           <para>-or-</para>
           <para>
-            <paramref name="index " /> and <paramref name="count " /> do not specify a valid range in <paramref name="bytes" /> (i.e. (<paramref name="index" /> + <paramref name="count" />) &gt; <paramref name="bytes" />.Length).</para>
+            <paramref name="index " />
+
+             and <paramref
+             name="count " />
+
+             do not specify a valid range in <paramref
+             name="bytes" />
+
+             (i.e. (<paramref
+             name="index" />
+
+             + <paramref
+             name="count" />
+
+            ) &gt; <paramref
+             name="bytes" />
+
+            .Length).</para
+          >
         </exception>
         <exception cref="T:System.ArgumentException">
-          <para>Error-checking is turned on for the current instance and <paramref name="bytes" /> contains an invalid surrogate sequence.</para>
+          <para
+            >Error-checking is turned on for the current instance and <paramref
+             name="bytes" />
+
+             contains an invalid surrogate sequence.</para
+          >
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> to store the resulting characters, the application uses <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+             to store the resulting characters, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -665,17 +1447,32 @@
           <para>The number of characters produced by decoding the specified sequence of bytes.</para>
         </returns>
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array containing the sequence of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array containing the sequence of bytes to decode. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the first byte to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the first byte to decode. </param
+        >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to decode. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetChars">
-      <MemberSignature Language="C#" Value="public override int GetChars (byte* bytes, int byteCount, char* chars, int charCount);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetChars(unsigned int8* bytes, int32 byteCount, char* chars, int32 charCount) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetChars (byte* bytes, int byteCount, char* chars, int charCount);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetChars(unsigned int8* bytes, int32 byteCount, char* chars, int32 charCount) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -702,9 +1499,45 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> to store the resulting characters, the application uses <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
-          <para>Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.UTF8Encoding.GetDecoder" /> method or the <see cref="M:System.Text.UTF8Encoding.GetEncoder" /> method, respectively.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+             to store the resulting characters, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
+          <para
+            >Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see
+             cref="T:System.Text.Decoder" />
+
+             or the <see
+             cref="T:System.Text.Encoder" />
+
+             provided by the <see
+             cref="M:System.Text.UTF8Encoding.GetDecoder" />
+
+             method or the <see
+             cref="M:System.Text.UTF8Encoding.GetEncoder" />
+
+             method, respectively.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -712,22 +1545,48 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The actual number of characters written at the location indicated by <paramref name="chars" />.</para>
+          <para
+            >The actual number of characters written at the location indicated by <paramref
+             name="chars" />
+
+            .</para
+          >
         </returns>
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the first byte to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the first byte to decode. </param
+        >
         <param name="byteCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to decode. </param
+        >
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the location at which to start writing the resulting set of characters. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the location at which to start writing the resulting set of characters. </param
+        >
         <param name="charCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of characters to write. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of characters to write. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetChars">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetChars(class System.Byte[] bytes, int32 byteIndex, int32 byteCount, class System.Char[] chars, int32 charIndex)" />
-      <MemberSignature Language="C#" Value="public override int GetChars (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetChars(unsigned int8[] bytes, int32 byteIndex, int32 byteCount, char[] chars, int32 charIndex) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetChars(class System.Byte[] bytes, int32 byteIndex, int32 byteCount, class System.Char[] chars, int32 charIndex)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetChars (byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetChars(unsigned int8[] bytes, int32 byteIndex, int32 byteCount, char[] chars, int32 charIndex) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -747,28 +1606,107 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="chars" /> does not contain sufficient space to store the decoded characters.</para>
+            <paramref name="chars" />
+
+             does not contain sufficient space to store the decoded characters.</para
+          >
           <para>-or-</para>
-          <para>Error-checking is turned on for the current instance and <paramref name="bytes" /> contains an invalid surrogate sequence.</para>
+          <para
+            >Error-checking is turned on for the current instance and <paramref
+             name="bytes" />
+
+             contains an invalid surrogate sequence.</para
+          >
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <para>
-            <paramref name="bytes " /> or <paramref name="chars " /> is <see langword="null" />. </para>
+            <paramref name="bytes " />
+
+             or <paramref
+             name="chars " />
+
+             is <see
+             langword="null" />
+
+            . </para
+          >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="byteIndex" />, <paramref name="byteCount" />, or <paramref name="charIndex " /> is less than zero.</para>
+            <paramref name="byteIndex" />
+
+            , <paramref
+             name="byteCount" />
+
+            , or <paramref
+             name="charIndex " />
+
+             is less than zero.</para
+          >
           <para> -or-</para>
-          <para> (<paramref name="bytes" />.Length - <paramref name="byteIndex" />) &lt; <paramref name="byteCount" />.</para>
+          <para
+            > (<paramref
+             name="bytes" />
+
+            .Length - <paramref
+             name="byteIndex" />
+
+            ) &lt; <paramref
+             name="byteCount" />
+
+            .</para
+          >
           <para>-or-</para>
           <para>
-            <paramref name="charIndex" /> &gt; <paramref name="chars" />.Length.</para>
+            <paramref name="charIndex" />
+
+             &gt; <paramref
+             name="chars" />
+
+            .Length.</para
+          >
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> to store the resulting characters, the application uses <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" /> method generally executes faster.</para>
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
-          <para>Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.UTF8Encoding.GetDecoder" /> method or the <see cref="M:System.Text.UTF8Encoding.GetEncoder" /> method, respectively.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+             to store the resulting characters, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
+          <para
+            >Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see
+             cref="T:System.Text.Decoder" />
+
+             or the <see
+             cref="T:System.Text.Encoder" />
+
+             provided by the <see
+             cref="M:System.Text.UTF8Encoding.GetDecoder" />
+
+             method or the <see
+             cref="M:System.Text.UTF8Encoding.GetEncoder" />
+
+             method, respectively.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -776,25 +1714,51 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The actual number of characters written into <paramref name="chars" />.</para>
+          <para
+            >The actual number of characters written into <paramref
+             name="chars" />
+
+            .</para
+          >
         </returns>
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array containing the sequence of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array containing the sequence of bytes to decode. </param
+        >
         <param name="byteIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the first byte to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the first byte to decode. </param
+        >
         <param name="byteCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to decode. </param
+        >
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />The character array to contain the resulting set of characters. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The character array to contain the resulting set of characters. </param
+        >
         <param name="charIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index at which to start writing the resulting set of characters. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index at which to start writing the resulting set of characters. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetDecoder">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual class System.Text.Decoder GetDecoder()" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual class System.Text.Decoder GetDecoder()"
+      />
       <MemberSignature Language="C#" Value="public override System.Text.Decoder GetDecoder ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Text.Decoder GetDecoder() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Text.Decoder GetDecoder() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -808,8 +1772,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method converts sequential blocks of bytes into sequential blocks of characters, in a manner similar to the <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method of this class. However, a <see cref="T:System.Text.Decoder" /> maintains state information between calls so it can correctly decode byte sequences that span blocks. The <see cref="T:System.Text.Decoder" /> also preserves trailing bytes at the end of data blocks and uses the trailing bytes in the next decoding operation. Therefore, <see cref="M:System.Text.UTF8Encoding.GetDecoder" /> and <see cref="M:System.Text.UTF8Encoding.GetEncoder" /> are useful for network transmission and file operations, because those operations often deal with blocks of data instead of a complete data stream.</para>
-          <para>If error detection is enabled, that is, the <paramref name="throwOnInvalidCharacters" /> parameter of the constructor is set to true, error detection is also enabled in the <see cref="T:System.Text.Decoder" /> returned by this method. If error detection is enabled and an invalid sequence is encountered, the state of the decoder is undefined and processing must stop.</para>
+          <para
+            >The <see
+             cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+             method converts sequential blocks of bytes into sequential blocks of characters, in a manner similar to the <see
+             cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+             method of this class. However, a <see
+             cref="T:System.Text.Decoder" />
+
+             maintains state information between calls so it can correctly decode byte sequences that span blocks. The <see
+             cref="T:System.Text.Decoder" />
+
+             also preserves trailing bytes at the end of data blocks and uses the trailing bytes in the next decoding operation. Therefore, <see
+             cref="M:System.Text.UTF8Encoding.GetDecoder" />
+
+             and <see
+             cref="M:System.Text.UTF8Encoding.GetEncoder" />
+
+             are useful for network transmission and file operations, because those operations often deal with blocks of data instead of a complete data stream.</para
+          >
+          <para
+            >If error detection is enabled, that is, the <paramref
+             name="throwOnInvalidCharacters" />
+
+             parameter of the constructor is set to true, error detection is also enabled in the <see
+             cref="T:System.Text.Decoder" />
+
+             returned by this method. If error detection is enabled and an invalid sequence is encountered, the state of the decoder is undefined and processing must stop.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -817,15 +1809,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Text.Decoder" /> that converts a UTF-8 encoded sequence of bytes into a sequence of Unicode characters.</para>
+          <para
+            >A <see
+             cref="T:System.Text.Decoder" />
+
+             that converts a UTF-8 encoded sequence of bytes into a sequence of Unicode characters.</para
+          >
         </returns>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetEncoder">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual class System.Text.Encoder GetEncoder()" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual class System.Text.Encoder GetEncoder()"
+      />
       <MemberSignature Language="C#" Value="public override System.Text.Encoder GetEncoder ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Text.Encoder GetEncoder() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Text.Encoder GetEncoder() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -839,8 +1842,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method converts sequential blocks of characters into sequential blocks of bytes, in a manner similar to the <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> method. However, a <see cref="T:System.Text.Encoder" /> maintains state information between calls so it can correctly encode character sequences that span blocks. The <see cref="T:System.Text.Encoder" /> also preserves trailing characters at the end of data blocks and uses the trailing characters in the next encoding operation. For example, a data block might end with an unmatched high surrogate, and the matching low surrogate might be in the next data block. Therefore, <see cref="M:System.Text.UTF8Encoding.GetDecoder" /> and <see cref="M:System.Text.UTF8Encoding.GetEncoder" /> are useful for network transmission and file operations, because those operations often deal with blocks of data instead of a complete data stream.</para>
-          <para>If error detection is enabled, that is, the <paramref name="throwOnInvalidCharacters" /> parameter of the constructor is set to true, error detection is also enabled in the <see cref="T:System.Text.Encoder" /> returned by this method. If error detection is enabled and an invalid sequence is encountered, the state of the encoder is undefined and processing must stop.</para>
+          <para
+            >The <see
+             cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" />
+
+             method converts sequential blocks of characters into sequential blocks of bytes, in a manner similar to the <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+             method. However, a <see
+             cref="T:System.Text.Encoder" />
+
+             maintains state information between calls so it can correctly encode character sequences that span blocks. The <see
+             cref="T:System.Text.Encoder" />
+
+             also preserves trailing characters at the end of data blocks and uses the trailing characters in the next encoding operation. For example, a data block might end with an unmatched high surrogate, and the matching low surrogate might be in the next data block. Therefore, <see
+             cref="M:System.Text.UTF8Encoding.GetDecoder" />
+
+             and <see
+             cref="M:System.Text.UTF8Encoding.GetEncoder" />
+
+             are useful for network transmission and file operations, because those operations often deal with blocks of data instead of a complete data stream.</para
+          >
+          <para
+            >If error detection is enabled, that is, the <paramref
+             name="throwOnInvalidCharacters" />
+
+             parameter of the constructor is set to true, error detection is also enabled in the <see
+             cref="T:System.Text.Encoder" />
+
+             returned by this method. If error detection is enabled and an invalid sequence is encountered, the state of the encoder is undefined and processing must stop.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -848,15 +1879,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Text.Encoder" /> that converts a sequence of Unicode characters into a UTF-8 encoded sequence of bytes.</para>
+          <para
+            >A <see
+             cref="T:System.Text.Encoder" />
+
+             that converts a sequence of Unicode characters into a UTF-8 encoded sequence of bytes.</para
+          >
         </returns>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetHashCode">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetHashCode()" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetHashCode()"
+      />
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -872,7 +1914,12 @@
           <para>The algorithm used to generate the hash code is
       unspecified.</para>
           <para>
-            <block subset="none" type="note">This method overrides <see cref="M:System.Object.GetHashCode" qualify="true" />.</block>
+            <block subset="none" type="note"
+              >This method overrides <see
+               cref="M:System.Object.GetHashCode" qualify="true" />
+
+              .</block
+            >
           </para>
         </remarks>
         <summary>
@@ -887,9 +1934,15 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetMaxByteCount">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetMaxByteCount(int32 charCount)" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetMaxByteCount(int32 charCount)"
+      />
       <MemberSignature Language="C#" Value="public override int GetMaxByteCount (int charCount);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetMaxByteCount(int32 charCount) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetMaxByteCount(int32 charCount) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -905,16 +1958,68 @@
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="charCount" /> &lt; 0.</para>
+            <paramref name="charCount" />
+
+             &lt; 0.</para
+          >
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" /> to store the resulting bytes, the application uses <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.String,System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+             to store the resulting bytes, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
           <para>
-            <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> is a worst-case number, including the worst case for the currently selected <see cref="T:System.Text.EncoderFallback" />. If a fallback is chosen with a potentially large string, <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> can return large values.</para>
-          <para>In most cases, this method returns reasonable numbers for small strings. For large strings, you might have to choose between using very large buffers and catching errors in the rare case that a more reasonable buffer is exceeded. You might also want to consider a different approach using <see cref="Overload:System.Text.UTF8Encoding.GetByteCount" /> or <see cref="Overload:System.Text.Encoder.Convert" />. For example, text in English and many other languages often needs only one UTF-8 byte to represent a character, but the number returned by <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> has to allow for the possibility that the string to be converted will consist entirely of characters that each require four bytes. </para>
+            <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             is a worst-case number, including the worst case for the currently selected <see
+             cref="T:System.Text.EncoderFallback" />
+
+            . If a fallback is chosen with a potentially large string, <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             can return large values.</para
+          >
+          <para
+            >In most cases, this method returns reasonable numbers for small strings. For large strings, you might have to choose between using very large buffers and catching errors in the rare case that a more reasonable buffer is exceeded. You might also want to consider a different approach using <see
+             cref="Overload:System.Text.UTF8Encoding.GetByteCount" />
+
+             or <see
+             cref="Overload:System.Text.Encoder.Convert" />
+
+            . For example, text in English and many other languages often needs only one UTF-8 byte to represent a character, but the number returned by <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             has to allow for the possibility that the string to be converted will consist entirely of characters that each require four bytes. </para
+          >
           <para>
-            <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> has no relation to <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />. If your application needs a similar function to use with <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />, it should use <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />.</para>
+            <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+             has no relation to <see
+             cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+            . If your application needs a similar function to use with <see
+             cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+            , it should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+            .</para
+          >
           <block subset="none" type="note">
             <para>GetMaxByteCount(N) is not necessarily the same value as N* GetMaxByteCount(1).</para>
           </block>
@@ -928,14 +2033,23 @@
           <para>The maximum number of bytes produced by encoding the specified number of characters.</para>
         </returns>
         <param name="charCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to encode. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetMaxCharCount">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual int32 GetMaxCharCount(int32 byteCount)" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual int32 GetMaxCharCount(int32 byteCount)"
+      />
       <MemberSignature Language="C#" Value="public override int GetMaxCharCount (int byteCount);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetMaxCharCount(int32 byteCount) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetMaxCharCount(int32 byteCount) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -951,16 +2065,65 @@
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="byteCount" /> &lt; 0.</para>
+            <paramref name="byteCount" />
+
+             &lt; 0.</para
+          >
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To calculate the exact array size required by <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> to store the resulting characters, the application uses <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />. The <see cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" /> method generally executes faster.</para>
+          <para
+            >To calculate the exact array size required by <see
+             cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+             to store the resulting characters, the application uses <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            . To calculate the maximum array size, the application should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+            . The <see
+             cref="M:System.Text.UTF8Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+             method generally allows allocation of less memory, while the <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+             method generally executes faster.</para
+          >
           <para>
-            <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" /> is a worst-case number, including the worst case for the currently selected <see cref="T:System.Text.DecoderFallback" />. If a fallback is chosen with a potentially large string, <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" /> can return large values.</para>
-          <para>In most cases, this method returns reasonable numbers for small strings. For large strings, you might have to choose between using very large buffers and catching errors in the rare case that a more reasonable buffer is exceeded.  You might also want to consider a different approach using <see cref="Overload:System.Text.UTF8Encoding.GetCharCount" /> or <see cref="Overload:System.Text.Encoder.Convert" />.</para>
+            <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+             is a worst-case number, including the worst case for the currently selected <see
+             cref="T:System.Text.DecoderFallback" />
+
+            . If a fallback is chosen with a potentially large string, <see
+             cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+             can return large values.</para
+          >
+          <para
+            >In most cases, this method returns reasonable numbers for small strings. For large strings, you might have to choose between using very large buffers and catching errors in the rare case that a more reasonable buffer is exceeded.  You might also want to consider a different approach using <see
+             cref="Overload:System.Text.UTF8Encoding.GetCharCount" />
+
+             or <see
+             cref="Overload:System.Text.Encoder.Convert" />
+
+            .</para
+          >
           <para>
-            <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" /> has no relation to <see cref="M:System.Text.UTF8Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" />. If your application needs a similar function to use with <see cref="M:System.Text.UTF8Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" />, it should use <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />.</para>
+            <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />
+
+             has no relation to <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+            . If your application needs a similar function to use with <see
+             cref="M:System.Text.UTF8Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" />
+
+            , it should use <see
+             cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" />
+
+            .</para
+          >
           <block subset="none" type="note">
             <para>GetMaxCharCount(N) is not necessarily the same value as N* GetMaxCharCount(1).</para>
           </block>
@@ -974,14 +2137,23 @@
           <para>The maximum number of characters produced by decoding the specified number of bytes.</para>
         </returns>
         <param name="byteCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to decode. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetPreamble">
-      <MemberSignature Language="ILASM" Value=".method public hidebysig virtual class System.Byte[] GetPreamble()" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".method public hidebysig virtual class System.Byte[] GetPreamble()"
+      />
       <MemberSignature Language="C#" Value="public override byte[] GetPreamble ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance unsigned int8[] GetPreamble() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance unsigned int8[] GetPreamble() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -995,11 +2167,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Optionally, the <see cref="T:System.Text.UTF8Encoding" /> object provides a preamble, which is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (code point U+FEFF), it helps the decoder determine the byte order and the transformation format or UTF. The Unicode byte order mark (BOM) is serialized as EF BB BF (in hexadecimal).</para>
+          <para
+            >Optionally, the <see
+             cref="T:System.Text.UTF8Encoding" />
+
+             object provides a preamble, which is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (code point U+FEFF), it helps the decoder determine the byte order and the transformation format or UTF. The Unicode byte order mark (BOM) is serialized as EF BB BF (in hexadecimal).</para
+          >
           <para>Your applications are recommended to use the BOM, as it provides nearly certain identification of an encoding for files that otherwise have lost reference to the UTF8Encoding object, for example, untagged or improperly tagged web data or random text files stored when a business did not have international concerns or other data. Often user problems might be avoided if data is consistently and properly tagged.  </para>
           <para>For standards that provide an encoding type, a BOM is somewhat redundant. However, it can be used to help a server send the correct encoding header. Alternatively, it can be used as a fallback in case the encoding is otherwise lost.  </para>
           <para>There are some disadvantages to using a BOM. For example, knowing how to limit the database fields that use a BOM can be difficult. Concatenation of files can be a problem also, for example, when files are merged in such a way that an unnecessary character can end up in the middle of data. In spite of the few disadvantages, however, the use of a BOM is highly recommended.</para>
-          <para>For more information on byte order and the byte order mark, see The Unicode Standard at the <see cref="http://go.microsoft.com/fwlink/?LinkId=37123">Unicode home page</see>.</para>
+          <para
+            >For more information on byte order and the byte order mark, see The Unicode Standard at the <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=37123">Unicode home page</see>
+
+            .</para
+          >
           <block subset="none" type="note">
             <para>To ensure that the encoded bytes are decoded properly, your application should prefix encoded bytes with a preamble. </para>
           </block>
@@ -1016,8 +2198,14 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GetString">
-      <MemberSignature Language="C#" Value="public override string GetString (byte[] bytes, int index, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string GetString(unsigned int8[] bytes, int32 index, int32 count) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override string GetString (byte[] bytes, int index, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string GetString(unsigned int8[] bytes, int32 index, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1040,8 +2228,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>With error detection, an invalid sequence causes this method to throw a <see cref="T:System.ArgumentException" />. Without error detection, invalid sequences are ignored, and no exception is thrown.</para>
-          <para>Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.UTF8Encoding.GetDecoder" /> method or the <see cref="M:System.Text.UTF8Encoding.GetEncoder" /> method, respectively.</para>
+          <para
+            >With error detection, an invalid sequence causes this method to throw a <see
+             cref="T:System.ArgumentException" />
+
+            . Without error detection, invalid sequences are ignored, and no exception is thrown.</para
+          >
+          <para
+            >Data to be converted, such as data read from a stream, might be available only in sequential blocks. In this case, or if the amount of data is so large that it needs to be divided into smaller blocks, the application uses the <see
+             cref="T:System.Text.Decoder" />
+
+             or the <see
+             cref="T:System.Text.Encoder" />
+
+             provided by the <see
+             cref="M:System.Text.UTF8Encoding.GetDecoder" />
+
+             method or the <see
+             cref="M:System.Text.UTF8Encoding.GetEncoder" />
+
+             method, respectively.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1049,14 +2256,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> containing the results of decoding the specified sequence of bytes.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             containing the results of decoding the specified sequence of bytes.</para
+          >
         </returns>
         <param name="bytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array containing the sequence of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array containing the sequence of bytes to decode. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the first byte to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the first byte to decode. </param
+        >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to decode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to decode. </param
+        >
       </Docs>
     </Member>
   </Members>

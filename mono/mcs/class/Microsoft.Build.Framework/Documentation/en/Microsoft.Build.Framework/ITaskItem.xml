@@ -18,7 +18,12 @@
     <since version="2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The number of <see cref="T:Microsoft.Build.Framework.ITaskItem" /> objects created during a build may not correspond exactly to items declared in a project file for the following reasons:</para>
+      <para
+        >The number of <see
+         cref="T:Microsoft.Build.Framework.ITaskItem" />
+
+         objects created during a build may not correspond exactly to items declared in a project file for the following reasons:</para
+      >
       <list type="bullet">
         <item>
           <para>Tasks sometimes create items that were not declared in the project file.</para>
@@ -35,7 +40,10 @@
   </Docs>
   <Members>
     <Member MemberName="CloneCustomMetadata">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionary CloneCustomMetadata ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionary CloneCustomMetadata ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IDictionary</ReturnType>
@@ -71,7 +79,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyMetadataTo">
-      <MemberSignature Language="C#" Value="public void CopyMetadataTo (Microsoft.Build.Framework.ITaskItem destinationItem);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyMetadataTo (Microsoft.Build.Framework.ITaskItem destinationItem);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -86,7 +97,12 @@
           <para>Follow the guidelines below when implementing this method.</para>
           <list type="bullet">
             <item>
-              <para>Do not overwrite the <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> property.</para>
+              <para
+                >Do not overwrite the <see
+                 cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
+
+                 property.</para
+              >
             </item>
             <item>
               <para>Do not overwrite existing metadata entries.</para>
@@ -101,7 +117,10 @@
           <para>Copies the custom metadata entries to another item.</para>
         </summary>
         <param name="destinationItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to copy the metadata entries to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item to copy the metadata entries to.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -125,10 +144,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of the <paramref name="attributeName" /> metadata.</para>
+          <para
+            >The value of the <paramref
+             name="attributeName" />
+
+             metadata.</para
+          >
         </returns>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the metadata entry.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the metadata entry.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -146,7 +173,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The item specification is an arbitrary string. If the item represents a file on disk, the item specification will be the path of that file.</para>
-          <para>The <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> for the following item declaration in a project file is File.cs.</para>
+          <para
+            >The <see
+             cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
+
+             for the following item declaration in a project file is File.cs.</para
+          >
           <code>&lt;ItemGroup&gt;
     &lt;Compile Include="File.cs"/&gt;
 &lt;/ItemGroup&gt;</code>
@@ -180,7 +212,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MetadataNames">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection MetadataNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection MetadataNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ICollection</ReturnType>
@@ -215,14 +250,20 @@
           <para>Removes the specified metadata entry from the item.</para>
         </summary>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the metadata entry to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the metadata entry to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetMetadata">
-      <MemberSignature Language="C#" Value="public void SetMetadata (string metadataName, string metadataValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetMetadata (string metadataName, string metadataValue);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -239,9 +280,15 @@
           <para>Adds or changes a custom metadata entry to the item.</para>
         </summary>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the metadata entry.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the metadata entry.</param
+        >
         <param name="metadataValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the metadata entry.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the metadata entry.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

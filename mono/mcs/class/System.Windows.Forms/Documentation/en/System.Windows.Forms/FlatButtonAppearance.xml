@@ -14,12 +14,26 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides properties that specify the appearance of <see cref="T:System.Windows.Forms.Button" /> controls whose <see cref="T:System.Windows.Forms.FlatStyle" /> is <see cref="F:System.Windows.Forms.FlatStyle.Flat" />.</para>
+      <para
+        >Provides properties that specify the appearance of <see
+         cref="T:System.Windows.Forms.Button" />
+
+         controls whose <see
+         cref="T:System.Windows.Forms.FlatStyle" />
+
+         is <see
+         cref="F:System.Windows.Forms.FlatStyle.Flat" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="BorderColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color BorderColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color BorderColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -85,7 +99,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CheckedBackColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color CheckedBackColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color CheckedBackColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -118,7 +135,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MouseDownBackColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color MouseDownBackColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color MouseDownBackColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -151,7 +171,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MouseOverBackColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color MouseOverBackColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color MouseOverBackColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>

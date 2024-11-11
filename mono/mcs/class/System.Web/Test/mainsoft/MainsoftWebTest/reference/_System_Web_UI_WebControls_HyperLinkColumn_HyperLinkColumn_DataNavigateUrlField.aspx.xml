@@ -122,9 +122,15 @@
       <br />
     </span>
     <span>
-      <br />Name</span>
+      <br />
+
+      Name</span
+    >
     <span>
-      <br />Company</span>
+      <br />
+
+      Company</span
+    >
   </div>
   <div id="Ghtsubtest3" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid3">
@@ -248,8 +254,14 @@
       <br />
     </span>
     <span>
-      <br />Name</span>
+      <br />
+
+      Name</span
+    >
     <span>
-      <br />Company</span>
+      <br />
+
+      Company</span
+    >
   </div>
 </testresults>

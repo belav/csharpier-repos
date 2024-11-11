@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TcpTransportSecurity" FullName="System.ServiceModel.TcpTransportSecurity">
   <TypeSignature Language="C#" Value="public sealed class TcpTransportSecurity" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TcpTransportSecurity extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit TcpTransportSecurity extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +16,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class is used by <see cref="P:System.ServiceModel.NetTcpSecurity.Transport" /> to set the transport-level security settings for a binding.</para>
+      <para
+        >This class is used by <see
+         cref="P:System.ServiceModel.NetTcpSecurity.Transport" />
+
+         to set the transport-level security settings for a binding.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -23,7 +31,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public TcpTransportSecurity ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +44,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.TcpTransportSecurity" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.TcpTransportSecurity" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ClientCredentialType">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.TcpClientCredentialType ClientCredentialType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.TcpClientCredentialType ClientCredentialType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.TcpClientCredentialType ClientCredentialType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.TcpClientCredentialType ClientCredentialType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -65,7 +87,8 @@
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.HttpClientCredentialType.Digest" /> </para>
+                <see cref="F:System.ServiceModel.HttpClientCredentialType.Digest" />
+              </para>
             </item>
             <item>
               <para>
@@ -91,8 +114,14 @@
       </Docs>
     </Member>
     <Member MemberName="ProtectionLevel">
-      <MemberSignature Language="C#" Value="public System.Net.Security.ProtectionLevel ProtectionLevel { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Security.ProtectionLevel ProtectionLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Security.ProtectionLevel ProtectionLevel { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Security.ProtectionLevel ProtectionLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -105,7 +134,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Net.Security.ProtectionLevel" /> for the TCP stream.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Net.Security.ProtectionLevel" />
+
+             for the TCP stream.</para
+          >
         </summary>
       </Docs>
     </Member>

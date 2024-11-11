@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="WebColorConverter" FullName="System.Web.UI.WebControls.WebColorConverter">
-  <TypeSignature Language="C#" Value="public class WebColorConverter : System.Drawing.ColorConverter" Maintainer="auto" />
+  <TypeSignature
+    Language="C#"
+    Value="public class WebColorConverter : System.Drawing.ColorConverter"
+    Maintainer="auto"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -16,9 +19,28 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.WebColorConverter" /> class is used to convert a <see cref="T:System.Drawing.Color" /> object to a predefined color name or an RGB color value. It is also used to convert a predefined color name or an RGB color value to a <see cref="T:System.Drawing.Color" /> object.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.WebColorConverter" />
+
+         class is used to convert a <see
+         cref="T:System.Drawing.Color" />
+
+         object to a predefined color name or an RGB color value. It is also used to convert a predefined color name or an RGB color value to a <see
+         cref="T:System.Drawing.Color" />
+
+         object.</para
+      >
       <block subset="none" type="note">
-        <para>You should never access a type converter directly. Instead, call the appropriate converter by using <see cref="T:System.ComponentModel.TypeDescriptor" />. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> class overview.</para>
+        <para
+          >You should never access a type converter directly. Instead, call the appropriate converter by using <see
+           cref="T:System.ComponentModel.TypeDescriptor" />
+
+          . For more information, see the examples in the <see
+           cref="T:System.ComponentModel.TypeConverter" />
+
+           class overview.</para
+        >
       </block>
       <para>The following list contains the sixteen predefined HTML color names you can use: </para>
       <list type="bullet">
@@ -75,7 +97,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Converts a predefined color name or an RGB color value to and from a <see cref="T:System.Drawing.Color" /> object.</para>
+      <para
+        >Converts a predefined color name or an RGB color value to and from a <see
+         cref="T:System.Drawing.Color" />
+
+         object.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -88,7 +115,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebColorConverter" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.WebControls.WebColorConverter" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -97,7 +129,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ConvertFrom">
-      <MemberSignature Language="C#" Value="public override object ConvertFrom (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object ConvertFrom (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -118,11 +153,26 @@
           <para>The object resulting from conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that indicates the context of the object to convert.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that indicates the context of the object to convert.</param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Globalization.CultureInfo" /> object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Globalization.CultureInfo" />
+
+           object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -130,7 +180,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ConvertTo">
-      <MemberSignature Language="C#" Value="public override object ConvertTo (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object ConvertTo (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -152,13 +205,31 @@
           <para>The object resulting from conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> instance that indicates the context of the object to convert.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           instance that indicates the context of the object to convert.</param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Globalization.CultureInfo" /> object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Globalization.CultureInfo" />
+
+           object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert.</param
+        >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to convert to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to convert to.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

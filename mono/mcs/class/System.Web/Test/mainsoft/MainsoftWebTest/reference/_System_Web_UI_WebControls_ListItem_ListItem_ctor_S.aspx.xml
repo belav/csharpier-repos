@@ -2,8 +2,14 @@
 <testresults name="">
   <div id="GHTSubTest1" testname="">
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
 </testresults>

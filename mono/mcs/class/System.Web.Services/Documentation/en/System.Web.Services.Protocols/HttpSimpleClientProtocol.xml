@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="HttpSimpleClientProtocol" FullName="System.Web.Services.Protocols.HttpSimpleClientProtocol">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public abstract class HttpSimpleClientProtocol : System.Web.Services.Protocols.HttpWebClientProtocol" />
+<Type
+  Name="HttpSimpleClientProtocol"
+  FullName="System.Web.Services.Protocols.HttpSimpleClientProtocol"
+>
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public abstract class HttpSimpleClientProtocol : System.Web.Services.Protocols.HttpWebClientProtocol"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -12,14 +18,43 @@
   <Base>
     <BaseTypeName>System.Web.Services.Protocols.HttpWebClientProtocol</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class specifies most of the implementation for communicating with an XML Web service over HTTP using encoders to encode the parameters and return values into common MIME formats. These encoders derive from the <see cref="T:System.Web.Services.Protocols.MimeFormatter" /> class. By default, a proxy class deriving from <see cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" /> encodes parameters using the application/x-www-form-urlencoded MIME type and the response in plain XML. Custom mime formatters can be specified using the <see cref="T:System.Web.Services.Protocols.HttpMethodAttribute" /> attribute, however, there is no support for integrating this into a service description and proxy generation.</para>
-      <para>Notes to Inheritors: When you override this class, you can introduce methods in the derived class that are specific to a particular type of an XML Web service. The methods simply capture the parameters, and call the base class to do the work of communicating with the site. If the introduced methods are asynchronous, call the <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" /> and <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.EndInvoke(System.IAsyncResult)" /> methods. If the introduced methods are synchronous, call the <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.Invoke(System.String,System.String,System.Object[])" /> method. The overridden constructor typically sets the <see cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" /> property to the URI of the XML Web service method.</para>
-      <para>The Web Services Description Language tool (Wsdl.exe) generates derived classes of <see cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" /> for a given Service Description.</para>
+      <para
+        >This class specifies most of the implementation for communicating with an XML Web service over HTTP using encoders to encode the parameters and return values into common MIME formats. These encoders derive from the <see
+         cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+         class. By default, a proxy class deriving from <see
+         cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
+
+         encodes parameters using the application/x-www-form-urlencoded MIME type and the response in plain XML. Custom mime formatters can be specified using the <see
+         cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+         attribute, however, there is no support for integrating this into a service description and proxy generation.</para
+      >
+      <para
+        >Notes to Inheritors: When you override this class, you can introduce methods in the derived class that are specific to a particular type of an XML Web service. The methods simply capture the parameters, and call the base class to do the work of communicating with the site. If the introduced methods are asynchronous, call the <see
+         cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" />
+
+         and <see
+         cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.EndInvoke(System.IAsyncResult)" />
+
+         methods. If the introduced methods are synchronous, call the <see
+         cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.Invoke(System.String,System.String,System.Object[])" />
+
+         method. The overridden constructor typically sets the <see
+         cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
+
+         property to the URI of the XML Web service method.</para
+      >
+      <para
+        >The Web Services Description Language tool (Wsdl.exe) generates derived classes of <see
+         cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
+
+         for a given Service Description.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -36,7 +71,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -45,7 +85,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BeginInvoke">
-      <MemberSignature Language="C#" Value="protected IAsyncResult BeginInvoke (string methodName, string requestUrl, object[] parameters, AsyncCallback callback, object asyncState);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected IAsyncResult BeginInvoke (string methodName, string requestUrl, object[] parameters, AsyncCallback callback, object asyncState);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.IAsyncResult</ReturnType>
@@ -60,9 +103,41 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="methodName" /> parameter is used to find the types of the parameters and return values of the method that is invoking the <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" /> method. It is also used to find custom attributes that may have been added to the method. <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />, <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />, and <see cref="T:System.Xml.Serialization.XmlElementAttribute" /> provide additional information on the derived method that is required for the HTTP protocol.</para>
+          <para
+            >The <paramref
+             name="methodName" />
+
+             parameter is used to find the types of the parameters and return values of the method that is invoking the <see
+             cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" />
+
+             method. It is also used to find custom attributes that may have been added to the method. <see
+             cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+
+            , <see
+             cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            , and <see
+             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+             provide additional information on the derived method that is required for the HTTP protocol.</para
+          >
           <para>
-            <paramref name="asyncState" /> is passed into <paramref name="callback" /> and is included in the <see cref="T:System.IAsyncResult" /> that is returned from the <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" /> method. It is useful for passing information from the context of the asynchronous call to the handling of the asynchronous result in <paramref name="callback" />.</para>
+            <paramref name="asyncState" />
+
+             is passed into <paramref
+             name="callback" />
+
+             and is included in the <see
+             cref="T:System.IAsyncResult" />
+
+             that is returned from the <see
+             cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" />
+
+             method. It is useful for passing information from the context of the asynchronous call to the handling of the asynchronous result in <paramref
+             name="callback" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,18 +145,47 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.IAsyncResult" /> that can be passed to the <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.EndInvoke(System.IAsyncResult)" /> method to obtain the return values from the XML Web service method.</para>
+          <para
+            >An <see
+             cref="T:System.IAsyncResult" />
+
+             that can be passed to the <see
+             cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.EndInvoke(System.IAsyncResult)" />
+
+             method to obtain the return values from the XML Web service method.</para
+          >
         </returns>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the XML Web service method. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the XML Web service method. </param
+        >
         <param name="requestUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URL to use when creating the <see cref="T:System.Net.WebRequest" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URL to use when creating the <see
+           cref="T:System.Net.WebRequest" />
+
+          . </param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of objects containing the parameters to pass to the XML Web service method. The order of the values in the array corresponds to the order of the parameters in the calling method of the derived class. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of objects containing the parameters to pass to the XML Web service method. The order of the values in the array corresponds to the order of the parameters in the calling method of the derived class. </param
+        >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delegate to call when the asynchronous method call is complete. If <paramref name="callback" /> is null, the delegate is not called. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delegate to call when the asynchronous method call is complete. If <paramref
+           name="callback" />
+
+           is null, the delegate is not called. </param
+        >
         <param name="asyncState">
-          <attribution license="cc4" from="Microsoft" modified="false" />The additional information supplied by a client. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The additional information supplied by a client. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -89,7 +193,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EndInvoke">
-      <MemberSignature Language="C#" Value="protected object EndInvoke (IAsyncResult asyncResult);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected object EndInvoke (IAsyncResult asyncResult);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -105,10 +212,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of objects containing the return value and any by reference or <paramref name="out" /> parameters for the XML Web service method.</para>
+          <para
+            >An array of objects containing the return value and any by reference or <paramref
+             name="out" />
+
+             parameters for the XML Web service method.</para
+          >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.IAsyncResult" /> returned from the <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" /> method. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.IAsyncResult" />
+
+           returned from the <see
+           cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" />
+
+           method. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -116,7 +237,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Invoke">
-      <MemberSignature Language="C#" Value="protected object Invoke (string methodName, string requestUrl, object[] parameters);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected object Invoke (string methodName, string requestUrl, object[] parameters);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -129,7 +253,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="methodName" /> parameter is used to find the types of the parameters and return values of the method that is invoking the <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.Invoke(System.String,System.String,System.Object[])" /> method. It is also used to find custom attributes which may have been added to the method. <see cref="T:System.Web.Services.Protocols.HttpMethodAttribute" /> and <see cref="T:System.Xml.Serialization.XmlElementAttribute" /> provide additional information on the derived method that is required for the SOAP protocol.</para>
+          <para
+            >The <paramref
+             name="methodName" />
+
+             parameter is used to find the types of the parameters and return values of the method that is invoking the <see
+             cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.Invoke(System.String,System.String,System.Object[])" />
+
+             method. It is also used to find custom attributes which may have been added to the method. <see
+             cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+             and <see
+             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+             provide additional information on the derived method that is required for the SOAP protocol.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -137,14 +275,31 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of objects containing the return value and any by-reference or <paramref name="out" /> parameters of the derived class method.</para>
+          <para
+            >An array of objects containing the return value and any by-reference or <paramref
+             name="out" />
+
+             parameters of the derived class method.</para
+          >
         </returns>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the XML Web service method in the derived class that is invoking the <see cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.Invoke(System.String,System.String,System.Object[])" /> method. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the XML Web service method in the derived class that is invoking the <see
+           cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.Invoke(System.String,System.String,System.Object[])" />
+
+           method. </param
+        >
         <param name="requestUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URL of the XML Web service method that the client is requesting. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URL of the XML Web service method that the client is requesting. </param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of objects containing the parameters to pass to the remote XML Web service. The order of the values in the array corresponds to the order of the parameters in the calling method of the derived class. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of objects containing the parameters to pass to the remote XML Web service. The order of the values in the array corresponds to the order of the parameters in the calling method of the derived class. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -152,7 +307,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="InvokeAsync">
-      <MemberSignature Language="C#" Value="protected void InvokeAsync (string methodName, string requestUrl, object[] parameters, System.Threading.SendOrPostCallback callback);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void InvokeAsync (string methodName, string requestUrl, object[] parameters, System.Threading.SendOrPostCallback callback);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -173,17 +331,32 @@
           <para>Invokes the specified method asynchronously.</para>
         </summary>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the method to invoke.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the method to invoke.</param
+        >
         <param name="requestUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The request URL of the invoked web service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The request URL of the invoked web service.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parameters to pass to the method.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parameters to pass to the method.</param
+        >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delegate called when the method invocation has completed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delegate called when the method invocation has completed.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="InvokeAsync">
-      <MemberSignature Language="C#" Value="protected void InvokeAsync (string methodName, string requestUrl, object[] parameters, System.Threading.SendOrPostCallback callback, object userState);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void InvokeAsync (string methodName, string requestUrl, object[] parameters, System.Threading.SendOrPostCallback callback, object userState);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -205,15 +378,33 @@
           <para>Invokes the specified method asynchronously while maintaining an associated state.</para>
         </summary>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the method to invoke.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the method to invoke.</param
+        >
         <param name="requestUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The request URL of the invoked web service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The request URL of the invoked web service.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parameters to pass to the method.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parameters to pass to the method.</param
+        >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delegate called when the method invocation has completed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delegate called when the method invocation has completed.</param
+        >
         <param name="userState">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object containing associated state information that is passed to the <paramref name="callback" /> delegate when the method has completed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object containing associated state information that is passed to the <paramref
+           name="callback" />
+
+           delegate when the method has completed.</param
+        >
       </Docs>
     </Member>
   </Members>

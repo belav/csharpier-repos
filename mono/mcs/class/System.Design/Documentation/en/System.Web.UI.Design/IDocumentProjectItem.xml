@@ -32,7 +32,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.IO.Stream" /> object.</para>
+          <para
+            >A <see
+             cref="T:System.IO.Stream" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>

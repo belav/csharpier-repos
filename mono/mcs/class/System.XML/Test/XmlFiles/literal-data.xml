@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-16"?>
-<rootroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="UknTestPart" d1p1:c="44" opAtt="xmlBB" xmlns:q1="thenamespace" attqname="q1:thename" xmlns:d1p1="attribns">
+<rootroot
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xsi:type="UknTestPart"
+  d1p1:c="44"
+  opAtt="xmlBB"
+  xmlns:q1="thenamespace"
+  attqname="q1:thename"
+  xmlns:d1p1="attribns"
+>
   <anot xmlns:q2="mm" xsi:type="q2:AnotherTestPart">1234567890</anot>
   <suba xmlns="kk">1</suba>
   <b>hola</b>
@@ -9,7 +18,11 @@
     <bval xmlns="mm">false</bval>
   </part>
   <ta xsi:type="TB">
-    <xx>1</xx>AABB<yy>2</yy></ta>
+    <xx>1</xx>
+
+    AABB<yy
+    >2</yy>
+  </ta>
   <parts>
     <UnTestPart>
       <name xmlns="mm">un</name>
@@ -246,16 +259,25 @@
   <ttList>
     <anyType xsi:type="xsd:string">two</anyType>
     <anyType xsi:type="xsd:string">strings</anyType>
-  </ttList>aa<xmltext>33</xmltext>bb<xmltext>776</xmltext><special>
+  </ttList>
+
+  aa<xmltext
+  >33</xmltext>
+
+  bb<xmltext
+  >776</xmltext>
+  <special>
     <data>
       <one>1</one>
       <three>3</three>
       <two>2</two>
     </data>
-  </special><dummyStringArray xmlns="mm">
+  </special>
+  <dummyStringArray xmlns="mm">
     <ArrayOfString xsi:nil="true" />
     <ArrayOfString xsi:nil="true" />
-  </dummyStringArray><dbscontainer xmlns="mm">
+  </dummyStringArray>
+  <dbscontainer xmlns="mm">
     <at xsi:type="DblStringContainer">
       <doublestring>
         <ArrayOfString xsi:nil="true" />
@@ -265,7 +287,8 @@
       </doublestring>
       <at xsi:type="AnotherTestPart">567</at>
     </at>
-  </dbscontainer><RoList>
+  </dbscontainer>
+  <RoList>
     <anyType xmlns:q5="mm" xsi:type="q5:UnTestPart">
       <q5:name>un</q5:name>
       <q5:bval>true</q5:bval>
@@ -274,4 +297,7 @@
       <q6:name>dos</q6:name>
       <q6:bval>false</q6:bval>
     </anyType>
-  </RoList><uname xsi:nil="true" /><uval>false</uval></rootroot>
+  </RoList>
+  <uname xsi:nil="true" />
+  <uval>false</uval>
+</rootroot>

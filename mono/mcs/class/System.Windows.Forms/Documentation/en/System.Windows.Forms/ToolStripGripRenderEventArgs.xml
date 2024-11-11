@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripGripRenderEventArgs" FullName="System.Windows.Forms.ToolStripGripRenderEventArgs">
-  <TypeSignature Language="C#" Value="public class ToolStripGripRenderEventArgs : System.Windows.Forms.ToolStripRenderEventArgs" />
+<Type
+  Name="ToolStripGripRenderEventArgs"
+  FullName="System.Windows.Forms.ToolStripGripRenderEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripGripRenderEventArgs : System.Windows.Forms.ToolStripRenderEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,12 +20,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderGrip" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ToolStripRenderer.RenderGrip" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripGripRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStrip toolStrip);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripGripRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStrip toolStrip);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="g" Type="System.Drawing.Graphics" />
@@ -30,12 +44,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> object used to paint the move handle.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           object used to paint the move handle.</param
+        >
         <param name="toolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStrip" /> the move handle is to be drawn on.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStrip" />
+
+           the move handle is to be drawn on.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -61,7 +92,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GripDisplayStyle">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripGripDisplayStyle GripDisplayStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripGripDisplayStyle GripDisplayStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStripGripDisplayStyle</ReturnType>
@@ -80,7 +114,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GripStyle">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripGripStyle GripStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripGripStyle GripStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStripGripStyle</ReturnType>

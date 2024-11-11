@@ -34,7 +34,10 @@
   </Docs>
   <Members>
     <Member MemberName="Compile">
-      <MemberSignature Language="C#" Value="public static Mono.CSharp.CompiledMethod Compile (string input);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.CSharp.CompiledMethod Compile (string input);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -52,30 +55,33 @@
             </summary>
         <returns></returns>
         <remarks>
-	  <para>
+          <para>
             Compiles the input string as a C# expression or
             statement.
 	  </para>
-	  <para>
+          <para>
 	    Unlike the Evaluate method, the
             resulting delegate can be invoked multiple times
             without incurring in the compilation overhead.
 	  </para>
-	  <para>
+          <para>
             This method can only deal with fully formed input
             strings and does not provide a completion mechanism.
             If you must deal with partial input (for example for
             interactive use) use the other overload.
 	  </para>
-	  <para>
+          <para>
             On success, a delegate is returned that can be used
             to invoke the method.
 	  </para>
-	  </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Compile">
-      <MemberSignature Language="C#" Value="public static string Compile (string input, out Mono.CSharp.CompiledMethod compiled);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string Compile (string input, out Mono.CSharp.CompiledMethod compiled);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -85,7 +91,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="input" Type="System.String" />
-        <Parameter Name="compiled" Type="Mono.CSharp.CompiledMethod&amp;" RefType="out" />
+        <Parameter Name="compiled" Type="Mono.CSharp.CompiledMethod&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="input">The expression or statement to compile.</param>
@@ -95,33 +101,33 @@
             </summary>
         <returns>On success, a delegate that can be used to invoke the compiled code repeatedly.</returns>
         <remarks>
-	  <para>
+          <para>
             Compiles the input string as a C# expression or
             statement, unlike the Evaluate method, the
             resulting delegate can be invoked multiple times
             without incurring in the compilation overhead.
 	  </para>
-	  <para>
+          <para>
             If the return value of this function is null,
             this indicates that the parsing was complete.
 	  </para>
-	  <para>
+          <para>
             If the return value is a string it indicates
             that the input string was partial and that the
             invoking code should provide more code before
             the code can be successfully compiled.
 	  </para>
-	  <para>
+          <para>
             If you know that you will always get full expressions or
             statements and do not care about partial input, you can use
             the other Compile overload.
 	  </para>
-	  <para>
+          <para>
             On success, in addition to returning null, the
             compiled parameter will be set to the delegate
             that can be invoked to execute the code.
 	  </para>
-            </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Evaluate">
@@ -143,17 +149,18 @@
             </summary>
         <returns>The result of computing the expression.</returns>
         <remarks>
-	  <para>
+          <para>
             Evaluates the input string as a C# expression or
             statement and returns the value.
 	  </para>
-	  <para>
+          <para>
             This method will throw an exception if there is a syntax error,
             of if the provided input is not an expression but a statement.
 	  </para>
-	  <para>
-	    <example>
-	      <code lang="C#">
+          <para>
+            <example>
+              <code lang="C#"
+                >
       // First setup the active using statements:
       Evaluator.Run ("using System;");
 
@@ -165,14 +172,18 @@
 
       // We know the result is an IEnumerator, cast it.
       IEnumerator even = (IEnumerator) Evaluator.Evaluate ("from x in numbers where (x % 2) == 0 select x");
-	      </code>
-	    </example>
-	  </para>
-	</remarks>
+	      </code
+              >
+            </example>
+          </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Evaluate">
-      <MemberSignature Language="C#" Value="public static string Evaluate (string input, out object result, out bool result_set);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string Evaluate (string input, out object result, out bool result_set);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -182,25 +193,27 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="input" Type="System.String" />
-        <Parameter Name="result" Type="System.Object&amp;" RefType="out" />
-        <Parameter Name="result_set" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="result" Type="System.Object&" RefType="out" />
+        <Parameter Name="result_set" Type="System.Boolean&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="input">The expression to evaluate.</param>
         <param name="result">The result will be stored here.</param>
-        <param name="result_set">If this value is true, the result was set and can be used, otherwise it was not set.</param>
+        <param name="result_set"
+          >If this value is true, the result was set and can be used, otherwise it was not set.</param
+        >
         <summary>
             Evaluates and expression or statement and returns any result values.
             </summary>
         <returns>If null, the parsing was successful, if not, it means that the input is partial.</returns>
         <remarks>
-	  <para>
+          <para>
             Evaluates the input string as a C# expression or
             statement.  If the input string is an expression
             the result will be stored in the result variable
             and the result_set variable will be set to true.
 	  </para>
-	  <para>
+          <para>
             It is necessary to use the result/result_set
             pair to identify when a result was set (for
             example, execution of user-provided input can be
@@ -208,11 +221,11 @@
             result_set would only be set if the input was an
             expression.
 	  </para>
-	  <para>
+          <para>
             If the return value of this function is null,
             this indicates that the parsing was complete.
 	  </para>
-	  <para>
+          <para>
             If the return value is a string, it indicates
             that the input is partial and that the user
             should provide an updated string.
@@ -270,22 +283,25 @@
             Optional initialization for the Evaluator.
             </summary>
         <remarks>
-	  <para>
+          <para>
             Initializes the Evaluator with the command line options
             that would be processed by the command line compiler.  Only
             the first call to Init will work, any future invocations are
             ignored.
 	  </para>
-	  <para>
+          <para>
             You can safely avoid calling this method if your application
             does not need any of the features exposed by the command line
             interface.
 	  </para>
-            </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="InteractiveBaseClass">
-      <MemberSignature Language="C#" Value="public static Type InteractiveBaseClass { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Type InteractiveBaseClass { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -299,18 +315,18 @@
             </summary>
         <value></value>
         <remarks>
-	  <para>
+          <para>
             This is the base class that will host the code
             executed by the Evaluator.  By default
             this is the Mono.CSharp.InteractiveBase class
             which is useful for interactive use.
 	  </para>
-	  <para>
+          <para>
             By changing this property you can control the
             base class and the static members that are
             available to your evaluated code.
 	  </para>
-            </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Interrupt">
@@ -353,7 +369,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReferenceAssembly">
-      <MemberSignature Language="C#" Value="public static void ReferenceAssembly (System.Reflection.Assembly a);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void ReferenceAssembly (System.Reflection.Assembly a);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -393,21 +412,23 @@
             </summary>
         <returns>True if the code was succesfully parsed.</returns>
         <remarks>
-	  <para>
+          <para>
             Executes the provided statement, returns true
             on success, false on parsing errors.  Exceptions
             might be thrown by the called code.
 	  </para>
-	  <para>
-	    <example>
-	      <code lang="C#">
+          <para>
+            <example>
+              <code lang="C#"
+                >
       // First setup the active using statements:
       Evaluator.Run ("using System;");
 
       Evaluator.Run ("Console.WriteLine (\"Hello, World\");
-	      </code>
-	    </example>
-	  </para>
+	      </code
+              >
+            </example>
+          </para>
         </remarks>
       </Docs>
     </Member>

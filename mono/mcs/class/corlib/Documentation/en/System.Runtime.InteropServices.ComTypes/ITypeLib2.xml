@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ITypeLib2" FullName="System.Runtime.InteropServices.ComTypes.ITypeLib2">
-  <TypeSignature Language="C#" Value="public interface ITypeLib2 : System.Runtime.InteropServices.ComTypes.ITypeLib" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ITypeLib2 implements class System.Runtime.InteropServices.ComTypes.ITypeLib" />
+  <TypeSignature
+    Language="C#"
+    Value="public interface ITypeLib2 : System.Runtime.InteropServices.ComTypes.ITypeLib"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ITypeLib2 implements class System.Runtime.InteropServices.ComTypes.ITypeLib"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -25,7 +31,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For additional information about the ITypeLib2 interface, see the MSDN Library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -34,8 +47,14 @@
   </Docs>
   <Members>
     <Member MemberName="FindName">
-      <MemberSignature Language="C#" Value="public void FindName (string szNameBuf, int lHashVal, System.Runtime.InteropServices.ComTypes.ITypeInfo[] ppTInfo, int[] rgMemId, ref short pcFound);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void FindName(string szNameBuf, int32 lHashVal, class System.Runtime.InteropServices.ComTypes.ITypeInfo[] ppTInfo, int32[] rgMemId, int16 pcFound) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void FindName (string szNameBuf, int lHashVal, System.Runtime.InteropServices.ComTypes.ITypeInfo[] ppTInfo, int[] rgMemId, ref short pcFound);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void FindName(string szNameBuf, int32 lHashVal, class System.Runtime.InteropServices.ComTypes.ITypeInfo[] ppTInfo, int32[] rgMemId, int16 pcFound) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,7 +68,7 @@
         <Parameter Name="lHashVal" Type="System.Int32" />
         <Parameter Name="ppTInfo" Type="System.Runtime.InteropServices.ComTypes.ITypeInfo[]" />
         <Parameter Name="rgMemId" Type="System.Int32[]" />
-        <Parameter Name="pcFound" Type="System.Int16&amp;" RefType="ref" />
+        <Parameter Name="pcFound" Type="System.Int16&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="szNameBuf">To be added.</param>
@@ -63,7 +82,10 @@
     </Member>
     <Member MemberName="GetAllCustData">
       <MemberSignature Language="C#" Value="public void GetAllCustData (IntPtr pCustData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetAllCustData(native int pCustData) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetAllCustData(native int pCustData) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -126,12 +148,21 @@
           </list>
         </returns>
         <param name="pCustData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to CUSTDATA, which holds all custom data items. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to CUSTDATA, which holds all custom data items. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetCustData">
-      <MemberSignature Language="C#" Value="public void GetCustData (ref Guid guid, out object pVarVal);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetCustData(valuetype System.Guid guid, object pVarVal) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetCustData (ref Guid guid, out object pVarVal);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetCustData(valuetype System.Guid guid, object pVarVal) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -141,8 +172,8 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="guid" Type="System.Guid&amp;" RefType="ref" />
-        <Parameter Name="pVarVal" Type="System.Object&amp;" RefType="out" />
+        <Parameter Name="guid" Type="System.Guid&" RefType="ref" />
+        <Parameter Name="pVarVal" Type="System.Object&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="guid">To be added.</param>
@@ -153,8 +184,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetDocumentation">
-      <MemberSignature Language="C#" Value="public void GetDocumentation (int index, out string strName, out string strDocString, out int dwHelpContext, out string strHelpFile);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetDocumentation(int32 index, string strName, string strDocString, int32 dwHelpContext, string strHelpFile) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetDocumentation (int index, out string strName, out string strDocString, out int dwHelpContext, out string strHelpFile);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetDocumentation(int32 index, string strName, string strDocString, int32 dwHelpContext, string strHelpFile) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -165,10 +202,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="index" Type="System.Int32" />
-        <Parameter Name="strName" Type="System.String&amp;" RefType="out" />
-        <Parameter Name="strDocString" Type="System.String&amp;" RefType="out" />
-        <Parameter Name="dwHelpContext" Type="System.Int32&amp;" RefType="out" />
-        <Parameter Name="strHelpFile" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="strName" Type="System.String&" RefType="out" />
+        <Parameter Name="strDocString" Type="System.String&" RefType="out" />
+        <Parameter Name="dwHelpContext" Type="System.Int32&" RefType="out" />
+        <Parameter Name="strHelpFile" Type="System.String&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="index">To be added.</param>
@@ -181,8 +218,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetDocumentation2">
-      <MemberSignature Language="C#" Value="public void GetDocumentation2 (int index, out string pbstrHelpString, out int pdwHelpStringContext, out string pbstrHelpStringDll);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetDocumentation2(int32 index, string pbstrHelpString, int32 pdwHelpStringContext, string pbstrHelpStringDll) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetDocumentation2 (int index, out string pbstrHelpString, out int pdwHelpStringContext, out string pbstrHelpStringDll);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetDocumentation2(int32 index, string pbstrHelpString, int32 pdwHelpStringContext, string pbstrHelpStringDll) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -198,9 +241,9 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="index" Type="System.Int32" />
-        <Parameter Name="pbstrHelpString" Type="System.String&amp;" RefType="out" />
-        <Parameter Name="pdwHelpStringContext" Type="System.Int32&amp;" RefType="out" />
-        <Parameter Name="pbstrHelpStringDll" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="pbstrHelpString" Type="System.String&" RefType="out" />
+        <Parameter Name="pdwHelpStringContext" Type="System.Int32&" RefType="out" />
+        <Parameter Name="pbstrHelpStringDll" Type="System.String&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="index">To be added.</param>
@@ -214,7 +257,10 @@
     </Member>
     <Member MemberName="GetLibAttr">
       <MemberSignature Language="C#" Value="public void GetLibAttr (out IntPtr ppTLibAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetLibAttr(native int ppTLibAttr) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetLibAttr(native int ppTLibAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -224,7 +270,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="ppTLibAttr" Type="System.IntPtr&amp;" RefType="out" />
+        <Parameter Name="ppTLibAttr" Type="System.IntPtr&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="ppTLibAttr">To be added.</param>
@@ -233,8 +279,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetLibStatistics">
-      <MemberSignature Language="C#" Value="public void GetLibStatistics (IntPtr pcUniqueNames, out int pcchUniqueNames);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetLibStatistics(native int pcUniqueNames, int32 pcchUniqueNames) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetLibStatistics (IntPtr pcUniqueNames, out int pcchUniqueNames);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetLibStatistics(native int pcUniqueNames, int32 pcchUniqueNames) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -245,7 +297,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="pcUniqueNames" Type="System.IntPtr" />
-        <Parameter Name="pcchUniqueNames" Type="System.Int32&amp;" RefType="out" />
+        <Parameter Name="pcchUniqueNames" Type="System.Int32&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="pcUniqueNames">To be added.</param>
@@ -256,8 +308,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetTypeComp">
-      <MemberSignature Language="C#" Value="public void GetTypeComp (out System.Runtime.InteropServices.ComTypes.ITypeComp ppTComp);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetTypeComp(class System.Runtime.InteropServices.ComTypes.ITypeComp ppTComp) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetTypeComp (out System.Runtime.InteropServices.ComTypes.ITypeComp ppTComp);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetTypeComp(class System.Runtime.InteropServices.ComTypes.ITypeComp ppTComp) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -267,7 +325,11 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="ppTComp" Type="System.Runtime.InteropServices.ComTypes.ITypeComp&amp;" RefType="out" />
+        <Parameter
+          Name="ppTComp"
+          Type="System.Runtime.InteropServices.ComTypes.ITypeComp&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="ppTComp">To be added.</param>
@@ -276,8 +338,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetTypeInfo">
-      <MemberSignature Language="C#" Value="public void GetTypeInfo (int index, out System.Runtime.InteropServices.ComTypes.ITypeInfo ppTI);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetTypeInfo(int32 index, class System.Runtime.InteropServices.ComTypes.ITypeInfo ppTI) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetTypeInfo (int index, out System.Runtime.InteropServices.ComTypes.ITypeInfo ppTI);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetTypeInfo(int32 index, class System.Runtime.InteropServices.ComTypes.ITypeInfo ppTI) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -288,7 +356,11 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="index" Type="System.Int32" />
-        <Parameter Name="ppTI" Type="System.Runtime.InteropServices.ComTypes.ITypeInfo&amp;" RefType="out" />
+        <Parameter
+          Name="ppTI"
+          Type="System.Runtime.InteropServices.ComTypes.ITypeInfo&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="index">To be added.</param>
@@ -299,7 +371,10 @@
     </Member>
     <Member MemberName="GetTypeInfoCount">
       <MemberSignature Language="C#" Value="public int GetTypeInfoCount ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 GetTypeInfoCount() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 GetTypeInfoCount() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -325,8 +400,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetTypeInfoOfGuid">
-      <MemberSignature Language="C#" Value="public void GetTypeInfoOfGuid (ref Guid guid, out System.Runtime.InteropServices.ComTypes.ITypeInfo ppTInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetTypeInfoOfGuid(valuetype System.Guid guid, class System.Runtime.InteropServices.ComTypes.ITypeInfo ppTInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetTypeInfoOfGuid (ref Guid guid, out System.Runtime.InteropServices.ComTypes.ITypeInfo ppTInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetTypeInfoOfGuid(valuetype System.Guid guid, class System.Runtime.InteropServices.ComTypes.ITypeInfo ppTInfo) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -336,8 +417,12 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="guid" Type="System.Guid&amp;" RefType="ref" />
-        <Parameter Name="ppTInfo" Type="System.Runtime.InteropServices.ComTypes.ITypeInfo&amp;" RefType="out" />
+        <Parameter Name="guid" Type="System.Guid&" RefType="ref" />
+        <Parameter
+          Name="ppTInfo"
+          Type="System.Runtime.InteropServices.ComTypes.ITypeInfo&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="guid">To be added.</param>
@@ -347,8 +432,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetTypeInfoType">
-      <MemberSignature Language="C#" Value="public void GetTypeInfoType (int index, out System.Runtime.InteropServices.ComTypes.TYPEKIND pTKind);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetTypeInfoType(int32 index, valuetype System.Runtime.InteropServices.ComTypes.TYPEKIND pTKind) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetTypeInfoType (int index, out System.Runtime.InteropServices.ComTypes.TYPEKIND pTKind);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetTypeInfoType(int32 index, valuetype System.Runtime.InteropServices.ComTypes.TYPEKIND pTKind) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -359,7 +450,11 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="index" Type="System.Int32" />
-        <Parameter Name="pTKind" Type="System.Runtime.InteropServices.ComTypes.TYPEKIND&amp;" RefType="out" />
+        <Parameter
+          Name="pTKind"
+          Type="System.Runtime.InteropServices.ComTypes.TYPEKIND&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="index">To be added.</param>
@@ -370,7 +465,10 @@
     </Member>
     <Member MemberName="IsName">
       <MemberSignature Language="C#" Value="public bool IsName (string szNameBuf, int lHashVal);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsName(string szNameBuf, int32 lHashVal) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsName(string szNameBuf, int32 lHashVal) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -394,17 +492,34 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="szNameBuf" /> was found in the type library; otherwise, false.</para>
+          <para
+            >true if <paramref
+             name="szNameBuf" />
+
+             was found in the type library; otherwise, false.</para
+          >
         </returns>
         <param name="szNameBuf">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to test. </param
+        >
         <param name="lHashVal">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hash value of <paramref name="szNameBuf" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The hash value of <paramref
+           name="szNameBuf" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReleaseTLibAttr">
       <MemberSignature Language="C#" Value="public void ReleaseTLibAttr (IntPtr pTLibAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ReleaseTLibAttr(native int pTLibAttr) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void ReleaseTLibAttr(native int pTLibAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -423,10 +538,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the <see cref="T:System.Runtime.InteropServices.TYPELIBATTR" /> structure originally obtained from the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeLib.GetLibAttr(System.IntPtr@)" /> method.</para>
+          <para
+            >Releases the <see
+             cref="T:System.Runtime.InteropServices.TYPELIBATTR" />
+
+             structure originally obtained from the <see
+             cref="M:System.Runtime.InteropServices.ComTypes.ITypeLib.GetLibAttr(System.IntPtr@)" />
+
+             method.</para
+          >
         </summary>
         <param name="pTLibAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />The TLIBATTR structure to release. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The TLIBATTR structure to release. </param
+        >
       </Docs>
     </Member>
   </Members>

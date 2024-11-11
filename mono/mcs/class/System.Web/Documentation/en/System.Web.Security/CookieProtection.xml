@@ -27,7 +27,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use both <see cref="F:System.Web.Security.CookieProtection.Validation" /> and <see cref="F:System.Web.Security.CookieProtection.Encryption" /> to protect the information in the cookie.</para>
+          <para
+            >Use both <see
+             cref="F:System.Web.Security.CookieProtection.Validation" />
+
+             and <see
+             cref="F:System.Web.Security.CookieProtection.Encryption" />
+
+             to protect the information in the cookie.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OleDbInfoMessageEventArgs" FullName="System.Data.OleDb.OleDbInfoMessageEventArgs">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public sealed class OleDbInfoMessageEventArgs : EventArgs" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public sealed class OleDbInfoMessageEventArgs : EventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -16,11 +20,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" /> event contains an <see cref="T:System.Data.OleDb.OleDbErrorCollection" /> collection with warnings sent from the data source.</para>
+      <para
+        >The <see
+         cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" />
+
+         event contains an <see
+         cref="T:System.Data.OleDb.OleDbErrorCollection" />
+
+         collection with warnings sent from the data source.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" /> event. This class cannot be inherited.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" />
+
+         event. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -34,7 +51,18 @@
         <value>To be added: an object of type 'int'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is a wrapper for the <see cref="P:System.Data.OleDb.OleDbError.SQLState" /> property of the first <see cref="T:System.Data.OleDb.OleDbError" /> in the <see cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" /> collection.</para>
+          <para
+            >This is a wrapper for the <see
+             cref="P:System.Data.OleDb.OleDbError.SQLState" />
+
+             property of the first <see
+             cref="T:System.Data.OleDb.OleDbError" />
+
+             in the <see
+             cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -47,7 +75,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Errors">
-      <MemberSignature Language="C#" Value="public System.Data.OleDb.OleDbErrorCollection Errors { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.OleDb.OleDbErrorCollection Errors { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.OleDb.OleDbErrorCollection</ReturnType>
@@ -75,7 +106,18 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is a wrapper for the <see cref="P:System.Data.OleDb.OleDbError.Message" /> property of the first <see cref="T:System.Data.OleDb.OleDbError" /> in the <see cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" /> collection.</para>
+          <para
+            >This is a wrapper for the <see
+             cref="P:System.Data.OleDb.OleDbError.Message" />
+
+             property of the first <see
+             cref="T:System.Data.OleDb.OleDbError" />
+
+             in the <see
+             cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -97,7 +139,18 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is a wrapper for the <see cref="P:System.Data.OleDb.OleDbError.Source" /> property of the first <see cref="T:System.Data.OleDb.OleDbError" /> in the <see cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" /> collection.</para>
+          <para
+            >This is a wrapper for the <see
+             cref="P:System.Data.OleDb.OleDbError.Source" />
+
+             property of the first <see
+             cref="T:System.Data.OleDb.OleDbError" />
+
+             in the <see
+             cref="P:System.Data.OleDb.OleDbInfoMessageEventArgs.Errors" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -120,11 +173,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a string representation of the <see cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" /> event.</para>
+          <para
+            >Retrieves a string representation of the <see
+             cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" />
+
+             event.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string representing the <see cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" /> event.</para>
+          <para
+            >A string representing the <see
+             cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" />
+
+             event.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>

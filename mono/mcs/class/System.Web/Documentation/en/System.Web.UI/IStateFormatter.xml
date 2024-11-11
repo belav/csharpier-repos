@@ -10,8 +10,39 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.IStateFormatter" /> interface defines methods that a type can implement to serialize and deserialize the state that an ASP.NET Web server control maintains in its <see cref="P:System.Web.UI.Control.ViewState" /> property. This infrastructure is used by classes that derive from the <see cref="T:System.Web.UI.PageStatePersister" /> class to maintain an ASP.NET page's state between requests. By default, ASP.NET page state is serialized and deserialized by an instance of the <see cref="T:System.Web.UI.ObjectStateFormatter" /> class; however, site and adapter developers can implement the <see cref="T:System.Web.UI.IStateFormatter" /> interface on their own types to perform this work.</para>
-      <para>For more information about Web server control state management and view state, see <format type="text/html"><a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a></format> and <format type="text/html"><a href="c1ea6a66-3307-4c98-8187-cad462e1c027">Dynamic Web Server Controls and View State</a></format>. </para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.IStateFormatter" />
+
+         interface defines methods that a type can implement to serialize and deserialize the state that an ASP.NET Web server control maintains in its <see
+         cref="P:System.Web.UI.Control.ViewState" />
+
+         property. This infrastructure is used by classes that derive from the <see
+         cref="T:System.Web.UI.PageStatePersister" />
+
+         class to maintain an ASP.NET page's state between requests. By default, ASP.NET page state is serialized and deserialized by an instance of the <see
+         cref="T:System.Web.UI.ObjectStateFormatter" />
+
+         class; however, site and adapter developers can implement the <see
+         cref="T:System.Web.UI.IStateFormatter" />
+
+         interface on their own types to perform this work.</para
+      >
+      <para
+        >For more information about Web server control state management and view state, see <format
+         type="text/html">
+          <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
+        </format>
+
+         and <format
+         type="text/html">
+          <a href="c1ea6a66-3307-4c98-8187-cad462e1c027"
+            >Dynamic Web Server Controls and View State</a
+          >
+        </format>
+
+        . </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -20,7 +51,10 @@
   </Docs>
   <Members>
     <Member MemberName="Deserialize">
-      <MemberSignature Language="C#" Value="public object Deserialize (string serializationState);" />
+      <MemberSignature
+        Language="C#"
+        Value="public object Deserialize (string serializationState);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -33,7 +67,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Web.UI.IStateFormatter.Deserialize(System.String)" /> method to reconstitute the state object for an ASP.NET page or server control that has been serialized using the <see cref="M:System.Web.UI.IStateFormatter.Serialize(System.Object)" /> method. </para>
+          <para
+            >Use the <see
+             cref="M:System.Web.UI.IStateFormatter.Deserialize(System.String)" />
+
+             method to reconstitute the state object for an ASP.NET page or server control that has been serialized using the <see
+             cref="M:System.Web.UI.IStateFormatter.Serialize(System.Object)" />
+
+             method. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,7 +103,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Web.UI.IStateFormatter.Serialize(System.Object)" /> method to transform an object state graph to string form. Reconstitute a state object from the string using the <see cref="M:System.Web.UI.IStateFormatter.Deserialize(System.String)" /> method.</para>
+          <para
+            >Use the <see
+             cref="M:System.Web.UI.IStateFormatter.Serialize(System.Object)" />
+
+             method to transform an object state graph to string form. Reconstitute a state object from the string using the <see
+             cref="M:System.Web.UI.IStateFormatter.Deserialize(System.String)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -72,7 +122,10 @@
           <para>A string that represents a Web server control's view state. </para>
         </returns>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that represents the view state of the Web server control to serialize to string form.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that represents the view state of the Web server control to serialize to string form.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

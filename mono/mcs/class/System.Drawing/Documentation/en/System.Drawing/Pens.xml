@@ -16,7 +16,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Drawing.Pen" /> objects returned by this class are immutable, meaning their properties cannot be changed. To see the colors represented by pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+      <para
+        >The <see
+         cref="T:System.Drawing.Pen" />
+
+         objects returned by this class are immutable, meaning their properties cannot be changed. To see the colors represented by pens in this class, see <see
+         cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -34,11 +42,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -47,7 +65,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AntiqueWhite">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen AntiqueWhite { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen AntiqueWhite { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -56,11 +77,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -78,11 +109,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -100,11 +141,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -122,11 +173,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -144,11 +205,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -166,11 +237,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -188,11 +269,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -201,7 +292,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BlanchedAlmond">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen BlanchedAlmond { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen BlanchedAlmond { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -210,11 +304,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -232,11 +336,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -254,11 +368,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -276,11 +400,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -298,11 +432,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -320,11 +464,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -342,11 +496,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -364,11 +528,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -386,11 +560,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -399,7 +583,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CornflowerBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen CornflowerBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen CornflowerBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -408,11 +595,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -430,11 +627,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -452,11 +659,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -474,11 +691,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -496,11 +723,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -518,11 +755,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -531,7 +778,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkGoldenrod">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen DarkGoldenrod { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen DarkGoldenrod { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -540,11 +790,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -562,11 +822,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -584,11 +854,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -606,11 +886,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -619,7 +909,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkMagenta">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen DarkMagenta { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen DarkMagenta { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -628,11 +921,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -641,7 +944,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkOliveGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen DarkOliveGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen DarkOliveGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -650,11 +956,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -672,11 +988,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -694,11 +1020,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -716,11 +1052,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -738,11 +1084,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -751,7 +1107,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkSeaGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen DarkSeaGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen DarkSeaGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -760,11 +1119,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -773,7 +1142,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkSlateBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen DarkSlateBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen DarkSlateBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -782,11 +1154,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -795,7 +1177,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkSlateGray">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen DarkSlateGray { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen DarkSlateGray { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -804,11 +1189,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -817,7 +1212,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkTurquoise">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen DarkTurquoise { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen DarkTurquoise { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -826,11 +1224,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -848,11 +1256,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -870,11 +1288,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -883,7 +1311,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DeepSkyBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen DeepSkyBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen DeepSkyBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -892,11 +1323,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -914,11 +1355,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -936,11 +1387,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -958,11 +1419,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -971,7 +1442,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FloralWhite">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen FloralWhite { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen FloralWhite { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -980,11 +1454,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -993,7 +1477,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ForestGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen ForestGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen ForestGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1002,11 +1489,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1024,11 +1521,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1046,11 +1553,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1068,11 +1585,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1090,11 +1617,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1112,11 +1649,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1134,11 +1681,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1156,11 +1713,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1169,7 +1736,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GreenYellow">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen GreenYellow { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen GreenYellow { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1178,11 +1748,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1200,11 +1780,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1222,11 +1812,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1244,11 +1844,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1266,11 +1876,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1288,11 +1908,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1310,11 +1940,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1332,11 +1972,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1345,7 +1995,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LavenderBlush">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LavenderBlush { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LavenderBlush { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1354,11 +2007,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1376,11 +2039,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1389,7 +2062,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LemonChiffon">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LemonChiffon { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LemonChiffon { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1398,11 +2074,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1420,11 +2106,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1442,11 +2138,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1464,11 +2170,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1477,7 +2193,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightGoldenrodYellow">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LightGoldenrodYellow { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LightGoldenrodYellow { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1486,11 +2205,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1508,11 +2237,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1530,11 +2269,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1552,11 +2301,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1565,7 +2324,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSalmon">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LightSalmon { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LightSalmon { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1574,11 +2336,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1587,7 +2359,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSeaGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LightSeaGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LightSeaGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1596,11 +2371,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1609,7 +2394,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSkyBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LightSkyBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LightSkyBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1618,11 +2406,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1631,7 +2429,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSlateGray">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LightSlateGray { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LightSlateGray { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1640,11 +2441,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1653,7 +2464,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSteelBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LightSteelBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LightSteelBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1662,11 +2476,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1675,7 +2499,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightYellow">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen LightYellow { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen LightYellow { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1684,11 +2511,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1706,11 +2543,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1728,11 +2575,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1750,11 +2607,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1772,11 +2639,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1794,11 +2671,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1807,7 +2694,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumAquamarine">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MediumAquamarine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MediumAquamarine { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1816,11 +2706,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1838,11 +2738,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1851,7 +2761,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumOrchid">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MediumOrchid { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MediumOrchid { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1860,11 +2773,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1873,7 +2796,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumPurple">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MediumPurple { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MediumPurple { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1882,11 +2808,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1895,7 +2831,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumSeaGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MediumSeaGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MediumSeaGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1904,11 +2843,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1917,7 +2866,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumSlateBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MediumSlateBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MediumSlateBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1926,11 +2878,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1939,7 +2901,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumSpringGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MediumSpringGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MediumSpringGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1948,11 +2913,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1961,7 +2936,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumTurquoise">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MediumTurquoise { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MediumTurquoise { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1970,11 +2948,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1983,7 +2971,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumVioletRed">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MediumVioletRed { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MediumVioletRed { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -1992,11 +2983,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2005,7 +3006,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MidnightBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen MidnightBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen MidnightBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -2014,11 +3018,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2036,11 +3050,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2058,11 +3082,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2080,11 +3114,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2093,7 +3137,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NavajoWhite">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen NavajoWhite { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen NavajoWhite { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -2102,11 +3149,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2124,11 +3181,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2146,11 +3213,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2168,11 +3245,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2190,11 +3277,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2212,11 +3309,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2234,11 +3341,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2256,11 +3373,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2269,7 +3396,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PaleGoldenrod">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen PaleGoldenrod { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen PaleGoldenrod { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -2278,11 +3408,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2300,11 +3440,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2313,7 +3463,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PaleTurquoise">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen PaleTurquoise { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen PaleTurquoise { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -2322,11 +3475,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2335,7 +3498,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PaleVioletRed">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen PaleVioletRed { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen PaleVioletRed { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -2344,11 +3510,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2366,11 +3542,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2388,11 +3574,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2410,11 +3606,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2432,11 +3638,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2454,11 +3670,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2476,11 +3702,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2498,11 +3734,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2520,11 +3766,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2542,11 +3798,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2564,11 +3830,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2577,7 +3853,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SaddleBrown">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen SaddleBrown { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen SaddleBrown { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -2586,11 +3865,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2608,11 +3897,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2630,11 +3929,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2652,11 +3961,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2674,11 +3993,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2696,11 +4025,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2718,11 +4057,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2740,11 +4089,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2762,11 +4121,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2784,11 +4153,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2806,11 +4185,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2819,7 +4208,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SpringGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen SpringGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen SpringGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -2828,11 +4220,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2850,11 +4252,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2872,11 +4284,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2894,11 +4316,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2916,11 +4348,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2938,11 +4380,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2951,7 +4403,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Transparent">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen Transparent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen Transparent { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -2960,11 +4415,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2982,11 +4447,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3004,11 +4479,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3026,11 +4511,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3048,11 +4543,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3070,11 +4575,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3092,11 +4607,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3105,7 +4630,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="YellowGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Pen YellowGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Pen YellowGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Pen</ReturnType>
@@ -3114,11 +4642,21 @@
         <value>To be added: an object of type 'Pen'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this pen and other pens in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this pen and other pens in this class, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-defined <see cref="T:System.Drawing.Pen" /> object with a width of 1.</para>
+          <para
+            >A system-defined <see
+             cref="T:System.Drawing.Pen" />
+
+             object with a width of 1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

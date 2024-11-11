@@ -159,7 +159,10 @@
       </tr>
     </table>
     <span>
-      <br />3</span>
+      <br />
+
+      3</span
+    >
   </div>
   <div id="GHTSubTest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
@@ -320,10 +323,16 @@
       </tr>
     </table>
     <span>
-      <br />77</span>
+      <br />
+
+      77</span
+    >
   </div>
   <div id="GHTSubTest3" style="height:120px;width:553px">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

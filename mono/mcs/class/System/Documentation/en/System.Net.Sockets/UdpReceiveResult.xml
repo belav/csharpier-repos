@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="UdpReceiveResult" FullName="System.Net.Sockets.UdpReceiveResult">
-  <TypeSignature Language="C#" Value="public struct UdpReceiveResult : IEquatable&lt;System.Net.Sockets.UdpReceiveResult&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit UdpReceiveResult extends System.ValueType implements class System.IEquatable`1&lt;valuetype System.Net.Sockets.UdpReceiveResult&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public struct UdpReceiveResult : IEquatable<System.Net.Sockets.UdpReceiveResult>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit UdpReceiveResult extends System.ValueType implements class System.IEquatable`1<valuetype System.Net.Sockets.UdpReceiveResult>"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,13 +24,24 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Presents UDP receive result information from a call to the <see cref="M:System.Net.Sockets.UdpClient.ReceiveAsync" /> method.</para>
+      <para
+        >Presents UDP receive result information from a call to the <see
+         cref="M:System.Net.Sockets.UdpClient.ReceiveAsync" />
+
+         method.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public UdpReceiveResult (byte[] buffer, System.Net.IPEndPoint remoteEndPoint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] buffer, class System.Net.IPEndPoint remoteEndPoint) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public UdpReceiveResult (byte[] buffer, System.Net.IPEndPoint remoteEndPoint);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] buffer, class System.Net.IPEndPoint remoteEndPoint) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,12 +54,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Sockets.UdpReceiveResult" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+             class.</para
+          >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />A buffer for data to receive in the UDP packet.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A buffer for data to receive in the UDP packet.</param
+        >
         <param name="remoteEndPoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />The remote endpoint of the UDP packet.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The remote endpoint of the UDP packet.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Buffer">
@@ -65,8 +93,14 @@
       </Docs>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals (System.Net.Sockets.UdpReceiveResult other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype System.Net.Sockets.UdpReceiveResult other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Equals (System.Net.Sockets.UdpReceiveResult other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Equals(valuetype System.Net.Sockets.UdpReceiveResult other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -85,16 +119,35 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
-          <para>true if <paramref name="other" /> is an instance of <see cref="T:System.Net.Sockets.UdpReceiveResult" /> and equals the value of the instance; otherwise, false.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
+          <para
+            >true if <paramref
+             name="other" />
+
+             is an instance of <see
+             cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+             and equals the value of the instance; otherwise, false.</para
+          >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare with this instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to compare with this instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -113,16 +166,35 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
-          <para>true if <paramref name="obj" /> is an instance of <see cref="T:System.Net.Sockets.UdpReceiveResult" /> and equals the value of the instance; otherwise, false.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
+          <para
+            >true if <paramref
+             name="obj" />
+
+             is an instance of <see
+             cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+             and equals the value of the instance; otherwise, false.</para
+          >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare with this instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to compare with this instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -139,14 +211,25 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Int32" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Int32" />
+
+            .</para
+          >
           <para>The hash code.</para>
         </returns>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (System.Net.Sockets.UdpReceiveResult left, System.Net.Sockets.UdpReceiveResult right);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype System.Net.Sockets.UdpReceiveResult left, valuetype System.Net.Sockets.UdpReceiveResult right) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (System.Net.Sockets.UdpReceiveResult left, System.Net.Sockets.UdpReceiveResult right);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Equality(valuetype System.Net.Sockets.UdpReceiveResult left, valuetype System.Net.Sockets.UdpReceiveResult right) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -162,22 +245,58 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether two specified <see cref="T:System.Net.Sockets.UdpReceiveResult" /> instances are equivalent.</para>
+          <para
+            >Tests whether two specified <see
+             cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+             instances are equivalent.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
-          <para>true if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, false.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
+          <para
+            >true if <paramref
+             name="left" />
+
+             and <paramref
+             name="right" />
+
+             are equal; otherwise, false.</para
+          >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Net.Sockets.UdpReceiveResult" /> instance that is to the left of the equality operator.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+           instance that is to the left of the equality operator.</param
+        >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Net.Sockets.UdpReceiveResult" /> instance that is to the right of the equality operator.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+           instance that is to the right of the equality operator.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (System.Net.Sockets.UdpReceiveResult left, System.Net.Sockets.UdpReceiveResult right);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype System.Net.Sockets.UdpReceiveResult left, valuetype System.Net.Sockets.UdpReceiveResult right) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (System.Net.Sockets.UdpReceiveResult left, System.Net.Sockets.UdpReceiveResult right);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Inequality(valuetype System.Net.Sockets.UdpReceiveResult left, valuetype System.Net.Sockets.UdpReceiveResult right) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -193,22 +312,55 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether two specified <see cref="T:System.Net.Sockets.UdpReceiveResult" /> instances are not equal.</para>
+          <para
+            >Tests whether two specified <see
+             cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+             instances are not equal.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
-          <para>true if <paramref name="left" /> and <paramref name="right" /> are unequal; otherwise, false.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
+          <para
+            >true if <paramref
+             name="left" />
+
+             and <paramref
+             name="right" />
+
+             are unequal; otherwise, false.</para
+          >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Net.Sockets.UdpReceiveResult" /> instance that is to the left of the not equal operator.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+           instance that is to the left of the not equal operator.</param
+        >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Net.Sockets.UdpReceiveResult" /> instance that is to the right of the not equal operator.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Net.Sockets.UdpReceiveResult" />
+
+           instance that is to the right of the not equal operator.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoteEndPoint">
       <MemberSignature Language="C#" Value="public System.Net.IPEndPoint RemoteEndPoint { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.IPEndPoint RemoteEndPoint" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.IPEndPoint RemoteEndPoint"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -2,9 +2,7 @@
   <PropertyGroup>
     <EnsureRuntimeIdentifierSet>true</EnsureRuntimeIdentifierSet>
   </PropertyGroup>
-
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <ProductBrandPrefix>Microsoft .NET</ProductBrandPrefix>

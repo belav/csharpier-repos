@@ -15,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName="ContentDefinitions">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionary ContentDefinitions { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionary ContentDefinitions { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -28,12 +31,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.UI.Design.ContentDefinition" /> objects for the content placeholders that are identified in the master page.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.UI.Design.ContentDefinition" />
+
+             objects for the content placeholders that are identified in the master page.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetContentDesignerState">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.ContentDesignerState GetContentDesignerState (string identifier);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.ContentDesignerState GetContentDesignerState (string identifier);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -55,11 +66,17 @@
           <para>The current state of the identified content placeholder.</para>
         </returns>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />The identifier for a content place holder.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The identifier for a content place holder.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetContentDesignerState">
-      <MemberSignature Language="C#" Value="public void SetContentDesignerState (string identifier, System.Web.UI.Design.ContentDesignerState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetContentDesignerState (string identifier, System.Web.UI.Design.ContentDesignerState state);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -78,9 +95,18 @@
           <para>Sets the current state of the identified content place holder.</para>
         </summary>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />The identifier for a content place holder.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The identifier for a content place holder.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.UI.Design.ContentDesignerState" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.UI.Design.ContentDesignerState" />
+
+          .</param
+        >
       </Docs>
     </Member>
   </Members>

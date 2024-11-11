@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceDescriptionReflector" FullName="System.Web.Services.Description.ServiceDescriptionReflector">
+<Type
+  Name="ServiceDescriptionReflector"
+  FullName="System.Web.Services.Description.ServiceDescriptionReflector"
+>
   <TypeSignature Language="C#" Value="public class ServiceDescriptionReflector" Maintainer="auto" />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -30,7 +32,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -51,17 +58,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method examines the metadata for the XML Web service at the specified URL. If the specified <see cref="T:System.Type" /> is not supported, it modifies the Web Services Description Language (WSDL) file corresponding to the <see cref="T:System.Web.Services.Description.ServiceDescription" /> describing the XML Web service, in order to include that type.</para>
+          <para
+            >This method examines the metadata for the XML Web service at the specified URL. If the specified <see
+             cref="T:System.Type" />
+
+             is not supported, it modifies the Web Services Description Language (WSDL) file corresponding to the <see
+             cref="T:System.Web.Services.Description.ServiceDescription" />
+
+             describing the XML Web service, in order to include that type.</para
+          >
           <para>For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a <see cref="T:System.Web.Services.Description.ServiceDescription" /> including the specified <see cref="T:System.Type" /> for the XML Web service at the specified URL.</para>
+          <para
+            >Creates a <see
+             cref="T:System.Web.Services.Description.ServiceDescription" />
+
+             including the specified <see
+             cref="T:System.Type" />
+
+             for the XML Web service at the specified URL.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of the class or interface to reflect. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of the class or interface to reflect. </param
+        >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />The address (URL) of the XML Web service. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The address (URL) of the XML Web service. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -69,22 +101,41 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Schemas">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlSchemas Schemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlSchemas Schemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Xml.Serialization.XmlSchemas</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value>a <see cref="T:System.Xml.Serialization.XmlSchemas" /></value>
+        <value
+          >a <see
+           cref="T:System.Xml.Serialization.XmlSchemas" />
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is initialized with a <see cref="P:System.Collections.CollectionBase.Count" /> of zero. Any members must be explicitly added using the collection's <see cref="M:System.Xml.Serialization.XmlSchemas.Add(System.Xml.Schema.XmlSchema)" /> method.</para>
+          <para
+            >This property is initialized with a <see
+             cref="P:System.Collections.CollectionBase.Count" />
+
+             of zero. Any members must be explicitly added using the collection's <see
+             cref="M:System.Xml.Serialization.XmlSchemas.Add(System.Xml.Schema.XmlSchema)" />
+
+             method.</para
+          >
           <para>For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a reference to the <see cref="T:System.Xml.Serialization.XmlSchemas" /> associated with the XML Web service.</para>
+          <para
+            >Gets a reference to the <see
+             cref="T:System.Xml.Serialization.XmlSchemas" />
+
+             associated with the XML Web service.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -93,7 +144,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ServiceDescriptions">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.ServiceDescriptionCollection ServiceDescriptions { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.ServiceDescriptionCollection ServiceDescriptions { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.ServiceDescriptionCollection</ReturnType>
@@ -102,12 +156,25 @@
         <value>To be added: an object of type 'ServiceDescriptionCollection'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is initialized with a <see cref="P:System.Collections.CollectionBase.Count" /> of zero. Any members must be explicitly added using the collection's <see cref="M:System.Web.Services.Description.ServiceDescriptionCollection.Add(System.Web.Services.Description.ServiceDescription)" /> method.</para>
+          <para
+            >This property is initialized with a <see
+             cref="P:System.Collections.CollectionBase.Count" />
+
+             of zero. Any members must be explicitly added using the collection's <see
+             cref="M:System.Web.Services.Description.ServiceDescriptionCollection.Add(System.Web.Services.Description.ServiceDescription)" />
+
+             method.</para
+          >
           <para>For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a reference to the <see cref="T:System.Web.Services.Description.ServiceDescriptionCollection" /> associated with the XML Web service.</para>
+          <para
+            >Gets a reference to the <see
+             cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+             associated with the XML Web service.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

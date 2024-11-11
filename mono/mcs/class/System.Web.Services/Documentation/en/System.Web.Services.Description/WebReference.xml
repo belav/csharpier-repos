@@ -13,7 +13,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:System.Web.Services.Description.WebReference" /> object is used to pass information about a set of Web services to the static <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method of the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> class.</para>
+      <para
+        >A <see
+         cref="T:System.Web.Services.Description.WebReference" />
+
+         object is used to pass information about a set of Web services to the static <see
+         cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+
+         method of the <see
+         cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,36 +33,82 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WebReference (System.Web.Services.Discovery.DiscoveryClientDocumentCollection documents, System.CodeDom.CodeNamespace proxyCode);" />
+      <MemberSignature
+        Language="C#"
+        Value="public WebReference (System.Web.Services.Discovery.DiscoveryClientDocumentCollection documents, System.CodeDom.CodeNamespace proxyCode);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
-        <Parameter Name="documents" Type="System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+        <Parameter
+          Name="documents"
+          Type="System.Web.Services.Discovery.DiscoveryClientDocumentCollection"
+        />
         <Parameter Name="proxyCode" Type="System.CodeDom.CodeNamespace" />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="documents" /> collection should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" /> and <see cref="T:System.Xml.Schema.XmlSchema" /> objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> objects. </para>
+          <para
+            >The <paramref
+             name="documents" />
+
+             collection should contain only <see
+             cref="T:System.Web.Services.Description.ServiceDescription" />
+
+             and <see
+             cref="T:System.Xml.Schema.XmlSchema" />
+
+             objects; the <see
+             cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+
+             method is unable to interpret <see
+             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+             objects. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.WebReference" /> class with the given description document collection and proxy code namespace.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.WebReference" />
+
+             class with the given description document collection and proxy code namespace.</para
+          >
         </summary>
         <param name="documents">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />  that specifies a collection of description documents.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+            that specifies a collection of description documents.</param
+        >
         <param name="proxyCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.CodeDom.CodeNamespace" /> that specifies a namespace for code compilation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.CodeDom.CodeNamespace" />
+
+           that specifies a namespace for code compilation.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WebReference (System.Web.Services.Discovery.DiscoveryClientDocumentCollection documents, System.CodeDom.CodeNamespace proxyCode, string appSettingUrlKey, string appSettingBaseUrl);" />
+      <MemberSignature
+        Language="C#"
+        Value="public WebReference (System.Web.Services.Discovery.DiscoveryClientDocumentCollection documents, System.CodeDom.CodeNamespace proxyCode, string appSettingUrlKey, string appSettingBaseUrl);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
-        <Parameter Name="documents" Type="System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+        <Parameter
+          Name="documents"
+          Type="System.Web.Services.Discovery.DiscoveryClientDocumentCollection"
+        />
         <Parameter Name="proxyCode" Type="System.CodeDom.CodeNamespace" />
         <Parameter Name="appSettingUrlKey" Type="System.String" />
         <Parameter Name="appSettingBaseUrl" Type="System.String" />
@@ -60,30 +117,76 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="documents" /> collection should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" /> and <see cref="T:Sytem.Xml.Schema.XmlSchema" /> objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> objects.</para>
+          <para
+            >The <paramref
+             name="documents" />
+
+             collection should contain only <see
+             cref="T:System.Web.Services.Description.ServiceDescription" />
+
+             and <see
+             cref="T:Sytem.Xml.Schema.XmlSchema" />
+
+             objects; the <see
+             cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+
+             method is unable to interpret <see
+             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+             objects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.WebReference" /> class with the given data.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.WebReference" />
+
+             class with the given data.</para
+          >
         </summary>
         <param name="documents">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />  that specifies a collection of description documents.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+            that specifies a collection of description documents.</param
+        >
         <param name="proxyCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.CodeDom.CodeNamespace" /> that specifies a namespace for code compilation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.CodeDom.CodeNamespace" />
+
+           that specifies a namespace for code compilation.</param
+        >
         <param name="appSettingUrlKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URL key of the Web reference.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URL key of the Web reference.</param
+        >
         <param name="appSettingBaseUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base URL of the Web reference.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The base URL of the Web reference.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WebReference (System.Web.Services.Discovery.DiscoveryClientDocumentCollection documents, System.CodeDom.CodeNamespace proxyCode, string protocolName, string appSettingUrlKey, string appSettingBaseUrl);" />
+      <MemberSignature
+        Language="C#"
+        Value="public WebReference (System.Web.Services.Discovery.DiscoveryClientDocumentCollection documents, System.CodeDom.CodeNamespace proxyCode, string protocolName, string appSettingUrlKey, string appSettingBaseUrl);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
-        <Parameter Name="documents" Type="System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+        <Parameter
+          Name="documents"
+          Type="System.Web.Services.Discovery.DiscoveryClientDocumentCollection"
+        />
         <Parameter Name="proxyCode" Type="System.CodeDom.CodeNamespace" />
         <Parameter Name="protocolName" Type="System.String" />
         <Parameter Name="appSettingUrlKey" Type="System.String" />
@@ -93,22 +196,65 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="documents" /> collection should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" /> and <see cref="T:System.Xml.Schema.XmlSchema" /> objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> objects.</para>
+          <para
+            >The <paramref
+             name="documents" />
+
+             collection should contain only <see
+             cref="T:System.Web.Services.Description.ServiceDescription" />
+
+             and <see
+             cref="T:System.Xml.Schema.XmlSchema" />
+
+             objects; the <see
+             cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+
+             method is unable to interpret <see
+             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+             objects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.WebReference" /> class with the given data.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.WebReference" />
+
+             class with the given data.</para
+          >
         </summary>
         <param name="documents">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />  that specifies a collection of description documents.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+            that specifies a collection of description documents.</param
+        >
         <param name="proxyCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.CodeDom.CodeNamespace" /> that specifies a namespace for code compilation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.CodeDom.CodeNamespace" />
+
+           that specifies a namespace for code compilation.</param
+        >
         <param name="protocolName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The protocol used by the XML Web service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The protocol used by the XML Web service.</param
+        >
         <param name="appSettingUrlKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URL key of the Web reference.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URL key of the Web reference.</param
+        >
         <param name="appSettingBaseUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base URL of the Web reference.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The base URL of the Web reference.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -153,7 +299,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Documents">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Discovery.DiscoveryClientDocumentCollection Documents { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Discovery.DiscoveryClientDocumentCollection Documents { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Discovery.DiscoveryClientDocumentCollection</ReturnType>
@@ -163,7 +312,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The description document collection associated with a Web reference should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" /> and <see cref="T:System.Xml.Schema.XmlSchema" /> objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> objects. </para>
+          <para
+            >The description document collection associated with a Web reference should contain only <see
+             cref="T:System.Web.Services.Description.ServiceDescription" />
+
+             and <see
+             cref="T:System.Xml.Schema.XmlSchema" />
+
+             objects; the <see
+             cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+
+             method is unable to interpret <see
+             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+             objects. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -185,7 +348,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Allowed protocol strings include "Soap" (indicating SOAP 1.0) and "Soap12" (indicating SOAP 1.2). The value of this property determines the protocol used by proxy clients when contacting any XML Web service in the <see cref="P:System.Web.Services.Description.WebReference.Documents" /> collection.</para>
+          <para
+            >Allowed protocol strings include "Soap" (indicating SOAP 1.0) and "Soap12" (indicating SOAP 1.2). The value of this property determines the protocol used by proxy clients when contacting any XML Web service in the <see
+             cref="P:System.Web.Services.Description.WebReference.Documents" />
+
+             collection.</para
+          >
           <para>For more information on SOAP, see the World Wide Web Consortium Web site, at www.w3.org.</para>
         </remarks>
         <summary>
@@ -198,7 +366,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProxyCode">
-      <MemberSignature Language="C#" Value="public System.CodeDom.CodeNamespace ProxyCode { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.CodeDom.CodeNamespace ProxyCode { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.CodeDom.CodeNamespace</ReturnType>
@@ -217,7 +388,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ValidationWarnings">
-      <MemberSignature Language="C#" Value="public System.Collections.Specialized.StringCollection ValidationWarnings { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Specialized.StringCollection ValidationWarnings { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.Specialized.StringCollection</ReturnType>
@@ -236,7 +410,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Warnings">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.ServiceDescriptionImportWarnings Warnings { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.ServiceDescriptionImportWarnings Warnings { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.ServiceDescriptionImportWarnings</ReturnType>

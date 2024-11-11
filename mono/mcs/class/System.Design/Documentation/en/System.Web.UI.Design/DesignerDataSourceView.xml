@@ -18,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected DesignerDataSourceView (System.Web.UI.Design.IDataSourceDesigner owner, string viewName);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected DesignerDataSourceView (System.Web.UI.Design.IDataSourceDesigner owner, string viewName);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -31,12 +34,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> class using the specified data source designer and view name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.Design.DesignerDataSourceView" />
+
+             class using the specified data source designer and view name.</para
+          >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parent data source designer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parent data source designer.</param
+        >
         <param name="viewName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the view in the data source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the view in the data source.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CanDelete">
@@ -53,7 +67,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" /> method.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Web.UI.DataSourceView" />
+
+             object that is associated with the current <see
+             cref="T:System.Web.UI.DataSourceControl" />
+
+             object supports the <see
+             cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+             method.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -71,7 +96,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" /> method.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Web.UI.DataSourceView" />
+
+             object that is associated with the current <see
+             cref="T:System.Web.UI.DataSourceControl" />
+
+             object supports the <see
+             cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+
+             method.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -89,12 +125,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports paging through the data that is retrieved by the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" /> method.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Web.UI.DataSourceView" />
+
+             object that is associated with the current <see
+             cref="T:System.Web.UI.DataSourceControl" />
+
+             object supports paging through the data that is retrieved by the <see
+             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+             method.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CanRetrieveTotalRowCount">
-      <MemberSignature Language="C#" Value="public virtual bool CanRetrieveTotalRowCount { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool CanRetrieveTotalRowCount { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -107,7 +157,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports retrieving the total number of data rows instead of the data itself.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Web.UI.DataSourceView" />
+
+             object that is associated with the current <see
+             cref="T:System.Web.UI.DataSourceControl" />
+
+             object supports retrieving the total number of data rows instead of the data itself.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -125,7 +183,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports a sorted view on the underlying data source.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Web.UI.DataSourceView" />
+
+             object that is associated with the current <see
+             cref="T:System.Web.UI.DataSourceControl" />
+
+             object supports a sorted view on the underlying data source.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -143,12 +209,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" /> method.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Web.UI.DataSourceView" />
+
+             object that is associated with the current <see
+             cref="T:System.Web.UI.DataSourceControl" />
+
+             object supports the <see
+             cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+             method.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DataSourceDesigner">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.IDataSourceDesigner DataSourceDesigner { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.IDataSourceDesigner DataSourceDesigner { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -161,12 +241,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a reference to the designer that created this <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> control.</para>
+          <para
+            >Gets a reference to the designer that created this <see
+             cref="T:System.Web.UI.Design.DesignerDataSourceView" />
+
+             control.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetDesignTimeData">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerable GetDesignTimeData (int minimumRows, out bool isSampleData);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerable GetDesignTimeData (int minimumRows, out bool isSampleData);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -176,7 +264,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="minimumRows" Type="System.Int32" />
-        <Parameter Name="isSampleData" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="isSampleData" Type="System.Boolean&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="minimumRows">To be added.</param>
@@ -200,12 +288,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the name of the view as provided when this instance of the <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> class was created.</para>
+          <para
+            >Gets the name of the view as provided when this instance of the <see
+             cref="T:System.Web.UI.Design.DesignerDataSourceView" />
+
+             class was created.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Schema">
-      <MemberSignature Language="C#" Value="public virtual System.Web.UI.Design.IDataSourceViewSchema Schema { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Web.UI.Design.IDataSourceViewSchema Schema { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

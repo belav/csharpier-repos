@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="AspNetCompatibilityRequirementsAttribute" FullName="System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute">
-  <TypeSignature Language="C#" Value="public sealed class AspNetCompatibilityRequirementsAttribute : Attribute, System.ServiceModel.Description.IServiceBehavior" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit AspNetCompatibilityRequirementsAttribute extends System.Attribute implements class System.ServiceModel.Description.IServiceBehavior" />
+<Type
+  Name="AspNetCompatibilityRequirementsAttribute"
+  FullName="System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class AspNetCompatibilityRequirementsAttribute : Attribute, System.ServiceModel.Description.IServiceBehavior"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit AspNetCompatibilityRequirementsAttribute extends System.Attribute implements class System.ServiceModel.Description.IServiceBehavior"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,8 +46,23 @@
       <para>      &lt;serviceHostingEnvironment aspNetCompatibilityEnabled="true"/&gt;</para>
       <para>   &lt;/system.serviceModel&gt;</para>
       <para>This flag is false by default and thus indigo2 services run in the Mixed Transports Mode unless you explicitly opt into the vstecasp compatibility mode. </para>
-      <para>crabout vstecasp compatibility mode, see <format type="text/html"><a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a></format>. </para>
-      <para>Use the <see cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" /> property to do this. At runtime, applications can detect if vstecasp compatibility mode is enabled by checking the value of the static property <see cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />.</para>
+      <para
+        >crabout vstecasp compatibility mode, see <format
+         type="text/html">
+          <a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a>
+        </format>
+
+        . </para
+      >
+      <para
+        >Use the <see
+         cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" />
+
+         property to do this. At runtime, applications can detect if vstecasp compatibility mode is enabled by checking the value of the static property <see
+         cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,7 +72,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public AspNetCompatibilityRequirementsAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,13 +85,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="RequirementsMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Activation.AspNetCompatibilityRequirementsMode RequirementsMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Activation.AspNetCompatibilityRequirementsMode RequirementsMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Activation.AspNetCompatibilityRequirementsMode RequirementsMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Activation.AspNetCompatibilityRequirementsMode RequirementsMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -76,8 +114,23 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" /> property to set the hosting mode in code. This can also be done by setting an application-level configuration flag aspNetCompatibilityEnabled. crdefault <format type="text/html"><a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a></format>. </para>
-          <para>At runtime, applications can detect whether vstecasp compatibility mode is enabled by checking the value of the static property <see cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />. </para>
+          <para
+            >Use the <see
+             cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" />
+
+             property to set the hosting mode in code. This can also be done by setting an application-level configuration flag aspNetCompatibilityEnabled. crdefault <format
+             type="text/html">
+              <a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a>
+            </format>
+
+            . </para
+          >
+          <para
+            >At runtime, applications can detect whether vstecasp compatibility mode is enabled by checking the value of the static property <see
+             cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -86,8 +139,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IServiceBehavior.AddBindingParameters">
-      <MemberSignature Language="C#" Value="void IServiceBehavior.AddBindingParameters (System.ServiceModel.Description.ServiceDescription description, System.ServiceModel.ServiceHostBase serviceHostBase, System.Collections.ObjectModel.Collection&lt;System.ServiceModel.Description.ServiceEndpoint&gt; endpoints, System.ServiceModel.Channels.BindingParameterCollection parameters);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(class System.ServiceModel.Description.ServiceDescription description, class System.ServiceModel.ServiceHostBase serviceHostBase, class System.Collections.ObjectModel.Collection`1&lt;class System.ServiceModel.Description.ServiceEndpoint&gt; endpoints, class System.ServiceModel.Channels.BindingParameterCollection parameters) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IServiceBehavior.AddBindingParameters (System.ServiceModel.Description.ServiceDescription description, System.ServiceModel.ServiceHostBase serviceHostBase, System.Collections.ObjectModel.Collection<System.ServiceModel.Description.ServiceEndpoint> endpoints, System.ServiceModel.Channels.BindingParameterCollection parameters);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(class System.ServiceModel.Description.ServiceDescription description, class System.ServiceModel.ServiceHostBase serviceHostBase, class System.Collections.ObjectModel.Collection`1<class System.ServiceModel.Description.ServiceEndpoint> endpoints, class System.ServiceModel.Channels.BindingParameterCollection parameters) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,8 +157,14 @@
       <Parameters>
         <Parameter Name="description" Type="System.ServiceModel.Description.ServiceDescription" />
         <Parameter Name="serviceHostBase" Type="System.ServiceModel.ServiceHostBase" />
-        <Parameter Name="endpoints" Type="System.Collections.ObjectModel.Collection&lt;System.ServiceModel.Description.ServiceEndpoint&gt;" />
-        <Parameter Name="parameters" Type="System.ServiceModel.Channels.BindingParameterCollection" />
+        <Parameter
+          Name="endpoints"
+          Type="System.Collections.ObjectModel.Collection<System.ServiceModel.Description.ServiceEndpoint>"
+        />
+        <Parameter
+          Name="parameters"
+          Type="System.ServiceModel.Channels.BindingParameterCollection"
+        />
       </Parameters>
       <Docs>
         <remarks>
@@ -111,18 +176,51 @@
           <para>Adds custom data that the binding elements can access to support the implementation of the contract.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+           of the service. </param
+        >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.ServiceHostBase" /> used to host the service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.ServiceHostBase" />
+
+           used to host the service.</param
+        >
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Collections.ObjectModel.Collection`1" /> of type <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> that contains the endpoints for the service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Collections.ObjectModel.Collection`1" />
+
+           of type <see
+           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+           that contains the endpoints for the service.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" /> that contains the parameters that the binding elements for the service can access.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+
+           that contains the parameters that the binding elements for the service can access.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior">
-      <MemberSignature Language="C#" Value="void IServiceBehavior.ApplyDispatchBehavior (System.ServiceModel.Description.ServiceDescription description, System.ServiceModel.ServiceHostBase serviceHostBase);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior(class System.ServiceModel.Description.ServiceDescription description, class System.ServiceModel.ServiceHostBase serviceHostBase) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IServiceBehavior.ApplyDispatchBehavior (System.ServiceModel.Description.ServiceDescription description, System.ServiceModel.ServiceHostBase serviceHostBase);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior(class System.ServiceModel.Description.ServiceDescription description, class System.ServiceModel.ServiceHostBase serviceHostBase) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -144,14 +242,32 @@
           <para>Checks that the type of hosting is consistent with the vstecasp compatibility requirements.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+           of the service. </param
+        >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.ServiceHostBase" /> for hosting the service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.ServiceHostBase" />
+
+           for hosting the service.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IServiceBehavior.Validate">
-      <MemberSignature Language="C#" Value="void IServiceBehavior.Validate (System.ServiceModel.Description.ServiceDescription description, System.ServiceModel.ServiceHostBase serviceHostBase);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IServiceBehavior.Validate(class System.ServiceModel.Description.ServiceDescription description, class System.ServiceModel.ServiceHostBase serviceHostBase) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IServiceBehavior.Validate (System.ServiceModel.Description.ServiceDescription description, System.ServiceModel.ServiceHostBase serviceHostBase);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IServiceBehavior.Validate(class System.ServiceModel.Description.ServiceDescription description, class System.ServiceModel.ServiceHostBase serviceHostBase) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -173,9 +289,21 @@
           <para>Validates the service behavior.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+           of the service. </param
+        >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.ServiceHostBase" /> for hosting the service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.ServiceHostBase" />
+
+           for hosting the service.</param
+        >
       </Docs>
     </Member>
   </Members>

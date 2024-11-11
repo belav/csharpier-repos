@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ZoneIdentityPermission" FullName="System.Security.Permissions.ZoneIdentityPermission">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class ZoneIdentityPermission : System.Security.CodeAccessPermission, System.Security.Permissions.IBuiltInPermission" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit ZoneIdentityPermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IBuiltInPermission" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class ZoneIdentityPermission : System.Security.CodeAccessPermission, System.Security.Permissions.IBuiltInPermission"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit ZoneIdentityPermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IBuiltInPermission"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -56,8 +63,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ZoneIdentityPermission (System.Security.Permissions.PermissionState state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ZoneIdentityPermission (System.Security.Permissions.PermissionState state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -73,21 +86,49 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Creates either a fully restricted (None) or Unrestricted permission.</para>
           <block subset="none" type="note">
-            <para>In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" /> permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" /> interface. That is, a demand for an identity always succeeds, regardless of the identity of the assembly, if the assembly has been granted full trust.</para>
+            <para
+              >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see
+               cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+
+               permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
+               cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+               interface. That is, a demand for an identity always succeeds, regardless of the identity of the assembly, if the assembly has been granted full trust.</para
+            >
           </block>
           <para>In the .NET Framework versions 1.0 and 1.1, demands on the identity permissions are effective, even when the calling assembly is fully trusted. That is, although the calling assembly has full trust, a demand for an identity permission fails if the assembly does not meet the demanded criteria. Starting with the .NET Framework version 2.0, demands for identity permissions are ineffective if the calling assembly has full trust. This assures consistency for all permissions, eliminating the treatment of identity permissions as a special case.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+             class with the specified <see
+             cref="T:System.Security.Permissions.PermissionState" />
+
+            .</para
+          >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Permissions.PermissionState" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ZoneIdentityPermission (System.Security.SecurityZone zone);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.SecurityZone zone) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ZoneIdentityPermission (System.Security.SecurityZone zone);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.SecurityZone zone) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -102,15 +143,26 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> class to represent the specified zone identity.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+             class to represent the specified zone identity.</para
+          >
         </summary>
         <param name="zone">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zone identifier. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zone identifier. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Copy">
       <MemberSignature Language="C#" Value="public override System.Security.IPermission Copy ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -137,8 +189,14 @@
       </Docs>
     </Member>
     <Member MemberName="FromXml">
-      <MemberSignature Language="C#" Value="public override void FromXml (System.Security.SecurityElement esd);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement esd) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void FromXml (System.Security.SecurityElement esd);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement esd) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -158,12 +216,21 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XML encoding to use to reconstruct the permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The XML encoding to use to reconstruct the permission. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Intersect">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -180,7 +247,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The intersection of two permissions is a permission that describes the set of operations they both describe in common. Only a demand that passes both original permissions will pass the intersection.</para>
-          <para>The intersection of two identical <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> objects is the same permission. Any other combination results in a permission that is null.</para>
+          <para
+            >The intersection of two identical <see
+             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+             objects is the same permission. Any other combination results in a permission that is null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -191,12 +263,21 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission to intersect with the current permission. It must be of the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission to intersect with the current permission. It must be of the same type as the current permission. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
-      <MemberSignature Language="C#" Value="public override bool IsSubsetOf (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsSubsetOf (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -212,7 +293,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The current permission is a subset of the specified permission if the two permissions are equal or if the current permission represents the <see cref="F:System.Security.SecurityZone.NoZone" /> security zone.</para>
+          <para
+            >The current permission is a subset of the specified permission if the two permissions are equal or if the current permission represents the <see
+             cref="F:System.Security.SecurityZone.NoZone" />
+
+             security zone.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -223,12 +309,21 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SecurityZone">
-      <MemberSignature Language="C#" Value="public System.Security.SecurityZone SecurityZone { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.SecurityZone SecurityZone" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.SecurityZone SecurityZone { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.SecurityZone SecurityZone"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -243,13 +338,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the zone represented by the current <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />.</para>
+          <para
+            >Gets or sets the zone represented by the current <see
+             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Security.Permissions.IBuiltInPermission.GetTokenIndex">
       <MemberSignature Language="C#" Value="int IBuiltInPermission.GetTokenIndex ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance int32 System.Security.Permissions.IBuiltInPermission.GetTokenIndex() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance int32 System.Security.Permissions.IBuiltInPermission.GetTokenIndex() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -267,8 +370,14 @@
       </Docs>
     </Member>
     <Member MemberName="ToXml">
-      <MemberSignature Language="C#" Value="public override System.Security.SecurityElement ToXml ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.SecurityElement ToXml ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -292,8 +401,14 @@
       </Docs>
     </Member>
     <Member MemberName="Union">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission Union (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission Union (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -309,8 +424,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The result of a call to <see cref="M:System.Security.Permissions.ZoneIdentityPermission.Union(System.Security.IPermission)" /> is a permission that represents the security zone represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. The union of two identical <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> objects is the same permission. The union of a null permission and a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> permission is the permission that is not null. </para>
-          <para>Note that a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> object representing a <see cref="F:System.Security.SecurityZone.NoZone" /> security zone is treated as a null permission and handled as a special case. The union of a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> object representing the <see cref="F:System.Security.SecurityZone.NoZone" /> security zone and a null permission is null. The union of two different zone identity permissions results in an <see cref="T:System.ArgumentException" /> exception being thrown when neither of the two permissions represents the <see cref="F:System.Security.SecurityZone.NoZone" /> security zone.</para>
+          <para
+            >The result of a call to <see
+             cref="M:System.Security.Permissions.ZoneIdentityPermission.Union(System.Security.IPermission)" />
+
+             is a permission that represents the security zone represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. The union of two identical <see
+             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+             objects is the same permission. The union of a null permission and a <see
+             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+             permission is the permission that is not null. </para
+          >
+          <para
+            >Note that a <see
+             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+             object representing a <see
+             cref="F:System.Security.SecurityZone.NoZone" />
+
+             security zone is treated as a null permission and handled as a special case. The union of a <see
+             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+             object representing the <see
+             cref="F:System.Security.SecurityZone.NoZone" />
+
+             security zone and a null permission is null. The union of two different zone identity permissions results in an <see
+             cref="T:System.ArgumentException" />
+
+             exception being thrown when neither of the two permissions represents the <see
+             cref="F:System.Security.SecurityZone.NoZone" />
+
+             security zone.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -321,7 +467,10 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission to combine with the current permission. It must be of the same type as the current permission. </param
+        >
       </Docs>
     </Member>
   </Members>

@@ -16,11 +16,11 @@
   <Docs>
     <summary>This is the main object when drawing with Cairo. </summary>
     <remarks>
-      <para>
-      </para>
+      <para></para>
       <para>
         <example>
-          <code lang="C#">
+          <code lang="C#"
+            >
 // This example sets up a surface on a GTK window and draws an arc to it. 
 // More examples are available in the samples directory in mcs/classes/Mono.Cairo
 //
@@ -113,7 +113,8 @@ public class CairoGraphic : DrawingArea
                 return true;
         }
 }
-  </code>
+  </code
+          >
         </example>
       </para>
     </remarks>
@@ -126,11 +127,22 @@ public class CairoGraphic : DrawingArea
         <Parameter Name="surface" Type="Cairo.Surface" />
       </Parameters>
       <Docs>
-        <param name="surface">The <see cref="T:Cairo.Surface" /> on which this Context object will render everything.</param>
-        <summary>Creates a <see cref="T:Cairo.Context" /> object using the provided surface.</summary>
+        <param name="surface"
+          >The <see
+           cref="T:Cairo.Surface" />
+
+           on which this Context object will render everything.</param
+        >
+        <summary
+          >Creates a <see
+           cref="T:Cairo.Context" />
+
+           object using the provided surface.</summary
+        >
         <remarks>
           <example>
-            <code lang="C#">
+            <code lang="C#"
+              >
 
 /* Example assumes you have already set up the drawable as per the main code snippet shown*/
 
@@ -142,11 +154,24 @@ Cairo.XlibSurface s = new Cairo.XlibSurface (Xdisplay,
 Cairo.Context g = new Cairo.Context (s);
 
 
-  </code>
+  </code
+            >
           </example>
 
+          
 
-Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /> or <see cref="T:Cairo.ImageSurface" />.</remarks>
+
+Note that the <paramref
+           name="surface" />
+
+           can be a <see
+           cref="T:Cairo.Surface" />
+
+           or <see
+           cref="T:Cairo.ImageSurface" />
+
+          .</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -161,7 +186,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </Parameters>
       <Docs>
         <param name="state">The raw C object.</param>
-        <summary>This constructor accepts a Cairo graphics object coming in from the C API and wraps it into our <see cref="T:Cairo.Context" /> class.</summary>
+        <summary
+          >This constructor accepts a Cairo graphics object coming in from the C API and wraps it into our <see
+           cref="T:Cairo.Context" />
+
+           class.</summary
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -178,7 +208,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       <Docs>
         <summary>The antialiasing mode of the rasterizer used for drawing shapes.</summary>
         <value>The antialiasing mode</value>
-        <remarks>This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports <see cref="F:Cairo.Antialias.Subpixel" /> when drawing shapes. Note that this option does not affect text rendering.</remarks>
+        <remarks
+          >This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports <see
+           cref="F:Cairo.Antialias.Subpixel" />
+
+           when drawing shapes. Note that this option does not affect text rendering.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -200,12 +235,28 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </Parameters>
       <Docs>
         <param name="path">path to be appended</param>
-        <summary>Appends the path <paramref name="path" /> onto the current path.</summary>
-        <remarks>This Function appends the path onto the current path. The path may be either the return value from one of <see cref="P:Cairo.Context.CopyPath" /> or <see cref="P:Cairo.Context.CopyPathFlat" /> or it may be constructed manually.</remarks>
+        <summary
+          >Appends the path <paramref
+           name="path" />
+
+           onto the current path.</summary
+        >
+        <remarks
+          >This Function appends the path onto the current path. The path may be either the return value from one of <see
+           cref="P:Cairo.Context.CopyPath" />
+
+           or <see
+           cref="P:Cairo.Context.CopyPathFlat" />
+
+           or it may be constructed manually.</remarks
+        >
       </Docs>
     </Member>
     <Member MemberName="Arc">
-      <MemberSignature Language="C#" Value="public void Arc (double xc, double yc, double radius, double angle1, double angle2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Arc (double xc, double yc, double radius, double angle1, double angle2);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -223,9 +274,18 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
         <param name="radius">the radius of the arc</param>
         <param name="angle1">the start angle, in radians</param>
         <param name="angle2">the end angle, in radians</param>
-        <summary>Adds an arc from <paramref name="angle1" /> to <paramref name="angle2" /> to the current path. </summary>
+        <summary
+          >Adds an arc from <paramref
+           name="angle1" />
+
+           to <paramref
+           name="angle2" />
+
+           to the current path. </summary
+        >
         <remarks>
-          <para>
+          <para
+            >
 	  If there is a current point, that point is connected to the
 	  start of the arc by a straight line segment. Angles are
 	  measured in radians with an angle of 0 along the X axis and
@@ -233,9 +293,13 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
 	  with the default transformation matrix, positive angles are
 	  clockwise. (To convert from degrees to radians, use degrees
 	  * (M_PI / 180.) )  This function gives the arc in the
-	  direction of increasing angle; see  <see cref="M:Cairo.Context.ArcNegative" /> to get the arc in the
+	  direction of increasing angle; see  <see
+             cref="M:Cairo.Context.ArcNegative" />
+
+             to get the arc in the
 	  direction of decreasing angle.
-	</para>
+	</para
+          >
           <para>
 	  A full arc is drawn as a circle. To make an oval arc, you
 	  can scale  the current transformation matrix by different
@@ -243,7 +307,8 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
 	</para>
           <para>
             <example>
-              <code lang="C#">
+              <code lang="C#"
+                >
 double xc = 0.5;
 double yc = 0.5;
 double radius = 0.4;
@@ -255,7 +320,8 @@ gr.LineWidth = 0.04;
 
 gr.Arc (xc, yc, radius, angle1, angle2);
 gr.Stroke ();
-  </code>
+  </code
+              >
             </example>
           </para>
         </remarks>
@@ -266,7 +332,10 @@ gr.Stroke ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="ArcNegative">
-      <MemberSignature Language="C#" Value="public void ArcNegative (double xc, double yc, double radius, double angle1, double angle2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void ArcNegative (double xc, double yc, double radius, double angle1, double angle2);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -284,15 +353,29 @@ gr.Stroke ();
         <param name="radius">the radius of the arc</param>
         <param name="angle1">the start angle, in radians</param>
         <param name="angle2">the end angle, in radians</param>
-        <summary>Adds an arc from <paramref name="angle1" /> to <paramref name="angle2" /> to the current path. 
-</summary>
+        <summary
+          >Adds an arc from <paramref
+           name="angle1" />
+
+           to <paramref
+           name="angle2" />
+
+           to the current path. 
+</summary
+        >
         <remarks>
-          <para>The function behaves identically to <see cref="M:Cairo.Context.Arc" /> except that instead of giving
+          <para
+            >The function behaves identically to <see
+             cref="M:Cairo.Context.Arc" />
+
+             except that instead of giving
 	  the arc in the direction of increasing angle, it gives the
-	  arc in the direction of decreasing angle.</para>
+	  arc in the direction of decreasing angle.</para
+          >
           <para>
             <example>
-              <code lang="C#">
+              <code lang="C#"
+                >
 double xc = 0.5;
 double yc = 0.5;
 double radius = 0.4;
@@ -304,7 +387,8 @@ gr.LineWidth = 0.04;
 
 gr.ArcNegative (xc, yc, radius, angle1, angle2);
 gr.Stroke ();
-  </code>
+  </code
+              >
             </example>
           </para>
         </remarks>
@@ -322,8 +406,16 @@ gr.Stroke ();
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Establishes a new clip region by intersecting the current clip region with the current path as it would be filled by <see cref="M:Cairo.Context.Fill" /> and according to the current fill rule (see <see cref="M:Cairo.Context.FillRule" />).
-</summary>
+        <summary
+          >Establishes a new clip region by intersecting the current clip region with the current path as it would be filled by <see
+           cref="M:Cairo.Context.Fill" />
+
+           and according to the current fill rule (see <see
+           cref="M:Cairo.Context.FillRule" />
+
+          ).
+</summary
+        >
         <remarks>
           <para>
 	    After calling this method, the current path will be
@@ -334,13 +426,24 @@ gr.Stroke ();
 	    effectively masking out any changes to the surface that
 	    are outside the current clip region. 
 	  </para>
-          <para>
+          <para
+            >
 	    Calling this method can only make the clip region smaller,
 	    never larger. But the current clip is part of the graphics
 	    state, so a temporary restriction of the clip region can
-	    be achieved by calling this method within a <see cref="M:Cairo.Context.Save" /> / <see cref="M:Cairo.Context.Restore" /> pair. The only other
-	    means of increasing the size of the clip region is <see cref="M:Cairo.Context.ClipReset" />.
-	  </para>
+	    be achieved by calling this method within a <see
+             cref="M:Cairo.Context.Save" />
+
+             / <see
+             cref="M:Cairo.Context.Restore" />
+
+             pair. The only other
+	    means of increasing the size of the clip region is <see
+             cref="M:Cairo.Context.ClipReset" />
+
+            .
+	  </para
+          >
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -356,7 +459,15 @@ gr.Stroke ();
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Establishes a new clip region by intersecting the current clip region with the current path as it would be filled by <see cref="M:Cairo.Context.Fill()" /> and according to the current fill rule (see <see cref="P:Cairo.Context.FillRule()" />).</summary>
+        <summary
+          >Establishes a new clip region by intersecting the current clip region with the current path as it would be filled by <see
+           cref="M:Cairo.Context.Fill()" />
+
+           and according to the current fill rule (see <see
+           cref="P:Cairo.Context.FillRule()" />
+
+          ).</summary
+        >
         <remarks>Unlike Cairo.Context.Clip(), Cairo.Context.ClipPreserve() preserves the path within the cairo context. The current clip region affects all drawing operations by effectively masking out any changes to the surface that are outside the current clip region. Calling Cairo.Context.Clip() can only make the clip region smaller, never larger. But the current clip is part of the graphics state, so a temporary restriction of the clip region can be achieved by calling Cairo.Context.Clip() within a Cairo.Context.Save()/Cairo.Context.Restore() pair. The only other means of increasing the size of the clip region is Cairo.Context.ResetClip().</remarks>
       </Docs>
       <AssemblyInfo>
@@ -375,7 +486,8 @@ gr.Stroke ();
         <summary>Closes a path so it can be stroked.</summary>
         <remarks>
           <example>
-            <code lang="C#">
+            <code lang="C#"
+              >
 gr.Scale (width, height);
 gr.LineWidth = 0.04;
 
@@ -389,7 +501,8 @@ gr.CurveTo ( new PointD (0.2, 0.9),
                   new PointD (0.5, 0.5));
 
 gr.ClosePath ();
-  </code>
+  </code
+            >
           </example>
         </remarks>
       </Docs>
@@ -407,8 +520,7 @@ gr.ClosePath ();
       <Docs>
         <summary>The current Color in the drawing context.</summary>
         <value>the Color</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -473,11 +585,16 @@ gr.ClosePath ();
       <Parameters />
       <Docs>
         <summary>Emits the current page for backends that support multiple pages, without clearing it..</summary>
-        <remarks>
+        <remarks
+          >
 	  The contents of the current page will be retained for the
-	  next page too.  Use <see cref="M:Cairo.Context.ShowPage()" /> if you want to get an empty page
+	  next page too.  Use <see
+           cref="M:Cairo.Context.ShowPage()" />
+
+           if you want to get an empty page
 	  after the emission.
-      </remarks>
+      </remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -496,9 +613,19 @@ gr.ClosePath ();
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Creates a copy of the current path and returns it as <see cref="T:Cairo.Path" />.</summary>
+        <summary
+          >Creates a copy of the current path and returns it as <see
+           cref="T:Cairo.Path" />
+
+          .</summary
+        >
         <returns>Copy of current path</returns>
-        <remarks>This function creates a copy of the current path and returns it to the user as <see cref="T:Cairo.Path" />.</remarks>
+        <remarks
+          >This function creates a copy of the current path and returns it to the user as <see
+           cref="T:Cairo.Path" />
+
+          .</remarks
+        >
       </Docs>
     </Member>
     <Member MemberName="CopyPathFlat">
@@ -513,9 +640,25 @@ gr.ClosePath ();
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Gets a flattened copy of the current path and returns it to the user as a <see cref="T:Cairo.Path" />.</summary>
+        <summary
+          >Gets a flattened copy of the current path and returns it to the user as a <see
+           cref="T:Cairo.Path" />
+
+          .</summary
+        >
         <returns>Flattened copy of current path.</returns>
-        <remarks>This function is like <see cref="P:Cairo.Context.CopyPath" /> except that any curves in the path will be approximated with piecewise-linear approximations, (accurate to within the current tolerance value). That is, the result is guaranteed to not have any elements of type <see cref="P:Cairo.Context.CurveTo" /> which will instead be replaced by a series of <see cref="P:Cairo.Context.LineTo" /> elements.</remarks>
+        <remarks
+          >This function is like <see
+           cref="P:Cairo.Context.CopyPath" />
+
+           except that any curves in the path will be approximated with piecewise-linear approximations, (accurate to within the current tolerance value). That is, the result is guaranteed to not have any elements of type <see
+           cref="P:Cairo.Context.CurveTo" />
+
+           which will instead be replaced by a series of <see
+           cref="P:Cairo.Context.LineTo" />
+
+           elements.</remarks
+        >
       </Docs>
     </Member>
     <Member MemberName="CurrentPoint">
@@ -535,7 +678,10 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="CurveTo">
-      <MemberSignature Language="C#" Value="public void CurveTo (Cairo.PointD p1, Cairo.PointD p2, Cairo.PointD p3);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CurveTo (Cairo.PointD p1, Cairo.PointD p2, Cairo.PointD p3);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -558,7 +704,10 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="CurveTo">
-      <MemberSignature Language="C#" Value="public void CurveTo (double x1, double y1, double x2, double y2, double x3, double y3);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CurveTo (double x1, double y1, double x2, double y2, double x3, double y3);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -587,14 +736,17 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="DeviceToUser">
-      <MemberSignature Language="C#" Value="public void DeviceToUser (ref double x, ref double y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void DeviceToUser (ref double x, ref double y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="x" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="y" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="x" Type="System.Double&" RefType="ref" />
+        <Parameter Name="y" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="x">X value of coordinate</param>
@@ -609,20 +761,28 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="DeviceToUserDistance">
-      <MemberSignature Language="C#" Value="public void DeviceToUserDistance (ref double dx, ref double dy);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void DeviceToUserDistance (ref double dx, ref double dy);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dx" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="dy" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="dx" Type="System.Double&" RefType="ref" />
+        <Parameter Name="dy" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="dx">X value of the coordinate</param>
         <param name="dy">Y value of the coordinate</param>
         <summary>Transform a distance vector from device space to user space. </summary>
-        <remarks>This function is similar to <see cref="P:Cairo.Context.DeviceToUser" /> except that the translation components of the inverse CTM will be ignored when transforming (dx,dy).</remarks>
+        <remarks
+          >This function is similar to <see
+           cref="P:Cairo.Context.DeviceToUser" />
+
+           except that the translation components of the inverse CTM will be ignored when transforming (dx,dy).</remarks
+        >
         <since version="Mono-1.2.5" />
       </Docs>
       <AssemblyInfo>
@@ -640,7 +800,9 @@ gr.ClosePath ();
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">When false, returning and "Cairo.Context: called from finalization thread, programmer is missing a call to Dispose" is written</param>
+        <param name="disposing"
+          >When false, returning and "Cairo.Context: called from finalization thread, programmer is missing a call to Dispose" is written</param
+        >
         <summary>Decreases the reference count on cr by one. If the result is zero, then cr and all associated resources are freed.</summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -659,11 +821,19 @@ gr.ClosePath ();
       <Docs>
         <summary>A drawing operator that fills the current path according to the current fill rule. 
 </summary>
-        <remarks>
+        <remarks
+          >
 	After cairo_fill, the current path will be cleared from the
-	  cairo context. See <see cref="P:Cairo.Context.FillRule" />
-	  and <see cref="M:Cairo.Context.FillPreserve" />.
-	  </remarks>
+	  cairo context. See <see
+           cref="P:Cairo.Context.FillRule" />
+
+          
+	  and <see
+           cref="M:Cairo.Context.FillPreserve" />
+
+          .
+	  </remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -678,7 +848,12 @@ gr.ClosePath ();
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Computes a bounding box in user coordinates covering the area that would be affected by a call to <see cref="M:Cairo.Context.Fill()" />.</summary>
+        <summary
+          >Computes a bounding box in user coordinates covering the area that would be affected by a call to <see
+           cref="M:Cairo.Context.Fill()" />
+
+          .</summary
+        >
         <returns>The rectangle describing the area that would be affected.</returns>
         <remarks>If the current path is empty, returns an empty rectangle (0,0, 0,0). Surface dimensions and clipping are not taken into account.</remarks>
       </Docs>
@@ -695,8 +870,13 @@ gr.ClosePath ();
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>A drawing operator that fills the current path according to the current fill rule. Unlike <see cref="M:Cairo.Context.Fill" />, this preserves the path within the cairo context.
-</summary>
+        <summary
+          >A drawing operator that fills the current path according to the current fill rule. Unlike <see
+           cref="M:Cairo.Context.Fill" />
+
+          , this preserves the path within the cairo context.
+</summary
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -712,14 +892,28 @@ gr.ClosePath ();
       </ReturnValue>
       <Docs>
         <summary>Get or set the fill rule.</summary>
-        <value>See <see cref="T:Cairo.FillRule" /></value>
-        <remarks>
+        <value
+          >See <see
+           cref="T:Cairo.FillRule" />
+        </value>
+        <remarks
+          >
 	  The fill rule is used to determine which regions are inside
 	  or outside a complex (potentially self-intersecting) path. The current
-	  fill rule affects both <see cref="M:Cairo.Context.Fill()" /> and <see cref="M:Cairo.Context.Clip()" />. See
-	  <see cref="T:Cairo.FillRule" /> for details on the semantics
+	  fill rule affects both <see
+           cref="M:Cairo.Context.Fill()" />
+
+           and <see
+           cref="M:Cairo.Context.Clip()" />
+
+          . See
+	  <see
+           cref="T:Cairo.FillRule" />
+
+           for details on the semantics
 	  of each available fill rule.
-        </remarks>
+        </remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -751,8 +945,7 @@ gr.ClosePath ();
       <Docs>
         <summary>Gets the font extents for the currently selected font.</summary>
         <value>the FontExtents</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -760,7 +953,10 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="FontFace">
-      <MemberSignature Language="C#" Value="public void FontFace (string family, Cairo.FontSlant slant, Cairo.FontWeight weight);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void FontFace (string family, Cairo.FontSlant slant, Cairo.FontWeight weight);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -803,7 +999,12 @@ gr.ClosePath ();
       <Docs>
         <summary>The current font matrix</summary>
         <value>a matrix describing a transform to be applied to the current font.</value>
-        <remarks>The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see <see cref="M:Cairo.Context.SetFontSize()" />), but a more complex font matrix can be used to shear the font or stretch it unequally along the two axes</remarks>
+        <remarks
+          >The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see <see
+           cref="M:Cairo.Context.SetFontSize()" />
+
+          ), but a more complex font matrix can be used to shear the font or stretch it unequally along the two axes</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -838,7 +1039,12 @@ gr.ClosePath ();
       <Docs>
         <param name="scale">size of the font.</param>
         <summary>Sets the current font matrix to a scale by a factor of size, replacing any font matrix previously set. This results in a font size of size user space units. (More precisely, this matrix will result in the font's em-square being a size by size square in user space.)</summary>
-        <remarks>If text is drawn without a call to <see cref="S:Cairo.Context.FontSetSize" />, the default font size is 10.0.</remarks>
+        <remarks
+          >If text is drawn without a call to <see
+           cref="S:Cairo.Context.FontSetSize" />
+
+          , the default font size is 10.0.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -864,8 +1070,7 @@ gr.ClosePath ();
       <Docs>
         <summary>Set the size of the font for the context.</summary>
         <value>the new font size</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -873,7 +1078,10 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="GlyphExtents">
-      <MemberSignature Language="C#" Value="public Cairo.TextExtents GlyphExtents (Cairo.Glyph[] glyphs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Cairo.TextExtents GlyphExtents (Cairo.Glyph[] glyphs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Cairo.TextExtents</ReturnType>
@@ -882,9 +1090,17 @@ gr.ClosePath ();
         <Parameter Name="glyphs" Type="Cairo.Glyph[]" />
       </Parameters>
       <Docs>
-        <param name="glyphs">an array of <see cref="T:Cairo.Glyph" /></param>
+        <param name="glyphs"
+          >an array of <see
+           cref="T:Cairo.Glyph" />
+        </param>
         <summary>Gets the extents for an array of glyphs.</summary>
-        <returns>The extents of an array of glyphs as <see cref="P:Cairo.Context.TextExtends" />.</returns>
+        <returns
+          >The extents of an array of glyphs as <see
+           cref="P:Cairo.Context.TextExtends" />
+
+          .</returns
+        >
         <remarks>Note that whitespace glyphs do not contribute to the size of the rectangle.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -912,7 +1128,10 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="GlyphPath">
-      <MemberSignature Language="C#" Value="public void GlyphPath (Cairo.Matrix matrix, Cairo.Glyph[] glyphs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GlyphPath (Cairo.Matrix matrix, Cairo.Glyph[] glyphs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -946,7 +1165,12 @@ gr.ClosePath ();
       <Docs>
         <summary>Gets the current destination surface for the context.</summary>
         <value>the target surface</value>
-        <remarks>Gets the current destination surface for the context. This is either the original target surface or the target surface for the current group as started by the most recent call to <see cref="P:Cairo.Context.PushGroup" />.</remarks>
+        <remarks
+          >Gets the current destination surface for the context. This is either the original target surface or the target surface for the current group as started by the most recent call to <see
+           cref="P:Cairo.Context.PushGroup" />
+
+          .</remarks
+        >
         <since version="cairo 1.2" />
       </Docs>
       <AssemblyInfo>
@@ -963,8 +1187,7 @@ gr.ClosePath ();
       <Docs>
         <summary>Internal handle to the native cairo object</summary>
         <value>pointer to native object</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1001,7 +1224,12 @@ gr.ClosePath ();
       <Docs>
         <param name="x">X coordinate of the point to test</param>
         <param name="y">Y coordinate of the point to test</param>
-        <summary>Tests whether the given point is inside the area that would be affected by a <see cref="P:Cairo.Context.Fill" /> operation given the current path and filling parameters.</summary>
+        <summary
+          >Tests whether the given point is inside the area that would be affected by a <see
+           cref="P:Cairo.Context.Fill" />
+
+           operation given the current path and filling parameters.</summary
+        >
         <returns>True if the point is inside, or false if outside.</returns>
         <remarks>Surface dimensions and clipping are not taken into account.</remarks>
       </Docs>
@@ -1023,7 +1251,12 @@ gr.ClosePath ();
       <Docs>
         <param name="x">X coordinate of the point to test</param>
         <param name="y">Y coordinate of the point to test</param>
-        <summary>Tests whether the given point is inside the area that would be affected by a <see cref="P:Cairo.Context.Stroke" /> operation given the current path and stroking parameters.</summary>
+        <summary
+          >Tests whether the given point is inside the area that would be affected by a <see
+           cref="P:Cairo.Context.Stroke" />
+
+           operation given the current path and stroking parameters.</summary
+        >
         <returns>True if the point is inside, or false if outside.</returns>
         <remarks>Surface dimensions and clipping are not taken into account.</remarks>
       </Docs>
@@ -1033,14 +1266,17 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="InverseTransformDistance">
-      <MemberSignature Language="C#" Value="public void InverseTransformDistance (ref double dx, ref double dy);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void InverseTransformDistance (ref double dx, ref double dy);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dx" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="dy" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="dx" Type="System.Double&" RefType="ref" />
+        <Parameter Name="dy" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="dx">X component of distance vector to be transformed.</param>
@@ -1057,14 +1293,17 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="InverseTransformPoint">
-      <MemberSignature Language="C#" Value="public void InverseTransformPoint (ref double x, ref double y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void InverseTransformPoint (ref double x, ref double y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="x" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="y" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="x" Type="System.Double&" RefType="ref" />
+        <Parameter Name="y" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="x">X value of the point to be transformed.</param>
@@ -1088,9 +1327,13 @@ gr.ClosePath ();
       </ReturnValue>
       <Docs>
         <summary>Get or set the line cap style.</summary>
-        <value>See <see cref="T:Cairo.LineCap" />.</value>
-        <remarks>
-        </remarks>
+        <value
+          >See <see
+           cref="T:Cairo.LineCap" />
+
+          .</value
+        >
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1105,9 +1348,13 @@ gr.ClosePath ();
       </ReturnValue>
       <Docs>
         <summary>Get or set the line join style.</summary>
-        <value>See <see cref="T:Cairo.LineJoin" />.</value>
-        <remarks>
-        </remarks>
+        <value
+          >See <see
+           cref="T:Cairo.LineJoin" />
+
+          .</value
+        >
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1163,8 +1410,7 @@ gr.ClosePath ();
       <Docs>
         <summary>Get or set the width of the stroke.</summary>
         <value>The width of the stroke.</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1182,7 +1428,12 @@ gr.ClosePath ();
       </Parameters>
       <Docs>
         <param name="pattern">a Pattern</param>
-        <summary>A drawing operator that paints the current source using the alpha channel of <paramref name="pattern" /> as a mask.</summary>
+        <summary
+          >A drawing operator that paints the current source using the alpha channel of <paramref
+           name="pattern" />
+
+           as a mask.</summary
+        >
         <remarks>Opaque areas of mask are painted with the source, transparent areas are not painted.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1191,7 +1442,10 @@ gr.ClosePath ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="MaskSurface">
-      <MemberSignature Language="C#" Value="public void MaskSurface (Cairo.Surface surface, double surface_x, double surface_y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void MaskSurface (Cairo.Surface surface, double surface_x, double surface_y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1203,9 +1457,20 @@ gr.ClosePath ();
       </Parameters>
       <Docs>
         <param name="surface">a Surface</param>
-        <param name="surface_x">X coordinate at which to place the origin of <paramref name="surface" /></param>
-        <param name="surface_y">Y coordinate at which to place the origin of <paramref name="surface" /></param>
-        <summary>A drawing operator that paints the current source using the alpha channel of <paramref name="surface" /> as a mask.</summary>
+        <param name="surface_x"
+          >X coordinate at which to place the origin of <paramref
+           name="surface" />
+        </param>
+        <param name="surface_y"
+          >Y coordinate at which to place the origin of <paramref
+           name="surface" />
+        </param>
+        <summary
+          >A drawing operator that paints the current source using the alpha channel of <paramref
+           name="surface" />
+
+           as a mask.</summary
+        >
         <remarks>Opaque areas of surface are painted with the source, transparent areas are not painted.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1222,8 +1487,7 @@ gr.ClosePath ();
       <Docs>
         <summary>Get or set the current transformation matrix (CTM).</summary>
         <value>the CTM</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1239,8 +1503,7 @@ gr.ClosePath ();
       <Docs>
         <summary>Get or set the miter limit (the value beyond which joins are no longer mitered).</summary>
         <value>the MiterLimit</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1312,9 +1575,23 @@ gr.ClosePath ();
       <Parameters />
       <Docs>
         <summary>Begins a new sub-path.</summary>
-        <remarks>Note that the existing path is not affected. After this call there will be no current point.
-In many cases, this call is not needed since new sub-paths are frequently started with <see cref="P:Cairo.Context.MoveTo" />.
-A call to <see cref="P:Cairo.Context.NewSubPath" /> is particularly useful when beginning a new sub-path with one of the <see cref="P:Cairo.Context.Arc" /> calls. This makes things easier as it is no longer necessary to manually compute the arc's initial coordinates for a call to <see cref="P:Cairo.Context.MoveTo" />.</remarks>
+        <remarks
+          >Note that the existing path is not affected. After this call there will be no current point.
+In many cases, this call is not needed since new sub-paths are frequently started with <see
+           cref="P:Cairo.Context.MoveTo" />
+
+          .
+A call to <see
+           cref="P:Cairo.Context.NewSubPath" />
+
+           is particularly useful when beginning a new sub-path with one of the <see
+           cref="P:Cairo.Context.Arc" />
+
+           calls. This makes things easier as it is no longer necessary to manually compute the arc's initial coordinates for a call to <see
+           cref="P:Cairo.Context.MoveTo" />
+
+          .</remarks
+        >
         <since version="cairo 1.2" />
       </Docs>
       <AssemblyInfo>
@@ -1331,8 +1608,7 @@ A call to <see cref="P:Cairo.Context.NewSubPath" /> is particularly useful when 
       <Docs>
         <summary>The current Operator for the drawing context.</summary>
         <value>the Operator</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1348,8 +1624,7 @@ A call to <see cref="P:Cairo.Context.NewSubPath" /> is particularly useful when 
       <Parameters />
       <Docs>
         <summary>A drawing operator that paints the current source everywhere within the current clip region.</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1367,8 +1642,18 @@ A call to <see cref="P:Cairo.Context.NewSubPath" /> is particularly useful when 
       </Parameters>
       <Docs>
         <param name="alpha">alpha value, between 0 (transparent) and 1 (opaque)</param>
-        <summary>A drawing operator that paints the current source everywhere within the current clip region using a mask of constant alpha value <paramref name="alpha" />.</summary>
-        <remarks>The effect is similar to <see cref="M:Cairo.Context.Paint()" />, but the drawing is faded out using the alpha value.</remarks>
+        <summary
+          >A drawing operator that paints the current source everywhere within the current clip region using a mask of constant alpha value <paramref
+           name="alpha" />
+
+          .</summary
+        >
+        <remarks
+          >The effect is similar to <see
+           cref="M:Cairo.Context.Paint()" />
+
+          , but the drawing is faded out using the alpha value.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1382,8 +1667,18 @@ A call to <see cref="P:Cairo.Context.NewSubPath" /> is particularly useful when 
         <ReturnType>Cairo.Pattern</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>See <see cref="P:Cairo.Context.Source" />.</summary>
-        <value>See <see cref="P:Cairo.Context.Source" />.</value>
+        <summary
+          >See <see
+           cref="P:Cairo.Context.Source" />
+
+          .</summary
+        >
+        <value
+          >See <see
+           cref="P:Cairo.Context.Source" />
+
+          .</value
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -1399,9 +1694,25 @@ A call to <see cref="P:Cairo.Context.NewSubPath" /> is particularly useful when 
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Terminates the redirection begun by a call to <see cref="P:Cairo.Context.PushGroup" /> and returns a new pattern containing the results of all drawing operations performed to the group.</summary>
+        <summary
+          >Terminates the redirection begun by a call to <see
+           cref="P:Cairo.Context.PushGroup" />
+
+           and returns a new pattern containing the results of all drawing operations performed to the group.</summary
+        >
         <returns>A newly created (surface) pattern containing the results of all drawing operations performed to the group. The caller owns the returned object and should call cairo_pattern_destroy() when finished with it.</returns>
-        <remarks>The <see cref="P:Cairo.Context.PopGroup" /> function calls <see cref="P:Cairo.Context.Restore" />, (balancing a call to <see cref="P:Cairo.Context.Save" /> by the PopGroup function), so that any changes to the graphics state will not be visible outside the group.</remarks>
+        <remarks
+          >The <see
+           cref="P:Cairo.Context.PopGroup" />
+
+           function calls <see
+           cref="P:Cairo.Context.Restore" />
+
+          , (balancing a call to <see
+           cref="P:Cairo.Context.Save" />
+
+           by the PopGroup function), so that any changes to the graphics state will not be visible outside the group.</remarks
+        >
         <since version="cairo 1.2" />
       </Docs>
       <AssemblyInfo>
@@ -1417,8 +1728,24 @@ A call to <see cref="P:Cairo.Context.NewSubPath" /> is particularly useful when 
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Terminates the redirection begun by a call to <see cref="P:Cairo.Context.PushGroup" /> and installs the resulting pattern as the source pattern in the given cairo context.</summary>
-        <remarks>The <see cref="P:Cairo.Context.PopGroup" /> function calls <see cref="P:Cairo.Context.Restore" />, (balancing a call to <see cref="P:Cairo.Context.Save" /> by the PopGroup function), so that any changes to the graphics state will not be visible outside the group.</remarks>
+        <summary
+          >Terminates the redirection begun by a call to <see
+           cref="P:Cairo.Context.PushGroup" />
+
+           and installs the resulting pattern as the source pattern in the given cairo context.</summary
+        >
+        <remarks
+          >The <see
+           cref="P:Cairo.Context.PopGroup" />
+
+           function calls <see
+           cref="P:Cairo.Context.Restore" />
+
+          , (balancing a call to <see
+           cref="P:Cairo.Context.Save" />
+
+           by the PopGroup function), so that any changes to the graphics state will not be visible outside the group.</remarks
+        >
         <since version="cairo 1.2" />
       </Docs>
       <AssemblyInfo>
@@ -1435,10 +1762,36 @@ A call to <see cref="P:Cairo.Context.NewSubPath" /> is particularly useful when 
       <Parameters />
       <Docs>
         <summary>Temporarily redirects drawing to an intermediate surface known as a group.</summary>
-        <remarks>Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to <see cref="P:Cairo.Context.PopGroup" /> or <see cref="P:Cairo.Context.PopGroupToSource" />. These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
+        <remarks
+          >Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to <see
+           cref="P:Cairo.Context.PopGroup" />
+
+           or <see
+           cref="P:Cairo.Context.PopGroupToSource" />
+
+          . These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
 This group functionality can be convenient for performing intermediate compositing. One common use of a group is to render objects as opaque within the group, (so that they occlude each other), and then blend the result with translucence onto the destination.
-Groups can be nested arbitrarily deep by making balanced calls to <see cref="P:Cairo.Context.PushGroup" />/<see cref="P:Cairo.Context.PopGroup" />. Each call pushes/pops the new target group onto/from a stack.
-The <see cref="P:Cairo.Context.PushGroup" /> function calls <see cref="P:Cairo.Context.Save" /> so that any changes to the graphics state will not be visible outside the group, (the <see cref="P:Cairo.Context.PopGroup" /> functions call <see cref="P:Cairo.Context.Restore" />).</remarks>
+Groups can be nested arbitrarily deep by making balanced calls to <see
+           cref="P:Cairo.Context.PushGroup" />
+
+          /<see
+           cref="P:Cairo.Context.PopGroup" />
+
+          . Each call pushes/pops the new target group onto/from a stack.
+The <see
+           cref="P:Cairo.Context.PushGroup" />
+
+           function calls <see
+           cref="P:Cairo.Context.Save" />
+
+           so that any changes to the graphics state will not be visible outside the group, (the <see
+           cref="P:Cairo.Context.PopGroup" />
+
+           functions call <see
+           cref="P:Cairo.Context.Restore" />
+
+          ).</remarks
+        >
         <since version="cairo 1.2" />
       </Docs>
       <AssemblyInfo>
@@ -1456,10 +1809,26 @@ The <see cref="P:Cairo.Context.PushGroup" /> function calls <see cref="P:Cairo.C
         <Parameter Name="content" Type="Cairo.Content" />
       </Parameters>
       <Docs>
-        <param name="content">a <see cref="T:Cairo.Content" /> indicating the type of group that will be created</param>
+        <param name="content"
+          >a <see
+           cref="T:Cairo.Content" />
+
+           indicating the type of group that will be created</param
+        >
         <summary>Temporarily redirects drawing to an intermediate surface known as a group. The group will have a content type of content.</summary>
-        <remarks>Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to <see cref="P:Cairo.Context.PopGroup" /> or <see cref="P:Cairo.Context.PopGroupToSource" />. These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
-The group will have a content type of content. The ability to control this content type is the only distinction between this function and  <see cref="P:Cairo.Context.PushGroup" /> which you should see for a more detailed description of group rendering.</remarks>
+        <remarks
+          >Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to <see
+           cref="P:Cairo.Context.PopGroup" />
+
+           or <see
+           cref="P:Cairo.Context.PopGroupToSource" />
+
+          . These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
+The group will have a content type of content. The ability to control this content type is the only distinction between this function and  <see
+           cref="P:Cairo.Context.PushGroup" />
+
+           which you should see for a more detailed description of group rendering.</remarks
+        >
         <since version="cairo 1.2" />
       </Docs>
       <AssemblyInfo>
@@ -1479,8 +1848,7 @@ The group will have a content type of content. The ability to control this conte
       <Docs>
         <param name="rectangle">To be added.</param>
         <summary>Adds a closed-subpath rectangle of the given size to the current path in user-space coordinates.</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1488,7 +1856,10 @@ The group will have a content type of content. The ability to control this conte
       </AssemblyInfo>
     </Member>
     <Member MemberName="Rectangle">
-      <MemberSignature Language="C#" Value="public void Rectangle (Cairo.PointD p, double width, double height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Rectangle (Cairo.PointD p, double width, double height);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1502,9 +1873,20 @@ The group will have a content type of content. The ability to control this conte
         <param name="p">point at which to draw</param>
         <param name="width">rectangle's width</param>
         <param name="height">rectangle's height</param>
-        <summary>Draw a rectangle at <see cref="T:Cairo.PointD" /><paramref name=" p" /> with  <paramref name="width" /> and <paramref name="height" />.</summary>
-        <remarks>
-        </remarks>
+        <summary
+          >Draw a rectangle at <see
+           cref="T:Cairo.PointD" />
+          <paramref name=" p" />
+
+           with  <paramref
+           name="width" />
+
+           and <paramref
+           name="height" />
+
+          .</summary
+        >
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1512,7 +1894,10 @@ The group will have a content type of content. The ability to control this conte
       </AssemblyInfo>
     </Member>
     <Member MemberName="Rectangle">
-      <MemberSignature Language="C#" Value="public void Rectangle (double x, double y, double width, double height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Rectangle (double x, double y, double width, double height);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1529,8 +1914,7 @@ The group will have a content type of content. The ability to control this conte
         <param name="width">the width of the rectangle</param>
         <param name="height">the height of the rectangle</param>
         <summary>Adds a closed-subpath rectangle of the given size to the current path at position (x, y) in user-space coordinates.</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1554,7 +1938,10 @@ The group will have a content type of content. The ability to control this conte
       </Docs>
     </Member>
     <Member MemberName="RelCurveTo">
-      <MemberSignature Language="C#" Value="public void RelCurveTo (Cairo.Distance d1, Cairo.Distance d2, Cairo.Distance d3);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RelCurveTo (Cairo.Distance d1, Cairo.Distance d2, Cairo.Distance d3);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1568,7 +1955,12 @@ The group will have a content type of content. The ability to control this conte
         <param name="d1">offset to the first control point</param>
         <param name="d2">offset to the second control point</param>
         <param name="d3">offset to the end of the curve</param>
-        <summary>Relative-coordinate version of <see cref="M:Cairo.Context.CurveTo()" />. </summary>
+        <summary
+          >Relative-coordinate version of <see
+           cref="M:Cairo.Context.CurveTo()" />
+
+          . </summary
+        >
         <remarks>
           <para>All offsets are relative to the current point. Adds a cubic Bézier spline to the path from the current point to a point offset from the current point by (d3), using points offset by (d1) and (d2) as the control points. After this call the current point will be offset by (d3.Dx, d3.Dy).</para>
           <para>Given a current point of (x, y), Cairo.Context.RelCurveTo (d1, d2, d3) is logically equivalent to Cairo.Context.CurveTo (x + d1.Dx, y + d1.Dy, x + d2.Dx, y + d2.Dy, x + d3.Dx, y + d3.Dy).</para>
@@ -1580,7 +1972,10 @@ The group will have a content type of content. The ability to control this conte
       </AssemblyInfo>
     </Member>
     <Member MemberName="RelCurveTo">
-      <MemberSignature Language="C#" Value="public void RelCurveTo (double dx1, double dy1, double dx2, double dy2, double dx3, double dy3);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RelCurveTo (double dx1, double dy1, double dx2, double dy2, double dx3, double dy3);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1600,7 +1995,12 @@ The group will have a content type of content. The ability to control this conte
         <param name="dy2">the Y offset to the second control point</param>
         <param name="dx3">the X offset to the end of the curve</param>
         <param name="dy3">the Y offset to the end of the curve</param>
-        <summary>Relative-coordinate version of <see cref="M:Cairo.Context.CurveTo()" />. </summary>
+        <summary
+          >Relative-coordinate version of <see
+           cref="M:Cairo.Context.CurveTo()" />
+
+          . </summary
+        >
         <remarks>
           <para>All offsets are relative to the current point. Adds a cubic Bézier spline to the path from the current point to a point offset from the current point by (dx3, dy3), using points offset by (dx1, dy1) and (dx2, dy2) as the control points. After this call the current point will be offset by (dx3, dy3).</para>
           <para>Given a current point of (x, y), Cairo.Context.RelCurveTo (dx1, dy1, dx2, dy2, dx3, dy3) is logically equivalent to Cairo.Context.CurveTo (x + dx1, y + dy1, x + dx2, y + dy2, x + dx3, y + dy3).</para>
@@ -1622,7 +2022,12 @@ The group will have a content type of content. The ability to control this conte
       </Parameters>
       <Docs>
         <param name="d">the offset to the end of the new line</param>
-        <summary>Relative-coordinate version of <see cref="M:Cairo.Context.LineTo()" />.</summary>
+        <summary
+          >Relative-coordinate version of <see
+           cref="M:Cairo.Context.LineTo()" />
+
+          .</summary
+        >
         <remarks>Adds a line to the path from the current point to a point that is offset from the current point by (d.Dx, d.Dy) in user space. After this call the current point will be offset by (d.Dx, d.Dy).  Given a current point of (x, y), Cairo.Context.RelLineTo (d) is logically equivalent to Cairo.Context.LineTo (x + d.Dx, y + d.Dy).</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1643,7 +2048,12 @@ The group will have a content type of content. The ability to control this conte
       <Docs>
         <param name="dx">the X offset to the end of the new line</param>
         <param name="dy">the Y offset to the end of the new line</param>
-        <summary>Relative-coordinate version of <see cref="M:Cairo.Context.LineTo()" />.</summary>
+        <summary
+          >Relative-coordinate version of <see
+           cref="M:Cairo.Context.LineTo()" />
+
+          .</summary
+        >
         <remarks>Adds a line to the path from the current point to a point that is offset from the current point by (dx, dy) in user space. After this call the current point will be offset by (dx, dy).  Given a current point of (x, y), Cairo.Context.RelLineTo (dx, dy) is logically equivalent to Cairo.Context.LineTo (x + dx, y + dy).</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1717,8 +2127,13 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Restores the object to the state saved by a preceding call to <see cref="M:Cairo.Context.Save" /> and removes that state from the stack of saved states.
-</summary>
+        <summary
+          >Restores the object to the state saved by a preceding call to <see
+           cref="M:Cairo.Context.Save" />
+
+           and removes that state from the stack of saved states.
+</summary
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -1736,10 +2151,17 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
         <Parameter Name="angle" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="angle">angle (in radians) by which the user-space axes will be rotated.
-</param>
-        <summary>Modifies the current transformation matrix (CTM) by rotating the user-space axes by <paramref name="angle" /> radians. 
-</summary>
+        <param name="angle"
+          >angle (in radians) by which the user-space axes will be rotated.
+</param
+        >
+        <summary
+          >Modifies the current transformation matrix (CTM) by rotating the user-space axes by <paramref
+           name="angle" />
+
+           radians. 
+</summary
+        >
         <remarks>
 	    The rotation of the axes takes places after any existing
 	    transformation of user space. The rotation direction for
@@ -1761,7 +2183,24 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       <Parameters />
       <Docs>
         <summary> Makes a copy of the current state of the object and saves it on an internal stack of saved states.</summary>
-        <remarks>When <see cref="M:Cairo.Context.Restore" /> is called, @cr will be restored to the saved state. Multiple calls to <see cref="M:Cairo.Context.Save" /> and <see cref="M:Cairo.Context.Restore" /> can be nested; each call to <see cref="M:Cairo.Context.Restore" /> restores the state from the matching paired <see cref="M:Cairo.Context.Save" />.</remarks>
+        <remarks
+          >When <see
+           cref="M:Cairo.Context.Restore" />
+
+           is called, @cr will be restored to the saved state. Multiple calls to <see
+           cref="M:Cairo.Context.Save" />
+
+           and <see
+           cref="M:Cairo.Context.Restore" />
+
+           can be nested; each call to <see
+           cref="M:Cairo.Context.Restore" />
+
+           restores the state from the matching paired <see
+           cref="M:Cairo.Context.Save" />
+
+          .</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1781,8 +2220,16 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       <Docs>
         <param name="sx">scale factor for the X dimension</param>
         <param name="sy">scale factor for the Y dimension</param>
-        <summary> Modifies the current transformation matrix (CTM) by scaling the X and Y user-space axes by <paramref name="sx" /> and <paramref name="sy" /> respectively. 
-</summary>
+        <summary
+          > Modifies the current transformation matrix (CTM) by scaling the X and Y user-space axes by <paramref
+           name="sx" />
+
+           and <paramref
+           name="sy" />
+
+           respectively. 
+</summary
+        >
         <remarks>
 	The scaling of the axes takes place after any existing
 	    transformation of user space.
@@ -1810,7 +2257,10 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </Docs>
     </Member>
     <Member MemberName="SelectFontFace">
-      <MemberSignature Language="C#" Value="public void SelectFontFace (string family, Cairo.FontSlant slant, Cairo.FontWeight weight);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SelectFontFace (string family, Cairo.FontSlant slant, Cairo.FontWeight weight);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1833,7 +2283,10 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetDash">
-      <MemberSignature Language="C#" Value="public void SetDash (double[] dashes, double offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetDash (double[] dashes, double offset);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1845,7 +2298,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       <Docs>
         <param name="dashes">length of on and off portions</param>
         <param name="offset">the offset to begin the stroke</param>
-        <summary>Sets the dash pattern to be used by <see cref="M:Cairo.Context.Stroke()" />.</summary>
+        <summary
+          >Sets the dash pattern to be used by <see
+           cref="M:Cairo.Context.Stroke()" />
+
+          .</summary
+        >
         <remarks>A dash pattern is specified by dashes, an array of positive values. Each value provides the user-space length of alternate "on" and "off" portions of the stroke. The offset specifies an offset into the pattern at which the stroke begins.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1864,8 +2322,24 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </Parameters>
       <Docs>
         <param name="scale">the new font size, in user space units</param>
-        <summary>Sets the current font matrix to a scale by a factor of <paramref name="scale" />, replacing any font matrix previously set with <see cref="M:Cairo.Context.SetFontSize()" /> or <see cref="M:Cairo.Context.SetFontMatrix()" />.</summary>
-        <remarks>This results in a font size of <paramref name="scale" /> user space units. (More precisely, this matrix will result in the font's em-square being a scale by scale square in user space.)</remarks>
+        <summary
+          >Sets the current font matrix to a scale by a factor of <paramref
+           name="scale" />
+
+          , replacing any font matrix previously set with <see
+           cref="M:Cairo.Context.SetFontSize()" />
+
+           or <see
+           cref="M:Cairo.Context.SetFontMatrix()" />
+
+          .</summary
+        >
+        <remarks
+          >This results in a font size of <paramref
+           name="scale" />
+
+           user space units. (More precisely, this matrix will result in the font's em-square being a scale by scale square in user space.)</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1883,7 +2357,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </Parameters>
       <Docs>
         <param name="source">a surface to be used to set the source pattern</param>
-        <summary>This is a convenience function for creating a pattern from surface and setting it as the source in cr with <see cref="P:Cairo.Context.GetSource" />.</summary>
+        <summary
+          >This is a convenience function for creating a pattern from surface and setting it as the source in cr with <see
+           cref="P:Cairo.Context.GetSource" />
+
+          .</summary
+        >
         <remarks />
         <since version="Mono-1.2.5" />
       </Docs>
@@ -1893,7 +2372,10 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetSource">
-      <MemberSignature Language="C#" Value="public void SetSource (Cairo.Surface source, double x, double y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSource (Cairo.Surface source, double x, double y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1907,7 +2389,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
         <param name="source">a surface to be used to set the source pattern</param>
         <param name="x">User-space X coordinate for surface origin</param>
         <param name="y">User-space Y coordinate for surface origin</param>
-        <summary>This is a convenience function for creating a pattern from surface and setting it as the source in cr with <see cref="P:Cairo.Context.GetSource" />.</summary>
+        <summary
+          >This is a convenience function for creating a pattern from surface and setting it as the source in cr with <see
+           cref="P:Cairo.Context.GetSource" />
+
+          .</summary
+        >
         <remarks>The x and y parameters give the user-space coordinate at which the surface origin should appear. (The surface origin is its upper-left corner before any transformation has been applied.) The x and y patterns are negated and then set as translation values in the pattern matrix.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -1916,7 +2403,10 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetSourceRGB">
-      <MemberSignature Language="C#" Value="public void SetSourceRGB (double r, double g, double b);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSourceRGB (double r, double g, double b);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1939,7 +2429,10 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetSourceRGBA">
-      <MemberSignature Language="C#" Value="public void SetSourceRGBA (double r, double g, double b, double a);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSourceRGBA (double r, double g, double b, double a);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1964,7 +2457,10 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetSourceSurface">
-      <MemberSignature Language="C#" Value="public void SetSourceSurface (Cairo.Surface source, int x, int y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSourceSurface (Cairo.Surface source, int x, int y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2008,7 +2504,10 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </AssemblyInfo>
     </Member>
     <Member MemberName="ShowGlyphs">
-      <MemberSignature Language="C#" Value="public void ShowGlyphs (Cairo.Matrix matrix, Cairo.Glyph[] glyphs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void ShowGlyphs (Cairo.Matrix matrix, Cairo.Glyph[] glyphs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2042,7 +2541,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       <Parameters />
       <Docs>
         <summary>Emits and clears the current page for backends that support multiple pages..</summary>
-        <remarks>Use <see cref="M:Cairo.Context.CopyPage()" /> if you do not want to clear the page.</remarks>
+        <remarks
+          >Use <see
+           cref="M:Cairo.Context.CopyPage()" />
+
+           if you do not want to clear the page.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2064,7 +2568,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
         <remarks>
           <para>This function first computes a set of glyphs for the string of text. The first glyph is placed so that its origin is at the current point. The origin of each subsequent glyph is offset from that of the previous glyph by the advance values of the previous glyph.</para>
           <para>After this call the current point is moved to the origin of where the next glyph would be placed in this same progression. That is, the current point will be at the origin of the final glyph offset by its advance values. This allows for easy display of a single logical string with multiple calls to Cairo.Context.ShowText().</para>
-          <para>NOTE: The Cairo.Context.ShowText() function call is part of what the cairo designers call the "toy" text API. It is convenient for short demos and simple programs, but it is not expected to be adequate for the most serious of text-using applications. See <see cref="M:Cairo.Context.ShowGlyphs()" /> for the "real" text display API in cairo.</para>
+          <para
+            >NOTE: The Cairo.Context.ShowText() function call is part of what the cairo designers call the "toy" text API. It is convenient for short demos and simple programs, but it is not expected to be adequate for the most serious of text-using applications. See <see
+             cref="M:Cairo.Context.ShowGlyphs()" />
+
+             for the "real" text display API in cairo.</para
+          >
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -2079,9 +2588,19 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
         <ReturnType>Cairo.Pattern</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Sets the source pattern within graphics object to <paramref name="source" />.</summary>
-        <value>A <see cref="T:Cairo.Pattern" /> to be used as the source for subsequent drawing operations.
-</value>
+        <summary
+          >Sets the source pattern within graphics object to <paramref
+           name="source" />
+
+          .</summary
+        >
+        <value
+          >A <see
+           cref="T:Cairo.Pattern" />
+
+           to be used as the source for subsequent drawing operations.
+</value
+        >
         <remarks>This pattern will then be used for any subsequent drawing operation until a new source pattern is set.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -2115,12 +2634,29 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       <Docs>
         <summary>A drawing operator that strokes the current path according to the current line width, line join, line cap, and dash settings. 
 </summary>
-        <remarks>
+        <remarks
+          >
 	After cairo_stroke, the current path will be cleared from the
-	  cairo context. See <see cref="P:Cairo.Context.LineWidth" />,
-	  <see cref="P:Cairo.Context.LineJoin" />, <see cref="P:Cairo.Context.LineCap" />, <see cref="M:Cairo.Context.SetDash" />, and <see cref="M:Cairo.Context.StrokePreserve" />.
+	  cairo context. See <see
+           cref="P:Cairo.Context.LineWidth" />
+
+          ,
+	  <see
+           cref="P:Cairo.Context.LineJoin" />
+
+          , <see
+           cref="P:Cairo.Context.LineCap" />
+
+          , <see
+           cref="M:Cairo.Context.SetDash" />
+
+          , and <see
+           cref="M:Cairo.Context.StrokePreserve" />
+
+          .
 	  
-        </remarks>
+        </remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2135,7 +2671,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Computes a bounding box in user coordinates covering the area that would be affected by a call to <see cref="M:Cairo.Context.Stroke()" /> using the current stroke parameters.</summary>
+        <summary
+          >Computes a bounding box in user coordinates covering the area that would be affected by a call to <see
+           cref="M:Cairo.Context.Stroke()" />
+
+           using the current stroke parameters.</summary
+        >
         <returns>The rectangle describing the area that would be affected.</returns>
         <remarks>If the current path is empty, returns an empty
 rectangle (0,0, 0,0). Surface dimensions and clipping are not taken
@@ -2154,8 +2695,13 @@ into account.</remarks>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>A drawing operator that strokes the current path according to the current line width, line join, line cap, and dash settings. Unlike <see cref="M:Cairo.Context.Stroke" />, it preserves the path within the cairo context.
-</summary>
+        <summary
+          >A drawing operator that strokes the current path according to the current line width, line join, line cap, and dash settings. Unlike <see
+           cref="M:Cairo.Context.Stroke" />
+
+          , it preserves the path within the cairo context.
+</summary
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -2186,10 +2732,14 @@ into account.</remarks>
         <ReturnType>Cairo.Surface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the target surface for the cairo context as passed to <see cref="C:Cairo.Context()" />.</summary>
+        <summary
+          >Gets the target surface for the cairo context as passed to <see
+           cref="C:Cairo.Context()" />
+
+          .</summary
+        >
         <value>the target surface.</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2210,8 +2760,30 @@ into account.</remarks>
         <summary>Gets the extents for a string of text.</summary>
         <returns>the TextExtents</returns>
         <remarks>
-          <para>The extents describe a user-space rectangle that encloses the "inked" portion of the text, (as it would be drawn by <see cref="M:Cairo.Context.ShowText()" />). Additionally, the <see cref="F:Cairo.TextExtents.XAdvance" /> and <see cref="F:Cairo.TextExtents.YAdvance" /> values indicate the amount by which the current point would be advanced by <see cref="M:Cairo.Context.ShowText()" />.</para>
-          <para>Note that whitespace characters do not directly contribute to the size of the rectangle (TextExtents.Width and TextExtents.Height). They do contribute indirectly by changing the position of non-whitespace characters. In particular, trailing whitespace characters are likely to not affect the size of the rectangle, though they will affect the <see cref="F:Cairo.TextExtents.XAdvance" /> and <see cref="F:Cairo.TextExtents.YAdvance" /> values.</para>
+          <para
+            >The extents describe a user-space rectangle that encloses the "inked" portion of the text, (as it would be drawn by <see
+             cref="M:Cairo.Context.ShowText()" />
+
+            ). Additionally, the <see
+             cref="F:Cairo.TextExtents.XAdvance" />
+
+             and <see
+             cref="F:Cairo.TextExtents.YAdvance" />
+
+             values indicate the amount by which the current point would be advanced by <see
+             cref="M:Cairo.Context.ShowText()" />
+
+            .</para
+          >
+          <para
+            >Note that whitespace characters do not directly contribute to the size of the rectangle (TextExtents.Width and TextExtents.Height). They do contribute indirectly by changing the position of non-whitespace characters. In particular, trailing whitespace characters are likely to not affect the size of the rectangle, though they will affect the <see
+             cref="F:Cairo.TextExtents.XAdvance" />
+
+             and <see
+             cref="F:Cairo.TextExtents.YAdvance" />
+
+             values.</para
+          >
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -2231,7 +2803,12 @@ into account.</remarks>
       <Docs>
         <param name="str">a String</param>
         <summary>Adds closed paths for text to the current path. </summary>
-        <remarks>Adds closed paths for text to the current path. The generated path if filled, achieves an effect similar to that of <see cref="P:Cairo.Context.ShowText" />.</remarks>
+        <remarks
+          >Adds closed paths for text to the current path. The generated path if filled, achieves an effect similar to that of <see
+           cref="P:Cairo.Context.ShowText" />
+
+          .</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2266,8 +2843,7 @@ into account.</remarks>
       <Docs>
         <param name="m">The affine transformation to tranform by.</param>
         <summary>Transform the CTM (Current Transformation Matrix) by the specified affine transformation matrix.</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2275,14 +2851,17 @@ into account.</remarks>
       </AssemblyInfo>
     </Member>
     <Member MemberName="TransformDistance">
-      <MemberSignature Language="C#" Value="public void TransformDistance (ref double dx, ref double dy);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void TransformDistance (ref double dx, ref double dy);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dx" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="dy" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="dx" Type="System.Double&" RefType="ref" />
+        <Parameter Name="dy" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="dx">X component of distance vector to be transformed.</param>
@@ -2299,14 +2878,17 @@ into account.</remarks>
       </AssemblyInfo>
     </Member>
     <Member MemberName="TransformPoint">
-      <MemberSignature Language="C#" Value="public void TransformPoint (ref double x, ref double y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void TransformPoint (ref double x, ref double y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="x" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="y" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="x" Type="System.Double&" RefType="ref" />
+        <Parameter Name="y" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="x">X value of point to be transformed.</param>
@@ -2347,7 +2929,8 @@ into account.</remarks>
 	</para>
           <para>
             <example>
-              <code lang="C#">
+              <code lang="C#"
+                >
 image = new ImageSurface ("data/e.png");
 w = image.Width;
 h = image.Height;
@@ -2359,7 +2942,8 @@ gr.Translate (-0.5*w, -0.5*h);
 
 image.Show (gr, 0, 0);
 image.Destroy ();
-  </code>
+  </code
+              >
             </example>
           </para>
         </remarks>
@@ -2370,14 +2954,17 @@ image.Destroy ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="UserToDevice">
-      <MemberSignature Language="C#" Value="public void UserToDevice (ref double x, ref double y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void UserToDevice (ref double x, ref double y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="x" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="y" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="x" Type="System.Double&" RefType="ref" />
+        <Parameter Name="y" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="x">X value of coordinate</param>
@@ -2392,20 +2979,28 @@ image.Destroy ();
       </AssemblyInfo>
     </Member>
     <Member MemberName="UserToDeviceDistance">
-      <MemberSignature Language="C#" Value="public void UserToDeviceDistance (ref double dx, ref double dy);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void UserToDeviceDistance (ref double dx, ref double dy);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dx" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="dy" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="dx" Type="System.Double&" RefType="ref" />
+        <Parameter Name="dy" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="dx">X component of a distance vector</param>
         <param name="dy">Y component of a distance vector</param>
         <summary>Transform a distance vector from user space to device space.</summary>
-        <remarks> This function is similar to <see cref="P:Cairo.Context.UserToDevice" /> except that the translation components of the CTM will be ignored when transforming (dx,dy).</remarks>
+        <remarks
+          > This function is similar to <see
+           cref="P:Cairo.Context.UserToDevice" />
+
+           except that the translation components of the CTM will be ignored when transforming (dx,dy).</remarks
+        >
         <since version="Mono-1.2.5" />
       </Docs>
       <AssemblyInfo>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="HostObjectInitializationStatus" FullName="Microsoft.Build.Utilities.HostObjectInitializationStatus">
+<Type
+  Name="HostObjectInitializationStatus"
+  FullName="Microsoft.Build.Utilities.HostObjectInitializationStatus"
+>
   <TypeSignature Language="C#" Value="public enum HostObjectInitializationStatus" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Build.Utilities</AssemblyName>
@@ -13,11 +16,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:Microsoft.Build.Utilities.HostObjectInitializationStatus" /> is the return type of the <see cref="M:Microsoft.Build.Utilities.ToolTask.InitializeHostObject" /> method of the <see cref="T:Microsoft.Build.Utilities.ToolTask" /> class.</para>
+        <see cref="T:Microsoft.Build.Utilities.HostObjectInitializationStatus" />
+
+         is the return type of the <see
+         cref="M:Microsoft.Build.Utilities.ToolTask.InitializeHostObject" />
+
+         method of the <see
+         cref="T:Microsoft.Build.Utilities.ToolTask" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines the next action for <see cref="T:Microsoft.Build.Utilities.ToolTask" /> after an attempt to initialize the host object.</para>
+      <para
+        >Defines the next action for <see
+         cref="T:Microsoft.Build.Utilities.ToolTask" />
+
+         after an attempt to initialize the host object.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -65,7 +82,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates that either a host object is not available, or that the host object is not capable of supporting all of the features required for this build. Therefore, <see cref="T:Microsoft.Build.Utilities.ToolTask" /> should fallback to an alternate means of doing the build, such as invoking the command-line tool.</para>
+          <para
+            >Indicates that either a host object is not available, or that the host object is not capable of supporting all of the features required for this build. Therefore, <see
+             cref="T:Microsoft.Build.Utilities.ToolTask" />
+
+             should fallback to an alternate means of doing the build, such as invoking the command-line tool.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

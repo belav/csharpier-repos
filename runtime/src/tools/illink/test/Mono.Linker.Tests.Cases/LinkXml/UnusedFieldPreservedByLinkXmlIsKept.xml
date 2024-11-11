@@ -3,10 +3,10 @@
     <type fullname="Mono.Linker.Tests.Cases.LinkXml.UnusedFieldPreservedByLinkXmlIsKept/Unused">
       <field signature="System.Int32 _preserved" />
       <field name="_preserved2" />
-      <field signature="System.Collections.Generic.List`1&lt;System.Int32&gt; _preserved3" />
+      <field signature="System.Collections.Generic.List`1<System.Int32> _preserved3" />
     </type>
     <type fullname="Mono.Linker.Tests.Cases.LinkXml.UnusedFieldPreservedByLinkXmlIsKept/UnusedWithGenerics`1">
-      <field signature="System.Collections.Generic.List`1&lt;T&gt; _preserved1" />
+      <field signature="System.Collections.Generic.List`1<T> _preserved1" />
     </type>
   </assembly>
 </linker>

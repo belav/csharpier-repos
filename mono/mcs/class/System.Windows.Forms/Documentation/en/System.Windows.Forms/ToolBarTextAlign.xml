@@ -12,7 +12,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by members such as <see cref="P:System.Windows.Forms.ToolBar.TextAlign" />.</para>
+      <para
+        >This enumeration is used by members such as <see
+         cref="P:System.Windows.Forms.ToolBar.TextAlign" />
+
+        .</para
+      >
       <para>Room is reserved for an image to be displayed on toolbar buttons. The alignment of text is in relation to the image displayed on the toolbar button. If no image is assigned to the button, the reserved space will appear to the left, or above the text displayed.</para>
     </remarks>
     <summary>

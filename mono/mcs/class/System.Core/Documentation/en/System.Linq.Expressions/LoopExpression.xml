@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="LoopExpression" FullName="System.Linq.Expressions.LoopExpression">
-  <TypeSignature Language="C#" Value="public sealed class LoopExpression : System.Linq.Expressions.Expression" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit LoopExpression extends System.Linq.Expressions.Expression" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class LoopExpression : System.Linq.Expressions.Expression"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit LoopExpression extends System.Linq.Expressions.Expression"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -24,8 +30,14 @@
   </Docs>
   <Members>
     <Member MemberName="Accept">
-      <MemberSignature Language="C#" Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -44,8 +56,14 @@
       </Docs>
     </Member>
     <Member MemberName="Body">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.Expression Body { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.Expression Body" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.Expression Body { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.Expression Body"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,13 +76,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Linq.Expressions.Expression" /> that is the body of the loop.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+             that is the body of the loop.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BreakLabel">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.LabelTarget BreakLabel { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.LabelTarget BreakLabel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.LabelTarget BreakLabel { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.LabelTarget BreakLabel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,13 +106,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Linq.Expressions.LabelTarget" /> that is used by the loop body as a break statement target.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Linq.Expressions.LabelTarget" />
+
+             that is used by the loop body as a break statement target.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ContinueLabel">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.LabelTarget ContinueLabel { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.LabelTarget ContinueLabel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.LabelTarget ContinueLabel { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.LabelTarget ContinueLabel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -96,13 +136,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Linq.Expressions.LabelTarget" /> that is used by the loop body as a continue statement target.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Linq.Expressions.LabelTarget" />
+
+             that is used by the loop body as a continue statement target.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,7 +166,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the node type of this expression. Extension nodes should return <see cref="F:System.Linq.Expressions.ExpressionType.Extension" /> when overriding this method.</para>
+          <para
+            >Returns the node type of this expression. Extension nodes should return <see
+             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+
+             when overriding this method.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -134,13 +190,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
+          <para
+            >Gets the static type of the expression that this <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+             represents.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Update">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.LoopExpression Update (System.Linq.Expressions.LabelTarget breakLabel, System.Linq.Expressions.LabelTarget continueLabel, System.Linq.Expressions.Expression body);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Linq.Expressions.LoopExpression Update(class System.Linq.Expressions.LabelTarget breakLabel, class System.Linq.Expressions.LabelTarget continueLabel, class System.Linq.Expressions.Expression body) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.LoopExpression Update (System.Linq.Expressions.LabelTarget breakLabel, System.Linq.Expressions.LabelTarget continueLabel, System.Linq.Expressions.Expression body);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Linq.Expressions.LoopExpression Update(class System.Linq.Expressions.LabelTarget breakLabel, class System.Linq.Expressions.LabelTarget continueLabel, class System.Linq.Expressions.Expression body) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -164,11 +231,29 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="breakLabel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.LoopExpression.BreakLabel" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.LoopExpression.BreakLabel" />
+
+           property of the result.</param
+        >
         <param name="continueLabel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.LoopExpression.ContinueLabel" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.LoopExpression.ContinueLabel" />
+
+           property of the result.</param
+        >
         <param name="body">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.LoopExpression.Body" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.LoopExpression.Body" />
+
+           property of the result.</param
+        >
       </Docs>
     </Member>
   </Members>

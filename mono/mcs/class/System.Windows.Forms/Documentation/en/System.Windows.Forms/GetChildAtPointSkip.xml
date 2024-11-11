@@ -17,7 +17,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The system maintains an internal list that contains the child controls associated with a parent window. The order of the controls in the list depends on the z-order of the child controls. If more than one child window contains the specified point, the system returns the first control in the list that contains the point and meets the criteria specified by <see cref="T:System.Windows.Forms.GetChildAtPointSkip" />.</para>
+      <para
+        >The system maintains an internal list that contains the child controls associated with a parent window. The order of the controls in the list depends on the z-order of the child controls. If more than one child window contains the specified point, the system returns the first control in the list that contains the point and meets the criteria specified by <see
+         cref="T:System.Windows.Forms.GetChildAtPointSkip" />
+
+        .</para
+      >
       <para>For more information, see ChildWindowFromPointEx in the Platform SDK documentation.</para>
     </remarks>
     <summary>

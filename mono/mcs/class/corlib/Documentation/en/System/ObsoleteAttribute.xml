@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ObsoleteAttribute" FullName="System.ObsoleteAttribute" FullNameSP="System_ObsoleteAttribute" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public sealed serializable ObsoleteAttribute extends System.Attribute" />
+<Type
+  Name="ObsoleteAttribute"
+  FullName="System.ObsoleteAttribute"
+  FullNameSP="System_ObsoleteAttribute"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public sealed serializable ObsoleteAttribute extends System.Attribute"
+  />
   <TypeSignature Language="C#" Value="public sealed class ObsoleteAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit ObsoleteAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit ObsoleteAttribute extends System.Attribute"
+  />
   <MemberOfLibrary>BCL</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
@@ -26,9 +37,15 @@
   </Attributes>
   <Docs>
     <example>
-      <para>The following example demonstrates the usage of <see cref="T:System.ObsoleteAttribute" /> to
-   generate a compile-time warning.</para>
-      <code lang="C#">
+      <para
+        >The following example demonstrates the usage of <see
+         cref="T:System.ObsoleteAttribute" />
+
+         to
+   generate a compile-time warning.</para
+      >
+      <code lang="C#"
+        >
    
 using System;
 
@@ -45,7 +62,8 @@ public class ObsoleteAttributeExample {
     OldMethod();
   }
 }
-</code>
+</code
+      >
       <para>An example compile-time result is</para>
       <para>
         <c>ObsoleteAttributeExample.cs(8,4):
@@ -56,36 +74,150 @@ public class ObsoleteAttributeExample {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ObsoleteAttribute" /> is applicable to all program elements except assemblies, modules, parameters, and return values. Marking an element as obsolete informs users that the element will be removed in future versions of the product.</para>
-      <para>The <see cref="T:System.ObsoleteAttribute" /> class includes two properties:</para>
+        <see cref="T:System.ObsoleteAttribute" />
+
+         is applicable to all program elements except assemblies, modules, parameters, and return values. Marking an element as obsolete informs users that the element will be removed in future versions of the product.</para
+      >
+      <para
+        >The <see
+         cref="T:System.ObsoleteAttribute" />
+
+         class includes two properties:</para
+      >
       <list type="bullet">
         <item>
           <para>
-            <see cref="P:System.ObsoleteAttribute.Message" />. The string assigned to the <see cref="P:System.ObsoleteAttribute.Message" /> property is emitted by the compiler when the attribute target is used in code. The string should note that the attribute target is obsolete and, if possible, provide some workaround or programmatic alternative. </para>
+            <see cref="P:System.ObsoleteAttribute.Message" />
+
+            . The string assigned to the <see
+             cref="P:System.ObsoleteAttribute.Message" />
+
+             property is emitted by the compiler when the attribute target is used in code. The string should note that the attribute target is obsolete and, if possible, provide some workaround or programmatic alternative. </para
+          >
         </item>
         <item>
           <para>
-            <see cref="P:System.ObsoleteAttribute.IsError" />. This is a Boolean value that indicates to the compiler whether using the <see cref="T:System.ObsoleteAttribute" /> attribute should cause it to emit an error (<see cref="P:System.ObsoleteAttribute.IsError" /> is true) or a warning (<see cref="P:System.ObsoleteAttribute.IsError" /> is false).  </para>
+            <see cref="P:System.ObsoleteAttribute.IsError" />
+
+            . This is a Boolean value that indicates to the compiler whether using the <see
+             cref="T:System.ObsoleteAttribute" />
+
+             attribute should cause it to emit an error (<see
+             cref="P:System.ObsoleteAttribute.IsError" />
+
+             is true) or a warning (<see
+             cref="P:System.ObsoleteAttribute.IsError" />
+
+             is false).  </para
+          >
         </item>
       </list>
-      <para>For more information about using attributes, see <format type="text/html"><a href="30386922-1E00-4602-9EBF-526B271A8B87">[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a></format>.</para>
+      <para
+        >For more information about using attributes, see <format
+         type="text/html">
+          <a href="30386922-1E00-4602-9EBF-526B271A8B87"
+            >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
+          >
+        </format>
+
+        .</para
+      >
       <format type="text/html">
         <h2>win8_appname_long Apps</h2>
       </format>
-      <para>When you create a Windows Metadata library (.winmd file), the <see cref="T:System.ObsoleteAttribute" /> is exported as both the <see cref="T:System.ObsoleteAttribute" /> attribute and the <see cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecatedattribute.aspx">Windows.Foundation.Metadata.DeprecatedAttribute</see> attribute if only the <see cref="T:System.ObsoleteAttribute" /> is present in source code. The <see cref="T:System.ObsoleteAttribute" /> is transformed to the DeprecatedAttribute as follows:</para>
+      <para
+        >When you create a Windows Metadata library (.winmd file), the <see
+         cref="T:System.ObsoleteAttribute" />
+
+         is exported as both the <see
+         cref="T:System.ObsoleteAttribute" />
+
+         attribute and the <see
+
+          cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecatedattribute.aspx"
+          >Windows.Foundation.Metadata.DeprecatedAttribute</see
+        >
+
+         attribute if only the <see
+         cref="T:System.ObsoleteAttribute" />
+
+         is present in source code. The <see
+         cref="T:System.ObsoleteAttribute" />
+
+         is transformed to the DeprecatedAttribute as follows:</para
+      >
       <list type="bullet">
         <item>
-          <para>If the <paramref name="message" /> and <paramref name="error" /> arguments are both present, <paramref name="message" /> is assigned to the DeprecatedAttribute <paramref name="message" /> argument. An error value of true maps to <see cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx">DeprecationType.Remove</see>, and an <paramref name="error" /> value of false maps to <see cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx">DeprecationType.Deprecate</see>. </para>
+          <para
+            >If the <paramref
+             name="message" />
+
+             and <paramref
+             name="error" />
+
+             arguments are both present, <paramref
+             name="message" />
+
+             is assigned to the DeprecatedAttribute <paramref
+             name="message" />
+
+             argument. An error value of true maps to <see
+
+              cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx"
+              >DeprecationType.Remove</see
+            >
+
+            , and an <paramref
+             name="error" />
+
+             value of false maps to <see
+
+              cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx"
+              >DeprecationType.Deprecate</see
+            >
+
+            . </para
+          >
         </item>
         <item>
-          <para>If the <paramref name="message" /> argument is not supplied in the <see cref="T:System.ObsoleteAttribute" />, its default value in the DeprecatedAttribute is "element_name is deprecated", where element_name is the name of the target program element to which the attribute is applied. </para>
+          <para
+            >If the <paramref
+             name="message" />
+
+             argument is not supplied in the <see
+             cref="T:System.ObsoleteAttribute" />
+
+            , its default value in the DeprecatedAttribute is "element_name is deprecated", where element_name is the name of the target program element to which the attribute is applied. </para
+          >
         </item>
         <item>
-          <para>If the <paramref name="error" /> argument is not present in the <see cref="T:System.ObsoleteAttribute" />, its default value in the DeprecatedAttribute is <see cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx">DeprecationType.Deprecate</see>.  </para>
+          <para
+            >If the <paramref
+             name="error" />
+
+             argument is not present in the <see
+             cref="T:System.ObsoleteAttribute" />
+
+            , its default value in the DeprecatedAttribute is <see
+
+              cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecationtype.aspx"
+              >DeprecationType.Deprecate</see
+            >
+
+            .  </para
+          >
         </item>
       </list>
       <block subset="none" type="note">
-        <para>Directly applying the <see cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecatedattribute.aspx">Windows.Foundation.Metadata.DeprecatedAttribute</see> attribute to managed code is not recommended, because this export occurs automatically. </para>
+        <para
+          >Directly applying the <see
+
+            cref="http://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.deprecatedattribute.aspx"
+            >Windows.Foundation.Metadata.DeprecatedAttribute</see
+          >
+
+           attribute to managed code is not recommended, because this export occurs automatically. </para
+        >
       </block>
     </remarks>
     <summary>
@@ -95,9 +227,15 @@ public class ObsoleteAttributeExample {
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor()" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor()"
+      />
       <MemberSignature Language="C#" Value="public ObsoleteAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -109,7 +247,12 @@ public class ObsoleteAttributeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.ObsoleteAttribute" />.</para>
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.ObsoleteAttribute" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -124,7 +267,8 @@ public class ObsoleteAttributeExample {
             <item>
               <term>
                 <para>
-                  <see cref="P:System.ObsoleteAttribute.IsError" /> </para>
+                  <see cref="P:System.ObsoleteAttribute.IsError" />
+                </para>
               </term>
               <description>
                 <para>false </para>
@@ -133,7 +277,8 @@ public class ObsoleteAttributeExample {
             <item>
               <term>
                 <para>
-                  <see cref="P:System.ObsoleteAttribute.Message" /> </para>
+                  <see cref="P:System.ObsoleteAttribute.Message" />
+                </para>
               </term>
               <description>
                 <para>null </para>
@@ -143,15 +288,26 @@ public class ObsoleteAttributeExample {
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ObsoleteAttribute" /> class with default properties.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ObsoleteAttribute" />
+
+             class with default properties.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message)" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(string message)"
+      />
       <MemberSignature Language="C#" Value="public ObsoleteAttribute (string message);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -165,7 +321,12 @@ public class ObsoleteAttributeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.ObsoleteAttribute" />.</para>
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.ObsoleteAttribute" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -180,7 +341,8 @@ public class ObsoleteAttributeExample {
             <item>
               <term>
                 <para>
-                  <see cref="P:System.ObsoleteAttribute.IsError" /> </para>
+                  <see cref="P:System.ObsoleteAttribute.IsError" />
+                </para>
               </term>
               <description>
                 <para>false. </para>
@@ -189,7 +351,8 @@ public class ObsoleteAttributeExample {
             <item>
               <term>
                 <para>
-                  <see cref="P:System.ObsoleteAttribute.Message" /> </para>
+                  <see cref="P:System.ObsoleteAttribute.Message" />
+                </para>
               </term>
               <description>
                 <para>The workaround message. </para>
@@ -199,17 +362,34 @@ public class ObsoleteAttributeExample {
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ObsoleteAttribute" /> class with a specified workaround message.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ObsoleteAttribute" />
+
+             class with a specified workaround message.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text string that describes alternative workarounds. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text string that describes alternative workarounds. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message, bool error)" />
-      <MemberSignature Language="C#" Value="public ObsoleteAttribute (string message, bool error);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, bool error) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(string message, bool error)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public ObsoleteAttribute (string message, bool error);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, bool error) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -224,7 +404,12 @@ public class ObsoleteAttributeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.ObsoleteAttribute" />.</para>
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.ObsoleteAttribute" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -239,16 +424,23 @@ public class ObsoleteAttributeExample {
             <item>
               <term>
                 <para>
-                  <see cref="P:System.ObsoleteAttribute.IsError" /> </para>
+                  <see cref="P:System.ObsoleteAttribute.IsError" />
+                </para>
               </term>
               <description>
-                <para>The <paramref name="error" /> value. </para>
+                <para
+                  >The <paramref
+                   name="error" />
+
+                   value. </para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="P:System.ObsoleteAttribute.Message" /> </para>
+                  <see cref="P:System.ObsoleteAttribute.Message" />
+                </para>
               </term>
               <description>
                 <para>The workaround message. </para>
@@ -258,17 +450,31 @@ public class ObsoleteAttributeExample {
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ObsoleteAttribute" /> class with a workaround message and a Boolean value indicating whether the obsolete element usage is considered an error.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ObsoleteAttribute" />
+
+             class with a workaround message and a Boolean value indicating whether the obsolete element usage is considered an error.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text string that describes alternative workarounds. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text string that describes alternative workarounds. </param
+        >
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Boolean value that indicates whether the obsolete element usage is considered an error. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Boolean value that indicates whether the obsolete element usage is considered an error. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="IsError">
-      <MemberSignature Language="ILASM" Value=".property bool IsError { public hidebysig specialname instance bool get_IsError() }" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".property bool IsError { public hidebysig specialname instance bool get_IsError() }"
+      />
       <MemberSignature Language="C#" Value="public bool IsError { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool IsError" />
       <MemberType>Property</MemberType>
@@ -284,14 +490,25 @@ public class ObsoleteAttributeExample {
       <Docs>
         <value>
           <para>
-            <see langword="true" /> if the 
+            <see langword="true" />
+
+             if the 
  compiler treats usage of the target
  of the current instance
- as an error; otherwise, <see langword="false" />.</para>
+ as an error; otherwise, <see
+             langword="false" />
+
+            .</para
+          >
         </value>
         <remarks>
           <para>This property is read-only.</para>
-          <para>The default value of this property is <see langword="false" />.</para>
+          <para
+            >The default value of this property is <see
+             langword="false" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -301,7 +518,10 @@ public class ObsoleteAttributeExample {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Message">
-      <MemberSignature Language="ILASM" Value=".property string Message { public hidebysig specialname instance string get_Message() }" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".property string Message { public hidebysig specialname instance string get_Message() }"
+      />
       <MemberSignature Language="C#" Value="public string Message { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string Message" />
       <MemberType>Property</MemberType>
@@ -316,16 +536,26 @@ public class ObsoleteAttributeExample {
       <Parameters />
       <Docs>
         <value>
-          <para>A <see cref="T:System.String" /> that contains
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that contains
    suggested workarounds
-   for the target of the current instance.</para>
+   for the target of the current instance.</para
+          >
         </value>
         <remarks>
           <para>This property is read-only.</para>
-          <para>The current instance contains a suggested workaround message if and only if
+          <para
+            >The current instance contains a suggested workaround message if and only if
       such a message was specified when the current instance was constructed. If
       no workaround was specified for the current instance, the value of
-      this property is <see langword="null" />.</para>
+      this property is <see
+             langword="null" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

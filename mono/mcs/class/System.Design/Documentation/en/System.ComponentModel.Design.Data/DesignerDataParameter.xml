@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DesignerDataParameter" FullName="System.ComponentModel.Design.Data.DesignerDataParameter">
+<Type
+  Name="DesignerDataParameter"
+  FullName="System.ComponentModel.Design.Data.DesignerDataParameter"
+>
   <TypeSignature Language="C#" Value="public sealed class DesignerDataParameter" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -12,8 +15,30 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" /> class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see cref="T:System.ComponentModel.Design.Data.IDataEnvironment" /> interface. Controls access schema objects by calling the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" /> method of the interface.</para>
-      <para>The <see cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" /> class represents the parameters required to call a stored procedure in the data store. The <see cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" /> property contains a collection of <see cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" /> objects.</para>
+      <para
+        >The <see
+         cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" />
+
+         class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see
+         cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+
+         interface. Controls access schema objects by calling the <see
+         cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+         method of the interface.</para
+      >
+      <para
+        >The <see
+         cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" />
+
+         class represents the parameters required to call a stored procedure in the data store. The <see
+         cref="P:System.ComponentModel.Design.Data.DesignerDataStoredProcedure.Parameters" />
+
+         property contains a collection of <see
+         cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" />
+
+         objects.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,7 +47,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DesignerDataParameter (string name, System.Data.DbType dataType, System.Data.ParameterDirection direction);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DesignerDataParameter (string name, System.Data.DbType dataType, System.Data.ParameterDirection direction);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,14 +64,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" /> class with the specified name, data type, and input/output semantics. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Data.DesignerDataParameter" />
+
+             class with the specified name, data type, and input/output semantics. </para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the parameter.</param
+        >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Data.DbType" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Data.DbType" />
+
+           values.</param
+        >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Data.ParameterDirection" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Data.ParameterDirection" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DataType">
@@ -59,7 +107,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ComponentModel.Design.Data.DesignerDataParameter.DataType" /> property contains the type of data required by the underlying data store.</para>
+          <para
+            >The <see
+             cref="P:System.ComponentModel.Design.Data.DesignerDataParameter.DataType" />
+
+             property contains the type of data required by the underlying data store.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,7 +121,10 @@
       </Docs>
     </Member>
     <Member MemberName="Direction">
-      <MemberSignature Language="C#" Value="public System.Data.ParameterDirection Direction { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.ParameterDirection Direction { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -80,7 +136,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.ComponentModel.Design.Data.DesignerDataParameter.Direction" /> property to indicate whether a parameter is passed into a stored procedure, returned from a stored procedure, or both.</para>
+          <para
+            >Use the <see
+             cref="P:System.ComponentModel.Design.Data.DesignerDataParameter.Direction" />
+
+             property to indicate whether a parameter is passed into a stored procedure, returned from a stored procedure, or both.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

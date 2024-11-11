@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="LCIDConversionAttribute" FullName="System.Runtime.InteropServices.LCIDConversionAttribute">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class LCIDConversionAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit LCIDConversionAttribute extends System.Attribute" />
+<Type
+  Name="LCIDConversionAttribute"
+  FullName="System.Runtime.InteropServices.LCIDConversionAttribute"
+>
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class LCIDConversionAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit LCIDConversionAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -36,7 +46,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public LCIDConversionAttribute (int lcid);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 lcid) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 lcid) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -54,7 +67,10 @@
           <para>Initializes a new instance of the LCIDConversionAttribute class with the position of the LCID in the unmanaged signature.</para>
         </summary>
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />Indicates the position of the LCID argument in the unmanaged signature, where 0 is the first argument. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Indicates the position of the LCID argument in the unmanaged signature, where 0 is the first argument. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Value">

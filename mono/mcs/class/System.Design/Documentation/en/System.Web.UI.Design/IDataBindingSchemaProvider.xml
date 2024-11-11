@@ -9,7 +9,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.Design.IDataBindingSchemaProvider" /> class is implemented by design hosts, such as vsprvslong, that host the data-binding dialog box to show schema.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.Design.IDataBindingSchemaProvider" />
+
+         class is implemented by design hosts, such as vsprvslong, that host the data-binding dialog box to show schema.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -50,18 +55,32 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.Design.IDataBindingSchemaProvider.RefreshSchema(System.Boolean)" /> method is called by the design host only if the <see cref="P:System.Web.UI.Design.IDataBindingSchemaProvider.CanRefreshSchema" /> property is true.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.IDataBindingSchemaProvider.RefreshSchema(System.Boolean)" />
+
+             method is called by the design host only if the <see
+             cref="P:System.Web.UI.Design.IDataBindingSchemaProvider.CanRefreshSchema" />
+
+             property is true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Refreshes the schema for the data source.</para>
         </summary>
         <param name="preferSilent">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to disable data-binding events until after the schema has been refreshed; false to enable the events.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to disable data-binding events until after the schema has been refreshed; false to enable the events.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Schema">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.IDataSourceViewSchema Schema { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.IDataSourceViewSchema Schema { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

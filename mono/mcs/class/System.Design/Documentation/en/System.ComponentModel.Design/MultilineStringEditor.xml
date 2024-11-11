@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MultilineStringEditor" FullName="System.ComponentModel.Design.MultilineStringEditor">
-  <TypeSignature Language="C#" Value="public sealed class MultilineStringEditor : System.Drawing.Design.UITypeEditor" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class MultilineStringEditor : System.Drawing.Design.UITypeEditor"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -28,12 +31,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MultilineStringEditor" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.MultilineStringEditor" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EditValue">
-      <MemberSignature Language="C#" Value="public override object EditValue (System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object EditValue (System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -50,22 +61,42 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Edits the specified object value using the edit style provided by <see cref="M:System.Drawing.Design.ImageEditor.GetEditStyle(System.ComponentModel.ITypeDescriptorContext)" />.</para>
+          <para
+            >Edits the specified object value using the edit style provided by <see
+             cref="M:System.Drawing.Design.ImageEditor.GetEditStyle(System.ComponentModel.ITypeDescriptorContext)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The new value of the object. If the value of the object has not changed, this method should return the same object passed to it.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that can be used to gain additional context information. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that can be used to gain additional context information. </param
+        >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />A service provider object through which editing services can be obtained. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A service provider object through which editing services can be obtained. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An instance of the value being edited. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An instance of the value being edited. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetEditStyle">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Design.UITypeEditorEditStyle GetEditStyle (System.ComponentModel.ITypeDescriptorContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Design.UITypeEditorEditStyle GetEditStyle (System.ComponentModel.ITypeDescriptorContext context);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -80,18 +111,37 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the editing style of the <see cref="M:System.Drawing.Design.ImageEditor.EditValue(System.ComponentModel.ITypeDescriptorContext,System.IServiceProvider,System.Object)" /> method.</para>
+          <para
+            >Gets the editing style of the <see
+             cref="M:System.Drawing.Design.ImageEditor.EditValue(System.ComponentModel.ITypeDescriptorContext,System.IServiceProvider,System.Object)" />
+
+             method.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Design.UITypeEditorEditStyle" /> enumeration value indicating the supported editing style.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+
+             enumeration value indicating the supported editing style.</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that can be used to gain additional context information. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that can be used to gain additional context information. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetPaintValueSupported">
-      <MemberSignature Language="C#" Value="public override bool GetPaintValueSupported (System.ComponentModel.ITypeDescriptorContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool GetPaintValueSupported (System.ComponentModel.ITypeDescriptorContext context);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -110,10 +160,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>false, indicating that this <see cref="T:System.Drawing.Design.UITypeEditor" /> does not display a visual representation in the Properties Window.</para>
+          <para
+            >false, indicating that this <see
+             cref="T:System.Drawing.Design.UITypeEditor" />
+
+             does not display a visual representation in the Properties Window.</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that can be used to gain additional context information. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that can be used to gain additional context information. </param
+        >
       </Docs>
     </Member>
   </Members>

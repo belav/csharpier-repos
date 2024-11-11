@@ -8,7 +8,6 @@
     <MainLibraryFileName>Android.Device_Emulator.Interpreter.Test.dll</MainLibraryFileName>
     <ExpectedExitCode>42</ExpectedExitCode>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

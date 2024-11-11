@@ -13,7 +13,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A collection of <see cref="T:System.Web.UI.Design.TemplateDefinition" /> objects representing the template elements in a Web server control at design time.</para>
+      <para
+        >A collection of <see
+         cref="T:System.Web.UI.Design.TemplateDefinition" />
+
+         objects representing the template elements in a Web server control at design time.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,14 +35,25 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateGroup" /> class, using the provided name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.Design.TemplateGroup" />
+
+             class, using the provided name.</para
+          >
         </summary>
         <param name="groupName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the group.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the group.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TemplateGroup (string groupName, System.Web.UI.WebControls.Style groupStyle);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TemplateGroup (string groupName, System.Web.UI.WebControls.Style groupStyle);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -50,16 +66,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateGroup" /> class, using the provided name and style.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.Design.TemplateGroup" />
+
+             class, using the provided name and style.</para
+          >
         </summary>
         <param name="groupName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the group</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the group</param
+        >
         <param name="groupStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.UI.WebControls.Style" /> object to be applied to templates in the group.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.UI.WebControls.Style" />
+
+           object to be applied to templates in the group.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddTemplateDefinition">
-      <MemberSignature Language="C#" Value="public void AddTemplateDefinition (System.Web.UI.Design.TemplateDefinition templateDefinition);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddTemplateDefinition (System.Web.UI.Design.TemplateDefinition templateDefinition);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -74,10 +107,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the provided <see cref="T:System.Web.UI.Design.TemplateDefinition" /> to the group.</para>
+          <para
+            >Adds the provided <see
+             cref="T:System.Web.UI.Design.TemplateDefinition" />
+
+             to the group.</para
+          >
         </summary>
         <param name="templateDefinition">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.UI.Design.TemplateDefinition" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.UI.Design.TemplateDefinition" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GroupName">
@@ -99,7 +143,10 @@
       </Docs>
     </Member>
     <Member MemberName="GroupStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.Style GroupStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.Style GroupStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -135,7 +182,10 @@
       </Docs>
     </Member>
     <Member MemberName="Templates">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.TemplateDefinition[] Templates { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.TemplateDefinition[] Templates { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

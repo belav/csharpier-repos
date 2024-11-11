@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="XmlSerializerAssemblyAttribute" FullName="System.Xml.Serialization.XmlSerializerAssemblyAttribute">
-  <TypeSignature Language="C#" Value="public sealed class XmlSerializerAssemblyAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit XmlSerializerAssemblyAttribute extends System.Attribute" />
+<Type
+  Name="XmlSerializerAssemblyAttribute"
+  FullName="System.Xml.Serialization.XmlSerializerAssemblyAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class XmlSerializerAssemblyAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit XmlSerializerAssemblyAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,7 +29,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to increase the performance of a Web service client application. </para>
+      <para
+        >Use the <see
+         cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" />
+
+         to increase the performance of a Web service client application. </para
+      >
       <para>A typical method of using this attribute is as follows:</para>
       <list type="ordered">
         <item>
@@ -44,18 +58,36 @@
           <para>Run the proxy application.</para>
         </item>
         <item>
-          <para>Open a command window and navigate to the \Temp directory used by the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to cache files. </para>
+          <para
+            >Open a command window and navigate to the \Temp directory used by the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             to cache files. </para
+          >
           <code>cd %temp%</code>
         </item>
         <item>
-          <para>Find the last file created using the <system>dir</system> command with the <system>/OD</system> switch. </para>
+          <para
+            >Find the last file created using the <system
+            >dir</system>
+
+             command with the <system
+            >/OD</system>
+
+             switch. </para
+          >
           <code>dir *.vb /OD </code>
         </item>
         <item>
           <para>Compile the file into an assembly. Name the assembly.</para>
         </item>
         <item>
-          <para>Edit the original proxy code by applying the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to the class. Specify the assembly name, as shown in the following C# code.</para>
+          <para
+            >Edit the original proxy code by applying the <see
+             cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" />
+
+             to the class. Specify the assembly name, as shown in the following C# code.</para
+          >
           <code>[XmlSerializerAssemblyAttribute(AssemblyName="hello.serializer")]
 public class Hello: System.Web.Services.Protocols.SoapHttpClientProtocol {
    // Proxy code not shown.
@@ -76,7 +108,10 @@ End Class</code>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlSerializerAssemblyAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -88,13 +123,24 @@ End Class</code>
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XmlSerializerAssemblyAttribute (string assemblyName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string assemblyName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public XmlSerializerAssemblyAttribute (string assemblyName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string assemblyName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -108,15 +154,29 @@ End Class</code>
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class with the specified assembly name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" />
+
+             class with the specified assembly name.</para
+          >
         </summary>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The simple, unencrypted name of the assembly. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The simple, unencrypted name of the assembly. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XmlSerializerAssemblyAttribute (string assemblyName, string codeBase);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string assemblyName, string codeBase) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public XmlSerializerAssemblyAttribute (string assemblyName, string codeBase);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string assemblyName, string codeBase) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -131,12 +191,23 @@ End Class</code>
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class with the specified assembly name and location of the assembly.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" />
+
+             class with the specified assembly name and location of the assembly.</para
+          >
         </summary>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The simple, unencrypted name of the assembly. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The simple, unencrypted name of the assembly. </param
+        >
         <param name="codeBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that is the URL location of the assembly.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that is the URL location of the assembly.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AssemblyName">

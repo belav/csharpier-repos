@@ -15,11 +15,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The preceding table shows mappings between <see cref="T:System.Data.OleDb.OleDbType" /> data types, OLE DB data types (shown in parentheses), and the .NET Framework types. The <see cref="T:System.Data.OleDb.OleDbType" /> data types accept System.Char[]as Parameter.Value in parameterized queries.</para>
+      <para
+        >The preceding table shows mappings between <see
+         cref="T:System.Data.OleDb.OleDbType" />
+
+         data types, OLE DB data types (shown in parentheses), and the .NET Framework types. The <see
+         cref="T:System.Data.OleDb.OleDbType" />
+
+         data types accept System.Char[]as Parameter.Value in parameterized queries.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the data type of a field, a property, for use in an <see cref="T:System.Data.OleDb.OleDbParameter" />.</para>
+      <para
+        >Specifies the data type of a field, a property, for use in an <see
+         cref="T:System.Data.OleDb.OleDbParameter" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -34,7 +47,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 64-bit signed integer (DBTYPE_I8). This maps to <see cref="T:System.Int64" />.</para>
+          <para
+            >A 64-bit signed integer (DBTYPE_I8). This maps to <see
+             cref="T:System.Int64" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -53,7 +71,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A stream of binary data (DBTYPE_BYTES). This maps to an <see cref="T:System.Array" /> of type <see cref="T:System.Byte" />.</para>
+          <para
+            >A stream of binary data (DBTYPE_BYTES). This maps to an <see
+             cref="T:System.Array" />
+
+             of type <see
+             cref="T:System.Byte" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -72,7 +98,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A Boolean value (DBTYPE_BOOL). This maps to <see cref="T:System.Boolean" />.</para>
+          <para
+            >A Boolean value (DBTYPE_BOOL). This maps to <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -91,7 +122,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A null-terminated character string of Unicode characters (DBTYPE_BSTR). This maps to <see cref="T:System.String" />.</para>
+          <para
+            >A null-terminated character string of Unicode characters (DBTYPE_BSTR). This maps to <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -110,7 +146,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A character string (DBTYPE_STR). This maps to <see cref="T:System.String" />.</para>
+          <para
+            >A character string (DBTYPE_STR). This maps to <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -129,7 +170,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A currency value ranging from -2 <superscript>63</superscript> (or -922,337,203,685,477.5808) to 2 <superscript>63</superscript> -1 (or +922,337,203,685,477.5807) with an accuracy to a ten-thousandth of a currency unit (DBTYPE_CY). This maps to <see cref="T:System.Decimal" />.</para>
+          <para
+            >A currency value ranging from -2 <superscript
+            >63</superscript>
+
+             (or -922,337,203,685,477.5808) to 2 <superscript
+            >63</superscript>
+
+             -1 (or +922,337,203,685,477.5807) with an accuracy to a ten-thousandth of a currency unit (DBTYPE_CY). This maps to <see
+             cref="T:System.Decimal" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -148,7 +200,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Date data, stored as a double (DBTYPE_DATE). The whole portion is the number of days since December 30, 1899, and the fractional portion is a fraction of a day. This maps to <see cref="T:System.DateTime" />.</para>
+          <para
+            >Date data, stored as a double (DBTYPE_DATE). The whole portion is the number of days since December 30, 1899, and the fractional portion is a fraction of a day. This maps to <see
+             cref="T:System.DateTime" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -167,7 +224,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Date data in the format yyyymmdd (DBTYPE_DBDATE). This maps to <see cref="T:System.DateTime" />.</para>
+          <para
+            >Date data in the format yyyymmdd (DBTYPE_DBDATE). This maps to <see
+             cref="T:System.DateTime" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -186,7 +248,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Time data in the format hhmmss (DBTYPE_DBTIME). This maps to <see cref="T:System.TimeSpan" />.</para>
+          <para
+            >Time data in the format hhmmss (DBTYPE_DBTIME). This maps to <see
+             cref="T:System.TimeSpan" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -205,7 +272,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Data and time data in the format yyyymmddhhmmss (DBTYPE_DBTIMESTAMP). This maps to <see cref="T:System.DateTime" />.</para>
+          <para
+            >Data and time data in the format yyyymmddhhmmss (DBTYPE_DBTIMESTAMP). This maps to <see
+             cref="T:System.DateTime" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -224,7 +296,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A fixed precision and scale numeric value between -10 <superscript>38</superscript> -1 and 10 <superscript>38</superscript> -1 (DBTYPE_DECIMAL). This maps to <see cref="T:System.Decimal" />.</para>
+          <para
+            >A fixed precision and scale numeric value between -10 <superscript
+            >38</superscript>
+
+             -1 and 10 <superscript
+            >38</superscript>
+
+             -1 (DBTYPE_DECIMAL). This maps to <see
+             cref="T:System.Decimal" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -243,7 +326,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A floating-point number within the range of -1.79E +308 through 1.79E +308 (DBTYPE_R8). This maps to <see cref="T:System.Double" />.</para>
+          <para
+            >A floating-point number within the range of -1.79E +308 through 1.79E +308 (DBTYPE_R8). This maps to <see
+             cref="T:System.Double" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -281,7 +369,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 32-bit error code (DBTYPE_ERROR). This maps to <see cref="T:System.Exception" />.</para>
+          <para
+            >A 32-bit error code (DBTYPE_ERROR). This maps to <see
+             cref="T:System.Exception" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -300,7 +393,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 64-bit unsigned integer representing the number of 100-nanosecond intervals since January 1, 1601 (DBTYPE_FILETIME). This maps to <see cref="T:System.DateTime" />.</para>
+          <para
+            >A 64-bit unsigned integer representing the number of 100-nanosecond intervals since January 1, 1601 (DBTYPE_FILETIME). This maps to <see
+             cref="T:System.DateTime" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -319,7 +417,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A globally unique identifier (or GUID) (DBTYPE_GUID). This maps to <see cref="T:System.Guid" />.</para>
+          <para
+            >A globally unique identifier (or GUID) (DBTYPE_GUID). This maps to <see
+             cref="T:System.Guid" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -341,7 +444,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A pointer to an IDispatch interface (DBTYPE_IDISPATCH). This maps to <see cref="T:System.Object" />.</para>
+          <para
+            >A pointer to an IDispatch interface (DBTYPE_IDISPATCH). This maps to <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -360,7 +468,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 32-bit signed integer (DBTYPE_I4). This maps to <see cref="T:System.Int32" />.</para>
+          <para
+            >A 32-bit signed integer (DBTYPE_I4). This maps to <see
+             cref="T:System.Int32" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -382,7 +495,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A pointer to an IUnknown interface (DBTYPE_UNKNOWN). This maps to <see cref="T:System.Object" />.</para>
+          <para
+            >A pointer to an IUnknown interface (DBTYPE_UNKNOWN). This maps to <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -401,7 +519,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A long binary value (<see cref="T:System.Data.OleDb.OleDbParameter" /> only). This maps to an <see cref="T:System.Array" /> of type <see cref="T:System.Byte" />.</para>
+          <para
+            >A long binary value (<see
+             cref="T:System.Data.OleDb.OleDbParameter" />
+
+             only). This maps to an <see
+             cref="T:System.Array" />
+
+             of type <see
+             cref="T:System.Byte" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -420,7 +549,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A long string value (<see cref="T:System.Data.OleDb.OleDbParameter" /> only). This maps to <see cref="T:System.String" />.</para>
+          <para
+            >A long string value (<see
+             cref="T:System.Data.OleDb.OleDbParameter" />
+
+             only). This maps to <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -439,7 +576,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A long null-terminated Unicode string value (<see cref="T:System.Data.OleDb.OleDbParameter" /> only). This maps to <see cref="T:System.String" />.</para>
+          <para
+            >A long null-terminated Unicode string value (<see
+             cref="T:System.Data.OleDb.OleDbParameter" />
+
+             only). This maps to <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -458,7 +603,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An exact numeric value with a fixed precision and scale (DBTYPE_NUMERIC). This maps to <see cref="T:System.Decimal" />.</para>
+          <para
+            >An exact numeric value with a fixed precision and scale (DBTYPE_NUMERIC). This maps to <see
+             cref="T:System.Decimal" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -477,7 +627,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An automation PROPVARIANT (DBTYPE_PROP_VARIANT). This maps to <see cref="T:System.Object" />.</para>
+          <para
+            >An automation PROPVARIANT (DBTYPE_PROP_VARIANT). This maps to <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -496,7 +651,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A floating-point number within the range of -3.40E +38 through 3.40E +38 (DBTYPE_R4). This maps to <see cref="T:System.Single" />.</para>
+          <para
+            >A floating-point number within the range of -3.40E +38 through 3.40E +38 (DBTYPE_R4). This maps to <see
+             cref="T:System.Single" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -515,7 +675,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 16-bit signed integer (DBTYPE_I2). This maps to <see cref="T:System.Int16" />.</para>
+          <para
+            >A 16-bit signed integer (DBTYPE_I2). This maps to <see
+             cref="T:System.Int16" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -534,7 +699,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 8-bit signed integer (DBTYPE_I1). This maps to <see cref="T:System.SByte" />.</para>
+          <para
+            >A 8-bit signed integer (DBTYPE_I1). This maps to <see
+             cref="T:System.SByte" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -553,7 +723,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 64-bit unsigned integer (DBTYPE_UI8). This maps to <see cref="T:System.UInt64" />.</para>
+          <para
+            >A 64-bit unsigned integer (DBTYPE_UI8). This maps to <see
+             cref="T:System.UInt64" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -572,7 +747,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 32-bit unsigned integer (DBTYPE_UI4). This maps to <see cref="T:System.UInt32" />.</para>
+          <para
+            >A 32-bit unsigned integer (DBTYPE_UI4). This maps to <see
+             cref="T:System.UInt32" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -591,7 +771,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 16-bit unsigned integer (DBTYPE_UI2). This maps to <see cref="T:System.UInt16" />.</para>
+          <para
+            >A 16-bit unsigned integer (DBTYPE_UI2). This maps to <see
+             cref="T:System.UInt16" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -610,7 +795,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 8-bit unsigned integer (DBTYPE_UI1). This maps to <see cref="T:System.Byte" />.</para>
+          <para
+            >A 8-bit unsigned integer (DBTYPE_UI1). This maps to <see
+             cref="T:System.Byte" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -629,7 +819,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A variable-length stream of binary data (<see cref="T:System.Data.OleDb.OleDbParameter" /> only). This maps to an <see cref="T:System.Array" /> of type <see cref="T:System.Byte" />.</para>
+          <para
+            >A variable-length stream of binary data (<see
+             cref="T:System.Data.OleDb.OleDbParameter" />
+
+             only). This maps to an <see
+             cref="T:System.Array" />
+
+             of type <see
+             cref="T:System.Byte" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -648,7 +849,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A variable-length stream of non-Unicode characters (<see cref="T:System.Data.OleDb.OleDbParameter" /> only). This maps to <see cref="T:System.String" />.</para>
+          <para
+            >A variable-length stream of non-Unicode characters (<see
+             cref="T:System.Data.OleDb.OleDbParameter" />
+
+             only). This maps to <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -667,7 +876,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A special data type that can contain numeric, string, binary, or date data, and also the special values Empty and Null (DBTYPE_VARIANT). This type is assumed if no other is specified. This maps to <see cref="T:System.Object" />.</para>
+          <para
+            >A special data type that can contain numeric, string, binary, or date data, and also the special values Empty and Null (DBTYPE_VARIANT). This type is assumed if no other is specified. This maps to <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -686,7 +900,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A variable-length numeric value (<see cref="T:System.Data.OleDb.OleDbParameter" /> only). This maps to <see cref="T:System.Decimal" />.</para>
+          <para
+            >A variable-length numeric value (<see
+             cref="T:System.Data.OleDb.OleDbParameter" />
+
+             only). This maps to <see
+             cref="T:System.Decimal" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -705,7 +927,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A variable-length, null-terminated stream of Unicode characters (<see cref="T:System.Data.OleDb.OleDbParameter" /> only). This maps to <see cref="T:System.String" />.</para>
+          <para
+            >A variable-length, null-terminated stream of Unicode characters (<see
+             cref="T:System.Data.OleDb.OleDbParameter" />
+
+             only). This maps to <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -724,7 +954,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A null-terminated stream of Unicode characters (DBTYPE_WSTR). This maps to <see cref="T:System.String" />. </para>
+          <para
+            >A null-terminated stream of Unicode characters (DBTYPE_WSTR). This maps to <see
+             cref="T:System.String" />
+
+            . </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

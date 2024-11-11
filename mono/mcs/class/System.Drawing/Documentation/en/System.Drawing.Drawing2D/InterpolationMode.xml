@@ -16,7 +16,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Drawing.Drawing2D.InterpolationMode" /> enumeration specifies the algorithm that is used when images are scaled or rotated. </para>
+      <para
+        >The <see
+         cref="T:System.Drawing.Drawing2D.InterpolationMode" />
+
+         enumeration specifies the algorithm that is used when images are scaled or rotated. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -145,7 +150,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to the <see cref="F:System.Drawing.Drawing2D.QualityMode.Invalid" /> element of the <see cref="T:System.Drawing.Drawing2D.QualityMode" /> enumeration.</para>
+          <para
+            >Equivalent to the <see
+             cref="F:System.Drawing.Drawing2D.QualityMode.Invalid" />
+
+             element of the <see
+             cref="T:System.Drawing.Drawing2D.QualityMode" />
+
+             enumeration.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

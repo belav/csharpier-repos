@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BoundPropertyEntry" FullName="System.Web.UI.BoundPropertyEntry">
-  <TypeSignature Language="C#" Value="public class BoundPropertyEntry : System.Web.UI.PropertyEntry" />
+  <TypeSignature
+    Language="C#"
+    Value="public class BoundPropertyEntry : System.Web.UI.PropertyEntry"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When a page is parsed, the page parser retains information about an expression and the property it is bound to in a <see cref="T:System.Web.UI.BoundPropertyEntry" /> object.</para>
+      <para
+        >When a page is parsed, the page parser retains information about an expression and the property it is bound to in a <see
+         cref="T:System.Web.UI.BoundPropertyEntry" />
+
+         object.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

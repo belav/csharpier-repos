@@ -17,7 +17,36 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used in numerous classes. A partial list of these classes is <see cref="T:System.Windows.Forms.CheckedListBox" />, <see cref="T:System.Windows.Forms.ColumnHeader" />, <see cref="T:System.Windows.Forms.ComboBox" />, <see cref="T:System.Windows.Forms.ControlPaint" />, <see cref="T:System.Windows.Forms.Label" />, <see cref="T:System.Windows.Forms.ListBox" />, <see cref="T:System.Windows.Forms.Control" />, <see cref="T:System.Windows.Forms.RichTextBox" />, and <see cref="T:System.Windows.Forms.TextBox" />.</para>
+      <para
+        >This enumeration is used in numerous classes. A partial list of these classes is <see
+         cref="T:System.Windows.Forms.CheckedListBox" />
+
+        , <see
+         cref="T:System.Windows.Forms.ColumnHeader" />
+
+        , <see
+         cref="T:System.Windows.Forms.ComboBox" />
+
+        , <see
+         cref="T:System.Windows.Forms.ControlPaint" />
+
+        , <see
+         cref="T:System.Windows.Forms.Label" />
+
+        , <see
+         cref="T:System.Windows.Forms.ListBox" />
+
+        , <see
+         cref="T:System.Windows.Forms.Control" />
+
+        , <see
+         cref="T:System.Windows.Forms.RichTextBox" />
+
+        , and <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

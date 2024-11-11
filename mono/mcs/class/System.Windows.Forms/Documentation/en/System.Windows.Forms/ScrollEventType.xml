@@ -17,11 +17,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by <see cref="P:System.Windows.Forms.ScrollEventArgs.Type" />.</para>
+      <para
+        >This enumeration is used by <see
+         cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the type of action used to raise the <see cref="E:System.Windows.Forms.ScrollBar.Scroll" /> event.</para>
+      <para
+        >Specifies the type of action used to raise the <see
+         cref="E:System.Windows.Forms.ScrollBar.Scroll" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -51,7 +61,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The scroll box was moved to the <see cref="P:System.Windows.Forms.ScrollBar.Minimum" /> position.</para>
+          <para
+            >The scroll box was moved to the <see
+             cref="P:System.Windows.Forms.ScrollBar.Minimum" />
+
+             position.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -102,7 +117,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The scroll box was moved to the <see cref="P:System.Windows.Forms.ScrollBar.Maximum" /> position.</para>
+          <para
+            >The scroll box was moved to the <see
+             cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+
+             position.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -12,11 +12,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.ApplicationShutdownReason" /> represents the possible values for the <see cref="P:System.Web.Hosting.HostingEnvironment.ShutdownReason" /> property of the <see cref="T:System.Web.Hosting.HostingEnvironment" /> class.</para>
+      <para
+        >The <see
+         cref="T:System.Web.ApplicationShutdownReason" />
+
+         represents the possible values for the <see
+         cref="P:System.Web.Hosting.HostingEnvironment.ShutdownReason" />
+
+         property of the <see
+         cref="T:System.Web.Hosting.HostingEnvironment" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies why the <see cref="T:System.AppDomain" /> class shut down.</para>
+      <para
+        >Specifies why the <see
+         cref="T:System.AppDomain" />
+
+         class shut down.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -149,7 +165,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A call was made to <see cref="M:System.Web.HttpRuntime.Close" />. </para>
+          <para
+            >A call was made to <see
+             cref="M:System.Web.HttpRuntime.Close" />
+
+            . </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -183,7 +204,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.AppDomain" /> initialization error occurred. </para>
+          <para
+            >An <see
+             cref="T:System.AppDomain" />
+
+             initialization error occurred. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -268,7 +294,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A call was made to <see cref="M:System.Web.HttpRuntime.UnloadAppDomain" />. </para>
+          <para
+            >A call was made to <see
+             cref="M:System.Web.HttpRuntime.UnloadAppDomain" />
+
+            . </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

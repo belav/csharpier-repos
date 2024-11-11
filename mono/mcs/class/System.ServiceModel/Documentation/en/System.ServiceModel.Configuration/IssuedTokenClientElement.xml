@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IssuedTokenClientElement" FullName="System.ServiceModel.Configuration.IssuedTokenClientElement">
-  <TypeSignature Language="C#" Value="public sealed class IssuedTokenClientElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed IssuedTokenClientElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="IssuedTokenClientElement"
+  FullName="System.ServiceModel.Configuration.IssuedTokenClientElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class IssuedTokenClientElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed IssuedTokenClientElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public IssuedTokenClientElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,7 +42,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.IssuedTokenClientElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.IssuedTokenClientElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -59,8 +76,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultKeyEntropyMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityKeyEntropyMode DefaultKeyEntropyMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Security.SecurityKeyEntropyMode DefaultKeyEntropyMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityKeyEntropyMode DefaultKeyEntropyMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Security.SecurityKeyEntropyMode DefaultKeyEntropyMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -78,13 +101,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the default value of <see cref="T:System.ServiceModel.Security.SecurityKeyEntropyMode" />.</para>
+          <para
+            >Gets or sets the default value of <see
+             cref="T:System.ServiceModel.Security.SecurityKeyEntropyMode" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IssuedTokenRenewalThresholdPercentage">
-      <MemberSignature Language="C#" Value="public int IssuedTokenRenewalThresholdPercentage { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 IssuedTokenRenewalThresholdPercentage" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IssuedTokenRenewalThresholdPercentage { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 IssuedTokenRenewalThresholdPercentage"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -110,8 +144,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuerChannelBehaviors">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.IssuedTokenClientBehaviorsElementCollection IssuerChannelBehaviors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.IssuedTokenClientBehaviorsElementCollection IssuerChannelBehaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.IssuedTokenClientBehaviorsElementCollection IssuerChannelBehaviors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.IssuedTokenClientBehaviorsElementCollection IssuerChannelBehaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -134,8 +174,14 @@
       </Docs>
     </Member>
     <Member MemberName="LocalIssuer">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.IssuedTokenParametersEndpointAddressElement LocalIssuer { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.IssuedTokenParametersEndpointAddressElement LocalIssuer" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.IssuedTokenParametersEndpointAddressElement LocalIssuer { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.IssuedTokenParametersEndpointAddressElement LocalIssuer"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -158,8 +204,14 @@
       </Docs>
     </Member>
     <Member MemberName="LocalIssuerChannelBehaviors">
-      <MemberSignature Language="C#" Value="public string LocalIssuerChannelBehaviors { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string LocalIssuerChannelBehaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public string LocalIssuerChannelBehaviors { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string LocalIssuerChannelBehaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -185,8 +237,14 @@
       </Docs>
     </Member>
     <Member MemberName="MaxIssuedTokenCachingTime">
-      <MemberSignature Language="C#" Value="public TimeSpan MaxIssuedTokenCachingTime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan MaxIssuedTokenCachingTime" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan MaxIssuedTokenCachingTime { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan MaxIssuedTokenCachingTime"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -212,8 +270,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

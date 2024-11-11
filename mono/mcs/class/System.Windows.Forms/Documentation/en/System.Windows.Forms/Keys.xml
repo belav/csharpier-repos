@@ -26,7 +26,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.Keys" /> class contains constants for processing keyboard input. The members of the Keys enumeration consist of a key code and a set of modifiers combined into a single integer value. In the Win32 application programming interface (API) a key value has two halves, with the high-order bits containing the key code (which is the same as a Windows virtual key code), and the low-order bits representing key modifiers such as the SHIFT, CONTROL, and ALT keys.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.Keys" />
+
+         class contains constants for processing keyboard input. The members of the Keys enumeration consist of a key code and a set of modifiers combined into a single integer value. In the Win32 application programming interface (API) a key value has two halves, with the high-order bits containing the key code (which is the same as a Windows virtual key code), and the low-order bits representing key modifiers such as the SHIFT, CONTROL, and ALT keys.</para
+      >
       <block subset="none" type="note">
         <para>Do not use the values in this enumeration for combined bitwise operations. The values in the enumeration are not mutually exclusive.</para>
       </block>
@@ -35,10 +40,25 @@
       </block>
       <list type="bullet">
         <item>
-          <para>Call the <see cref="M:System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys)" /> method of the <see cref="T:System.Windows.Forms.Control" /> class.</para>
+          <para
+            >Call the <see
+             cref="M:System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys)" />
+
+             method of the <see
+             cref="T:System.Windows.Forms.Control" />
+
+             class.</para
+          >
         </item>
         <item>
-          <para>For finer control, use the Win32 API functions GetKeyState, GetAsyncKeyState, or GetKeyboardState defined in user32.dll, to do this. For more information about calling native functions, see <format type="text/html"><a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a></format>.</para>
+          <para
+            >For finer control, use the Win32 API functions GetKeyState, GetAsyncKeyState, or GetKeyboardState defined in user32.dll, to do this. For more information about calling native functions, see <format
+             type="text/html">
+              <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
+            </format>
+
+            .</para
+          >
         </item>
       </list>
       <para>The following table shows the key code values represented by two enumerated values, representing both the general original equipment manufacturer (OEM) keys and the more specific U.S.-keyboard associations.</para>
@@ -67,7 +87,8 @@
           </description>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oem1" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oem1" />
+            </para>
           </description>
         </item>
         <item>
@@ -76,11 +97,13 @@
           </term>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.OemQuestion" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.OemQuestion" />
+            </para>
           </description>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oem2" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oem2" />
+            </para>
           </description>
         </item>
         <item>
@@ -89,11 +112,13 @@
           </term>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oemtilde" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oemtilde" />
+            </para>
           </description>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oem3" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oem3" />
+            </para>
           </description>
         </item>
         <item>
@@ -102,11 +127,13 @@
           </term>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.OemOpenBrackets" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.OemOpenBrackets" />
+            </para>
           </description>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oem4" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oem4" />
+            </para>
           </description>
         </item>
         <item>
@@ -115,11 +142,13 @@
           </term>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.OemPipe" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.OemPipe" />
+            </para>
           </description>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oem5" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oem5" />
+            </para>
           </description>
         </item>
         <item>
@@ -128,11 +157,13 @@
           </term>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.OemCloseBrackets" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.OemCloseBrackets" />
+            </para>
           </description>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oem6" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oem6" />
+            </para>
           </description>
         </item>
         <item>
@@ -141,11 +172,13 @@
           </term>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.OemQuotes" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.OemQuotes" />
+            </para>
           </description>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oem7" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oem7" />
+            </para>
           </description>
         </item>
         <item>
@@ -154,16 +187,26 @@
           </term>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.OemBackslash" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.OemBackslash" />
+            </para>
           </description>
           <description>
             <para>
-              <see cref="F:System.Windows.Forms.Keys.Oem102" /> </para>
+              <see cref="F:System.Windows.Forms.Keys.Oem102" />
+            </para>
           </description>
         </item>
       </list>
       <block subset="none" type="note">
-        <para>For the .NET Framework 2.0, a member <see cref="F:System.Windows.Forms.Keys.IMEAccept" /> was added that supersedes the previous entry, <see cref="F:System.Windows.Forms.Keys.IMEAceept" />, which was spelled incorrectly. The older version has been retained for backward compatibility, but it may be deleted in future versions of the .NET Framework </para>
+        <para
+          >For the .NET Framework 2.0, a member <see
+           cref="F:System.Windows.Forms.Keys.IMEAccept" />
+
+           was added that supersedes the previous entry, <see
+           cref="F:System.Windows.Forms.Keys.IMEAceept" />
+
+          , which was spelled incorrectly. The older version has been retained for backward compatibility, but it may be deleted in future versions of the .NET Framework </para
+        >
       </block>
     </remarks>
     <summary>
@@ -1508,7 +1551,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The IME accept key, replaces <see cref="F:System.Windows.Forms.Keys.IMEAceept" />.</para>
+          <para
+            >The IME accept key, replaces <see
+             cref="F:System.Windows.Forms.Keys.IMEAceept" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1524,7 +1572,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The IME accept key. Obsolete, use <see cref="F:System.Windows.Forms.Keys.IMEAccept" /> instead.</para>
+          <para
+            >The IME accept key. Obsolete, use <see
+             cref="F:System.Windows.Forms.Keys.IMEAccept" />
+
+             instead.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

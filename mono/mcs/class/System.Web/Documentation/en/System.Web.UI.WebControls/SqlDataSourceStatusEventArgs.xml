@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SqlDataSourceStatusEventArgs" FullName="System.Web.UI.WebControls.SqlDataSourceStatusEventArgs">
+<Type
+  Name="SqlDataSourceStatusEventArgs"
+  FullName="System.Web.UI.WebControls.SqlDataSourceStatusEventArgs"
+>
   <TypeSignature Language="C#" Value="public class SqlDataSourceStatusEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
@@ -13,8 +16,51 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> class is used in the <see cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />, and <see cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" /> events to pass information about a database operation after it is performed by the data source control. This information includes the number of rows affected by the operation, the <see cref="T:System.Data.Common.DbCommand" /> object that the data source used to perform the operation, and any exception information that resulted. By adding an event handler delegate to handle the <see cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" /> or <see cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" /> events, you can examine this data and perform any additional post processing required.</para>
-      <para>The <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control exposes many events that you can handle to work with the underlying data objects during the course of a data operation. The following table lists the events and associated <see cref="T:System.EventArgs" /> and event handler classes, to better guide you to the various events that correspond to the life cycle of a data operation using the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+         class is used in the <see
+         cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
+
+        , <see
+         cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />
+
+        , <see
+         cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+        , and <see
+         cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+         events to pass information about a database operation after it is performed by the data source control. This information includes the number of rows affected by the operation, the <see
+         cref="T:System.Data.Common.DbCommand" />
+
+         object that the data source used to perform the operation, and any exception information that resulted. By adding an event handler delegate to handle the <see
+         cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
+
+        , <see
+         cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />
+
+        , <see
+         cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+         or <see
+         cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+         events, you can examine this data and perform any additional post processing required.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+         control exposes many events that you can handle to work with the underlying data objects during the course of a data operation. The following table lists the events and associated <see
+         cref="T:System.EventArgs" />
+
+         and event handler classes, to better guide you to the various events that correspond to the life cycle of a data operation using the <see
+         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+         control.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -32,7 +78,10 @@
         <item>
           <term>
             <para>
-              <see cref="E:System.Web.UI.WebControls.SqlDataSource.Selecting" /> occurs before the data is retrieved.</para>
+              <see cref="E:System.Web.UI.WebControls.SqlDataSource.Selecting" />
+
+               occurs before the data is retrieved.</para
+            >
           </term>
           <description>
             <para>
@@ -48,7 +97,16 @@
         <item>
           <term>
             <para>
-              <see cref="E:System.Web.UI.WebControls.SqlDataSource.Inserting" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Updating" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Deleting" /> occur before an insert, update, or delete operation is performed.</para>
+              <see cref="E:System.Web.UI.WebControls.SqlDataSource.Inserting" />
+
+              , <see
+               cref="E:System.Web.UI.WebControls.SqlDataSource.Updating" />
+
+              , <see
+               cref="E:System.Web.UI.WebControls.SqlDataSource.Deleting" />
+
+               occur before an insert, update, or delete operation is performed.</para
+            >
           </term>
           <description>
             <para>
@@ -64,7 +122,19 @@
         <item>
           <term>
             <para>
-              <see cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" /> occur after the data retrieval, insert, update, or delete operations completes.</para>
+              <see cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
+
+              , <see
+               cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+              , <see
+               cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />
+
+              , <see
+               cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+               occur after the data retrieval, insert, update, or delete operations completes.</para
+            >
           </term>
           <description>
             <para>
@@ -81,12 +151,20 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for an event that is raised by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control after a data operation has completed.</para>
+      <para
+        >Provides data for an event that is raised by the <see
+         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+         control after a data operation has completed.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqlDataSourceStatusEventArgs (System.Data.Common.DbCommand command, int rowsAffected, Exception exception);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqlDataSourceStatusEventArgs (System.Data.Common.DbCommand command, int rowsAffected, Exception exception);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="command" Type="System.Data.Common.DbCommand" />
@@ -99,12 +177,32 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> class, using the specified output parameters, return value, and number of rows affected by the database operation.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+             class, using the specified output parameters, return value, and number of rows affected by the database operation.</para
+          >
         </summary>
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Data.Common.DbCommand" /> that represents the database query, command, or stored procedure that is submitted to the database by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Data.Common.DbCommand" />
+
+           that represents the database query, command, or stored procedure that is submitted to the database by the <see
+           cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+           control. </param
+        >
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Exception" /> thrown by the database operation, if applicable.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Exception" />
+
+           thrown by the database operation, if applicable.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -121,8 +219,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>All operations return the number of rows affected by the operation. The <see cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.AffectedRows" /> property has the same value as the return value of the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Update" />, <see cref="M:System.Web.UI.WebControls.SqlDataSource.Insert" />, and <see cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" /> methods. </para>
-          <para>When the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" /> method is called and the data source is set to <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataReader" /> mode, the return value is 0 in all cases. </para>
+          <para
+            >All operations return the number of rows affected by the operation. The <see
+             cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.AffectedRows" />
+
+             property has the same value as the return value of the <see
+             cref="M:System.Web.UI.WebControls.SqlDataSource.Update" />
+
+            , <see
+             cref="M:System.Web.UI.WebControls.SqlDataSource.Insert" />
+
+            , and <see
+             cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" />
+
+             methods. </para
+          >
+          <para
+            >When the <see
+             cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+             method is called and the data source is set to <see
+             cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataReader" />
+
+             mode, the return value is 0 in all cases. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -144,8 +264,54 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can handle the <see cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />, <see cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />, or <see cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" /> event to examine and manipulate the properties of the <see cref="T:System.Data.Common.DbCommand" /> after it is submitted by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to the database. The <see cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.Command" /> property enables you to access return values and values in any output parameters after the database operation is performed through its <see cref="P:System.Data.Common.DbCommand.Parameters" /> property, as well as the <see cref="P:System.Data.Common.DbCommand.CommandText" /> property, which represents the SQL query, command, or stored procedure name that was submitted to the database.</para>
-          <para>Any output parameters are specifically from parameters that have an  <see cref="F:System.Data.ParameterDirection.InputOutput" /> or <see cref="F:System.Data.ParameterDirection.Output" /> value for the <see cref="P:System.Web.UI.WebControls.Parameter.Direction" /> property of the <see cref="T:System.Web.UI.WebControls.Parameter" /> object. A return value is from a parameter that has a <see cref="F:System.Data.ParameterDirection.ReturnValue" /> value.</para>
+          <para
+            >You can handle the <see
+             cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
+
+            , <see
+             cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />
+
+            , <see
+             cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+            , or <see
+             cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+             event to examine and manipulate the properties of the <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             after it is submitted by the <see
+             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+             control to the database. The <see
+             cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.Command" />
+
+             property enables you to access return values and values in any output parameters after the database operation is performed through its <see
+             cref="P:System.Data.Common.DbCommand.Parameters" />
+
+             property, as well as the <see
+             cref="P:System.Data.Common.DbCommand.CommandText" />
+
+             property, which represents the SQL query, command, or stored procedure name that was submitted to the database.</para
+          >
+          <para
+            >Any output parameters are specifically from parameters that have an  <see
+             cref="F:System.Data.ParameterDirection.InputOutput" />
+
+             or <see
+             cref="F:System.Data.ParameterDirection.Output" />
+
+             value for the <see
+             cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+             property of the <see
+             cref="T:System.Web.UI.WebControls.Parameter" />
+
+             object. A return value is from a parameter that has a <see
+             cref="F:System.Data.ParameterDirection.ReturnValue" />
+
+             value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -167,7 +333,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Exception" /> property does not represent the actual exception thrown by the database operation. You can access the thrown exception using the <see cref="P:System.Exception.InnerException" /> property.</para>
+          <para
+            >The <see
+             cref="T:System.Exception" />
+
+             property does not represent the actual exception thrown by the database operation. You can access the thrown exception using the <see
+             cref="P:System.Exception.InnerException" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -189,7 +363,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the database throws an exception, the <see cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.ExceptionHandled" /> property is set to false and the exception is wrapped by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.Exception" /> property. If you use an <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventHandler" />, you can check the <see cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.Exception" /> property and handle the exception. If you handle the exception, set the <see cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.ExceptionHandled" /> property to true or the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control will throw an exception.</para>
+          <para
+            >If the database throws an exception, the <see
+             cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.ExceptionHandled" />
+
+             property is set to false and the exception is wrapped by the <see
+             cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.Exception" />
+
+             property. If you use an <see
+             cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventHandler" />
+
+            , you can check the <see
+             cref="P:System.Web.UI.WebControls.ObjectDataSourceStatusEventArgs.Exception" />
+
+             property and handle the exception. If you handle the exception, set the <see
+             cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.ExceptionHandled" />
+
+             property to true or the <see
+             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+             control will throw an exception.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

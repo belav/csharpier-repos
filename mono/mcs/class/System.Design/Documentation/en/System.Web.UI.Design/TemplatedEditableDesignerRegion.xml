@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="TemplatedEditableDesignerRegion" FullName="System.Web.UI.Design.TemplatedEditableDesignerRegion">
-  <TypeSignature Language="C#" Value="public class TemplatedEditableDesignerRegion : System.Web.UI.Design.EditableDesignerRegion" />
+<Type
+  Name="TemplatedEditableDesignerRegion"
+  FullName="System.Web.UI.Design.TemplatedEditableDesignerRegion"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class TemplatedEditableDesignerRegion : System.Web.UI.Design.EditableDesignerRegion"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,7 +24,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TemplatedEditableDesignerRegion (System.Web.UI.Design.TemplateDefinition templateDefinition);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TemplatedEditableDesignerRegion (System.Web.UI.Design.TemplateDefinition templateDefinition);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -30,14 +39,28 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplatedEditableDesignerRegion" /> class using the provided template definition.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.Design.TemplatedEditableDesignerRegion" />
+
+             class using the provided template definition.</para
+          >
         </summary>
         <param name="templateDefinition">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.UI.Design.TemplateDefinition" /> instance for the template to edit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.UI.Design.TemplateDefinition" />
+
+           instance for the template to edit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSingleInstanceTemplate">
-      <MemberSignature Language="C#" Value="public virtual bool IsSingleInstanceTemplate { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsSingleInstanceTemplate { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -55,7 +78,10 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsDataBinding">
-      <MemberSignature Language="C#" Value="public override bool SupportsDataBinding { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool SupportsDataBinding { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -73,7 +99,10 @@
       </Docs>
     </Member>
     <Member MemberName="TemplateDefinition">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.TemplateDefinition TemplateDefinition { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.TemplateDefinition TemplateDefinition { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -86,7 +115,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.UI.Design.TemplateDefinition" /> object describing the template that is referenced by the region.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.UI.Design.TemplateDefinition" />
+
+             object describing the template that is referenced by the region.</para
+          >
         </summary>
       </Docs>
     </Member>

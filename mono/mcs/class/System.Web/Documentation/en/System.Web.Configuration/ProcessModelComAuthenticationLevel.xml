@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ProcessModelComAuthenticationLevel" FullName="System.Web.Configuration.ProcessModelComAuthenticationLevel">
+<Type
+  Name="ProcessModelComAuthenticationLevel"
+  FullName="System.Web.Configuration.ProcessModelComAuthenticationLevel"
+>
   <TypeSignature Language="C#" Value="public enum ProcessModelComAuthenticationLevel" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
@@ -12,10 +15,28 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.ProcessModelComAuthenticationLevel" /> enumerates the values to use when you set the <see cref="P:System.Web.Configuration.ProcessModelSection.ComAuthenticationLevel" /> property.</para>
-      <para>The default is <see cref="F:System.Web.Configuration.ProcessModelComAuthenticationLevel.Connect" />.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.ProcessModelComAuthenticationLevel" />
+
+         enumerates the values to use when you set the <see
+         cref="P:System.Web.Configuration.ProcessModelSection.ComAuthenticationLevel" />
+
+         property.</para
+      >
+      <para
+        >The default is <see
+         cref="F:System.Web.Configuration.ProcessModelComAuthenticationLevel.Connect" />
+
+        .</para
+      >
       <block subset="none" type="note">
-        <para>The <see cref="T:System.Web.Configuration.ProcessModelComAuthenticationLevel" /> settings are relevant only when you use the ASP.NET process model (Internet Information Services [IIS] 5.n or compatible mode on IIS 6 only).</para>
+        <para
+          >The <see
+           cref="T:System.Web.Configuration.ProcessModelComAuthenticationLevel" />
+
+           settings are relevant only when you use the ASP.NET process model (Internet Information Services [IIS] 5.n or compatible mode on IIS 6 only).</para
+        >
       </block>
     </remarks>
     <summary>

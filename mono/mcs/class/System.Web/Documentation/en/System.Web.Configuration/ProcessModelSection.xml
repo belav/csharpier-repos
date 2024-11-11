@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ProcessModelSection" FullName="System.Web.Configuration.ProcessModelSection">
-  <TypeSignature Language="C#" Value="public sealed class ProcessModelSection : System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ProcessModelSection : System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,9 +16,39 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.ProcessModelSection" /> class provides a way to programmatically access and modify the processModel section of a configuration file. </para>
-      <para>The <see cref="T:System.Web.Configuration.ProcessModelSection" /> class controls various aspects of the ASP.NET worker process, including its lifetime, the number of instances created at a time, what security identity it runs under, and the size of the CLR thread pool to service requests.</para>
-      <para>When ASP.NET is running under IIS 6 in native mode, ASP.NET uses the IIS 6 process model and ignores most settings in this section. Use the IIS administration user interface (UI) to configure those properties. ASP.NET still uses the following properties, which can be configured through the configuration file: <see cref="P:System.Web.Configuration.ProcessModelSection.RequestQueueLimit" />, <see cref="P:System.Web.Configuration.ProcessModelSection.ResponseDeadlockInterval" />, <see cref="P:System.Web.Configuration.ProcessModelSection.MaxWorkerThreads" />, <see cref="P:System.Web.Configuration.ProcessModelSection.MaxIOThreads" />, <see cref="P:System.Web.Configuration.ProcessModelSection.MinWorkerThreads" />, and <see cref="P:System.Web.Configuration.ProcessModelSection.MinWorkerThreads" />. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.ProcessModelSection" />
+
+         class provides a way to programmatically access and modify the processModel section of a configuration file. </para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.ProcessModelSection" />
+
+         class controls various aspects of the ASP.NET worker process, including its lifetime, the number of instances created at a time, what security identity it runs under, and the size of the CLR thread pool to service requests.</para
+      >
+      <para
+        >When ASP.NET is running under IIS 6 in native mode, ASP.NET uses the IIS 6 process model and ignores most settings in this section. Use the IIS administration user interface (UI) to configure those properties. ASP.NET still uses the following properties, which can be configured through the configuration file: <see
+         cref="P:System.Web.Configuration.ProcessModelSection.RequestQueueLimit" />
+
+        , <see
+         cref="P:System.Web.Configuration.ProcessModelSection.ResponseDeadlockInterval" />
+
+        , <see
+         cref="P:System.Web.Configuration.ProcessModelSection.MaxWorkerThreads" />
+
+        , <see
+         cref="P:System.Web.Configuration.ProcessModelSection.MaxIOThreads" />
+
+        , <see
+         cref="P:System.Web.Configuration.ProcessModelSection.MinWorkerThreads" />
+
+        , and <see
+         cref="P:System.Web.Configuration.ProcessModelSection.MinWorkerThreads" />
+
+        . </para
+      >
       <para>The processModel section cannot be encrypted using the protected-configuration feature or tools because it is consumed by the ASP.NET ISAPI extension. </para>
     </remarks>
     <summary>
@@ -32,11 +65,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Configuration.ProcessModelSection.#ctor" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.ProcessModelSection" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Configuration.ProcessModelSection.#ctor" />
+
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
+             cref="T:System.Web.Configuration.ProcessModelSection" />
+
+             class by using the <see
+             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.ProcessModelSection" /> class using default settings.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.ProcessModelSection" />
+
+             class using default settings.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -59,8 +108,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Web.Configuration.ProcessModelSection.AutoConfig" /> value is set to false, explicit Web.config values are used to determine performance configuration for the ASP.NET application. If the <see cref="P:System.Web.Configuration.ProcessModelSection.AutoConfig" /> value is set to true, the performance settings are automatically configured for the ASP.NET application.</para>
-          <para>The <see cref="P:System.Web.Configuration.ProcessModelSection.AutoConfig" /> value is explicitly set to true in the Machine.config file. The default code value is set to false.  If the <see cref="P:System.Web.Configuration.ProcessModelSection.AutoConfig" /> value is removed from Machine.config, the explicit settings are used instead of the auto-configured settings.</para>
+          <para
+            >If the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.AutoConfig" />
+
+             value is set to false, explicit Web.config values are used to determine performance configuration for the ASP.NET application. If the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.AutoConfig" />
+
+             value is set to true, the performance settings are automatically configured for the ASP.NET application.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.ProcessModelSection.AutoConfig" />
+
+             value is explicitly set to true in the Machine.config file. The default code value is set to false.  If the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.AutoConfig" />
+
+             value is removed from Machine.config, the explicit settings are used instead of the auto-configured settings.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -105,7 +170,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ComAuthenticationLevel">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.ProcessModelComAuthenticationLevel ComAuthenticationLevel { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.ProcessModelComAuthenticationLevel ComAuthenticationLevel { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -120,7 +188,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When this property value is set to <see cref="F:System.Web.Configuration.ProcessModelComAuthenticationLevel.Default" />, DCOM determines the authentication level using its normal security-negotiation algorithm. The default value assigned to this property, as specified in the Machine.config file, is <see cref="F:System.Web.Configuration.ProcessModelComAuthenticationLevel.Connect" />. In this case, DCOM authenticates the credentials of the client only when the client establishes a relationship with the server. </para>
+          <para
+            >When this property value is set to <see
+             cref="F:System.Web.Configuration.ProcessModelComAuthenticationLevel.Default" />
+
+            , DCOM determines the authentication level using its normal security-negotiation algorithm. The default value assigned to this property, as specified in the Machine.config file, is <see
+             cref="F:System.Web.Configuration.ProcessModelComAuthenticationLevel.Connect" />
+
+            . In this case, DCOM authenticates the credentials of the client only when the client establishes a relationship with the server. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -132,7 +208,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ComImpersonationLevel">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.ProcessModelComImpersonationLevel ComImpersonationLevel { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.ProcessModelComImpersonationLevel ComImpersonationLevel { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -147,7 +226,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When this property value is set to <see cref="F:System.Web.Configuration.ProcessModelComImpersonationLevel.Default" />, DCOM determines the impersonation level using its normal security-negotiation algorithm. The default value assigned to this property, as specified in the Machine.config file, is <see cref="F:System.Web.Configuration.ProcessModelComImpersonationLevel.Impersonate" />. In this case, the server process can impersonate the client's security context while acting on behalf of the client.</para>
+          <para
+            >When this property value is set to <see
+             cref="F:System.Web.Configuration.ProcessModelComImpersonationLevel.Default" />
+
+            , DCOM determines the impersonation level using its normal security-negotiation algorithm. The default value assigned to this property, as specified in the Machine.config file, is <see
+             cref="F:System.Web.Configuration.ProcessModelComImpersonationLevel.Impersonate" />
+
+            . In this case, the server process can impersonate the client's security context while acting on behalf of the client.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -174,7 +261,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" /> value specifies a bit pattern that indicates the CPUs eligible to run ASP.NET threads. If the <see cref="P:System.Web.Configuration.ProcessModelSection.WebGarden" /> property is set to true, the <see cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" /> limits worker processes to the number of eligible CPUs. The maximum allowed number of worker processes is equal to the number of CPUs. By default, all CPUs are enabled and ASP.NET launches one process for each CPU. If the <see cref="P:System.Web.Configuration.ProcessModelSection.WebGarden" /> property is set to false, the <see cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" /> attribute is ignored and only one worker process will run.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" />
+
+             value specifies a bit pattern that indicates the CPUs eligible to run ASP.NET threads. If the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.WebGarden" />
+
+             property is set to true, the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" />
+
+             limits worker processes to the number of eligible CPUs. The maximum allowed number of worker processes is equal to the number of CPUs. By default, all CPUs are enabled and ASP.NET launches one process for each CPU. If the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.WebGarden" />
+
+             property is set to false, the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" />
+
+             attribute is ignored and only one worker process will run.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -186,7 +290,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ElementProperty">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElementProperty ElementProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElementProperty ElementProperty { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElementProperty</ReturnType>
@@ -217,7 +324,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.ProcessModelSection.Enable" /> property specifies whether ASP.NET is hosted in an external worker process. If <see cref="P:System.Web.Configuration.ProcessModelSection.Enable" /> is true, ASP.NET is hosted in an external worker process; otherwise, it runs directly in Inetinfo.exe.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.ProcessModelSection.Enable" />
+
+             property specifies whether ASP.NET is hosted in an external worker process. If <see
+             cref="P:System.Web.Configuration.ProcessModelSection.Enable" />
+
+             is true, ASP.NET is hosted in an external worker process; otherwise, it runs directly in Inetinfo.exe.</para
+          >
           <block subset="none" type="note">
             <para>Running ASP.NET in Inetinfo.exe is not recommended, because this involves running the application in the Local System security context. When ASP.NET runs in Internet Information Services (IIS) 6 native mode, this setting is ignored, so there is usually no reason to set it to false.</para>
           </block>
@@ -250,7 +365,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The worker process is restarted (bounced) when the <see cref="P:System.Web.Configuration.ProcessModelSection.IdleTimeout" /> property value is reached. By default, only two conditions cause the process to bounce: the process exceeds the allowed memory limit, or the process exceeds the allowed number of requests that can be queued. You can add other conditions to the default ones. For example, you can use the <see cref="P:System.Web.Configuration.ProcessModelSection.IdleTimeout" /> property to limit the time the worker process is idle. </para>
+          <para
+            >The worker process is restarted (bounced) when the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.IdleTimeout" />
+
+             property value is reached. By default, only two conditions cause the process to bounce: the process exceeds the allowed memory limit, or the process exceeds the allowed number of requests that can be queued. You can add other conditions to the default ones. For example, you can use the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.IdleTimeout" />
+
+             property to limit the time the worker process is idle. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -262,7 +385,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogLevel">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.ProcessModelLogLevel LogLevel { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.ProcessModelLogLevel LogLevel { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -307,7 +433,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Web.Configuration.ProcessModelSection.MaxAppDomains" /> threshold is exceeded, the least-used application domain is shut down if a new application domain must start.</para>
+          <para
+            >If the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.MaxAppDomains" />
+
+             threshold is exceeded, the least-used application domain is shut down if a new application domain must start.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -337,8 +468,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of <see cref="P:System.Web.Configuration.ProcessModelSection.MaxIOThreads" /> must be equal to or greater than the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MinFreeThreads" /> setting in the httpRuntime configuration section.</para>
-          <para>You can have some control over the CPU utilization by setting the number of worker threads and I/O threads, using the <see cref="P:System.Web.Configuration.ProcessModelSection.MaxWorkerThreads" /> property and the <see cref="P:System.Web.Configuration.ProcessModelSection.MaxIOThreads" /> property respectively.</para>
+          <para
+            >The value of <see
+             cref="P:System.Web.Configuration.ProcessModelSection.MaxIOThreads" />
+
+             must be equal to or greater than the <see
+             cref="P:System.Web.Configuration.HttpRuntimeSection.MinFreeThreads" />
+
+             setting in the httpRuntime configuration section.</para
+          >
+          <para
+            >You can have some control over the CPU utilization by setting the number of worker threads and I/O threads, using the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.MaxWorkerThreads" />
+
+             property and the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.MaxIOThreads" />
+
+             property respectively.</para
+          >
           <para>The difference between the two types of threads is that the latter are bound to I/O objects, such as a stream or a pipe, and the former are traditional unrestricted threads. For Internet Information Services (IIS) version 6.0 and later, ASP.NET processes requests on worker threads. This is because ASP.NET is integrated within IIS.</para>
           <para>These threads are obtained from the process-wide CLR thread pool belonging to an application.</para>
           <block subset="none" type="note">
@@ -373,8 +520,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of <see cref="P:System.Web.Configuration.ProcessModelSection.MaxWorkerThreads" />  must be equal to or greater than the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MinFreeThreads" />  setting in the httpRuntime configuration section.</para>
-          <para>You can have some control over the CPU utilization by setting the number of worker threads and I/O threads, using the <see cref="P:System.Web.Configuration.ProcessModelSection.MaxWorkerThreads" /> property and, the <see cref="P:System.Web.Configuration.ProcessModelSection.MaxIOThreads" /> property, respectively.</para>
+          <para
+            >The value of <see
+             cref="P:System.Web.Configuration.ProcessModelSection.MaxWorkerThreads" />
+
+              must be equal to or greater than the <see
+             cref="P:System.Web.Configuration.HttpRuntimeSection.MinFreeThreads" />
+
+              setting in the httpRuntime configuration section.</para
+          >
+          <para
+            >You can have some control over the CPU utilization by setting the number of worker threads and I/O threads, using the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.MaxWorkerThreads" />
+
+             property and, the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.MaxIOThreads" />
+
+             property, respectively.</para
+          >
           <para>The difference between the two types of threads is that the latter are bound to I/O objects, such as a stream or a pipe, and the former are traditional unrestricted threads. For Internet Information Services (IIS) version 6.0 and higher, ASP.NET processes requests on worker threads. This is because ASP.NET is integrated within IIS.</para>
           <para>These threads are obtained from the process-wide CLR thread pool belonging to an application. </para>
           <block subset="none" type="note">
@@ -487,7 +650,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.ProcessModelSection.Password" /> property must be used with the <see cref="P:System.Web.Configuration.ProcessModelSection.UserName" /> property.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.ProcessModelSection.Password" />
+
+             property must be used with the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.UserName" />
+
+             property.</para
+          >
           <para>When present, these property values cause the worker process to run with the configured Windows identity.</para>
         </remarks>
         <summary>
@@ -518,7 +689,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The worker process is restarted (bounced) if it is not running after the <see cref="P:System.Web.Configuration.ProcessModelSection.PingFrequency" /> interval has expired.</para>
+          <para
+            >The worker process is restarted (bounced) if it is not running after the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.PingFrequency" />
+
+             interval has expired.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -548,7 +724,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The ISAPI extensions ping the worker process at the <see cref="P:System.Web.Configuration.ProcessModelSection.PingFrequency" /> interval. If the worker process does not respond within the <see cref="P:System.Web.Configuration.ProcessModelSection.PingTimeout" /> interval, the process is restarted.</para>
+          <para
+            >The ISAPI extensions ping the worker process at the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.PingFrequency" />
+
+             interval. If the worker process does not respond within the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.PingTimeout" />
+
+             interval, the process is restarted.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -560,7 +744,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -571,7 +758,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Configuration.ProcessModelSection" /> properties.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Configuration.ProcessModelSection" />
+
+             properties.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -645,7 +837,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ResponseDeadlockInterval">
-      <MemberSignature Language="C#" Value="public TimeSpan ResponseDeadlockInterval { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan ResponseDeadlockInterval { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -666,7 +861,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The process is restarted if there are queued requests and if there has not been a response during the time interval that is defined by <see cref="P:System.Web.Configuration.ProcessModelSection.ResponseDeadlockInterval" />. </para>
+          <para
+            >The process is restarted if there are queued requests and if there has not been a response during the time interval that is defined by <see
+             cref="P:System.Web.Configuration.ProcessModelSection.ResponseDeadlockInterval" />
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -678,7 +878,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ResponseRestartDeadlockInterval">
-      <MemberSignature Language="C#" Value="public TimeSpan ResponseRestartDeadlockInterval { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan ResponseRestartDeadlockInterval { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -696,7 +899,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is no longer used by ASP.NET and is provided for backward compatibility only. It will not cause a configuration error if it is already present in a configuration file. All recycling in the event of a deadlock condition is now controlled by the <see cref="P:System.Web.Configuration.ProcessModelSection.ResponseDeadlockInterval" /> property.</para>
+          <para
+            >This property is no longer used by ASP.NET and is provided for backward compatibility only. It will not cause a configuration error if it is already present in a configuration file. All recycling in the event of a deadlock condition is now controlled by the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.ResponseDeadlockInterval" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -847,12 +1055,35 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If present, the <see cref="P:System.Web.Configuration.ProcessModelSection.UserName" /> defines a Windows identity different from that of the default process. This identity is used to run the ASP.NET worker process. </para>
-          <para>By default, <see cref="P:System.Web.Configuration.ProcessModelSection.UserName" /> is set to the special value Machine, and the process runs under a user account named ASPNET that is created automatically when ASP.NET is installed. </para>
-          <para>The <see cref="P:System.Web.Configuration.ProcessModelSection.Password" /> property must be used with the <see cref="P:System.Web.Configuration.ProcessModelSection.UserName" /> property.</para>
+          <para
+            >If present, the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.UserName" />
+
+             defines a Windows identity different from that of the default process. This identity is used to run the ASP.NET worker process. </para
+          >
+          <para
+            >By default, <see
+             cref="P:System.Web.Configuration.ProcessModelSection.UserName" />
+
+             is set to the special value Machine, and the process runs under a user account named ASPNET that is created automatically when ASP.NET is installed. </para
+          >
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.ProcessModelSection.Password" />
+
+             property must be used with the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.UserName" />
+
+             property.</para
+          >
           <para>When present, these property values cause the worker process to run with the configured Windows identity.</para>
           <block subset="none" type="note">
-            <para>If the <see cref="P:System.Web.Configuration.ProcessModelSection.UserName" /> property is set to System, with the password AutoGenerate, it defines an entity that runs the process as an administrative account and allows all ASP.NET user code running under the process to have full administrative privileges. So, pay close attention to this case, for the permissions allowed.</para>
+            <para
+              >If the <see
+               cref="P:System.Web.Configuration.ProcessModelSection.UserName" />
+
+               property is set to System, with the password AutoGenerate, it defines an entity that runs the process as an administrative account and allows all ASP.NET user code running under the process to have full administrative privileges. So, pay close attention to this case, for the permissions allowed.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -880,8 +1111,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.ProcessModelSection.WebGarden" /> property must be used with the <see cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" /> property. </para>
-          <para>If the <see cref="P:System.Web.Configuration.ProcessModelSection.WebGarden" /> property is set to false, the <see cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" /> attribute is ignored and only one worker process runs.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.ProcessModelSection.WebGarden" />
+
+             property must be used with the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" />
+
+             property. </para
+          >
+          <para
+            >If the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.WebGarden" />
+
+             property is set to false, the <see
+             cref="P:System.Web.Configuration.ProcessModelSection.CpuMask" />
+
+             attribute is ignored and only one worker process runs.</para
+          >
           <block subset="none" type="note">
             <para>A multiprocessor Web server is called a Web garden.</para>
           </block>

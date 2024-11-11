@@ -18,7 +18,8 @@
     </remarks>
     <example>
       <para> The following example shows how to detect the feature set and conditionally generate the right code.</para>
-      <code lang="C#"><![CDATA[
+      <code lang="C#">
+        <![CDATA[
 	using System;
 	using Mono.Simd;
 
@@ -66,7 +67,8 @@
 	}
 
 	
-		]]></code>
+		]]>
+      </code>
     </example>
   </Docs>
   <Members>
@@ -81,8 +83,7 @@
       </ReturnValue>
       <Docs>
         <summary>The acceleration mode supported in this system.</summary>
-        <value>
-        </value>
+        <value></value>
         <remarks>This value returns the acceleration mode supported in
 	the current configuration. The value is AccelMode.None on
 	systems without SIMD support or runtimes without SIMD support
@@ -90,7 +91,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsMethodAccelerated">
-      <MemberSignature Language="C#" Value="public static bool IsMethodAccelerated (Type type, string method);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsMethodAccelerated (Type type, string method);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -103,7 +107,10 @@
         <Parameter Name="method" Type="System.String" />
       </Parameters>
       <exception cref="T:System.ArgumentException">
-	    <paramref name="method" /> could not be found on <paramref name="type" />
+        <paramref name="method" />
+
+         could not be found on <paramref
+         name="type" />
       </exception>
       <Docs>
         <param name="type">The type to lookup, a Type from Mono.Simd.</param>
@@ -117,7 +124,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsMethodAccelerated">
-      <MemberSignature Language="C#" Value="public static bool IsMethodAccelerated (Type type, string method, Type[] signature);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsMethodAccelerated (Type type, string method, Type[] signature);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -137,7 +147,13 @@
         </Parameter>
       </Parameters>
       <exception cref="T:System.ArgumentException">
-	    <paramref name="method" /> with <paramref name="signature" /> could not be found on <paramref name="type" />
+        <paramref name="method" />
+
+         with <paramref
+         name="signature" />
+
+         could not be found on <paramref
+         name="type" />
       </exception>
       <Docs>
         <param name="type">The type to lookup, a Type from Mono.Simd.</param>
@@ -152,7 +168,10 @@
       </Docs>
     </Member>
     <Member MemberName="MethodAccelerationMode">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.AccelMode MethodAccelerationMode (System.Reflection.MethodInfo method);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.AccelMode MethodAccelerationMode (System.Reflection.MethodInfo method);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -164,8 +183,14 @@
         <Parameter Name="method" Type="System.Reflection.MethodInfo" />
       </Parameters>
       <exception cref="T:System.ArgumentNullException">
-        <paramref name="method" /> was <see langword="null" />.
-      </exception>
+        <paramref name="method" />
+
+         was <see
+         langword="null" />
+
+        .
+      </exception
+      >
       <Docs>
         <param name="method">To be added.</param>
         <summary>To be added.</summary>
@@ -174,7 +199,10 @@
       </Docs>
     </Member>
     <Member MemberName="MethodAccelerationMode">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.AccelMode MethodAccelerationMode (Type type, string method);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.AccelMode MethodAccelerationMode (Type type, string method);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -187,7 +215,10 @@
         <Parameter Name="method" Type="System.String" />
       </Parameters>
       <exception cref="T:System.ArgumentException">
-	    <paramref name="method" /> could not be found on <paramref name="type" />
+        <paramref name="method" />
+
+         could not be found on <paramref
+         name="type" />
       </exception>
       <Docs>
         <param name="type">The type to lookup, a Type from Mono.Simd.</param>
@@ -200,7 +231,10 @@
       </Docs>
     </Member>
     <Member MemberName="MethodAccelerationMode">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.AccelMode MethodAccelerationMode (Type type, string method, Type[] signature);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.AccelMode MethodAccelerationMode (Type type, string method, Type[] signature);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -220,7 +254,13 @@
         </Parameter>
       </Parameters>
       <exception cref="T:System.ArgumentException">
-	    <paramref name="method" /> with <paramref name="signature" /> could not be found on <paramref name="type" />
+        <paramref name="method" />
+
+         with <paramref
+         name="signature" />
+
+         could not be found on <paramref
+         name="type" />
       </exception>
       <Docs>
         <param name="type">The type to lookup, a Type from Mono.Simd.</param>

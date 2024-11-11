@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="UnmanagedMemoryAccessor" FullName="System.IO.UnmanagedMemoryAccessor">
   <TypeSignature Language="C#" Value="public class UnmanagedMemoryAccessor : IDisposable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UnmanagedMemoryAccessor extends System.Object implements class System.IDisposable" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit UnmanagedMemoryAccessor extends System.Object implements class System.IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +20,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateViewAccessor" /> method of a <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" /> object returns the unmanaged blocks of memory for working with views of memory-mapped files.</para>
+      <para
+        >The <see
+         cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateViewAccessor" />
+
+         method of a <see
+         cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
+
+         object returns the unmanaged blocks of memory for working with views of memory-mapped files.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +38,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected UnmanagedMemoryAccessor ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,13 +51,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.IO.UnmanagedMemoryAccessor" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public UnmanagedMemoryAccessor (System.Runtime.InteropServices.SafeBuffer buffer, long offset, long capacity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Runtime.InteropServices.SafeBuffer buffer, int64 offset, int64 capacity) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public UnmanagedMemoryAccessor (System.Runtime.InteropServices.SafeBuffer buffer, long offset, long capacity);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Runtime.InteropServices.SafeBuffer buffer, int64 offset, int64 capacity) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -57,19 +82,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class with a specified buffer, offset, and capacity.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.IO.UnmanagedMemoryAccessor" />
+
+             class with a specified buffer, offset, and capacity.</para
+          >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The buffer to contain the accessor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The buffer to contain the accessor.</param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte at which to start the accessor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte at which to start the accessor.</param
+        >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The size, in bytes, of memory to allocate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The size, in bytes, of memory to allocate.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public UnmanagedMemoryAccessor (System.Runtime.InteropServices.SafeBuffer buffer, long offset, long capacity, System.IO.FileAccess access);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Runtime.InteropServices.SafeBuffer buffer, int64 offset, int64 capacity, valuetype System.IO.FileAccess access) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public UnmanagedMemoryAccessor (System.Runtime.InteropServices.SafeBuffer buffer, long offset, long capacity, System.IO.FileAccess access);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Runtime.InteropServices.SafeBuffer buffer, int64 offset, int64 capacity, valuetype System.IO.FileAccess access) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -84,16 +129,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class with a specified buffer, offset, capacity, and access right.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.IO.UnmanagedMemoryAccessor" />
+
+             class with a specified buffer, offset, capacity, and access right.</para
+          >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The buffer to contain the accessor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The buffer to contain the accessor.</param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte at which to start the accessor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte at which to start the accessor.</param
+        >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The size, in bytes, of memory to allocate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The size, in bytes, of memory to allocate.</param
+        >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of access allowed to the memory. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of access allowed to the memory. The default is <see
+           cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CanRead">
@@ -155,7 +220,10 @@
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="public void Dispose ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Dispose() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -168,13 +236,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases all resources used by the <see cref="T:System.IO.UnmanagedMemoryAccessor" />. </para>
+          <para
+            >Releases all resources used by the <see
+             cref="T:System.IO.UnmanagedMemoryAccessor" />
+
+            . </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected virtual void Dispose (bool disposing);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void Dispose(bool disposing) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -188,20 +264,56 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
-          <para>When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.UnmanagedMemoryAccessor" /> references. This method invokes the Dispose() method of each referenced object.</para>
+          <para
+            >This method is called by the public Dispose() method and the <see
+             cref="M:System.Object.Finalize" />
+
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
+             name="disposing" />
+
+             parameter set to true. <see
+             cref="M:System.Object.Finalize" />
+
+             invokes Dispose with <paramref
+             name="disposing" />
+
+             set to false.</para
+          >
+          <para
+            >When the <paramref
+             name="disposing" />
+
+             parameter is true, this method releases all resources held by any managed objects that this <see
+             cref="T:System.IO.UnmanagedMemoryAccessor" />
+
+             references. This method invokes the Dispose() method of each referenced object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the unmanaged resources used by the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> and optionally releases the managed resources. </para>
+          <para
+            >Releases the unmanaged resources used by the <see
+             cref="T:System.IO.UnmanagedMemoryAccessor" />
+
+             and optionally releases the managed resources. </para
+          >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Initialize">
-      <MemberSignature Language="C#" Value="protected void Initialize (System.Runtime.InteropServices.SafeBuffer buffer, long offset, long capacity, System.IO.FileAccess access);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void Initialize(class System.Runtime.InteropServices.SafeBuffer buffer, int64 offset, int64 capacity, valuetype System.IO.FileAccess access) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void Initialize (System.Runtime.InteropServices.SafeBuffer buffer, long offset, long capacity, System.IO.FileAccess access);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance void Initialize(class System.Runtime.InteropServices.SafeBuffer buffer, int64 offset, int64 capacity, valuetype System.IO.FileAccess access) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -225,13 +337,28 @@
           <para>Sets the initial values for the accessor.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The buffer to contain the accessor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The buffer to contain the accessor.</param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte at which to start the accessor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte at which to start the accessor.</param
+        >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The size, in bytes, of memory to allocate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The size, in bytes, of memory to allocate.</param
+        >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of access allowed to the memory. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of access allowed to the memory. The default is <see
+           cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsOpen">
@@ -253,9 +380,15 @@
         </summary>
       </Docs>
     </Member>
-    <Member MemberName="Read&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public void Read&lt;T&gt; (long position, out T structure) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Read&lt;struct .ctor (class System.ValueType) T&gt;(int64 position, !!T structure) cil managed" />
+    <Member MemberName="Read<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public void Read<T> (long position, out T structure) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Read<struct .ctor (class System.ValueType) T>(int64 position, !!T structure) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -274,7 +407,7 @@
       </TypeParameters>
       <Parameters>
         <Parameter Name="position" Type="System.Int64" />
-        <Parameter Name="structure" Type="T&amp;" RefType="out" />
+        <Parameter Name="structure" Type="T&" RefType="out" />
       </Parameters>
       <Docs>
         <typeparam name="T">To be added.</typeparam>
@@ -284,9 +417,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ReadArray&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public int ReadArray&lt;T&gt; (long position, T[] array, int offset, int count) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 ReadArray&lt;struct .ctor (class System.ValueType) T&gt;(int64 position, !!T[] array, int32 offset, int32 count) cil managed" />
+    <Member MemberName="ReadArray<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public int ReadArray<T> (long position, T[] array, int offset, int count) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int32 ReadArray<struct .ctor (class System.ValueType) T>(int64 position, !!T[] array, int32 offset, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -322,7 +461,10 @@
     </Member>
     <Member MemberName="ReadBoolean">
       <MemberSignature Language="C#" Value="public bool ReadBoolean (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ReadBoolean(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool ReadBoolean(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -344,12 +486,18 @@
           <para>true or false.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadByte">
       <MemberSignature Language="C#" Value="public byte ReadByte (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8 ReadByte(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance unsigned int8 ReadByte(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -371,12 +519,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadChar">
       <MemberSignature Language="C#" Value="public char ReadChar (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance char ReadChar(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance char ReadChar(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -398,12 +552,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadDecimal">
       <MemberSignature Language="C#" Value="public decimal ReadDecimal (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Decimal ReadDecimal(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance valuetype System.Decimal ReadDecimal(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -425,12 +585,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadDouble">
       <MemberSignature Language="C#" Value="public double ReadDouble (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float64 ReadDouble(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance float64 ReadDouble(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -452,12 +618,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadInt16">
       <MemberSignature Language="C#" Value="public short ReadInt16 (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int16 ReadInt16(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int16 ReadInt16(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -479,12 +651,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadInt32">
       <MemberSignature Language="C#" Value="public int ReadInt32 (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 ReadInt32(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int32 ReadInt32(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -506,12 +684,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadInt64">
       <MemberSignature Language="C#" Value="public long ReadInt64 (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int64 ReadInt64(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int64 ReadInt64(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -533,12 +717,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadSByte">
       <MemberSignature Language="C#" Value="public sbyte ReadSByte (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int8 ReadSByte(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int8 ReadSByte(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -565,12 +755,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadSingle">
       <MemberSignature Language="C#" Value="public float ReadSingle (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 ReadSingle(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance float32 ReadSingle(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -592,12 +788,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadUInt16">
       <MemberSignature Language="C#" Value="public ushort ReadUInt16 (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16 ReadUInt16(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance unsigned int16 ReadUInt16(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -624,12 +826,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadUInt32">
       <MemberSignature Language="C#" Value="public uint ReadUInt32 (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int32 ReadUInt32(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance unsigned int32 ReadUInt32(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -656,12 +864,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadUInt64">
       <MemberSignature Language="C#" Value="public ulong ReadUInt64 (long position);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int64 ReadUInt64(int64 position) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance unsigned int64 ReadUInt64(int64 position) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -688,12 +902,18 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, bool value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, bool value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, bool value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -712,14 +932,23 @@
           <para>Writes a Boolean value into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, byte value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, unsigned int8 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, unsigned int8 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -738,14 +967,23 @@
           <para>Writes a byte value into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, char value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, char value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, char value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -764,14 +1002,23 @@
           <para>Writes a character into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, decimal value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, valuetype System.Decimal value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, valuetype System.Decimal value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -790,14 +1037,23 @@
           <para>Writes a decimal value into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, double value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, float64 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, float64 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -816,14 +1072,23 @@
           <para>Writes a Double value into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, short value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, int16 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, int16 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -842,14 +1107,23 @@
           <para>Writes a 16-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, int value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, int32 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, int32 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -868,14 +1142,23 @@
           <para>Writes a 32-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, long value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, int64 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, int64 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -894,14 +1177,23 @@
           <para>Writes a 64-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, sbyte value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, int8 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, int8 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -925,14 +1217,23 @@
           <para>Writes an 8-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, float value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, float32 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, float32 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -951,14 +1252,23 @@
           <para>Writes a Single into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, ushort value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, unsigned int16 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, unsigned int16 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -982,14 +1292,23 @@
           <para>Writes an unsigned 16-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, uint value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, unsigned int32 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, unsigned int32 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1013,14 +1332,23 @@
           <para>Writes an unsigned 32-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="public void Write (long position, ulong value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write(int64 position, unsigned int64 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write(int64 position, unsigned int64 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1044,14 +1372,26 @@
           <para>Writes an unsigned 64-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes into the accessor at which to begin writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes into the accessor at which to begin writing.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to write.</param
+        >
       </Docs>
     </Member>
-    <Member MemberName="Write&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public void Write&lt;T&gt; (long position, ref T structure) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write&lt;struct .ctor (class System.ValueType) T&gt;(int64 position, !!T structure) cil managed" />
+    <Member MemberName="Write<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public void Write<T> (long position, ref T structure) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write<struct .ctor (class System.ValueType) T>(int64 position, !!T structure) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1070,7 +1410,7 @@
       </TypeParameters>
       <Parameters>
         <Parameter Name="position" Type="System.Int64" />
-        <Parameter Name="structure" Type="T&amp;" RefType="ref" />
+        <Parameter Name="structure" Type="T&" RefType="ref" />
       </Parameters>
       <Docs>
         <typeparam name="T">To be added.</typeparam>
@@ -1080,9 +1420,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="WriteArray&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public void WriteArray&lt;T&gt; (long position, T[] array, int offset, int count) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WriteArray&lt;struct .ctor (class System.ValueType) T&gt;(int64 position, !!T[] array, int32 offset, int32 count) cil managed" />
+    <Member MemberName="WriteArray<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public void WriteArray<T> (long position, T[] array, int offset, int count) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WriteArray<struct .ctor (class System.ValueType) T>(int64 position, !!T[] array, int32 offset, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

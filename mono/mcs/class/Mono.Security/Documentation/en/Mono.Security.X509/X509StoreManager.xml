@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -17,7 +22,10 @@
   </Docs>
   <Members>
     <Member MemberName="CurrentUser">
-      <MemberSignature Language="C#" Value="public static Mono.Security.X509.X509Stores CurrentUser { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.X509.X509Stores CurrentUser { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509Stores</ReturnType>
@@ -25,7 +33,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509Stores" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509Stores" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -34,7 +45,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IntermediateCACertificates">
-      <MemberSignature Language="C#" Value="public static Mono.Security.X509.X509CertificateCollection IntermediateCACertificates { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.X509.X509CertificateCollection IntermediateCACertificates { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509CertificateCollection</ReturnType>
@@ -42,7 +56,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509CertificateCollection" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -51,7 +68,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IntermediateCACrls">
-      <MemberSignature Language="C#" Value="public static System.Collections.ArrayList IntermediateCACrls { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.ArrayList IntermediateCACrls { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ArrayList</ReturnType>
@@ -59,7 +79,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:System.Collections.ArrayList" /></value>
+        <value
+          >a <see
+           cref="T:System.Collections.ArrayList" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +91,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LocalMachine">
-      <MemberSignature Language="C#" Value="public static Mono.Security.X509.X509Stores LocalMachine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.X509.X509Stores LocalMachine { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509Stores</ReturnType>
@@ -76,7 +102,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509Stores" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509Stores" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -85,7 +114,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TrustedRootCACrls">
-      <MemberSignature Language="C#" Value="public static System.Collections.ArrayList TrustedRootCACrls { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.ArrayList TrustedRootCACrls { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ArrayList</ReturnType>
@@ -93,7 +125,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:System.Collections.ArrayList" /></value>
+        <value
+          >a <see
+           cref="T:System.Collections.ArrayList" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -102,7 +137,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TrustedRootCertificates">
-      <MemberSignature Language="C#" Value="public static Mono.Security.X509.X509CertificateCollection TrustedRootCertificates { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.X509.X509CertificateCollection TrustedRootCertificates { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509CertificateCollection</ReturnType>
@@ -110,7 +148,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509CertificateCollection" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -119,7 +160,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UntrustedCertificates">
-      <MemberSignature Language="C#" Value="public static Mono.Security.X509.X509CertificateCollection UntrustedCertificates { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.X509.X509CertificateCollection UntrustedCertificates { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509CertificateCollection</ReturnType>
@@ -127,7 +171,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509CertificateCollection" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

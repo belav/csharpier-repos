@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CodeDirective" FullName="System.CodeDom.CodeDirective">
   <TypeSignature Language="C#" Value="public class CodeDirective : System.CodeDom.CodeObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit CodeDirective extends System.CodeDom.CodeObject" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit CodeDirective extends System.CodeDom.CodeObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -23,7 +26,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A class must inherit from the <see cref="T:System.CodeDom.CodeDirective" /> class to be contained in a <see cref="T:System.CodeDom.CodeDirectiveCollection" />.</para>
+      <para
+        >A class must inherit from the <see
+         cref="T:System.CodeDom.CodeDirective" />
+
+         class to be contained in a <see
+         cref="T:System.CodeDom.CodeDirectiveCollection" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -33,7 +44,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeDirective ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -45,7 +59,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirective" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeDirective" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>

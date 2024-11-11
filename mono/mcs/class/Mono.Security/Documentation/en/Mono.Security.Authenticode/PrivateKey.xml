@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -50,7 +55,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateFromFile">
-      <MemberSignature Language="C#" Value="public static Mono.Security.Authenticode.PrivateKey CreateFromFile (string filename);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.Authenticode.PrivateKey CreateFromFile (string filename);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.Authenticode.PrivateKey</ReturnType>
@@ -59,10 +67,25 @@
         <Parameter Name="filename" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="filename">a <see cref="T:System.String" /> representing the filename under which the private key will be loaded. </param>
+        <param name="filename"
+          >a <see
+           cref="T:System.String" />
+
+           representing the filename under which the private key will be loaded. </param
+        >
         <summary>Create a PrivateKey object from the specified file.</summary>
-        <returns>a <see cref="T:Mono.Security.Authenticode.PrivateKey" /> object containing the loaded private key.</returns>
-        <remarks>A <see cref="T:System.Security.Cryptography.CryptographicException" /> will be thrown if the file doesn't contain a valid private key. This can either be due to a bad, or missing, password or a bad file format.</remarks>
+        <returns
+          >a <see
+           cref="T:Mono.Security.Authenticode.PrivateKey" />
+
+           object containing the loaded private key.</returns
+        >
+        <remarks
+          >A <see
+           cref="T:System.Security.Cryptography.CryptographicException" />
+
+           will be thrown if the file doesn't contain a valid private key. This can either be due to a bad, or missing, password or a bad file format.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -70,7 +93,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateFromFile">
-      <MemberSignature Language="C#" Value="public static Mono.Security.Authenticode.PrivateKey CreateFromFile (string filename, string password);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.Authenticode.PrivateKey CreateFromFile (string filename, string password);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.Authenticode.PrivateKey</ReturnType>
@@ -80,11 +106,26 @@
         <Parameter Name="password" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="filename">a <see cref="T:System.String" /> representing the filename under which the private key will be loaded. </param>
+        <param name="filename"
+          >a <see
+           cref="T:System.String" />
+
+           representing the filename under which the private key will be loaded. </param
+        >
         <param name="password">the password to decrypt the private key file.</param>
         <summary>Create a PrivateKey object from the specified file and password.</summary>
-        <returns>a <see cref="T:Mono.Security.Authenticode.PrivateKey" /> object containing the loaded and, if required, decrypted private key.</returns>
-        <remarks>A <see cref="T:System.Security.Cryptography.CryptographicException" /> will be thrown if the file doesn't contain a valid private key. This can either be due to a bad, or missing, password or a bad file format.</remarks>
+        <returns
+          >a <see
+           cref="T:Mono.Security.Authenticode.PrivateKey" />
+
+           object containing the loaded and, if required, decrypted private key.</returns
+        >
+        <remarks
+          >A <see
+           cref="T:System.Security.Cryptography.CryptographicException" />
+
+           will be thrown if the file doesn't contain a valid private key. This can either be due to a bad, or missing, password or a bad file format.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -117,7 +158,12 @@
       <Parameters />
       <Docs>
         <summary>Get or set the intended key usage for the private key.</summary>
-        <value>a <see cref="T:System.Int32" /> indicating the private key intended usage.</value>
+        <value
+          >a <see
+           cref="T:System.Int32" />
+
+           indicating the private key intended usage.</value
+        >
         <remarks>Default to 2. The utility MakeCert requires the private keys inside PVK files to have a KeyType equals to 2 (signing).</remarks>
       </Docs>
       <AssemblyInfo>
@@ -126,7 +172,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RSA">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.RSA RSA { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.RSA RSA { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Security.Cryptography.RSA</ReturnType>
@@ -134,7 +183,12 @@
       <Parameters />
       <Docs>
         <summary>The RSA instance containing the private key.</summary>
-        <value>a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the private key.</value>
+        <value
+          >a <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance containing the private key.</value
+        >
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -152,7 +206,12 @@
         <Parameter Name="filename" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="filename">a <see cref="T:System.String" /> representing the filename under which the private key will be saved.</param>
+        <param name="filename"
+          >a <see
+           cref="T:System.String" />
+
+           representing the filename under which the private key will be saved.</param
+        >
         <summary>Save the current private key without a password.</summary>
         <remarks>WARNING: Private keys saved without password aren't encrypted.</remarks>
       </Docs>
@@ -172,8 +231,18 @@
         <Parameter Name="password" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="filename">a <see cref="T:System.String" /> representing the filename under which the private key will be saved.</param>
-        <param name="password">a <see cref="T:System.String" /> representing the password used to encrypt the private key.</param>
+        <param name="filename"
+          >a <see
+           cref="T:System.String" />
+
+           representing the filename under which the private key will be saved.</param
+        >
+        <param name="password"
+          >a <see
+           cref="T:System.String" />
+
+           representing the password used to encrypt the private key.</param
+        >
         <summary>Save the current private key encrypted with the specified password.</summary>
         <remarks>
           <para>The level of encryption will depends on the Weak property. If Weak is true then the encryption will be limited to 40 bits. By default Weak is false and the private keys are encrypted with a 128 bits key.</para>

@@ -1,1 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><ActivationContext.ContextForm xmlns="http://schemas.datacontract.org/2004/07/System">Loose</ActivationContext.ContextForm>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ActivationContext.ContextForm xmlns="http://schemas.datacontract.org/2004/07/System"
+  >Loose</ActivationContext.ContextForm
+>

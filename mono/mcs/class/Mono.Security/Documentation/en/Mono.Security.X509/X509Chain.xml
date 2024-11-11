@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -31,14 +36,20 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Chain (Mono.Security.X509.X509CertificateCollection chain);" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Chain (Mono.Security.X509.X509CertificateCollection chain);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
         <Parameter Name="chain" Type="Mono.Security.X509.X509CertificateCollection" />
       </Parameters>
       <Docs>
-        <param name="chain">a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></param>
+        <param name="chain"
+          >a <see
+           cref="T:Mono.Security.X509.X509CertificateCollection" />
+        </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -48,7 +59,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Build">
-      <MemberSignature Language="C#" Value="public bool Build (Mono.Security.X509.X509Certificate leaf);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Build (Mono.Security.X509.X509Certificate leaf);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -57,9 +71,15 @@
         <Parameter Name="leaf" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="leaf">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
+        <param name="leaf"
+          >a <see
+           cref="T:Mono.Security.X509.X509Certificate" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:System.Boolean" /></returns>
+        <returns
+          >a <see
+           cref="T:System.Boolean" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +88,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Chain">
-      <MemberSignature Language="C#" Value="public Mono.Security.X509.X509CertificateCollection Chain { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.X509.X509CertificateCollection Chain { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509CertificateCollection</ReturnType>
@@ -76,7 +99,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509CertificateCollection" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -85,7 +111,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FindByIssuerName">
-      <MemberSignature Language="C#" Value="public Mono.Security.X509.X509Certificate FindByIssuerName (string issuerName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.X509.X509Certificate FindByIssuerName (string issuerName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509Certificate</ReturnType>
@@ -94,9 +123,15 @@
         <Parameter Name="issuerName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="issuerName">a <see cref="T:System.String" /></param>
+        <param name="issuerName"
+          >a <see
+           cref="T:System.String" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:Mono.Security.X509.X509Certificate" /></returns>
+        <returns
+          >a <see
+           cref="T:Mono.Security.X509.X509Certificate" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -105,7 +140,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LoadCertificate">
-      <MemberSignature Language="C#" Value="public void LoadCertificate (Mono.Security.X509.X509Certificate x509);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LoadCertificate (Mono.Security.X509.X509Certificate x509);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -114,7 +152,10 @@
         <Parameter Name="x509" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="x509">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
+        <param name="x509"
+          >a <see
+           cref="T:Mono.Security.X509.X509Certificate" />
+        </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -124,7 +165,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LoadCertificates">
-      <MemberSignature Language="C#" Value="public void LoadCertificates (Mono.Security.X509.X509CertificateCollection collection);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LoadCertificates (Mono.Security.X509.X509CertificateCollection collection);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -133,7 +177,10 @@
         <Parameter Name="collection" Type="Mono.Security.X509.X509CertificateCollection" />
       </Parameters>
       <Docs>
-        <param name="collection">a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></param>
+        <param name="collection"
+          >a <see
+           cref="T:Mono.Security.X509.X509CertificateCollection" />
+        </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -159,7 +206,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Root">
-      <MemberSignature Language="C#" Value="public Mono.Security.X509.X509Certificate Root { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.X509.X509Certificate Root { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509Certificate</ReturnType>
@@ -167,7 +217,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509Certificate" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509Certificate" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -176,7 +229,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Status">
-      <MemberSignature Language="C#" Value="public Mono.Security.X509.X509ChainStatusFlags Status { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.X509.X509ChainStatusFlags Status { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509ChainStatusFlags</ReturnType>
@@ -184,7 +240,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509ChainStatusFlags" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509ChainStatusFlags" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -193,7 +252,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TrustAnchors">
-      <MemberSignature Language="C#" Value="public Mono.Security.X509.X509CertificateCollection TrustAnchors { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.X509.X509CertificateCollection TrustAnchors { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509CertificateCollection</ReturnType>
@@ -201,7 +263,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Security.X509.X509CertificateCollection" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

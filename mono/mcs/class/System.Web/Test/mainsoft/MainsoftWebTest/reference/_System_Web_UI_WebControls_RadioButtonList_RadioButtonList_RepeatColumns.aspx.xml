@@ -178,6 +178,9 @@
   </div>
   <div id="GHTSubTest6" testname="Non valid RepeatColumns value">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

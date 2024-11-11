@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SiteMapNodeItem" FullName="System.Web.UI.WebControls.SiteMapNodeItem">
-  <TypeSignature Language="C#" Value="public class SiteMapNodeItem : System.Web.UI.WebControls.WebControl, System.Web.UI.IDataItemContainer" />
+  <TypeSignature
+    Language="C#"
+    Value="public class SiteMapNodeItem : System.Web.UI.WebControls.WebControl, System.Web.UI.IDataItemContainer"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -17,18 +20,89 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control is a <see cref="T:System.Web.UI.WebControls.CompositeControl" />, which means it renders a user interface composed of many other Web server controls. While the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control works directly with the <see cref="T:System.Web.SiteMap" /> configured for your site and its <see cref="T:System.Web.SiteMapNode" /> objects, the <see cref="T:System.Web.SiteMapNode" /> objects are not Web server controls. The <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> class is a Web server control wrapper for the <see cref="T:System.Web.SiteMapNode" /> class, which enables the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control to display <see cref="T:System.Web.SiteMapNode" /> data while maintaining the functional distinction between a generic navigation data item and a user interface item.</para>
-      <para>The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control maintains the site map nodes in its <see cref="P:System.Web.UI.Control.Controls" /> collection internally. Because the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> can render its child controls with different styles, templates, and orders, it must be able to distinguish between functionally different types of nodes, regardless of display order. For this reason, each <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> is created with a specific type. (Possible types are listed in the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" /> enumeration.)</para>
-      <para>Use the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> class directly in your code only if you plan to extend the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control or write a control with similar functionality.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+         control is a <see
+         cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+        , which means it renders a user interface composed of many other Web server controls. While the <see
+         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+         control works directly with the <see
+         cref="T:System.Web.SiteMap" />
+
+         configured for your site and its <see
+         cref="T:System.Web.SiteMapNode" />
+
+         objects, the <see
+         cref="T:System.Web.SiteMapNode" />
+
+         objects are not Web server controls. The <see
+         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+         class is a Web server control wrapper for the <see
+         cref="T:System.Web.SiteMapNode" />
+
+         class, which enables the <see
+         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+         control to display <see
+         cref="T:System.Web.SiteMapNode" />
+
+         data while maintaining the functional distinction between a generic navigation data item and a user interface item.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+         control maintains the site map nodes in its <see
+         cref="P:System.Web.UI.Control.Controls" />
+
+         collection internally. Because the <see
+         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+         can render its child controls with different styles, templates, and orders, it must be able to distinguish between functionally different types of nodes, regardless of display order. For this reason, each <see
+         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+         is created with a specific type. (Possible types are listed in the <see
+         cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
+
+         enumeration.)</para
+      >
+      <para
+        >Use the <see
+         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+         class directly in your code only if you plan to extend the <see
+         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+         control or write a control with similar functionality.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> class is used by the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control to functionally represent a <see cref="T:System.Web.SiteMapNode" />.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+         class is used by the <see
+         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+         control to functionally represent a <see
+         cref="T:System.Web.SiteMapNode" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SiteMapNodeItem (int itemIndex, System.Web.UI.WebControls.SiteMapNodeItemType itemType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SiteMapNodeItem (int itemIndex, System.Web.UI.WebControls.SiteMapNodeItemType itemType);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="itemIndex" Type="System.Int32" />
@@ -38,16 +112,65 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" /> is <see cref="F:System.Web.UI.WebControls.PathDirection.RootToCurrent" />, you can add each deeper-level item of the site navigation hierarchy at the end of the <see cref="P:System.Web.UI.Control.Controls" /> collection. However, if the <see cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" /> property is set to <see cref="F:System.Web.UI.WebControls.PathDirection.CurrentToRoot" />, each deeper-level node must be inserted at the beginning of the <see cref="P:System.Web.UI.Control.Controls" /> collection.</para>
+          <para
+            >If the <see
+             cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
+
+             is <see
+             cref="F:System.Web.UI.WebControls.PathDirection.RootToCurrent" />
+
+            , you can add each deeper-level item of the site navigation hierarchy at the end of the <see
+             cref="P:System.Web.UI.Control.Controls" />
+
+             collection. However, if the <see
+             cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
+
+             property is set to <see
+             cref="F:System.Web.UI.WebControls.PathDirection.CurrentToRoot" />
+
+            , each deeper-level node must be inserted at the beginning of the <see
+             cref="P:System.Web.UI.Control.Controls" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> class, using the specified index and <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             class, using the specified index and <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
+
+            .</para
+          >
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index in the <see cref="P:System.Web.UI.Control.Controls" /> collection that the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control uses to track the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index in the <see
+           cref="P:System.Web.UI.Control.Controls" />
+
+           collection that the <see
+           cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+           control uses to track the <see
+           cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+           object. </param
+        >
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The functional type of <see cref="T:System.Web.SiteMapNode" /> that this <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> represents. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The functional type of <see
+           cref="T:System.Web.SiteMapNode" />
+
+           that this <see
+           cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+           represents. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -65,7 +188,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves the index that the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control uses to track and manage the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> in its internal collections.</para>
+          <para
+            >Retrieves the index that the <see
+             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+             control uses to track and manage the <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             in its internal collections.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -73,7 +204,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ItemType">
-      <MemberSignature Language="C#" Value="public virtual System.Web.UI.WebControls.SiteMapNodeItemType ItemType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Web.UI.WebControls.SiteMapNodeItemType ItemType { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.SiteMapNodeItemType</ReturnType>
@@ -84,11 +218,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> objects that have a <see cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" /> type are not bound to a corresponding <see cref="T:System.Web.SiteMapNode" />.</para>
+            <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             objects that have a <see
+             cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" />
+
+             type are not bound to a corresponding <see
+             cref="T:System.Web.SiteMapNode" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves the functional type of the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />.</para>
+          <para
+            >Retrieves the functional type of the <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -96,7 +244,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetItemType">
-      <MemberSignature Language="C#" Value="protected virtual void SetItemType (System.Web.UI.WebControls.SiteMapNodeItemType itemType);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void SetItemType (System.Web.UI.WebControls.SiteMapNodeItemType itemType);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -111,14 +262,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the current <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemType" /> property.</para>
+          <para
+            >Sets the current <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+            <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemType" />
+
+             property.</para
+          >
         </summary>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
+
+           values. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SiteMapNode">
-      <MemberSignature Language="C#" Value="public virtual System.Web.SiteMapNode SiteMapNode { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Web.SiteMapNode SiteMapNode { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.SiteMapNode</ReturnType>
@@ -128,11 +294,39 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.SiteMapNode" /> property gets or sets the <see cref="T:System.Web.SiteMapNode" /> that the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> is bound to. <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> objects that have a <see cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" /> type are not bound to a corresponding <see cref="T:System.Web.SiteMapNode" /> object.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.SiteMapNodeItem.SiteMapNode" />
+
+             property gets or sets the <see
+             cref="T:System.Web.SiteMapNode" />
+
+             that the <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             is bound to. <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             objects that have a <see
+             cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" />
+
+             type are not bound to a corresponding <see
+             cref="T:System.Web.SiteMapNode" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.SiteMapNode" /> object that the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> represents.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.SiteMapNode" />
+
+             object that the <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             represents.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -140,7 +334,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="System.Web.UI.IDataItemContainer.DataItem">
-      <MemberSignature Language="C#" Value="object System.Web.UI.IDataItemContainer.DataItem { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Web.UI.IDataItemContainer.DataItem { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -152,8 +349,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.SiteMapNode" /> property to access the data item represented by a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object. </para>
-          <para>The <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DataItem" /> member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" /> interface.</para>
+          <para
+            >Typically, you should use the <see
+             cref="P:System.Web.UI.WebControls.SiteMapNodeItem.SiteMapNode" />
+
+             property to access the data item represented by a <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             object. </para
+          >
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DataItem" />
+
+             member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             instance is cast to an <see
+             cref="T:System.Web.UI.IDataItemContainer" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -162,7 +378,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IDataItemContainer.DataItemIndex">
-      <MemberSignature Language="C#" Value="int System.Web.UI.IDataItemContainer.DataItemIndex { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="int System.Web.UI.IDataItemContainer.DataItemIndex { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -174,8 +393,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemIndex" /> property to determine the index for a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object. </para>
-          <para>The <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DataItemIndex" /> member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" /> interface.</para>
+          <para
+            >Typically, you should use the <see
+             cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemIndex" />
+
+             property to determine the index for a <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             object. </para
+          >
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DataItemIndex" />
+
+             member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             instance is cast to an <see
+             cref="T:System.Web.UI.IDataItemContainer" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -184,7 +422,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IDataItemContainer.DisplayIndex">
-      <MemberSignature Language="C#" Value="int System.Web.UI.IDataItemContainer.DisplayIndex { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="int System.Web.UI.IDataItemContainer.DisplayIndex { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -196,8 +437,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemIndex" /> property to determine the index for a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object. </para>
-          <para>The <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DisplayIndex" /> member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" /> interface.</para>
+          <para
+            >Typically, you should use the <see
+             cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemIndex" />
+
+             property to determine the index for a <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             object. </para
+          >
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DisplayIndex" />
+
+             member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+             instance is cast to an <see
+             cref="T:System.Web.UI.IDataItemContainer" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

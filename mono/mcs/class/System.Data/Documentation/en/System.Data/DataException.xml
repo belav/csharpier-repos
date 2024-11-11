@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DataException" FullName="System.Data.DataException">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class DataException : SystemException" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class DataException : SystemException"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -12,8 +16,7 @@
   <Base>
     <BaseTypeName>System.SystemException</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <remarks>To be added</remarks>
     <summary>
@@ -31,7 +34,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.DataException" /> class. This is the default constructor.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.DataException" />
+
+             class. This is the default constructor.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -50,10 +58,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.DataException" /> class with the specified string.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.DataException" />
+
+             class with the specified string.</para
+          >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to display when the exception is thrown. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to display when the exception is thrown. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -61,7 +77,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected DataException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected DataException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -72,12 +91,23 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.DataException" /> class with the specified serialization information and context.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.DataException" />
+
+             class with the specified serialization information and context.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data necessary to serialize or deserialize an object. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data necessary to serialize or deserialize an object. </param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Description of the source and destination of the specified serialized stream. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Description of the source and destination of the specified serialized stream. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -85,7 +115,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataException (string s, Exception innerException);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DataException (string s, Exception innerException);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -99,12 +132,23 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.DataException" /> class with the specified string and inner exception.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.DataException" />
+
+             class with the specified string and inner exception.</para
+          >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to display when the exception is thrown. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to display when the exception is thrown. </param
+        >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />A reference to an inner exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A reference to an inner exception. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

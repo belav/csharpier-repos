@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripItemClickedEventArgs" FullName="System.Windows.Forms.ToolStripItemClickedEventArgs">
+<Type
+  Name="ToolStripItemClickedEventArgs"
+  FullName="System.Windows.Forms.ToolStripItemClickedEventArgs"
+>
   <TypeSignature Language="C#" Value="public class ToolStripItemClickedEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -14,12 +17,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ToolStrip.ItemClicked" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripItemClickedEventArgs (System.Windows.Forms.ToolStripItem clickedItem);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripItemClickedEventArgs (System.Windows.Forms.ToolStripItem clickedItem);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="clickedItem" Type="System.Windows.Forms.ToolStripItem" />
@@ -29,17 +40,34 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" /> class, specifying the <see cref="T:System.Windows.Forms.ToolStripItem" /> that was clicked. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
+
+             class, specifying the <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+             that was clicked. </para
+          >
         </summary>
         <param name="clickedItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStripItem" /> that was clicked.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStripItem" />
+
+           that was clicked.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="ClickedItem">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripItem ClickedItem { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripItem ClickedItem { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStripItem</ReturnType>
@@ -50,7 +78,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the item that was clicked on the <see cref="T:System.Windows.Forms.ToolStrip" />.</para>
+          <para
+            >Gets the item that was clicked on the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

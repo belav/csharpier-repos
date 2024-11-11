@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DataSetFieldSchema" FullName="System.Web.UI.Design.DataSetFieldSchema">
-  <TypeSignature Language="C#" Value="public sealed class DataSetFieldSchema : System.Web.UI.Design.IDataSourceFieldSchema" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DataSetFieldSchema : System.Web.UI.Design.IDataSourceFieldSchema"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,9 +19,51 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class to get the properties of a data field using a <see cref="T:System.Data.DataColumn" />. You can discover the structure of a data field by using the following properties in this class: <see cref="P:System.Web.UI.Design.DataSetFieldSchema.DataType" />, <see cref="P:System.Web.UI.Design.DataSetFieldSchema.IsReadOnly" />, <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" />, <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />, and <see cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" />. In addition, you can use the <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" /> property to determine if a data column is set for <see cref="P:System.Data.DataColumn.AutoIncrement" />, or the <see cref="P:System.Web.UI.Design.DataSetFieldSchema.PrimaryKey" /> property to determine if a data column is in the primary key.</para>
-      <para>The <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class is used by custom control designer components to provide information about a data field at design time. </para>
-      <para>To examine the components of data using a <see cref="T:System.Data.DataSet" />, use the following classes.</para>
+      <para
+        >Use the <see
+         cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+         class to get the properties of a data field using a <see
+         cref="T:System.Data.DataColumn" />
+
+        . You can discover the structure of a data field by using the following properties in this class: <see
+         cref="P:System.Web.UI.Design.DataSetFieldSchema.DataType" />
+
+        , <see
+         cref="P:System.Web.UI.Design.DataSetFieldSchema.IsReadOnly" />
+
+        , <see
+         cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" />
+
+        , <see
+         cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />
+
+        , and <see
+         cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" />
+
+        . In addition, you can use the <see
+         cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" />
+
+         property to determine if a data column is set for <see
+         cref="P:System.Data.DataColumn.AutoIncrement" />
+
+        , or the <see
+         cref="P:System.Web.UI.Design.DataSetFieldSchema.PrimaryKey" />
+
+         property to determine if a data column is in the primary key.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+         class is used by custom control designer components to provide information about a data field at design time. </para
+      >
+      <para
+        >To examine the components of data using a <see
+         cref="T:System.Data.DataSet" />
+
+        , use the following classes.</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -44,7 +89,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataSetFieldSchema (System.Data.DataColumn column);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DataSetFieldSchema (System.Data.DataColumn column);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -55,14 +103,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class to examine the properties of a data field using a <see cref="T:System.Data.DataColumn" /> object.</para>
+          <para
+            >Use the <see
+             cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+             class to examine the properties of a data field using a <see
+             cref="T:System.Data.DataColumn" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class using a specified <see cref="T:System.Data.DataColumn" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+             class using a specified <see
+             cref="T:System.Data.DataColumn" />
+
+            .</para
+          >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.DataColumn" /> object that the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> object  describes.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.DataColumn" />
+
+           object that the <see
+           cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+           object  describes.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DataType">
@@ -96,7 +169,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" /> property corresponds to the <see cref="P:System.Data.DataColumn.AutoIncrement" /> property of a <see cref="T:System.Data.DataColumn" />.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" />
+
+             property corresponds to the <see
+             cref="P:System.Data.DataColumn.AutoIncrement" />
+
+             property of a <see
+             cref="T:System.Data.DataColumn" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,7 +202,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Data.DataColumn" /> is read-only.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Data.DataColumn" />
+
+             is read-only.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -135,7 +224,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" /> property corresponds to the <see cref="P:System.Data.DataColumn.Unique" /> property of a <see cref="T:System.Data.DataColumn" />.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" />
+
+             property corresponds to the <see
+             cref="P:System.Data.DataColumn.Unique" />
+
+             property of a <see
+             cref="T:System.Data.DataColumn" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -156,7 +256,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" /> property corresponds to the <see cref="P:System.Data.DataColumn.MaxLength" /> property of a <see cref="T:System.Data.DataColumn" />.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" />
+
+             property corresponds to the <see
+             cref="P:System.Data.DataColumn.MaxLength" />
+
+             property of a <see
+             cref="T:System.Data.DataColumn" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -177,7 +288,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" /> property corresponds to the <see cref="P:System.Data.DataColumn.ColumnName" /> property of a <see cref="T:System.Data.DataColumn" />.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />
+
+             property corresponds to the <see
+             cref="P:System.Data.DataColumn.ColumnName" />
+
+             property of a <see
+             cref="T:System.Data.DataColumn" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -198,7 +320,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Nullable" /> property corresponds to the <see cref="P:System.Data.DataColumn.AllowDBNull" /> property of a <see cref="T:System.Data.DataColumn" />.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DataSetFieldSchema.Nullable" />
+
+             property corresponds to the <see
+             cref="P:System.Data.DataColumn.AllowDBNull" />
+
+             property of a <see
+             cref="T:System.Data.DataColumn" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -219,7 +352,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Precision" /> property is required by the <see cref="T:System.Web.UI.Design.IDataSourceFieldSchema" /> interface, but is not used by the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DataSetFieldSchema.Precision" />
+
+             property is required by the <see
+             cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+
+             interface, but is not used by the <see
+             cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -258,7 +402,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Scale" /> property is required by the <see cref="T:System.Web.UI.Design.IDataSourceFieldSchema" /> interface, but is not used by the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DataSetFieldSchema.Scale" />
+
+             property is required by the <see
+             cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+
+             interface, but is not used by the <see
+             cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SettingsPropertyValueCollection" FullName="System.Configuration.SettingsPropertyValueCollection">
-  <TypeSignature Language="C#" Value="public class SettingsPropertyValueCollection : ICloneable, System.Collections.ICollection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SettingsPropertyValueCollection extends System.Object implements class System.Collections.ICollection, class System.Collections.IEnumerable, class System.ICloneable" />
+<Type
+  Name="SettingsPropertyValueCollection"
+  FullName="System.Configuration.SettingsPropertyValueCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class SettingsPropertyValueCollection : ICloneable, System.Collections.ICollection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SettingsPropertyValueCollection extends System.Object implements class System.Collections.ICollection, class System.Collections.IEnumerable, class System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -23,13 +32,24 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains a collection of settings property values that map <see cref="T:System.Configuration.SettingsProperty" /> objects to <see cref="T:System.Configuration.SettingsPropertyValue" /> objects.</para>
+      <para
+        >Contains a collection of settings property values that map <see
+         cref="T:System.Configuration.SettingsProperty" />
+
+         objects to <see
+         cref="T:System.Configuration.SettingsPropertyValue" />
+
+         objects.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SettingsPropertyValueCollection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -41,13 +61,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyValueCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Configuration.SettingsPropertyValueCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Configuration.SettingsPropertyValue property);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(class System.Configuration.SettingsPropertyValue property) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Configuration.SettingsPropertyValue property);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Add(class System.Configuration.SettingsPropertyValue property) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -64,15 +95,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a <see cref="T:System.Configuration.SettingsPropertyValue" /> object to the collection.</para>
+          <para
+            >Adds a <see
+             cref="T:System.Configuration.SettingsPropertyValue" />
+
+             object to the collection.</para
+          >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Configuration.SettingsPropertyValue" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Configuration.SettingsPropertyValue" />
+
+           object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -87,13 +132,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all <see cref="T:System.Configuration.SettingsPropertyValue" /> objects from the collection.</para>
+          <para
+            >Removes all <see
+             cref="T:System.Configuration.SettingsPropertyValue" />
+
+             objects from the collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Clone">
       <MemberSignature Language="C#" Value="public object Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Clone() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -112,13 +165,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Configuration.SettingsPropertyValueCollection" /> class.</para>
+          <para
+            >A <see
+             cref="T:System.Configuration.SettingsPropertyValueCollection" />
+
+             class.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
       <MemberSignature Language="C#" Value="public void CopyTo (Array array, int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CopyTo(class System.Array array, int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void CopyTo(class System.Array array, int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -136,12 +197,23 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies this <see cref="T:System.Configuration.SettingsPropertyValueCollection" /> collection to an array.</para>
+          <para
+            >Copies this <see
+             cref="T:System.Configuration.SettingsPropertyValueCollection" />
+
+             collection to an array.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array to copy the collection to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The array to copy the collection to.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index at which to begin copying.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index at which to begin copying.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -161,13 +233,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that specifies the number of <see cref="T:System.Configuration.SettingsPropertyValue" /> objects in the collection.</para>
+          <para
+            >Gets a value that specifies the number of <see
+             cref="T:System.Configuration.SettingsPropertyValue" />
+
+             objects in the collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -182,11 +265,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Collections.IEnumerator" /> object as it applies to the collection.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Collections.IEnumerator" />
+
+             object as it applies to the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Collections.IEnumerator" /> object as it applies to the collection.</para>
+          <para
+            >The <see
+             cref="T:System.Collections.IEnumerator" />
+
+             object as it applies to the collection.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -212,8 +305,14 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Configuration.SettingsPropertyValue this[string name] { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.SettingsPropertyValue Item(string)" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.SettingsPropertyValue this[string name] { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.SettingsPropertyValue Item(string)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -235,7 +334,10 @@
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="public void Remove (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Remove(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Remove(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -252,15 +354,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Configuration.SettingsPropertyValue" /> object from the collection.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Configuration.SettingsPropertyValue" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Configuration.SettingsPropertyValue" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Configuration.SettingsPropertyValue" />
+
+           object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetReadOnly">
       <MemberSignature Language="C#" Value="public void SetReadOnly ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetReadOnly() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetReadOnly() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

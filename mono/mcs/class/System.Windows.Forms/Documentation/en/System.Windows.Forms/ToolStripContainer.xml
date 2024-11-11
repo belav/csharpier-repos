@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ToolStripContainer" FullName="System.Windows.Forms.ToolStripContainer">
-  <TypeSignature Language="C#" Value="public class ToolStripContainer : System.Windows.Forms.ContainerControl" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripContainer : System.Windows.Forms.ContainerControl"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -25,9 +28,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.ToolStripContainer" /> is similar to <see cref="T:System.Windows.Forms.SplitContainer" />. It uses four docked side panels (instances of <see cref="T:System.Windows.Forms.ToolStripPanel" />) and one central panel (an instance of <see cref="T:System.Windows.Forms.ToolStripContentPanel" />) to create a typical arrangement. You cannot remove the side panels, but you can hide them by setting their respective <see cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />, <see cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />, <see cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />, and <see cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" /> properties to false. By default, each of these properties is true at design time. Also at design time, the <see cref="T:System.Windows.Forms.ToolStripContainer" /> appears with its top panel already expanded. You can neither remove nor hide the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />. You can arrange one or more <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> controls in the side panels, and you can use the central panel for other controls. The <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> also provides a way to get renderer support into the body of your form for a consistent appearance. </para>
+        <see cref="T:System.Windows.Forms.ToolStripContainer" />
+
+         is similar to <see
+         cref="T:System.Windows.Forms.SplitContainer" />
+
+        . It uses four docked side panels (instances of <see
+         cref="T:System.Windows.Forms.ToolStripPanel" />
+
+        ) and one central panel (an instance of <see
+         cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+        ) to create a typical arrangement. You cannot remove the side panels, but you can hide them by setting their respective <see
+         cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />
+
+        , <see
+         cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />
+
+        , <see
+         cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />
+
+        , and <see
+         cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" />
+
+         properties to false. By default, each of these properties is true at design time. Also at design time, the <see
+         cref="T:System.Windows.Forms.ToolStripContainer" />
+
+         appears with its top panel already expanded. You can neither remove nor hide the <see
+         cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+        . You can arrange one or more <see
+         cref="T:System.Windows.Forms.ToolStrip" />
+
+        , <see
+         cref="T:System.Windows.Forms.MenuStrip" />
+
+        , or <see
+         cref="T:System.Windows.Forms.StatusStrip" />
+
+         controls in the side panels, and you can use the central panel for other controls. The <see
+         cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+         also provides a way to get renderer support into the body of your form for a consistent appearance. </para
+      >
       <para>
-        <see cref="T:System.Windows.Forms.ToolStripContainer" /> does not support Multiple Document Interface (MDI) applications. Use <see cref="T:System.Windows.Forms.ToolStripPanel" /> for MDI applications.</para>
+        <see cref="T:System.Windows.Forms.ToolStripContainer" />
+
+         does not support Multiple Document Interface (MDI) applications. Use <see
+         cref="T:System.Windows.Forms.ToolStripPanel" />
+
+         for MDI applications.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -44,7 +95,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -85,7 +141,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AutoScrollMargin">
-      <MemberSignature Language="C#" Value="public System.Drawing.Size AutoScrollMargin { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Size AutoScrollMargin { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -118,7 +177,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AutoScrollMinSize">
-      <MemberSignature Language="C#" Value="public System.Drawing.Size AutoScrollMinSize { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Size AutoScrollMinSize { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -216,7 +278,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BackgroundImage">
-      <MemberSignature Language="C#" Value="public System.Drawing.Image BackgroundImage { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Image BackgroundImage { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -281,7 +346,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BackgroundImageLayout">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.ImageLayout BackgroundImageLayout { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.ImageLayout BackgroundImageLayout { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -313,7 +381,10 @@
       </Docs>
     </Member>
     <Member MemberName="BackgroundImageLayoutChanged">
-      <MemberSignature Language="C#" Value="public event EventHandler BackgroundImageLayoutChanged;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event EventHandler BackgroundImageLayoutChanged;"
+      />
       <MemberType>Event</MemberType>
       <Attributes>
         <Attribute>
@@ -345,7 +416,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BottomToolStripPanel">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripPanel BottomToolStripPanel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripPanel BottomToolStripPanel { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -363,11 +437,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanel" /> property to add <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> controls or move them from another <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanel" />
+
+             property to add <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , <see
+             cref="T:System.Windows.Forms.MenuStrip" />
+
+            , or <see
+             cref="T:System.Windows.Forms.StatusStrip" />
+
+             controls or move them from another <see
+             cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the bottom panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />.</para>
+          <para
+            >Gets the bottom panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -375,7 +471,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BottomToolStripPanelVisible">
-      <MemberSignature Language="C#" Value="public bool BottomToolStripPanelVisible { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool BottomToolStripPanelVisible { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -390,11 +489,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Set the <see cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" /> property to false to use a <see cref="T:System.Windows.Forms.ToolStripContainer" /> without a bottom panel.</para>
+          <para
+            >Set the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />
+
+             property to false to use a <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             without a bottom panel.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the bottom panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> is visible. </para>
+          <para
+            >Gets or sets a value indicating whether the bottom panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             is visible. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -452,11 +564,23 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripContainer.CausesValidation" /> property changes.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.CausesValidation" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -464,7 +588,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ContentPanel">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripContentPanel ContentPanel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripContentPanel ContentPanel { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -482,11 +609,42 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the top, bottom, left, and right panels of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> to hold <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> controls. Controls other than <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> are automatically added to the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />.</para>
+          <para
+            >You can use the top, bottom, left, and right panels of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             to hold <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , <see
+             cref="T:System.Windows.Forms.MenuStrip" />
+
+            , or <see
+             cref="T:System.Windows.Forms.StatusStrip" />
+
+             controls. Controls other than <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , <see
+             cref="T:System.Windows.Forms.MenuStrip" />
+
+            , or <see
+             cref="T:System.Windows.Forms.StatusStrip" />
+
+             are automatically added to the <see
+             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the center panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />.</para>
+          <para
+            >Gets the center panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -494,7 +652,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ContextMenuStrip">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ContextMenuStrip ContextMenuStrip { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ContextMenuStrip ContextMenuStrip { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -543,11 +704,23 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripContainer.ContextMenuStrip" /> property changes.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.ContextMenuStrip" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -555,7 +728,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Controls">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Control.ControlCollection Controls { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Control.ControlCollection Controls { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -585,7 +761,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateControlsInstance">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.Control.ControlCollection CreateControlsInstance ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.Control.ControlCollection CreateControlsInstance ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.Control+ControlCollection</ReturnType>
@@ -596,11 +775,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates and returns a <see cref="T:System.Windows.Forms.ToolStripContainer" /> collection.</para>
+          <para
+            >Creates and returns a <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A read-only <see cref="T:System.Windows.Forms.ToolStripContainer" /> collection.</para>
+          <para
+            >A read-only <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             collection.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -613,7 +802,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Cursor">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.Cursor Cursor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.Cursor Cursor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -678,7 +870,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DefaultSize">
-      <MemberSignature Language="C#" Value="protected override System.Drawing.Size DefaultSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Drawing.Size DefaultSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -689,7 +884,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the default size of the <see cref="T:System.Windows.Forms.ToolStripContainer" />, in pixels.</para>
+          <para
+            >Gets the default size of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            , in pixels.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -762,7 +962,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LeftToolStripPanel">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripPanel LeftToolStripPanel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripPanel LeftToolStripPanel { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -780,11 +983,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanel" /> property to add <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> controls or move them from another <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanel" />
+
+             property to add <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , <see
+             cref="T:System.Windows.Forms.MenuStrip" />
+
+            , or <see
+             cref="T:System.Windows.Forms.StatusStrip" />
+
+             controls or move them from another <see
+             cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the left panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />.</para>
+          <para
+            >Gets the left panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -807,11 +1032,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Set the <see cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" /> property to false to use a <see cref="T:System.Windows.Forms.ToolStripContainer" /> without a left panel.</para>
+          <para
+            >Set the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />
+
+             property to false to use a <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             without a left panel.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the left panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> is visible.</para>
+          <para
+            >Gets or sets a value indicating whether the left panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             is visible.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -819,7 +1057,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRightToLeftChanged">
-      <MemberSignature Language="C#" Value="protected override void OnRightToLeftChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRightToLeftChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -834,10 +1075,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.RightToLeftChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The event data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnSizeChanged">
@@ -853,22 +1102,48 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.ToolStripContainer.OnSizeChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.ToolStripContainer.OnSizeChanged(System.EventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.SizeChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.SizeChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RightToolStripPanel">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripPanel RightToolStripPanel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripPanel RightToolStripPanel { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -886,11 +1161,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanel" /> property to add <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> controls or move them from another <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanel" />
+
+             property to add <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , <see
+             cref="T:System.Windows.Forms.MenuStrip" />
+
+            , or <see
+             cref="T:System.Windows.Forms.StatusStrip" />
+
+             controls or move them from another <see
+             cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the right panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />.</para>
+          <para
+            >Gets the right panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -913,11 +1210,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Set the <see cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" /> property to false to use a <see cref="T:System.Windows.Forms.ToolStripContainer" /> without a right panel.</para>
+          <para
+            >Set the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" />
+
+             property to false to use a <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             without a right panel.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the right panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> is visible.</para>
+          <para
+            >Gets or sets a value indicating whether the right panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             is visible.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -925,7 +1235,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TopToolStripPanel">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripPanel TopToolStripPanel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripPanel TopToolStripPanel { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -943,11 +1256,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanel" /> property to add <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> controls or move them from another <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanel" />
+
+             property to add <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , <see
+             cref="T:System.Windows.Forms.MenuStrip" />
+
+            , or <see
+             cref="T:System.Windows.Forms.StatusStrip" />
+
+             controls or move them from another <see
+             cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the top panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />.</para>
+          <para
+            >Gets the top panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -970,11 +1305,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Set the <see cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" /> property to false to use a <see cref="T:System.Windows.Forms.ToolStripContainer" /> without a top panel.</para>
+          <para
+            >Set the <see
+             cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />
+
+             property to false to use a <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             without a top panel.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the top panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> is visible.</para>
+          <para
+            >Gets or sets a value indicating whether the top panel of the <see
+             cref="T:System.Windows.Forms.ToolStripContainer" />
+
+             is visible.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

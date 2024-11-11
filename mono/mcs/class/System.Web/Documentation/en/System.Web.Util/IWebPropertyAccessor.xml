@@ -36,14 +36,20 @@
           <para>The value of the specified property.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property from which the value is retrieved.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property from which the value is retrieved.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetProperty">
-      <MemberSignature Language="C#" Value="public void SetProperty (object target, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetProperty (object target, object value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -60,9 +66,18 @@
           <para>Sets the specified property with the given value.</para>
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property for which <paramref name="value" /> is set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property for which <paramref
+           name="value" />
+
+           is set.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object containing the value of the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object containing the value of the property.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

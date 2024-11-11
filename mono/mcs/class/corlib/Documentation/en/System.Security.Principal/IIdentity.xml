@@ -19,7 +19,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An identity object represents the user on whose behalf the code is running. This interface is implemented by the <see cref="T:System.Security.Principal.GenericIdentity" /> and <see cref="T:System.Security.Principal.WindowsIdentity" /> classes.</para>
+      <para
+        >An identity object represents the user on whose behalf the code is running. This interface is implemented by the <see
+         cref="T:System.Security.Principal.GenericIdentity" />
+
+         and <see
+         cref="T:System.Security.Principal.WindowsIdentity" />
+
+         classes.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -93,7 +101,10 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The user name is passed to the common language runtime by the operating system or other authentication provider (such as ASP.NET).</para>
           <para>
-            <see cref="P:System.Security.Principal.IIdentity.Name" /> is typically set to an empty string ("") for an unauthenticated entity, but can take other values.</para>
+            <see cref="P:System.Security.Principal.IIdentity.Name" />
+
+             is typically set to an empty string ("") for an unauthenticated entity, but can take other values.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -2,12 +2,10 @@
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System.Runtime.Serialization.Xml.cs" />
     <Compile Include="System.Runtime.Serialization.Xml.Forwards.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime\ref\System.Runtime.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime.Serialization.Primitives\ref\System.Runtime.Serialization.Primitives.csproj" />

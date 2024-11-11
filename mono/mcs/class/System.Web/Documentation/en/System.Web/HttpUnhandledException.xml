@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpUnhandledException" FullName="System.Web.HttpUnhandledException">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public sealed class HttpUnhandledException : System.Web.HttpException" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public sealed class HttpUnhandledException : System.Web.HttpException"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -12,8 +15,7 @@
   <Base>
     <BaseTypeName>System.Web.HttpException</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <remarks>To be added</remarks>
     <summary>
@@ -33,7 +35,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.HttpUnhandledException" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.HttpUnhandledException" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -50,14 +57,25 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.HttpUnhandledException" /> class with the specified error messages.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.HttpUnhandledException" />
+
+             class with the specified error messages.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message displayed to the client when the exception is thrown. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message displayed to the client when the exception is thrown. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HttpUnhandledException (string message, Exception innerException);" />
+      <MemberSignature
+        Language="C#"
+        Value="public HttpUnhandledException (string message, Exception innerException);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -70,12 +88,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.HttpUnhandledException" /> class with the specified error message and inner exception.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.HttpUnhandledException" />
+
+             class with the specified error message and inner exception.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message displayed to the client when the exception is thrown. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message displayed to the client when the exception is thrown. </param
+        >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Exception.InnerException" />, if any, that threw the current exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Exception.InnerException" />
+
+          , if any, that threw the current exception. </param
+        >
       </Docs>
     </Member>
   </Members>

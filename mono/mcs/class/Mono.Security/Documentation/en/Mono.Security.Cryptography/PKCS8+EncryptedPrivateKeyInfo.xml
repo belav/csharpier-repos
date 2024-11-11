@@ -1,4 +1,7 @@
-<Type Name="PKCS8+EncryptedPrivateKeyInfo" FullName="Mono.Security.Cryptography.PKCS8+EncryptedPrivateKeyInfo">
+<Type
+  Name="PKCS8+EncryptedPrivateKeyInfo"
+  FullName="Mono.Security.Cryptography.PKCS8+EncryptedPrivateKeyInfo"
+>
   <TypeSignature Language="C#" Value="public class PKCS8.EncryptedPrivateKeyInfo" />
   <AssemblyInfo>
     <AssemblyName>Mono.Security</AssemblyName>

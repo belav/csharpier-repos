@@ -19,7 +19,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies individual channels in the CMYK (cyan, magenta, yellow, black) color space. This enumeration is used by the <see cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" /> methods.</para>
+      <para
+        >Specifies individual channels in the CMYK (cyan, magenta, yellow, black) color space. This enumeration is used by the <see
+         cref="Overload:System.Drawing.Imaging.ImageAttributes.SetOutputChannel" />
+
+         methods.</para
+      >
     </summary>
   </Docs>
   <Members>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XProcessingInstruction" FullName="System.Xml.Linq.XProcessingInstruction">
-  <TypeSignature Language="C#" Value="public class XProcessingInstruction : System.Xml.Linq.XNode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XProcessingInstruction extends System.Xml.Linq.XNode" />
+  <TypeSignature
+    Language="C#"
+    Value="public class XProcessingInstruction : System.Xml.Linq.XNode"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XProcessingInstruction extends System.Xml.Linq.XNode"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml.Linq</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,7 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can use processing instructions in XML to indicate that an XML document can be processed by some processor, such as XSLT. </para>
-      <para>Processing instructions are nodes in the XML tree. When a processing instruction is found in the XML being parsed, sqltecxlinq creates an <see cref="T:System.Xml.Linq.XProcessingInstruction" /> node. </para>
+      <para
+        >Processing instructions are nodes in the XML tree. When a processing instruction is found in the XML being parsed, sqltecxlinq creates an <see
+         cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+         node. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -23,8 +34,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XProcessingInstruction (System.Xml.Linq.XProcessingInstruction other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XProcessingInstruction other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public XProcessingInstruction (System.Xml.Linq.XProcessingInstruction other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XProcessingInstruction other) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,15 +56,32 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+             class. </para
+          >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.Linq.XProcessingInstruction" /> node to copy from.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+           node to copy from.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XProcessingInstruction (string target, string data);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string target, string data) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public XProcessingInstruction (string target, string data);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string target, string data) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -60,12 +94,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+             class. </para
+          >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> containing the target application for this <see cref="T:System.Xml.Linq.XProcessingInstruction" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           containing the target application for this <see
+           cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+          .</param
+        >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string data for this <see cref="T:System.Xml.Linq.XProcessingInstruction" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string data for this <see
+           cref="T:System.Xml.Linq.XProcessingInstruction" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Data">
@@ -91,8 +145,14 @@
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override System.Xml.XmlNodeType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.XmlNodeType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Xml.XmlNodeType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.XmlNodeType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -104,7 +164,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" /> contain a <see cref="P:System.Xml.Linq.XObject.NodeType" /> property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />. Your code can then test for the node type of each node in the collection.</para>
+          <para
+            >Because all classes that derive from <see
+             cref="T:System.Xml.Linq.XObject" />
+
+             contain a <see
+             cref="P:System.Xml.Linq.XObject.NodeType" />
+
+             property, you can write code that operates on collections of concrete subclass of <see
+             cref="T:System.Xml.Linq.XObject" />
+
+            . Your code can then test for the node type of each node in the collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -132,8 +203,14 @@
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
-      <MemberSignature Language="C#" Value="public override void WriteTo (System.Xml.XmlWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void WriteTo(class System.Xml.XmlWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void WriteTo (System.Xml.XmlWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void WriteTo(class System.Xml.XmlWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -147,14 +224,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />. </para>
+          <para
+            >This method is primarily used internally by the methods that write an XML tree to an <see
+             cref="T:System.Xml.XmlWriter" />
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes this processing instruction to an <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Writes this processing instruction to an <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlWriter" /> to write this processing instruction to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlWriter" />
+
+           to write this processing instruction to.</param
+        >
       </Docs>
     </Member>
   </Members>

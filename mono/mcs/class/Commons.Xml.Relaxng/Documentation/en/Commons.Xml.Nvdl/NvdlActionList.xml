@@ -1,5 +1,8 @@
 <Type Name="NvdlActionList" FullName="Commons.Xml.Nvdl.NvdlActionList">
-  <TypeSignature Language="C#" Value="public class NvdlActionList : System.Collections.CollectionBase" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlActionList : System.Collections.CollectionBase"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -39,7 +42,10 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (Commons.Xml.Nvdl.NvdlAction item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (Commons.Xml.Nvdl.NvdlAction item);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -54,7 +60,10 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlAction Item[int i] { set; get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlAction Item[int i] { set; get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlAction</ReturnType>
@@ -71,7 +80,17 @@
     </Member>
   </Members>
   <Docs>
-    <summary>Typed collection for <see cref="T:Commons.Xml.Nvdl.NvdlAction" />.</summary>
-    <remarks>This class is a collection for <see cref="T:Commons.Xml.Nvdl.NvdlAction" />.</remarks>
+    <summary
+      >Typed collection for <see
+       cref="T:Commons.Xml.Nvdl.NvdlAction" />
+
+      .</summary
+    >
+    <remarks
+      >This class is a collection for <see
+       cref="T:Commons.Xml.Nvdl.NvdlAction" />
+
+      .</remarks
+    >
   </Docs>
 </Type>

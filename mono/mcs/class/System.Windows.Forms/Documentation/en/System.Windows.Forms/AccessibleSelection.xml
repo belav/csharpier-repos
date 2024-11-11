@@ -18,7 +18,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A focused object is the one object that receives keyboard input. The object with the keyboard focus is either the active window or a child object of the active window. A selected object is marked to participate in some type of group operation.</para>
-      <para>This enumeration is used by <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />.</para>
+      <para
+        >This enumeration is used by <see
+         cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
+
+        .</para
+      >
       <para>For additional information on the accessibility application, search for "Microsoft Active Accessibility" in the Microsoft Developer Network (MSDN) library.</para>
     </remarks>
     <summary>

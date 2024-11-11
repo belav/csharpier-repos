@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
     <Description>Entity Framework Core Command-line Tools</Description>
@@ -10,7 +9,6 @@
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\..\rulesets\EFCore.noxmldocs.ruleset</CodeAnalysisRuleSet>
     <RollForward>Major</RollForward>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\dotnet-ef\Exe.cs" />
     <Compile Include="..\Shared\CodeAnnotations.cs" />
@@ -21,12 +19,10 @@
     <Compile Include="..\EFCore.Design\Design\OperationResultHandler.cs" />
     <Compile Include="..\EFCore.Relational\Internal\SemanticVersionComparer.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Configuration" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Generators\BundleProgramGenerator.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -41,11 +37,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Generators\BundleProgramGenerator.cs">
       <DesignTime>True</DesignTime>
@@ -63,10 +57,20 @@
       <DependentUpon>Resources.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
-  <Target Name="BuildOtherPlatforms" AfterTargets="Build" Condition=" '$(TargetFramework)' == 'net461' And '$(Platform)' == 'AnyCPU' ">
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="TargetFramework=$(TargetFramework);Platform=x86;Configuration=$(Configuration)" Targets="Build" />
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="TargetFramework=$(TargetFramework);Platform=ARM64;Configuration=$(Configuration)" Targets="Build" />
+  <Target
+    Name="BuildOtherPlatforms"
+    AfterTargets="Build"
+    Condition=" '$(TargetFramework)' == 'net461' And '$(Platform)' == 'AnyCPU' "
+  >
+    <MSBuild
+      Projects="$(MSBuildProjectFullPath)"
+      Properties="TargetFramework=$(TargetFramework);Platform=x86;Configuration=$(Configuration)"
+      Targets="Build"
+    />
+    <MSBuild
+      Projects="$(MSBuildProjectFullPath)"
+      Properties="TargetFramework=$(TargetFramework);Platform=ARM64;Configuration=$(Configuration)"
+      Targets="Build"
+    />
   </Target>
-
 </Project>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="NotifyCollectionChangedAction" FullName="System.Collections.Specialized.NotifyCollectionChangedAction">
+<Type
+  Name="NotifyCollectionChangedAction"
+  FullName="System.Collections.Specialized.NotifyCollectionChangedAction"
+>
   <TypeSignature Language="C#" Value="public enum NotifyCollectionChangedAction" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed NotifyCollectionChangedAction extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed NotifyCollectionChangedAction extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,13 +24,21 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Describes the action that caused a <see cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" /> event. </para>
+      <para
+        >Describes the action that caused a <see
+         cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="Add" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Add = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Add = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -41,7 +55,10 @@
     </Member>
     <Member MemberName="Move">
       <MemberSignature Language="C#" Value="Move" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Move = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Move = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,7 +75,10 @@
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="Remove" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Remove = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Remove = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -75,7 +95,10 @@
     </Member>
     <Member MemberName="Replace">
       <MemberSignature Language="C#" Value="Replace" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Replace = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Replace = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,7 +115,10 @@
     </Member>
     <Member MemberName="Reset">
       <MemberSignature Language="C#" Value="Reset" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Reset = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Collections.Specialized.NotifyCollectionChangedAction Reset = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

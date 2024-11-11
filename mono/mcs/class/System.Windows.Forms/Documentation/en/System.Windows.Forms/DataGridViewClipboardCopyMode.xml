@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataGridViewClipboardCopyMode" FullName="System.Windows.Forms.DataGridViewClipboardCopyMode">
+<Type
+  Name="DataGridViewClipboardCopyMode"
+  FullName="System.Windows.Forms.DataGridViewClipboardCopyMode"
+>
   <TypeSignature Language="C#" Value="public enum DataGridViewClipboardCopyMode" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -12,11 +15,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.DataGridView.ClipboardCopyMode" /> property to indicate whether users can copy the text values of selected cells to the Clipboard and whether row and column header text is included.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.DataGridView.ClipboardCopyMode" />
+
+         property to indicate whether users can copy the text values of selected cells to the Clipboard and whether row and column header text is included.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines constants that indicate whether content is copied from a <see cref="T:System.Windows.Forms.DataGridView" /> control to the Clipboard.</para>
+      <para
+        >Defines constants that indicate whether content is copied from a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         control to the Clipboard.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -64,7 +77,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The text values of selected cells can be copied to the Clipboard. Row or column header text is included for rows or columns that contain selected cells only when the <see cref="P:System.Windows.Forms.DataGridView.SelectionMode" /> property is set to <see cref="F:System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect" /> or <see cref="F:System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect" /> and at least one header is selected. </para>
+          <para
+            >The text values of selected cells can be copied to the Clipboard. Row or column header text is included for rows or columns that contain selected cells only when the <see
+             cref="P:System.Windows.Forms.DataGridView.SelectionMode" />
+
+             property is set to <see
+             cref="F:System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect" />
+
+             or <see
+             cref="F:System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect" />
+
+             and at least one header is selected. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

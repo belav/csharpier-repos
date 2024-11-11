@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="X500DistinguishedNameFlags" FullName="System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags">
+<Type
+  Name="X500DistinguishedNameFlags"
+  FullName="System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags"
+>
   <TypeSignature Language="C#" Value="public enum X500DistinguishedNameFlags" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed X500DistinguishedNameFlags extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed X500DistinguishedNameFlags extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,8 +25,30 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used with the <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags" /> class to indicate special characters contained in the distinguished name.</para>
-      <para>Several values are mutually exclusive in this enumeration; use only one of these values to define the special characteristics of an X.500 distinguished name. For example, specify only one of the <see cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseCommas" />, <see cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseNewLines" /> , and <see cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseSemicolons" /> values. You would also specify either <see cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseT61Encoding" /> or <see cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseUTF8Encoding" /> .</para>
+      <para
+        >This enumeration is used with the <see
+         cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags" />
+
+         class to indicate special characters contained in the distinguished name.</para
+      >
+      <para
+        >Several values are mutually exclusive in this enumeration; use only one of these values to define the special characteristics of an X.500 distinguished name. For example, specify only one of the <see
+         cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseCommas" />
+
+        , <see
+         cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseNewLines" />
+
+         , and <see
+         cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseSemicolons" />
+
+         values. You would also specify either <see
+         cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseT61Encoding" />
+
+         or <see
+         cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseUTF8Encoding" />
+
+         .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +58,10 @@
   <Members>
     <Member MemberName="DoNotUsePlusSign">
       <MemberSignature Language="C#" Value="DoNotUsePlusSign" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags DoNotUsePlusSign = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags DoNotUsePlusSign = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,7 +80,10 @@
     </Member>
     <Member MemberName="DoNotUseQuotes">
       <MemberSignature Language="C#" Value="DoNotUseQuotes" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags DoNotUseQuotes = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags DoNotUseQuotes = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -68,7 +102,10 @@
     </Member>
     <Member MemberName="ForceUTF8Encoding">
       <MemberSignature Language="C#" Value="ForceUTF8Encoding" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags ForceUTF8Encoding = int32(16384)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags ForceUTF8Encoding = int32(16384)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -81,13 +118,23 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Forces the distinguished name to encode specific X.500 keys as UTF-8 strings rather than printable Unicode strings. For more information and the list of X.500 keys affected, see the <see cref="http://msdn.microsoft.com/en-us/library/windows/desktop/aa379394.aspx">X500NameFlags enumeration</see>.</para>
+          <para
+            >Forces the distinguished name to encode specific X.500 keys as UTF-8 strings rather than printable Unicode strings. For more information and the list of X.500 keys affected, see the <see
+             cref="http://msdn.microsoft.com/en-us/library/windows/desktop/aa379394.aspx"
+              >X500NameFlags enumeration</see
+            >
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -106,7 +153,10 @@
     </Member>
     <Member MemberName="Reversed">
       <MemberSignature Language="C#" Value="Reversed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags Reversed = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags Reversed = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -125,7 +175,10 @@
     </Member>
     <Member MemberName="UseCommas">
       <MemberSignature Language="C#" Value="UseCommas" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseCommas = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseCommas = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -144,7 +197,10 @@
     </Member>
     <Member MemberName="UseNewLines">
       <MemberSignature Language="C#" Value="UseNewLines" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseNewLines = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseNewLines = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -163,7 +219,10 @@
     </Member>
     <Member MemberName="UseSemicolons">
       <MemberSignature Language="C#" Value="UseSemicolons" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseSemicolons = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseSemicolons = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -182,7 +241,10 @@
     </Member>
     <Member MemberName="UseT61Encoding">
       <MemberSignature Language="C#" Value="UseT61Encoding" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseT61Encoding = int32(8192)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseT61Encoding = int32(8192)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -201,7 +263,10 @@
     </Member>
     <Member MemberName="UseUTF8Encoding">
       <MemberSignature Language="C#" Value="UseUTF8Encoding" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseUTF8Encoding = int32(4096)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags UseUTF8Encoding = int32(4096)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

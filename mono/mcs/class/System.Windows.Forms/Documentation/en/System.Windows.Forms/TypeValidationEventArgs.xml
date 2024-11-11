@@ -13,17 +13,56 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" /> event occurs when a <see cref="T:System.Windows.Forms.MaskedTextBox" /> control performs optional type validation. Type validation occurs only when the <see cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" /> property is not null and a causal action occurs, such as the <see cref="T:System.Windows.Forms.MaskedTextBox" /> control losing focus. <newTerm>Type validation</newTerm> is the ability to convert the formatted input string to the type represented by the <see cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" /> property. For more information about the type validation process, see the <see cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" /> event.</para>
-      <para>If an event handler is implemented for <see cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />, the handler receives a parameter of type <see cref="T:System.Windows.Forms.TypeValidationEventArgs" />. This parameter contains information about the event, such as whether the type conversion process succeeded, the validating type, and so on.</para>
+      <para
+        >The <see
+         cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+         event occurs when a <see
+         cref="T:System.Windows.Forms.MaskedTextBox" />
+
+         control performs optional type validation. Type validation occurs only when the <see
+         cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" />
+
+         property is not null and a causal action occurs, such as the <see
+         cref="T:System.Windows.Forms.MaskedTextBox" />
+
+         control losing focus. <newTerm
+        >Type validation</newTerm>
+
+         is the ability to convert the formatted input string to the type represented by the <see
+         cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" />
+
+         property. For more information about the type validation process, see the <see
+         cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+         event.</para
+      >
+      <para
+        >If an event handler is implemented for <see
+         cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+        , the handler receives a parameter of type <see
+         cref="T:System.Windows.Forms.TypeValidationEventArgs" />
+
+        . This parameter contains information about the event, such as whether the type conversion process succeeded, the validating type, and so on.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TypeValidationEventArgs (Type validatingType, bool isValidInput, object returnValue, string message);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TypeValidationEventArgs (Type validatingType, bool isValidInput, object returnValue, string message);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="validatingType" Type="System.Type" />
@@ -35,20 +74,54 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The parameters to the <see cref="M:System.Windows.Forms.TypeValidationEventArgs.#ctor(System.Type,System.Boolean,System.Object,System.String)" /> constructor are used to initialize the corresponding read-only properties of this class.</para>
+          <para
+            >The parameters to the <see
+             cref="M:System.Windows.Forms.TypeValidationEventArgs.#ctor(System.Type,System.Boolean,System.Object,System.String)" />
+
+             constructor are used to initialize the corresponding read-only properties of this class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.TypeValidationEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.TypeValidationEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="validatingType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> that the formatted input string was being validated against. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           that the formatted input string was being validated against. </param
+        >
         <param name="isValidInput">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Boolean" /> value indicating whether the formatted string was successfully converted to the validating type. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Boolean" />
+
+           value indicating whether the formatted string was successfully converted to the validating type. </param
+        >
         <param name="returnValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that is the result of the formatted string being converted to the target type. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that is the result of the formatted string being converted to the target type. </param
+        >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> containing a description of the conversion process. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           containing a description of the conversion process. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -65,8 +138,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" /> event occurs just before the <see cref="E:System.Windows.Forms.Control.Validating" /> event.</para>
-          <para>Setting the <see cref="P:System.Windows.Forms.TypeValidationEventArgs.Cancel" /> property to true in the <see cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" /> event handler will cancel the event, causing the <see cref="T:System.Windows.Forms.MaskedTextBox" /> control to retain focus, unless the subsequent <see cref="E:System.Windows.Forms.Control.Validating" /> event sets its version of the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to false. </para>
+          <para
+            >The <see
+             cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+             event occurs just before the <see
+             cref="E:System.Windows.Forms.Control.Validating" />
+
+             event.</para
+          >
+          <para
+            >Setting the <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.Cancel" />
+
+             property to true in the <see
+             cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+             event handler will cancel the event, causing the <see
+             cref="T:System.Windows.Forms.MaskedTextBox" />
+
+             control to retain focus, unless the subsequent <see
+             cref="E:System.Windows.Forms.Control.Validating" />
+
+             event sets its version of the <see
+             cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+             property to false. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -88,11 +186,41 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.TypeValidationEventArgs.IsValidInput" /> property indicates the success of the Parse method found in the <see cref="T:System.Type" /> represented by the <see cref="P:System.Windows.Forms.TypeValidationEventArgs.ValidatingType" /> property. This type must contain Parse method(s) having one or both of the following signatures:</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.IsValidInput" />
+
+             property indicates the success of the Parse method found in the <see
+             cref="T:System.Type" />
+
+             represented by the <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.ValidatingType" />
+
+             property. This type must contain Parse method(s) having one or both of the following signatures:</para
+          >
           <para>public static Object Parse(string) </para>
           <para>public static Object Parse(string, IFormatProvider) </para>
-          <para>Parse is called before the <see cref="T:System.Windows.Forms.MaskedTextBox" /> control raises the <see cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" /> event. This method is invoked with the contents, minus the prompt characters, of the <see cref="P:System.Windows.Forms.MaskedTextBox.Text" /> property of the <see cref="T:System.Windows.Forms.MaskedTextBox" /> class. If successful, it returns the converted object; otherwise, it returns null.</para>
-          <para>For more information about the type validation process, see the <see cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" /> event. </para>
+          <para
+            >Parse is called before the <see
+             cref="T:System.Windows.Forms.MaskedTextBox" />
+
+             control raises the <see
+             cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+             event. This method is invoked with the contents, minus the prompt characters, of the <see
+             cref="P:System.Windows.Forms.MaskedTextBox.Text" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.MaskedTextBox" />
+
+             class. If successful, it returns the converted object; otherwise, it returns null.</para
+          >
+          <para
+            >For more information about the type validation process, see the <see
+             cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+             event. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -114,7 +242,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The validation process entails converting the formatted user input to the type defined by the <see cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" /> property. The <see cref="P:System.Windows.Forms.TypeValidationEventArgs.Message" /> property contains a text description of the conversion process. <see cref="P:System.Windows.Forms.TypeValidationEventArgs.Message" /> is primarily useful when conversion fails, as indicated by an <see cref="P:System.Windows.Forms.TypeValidationEventArgs.IsValidInput" /> property value of false. </para>
+          <para
+            >The validation process entails converting the formatted user input to the type defined by the <see
+             cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" />
+
+             property. The <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.Message" />
+
+             property contains a text description of the conversion process. <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.Message" />
+
+             is primarily useful when conversion fails, as indicated by an <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.IsValidInput" />
+
+             property value of false. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,7 +278,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The type validation process attempts to convert the formatted input string, not including prompt characters, to the type specified by the <see cref="P:System.Windows.Forms.TypeValidationEventArgs.ValidatingType" /> property. The <see cref="P:System.Windows.Forms.TypeValidationEventArgs.ReturnValue" /> property represents the result of the conversion attempt, and is equivalent to the value returned by the <see cref="M:System.Windows.Forms.MaskedTextBox.ValidateText" /> method of the <see cref="T:System.Windows.Forms.MaskedTextBox" /> class.</para>
+          <para
+            >The type validation process attempts to convert the formatted input string, not including prompt characters, to the type specified by the <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.ValidatingType" />
+
+             property. The <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.ReturnValue" />
+
+             property represents the result of the conversion attempt, and is equivalent to the value returned by the <see
+             cref="M:System.Windows.Forms.MaskedTextBox.ValidateText" />
+
+             method of the <see
+             cref="T:System.Windows.Forms.MaskedTextBox" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -158,7 +314,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The validation process only occurs if <see cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" /> property of the <see cref="T:System.Windows.Forms.MaskedTextBox" /> class is not null. The <see cref="P:System.Windows.Forms.TypeValidationEventArgs.ValidatingType" /> property references the same type, which represents the target type of the conversion process.</para>
+          <para
+            >The validation process only occurs if <see
+             cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.MaskedTextBox" />
+
+             class is not null. The <see
+             cref="P:System.Windows.Forms.TypeValidationEventArgs.ValidatingType" />
+
+             property references the same type, which represents the target type of the conversion process.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BindingCollection" FullName="System.Web.Services.Description.BindingCollection">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public sealed class BindingCollection : System.Web.Services.Description.ServiceDescriptionBaseCollection" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public sealed class BindingCollection : System.Web.Services.Description.ServiceDescriptionBaseCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -12,21 +15,33 @@
   <Base>
     <BaseTypeName>System.Web.Services.Description.ServiceDescriptionBaseCollection</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Services.Description.Binding" /> class corresponds to the Web Services Description Language (WSDL) &lt;binding&gt; element enclosed by the root &lt;definitions&gt; element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Services.Description.Binding" />
+
+         class corresponds to the Web Services Description Language (WSDL) &lt;binding&gt; element enclosed by the root &lt;definitions&gt; element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a collection of instances of the <see cref="T:System.Web.Services.Description.Binding" /> class supported by the XML Web service. This class cannot be inherited.</para>
+      <para
+        >Represents a collection of instances of the <see
+         cref="T:System.Web.Services.Description.Binding" />
+
+         class supported by the XML Web service. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public int Add (System.Web.Services.Description.Binding binding);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int Add (System.Web.Services.Description.Binding binding);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -38,14 +53,33 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <see cref="T:System.Web.Services.Description.Binding" /> to the end of the <see cref="T:System.Web.Services.Description.BindingCollection" />.</para>
+          <para
+            >Adds the specified <see
+             cref="T:System.Web.Services.Description.Binding" />
+
+             to the end of the <see
+             cref="T:System.Web.Services.Description.BindingCollection" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The zero-based index where the <paramref name="binding" /> parameter has been added.</para>
+          <para
+            >The zero-based index where the <paramref
+             name="binding" />
+
+             parameter has been added.</para
+          >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Description.Binding" /> to add to the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Services.Description.Binding" />
+
+           to add to the collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -53,7 +87,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains (System.Web.Services.Description.Binding binding);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains (System.Web.Services.Description.Binding binding);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -65,14 +102,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value indicating whether the specified <see cref="T:System.Web.Services.Description.Binding" /> is a member of the <see cref="T:System.Web.Services.Description.BindingCollection" />.</para>
+          <para
+            >Returns a value indicating whether the specified <see
+             cref="T:System.Web.Services.Description.Binding" />
+
+             is a member of the <see
+             cref="T:System.Web.Services.Description.BindingCollection" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <paramref name="binding" /> parameter is a member of the <see cref="T:System.Web.Services.Description.BindingCollection" />; otherwise, false.</para>
+          <para
+            >true if the <paramref
+             name="binding" />
+
+             parameter is a member of the <see
+             cref="T:System.Web.Services.Description.BindingCollection" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Description.Binding" /> for which to check collection membership. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Services.Description.Binding" />
+
+           for which to check collection membership. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -80,7 +139,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (System.Web.Services.Description.Binding[] array, int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (System.Web.Services.Description.Binding[] array, int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -93,12 +155,29 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the entire <see cref="T:System.Web.Services.Description.BindingCollection" /> to a compatible one-dimensional array of type <see cref="T:System.Web.Services.Description.Binding" />, starting at the specified zero-based index of the target array.</para>
+          <para
+            >Copies the entire <see
+             cref="T:System.Web.Services.Description.BindingCollection" />
+
+             to a compatible one-dimensional array of type <see
+             cref="T:System.Web.Services.Description.Binding" />
+
+            , starting at the specified zero-based index of the target array.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Web.Services.Description.Binding" /> serving as the destination for the copy action. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Web.Services.Description.Binding" />
+
+           serving as the destination for the copy action. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index at which to start placing the copied collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index at which to start placing the copied collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -118,14 +197,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the name of the <see cref="T:System.Web.Services.Description.Binding" /> associated with the value passed by reference.</para>
+          <para
+            >Returns the name of the <see
+             cref="T:System.Web.Services.Description.Binding" />
+
+             associated with the value passed by reference.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The name of the <paramref name="value" /> parameter.</para>
+          <para
+            >The name of the <paramref
+             name="value" />
+
+             parameter.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Description.Binding" /> for which to return the name. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Services.Description.Binding" />
+
+           for which to return the name. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -133,7 +228,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf (System.Web.Services.Description.Binding binding);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf (System.Web.Services.Description.Binding binding);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -145,14 +243,25 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Searches for the specified <see cref="T:System.Web.Services.Description.Binding" /> and returns the zero-based index of the first occurrence within the collection.</para>
+          <para
+            >Searches for the specified <see
+             cref="T:System.Web.Services.Description.Binding" />
+
+             and returns the zero-based index of the first occurrence within the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A 32-bit signed integer.</para>
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Description.Binding" /> for which to search in the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Services.Description.Binding" />
+
+           for which to search in the collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -160,7 +269,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, System.Web.Services.Description.Binding binding);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, System.Web.Services.Description.Binding binding);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -173,17 +285,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the number of items in the collection already equals the collection's capacity, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para>
-          <para>If the <paramref name="index" /> parameter is equal to <see cref="P:System.Collections.CollectionBase.Count" />, the <paramref name="binding" /> parameter is added to the end of the <see cref="T:System.Web.Services.Description.BindingCollection" />.</para>
+          <para
+            >If the <paramref
+             name="index" />
+
+             parameter is equal to <see
+             cref="P:System.Collections.CollectionBase.Count" />
+
+            , the <paramref
+             name="binding" />
+
+             parameter is added to the end of the <see
+             cref="T:System.Web.Services.Description.BindingCollection" />
+
+            .</para
+          >
           <para>The elements after the insertion point move down to accommodate the new element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <see cref="T:System.Web.Services.Description.Binding" /> to the <see cref="T:System.Web.Services.Description.BindingCollection" /> at the specified zero-based index.</para>
+          <para
+            >Adds the specified <see
+             cref="T:System.Web.Services.Description.Binding" />
+
+             to the <see
+             cref="T:System.Web.Services.Description.BindingCollection" />
+
+             at the specified zero-based index.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index at which to insert the <paramref name="binding" /> parameter. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index at which to insert the <paramref
+           name="binding" />
+
+           parameter. </param
+        >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Description.Binding" /> to be added to the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Services.Description.Binding" />
+
+           to be added to the collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -191,7 +337,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.Binding this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.Binding this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.Binding</ReturnType>
@@ -211,7 +360,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.Binding this[string name] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.Binding this[string name] { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -231,7 +383,10 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (System.Web.Services.Description.Binding binding);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (System.Web.Services.Description.Binding binding);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -242,15 +397,34 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.CollectionBase.Count" />.</para>
+          <para
+            >This method performs a linear search; therefore, the average execution time is proportional to <see
+             cref="P:System.Collections.CollectionBase.Count" />
+
+            .</para
+          >
           <para>The elements that follow the removed Binding move up to occupy the vacated spot.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the first occurrence of the specified <see cref="T:System.Web.Services.Description.Binding" /> from the <see cref="T:System.Web.Services.Description.BindingCollection" />.</para>
+          <para
+            >Removes the first occurrence of the specified <see
+             cref="T:System.Web.Services.Description.Binding" />
+
+             from the <see
+             cref="T:System.Web.Services.Description.BindingCollection" />
+
+            .</para
+          >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Description.Binding" /> to remove from the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Services.Description.Binding" />
+
+           to remove from the collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -258,7 +432,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetParent">
-      <MemberSignature Language="C#" Value="protected override void SetParent (object value, object parent);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetParent (object value, object parent);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -271,12 +448,32 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the parent <see cref="T:System.Web.Services.Description.ServiceDescription" /> of a member of the <see cref="T:System.Web.Services.Description.BindingCollection" />.</para>
+          <para
+            >Sets the parent <see
+             cref="T:System.Web.Services.Description.ServiceDescription" />
+
+             of a member of the <see
+             cref="T:System.Web.Services.Description.BindingCollection" />
+
+            .</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Services.Description.Binding" /> within the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Services.Description.Binding" />
+
+           within the collection. </param
+        >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Description.ServiceDescription" /> to set as the parent. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Services.Description.ServiceDescription" />
+
+           to set as the parent. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -1,5 +1,8 @@
 <Type Name="KeyContainer" FullName="Mono.Configuration.Crypto.KeyContainer">
-  <TypeSignature Language="C#" Value="public class KeyContainer : System.Collections.Generic.IEnumerable&lt;Mono.Configuration.Crypto.Key&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public class KeyContainer : System.Collections.Generic.IEnumerable<Mono.Configuration.Crypto.Key>"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Configuration.Crypto</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -18,7 +21,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public KeyContainer (string name, bool machineStore);" />
+      <MemberSignature
+        Language="C#"
+        Value="public KeyContainer (string name, bool machineStore);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -68,7 +74,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerator&lt;Mono.Configuration.Crypto.Key&gt; GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerator<Mono.Configuration.Crypto.Key> GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -84,7 +93,10 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Mono.Configuration.Crypto.Key this[int index] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Configuration.Crypto.Key this[int index] { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -133,7 +145,10 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveFromDisk">
-      <MemberSignature Language="C#" Value="public static void RemoveFromDisk (string containerName, bool machineStore);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void RemoveFromDisk (string containerName, bool machineStore);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -152,8 +167,11 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.IEnumerable&lt;Mono.Configuration.Crypto.Key&gt;.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.Generic.IEnumerator&lt;Mono.Configuration.Crypto.Key&gt; IEnumerable&lt;Key&gt;.GetEnumerator ();" />
+    <Member MemberName="System.Collections.Generic.IEnumerable<Mono.Configuration.Crypto.Key>.GetEnumerator">
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.Generic.IEnumerator<Mono.Configuration.Crypto.Key> IEnumerable<Key>.GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -169,7 +187,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

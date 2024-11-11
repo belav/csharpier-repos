@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="UCOMIEnumConnectionPoints" FullName="System.Runtime.InteropServices.UCOMIEnumConnectionPoints">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public interface UCOMIEnumConnectionPoints" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract UCOMIEnumConnectionPoints" />
+<Type
+  Name="UCOMIEnumConnectionPoints"
+  FullName="System.Runtime.InteropServices.UCOMIEnumConnectionPoints"
+>
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public interface UCOMIEnumConnectionPoints"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract UCOMIEnumConnectionPoints"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -29,13 +39,24 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use <see cref="T:System.Runtime.InteropServices.ComTypes.IEnumConnectionPoints" /> instead. </para>
+      <para
+        >Use <see
+         cref="T:System.Runtime.InteropServices.ComTypes.IEnumConnectionPoints" />
+
+         instead. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Clone">
-      <MemberSignature Language="C#" Value="public void Clone (out System.Runtime.InteropServices.UCOMIEnumConnectionPoints ppenum);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Clone(class System.Runtime.InteropServices.UCOMIEnumConnectionPoints ppenum) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Clone (out System.Runtime.InteropServices.UCOMIEnumConnectionPoints ppenum);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Clone(class System.Runtime.InteropServices.UCOMIEnumConnectionPoints ppenum) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -46,7 +67,11 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="ppenum" Type="System.Runtime.InteropServices.UCOMIEnumConnectionPoints&amp;" RefType="out" />
+        <Parameter
+          Name="ppenum"
+          Type="System.Runtime.InteropServices.UCOMIEnumConnectionPoints&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="ppenum">To be added: an object of type 'UCOMIEnumConnectionPoints&amp;'</param>
@@ -55,8 +80,14 @@
       </Docs>
     </Member>
     <Member MemberName="Next">
-      <MemberSignature Language="C#" Value="public int Next (int celt, System.Runtime.InteropServices.UCOMIConnectionPoint[] rgelt, out int pceltFetched);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 Next(int32 celt, class System.Runtime.InteropServices.UCOMIConnectionPoint[] rgelt, int32 pceltFetched) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public int Next (int celt, System.Runtime.InteropServices.UCOMIConnectionPoint[] rgelt, out int pceltFetched);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 Next(int32 celt, class System.Runtime.InteropServices.UCOMIConnectionPoint[] rgelt, int32 pceltFetched) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -69,7 +100,7 @@
       <Parameters>
         <Parameter Name="celt" Type="System.Int32" />
         <Parameter Name="rgelt" Type="System.Runtime.InteropServices.UCOMIConnectionPoint[]" />
-        <Parameter Name="pceltFetched" Type="System.Int32&amp;" RefType="out" />
+        <Parameter Name="pceltFetched" Type="System.Int32&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="celt">To be added: an object of type 'int'</param>
@@ -82,7 +113,10 @@
     </Member>
     <Member MemberName="Reset">
       <MemberSignature Language="C#" Value="public int Reset ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 Reset() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 Reset() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -110,7 +144,10 @@
     </Member>
     <Member MemberName="Skip">
       <MemberSignature Language="C#" Value="public int Skip (int celt);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 Skip(int32 celt) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 Skip(int32 celt) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -134,10 +171,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>S_OK if the number of elements skipped equals the <paramref name="celt" /> parameter; otherwise, S_FALSE.</para>
+          <para
+            >S_OK if the number of elements skipped equals the <paramref
+             name="celt" />
+
+             parameter; otherwise, S_FALSE.</para
+          >
         </returns>
         <param name="celt">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of elements to skip in the enumeration. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of elements to skip in the enumeration. </param
+        >
       </Docs>
     </Member>
   </Members>

@@ -76,7 +76,10 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
   <div id="GHTSubTest2" testname="GhtSubTest2">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl2">
@@ -174,7 +177,10 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
   <div id="GHTSubTest3" testname="GhtSubTest3">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl4">
@@ -272,7 +278,10 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
   <div id="GHTSubTest4" testname="GhtSubTest4">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl6">
@@ -370,7 +379,10 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
   <div id="GHTSubTest5" testname="GhtSubTest5">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl8">

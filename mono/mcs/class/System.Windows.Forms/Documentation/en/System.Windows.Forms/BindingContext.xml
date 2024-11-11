@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BindingContext" FullName="System.Windows.Forms.BindingContext">
-  <TypeSignature Language="C#" Value="public class BindingContext : System.Collections.ICollection" />
+  <TypeSignature
+    Language="C#"
+    Value="public class BindingContext : System.Collections.ICollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -22,13 +25,137 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Each Windows Form has at least one <see cref="T:System.Windows.Forms.BindingContext" /> object that manages the <see cref="T:System.Windows.Forms.BindingManagerBase" /> objects for the form. Because the <see cref="T:System.Windows.Forms.BindingManagerBase" /> class is abstract, the return type of the <see cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" /> property is either a <see cref="T:System.Windows.Forms.CurrencyManager" /> or a <see cref="T:System.Windows.Forms.PropertyManager" />. If the data source is an object that can return only a single property (instead of a list of objects), the <see cref="T:System.Type" /> is a <see cref="T:System.Windows.Forms.PropertyManager" />. For example, if you specify a <see cref="T:System.Windows.Forms.TextBox" /> as the data source, a <see cref="T:System.Windows.Forms.PropertyManager" /> is returned. On the other hand, if the data source is an object that implements <see cref="T:System.Collections.IList" /> or <see cref="T:System.ComponentModel.IBindingList" />, a <see cref="T:System.Windows.Forms.CurrencyManager" /> is returned.</para>
-      <para>For each data source on a Windows Form, there is a single <see cref="T:System.Windows.Forms.CurrencyManager" /> or <see cref="T:System.Windows.Forms.PropertyManager" />. Because there may be multiple data sources associated with a Windows Form, the <see cref="T:System.Windows.Forms.BindingContext" /> enables you to retrieve any particular <see cref="T:System.Windows.Forms.CurrencyManager" /> associated with a data source.</para>
+      <para
+        >Each Windows Form has at least one <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         object that manages the <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+         objects for the form. Because the <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+         class is abstract, the return type of the <see
+         cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+
+         property is either a <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+         or a <see
+         cref="T:System.Windows.Forms.PropertyManager" />
+
+        . If the data source is an object that can return only a single property (instead of a list of objects), the <see
+         cref="T:System.Type" />
+
+         is a <see
+         cref="T:System.Windows.Forms.PropertyManager" />
+
+        . For example, if you specify a <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         as the data source, a <see
+         cref="T:System.Windows.Forms.PropertyManager" />
+
+         is returned. On the other hand, if the data source is an object that implements <see
+         cref="T:System.Collections.IList" />
+
+         or <see
+         cref="T:System.ComponentModel.IBindingList" />
+
+        , a <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+         is returned.</para
+      >
+      <para
+        >For each data source on a Windows Form, there is a single <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+         or <see
+         cref="T:System.Windows.Forms.PropertyManager" />
+
+        . Because there may be multiple data sources associated with a Windows Form, the <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         enables you to retrieve any particular <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+         associated with a data source.</para
+      >
       <block subset="none" type="note">
-        <para>When using the <see cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" /> property, the <see cref="T:System.Windows.Forms.BindingContext" /> creates a new <see cref="T:System.Windows.Forms.BindingManagerBase" /> if one does not already exist. This can lead to some confusion, as the returned object may not manage the list (or any list) that you intend. To prevent returning an invalid <see cref="T:System.Windows.Forms.BindingManagerBase" />, use the <see cref="M:System.Windows.Forms.BindingContext.Contains(System.Object)" /> method to determine if the intended <see cref="T:System.Windows.Forms.BindingManagerBase" /> already exists.</para>
+        <para
+          >When using the <see
+           cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+
+           property, the <see
+           cref="T:System.Windows.Forms.BindingContext" />
+
+           creates a new <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+           if one does not already exist. This can lead to some confusion, as the returned object may not manage the list (or any list) that you intend. To prevent returning an invalid <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          , use the <see
+           cref="M:System.Windows.Forms.BindingContext.Contains(System.Object)" />
+
+           method to determine if the intended <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+           already exists.</para
+        >
       </block>
-      <para>If you use a container control, such as a <see cref="T:System.Windows.Forms.GroupBox" />, <see cref="T:System.Windows.Forms.Panel" />, or <see cref="T:System.Windows.Forms.TabControl" />, to contain data-bound controls, you can create a <see cref="T:System.Windows.Forms.BindingContext" /> for just that container control and its controls. Then, each part of your form can be managed by its own <see cref="T:System.Windows.Forms.BindingManagerBase" />. See the <see cref="M:System.Windows.Forms.BindingContext.#ctor" /> constructor for more information about creating multiple <see cref="T:System.Windows.Forms.BindingManagerBase" /> objects for the same data source.</para>
-      <para>If you add a <see cref="T:System.Windows.Forms.TextBox" /> control to a form and bind it to a column of a table in a dataset, the control communicates with the <see cref="T:System.Windows.Forms.BindingContext" /> of that form. The <see cref="T:System.Windows.Forms.BindingContext" />, in turn, talks to the specific <see cref="T:System.Windows.Forms.CurrencyManager" /> for that data association. If you queried the Position property of the <see cref="T:System.Windows.Forms.CurrencyManager" />, it would report the current record for the binding of that <see cref="T:System.Windows.Forms.TextBox" /> control. In the following code example, a <see cref="T:System.Windows.Forms.TextBox" /> control is bound to the FirstName column of a Customers table on the dataSet1 dataset through the <see cref="T:System.Windows.Forms.BindingContext" /> for the form it is on.</para>
+      <para
+        >If you use a container control, such as a <see
+         cref="T:System.Windows.Forms.GroupBox" />
+
+        , <see
+         cref="T:System.Windows.Forms.Panel" />
+
+        , or <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+        , to contain data-bound controls, you can create a <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         for just that container control and its controls. Then, each part of your form can be managed by its own <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        . See the <see
+         cref="M:System.Windows.Forms.BindingContext.#ctor" />
+
+         constructor for more information about creating multiple <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+         objects for the same data source.</para
+      >
+      <para
+        >If you add a <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control to a form and bind it to a column of a table in a dataset, the control communicates with the <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         of that form. The <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+        , in turn, talks to the specific <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+         for that data association. If you queried the Position property of the <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+        , it would report the current record for the binding of that <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control. In the following code example, a <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control is bound to the FirstName column of a Customers table on the dataSet1 dataset through the <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         for the form it is on.</para
+      >
       <code>TextBox1.DataBindings.Add("Text", dataSet1, "Customers.FirstName")
 
 </code>
@@ -36,7 +163,18 @@
 
 </code>
       <code>textBox1-&gt;DataBindings-&gt;Add("Text", dataSet1, "Customers.FirstName");</code>
-      <para>You can add a second <see cref="T:System.Windows.Forms.TextBox" /> control (TextBox2) to the form and bind it to the LastName column of the Customers table in the same dataset. The <see cref="T:System.Windows.Forms.BindingContext" /> is aware of the first binding (TextBox1 to Customers.FirstName), so it would use the same <see cref="T:System.Windows.Forms.CurrencyManager" />, as both text boxes are bound to the same dataset (DataSet1). </para>
+      <para
+        >You can add a second <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control (TextBox2) to the form and bind it to the LastName column of the Customers table in the same dataset. The <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         is aware of the first binding (TextBox1 to Customers.FirstName), so it would use the same <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+        , as both text boxes are bound to the same dataset (DataSet1). </para
+      >
       <code>TextBox2.DataBindings.Add("Text", dataSet1, "Customers.LastName")
 
 </code>
@@ -44,8 +182,30 @@
 
 </code>
       <code>textBox2-&gt;DataBindings-&gt;Add("Text", dataSet1, "Customers.LastName");</code>
-      <para>If you bind TextBox2 to a different dataset, the <see cref="T:System.Windows.Forms.BindingContext" /> creates and manages a second <see cref="T:System.Windows.Forms.CurrencyManager" />.</para>
-      <para>It is important to be consistent about how you set the <see cref="P:System.Windows.Forms.ListControl.DataSource" /> and <see cref="P:System.Windows.Forms.ListControl.DisplayMember" /> properties; otherwise, the <see cref="T:System.Windows.Forms.BindingContext" /> creates multiple currency managers for the same dataset, which results in errors. The following code example shows a few ways to set the properties and their associated <see cref="T:System.Windows.Forms.BindingContext" /> objects. You can set the properties using either of the following methods, as long as you are consistent throughout your code.</para>
+      <para
+        >If you bind TextBox2 to a different dataset, the <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         creates and manages a second <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+        .</para
+      >
+      <para
+        >It is important to be consistent about how you set the <see
+         cref="P:System.Windows.Forms.ListControl.DataSource" />
+
+         and <see
+         cref="P:System.Windows.Forms.ListControl.DisplayMember" />
+
+         properties; otherwise, the <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         creates multiple currency managers for the same dataset, which results in errors. The following code example shows a few ways to set the properties and their associated <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         objects. You can set the properties using either of the following methods, as long as you are consistent throughout your code.</para
+      >
       <code>ComboBox1.DataSource = DataSet1
 ComboBox1.DisplayMember = "Customers.FirstName"
 Me.BindingContext(dataSet1, "Customers").Position = 1
@@ -76,12 +236,43 @@ comboBox1-&gt;DisplayMember = "FirstName";
 this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 </code>
       <block subset="none" type="note">
-        <para>Most Windows Forms applications bind through a <see cref="T:System.Windows.Forms.BindingSource" />. The <see cref="T:System.Windows.Forms.BindingSource" /> component encapsulates a <see cref="T:System.Windows.Forms.CurrencyManager" /> and exposes the <see cref="T:System.Windows.Forms.CurrencyManager" /> programming interface. When using a <see cref="T:System.Windows.Forms.BindingSource" /> for binding, you should use the members exposed by the <see cref="T:System.Windows.Forms.BindingSource" /> to manipulate "currency" (that is, Position) rather than go through the <see cref="T:System.Windows.Forms.BindingContext" />.</para>
+        <para
+          >Most Windows Forms applications bind through a <see
+           cref="T:System.Windows.Forms.BindingSource" />
+
+          . The <see
+           cref="T:System.Windows.Forms.BindingSource" />
+
+           component encapsulates a <see
+           cref="T:System.Windows.Forms.CurrencyManager" />
+
+           and exposes the <see
+           cref="T:System.Windows.Forms.CurrencyManager" />
+
+           programming interface. When using a <see
+           cref="T:System.Windows.Forms.BindingSource" />
+
+           for binding, you should use the members exposed by the <see
+           cref="T:System.Windows.Forms.BindingSource" />
+
+           to manipulate "currency" (that is, Position) rather than go through the <see
+           cref="T:System.Windows.Forms.BindingContext" />
+
+          .</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Manages the collection of <see cref="T:System.Windows.Forms.BindingManagerBase" /> objects for any object that inherits from the <see cref="T:System.Windows.Forms.Control" /> class.</para>
+      <para
+        >Manages the collection of <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+         objects for any object that inherits from the <see
+         cref="T:System.Windows.Forms.Control" />
+
+         class.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -92,11 +283,42 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you want to have multiple <see cref="T:System.Windows.Forms.BindingManagerBase" /> instances for the same data source, create a new <see cref="T:System.Windows.Forms.BindingContext" /> and set it to the <see cref="P:System.Windows.Forms.Control.BindingContext" /> property of an object that inherits from the <see cref="T:System.Windows.Forms.Control" /> class. For example, if you have two <see cref="T:System.Windows.Forms.BindingManagerBase" /> objects (from two different <see cref="T:System.Windows.Forms.BindingContext" /> objects), you can set the <see cref="P:System.Windows.Forms.BindingManagerBase.Position" /> properties of each <see cref="T:System.Windows.Forms.BindingManagerBase" /> to different values. This causes each set of data-bound controls to display different values from the same data source.</para>
+          <para
+            >If you want to have multiple <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             instances for the same data source, create a new <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+             and set it to the <see
+             cref="P:System.Windows.Forms.Control.BindingContext" />
+
+             property of an object that inherits from the <see
+             cref="T:System.Windows.Forms.Control" />
+
+             class. For example, if you have two <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             objects (from two different <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+             objects), you can set the <see
+             cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+             properties of each <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             to different values. This causes each set of data-bound controls to display different values from the same data source.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingContext" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -105,7 +327,10 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="protected void Add (object dataSource, System.Windows.Forms.BindingManagerBase listManager);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void Add (object dataSource, System.Windows.Forms.BindingManagerBase listManager);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -122,16 +347,39 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the <see cref="T:System.Windows.Forms.BindingManagerBase" /> associated with a specific data source to the collection.</para>
+          <para
+            >Adds the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             associated with a specific data source to the collection.</para
+          >
         </summary>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> associated with the <see cref="T:System.Windows.Forms.BindingManagerBase" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           associated with the <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          . </param
+        >
         <param name="listManager">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.BindingManagerBase" /> to add. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+           to add. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddCore">
-      <MemberSignature Language="C#" Value="protected virtual void AddCore (object dataSource, System.Windows.Forms.BindingManagerBase listManager);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void AddCore (object dataSource, System.Windows.Forms.BindingManagerBase listManager);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -144,12 +392,29 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the <see cref="T:System.Windows.Forms.BindingManagerBase" /> associated with a specific data source to the collection.</para>
+          <para
+            >Adds the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             associated with a specific data source to the collection.</para
+          >
         </summary>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object associated with the <see cref="T:System.Windows.Forms.BindingManagerBase" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object associated with the <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          . </param
+        >
         <param name="listManager">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.BindingManagerBase" /> to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+           to add.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -171,7 +436,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Clears the collection of any <see cref="T:System.Windows.Forms.BindingManagerBase" /> objects.</para>
+          <para
+            >Clears the collection of any <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             objects.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -195,7 +465,10 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       </AssemblyInfo>
     </Member>
     <Member MemberName="CollectionChanged">
-      <MemberSignature Language="C#" Value="public event System.ComponentModel.CollectionChangeEventHandler CollectionChanged;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.ComponentModel.CollectionChangeEventHandler CollectionChanged;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.ComponentModel.CollectionChangeEventHandler</ReturnType>
@@ -203,11 +476,29 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="E:System.Windows.Forms.BindingContext.CollectionChanged" /> event is obsolete and always raises a <see cref="T:System.NotImplementedException" /> when handled. For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >The <see
+             cref="E:System.Windows.Forms.BindingContext.CollectionChanged" />
+
+             event is obsolete and always raises a <see
+             cref="T:System.NotImplementedException" />
+
+             when handled. For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Always raises a <see cref="T:System.NotImplementedException" /> when handled.</para>
+          <para
+            >Always raises a <see
+             cref="T:System.NotImplementedException" />
+
+             when handled.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -235,19 +526,54 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See the <see cref="T:System.Windows.Forms.Binding" /> class for a list of possible data sources and information about creating bindings between controls and data sources.</para>
-          <para>See the <see cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" /> property for information about returning a <see cref="T:System.Windows.Forms.BindingManagerBase" /> using only a data source.</para>
+          <para
+            >See the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class for a list of possible data sources and information about creating bindings between controls and data sources.</para
+          >
+          <para
+            >See the <see
+             cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+
+             property for information about returning a <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             using only a data source.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Windows.Forms.BindingContext" /> contains the <see cref="T:System.Windows.Forms.BindingManagerBase" /> associated with the specified data source.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+             contains the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             associated with the specified data source.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Windows.Forms.BindingContext" /> contains the specified <see cref="T:System.Windows.Forms.BindingManagerBase" />; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+             contains the specified <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the data source. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the data source. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -255,7 +581,10 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       </AssemblyInfo>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains (object dataSource, string dataMember);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains (object dataSource, string dataMember);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -267,21 +596,62 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See the <see cref="T:System.Windows.Forms.Binding" /> class for a list of possible data sources and for information about creating bindings between controls and data sources.</para>
-          <para>See the <see cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" /> property for information about returning a <see cref="T:System.Windows.Forms.BindingManagerBase" /> using a data source and data member.</para>
+          <para
+            >See the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class for a list of possible data sources and for information about creating bindings between controls and data sources.</para
+          >
+          <para
+            >See the <see
+             cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+
+             property for information about returning a <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             using a data source and data member.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Windows.Forms.BindingContext" /> contains the <see cref="T:System.Windows.Forms.BindingManagerBase" /> associated with the specified data source and data member.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+             contains the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             associated with the specified data source and data member.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Windows.Forms.BindingContext" /> contains the specified <see cref="T:System.Windows.Forms.BindingManagerBase" />; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+             contains the specified <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the data source. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the data source. </param
+        >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />The information needed to resolve to a specific <see cref="T:System.Windows.Forms.BindingManagerBase" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The information needed to resolve to a specific <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -298,7 +668,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is derived from <see cref="T:System.Collections.ICollection" />, and is overridden to always return false.</para>
+          <para
+            >This property is derived from <see
+             cref="T:System.Collections.ICollection" />
+
+            , and is overridden to always return false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -311,7 +686,10 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.BindingManagerBase this[object dataSource] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.BindingManagerBase this[object dataSource] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.BindingManagerBase</ReturnType>
@@ -331,7 +709,10 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.BindingManagerBase this[object dataSource, string dataMember] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.BindingManagerBase this[object dataSource, string dataMember] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.BindingManagerBase</ReturnType>
@@ -353,7 +734,10 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnCollectionChanged">
-      <MemberSignature Language="C#" Value="protected virtual void OnCollectionChanged (System.ComponentModel.CollectionChangeEventArgs ccevent);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnCollectionChanged (System.ComponentModel.CollectionChangeEventArgs ccevent);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -364,15 +748,38 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.BindingContext.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.BindingContext.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.BindingContext.CollectionChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.BindingContext.CollectionChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="ccevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -396,14 +803,28 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Deletes the <see cref="T:System.Windows.Forms.BindingManagerBase" /> associated with the specified data source.</para>
+          <para
+            >Deletes the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             associated with the specified data source.</para
+          >
         </summary>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data source associated with the <see cref="T:System.Windows.Forms.BindingManagerBase" /> to remove. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data source associated with the <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+           to remove. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveCore">
-      <MemberSignature Language="C#" Value="protected virtual void RemoveCore (object dataSource);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void RemoveCore (object dataSource);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -415,10 +836,21 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the <see cref="T:System.Windows.Forms.BindingManagerBase" /> associated with the specified data source.</para>
+          <para
+            >Removes the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             associated with the specified data source.</para
+          >
         </summary>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data source associated with the <see cref="T:System.Windows.Forms.BindingManagerBase" /> to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data source associated with the <see
+           cref="T:System.Windows.Forms.BindingManagerBase" />
+
+           to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -446,9 +878,18 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
           <para>Copies the elements of the collection into a specified array, starting at the collection index.</para>
         </summary>
         <param name="ar">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Array" /> to copy into. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Array" />
+
+           to copy into. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The collection index to begin copying from. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The collection index to begin copying from. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.Count">
@@ -466,12 +907,23 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the total number of <see cref="T:System.Windows.Forms.CurrencyManager" /> objects managed by the <see cref="T:System.Windows.Forms.BindingContext" />.</para>
+          <para
+            >Gets the total number of <see
+             cref="T:System.Windows.Forms.CurrencyManager" />
+
+             objects managed by the <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -484,7 +936,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is derived from <see cref="T:System.Collections.ICollection" />, and is overridden to always return false.</para>
+          <para
+            >This property is derived from <see
+             cref="T:System.Collections.ICollection" />
+
+            , and is overridden to always return false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -493,7 +950,10 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -512,7 +972,10 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -525,7 +988,18 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Collections.IEnumerator" /> returned by the <see cref="M:System.Windows.Forms.BindingContext.System#Collections#IEnumerable#GetEnumerator" /> method allows you to iterate over the collection managed by the <see cref="T:System.Windows.Forms.BindingContext" />.</para>
+          <para
+            >The <see
+             cref="T:System.Collections.IEnumerator" />
+
+             returned by the <see
+             cref="M:System.Windows.Forms.BindingContext.System#Collections#IEnumerable#GetEnumerator" />
+
+             method allows you to iterate over the collection managed by the <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -533,12 +1007,20 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IEnumerator" /> for the collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IEnumerator" />
+
+             for the collection.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="UpdateBinding">
-      <MemberSignature Language="C#" Value="public static void UpdateBinding (System.Windows.Forms.BindingContext newBindingContext, System.Windows.Forms.Binding binding);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void UpdateBinding (System.Windows.Forms.BindingContext newBindingContext, System.Windows.Forms.Binding binding);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -553,16 +1035,50 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is intended update the bindings of components that implement <see cref="T:System.Windows.Forms.IBindableComponent" />, when their <see cref="T:System.Windows.Forms.BindingContext" /> changes.</para>
+          <para
+            >This method is intended update the bindings of components that implement <see
+             cref="T:System.Windows.Forms.IBindableComponent" />
+
+            , when their <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+             changes.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Associates a <see cref="T:System.Windows.Forms.Binding" /> with a new <see cref="T:System.Windows.Forms.BindingContext" />.</para>
+          <para
+            >Associates a <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             with a new <see
+             cref="T:System.Windows.Forms.BindingContext" />
+
+            .</para
+          >
         </summary>
         <param name="newBindingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new <see cref="T:System.Windows.Forms.BindingContext" /> to associate with the <see cref="T:System.Windows.Forms.Binding" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new <see
+           cref="T:System.Windows.Forms.BindingContext" />
+
+           to associate with the <see
+           cref="T:System.Windows.Forms.Binding" />
+
+          .</param
+        >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Binding" /> to associate with the new <see cref="T:System.Windows.Forms.BindingContext" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Binding" />
+
+           to associate with the new <see
+           cref="T:System.Windows.Forms.BindingContext" />
+
+          .</param
+        >
       </Docs>
     </Member>
   </Members>

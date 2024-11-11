@@ -16,11 +16,30 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>GDI+ uses image encoders to convert the images stored in <see cref="T:System.Drawing.Bitmap" /> objects to various file formats. Image encoders are built into GDI+ for the BMP, JPEG, GIF, TIFF, and PNG formats. An encoder is invoked when you call the <see cref="Overload:System.Drawing.Image.Save" /> or <see cref="Overload:System.Drawing.Image.SaveAdd" /> method of a <see cref="T:System.Drawing.Image" /> object.</para>
+      <para
+        >GDI+ uses image encoders to convert the images stored in <see
+         cref="T:System.Drawing.Bitmap" />
+
+         objects to various file formats. Image encoders are built into GDI+ for the BMP, JPEG, GIF, TIFF, and PNG formats. An encoder is invoked when you call the <see
+         cref="Overload:System.Drawing.Image.Save" />
+
+         or <see
+         cref="Overload:System.Drawing.Image.SaveAdd" />
+
+         method of a <see
+         cref="T:System.Drawing.Image" />
+
+         object.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> class provides the necessary storage members and methods to retrieve all pertinent information about the installed image encoders and decoders (called codecs). Not inheritable. </para>
+      <para
+        >The <see
+         cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+         class provides the necessary storage members and methods to retrieve all pertinent information about the installed image encoders and decoders (called codecs). Not inheritable. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,14 +49,18 @@
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Guid'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.Guid" /> structure that contains a GUID that identifies a specific codec.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.Guid" />
+
+             structure that contains a GUID that identifies a specific codec.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -51,8 +74,7 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>To be added</remarks>
@@ -72,8 +94,7 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>To be added</remarks>
@@ -93,8 +114,7 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>To be added</remarks>
@@ -109,19 +129,26 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Flags">
-      <MemberSignature Language="C#" Value="public System.Drawing.Imaging.ImageCodecFlags Flags { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Imaging.ImageCodecFlags Flags { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageCodecFlags</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'ImageCodecFlags'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets 32-bit value used to store additional information about the codec. This property returns a combination of flags from the <see cref="T:System.Drawing.Imaging.ImageCodecFlags" /> enumeration.</para>
+          <para
+            >Gets or sets 32-bit value used to store additional information about the codec. This property returns a combination of flags from the <see
+             cref="T:System.Drawing.Imaging.ImageCodecFlags" />
+
+             enumeration.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -135,8 +162,7 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>To be added</remarks>
@@ -156,14 +182,18 @@
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Guid'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.Guid" /> structure that contains a GUID that identifies the codec's format.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.Guid" />
+
+             structure that contains a GUID that identifies the codec's format.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -172,7 +202,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetImageDecoders">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageCodecInfo[] GetImageDecoders ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageCodecInfo[] GetImageDecoders ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageCodecInfo[]</ReturnType>
@@ -182,11 +215,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> objects that contain information about the image decoders built into GDI+.</para>
+          <para
+            >Returns an array of <see
+             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+             objects that contain information about the image decoders built into GDI+.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> objects. Each <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> object in the array contains information about one of the built-in image decoders.</para>
+          <para
+            >An array of <see
+             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+             objects. Each <see
+             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+             object in the array contains information about one of the built-in image decoders.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -195,7 +241,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetImageEncoders">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageCodecInfo[] GetImageEncoders ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageCodecInfo[] GetImageEncoders ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageCodecInfo[]</ReturnType>
@@ -205,11 +254,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> objects that contain information about the image encoders built into GDI+.</para>
+          <para
+            >Returns an array of <see
+             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+             objects that contain information about the image encoders built into GDI+.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> objects. Each <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> object in the array contains information about one of the built-in image encoders.</para>
+          <para
+            >An array of <see
+             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+             objects. Each <see
+             cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+
+             object in the array contains information about one of the built-in image encoders.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -223,8 +285,7 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>To be added</remarks>
@@ -244,8 +305,7 @@
       <ReturnValue>
         <ReturnType>System.Byte[][]</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Byte[] []'</value>
         <remarks>To be added</remarks>
@@ -270,8 +330,7 @@
       <ReturnValue>
         <ReturnType>System.Byte[][]</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Byte[] []'</value>
         <remarks>To be added</remarks>
@@ -296,8 +355,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'int'</value>
         <remarks>To be added</remarks>

@@ -3,73 +3,63 @@
   <div id="GHTSubTest1" testname="TableItemStyle - VerticalAlign">
     <table id="Table1" style="height:232px;width:776px" border="0">
       <tr valign="Bottom">
-        <td valign="Bottom">
-        </td>
-        <td valign="Middle">
-        </td>
-        <td>
-        </td>
-        <td valign="Top">
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
+        <td valign="Bottom"></td>
+        <td valign="Middle"></td>
+        <td></td>
+        <td valign="Top"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
       <tr valign="Middle">
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
       </tr>
       <tr valign="Top">
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
       </tr>
     </table>
     <span>
-      <br />Bottom</span>
+      <br />
+
+      Bottom</span
+    >
     <span>
-      <br />Middle</span>
+      <br />
+
+      Middle</span
+    >
     <span>
-      <br />NotSet</span>
+      <br />
+
+      NotSet</span
+    >
     <span>
-      <br />Top</span>
+      <br />
+
+      Top</span
+    >
   </div>
 </testresults>

@@ -13,9 +13,38 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.CheckBoxRenderer" /> class provides a set of static methods that can be used to render a check box control. Rendering a control refers to drawing the user interface of a control. To draw a check box, use one of the <see cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" /> methods. These methods provide a variety of options, such as drawing text or an image with the check box.</para>
-      <para>If visual styles are enabled in the operating system and visual styles are applied to the current application, <see cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" /> will draw the check box with the current visual style. Otherwise, <see cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" /> will draw the check box with the classic Windows style. This is useful if you are drawing a custom control that should automatically match the current visual style setting of the operating system.</para>
-      <para>This class wraps the functionality of a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> that is set to one of the elements exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.CheckBox" /> class. For more information, see <format type="text/html"><a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a></format>.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.CheckBoxRenderer" />
+
+         class provides a set of static methods that can be used to render a check box control. Rendering a control refers to drawing the user interface of a control. To draw a check box, use one of the <see
+         cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" />
+
+         methods. These methods provide a variety of options, such as drawing text or an image with the check box.</para
+      >
+      <para
+        >If visual styles are enabled in the operating system and visual styles are applied to the current application, <see
+         cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" />
+
+         will draw the check box with the current visual style. Otherwise, <see
+         cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" />
+
+         will draw the check box with the classic Windows style. This is useful if you are drawing a custom control that should automatically match the current visual style setting of the operating system.</para
+      >
+      <para
+        >This class wraps the functionality of a <see
+         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+         that is set to one of the elements exposed by the <see
+         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.CheckBox" />
+
+         class. For more information, see <format
+         type="text/html">
+          <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +53,10 @@
   </Docs>
   <Members>
     <Member MemberName="DrawCheckBox">
-      <MemberSignature Language="C#" Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Windows.Forms.VisualStyles.CheckBoxState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Windows.Forms.VisualStyles.CheckBoxState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -45,18 +77,39 @@
           <para>Draws a check box control in the specified state and location.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the check box.</param
+        >
         <param name="glyphLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> to draw the check box glyph at.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           to draw the check box glyph at.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" /> values that specifies the visual state of the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+           values that specifies the visual state of the check box.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawCheckBox">
-      <MemberSignature Language="C#" Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Drawing.Rectangle textBounds, string checkBoxText, System.Drawing.Font font, bool focused, System.Windows.Forms.VisualStyles.CheckBoxState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Drawing.Rectangle textBounds, string checkBoxText, System.Drawing.Font font, bool focused, System.Windows.Forms.VisualStyles.CheckBoxState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -81,26 +134,74 @@
           <para>Draws a check box control in the specified state and location, with the specified text, and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the check box.</param
+        >
         <param name="glyphLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> to draw the check box glyph at.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           to draw the check box glyph at.</param
+        >
         <param name="textBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> to draw <paramref name="checkBoxText" /> in.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           to draw <paramref
+           name="checkBoxText" />
+
+           in.</param
+        >
         <param name="checkBoxText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to draw with the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to draw with the check box.</param
+        >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Font" /> to apply to <paramref name="checkBoxText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Font" />
+
+           to apply to <paramref
+           name="checkBoxText" />
+
+          .</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" /> values that specifies the visual state of the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+           values that specifies the visual state of the check box.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawCheckBox">
-      <MemberSignature Language="C#" Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Drawing.Rectangle textBounds, string checkBoxText, System.Drawing.Font font, System.Windows.Forms.TextFormatFlags flags, bool focused, System.Windows.Forms.VisualStyles.CheckBoxState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Drawing.Rectangle textBounds, string checkBoxText, System.Drawing.Font font, System.Windows.Forms.TextFormatFlags flags, bool focused, System.Windows.Forms.VisualStyles.CheckBoxState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -126,28 +227,82 @@
           <para>Draws a check box control in the specified state and location, with the specified text and text formatting, and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the check box.</param
+        >
         <param name="glyphLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> to draw the check box glyph at.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           to draw the check box glyph at.</param
+        >
         <param name="textBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> to draw <paramref name="checkBoxText" /> in.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           to draw <paramref
+           name="checkBoxText" />
+
+           in.</param
+        >
         <param name="checkBoxText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to draw with the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to draw with the check box.</param
+        >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Font" /> to apply to <paramref name="checkBoxText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Font" />
+
+           to apply to <paramref
+           name="checkBoxText" />
+
+          .</param
+        >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the <see cref="T:System.Windows.Forms.TextFormatFlags" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the <see
+           cref="T:System.Windows.Forms.TextFormatFlags" />
+
+           values.</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" /> values that specifies the visual state of the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+           values that specifies the visual state of the check box.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawCheckBox">
-      <MemberSignature Language="C#" Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Drawing.Rectangle textBounds, string checkBoxText, System.Drawing.Font font, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.CheckBoxState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Drawing.Rectangle textBounds, string checkBoxText, System.Drawing.Font font, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.CheckBoxState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -174,30 +329,93 @@
           <para>Draws a check box control in the specified state and location, with the specified text and image, and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the check box.</param
+        >
         <param name="glyphLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> to draw the check box glyph at.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           to draw the check box glyph at.</param
+        >
         <param name="textBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> to draw <paramref name="checkBoxText" /> in.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           to draw <paramref
+           name="checkBoxText" />
+
+           in.</param
+        >
         <param name="checkBoxText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to draw with the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to draw with the check box.</param
+        >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Font" /> to apply to <paramref name="checkBoxText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Font" />
+
+           to apply to <paramref
+           name="checkBoxText" />
+
+          .</param
+        >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Image" /> to draw with the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Image" />
+
+           to draw with the check box.</param
+        >
         <param name="imageBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that represents the dimensions of <paramref name="image" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the dimensions of <paramref
+           name="image" />
+
+          .</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" /> values that specifies the visual state of the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+           values that specifies the visual state of the check box.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawCheckBox">
-      <MemberSignature Language="C#" Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Drawing.Rectangle textBounds, string checkBoxText, System.Drawing.Font font, System.Windows.Forms.TextFormatFlags flags, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.CheckBoxState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawCheckBox (System.Drawing.Graphics g, System.Drawing.Point glyphLocation, System.Drawing.Rectangle textBounds, string checkBoxText, System.Drawing.Font font, System.Windows.Forms.TextFormatFlags flags, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.CheckBoxState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -225,32 +443,101 @@
           <para>Draws a check box control in the specified state and location; with the specified text, text formatting, and image; and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the check box.</param
+        >
         <param name="glyphLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> to draw the check box glyph at.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           to draw the check box glyph at.</param
+        >
         <param name="textBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> to draw <paramref name="checkBoxText" /> in.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           to draw <paramref
+           name="checkBoxText" />
+
+           in.</param
+        >
         <param name="checkBoxText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to draw with the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to draw with the check box.</param
+        >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Font" /> to apply to <paramref name="checkBoxText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Font" />
+
+           to apply to <paramref
+           name="checkBoxText" />
+
+          .</param
+        >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the <see cref="T:System.Windows.Forms.TextFormatFlags" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the <see
+           cref="T:System.Windows.Forms.TextFormatFlags" />
+
+           values.</param
+        >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Image" /> to draw with the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Image" />
+
+           to draw with the check box.</param
+        >
         <param name="imageBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that represents the dimensions of <paramref name="image" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the dimensions of <paramref
+           name="image" />
+
+          .</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" /> values that specifies the visual state of the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+           values that specifies the visual state of the check box.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawParentBackground">
-      <MemberSignature Language="C#" Value="public static void DrawParentBackground (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.Control childControl);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawParentBackground (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.Control childControl);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -268,18 +555,39 @@
           <para>Draws the background of a control's parent in the specified area.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the background of the parent of <paramref name="childControl" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the background of the parent of <paramref
+           name="childControl" />
+
+          . </param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> in which to draw the parent control's background. This rectangle should be inside the child control’s bounds.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           in which to draw the parent control's background. This rectangle should be inside the child control’s bounds.</param
+        >
         <param name="childControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The control whose parent's background will be drawn.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The control whose parent's background will be drawn.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetGlyphSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size GetGlyphSize (System.Drawing.Graphics g, System.Windows.Forms.VisualStyles.CheckBoxState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size GetGlyphSize (System.Drawing.Graphics g, System.Windows.Forms.VisualStyles.CheckBoxState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -300,19 +608,39 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Size" /> that represents the size of the check box glyph.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Size" />
+
+             that represents the size of the check box glyph.</para
+          >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> this operation will use.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           this operation will use.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" /> values that specifies the visual state of the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+           values that specifies the visual state of the check box.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsBackgroundPartiallyTransparent">
-      <MemberSignature Language="C#" Value="public static bool IsBackgroundPartiallyTransparent (System.Windows.Forms.VisualStyles.CheckBoxState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsBackgroundPartiallyTransparent (System.Windows.Forms.VisualStyles.CheckBoxState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -332,14 +660,23 @@
           <para>true if the background of the check box has semitransparent or alpha-blended pieces; otherwise, false.</para>
         </returns>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" /> values that specifies the visual state of the check box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+
+           values that specifies the visual state of the check box.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RenderMatchingApplicationState">
-      <MemberSignature Language="C#" Value="public static bool RenderMatchingApplicationState { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool RenderMatchingApplicationState { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -349,7 +686,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Windows.Forms.CheckBoxRenderer.RenderMatchingApplicationState" /> property is true, the <see cref="T:System.Windows.Forms.CheckBoxRenderer" /> uses the setting from the <see cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" /> property to determine the rendering style. If <see cref="P:System.Windows.Forms.CheckBoxRenderer.RenderMatchingApplicationState" /> is false, the renderer will always render using visual styles.</para>
+          <para
+            >If the <see
+             cref="P:System.Windows.Forms.CheckBoxRenderer.RenderMatchingApplicationState" />
+
+             property is true, the <see
+             cref="T:System.Windows.Forms.CheckBoxRenderer" />
+
+             uses the setting from the <see
+             cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
+
+             property to determine the rendering style. If <see
+             cref="P:System.Windows.Forms.CheckBoxRenderer.RenderMatchingApplicationState" />
+
+             is false, the renderer will always render using visual styles.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

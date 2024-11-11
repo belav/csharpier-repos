@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataGridViewRowHeightInfoPushedEventArgs" FullName="System.Windows.Forms.DataGridViewRowHeightInfoPushedEventArgs">
-  <TypeSignature Language="C#" Value="public class DataGridViewRowHeightInfoPushedEventArgs : System.ComponentModel.HandledEventArgs" />
+<Type
+  Name="DataGridViewRowHeightInfoPushedEventArgs"
+  FullName="System.Windows.Forms.DataGridViewRowHeightInfoPushedEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DataGridViewRowHeightInfoPushedEventArgs : System.ComponentModel.HandledEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,11 +19,26 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+      <para
+        >For more information about handling events, see <format
+         type="text/html">
+          <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+        </format>
+
+        . </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.DataGridView.RowHeightInfoPushed" /> event of a <see cref="T:System.Windows.Forms.DataGridView" />. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.DataGridView.RowHeightInfoPushed" />
+
+         event of a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+        . </para
+      >
     </summary>
   </Docs>
   <Members>

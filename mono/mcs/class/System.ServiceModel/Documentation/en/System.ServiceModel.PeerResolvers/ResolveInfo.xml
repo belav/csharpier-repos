@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ResolveInfo" FullName="System.ServiceModel.PeerResolvers.ResolveInfo">
   <TypeSignature Language="C#" Value="public class ResolveInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ResolveInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ResolveInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -29,7 +32,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ResolveInfo ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,13 +45,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" /> class. </para>
+          <para
+            >Initializes a new default instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ResolveInfo (Guid clientId, string meshId, int maxAddresses);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Guid clientId, string meshId, int32 maxAddresses) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ResolveInfo (Guid clientId, string meshId, int maxAddresses);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Guid clientId, string meshId, int32 maxAddresses) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,17 +76,31 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" /> class with the provided client ID and mesh ID, as well as the maximum number of endpoint addresses to return.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+
+             class with the provided client ID and mesh ID, as well as the maximum number of endpoint addresses to return.</para
+          >
         </summary>
         <param name="clientId">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Guid" /> that contains a unique ID for the client for which endpoints are to be resolved.</param>
+          <see cref="T:System.Guid" />
+
+           that contains a unique ID for the client for which endpoints are to be resolved.</param
+        >
         <param name="meshId">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.String" /> that contains the ID of the mesh in which the client is participating.</param>
+          <see cref="T:System.String" />
+
+           that contains the ID of the mesh in which the client is participating.</param
+        >
         <param name="maxAddresses">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Int32" /> that contains the maximum number of client endpoint addresses to be returned by the resolve operation.</param>
+          <see cref="T:System.Int32" />
+
+           that contains the maximum number of client endpoint addresses to be returned by the resolve operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ClientId">
@@ -93,7 +124,10 @@
     </Member>
     <Member MemberName="HasBody">
       <MemberSignature Language="C#" Value="public bool HasBody ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool HasBody() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool HasBody() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

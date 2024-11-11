@@ -1,6 +1,9 @@
 <Type Name="StackFrame" FullName="Mono.Debugger.Soft.StackFrame">
   <TypeSignature Language="C#" Value="public class StackFrame : Mono.Debugger.Soft.Mirror" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit StackFrame extends Mono.Debugger.Soft.Mirror" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit StackFrame extends Mono.Debugger.Soft.Mirror"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -11,8 +14,7 @@
   <Interfaces />
   <Docs>
     <summary>Represents a stack frame of a suspended thread in the debuggee.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName="FileName">
@@ -32,8 +34,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetArgument">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Value GetArgument (int pos);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.Value GetArgument(int32 pos) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.Value GetArgument (int pos);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.Value GetArgument(int32 pos) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -53,7 +61,10 @@
     </Member>
     <Member MemberName="GetThis">
       <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Value GetThis ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.Value GetThis() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.Value GetThis() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -69,8 +80,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetValue">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Value GetValue (Mono.Debugger.Soft.LocalVariable var);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.Value GetValue(class Mono.Debugger.Soft.LocalVariable var) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.Value GetValue (Mono.Debugger.Soft.LocalVariable var);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.Value GetValue(class Mono.Debugger.Soft.LocalVariable var) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -89,8 +106,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetValue">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Value GetValue (Mono.Debugger.Soft.ParameterInfoMirror param);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.Value GetValue(class Mono.Debugger.Soft.ParameterInfoMirror param) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.Value GetValue (Mono.Debugger.Soft.ParameterInfoMirror param);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.Value GetValue(class Mono.Debugger.Soft.ParameterInfoMirror param) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -109,8 +132,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetValues">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Value[] GetValues (Mono.Debugger.Soft.LocalVariable[] vars);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.Value[] GetValues(class Mono.Debugger.Soft.LocalVariable[] vars) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.Value[] GetValues (Mono.Debugger.Soft.LocalVariable[] vars);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.Value[] GetValues(class Mono.Debugger.Soft.LocalVariable[] vars) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -129,8 +158,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetVisibleVariableByName">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.LocalVariable GetVisibleVariableByName (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.LocalVariable GetVisibleVariableByName(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.LocalVariable GetVisibleVariableByName (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.LocalVariable GetVisibleVariableByName(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -149,8 +184,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetVisibleVariables">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Mono.Debugger.Soft.LocalVariable&gt; GetVisibleVariables ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IList`1&lt;class Mono.Debugger.Soft.LocalVariable&gt; GetVisibleVariables() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IList<Mono.Debugger.Soft.LocalVariable> GetVisibleVariables ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IList`1<class Mono.Debugger.Soft.LocalVariable> GetVisibleVariables() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -215,7 +256,10 @@
     </Member>
     <Member MemberName="Location">
       <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Location Location { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.Location Location" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.Location Location"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -230,8 +274,14 @@
       </Docs>
     </Member>
     <Member MemberName="Method">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.MethodMirror Method { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.MethodMirror Method" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.MethodMirror Method { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.MethodMirror Method"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -246,8 +296,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetValue">
-      <MemberSignature Language="C#" Value="public void SetValue (Mono.Debugger.Soft.LocalVariable var, Mono.Debugger.Soft.Value value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetValue(class Mono.Debugger.Soft.LocalVariable var, class Mono.Debugger.Soft.Value value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetValue (Mono.Debugger.Soft.LocalVariable var, Mono.Debugger.Soft.Value value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetValue(class Mono.Debugger.Soft.LocalVariable var, class Mono.Debugger.Soft.Value value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -267,8 +323,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetValue">
-      <MemberSignature Language="C#" Value="public void SetValue (Mono.Debugger.Soft.ParameterInfoMirror param, Mono.Debugger.Soft.Value value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetValue(class Mono.Debugger.Soft.ParameterInfoMirror param, class Mono.Debugger.Soft.Value value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetValue (Mono.Debugger.Soft.ParameterInfoMirror param, Mono.Debugger.Soft.Value value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetValue(class Mono.Debugger.Soft.ParameterInfoMirror param, class Mono.Debugger.Soft.Value value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -288,8 +350,14 @@
       </Docs>
     </Member>
     <Member MemberName="Thread">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.ThreadMirror Thread { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.ThreadMirror Thread" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.ThreadMirror Thread { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.ThreadMirror Thread"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

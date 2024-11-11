@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="EmailAddressAttribute" FullName="System.ComponentModel.DataAnnotations.EmailAddressAttribute">
-  <TypeSignature Language="C#" Value="public class EmailAddressAttribute : System.ComponentModel.DataAnnotations.DataTypeAttribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit EmailAddressAttribute extends System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+<Type
+  Name="EmailAddressAttribute"
+  FullName="System.ComponentModel.DataAnnotations.EmailAddressAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class EmailAddressAttribute : System.ComponentModel.DataAnnotations.DataTypeAttribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit EmailAddressAttribute extends System.ComponentModel.DataAnnotations.DataTypeAttribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -25,7 +34,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public EmailAddressAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -35,13 +47,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.EmailAddressAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.EmailAddressAttribute" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
       <MemberSignature Language="C#" Value="public override bool IsValid (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsValid(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsValid(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -63,7 +83,10 @@
           <para>true if the specified value is valid or null; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to validate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to validate.</param
+        >
       </Docs>
     </Member>
   </Members>

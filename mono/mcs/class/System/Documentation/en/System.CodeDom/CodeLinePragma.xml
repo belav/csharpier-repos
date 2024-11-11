@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CodeLinePragma" FullName="System.CodeDom.CodeLinePragma">
   <TypeSignature Language="C#" Value="public class CodeLinePragma" Maintainer="auto" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit CodeLinePragma extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit CodeLinePragma extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -27,7 +30,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeLinePragma" /> can be used to represent a specific location within a file. This type of object is often used after compilation by debugging tools to store locations of associated code elements, such as position references associated with compiler warnings and errors.</para>
+        <see cref="T:System.CodeDom.CodeLinePragma" />
+
+         can be used to represent a specific location within a file. This type of object is often used after compilation by debugging tools to store locations of associated code elements, such as position references associated with compiler warnings and errors.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -37,7 +43,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeLinePragma ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -47,17 +56,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you use this constructor you should also set the <see cref="P:System.CodeDom.CodeLinePragma.LineNumber" /> and <see cref="P:System.CodeDom.CodeLinePragma.FileName" /> properties.</para>
+          <para
+            >If you use this constructor you should also set the <see
+             cref="P:System.CodeDom.CodeLinePragma.LineNumber" />
+
+             and <see
+             cref="P:System.CodeDom.CodeLinePragma.FileName" />
+
+             properties.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeLinePragma" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CodeLinePragma (string fileName, int lineNumber);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, int32 lineNumber) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public CodeLinePragma (string fileName, int lineNumber);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, int32 lineNumber) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -73,12 +101,23 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeLinePragma" />
+
+             class.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name of the associated file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file name of the associated file. </param
+        >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line number to store a reference to. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line number to store a reference to. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="FileName">
@@ -93,8 +132,7 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>To be added</remarks>
@@ -116,8 +154,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'int'</value>
         <remarks>To be added</remarks>

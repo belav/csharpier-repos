@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Namespace Name="System.Runtime.Remoting.Contexts" FullName="System.Runtime.Remoting.Contexts" FullNameSP="System.Runtime.Remoting.Contexts" Maintainer="Mono">
+<Namespace
+  Name="System.Runtime.Remoting.Contexts"
+  FullName="System.Runtime.Remoting.Contexts"
+  FullNameSP="System.Runtime.Remoting.Contexts"
+  Maintainer="Mono"
+>
   <Docs>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:System.Runtime.Remoting.Contexts" /> namespace contains objects that define the contexts all objects reside within. A context is an ordered sequence of properties that defines an environment for the objects within it. Contexts are created during the activation process for objects that are configured to require certain automatic services such synchronization, transactions, just-in-time (JIT) activation, security, and so on. Multiple objects can live inside a context.</para>
+      <para
+        >The <see
+         cref="N:System.Runtime.Remoting.Contexts" />
+
+         namespace contains objects that define the contexts all objects reside within. A context is an ordered sequence of properties that defines an environment for the objects within it. Contexts are created during the activation process for objects that are configured to require certain automatic services such synchronization, transactions, just-in-time (JIT) activation, security, and so on. Multiple objects can live inside a context.</para
+      >
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

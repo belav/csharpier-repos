@@ -19,7 +19,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TaskLoggingHelper (Microsoft.Build.Framework.ITask taskInstance);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TaskLoggingHelper (Microsoft.Build.Framework.ITask taskInstance);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="taskInstance" Type="Microsoft.Build.Framework.ITask" />
@@ -29,17 +32,28 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskLoggingHelper" /> class and associates it with the specified task instance.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Utilities.TaskLoggingHelper" />
+
+             class and associates it with the specified task instance.</para
+          >
         </summary>
         <param name="taskInstance">
-          <attribution license="cc4" from="Microsoft" modified="false" />The task containing an instance of this task.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The task containing an instance of this task.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="BuildEngine">
-      <MemberSignature Language="C#" Value="protected Microsoft.Build.Framework.IBuildEngine BuildEngine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected Microsoft.Build.Framework.IBuildEngine BuildEngine { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.IBuildEngine</ReturnType>
@@ -58,14 +72,17 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ExtractMessageCode">
-      <MemberSignature Language="C#" Value="public string ExtractMessageCode (string message, out string messageWithoutCodePrefix);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string ExtractMessageCode (string message, out string messageWithoutCodePrefix);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
-        <Parameter Name="messageWithoutCodePrefix" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="messageWithoutCodePrefix" Type="System.String&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="message">To be added.</param>
@@ -80,7 +97,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FormatResourceString">
-      <MemberSignature Language="C#" Value="public virtual string FormatResourceString (string resourceName, object[] args);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string FormatResourceString (string resourceName, object[] args);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -100,7 +120,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The culture of the current thread is used for formatting.</para>
-          <para>This method requires the owner task to have registered its resources with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.TaskResources" /> property.</para>
+          <para
+            >This method requires the owner task to have registered its resources with either the <see
+             cref="T:Microsoft.Build.Utilities.Task" />
+
+             base class constructor, or the <see
+             cref="P:Microsoft.Build.Utilities.Task.TaskResources" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -111,16 +139,25 @@
           <para>The formatted string.</para>
         </returns>
         <param name="resourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="FormatString">
-      <MemberSignature Language="C#" Value="public virtual string FormatString (string unformatted, object[] args);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string FormatString (string unformatted, object[] args);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -150,9 +187,15 @@
           <para>The formatted string.</para>
         </returns>
         <param name="unformatted">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to format.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to format.</param
+        >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />Arguments for formatting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Arguments for formatting.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -188,7 +231,12 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If a task does not have Help keywords associated with its messages, it can ignore this property or set it to null. If this property is set to an empty <see cref="T:System.String" />, resource names will be used verbatim as Help keywords.</para>
+          <para
+            >If a task does not have Help keywords associated with its messages, it can ignore this property or set it to null. If this property is set to an empty <see
+             cref="T:System.String" />
+
+            , resource names will be used verbatim as Help keywords.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -219,14 +267,20 @@
           <para>Logs the command line for an underlying tool, executable file, or shell command of a task.</para>
         </summary>
         <param name="commandLine">
-          <attribution license="cc4" from="Microsoft" modified="false" />The command line string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The command line string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogCommandLine">
-      <MemberSignature Language="C#" Value="public void LogCommandLine (Microsoft.Build.Framework.MessageImportance importance, string commandLine);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogCommandLine (Microsoft.Build.Framework.MessageImportance importance, string commandLine);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -246,16 +300,28 @@
           <para>Logs the command line for an underlying tool, executable file, or shell command of a task using the specified importance level.</para>
         </summary>
         <param name="importance">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the values of <see cref="T:Microsoft.Build.Framework.MessageImportance" /> that indicates the importance level of the command line.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the values of <see
+           cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+           that indicates the importance level of the command line.</param
+        >
         <param name="commandLine">
-          <attribution license="cc4" from="Microsoft" modified="false" />The command line string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The command line string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogError">
-      <MemberSignature Language="C#" Value="public void LogError (string message, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogError (string message, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -281,16 +347,25 @@
           <para>Logs an error with the specified message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional arguments for formatting the message string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional arguments for formatting the message string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogError">
-      <MemberSignature Language="C#" Value="public void LogError (string subcategory, string errorCode, string helpKeyword, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string message, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogError (string subcategory, string errorCode, string helpKeyword, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string message, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -317,33 +392,94 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The parameters <paramref name="subCategory" />, <paramref name="errorCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para>
-          <para>The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
+          <para
+            >The parameters <paramref
+             name="subCategory" />
+
+            , <paramref
+             name="errorCode" />
+
+            , <paramref
+             name="helpKeyword" />
+
+            , and <paramref
+             name="file" />
+
+             can be null.</para
+          >
+          <para
+            >The parameters <paramref
+             name="lineNumber" />
+
+            , <paramref
+             name="columnNumber" />
+
+            , <paramref
+             name="endLineNumber" />
+
+            , and <paramref
+             name="endColumnNumber" />
+
+             should be set to <math
+            >0</math>
+
+             if they are not available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs an error using the specified message and other error details.</para>
         </summary>
         <param name="subcategory">
-          <attribution license="cc4" from="Microsoft" modified="false" />The description of the error type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The description of the error type.</param
+        >
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error code.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword to associate with the error.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword to associate with the error.</param
+        >
         <param name="file">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path to the file containing the error.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path to the file containing the error.</param
+        >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line in the file where the error occurs.</param
+        >
         <param name="columnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column in the file where the error occurs.</param
+        >
         <param name="endLineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end line in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end line in the file where the error occurs.</param
+        >
         <param name="endColumnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end column in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end column in the file where the error occurs.</param
+        >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional arguments for formatting the message string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional arguments for formatting the message string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -375,7 +511,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogErrorFromException">
-      <MemberSignature Language="C#" Value="public void LogErrorFromException (Exception e, bool showStackTrace);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogErrorFromException (Exception e, bool showStackTrace);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -396,14 +535,20 @@
           <para>Logs an error using the message, and optionally the stack trace, from the given exception.</para>
         </summary>
         <param name="showStackTrace">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to include the stack trace in the log; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to include the stack trace in the log; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogErrorFromResources">
-      <MemberSignature Language="C#" Value="public void LogErrorFromResources (string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogErrorFromResources (string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -429,16 +574,25 @@
           <para>Logs an error using the specified resource string.</para>
         </summary>
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogErrorFromResources">
-      <MemberSignature Language="C#" Value="public void LogErrorFromResources (string subcategoryResourceName, string errorCode, string helpKeyword, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogErrorFromResources (string subcategoryResourceName, string errorCode, string helpKeyword, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -465,40 +619,104 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The parameters <paramref name="subCategoryResourceName" />, <paramref name="errorCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para>
-          <para>The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
+          <para
+            >The parameters <paramref
+             name="subCategoryResourceName" />
+
+            , <paramref
+             name="errorCode" />
+
+            , <paramref
+             name="helpKeyword" />
+
+            , and <paramref
+             name="file" />
+
+             can be null.</para
+          >
+          <para
+            >The parameters <paramref
+             name="lineNumber" />
+
+            , <paramref
+             name="columnNumber" />
+
+            , <paramref
+             name="endLineNumber" />
+
+            , and <paramref
+             name="endColumnNumber" />
+
+             should be set to <math
+            >0</math>
+
+             if they are not available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs an error using the specified resource string and other error details.</para>
         </summary>
         <param name="subcategoryResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource that describes the error type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource that describes the error type.</param
+        >
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error code.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword to associate with the error.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword to associate with the error.</param
+        >
         <param name="file">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path to the file containing the error.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path to the file containing the error.</param
+        >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line in the file where the error occurs.</param
+        >
         <param name="columnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column in the file where the error occurs.</param
+        >
         <param name="endLineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end line in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end line in the file where the error occurs.</param
+        >
         <param name="endColumnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end column in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end column in the file where the error occurs.</param
+        >
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogErrorWithCodeFromResources">
-      <MemberSignature Language="C#" Value="public void LogErrorWithCodeFromResources (string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogErrorWithCodeFromResources (string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -518,23 +736,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the message begins with an error code, the code is extracted and logged with the message.</para>
-          <para>If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para>
+          <para
+            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see
+             cref="T:Microsoft.Build.Utilities.Task" />
+
+             base class constructor, or the <see
+             cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs an error with an error code using the specified resource string.</para>
         </summary>
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogErrorWithCodeFromResources">
-      <MemberSignature Language="C#" Value="public void LogErrorWithCodeFromResources (string subcategoryResourceName, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogErrorWithCodeFromResources (string subcategoryResourceName, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -560,37 +795,97 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the message begins with an error code, the code is extracted and logged with the message.</para>
-          <para>If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para>
-          <para>The parameters <paramref name="subCategoryResourceName" />, and <paramref name="file" /> can be null.</para>
-          <para>The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
+          <para
+            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see
+             cref="T:Microsoft.Build.Utilities.Task" />
+
+             base class constructor, or the <see
+             cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+             property.</para
+          >
+          <para
+            >The parameters <paramref
+             name="subCategoryResourceName" />
+
+            , and <paramref
+             name="file" />
+
+             can be null.</para
+          >
+          <para
+            >The parameters <paramref
+             name="lineNumber" />
+
+            , <paramref
+             name="columnNumber" />
+
+            , <paramref
+             name="endLineNumber" />
+
+            , and <paramref
+             name="endColumnNumber" />
+
+             should be set to <math
+            >0</math>
+
+             if they are not available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs an error using the specified resource string and other error details.</para>
         </summary>
         <param name="subcategoryResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource that describes the error type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource that describes the error type.</param
+        >
         <param name="file">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path to the file containing the error.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path to the file containing the error.</param
+        >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line in the file where the error occurs.</param
+        >
         <param name="columnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column in the file where the error occurs.</param
+        >
         <param name="endLineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end line in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end line in the file where the error occurs.</param
+        >
         <param name="endColumnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end column in the file where the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end column in the file where the error occurs.</param
+        >
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogExternalProjectFinished">
-      <MemberSignature Language="C#" Value="public void LogExternalProjectFinished (string message, string helpKeyword, string projectFile, bool succeeded);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogExternalProjectFinished (string message, string helpKeyword, string projectFile, bool succeeded);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -606,23 +901,43 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Helps log the custom <see cref="T:Microsoft.Build.Framework.ExternalProjectFinishedEventArgs" /> build event.</para>
+          <para
+            >Helps log the custom <see
+             cref="T:Microsoft.Build.Framework.ExternalProjectFinishedEventArgs" />
+
+             build event.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text message.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The help keyword.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The help keyword.</param
+        >
         <param name="projectFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the project.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the project.</param
+        >
         <param name="succeeded">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to indicate that project was built successfully; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to indicate that project was built successfully; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogExternalProjectStarted">
-      <MemberSignature Language="C#" Value="public void LogExternalProjectStarted (string message, string helpKeyword, string projectFile, string targetNames);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogExternalProjectStarted (string message, string helpKeyword, string projectFile, string targetNames);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -638,23 +953,43 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Helps log the custom <see cref="T:Microsoft.Build.Framework.ExternalProjectStartedEventArgs" /> build event.</para>
+          <para
+            >Helps log the custom <see
+             cref="T:Microsoft.Build.Framework.ExternalProjectStartedEventArgs" />
+
+             build event.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text message.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The help keyword.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The help keyword.</param
+        >
         <param name="projectFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the project.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the project.</param
+        >
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The targets to build. An empty string indicates default targets.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The targets to build. An empty string indicates default targets.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogMessage">
-      <MemberSignature Language="C#" Value="public void LogMessage (string message, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogMessage (string message, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -673,23 +1008,40 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:Microsoft.Build.Framework.MessageImportance" /> value of a message is <unmanagedCodeEntityReference>Normal</unmanagedCodeEntityReference> by default.</para>
+          <para
+            >The <see
+             cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+             value of a message is <unmanagedCodeEntityReference
+            >Normal</unmanagedCodeEntityReference>
+
+             by default.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a message with the specified string.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the message.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogMessage">
-      <MemberSignature Language="C#" Value="public void LogMessage (Microsoft.Build.Framework.MessageImportance importance, string message, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogMessage (Microsoft.Build.Framework.MessageImportance importance, string message, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -716,18 +1068,30 @@
           <para>Logs a message with the specified string and importance.</para>
         </summary>
         <param name="importance">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the enumeration values that specifies the importance of the message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the enumeration values that specifies the importance of the message.</param
+        >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the message.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogMessageFromResources">
-      <MemberSignature Language="C#" Value="public void LogMessageFromResources (string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogMessageFromResources (string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -746,23 +1110,40 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:Microsoft.Build.Framework.MessageImportance" /> value of a message is <unmanagedCodeEntityReference>Normal</unmanagedCodeEntityReference> by default.</para>
+          <para
+            >The <see
+             cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+             value of a message is <unmanagedCodeEntityReference
+            >Normal</unmanagedCodeEntityReference>
+
+             by default.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a message with the specified resource string.</para>
         </summary>
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogMessageFromResources">
-      <MemberSignature Language="C#" Value="public void LogMessageFromResources (Microsoft.Build.Framework.MessageImportance importance, string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogMessageFromResources (Microsoft.Build.Framework.MessageImportance importance, string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -789,18 +1170,30 @@
           <para>Logs a message with the specified resource string and importance.</para>
         </summary>
         <param name="importance">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the enumeration values that specifies the importance of the message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the enumeration values that specifies the importance of the message.</param
+        >
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogMessageFromText">
-      <MemberSignature Language="C#" Value="public bool LogMessageFromText (string lineOfText, Microsoft.Build.Framework.MessageImportance importance);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool LogMessageFromText (string lineOfText, Microsoft.Build.Framework.MessageImportance importance);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -825,7 +1218,10 @@
           <para>true if an error was logged; otherwise, false.</para>
         </returns>
         <param name="lineOfText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line of text to log from.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line of text to log from.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -861,7 +1257,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogMessagesFromFile">
-      <MemberSignature Language="C#" Value="public bool LogMessagesFromFile (string filename, Microsoft.Build.Framework.MessageImportance messageImportance);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool LogMessagesFromFile (string filename, Microsoft.Build.Framework.MessageImportance messageImportance);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -886,14 +1285,20 @@
           <para>true to indicate at least one error was logged; otherwise, false.</para>
         </returns>
         <param name="messageImportance">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the enumeration values that specifies the importance of logged messages.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the enumeration values that specifies the importance of logged messages.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogMessagesFromStream">
-      <MemberSignature Language="C#" Value="public bool LogMessagesFromStream (System.IO.TextReader stream, Microsoft.Build.Framework.MessageImportance messageImportance);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool LogMessagesFromStream (System.IO.TextReader stream, Microsoft.Build.Framework.MessageImportance messageImportance);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -917,16 +1322,31 @@
           <para>true if an error was logged; otherwise, false.</para>
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.IO.TextReader" /> that reads the stream to log from.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.IO.TextReader" />
+
+           that reads the stream to log from.</param
+        >
         <param name="messageImportance">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the values of <see cref="T:Microsoft.Build.Framework.MessageImportance" /> that indicates the importance level of the command line.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the values of <see
+           cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+           that indicates the importance level of the command line.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogWarning">
-      <MemberSignature Language="C#" Value="public void LogWarning (string message, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogWarning (string message, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -952,16 +1372,25 @@
           <para>Logs a warning with the specified message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional arguments for formatting the message string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional arguments for formatting the message string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogWarning">
-      <MemberSignature Language="C#" Value="public void LogWarning (string subcategory, string warningCode, string helpKeyword, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string message, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogWarning (string subcategory, string warningCode, string helpKeyword, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string message, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -988,33 +1417,94 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The parameters <paramref name="subCategory" />, <paramref name="warningCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para>
-          <para>The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
+          <para
+            >The parameters <paramref
+             name="subCategory" />
+
+            , <paramref
+             name="warningCode" />
+
+            , <paramref
+             name="helpKeyword" />
+
+            , and <paramref
+             name="file" />
+
+             can be null.</para
+          >
+          <para
+            >The parameters <paramref
+             name="lineNumber" />
+
+            , <paramref
+             name="columnNumber" />
+
+            , <paramref
+             name="endLineNumber" />
+
+            , and <paramref
+             name="endColumnNumber" />
+
+             should be set to <math
+            >0</math>
+
+             if they are not available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a warning using the specified message and other warning details.</para>
         </summary>
         <param name="subcategory">
-          <attribution license="cc4" from="Microsoft" modified="false" />The description of the warning type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The description of the warning type.</param
+        >
         <param name="warningCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The warning code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The warning code.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword to associate with the warning.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword to associate with the warning.</param
+        >
         <param name="file">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path to the file containing the warning.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path to the file containing the warning.</param
+        >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line in the file where the warning occurs.</param
+        >
         <param name="columnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column in the file where the warning occurs.</param
+        >
         <param name="endLineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end line in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end line in the file where the warning occurs.</param
+        >
         <param name="endColumnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end column in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end column in the file where the warning occurs.</param
+        >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional arguments for formatting the message string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional arguments for formatting the message string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1046,7 +1536,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogWarningFromException">
-      <MemberSignature Language="C#" Value="public void LogWarningFromException (Exception e, bool showStackTrace);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogWarningFromException (Exception e, bool showStackTrace);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1067,14 +1560,20 @@
           <para>Logs a warning using the message, and optionally the stack trace, from the given exception.</para>
         </summary>
         <param name="showStackTrace">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to include the stack trace in the log; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to include the stack trace in the log; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogWarningFromResources">
-      <MemberSignature Language="C#" Value="public void LogWarningFromResources (string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogWarningFromResources (string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1100,16 +1599,25 @@
           <para>Logs a warning using the specified resource string.</para>
         </summary>
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogWarningFromResources">
-      <MemberSignature Language="C#" Value="public void LogWarningFromResources (string subcategoryResourceName, string warningCode, string helpKeyword, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogWarningFromResources (string subcategoryResourceName, string warningCode, string helpKeyword, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1136,40 +1644,104 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The parameters <paramref name="subCategoryResourceName" />, <paramref name="warningCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para>
-          <para>The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
+          <para
+            >The parameters <paramref
+             name="subCategoryResourceName" />
+
+            , <paramref
+             name="warningCode" />
+
+            , <paramref
+             name="helpKeyword" />
+
+            , and <paramref
+             name="file" />
+
+             can be null.</para
+          >
+          <para
+            >The parameters <paramref
+             name="lineNumber" />
+
+            , <paramref
+             name="columnNumber" />
+
+            , <paramref
+             name="endLineNumber" />
+
+            , and <paramref
+             name="endColumnNumber" />
+
+             should be set to <math
+            >0</math>
+
+             if they are not available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a warning using the specified resource string and other warning details.</para>
         </summary>
         <param name="subcategoryResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource that describes the warning type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource that describes the warning type.</param
+        >
         <param name="warningCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The warning code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The warning code.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword to associate with the warning.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword to associate with the warning.</param
+        >
         <param name="file">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path to the file containing the warning.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path to the file containing the warning.</param
+        >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line in the file where the warning occurs.</param
+        >
         <param name="columnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column in the file where the warning occurs.</param
+        >
         <param name="endLineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end line in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end line in the file where the warning occurs.</param
+        >
         <param name="endColumnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end column in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end column in the file where the warning occurs.</param
+        >
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogWarningWithCodeFromResources">
-      <MemberSignature Language="C#" Value="public void LogWarningWithCodeFromResources (string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogWarningWithCodeFromResources (string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1189,23 +1761,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the message begins with a warning code, the code is extracted and logged with the message.</para>
-          <para>If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para>
+          <para
+            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see
+             cref="T:Microsoft.Build.Utilities.Task" />
+
+             base class constructor, or the <see
+             cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a warning with a warning code using the specified resource string.</para>
         </summary>
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogWarningWithCodeFromResources">
-      <MemberSignature Language="C#" Value="public void LogWarningWithCodeFromResources (string subcategoryResourceName, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string messageResourceName, object[] messageArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogWarningWithCodeFromResources (string subcategoryResourceName, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string messageResourceName, object[] messageArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1231,30 +1820,87 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the message begins with a warning code, the code is extracted and logged with the message.</para>
-          <para>If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para>
-          <para>The parameters <paramref name="subCategoryResourceName" />, and <paramref name="file" /> can be null.</para>
-          <para>The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
+          <para
+            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see
+             cref="T:Microsoft.Build.Utilities.Task" />
+
+             base class constructor, or the <see
+             cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+             property.</para
+          >
+          <para
+            >The parameters <paramref
+             name="subCategoryResourceName" />
+
+            , and <paramref
+             name="file" />
+
+             can be null.</para
+          >
+          <para
+            >The parameters <paramref
+             name="lineNumber" />
+
+            , <paramref
+             name="columnNumber" />
+
+            , <paramref
+             name="endLineNumber" />
+
+            , and <paramref
+             name="endColumnNumber" />
+
+             should be set to <math
+            >0</math>
+
+             if they are not available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a warning with a warning code using the specified resource string and other warning details.</para>
         </summary>
         <param name="subcategoryResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource that describes the warning type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource that describes the warning type.</param
+        >
         <param name="file">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path to the file containing the warning.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path to the file containing the warning.</param
+        >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line in the file where the warning occurs.</param
+        >
         <param name="columnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column in the file where the warning occurs.</param
+        >
         <param name="endLineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end line in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end line in the file where the warning occurs.</param
+        >
         <param name="endColumnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end column in the file where the warning occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end column in the file where the warning occurs.</param
+        >
         <param name="messageResourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the string resource to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the string resource to load.</param
+        >
         <param name="messageArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments for formatting the loaded string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments for formatting the loaded string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1280,7 +1926,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TaskResources">
-      <MemberSignature Language="C#" Value="public System.Resources.ResourceManager TaskResources { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Resources.ResourceManager TaskResources { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Resources.ResourceManager</ReturnType>

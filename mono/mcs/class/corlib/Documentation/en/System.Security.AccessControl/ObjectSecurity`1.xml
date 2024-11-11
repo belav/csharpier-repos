@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ObjectSecurity&lt;T&gt;" FullName="System.Security.AccessControl.ObjectSecurity&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public abstract class ObjectSecurity&lt;T&gt; : System.Security.AccessControl.NativeObjectSecurity where T : struct" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ObjectSecurity`1&lt;struct .ctor (class System.ValueType) T&gt; extends System.Security.AccessControl.NativeObjectSecurity" />
+<Type Name="ObjectSecurity<T>" FullName="System.Security.AccessControl.ObjectSecurity<T>">
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class ObjectSecurity<T> : System.Security.AccessControl.NativeObjectSecurity where T : struct"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ObjectSecurity`1<struct .ctor (class System.ValueType) T> extends System.Security.AccessControl.NativeObjectSecurity"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +29,15 @@
     <typeparam name="T">To be added.</typeparam>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Access rights (permissions) are type T, which you can type-cast to or from an int. For example, you can cast a <see cref="T:System.Security.AccessControl.FileSystemRights" /> as the access rights type, and then use the instance normally. In contrast, <see cref="T:System.Security.AccessControl.ObjectSecurity" /> always takes access rights of type int.</para>
+      <para
+        >Access rights (permissions) are type T, which you can type-cast to or from an int. For example, you can cast a <see
+         cref="T:System.Security.AccessControl.FileSystemRights" />
+
+         as the access rights type, and then use the instance normally. In contrast, <see
+         cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+         always takes access rights of type int.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -32,8 +46,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -49,14 +69,29 @@
           <para>Initializes a new instance of the ObjectSecurity`1 class.</para>
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the new <see
+           cref="T:System.Security.AccessControl.ObjectSecurity`1" />
+
+           object is a container object.</param
+        >
         <param name="resourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of resource.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of resource.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType, System.Runtime.InteropServices.SafeHandle safeHandle, System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType, class System.Runtime.InteropServices.SafeHandle safeHandle, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType, System.Runtime.InteropServices.SafeHandle safeHandle, System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType, class System.Runtime.InteropServices.SafeHandle safeHandle, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -65,7 +100,10 @@
         <Parameter Name="isContainer" Type="System.Boolean" />
         <Parameter Name="resourceType" Type="System.Security.AccessControl.ResourceType" />
         <Parameter Name="safeHandle" Type="System.Runtime.InteropServices.SafeHandle" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -74,18 +112,39 @@
           <para>Initializes a new instance of the ObjectSecurity`1 class.</para>
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the new <see
+           cref="T:System.Security.AccessControl.ObjectSecurity`1" />
+
+           object is a container object.</param
+        >
         <param name="resourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of resource.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of resource.</param
+        >
         <param name="safeHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A handle.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A handle.</param
+        >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />The sections to include.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The sections to include.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType, string name, System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType, string name, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType, string name, System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType, string name, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -94,7 +153,10 @@
         <Parameter Name="isContainer" Type="System.Boolean" />
         <Parameter Name="resourceType" Type="System.Security.AccessControl.ResourceType" />
         <Parameter Name="name" Type="System.String" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -103,18 +165,42 @@
           <para>Initializes a new instance of the ObjectSecurity`1 class.</para>
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the new <see
+           cref="T:System.Security.AccessControl.ObjectSecurity`1" />
+
+           object is a container object.</param
+        >
         <param name="resourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of resource.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of resource.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the securable object with which the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is associated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the securable object with which the new <see
+           cref="T:System.Security.AccessControl.ObjectSecurity`1" />
+
+           object is associated.</param
+        >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />The sections to include.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The sections to include.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType, System.Runtime.InteropServices.SafeHandle safeHandle, System.Security.AccessControl.AccessControlSections includeSections, System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType, class System.Runtime.InteropServices.SafeHandle safeHandle, valuetype System.Security.AccessControl.AccessControlSections includeSections, class System.Security.AccessControl.NativeObjectSecurity/ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType, System.Runtime.InteropServices.SafeHandle safeHandle, System.Security.AccessControl.AccessControlSections includeSections, System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType, class System.Runtime.InteropServices.SafeHandle safeHandle, valuetype System.Security.AccessControl.AccessControlSections includeSections, class System.Security.AccessControl.NativeObjectSecurity/ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -123,8 +209,14 @@
         <Parameter Name="isContainer" Type="System.Boolean" />
         <Parameter Name="resourceType" Type="System.Security.AccessControl.ResourceType" />
         <Parameter Name="safeHandle" Type="System.Runtime.InteropServices.SafeHandle" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
-        <Parameter Name="exceptionFromErrorCode" Type="System.Security.AccessControl.NativeObjectSecurity+ExceptionFromErrorCode" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
+        <Parameter
+          Name="exceptionFromErrorCode"
+          Type="System.Security.AccessControl.NativeObjectSecurity+ExceptionFromErrorCode"
+        />
         <Parameter Name="exceptionContext" Type="System.Object" />
       </Parameters>
       <Docs>
@@ -139,8 +231,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType, string name, System.Security.AccessControl.AccessControlSections includeSections, System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType, string name, valuetype System.Security.AccessControl.AccessControlSections includeSections, class System.Security.AccessControl.NativeObjectSecurity/ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ObjectSecurity (bool isContainer, System.Security.AccessControl.ResourceType resourceType, string name, System.Security.AccessControl.AccessControlSections includeSections, System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, valuetype System.Security.AccessControl.ResourceType resourceType, string name, valuetype System.Security.AccessControl.AccessControlSections includeSections, class System.Security.AccessControl.NativeObjectSecurity/ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -149,8 +247,14 @@
         <Parameter Name="isContainer" Type="System.Boolean" />
         <Parameter Name="resourceType" Type="System.Security.AccessControl.ResourceType" />
         <Parameter Name="name" Type="System.String" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
-        <Parameter Name="exceptionFromErrorCode" Type="System.Security.AccessControl.NativeObjectSecurity+ExceptionFromErrorCode" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
+        <Parameter
+          Name="exceptionFromErrorCode"
+          Type="System.Security.AccessControl.NativeObjectSecurity+ExceptionFromErrorCode"
+        />
         <Parameter Name="exceptionContext" Type="System.Object" />
       </Parameters>
       <Docs>
@@ -166,7 +270,10 @@
     </Member>
     <Member MemberName="AccessRightType">
       <MemberSignature Language="C#" Value="public override Type AccessRightType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type AccessRightType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type AccessRightType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -184,8 +291,14 @@
       </Docs>
     </Member>
     <Member MemberName="AccessRuleFactory">
-      <MemberSignature Language="C#" Value="public override System.Security.AccessControl.AccessRule AccessRuleFactory (System.Security.Principal.IdentityReference identityReference, int accessMask, bool isInherited, System.Security.AccessControl.InheritanceFlags inheritanceFlags, System.Security.AccessControl.PropagationFlags propagationFlags, System.Security.AccessControl.AccessControlType type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.AccessControl.AccessRule AccessRuleFactory(class System.Security.Principal.IdentityReference identityReference, int32 accessMask, bool isInherited, valuetype System.Security.AccessControl.InheritanceFlags inheritanceFlags, valuetype System.Security.AccessControl.PropagationFlags propagationFlags, valuetype System.Security.AccessControl.AccessControlType type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.AccessControl.AccessRule AccessRuleFactory (System.Security.Principal.IdentityReference identityReference, int accessMask, bool isInherited, System.Security.AccessControl.InheritanceFlags inheritanceFlags, System.Security.AccessControl.PropagationFlags propagationFlags, System.Security.AccessControl.AccessControlType type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.AccessControl.AccessRule AccessRuleFactory(class System.Security.Principal.IdentityReference identityReference, int32 accessMask, bool isInherited, valuetype System.Security.AccessControl.InheritanceFlags inheritanceFlags, valuetype System.Security.AccessControl.PropagationFlags propagationFlags, valuetype System.Security.AccessControl.AccessControlType type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -212,22 +325,43 @@
           <para>Represents a new access control rule for the specified user, with the specified access rights, access control, and flags.</para>
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />Represents a user account.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Represents a user account.</param
+        >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />The access type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The access type.</param
+        >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the access rule is inherited; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the access rule is inherited; otherwise, false.</param
+        >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies how to propagate access masks to child objects.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies how to propagate access masks to child objects.</param
+        >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies how to propagate Access Control Entries (ACEs) to child objects.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies how to propagate Access Control Entries (ACEs) to child objects.</param
+        >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether access is allowed or denied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether access is allowed or denied.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AccessRuleType">
       <MemberSignature Language="C#" Value="public override Type AccessRuleType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type AccessRuleType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type AccessRuleType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -245,8 +379,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddAccessRule">
-      <MemberSignature Language="C#" Value="public virtual void AddAccessRule (System.Security.AccessControl.AccessRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void AddAccessRule(class System.Security.AccessControl.AccessRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void AddAccessRule (System.Security.AccessControl.AccessRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void AddAccessRule(class System.Security.AccessControl.AccessRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -255,7 +395,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -264,8 +404,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddAuditRule">
-      <MemberSignature Language="C#" Value="public virtual void AddAuditRule (System.Security.AccessControl.AuditRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void AddAuditRule(class System.Security.AccessControl.AuditRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void AddAuditRule (System.Security.AccessControl.AuditRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void AddAuditRule(class System.Security.AccessControl.AuditRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -274,7 +420,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -283,8 +429,14 @@
       </Docs>
     </Member>
     <Member MemberName="AuditRuleFactory">
-      <MemberSignature Language="C#" Value="public override System.Security.AccessControl.AuditRule AuditRuleFactory (System.Security.Principal.IdentityReference identityReference, int accessMask, bool isInherited, System.Security.AccessControl.InheritanceFlags inheritanceFlags, System.Security.AccessControl.PropagationFlags propagationFlags, System.Security.AccessControl.AuditFlags flags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.AccessControl.AuditRule AuditRuleFactory(class System.Security.Principal.IdentityReference identityReference, int32 accessMask, bool isInherited, valuetype System.Security.AccessControl.InheritanceFlags inheritanceFlags, valuetype System.Security.AccessControl.PropagationFlags propagationFlags, valuetype System.Security.AccessControl.AuditFlags flags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.AccessControl.AuditRule AuditRuleFactory (System.Security.Principal.IdentityReference identityReference, int accessMask, bool isInherited, System.Security.AccessControl.InheritanceFlags inheritanceFlags, System.Security.AccessControl.PropagationFlags propagationFlags, System.Security.AccessControl.AuditFlags flags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.AccessControl.AuditRule AuditRuleFactory(class System.Security.Principal.IdentityReference identityReference, int32 accessMask, bool isInherited, valuetype System.Security.AccessControl.InheritanceFlags inheritanceFlags, valuetype System.Security.AccessControl.PropagationFlags propagationFlags, valuetype System.Security.AccessControl.AuditFlags flags) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -304,29 +456,55 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.AccessControl.AuditRule" /> class representing the specified audit rule for the specified user.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.AccessControl.AuditRule" />
+
+             class representing the specified audit rule for the specified user.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns the specified audit rule for the specified user.</para>
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />Represents a user account. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Represents a user account. </param
+        >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />An integer that specifies an access type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An integer that specifies an access type.</param
+        >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the access rule is inherited; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the access rule is inherited; otherwise, false.</param
+        >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies how to propagate access masks to child objects.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies how to propagate access masks to child objects.</param
+        >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies how to propagate Access Control Entries (ACEs) to child objects.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies how to propagate Access Control Entries (ACEs) to child objects.</param
+        >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Describes the type of auditing to perform.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Describes the type of auditing to perform.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AuditRuleType">
       <MemberSignature Language="C#" Value="public override Type AuditRuleType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type AuditRuleType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type AuditRuleType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -344,8 +522,14 @@
       </Docs>
     </Member>
     <Member MemberName="Persist">
-      <MemberSignature Language="C#" Value="protected void Persist (System.Runtime.InteropServices.SafeHandle handle);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void Persist(class System.Runtime.InteropServices.SafeHandle handle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void Persist (System.Runtime.InteropServices.SafeHandle handle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance void Persist(class System.Runtime.InteropServices.SafeHandle handle) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -363,12 +547,18 @@
           <para>Saves the security descriptor associated with this ObjectSecurity`1 object to permanent storage, using the specified handle.</para>
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />The handle of the securable object with which this ObjectSecurity`1 object is associated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The handle of the securable object with which this ObjectSecurity`1 object is associated.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Persist">
       <MemberSignature Language="C#" Value="protected void Persist (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void Persist(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance void Persist(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -386,12 +576,21 @@
           <para>Saves the security descriptor associated with this ObjectSecurity`1 object to permanent storage, using the specified name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the securable object with which this ObjectSecurity`1 object is associated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the securable object with which this ObjectSecurity`1 object is associated.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveAccessRule">
-      <MemberSignature Language="C#" Value="public virtual bool RemoveAccessRule (System.Security.AccessControl.AccessRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool RemoveAccessRule(class System.Security.AccessControl.AccessRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RemoveAccessRule (System.Security.AccessControl.AccessRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool RemoveAccessRule(class System.Security.AccessControl.AccessRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -400,7 +599,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -410,8 +609,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveAccessRuleAll">
-      <MemberSignature Language="C#" Value="public virtual void RemoveAccessRuleAll (System.Security.AccessControl.AccessRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveAccessRuleAll(class System.Security.AccessControl.AccessRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void RemoveAccessRuleAll (System.Security.AccessControl.AccessRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RemoveAccessRuleAll(class System.Security.AccessControl.AccessRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -420,7 +625,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -429,8 +634,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveAccessRuleSpecific">
-      <MemberSignature Language="C#" Value="public virtual void RemoveAccessRuleSpecific (System.Security.AccessControl.AccessRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveAccessRuleSpecific(class System.Security.AccessControl.AccessRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void RemoveAccessRuleSpecific (System.Security.AccessControl.AccessRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RemoveAccessRuleSpecific(class System.Security.AccessControl.AccessRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -439,7 +650,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -448,8 +659,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveAuditRule">
-      <MemberSignature Language="C#" Value="public virtual bool RemoveAuditRule (System.Security.AccessControl.AuditRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool RemoveAuditRule(class System.Security.AccessControl.AuditRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RemoveAuditRule (System.Security.AccessControl.AuditRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool RemoveAuditRule(class System.Security.AccessControl.AuditRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -458,7 +675,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -468,8 +685,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveAuditRuleAll">
-      <MemberSignature Language="C#" Value="public virtual void RemoveAuditRuleAll (System.Security.AccessControl.AuditRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveAuditRuleAll(class System.Security.AccessControl.AuditRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void RemoveAuditRuleAll (System.Security.AccessControl.AuditRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RemoveAuditRuleAll(class System.Security.AccessControl.AuditRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -478,7 +701,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -487,8 +710,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveAuditRuleSpecific">
-      <MemberSignature Language="C#" Value="public virtual void RemoveAuditRuleSpecific (System.Security.AccessControl.AuditRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveAuditRuleSpecific(class System.Security.AccessControl.AuditRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void RemoveAuditRuleSpecific (System.Security.AccessControl.AuditRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RemoveAuditRuleSpecific(class System.Security.AccessControl.AuditRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -497,7 +726,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -506,8 +735,14 @@
       </Docs>
     </Member>
     <Member MemberName="ResetAccessRule">
-      <MemberSignature Language="C#" Value="public virtual void ResetAccessRule (System.Security.AccessControl.AccessRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ResetAccessRule(class System.Security.AccessControl.AccessRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void ResetAccessRule (System.Security.AccessControl.AccessRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void ResetAccessRule(class System.Security.AccessControl.AccessRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -516,7 +751,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -525,8 +760,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetAccessRule">
-      <MemberSignature Language="C#" Value="public virtual void SetAccessRule (System.Security.AccessControl.AccessRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetAccessRule(class System.Security.AccessControl.AccessRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void SetAccessRule (System.Security.AccessControl.AccessRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void SetAccessRule(class System.Security.AccessControl.AccessRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -535,7 +776,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>
@@ -544,8 +785,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetAuditRule">
-      <MemberSignature Language="C#" Value="public virtual void SetAuditRule (System.Security.AccessControl.AuditRule&lt;T&gt; rule);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetAuditRule(class System.Security.AccessControl.AuditRule`1&lt;!T&gt; rule) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void SetAuditRule (System.Security.AccessControl.AuditRule<T> rule);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void SetAuditRule(class System.Security.AccessControl.AuditRule`1<!T> rule) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -554,7 +801,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule&lt;T&gt;" />
+        <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule<T>" />
       </Parameters>
       <Docs>
         <param name="rule">To be added.</param>

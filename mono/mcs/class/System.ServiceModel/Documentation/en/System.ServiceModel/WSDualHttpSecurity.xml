@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="WSDualHttpSecurity" FullName="System.ServiceModel.WSDualHttpSecurity">
   <TypeSignature Language="C#" Value="public sealed class WSDualHttpSecurity" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit WSDualHttpSecurity extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit WSDualHttpSecurity extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,13 +20,24 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the security settings for the <see cref="T:System.ServiceModel.WsDualHttpBinding" />.</para>
+      <para
+        >Specifies the security settings for the <see
+         cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Message">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.MessageSecurityOverHttp Message { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.MessageSecurityOverHttp Message" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.MessageSecurityOverHttp Message { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.MessageSecurityOverHttp Message"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,13 +53,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the message-level security properties for the <see cref="T:System.ServiceModel.WsDualHttpBinding" />.</para>
+          <para
+            >Gets the message-level security properties for the <see
+             cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Mode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.WSDualHttpSecurityMode Mode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.WSDualHttpSecurityMode Mode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.WSDualHttpSecurityMode Mode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.WSDualHttpSecurityMode Mode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -61,7 +86,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the security mode for the parent <see cref="T:System.ServiceModel.WSDualHttpBinding" />.</para>
+          <para
+            >Gets or sets the security mode for the parent <see
+             cref="T:System.ServiceModel.WSDualHttpBinding" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

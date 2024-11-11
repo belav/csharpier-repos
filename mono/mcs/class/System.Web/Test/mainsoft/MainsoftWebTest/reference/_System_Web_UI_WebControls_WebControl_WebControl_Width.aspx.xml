@@ -6,12 +6,18 @@
   <div id="GHTSubTest2" testname="System.Web.UI.WebControls.Button: Default value">
     <input value="" type="submit" name="ctrl_1" id="ctrl_1" />
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest3" testname="System.Web.UI.WebControls.Button: Negative value">
     <input value="" type="submit" name="ctrl_2" id="ctrl_2" />
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest4" testname="System.Web.UI.WebControls.CheckBox: Valid value">
     <span style="width:120px">
@@ -21,28 +27,37 @@
   <div id="GHTSubTest5" testname="System.Web.UI.WebControls.CheckBox: Default value">
     <input id="ctrl_4" type="checkbox" name="ctrl_4" />
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.CheckBox: Negative value">
     <input id="ctrl_5" type="checkbox" name="ctrl_5" />
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.HyperLink: Valid value">
-    <a id="ctrl_6" style="width:120px">
-    </a>
+    <a id="ctrl_6" style="width:120px"></a>
   </div>
   <div id="GHTSubTest8" testname="System.Web.UI.WebControls.HyperLink: Default value">
-    <a id="ctrl_7">
-    </a>
+    <a id="ctrl_7"></a>
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest9" testname="System.Web.UI.WebControls.HyperLink: Negative value">
-    <a id="ctrl_8">
-    </a>
+    <a id="ctrl_8"></a>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest10" testname="System.Web.UI.WebControls.Image: Valid value">
     <img id="ctrl_9" alt="" border="0" style="width:120px" />
@@ -50,12 +65,18 @@
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.Image: Default value">
     <img id="ctrl_10" alt="" border="0" />
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.Image: Negative value">
     <img id="ctrl_11" alt="" border="0" />
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.ImageButton: Valid value">
     <input id="ctrl_12" alt="" border="0" style="width:120px" type="image" name="ctrl_12" />
@@ -63,60 +84,75 @@
   <div id="GHTSubTest14" testname="System.Web.UI.WebControls.ImageButton: Default value">
     <input id="ctrl_13" alt="" border="0" type="image" name="ctrl_13" />
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.ImageButton: Negative value">
     <input id="ctrl_14" alt="" border="0" type="image" name="ctrl_14" />
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest16" testname="System.Web.UI.WebControls.Label: Valid value">
-    <span id="ctrl_15" style="width:120px">
-    </span>
+    <span id="ctrl_15" style="width:120px"></span>
   </div>
   <div id="GHTSubTest17" testname="System.Web.UI.WebControls.Label: Default value">
-    <span id="ctrl_16">
-    </span>
+    <span id="ctrl_16"></span>
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest18" testname="System.Web.UI.WebControls.Label: Negative value">
-    <span id="ctrl_17">
-    </span>
+    <span id="ctrl_17"></span>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest19" testname="System.Web.UI.WebControls.LinkButton: Valid value">
-    <a href="javascript:__doPostBack('ctrl_18','')" id="ctrl_18" style="width:120px">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_18','')" id="ctrl_18" style="width:120px"></a>
   </div>
   <div id="GHTSubTest20" testname="System.Web.UI.WebControls.LinkButton: Default value">
-    <a href="javascript:__doPostBack('ctrl_19','')" id="ctrl_19">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_19','')" id="ctrl_19"></a>
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest21" testname="System.Web.UI.WebControls.LinkButton: Negative value">
-    <a href="javascript:__doPostBack('ctrl_20','')" id="ctrl_20">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_20','')" id="ctrl_20"></a>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest22" testname="System.Web.UI.WebControls.Panel: Valid value">
-    <div id="ctrl_21" style="width:120px">
-    </div>
+    <div id="ctrl_21" style="width:120px"></div>
   </div>
   <div id="GHTSubTest23" testname="System.Web.UI.WebControls.Panel: Default value">
-    <div id="ctrl_22">
-    </div>
+    <div id="ctrl_22"></div>
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest24" testname="System.Web.UI.WebControls.Panel: Negative value">
-    <div id="ctrl_23">
-    </div>
+    <div id="ctrl_23"></div>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest25" testname="System.Web.UI.WebControls.RadioButton: Valid value">
     <span style="width:120px">
@@ -126,12 +162,18 @@
   <div id="GHTSubTest26" testname="System.Web.UI.WebControls.RadioButton: Default value">
     <input id="ctrl_25" type="radio" name="ctrl_25" value="ctrl_25" />
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest27" testname="System.Web.UI.WebControls.RadioButton: Negative value">
     <input id="ctrl_26" type="radio" name="ctrl_26" value="ctrl_26" />
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest28" testname="System.Web.UI.WebControls.TextBox: Valid value">
     <input id="ctrl_27" style="width:120px" type="text" name="ctrl_27" />
@@ -139,74 +181,164 @@
   <div id="GHTSubTest29" testname="System.Web.UI.WebControls.TextBox: Default value">
     <input id="ctrl_28" type="text" name="ctrl_28" />
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest30" testname="System.Web.UI.WebControls.TextBox: Negative value">
     <input id="ctrl_29" type="text" name="ctrl_29" />
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest31" testname="System.Web.UI.WebControls.DropDownList: Valid value">
     <select id="ctrl_30" style="width:120px" name="ctrl_30">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest32" testname="System.Web.UI.WebControls.DropDownList: Default value">
     <select id="ctrl_31" name="ctrl_31">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest33" testname="System.Web.UI.WebControls.DropDownList: Negative value">
     <select id="ctrl_32" name="ctrl_32">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest34" testname="System.Web.UI.WebControls.ListBox: Valid value">
     <select id="ctrl_33" style="width:120px" size="4" name="ctrl_33">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest35" testname="System.Web.UI.WebControls.ListBox: Default value">
     <select id="ctrl_34" size="4" name="ctrl_34">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest36" testname="System.Web.UI.WebControls.ListBox: Negative value">
     <select id="ctrl_35" size="4" name="ctrl_35">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest37" testname="System.Web.UI.WebControls.RadioButtonList: Valid value">
     <table id="ctrl_36" style="width:120px" border="0">
@@ -264,7 +396,10 @@
       </tr>
     </table>
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest39" testname="System.Web.UI.WebControls.RadioButtonList: Negative value">
     <table id="ctrl_38" border="0">
@@ -294,7 +429,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest40" testname="System.Web.UI.WebControls.CheckBoxList: Valid value">
     <table id="ctrl_39" style="width:120px" border="0">
@@ -352,7 +490,10 @@
       </tr>
     </table>
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest42" testname="System.Web.UI.WebControls.CheckBoxList: Negative value">
     <table id="ctrl_41" border="0">
@@ -382,10 +523,19 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest43" testname="System.Web.UI.WebControls.DataGrid: Valid value">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;width:120px" rules="all" id="ctrl_42">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;width:120px"
+      rules="all"
+      id="ctrl_42"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -432,7 +582,10 @@
       </tr>
     </table>
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest45" testname="System.Web.UI.WebControls.DataGrid: Negative value">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_44">
@@ -458,7 +611,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest46" testname="System.Web.UI.WebControls.DataGridItem: Valid value">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_45">
@@ -508,7 +664,10 @@
       </tr>
     </table>
     <span>
-      <br />Default width = </span>
+      <br />
+
+      Default width = </span
+    >
   </div>
   <div id="GHTSubTest48" testname="System.Web.UI.WebControls.DataGridItem: Negative value">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_49">
@@ -534,7 +693,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest49" testname="System.Web.UI.WebControls.DataList: Valid value">
     <table id="ctrl_51" cellspacing="0" border="0" style="border-collapse:collapse;width:120px">

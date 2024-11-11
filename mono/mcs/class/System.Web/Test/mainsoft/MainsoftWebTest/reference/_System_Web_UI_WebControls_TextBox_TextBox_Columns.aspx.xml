@@ -14,6 +14,9 @@
   </div>
   <div id="GHTSubTest5" testname="Negative columns value">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IMethodCallMessage" FullName="System.Runtime.Remoting.Messaging.IMethodCallMessage">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public interface IMethodCallMessage : System.Runtime.Remoting.Messaging.IMethodMessage" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IMethodCallMessage implements class System.Runtime.Remoting.Messaging.IMessage, class System.Runtime.Remoting.Messaging.IMethodMessage" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public interface IMethodCallMessage : System.Runtime.Remoting.Messaging.IMethodMessage"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IMethodCallMessage implements class System.Runtime.Remoting.Messaging.IMessage, class System.Runtime.Remoting.Messaging.IMethodMessage"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -23,7 +30,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> is generated as a result of a method called on a remote object, and is used to transport details about the remote method call to the server side.</para>
+      <para
+        >An <see
+         cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+         is generated as a result of a method called on a remote object, and is used to transport details about the remote method call to the server side.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -33,7 +45,10 @@
   <Members>
     <Member MemberName="GetInArg">
       <MemberSignature Language="C#" Value="public object GetInArg (int argNum);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetInArg(int32 argNum) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetInArg(int32 argNum) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -57,12 +72,18 @@
           <para>The requested argument that is not marked as an out parameter.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of the requested in argument. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of the requested in argument. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetInArgName">
       <MemberSignature Language="C#" Value="public string GetInArgName (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetInArgName(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string GetInArgName(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -86,7 +107,10 @@
           <para>The name of a specific argument that is not marked as an out parameter.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of the requested in argument. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of the requested in argument. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="InArgCount">
@@ -126,7 +150,18 @@
         <value>To be added: an object of type 'object []'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgs" /> property is redundant since the same functionality can be achieved with the <see cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgCount" /> and <see cref="M:System.Runtime.Remoting.Messaging.IMethodCallMessage.GetInArg(System.Int32)" /> methods, there might be performance optimization available if the implementer understands when all the arguments will be retrieved.</para>
+          <para
+            >Although the <see
+             cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgs" />
+
+             property is redundant since the same functionality can be achieved with the <see
+             cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgCount" />
+
+             and <see
+             cref="M:System.Runtime.Remoting.Messaging.IMethodCallMessage.GetInArg(System.Int32)" />
+
+             methods, there might be performance optimization available if the implementer understands when all the arguments will be retrieved.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

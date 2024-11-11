@@ -3,8 +3,7 @@
   <TypeSignature Language="C#" Value="public sealed class LosFormatter" Maintainer="auto" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -34,7 +33,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.LosFormatter" /> class using default values.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.LosFormatter" />
+
+             class using default values.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -43,7 +47,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LosFormatter (bool enableMac, byte[] macKeyModifier);" />
+      <MemberSignature
+        Language="C#"
+        Value="public LosFormatter (bool enableMac, byte[] macKeyModifier);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -56,16 +63,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.LosFormatter" /> class using the specified enable flag and machine authentication code (MAC) key modifier.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.LosFormatter" />
+
+             class using the specified enable flag and machine authentication code (MAC) key modifier.</para
+          >
         </summary>
         <param name="enableMac">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to enable view-state MAC; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to enable view-state MAC; otherwise, false.</param
+        >
         <param name="macKeyModifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />The modifier for the MAC key.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The modifier for the MAC key.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LosFormatter (bool enableMac, string macKeyModifier);" />
+      <MemberSignature
+        Language="C#"
+        Value="public LosFormatter (bool enableMac, string macKeyModifier);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="enableMac" Type="System.Boolean" />
@@ -75,12 +96,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.LosFormatter" /> class using the specified enable flag and machine authentication code (MAC) key modifier.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.LosFormatter" />
+
+             class using the specified enable flag and machine authentication code (MAC) key modifier.</para
+          >
         </summary>
         <param name="enableMac">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to enable view-state MAC; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to enable view-state MAC; otherwise, false. </param
+        >
         <param name="macKeyModifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />The modifier for the MAC key. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The modifier for the MAC key. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -99,21 +131,47 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This version of the <see cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" /> method is used to transform the view-state value contained in a <see cref="T:System.IO.Stream" /> object to a LOS-formatted object.</para>
+          <para
+            >This version of the <see
+             cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
+
+             method is used to transform the view-state value contained in a <see
+             cref="T:System.IO.Stream" />
+
+             object to a LOS-formatted object.</para
+          >
           <block subset="none" type="note">
-            <para>Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see cref="http://go.microsoft.com/fwlink/?LinkId=330378">Untrusted Data Security Risks</see>.</para>
+            <para
+              >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
+               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                >Untrusted Data Security Risks</see
+              >
+
+              .</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Transforms the view-state value contained in a <see cref="T:System.IO.Stream" /> object to a limited object serialization (LOS)-formatted object.</para>
+          <para
+            >Transforms the view-state value contained in a <see
+             cref="T:System.IO.Stream" />
+
+             object to a limited object serialization (LOS)-formatted object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A LOS-formatted object.</para>
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.IO.Stream" /> that contains the view-state value to transform. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.IO.Stream" />
+
+           that contains the view-state value to transform. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -121,7 +179,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Deserialize">
-      <MemberSignature Language="C#" Value="public object Deserialize (System.IO.TextReader input);" />
+      <MemberSignature
+        Language="C#"
+        Value="public object Deserialize (System.IO.TextReader input);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -132,21 +193,47 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This version of the <see cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" /> method is used to transform the view-state value contained in a <see cref="T:System.IO.TextReader" /> object to a LOS-formatted object.</para>
+          <para
+            >This version of the <see
+             cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
+
+             method is used to transform the view-state value contained in a <see
+             cref="T:System.IO.TextReader" />
+
+             object to a LOS-formatted object.</para
+          >
           <block subset="none" type="note">
-            <para>Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see cref="http://go.microsoft.com/fwlink/?LinkId=330378">Untrusted Data Security Risks</see>.</para>
+            <para
+              >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
+               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                >Untrusted Data Security Risks</see
+              >
+
+              .</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Transforms the view-state value contained in a <see cref="T:System.IO.TextReader" /> object to a limited object serialization (LOS)-formatted object.</para>
+          <para
+            >Transforms the view-state value contained in a <see
+             cref="T:System.IO.TextReader" />
+
+             object to a limited object serialization (LOS)-formatted object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A LOS-formatted object.</para>
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.IO.TextReader" /> that contains the view-state value to transform. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.IO.TextReader" />
+
+           that contains the view-state value to transform. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -165,9 +252,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This version of the <see cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" /> method is used to transform the specified view-state value to a LOS-formatted object.</para>
+          <para
+            >This version of the <see
+             cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
+
+             method is used to transform the specified view-state value to a LOS-formatted object.</para
+          >
           <block subset="none" type="note">
-            <para>Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see cref="http://go.microsoft.com/fwlink/?LinkId=330378">Untrusted Data Security Risks</see>.</para>
+            <para
+              >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
+               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                >Untrusted Data Security Risks</see
+              >
+
+              .</para
+            >
           </block>
         </remarks>
         <summary>
@@ -179,7 +278,10 @@
           <para>A LOS-formatted object.</para>
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />The view-state value to transform. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The view-state value to transform. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -187,7 +289,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Serialize">
-      <MemberSignature Language="C#" Value="public void Serialize (System.IO.Stream stream, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Serialize (System.IO.Stream stream, object value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -199,16 +304,38 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This version of the <see cref="M:System.Web.UI.LosFormatter.Serialize(System.IO.Stream,System.Object)" /> method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see cref="T:System.IO.Stream" /> object.</para>
+          <para
+            >This version of the <see
+             cref="M:System.Web.UI.LosFormatter.Serialize(System.IO.Stream,System.Object)" />
+
+             method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see
+             cref="T:System.IO.Stream" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Transforms a limited object serialization (LOS)-formatted object into a view-state value and places the results into a <see cref="T:System.IO.Stream" /> object.</para>
+          <para
+            >Transforms a limited object serialization (LOS)-formatted object into a view-state value and places the results into a <see
+             cref="T:System.IO.Stream" />
+
+             object.</para
+          >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.IO.Stream" /> to receive the transformed value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.IO.Stream" />
+
+           to receive the transformed value. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The LOS-formatted object to transform into a view-state value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The LOS-formatted object to transform into a view-state value. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -216,7 +343,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Serialize">
-      <MemberSignature Language="C#" Value="public void Serialize (System.IO.TextWriter output, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Serialize (System.IO.TextWriter output, object value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -228,16 +358,38 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This version of the <see cref="M:System.Web.UI.LosFormatter.Serialize(System.IO.Stream,System.Object)" /> method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see cref="T:System.IO.TextWriter" /> object.</para>
+          <para
+            >This version of the <see
+             cref="M:System.Web.UI.LosFormatter.Serialize(System.IO.Stream,System.Object)" />
+
+             method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see
+             cref="T:System.IO.TextWriter" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Transforms a limited object serialization (LOS)-formatted object into a view-state value and places the results into a <see cref="T:System.IO.TextWriter" /> object.</para>
+          <para
+            >Transforms a limited object serialization (LOS)-formatted object into a view-state value and places the results into a <see
+             cref="T:System.IO.TextWriter" />
+
+             object.</para
+          >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.IO.TextWriter" /> to receive the transformed value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.IO.TextWriter" />
+
+           to receive the transformed value. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The LOS-formatted object to transform into a view-state value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The LOS-formatted object to transform into a view-state value. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

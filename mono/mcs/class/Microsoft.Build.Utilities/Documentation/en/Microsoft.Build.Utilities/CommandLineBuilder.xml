@@ -27,7 +27,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.CommandLineBuilder" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Utilities.CommandLineBuilder" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +40,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendFileNameIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendFileNameIfNotNull (Microsoft.Build.Framework.ITaskItem fileItem);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendFileNameIfNotNull (Microsoft.Build.Framework.ITaskItem fileItem);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -52,17 +60,28 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the command line with the file name of the specified <see cref="T:Microsoft.Build.Framework.ITaskItem" /> object.</para>
+          <para
+            >Appends the command line with the file name of the specified <see
+             cref="T:Microsoft.Build.Framework.ITaskItem" />
+
+             object.</para
+          >
         </summary>
         <param name="fileItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The task item specification to append to the command line. If it is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The task item specification to append to the command line. If it is null, then this method has no effect.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendFileNameIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendFileNameIfNotNull (string fileName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendFileNameIfNotNull (string fileName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -83,14 +102,20 @@
           <para>Appends the command line with file name represented by the parameter, inserting quotation marks if necessary.</para>
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name to append. If it is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file name to append. If it is null, then this method has no effect.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendFileNamesIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendFileNamesIfNotNull (Microsoft.Build.Framework.ITaskItem[] fileItems, string delimiter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendFileNamesIfNotNull (Microsoft.Build.Framework.ITaskItem[] fileItems, string delimiter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -108,19 +133,33 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the command line with the list of file names in the specified <see cref="T:Microsoft.Build.Framework.ITaskItem" /> array, separated by the specified delimiter.</para>
+          <para
+            >Appends the command line with the list of file names in the specified <see
+             cref="T:Microsoft.Build.Framework.ITaskItem" />
+
+             array, separated by the specified delimiter.</para
+          >
         </summary>
         <param name="fileItems">
-          <attribution license="cc4" from="Microsoft" modified="false" />The task item specifications to append. If the array is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The task item specifications to append. If the array is null, then this method has no effect.</param
+        >
         <param name="delimiter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delimiter to put between task item specifications in the command line.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delimiter to put between task item specifications in the command line.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendFileNamesIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendFileNamesIfNotNull (string[] fileNames, string delimiter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendFileNamesIfNotNull (string[] fileNames, string delimiter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -141,16 +180,25 @@
           <para>Appends the command line with the list of file names in the specified string array, separated by the specified delimiter.</para>
         </summary>
         <param name="fileNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file names to append. If the array is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file names to append. If the array is null, then this method has no effect.</param
+        >
         <param name="delimiter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delimiter to put between file names in the command line.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delimiter to put between file names in the command line.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendFileNameWithQuoting">
-      <MemberSignature Language="C#" Value="protected void AppendFileNameWithQuoting (string fileName);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void AppendFileNameWithQuoting (string fileName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -170,7 +218,10 @@
           <para>Appends the command line with a file name, and surrounds the file name with quotation marks as necessary.</para>
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name to append.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file name to append.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -218,14 +269,20 @@
           <para>Appends the command line with the specified switch.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendSwitchIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendSwitchIfNotNull (string switchName, Microsoft.Build.Framework.ITaskItem parameter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendSwitchIfNotNull (string switchName, Microsoft.Build.Framework.ITaskItem parameter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -246,16 +303,25 @@
           <para>Appends the command line with a switch that takes a task item specification that acts a single string parameter.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The switch parameter to append to the command line. Quotation marks will be added as necessary. If this value is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The switch parameter to append to the command line. Quotation marks will be added as necessary. If this value is null, then this method has no effect.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendSwitchIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendSwitchIfNotNull (string switchName, string parameter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendSwitchIfNotNull (string switchName, string parameter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -276,16 +342,25 @@
           <para>Appends the command line with a switch that takes a single string parameter.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The switch parameter to append to the command line. Quotation marks will be added as necessary. If this value is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The switch parameter to append to the command line. Quotation marks will be added as necessary. If this value is null, then this method has no effect.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendSwitchIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendSwitchIfNotNull (string switchName, Microsoft.Build.Framework.ITaskItem[] parameters, string delimiter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendSwitchIfNotNull (string switchName, Microsoft.Build.Framework.ITaskItem[] parameters, string delimiter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -307,18 +382,30 @@
           <para>Appends the command line with a switch that takes an array of task item specifications that act as string parameters.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param
+        >
         <param name="delimiter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendSwitchIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendSwitchIfNotNull (string switchName, string[] parameters, string delimiter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendSwitchIfNotNull (string switchName, string[] parameters, string delimiter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -340,18 +427,30 @@
           <para>Appends the command line with a switch that takes an array of string parameters.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param
+        >
         <param name="delimiter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendSwitchUnquotedIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendSwitchUnquotedIfNotNull (string switchName, Microsoft.Build.Framework.ITaskItem parameter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendSwitchUnquotedIfNotNull (string switchName, Microsoft.Build.Framework.ITaskItem parameter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -371,16 +470,25 @@
           <para>Appends the command line with a switch that takes a task item specification as a single string parameter, without attempting to encapsulate the switch parameter with quotation marks.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The switch parameter to append to the command line. Quotation marks will not be added. If this value is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The switch parameter to append to the command line. Quotation marks will not be added. If this value is null, then this method has no effect.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendSwitchUnquotedIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendSwitchUnquotedIfNotNull (string switchName, string parameter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendSwitchUnquotedIfNotNull (string switchName, string parameter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -400,16 +508,25 @@
           <para>Appends the command line with a switch that takes a single string parameter, without attempting to encapsulate the switch parameter with quotation marks.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The switch parameter to append to the command line. Quotation marks will not be added. If this value is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The switch parameter to append to the command line. Quotation marks will not be added. If this value is null, then this method has no effect.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendSwitchUnquotedIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendSwitchUnquotedIfNotNull (string switchName, Microsoft.Build.Framework.ITaskItem[] parameters, string delimiter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendSwitchUnquotedIfNotNull (string switchName, Microsoft.Build.Framework.ITaskItem[] parameters, string delimiter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -430,18 +547,30 @@
           <para>Appends the command line with a switch that takes an array of task item specifications that act as string parameters, without attempting to encapsulate them with quotation marks.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param
+        >
         <param name="delimiter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendSwitchUnquotedIfNotNull">
-      <MemberSignature Language="C#" Value="public void AppendSwitchUnquotedIfNotNull (string switchName, string[] parameters, string delimiter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AppendSwitchUnquotedIfNotNull (string switchName, string[] parameters, string delimiter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -462,18 +591,30 @@
           <para>Appends the command line with a switch that takes an array of string parameters, without attempting to encapsulate switch parameters with quotation marks.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch to append to the command line. This value cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the switch to append to the command line. This value cannot be null.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param
+        >
         <param name="delimiter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendTextUnquoted">
-      <MemberSignature Language="C#" Value="protected void AppendTextUnquoted (string textToAppend);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void AppendTextUnquoted (string textToAppend);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -492,14 +633,20 @@
           <para>Appends the command line with string, without attempting to encapsulate the string with quotation marks.</para>
         </summary>
         <param name="textToAppend">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to append to the command line.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to append to the command line.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppendTextWithQuoting">
-      <MemberSignature Language="C#" Value="protected void AppendTextWithQuoting (string textToAppend);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void AppendTextWithQuoting (string textToAppend);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -518,14 +665,20 @@
           <para>Appends the command line with string, and surrounds the string with quotations marks as necessary.</para>
         </summary>
         <param name="textToAppend">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to append to the command line.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to append to the command line.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="CommandLine">
-      <MemberSignature Language="C#" Value="protected System.Text.StringBuilder CommandLine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected System.Text.StringBuilder CommandLine { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Text.StringBuilder</ReturnType>
@@ -536,7 +689,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Text.StringBuilder" /> instance representing the command line for inheriting classes.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Text.StringBuilder" />
+
+             instance representing the command line for inheriting classes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -544,7 +702,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsQuotingRequired">
-      <MemberSignature Language="C#" Value="protected virtual bool IsQuotingRequired (string parameter);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual bool IsQuotingRequired (string parameter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -564,7 +725,10 @@
           <para>true, if the switch parameter should be surrounded with quotation marks; otherwise, false.</para>
         </returns>
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to examine for characters that require quotation marks.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to examine for characters that require quotation marks.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -588,12 +752,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that represents the command line.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that represents the command line.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="VerifyThrowNoEmbeddedDoubleQuotes">
-      <MemberSignature Language="C#" Value="protected virtual void VerifyThrowNoEmbeddedDoubleQuotes (string switchName, string parameter);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void VerifyThrowNoEmbeddedDoubleQuotes (string switchName, string parameter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -607,16 +779,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:Microsoft.Build.Utilities.CommandLineBuilder.VerifyThrowNoEmbeddedDoubleQuotes(System.String,System.String)" /> is a virtual method so that your applications can override this method if you want to allow double-quotes escaped in filenames.</para>
+            <see cref="M:Microsoft.Build.Utilities.CommandLineBuilder.VerifyThrowNoEmbeddedDoubleQuotes(System.String,System.String)" />
+
+             is a virtual method so that your applications can override this method if you want to allow double-quotes escaped in filenames.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns an error if the command line parameter contains a double-quote (") character. Because double quotes are illegal in command line parameters, this method helps prevent parameter injection attacks.</para>
         </summary>
         <param name="switchName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string representing the switch name for the error message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string representing the switch name for the error message.</param
+        >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string representing the switch parameter to scan for double-quotes.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string representing the switch parameter to scan for double-quotes.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

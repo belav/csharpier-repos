@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="NetworkInformationPermission" FullName="System.Net.NetworkInformation.NetworkInformationPermission">
-  <TypeSignature Language="C#" Value="public sealed class NetworkInformationPermission : System.Security.CodeAccessPermission, System.Security.Permissions.IUnrestrictedPermission" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit NetworkInformationPermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IUnrestrictedPermission" />
+<Type
+  Name="NetworkInformationPermission"
+  FullName="System.Net.NetworkInformation.NetworkInformationPermission"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class NetworkInformationPermission : System.Security.CodeAccessPermission, System.Security.Permissions.IUnrestrictedPermission"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit NetworkInformationPermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IUnrestrictedPermission"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,8 +28,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This permission is used to secure data returned by the classes in the <see cref="N:System.Net.NetworkInformation" /> namespace.</para>
-      <para>For declarative security, use the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermissionAttribute" /> class.</para>
+      <para
+        >This permission is used to secure data returned by the classes in the <see
+         cref="N:System.Net.NetworkInformation" />
+
+         namespace.</para
+      >
+      <para
+        >For declarative security, use the <see
+         cref="T:System.Net.NetworkInformation.NetworkInformationPermissionAttribute" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,8 +48,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NetworkInformationPermission (System.Net.NetworkInformation.NetworkInformationAccess access);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Net.NetworkInformation.NetworkInformationAccess access) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public NetworkInformationPermission (System.Net.NetworkInformation.NetworkInformationAccess access);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Net.NetworkInformation.NetworkInformationAccess access) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -52,15 +77,35 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> class using the specified <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> value.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+             class using the specified <see
+             cref="T:System.Net.NetworkInformation.NetworkInformationAccess" />
+
+             value.</para
+          >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Net.NetworkInformation.NetworkInformationAccess" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NetworkInformationPermission (System.Security.Permissions.PermissionState state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public NetworkInformationPermission (System.Security.Permissions.PermissionState state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,15 +127,35 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+             class with the specified <see
+             cref="T:System.Security.Permissions.PermissionState" />
+
+            .</para
+          >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Permissions.PermissionState" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Access">
-      <MemberSignature Language="C#" Value="public System.Net.NetworkInformation.NetworkInformationAccess Access { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.NetworkInformation.NetworkInformationAccess Access" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.NetworkInformation.NetworkInformationAccess Access { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.NetworkInformation.NetworkInformationAccess Access"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -109,7 +174,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> created with <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" /> is given <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Ping" /> | <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Read" /> access. A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> created with <see cref="F:System.Security.Permissions.PermissionState.None" /> is given <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.None" /> access.</para>
+          <para
+            >A <see
+             cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+             created with <see
+             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+
+             is given <see
+             cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Ping" />
+
+             | <see
+             cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Read" />
+
+             access. A <see
+             cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+             created with <see
+             cref="F:System.Security.Permissions.PermissionState.None" />
+
+             is given <see
+             cref="F:System.Net.NetworkInformation.NetworkInformationAccess.None" />
+
+             access.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,8 +206,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddPermission">
-      <MemberSignature Language="C#" Value="public void AddPermission (System.Net.NetworkInformation.NetworkInformationAccess access);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddPermission(valuetype System.Net.NetworkInformation.NetworkInformationAccess access) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddPermission (System.Net.NetworkInformation.NetworkInformationAccess access);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddPermission(valuetype System.Net.NetworkInformation.NetworkInformationAccess access) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -147,12 +241,21 @@
           <para>Adds the specified value to this permission.</para>
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Net.NetworkInformation.NetworkInformationAccess" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Copy">
       <MemberSignature Language="C#" Value="public override System.Security.IPermission Copy ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -179,13 +282,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> that is identical to the current permission</para>
+          <para
+            >A <see
+             cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+             that is identical to the current permission</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
-      <MemberSignature Language="C#" Value="public override void FromXml (System.Security.SecurityElement securityElement);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement securityElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void FromXml (System.Security.SecurityElement securityElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement securityElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -213,12 +327,24 @@
           <para>Sets the state of this permission using the specified XML encoding.</para>
         </summary>
         <param name="securityElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding to use to set the state of the current permission</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Security.SecurityElement" />
+
+           that contains the XML encoding to use to set the state of the current permission</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Intersect">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -247,15 +373,35 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty or <paramref name="target" /> is null.</para>
+          <para
+            >A <see
+             cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+             that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty or <paramref
+             name="target" />
+
+             is null.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Security.IPermission" /> to intersect with the current permission. It must be of the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Security.IPermission" />
+
+           to intersect with the current permission. It must be of the same type as the current permission. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
-      <MemberSignature Language="C#" Value="public override bool IsSubsetOf (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsSubsetOf (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -287,12 +433,21 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Security.IPermission" /> that is to be tested for the subset relationship. This permission must be of the same type as the current permission</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Security.IPermission" />
+
+           that is to be tested for the subset relationship. This permission must be of the same type as the current permission</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
       <MemberSignature Language="C#" Value="public bool IsUnrestricted ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsUnrestricted() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsUnrestricted() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -311,7 +466,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An unrestricted permission is created using the <see cref="M:System.Net.NetworkInformation.NetworkInformationPermission.#ctor(System.Security.Permissions.PermissionState)" /> constructor.</para>
+          <para
+            >An unrestricted permission is created using the <see
+             cref="M:System.Net.NetworkInformation.NetworkInformationPermission.#ctor(System.Security.Permissions.PermissionState)" />
+
+             constructor.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -324,8 +484,14 @@
       </Docs>
     </Member>
     <Member MemberName="ToXml">
-      <MemberSignature Language="C#" Value="public override System.Security.SecurityElement ToXml ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.SecurityElement ToXml ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -352,13 +518,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding of the current permission.</para>
+          <para
+            >A <see
+             cref="T:System.Security.SecurityElement" />
+
+             that contains the XML encoding of the current permission.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Union">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission Union (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission Union (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -379,7 +556,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Net.NetworkInformation.NetworkInformationPermission.Union(System.Security.IPermission)" /> method returns a permission that represents all the states represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
+          <para
+            >The <see
+             cref="M:System.Net.NetworkInformation.NetworkInformationPermission.Union(System.Security.IPermission)" />
+
+             method returns a permission that represents all the states represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -390,7 +572,13 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />  permission to combine with the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+            permission to combine with the current permission. </param
+        >
       </Docs>
     </Member>
   </Members>

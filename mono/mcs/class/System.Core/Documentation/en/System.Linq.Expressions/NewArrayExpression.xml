@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NewArrayExpression" FullName="System.Linq.Expressions.NewArrayExpression">
-  <TypeSignature Language="C#" Value="public class NewArrayExpression : System.Linq.Expressions.Expression" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NewArrayExpression extends System.Linq.Expressions.Expression" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NewArrayExpression : System.Linq.Expressions.Expression"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit NewArrayExpression extends System.Linq.Expressions.Expression"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -19,7 +25,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The following table shows the different factory methods that you can use to create a <see cref="T:System.Linq.Expressions.NewArrayExpression" /> depending on the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> you require.</para>
+      <para
+        >The following table shows the different factory methods that you can use to create a <see
+         cref="T:System.Linq.Expressions.NewArrayExpression" />
+
+         depending on the <see
+         cref="P:System.Linq.Expressions.Expression.NodeType" />
+
+         you require.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -66,8 +80,14 @@
   </Docs>
   <Members>
     <Member MemberName="Accept">
-      <MemberSignature Language="C#" Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -81,23 +101,54 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This default implementation for <see cref="F:System.Linq.Expressions.ExpressionType.Extension" /> nodes calls <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />. Override this method to call into a more specific method on a derived visitor class of the <see cref="T:System.Linq.Expressions.ExpressionVisitor" /> class. However, it should still support unknown visitors by calling <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />. </para>
+          <para
+            >This default implementation for <see
+             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+
+             nodes calls <see
+             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            . Override this method to call into a more specific method on a derived visitor class of the <see
+             cref="T:System.Linq.Expressions.ExpressionVisitor" />
+
+             class. However, it should still support unknown visitors by calling <see
+             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Dispatches to the specific visit method for this node type. For example, <see cref="T:System.Linq.Expressions.MethodCallExpression" /> calls the <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />.</para>
+          <para
+            >Dispatches to the specific visit method for this node type. For example, <see
+             cref="T:System.Linq.Expressions.MethodCallExpression" />
+
+             calls the <see
+             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The result of visiting this node.</para>
         </returns>
         <param name="visitor">
-          <attribution license="cc4" from="Microsoft" modified="false" />The visitor to visit this node with.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The visitor to visit this node with.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Expressions">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;System.Linq.Expressions.Expression&gt; Expressions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class System.Linq.Expressions.Expression&gt; Expressions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Expressions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1<class System.Linq.Expressions.Expression> Expressions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -111,7 +162,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the bounds of the array if the value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property is <see cref="F:System.Linq.Expressions.ExpressionType.NewArrayBounds" />, or the values to initialize the elements of the new array if the value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property is <see cref="F:System.Linq.Expressions.ExpressionType.NewArrayInit" />.</para>
+          <para
+            >Gets the bounds of the array if the value of the <see
+             cref="P:System.Linq.Expressions.Expression.NodeType" />
+
+             property is <see
+             cref="F:System.Linq.Expressions.ExpressionType.NewArrayBounds" />
+
+            , or the values to initialize the elements of the new array if the value of the <see
+             cref="P:System.Linq.Expressions.Expression.NodeType" />
+
+             property is <see
+             cref="F:System.Linq.Expressions.ExpressionType.NewArrayInit" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -130,13 +195,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
+          <para
+            >Gets the static type of the expression that this <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+             represents.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Update">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.NewArrayExpression Update (System.Collections.Generic.IEnumerable&lt;System.Linq.Expressions.Expression&gt; expressions);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Linq.Expressions.NewArrayExpression Update(class System.Collections.Generic.IEnumerable`1&lt;class System.Linq.Expressions.Expression&gt; expressions) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.NewArrayExpression Update (System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression> expressions);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Linq.Expressions.NewArrayExpression Update(class System.Collections.Generic.IEnumerable`1<class System.Linq.Expressions.Expression> expressions) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -145,7 +221,10 @@
         <ReturnType>System.Linq.Expressions.NewArrayExpression</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="expressions" Type="System.Collections.Generic.IEnumerable&lt;System.Linq.Expressions.Expression&gt;" />
+        <Parameter
+          Name="expressions"
+          Type="System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -158,7 +237,13 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="expressions">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.NewArrayExpression.Expressions" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.NewArrayExpression.Expressions" />
+
+           property of the result.</param
+        >
       </Docs>
     </Member>
   </Members>

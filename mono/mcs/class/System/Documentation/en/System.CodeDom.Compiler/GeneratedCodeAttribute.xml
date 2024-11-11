@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="GeneratedCodeAttribute" FullName="System.CodeDom.Compiler.GeneratedCodeAttribute">
   <TypeSignature Language="C#" Value="public sealed class GeneratedCodeAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit GeneratedCodeAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit GeneratedCodeAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,7 +23,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" /> class can be used by code analysis tools to identify computer-generated code, and to provide an analysis based on the tool and the version of the tool that generated the code.</para>
+      <para
+        >The <see
+         cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" />
+
+         class can be used by code analysis tools to identify computer-generated code, and to provide an analysis based on the tool and the version of the tool that generated the code.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,8 +37,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public GeneratedCodeAttribute (string tool, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string tool, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public GeneratedCodeAttribute (string tool, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string tool, string version) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -45,12 +59,23 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" /> class specifying the name and version of the tool that generated the code.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" />
+
+             class specifying the name and version of the tool that generated the code.</para
+          >
         </summary>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the tool that generated the code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the tool that generated the code.</param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the tool that generated the code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the tool that generated the code.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Tool">

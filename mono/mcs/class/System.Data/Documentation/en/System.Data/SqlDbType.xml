@@ -15,11 +15,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When setting command parameters, the <see cref="T:System.Data.SqlDbType" /> and <see cref="T:System.Data.DbType" /> are linked. Therefore, setting the DbType changes the SqlDbType to a supporting SqlDbType.</para>
+      <para
+        >When setting command parameters, the <see
+         cref="T:System.Data.SqlDbType" />
+
+         and <see
+         cref="T:System.Data.DbType" />
+
+         are linked. Therefore, setting the DbType changes the SqlDbType to a supporting SqlDbType.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies SQL Server-specific data type of a field, property, for use in a <see cref="T:System.Data.SqlClient.SqlParameter" />.</para>
+      <para
+        >Specifies SQL Server-specific data type of a field, property, for use in a <see
+         cref="T:System.Data.SqlClient.SqlParameter" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -35,7 +48,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Int64" />. A 64-bit signed integer.</para>
+            <see cref="T:System.Int64" />
+
+            . A 64-bit signed integer.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -55,7 +71,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Array" /> of type <see cref="T:System.Byte" />. A fixed-length stream of binary data ranging between 1 and 8,000 bytes.</para>
+            <see cref="T:System.Array" />
+
+             of type <see
+             cref="T:System.Byte" />
+
+            . A fixed-length stream of binary data ranging between 1 and 8,000 bytes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -75,7 +97,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Boolean" />. An unsigned numeric value that can be 0, 1, or null. </para>
+            <see cref="T:System.Boolean" />
+
+            . An unsigned numeric value that can be 0, 1, or null. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -95,7 +120,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.String" />. A fixed-length stream of non-Unicode characters ranging between 1 and 8,000 characters.</para>
+            <see cref="T:System.String" />
+
+            . A fixed-length stream of non-Unicode characters ranging between 1 and 8,000 characters.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -115,7 +143,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.DateTime" />. Date and time data ranging in value from January 1, 1753 to December 31, 9999 to an accuracy of 3.33 milliseconds.</para>
+            <see cref="T:System.DateTime" />
+
+            . Date and time data ranging in value from January 1, 1753 to December 31, 9999 to an accuracy of 3.33 milliseconds.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -135,7 +166,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Decimal" />. A fixed precision and scale numeric value between -10 <superscript>38</superscript> -1 and 10 <superscript>38</superscript> -1.</para>
+            <see cref="T:System.Decimal" />
+
+            . A fixed precision and scale numeric value between -10 <superscript
+            >38</superscript>
+
+             -1 and 10 <superscript
+            >38</superscript>
+
+             -1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -155,7 +195,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Double" />. A floating point number within the range of -1.79E +308 through 1.79E +308.</para>
+            <see cref="T:System.Double" />
+
+            . A floating point number within the range of -1.79E +308 through 1.79E +308.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -175,7 +218,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Array" /> of type <see cref="T:System.Byte" />. A variable-length stream of binary data ranging from 0 to 2 <superscript>31</superscript> -1 (or 2,147,483,647) bytes.</para>
+            <see cref="T:System.Array" />
+
+             of type <see
+             cref="T:System.Byte" />
+
+            . A variable-length stream of binary data ranging from 0 to 2 <superscript
+            >31</superscript>
+
+             -1 (or 2,147,483,647) bytes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -195,7 +247,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Int32" />. A 32-bit signed integer.</para>
+            <see cref="T:System.Int32" />
+
+            . A 32-bit signed integer.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -215,7 +270,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Decimal" />. A currency value ranging from -2 <superscript>63</superscript> (or -9,223,372,036,854,775,808) to 2 <superscript>63</superscript> -1 (or +9,223,372,036,854,775,807) with an accuracy to a ten-thousandth of a currency unit.</para>
+            <see cref="T:System.Decimal" />
+
+            . A currency value ranging from -2 <superscript
+            >63</superscript>
+
+             (or -9,223,372,036,854,775,808) to 2 <superscript
+            >63</superscript>
+
+             -1 (or +9,223,372,036,854,775,807) with an accuracy to a ten-thousandth of a currency unit.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -235,7 +299,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.String" />. A fixed-length stream of Unicode characters ranging between 1 and 4,000 characters.</para>
+            <see cref="T:System.String" />
+
+            . A fixed-length stream of Unicode characters ranging between 1 and 4,000 characters.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -255,7 +322,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.String" />. A variable-length stream of Unicode data with a maximum length of 2 <superscript>30</superscript> - 1 (or 1,073,741,823) characters.</para>
+            <see cref="T:System.String" />
+
+            . A variable-length stream of Unicode data with a maximum length of 2 <superscript
+            >30</superscript>
+
+             - 1 (or 1,073,741,823) characters.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -275,7 +348,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.String" />. A variable-length stream of Unicode characters ranging between 1 and 4,000 characters. Implicit conversion fails if the string is greater than 4,000 characters. Explicitly set the object when working with strings longer than 4,000 characters. Use <see cref="F:System.Data.SqlDbType.NVarChar" /> when the database column is nvarchar(max).</para>
+            <see cref="T:System.String" />
+
+            . A variable-length stream of Unicode characters ranging between 1 and 4,000 characters. Implicit conversion fails if the string is greater than 4,000 characters. Explicitly set the object when working with strings longer than 4,000 characters. Use <see
+             cref="F:System.Data.SqlDbType.NVarChar" />
+
+             when the database column is nvarchar(max).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -295,7 +374,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Single" />. A floating point number within the range of -3.40E +38 through 3.40E +38.</para>
+            <see cref="T:System.Single" />
+
+            . A floating point number within the range of -3.40E +38 through 3.40E +38.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -315,7 +397,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.DateTime" />. Date and time data ranging in value from January 1, 1900 to June 6, 2079 to an accuracy of one minute.</para>
+            <see cref="T:System.DateTime" />
+
+            . Date and time data ranging in value from January 1, 1900 to June 6, 2079 to an accuracy of one minute.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -335,7 +420,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Int16" />. A 16-bit signed integer.</para>
+            <see cref="T:System.Int16" />
+
+            . A 16-bit signed integer.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -355,7 +443,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Decimal" />. A currency value ranging from -214,748.3648 to +214,748.3647 with an accuracy to a ten-thousandth of a currency unit.</para>
+            <see cref="T:System.Decimal" />
+
+            . A currency value ranging from -214,748.3648 to +214,748.3647 with an accuracy to a ten-thousandth of a currency unit.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -375,7 +466,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.String" />. A variable-length stream of non-Unicode data with a maximum length of 2 <superscript>31</superscript> -1 (or 2,147,483,647) characters.</para>
+            <see cref="T:System.String" />
+
+            . A variable-length stream of non-Unicode data with a maximum length of 2 <superscript
+            >31</superscript>
+
+             -1 (or 2,147,483,647) characters.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -395,7 +492,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Array" /> of type <see cref="T:System.Byte" />. Automatically generated binary numbers, which are guaranteed to be unique within a database. timestamp is used typically as a mechanism for version-stamping table rows. The storage size is 8 bytes.</para>
+            <see cref="T:System.Array" />
+
+             of type <see
+             cref="T:System.Byte" />
+
+            . Automatically generated binary numbers, which are guaranteed to be unique within a database. timestamp is used typically as a mechanism for version-stamping table rows. The storage size is 8 bytes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -415,7 +518,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Byte" />. An 8-bit unsigned integer.</para>
+            <see cref="T:System.Byte" />
+
+            . An 8-bit unsigned integer.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -451,7 +557,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Guid" />. A globally unique identifier (or GUID).</para>
+            <see cref="T:System.Guid" />
+
+            . A globally unique identifier (or GUID).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -471,7 +580,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Array" /> of type <see cref="T:System.Byte" />. A variable-length stream of binary data ranging between 1 and 8,000 bytes. Implicit conversion fails if the byte array is greater than 8,000 bytes. Explicitly set the object when working with byte arrays larger than 8,000 bytes.</para>
+            <see cref="T:System.Array" />
+
+             of type <see
+             cref="T:System.Byte" />
+
+            . A variable-length stream of binary data ranging between 1 and 8,000 bytes. Implicit conversion fails if the byte array is greater than 8,000 bytes. Explicitly set the object when working with byte arrays larger than 8,000 bytes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -491,7 +606,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.String" />. A variable-length stream of non-Unicode characters ranging between 1 and 8,000 characters. Use <see cref="F:System.Data.SqlDbType.VarChar" /> when the database column is varchar(max).</para>
+            <see cref="T:System.String" />
+
+            . A variable-length stream of non-Unicode characters ranging between 1 and 8,000 characters. Use <see
+             cref="F:System.Data.SqlDbType.VarChar" />
+
+             when the database column is varchar(max).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -511,7 +632,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Object" />. A special data type that can contain numeric, string, binary, or date data as well as the SQL Server values Empty and Null, which is assumed if no other type is declared.</para>
+            <see cref="T:System.Object" />
+
+            . A special data type that can contain numeric, string, binary, or date data as well as the SQL Server values Empty and Null, which is assumed if no other type is declared.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -531,7 +655,21 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An XML value. Obtain the XML as a string using the <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" /> method or <see cref="P:System.Data.SqlTypes.SqlXml.Value" /> property, or as an <see cref="T:System.Xml.XmlReader" /> by calling the <see cref="M:System.Data.SqlTypes.SqlXml.CreateReader" /> method.</para>
+          <para
+            >An XML value. Obtain the XML as a string using the <see
+             cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
+
+             method or <see
+             cref="P:System.Data.SqlTypes.SqlXml.Value" />
+
+             property, or as an <see
+             cref="T:System.Xml.XmlReader" />
+
+             by calling the <see
+             cref="M:System.Data.SqlTypes.SqlXml.CreateReader" />
+
+             method.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ParallelLoopResult" FullName="System.Threading.Tasks.ParallelLoopResult">
   <TypeSignature Language="C#" Value="public struct ParallelLoopResult" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit ParallelLoopResult extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit ParallelLoopResult extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,11 +16,39 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>If <see cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" /> returns true, then the loop ran to completion, such that all iterations of the loop were executed. If <see cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" /> returns false and <see cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" /> returns null, a call to <see cref="M:System.Threading.Tasks.ParallelLoopState.Stop" /> was used to end the loop prematurely. If <see cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" /> returns false and <see cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" /> returns a non-null integral value, <see cref="M:System.Threading.Tasks.ParallelLoopState.Break" /> was used to end the loop prematurely.</para>
+      <para
+        >If <see
+         cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
+
+         returns true, then the loop ran to completion, such that all iterations of the loop were executed. If <see
+         cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
+
+         returns false and <see
+         cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" />
+
+         returns null, a call to <see
+         cref="M:System.Threading.Tasks.ParallelLoopState.Stop" />
+
+         was used to end the loop prematurely. If <see
+         cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
+
+         returns false and <see
+         cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" />
+
+         returns a non-null integral value, <see
+         cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+         was used to end the loop prematurely.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides completion status on the execution of a <see cref="T:System.Threading.Tasks.Parallel" /> loop.</para>
+      <para
+        >Provides completion status on the execution of a <see
+         cref="T:System.Threading.Tasks.Parallel" />
+
+         loop.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -41,8 +72,11 @@
       </Docs>
     </Member>
     <Member MemberName="LowestBreakIteration">
-      <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; LowestBreakIteration { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; LowestBreakIteration" />
+      <MemberSignature Language="C#" Value="public Nullable<long> LowestBreakIteration { get; }" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<int64> LowestBreakIteration"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -54,11 +88,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <see cref="M:System.Threading.Tasks.ParallelLoopState.Break" /> was not employed, this property will return null.</para>
+          <para
+            >If <see
+             cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+             was not employed, this property will return null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the index of the lowest iteration from which <see cref="M:System.Threading.Tasks.ParallelLoopState.Break" /> was called.</para>
+          <para
+            >Gets the index of the lowest iteration from which <see
+             cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+             was called.</para
+          >
         </summary>
       </Docs>
     </Member>

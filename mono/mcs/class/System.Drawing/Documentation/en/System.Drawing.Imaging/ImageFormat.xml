@@ -21,7 +21,30 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The properties of the <see cref="T:System.Drawing.Imaging.ImageFormat" /> class indicate image formats such as bitmap (<see cref="P:System.Drawing.Imaging.ImageFormat.Bmp" />), enhanced metafile (<see cref="P:System.Drawing.Imaging.ImageFormat.Emf" />), and icon (<see cref="P:System.Drawing.Imaging.ImageFormat.Icon" />). For example, you can use the properties of the <see cref="T:System.Drawing.Imaging.ImageFormat" />  class to specify an image format when saving an image using the <see cref="M:System.Drawing.Image.Save(System.String,System.Drawing.Imaging.ImageFormat)" /> method. You can compare two image formats by using the <see cref="M:System.Drawing.Imaging.ImageFormat.Equals(System.Object)" /> method.</para>
+      <para
+        >The properties of the <see
+         cref="T:System.Drawing.Imaging.ImageFormat" />
+
+         class indicate image formats such as bitmap (<see
+         cref="P:System.Drawing.Imaging.ImageFormat.Bmp" />
+
+        ), enhanced metafile (<see
+         cref="P:System.Drawing.Imaging.ImageFormat.Emf" />
+
+        ), and icon (<see
+         cref="P:System.Drawing.Imaging.ImageFormat.Icon" />
+
+        ). For example, you can use the properties of the <see
+         cref="T:System.Drawing.Imaging.ImageFormat" />
+
+          class to specify an image format when saving an image using the <see
+         cref="M:System.Drawing.Image.Save(System.String,System.Drawing.Imaging.ImageFormat)" />
+
+         method. You can compare two image formats by using the <see
+         cref="M:System.Drawing.Imaging.ImageFormat.Equals(System.Object)" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -39,14 +62,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Typically you use the static properties of the <see cref="T:System.Drawing.Imaging.ImageFormat" /> class to specify a particular format such as <see cref="P:System.Drawing.Imaging.ImageFormat.Png" />or <see cref="P:System.Drawing.Imaging.ImageFormat.Jpeg" />, rather than constructing a new <see cref="T:System.Drawing.Imaging.ImageFormat" />.</para>
+          <para
+            >Typically you use the static properties of the <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             class to specify a particular format such as <see
+             cref="P:System.Drawing.Imaging.ImageFormat.Png" />
+
+            or <see
+             cref="P:System.Drawing.Imaging.ImageFormat.Jpeg" />
+
+            , rather than constructing a new <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Drawing.Imaging.ImageFormat" /> class by using the specified <see cref="T:System.Guid" /> structure.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             class by using the specified <see
+             cref="T:System.Guid" />
+
+             structure.</para
+          >
         </summary>
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Guid" /> structure that specifies a particular image format. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Guid" />
+
+           structure that specifies a particular image format. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -54,7 +105,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Bmp">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Bmp { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Bmp { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -73,7 +127,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Emf">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Emf { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Emf { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -104,14 +161,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the specified object is an <see cref="T:System.Drawing.Imaging.ImageFormat" /> object that is equivalent to this <see cref="T:System.Drawing.Imaging.ImageFormat" /> object.</para>
+          <para
+            >Returns a value that indicates whether the specified object is an <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             object that is equivalent to this <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="o" /> is an <see cref="T:System.Drawing.Imaging.ImageFormat" /> object that is equivalent to this <see cref="T:System.Drawing.Imaging.ImageFormat" /> object; otherwise, false.</para>
+          <para
+            >true if <paramref
+             name="o" />
+
+             is an <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             object that is equivalent to this <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             object; otherwise, false.</para
+          >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to test. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -119,7 +198,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Exif">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Exif { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Exif { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -161,7 +243,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Gif">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Gif { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Gif { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -190,7 +275,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Guid" /> structure that represents this <see cref="T:System.Drawing.Imaging.ImageFormat" /> object.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Guid" />
+
+             structure that represents this <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -199,7 +292,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Icon">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Icon { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Icon { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -218,7 +314,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Jpeg">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Jpeg { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Jpeg { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -237,7 +336,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MemoryBmp">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat MemoryBmp { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat MemoryBmp { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -256,7 +358,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Png">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Png { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Png { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -275,7 +380,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Tiff">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Tiff { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Tiff { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>
@@ -304,11 +412,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Drawing.Imaging.ImageFormat" /> object to a human-readable string.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             object to a human-readable string.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string that represents this <see cref="T:System.Drawing.Imaging.ImageFormat" /> object.</para>
+          <para
+            >A string that represents this <see
+             cref="T:System.Drawing.Imaging.ImageFormat" />
+
+             object.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -317,7 +435,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Wmf">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Imaging.ImageFormat Wmf { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Imaging.ImageFormat Wmf { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.ImageFormat</ReturnType>

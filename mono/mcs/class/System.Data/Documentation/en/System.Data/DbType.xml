@@ -17,7 +17,12 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The type of a parameter is specific to the .NET Framework data provider. Specifying the type converts the value of the Parameter to the data provider Type before passing the value to the data source. If the type is not specified, ADO.NET infers the data provider Type of the Parameter from the Value property of the Parameter object. </para>
       <para>You can also generically specify the type of a Parameter by setting DbType property of a Parameter object. </para>
-      <para>ADO.NET cannot correctly infer the type if a byte array is larger than 8,000 bytes. Explicitly specify the <see cref="T:System.Data.DbType" /> when working with byte arrays larger than 8,000 bytes.</para>
+      <para
+        >ADO.NET cannot correctly infer the type if a byte array is larger than 8,000 bytes. Explicitly specify the <see
+         cref="T:System.Data.DbType" />
+
+         when working with byte arrays larger than 8,000 bytes.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -131,7 +136,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A currency value ranging from -2 <superscript>63</superscript> (or -922,337,203,685,477.5808) to 2 <superscript>63</superscript> -1 (or +922,337,203,685,477.5807) with an accuracy to a ten-thousandth of a currency unit.</para>
+          <para
+            >A currency value ranging from -2 <superscript
+            >63</superscript>
+
+             (or -922,337,203,685,477.5808) to 2 <superscript
+            >63</superscript>
+
+             -1 (or +922,337,203,685,477.5807) with an accuracy to a ten-thousandth of a currency unit.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -188,7 +201,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A simple type representing values ranging from 1.0 x 10 <superscript>-28</superscript> to approximately 7.9 x 10 <superscript>28</superscript> with 28-29 significant digits.</para>
+          <para
+            >A simple type representing values ranging from 1.0 x 10 <superscript
+            >-28</superscript>
+
+             to approximately 7.9 x 10 <superscript
+            >28</superscript>
+
+             with 28-29 significant digits.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -207,7 +228,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A floating point type representing values ranging from approximately 5.0 x 10 <superscript>-324</superscript> to 1.7 x 10 <superscript>308</superscript> with a precision of 15-16 digits.</para>
+          <para
+            >A floating point type representing values ranging from approximately 5.0 x 10 <superscript
+            >-324</superscript>
+
+             to 1.7 x 10 <superscript
+            >308</superscript>
+
+             with a precision of 15-16 digits.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -340,7 +369,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A floating point type representing values ranging from approximately 1.5 x 10 <superscript>-45</superscript> to 3.4 x 10 <superscript>38</superscript> with a precision of 7 digits.</para>
+          <para
+            >A floating point type representing values ranging from approximately 1.5 x 10 <superscript
+            >-45</superscript>
+
+             to 3.4 x 10 <superscript
+            >38</superscript>
+
+             with a precision of 7 digits.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -397,7 +434,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A type representing a SQL Server DateTime value. If you want to use a SQL Server time value, use <see cref="F:System.Data.SqlDbType.Time" />.</para>
+          <para
+            >A type representing a SQL Server DateTime value. If you want to use a SQL Server time value, use <see
+             cref="F:System.Data.SqlDbType.Time" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

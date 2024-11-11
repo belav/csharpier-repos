@@ -1,5 +1,8 @@
 <Type Name="NvdlValidate" FullName="Commons.Xml.Nvdl.NvdlValidate">
-  <TypeSignature Language="C#" Value="public class NvdlValidate : Commons.Xml.Nvdl.NvdlNoResultAction" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlValidate : Commons.Xml.Nvdl.NvdlNoResultAction"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -31,7 +34,10 @@
       </Docs>
     </Member>
     <Member MemberName="Options">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlOptionList Options { get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlOptionList Options { get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlOptionList</ReturnType>
@@ -55,7 +61,10 @@
       </Docs>
     </Member>
     <Member MemberName="SchemaBody">
-      <MemberSignature Language="C#" Value="public System.Xml.XmlElement SchemaBody { set; get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.XmlElement SchemaBody { set; get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Xml.XmlElement</ReturnType>

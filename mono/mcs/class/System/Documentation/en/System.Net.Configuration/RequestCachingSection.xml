@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RequestCachingSection" FullName="System.Net.Configuration.RequestCachingSection">
-  <TypeSignature Language="C#" Value="public sealed class RequestCachingSection : System.Configuration.ConfigurationSection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed RequestCachingSection extends System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class RequestCachingSection : System.Configuration.ConfigurationSection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed RequestCachingSection extends System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +21,25 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class corresponds to the <format type="text/html"><a href="9962a2fe-cbda-41a6-9377-571811eaea84">RequestCaching Element (Network Settings)</a></format> configuration element.</para>
-      <para>This class is used to access information about default caching behavior for resources requested by using the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para>
+      <para
+        >This class corresponds to the <format
+         type="text/html">
+          <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
+            >RequestCaching Element (Network Settings)</a
+          >
+        </format>
+
+         configuration element.</para
+      >
+      <para
+        >This class is used to access information about default caching behavior for resources requested by using the <see
+         cref="T:System.Net.WebRequest" />
+
+         and <see
+         cref="T:System.Net.WebClient" />
+
+         classes. </para
+      >
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
     <summary>
@@ -27,7 +50,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public RequestCachingSection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -39,13 +65,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Configuration.RequestCachingSection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Configuration.RequestCachingSection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DefaultFtpCachePolicy">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.FtpCachePolicyElement DefaultFtpCachePolicy { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.FtpCachePolicyElement DefaultFtpCachePolicy" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.FtpCachePolicyElement DefaultFtpCachePolicy { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.FtpCachePolicyElement DefaultFtpCachePolicy"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -70,8 +107,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultHttpCachePolicy">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.HttpCachePolicyElement DefaultHttpCachePolicy { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.HttpCachePolicyElement DefaultHttpCachePolicy" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.HttpCachePolicyElement DefaultHttpCachePolicy { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.HttpCachePolicyElement DefaultHttpCachePolicy"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,7 +133,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Unless the <see cref="P:System.Net.Configuration.RequestCachingSection.DisableAllCaching" /> property is set to true, the policy returned by this property overrides the policy set in the <see cref="P:System.Net.Configuration.RequestCachingSection.DefaultPolicyLevel" /> property.</para>
+          <para
+            >Unless the <see
+             cref="P:System.Net.Configuration.RequestCachingSection.DisableAllCaching" />
+
+             property is set to true, the policy returned by this property overrides the policy set in the <see
+             cref="P:System.Net.Configuration.RequestCachingSection.DefaultPolicyLevel" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -99,8 +150,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultPolicyLevel">
-      <MemberSignature Language="C#" Value="public System.Net.Cache.RequestCacheLevel DefaultPolicyLevel { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Cache.RequestCacheLevel DefaultPolicyLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Cache.RequestCacheLevel DefaultPolicyLevel { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Cache.RequestCacheLevel DefaultPolicyLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -125,8 +182,14 @@
       </Docs>
     </Member>
     <Member MemberName="DeserializeElement">
-      <MemberSignature Language="C#" Value="protected override void DeserializeElement (System.Xml.XmlReader reader, bool serializeCollectionKey);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DeserializeElement(class System.Xml.XmlReader reader, bool serializeCollectionKey) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void DeserializeElement (System.Xml.XmlReader reader, bool serializeCollectionKey);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void DeserializeElement(class System.Xml.XmlReader reader, bool serializeCollectionKey) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -212,7 +275,10 @@
     </Member>
     <Member MemberName="PostDeserialize">
       <MemberSignature Language="C#" Value="protected override void PostDeserialize ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -234,8 +300,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -253,7 +325,10 @@
     </Member>
     <Member MemberName="UnspecifiedMaximumAge">
       <MemberSignature Language="C#" Value="public TimeSpan UnspecifiedMaximumAge { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan UnspecifiedMaximumAge" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan UnspecifiedMaximumAge"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -12,7 +12,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" /> enumeration represents a set of integer properties that describe visual style elements. The <see cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" /> values are used as an argument in the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetInteger(System.Windows.Forms.VisualStyles.IntegerProperty)" /> method to specify which property value to retrieve for the element that the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> currently represents. </para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" />
+
+         enumeration represents a set of integer properties that describe visual style elements. The <see
+         cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" />
+
+         values are used as an argument in the <see
+         cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetInteger(System.Windows.Forms.VisualStyles.IntegerProperty)" />
+
+         method to specify which property value to retrieve for the element that the <see
+         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+         currently represents. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -98,7 +112,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor1" />  to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para>
+          <para
+            >The amount of <see
+             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor1" />
+
+              to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -115,7 +134,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor2" />  to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para>
+          <para
+            >The amount of <see
+             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor2" />
+
+              to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -132,7 +156,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor3" />  to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para>
+          <para
+            >The amount of <see
+             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor3" />
+
+              to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -149,7 +178,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor4" />  to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para>
+          <para
+            >The amount of <see
+             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor4" />
+
+              to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -166,7 +200,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor5" />  to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para>
+          <para
+            >The amount of <see
+             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor5" />
+
+              to use in a color gradient. The sum of the five GradientRatio properties must equal 255.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -217,7 +256,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The minimum dots per inch (DPI) that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile1" /> was designed for.</para>
+          <para
+            >The minimum dots per inch (DPI) that <see
+             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile1" />
+
+             was designed for.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -234,7 +278,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The minimum DPI that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile2" /> was designed for.</para>
+          <para
+            >The minimum DPI that <see
+             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile2" />
+
+             was designed for.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -251,7 +300,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The minimum DPI that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile3" /> was designed for.</para>
+          <para
+            >The minimum DPI that <see
+             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile3" />
+
+             was designed for.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -268,7 +322,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The minimum DPI that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile4" /> was designed for.</para>
+          <para
+            >The minimum DPI that <see
+             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile4" />
+
+             was designed for.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -285,7 +344,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The minimum DPI that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile5" /> was designed for.</para>
+          <para
+            >The minimum DPI that <see
+             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile5" />
+
+             was designed for.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

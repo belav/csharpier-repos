@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RequiredAttribute" FullName="System.ComponentModel.DataAnnotations.RequiredAttribute">
-  <TypeSignature Language="C#" Value="public class RequiredAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit RequiredAttribute extends System.ComponentModel.DataAnnotations.ValidationAttribute" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RequiredAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit RequiredAttribute extends System.ComponentModel.DataAnnotations.ValidationAttribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,11 +24,26 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" /> attribute specifies that when a field on a form is validated, the field must contain a value. A validation exception is raised if the property is null, contains an empty string (""), or contains only white-space characters.</para>
+      <para
+        >The <see
+         cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+
+         attribute specifies that when a field on a form is validated, the field must contain a value. A validation exception is raised if the property is null, contains an empty string (""), or contains only white-space characters.</para
+      >
       <block subset="none" type="note">
-        <para>If the MVC data model or entity partial class contains a field that is annotated with the <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" /> attribute, but the page does not contain the property, an error is not raised. Validation occurs only for fields that are submitted to the server.</para>
+        <para
+          >If the MVC data model or entity partial class contains a field that is annotated with the <see
+           cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+
+           attribute, but the page does not contain the property, an error is not raised. Validation occurs only for fields that are submitted to the server.</para
+        >
       </block>
-      <para>A Visual Studio project with source code is available to accompany this topic: <see cref="http://go.microsoft.com/fwlink/?linkid=158686">Download</see>.</para>
+      <para
+        >A Visual Studio project with source code is available to accompany this topic: <see
+         cref="http://go.microsoft.com/fwlink/?linkid=158686">Download</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -32,7 +53,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public RequiredAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -42,7 +66,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -60,8 +89,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you set <see cref="P:System.ComponentModel.DataAnnotations.RequiredAttribute.AllowEmptyStrings" /> to true for a data field, Dynamic Data does not perform validation and transforms the empty string to a null value. This value is then passed to the database. </para>
-          <para>If the database does not allow null values, it raises an error. To avoid this error, you must also set the <see cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.ConvertEmptyStringToNull" /> to false.</para>
+          <para
+            >When you set <see
+             cref="P:System.ComponentModel.DataAnnotations.RequiredAttribute.AllowEmptyStrings" />
+
+             to true for a data field, Dynamic Data does not perform validation and transforms the empty string to a null value. This value is then passed to the database. </para
+          >
+          <para
+            >If the database does not allow null values, it raises an error. To avoid this error, you must also set the <see
+             cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.ConvertEmptyStringToNull" />
+
+             to false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -71,7 +110,10 @@
     </Member>
     <Member MemberName="IsValid">
       <MemberSignature Language="C#" Value="public override bool IsValid (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsValid(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsValid(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -96,7 +138,10 @@
           <para>true if validation is successful; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data field value to validate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data field value to validate.</param
+        >
       </Docs>
     </Member>
   </Members>

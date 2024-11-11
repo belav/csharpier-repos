@@ -12,11 +12,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ComponentModel.Design.DisplayMode" /> identifiers are used to indicate the display mode used to display each byte sequence.</para>
+      <para
+        >The <see
+         cref="T:System.ComponentModel.Design.DisplayMode" />
+
+         identifiers are used to indicate the display mode used to display each byte sequence.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines identifiers that indicate the display modes used by <see cref="T:System.ComponentModel.Design.ByteViewer" />.</para>
+      <para
+        >Defines identifiers that indicate the display modes used by <see
+         cref="T:System.ComponentModel.Design.ByteViewer" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -46,7 +56,18 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A display mode that automatically selects a display mode. In this mode, the bytes are examined to determine if they are hexadecimal or printable. If the bytes are in hexadecimal format, the <see cref="F:System.ComponentModel.Design.DisplayMode.Hexdump" /> mode is selected. If the characters match a printable character set, a test is run to automatically select either the <see cref="F:System.ComponentModel.Design.DisplayMode.Ansi" /> or <see cref="F:System.ComponentModel.Design.DisplayMode.Unicode" /> display mode.</para>
+          <para
+            >A display mode that automatically selects a display mode. In this mode, the bytes are examined to determine if they are hexadecimal or printable. If the bytes are in hexadecimal format, the <see
+             cref="F:System.ComponentModel.Design.DisplayMode.Hexdump" />
+
+             mode is selected. If the characters match a printable character set, a test is run to automatically select either the <see
+             cref="F:System.ComponentModel.Design.DisplayMode.Ansi" />
+
+             or <see
+             cref="F:System.ComponentModel.Design.DisplayMode.Unicode" />
+
+             display mode.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

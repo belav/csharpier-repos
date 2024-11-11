@@ -16,7 +16,13 @@
     <input value="" style="font-family:console lucida" type="submit" name="ctrl_2" id="ctrl_2" />
   </div>
   <div id="GHTSubTest4" testname="System.Web.UI.WebControls.Button: Names">
-    <input value="" style="font-family:console,courier verdana,lucida" type="submit" name="ctrl_3" id="ctrl_3" />
+    <input
+      value=""
+      style="font-family:console,courier verdana,lucida"
+      type="submit"
+      name="ctrl_3"
+      id="ctrl_3"
+    />
   </div>
   <div id="GHTSubTest5" testname="System.Web.UI.WebControls.Button: Overline">
     <input value="" style="text-decoration:overline" type="submit" name="ctrl_4" id="ctrl_4" />
@@ -27,7 +33,10 @@
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.Button: FontSize">
     <input value="" style="font-size:xx-large" type="submit" name="ctrl_5" id="ctrl_5" />
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.Button: Strikeout">
     <input value="" style="text-decoration:line-through" type="submit" name="ctrl_6" id="ctrl_6" />
@@ -80,7 +89,10 @@
       <input id="ctrl_13" type="checkbox" name="ctrl_13" />
     </span>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.CheckBox: Strikeout">
     <span style="text-decoration:line-through">
@@ -99,50 +111,45 @@
     </span>
   </div>
   <div id="GHTSubTest17" testname="System.Web.UI.WebControls.HyperLink: Bold">
-    <a id="ctrl_16" style="font-weight:bold">
-    </a>
+    <a id="ctrl_16" style="font-weight:bold"></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest18" testname="System.Web.UI.WebControls.HyperLink: Italic">
-    <a id="ctrl_17" style="font-style:italic">
-    </a>
+    <a id="ctrl_17" style="font-style:italic"></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest19" testname="System.Web.UI.WebControls.HyperLink: Name ">
-    <a id="ctrl_18" style="font-family:console lucida">
-    </a>
+    <a id="ctrl_18" style="font-family:console lucida"></a>
   </div>
   <div id="GHTSubTest20" testname="System.Web.UI.WebControls.HyperLink: Names">
-    <a id="ctrl_19" style="font-family:console,courier verdana,lucida">
-    </a>
+    <a id="ctrl_19" style="font-family:console,courier verdana,lucida"></a>
   </div>
   <div id="GHTSubTest21" testname="System.Web.UI.WebControls.HyperLink: Overline">
-    <a id="ctrl_20" style="text-decoration:overline">
-    </a>
+    <a id="ctrl_20" style="text-decoration:overline"></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest22" testname="System.Web.UI.WebControls.HyperLink: FontSize">
-    <a id="ctrl_21" style="font-size:xx-large">
-    </a>
+    <a id="ctrl_21" style="font-size:xx-large"></a>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest23" testname="System.Web.UI.WebControls.HyperLink: Strikeout">
-    <a id="ctrl_22" style="text-decoration:line-through">
-    </a>
+    <a id="ctrl_22" style="text-decoration:line-through"></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest24" testname="System.Web.UI.WebControls.HyperLink: Underline">
-    <a id="ctrl_23" style="text-decoration:underline">
-    </a>
+    <a id="ctrl_23" style="text-decoration:underline"></a>
     <span>
       <br />
     </span>
@@ -174,7 +181,10 @@
   <div id="GHTSubTest30" testname="System.Web.UI.WebControls.Image: FontSize">
     <img id="ctrl_29" alt="" border="0" style="font-size:xx-large" />
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest31" testname="System.Web.UI.WebControls.Image: Strikeout">
     <img id="ctrl_30" alt="" border="0" style="text-decoration:line-through" />
@@ -201,13 +211,34 @@
     </span>
   </div>
   <div id="GHTSubTest35" testname="System.Web.UI.WebControls.ImageButton: Name ">
-    <input id="ctrl_34" alt="" border="0" style="font-family:console lucida" type="image" name="ctrl_34" />
+    <input
+      id="ctrl_34"
+      alt=""
+      border="0"
+      style="font-family:console lucida"
+      type="image"
+      name="ctrl_34"
+    />
   </div>
   <div id="GHTSubTest36" testname="System.Web.UI.WebControls.ImageButton: Names">
-    <input id="ctrl_35" alt="" border="0" style="font-family:console,courier verdana,lucida" type="image" name="ctrl_35" />
+    <input
+      id="ctrl_35"
+      alt=""
+      border="0"
+      style="font-family:console,courier verdana,lucida"
+      type="image"
+      name="ctrl_35"
+    />
   </div>
   <div id="GHTSubTest37" testname="System.Web.UI.WebControls.ImageButton: Overline">
-    <input id="ctrl_36" alt="" border="0" style="text-decoration:overline" type="image" name="ctrl_36" />
+    <input
+      id="ctrl_36"
+      alt=""
+      border="0"
+      style="text-decoration:overline"
+      type="image"
+      name="ctrl_36"
+    />
     <span>
       <br />
     </span>
@@ -215,163 +246,185 @@
   <div id="GHTSubTest38" testname="System.Web.UI.WebControls.ImageButton: FontSize">
     <input id="ctrl_37" alt="" border="0" style="font-size:xx-large" type="image" name="ctrl_37" />
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest39" testname="System.Web.UI.WebControls.ImageButton: Strikeout">
-    <input id="ctrl_38" alt="" border="0" style="text-decoration:line-through" type="image" name="ctrl_38" />
+    <input
+      id="ctrl_38"
+      alt=""
+      border="0"
+      style="text-decoration:line-through"
+      type="image"
+      name="ctrl_38"
+    />
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest40" testname="System.Web.UI.WebControls.ImageButton: Underline">
-    <input id="ctrl_39" alt="" border="0" style="text-decoration:underline" type="image" name="ctrl_39" />
+    <input
+      id="ctrl_39"
+      alt=""
+      border="0"
+      style="text-decoration:underline"
+      type="image"
+      name="ctrl_39"
+    />
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest41" testname="System.Web.UI.WebControls.Label: Bold">
-    <span id="ctrl_40" style="font-weight:bold">
-    </span>
+    <span id="ctrl_40" style="font-weight:bold"></span>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest42" testname="System.Web.UI.WebControls.Label: Italic">
-    <span id="ctrl_41" style="font-style:italic">
-    </span>
+    <span id="ctrl_41" style="font-style:italic"></span>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest43" testname="System.Web.UI.WebControls.Label: Name ">
-    <span id="ctrl_42" style="font-family:console lucida">
-    </span>
+    <span id="ctrl_42" style="font-family:console lucida"></span>
   </div>
   <div id="GHTSubTest44" testname="System.Web.UI.WebControls.Label: Names">
-    <span id="ctrl_43" style="font-family:console,courier verdana,lucida">
-    </span>
+    <span id="ctrl_43" style="font-family:console,courier verdana,lucida"></span>
   </div>
   <div id="GHTSubTest45" testname="System.Web.UI.WebControls.Label: Overline">
-    <span id="ctrl_44" style="text-decoration:overline">
-    </span>
+    <span id="ctrl_44" style="text-decoration:overline"></span>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest46" testname="System.Web.UI.WebControls.Label: FontSize">
-    <span id="ctrl_45" style="font-size:xx-large">
-    </span>
+    <span id="ctrl_45" style="font-size:xx-large"></span>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest47" testname="System.Web.UI.WebControls.Label: Strikeout">
-    <span id="ctrl_46" style="text-decoration:line-through">
-    </span>
+    <span id="ctrl_46" style="text-decoration:line-through"></span>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest48" testname="System.Web.UI.WebControls.Label: Underline">
-    <span id="ctrl_47" style="text-decoration:underline">
-    </span>
+    <span id="ctrl_47" style="text-decoration:underline"></span>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest49" testname="System.Web.UI.WebControls.LinkButton: Bold">
-    <a href="javascript:__doPostBack('ctrl_48','')" id="ctrl_48" style="font-weight:bold">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_48','')" id="ctrl_48" style="font-weight:bold"></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest50" testname="System.Web.UI.WebControls.LinkButton: Italic">
-    <a href="javascript:__doPostBack('ctrl_49','')" id="ctrl_49" style="font-style:italic">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_49','')" id="ctrl_49" style="font-style:italic"></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest51" testname="System.Web.UI.WebControls.LinkButton: Name ">
-    <a href="javascript:__doPostBack('ctrl_50','')" id="ctrl_50" style="font-family:console lucida">
-    </a>
+    <a
+      href="javascript:__doPostBack('ctrl_50','')"
+      id="ctrl_50"
+      style="font-family:console lucida"
+    ></a>
   </div>
   <div id="GHTSubTest52" testname="System.Web.UI.WebControls.LinkButton: Names">
-    <a href="javascript:__doPostBack('ctrl_51','')" id="ctrl_51" style="font-family:console,courier verdana,lucida">
-    </a>
+    <a
+      href="javascript:__doPostBack('ctrl_51','')"
+      id="ctrl_51"
+      style="font-family:console,courier verdana,lucida"
+    ></a>
   </div>
   <div id="GHTSubTest53" testname="System.Web.UI.WebControls.LinkButton: Overline">
-    <a href="javascript:__doPostBack('ctrl_52','')" id="ctrl_52" style="text-decoration:overline">
-    </a>
+    <a
+      href="javascript:__doPostBack('ctrl_52','')"
+      id="ctrl_52"
+      style="text-decoration:overline"
+    ></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest54" testname="System.Web.UI.WebControls.LinkButton: FontSize">
-    <a href="javascript:__doPostBack('ctrl_53','')" id="ctrl_53" style="font-size:xx-large">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_53','')" id="ctrl_53" style="font-size:xx-large"></a>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest55" testname="System.Web.UI.WebControls.LinkButton: Strikeout">
-    <a href="javascript:__doPostBack('ctrl_54','')" id="ctrl_54" style="text-decoration:line-through">
-    </a>
+    <a
+      href="javascript:__doPostBack('ctrl_54','')"
+      id="ctrl_54"
+      style="text-decoration:line-through"
+    ></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest56" testname="System.Web.UI.WebControls.LinkButton: Underline">
-    <a href="javascript:__doPostBack('ctrl_55','')" id="ctrl_55" style="text-decoration:underline">
-    </a>
+    <a
+      href="javascript:__doPostBack('ctrl_55','')"
+      id="ctrl_55"
+      style="text-decoration:underline"
+    ></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest57" testname="System.Web.UI.WebControls.Panel: Bold">
-    <div id="ctrl_56" style="font-weight:bold">
-    </div>
+    <div id="ctrl_56" style="font-weight:bold"></div>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest58" testname="System.Web.UI.WebControls.Panel: Italic">
-    <div id="ctrl_57" style="font-style:italic">
-    </div>
+    <div id="ctrl_57" style="font-style:italic"></div>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest59" testname="System.Web.UI.WebControls.Panel: Name ">
-    <div id="ctrl_58" style="font-family:console lucida">
-    </div>
+    <div id="ctrl_58" style="font-family:console lucida"></div>
   </div>
   <div id="GHTSubTest60" testname="System.Web.UI.WebControls.Panel: Names">
-    <div id="ctrl_59" style="font-family:console,courier verdana,lucida">
-    </div>
+    <div id="ctrl_59" style="font-family:console,courier verdana,lucida"></div>
   </div>
   <div id="GHTSubTest61" testname="System.Web.UI.WebControls.Panel: Overline">
-    <div id="ctrl_60" style="text-decoration:overline">
-    </div>
+    <div id="ctrl_60" style="text-decoration:overline"></div>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest62" testname="System.Web.UI.WebControls.Panel: FontSize">
-    <div id="ctrl_61" style="font-size:xx-large">
-    </div>
+    <div id="ctrl_61" style="font-size:xx-large"></div>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest63" testname="System.Web.UI.WebControls.Panel: Strikeout">
-    <div id="ctrl_62" style="text-decoration:line-through">
-    </div>
+    <div id="ctrl_62" style="text-decoration:line-through"></div>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest64" testname="System.Web.UI.WebControls.Panel: Underline">
-    <div id="ctrl_63" style="text-decoration:underline">
-    </div>
+    <div id="ctrl_63" style="text-decoration:underline"></div>
     <span>
       <br />
     </span>
@@ -415,7 +468,10 @@
       <input id="ctrl_69" type="radio" name="ctrl_69" value="ctrl_69" />
     </span>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest71" testname="System.Web.UI.WebControls.RadioButton: Strikeout">
     <span style="text-decoration:line-through">
@@ -449,7 +505,12 @@
     <input id="ctrl_74" style="font-family:console lucida" type="text" name="ctrl_74" />
   </div>
   <div id="GHTSubTest76" testname="System.Web.UI.WebControls.TextBox: Names">
-    <input id="ctrl_75" style="font-family:console,courier verdana,lucida" type="text" name="ctrl_75" />
+    <input
+      id="ctrl_75"
+      style="font-family:console,courier verdana,lucida"
+      type="text"
+      name="ctrl_75"
+    />
   </div>
   <div id="GHTSubTest77" testname="System.Web.UI.WebControls.TextBox: Overline">
     <input id="ctrl_76" style="text-decoration:overline" type="text" name="ctrl_76" />
@@ -460,7 +521,10 @@
   <div id="GHTSubTest78" testname="System.Web.UI.WebControls.TextBox: FontSize">
     <input id="ctrl_77" style="font-size:xx-large" type="text" name="ctrl_77" />
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest79" testname="System.Web.UI.WebControls.TextBox: Strikeout">
     <input id="ctrl_78" style="text-decoration:line-through" type="text" name="ctrl_78" />
@@ -476,178 +540,376 @@
   </div>
   <div id="GHTSubTest81" testname="System.Web.UI.WebControls.DropDownList: Bold">
     <select id="ctrl_80" style="font-weight:bold" name="ctrl_80">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest82" testname="System.Web.UI.WebControls.DropDownList: Italic">
     <select id="ctrl_81" style="font-style:italic" name="ctrl_81">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest83" testname="System.Web.UI.WebControls.DropDownList: Name ">
     <select id="ctrl_82" style="font-family:console lucida" name="ctrl_82">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest84" testname="System.Web.UI.WebControls.DropDownList: Names">
     <select id="ctrl_83" style="font-family:console,courier verdana,lucida" name="ctrl_83">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest85" testname="System.Web.UI.WebControls.DropDownList: Overline">
     <select id="ctrl_84" style="text-decoration:overline" name="ctrl_84">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest86" testname="System.Web.UI.WebControls.DropDownList: FontSize">
     <select id="ctrl_85" style="font-size:xx-large" name="ctrl_85">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest87" testname="System.Web.UI.WebControls.DropDownList: Strikeout">
     <select id="ctrl_86" style="text-decoration:line-through" name="ctrl_86">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest88" testname="System.Web.UI.WebControls.DropDownList: Underline">
     <select id="ctrl_87" style="text-decoration:underline" name="ctrl_87">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest89" testname="System.Web.UI.WebControls.ListBox: Bold">
     <select id="ctrl_88" style="font-weight:bold" size="4" name="ctrl_88">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest90" testname="System.Web.UI.WebControls.ListBox: Italic">
     <select id="ctrl_89" style="font-style:italic" size="4" name="ctrl_89">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest91" testname="System.Web.UI.WebControls.ListBox: Name ">
     <select id="ctrl_90" style="font-family:console lucida" size="4" name="ctrl_90">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest92" testname="System.Web.UI.WebControls.ListBox: Names">
     <select id="ctrl_91" style="font-family:console,courier verdana,lucida" size="4" name="ctrl_91">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest93" testname="System.Web.UI.WebControls.ListBox: Overline">
     <select id="ctrl_92" style="text-decoration:overline" size="4" name="ctrl_92">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest94" testname="System.Web.UI.WebControls.ListBox: FontSize">
     <select id="ctrl_93" style="font-size:xx-large" size="4" name="ctrl_93">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest95" testname="System.Web.UI.WebControls.ListBox: Strikeout">
     <select id="ctrl_94" style="text-decoration:line-through" size="4" name="ctrl_94">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest96" testname="System.Web.UI.WebControls.ListBox: Underline">
     <select id="ctrl_95" style="text-decoration:underline" size="4" name="ctrl_95">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
@@ -829,7 +1091,10 @@
       </tr>
     </table>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest103" testname="System.Web.UI.WebControls.RadioButtonList: Strikeout">
     <table id="ctrl_102" style="text-decoration:line-through" border="0">
@@ -1070,7 +1335,10 @@
       </tr>
     </table>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest111" testname="System.Web.UI.WebControls.CheckBoxList: Strikeout">
     <table id="ctrl_110" style="text-decoration:line-through" border="0">
@@ -1135,7 +1403,13 @@
     </span>
   </div>
   <div id="GHTSubTest113" testname="System.Web.UI.WebControls.DataGrid: Bold">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;font-weight:bold" rules="all" id="ctrl_112">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;font-weight:bold"
+      rules="all"
+      id="ctrl_112"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -1162,7 +1436,13 @@
     </span>
   </div>
   <div id="GHTSubTest114" testname="System.Web.UI.WebControls.DataGrid: Italic">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;font-style:italic" rules="all" id="ctrl_113">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;font-style:italic"
+      rules="all"
+      id="ctrl_113"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -1189,7 +1469,13 @@
     </span>
   </div>
   <div id="GHTSubTest115" testname="System.Web.UI.WebControls.DataGrid: Name ">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;font-family:console lucida" rules="all" id="ctrl_114">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;font-family:console lucida"
+      rules="all"
+      id="ctrl_114"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -1213,7 +1499,13 @@
     </table>
   </div>
   <div id="GHTSubTest116" testname="System.Web.UI.WebControls.DataGrid: Names">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;font-family:console,courier verdana,lucida" rules="all" id="ctrl_115">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;font-family:console,courier verdana,lucida"
+      rules="all"
+      id="ctrl_115"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -1237,7 +1529,13 @@
     </table>
   </div>
   <div id="GHTSubTest117" testname="System.Web.UI.WebControls.DataGrid: Overline">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;text-decoration:overline" rules="all" id="ctrl_116">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;text-decoration:overline"
+      rules="all"
+      id="ctrl_116"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -1264,7 +1562,13 @@
     </span>
   </div>
   <div id="GHTSubTest118" testname="System.Web.UI.WebControls.DataGrid: FontSize">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;font-size:xx-large" rules="all" id="ctrl_117">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;font-size:xx-large"
+      rules="all"
+      id="ctrl_117"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -1287,10 +1591,19 @@
       </tr>
     </table>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest119" testname="System.Web.UI.WebControls.DataGrid: Strikeout">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;text-decoration:line-through" rules="all" id="ctrl_118">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;text-decoration:line-through"
+      rules="all"
+      id="ctrl_118"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -1317,7 +1630,13 @@
     </span>
   </div>
   <div id="GHTSubTest120" testname="System.Web.UI.WebControls.DataGrid: Underline">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;text-decoration:underline" rules="all" id="ctrl_119">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;text-decoration:underline"
+      rules="all"
+      id="ctrl_119"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -1496,7 +1815,10 @@
       </tr>
     </table>
     <span>
-      <br />XX-Large</span>
+      <br />
+
+      XX-Large</span
+    >
   </div>
   <div id="GHTSubTest127" testname="System.Web.UI.WebControls.DataGridItem: Strikeout">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_132">
@@ -1553,7 +1875,12 @@
     </span>
   </div>
   <div id="GHTSubTest129" testname="System.Web.UI.WebControls.DataList: Bold">
-    <table id="ctrl_136" cellspacing="0" border="0" style="border-collapse:collapse;font-weight:bold">
+    <table
+      id="ctrl_136"
+      cellspacing="0"
+      border="0"
+      style="border-collapse:collapse;font-weight:bold"
+    >
       <tr>
         <td>
           <div>

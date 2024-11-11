@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <clause number="17.2.6.3" title="Hiding">
-  <paragraph>A nested type may hide (<hyperlink>10.7.1.1</hyperlink>) a base member. The new modifier is permitted on nested type declarations so that hiding can be expressed explicitly. <example>[Example: The example <code_example><![CDATA[
+  <paragraph
+    >A nested type may hide (<hyperlink
+    >10.7.1.1</hyperlink>
+
+    ) a base member. The new modifier is permitted on nested type declarations so that hiding can be expressed explicitly. <example
+
+      >[Example: The example <code_example
+      >
+        <![CDATA[
 using System;  
 class Base   
 {  
@@ -23,5 +31,10 @@ class Test
       Derived.M.F();  
    }  
 }  
-]]></code_example>shows a nested class M that hides the method M defined in Base. end example]</example> </paragraph>
+]]>
+      </code_example>
+
+      shows a nested class M that hides the method M defined in Base. end example]</example
+    >
+  </paragraph>
 </clause>

@@ -19,7 +19,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:Microsoft.SqlServer.Server.SqlProcedureAttribute" /> is used only by Microsoft Visual Studio to automatically register the specified method as a stored procedure. It is not used by SQL Server.</para>
+        <see cref="T:Microsoft.SqlServer.Server.SqlProcedureAttribute" />
+
+         is used only by Microsoft Visual Studio to automatically register the specified method as a stored procedure. It is not used by SQL Server.</para
+      >
       <para>See "CLR Stored Procedures" in SQL Server 2005 Books Online for more information on CLR stored procedures and examples.</para>
     </remarks>
     <summary>

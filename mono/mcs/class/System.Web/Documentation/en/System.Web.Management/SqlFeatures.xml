@@ -17,11 +17,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration has a <see cref="T:System.FlagsAttribute" />, which means you can select two or more features by combining them with the &amp; (and) operator (the And operator in Visual Basic).</para>
+      <para
+        >This enumeration has a <see
+         cref="T:System.FlagsAttribute" />
+
+        , which means you can select two or more features by combining them with the &amp; (and) operator (the And operator in Visual Basic).</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the ASP.Net features to install or remove using the methods provided by the <see cref="T:System.Web.Management.SqlServices" /> class.</para>
+      <para
+        >Specifies the ASP.Net features to install or remove using the methods provided by the <see
+         cref="T:System.Web.Management.SqlServices" />
+
+         class.</para
+      >
     </summary>
   </Docs>
   <Members>

@@ -13,7 +13,8 @@
     <summary>Color objects holding red, green, blue, and alpha values.</summary>
     <remarks>
       <example>
-        <code lang="C#">
+        <code lang="C#"
+          >
 static readonly double  M_PI = 3.14159265358979323846;
 
 Cairo.Graphics gr;
@@ -25,7 +26,8 @@ gr.Arc (0.04, 0.53, 0.02, 0, 2*M_PI);
 gr.Arc (0.27, 0.65, 0.02, 0, 2*M_PI);
 gr.Fill ();
 
-  </code>
+  </code
+        >
       </example>
     </remarks>
   </Docs>
@@ -43,7 +45,10 @@ gr.Fill ();
         <param name="g">Green value</param>
         <param name="b">Blue value</param>
         <summary>Convenience to create a color with alpha of 1.0</summary>
-        <remarks>See <see cref="C:Cairo.Color(System.Double,System.Double,System.Double,System.Double)" /></remarks>
+        <remarks
+          >See <see
+           cref="C:Cairo.Color(System.Double,System.Double,System.Double,System.Double)" />
+        </remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -51,7 +56,10 @@ gr.Fill ();
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Color (double r, double g, double b, double a);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Color (double r, double g, double b, double a);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="r" Type="System.Double" />
@@ -81,8 +89,7 @@ gr.Fill ();
       <Docs>
         <summary>Alpha value.</summary>
         <value>To be added.</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -98,8 +105,7 @@ gr.Fill ();
       <Docs>
         <summary>Blue value.</summary>
         <value>To be added.</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -115,8 +121,7 @@ gr.Fill ();
       <Docs>
         <summary>Green value.</summary>
         <value>To be added.</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -132,8 +137,7 @@ gr.Fill ();
       <Docs>
         <summary>Red value.</summary>
         <value>To be added.</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -22,7 +22,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RelaxngReader (System.Xml.XmlReader reader, string ns);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RelaxngReader (System.Xml.XmlReader reader, string ns);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="reader" Type="System.Xml.XmlReader" />
@@ -52,7 +55,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReadPattern">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Relaxng.RelaxngPattern ReadPattern ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Relaxng.RelaxngPattern ReadPattern ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPattern</ReturnType>
@@ -65,7 +71,10 @@
       </Docs>
     </Member>
     <Member MemberName="GrammarForRelaxng">
-      <MemberSignature Language="C#" Value="public static Commons.Xml.Relaxng.RelaxngPattern GrammarForRelaxng { get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Commons.Xml.Relaxng.RelaxngPattern GrammarForRelaxng { get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPattern</ReturnType>

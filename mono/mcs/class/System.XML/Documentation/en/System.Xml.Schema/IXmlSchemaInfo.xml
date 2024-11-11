@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IXmlSchemaInfo" FullName="System.Xml.Schema.IXmlSchemaInfo">
   <TypeSignature Language="C#" Value="public interface IXmlSchemaInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IXmlSchemaInfo" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IXmlSchemaInfo"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -33,7 +36,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Xml.Schema.IXmlSchemaInfo" /> property does not report document type definition (DTD) defaults</para>
+          <para
+            >The <see
+             cref="T:System.Xml.Schema.IXmlSchemaInfo" />
+
+             property does not report document type definition (DTD) defaults</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,8 +71,14 @@
       </Docs>
     </Member>
     <Member MemberName="MemberType">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaSimpleType MemberType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaSimpleType MemberType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaSimpleType MemberType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaSimpleType MemberType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -78,7 +92,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" /> property is set only if the static type of the XML node is a union type in which case the <see cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" /> property will return the type from the union the XML node validated against.</para>
+          <para
+            >The <see
+             cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" />
+
+             property is set only if the static type of the XML node is a union type in which case the <see
+             cref="P:System.Xml.Schema.IXmlSchemaInfo.MemberType" />
+
+             property will return the type from the union the XML node validated against.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -87,8 +109,14 @@
       </Docs>
     </Member>
     <Member MemberName="SchemaAttribute">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaAttribute SchemaAttribute { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaAttribute SchemaAttribute" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaAttribute SchemaAttribute { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaAttribute SchemaAttribute"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -103,13 +131,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the compiled <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> that corresponds to this validated XML node.</para>
+          <para
+            >Gets the compiled <see
+             cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+             that corresponds to this validated XML node.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SchemaElement">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaElement SchemaElement { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaElement SchemaElement" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaElement SchemaElement { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaElement SchemaElement"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -124,13 +163,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the compiled <see cref="T:System.Xml.Schema.XmlSchemaElement" /> that corresponds to this validated XML node.</para>
+          <para
+            >Gets the compiled <see
+             cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+             that corresponds to this validated XML node.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SchemaType">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaType SchemaType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaType SchemaType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaType SchemaType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaType SchemaType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -153,8 +203,14 @@
       </Docs>
     </Member>
     <Member MemberName="Validity">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaValidity Validity { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.Schema.XmlSchemaValidity Validity" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaValidity Validity { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.Schema.XmlSchemaValidity Validity"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -168,11 +224,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The possible <see cref="T:System.Xml.Schema.XmlSchemaValidity" /> values for this XML node are <see cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />, <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />, and <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para>
+          <para
+            >The possible <see
+             cref="T:System.Xml.Schema.XmlSchemaValidity" />
+
+             values for this XML node are <see
+             cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />
+
+            , <see
+             cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />
+
+            , and <see
+             cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.Schema.XmlSchemaValidity" /> value of this validated XML node.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.Schema.XmlSchemaValidity" />
+
+             value of this validated XML node.</para
+          >
         </summary>
       </Docs>
     </Member>

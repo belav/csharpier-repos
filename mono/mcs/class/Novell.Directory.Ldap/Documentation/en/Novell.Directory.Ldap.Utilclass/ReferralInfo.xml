@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -47,7 +46,10 @@
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ReferralInfo(Novell.Directory.Ldap.LdapConnection lc, string[] refList, Novell.Directory.Ldap.LdapUrl refUrl)" />
+      <MemberSignature
+        Language="C#"
+        Value="public ReferralInfo(Novell.Directory.Ldap.LdapConnection lc, string[] refList, Novell.Directory.Ldap.LdapUrl refUrl)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="lc" Type="Novell.Directory.Ldap.LdapConnection" />
@@ -63,7 +65,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReferralUrl">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapUrl ReferralUrl { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapUrl ReferralUrl { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapUrl</ReturnType>
@@ -75,7 +80,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReferralConnection">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapConnection ReferralConnection { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapConnection ReferralConnection { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapConnection</ReturnType>

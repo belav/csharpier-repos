@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MemoryMappedFileRights" FullName="System.IO.MemoryMappedFiles.MemoryMappedFileRights">
   <TypeSignature Language="C#" Value="public enum MemoryMappedFileRights" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed MemoryMappedFileRights extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed MemoryMappedFileRights extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +20,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You can specify access rights when you use the <see cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.OpenExisting" /> method to open an existing memory-mapped file. </para>
+      <para
+        >You can specify access rights when you use the <see
+         cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.OpenExisting" />
+
+         method to open an existing memory-mapped file. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +35,10 @@
   <Members>
     <Member MemberName="AccessSystemSecurity">
       <MemberSignature Language="C#" Value="AccessSystemSecurity" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights AccessSystemSecurity = int32(16777216)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights AccessSystemSecurity = int32(16777216)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -44,7 +55,10 @@
     </Member>
     <Member MemberName="ChangePermissions">
       <MemberSignature Language="C#" Value="ChangePermissions" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ChangePermissions = int32(262144)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ChangePermissions = int32(262144)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -61,7 +75,10 @@
     </Member>
     <Member MemberName="CopyOnWrite">
       <MemberSignature Language="C#" Value="CopyOnWrite" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights CopyOnWrite = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights CopyOnWrite = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -78,7 +95,10 @@
     </Member>
     <Member MemberName="Delete">
       <MemberSignature Language="C#" Value="Delete" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights Delete = int32(65536)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights Delete = int32(65536)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -95,7 +115,10 @@
     </Member>
     <Member MemberName="Execute">
       <MemberSignature Language="C#" Value="Execute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights Execute = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights Execute = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -112,7 +135,10 @@
     </Member>
     <Member MemberName="FullControl">
       <MemberSignature Language="C#" Value="FullControl" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights FullControl = int32(983055)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights FullControl = int32(983055)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -129,7 +155,10 @@
     </Member>
     <Member MemberName="Read">
       <MemberSignature Language="C#" Value="Read" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights Read = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights Read = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -146,7 +175,10 @@
     </Member>
     <Member MemberName="ReadExecute">
       <MemberSignature Language="C#" Value="ReadExecute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ReadExecute = int32(12)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ReadExecute = int32(12)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -157,13 +189,24 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The right to open and copy a folder or file as read-only, and to run application files. This right includes the <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Read" /> right and the <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Execute" /> right.</para>
+          <para
+            >The right to open and copy a folder or file as read-only, and to run application files. This right includes the <see
+             cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Read" />
+
+             right and the <see
+             cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileRights.Execute" />
+
+             right.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReadPermissions">
       <MemberSignature Language="C#" Value="ReadPermissions" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ReadPermissions = int32(131072)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ReadPermissions = int32(131072)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -180,7 +223,10 @@
     </Member>
     <Member MemberName="ReadWrite">
       <MemberSignature Language="C#" Value="ReadWrite" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ReadWrite = int32(6)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ReadWrite = int32(6)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -197,7 +243,10 @@
     </Member>
     <Member MemberName="ReadWriteExecute">
       <MemberSignature Language="C#" Value="ReadWriteExecute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ReadWriteExecute = int32(14)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights ReadWriteExecute = int32(14)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -214,7 +263,10 @@
     </Member>
     <Member MemberName="TakeOwnership">
       <MemberSignature Language="C#" Value="TakeOwnership" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights TakeOwnership = int32(524288)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights TakeOwnership = int32(524288)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -231,7 +283,10 @@
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="Write" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights Write = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.MemoryMappedFiles.MemoryMappedFileRights Write = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

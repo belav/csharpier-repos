@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RoleManagerSection" FullName="System.Web.Configuration.RoleManagerSection">
-  <TypeSignature Language="C#" Value="public sealed class RoleManagerSection : System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class RoleManagerSection : System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.RoleManagerSection" /> class provides a way to programmatically access and modify the content of the roleManager section of the configuration file.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.RoleManagerSection" />
+
+         class provides a way to programmatically access and modify the content of the roleManager section of the configuration file.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,8 +37,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Configuration.RoleManagerSection.#ctor" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.RoleManagerSection" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para>
-          <para>The following table shows the default settings that are used for the <see cref="M:System.Web.Configuration.RoleManagerSection.#ctor" /> constructor.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Configuration.RoleManagerSection.#ctor" />
+
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
+             cref="T:System.Web.Configuration.RoleManagerSection" />
+
+             class by using the <see
+             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+             method.</para
+          >
+          <para
+            >The following table shows the default settings that are used for the <see
+             cref="M:System.Web.Configuration.RoleManagerSection.#ctor" />
+
+             constructor.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -166,7 +190,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.RoleManagerSection" /> class by using default settings.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.RoleManagerSection" />
+
+             class by using default settings.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -189,9 +218,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.CacheRolesInCookie" /> property returns a Boolean value indicating whether cookie storage for role names is enabled.</para>
-          <para>When the <see cref="P:System.Web.Configuration.RoleManagerSection.CacheRolesInCookie" /> property is set to true in the configuration file, role information for each user is stored in a cookie on the client. When role management checks to determine whether a user is in a particular role, the roles cookie is checked before calling the role provider to check the list of roles at the data source. The cookie is dynamically updated on the client to cache the most recently validated role names.</para>
-          <para>You can improve the reliability of the role names that are cached in a cookie by specifying a <see cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" /> property when you configure the roleManager section of the configuration file. The default <see cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" /> property is All, which encrypts role names in the cookie and validates that the cookie contents have not been altered.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CacheRolesInCookie" />
+
+             property returns a Boolean value indicating whether cookie storage for role names is enabled.</para
+          >
+          <para
+            >When the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CacheRolesInCookie" />
+
+             property is set to true in the configuration file, role information for each user is stored in a cookie on the client. When role management checks to determine whether a user is in a particular role, the roles cookie is checked before calling the role provider to check the list of roles at the data source. The cookie is dynamically updated on the client to cache the most recently validated role names.</para
+          >
+          <para
+            >You can improve the reliability of the role names that are cached in a cookie by specifying a <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" />
+
+             property when you configure the roleManager section of the configuration file. The default <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" />
+
+             property is All, which encrypts role names in the cookie and validates that the cookie contents have not been altered.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -224,7 +271,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.CookieName" /> property returns the name of the cookie that is used to cache role names. You can specify the name of the cookie where roles are cached for your application by setting the cookieName attribute in the Web.config file for your ASP.NET application. This is useful when you want to uniquely identify a cookie for your application or when a cookie is shared across multiple applications.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieName" />
+
+             property returns the name of the cookie that is used to cache role names. You can specify the name of the cookie where roles are cached for your application by setting the cookieName attribute in the Web.config file for your ASP.NET application. This is useful when you want to uniquely identify a cookie for your application or when a cookie is shared across multiple applications.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -257,7 +309,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can specify the path of the cookie where role names are cached for your application by setting the cookiePath attribute in the Web.config file for your ASP.NET application. The <see cref="P:System.Web.Configuration.RoleManagerSection.CookiePath" /> property returns the value of the cookiePath attribute from the Web.config file. The path is case sensitive.</para>
+          <para
+            >You can specify the path of the cookie where role names are cached for your application by setting the cookiePath attribute in the Web.config file for your ASP.NET application. The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookiePath" />
+
+             property returns the value of the cookiePath attribute from the Web.config file. The path is case sensitive.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,7 +326,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CookieProtection">
-      <MemberSignature Language="C#" Value="public System.Web.Security.CookieProtection CookieProtection { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Security.CookieProtection CookieProtection { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -284,7 +344,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" /> property describes how information in a cookie is securely stored. You can specify the security type of the cookie where roles are cached for your application by setting the cookieProtection attribute in the Web.config file for your ASP.NET application. The cookieProtection attribute takes a <see cref="T:System.Web.Security.CookieProtection" /> enumeration value of All, Encryption, None, or Validation. The default is All. Be sure to use the default value for the <see cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" /> property if you want both data validation and encryption to help protect the cookie. To improve the protection of your cookie, you can also set the <see cref="P:System.Web.Configuration.RoleManagerSection.CookieRequireSSL" /> property to true.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" />
+
+             property describes how information in a cookie is securely stored. You can specify the security type of the cookie where roles are cached for your application by setting the cookieProtection attribute in the Web.config file for your ASP.NET application. The cookieProtection attribute takes a <see
+             cref="T:System.Web.Security.CookieProtection" />
+
+             enumeration value of All, Encryption, None, or Validation. The default is All. Be sure to use the default value for the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieProtection" />
+
+             property if you want both data validation and encryption to help protect the cookie. To improve the protection of your cookie, you can also set the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieRequireSSL" />
+
+             property to true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -338,7 +412,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can specify whether the cookie that is used to cache role names is periodically reset or expired at a fixed point in time by using the cookieSlidingExpiration attribute in the Web.config file for your ASP.NET application. If true, the cookie expiration is initially set to the current date and time plus the <see cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" /> property, in minutes. While the user continues to actively use the ASP.NET application, the expiration date and time of the cookie is automatically refreshed, if there is less than half of the <see cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" /> remaining. The default is true.</para>
+          <para
+            >You can specify whether the cookie that is used to cache role names is periodically reset or expired at a fixed point in time by using the cookieSlidingExpiration attribute in the Web.config file for your ASP.NET application. If true, the cookie expiration is initially set to the current date and time plus the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" />
+
+             property, in minutes. While the user continues to actively use the ASP.NET application, the expiration date and time of the cookie is automatically refreshed, if there is less than half of the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" />
+
+             remaining. The default is true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -371,7 +453,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" /> property sets a value specifying the number of minutes before the role names cookie expires. The default is 30 minutes. If the <see cref="P:System.Web.Configuration.RoleManagerSection.CookieSlidingExpiration" /> property is false, the <see cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" /> property is ignored.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" />
+
+             property sets a value specifying the number of minutes before the role names cookie expires. The default is 30 minutes. If the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieSlidingExpiration" />
+
+             property is false, the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CookieTimeout" />
+
+             property is ignored.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -398,7 +491,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.CreatePersistentCookie" /> property indicates whether or not the cookie that is used to cache role names should be a session-based cookie, which means that the cookie is lost when the browser is closed, or a persistent cookie, which means that the cookie is available across browser sessions. The default is false, which indicates that a session-based cookie is used to cache role names.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.CreatePersistentCookie" />
+
+             property indicates whether or not the cookie that is used to cache role names should be a session-based cookie, which means that the cookie is lost when the browser is closed, or a persistent cookie, which means that the cookie is available across browser sessions. The default is false, which indicates that a session-based cookie is used to cache role names.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -431,7 +529,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.DefaultProvider" /> property must match a named value in the providers subsection of the roleManager section of a configuration file. An empty string ("") is not a valid value for the <see cref="P:System.Web.Configuration.RoleManagerSection.DefaultProvider" /> property.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.DefaultProvider" />
+
+             property must match a named value in the providers subsection of the roleManager section of a configuration file. An empty string ("") is not a valid value for the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.DefaultProvider" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -458,7 +564,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.Domain" /> property is set in the configuration for an ASP.NET application by using the domain attribute of the roleManager configuration element. If no value is specified in the configuration for the domain attribute, the <see cref="P:System.Web.Configuration.RoleManagerSection.Domain" /> property returns null and the role names cookie domain defaults to the behavior of the <see cref="P:System.Web.HttpCookie.Domain" /> property. The default is an empty string.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.Domain" />
+
+             property is set in the configuration for an ASP.NET application by using the domain attribute of the roleManager configuration element. If no value is specified in the configuration for the domain attribute, the <see
+             cref="P:System.Web.Configuration.RoleManagerSection.Domain" />
+
+             property returns null and the role names cookie domain defaults to the behavior of the <see
+             cref="P:System.Web.HttpCookie.Domain" />
+
+             property. The default is an empty string.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -485,7 +602,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.Enabled" /> property returns a Boolean value indicating whether or not the ASP.NET role management feature can be accessed at run time.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.Enabled" />
+
+             property returns a Boolean value indicating whether or not the ASP.NET role management feature can be accessed at run time.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -512,7 +634,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Security.Roles.MaxCachedResults" /> property returns an integer indicating the maximum number of roles that ASP.NET caches in the role cookie. The default is 25.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Security.Roles.MaxCachedResults" />
+
+             property returns an integer indicating the maximum number of roles that ASP.NET caches in the role cookie. The default is 25.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -524,7 +651,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -540,7 +670,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Providers">
-      <MemberSignature Language="C#" Value="public System.Configuration.ProviderSettingsCollection Providers { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.ProviderSettingsCollection Providers { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -556,11 +689,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Role management providers are components that provide access to the types of roles for a site. You can specify role management providers in the providers subsection of the roleManager section of a configuration file.</para>
-          <para>The <see cref="P:System.Web.Configuration.RoleManagerSection.DefaultProvider" /> property specifies the provider that is used by default.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.RoleManagerSection.DefaultProvider" />
+
+             property specifies the provider that is used by default.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ProviderSettingsCollection" /> object of <see cref="T:System.Configuration.ProviderSettings" /> elements.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ProviderSettingsCollection" />
+
+             object of <see
+             cref="T:System.Configuration.ProviderSettings" />
+
+             elements.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

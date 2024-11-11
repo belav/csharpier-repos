@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="GenericSecurityDescriptor" FullName="System.Security.AccessControl.GenericSecurityDescriptor">
+<Type
+  Name="GenericSecurityDescriptor"
+  FullName="System.Security.AccessControl.GenericSecurityDescriptor"
+>
   <TypeSignature Language="C#" Value="public abstract class GenericSecurityDescriptor" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit GenericSecurityDescriptor extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit GenericSecurityDescriptor extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -22,7 +28,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected GenericSecurityDescriptor ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -34,7 +43,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.AccessControl.GenericSecurity" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.AccessControl.GenericSecurity" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -55,13 +69,27 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl.GenericSecurityDescriptor.GetBinaryForm" /> method.</para>
+          <para
+            >Gets the length, in bytes, of the binary representation of the current <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object. This length should be used before marshaling the ACL into a binary array with the <see
+             cref="M:System.Security.AccessControl.GenericSecurityDescriptor.GetBinaryForm" />
+
+             method.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ControlFlags">
-      <MemberSignature Language="C#" Value="public abstract System.Security.AccessControl.ControlFlags ControlFlags { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.AccessControl.ControlFlags ControlFlags" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Security.AccessControl.ControlFlags ControlFlags { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.AccessControl.ControlFlags ControlFlags"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -76,13 +104,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets values that specify behavior of the <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object.</para>
+          <para
+            >Gets values that specify behavior of the <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetBinaryForm">
-      <MemberSignature Language="C#" Value="public void GetBinaryForm (byte[] binaryForm, int offset);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetBinaryForm(unsigned int8[] binaryForm, int32 offset) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetBinaryForm (byte[] binaryForm, int offset);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void GetBinaryForm(unsigned int8[] binaryForm, int32 offset) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,17 +139,37 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of byte values that represents the information contained in this <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object.</para>
+          <para
+            >Returns an array of byte values that represents the information contained in this <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object.</para
+          >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array into which the contents of the <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> is marshaled.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array into which the contents of the <see
+           cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+           is marshaled.</param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The offset at which to start marshaling.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The offset at which to start marshaling.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetSddlForm">
-      <MemberSignature Language="C#" Value="public string GetSddlForm (System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetSddlForm(valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public string GetSddlForm (System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance string GetSddlForm(valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,26 +179,48 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the Security Descriptor Definition Language (SDDL) representation of the specified sections of the security descriptor that this <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object represents.</para>
+          <para
+            >Returns the Security Descriptor Definition Language (SDDL) representation of the specified sections of the security descriptor that this <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object represents.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The SDDL representation of the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object.</para>
+          <para
+            >The SDDL representation of the specified sections of the security descriptor associated with this <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object.</para
+          >
         </returns>
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies which sections (access rules, audit rules, primary group, owner) of the security descriptor to get.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies which sections (access rules, audit rules, primary group, owner) of the security descriptor to get.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Group">
-      <MemberSignature Language="C#" Value="public abstract System.Security.Principal.SecurityIdentifier Group { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Principal.SecurityIdentifier Group" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Security.Principal.SecurityIdentifier Group { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Principal.SecurityIdentifier Group"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -154,13 +235,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the primary group for this <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object.</para>
+          <para
+            >Gets or sets the primary group for this <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IsSddlConversionSupported">
       <MemberSignature Language="C#" Value="public static bool IsSddlConversionSupported ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsSddlConversionSupported() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool IsSddlConversionSupported() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -175,17 +264,33 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a boolean value that specifies whether the security descriptor associated with this  <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object can be converted to the Security Descriptor Definition Language (SDDL) format.</para>
+          <para
+            >Returns a boolean value that specifies whether the security descriptor associated with this  <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object can be converted to the Security Descriptor Definition Language (SDDL) format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the security descriptor associated with this  <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object can be converted to the Security Descriptor Definition Language (SDDL) format; otherwise, false.</para>
+          <para
+            >true if the security descriptor associated with this  <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object can be converted to the Security Descriptor Definition Language (SDDL) format; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Owner">
-      <MemberSignature Language="C#" Value="public abstract System.Security.Principal.SecurityIdentifier Owner { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Principal.SecurityIdentifier Owner" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Security.Principal.SecurityIdentifier Owner { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Principal.SecurityIdentifier Owner"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -200,7 +305,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the owner of the object associated with this <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object.</para>
+          <para
+            >Gets or sets the owner of the object associated with this <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -221,7 +331,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the revision level of the <see cref="T:System.Security.AccessControl.GenericSecurityDescriptor" /> object.</para>
+          <para
+            >Gets the revision level of the <see
+             cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>

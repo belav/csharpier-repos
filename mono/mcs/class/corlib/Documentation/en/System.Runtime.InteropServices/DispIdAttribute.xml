@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DispIdAttribute" FullName="System.Runtime.InteropServices.DispIdAttribute">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class DispIdAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit DispIdAttribute extends System.Attribute" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class DispIdAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit DispIdAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -36,7 +43,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DispIdAttribute (int dispId);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 dispId) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 dispId) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -54,7 +64,10 @@
           <para>Initializes a new instance of the DispIdAttribute class with the specified DISPID.</para>
         </summary>
         <param name="dispId">
-          <attribution license="cc4" from="Microsoft" modified="false" />The DISPID for the member. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The DISPID for the member. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Value">

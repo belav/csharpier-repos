@@ -15,7 +15,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="T:System.Drawing.Printing.PrintingPermission" /> class.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="T:System.Drawing.Printing.PrintingPermission" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,7 +58,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Provides printing programmatically to the default printer, along with safe printing through semirestricted dialog box. <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" /> is a subset of <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.AllPrinting" />.</para>
+          <para
+            >Provides printing programmatically to the default printer, along with safe printing through semirestricted dialog box. <see
+             cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />
+
+             is a subset of <see
+             cref="F:System.Drawing.Printing.PrintingPermissionLevel.AllPrinting" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -72,7 +85,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Prevents access to printers. <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.NoPrinting" /> is a subset of <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />.</para>
+          <para
+            >Prevents access to printers. <see
+             cref="F:System.Drawing.Printing.PrintingPermissionLevel.NoPrinting" />
+
+             is a subset of <see
+             cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -91,7 +112,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Provides printing only from a restricted dialog box. <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" /> is a subset of <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />.</para>
+          <para
+            >Provides printing only from a restricted dialog box. <see
+             cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />
+
+             is a subset of <see
+             cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlWriterSettings" FullName="System.Xml.XmlWriterSettings">
   <TypeSignature Language="C#" Value="public sealed class XmlWriterSettings" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit XmlWriterSettings extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit XmlWriterSettings extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,11 +18,50 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="Overload:System.Xml.XmlWriter.Create" /> method is the preferred mechanism for obtaining <see cref="T:System.Xml.XmlWriter" /> instances. The <see cref="Overload:System.Xml.XmlWriter.Create" /> method uses the <see cref="T:System.Xml.XmlWriterSettings" /> class to specify which features to implement in the <see cref="T:System.Xml.XmlWriter" /> object that is created.</para>
+      <para
+        >The <see
+         cref="Overload:System.Xml.XmlWriter.Create" />
+
+         method is the preferred mechanism for obtaining <see
+         cref="T:System.Xml.XmlWriter" />
+
+         instances. The <see
+         cref="Overload:System.Xml.XmlWriter.Create" />
+
+         method uses the <see
+         cref="T:System.Xml.XmlWriterSettings" />
+
+         class to specify which features to implement in the <see
+         cref="T:System.Xml.XmlWriter" />
+
+         object that is created.</para
+      >
       <block subset="none" type="note">
-        <para>If you're using the <see cref="T:System.Xml.XmlWriter" /> object with the <see cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.String,System.Xml.XmlWriter)" /> method, you should use the <see cref="P:System.Xml.Xsl.XslCompiledTransform.OutputSettings" /> property to obtain an <see cref="T:System.Xml.XmlWriterSettings" /> object with the correct settings. This ensures that the created <see cref="T:System.Xml.XmlWriter" /> object has the correct output settings.</para>
+        <para
+          >If you're using the <see
+           cref="T:System.Xml.XmlWriter" />
+
+           object with the <see
+           cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.String,System.Xml.XmlWriter)" />
+
+           method, you should use the <see
+           cref="P:System.Xml.Xsl.XslCompiledTransform.OutputSettings" />
+
+           property to obtain an <see
+           cref="T:System.Xml.XmlWriterSettings" />
+
+           object with the correct settings. This ensures that the created <see
+           cref="T:System.Xml.XmlWriter" />
+
+           object has the correct output settings.</para
+        >
       </block>
-      <para>The <see cref="T:System.Xml.XmlWriterSettings" /> class provides properties that control data conformance and output format.</para>
+      <para
+        >The <see
+         cref="T:System.Xml.XmlWriterSettings" />
+
+         class provides properties that control data conformance and output format.</para
+      >
       <para>For data conformance checks and auto-corrections, use these properties:</para>
       <list type="table">
         <listheader>
@@ -65,11 +107,23 @@
           </description>
           <description>
             <para>
-              <see cref="F:System.Xml.ConformanceLevel.Document" /> (document-level), <see cref="F:System.Xml.ConformanceLevel.Fragment" /> (fragment-level), or <see cref="F:System.Xml.ConformanceLevel.Auto" /> (auto-detection) </para>
+              <see cref="F:System.Xml.ConformanceLevel.Document" />
+
+               (document-level), <see
+               cref="F:System.Xml.ConformanceLevel.Fragment" />
+
+               (fragment-level), or <see
+               cref="F:System.Xml.ConformanceLevel.Auto" />
+
+               (auto-detection) </para
+            >
           </description>
           <description>
             <para>
-              <see cref="F:System.Xml.ConformanceLevel.Document" /> (document-level conformance)</para>
+              <see cref="F:System.Xml.ConformanceLevel.Document" />
+
+               (document-level conformance)</para
+            >
           </description>
         </item>
         <item>
@@ -79,7 +133,12 @@
             </para>
           </term>
           <description>
-            <para>Whether to add closing tags to all unclosed elements when the <see cref="M:System.Xml.XmlWriter.Close" /> method is called.</para>
+            <para
+              >Whether to add closing tags to all unclosed elements when the <see
+               cref="M:System.Xml.XmlWriter.Close" />
+
+               method is called.</para
+            >
           </description>
           <description>
             <para>true or false</para>
@@ -89,7 +148,7 @@
           </description>
         </item>
       </list>
-      <para>  </para>
+      <para></para>
       <para>To specify output format, use these properties:</para>
       <list type="table">
         <listheader>
@@ -119,7 +178,10 @@
           </description>
           <description>
             <para>
-              <see cref="T:System.Text.Encoding" /> value</para>
+              <see cref="T:System.Text.Encoding" />
+
+               value</para
+            >
           </description>
           <description>
             <para>
@@ -150,7 +212,12 @@
             </para>
           </term>
           <description>
-            <para>Character string to use when indenting (used when <see cref="P:System.Xml.XmlWriterSettings.Indent" /> is set to true).</para>
+            <para
+              >Character string to use when indenting (used when <see
+               cref="P:System.Xml.XmlWriterSettings.Indent" />
+
+               is set to true).</para
+            >
           </description>
           <description>
             <para>String</para>
@@ -186,11 +253,29 @@
           </description>
           <description>
             <para>
-              <see cref="T:System.Xml.NewLineHandling" /> value: <see cref="F:System.Xml.NewLineHandling.Entitize" /> (normalize), <see cref="F:System.Xml.NewLineHandling.Replace" /> (replace), or <see cref="F:System.Xml.NewLineHandling.None" /> (leave unchanged) </para>
+              <see cref="T:System.Xml.NewLineHandling" />
+
+               value: <see
+               cref="F:System.Xml.NewLineHandling.Entitize" />
+
+               (normalize), <see
+               cref="F:System.Xml.NewLineHandling.Replace" />
+
+               (replace), or <see
+               cref="F:System.Xml.NewLineHandling.None" />
+
+               (leave unchanged) </para
+            >
           </description>
           <description>
             <para>
-              <see cref="F:System.Xml.NewLineHandling.Replace" /> (replace with characters specified by <see cref="P:System.Xml.XmlWriterSettings.NewLineChars" />)</para>
+              <see cref="F:System.Xml.NewLineHandling.Replace" />
+
+               (replace with characters specified by <see
+               cref="P:System.Xml.XmlWriterSettings.NewLineChars" />
+
+              )</para
+            >
           </description>
         </item>
         <item>
@@ -200,7 +285,12 @@
             </para>
           </term>
           <description>
-            <para>Whether to write attributes on individual lines (has no effect when <see cref="P:System.Xml.XmlWriterSettings.Indent" /> is false).</para>
+            <para
+              >Whether to write attributes on individual lines (has no effect when <see
+               cref="P:System.Xml.XmlWriterSettings.Indent" />
+
+               is false).</para
+            >
           </description>
           <description>
             <para>true or false</para>
@@ -229,13 +319,24 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies a set of features to support on the <see cref="T:System.Xml.XmlWriter" /> object created by the <see cref="Overload:System.Xml.XmlWriter.Create" /> method.</para>
+      <para
+        >Specifies a set of features to support on the <see
+         cref="T:System.Xml.XmlWriter" />
+
+         object created by the <see
+         cref="Overload:System.Xml.XmlWriter.Create" />
+
+         method.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlWriterSettings ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -246,7 +347,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows initial property values for an instance of <see cref="T:System.Xml.XmlWriterSettings" />.</para>
+          <para
+            >The following table shows initial property values for an instance of <see
+             cref="T:System.Xml.XmlWriterSettings" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -271,7 +377,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.CheckCharacters" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.CheckCharacters" />
+                </para>
               </term>
               <description>
                 <para>true.</para>
@@ -290,17 +397,22 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" />
+                </para>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.ConformanceLevel.Document" />.</para>
+                  <see cref="F:System.Xml.ConformanceLevel.Document" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.Encoding" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.Encoding" />
+                </para>
               </term>
               <description>
                 <para>Encoding.UTF8.</para>
@@ -309,7 +421,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.Indent" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.Indent" />
+                </para>
               </term>
               <description>
                 <para>false.</para>
@@ -318,7 +431,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.IndentChars" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.IndentChars" />
+                </para>
               </term>
               <description>
                 <para>Two spaces.</para>
@@ -327,7 +441,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.NewLineChars" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.NewLineChars" />
+                </para>
               </term>
               <description>
                 <para>\r\n (carriage return, new line).</para>
@@ -341,13 +456,17 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.NewLineHandling.Replace" />.</para>
+                  <see cref="F:System.Xml.NewLineHandling.Replace" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.NewLineOnAttributes" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.NewLineOnAttributes" />
+                </para>
               </term>
               <description>
                 <para>false.</para>
@@ -356,7 +475,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" />
+                </para>
               </term>
               <description>
                 <para>false.</para>
@@ -376,7 +496,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.XmlWriterSettings" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.XmlWriterSettings" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -394,12 +519,51 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You must set this value to true when you create a new <see cref="T:System.Xml.XmlWriter" /> instance if you want to use asynchronous <see cref="T:System.Xml.XmlWriter" /> methods on that instance. After the <see cref="T:System.Xml.XmlWriter" /> instance is created, the <see cref="P:System.Xml.XmlWriterSettings.Async" /> property is read-only. The default value of this property is false.</para>
-          <para>This flag is ignored by the <see cref="M:System.Xml.XmlWriter.Create(System.Xml.XmlWriter,System.Xml.XmlWriterSettings)" /> overload. This means that if you create a new <see cref="T:System.Xml.XmlWriter" /> based on an existing <see cref="T:System.Xml.XmlWriter" />, the async behavior depends on the input <see cref="T:System.Xml.XmlWriter" />, and you cannot use the <see cref="P:System.Xml.XmlWriterSettings.Async" /> flag to change the async behavior.</para>
+          <para
+            >You must set this value to true when you create a new <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instance if you want to use asynchronous <see
+             cref="T:System.Xml.XmlWriter" />
+
+             methods on that instance. After the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instance is created, the <see
+             cref="P:System.Xml.XmlWriterSettings.Async" />
+
+             property is read-only. The default value of this property is false.</para
+          >
+          <para
+            >This flag is ignored by the <see
+             cref="M:System.Xml.XmlWriter.Create(System.Xml.XmlWriter,System.Xml.XmlWriterSettings)" />
+
+             overload. This means that if you create a new <see
+             cref="T:System.Xml.XmlWriter" />
+
+             based on an existing <see
+             cref="T:System.Xml.XmlWriter" />
+
+            , the async behavior depends on the input <see
+             cref="T:System.Xml.XmlWriter" />
+
+            , and you cannot use the <see
+             cref="P:System.Xml.XmlWriterSettings.Async" />
+
+             flag to change the async behavior.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether asynchronous <see cref="T:System.Xml.XmlWriter" /> methods can be used on a particular <see cref="T:System.Xml.XmlWriter" /> instance.</para>
+          <para
+            >Gets or sets a value that indicates whether asynchronous <see
+             cref="T:System.Xml.XmlWriter" />
+
+             methods can be used on a particular <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -419,18 +583,34 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="T:System.Xml.XmlWriter" /> object supports character checking, it throws an exception if any characters are outside the range of legal XML characters specified by the "2.2 Characters" section of the W3C <see cref="http://www.w3.org/TR/REC-xml/#charsets">XML 1.0 Recommendation</see>.</para>
+          <para
+            >If the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             object supports character checking, it throws an exception if any characters are outside the range of legal XML characters specified by the "2.2 Characters" section of the W3C <see
+             cref="http://www.w3.org/TR/REC-xml/#charsets">XML 1.0 Recommendation</see>
+
+            .</para
+          >
           <para>Character checking does not include checking for illegal characters in XML names or checking that all XML names are valid. These checks are part of conformance checking and are always performed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether the XML writer should check to ensure that all characters in the document conform to the "2.2 Characters" section of the W3C <see cref="http://www.w3.org/TR/REC-xml/#charsets">XML 1.0 Recommendation</see>.</para>
+          <para
+            >Gets or sets a value that indicates whether the XML writer should check to ensure that all characters in the document conform to the "2.2 Characters" section of the W3C <see
+             cref="http://www.w3.org/TR/REC-xml/#charsets">XML 1.0 Recommendation</see>
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Clone">
       <MemberSignature Language="C#" Value="public System.Xml.XmlWriterSettings Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Xml.XmlWriterSettings Clone() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Xml.XmlWriterSettings Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -444,15 +624,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The cloned <see cref="T:System.Xml.XmlWriterSettings" /> object can be modified without affecting the settings on the original object.</para>
+          <para
+            >The cloned <see
+             cref="T:System.Xml.XmlWriterSettings" />
+
+             object can be modified without affecting the settings on the original object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a copy of the <see cref="T:System.Xml.XmlWriterSettings" /> instance.</para>
+          <para
+            >Creates a copy of the <see
+             cref="T:System.Xml.XmlWriterSettings" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The cloned <see cref="T:System.Xml.XmlWriterSettings" /> object.</para>
+          <para
+            >The cloned <see
+             cref="T:System.Xml.XmlWriterSettings" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -472,18 +667,48 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This setting is useful when you wish to write XML to a stream, and then add extra information to the end of the stream after the <see cref="T:System.Xml.XmlWriter" /> has finished writing.</para>
-          <para>This property only applies to <see cref="T:System.Xml.XmlWriter" /> instances that output XML content to a stream or <see cref="T:System.IO.TextWriter" />; otherwise, this setting is ignored.</para>
+          <para
+            >This setting is useful when you wish to write XML to a stream, and then add extra information to the end of the stream after the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             has finished writing.</para
+          >
+          <para
+            >This property only applies to <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instances that output XML content to a stream or <see
+             cref="T:System.IO.TextWriter" />
+
+            ; otherwise, this setting is ignored.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <see cref="T:System.Xml.XmlWriter" /> should also close the underlying stream or <see cref="T:System.IO.TextWriter" /> when the <see cref="M:System.Xml.XmlWriter.Close" /> method is called.</para>
+          <para
+            >Gets or sets a value indicating whether the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             should also close the underlying stream or <see
+             cref="T:System.IO.TextWriter" />
+
+             when the <see
+             cref="M:System.Xml.XmlWriter.Close" />
+
+             method is called.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ConformanceLevel">
-      <MemberSignature Language="C#" Value="public System.Xml.ConformanceLevel ConformanceLevel { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.ConformanceLevel ConformanceLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.ConformanceLevel ConformanceLevel { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.ConformanceLevel ConformanceLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -497,7 +722,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" /> property configures the XML writer to check and guarantee that the stream being written complies with a certain set of rules. The XML data can be checked to see that it conforms to the rules for a well-formed XML 1.0 document or a document fragment. The following table describes the three settings. The default is document-level conformance.</para>
+          <para
+            >The <see
+             cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" />
+
+             property configures the XML writer to check and guarantee that the stream being written complies with a certain set of rules. The XML data can be checked to see that it conforms to the rules for a well-formed XML 1.0 document or a document fragment. The following table describes the three settings. The default is document-level conformance.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -516,7 +746,14 @@
                 </para>
               </term>
               <description>
-                <para>Ensures that the XML output conforms to the <see cref="http://www.w3.org/TR/REC-xml/#sec-well-formed">rules for a well-formed XML 1.0 document</see> and can be processed by any conforming processor.</para>
+                <para
+                  >Ensures that the XML output conforms to the <see
+                   cref="http://www.w3.org/TR/REC-xml/#sec-well-formed"
+                    >rules for a well-formed XML 1.0 document</see
+                  >
+
+                   and can be processed by any conforming processor.</para
+                >
                 <para>The document conformance checks include most of the fragment-level checks and also ensure the following:</para>
                 <list type="bullet">
                   <item>
@@ -536,7 +773,14 @@
                 </para>
               </term>
               <description>
-                <para>Ensures that the XML output conforms to the <see cref="http://www.w3.org/TR/REC-xml/#wf-entities">rules for a well-formed XML 1.0 document fragment</see>. </para>
+                <para
+                  >Ensures that the XML output conforms to the <see
+                   cref="http://www.w3.org/TR/REC-xml/#wf-entities"
+                    >rules for a well-formed XML 1.0 document fragment</see
+                  >
+
+                  . </para
+                >
                 <para>This setting accepts XML data that has multiple root elements or text nodes at the top level. This level of checking ensures that any processor can consume the stream being read as an XML 1.0 external parsed entity.</para>
                 <para>DTD information isn't allowed in document fragments.</para>
               </description>
@@ -552,7 +796,12 @@
                 <para>Document conformance checking is applied in the following cases:</para>
                 <list type="bullet">
                   <item>
-                    <para>If the <see cref="M:System.Xml.XmlWriter.WriteStartDocument" /> method is called.</para>
+                    <para
+                      >If the <see
+                       cref="M:System.Xml.XmlWriter.WriteStartDocument" />
+
+                       method is called.</para
+                    >
                   </item>
                   <item>
                     <para>If DTD information is written.</para>
@@ -570,8 +819,18 @@
                     <para>No element at the root level.</para>
                   </item>
                 </list>
-                <para>An <see cref="T:System.Xml.XmlException" /> is thrown if there is a conflict, such as when you try to write a text node and a DTD at the root level.</para>
-                <para>If you are wrapping another <see cref="T:System.Xml.XmlWriter" /> object, the outer object doesn't do any additional conformance checking; this is left to the underlying object.</para>
+                <para
+                  >An <see
+                   cref="T:System.Xml.XmlException" />
+
+                   is thrown if there is a conflict, such as when you try to write a text node and a DTD at the root level.</para
+                >
+                <para
+                  >If you are wrapping another <see
+                   cref="T:System.Xml.XmlWriter" />
+
+                   object, the outer object doesn't do any additional conformance checking; this is left to the underlying object.</para
+                >
               </description>
             </item>
           </list>
@@ -608,7 +867,10 @@
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>Document conformance checking is applied.</para>
@@ -617,14 +879,20 @@
             <item>
               <term>
                 <para>
-                  <see cref="Overload:System.Xml.XmlWriter.WriteStartDocument" /> is called.</para>
+                  <see cref="Overload:System.Xml.XmlWriter.WriteStartDocument" />
+
+                   is called.</para
+                >
               </term>
               <description>
                 <para>Not considered a violation for this setting.</para>
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>Document conformance checking is applied.</para>
@@ -633,19 +901,31 @@
             <item>
               <term>
                 <para>
-                  <see cref="Overload:System.Xml.XmlWriter.WriteStartDocument" /> is called multiple times.</para>
+                  <see cref="Overload:System.Xml.XmlWriter.WriteStartDocument" />
+
+                   is called multiple times.</para
+                >
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
             </item>
             <item>
@@ -654,7 +934,10 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>Not considered a violation.</para>
@@ -669,7 +952,10 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>Not considered a violation.</para>
@@ -695,7 +981,10 @@
             <item>
               <term>
                 <para>
-                  <see cref="M:System.Xml.XmlWriter.WriteEndAttribute" /> isn't called to end an attribute node.</para>
+                  <see cref="M:System.Xml.XmlWriter.WriteEndAttribute" />
+
+                   isn't called to end an attribute node.</para
+                >
               </term>
               <description>
                 <para>Fixed by XML writer.</para>
@@ -709,19 +998,36 @@
             </item>
             <item>
               <term>
-                <para>The XML writer is in an improperly nested state (for example, a <see cref="Overload:System.Xml.XmlWriter.WriteStartElement" /> call is followed by a <see cref="M:System.Xml.XmlWriter.WriteEndAttribute" />).</para>
+                <para
+                  >The XML writer is in an improperly nested state (for example, a <see
+                   cref="Overload:System.Xml.XmlWriter.WriteStartElement" />
+
+                   call is followed by a <see
+                   cref="M:System.Xml.XmlWriter.WriteEndAttribute" />
+
+                  ).</para
+                >
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
             </item>
             <item>
@@ -730,15 +1036,24 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
             </item>
             <item>
@@ -772,7 +1087,10 @@
             <item>
               <term>
                 <para>
-                  <see cref="Overload:System.Xml.XmlWriter.WriteStartElement" /> specifies a prefix and a namespace that isn't declared within that scope, or the prefix is associated with a different namespace.</para>
+                  <see cref="Overload:System.Xml.XmlWriter.WriteStartElement" />
+
+                   specifies a prefix and a namespace that isn't declared within that scope, or the prefix is associated with a different namespace.</para
+                >
               </term>
               <description>
                 <para>The XML writer writes the necessary namespace node.</para>
@@ -787,7 +1105,10 @@
             <item>
               <term>
                 <para>
-                  <see cref="Overload:System.Xml.XmlWriter.WriteStartAttribute" /> specifies a prefix and a namespace that isn't declared within that scope.</para>
+                  <see cref="Overload:System.Xml.XmlWriter.WriteStartAttribute" />
+
+                   specifies a prefix and a namespace that isn't declared within that scope.</para
+                >
               </term>
               <description>
                 <para>The XML writer writes the necessary namespace node.</para>
@@ -802,7 +1123,10 @@
             <item>
               <term>
                 <para>
-                  <see cref="Overload:System.Xml.XmlWriter.WriteStartAttribute" /> specifies a prefix and a namespace, but the prefix is associated with a different in-scope namespace.</para>
+                  <see cref="Overload:System.Xml.XmlWriter.WriteStartAttribute" />
+
+                   specifies a prefix and a namespace, but the prefix is associated with a different in-scope namespace.</para
+                >
               </term>
               <description>
                 <para>The XML writer ignores the specified prefix and either looks up the correct prefix or generates a new prefix.</para>
@@ -817,25 +1141,40 @@
             <item>
               <term>
                 <para>
-                  <see cref="M:System.Xml.XmlWriter.WriteQualifiedName(System.String,System.String)" /> is used to write element content by using a namespace that doesn't exist within the scope.</para>
+                  <see cref="M:System.Xml.XmlWriter.WriteQualifiedName(System.String,System.String)" />
+
+                   is used to write element content by using a namespace that doesn't exist within the scope.</para
+                >
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="M:System.Xml.XmlWriter.WriteQualifiedName(System.String,System.String)" /> is used to write attribute content by using a namespace that doesn't exist within the scope.</para>
+                  <see cref="M:System.Xml.XmlWriter.WriteQualifiedName(System.String,System.String)" />
+
+                   is used to write attribute content by using a namespace that doesn't exist within the scope.</para
+                >
               </term>
               <description>
                 <para>The XML writer writes the necessary namespace declaration.</para>
@@ -853,15 +1192,24 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
             </item>
             <item>
@@ -870,15 +1218,24 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
             </item>
             <item>
@@ -901,15 +1258,24 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
             </item>
             <item>
@@ -932,15 +1298,24 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlException" /> is thrown.</para>
+                  <see cref="T:System.Xml.XmlException" />
+
+                   is thrown.</para
+                >
               </description>
             </item>
           </list>
@@ -953,7 +1328,10 @@
     </Member>
     <Member MemberName="Encoding">
       <MemberSignature Language="C#" Value="public System.Text.Encoding Encoding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Text.Encoding Encoding" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Text.Encoding Encoding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -967,16 +1345,80 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Xml.XmlWriter" /> encodes a buffer of characters all at once, rather than character by character. An exception is thrown when the <see cref="M:System.Xml.XmlWriter.Flush" /> method is called if any encoding errors are encountered.</para>
-          <para>The <see cref="P:System.Xml.XmlWriterSettings.Encoding" /> property only applies to the <see cref="T:System.Xml.XmlWriter" /> instances that are created either with the specified <see cref="T:System.IO.Stream" /> or with the specified file name. If the <see cref="T:System.Xml.XmlWriter" /> instance is created with the specified <see cref="T:System.IO.TextWriter" />, the <see cref="P:System.Xml.XmlWriterSettings.Encoding" /> property is overridden by the encoding of the underlying <see cref="T:System.IO.TextWriter" />. For example, if this property is set to Unicode (UTF-16) for a particular <see cref="T:System.Xml.XmlWriter" />, but the underlying writer is a <see cref="T:System.IO.StreamWriter" /> (which derives from <see cref="T:System.IO.TextWriter" />) with its encoding set to UTF8, the output will be UTF-8 encoded.</para>
-          <para>If the <see cref="T:System.Xml.XmlWriter" /> instance is created with other output parameters, the <see cref="P:System.Xml.XmlWriterSettings.Encoding" /> property is ignored.</para>
+          <para
+            >The <see
+             cref="T:System.Xml.XmlWriter" />
+
+             encodes a buffer of characters all at once, rather than character by character. An exception is thrown when the <see
+             cref="M:System.Xml.XmlWriter.Flush" />
+
+             method is called if any encoding errors are encountered.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Xml.XmlWriterSettings.Encoding" />
+
+             property only applies to the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instances that are created either with the specified <see
+             cref="T:System.IO.Stream" />
+
+             or with the specified file name. If the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instance is created with the specified <see
+             cref="T:System.IO.TextWriter" />
+
+            , the <see
+             cref="P:System.Xml.XmlWriterSettings.Encoding" />
+
+             property is overridden by the encoding of the underlying <see
+             cref="T:System.IO.TextWriter" />
+
+            . For example, if this property is set to Unicode (UTF-16) for a particular <see
+             cref="T:System.Xml.XmlWriter" />
+
+            , but the underlying writer is a <see
+             cref="T:System.IO.StreamWriter" />
+
+             (which derives from <see
+             cref="T:System.IO.TextWriter" />
+
+            ) with its encoding set to UTF8, the output will be UTF-8 encoded.</para
+          >
+          <para
+            >If the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instance is created with other output parameters, the <see
+             cref="P:System.Xml.XmlWriterSettings.Encoding" />
+
+             property is ignored.</para
+          >
           <para>In the following example: </para>
           <list type="bullet">
             <item>
-              <para>The default value of <see cref="P:System.Xml.XmlWriterSettings.Encoding" /> is Encoding.UTF8.</para>
+              <para
+                >The default value of <see
+                 cref="P:System.Xml.XmlWriterSettings.Encoding" />
+
+                 is Encoding.UTF8.</para
+              >
             </item>
             <item>
-              <para>The <see cref="T:System.IO.StreamWriter" /> is set to Encoding.Unicode and the <see cref="T:System.IO.StreamWriter" />’s encoding overrides the <see cref="P:System.Xml.XmlWriterSettings.Encoding" /> setting.</para>
+              <para
+                >The <see
+                 cref="T:System.IO.StreamWriter" />
+
+                 is set to Encoding.Unicode and the <see
+                 cref="T:System.IO.StreamWriter" />
+
+                ’s encoding overrides the <see
+                 cref="P:System.Xml.XmlWriterSettings.Encoding" />
+
+                 setting.</para
+              >
             </item>
             <item>
               <para>The output will be Encoding.Unicode.</para>
@@ -995,7 +1437,12 @@
     }
 }</code>
           <block subset="none" type="note">
-            <para>Do not accept an <see cref="T:System.Text.Encoding" /> object from an untrusted source.</para>
+            <para
+              >Do not accept an <see
+               cref="T:System.Text.Encoding" />
+
+               object from an untrusted source.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1020,8 +1467,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property only applies to <see cref="T:System.Xml.XmlWriter" /> instances that output text content; otherwise, this setting is ignored.</para>
-          <para>The elements are indented as long as the element does not contain mixed content. Once the <see cref="M:System.Xml.XmlWriter.WriteString(System.String)" /> or <see cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" /> method is called to write out a mixed element content, the <see cref="T:System.Xml.XmlWriter" /> stops indenting. The indenting resumes once the mixed content element is closed.</para>
+          <para
+            >This property only applies to <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instances that output text content; otherwise, this setting is ignored.</para
+          >
+          <para
+            >The elements are indented as long as the element does not contain mixed content. Once the <see
+             cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+             or <see
+             cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+             method is called to write out a mixed element content, the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             stops indenting. The indenting resumes once the mixed content element is closed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1045,17 +1508,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property only applies to <see cref="T:System.Xml.XmlWriter" /> instances that output text content; otherwise, this setting is ignored. The <see cref="T:System.Xml.XmlWriter" /> throws an exception if the indent characters would result in invalid XML.</para>
+          <para
+            >This property only applies to <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instances that output text content; otherwise, this setting is ignored. The <see
+             cref="T:System.Xml.XmlWriter" />
+
+             throws an exception if the indent characters would result in invalid XML.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the character string to use when indenting. This setting is used when the <see cref="P:System.Xml.XmlWriterSettings.Indent" /> property is set to true.</para>
+          <para
+            >Gets or sets the character string to use when indenting. This setting is used when the <see
+             cref="P:System.Xml.XmlWriterSettings.Indent" />
+
+             property is set to true.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="NamespaceHandling">
-      <MemberSignature Language="C#" Value="public System.Xml.NamespaceHandling NamespaceHandling { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.NamespaceHandling NamespaceHandling" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.NamespaceHandling NamespaceHandling { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.NamespaceHandling NamespaceHandling"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1068,7 +1550,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether the <see cref="T:System.Xml.XmlWriter" /> should remove duplicate namespace declarations when writing XML content. The default behavior is for the writer to output all namespace declarations that are present in the writer's namespace resolver.</para>
+          <para
+            >Gets or sets a value that indicates whether the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             should remove duplicate namespace declarations when writing XML content. The default behavior is for the writer to output all namespace declarations that are present in the writer's namespace resolver.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -1088,7 +1575,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property only applies to <see cref="T:System.Xml.XmlWriter" /> instances that output text content; otherwise, this setting is ignored. The <see cref="T:System.Xml.XmlWriter" /> throws an exception if the line break characters would result in invalid XML.</para>
+          <para
+            >This property only applies to <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instances that output text content; otherwise, this setting is ignored. The <see
+             cref="T:System.Xml.XmlWriter" />
+
+             throws an exception if the line break characters would result in invalid XML.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1097,8 +1592,14 @@
       </Docs>
     </Member>
     <Member MemberName="NewLineHandling">
-      <MemberSignature Language="C#" Value="public System.Xml.NewLineHandling NewLineHandling { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.NewLineHandling NewLineHandling" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.NewLineHandling NewLineHandling { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.NewLineHandling NewLineHandling"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1112,25 +1613,77 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This setting applies when writing text content or attribute values. Each of the <see cref="T:System.Xml.NewLineHandling" /> values is described below:</para>
+          <para
+            >This setting applies when writing text content or attribute values. Each of the <see
+             cref="T:System.Xml.NewLineHandling" />
+
+             values is described below:</para
+          >
           <list type="bullet">
             <item>
-              <para>The <see cref="F:System.Xml.NewLineHandling.Entitize" /> setting tells the <see cref="T:System.Xml.XmlWriter" /> to replace new line characters that would not be otherwise preserved by a normalizing <see cref="T:System.Xml.XmlReader" /> with character entities. This is useful in round-trip scenarios where the output is read by a normalizing <see cref="T:System.Xml.XmlReader" />. Additional normalization rules apply for attribute values when round tripping since \t, \n and \r are replaced with a space in attribute values when normalized in an <see cref="T:System.Xml.XmlReader" />.</para>
+              <para
+                >The <see
+                 cref="F:System.Xml.NewLineHandling.Entitize" />
+
+                 setting tells the <see
+                 cref="T:System.Xml.XmlWriter" />
+
+                 to replace new line characters that would not be otherwise preserved by a normalizing <see
+                 cref="T:System.Xml.XmlReader" />
+
+                 with character entities. This is useful in round-trip scenarios where the output is read by a normalizing <see
+                 cref="T:System.Xml.XmlReader" />
+
+                . Additional normalization rules apply for attribute values when round tripping since \t, \n and \r are replaced with a space in attribute values when normalized in an <see
+                 cref="T:System.Xml.XmlReader" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>The <see cref="F:System.Xml.NewLineHandling.Replace" /> setting tells the <see cref="T:System.Xml.XmlWriter" /> to replace new line characters with \r\n, which is the new line format used by the Microsoft Windows operating system. This helps to ensure that the file can be correctly displayed by the Notepad or Microsoft Word applications. This setting also replaces new lines in attributes with character entities to preserve the characters. This is the default value.</para>
+              <para
+                >The <see
+                 cref="F:System.Xml.NewLineHandling.Replace" />
+
+                 setting tells the <see
+                 cref="T:System.Xml.XmlWriter" />
+
+                 to replace new line characters with \r\n, which is the new line format used by the Microsoft Windows operating system. This helps to ensure that the file can be correctly displayed by the Notepad or Microsoft Word applications. This setting also replaces new lines in attributes with character entities to preserve the characters. This is the default value.</para
+              >
             </item>
             <item>
-              <para>The <see cref="F:System.Xml.NewLineHandling.None" /> setting tells the <see cref="T:System.Xml.XmlWriter" /> to leave the input unchanged. This setting is used when you not want any new-line processing. This is useful when the output is read by an <see cref="T:System.Xml.XmlReader" /> that does not do any normalization (for example, an <see cref="T:System.Xml.XmlTextReader" /> with default settings.)</para>
+              <para
+                >The <see
+                 cref="F:System.Xml.NewLineHandling.None" />
+
+                 setting tells the <see
+                 cref="T:System.Xml.XmlWriter" />
+
+                 to leave the input unchanged. This setting is used when you not want any new-line processing. This is useful when the output is read by an <see
+                 cref="T:System.Xml.XmlReader" />
+
+                 that does not do any normalization (for example, an <see
+                 cref="T:System.Xml.XmlTextReader" />
+
+                 with default settings.)</para
+              >
             </item>
           </list>
-          <para>The following tables show the output of the <see cref="M:System.Xml.XmlWriter.WriteString(System.String)" /> method when supplied with the input value depending on the <see cref="P:System.Xml.XmlWriterSettings.NewLineHandling" /> property setting. The tables show the output when writing text content and also when writing an attribute value.</para>
+          <para
+            >The following tables show the output of the <see
+             cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+             method when supplied with the input value depending on the <see
+             cref="P:System.Xml.XmlWriterSettings.NewLineHandling" />
+
+             property setting. The tables show the output when writing text content and also when writing an attribute value.</para
+          >
           <para>Text Node Value:</para>
           <list type="table">
             <listheader>
               <item>
                 <term>
-                  <para> </para>
+                  <para></para>
                 </term>
                 <description>
                   <para>\r\n</para>
@@ -1203,7 +1756,7 @@
             <listheader>
               <item>
                 <term>
-                  <para> </para>
+                  <para></para>
                 </term>
                 <description>
                   <para>\r\n</para>
@@ -1272,17 +1825,59 @@
             </item>
           </list>
           <block subset="none" type="note">
-            <para>The <see cref="T:System.Xml.XmlWriter" /> has the following behavior when writing content within a CDATA section, comment, or processing instruction. New lines are never replaced with their character entities, even when the <see cref="P:System.Xml.XmlWriterSettings.NewLineHandling" /> property is set to <see cref="F:System.Xml.NewLineHandling.Entitize" />. This is because character entities are not recognized in CDATA sections, comments or processing instructions. If the <see cref="P:System.Xml.XmlWriterSettings.NewLineHandling" /> property is set to <see cref="F:System.Xml.NewLineHandling.None" /> or <see cref="F:System.Xml.NewLineHandling.Replace" />, the behavior is the same as when writing a text node value.</para>
+            <para
+              >The <see
+               cref="T:System.Xml.XmlWriter" />
+
+               has the following behavior when writing content within a CDATA section, comment, or processing instruction. New lines are never replaced with their character entities, even when the <see
+               cref="P:System.Xml.XmlWriterSettings.NewLineHandling" />
+
+               property is set to <see
+               cref="F:System.Xml.NewLineHandling.Entitize" />
+
+              . This is because character entities are not recognized in CDATA sections, comments or processing instructions. If the <see
+               cref="P:System.Xml.XmlWriterSettings.NewLineHandling" />
+
+               property is set to <see
+               cref="F:System.Xml.NewLineHandling.None" />
+
+               or <see
+               cref="F:System.Xml.NewLineHandling.Replace" />
+
+              , the behavior is the same as when writing a text node value.</para
+            >
           </block>
-          <para>The following table describes what a normalizing <see cref="T:System.Xml.XmlReader" /> returns for each white space input. For more information, see sections 2.11 and 3.3.3 of the W3C <see cref="http://www.w3.org/TR/REC-xml/">XML 1.0 Recommendation</see>.</para>
+          <para
+            >The following table describes what a normalizing <see
+             cref="T:System.Xml.XmlReader" />
+
+             returns for each white space input. For more information, see sections 2.11 and 3.3.3 of the W3C <see
+             cref="http://www.w3.org/TR/REC-xml/">XML 1.0 Recommendation</see>
+
+            .</para
+          >
           <block subset="none" type="note">
-            <para>A normalizing reader is any <see cref="T:System.Xml.XmlReader" /> object created by the <see cref="Overload:System.Xml.XmlReader.Create" /> method. These objects always perform line break normalization and full normalization of attributes. The <see cref="T:System.Xml.XmlTextReader" /> object can also be a normalizing reader if it's <see cref="P:System.Xml.XmlTextReader.Normalization" /> property is set to true.</para>
+            <para
+              >A normalizing reader is any <see
+               cref="T:System.Xml.XmlReader" />
+
+               object created by the <see
+               cref="Overload:System.Xml.XmlReader.Create" />
+
+               method. These objects always perform line break normalization and full normalization of attributes. The <see
+               cref="T:System.Xml.XmlTextReader" />
+
+               object can also be a normalizing reader if it's <see
+               cref="P:System.Xml.XmlTextReader.Normalization" />
+
+               property is set to true.</para
+            >
           </block>
           <list type="table">
             <listheader>
               <item>
                 <term>
-                  <para> </para>
+                  <para></para>
                 </term>
                 <description>
                   <para>\r\n</para>
@@ -1356,7 +1951,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property only applies to <see cref="T:System.Xml.XmlWriter" /> instances that output text content; otherwise, this setting is ignored.</para>
+          <para
+            >This property only applies to <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instances that output text content; otherwise, this setting is ignored.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1380,10 +1980,42 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property only applies to <see cref="T:System.Xml.XmlWriter" /> instances that output text content; otherwise, this setting is ignored.</para>
-          <para>If <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" /> is set to false, The XML declaration is written automatically </para>
-          <para>The XML declaration is always written if <see cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" /> is set to <see cref="F:System.Xml.ConformanceLevel.Document" />, even if <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" /> is set to true.</para>
-          <para>The XML declaration is never written if <see cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" /> is set to <see cref="F:System.Xml.ConformanceLevel.Fragment" />. You can call <see cref="M:System.Xml.XmlWriter.WriteProcessingInstruction(System.String,System.String)" /> to explicitly write out an XML declaration.</para>
+          <para
+            >This property only applies to <see
+             cref="T:System.Xml.XmlWriter" />
+
+             instances that output text content; otherwise, this setting is ignored.</para
+          >
+          <para
+            >If <see
+             cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" />
+
+             is set to false, The XML declaration is written automatically </para
+          >
+          <para
+            >The XML declaration is always written if <see
+             cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" />
+
+             is set to <see
+             cref="F:System.Xml.ConformanceLevel.Document" />
+
+            , even if <see
+             cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" />
+
+             is set to true.</para
+          >
+          <para
+            >The XML declaration is never written if <see
+             cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" />
+
+             is set to <see
+             cref="F:System.Xml.ConformanceLevel.Fragment" />
+
+            . You can call <see
+             cref="M:System.Xml.XmlWriter.WriteProcessingInstruction(System.String,System.String)" />
+
+             to explicitly write out an XML declaration.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1392,8 +2024,14 @@
       </Docs>
     </Member>
     <Member MemberName="OutputMethod">
-      <MemberSignature Language="C#" Value="public System.Xml.XmlOutputMethod OutputMethod { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.XmlOutputMethod OutputMethod" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.XmlOutputMethod OutputMethod { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.XmlOutputMethod OutputMethod"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1411,13 +2049,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the method used to serialize the <see cref="T:System.Xml.XmlWriter" /> output.</para>
+          <para
+            >Gets the method used to serialize the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             output.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Reset">
       <MemberSignature Language="C#" Value="public void Reset ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Reset() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Reset() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1431,7 +2077,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows the default property values for an instance of <see cref="T:System.Xml.XmlWriterSettings" />.</para>
+          <para
+            >The following table shows the default property values for an instance of <see
+             cref="T:System.Xml.XmlWriterSettings" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1456,7 +2107,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.CheckCharacters" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.CheckCharacters" />
+                </para>
               </term>
               <description>
                 <para>true.</para>
@@ -1475,17 +2127,22 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" />
+                </para>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.ConformanceLevel.Document" />.</para>
+                  <see cref="F:System.Xml.ConformanceLevel.Document" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.Encoding" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.Encoding" />
+                </para>
               </term>
               <description>
                 <para>Encoding.UTF8.</para>
@@ -1494,7 +2151,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.Indent" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.Indent" />
+                </para>
               </term>
               <description>
                 <para>false.</para>
@@ -1503,7 +2161,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.IndentChars" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.IndentChars" />
+                </para>
               </term>
               <description>
                 <para>Two spaces.</para>
@@ -1512,7 +2171,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.NewLineChars" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.NewLineChars" />
+                </para>
               </term>
               <description>
                 <para>\r\n.</para>
@@ -1521,17 +2181,22 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.NewLineHandling" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.NewLineHandling" />
+                </para>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.NewLineHandling.Replace" />.</para>
+                  <see cref="F:System.Xml.NewLineHandling.Replace" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.NewLineOnAttributes" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.NewLineOnAttributes" />
+                </para>
               </term>
               <description>
                 <para>false.</para>
@@ -1540,7 +2205,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" /> </para>
+                  <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" />
+                </para>
               </term>
               <description>
                 <para>false.</para>
@@ -1582,7 +2248,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether the <see cref="T:System.Xml.XmlWriter" /> will add closing tags to all unclosed element tags when the <see cref="M:System.Xml.XmlWriter.Close" /> method is called.</para>
+          <para
+            >Gets or sets a value that indicates whether the <see
+             cref="T:System.Xml.XmlWriter" />
+
+             will add closing tags to all unclosed element tags when the <see
+             cref="M:System.Xml.XmlWriter.Close" />
+
+             method is called.</para
+          >
         </summary>
       </Docs>
     </Member>

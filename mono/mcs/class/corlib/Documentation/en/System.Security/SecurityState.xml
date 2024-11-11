@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SecurityState" FullName="System.Security.SecurityState">
   <TypeSignature Language="C#" Value="public abstract class SecurityState" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SecurityState extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit SecurityState extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,8 +17,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You must inherit from this class to provide a class that includes a property that specifies the security-sensitive action to be performed. The <see cref="T:System.Security.SecurityState" /> object that is instantiated from the derived class is passed to the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method to determine whether the host allows that action to be performed. The default implementation of the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method always returns false.  The method must be overridden to detect the actions that are allowed.</para>
-      <para>For example, if you want to access a Web camera in your library code, you would create a WebcamSecurityState object and call the <see cref="M:System.Security.SecurityState.EnsureState" /> method to determine whether the host allows Web camera access, as shown in the following example.  (You can find the code for WebcamSecurityState in the "Example" section.)</para>
+      <para
+        >You must inherit from this class to provide a class that includes a property that specifies the security-sensitive action to be performed. The <see
+         cref="T:System.Security.SecurityState" />
+
+         object that is instantiated from the derived class is passed to the <see
+         cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+         method to determine whether the host allows that action to be performed. The default implementation of the <see
+         cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+         method always returns false.  The method must be overridden to detect the actions that are allowed.</para
+      >
+      <para
+        >For example, if you want to access a Web camera in your library code, you would create a WebcamSecurityState object and call the <see
+         cref="M:System.Security.SecurityState.EnsureState" />
+
+         method to determine whether the host allows Web camera access, as shown in the following example.  (You can find the code for WebcamSecurityState in the "Example" section.)</para
+      >
       <code>WebcamSecurityState securityState = new WebcamSecurityState("Safe access to Webcam", WebcamSecurityOptions.SafeAccess);
 try
 {
@@ -27,7 +46,15 @@ catch (ApplicationException e)
     // Handle any exception that is thrown.
     System.Diagnostics.Debug.WriteLine(e.Message);
 }</code>
-      <para>To process the call the <see cref="T:System.AppDomainManager" /> must be made aware of WebcamSecurityState through an override of the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method, as shown in the following example.</para>
+      <para
+        >To process the call the <see
+         cref="T:System.AppDomainManager" />
+
+         must be made aware of WebcamSecurityState through an override of the <see
+         cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+         method, as shown in the following example.</para
+      >
       <code>[SecurityCritical]
 public override bool CheckSecuritySettings(System.Security.SecurityState securityState)
 {
@@ -56,13 +83,21 @@ private bool PromptUser(string text)
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides a base class for requesting the security status of an action from the <see cref="T:System.AppDomainManager" /> object.</para>
+      <para
+        >Provides a base class for requesting the security status of an action from the <see
+         cref="T:System.AppDomainManager" />
+
+         object.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected SecurityState ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -73,13 +108,21 @@ private bool PromptUser(string text)
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.SecurityState" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.SecurityState" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EnsureState">
       <MemberSignature Language="C#" Value="public abstract void EnsureState ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void EnsureState() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void EnsureState() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,13 +145,21 @@ private bool PromptUser(string text)
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, ensures that the state that is represented by <see cref="T:System.Security.SecurityState" /> is available on the host.</para>
+          <para
+            >When overridden in a derived class, ensures that the state that is represented by <see
+             cref="T:System.Security.SecurityState" />
+
+             is available on the host.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IsStateAvailable">
       <MemberSignature Language="C#" Value="public bool IsStateAvailable ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsStateAvailable() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool IsStateAvailable() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -122,12 +173,31 @@ private bool PromptUser(string text)
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Security.SecurityState.IsStateAvailable" /> calls the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method to determine whether the state that is represented by this class is available on the host. </para>
-          <para>See the <see cref="T:System.Security.SecurityState" /> class for an example implementation of the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method.</para>
+            <see cref="M:System.Security.SecurityState.IsStateAvailable" />
+
+             calls the <see
+             cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+             method to determine whether the state that is represented by this class is available on the host. </para
+          >
+          <para
+            >See the <see
+             cref="T:System.Security.SecurityState" />
+
+             class for an example implementation of the <see
+             cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether the state for this implementation of the <see cref="T:System.Security.SecurityState" /> class is available on the current host. </para>
+          <para
+            >Gets a value that indicates whether the state for this implementation of the <see
+             cref="T:System.Security.SecurityState" />
+
+             class is available on the current host. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

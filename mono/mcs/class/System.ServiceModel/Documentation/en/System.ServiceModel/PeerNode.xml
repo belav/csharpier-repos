@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PeerNode" FullName="System.ServiceModel.PeerNode">
-  <TypeSignature Language="C#" Value="public abstract class PeerNode : System.ServiceModel.IOnlineStatus" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit PeerNode extends System.Object implements class System.ServiceModel.IOnlineStatus" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class PeerNode : System.ServiceModel.IOnlineStatus"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit PeerNode extends System.Object implements class System.ServiceModel.IOnlineStatus"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,9 +23,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A peer node can host multiple peer channels within the mesh as long as they share a common URI and host name in the <see cref="T:System.ServiceModel.EndpointAddress" /> supplied to the binding for each channel.</para>
-      <para>If two or more peer channels defined for a peer node are created with separate bindings, then the <see cref="P:System.ServiceModel.NetPeerTcpBinding.Port" />, <see cref="P:System.ServiceModel.NetPeerTcpBinding.ListenIPAddress" />, and <see cref="P:System.ServiceModel.NetPeerTcpBinding.Resolver" /> properties must be identical on all bindings.</para>
-      <para>If a subsequent channel binding is created after the first one for the same peer node instance, then the <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" /> property on this and subsequent bindings must be less than or equal to the value of <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" /> property as set on the first channel binding.</para>
+      <para
+        >A peer node can host multiple peer channels within the mesh as long as they share a common URI and host name in the <see
+         cref="T:System.ServiceModel.EndpointAddress" />
+
+         supplied to the binding for each channel.</para
+      >
+      <para
+        >If two or more peer channels defined for a peer node are created with separate bindings, then the <see
+         cref="P:System.ServiceModel.NetPeerTcpBinding.Port" />
+
+        , <see
+         cref="P:System.ServiceModel.NetPeerTcpBinding.ListenIPAddress" />
+
+        , and <see
+         cref="P:System.ServiceModel.NetPeerTcpBinding.Resolver" />
+
+         properties must be identical on all bindings.</para
+      >
+      <para
+        >If a subsequent channel binding is created after the first one for the same peer node instance, then the <see
+         cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
+
+         property on this and subsequent bindings must be less than or equal to the value of <see
+         cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
+
+         property as set on the first channel binding.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -50,8 +80,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessagePropagationFilter">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.PeerMessagePropagationFilter MessagePropagationFilter { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.PeerMessagePropagationFilter MessagePropagationFilter" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.PeerMessagePropagationFilter MessagePropagationFilter { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.PeerMessagePropagationFilter MessagePropagationFilter"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -134,7 +170,10 @@
     </Member>
     <Member MemberName="RefreshConnection">
       <MemberSignature Language="C#" Value="public void RefreshConnection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RefreshConnection() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void RefreshConnection() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -153,7 +192,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -171,7 +213,10 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.String" /> value that contains the mesh ID of the peer node if the mesh ID is set; otherwise, it returns the type.</para>
+            <see cref="T:System.String" />
+
+             value that contains the mesh ID of the peer node if the mesh ID is set; otherwise, it returns the type.</para
+          >
         </returns>
       </Docs>
     </Member>

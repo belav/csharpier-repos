@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataGridViewCellStyleContentChangedEventArgs" FullName="System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs">
-  <TypeSignature Language="C#" Value="public class DataGridViewCellStyleContentChangedEventArgs : EventArgs" />
+<Type
+  Name="DataGridViewCellStyleContentChangedEventArgs"
+  FullName="System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DataGridViewCellStyleContentChangedEventArgs : EventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +19,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" /> event occurs when a property value of a <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> object returned by one of the following properties changes:</para>
+      <para
+        >The <see
+         cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" />
+
+         event occurs when a property value of a <see
+         cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+         object returned by one of the following properties changes:</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -56,18 +70,52 @@
           </para>
         </item>
       </list>
-      <para>If one of these properties is set to a different <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> object, however, the corresponding PropertyNameChanged event occurs but the <see cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" /> event does not occur.</para>
-      <para>Use the <see cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" /> property to determine which property has the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that changed. Use the <see cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyle" /> property to retrieve the updated value.</para>
-      <para>For more information about handling events, see <format type="text/html"><a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a></format>.</para>
+      <para
+        >If one of these properties is set to a different <see
+         cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+         object, however, the corresponding PropertyNameChanged event occurs but the <see
+         cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" />
+
+         event does not occur.</para
+      >
+      <para
+        >Use the <see
+         cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" />
+
+         property to determine which property has the <see
+         cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+         that changed. Use the <see
+         cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyle" />
+
+         property to retrieve the updated value.</para
+      >
+      <para
+        >For more information about handling events, see <format
+         type="text/html">
+          <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="CellStyle">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataGridViewCellStyle CellStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DataGridViewCellStyle CellStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DataGridViewCellStyle</ReturnType>
@@ -77,11 +125,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this property to retrieve the updated <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> property value. Use the <see cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" /> property to determine which property has the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that changed. </para>
+          <para
+            >Use this property to retrieve the updated <see
+             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+             property value. Use the <see
+             cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" />
+
+             property to determine which property has the <see
+             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+             that changed. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the changed <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />.</para>
+          <para
+            >Gets the changed <see
+             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -89,7 +153,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CellStyleScope">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataGridViewCellStyleScopes CellStyleScope { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DataGridViewCellStyleScopes CellStyleScope { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DataGridViewCellStyleScopes</ReturnType>
@@ -99,7 +166,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" /> property to determine which property has the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that changed. Use the <see cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyle" /> property to retrieve the updated value.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" />
+
+             property to determine which property has the <see
+             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+             that changed. Use the <see
+             cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyle" />
+
+             property to retrieve the updated value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IChannelReceiver" FullName="System.Runtime.Remoting.Channels.IChannelReceiver">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public interface IChannelReceiver : System.Runtime.Remoting.Channels.IChannel" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IChannelReceiver implements class System.Runtime.Remoting.Channels.IChannel" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public interface IChannelReceiver : System.Runtime.Remoting.Channels.IChannel"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IChannelReceiver implements class System.Runtime.Remoting.Channels.IChannel"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -23,7 +30,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The receiving side of channels must expose the <see cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" /> interface.</para>
+      <para
+        >The receiving side of channels must expose the <see
+         cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" />
+
+         interface.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -47,7 +59,15 @@
         <value>To be added: an object of type 'object'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is used when <see cref="M:System.Runtime.Remoting.RemotingServices.Marshal(System.MarshalByRefObject)" /> is called and a <see cref="T:System.Runtime.Remoting.ObjRef" /> is created.</para>
+          <para
+            >This property is used when <see
+             cref="M:System.Runtime.Remoting.RemotingServices.Marshal(System.MarshalByRefObject)" />
+
+             is called and a <see
+             cref="T:System.Runtime.Remoting.ObjRef" />
+
+             is created.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,7 +77,10 @@
     </Member>
     <Member MemberName="GetUrlsForUri">
       <MemberSignature Language="C#" Value="public string[] GetUrlsForUri (string objectURI);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string[] GetUrlsForUri(string objectURI) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string[] GetUrlsForUri(string objectURI) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -73,7 +96,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is used by the <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetUrlsForObject(System.MarshalByRefObject)" /> method.</para>
+          <para
+            >This method is used by the <see
+             cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetUrlsForObject(System.MarshalByRefObject)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -84,12 +112,18 @@
           <para>An array of the URLs.</para>
         </returns>
         <param name="objectURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URI for which URLs are required. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URI for which URLs are required. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="StartListening">
       <MemberSignature Language="C#" Value="public void StartListening (object data);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void StartListening(object data) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void StartListening(object data) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -112,12 +146,18 @@
           <para>Instructs the current channel to start listening for requests.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional initialization information. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional initialization information. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="StopListening">
       <MemberSignature Language="C#" Value="public void StopListening (object data);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void StopListening(object data) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void StopListening(object data) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -140,7 +180,10 @@
           <para>Instructs the current channel to stop listening for requests.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional state information for the channel. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional state information for the channel. </param
+        >
       </Docs>
     </Member>
   </Members>

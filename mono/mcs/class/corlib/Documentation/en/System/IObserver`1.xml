@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IObserver&lt;T&gt;" FullName="System.IObserver&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public interface IObserver&lt;in T&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IObserver`1&lt;- T&gt;" />
+<Type Name="IObserver<T>" FullName="System.IObserver<T>">
+  <TypeSignature Language="C#" Value="public interface IObserver<in T>" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IObserver`1<- T>"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,18 +21,69 @@
     <typeparam name="T">To be added.</typeparam>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.IObserver`1" /> and <see cref="T:System.IObservable`1" /> interfaces provide a generalized mechanism for push-based notification, also known as the observer design pattern. The <see cref="T:System.IObservable`1" /> interface represents the class that sends notifications (the provider); the <see cref="T:System.IObserver`1" /> interface represents the class that receives them (the observer). <paramref name="T" /> represents the class that provides the notification information.</para>
-      <para>An <see cref="T:System.IObserver`1" /> implementation arranges to receive notifications from a provider (an <see cref="T:System.IObservable`1" /> implementation) by passing an instance of itself to the provider's <see cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" /> method. This method returns an <see cref="T:System.IDisposable" /> object that can be used to unsubscribe the observer before the provider finishes sending notifications.</para>
-      <para>The <see cref="T:System.IObserver`1" /> interface defines the following three methods that the observer must implement:</para>
+      <para
+        >The <see
+         cref="T:System.IObserver`1" />
+
+         and <see
+         cref="T:System.IObservable`1" />
+
+         interfaces provide a generalized mechanism for push-based notification, also known as the observer design pattern. The <see
+         cref="T:System.IObservable`1" />
+
+         interface represents the class that sends notifications (the provider); the <see
+         cref="T:System.IObserver`1" />
+
+         interface represents the class that receives them (the observer). <paramref
+         name="T" />
+
+         represents the class that provides the notification information.</para
+      >
+      <para
+        >An <see
+         cref="T:System.IObserver`1" />
+
+         implementation arranges to receive notifications from a provider (an <see
+         cref="T:System.IObservable`1" />
+
+         implementation) by passing an instance of itself to the provider's <see
+         cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" />
+
+         method. This method returns an <see
+         cref="T:System.IDisposable" />
+
+         object that can be used to unsubscribe the observer before the provider finishes sending notifications.</para
+      >
+      <para
+        >The <see
+         cref="T:System.IObserver`1" />
+
+         interface defines the following three methods that the observer must implement:</para
+      >
       <list type="bullet">
         <item>
-          <para>The <see cref="M:System.IObserver`1.OnNext(`0)" /> method, which is typically called by the provider to supply the observer with new data or state information.</para>
+          <para
+            >The <see
+             cref="M:System.IObserver`1.OnNext(`0)" />
+
+             method, which is typically called by the provider to supply the observer with new data or state information.</para
+          >
         </item>
         <item>
-          <para>The <see cref="M:System.IObserver`1.OnError(System.Exception)" /> method, which is typically called by the provider to indicate that data is unavailable, inaccessible, or corrupted, or that the provider has experienced some other error condition. </para>
+          <para
+            >The <see
+             cref="M:System.IObserver`1.OnError(System.Exception)" />
+
+             method, which is typically called by the provider to indicate that data is unavailable, inaccessible, or corrupted, or that the provider has experienced some other error condition. </para
+          >
         </item>
         <item>
-          <para>The <see cref="M:System.IObserver`1.OnCompleted" /> method, which is typically called by the provider to indicate that it has finished sending notifications to observers.</para>
+          <para
+            >The <see
+             cref="M:System.IObserver`1.OnCompleted" />
+
+             method, which is typically called by the provider to indicate that it has finished sending notifications to observers.</para
+          >
         </item>
       </list>
     </remarks>
@@ -41,7 +95,10 @@
   <Members>
     <Member MemberName="OnCompleted">
       <MemberSignature Language="C#" Value="public void OnCompleted ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnCompleted() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnCompleted() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -53,7 +110,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the observer's <see cref="M:System.IObserver`1.OnCompleted" /> implementation is called, the <see cref="M:System.IObserver`1.OnCompleted" /> method can optionally call the <see cref="M:System.IDisposable.Dispose" /> method of the <see cref="T:System.IDisposable" /> object that was returned to the observer when it called the <see cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" /> method. </para>
+          <para
+            >When the observer's <see
+             cref="M:System.IObserver`1.OnCompleted" />
+
+             implementation is called, the <see
+             cref="M:System.IObserver`1.OnCompleted" />
+
+             method can optionally call the <see
+             cref="M:System.IDisposable.Dispose" />
+
+             method of the <see
+             cref="T:System.IDisposable" />
+
+             object that was returned to the observer when it called the <see
+             cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" />
+
+             method. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,7 +137,10 @@
     </Member>
     <Member MemberName="OnError">
       <MemberSignature Language="C#" Value="public void OnError (Exception error);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnError(class System.Exception error) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnError(class System.Exception error) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,19 +154,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Although <paramref name="error" /> is an object that is derived from <see cref="T:System.Exception" />, it does not necessarily represent an exception that is thrown by the provider. It can also represent a routine or expected error condition, such as data that is missing or unavailable. The <see cref="M:System.IObserver`1.OnError(System.Exception)" /> method should be seen as informational, and the provider should not expect the observer to provide error handling.</para>
+          <para
+            >Although <paramref
+             name="error" />
+
+             is an object that is derived from <see
+             cref="T:System.Exception" />
+
+            , it does not necessarily represent an exception that is thrown by the provider. It can also represent a routine or expected error condition, such as data that is missing or unavailable. The <see
+             cref="M:System.IObserver`1.OnError(System.Exception)" />
+
+             method should be seen as informational, and the provider should not expect the observer to provide error handling.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Notifies the observer that the provider has experienced an error condition.</para>
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that provides additional information about the error.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that provides additional information about the error.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnNext">
       <MemberSignature Language="C#" Value="public void OnNext (T value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnNext(!T value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnNext(!T value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

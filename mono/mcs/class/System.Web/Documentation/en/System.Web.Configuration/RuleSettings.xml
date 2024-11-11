@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RuleSettings" FullName="System.Web.Configuration.RuleSettings">
-  <TypeSignature Language="C#" Value="public sealed class RuleSettings : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class RuleSettings : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -22,7 +25,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RuleSettings (string name, string eventName, string provider);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RuleSettings (string name, string eventName, string provider);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
@@ -63,7 +69,10 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Int32.MaxValue" />.</para>
+                  <see cref="F:System.Int32.MaxValue" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -100,21 +109,47 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettings" /> class using default settings; however, the name, event name, and provider are specified.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.RuleSettings" />
+
+             class using default settings; however, the name, event name, and provider are specified.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.RuleSettings" />
+
+           object to create.</param
+        >
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object this rule applies to.</param
+        >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Configuration.ProviderSettings" />
+
+           object this rule applies to.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RuleSettings (string name, string eventName, string provider, string profile, int minInstances, int maxLimit, TimeSpan minInterval);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RuleSettings (string name, string eventName, string provider, string profile, int minInstances, int maxLimit, TimeSpan minInterval);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
@@ -155,29 +190,73 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettings" /> class where all values except those of the <see cref="P:System.Web.Configuration.RuleSettings.Custom" /> class are specified.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.RuleSettings" />
+
+             class where all values except those of the <see
+             cref="P:System.Web.Configuration.RuleSettings.Custom" />
+
+             class are specified.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.RuleSettings" />
+
+           object to create.</param
+        >
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object this rule applies to.</param
+        >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Configuration.ProviderSettings" />
+
+           object this rule applies to.</param
+        >
         <param name="profile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.ProfileSettings" />
+
+           object this rule applies to.</param
+        >
         <param name="minInstances">
-          <attribution license="cc4" from="Microsoft" modified="false" />The minimum number of occurrences of the same type of event that can occur before the event is raised to the provider. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The minimum number of occurrences of the same type of event that can occur before the event is raised to the provider. </param
+        >
         <param name="maxLimit">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of times events of the same type can be raised.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of times events of the same type can be raised.</param
+        >
         <param name="minInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />The minimum time interval between two events of the same type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The minimum time interval between two events of the same type.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RuleSettings (string name, string eventName, string provider, string profile, int minInstances, int maxLimit, TimeSpan minInterval, string custom);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RuleSettings (string name, string eventName, string provider, string profile, int minInstances, int maxLimit, TimeSpan minInterval, string custom);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
@@ -197,24 +276,68 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModeSettings" /> class where all values are specified.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             class where all values are specified.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.RuleSettings" />
+
+           object to create.</param
+        >
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object this rule applies to.</param
+        >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Configuration.ProviderSettings" />
+
+           object this rule applies to.</param
+        >
         <param name="profile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.ProfileSettings" />
+
+           object this rule applies to.</param
+        >
         <param name="minInstances">
-          <attribution license="cc4" from="Microsoft" modified="false" />The minimum number of occurrences of an event of the same type before the event is fired to the provider. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The minimum number of occurrences of an event of the same type before the event is fired to the provider. </param
+        >
         <param name="maxLimit">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of times events of the same type are fired.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of times events of the same type are fired.</param
+        >
         <param name="minInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />The minimum time interval between two events of the same type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The minimum time interval between two events of the same type.</param
+        >
         <param name="custom">
-          <attribution license="cc4" from="Microsoft" modified="false" />The fully qualified type of a custom class that implements <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The fully qualified type of a custom class that implements <see
+           cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -240,7 +363,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the fully qualified type of a custom class that implements <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />.</para>
+          <para
+            >Gets or sets the fully qualified type of a custom class that implements <see
+             cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -263,12 +391,26 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.EventMappingSettings" /> object referenced by this property must be contained by the same <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object that also contains this <see cref="T:System.Web.Configuration.RuleSettings" /></para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object referenced by this property must be contained by the same <see
+             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+             object that also contains this <see
+             cref="T:System.Web.Configuration.RuleSettings" />
+          </para>
           <para>object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</para>
+          <para
+            >Gets or sets the name of the <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object this rule applies to.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -359,7 +501,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />. Invalid values may cause an exception to be thrown when the configuration section is saved.</para>
+          <para
+            >The value can be made infinite by setting it to <see
+             cref="F:System.Int32.MaxValue" />
+
+            . Invalid values may cause an exception to be thrown when the configuration section is saved.</para
+          >
           <para>If the value is zero, then there is no minimum interval.</para>
         </remarks>
         <summary>
@@ -394,7 +541,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object.</para>
+          <para
+            >Gets or sets the name of the <see
+             cref="T:System.Web.Configuration.RuleSettings" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -417,12 +569,26 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.ProfileSettings" /> object referenced by this property must be contained by the same <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object that also contains this <see cref="T:System.Web.Configuration.RuleSettings" /></para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.ProfileSettings" />
+
+             object referenced by this property must be contained by the same <see
+             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+             object that also contains this <see
+             cref="T:System.Web.Configuration.RuleSettings" />
+          </para>
           <para>object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</para>
+          <para
+            >Gets or sets the name of the <see
+             cref="T:System.Web.Configuration.ProfileSettings" />
+
+             object this rule applies to.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -430,7 +596,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -461,11 +630,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Configuration.ProviderSettings" /> object referenced by this property must be contained by the same <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object that also contains this <see cref="T:System.Web.Configuration.RuleSettings" /> object.</para>
+          <para
+            >The <see
+             cref="T:System.Configuration.ProviderSettings" />
+
+             object referenced by this property must be contained by the same <see
+             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+             object that also contains this <see
+             cref="T:System.Web.Configuration.RuleSettings" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</para>
+          <para
+            >Gets or sets the name of the <see
+             cref="T:System.Configuration.ProviderSettings" />
+
+             object this rule applies to.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IDeserializationCallback" FullName="System.Runtime.Serialization.IDeserializationCallback">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public interface IDeserializationCallback" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IDeserializationCallback" />
+<Type
+  Name="IDeserializationCallback"
+  FullName="System.Runtime.Serialization.IDeserializationCallback"
+>
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public interface IDeserializationCallback"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IDeserializationCallback"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -26,7 +36,10 @@
   <Members>
     <Member MemberName="OnDeserialization">
       <MemberSignature Language="C#" Value="public void OnDeserialization (object sender);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnDeserialization(object sender) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnDeserialization(object sender) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -46,7 +59,10 @@
           <para>Runs when the entire object graph has been deserialized.</para>
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that initiated the callback. The functionality for this parameter is not currently implemented. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that initiated the callback. The functionality for this parameter is not currently implemented. </param
+        >
       </Docs>
     </Member>
   </Members>

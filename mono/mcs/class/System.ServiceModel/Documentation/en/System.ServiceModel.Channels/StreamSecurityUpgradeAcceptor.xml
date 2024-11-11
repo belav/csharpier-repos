@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="StreamSecurityUpgradeAcceptor" FullName="System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor">
-  <TypeSignature Language="C#" Value="public abstract class StreamSecurityUpgradeAcceptor : System.ServiceModel.Channels.StreamUpgradeAcceptor" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit StreamSecurityUpgradeAcceptor extends System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+<Type
+  Name="StreamSecurityUpgradeAcceptor"
+  FullName="System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class StreamSecurityUpgradeAcceptor : System.ServiceModel.Channels.StreamUpgradeAcceptor"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit StreamSecurityUpgradeAcceptor extends System.ServiceModel.Channels.StreamUpgradeAcceptor"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,8 +22,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class is used with <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" /> and <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" /> to implement a security stream upgrade.  </para>
-      <para>For a detailed description of the upgrade process, see <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />.</para>
+      <para
+        >This class is used with <see
+         cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" />
+
+         and <see
+         cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+
+         to implement a security stream upgrade.  </para
+      >
+      <para
+        >For a detailed description of the upgrade process, see <see
+         cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +46,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected StreamSecurityUpgradeAcceptor ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,13 +59,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetRemoteSecurity">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.Security.SecurityMessageProperty GetRemoteSecurity ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Security.SecurityMessageProperty GetRemoteSecurity() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.Security.SecurityMessageProperty GetRemoteSecurity ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Security.SecurityMessageProperty GetRemoteSecurity() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -60,7 +96,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the <see cref="T:System.ServiceModel.Security.SecurityMessageProperty" />.</para>
+          <para
+            >Returns the <see
+             cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
