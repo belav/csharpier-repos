@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="RegexCompiler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 // The RegexCompiler class is internal to the Regex package.
@@ -11,20 +11,20 @@
 
 #if !SILVERLIGHT && !FULL_AOT_RUNTIME
 
-namespace System.Text.RegularExpressions {
-
+namespace System.Text.RegularExpressions
+{
     using System.Collections;
-	using System.Collections.Generic;
-    using System.Threading;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Reflection;
+    using System.Reflection.Emit;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Threading;
 
     /*
      * RegexDynamicModule
@@ -36,174 +36,194 @@ namespace System.Text.RegularExpressions {
      * While we're at it, we just create one RegexCompiler per thread
      * as well, and have RegexCompiler inherit from RegexDynamicModule.
      */
-    internal abstract class RegexCompiler {
+    internal abstract class RegexCompiler
+    {
         // fields that never change (making them saves about 6% overall running time)
 
-        internal static FieldInfo      _textbegF;
-        internal static FieldInfo      _textendF;
-        internal static FieldInfo      _textstartF;
-        internal static FieldInfo      _textposF;
-        internal static FieldInfo      _textF;
-        internal static FieldInfo      _trackposF;
-        internal static FieldInfo      _trackF;
-        internal static FieldInfo      _stackposF;
-        internal static FieldInfo      _stackF;
-        internal static FieldInfo      _trackcountF;
+        internal static FieldInfo _textbegF;
+        internal static FieldInfo _textendF;
+        internal static FieldInfo _textstartF;
+        internal static FieldInfo _textposF;
+        internal static FieldInfo _textF;
+        internal static FieldInfo _trackposF;
+        internal static FieldInfo _trackF;
+        internal static FieldInfo _stackposF;
+        internal static FieldInfo _stackF;
+        internal static FieldInfo _trackcountF;
 
         // note some methods
 
-        internal static MethodInfo     _ensurestorageM;
-        internal static MethodInfo     _captureM;
-        internal static MethodInfo     _transferM;
-        internal static MethodInfo     _uncaptureM;
-        internal static MethodInfo     _ismatchedM;
-        internal static MethodInfo     _matchlengthM;
-        internal static MethodInfo     _matchindexM;
-        internal static MethodInfo     _isboundaryM;
-        internal static MethodInfo     _isECMABoundaryM;
-        internal static MethodInfo     _chartolowerM; 
-        internal static MethodInfo     _getcharM; 
-        internal static MethodInfo     _crawlposM; 
-        internal static MethodInfo     _charInSetM;
-        internal static MethodInfo     _getCurrentCulture;
-        internal static MethodInfo     _getInvariantCulture;
-        internal static MethodInfo     _checkTimeoutM;
-    #if DBG
-        internal static MethodInfo     _dumpstateM;
-    #endif
+        internal static MethodInfo _ensurestorageM;
+        internal static MethodInfo _captureM;
+        internal static MethodInfo _transferM;
+        internal static MethodInfo _uncaptureM;
+        internal static MethodInfo _ismatchedM;
+        internal static MethodInfo _matchlengthM;
+        internal static MethodInfo _matchindexM;
+        internal static MethodInfo _isboundaryM;
+        internal static MethodInfo _isECMABoundaryM;
+        internal static MethodInfo _chartolowerM;
+        internal static MethodInfo _getcharM;
+        internal static MethodInfo _crawlposM;
+        internal static MethodInfo _charInSetM;
+        internal static MethodInfo _getCurrentCulture;
+        internal static MethodInfo _getInvariantCulture;
+        internal static MethodInfo _checkTimeoutM;
+#if DBG
+        internal static MethodInfo _dumpstateM;
+#endif
 
-        internal ILGenerator     _ilg;
+        internal ILGenerator _ilg;
 
         // tokens representing local variables
-        internal LocalBuilder      _textstartV;
-        internal LocalBuilder      _textbegV;
-        internal LocalBuilder      _textendV;
-        internal LocalBuilder      _textposV;
-        internal LocalBuilder      _textV;
-        internal LocalBuilder      _trackposV;
-        internal LocalBuilder      _trackV;
-        internal LocalBuilder      _stackposV;
-        internal LocalBuilder      _stackV;
-        internal LocalBuilder      _tempV;
-        internal LocalBuilder      _temp2V;
-        internal LocalBuilder      _temp3V;
+        internal LocalBuilder _textstartV;
+        internal LocalBuilder _textbegV;
+        internal LocalBuilder _textendV;
+        internal LocalBuilder _textposV;
+        internal LocalBuilder _textV;
+        internal LocalBuilder _trackposV;
+        internal LocalBuilder _trackV;
+        internal LocalBuilder _stackposV;
+        internal LocalBuilder _stackV;
+        internal LocalBuilder _tempV;
+        internal LocalBuilder _temp2V;
+        internal LocalBuilder _temp3V;
 
+        internal RegexCode _code; // the RegexCode object (used for debugging only)
+        internal int[] _codes; // the RegexCodes being translated
+        internal String[] _strings; // the stringtable associated with the RegexCodes
+        internal RegexPrefix _fcPrefix; // the possible first chars computed by RegexFCD
+        internal RegexBoyerMoore _bmPrefix; // a prefix as a boyer-moore machine
+        internal int _anchors; // the set of anchors
 
-        internal RegexCode       _code;              // the RegexCode object (used for debugging only)
-        internal int[]           _codes;             // the RegexCodes being translated
-        internal String[]        _strings;           // the stringtable associated with the RegexCodes
-        internal RegexPrefix     _fcPrefix;          // the possible first chars computed by RegexFCD
-        internal RegexBoyerMoore _bmPrefix;          // a prefix as a boyer-moore machine
-        internal int             _anchors;           // the set of anchors
+        internal Label[] _labels; // a label for every operation in _codes
+        internal BacktrackNote[] _notes; // a list of the backtracking states to be generated
+        internal int _notecount; // true count of _notes (allocation grows exponentially)
+        internal int _trackcount; // count of backtracking states (used to reduce allocations)
 
-        internal Label[]         _labels;            // a label for every operation in _codes
-        internal BacktrackNote[] _notes;             // a list of the backtracking states to be generated
-        internal int             _notecount;         // true count of _notes (allocation grows exponentially)
-        internal int             _trackcount;        // count of backtracking states (used to reduce allocations)
+        internal Label _backtrack; // label for backtracking
 
-        internal Label           _backtrack;         // label for backtracking
+        internal int _regexopcode; // the current opcode being processed
+        internal int _codepos; // the current code being translated
+        internal int _backpos; // the current backtrack-note being translated
 
-
-        internal int             _regexopcode;       // the current opcode being processed
-        internal int             _codepos;           // the current code being translated
-        internal int             _backpos;           // the current backtrack-note being translated
-
-        internal RegexOptions    _options;           // options
+        internal RegexOptions _options; // options
 
         // special code fragments
-        internal int[]           _uniquenote;        // _notes indices for code that should be emitted <= once
-        internal int[]           _goto;              // indices for forward-jumps-through-switch (for allocations)
+        internal int[] _uniquenote; // _notes indices for code that should be emitted <= once
+        internal int[] _goto; // indices for forward-jumps-through-switch (for allocations)
 
         // indices for unique code fragments
-        internal const int stackpop               = 0;    // pop one
-        internal const int stackpop2              = 1;    // pop two
-        internal const int stackpop3              = 2;    // pop three
-        internal const int capback                = 3;    // uncapture
-        internal const int capback2               = 4;    // uncapture 2
-        internal const int branchmarkback2        = 5;    // back2 part of branchmark
-        internal const int lazybranchmarkback2    = 6;    // back2 part of lazybranchmark
-        internal const int branchcountback2       = 7;    // back2 part of branchcount
-        internal const int lazybranchcountback2   = 8;    // back2 part of lazybranchcount
-        internal const int forejumpback           = 9;    // back part of forejump
-        internal const int uniquecount            = 10;
+        internal const int stackpop = 0; // pop one
+        internal const int stackpop2 = 1; // pop two
+        internal const int stackpop3 = 2; // pop three
+        internal const int capback = 3; // uncapture
+        internal const int capback2 = 4; // uncapture 2
+        internal const int branchmarkback2 = 5; // back2 part of branchmark
+        internal const int lazybranchmarkback2 = 6; // back2 part of lazybranchmark
+        internal const int branchcountback2 = 7; // back2 part of branchcount
+        internal const int lazybranchcountback2 = 8; // back2 part of lazybranchcount
+        internal const int forejumpback = 9; // back part of forejump
+        internal const int uniquecount = 10;
 
-        static RegexCompiler() {
+        static RegexCompiler()
+        {
             // <SECREVIEW> Regex only generates string manipulation, so this is ok.
-            // </SECREVIEW>      
+            // </SECREVIEW>
 
 #if MONO_FEATURE_CAS
             new ReflectionPermission(PermissionState.Unrestricted).Assert();
 #endif
-            try {
+            try
+            {
                 // note some fields
-                _textbegF       = RegexRunnerField("runtextbeg");
-                _textendF       = RegexRunnerField("runtextend");
-                _textstartF     = RegexRunnerField("runtextstart");
-                _textposF       = RegexRunnerField("runtextpos");
-                _textF          = RegexRunnerField("runtext");
-                _trackposF      = RegexRunnerField("runtrackpos");
-                _trackF         = RegexRunnerField("runtrack");
-                _stackposF      = RegexRunnerField("runstackpos");
-                _stackF         = RegexRunnerField("runstack");
-                _trackcountF    = RegexRunnerField("runtrackcount");
+                _textbegF = RegexRunnerField("runtextbeg");
+                _textendF = RegexRunnerField("runtextend");
+                _textstartF = RegexRunnerField("runtextstart");
+                _textposF = RegexRunnerField("runtextpos");
+                _textF = RegexRunnerField("runtext");
+                _trackposF = RegexRunnerField("runtrackpos");
+                _trackF = RegexRunnerField("runtrack");
+                _stackposF = RegexRunnerField("runstackpos");
+                _stackF = RegexRunnerField("runstack");
+                _trackcountF = RegexRunnerField("runtrackcount");
 
                 // note some methods
                 _ensurestorageM = RegexRunnerMethod("EnsureStorage");
-                _captureM       = RegexRunnerMethod("Capture");
-                _transferM      = RegexRunnerMethod("TransferCapture");
-                _uncaptureM     = RegexRunnerMethod("Uncapture");
-                _ismatchedM     = RegexRunnerMethod("IsMatched");
-                _matchlengthM   = RegexRunnerMethod("MatchLength");
-                _matchindexM    = RegexRunnerMethod("MatchIndex");
-                _isboundaryM    = RegexRunnerMethod("IsBoundary");
-                _charInSetM     = RegexRunnerMethod("CharInClass");
-                _isECMABoundaryM= RegexRunnerMethod("IsECMABoundary");
-                _crawlposM      = RegexRunnerMethod("Crawlpos");
-                _checkTimeoutM  = RegexRunnerMethod("CheckTimeout");
+                _captureM = RegexRunnerMethod("Capture");
+                _transferM = RegexRunnerMethod("TransferCapture");
+                _uncaptureM = RegexRunnerMethod("Uncapture");
+                _ismatchedM = RegexRunnerMethod("IsMatched");
+                _matchlengthM = RegexRunnerMethod("MatchLength");
+                _matchindexM = RegexRunnerMethod("MatchIndex");
+                _isboundaryM = RegexRunnerMethod("IsBoundary");
+                _charInSetM = RegexRunnerMethod("CharInClass");
+                _isECMABoundaryM = RegexRunnerMethod("IsECMABoundary");
+                _crawlposM = RegexRunnerMethod("Crawlpos");
+                _checkTimeoutM = RegexRunnerMethod("CheckTimeout");
 
-                _chartolowerM   = typeof(Char).GetMethod("ToLower", new Type[] {typeof(Char), typeof(CultureInfo)});
-                _getcharM       = typeof(String).GetMethod("get_Chars", new Type[] {typeof(int)});
-                _getCurrentCulture   = typeof(CultureInfo).GetMethod("get_CurrentCulture");
+                _chartolowerM = typeof(Char).GetMethod(
+                    "ToLower",
+                    new Type[] { typeof(Char), typeof(CultureInfo) }
+                );
+                _getcharM = typeof(String).GetMethod("get_Chars", new Type[] { typeof(int) });
+                _getCurrentCulture = typeof(CultureInfo).GetMethod("get_CurrentCulture");
                 _getInvariantCulture = typeof(CultureInfo).GetMethod("get_InvariantCulture");
-                
 
 #if DBG
-                _dumpstateM     = RegexRunnerMethod("DumpState");
+                _dumpstateM = RegexRunnerMethod("DumpState");
 #endif
             }
-            finally {
-#if MONO_FEATURE_CAS 
+            finally
+            {
+#if MONO_FEATURE_CAS
                 CodeAccessPermission.RevertAssert();
 #endif
             }
         }
 
-        private static FieldInfo RegexRunnerField(String fieldname) {
-            return typeof(RegexRunner).GetField(fieldname, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+        private static FieldInfo RegexRunnerField(String fieldname)
+        {
+            return typeof(RegexRunner).GetField(
+                fieldname,
+                BindingFlags.NonPublic
+                    | BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
         }
 
-        private static MethodInfo RegexRunnerMethod(String methname) {
-            return typeof(RegexRunner).GetMethod(methname, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+        private static MethodInfo RegexRunnerMethod(String methname)
+        {
+            return typeof(RegexRunner).GetMethod(
+                methname,
+                BindingFlags.NonPublic
+                    | BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
         }
 
-
-        /* 
-         * Entry point to dynamically compile a regular expression.  The expression is compiled to 
+        /*
+         * Entry point to dynamically compile a regular expression.  The expression is compiled to
          * an in-memory assembly.
          */
-        internal static RegexRunnerFactory Compile(RegexCode code, RegexOptions options) {
+        internal static RegexRunnerFactory Compile(RegexCode code, RegexOptions options)
+        {
             RegexLWCGCompiler c = new RegexLWCGCompiler();
             RegexRunnerFactory factory;
 
             // <SECREVIEW> Regex only generates string manipulation, so this is ok.
-            // </SECREVIEW>         
+            // </SECREVIEW>
 #if MONO_FEATURE_CAS
             new ReflectionPermission(PermissionState.Unrestricted).Assert();
 #endif
-            try {
+            try
+            {
                 factory = c.FactoryInstanceFromCode(code, options);
             }
-            finally {
+            finally
+            {
 #if MONO_FEATURE_CAS
                 CodeAccessPermission.RevertAssert();
 #endif
@@ -211,18 +231,33 @@ namespace System.Text.RegularExpressions {
             return factory;
         }
 
-        /* 
+        /*
          * Compile regular expressions into an assembly on disk.
          */
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [SuppressMessage("Microsoft.Security","CA2106:SecureAsserts", Justification="Microsoft: SECREVIEW : Regex only generates string manipulation, so this is OK")]
-        internal static void CompileToAssembly(RegexCompilationInfo[] regexes, AssemblyName an, CustomAttributeBuilder[] attribs, String resourceFile) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2106:SecureAsserts",
+            Justification = "Microsoft: SECREVIEW : Regex only generates string manipulation, so this is OK"
+        )]
+        internal static void CompileToAssembly(
+            RegexCompilationInfo[] regexes,
+            AssemblyName an,
+            CustomAttributeBuilder[] attribs,
+            String resourceFile
+        )
+        {
             RegexTypeCompiler c = new RegexTypeCompiler(an, attribs, resourceFile);
-        
-            for (int i=0; i<regexes.Length; i++) {
-                if (regexes[i] == null) {
-                    throw new ArgumentNullException("regexes", SR.GetString(SR.ArgumentNull_ArrayWithNullElements));
+
+            for (int i = 0; i < regexes.Length; i++)
+            {
+                if (regexes[i] == null)
+                {
+                    throw new ArgumentNullException(
+                        "regexes",
+                        SR.GetString(SR.ArgumentNull_ArrayWithNullElements)
+                    );
                 }
                 String pattern = regexes[i].Pattern;
                 RegexOptions options = regexes[i].Options;
@@ -233,36 +268,48 @@ namespace System.Text.RegularExpressions {
                     fullname = regexes[i].Namespace + "." + regexes[i].Name;
 
                 TimeSpan mTimeout = regexes[i].MatchTimeout;
-        
+
                 RegexTree tree = RegexParser.Parse(pattern, options);
                 RegexCode code = RegexWriter.Write(tree);
-        
+
                 Type factory;
-        
+
 #if MONO_FEATURE_CAS
                 new ReflectionPermission(PermissionState.Unrestricted).Assert();
 #endif
-                try {
+                try
+                {
                     factory = c.FactoryTypeFromCode(code, options, fullname);
-                    c.GenerateRegexType(pattern, options, fullname, regexes[i].IsPublic, code, tree, factory, mTimeout);
+                    c.GenerateRegexType(
+                        pattern,
+                        options,
+                        fullname,
+                        regexes[i].IsPublic,
+                        code,
+                        tree,
+                        factory,
+                        mTimeout
+                    );
                 }
-                finally {
+                finally
+                {
 #if MONO_FEATURE_CAS
                     CodeAccessPermission.RevertAssert();
 #endif
                 }
             }
-        
+
             c.Save();
         }
-        
 
         /*
          * Keeps track of an operation that needs to be referenced in the backtrack-jump
          * switch table, and that needs backtracking code to be emitted (if flags != 0)
          */
-        internal sealed class BacktrackNote {
-            internal BacktrackNote(int flags, Label label, int codepos) {
+        internal sealed class BacktrackNote
+        {
+            internal BacktrackNote(int flags, Label label, int codepos)
+            {
                 _codepos = codepos;
                 _flags = flags;
                 _label = label;
@@ -277,9 +324,13 @@ namespace System.Text.RegularExpressions {
          * Adds a backtrack note to the list of them, and returns the index of the new
          * note (which is also the index for the jump used by the switch table)
          */
-        internal int AddBacktrackNote(int flags, Label l, int codepos) {
-            if (_notes == null || _notecount >= _notes.Length) {
-                BacktrackNote[] newnotes = new BacktrackNote[_notes == null ? 16 : _notes.Length * 2];
+        internal int AddBacktrackNote(int flags, Label l, int codepos)
+        {
+            if (_notes == null || _notecount >= _notes.Length)
+            {
+                BacktrackNote[] newnotes = new BacktrackNote[
+                    _notes == null ? 16 : _notes.Length * 2
+                ];
                 if (_notes != null)
                     System.Array.Copy(_notes, 0, newnotes, 0, _notecount);
                 _notes = newnotes;
@@ -294,7 +345,8 @@ namespace System.Text.RegularExpressions {
          * Adds a backtrack note for the current operation; creates a new label for
          * where the code will be, and returns the switch index.
          */
-        internal int AddTrack() {
+        internal int AddTrack()
+        {
             return AddTrack(RegexCode.Back);
         }
 
@@ -302,7 +354,8 @@ namespace System.Text.RegularExpressions {
          * Adds a backtrack note for the current operation; creates a new label for
          * where the code will be, and returns the switch index.
          */
-        internal int AddTrack(int flags) {
+        internal int AddTrack(int flags)
+        {
             return AddBacktrackNote(flags, DefineLabel(), _codepos);
         }
 
@@ -310,7 +363,8 @@ namespace System.Text.RegularExpressions {
          * Adds a switchtable entry for the specified position (for the forward
          * logic; does not cause backtracking logic to be generated)
          */
-        internal int AddGoto(int destpos) {
+        internal int AddGoto(int destpos)
+        {
             if (_goto[destpos] == -1)
                 _goto[destpos] = AddBacktrackNote(0, _labels[destpos], destpos);
 
@@ -322,7 +376,8 @@ namespace System.Text.RegularExpressions {
          * if it's already marked to be generated, returns the switch index
          * for the unique piece of code.
          */
-        internal int AddUniqueTrack(int i) {
+        internal int AddUniqueTrack(int i)
+        {
             return AddUniqueTrack(i, RegexCode.Back);
         }
 
@@ -331,7 +386,8 @@ namespace System.Text.RegularExpressions {
          * if it's already marked to be generated, returns the switch index
          * for the unique piece of code.
          */
-        internal int AddUniqueTrack(int i, int flags) {
+        internal int AddUniqueTrack(int i, int flags)
+        {
             if (_uniquenote[i] == -1)
                 _uniquenote[i] = AddTrack(flags);
 
@@ -341,80 +397,94 @@ namespace System.Text.RegularExpressions {
         /*
          * A macro for _ilg.DefineLabel
          */
-        internal Label DefineLabel() {
+        internal Label DefineLabel()
+        {
             return _ilg.DefineLabel();
         }
 
         /*
          * A macro for _ilg.MarkLabel
          */
-        internal void MarkLabel(Label l) {
+        internal void MarkLabel(Label l)
+        {
             _ilg.MarkLabel(l);
         }
 
         /*
          * Returns the ith operand of the current operation
          */
-        internal int Operand(int i) {
+        internal int Operand(int i)
+        {
             return _codes[_codepos + i + 1];
         }
 
         /*
          * True if the current operation is marked for the leftward direction
          */
-        internal bool IsRtl() {
-            return(_regexopcode & RegexCode.Rtl) != 0;
+        internal bool IsRtl()
+        {
+            return (_regexopcode & RegexCode.Rtl) != 0;
         }
 
         /*
          * True if the current operation is marked for case insensitive operation
          */
-        internal bool IsCi() {
-            return(_regexopcode & RegexCode.Ci) != 0;
+        internal bool IsCi()
+        {
+            return (_regexopcode & RegexCode.Ci) != 0;
         }
 
 #if DBG
         /*
          * True if we need to do the backtrack logic for the current operation
          */
-        internal bool IsBack() {
-            return(_regexopcode & RegexCode.Back) != 0;
+        internal bool IsBack()
+        {
+            return (_regexopcode & RegexCode.Back) != 0;
         }
 
         /*
          * True if we need to do the second-backtrack logic for the current operation
          */
-        internal bool IsBack2() {
-            return(_regexopcode & RegexCode.Back2) != 0;
+        internal bool IsBack2()
+        {
+            return (_regexopcode & RegexCode.Back2) != 0;
         }
 #endif
 
         /*
          * Returns the raw regex opcode (masking out Back and Rtl)
          */
-        internal int Code() {
+        internal int Code()
+        {
             return _regexopcode & RegexCode.Mask;
         }
 
-        internal void Ldstr(string str) {
+        internal void Ldstr(string str)
+        {
             _ilg.Emit(OpCodes.Ldstr, str);
         }
 
         /*
          * A macro for the various forms of Ldc
          */
-        internal void Ldc(int i) {
+        internal void Ldc(int i)
+        {
             if (i <= 127 && i >= -128)
                 _ilg.Emit(OpCodes.Ldc_I4_S, (byte)i);
             else
                 _ilg.Emit(OpCodes.Ldc_I4, i);
         }
 
-        internal void LdcI8(long i) {
-            if (i <= Int32.MaxValue && i >= Int32.MinValue) {
-                Ldc((Int32) i);
+        internal void LdcI8(long i)
+        {
+            if (i <= Int32.MaxValue && i >= Int32.MinValue)
+            {
+                Ldc((Int32)i);
                 _ilg.Emit(OpCodes.Conv_I8);
-            } else {
+            }
+            else
+            {
                 _ilg.Emit(OpCodes.Ldc_I8, i);
             }
         }
@@ -422,35 +492,40 @@ namespace System.Text.RegularExpressions {
         /*
          * A macro for _ilg.Emit(OpCodes.Dup)
          */
-        internal void Dup() {
+        internal void Dup()
+        {
             _ilg.Emit(OpCodes.Dup);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Ret)
          */
-        internal void Ret() {
+        internal void Ret()
+        {
             _ilg.Emit(OpCodes.Ret);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Pop)
          */
-        internal void Pop() {
+        internal void Pop()
+        {
             _ilg.Emit(OpCodes.Pop);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Add)
          */
-        internal void Add() {
+        internal void Add()
+        {
             _ilg.Emit(OpCodes.Add);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Add); a true flag can turn it into a Sub
          */
-        internal void Add(bool negate) {
+        internal void Add(bool negate)
+        {
             if (negate)
                 _ilg.Emit(OpCodes.Sub);
             else
@@ -460,14 +535,16 @@ namespace System.Text.RegularExpressions {
         /*
          * A macro for _ilg.Emit(OpCodes.Sub)
          */
-        internal void Sub() {
+        internal void Sub()
+        {
             _ilg.Emit(OpCodes.Sub);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Sub); a true flag can turn it into a Add
          */
-        internal void Sub(bool negate) {
+        internal void Sub(bool negate)
+        {
             if (negate)
                 _ilg.Emit(OpCodes.Add);
             else
@@ -477,28 +554,32 @@ namespace System.Text.RegularExpressions {
         /*
          * A macro for _ilg.Emit(OpCodes.Ldloc);
          */
-        internal void Ldloc(LocalBuilder lt) {
+        internal void Ldloc(LocalBuilder lt)
+        {
             _ilg.Emit(OpCodes.Ldloc_S, lt);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Stloc);
          */
-        internal void Stloc(LocalBuilder lt) {
+        internal void Stloc(LocalBuilder lt)
+        {
             _ilg.Emit(OpCodes.Stloc_S, lt);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Ldarg_0);
          */
-        internal void Ldthis() {
+        internal void Ldthis()
+        {
             _ilg.Emit(OpCodes.Ldarg_0);
         }
 
         /*
          * A macro for Ldthis(); Ldfld();
          */
-        internal void Ldthisfld(FieldInfo ft) {
+        internal void Ldthisfld(FieldInfo ft)
+        {
             Ldthis();
             _ilg.Emit(OpCodes.Ldfld, ft);
         }
@@ -506,7 +587,8 @@ namespace System.Text.RegularExpressions {
         /*
          * A macro for Ldthis(); Ldfld(); Stloc();
          */
-        internal void Mvfldloc(FieldInfo ft, LocalBuilder lt) {
+        internal void Mvfldloc(FieldInfo ft, LocalBuilder lt)
+        {
             Ldthisfld(ft);
             Stloc(lt);
         }
@@ -514,7 +596,8 @@ namespace System.Text.RegularExpressions {
         /*
          * A macro for Ldthis(); Ldthisfld(); Stloc();
          */
-        internal void Mvlocfld(LocalBuilder lt, FieldInfo ft) {
+        internal void Mvlocfld(LocalBuilder lt, FieldInfo ft)
+        {
             Ldthis();
             Ldloc(lt);
             Stfld(ft);
@@ -523,168 +606,192 @@ namespace System.Text.RegularExpressions {
         /*
          * A macro for _ilg.Emit(OpCodes.Stfld);
          */
-        internal void Stfld(FieldInfo ft) {
+        internal void Stfld(FieldInfo ft)
+        {
             _ilg.Emit(OpCodes.Stfld, ft);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Callvirt);
          */
-        internal void Callvirt(MethodInfo mt) {
+        internal void Callvirt(MethodInfo mt)
+        {
             _ilg.Emit(OpCodes.Callvirt, mt);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Call);
          */
-        internal void Call(MethodInfo mt) {
+        internal void Call(MethodInfo mt)
+        {
             _ilg.Emit(OpCodes.Call, mt);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Newobj);
          */
-        internal void Newobj(ConstructorInfo ct) {
+        internal void Newobj(ConstructorInfo ct)
+        {
             _ilg.Emit(OpCodes.Newobj, ct);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Brfalse) (long form)
          */
-        internal void BrfalseFar(Label l) {
+        internal void BrfalseFar(Label l)
+        {
             _ilg.Emit(OpCodes.Brfalse, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Brtrue) (long form)
          */
-        internal void BrtrueFar(Label l) {
+        internal void BrtrueFar(Label l)
+        {
             _ilg.Emit(OpCodes.Brtrue, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Br) (long form)
          */
-        internal void BrFar(Label l) {
+        internal void BrFar(Label l)
+        {
             _ilg.Emit(OpCodes.Br, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Ble) (long form)
          */
-        internal void BleFar(Label l) {
+        internal void BleFar(Label l)
+        {
             _ilg.Emit(OpCodes.Ble, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Blt) (long form)
          */
-        internal void BltFar(Label l) {
+        internal void BltFar(Label l)
+        {
             _ilg.Emit(OpCodes.Blt, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Bge) (long form)
          */
-        internal void BgeFar(Label l) {
+        internal void BgeFar(Label l)
+        {
             _ilg.Emit(OpCodes.Bge, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Bgt) (long form)
          */
-        internal void BgtFar(Label l) {
+        internal void BgtFar(Label l)
+        {
             _ilg.Emit(OpCodes.Bgt, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Bne) (long form)
          */
-        internal void BneFar(Label l) {
+        internal void BneFar(Label l)
+        {
             _ilg.Emit(OpCodes.Bne_Un, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Beq) (long form)
          */
-        internal void BeqFar(Label l) {
+        internal void BeqFar(Label l)
+        {
             _ilg.Emit(OpCodes.Beq, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Brfalse_S) (short jump)
          */
-        internal void Brfalse(Label l) {
+        internal void Brfalse(Label l)
+        {
             _ilg.Emit(OpCodes.Brfalse_S, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Br_S) (short jump)
          */
-        internal void Br(Label l) {
+        internal void Br(Label l)
+        {
             _ilg.Emit(OpCodes.Br_S, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Ble_S) (short jump)
          */
-        internal void Ble(Label l) {
+        internal void Ble(Label l)
+        {
             _ilg.Emit(OpCodes.Ble_S, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Blt_S) (short jump)
          */
-        internal void Blt(Label l) {
+        internal void Blt(Label l)
+        {
             _ilg.Emit(OpCodes.Blt_S, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Bge_S) (short jump)
          */
-        internal void Bge(Label l) {
+        internal void Bge(Label l)
+        {
             _ilg.Emit(OpCodes.Bge_S, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Bgt_S) (short jump)
          */
-        internal void Bgt(Label l) {
+        internal void Bgt(Label l)
+        {
             _ilg.Emit(OpCodes.Bgt_S, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Bleun_S) (short jump)
          */
-        internal void Bgtun(Label l) {
+        internal void Bgtun(Label l)
+        {
             _ilg.Emit(OpCodes.Bgt_Un_S, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Bne_S) (short jump)
          */
-        internal void Bne(Label l) {
+        internal void Bne(Label l)
+        {
             _ilg.Emit(OpCodes.Bne_Un_S, l);
         }
 
         /*
          * A macro for _ilg.Emit(OpCodes.Beq_S) (short jump)
          */
-        internal void Beq(Label l) {
+        internal void Beq(Label l)
+        {
             _ilg.Emit(OpCodes.Beq_S, l);
         }
 
         /*
          * A macro for the Ldlen instruction
          */
-        internal void Ldlen() {
+        internal void Ldlen()
+        {
             _ilg.Emit(OpCodes.Ldlen);
         }
 
         /*
          * Loads the char to the right of the current position
          */
-        internal void Rightchar() {
+        internal void Rightchar()
+        {
             Ldloc(_textV);
             Ldloc(_textposV);
             Callvirt(_getcharM);
@@ -693,7 +800,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Loads the char to the right of the current position and advances the current position
          */
-        internal void Rightcharnext() {
+        internal void Rightcharnext()
+        {
             Ldloc(_textV);
             Ldloc(_textposV);
             Dup();
@@ -706,7 +814,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Loads the char to the left of the current position
          */
-        internal void Leftchar() {
+        internal void Leftchar()
+        {
             Ldloc(_textV);
             Ldloc(_textposV);
             Ldc(1);
@@ -717,7 +826,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Loads the char to the left of the current position and advances (leftward)
          */
-        internal void Leftcharnext() {
+        internal void Leftcharnext()
+        {
             Ldloc(_textV);
             Ldloc(_textposV);
             Ldc(1);
@@ -730,7 +840,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Creates a backtrack note and pushes the switch index it on the tracking stack
          */
-        internal void Track() {
+        internal void Track()
+        {
             ReadyPushTrack();
             Ldc(AddTrack());
             DoPush();
@@ -743,7 +854,8 @@ namespace System.Text.RegularExpressions {
          * <
 
 */
-        internal void Trackagain() {
+        internal void Trackagain()
+        {
             ReadyPushTrack();
             Ldc(_backpos);
             DoPush();
@@ -752,7 +864,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Saves the value of a local variable on the tracking stack
          */
-        internal void PushTrack(LocalBuilder lt) {
+        internal void PushTrack(LocalBuilder lt)
+        {
             ReadyPushTrack();
             Ldloc(lt);
             DoPush();
@@ -762,7 +875,8 @@ namespace System.Text.RegularExpressions {
          * Creates a backtrack note for a piece of code that should only be generated once,
          * and emits code that pushes the switch index on the backtracking stack.
          */
-        internal void TrackUnique(int i) {
+        internal void TrackUnique(int i)
+        {
             ReadyPushTrack();
             Ldc(AddUniqueTrack(i));
             DoPush();
@@ -773,7 +887,8 @@ namespace System.Text.RegularExpressions {
          * generated once, and emits code that pushes the switch index on the
          * backtracking stack.
          */
-        internal void TrackUnique2(int i) {
+        internal void TrackUnique2(int i)
+        {
             ReadyPushTrack();
             Ldc(AddUniqueTrack(i, RegexCode.Back2));
             DoPush();
@@ -782,7 +897,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Prologue to code that will push an element on the tracking stack
          */
-        internal void ReadyPushTrack() {
+        internal void ReadyPushTrack()
+        {
             _ilg.Emit(OpCodes.Ldloc_S, _trackV);
             _ilg.Emit(OpCodes.Ldloc_S, _trackposV);
             _ilg.Emit(OpCodes.Ldc_I4_1);
@@ -794,7 +910,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Pops an element off the tracking stack (leave it on the operand stack)
          */
-        internal void PopTrack() {
+        internal void PopTrack()
+        {
             _ilg.Emit(OpCodes.Ldloc_S, _trackV);
             _ilg.Emit(OpCodes.Ldloc_S, _trackposV);
             _ilg.Emit(OpCodes.Dup);
@@ -807,7 +924,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Retrieves the top entry on the tracking stack without popping
          */
-        internal void TopTrack() {
+        internal void TopTrack()
+        {
             _ilg.Emit(OpCodes.Ldloc_S, _trackV);
             _ilg.Emit(OpCodes.Ldloc_S, _trackposV);
             _ilg.Emit(OpCodes.Ldelem_I4);
@@ -816,7 +934,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Saves the value of a local variable on the grouping stack
          */
-        internal void PushStack(LocalBuilder lt) {
+        internal void PushStack(LocalBuilder lt)
+        {
             ReadyPushStack();
             _ilg.Emit(OpCodes.Ldloc_S, lt);
             DoPush();
@@ -825,10 +944,12 @@ namespace System.Text.RegularExpressions {
         /*
          * Prologue to code that will replace the ith element on the grouping stack
          */
-        internal void ReadyReplaceStack(int i) {
+        internal void ReadyReplaceStack(int i)
+        {
             _ilg.Emit(OpCodes.Ldloc_S, _stackV);
             _ilg.Emit(OpCodes.Ldloc_S, _stackposV);
-            if (i != 0) {
+            if (i != 0)
+            {
                 Ldc(i);
                 _ilg.Emit(OpCodes.Add);
             }
@@ -837,7 +958,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Prologue to code that will push an element on the grouping stack
          */
-        internal void ReadyPushStack() {
+        internal void ReadyPushStack()
+        {
             _ilg.Emit(OpCodes.Ldloc_S, _stackV);
             _ilg.Emit(OpCodes.Ldloc_S, _stackposV);
             _ilg.Emit(OpCodes.Ldc_I4_1);
@@ -849,7 +971,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Retrieves the top entry on the stack without popping
          */
-        internal void TopStack() {
+        internal void TopStack()
+        {
             _ilg.Emit(OpCodes.Ldloc_S, _stackV);
             _ilg.Emit(OpCodes.Ldloc_S, _stackposV);
             _ilg.Emit(OpCodes.Ldelem_I4);
@@ -858,7 +981,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Pops an element off the grouping stack (leave it on the operand stack)
          */
-        internal void PopStack() {
+        internal void PopStack()
+        {
             _ilg.Emit(OpCodes.Ldloc_S, _stackV);
             _ilg.Emit(OpCodes.Ldloc_S, _stackposV);
             _ilg.Emit(OpCodes.Dup);
@@ -871,14 +995,16 @@ namespace System.Text.RegularExpressions {
         /*
          * Pops 1 element off the grouping stack and discards it
          */
-        internal void PopDiscardStack() {
+        internal void PopDiscardStack()
+        {
             PopDiscardStack(1);
         }
 
         /*
          * Pops i elements off the grouping stack and discards them
          */
-        internal void PopDiscardStack(int i) {
+        internal void PopDiscardStack(int i)
+        {
             _ilg.Emit(OpCodes.Ldloc_S, _stackposV);
             Ldc(i);
             _ilg.Emit(OpCodes.Add);
@@ -888,21 +1014,24 @@ namespace System.Text.RegularExpressions {
         /*
          * Epilogue to code that will replace an element on a stack (use Ld* in between)
          */
-        internal void DoReplace() {
+        internal void DoReplace()
+        {
             _ilg.Emit(OpCodes.Stelem_I4);
         }
 
         /*
          * Epilogue to code that will push an element on a stack (use Ld* in between)
          */
-        internal void DoPush() {
+        internal void DoPush()
+        {
             _ilg.Emit(OpCodes.Stelem_I4);
         }
 
         /*
          * Jump to the backtracking switch
          */
-        internal void Back() {
+        internal void Back()
+        {
             _ilg.Emit(OpCodes.Br, _backtrack);
         }
 
@@ -921,8 +1050,10 @@ namespace System.Text.RegularExpressions {
          *
          * Since forward gotos pose no threat, they just turn into a Br.
          */
-        internal void Goto(int i) {
-            if (i < _codepos) {
+        internal void Goto(int i)
+        {
+            if (i < _codepos)
+            {
                 Label l1 = DefineLabel();
 
                 // When going backwards, ensure enough space.
@@ -932,13 +1063,14 @@ namespace System.Text.RegularExpressions {
                 Ldloc(_stackposV);
                 Ldc(_trackcount * 3);
                 BgtFar(_labels[i]);
-                MarkLabel(l1); 
+                MarkLabel(l1);
                 ReadyPushTrack();
                 Ldc(AddGoto(i));
                 DoPush();
                 BrFar(_backtrack);
             }
-            else {
+            else
+            {
                 BrFar(_labels[i]);
             }
         }
@@ -947,21 +1079,24 @@ namespace System.Text.RegularExpressions {
          * Returns the position of the next operation in the regex code, taking
          * into account the different numbers of arguments taken by operations
          */
-        internal int NextCodepos() {
+        internal int NextCodepos()
+        {
             return _codepos + RegexCode.OpcodeSize(_codes[_codepos]);
         }
 
         /*
          * The label for the next (forward) operation
          */
-        internal Label AdvanceLabel() {
+        internal Label AdvanceLabel()
+        {
             return _labels[NextCodepos()];
         }
 
         /*
          * Goto the next (forward) operation
          */
-        internal void Advance() {
+        internal void Advance()
+        {
             _ilg.Emit(OpCodes.Br, AdvanceLabel());
         }
 
@@ -971,7 +1106,7 @@ namespace System.Text.RegularExpressions {
                 Call(_getInvariantCulture);
             else
                 Call(_getCurrentCulture);
-            
+
             Call(_chartolowerM);
         }
 
@@ -981,38 +1116,49 @@ namespace System.Text.RegularExpressions {
          *
          * In the absence of backtracking, this is all we would need.
          */
-        internal void GenerateForwardSection() {
+        internal void GenerateForwardSection()
+        {
             int codepos;
 
             _labels = new Label[_codes.Length];
-            _goto   = new int[_codes.Length];
+            _goto = new int[_codes.Length];
 
             // initialize
 
-            for (codepos = 0; codepos < _codes.Length; codepos += RegexCode.OpcodeSize(_codes[codepos])) {
-                _goto[codepos]   = -1;
+            for (
+                codepos = 0;
+                codepos < _codes.Length;
+                codepos += RegexCode.OpcodeSize(_codes[codepos])
+            )
+            {
+                _goto[codepos] = -1;
                 _labels[codepos] = _ilg.DefineLabel();
             }
 
-            _uniquenote   = new int[uniquecount];
+            _uniquenote = new int[uniquecount];
             for (int i = 0; i < uniquecount; i++)
                 _uniquenote[i] = -1;
 
             // emit variable initializers
 
-            Mvfldloc(_textF,      _textV);
+            Mvfldloc(_textF, _textV);
             Mvfldloc(_textstartF, _textstartV);
-            Mvfldloc(_textbegF,   _textbegV);
-            Mvfldloc(_textendF,   _textendV);
-            Mvfldloc(_textposF,   _textposV);
-            Mvfldloc(_trackF,     _trackV);
-            Mvfldloc(_trackposF,  _trackposV);
-            Mvfldloc(_stackF,     _stackV);
-            Mvfldloc(_stackposF,  _stackposV);
+            Mvfldloc(_textbegF, _textbegV);
+            Mvfldloc(_textendF, _textendV);
+            Mvfldloc(_textposF, _textposV);
+            Mvfldloc(_trackF, _trackV);
+            Mvfldloc(_trackposF, _trackposV);
+            Mvfldloc(_stackF, _stackV);
+            Mvfldloc(_stackposF, _stackposV);
 
             _backpos = -1;
 
-            for (codepos = 0; codepos < _codes.Length; codepos += RegexCode.OpcodeSize(_codes[codepos])) {
+            for (
+                codepos = 0;
+                codepos < _codes.Length;
+                codepos += RegexCode.OpcodeSize(_codes[codepos])
+            )
+            {
                 MarkLabel(_labels[codepos]);
                 _codepos = codepos;
                 _regexopcode = _codes[codepos];
@@ -1026,7 +1172,8 @@ namespace System.Text.RegularExpressions {
          * and it also contains the calls that expand the tracking and the
          * grouping stack when they get too full.
          */
-        internal void GenerateMiddleSection() {
+        internal void GenerateMiddleSection()
+        {
 #pragma warning disable 219
             Label l1 = DefineLabel();
 #pragma warning restore 219
@@ -1036,7 +1183,7 @@ namespace System.Text.RegularExpressions {
             // Backtrack switch
             MarkLabel(_backtrack);
 
-            // first call EnsureStorage 
+            // first call EnsureStorage
             Mvlocfld(_trackposV, _trackposF);
             Mvlocfld(_stackposV, _stackposF);
             Ldthis();
@@ -1046,7 +1193,6 @@ namespace System.Text.RegularExpressions {
             Mvfldloc(_trackF, _trackV);
             Mvfldloc(_stackF, _stackV);
 
-
             PopTrack();
 
             table = new Label[_notecount];
@@ -1054,19 +1200,21 @@ namespace System.Text.RegularExpressions {
                 table[i] = _notes[i]._label;
 
             _ilg.Emit(OpCodes.Switch, table);
-
         }
 
         /*
          * Generates the last section of the MSIL. This section contains all of
          * the backtracking logic.
          */
-        internal void GenerateBacktrackSection() {
+        internal void GenerateBacktrackSection()
+        {
             int i;
 
-            for (i = 0; i < _notecount; i++) {
+            for (i = 0; i < _notecount; i++)
+            {
                 BacktrackNote n = _notes[i];
-                if (n._flags != 0) {
+                if (n._flags != 0)
+                {
                     _ilg.MarkLabel(n._label);
                     _codepos = n._codepos;
                     _backpos = i;
@@ -1083,15 +1231,22 @@ namespace System.Text.RegularExpressions {
         // !!!! This function must be kept synchronized with FindFirstChar in      !!!!
         // !!!! RegexInterpreter.cs                                                !!!!
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        internal void GenerateFindFirstChar() {
-            _textposV       = DeclareInt();
-            _textV          = DeclareString();
-            _tempV          = DeclareInt();
-            _temp2V         = DeclareInt();
+        internal void GenerateFindFirstChar()
+        {
+            _textposV = DeclareInt();
+            _textV = DeclareString();
+            _tempV = DeclareInt();
+            _temp2V = DeclareInt();
 
-            if (0 != (_anchors & (RegexFCD.Beginning | RegexFCD.Start | RegexFCD.EndZ | RegexFCD.End))) {
-                if (!_code._rightToLeft) {
-                    if (0 != (_anchors & RegexFCD.Beginning)) {
+            if (
+                0
+                != (_anchors & (RegexFCD.Beginning | RegexFCD.Start | RegexFCD.EndZ | RegexFCD.End))
+            )
+            {
+                if (!_code._rightToLeft)
+                {
+                    if (0 != (_anchors & RegexFCD.Beginning))
+                    {
                         Label l1 = DefineLabel();
                         Ldthisfld(_textposF);
                         Ldthisfld(_textbegF);
@@ -1104,7 +1259,8 @@ namespace System.Text.RegularExpressions {
                         MarkLabel(l1);
                     }
 
-                    if (0 != (_anchors & RegexFCD.Start)) {
+                    if (0 != (_anchors & RegexFCD.Start))
+                    {
                         Label l1 = DefineLabel();
                         Ldthisfld(_textposF);
                         Ldthisfld(_textstartF);
@@ -1117,7 +1273,8 @@ namespace System.Text.RegularExpressions {
                         MarkLabel(l1);
                     }
 
-                    if (0 != (_anchors & RegexFCD.EndZ)) {
+                    if (0 != (_anchors & RegexFCD.EndZ))
+                    {
                         Label l1 = DefineLabel();
                         Ldthisfld(_textposF);
                         Ldthisfld(_textendF);
@@ -1132,7 +1289,8 @@ namespace System.Text.RegularExpressions {
                         MarkLabel(l1);
                     }
 
-                    if (0 != (_anchors & RegexFCD.End)) {
+                    if (0 != (_anchors & RegexFCD.End))
+                    {
                         Label l1 = DefineLabel();
                         Ldthisfld(_textposF);
                         Ldthisfld(_textendF);
@@ -1143,8 +1301,10 @@ namespace System.Text.RegularExpressions {
                         MarkLabel(l1);
                     }
                 }
-                else {
-                    if (0 != (_anchors & RegexFCD.End)) {
+                else
+                {
+                    if (0 != (_anchors & RegexFCD.End))
+                    {
                         Label l1 = DefineLabel();
                         Ldthisfld(_textposF);
                         Ldthisfld(_textendF);
@@ -1157,7 +1317,8 @@ namespace System.Text.RegularExpressions {
                         MarkLabel(l1);
                     }
 
-                    if (0 != (_anchors & RegexFCD.EndZ)) {
+                    if (0 != (_anchors & RegexFCD.EndZ))
+                    {
                         Label l1 = DefineLabel();
                         Label l2 = DefineLabel();
                         Ldthisfld(_textposF);
@@ -1182,7 +1343,8 @@ namespace System.Text.RegularExpressions {
                         MarkLabel(l2);
                     }
 
-                    if (0 != (_anchors & RegexFCD.Start)) {
+                    if (0 != (_anchors & RegexFCD.Start))
+                    {
                         Label l1 = DefineLabel();
                         Ldthisfld(_textposF);
                         Ldthisfld(_textstartF);
@@ -1195,7 +1357,8 @@ namespace System.Text.RegularExpressions {
                         MarkLabel(l1);
                     }
 
-                    if (0 != (_anchors & RegexFCD.Beginning)) {
+                    if (0 != (_anchors & RegexFCD.Beginning))
+                    {
                         Label l1 = DefineLabel();
                         Ldthisfld(_textposF);
                         Ldthisfld(_textbegF);
@@ -1213,23 +1376,23 @@ namespace System.Text.RegularExpressions {
                 Ldc(1);
                 Ret();
             }
-            else if (_bmPrefix != null && _bmPrefix._negativeUnicode == null) {
+            else if (_bmPrefix != null && _bmPrefix._negativeUnicode == null)
+            {
                 // Compiled Boyer-Moore string matching
                 // <
 
 
-                LocalBuilder chV      = _tempV;
-                LocalBuilder testV    = _tempV;
-                LocalBuilder limitV   = _temp2V;
-                Label      lDefaultAdvance  = DefineLabel();
-                Label      lAdvance         = DefineLabel();
-                Label      lFail            = DefineLabel();
-                Label      lStart           = DefineLabel();
+                LocalBuilder chV = _tempV;
+                LocalBuilder testV = _tempV;
+                LocalBuilder limitV = _temp2V;
+                Label lDefaultAdvance = DefineLabel();
+                Label lAdvance = DefineLabel();
+                Label lFail = DefineLabel();
+                Label lStart = DefineLabel();
 #pragma warning disable 219
-                Label      lOutOfRange      = DefineLabel();
+                Label lOutOfRange = DefineLabel();
 #pragma warning restore 219
-                Label      lPartialMatch    = DefineLabel();
-
+                Label lPartialMatch = DefineLabel();
 
                 int chLast;
                 int i;
@@ -1237,11 +1400,13 @@ namespace System.Text.RegularExpressions {
                 int last;
                 Label[] table;
 
-                if (!_code._rightToLeft) {
+                if (!_code._rightToLeft)
+                {
                     beforefirst = -1;
                     last = _bmPrefix._pattern.Length - 1;
                 }
-                else {
+                else
+                {
                     beforefirst = _bmPrefix._pattern.Length;
                     last = 0;
                 }
@@ -1256,11 +1421,13 @@ namespace System.Text.RegularExpressions {
                 Stloc(limitV);
 
                 Ldthisfld(_textposF);
-                if (!_code._rightToLeft) {
+                if (!_code._rightToLeft)
+                {
                     Ldc(_bmPrefix._pattern.Length - 1);
                     Add();
                 }
-                else {
+                else
+                {
                     Ldc(_bmPrefix._pattern.Length);
                     Sub();
                 }
@@ -1308,7 +1475,8 @@ namespace System.Text.RegularExpressions {
 
                 table = new Label[_bmPrefix._highASCII - _bmPrefix._lowASCII + 1];
 
-                for (i = _bmPrefix._lowASCII; i <= _bmPrefix._highASCII; i++) {
+                for (i = _bmPrefix._lowASCII; i <= _bmPrefix._highASCII; i++)
+                {
                     if (_bmPrefix._negativeASCII[i] == beforefirst)
                         table[i - _bmPrefix._lowASCII] = lDefaultAdvance;
                     else
@@ -1318,7 +1486,8 @@ namespace System.Text.RegularExpressions {
                 Ldloc(chV);
                 _ilg.Emit(OpCodes.Switch, table);
 
-                for (i = _bmPrefix._lowASCII; i <= _bmPrefix._highASCII; i++) {
+                for (i = _bmPrefix._lowASCII; i <= _bmPrefix._highASCII; i++)
+                {
                     if (_bmPrefix._negativeASCII[i] == beforefirst)
                         continue;
 
@@ -1333,7 +1502,8 @@ namespace System.Text.RegularExpressions {
                 Ldloc(_textposV);
                 Stloc(testV);
 
-                for (i = _bmPrefix._pattern.Length - 2; i >= 0; i--) {
+                for (i = _bmPrefix._pattern.Length - 2; i >= 0; i--)
+                {
                     Label lNext = DefineLabel();
                     int charindex;
 
@@ -1351,19 +1521,19 @@ namespace System.Text.RegularExpressions {
                     Callvirt(_getcharM);
                     if (_bmPrefix._caseInsensitive)
                         CallToLower();
-                    
+
                     Ldc(_bmPrefix._pattern[charindex]);
                     Beq(lNext);
                     Ldc(_bmPrefix._positive[charindex]);
                     BrFar(lAdvance);
 
                     MarkLabel(lNext);
-
                 }
 
                 Ldthis();
                 Ldloc(testV);
-                if (_code._rightToLeft) {
+                if (_code._rightToLeft)
+                {
                     Ldc(1);
                     Add();
                 }
@@ -1382,29 +1552,33 @@ namespace System.Text.RegularExpressions {
                 Ldc(0);
                 Ret();
             }
-            else if (_fcPrefix == null) {
+            else if (_fcPrefix == null)
+            {
                 Ldc(1);
                 Ret();
             }
-            else {
-                LocalBuilder cV   = _temp2V;
+            else
+            {
+                LocalBuilder cV = _temp2V;
 #pragma warning disable 219
-                LocalBuilder chV  = _tempV;
+                LocalBuilder chV = _tempV;
 #pragma warning restore 219
-                Label      l1   = DefineLabel();
-                Label      l2   = DefineLabel();
-                Label      l3   = DefineLabel();
-                Label      l4   = DefineLabel();
-                Label      l5   = DefineLabel();
+                Label l1 = DefineLabel();
+                Label l2 = DefineLabel();
+                Label l3 = DefineLabel();
+                Label l4 = DefineLabel();
+                Label l5 = DefineLabel();
 
                 Mvfldloc(_textposF, _textposV);
                 Mvfldloc(_textF, _textV);
 
-                if (!_code._rightToLeft) {
+                if (!_code._rightToLeft)
+                {
                     Ldthisfld(_textendF);
                     Ldloc(_textposV);
                 }
-                else {
+                else
+                {
                     Ldloc(_textposV);
                     Ldthisfld(_textbegF);
                 }
@@ -1429,14 +1603,16 @@ namespace System.Text.RegularExpressions {
 
                 if (_fcPrefix.CaseInsensitive)
                     CallToLower();
-                
-                if (!RegexCharClass.IsSingleton(_fcPrefix.Prefix)) {
+
+                if (!RegexCharClass.IsSingleton(_fcPrefix.Prefix))
+                {
                     Ldstr(_fcPrefix.Prefix);
                     Call(_charInSetM);
 
                     BrtrueFar(l2);
                 }
-                else {
+                else
+                {
                     Ldc(RegexCharClass.SingletonChar(_fcPrefix.Prefix));
                     Beq(l2);
                 }
@@ -1507,13 +1683,13 @@ namespace System.Text.RegularExpressions {
                 Ldc(0);
                 Ret();
             }
-
         }
 
         /*
          * Generates a very simple method that sets the _trackcount field.
          */
-        internal void GenerateInitTrackCount() {
+        internal void GenerateInitTrackCount()
+        {
             Ldthis();
             Ldc(_trackcount);
             Stfld(_trackcountF);
@@ -1523,42 +1699,46 @@ namespace System.Text.RegularExpressions {
         /*
          * Declares a local int
          */
-        internal LocalBuilder DeclareInt() {
-            return _ilg.DeclareLocal(typeof(int));            
+        internal LocalBuilder DeclareInt()
+        {
+            return _ilg.DeclareLocal(typeof(int));
         }
 
         /*
          * Declares a local int array
          */
-        internal LocalBuilder DeclareIntArray() {
+        internal LocalBuilder DeclareIntArray()
+        {
             return _ilg.DeclareLocal(typeof(int[]));
         }
 
         /*
          * Declares a local string
          */
-        internal LocalBuilder DeclareString() {
+        internal LocalBuilder DeclareString()
+        {
             return _ilg.DeclareLocal(typeof(string));
         }
-        
+
         /*
          * Generates the code for "RegexRunner.Go"
          */
-        internal void GenerateGo() {
+        internal void GenerateGo()
+        {
             // declare some locals
 
-            _textposV       = DeclareInt();
-            _textV          = DeclareString();
-            _trackposV      = DeclareInt();
-            _trackV         = DeclareIntArray();
-            _stackposV      = DeclareInt();
-            _stackV         = DeclareIntArray();
-            _tempV          = DeclareInt();
-            _temp2V         = DeclareInt();
-            _temp3V         = DeclareInt();
-            _textbegV       = DeclareInt();
-            _textendV       = DeclareInt();
-            _textstartV     = DeclareInt();
+            _textposV = DeclareInt();
+            _textV = DeclareString();
+            _trackposV = DeclareInt();
+            _trackV = DeclareIntArray();
+            _stackposV = DeclareInt();
+            _stackV = DeclareIntArray();
+            _tempV = DeclareInt();
+            _temp2V = DeclareInt();
+            _temp3V = DeclareInt();
+            _textbegV = DeclareInt();
+            _textendV = DeclareInt();
+            _textstartV = DeclareInt();
 
             // clear some tables
 
@@ -1581,16 +1761,19 @@ namespace System.Text.RegularExpressions {
         /*
          * Some simple debugging stuff
          */
-        internal static MethodInfo _debugWriteLine = typeof(Debug).GetMethod("WriteLine", new Type[] {typeof(string)});
+        internal static MethodInfo _debugWriteLine = typeof(Debug).GetMethod(
+            "WriteLine",
+            new Type[] { typeof(string) }
+        );
 
         /*
          * Debug only: emit code to print out a message
          */
-        internal void Message(String str) {
+        internal void Message(String str)
+        {
             Ldstr(str);
             Call(_debugWriteLine);
         }
-
 #endif
 
         /*
@@ -1605,9 +1788,11 @@ namespace System.Text.RegularExpressions {
          * dealt with one-at-a-time in RegexIntepreter. We can also unroll loops that
          * iterate over constant strings or sets.
          */
-        internal void GenerateOneCode() {
+        internal void GenerateOneCode()
+        {
 #if DBG
-            if ((_options & RegexOptions.Debug) != 0) {
+            if ((_options & RegexOptions.Debug) != 0)
+            {
                 Mvlocfld(_textposV, _textposF);
                 Mvlocfld(_trackposV, _trackposF);
                 Mvlocfld(_stackposV, _stackposF);
@@ -1630,17 +1815,18 @@ namespace System.Text.RegularExpressions {
             // Before executing any RegEx code in the unrolled loop,
             // we try checking for the match timeout:
 
-            Ldthis();            
+            Ldthis();
             Callvirt(_checkTimeoutM);
 
             // Now generate the IL for the RegEx code saved in _regexopcode.
             // We unroll the loop done by the RegexCompiler creating as very long method
             // that is longer if the pattern is longer:
 
-            switch (_regexopcode) {
+            switch (_regexopcode)
+            {
                 case RegexCode.Stop:
                     //: return;
-                    Mvlocfld(_textposV, _textposF);       // update _textpos
+                    Mvlocfld(_textposV, _textposF); // update _textpos
                     Ret();
                     break;
 
@@ -1739,7 +1925,8 @@ namespace System.Text.RegularExpressions {
                     //: Capture(Operand(0), Stacked(0), Textpos());
                     //: Track(Stacked(0));
 
-                    if (Operand(1) != -1) {
+                    if (Operand(1) != -1)
+                    {
                         Ldthis();
                         Ldc(Operand(1));
                         Callvirt(_ismatchedM);
@@ -1749,7 +1936,8 @@ namespace System.Text.RegularExpressions {
                     PopStack();
                     Stloc(_tempV);
 
-                    if (Operand(1) != -1) {
+                    if (Operand(1) != -1)
+                    {
                         Ldthis();
                         Ldc(Operand(0));
                         Ldc(Operand(1));
@@ -1757,7 +1945,8 @@ namespace System.Text.RegularExpressions {
                         Ldloc(_textposV);
                         Callvirt(_transferM);
                     }
-                    else {
+                    else
+                    {
                         Ldthis();
                         Ldc(Operand(0));
                         Ldloc(_tempV);
@@ -1774,7 +1963,6 @@ namespace System.Text.RegularExpressions {
 
                     break;
 
-
                 case RegexCode.Capturemark | RegexCode.Back:
                     //: Trackframe(1);
                     //: Stack(Tracked(0));
@@ -1787,7 +1975,8 @@ namespace System.Text.RegularExpressions {
                     DoPush();
                     Ldthis();
                     Callvirt(_uncaptureM);
-                    if (Operand(0) != -1 && Operand(1) != -1) {
+                    if (Operand(0) != -1 && Operand(1) != -1)
+                    {
                         Ldthis();
                         Callvirt(_uncaptureM);
                     }
@@ -1795,44 +1984,44 @@ namespace System.Text.RegularExpressions {
                     break;
 
                 case RegexCode.Branchmark:
-                    //: Stackframe(1);
-                    //: 
-                    //: if (Textpos() != Stacked(0))
-                    //: {                                   // Nonempty match -> loop now
-                    //:     Track(Stacked(0), Textpos());   // Save old mark, textpos
-                    //:     Stack(Textpos());               // Make new mark
-                    //:     Goto(Operand(0));               // Loop
-                    //: }
-                    //: else
-                    //: {                                   // Empty match -> straight now
-                    //:     Track2(Stacked(0));             // Save old mark
-                    //:     Advance(1);                     // Straight
-                    //: }
-                    //: continue Forward;
-                    {
-                        LocalBuilder mark = _tempV;
-                        Label      l1   = DefineLabel();
+                //: Stackframe(1);
+                //:
+                //: if (Textpos() != Stacked(0))
+                //: {                                   // Nonempty match -> loop now
+                //:     Track(Stacked(0), Textpos());   // Save old mark, textpos
+                //:     Stack(Textpos());               // Make new mark
+                //:     Goto(Operand(0));               // Loop
+                //: }
+                //: else
+                //: {                                   // Empty match -> straight now
+                //:     Track2(Stacked(0));             // Save old mark
+                //:     Advance(1);                     // Straight
+                //: }
+                //: continue Forward;
+                {
+                    LocalBuilder mark = _tempV;
+                    Label l1 = DefineLabel();
 
-                        PopStack();
-                        Dup();
-                        Stloc(mark);                            // Stacked(0) -> temp
-                        PushTrack(mark);
-                        Ldloc(_textposV);
-                        Beq(l1);                                // mark == textpos -> branch
+                    PopStack();
+                    Dup();
+                    Stloc(mark); // Stacked(0) -> temp
+                    PushTrack(mark);
+                    Ldloc(_textposV);
+                    Beq(l1); // mark == textpos -> branch
 
-                        // (matched != 0)
+                    // (matched != 0)
 
-                        PushTrack(_textposV);
-                        PushStack(_textposV);
-                        Track();
-                        Goto(Operand(0));                       // Goto(Operand(0))
+                    PushTrack(_textposV);
+                    PushStack(_textposV);
+                    Track();
+                    Goto(Operand(0)); // Goto(Operand(0))
 
-                        // else
+                    // else
 
-                        MarkLabel(l1);
-                        TrackUnique2(branchmarkback2);
-                        break;
-                    }
+                    MarkLabel(l1);
+                    TrackUnique2(branchmarkback2);
+                    break;
+                }
 
                 case RegexCode.Branchmark | RegexCode.Back:
                     //: Trackframe(2);
@@ -1859,62 +2048,61 @@ namespace System.Text.RegularExpressions {
                     Back();
                     break;
 
-
                 case RegexCode.Lazybranchmark:
-                    //: StackPop();
-                    //: int oldMarkPos = StackPeek();
-                    //: 
-                    //: if (Textpos() != oldMarkPos) {         // Nonempty match -> next loop
-                    //: {                                   // Nonempty match -> next loop
-                    //:     if (oldMarkPos != -1)
-                    //:         Track(Stacked(0), Textpos());   // Save old mark, textpos
-                    //:     else
-                    //:         TrackPush(Textpos(), Textpos());   
-                    //: }
-                    //: else
-                    //: {                                   // Empty match -> no loop
-                    //:     Track2(Stacked(0));             // Save old mark
-                    //: }
-                    //: Advance(1);
-                    //: continue Forward;
-                    {
-                        LocalBuilder mark = _tempV;
-                        Label      l1   = DefineLabel();
-                        Label      l2   = DefineLabel();
-                        Label      l3   = DefineLabel();
+                //: StackPop();
+                //: int oldMarkPos = StackPeek();
+                //:
+                //: if (Textpos() != oldMarkPos) {         // Nonempty match -> next loop
+                //: {                                   // Nonempty match -> next loop
+                //:     if (oldMarkPos != -1)
+                //:         Track(Stacked(0), Textpos());   // Save old mark, textpos
+                //:     else
+                //:         TrackPush(Textpos(), Textpos());
+                //: }
+                //: else
+                //: {                                   // Empty match -> no loop
+                //:     Track2(Stacked(0));             // Save old mark
+                //: }
+                //: Advance(1);
+                //: continue Forward;
+                {
+                    LocalBuilder mark = _tempV;
+                    Label l1 = DefineLabel();
+                    Label l2 = DefineLabel();
+                    Label l3 = DefineLabel();
 
-                        PopStack();
-                        Dup();
-                        Stloc(mark);                      // Stacked(0) -> temp
+                    PopStack();
+                    Dup();
+                    Stloc(mark); // Stacked(0) -> temp
 
-                        // if (oldMarkPos != -1)
-                        Ldloc(mark);
-                        Ldc(-1);
-                        Beq(l2);                                // mark == -1 -> branch
-                            PushTrack(mark);
-                            Br(l3);
-                        // else
-                            MarkLabel(l2);
-                            PushTrack(_textposV);
-                        MarkLabel(l3);
-                            
-                        // if (Textpos() != mark)
-                        Ldloc(_textposV);
-                        Beq(l1);                                // mark == textpos -> branch
-                            PushTrack(_textposV);
-                            Track();
-                            Br(AdvanceLabel());                 // Advance (near)
-                        // else
-                            MarkLabel(l1);
-                            ReadyPushStack();                   // push the current textPos on the stack. 
-							        // May be ignored by 'back2' or used by a true empty match.
-                            Ldloc(mark);                        
+                    // if (oldMarkPos != -1)
+                    Ldloc(mark);
+                    Ldc(-1);
+                    Beq(l2); // mark == -1 -> branch
+                    PushTrack(mark);
+                    Br(l3);
+                    // else
+                    MarkLabel(l2);
+                    PushTrack(_textposV);
+                    MarkLabel(l3);
 
-                            DoPush();
-                            TrackUnique2(lazybranchmarkback2);
+                    // if (Textpos() != mark)
+                    Ldloc(_textposV);
+                    Beq(l1); // mark == textpos -> branch
+                    PushTrack(_textposV);
+                    Track();
+                    Br(AdvanceLabel()); // Advance (near)
+                    // else
+                    MarkLabel(l1);
+                    ReadyPushStack(); // push the current textPos on the stack.
+                    // May be ignored by 'back2' or used by a true empty match.
+                    Ldloc(mark);
 
-                        break;
-                    }
+                    DoPush();
+                    TrackUnique2(lazybranchmarkback2);
+
+                    break;
+                }
 
                 case RegexCode.Lazybranchmark | RegexCode.Back:
                     //: Trackframe(2);
@@ -1963,7 +2151,6 @@ namespace System.Text.RegularExpressions {
                     TrackUnique(stackpop2);
                     break;
 
-
                 case RegexCode.Nullcount | RegexCode.Back:
                 case RegexCode.Setcount | RegexCode.Back:
                     //: Stackframe(2);
@@ -1972,105 +2159,103 @@ namespace System.Text.RegularExpressions {
                     Back();
                     break;
 
-
                 case RegexCode.Branchcount:
-                    //: Stackframe(2);
-                    //: int mark = Stacked(0);
-                    //: int count = Stacked(1);
-                    //: 
-                    //: if (count >= Operand(1) || Textpos() == mark && count >= 0)
-                    //: {                                   // Max loops or empty match -> straight now
-                    //:     Track2(mark, count);            // Save old mark, count
-                    //:     Advance(2);                     // Straight
-                    //: }
-                    //: else
-                    //: {                                   // Nonempty match -> count+loop now
-                    //:     Track(mark);                    // remember mark
-                    //:     Stack(Textpos(), count + 1);    // Make new mark, incr count
-                    //:     Goto(Operand(0));               // Loop
-                    //: }
-                    //: continue Forward;
-                    {
-                        LocalBuilder count = _tempV;
-                        LocalBuilder mark  = _temp2V;
-                        Label      l1    = DefineLabel();
-                        Label      l2    = DefineLabel();
+                //: Stackframe(2);
+                //: int mark = Stacked(0);
+                //: int count = Stacked(1);
+                //:
+                //: if (count >= Operand(1) || Textpos() == mark && count >= 0)
+                //: {                                   // Max loops or empty match -> straight now
+                //:     Track2(mark, count);            // Save old mark, count
+                //:     Advance(2);                     // Straight
+                //: }
+                //: else
+                //: {                                   // Nonempty match -> count+loop now
+                //:     Track(mark);                    // remember mark
+                //:     Stack(Textpos(), count + 1);    // Make new mark, incr count
+                //:     Goto(Operand(0));               // Loop
+                //: }
+                //: continue Forward;
+                {
+                    LocalBuilder count = _tempV;
+                    LocalBuilder mark = _temp2V;
+                    Label l1 = DefineLabel();
+                    Label l2 = DefineLabel();
 
-                        PopStack();
-                        Stloc(count);                           // count -> temp
-                        PopStack();
-                        Dup();
-                        Stloc(mark);                            // mark -> temp2
-                        PushTrack(mark);
+                    PopStack();
+                    Stloc(count); // count -> temp
+                    PopStack();
+                    Dup();
+                    Stloc(mark); // mark -> temp2
+                    PushTrack(mark);
 
-                        Ldloc(_textposV);
-                        Bne(l1);                                // mark != textpos -> l1
-                        Ldloc(count);
-                        Ldc(0);
-                        Bge(l2);                                // count >= 0 && mark == textpos -> l2
+                    Ldloc(_textposV);
+                    Bne(l1); // mark != textpos -> l1
+                    Ldloc(count);
+                    Ldc(0);
+                    Bge(l2); // count >= 0 && mark == textpos -> l2
 
-                        MarkLabel(l1);
-                        Ldloc(count);
-                        Ldc(Operand(1));
-                        Bge(l2);                                // count >= Operand(1) -> l2
+                    MarkLabel(l1);
+                    Ldloc(count);
+                    Ldc(Operand(1));
+                    Bge(l2); // count >= Operand(1) -> l2
 
-                        // else
-                        PushStack(_textposV);
-                        ReadyPushStack();
-                        Ldloc(count);                           // mark already on track
-                        Ldc(1);
-                        Add();
-                        DoPush();
-                        Track();
-                        Goto(Operand(0));
+                    // else
+                    PushStack(_textposV);
+                    ReadyPushStack();
+                    Ldloc(count); // mark already on track
+                    Ldc(1);
+                    Add();
+                    DoPush();
+                    Track();
+                    Goto(Operand(0));
 
-                        // if (count >= Operand(1) || Textpos() == mark)
-                        MarkLabel(l2);
-                        PushTrack(count);                       // mark already on track
-                        TrackUnique2(branchcountback2);
-                        break;
-                    }
+                    // if (count >= Operand(1) || Textpos() == mark)
+                    MarkLabel(l2);
+                    PushTrack(count); // mark already on track
+                    TrackUnique2(branchcountback2);
+                    break;
+                }
 
                 case RegexCode.Branchcount | RegexCode.Back:
-                    //: Trackframe(1);
-                    //: Stackframe(2);
-                    //: if (Stacked(1) > 0)                     // Positive -> can go straight
-                    //: {
-                    //:     Textto(Stacked(0));                 // Zap to mark
-                    //:     Track2(Tracked(0), Stacked(1) - 1); // Save old mark, old count
-                    //:     Advance(2);                         // Straight
-                    //:     continue Forward;
-                    //: }
-                    //: Stack(Tracked(0), Stacked(1) - 1);      // recall old mark, old count
-                    //: break Backward;
-                    {
+                //: Trackframe(1);
+                //: Stackframe(2);
+                //: if (Stacked(1) > 0)                     // Positive -> can go straight
+                //: {
+                //:     Textto(Stacked(0));                 // Zap to mark
+                //:     Track2(Tracked(0), Stacked(1) - 1); // Save old mark, old count
+                //:     Advance(2);                         // Straight
+                //:     continue Forward;
+                //: }
+                //: Stack(Tracked(0), Stacked(1) - 1);      // recall old mark, old count
+                //: break Backward;
+                {
+                    LocalBuilder count = _tempV;
+                    Label l1 = DefineLabel();
+                    PopStack();
+                    Ldc(1);
+                    Sub();
+                    Dup();
+                    Stloc(count);
+                    Ldc(0);
+                    Blt(l1);
 
-                        LocalBuilder count = _tempV;
-                        Label      l1    = DefineLabel();
-                        PopStack();
-                        Ldc(1);
-                        Sub();
-                        Dup();
-                        Stloc(count);
-                        Ldc(0);
-                        Blt(l1);
+                    // if (count >= 0)
+                    PopStack();
+                    Stloc(_textposV);
+                    PushTrack(count); // Tracked(0) is alredy on the track
+                    TrackUnique2(branchcountback2);
+                    Advance();
 
-                        // if (count >= 0)
-                        PopStack();
-                        Stloc(_textposV);
-                        PushTrack(count);                       // Tracked(0) is alredy on the track
-                        TrackUnique2(branchcountback2);
-                        Advance();
-
-                        // else
-                        MarkLabel(l1);
-                        ReadyReplaceStack(0);
-                        PopTrack();
-                        DoReplace();
-                        PushStack(count);
-                        Back();
-                        break;
-                    }
+                    // else
+                    MarkLabel(l1);
+                    ReadyReplaceStack(0);
+                    PopTrack();
+                    DoReplace();
+                    PushStack(count);
+                    Back();
+                    break;
+                }
 
                 case RegexCode.Branchcount | RegexCode.Back2:
                     //: Trackframe(2);
@@ -2087,107 +2272,107 @@ namespace System.Text.RegularExpressions {
                     break;
 
                 case RegexCode.Lazybranchcount:
-                    //: Stackframe(2);
-                    //: int mark = Stacked(0);
-                    //: int count = Stacked(1);
-                    //:
-                    //: if (count < 0)
-                    //: {                                   // Negative count -> loop now
-                    //:     Track2(mark);                   // Save old mark
-                    //:     Stack(Textpos(), count + 1);    // Make new mark, incr count
-                    //:     Goto(Operand(0));               // Loop
-                    //: }
-                    //: else
-                    //: {                                   // Nonneg count or empty match -> straight now
-                    //:     Track(mark, count, Textpos());  // Save mark, count, position
-                    //: }
-                    {
-                        LocalBuilder count = _tempV;
-                        LocalBuilder mark  = _temp2V;
-                        Label      l1    = DefineLabel();
+                //: Stackframe(2);
+                //: int mark = Stacked(0);
+                //: int count = Stacked(1);
+                //:
+                //: if (count < 0)
+                //: {                                   // Negative count -> loop now
+                //:     Track2(mark);                   // Save old mark
+                //:     Stack(Textpos(), count + 1);    // Make new mark, incr count
+                //:     Goto(Operand(0));               // Loop
+                //: }
+                //: else
+                //: {                                   // Nonneg count or empty match -> straight now
+                //:     Track(mark, count, Textpos());  // Save mark, count, position
+                //: }
+                {
+                    LocalBuilder count = _tempV;
+                    LocalBuilder mark = _temp2V;
+                    Label l1 = DefineLabel();
 #pragma warning disable 219
-                        Label      l2    = DefineLabel();
-                        Label      l3    = _labels[NextCodepos()];
+                    Label l2 = DefineLabel();
+                    Label l3 = _labels[NextCodepos()];
 #pragma warning restore 219
 
-                        PopStack();
-                        Stloc(count);                           // count -> temp
-                        PopStack();
-                        Stloc(mark);                            // mark -> temp2
+                    PopStack();
+                    Stloc(count); // count -> temp
+                    PopStack();
+                    Stloc(mark); // mark -> temp2
 
-                        Ldloc(count);
-                        Ldc(0);
-                        Bge(l1);                                // count >= 0 -> l1
+                    Ldloc(count);
+                    Ldc(0);
+                    Bge(l1); // count >= 0 -> l1
 
-                        // if (count < 0)
-                        PushTrack(mark);
-                        PushStack(_textposV);
-                        ReadyPushStack();
-                        Ldloc(count);
-                        Ldc(1);
-                        Add();
-                        DoPush();
-                        TrackUnique2(lazybranchcountback2);
-                        Goto(Operand(0));
+                    // if (count < 0)
+                    PushTrack(mark);
+                    PushStack(_textposV);
+                    ReadyPushStack();
+                    Ldloc(count);
+                    Ldc(1);
+                    Add();
+                    DoPush();
+                    TrackUnique2(lazybranchcountback2);
+                    Goto(Operand(0));
 
-                        // else
-                        MarkLabel(l1);
-                        PushTrack(mark);
-                        PushTrack(count);
-                        PushTrack(_textposV);
-                        Track();
-                        break;
-                    }
+                    // else
+                    MarkLabel(l1);
+                    PushTrack(mark);
+                    PushTrack(count);
+                    PushTrack(_textposV);
+                    Track();
+                    break;
+                }
 
                 case RegexCode.Lazybranchcount | RegexCode.Back:
-                    //: Trackframe(3);
-                    //: int mark = Tracked(0);
-                    //: int textpos = Tracked(2);
-                    //: if (Tracked(1) < Operand(1) && textpos != mark)
-                    //: {                                       // Under limit and not empty match -> loop
-                    //:     Textto(Tracked(2));                 // Recall position
-                    //:     Stack(Textpos(), Tracked(1) + 1);   // Make new mark, incr count
-                    //:     Track2(Tracked(0));                 // Save old mark
-                    //:     Goto(Operand(0));                   // Loop
-                    //:     continue Forward;
-                    //: }
-                    //: else
-                    //: {
-                    //:     Stack(Tracked(0), Tracked(1));      // Recall old mark, count
-                    //:     break Backward;                     // backtrack
-                    //: }
-                    {
-                        Label       l1 = DefineLabel();
-                        LocalBuilder  cV = _tempV;
-                        PopTrack();
-                        Stloc(_textposV);
-                        PopTrack();
-                        Dup();
-                        Stloc(cV);
-                        Ldc(Operand(1));
-                        Bge(l1);                                // Tracked(1) >= Operand(1) -> l1
+                //: Trackframe(3);
+                //: int mark = Tracked(0);
+                //: int textpos = Tracked(2);
+                //: if (Tracked(1) < Operand(1) && textpos != mark)
+                //: {                                       // Under limit and not empty match -> loop
+                //:     Textto(Tracked(2));                 // Recall position
+                //:     Stack(Textpos(), Tracked(1) + 1);   // Make new mark, incr count
+                //:     Track2(Tracked(0));                 // Save old mark
+                //:     Goto(Operand(0));                   // Loop
+                //:     continue Forward;
+                //: }
+                //: else
+                //: {
+                //:     Stack(Tracked(0), Tracked(1));      // Recall old mark, count
+                //:     break Backward;                     // backtrack
+                //: }
+                {
+                    Label l1 = DefineLabel();
+                    LocalBuilder cV = _tempV;
+                    PopTrack();
+                    Stloc(_textposV);
+                    PopTrack();
+                    Dup();
+                    Stloc(cV);
+                    Ldc(Operand(1));
+                    Bge(l1); // Tracked(1) >= Operand(1) -> l1
 
-                        Ldloc(_textposV);
-                        TopTrack();
-                        Beq(l1);                                // textpos == mark -> l1
+                    Ldloc(_textposV);
+                    TopTrack();
+                    Beq(l1); // textpos == mark -> l1
 
-                        PushStack(_textposV);
-                        ReadyPushStack();
-                        Ldloc(cV);
-                        Ldc(1);
-                        Add();
-                        DoPush();
-                        TrackUnique2(lazybranchcountback2);
-                        Goto(Operand(0));
+                    PushStack(_textposV);
+                    ReadyPushStack();
+                    Ldloc(cV);
+                    Ldc(1);
+                    Add();
+                    DoPush();
+                    TrackUnique2(lazybranchcountback2);
+                    Goto(Operand(0));
 
-                        MarkLabel(l1);
-                        ReadyPushStack();
-                        PopTrack();
-                        DoPush();
-                        PushStack(cV);
-                        Back();
-                        break;
-                    }
+                    MarkLabel(l1);
+                    ReadyPushStack();
+                    PopTrack();
+                    DoPush();
+                    PushStack(cV);
+                    Back();
+                    break;
+                }
 
                 case RegexCode.Lazybranchcount | RegexCode.Back2:
                     // <
@@ -2206,7 +2391,6 @@ namespace System.Text.RegularExpressions {
                     DoReplace();
                     Back();
                     break;
-
 
                 case RegexCode.Setjump:
                     //: Stack(Trackpos(), Crawlpos());
@@ -2230,41 +2414,40 @@ namespace System.Text.RegularExpressions {
                     Back();
                     break;
 
-
                 case RegexCode.Backjump:
-                    //: Stackframe(2);
-                    //: Trackto(Stacked(0));
-                    //: while (Crawlpos() != Stacked(1))
-                    //:     Uncapture();
-                    //: break Backward;
-                    {
-                        Label      l1    = DefineLabel();
-                        Label      l2    = DefineLabel();
+                //: Stackframe(2);
+                //: Trackto(Stacked(0));
+                //: while (Crawlpos() != Stacked(1))
+                //:     Uncapture();
+                //: break Backward;
+                {
+                    Label l1 = DefineLabel();
+                    Label l2 = DefineLabel();
 
-                        PopStack();
-                        Ldthisfld(_trackF);
-                        Ldlen();
-                        PopStack();
-                        Sub();
-                        Stloc(_trackposV);
-                        Dup();
-                        Ldthis();
-                        Callvirt(_crawlposM);
-                        Beq(l2);
+                    PopStack();
+                    Ldthisfld(_trackF);
+                    Ldlen();
+                    PopStack();
+                    Sub();
+                    Stloc(_trackposV);
+                    Dup();
+                    Ldthis();
+                    Callvirt(_crawlposM);
+                    Beq(l2);
 
-                        MarkLabel(l1);
-                        Ldthis();
-                        Callvirt(_uncaptureM);
-                        Dup();
-                        Ldthis();
-                        Callvirt(_crawlposM);
-                        Bne(l1);
+                    MarkLabel(l1);
+                    Ldthis();
+                    Callvirt(_uncaptureM);
+                    Dup();
+                    Ldthis();
+                    Callvirt(_crawlposM);
+                    Bne(l1);
 
-                        MarkLabel(l2);
-                        Pop();
-                        Back();
-                        break;
-                    }
+                    MarkLabel(l2);
+                    Pop();
+                    Back();
+                    break;
+                }
 
                 case RegexCode.Forejump:
                     //: Stackframe(2);
@@ -2282,62 +2465,62 @@ namespace System.Text.RegularExpressions {
                     break;
 
                 case RegexCode.Forejump | RegexCode.Back:
-                    //: Trackframe(1);
-                    //: while (Crawlpos() != Tracked(0))
-                    //:     Uncapture();
-                    //: break Backward;
-                    {
-                        Label      l1    = DefineLabel();
-                        Label      l2    = DefineLabel();
+                //: Trackframe(1);
+                //: while (Crawlpos() != Tracked(0))
+                //:     Uncapture();
+                //: break Backward;
+                {
+                    Label l1 = DefineLabel();
+                    Label l2 = DefineLabel();
 
-                        PopTrack();
+                    PopTrack();
 
-                        Dup();
-                        Ldthis();
-                        Callvirt(_crawlposM);
-                        Beq(l2);
+                    Dup();
+                    Ldthis();
+                    Callvirt(_crawlposM);
+                    Beq(l2);
 
-                        MarkLabel(l1);
-                        Ldthis();
-                        Callvirt(_uncaptureM);
-                        Dup();
-                        Ldthis();
-                        Callvirt(_crawlposM);
-                        Bne(l1);
+                    MarkLabel(l1);
+                    Ldthis();
+                    Callvirt(_uncaptureM);
+                    Dup();
+                    Ldthis();
+                    Callvirt(_crawlposM);
+                    Bne(l1);
 
-                        MarkLabel(l2);
-                        Pop();
-                        Back();
-                        break;
-                    }
+                    MarkLabel(l2);
+                    Pop();
+                    Back();
+                    break;
+                }
 
                 case RegexCode.Bol:
-                    //: if (Leftchars() > 0 && CharAt(Textpos() - 1) != '\n')
-                    //:     break Backward;
-                    {
-                        Label      l1    = _labels[NextCodepos()];
-                        Ldloc(_textposV);
-                        Ldloc(_textbegV);
-                        Ble(l1);
-                        Leftchar();
-                        Ldc((int)'\n');
-                        BneFar(_backtrack);
-                        break;
-                    }
+                //: if (Leftchars() > 0 && CharAt(Textpos() - 1) != '\n')
+                //:     break Backward;
+                {
+                    Label l1 = _labels[NextCodepos()];
+                    Ldloc(_textposV);
+                    Ldloc(_textbegV);
+                    Ble(l1);
+                    Leftchar();
+                    Ldc((int)'\n');
+                    BneFar(_backtrack);
+                    break;
+                }
 
                 case RegexCode.Eol:
-                    //: if (Rightchars() > 0 && CharAt(Textpos()) != '\n')
-                    //:     break Backward;
-                    {
-                        Label      l1    = _labels[NextCodepos()];
-                        Ldloc(_textposV);
-                        Ldloc(_textendV);
-                        Bge(l1);
-                        Rightchar();
-                        Ldc((int)'\n');
-                        BneFar(_backtrack);
-                        break;
-                    }
+                //: if (Rightchars() > 0 && CharAt(Textpos()) != '\n')
+                //:     break Backward;
+                {
+                    Label l1 = _labels[NextCodepos()];
+                    Ldloc(_textposV);
+                    Ldloc(_textendV);
+                    Bge(l1);
+                    Rightchar();
+                    Ldc((int)'\n');
+                    BneFar(_backtrack);
+                    break;
+                }
 
                 case RegexCode.Boundary:
                 case RegexCode.Nonboundary:
@@ -2412,26 +2595,28 @@ namespace System.Text.RegularExpressions {
                 case RegexCode.One:
                 case RegexCode.Notone:
                 case RegexCode.Set:
-                case RegexCode.One      | RegexCode.Rtl:
-                case RegexCode.Notone   | RegexCode.Rtl:
-                case RegexCode.Set      | RegexCode.Rtl:
-                case RegexCode.One      | RegexCode.Ci:
-                case RegexCode.Notone   | RegexCode.Ci:
-                case RegexCode.Set      | RegexCode.Ci:
-                case RegexCode.One      | RegexCode.Ci  | RegexCode.Rtl:
-                case RegexCode.Notone   | RegexCode.Ci  | RegexCode.Rtl:
-                case RegexCode.Set      | RegexCode.Ci  | RegexCode.Rtl:
+                case RegexCode.One | RegexCode.Rtl:
+                case RegexCode.Notone | RegexCode.Rtl:
+                case RegexCode.Set | RegexCode.Rtl:
+                case RegexCode.One | RegexCode.Ci:
+                case RegexCode.Notone | RegexCode.Ci:
+                case RegexCode.Set | RegexCode.Ci:
+                case RegexCode.One | RegexCode.Ci | RegexCode.Rtl:
+                case RegexCode.Notone | RegexCode.Ci | RegexCode.Rtl:
+                case RegexCode.Set | RegexCode.Ci | RegexCode.Rtl:
 
                     //: if (Rightchars() < 1 || Rightcharnext() != (char)Operand(0))
                     //:    break Backward;
                     Ldloc(_textposV);
 
-                    if (!IsRtl()) {
+                    if (!IsRtl())
+                    {
                         Ldloc(_textendV);
                         BgeFar(_backtrack);
                         Rightcharnext();
                     }
-                    else {
+                    else
+                    {
                         Ldloc(_textbegV);
                         BleFar(_backtrack);
                         Leftcharnext();
@@ -2440,14 +2625,15 @@ namespace System.Text.RegularExpressions {
                     if (IsCi())
                         CallToLower();
 
-                    if (Code() == RegexCode.Set) {
-
+                    if (Code() == RegexCode.Set)
+                    {
                         Ldstr(_strings[Operand(0)]);
                         Call(_charInSetM);
 
                         BrfalseFar(_backtrack);
                     }
-                    else {
+                    else
+                    {
                         Ldc(Operand(0));
                         if (Code() == RegexCode.One)
                             BneFar(_backtrack);
@@ -2458,198 +2644,204 @@ namespace System.Text.RegularExpressions {
 
                 case RegexCode.Multi:
                 case RegexCode.Multi | RegexCode.Ci:
-                    //
-                    // <
+                //
+                // <
 
 
 
 
 
 
-                    //: String Str = _strings[Operand(0)];
-                    //: int i, c;
-                    //: if (Rightchars() < (c = Str.Length))
-                    //:     break Backward;
-                    //: for (i = 0; c > 0; i++, c--)
-                    //:     if (Str[i] != Rightcharnext())
-                    //:         break Backward;
+                //: String Str = _strings[Operand(0)];
+                //: int i, c;
+                //: if (Rightchars() < (c = Str.Length))
+                //:     break Backward;
+                //: for (i = 0; c > 0; i++, c--)
+                //:     if (Str[i] != Rightcharnext())
+                //:         break Backward;
+                {
+                    int i;
+                    String str;
+
+                    str = _strings[Operand(0)];
+
+                    Ldc(str.Length);
+                    Ldloc(_textendV);
+                    Ldloc(_textposV);
+                    Sub();
+                    BgtFar(_backtrack);
+
+                    // unroll the string
+                    for (i = 0; i < str.Length; i++)
                     {
-                        int i;
-                        String str;
-
-                        str = _strings[Operand(0)];
-
-                        Ldc(str.Length);
-                        Ldloc(_textendV);
+                        Ldloc(_textV);
                         Ldloc(_textposV);
-                        Sub();
-                        BgtFar(_backtrack);
-
-                        // unroll the string
-                        for (i = 0; i < str.Length; i++) {
-                            Ldloc(_textV);
-                            Ldloc(_textposV);
-                            if (i != 0) {
-                                Ldc(i);
-                                Add();
-                            }
-                            Callvirt(_getcharM);
-                            if (IsCi())
-                                CallToLower();
-                            
-                            Ldc((int)str[i]);
-                            BneFar(_backtrack);
+                        if (i != 0)
+                        {
+                            Ldc(i);
+                            Add();
                         }
+                        Callvirt(_getcharM);
+                        if (IsCi())
+                            CallToLower();
 
-                        Ldloc(_textposV);
-                        Ldc(str.Length);
-                        Add();
-                        Stloc(_textposV);
-                        break;
+                        Ldc((int)str[i]);
+                        BneFar(_backtrack);
                     }
 
+                    Ldloc(_textposV);
+                    Ldc(str.Length);
+                    Add();
+                    Stloc(_textposV);
+                    break;
+                }
 
                 case RegexCode.Multi | RegexCode.Rtl:
-                case RegexCode.Multi | RegexCode.Ci  | RegexCode.Rtl:
-                    //: String Str = _strings[Operand(0)];
-                    //: int c;
-                    //: if (Leftchars() < (c = Str.Length))
-                    //:     break Backward;
-                    //: while (c > 0)
-                    //:     if (Str[--c] != Leftcharnext())
-                    //:         break Backward;
+                case RegexCode.Multi | RegexCode.Ci | RegexCode.Rtl:
+                //: String Str = _strings[Operand(0)];
+                //: int c;
+                //: if (Leftchars() < (c = Str.Length))
+                //:     break Backward;
+                //: while (c > 0)
+                //:     if (Str[--c] != Leftcharnext())
+                //:         break Backward;
+                {
+                    int i;
+                    String str;
+
+                    str = _strings[Operand(0)];
+
+                    Ldc(str.Length);
+                    Ldloc(_textposV);
+                    Ldloc(_textbegV);
+                    Sub();
+                    BgtFar(_backtrack);
+
+                    // unroll the string
+                    for (i = str.Length; i > 0; )
                     {
-                        int i;
-                        String str;
-
-                        str = _strings[Operand(0)];
-
-                        Ldc(str.Length);
+                        i--;
+                        Ldloc(_textV);
                         Ldloc(_textposV);
-                        Ldloc(_textbegV);
+                        Ldc(str.Length - i);
                         Sub();
-                        BgtFar(_backtrack);
-
-                        // unroll the string
-                        for (i = str.Length; i > 0;) {
-                            i--;
-                            Ldloc(_textV);
-                            Ldloc(_textposV);
-                            Ldc(str.Length - i);
-                            Sub();
-                            Callvirt(_getcharM);
-                            if (IsCi()) 
-                            {
-                                CallToLower();
-                            }
-                            Ldc((int)str[i]);
-                            BneFar(_backtrack);
+                        Callvirt(_getcharM);
+                        if (IsCi())
+                        {
+                            CallToLower();
                         }
-
-                        Ldloc(_textposV);
-                        Ldc(str.Length);
-                        Sub();
-                        Stloc(_textposV);
-
-                        break;
+                        Ldc((int)str[i]);
+                        BneFar(_backtrack);
                     }
+
+                    Ldloc(_textposV);
+                    Ldc(str.Length);
+                    Sub();
+                    Stloc(_textposV);
+
+                    break;
+                }
 
                 case RegexCode.Ref:
                 case RegexCode.Ref | RegexCode.Rtl:
                 case RegexCode.Ref | RegexCode.Ci:
                 case RegexCode.Ref | RegexCode.Ci | RegexCode.Rtl:
-                    //: int capnum = Operand(0);
-                    //: int j, c;
-                    //: if (!_match.IsMatched(capnum)) {
-                    //:     if (!RegexOptions.ECMAScript)
-                    //:         break Backward;
-                    //: } else {
-                    //:     if (Rightchars() < (c = _match.MatchLength(capnum)))
-                    //:         break Backward;
-                    //:     for (j = _match.MatchIndex(capnum); c > 0; j++, c--)
-                    //:         if (CharAt(j) != Rightcharnext())
-                    //:             break Backward;
-                    //: }
+                //: int capnum = Operand(0);
+                //: int j, c;
+                //: if (!_match.IsMatched(capnum)) {
+                //:     if (!RegexOptions.ECMAScript)
+                //:         break Backward;
+                //: } else {
+                //:     if (Rightchars() < (c = _match.MatchLength(capnum)))
+                //:         break Backward;
+                //:     for (j = _match.MatchIndex(capnum); c > 0; j++, c--)
+                //:         if (CharAt(j) != Rightcharnext())
+                //:             break Backward;
+                //: }
+                {
+                    LocalBuilder lenV = _tempV;
+                    LocalBuilder indexV = _temp2V;
+                    Label l1 = DefineLabel();
+
+                    Ldthis();
+                    Ldc(Operand(0));
+                    Callvirt(_ismatchedM);
+                    if ((_options & RegexOptions.ECMAScript) != 0)
+                        Brfalse(AdvanceLabel());
+                    else
+                        BrfalseFar(_backtrack); // !IsMatched() -> back
+
+                    Ldthis();
+                    Ldc(Operand(0));
+                    Callvirt(_matchlengthM);
+                    Dup();
+                    Stloc(lenV);
+                    if (!IsRtl())
                     {
-                        LocalBuilder lenV     = _tempV;
-                        LocalBuilder indexV   = _temp2V;
-                        Label      l1       = DefineLabel();
-
-                        Ldthis();
-                        Ldc(Operand(0));
-                        Callvirt(_ismatchedM);
-                        if ((_options & RegexOptions.ECMAScript) != 0)
-                            Brfalse(AdvanceLabel());
-                        else
-                            BrfalseFar(_backtrack); // !IsMatched() -> back
-
-                        Ldthis();
-                        Ldc(Operand(0));
-                        Callvirt(_matchlengthM);
-                        Dup();
-                        Stloc(lenV);
-                        if (!IsRtl()) {
-                            Ldloc(_textendV);
-                            Ldloc(_textposV);
-                        }
-                        else {
-                            Ldloc(_textposV);
-                            Ldloc(_textbegV);
-                        }
-                        Sub();
-                        BgtFar(_backtrack);         // Matchlength() > Rightchars() -> back
-
-                        Ldthis();
-                        Ldc(Operand(0));
-                        Callvirt(_matchindexM);
-                        if (!IsRtl()) {
-                            Ldloc(lenV);
-                            Add(IsRtl());
-                        }
-                        Stloc(indexV);              // index += len
-
+                        Ldloc(_textendV);
                         Ldloc(_textposV);
+                    }
+                    else
+                    {
+                        Ldloc(_textposV);
+                        Ldloc(_textbegV);
+                    }
+                    Sub();
+                    BgtFar(_backtrack); // Matchlength() > Rightchars() -> back
+
+                    Ldthis();
+                    Ldc(Operand(0));
+                    Callvirt(_matchindexM);
+                    if (!IsRtl())
+                    {
                         Ldloc(lenV);
                         Add(IsRtl());
-                        Stloc(_textposV);           // texpos += len
-
-                        MarkLabel(l1);
-                        Ldloc(lenV);
-                        Ldc(0);
-                        Ble(AdvanceLabel());
-                        Ldloc(_textV);
-                        Ldloc(indexV);
-                        Ldloc(lenV);
-                        if (IsRtl()) {
-                            Ldc(1);
-                            Sub();
-                            Dup();
-                            Stloc(lenV);
-                        }
-                        Sub(IsRtl());
-                        Callvirt(_getcharM);
-                        if (IsCi())
-                            CallToLower();
-                        
-                        Ldloc(_textV);
-                        Ldloc(_textposV);
-                        Ldloc(lenV);
-                        if (!IsRtl()) {
-                            Dup();
-                            Ldc(1);
-                            Sub();
-                            Stloc(lenV);
-                        }
-                        Sub(IsRtl());
-                        Callvirt(_getcharM);
-                        if (IsCi())
-                            CallToLower();
-                        
-                        Beq(l1);
-                        Back();
-                        break;
                     }
+                    Stloc(indexV); // index += len
 
+                    Ldloc(_textposV);
+                    Ldloc(lenV);
+                    Add(IsRtl());
+                    Stloc(_textposV); // texpos += len
+
+                    MarkLabel(l1);
+                    Ldloc(lenV);
+                    Ldc(0);
+                    Ble(AdvanceLabel());
+                    Ldloc(_textV);
+                    Ldloc(indexV);
+                    Ldloc(lenV);
+                    if (IsRtl())
+                    {
+                        Ldc(1);
+                        Sub();
+                        Dup();
+                        Stloc(lenV);
+                    }
+                    Sub(IsRtl());
+                    Callvirt(_getcharM);
+                    if (IsCi())
+                        CallToLower();
+
+                    Ldloc(_textV);
+                    Ldloc(_textposV);
+                    Ldloc(lenV);
+                    if (!IsRtl())
+                    {
+                        Dup();
+                        Ldc(1);
+                        Sub();
+                        Stloc(lenV);
+                    }
+                    Sub(IsRtl());
+                    Callvirt(_getcharM);
+                    if (IsCi())
+                        CallToLower();
+
+                    Beq(l1);
+                    Back();
+                    break;
+                }
 
                 case RegexCode.Onerep:
                 case RegexCode.Notonerep:
@@ -2663,86 +2855,91 @@ namespace System.Text.RegularExpressions {
                 case RegexCode.Onerep | RegexCode.Ci | RegexCode.Rtl:
                 case RegexCode.Notonerep | RegexCode.Ci | RegexCode.Rtl:
                 case RegexCode.Setrep | RegexCode.Ci | RegexCode.Rtl:
-                    //: int c = Operand(1);
-                    //: if (Rightchars() < c)
-                    //:     break Backward;
-                    //: char ch = (char)Operand(0);
-                    //: while (c-- > 0)
-                    //:     if (Rightcharnext() != ch)
-                    //:         break Backward;
-                    {
-                        LocalBuilder lenV = _tempV;
-                        Label      l1   = DefineLabel();
+                //: int c = Operand(1);
+                //: if (Rightchars() < c)
+                //:     break Backward;
+                //: char ch = (char)Operand(0);
+                //: while (c-- > 0)
+                //:     if (Rightcharnext() != ch)
+                //:         break Backward;
+                {
+                    LocalBuilder lenV = _tempV;
+                    Label l1 = DefineLabel();
 
-                        int c = Operand(1);
+                    int c = Operand(1);
 
-                        if (c == 0)
-                            break;
-
-                        Ldc(c);
-                        if (!IsRtl()) {
-                            Ldloc(_textendV);
-                            Ldloc(_textposV);
-                        }
-                        else {
-                            Ldloc(_textposV);
-                            Ldloc(_textbegV);
-                        }
-                        Sub();
-                        BgtFar(_backtrack);         // Matchlength() > Rightchars() -> back
-
-                        Ldloc(_textposV);
-                        Ldc(c);
-                        Add(IsRtl());
-                        Stloc(_textposV);           // texpos += len
-
-                        Ldc(c);
-                        Stloc(lenV);
-
-                        MarkLabel(l1);
-                        Ldloc(_textV);
-                        Ldloc(_textposV);
-                        Ldloc(lenV);
-                        if (IsRtl()) {
-                            Ldc(1);
-                            Sub();
-                            Dup();
-                            Stloc(lenV);
-                            Add();
-                        }
-                        else {
-                            Dup();
-                            Ldc(1);
-                            Sub();
-                            Stloc(lenV);
-                            Sub();
-                        }
-                        Callvirt(_getcharM);
-                        if (IsCi())
-                            CallToLower();
-                        
-                        if (Code() == RegexCode.Setrep) {
-                            Ldstr(_strings[Operand(0)]);
-                            Call(_charInSetM);
-
-                            BrfalseFar(_backtrack);
-                        }
-                        else {
-                            Ldc(Operand(0));
-                            if (Code() == RegexCode.Onerep)
-                                BneFar(_backtrack);
-                            else
-                                BeqFar(_backtrack);
-                        }
-                        Ldloc(lenV);
-                        Ldc(0);
-                        if (Code() == RegexCode.Setrep)
-                            BgtFar(l1);
-                        else
-                            Bgt(l1);
+                    if (c == 0)
                         break;
-                    }
 
+                    Ldc(c);
+                    if (!IsRtl())
+                    {
+                        Ldloc(_textendV);
+                        Ldloc(_textposV);
+                    }
+                    else
+                    {
+                        Ldloc(_textposV);
+                        Ldloc(_textbegV);
+                    }
+                    Sub();
+                    BgtFar(_backtrack); // Matchlength() > Rightchars() -> back
+
+                    Ldloc(_textposV);
+                    Ldc(c);
+                    Add(IsRtl());
+                    Stloc(_textposV); // texpos += len
+
+                    Ldc(c);
+                    Stloc(lenV);
+
+                    MarkLabel(l1);
+                    Ldloc(_textV);
+                    Ldloc(_textposV);
+                    Ldloc(lenV);
+                    if (IsRtl())
+                    {
+                        Ldc(1);
+                        Sub();
+                        Dup();
+                        Stloc(lenV);
+                        Add();
+                    }
+                    else
+                    {
+                        Dup();
+                        Ldc(1);
+                        Sub();
+                        Stloc(lenV);
+                        Sub();
+                    }
+                    Callvirt(_getcharM);
+                    if (IsCi())
+                        CallToLower();
+
+                    if (Code() == RegexCode.Setrep)
+                    {
+                        Ldstr(_strings[Operand(0)]);
+                        Call(_charInSetM);
+
+                        BrfalseFar(_backtrack);
+                    }
+                    else
+                    {
+                        Ldc(Operand(0));
+                        if (Code() == RegexCode.Onerep)
+                            BneFar(_backtrack);
+                        else
+                            BeqFar(_backtrack);
+                    }
+                    Ldloc(lenV);
+                    Ldc(0);
+                    if (Code() == RegexCode.Setrep)
+                        BgtFar(l1);
+                    else
+                        Bgt(l1);
+                    break;
+                }
 
                 case RegexCode.Oneloop:
                 case RegexCode.Notoneloop:
@@ -2756,116 +2953,121 @@ namespace System.Text.RegularExpressions {
                 case RegexCode.Oneloop | RegexCode.Ci | RegexCode.Rtl:
                 case RegexCode.Notoneloop | RegexCode.Ci | RegexCode.Rtl:
                 case RegexCode.Setloop | RegexCode.Ci | RegexCode.Rtl:
-                    //: int c = Operand(1);
-                    //: if (c > Rightchars())
-                    //:     c = Rightchars();
-                    //: char ch = (char)Operand(0);
-                    //: int i;
-                    //: for (i = c; i > 0; i--)
-                    //: {
-                    //:     if (Rightcharnext() != ch)
-                    //:     {
-                    //:         Leftnext();
-                    //:         break;
-                    //:     }
-                    //: }
-                    //: if (c > i)
-                    //:     Track(c - i - 1, Textpos() - 1);
+                //: int c = Operand(1);
+                //: if (c > Rightchars())
+                //:     c = Rightchars();
+                //: char ch = (char)Operand(0);
+                //: int i;
+                //: for (i = c; i > 0; i--)
+                //: {
+                //:     if (Rightcharnext() != ch)
+                //:     {
+                //:         Leftnext();
+                //:         break;
+                //:     }
+                //: }
+                //: if (c > i)
+                //:     Track(c - i - 1, Textpos() - 1);
 
-                    {
-                        LocalBuilder cV   = _tempV;
-                        LocalBuilder lenV = _temp2V;
-                        Label      l1   = DefineLabel();
-                        Label      l2   = DefineLabel();
+                {
+                    LocalBuilder cV = _tempV;
+                    LocalBuilder lenV = _temp2V;
+                    Label l1 = DefineLabel();
+                    Label l2 = DefineLabel();
 
-                        int c = Operand(1);
+                    int c = Operand(1);
 
-                        if (c == 0)
-                            break;
-                        if (!IsRtl()) {
-                            Ldloc(_textendV);
-                            Ldloc(_textposV);
-                        }
-                        else {
-                            Ldloc(_textposV);
-                            Ldloc(_textbegV);
-                        }
-                        Sub();
-                        if (c != Int32.MaxValue) {
-                            Label l4 = DefineLabel();
-                            Dup();
-                            Ldc(c);
-                            Blt(l4);
-                            Pop();
-                            Ldc(c);
-                            MarkLabel(l4);
-                        }
-                        Dup();
-                        Stloc(lenV);
-                        Ldc(1);
-                        Add();
-                        Stloc(cV);
-
-                        MarkLabel(l1);
-                        Ldloc(cV);
-                        Ldc(1);
-                        Sub();
-                        Dup();
-                        Stloc(cV);
-                        Ldc(0);
-                        if (Code() == RegexCode.Setloop)
-                            BleFar(l2);
-                        else
-                            Ble(l2);
-
-                        if (IsRtl())
-                            Leftcharnext();
-                        else
-                            Rightcharnext();
-                        if (IsCi()) 
-                            CallToLower();
-                        
-                        if (Code() == RegexCode.Setloop) {
-                            Ldstr(_strings[Operand(0)]);
-                            Call(_charInSetM);
-
-                            BrtrueFar(l1);
-                        }
-                        else {
-                            Ldc(Operand(0));
-                            if (Code() == RegexCode.Oneloop)
-                                Beq(l1);
-                            else
-                                Bne(l1);
-                        }
-
-                        Ldloc(_textposV);
-                        Ldc(1);
-                        Sub(IsRtl());
-                        Stloc(_textposV);
-
-                        MarkLabel(l2);
-                        Ldloc(lenV);
-                        Ldloc(cV);
-                        Ble(AdvanceLabel());
-
-                        ReadyPushTrack();
-                        Ldloc(lenV);
-                        Ldloc(cV);
-                        Sub();
-                        Ldc(1);
-                        Sub();
-                        DoPush();
-
-                        ReadyPushTrack();
-                        Ldloc(_textposV);
-                        Ldc(1);
-                        Sub(IsRtl());
-                        DoPush();
-
-                        Track();
+                    if (c == 0)
                         break;
+                    if (!IsRtl())
+                    {
+                        Ldloc(_textendV);
+                        Ldloc(_textposV);
                     }
+                    else
+                    {
+                        Ldloc(_textposV);
+                        Ldloc(_textbegV);
+                    }
+                    Sub();
+                    if (c != Int32.MaxValue)
+                    {
+                        Label l4 = DefineLabel();
+                        Dup();
+                        Ldc(c);
+                        Blt(l4);
+                        Pop();
+                        Ldc(c);
+                        MarkLabel(l4);
+                    }
+                    Dup();
+                    Stloc(lenV);
+                    Ldc(1);
+                    Add();
+                    Stloc(cV);
+
+                    MarkLabel(l1);
+                    Ldloc(cV);
+                    Ldc(1);
+                    Sub();
+                    Dup();
+                    Stloc(cV);
+                    Ldc(0);
+                    if (Code() == RegexCode.Setloop)
+                        BleFar(l2);
+                    else
+                        Ble(l2);
+
+                    if (IsRtl())
+                        Leftcharnext();
+                    else
+                        Rightcharnext();
+                    if (IsCi())
+                        CallToLower();
+
+                    if (Code() == RegexCode.Setloop)
+                    {
+                        Ldstr(_strings[Operand(0)]);
+                        Call(_charInSetM);
+
+                        BrtrueFar(l1);
+                    }
+                    else
+                    {
+                        Ldc(Operand(0));
+                        if (Code() == RegexCode.Oneloop)
+                            Beq(l1);
+                        else
+                            Bne(l1);
+                    }
+
+                    Ldloc(_textposV);
+                    Ldc(1);
+                    Sub(IsRtl());
+                    Stloc(_textposV);
+
+                    MarkLabel(l2);
+                    Ldloc(lenV);
+                    Ldloc(cV);
+                    Ble(AdvanceLabel());
+
+                    ReadyPushTrack();
+                    Ldloc(lenV);
+                    Ldloc(cV);
+                    Sub();
+                    Ldc(1);
+                    Sub();
+                    DoPush();
+
+                    ReadyPushTrack();
+                    Ldloc(_textposV);
+                    Ldc(1);
+                    Sub(IsRtl());
+                    DoPush();
+
+                    Track();
+                    break;
+                }
 
                 case RegexCode.Oneloop | RegexCode.Back:
                 case RegexCode.Notoneloop | RegexCode.Back:
@@ -2919,50 +3121,53 @@ namespace System.Text.RegularExpressions {
                 case RegexCode.Onelazy | RegexCode.Ci | RegexCode.Rtl:
                 case RegexCode.Notonelazy | RegexCode.Ci | RegexCode.Rtl:
                 case RegexCode.Setlazy | RegexCode.Ci | RegexCode.Rtl:
-                    //: int c = Operand(1);
-                    //: if (c > Rightchars())
-                    //:     c = Rightchars();
-                    //: if (c > 0)
-                    //:     Track(c - 1, Textpos());
-                    {
-                        LocalBuilder cV   = _tempV;
+                //: int c = Operand(1);
+                //: if (c > Rightchars())
+                //:     c = Rightchars();
+                //: if (c > 0)
+                //:     Track(c - 1, Textpos());
+                {
+                    LocalBuilder cV = _tempV;
 
-                        int c = Operand(1);
+                    int c = Operand(1);
 
-                        if (c == 0)
-                            break;
-
-                        if (!IsRtl()) {
-                            Ldloc(_textendV);
-                            Ldloc(_textposV);
-                        }
-                        else {
-                            Ldloc(_textposV);
-                            Ldloc(_textbegV);
-                        }
-                        Sub();
-                        if (c != Int32.MaxValue) {
-                            Label l4 = DefineLabel();
-                            Dup();
-                            Ldc(c);
-                            Blt(l4);
-                            Pop();
-                            Ldc(c);
-                            MarkLabel(l4);
-                        }
-                        Dup();
-                        Stloc(cV);
-                        Ldc(0);
-                        Ble(AdvanceLabel());
-                        ReadyPushTrack();
-                        Ldloc(cV);
-                        Ldc(1);
-                        Sub();
-                        DoPush();
-                        PushTrack(_textposV);
-                        Track();
+                    if (c == 0)
                         break;
+
+                    if (!IsRtl())
+                    {
+                        Ldloc(_textendV);
+                        Ldloc(_textposV);
                     }
+                    else
+                    {
+                        Ldloc(_textposV);
+                        Ldloc(_textbegV);
+                    }
+                    Sub();
+                    if (c != Int32.MaxValue)
+                    {
+                        Label l4 = DefineLabel();
+                        Dup();
+                        Ldc(c);
+                        Blt(l4);
+                        Pop();
+                        Ldc(c);
+                        MarkLabel(l4);
+                    }
+                    Dup();
+                    Stloc(cV);
+                    Ldc(0);
+                    Ble(AdvanceLabel());
+                    ReadyPushTrack();
+                    Ldloc(cV);
+                    Ldc(1);
+                    Sub();
+                    DoPush();
+                    PushTrack(_textposV);
+                    Track();
+                    break;
+                }
 
                 case RegexCode.Onelazy | RegexCode.Back:
                 case RegexCode.Notonelazy | RegexCode.Back:
@@ -2998,13 +3203,15 @@ namespace System.Text.RegularExpressions {
                     if (IsCi())
                         CallToLower();
 
-                    if (Code() == RegexCode.Setlazy) {
+                    if (Code() == RegexCode.Setlazy)
+                    {
                         Ldstr(_strings[Operand(0)]);
                         Call(_charInSetM);
 
                         BrfalseFar(_backtrack);
                     }
-                    else {
+                    else
+                    {
                         Ldc(Operand(0));
                         if (Code() == RegexCode.Onelazy)
                             BneFar(_backtrack);
@@ -3031,55 +3238,81 @@ namespace System.Text.RegularExpressions {
         }
     }
 
-    internal class RegexTypeCompiler : RegexCompiler {
+    internal class RegexTypeCompiler : RegexCompiler
+    {
         private static int _typeCount = 0;
 #if !MONO
         private static LocalDataStoreSlot _moduleSlot = Thread.AllocateDataSlot();
 #endif
 
-        private  AssemblyBuilder _assembly;
-        private  ModuleBuilder  _module;
+        private AssemblyBuilder _assembly;
+        private ModuleBuilder _module;
 
         // state of the type builder
-        private  TypeBuilder     _typebuilder;
-        private  MethodBuilder   _methbuilder;
+        private TypeBuilder _typebuilder;
+        private MethodBuilder _methbuilder;
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [SuppressMessage("Microsoft.Security","CA2106:SecureAsserts", Justification="Microsoft: SECREVIEW : Regex only generates string manipulation, so this is OK")]
-        internal RegexTypeCompiler(AssemblyName an, CustomAttributeBuilder[] attribs, String resourceFile) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2106:SecureAsserts",
+            Justification = "Microsoft: SECREVIEW : Regex only generates string manipulation, so this is OK"
+        )]
+        internal RegexTypeCompiler(
+            AssemblyName an,
+            CustomAttributeBuilder[] attribs,
+            String resourceFile
+        )
+        {
             // SECREVIEW : Regex only generates string manipulation, so this is
             //           : ok.
             //
 #if MONO_FEATURE_CAS
             new ReflectionPermission(PermissionState.Unrestricted).Assert();
 #endif
-            try {
+            try
+            {
                 Debug.Assert(an != null, "AssemblyName should not be null");
 
-                List<CustomAttributeBuilder> assemblyAttributes = new List<CustomAttributeBuilder>();
+                List<CustomAttributeBuilder> assemblyAttributes =
+                    new List<CustomAttributeBuilder>();
 
-                ConstructorInfo transparencyCtor = typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes);
-                CustomAttributeBuilder transparencyAttribute = new CustomAttributeBuilder(transparencyCtor, new object[0]);
+                ConstructorInfo transparencyCtor =
+                    typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes);
+                CustomAttributeBuilder transparencyAttribute = new CustomAttributeBuilder(
+                    transparencyCtor,
+                    new object[0]
+                );
                 assemblyAttributes.Add(transparencyAttribute);
 
 #if MONO_FEATURE_CAS
-                ConstructorInfo securityRulesCtor = typeof(SecurityRulesAttribute).GetConstructor(new Type[] { typeof(SecurityRuleSet) });
-                CustomAttributeBuilder securityRulesAttribute =
-                    new CustomAttributeBuilder(securityRulesCtor, new object[] { SecurityRuleSet.Level2 });
+                ConstructorInfo securityRulesCtor = typeof(SecurityRulesAttribute).GetConstructor(
+                    new Type[] { typeof(SecurityRuleSet) }
+                );
+                CustomAttributeBuilder securityRulesAttribute = new CustomAttributeBuilder(
+                    securityRulesCtor,
+                    new object[] { SecurityRuleSet.Level2 }
+                );
                 assemblyAttributes.Add(securityRulesAttribute);
 #endif
-	
-                _assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(an, AssemblyBuilderAccess.RunAndSave, assemblyAttributes);
+                _assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    an,
+                    AssemblyBuilderAccess.RunAndSave,
+                    assemblyAttributes
+                );
                 _module = _assembly.DefineDynamicModule(an.Name + ".dll");
 
-                if (attribs != null) {
-                    for (int i=0; i<attribs.Length; i++) {
+                if (attribs != null)
+                {
+                    for (int i = 0; i < attribs.Length; i++)
+                    {
                         _assembly.SetCustomAttribute(attribs[i]);
                     }
                 }
 
-                if (resourceFile != null) {
+                if (resourceFile != null)
+                {
 #if FEATURE_PAL
                     // unmanaged resources are not supported
                     throw new ArgumentOutOfRangeException("resourceFile");
@@ -3088,7 +3321,8 @@ namespace System.Text.RegularExpressions {
 #endif
                 }
             }
-            finally {
+            finally
+            {
 #if MONO_FEATURE_CAS
                 CodeAccessPermission.RevertAssert();
 #endif
@@ -3098,30 +3332,31 @@ namespace System.Text.RegularExpressions {
         /*
          * The top-level driver. Initializes everything then calls the Generate* methods.
          */
-        internal Type FactoryTypeFromCode(RegexCode code, RegexOptions options, String typeprefix) {
+        internal Type FactoryTypeFromCode(RegexCode code, RegexOptions options, String typeprefix)
+        {
             String runnertypename;
             String runnerfactoryname;
             Type runnertype;
             Type factory;
-        
-            _code       = code;
-            _codes      = code._codes;
-            _strings    = code._strings;
-            _fcPrefix   = code._fcPrefix;
-            _bmPrefix   = code._bmPrefix;
-            _anchors    = code._anchors;
+
+            _code = code;
+            _codes = code._codes;
+            _strings = code._strings;
+            _fcPrefix = code._fcPrefix;
+            _bmPrefix = code._bmPrefix;
+            _anchors = code._anchors;
             _trackcount = code._trackcount;
-            _options    = options;
-        
+            _options = options;
+
             // pick a name for the class
             int typenum = Interlocked.Increment(ref _typeCount);
             string typenumString = typenum.ToString(CultureInfo.InvariantCulture);
-            runnertypename = typeprefix + "Runner" + typenumString ;
+            runnertypename = typeprefix + "Runner" + typenumString;
             runnerfactoryname = typeprefix + "Factory" + typenumString;
-        
+
             // Generate a RegexRunner class
             // (blocks are simply illustrative)
-        
+
             DefineType(runnertypename, false, typeof(RegexRunner));
             {
                 DefineMethod("Go", null);
@@ -3129,24 +3364,24 @@ namespace System.Text.RegularExpressions {
                     GenerateGo();
                     BakeMethod();
                 }
-        
+
                 DefineMethod("FindFirstChar", typeof(bool));
                 {
                     GenerateFindFirstChar();
                     BakeMethod();
                 }
-        
+
                 DefineMethod("InitTrackCount", null);
                 {
                     GenerateInitTrackCount();
                     BakeMethod();
                 }
-        
+
                 runnertype = BakeType();
             }
-        
+
             // Generate a RegexRunnerFactory class
-        
+
             DefineType(runnerfactoryname, false, typeof(RegexRunnerFactory));
             {
                 DefineMethod("CreateInstance", typeof(RegexRunner));
@@ -3154,37 +3389,59 @@ namespace System.Text.RegularExpressions {
                     GenerateCreateInstance(runnertype);
                     BakeMethod();
                 }
-        
+
                 factory = BakeType();
             }
-        
+
             return factory;
         }
-        
-        internal void GenerateRegexType(String pattern, RegexOptions opts, String name, bool ispublic, RegexCode code, RegexTree tree, Type factory, TimeSpan matchTimeout) {
-            FieldInfo patternF                = RegexField("pattern");
-            FieldInfo optionsF                = RegexField("roptions");
-            FieldInfo factoryF                = RegexField("factory");
-            FieldInfo capsF                   = RegexField("caps");
-            FieldInfo capnamesF               = RegexField("capnames");
-            FieldInfo capslistF               = RegexField("capslist");
-            FieldInfo capsizeF                = RegexField("capsize");
-            FieldInfo internalMatchTimeoutF   = RegexField("internalMatchTimeout");
-            Type[] noTypeArray                = new Type[0];
-            ConstructorBuilder defCtorBuilder, tmoutCtorBuilder;
-        
+
+        internal void GenerateRegexType(
+            String pattern,
+            RegexOptions opts,
+            String name,
+            bool ispublic,
+            RegexCode code,
+            RegexTree tree,
+            Type factory,
+            TimeSpan matchTimeout
+        )
+        {
+            FieldInfo patternF = RegexField("pattern");
+            FieldInfo optionsF = RegexField("roptions");
+            FieldInfo factoryF = RegexField("factory");
+            FieldInfo capsF = RegexField("caps");
+            FieldInfo capnamesF = RegexField("capnames");
+            FieldInfo capslistF = RegexField("capslist");
+            FieldInfo capsizeF = RegexField("capsize");
+            FieldInfo internalMatchTimeoutF = RegexField("internalMatchTimeout");
+            Type[] noTypeArray = new Type[0];
+            ConstructorBuilder defCtorBuilder,
+                tmoutCtorBuilder;
+
             DefineType(name, ispublic, typeof(Regex));
             {
                 // Define default constructor:
                 _methbuilder = null;
                 MethodAttributes ma = System.Reflection.MethodAttributes.Public;
-                defCtorBuilder = _typebuilder.DefineConstructor(ma, CallingConventions.Standard, noTypeArray);
+                defCtorBuilder = _typebuilder.DefineConstructor(
+                    ma,
+                    CallingConventions.Standard,
+                    noTypeArray
+                );
                 _ilg = defCtorBuilder.GetILGenerator();
                 {
                     // call base constructor
                     Ldthis();
-                    _ilg.Emit(OpCodes.Call, typeof(Regex).GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                                                                         null, new Type[0], new ParameterModifier[0]));
+                    _ilg.Emit(
+                        OpCodes.Call,
+                        typeof(Regex).GetConstructor(
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                            null,
+                            new Type[0],
+                            new ParameterModifier[0]
+                        )
+                    );
                     // set pattern
                     Ldthis();
                     Ldstr(pattern);
@@ -3192,13 +3449,18 @@ namespace System.Text.RegularExpressions {
 
                     // set options
                     Ldthis();
-                    Ldc((int) opts);
+                    Ldc((int)opts);
                     Stfld(optionsF);
 
                     // Set timeout (no need to validate as it should have happened in RegexCompilationInfo):
                     Ldthis();
                     LdcI8(matchTimeout.Ticks);
-                    Call(typeof(TimeSpan).GetMethod("FromTicks", BindingFlags.Static | BindingFlags.Public));
+                    Call(
+                        typeof(TimeSpan).GetMethod(
+                            "FromTicks",
+                            BindingFlags.Static | BindingFlags.Public
+                        )
+                    );
                     Stfld(internalMatchTimeoutF);
 
                     // set factory
@@ -3222,15 +3484,16 @@ namespace System.Text.RegularExpressions {
                         GenerateCreateHashtable(capnamesF, tree._capnames);
 #endif
 
-
                     // set capslist
-                    if (tree._capslist != null) {
+                    if (tree._capslist != null)
+                    {
                         Ldthis();
                         Ldc(tree._capslist.Length);
-                        _ilg.Emit(OpCodes.Newarr, typeof(String));  // create new string array
+                        _ilg.Emit(OpCodes.Newarr, typeof(String)); // create new string array
                         Stfld(capslistF);
 
-                        for (int i=0; i< tree._capslist.Length; i++) {
+                        for (int i = 0; i < tree._capslist.Length; i++)
+                        {
                             Ldthisfld(capslistF);
 
                             Ldc(i);
@@ -3246,8 +3509,15 @@ namespace System.Text.RegularExpressions {
 
                     // set runnerref and replref by calling InitializeReferences()
                     Ldthis();
-                    Call(typeof(Regex).GetMethod("InitializeReferences", BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic));
-
+                    Call(
+                        typeof(Regex).GetMethod(
+                            "InitializeReferences",
+                            BindingFlags.Instance
+                                | BindingFlags.Static
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                        )
+                    );
 
                     Ret();
                 }
@@ -3255,7 +3525,11 @@ namespace System.Text.RegularExpressions {
                 // Constructor with the timeout parameter:
                 _methbuilder = null;
                 ma = System.Reflection.MethodAttributes.Public;
-                tmoutCtorBuilder = _typebuilder.DefineConstructor(ma, CallingConventions.Standard, new Type[] { typeof(TimeSpan) });
+                tmoutCtorBuilder = _typebuilder.DefineConstructor(
+                    ma,
+                    CallingConventions.Standard,
+                    new Type[] { typeof(TimeSpan) }
+                );
                 _ilg = tmoutCtorBuilder.GetILGenerator();
                 {
                     // Call the default constructor:
@@ -3264,7 +3538,12 @@ namespace System.Text.RegularExpressions {
 
                     // Validate timeout:
                     _ilg.Emit(OpCodes.Ldarg_1);
-                    Call(typeof(Regex).GetMethod("ValidateMatchTimeout", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic));
+                    Call(
+                        typeof(Regex).GetMethod(
+                            "ValidateMatchTimeout",
+                            BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+                        )
+                    );
 
                     // Set timeout:
                     Ldthis();
@@ -3274,7 +3553,7 @@ namespace System.Text.RegularExpressions {
                     Ret();
                 }
             }
-        
+
             // bake the constructor and type, then save the assembly
             defCtorBuilder = null;
             tmoutCtorBuilder = null;
@@ -3290,52 +3569,70 @@ namespace System.Text.RegularExpressions {
             Ldthis();
             Newobj(myCollectionType.GetConstructor(new Type[0]));
 #else
-        internal void GenerateCreateHashtable(FieldInfo field, Hashtable ht) {
-            MethodInfo addMethod = typeof(Hashtable).GetMethod("Add", BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-            
+        internal void GenerateCreateHashtable(FieldInfo field, Hashtable ht)
+        {
+            MethodInfo addMethod = typeof(Hashtable).GetMethod(
+                "Add",
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+            );
+
             Ldthis();
             Newobj(typeof(Hashtable).GetConstructor(new Type[0]));
 #endif
 
             Stfld(field);
-        
+
             IDictionaryEnumerator en = ht.GetEnumerator();
-            while (en.MoveNext()) {
+            while (en.MoveNext())
+            {
                 Ldthisfld(field);
-        
-                if (en.Key is int) {
-                    Ldc((int) en.Key);  
+
+                if (en.Key is int)
+                {
+                    Ldc((int)en.Key);
 #if !SILVERLIGHT
                     _ilg.Emit(OpCodes.Box, typeof(Int32));
 #endif
                 }
-                else 
-                    Ldstr((String) en.Key);
-        
-                Ldc((int) en.Value);
+                else
+                    Ldstr((String)en.Key);
+
+                Ldc((int)en.Value);
 #if !SILVERLIGHT
                 _ilg.Emit(OpCodes.Box, typeof(Int32));
-#endif   
+#endif
                 Callvirt(addMethod);
             }
         }
 
-        private FieldInfo RegexField(String fieldname) {
-            return typeof(Regex).GetField(fieldname, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+        private FieldInfo RegexField(String fieldname)
+        {
+            return typeof(Regex).GetField(
+                fieldname,
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+            );
         }
 
         // Note that we save the assembly to the current directory, and we believe this is not a
         // problem because this should only be used by tools, not at runtime.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        internal void Save() {
+        internal void Save()
+        {
             _assembly.Save(_assembly.GetName().Name + ".dll");
         }
 
         /*
          * Generates a very simple factory method.
          */
-        internal void GenerateCreateInstance(Type newtype) {
+        internal void GenerateCreateInstance(Type newtype)
+        {
             Newobj(newtype.GetConstructor(new Type[0]));
             Ret();
         }
@@ -3343,96 +3640,128 @@ namespace System.Text.RegularExpressions {
         /*
          * Begins the definition of a new type with a specified base class
          */
-        internal void DefineType(String typename, bool ispublic, Type inheritfromclass) {
+        internal void DefineType(String typename, bool ispublic, Type inheritfromclass)
+        {
             if (ispublic)
-                _typebuilder = _module.DefineType(typename, TypeAttributes.Class | TypeAttributes.Public, inheritfromclass);
+                _typebuilder = _module.DefineType(
+                    typename,
+                    TypeAttributes.Class | TypeAttributes.Public,
+                    inheritfromclass
+                );
             else
-                _typebuilder = _module.DefineType(typename, TypeAttributes.Class | TypeAttributes.NotPublic, inheritfromclass);
-        
+                _typebuilder = _module.DefineType(
+                    typename,
+                    TypeAttributes.Class | TypeAttributes.NotPublic,
+                    inheritfromclass
+                );
         }
-        
+
         /*
          * Begins the definition of a new method (no args) with a specified return value
          */
-        internal void DefineMethod(String methname, Type returntype) {
-            MethodAttributes ma = System.Reflection.MethodAttributes.Public | System.Reflection.MethodAttributes.Virtual;
-        
+        internal void DefineMethod(String methname, Type returntype)
+        {
+            MethodAttributes ma =
+                System.Reflection.MethodAttributes.Public
+                | System.Reflection.MethodAttributes.Virtual;
+
             _methbuilder = _typebuilder.DefineMethod(methname, ma, returntype, null);
             _ilg = _methbuilder.GetILGenerator();
         }
-        
+
         /*
          * Ends the definition of a method
          */
-        internal void BakeMethod() {
+        internal void BakeMethod()
+        {
             _methbuilder = null;
         }
-        
+
         /*
          * Ends the definition of a class and returns the type
          */
-        internal Type BakeType() {
+        internal Type BakeType()
+        {
             Type retval = _typebuilder.CreateType();
             _typebuilder = null;
-        
+
             return retval;
         }
-        
     }
 
-    internal class RegexLWCGCompiler : RegexCompiler {
+    internal class RegexLWCGCompiler : RegexCompiler
+    {
         private static int _regexCount = 0;
-        private static Type[] _paramTypes = new Type[] {typeof(RegexRunner)};
-        
-        internal RegexLWCGCompiler() {
-        }
-        
+        private static Type[] _paramTypes = new Type[] { typeof(RegexRunner) };
+
+        internal RegexLWCGCompiler() { }
+
         /*
          * The top-level driver. Initializes everything then calls the Generate* methods.
          */
-        internal RegexRunnerFactory FactoryInstanceFromCode(RegexCode code, RegexOptions options) {
-            _code       = code;
-            _codes      = code._codes;
-            _strings    = code._strings;
-            _fcPrefix   = code._fcPrefix;
-            _bmPrefix   = code._bmPrefix;
-            _anchors    = code._anchors;
+        internal RegexRunnerFactory FactoryInstanceFromCode(RegexCode code, RegexOptions options)
+        {
+            _code = code;
+            _codes = code._codes;
+            _strings = code._strings;
+            _fcPrefix = code._fcPrefix;
+            _bmPrefix = code._bmPrefix;
+            _anchors = code._anchors;
             _trackcount = code._trackcount;
-            _options    = options;
-        
+            _options = options;
+
             // pick a unique number for the methods we generate
             int regexnum = Interlocked.Increment(ref _regexCount);
             string regexnumString = regexnum.ToString(CultureInfo.InvariantCulture);
-            
-            DynamicMethod goMethod = DefineDynamicMethod("Go" + regexnumString, null, typeof(CompiledRegexRunner));
+
+            DynamicMethod goMethod = DefineDynamicMethod(
+                "Go" + regexnumString,
+                null,
+                typeof(CompiledRegexRunner)
+            );
             GenerateGo();
-    
-            DynamicMethod firstCharMethod = DefineDynamicMethod("FindFirstChar" + regexnumString, typeof(bool), typeof(CompiledRegexRunner));
+
+            DynamicMethod firstCharMethod = DefineDynamicMethod(
+                "FindFirstChar" + regexnumString,
+                typeof(bool),
+                typeof(CompiledRegexRunner)
+            );
             GenerateFindFirstChar();
-    
-            DynamicMethod trackCountMethod = DefineDynamicMethod("InitTrackCount" + regexnumString, null, typeof(CompiledRegexRunner));
+
+            DynamicMethod trackCountMethod = DefineDynamicMethod(
+                "InitTrackCount" + regexnumString,
+                null,
+                typeof(CompiledRegexRunner)
+            );
             GenerateInitTrackCount();
 
             return new CompiledRegexRunnerFactory(goMethod, firstCharMethod, trackCountMethod);
         }
-        
+
         /*
          * Begins the definition of a new method (no args) with a specified return value
          */
-        internal DynamicMethod DefineDynamicMethod(String methname, Type returntype, Type hostType) {
+        internal DynamicMethod DefineDynamicMethod(String methname, Type returntype, Type hostType)
+        {
             // We're claiming that these are static methods, but really they are instance methods.
-            // By giving them a parameter which represents "this", we're tricking them into 
-            // being instance methods.  
+            // By giving them a parameter which represents "this", we're tricking them into
+            // being instance methods.
 
-            MethodAttributes attribs =  MethodAttributes.Public | MethodAttributes.Static;
+            MethodAttributes attribs = MethodAttributes.Public | MethodAttributes.Static;
             CallingConventions conventions = CallingConventions.Standard;
-                            
-            DynamicMethod dm = new DynamicMethod(methname, attribs, conventions, returntype, _paramTypes, hostType, false /*skipVisibility*/);
+
+            DynamicMethod dm = new DynamicMethod(
+                methname,
+                attribs,
+                conventions,
+                returntype,
+                _paramTypes,
+                hostType,
+                false /*skipVisibility*/
+            );
             _ilg = dm.GetILGenerator();
             return dm;
         }
-
     }
-    
 }
 #endif

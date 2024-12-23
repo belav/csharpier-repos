@@ -8,7 +8,10 @@ using Xunit;
 
 namespace System.Security.Cryptography.Algorithms.Tests
 {
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Not supported on Browser/iOS/tvOS/MacCatalyst")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+        "Not supported on Browser/iOS/tvOS/MacCatalyst"
+    )]
     public abstract class DsaFamilySignatureFormatTests
     {
         protected readonly struct KeyDescription
@@ -57,25 +60,29 @@ namespace System.Security.Cryptography.Algorithms.Tests
         protected abstract byte[] SignHash(
             KeyDescription key,
             byte[] hash,
-            DSASignatureFormat signatureFormat);
+            DSASignatureFormat signatureFormat
+        );
         protected abstract bool VerifyHash(
             KeyDescription key,
             byte[] hash,
             byte[] signature,
-            DSASignatureFormat signatureFormat);
+            DSASignatureFormat signatureFormat
+        );
         protected abstract byte[] SignData(
             KeyDescription key,
             byte[] data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat);
+            DSASignatureFormat signatureFormat
+        );
         protected abstract bool VerifyData(
             KeyDescription key,
             byte[] data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat);
+            DSASignatureFormat signatureFormat
+        );
 
-        protected KeyDescription GetKey([CallerMemberName]string testMethodName = null)
+        protected KeyDescription GetKey([CallerMemberName] string testMethodName = null)
         {
             int absoluteKeyId = Math.Abs(_typeDifferentiator + testMethodName.GetHashCode());
             int localKeyId = absoluteKeyId % _testKeys.Length;
@@ -102,14 +109,18 @@ namespace System.Security.Cryptography.Algorithms.Tests
             return 4;
         }
 
-        private static void CheckLength(KeyDescription key, byte[] signature, DSASignatureFormat signatureFormat)
+        private static void CheckLength(
+            KeyDescription key,
+            byte[] signature,
+            DSASignatureFormat signatureFormat
+        )
         {
             int fieldSizeBytes = (key.FieldSizeInBits + 7) / 8;
 
             switch (signatureFormat)
             {
                 case DSASignatureFormat.IeeeP1363FixedFieldConcatenation:
-                    
+
                     Assert.Equal(2 * fieldSizeBytes, signature.Length);
                     break;
                 case DSASignatureFormat.Rfc3279DerSequence:
@@ -220,16 +231,20 @@ namespace System.Security.Cryptography.Algorithms.Tests
                     _typeNameBytes,
                     invalidSignature,
                     HashAlgorithmName.SHA1,
-                    DSASignatureFormat.Rfc3279DerSequence),
-                "VerifyData with an illegal DER payload");
+                    DSASignatureFormat.Rfc3279DerSequence
+                ),
+                "VerifyData with an illegal DER payload"
+            );
 
             Assert.False(
                 VerifyHash(
                     key,
                     _typeNameBytes,
                     invalidSignature,
-                    DSASignatureFormat.Rfc3279DerSequence),
-                "VerifyHash with an illegal DER payload");
+                    DSASignatureFormat.Rfc3279DerSequence
+                ),
+                "VerifyHash with an illegal DER payload"
+            );
         }
 
         [Fact]
@@ -245,28 +260,41 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             Assert.True(
                 VerifyHash(key, hash, signature, SignatureFormat),
-                "VerifyHash with the unmodified signature");
+                "VerifyHash with the unmodified signature"
+            );
 
             Assert.False(
                 VerifyHash(key, hash, rightPadded, SignatureFormat),
-                "VerifyHash with the right-padded signature");
+                "VerifyHash with the right-padded signature"
+            );
 
             signature = SignData(key, hash, hashAlgorithm, SignatureFormat);
             rightPadded = signature.Concat(Enumerable.Repeat((byte)0, 4)).ToArray();
 
             Assert.True(
                 VerifyData(key, hash, signature, hashAlgorithm, SignatureFormat),
-                "VerifyData with the unmodified signature");
+                "VerifyData with the unmodified signature"
+            );
 
             Assert.False(
                 VerifyData(key, hash, rightPadded, hashAlgorithm, SignatureFormat),
-                "VerifyData with the right-padded signature");
+                "VerifyData with the right-padded signature"
+            );
         }
 
         [Theory]
-        [InlineData(DSASignatureFormat.IeeeP1363FixedFieldConcatenation, DSASignatureFormat.Rfc3279DerSequence)]
-        [InlineData(DSASignatureFormat.Rfc3279DerSequence, DSASignatureFormat.IeeeP1363FixedFieldConcatenation)]
-        public void SignatureFormatsAreNotCompatible(DSASignatureFormat signFormat, DSASignatureFormat verifyFormat)
+        [InlineData(
+            DSASignatureFormat.IeeeP1363FixedFieldConcatenation,
+            DSASignatureFormat.Rfc3279DerSequence
+        )]
+        [InlineData(
+            DSASignatureFormat.Rfc3279DerSequence,
+            DSASignatureFormat.IeeeP1363FixedFieldConcatenation
+        )]
+        public void SignatureFormatsAreNotCompatible(
+            DSASignatureFormat signFormat,
+            DSASignatureFormat verifyFormat
+        )
         {
             if (!SupportsSha2)
                 return;
@@ -285,23 +313,22 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             for (int i = 0; i < RetryCount; i++)
             {
-                byte[] signature = SignData(
-                    key,
-                    _typeNameBytes,
-                    hashAlgorithm,
-                    signFormat);
+                byte[] signature = SignData(key, _typeNameBytes, hashAlgorithm, signFormat);
 
                 if (!VerifyData(key, _typeNameBytes, signature, hashAlgorithm, verifyFormat))
                 {
                     Assert.False(
                         VerifyHash(key, hash, signature, verifyFormat),
-                        $"VerifyHash({verifyFormat}) verifies after VerifyData({verifyFormat}) fails");
+                        $"VerifyHash({verifyFormat}) verifies after VerifyData({verifyFormat}) fails"
+                    );
 
                     return;
                 }
             }
 
-            Assert.Fail($"{RetryCount} {signFormat} signatures verified as {verifyFormat} signatures");
+            Assert.Fail(
+                $"{RetryCount} {signFormat} signatures verified as {verifyFormat} signatures"
+            );
         }
 
         [Fact]
@@ -314,19 +341,23 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "signatureFormat",
-                () => SignData(key, empty, HashAlgorithmName.SHA1, SignatureFormat));
+                () => SignData(key, empty, HashAlgorithmName.SHA1, SignatureFormat)
+            );
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "signatureFormat",
-                () => VerifyData(key, empty, empty, HashAlgorithmName.SHA1, SignatureFormat));
+                () => VerifyData(key, empty, empty, HashAlgorithmName.SHA1, SignatureFormat)
+            );
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "signatureFormat",
-                () => SignHash(key, empty, SignatureFormat));
+                () => SignHash(key, empty, SignatureFormat)
+            );
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "signatureFormat",
-                () => VerifyHash(key, empty, empty, SignatureFormat));
+                () => VerifyHash(key, empty, empty, SignatureFormat)
+            );
         }
 
         [Fact]
@@ -339,19 +370,23 @@ namespace System.Security.Cryptography.Algorithms.Tests
             {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "hashAlgorithm",
-                    () => SignData(key, empty, default, format));
+                    () => SignData(key, empty, default, format)
+                );
 
                 AssertExtensions.Throws<ArgumentNullException>(
                     "hashAlgorithm",
-                    () => VerifyData(key, empty, empty, default, format));
+                    () => VerifyData(key, empty, empty, default, format)
+                );
 
                 AssertExtensions.Throws<ArgumentException>(
                     "hashAlgorithm",
-                    () => SignData(key, empty, new HashAlgorithmName(""), format));
+                    () => SignData(key, empty, new HashAlgorithmName(""), format)
+                );
 
                 AssertExtensions.Throws<ArgumentException>(
                     "hashAlgorithm",
-                    () => VerifyData(key, empty, empty, new HashAlgorithmName(""), format));
+                    () => VerifyData(key, empty, empty, new HashAlgorithmName(""), format)
+                );
             }
         }
 
@@ -365,10 +400,12 @@ namespace System.Security.Cryptography.Algorithms.Tests
             foreach (DSASignatureFormat format in Enum.GetValues(typeof(DSASignatureFormat)))
             {
                 Assert.ThrowsAny<CryptographicException>(
-                    () => SignData(key, empty, unknown, format));
+                    () => SignData(key, empty, unknown, format)
+                );
 
                 Assert.ThrowsAny<CryptographicException>(
-                    () => VerifyData(key, empty, empty, unknown, format));
+                    () => VerifyData(key, empty, empty, unknown, format)
+                );
             }
         }
 
@@ -384,27 +421,33 @@ namespace System.Security.Cryptography.Algorithms.Tests
             {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "data",
-                    () => SignData(key, null, HashAlgorithmName.SHA1, format));
+                    () => SignData(key, null, HashAlgorithmName.SHA1, format)
+                );
 
                 AssertExtensions.Throws<ArgumentNullException>(
                     "data",
-                    () => VerifyData(key, null, Array.Empty<byte>(), HashAlgorithmName.SHA1, format));
+                    () => VerifyData(key, null, Array.Empty<byte>(), HashAlgorithmName.SHA1, format)
+                );
 
                 AssertExtensions.Throws<ArgumentNullException>(
                     "signature",
-                    () => VerifyData(key, Array.Empty<byte>(), null, HashAlgorithmName.SHA1, format));
+                    () => VerifyData(key, Array.Empty<byte>(), null, HashAlgorithmName.SHA1, format)
+                );
 
                 AssertExtensions.Throws<ArgumentNullException>(
                     HashParameterName,
-                    () => SignHash(key, null, format));
+                    () => SignHash(key, null, format)
+                );
 
                 AssertExtensions.Throws<ArgumentNullException>(
                     HashParameterName,
-                    () => VerifyHash(key, null, Array.Empty<byte>(), format));
+                    () => VerifyHash(key, null, Array.Empty<byte>(), format)
+                );
 
                 AssertExtensions.Throws<ArgumentNullException>(
                     SignatureParameterName,
-                    () => VerifyHash(key, Array.Empty<byte>(), null, format));
+                    () => VerifyHash(key, Array.Empty<byte>(), null, format)
+                );
             }
         }
     }

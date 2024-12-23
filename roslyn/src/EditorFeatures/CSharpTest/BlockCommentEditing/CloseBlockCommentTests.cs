@@ -20,7 +20,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
 {
     [Trait(Traits.Feature, Traits.Features.BlockCommentEditing)]
-    public sealed class CloseBlockCommentTests : AbstractTypingCommandHandlerTest<TypeCharCommandArgs>
+    public sealed class CloseBlockCommentTests
+        : AbstractTypingCommandHandlerTest<TypeCharCommandArgs>
     {
         [WpfFact]
         public void ClosedRegularlyAfterAsterisk()
@@ -282,11 +283,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
                  *
                  * /$$
                 """;
-            Verify(code, expected, workspace =>
-            {
-                var globalOptions = workspace.GetService<IGlobalOptionService>();
-                globalOptions.SetGlobalOption(BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString, LanguageNames.CSharp, false);
-            });
+            Verify(
+                code,
+                expected,
+                workspace =>
+                {
+                    var globalOptions = workspace.GetService<IGlobalOptionService>();
+                    globalOptions.SetGlobalOption(
+                        BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString,
+                        LanguageNames.CSharp,
+                        false
+                    );
+                }
+            );
         }
 
         [WpfFact]
@@ -368,13 +377,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
             Verify(code, expected);
         }
 
-        protected override TestWorkspace CreateTestWorkspace(string initialMarkup)
-            => TestWorkspace.CreateCSharp(initialMarkup);
+        protected override TestWorkspace CreateTestWorkspace(string initialMarkup) =>
+            TestWorkspace.CreateCSharp(initialMarkup);
 
-        protected override (TypeCharCommandArgs, string insertionText) CreateCommandArgs(ITextView textView, ITextBuffer textBuffer)
-            => (new TypeCharCommandArgs(textView, textBuffer, '/'), "/");
+        protected override (TypeCharCommandArgs, string insertionText) CreateCommandArgs(
+            ITextView textView,
+            ITextBuffer textBuffer
+        ) => (new TypeCharCommandArgs(textView, textBuffer, '/'), "/");
 
-        internal override ICommandHandler<TypeCharCommandArgs> GetCommandHandler(TestWorkspace workspace)
-            => Assert.IsType<CloseBlockCommentCommandHandler>(workspace.GetService<ICommandHandler>(ContentTypeNames.CSharpContentType, nameof(CloseBlockCommentCommandHandler)));
+        internal override ICommandHandler<TypeCharCommandArgs> GetCommandHandler(
+            TestWorkspace workspace
+        ) =>
+            Assert.IsType<CloseBlockCommentCommandHandler>(
+                workspace.GetService<ICommandHandler>(
+                    ContentTypeNames.CSharpContentType,
+                    nameof(CloseBlockCommentCommandHandler)
+                )
+            );
     }
 }

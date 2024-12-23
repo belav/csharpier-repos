@@ -30,46 +30,54 @@ using System;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public sealed class Warning : TaskExtension {
-		
-		string	code;
-		string	helpKeyword;
-		string	text;
-	
-		public Warning ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public sealed class Warning : TaskExtension
+    {
+        string code;
+        string helpKeyword;
+        string text;
 
-		public override bool Execute ()
-		{
-			if (String.IsNullOrEmpty (text))
-				return true;
+        public Warning() { }
 
-			Log.LogWarning (null, code, helpKeyword,
-				String.IsNullOrEmpty (File) ? BuildEngine.ProjectFileOfTaskNode : File,
-				BuildEngine.LineNumberOfTaskNode, BuildEngine.ColumnNumberOfTaskNode,
-				BuildEngine.LineNumberOfTaskNode, BuildEngine.ColumnNumberOfTaskNode,
-				text, null);
-			return true;
-		}
+        public override bool Execute()
+        {
+            if (String.IsNullOrEmpty(text))
+                return true;
 
-		public string Code {
-			get { return code; }
-			set { code = value; }
-		}
-		
-		public string HelpKeyword {
-			get { return helpKeyword; }
-			set { helpKeyword = value; }
-		}
-		
-		public string Text {
-			get { return text; }
-			set { text = value; }
-		}
+            Log.LogWarning(
+                null,
+                code,
+                helpKeyword,
+                String.IsNullOrEmpty(File) ? BuildEngine.ProjectFileOfTaskNode : File,
+                BuildEngine.LineNumberOfTaskNode,
+                BuildEngine.ColumnNumberOfTaskNode,
+                BuildEngine.LineNumberOfTaskNode,
+                BuildEngine.ColumnNumberOfTaskNode,
+                text,
+                null
+            );
+            return true;
+        }
 
-		public string File { get; set; }
-	}
+        public string Code
+        {
+            get { return code; }
+            set { code = value; }
+        }
+
+        public string HelpKeyword
+        {
+            get { return helpKeyword; }
+            set { helpKeyword = value; }
+        }
+
+        public string Text
+        {
+            get { return text; }
+            set { text = value; }
+        }
+
+        public string File { get; set; }
+    }
 }
-

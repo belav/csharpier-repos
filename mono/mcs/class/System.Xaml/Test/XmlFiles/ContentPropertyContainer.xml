@@ -1,11 +1,14 @@
-<ContentPropertyContainer xmlns="http://www.domain.com/path" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<SimpleType x:Key="one">
-		<SimpleType />
-		<SimpleType />
-		<SimpleType.NonContentItems>
-			<SimpleType />
-			<SimpleType />
-		</SimpleType.NonContentItems>
-	</SimpleType>
-	<SimpleType x:Key="two" />
+<ContentPropertyContainer
+  xmlns="http://www.domain.com/path"
+  {http://www.w3.org/2000/xmlns/}x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+  <SimpleType {http://schemas.microsoft.com/winfx/2006/xaml}Key="one">
+    <SimpleType />
+    <SimpleType />
+    <SimpleType.NonContentItems>
+      <SimpleType />
+      <SimpleType />
+    </SimpleType.NonContentItems>
+  </SimpleType>
+  <SimpleType {http://schemas.microsoft.com/winfx/2006/xaml}Key="two" />
 </ContentPropertyContainer>

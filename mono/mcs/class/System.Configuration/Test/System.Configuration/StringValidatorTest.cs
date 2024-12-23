@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,109 +32,109 @@ using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class StringValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			StringValidator v = new StringValidator (5);
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class StringValidatorTest
+    {
+        [Test]
+        public void CanValidate()
+        {
+            StringValidator v = new StringValidator(5);
 
-			Assert.IsTrue (v.CanValidate (typeof (string)));
-			Assert.IsFalse (v.CanValidate (typeof (int)));
-			Assert.IsFalse (v.CanValidate (typeof (object)));
-		}
+            Assert.IsTrue(v.CanValidate(typeof(string)));
+            Assert.IsFalse(v.CanValidate(typeof(int)));
+            Assert.IsFalse(v.CanValidate(typeof(object)));
+        }
 
-		[Test]
-		public void NullZero ()
-		{
-			StringValidator v = new StringValidator (0);
+        [Test]
+        public void NullZero()
+        {
+            StringValidator v = new StringValidator(0);
 
-			v.Validate (null);
-		}
+            v.Validate(null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Null ()
-		{
-			StringValidator v = new StringValidator (1);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Null()
+        {
+            StringValidator v = new StringValidator(1);
 
-			v.Validate (null);
-		}
+            v.Validate(null);
+        }
 
-		[Test]
-		public void MinLenth ()
-		{
-			StringValidator v = new StringValidator (5);
+        [Test]
+        public void MinLenth()
+        {
+            StringValidator v = new StringValidator(5);
 
-			v.Validate ("123456789");
-			v.Validate ("1234567");
-			v.Validate ("12345");
-		}
+            v.Validate("123456789");
+            v.Validate("1234567");
+            v.Validate("12345");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void MinLength_fail ()
-		{
-			StringValidator v = new StringValidator (5);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MinLength_fail()
+        {
+            StringValidator v = new StringValidator(5);
 
-			v.Validate ("1234");
-		}
+            v.Validate("1234");
+        }
 
-		[Test]
-		public void Bounded ()
-		{
-			StringValidator v = new StringValidator (5, 7);
+        [Test]
+        public void Bounded()
+        {
+            StringValidator v = new StringValidator(5, 7);
 
-			v.Validate ("12345");
-			v.Validate ("123456");
-			v.Validate ("123457");
-		}
+            v.Validate("12345");
+            v.Validate("123456");
+            v.Validate("123457");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Bounded_fail1()
-		{
-			StringValidator v = new StringValidator (5, 7);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Bounded_fail1()
+        {
+            StringValidator v = new StringValidator(5, 7);
 
-			v.Validate ("1234");
-		}
+            v.Validate("1234");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Bounded_fail2()
-		{
-			StringValidator v = new StringValidator (5, 7);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Bounded_fail2()
+        {
+            StringValidator v = new StringValidator(5, 7);
 
-			v.Validate ("12345678");
-		}
+            v.Validate("12345678");
+        }
 
-		[Test]
-		public void Invalid ()
-		{
-			StringValidator v = new StringValidator (5, 7, "890");
+        [Test]
+        public void Invalid()
+        {
+            StringValidator v = new StringValidator(5, 7, "890");
 
-			v.Validate ("123456");
-		}
+            v.Validate("123456");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Invalid_fail ()
-		{
-			StringValidator v = new StringValidator (5, 7, "345");
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Invalid_fail()
+        {
+            StringValidator v = new StringValidator(5, 7, "345");
 
-			v.Validate ("123456");
-		}
+            v.Validate("123456");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Invalid_fail_length ()
-		{
-			StringValidator v = new StringValidator (5, 7, "890");
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Invalid_fail_length()
+        {
+            StringValidator v = new StringValidator(5, 7, "890");
 
-			v.Validate ("12345678");
-		}
-	}
+            v.Validate("12345678");
+        }
+    }
 }
-

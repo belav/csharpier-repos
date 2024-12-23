@@ -6,30 +6,31 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
-    using System.Text;
-    using System.Runtime.Serialization;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.IO;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Data.Common;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary; //Binary Formatter
+    using System.Runtime.Versioning;
+    using System.Text;
     using System.Xml;
+    using System.Xml.Schema;
     using System.Xml.Serialization;
 #if !NO_CONFIGURATION
     using System.Xml.Serialization.Advanced;
 #endif
-    using System.Xml.Schema;
-    using System.Runtime.Serialization.Formatters.Binary; //Binary Formatter
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using System.Configuration;
-    using System.Data.Common;
-    using System.Runtime.Versioning;
-    using System.Runtime.CompilerServices;
 
 #if !COREFX
     /// <devdoc>
@@ -38,16 +39,25 @@ namespace System.Data {
     ///    </para>
     /// </devdoc>
     [
-    ResDescriptionAttribute(Res.DataSetDescr),
-    DefaultProperty("DataSetName"),
-    ToolboxItem("Microsoft.VSDesigner.Data.VS.DataSetToolboxItem, " + AssemblyRef.MicrosoftVSDesigner),
-    Designer("Microsoft.VSDesigner.Data.VS.DataSetDesigner, " + AssemblyRef.MicrosoftVSDesigner),
-    Serializable,
-    XmlSchemaProvider("GetDataSetSchema"),
-    XmlRoot("DataSet")
+        ResDescriptionAttribute(Res.DataSetDescr),
+        DefaultProperty("DataSetName"),
+        ToolboxItem(
+            "Microsoft.VSDesigner.Data.VS.DataSetToolboxItem, " + AssemblyRef.MicrosoftVSDesigner
+        ),
+        Designer(
+            "Microsoft.VSDesigner.Data.VS.DataSetDesigner, " + AssemblyRef.MicrosoftVSDesigner
+        ),
+        Serializable,
+        XmlSchemaProvider("GetDataSetSchema"),
+        XmlRoot("DataSet")
     ]
- public class DataSet : MarshalByValueComponent, System.ComponentModel.IListSource, IXmlSerializable, ISupportInitializeNotification, ISerializable {
-
+    public class DataSet
+        : MarshalByValueComponent,
+            System.ComponentModel.IListSource,
+            IXmlSerializable,
+            ISupportInitializeNotification,
+            ISerializable
+    {
         private DataViewManager defaultViewManager;
 
         // Public Collections
@@ -73,17 +83,16 @@ namespace System.Data {
         internal bool fInitInProgress = false;
         internal bool fEnableCascading = true;
         internal bool fIsSchemaLoading = false;
-        private bool fBoundToDocument;        // for XmlDataDocument
+        private bool fBoundToDocument; // for XmlDataDocument
 
         // Events
         private PropertyChangedEventHandler onPropertyChangingDelegate;
         private MergeFailedEventHandler onMergeFailed;
-        private DataRowCreatedEventHandler onDataRowCreated;   // Internal for XmlDataDocument only
-        private DataSetClearEventhandler onClearFunctionCalled;   // Internal for XmlDataDocument only
+        private DataRowCreatedEventHandler onDataRowCreated; // Internal for XmlDataDocument only
+        private DataSetClearEventhandler onClearFunctionCalled; // Internal for XmlDataDocument only
         private System.EventHandler onInitialized;
 
-
-        internal readonly static DataTable[] zeroTables = new DataTable[0];
+        internal static readonly DataTable[] zeroTables = new DataTable[0];
         internal string mainTableName = "";
 
         //default remoting format is XML
@@ -92,7 +101,9 @@ namespace System.Data {
         private object _defaultViewManagerLock = new Object();
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(ref _objectTypeCount);
+        private readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref _objectTypeCount
+        );
         private static XmlSchemaComplexType schemaTypeForWSDL = null;
 
         internal bool UseDataSetSchemaOnly; // UseDataSetSchemaOnly  , for YUKON
@@ -101,7 +112,8 @@ namespace System.Data {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Data.DataSet'/> class.</para>
         /// </devdoc>
-        public DataSet() {
+        public DataSet()
+        {
             GC.SuppressFinalize(this);
             Bid.Trace("<ds.DataSet.DataSet|API> %d#\n", ObjectID); // others will call this constr
             // Set default locale
@@ -114,26 +126,26 @@ namespace System.Data {
         /// <para>Initializes a new instance of a <see cref='System.Data.DataSet'/>
         /// class with the given name.</para>
         /// </devdoc>
-        public DataSet(string dataSetName) 
+        public DataSet(string dataSetName)
             : this()
         {
             this.DataSetName = dataSetName;
         }
 
-        [
-        DefaultValue(SerializationFormat.Xml)
-        ]
-        public SerializationFormat RemotingFormat {
-            get {
-                return _remotingFormat;
-            }
-            set {
-                if (value != SerializationFormat.Binary && value != SerializationFormat.Xml) {
+        [DefaultValue(SerializationFormat.Xml)]
+        public SerializationFormat RemotingFormat
+        {
+            get { return _remotingFormat; }
+            set
+            {
+                if (value != SerializationFormat.Binary && value != SerializationFormat.Xml)
+                {
                     throw ExceptionBuilder.InvalidRemotingFormat(value);
                 }
                 _remotingFormat = value;
                 // this property is inherited to DataTable from DataSet.So we set this value to DataTable also
-                for (int i = 0; i < Tables.Count; i++) {
+                for (int i = 0; i < Tables.Count; i++)
+                {
                     Tables[i].RemotingFormat = value;
                 }
             }
@@ -141,12 +153,13 @@ namespace System.Data {
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public virtual SchemaSerializationMode SchemaSerializationMode { //Typed DataSet calls into this
-            get {
-                return SchemaSerializationMode.IncludeSchema;
-            }
-            set {
-                if (value != SchemaSerializationMode.IncludeSchema) {
+        public virtual SchemaSerializationMode SchemaSerializationMode
+        { //Typed DataSet calls into this
+            get { return SchemaSerializationMode.IncludeSchema; }
+            set
+            {
+                if (value != SchemaSerializationMode.IncludeSchema)
+                {
                     throw ExceptionBuilder.CannotChangeSchemaSerializationMode();
                 }
             }
@@ -154,13 +167,16 @@ namespace System.Data {
 
         //      Check whether the stream is binary serialized.
         // 'static' function that consumes SerializationInfo
-        protected bool IsBinarySerialized(SerializationInfo info, StreamingContext context) {// mainly for typed DS
+        protected bool IsBinarySerialized(SerializationInfo info, StreamingContext context)
+        { // mainly for typed DS
             // our default remoting format is XML
             SerializationFormat remotingFormat = SerializationFormat.Xml;
             SerializationInfoEnumerator e = info.GetEnumerator();
 
-            while (e.MoveNext()) {
-                if (e.Name == "DataSet.RemotingFormat") {//DataSet.RemotingFormat does not exist in V1/V1.1 versions
+            while (e.MoveNext())
+            {
+                if (e.Name == "DataSet.RemotingFormat")
+                { //DataSet.RemotingFormat does not exist in V1/V1.1 versions
                     remotingFormat = (SerializationFormat)e.Value;
                     break;
                 }
@@ -170,12 +186,18 @@ namespace System.Data {
 
         //      Should Schema be included during Serialization
         // 'static' function that consumes SerializationInfo
-        protected SchemaSerializationMode DetermineSchemaSerializationMode(SerializationInfo info, StreamingContext context) { //Typed DataSet calls into this
+        protected SchemaSerializationMode DetermineSchemaSerializationMode(
+            SerializationInfo info,
+            StreamingContext context
+        )
+        { //Typed DataSet calls into this
             SchemaSerializationMode schemaSerializationMode = SchemaSerializationMode.IncludeSchema;
             SerializationInfoEnumerator e = info.GetEnumerator();
 
-            while (e.MoveNext()) {
-                if (e.Name == "SchemaSerializationMode.DataSet") { //SchemaSerializationMode.DataSet does not exist in V1/V1.1 versions
+            while (e.MoveNext())
+            {
+                if (e.Name == "SchemaSerializationMode.DataSet")
+                { //SchemaSerializationMode.DataSet does not exist in V1/V1.1 versions
                     schemaSerializationMode = (SchemaSerializationMode)e.Value;
                     break;
                 }
@@ -183,35 +205,65 @@ namespace System.Data {
             return schemaSerializationMode;
         }
 
-        protected SchemaSerializationMode DetermineSchemaSerializationMode(XmlReader reader) { //Typed DataSet calls into this
+        protected SchemaSerializationMode DetermineSchemaSerializationMode(XmlReader reader)
+        { //Typed DataSet calls into this
             SchemaSerializationMode schemaSerializationMode = SchemaSerializationMode.IncludeSchema;
             reader.MoveToContent();
-            if (reader.NodeType == XmlNodeType.Element) {
-                if (reader.HasAttributes) {
-                    string attribValue = reader.GetAttribute(Keywords.MSD_SCHEMASERIALIZATIONMODE, Keywords.MSDNS);
-                    if ((String.Compare(attribValue, Keywords.MSD_EXCLUDESCHEMA, StringComparison.OrdinalIgnoreCase) == 0)) {
+            if (reader.NodeType == XmlNodeType.Element)
+            {
+                if (reader.HasAttributes)
+                {
+                    string attribValue = reader.GetAttribute(
+                        Keywords.MSD_SCHEMASERIALIZATIONMODE,
+                        Keywords.MSDNS
+                    );
+                    if (
+                        (
+                            String.Compare(
+                                attribValue,
+                                Keywords.MSD_EXCLUDESCHEMA,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
+                    {
                         schemaSerializationMode = SchemaSerializationMode.ExcludeSchema;
                     }
-                    else if ((String.Compare(attribValue, Keywords.MSD_INCLUDESCHEMA, StringComparison.OrdinalIgnoreCase) == 0)) {
+                    else if (
+                        (
+                            String.Compare(
+                                attribValue,
+                                Keywords.MSD_INCLUDESCHEMA,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
+                    {
                         schemaSerializationMode = SchemaSerializationMode.IncludeSchema;
                     }
-                    else if (attribValue != null) { // if attrib does not exist, then don't throw
-                        throw ExceptionBuilder.InvalidSchemaSerializationMode(typeof(SchemaSerializationMode), attribValue);
+                    else if (attribValue != null)
+                    { // if attrib does not exist, then don't throw
+                        throw ExceptionBuilder.InvalidSchemaSerializationMode(
+                            typeof(SchemaSerializationMode),
+                            attribValue
+                        );
                     }
                 }
             }
             return schemaSerializationMode;
         }
 
-
         //      Deserialize all the tables data of the dataset from binary/xml stream.
         // 'instance' method that consumes SerializationInfo
-        protected void GetSerializationData(SerializationInfo info, StreamingContext context) {// mainly for typed DS
+        protected void GetSerializationData(SerializationInfo info, StreamingContext context)
+        { // mainly for typed DS
             SerializationFormat remotingFormat = SerializationFormat.Xml;
             SerializationInfoEnumerator e = info.GetEnumerator();
 
-            while (e.MoveNext()) {
-                if (e.Name == "DataSet.RemotingFormat") { //DataSet.RemotingFormat does not exist in V1/V1.1 versions
+            while (e.MoveNext())
+            {
+                if (e.Name == "DataSet.RemotingFormat")
+                { //DataSet.RemotingFormat does not exist in V1/V1.1 versions
                     remotingFormat = (SerializationFormat)e.Value;
                     break;
                 }
@@ -219,19 +271,21 @@ namespace System.Data {
             DeserializeDataSetData(info, context, remotingFormat);
         }
 
-
         //      Deserialize all the tables schema and data of the dataset from binary/xml stream.
         protected DataSet(SerializationInfo info, StreamingContext context)
-            : this(info, context, true) {
-        }
+            : this(info, context, true) { }
+
         protected DataSet(SerializationInfo info, StreamingContext context, bool ConstructSchema)
-            : this() {
+            : this()
+        {
             SerializationFormat remotingFormat = SerializationFormat.Xml;
             SchemaSerializationMode schemaSerializationMode = SchemaSerializationMode.IncludeSchema;
             SerializationInfoEnumerator e = info.GetEnumerator();
 
-            while (e.MoveNext()) {
-                switch (e.Name) {
+            while (e.MoveNext())
+            {
+                switch (e.Name)
+                {
                     case "DataSet.RemotingFormat": //DataSet.RemotingFormat does not exist in V1/V1.1 versions
                         remotingFormat = (SerializationFormat)e.Value;
                         break;
@@ -241,52 +295,68 @@ namespace System.Data {
                 }
             }
 
-            if (schemaSerializationMode == SchemaSerializationMode.ExcludeSchema) {
+            if (schemaSerializationMode == SchemaSerializationMode.ExcludeSchema)
+            {
                 InitializeDerivedDataSet();
             }
 
-            // adding back this check will fix typed dataset XML remoting, but we have to fix case that 
+            // adding back this check will fix typed dataset XML remoting, but we have to fix case that
             // a class inherits from DataSet and just relies on DataSet to deserialize (see SQL BU DT 374717)
-            // to fix that case also, we need to add a flag and add it to below check so return (no-op) will be 
+            // to fix that case also, we need to add a flag and add it to below check so return (no-op) will be
             // conditional (flag needs to be set in TypedDataSet
-            if (remotingFormat == SerializationFormat.Xml && !ConstructSchema /* && this.GetType() != typeof(DataSet)*/) {
+            if (
+                remotingFormat == SerializationFormat.Xml
+                && !ConstructSchema /* && this.GetType() != typeof(DataSet)*/
+            )
+            {
                 return; //For typed dataset xml remoting, this is a no-op
             }
             DeserializeDataSet(info, context, remotingFormat, schemaSerializationMode);
         }
 
-
-
-        [System.Security.Permissions.SecurityPermissionAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Flags = System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) {
+        [System.Security.Permissions.SecurityPermissionAttribute(
+            System.Security.Permissions.SecurityAction.LinkDemand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter
+        )]
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             SerializationFormat remotingFormat = RemotingFormat;
             SerializeDataSet(info, context, remotingFormat);
         }
 
         //      Deserialize all the tables data of the dataset from binary/xml stream.
-        protected virtual void InitializeDerivedDataSet() {
+        protected virtual void InitializeDerivedDataSet()
+        {
             return;
         }
 
         //      Serialize all the tables.
-        private void SerializeDataSet(SerializationInfo info, StreamingContext context, SerializationFormat remotingFormat) {
+        private void SerializeDataSet(
+            SerializationInfo info,
+            StreamingContext context,
+            SerializationFormat remotingFormat
+        )
+        {
             Debug.Assert(info != null);
             info.AddValue("DataSet.RemotingVersion", new Version(2, 0));
 
             // SqlHotFix 299, SerializationFormat enumeration types don't exist in V1.1 SP1
-            if (SerializationFormat.Xml != remotingFormat) {
+            if (SerializationFormat.Xml != remotingFormat)
+            {
                 info.AddValue("DataSet.RemotingFormat", remotingFormat);
             }
 
             // SqlHotFix 299, SchemaSerializationMode enumeration types don't exist in V1.1 SP1
-            if (SchemaSerializationMode.IncludeSchema != SchemaSerializationMode) {
+            if (SchemaSerializationMode.IncludeSchema != SchemaSerializationMode)
+            {
                 //SkipSchemaDuringSerialization
                 info.AddValue("SchemaSerializationMode.DataSet", SchemaSerializationMode);
             }
 
-            if (remotingFormat != SerializationFormat.Xml) {
-                if (SchemaSerializationMode == SchemaSerializationMode.IncludeSchema) {
-
+            if (remotingFormat != SerializationFormat.Xml)
+            {
+                if (SchemaSerializationMode == SchemaSerializationMode.IncludeSchema)
+                {
                     //DataSet public state properties
                     SerializeDataSetProperties(info, context);
 
@@ -294,16 +364,24 @@ namespace System.Data {
                     info.AddValue("DataSet.Tables.Count", Tables.Count);
 
                     //Tables, Columns, Rows
-                    for (int i = 0; i < Tables.Count; i++) {
-                        BinaryFormatter bf = new BinaryFormatter(null, new StreamingContext(context.State, false));
+                    for (int i = 0; i < Tables.Count; i++)
+                    {
+                        BinaryFormatter bf = new BinaryFormatter(
+                            null,
+                            new StreamingContext(context.State, false)
+                        );
                         MemoryStream memStream = new MemoryStream();
                         bf.Serialize(memStream, Tables[i]);
                         memStream.Position = 0;
-                        info.AddValue(String.Format(CultureInfo.InvariantCulture, "DataSet.Tables_{0}", i), memStream.GetBuffer());
+                        info.AddValue(
+                            String.Format(CultureInfo.InvariantCulture, "DataSet.Tables_{0}", i),
+                            memStream.GetBuffer()
+                        );
                     }
 
                     //Constraints
-                    for (int i = 0; i < Tables.Count; i++) {
+                    for (int i = 0; i < Tables.Count; i++)
+                    {
                         Tables[i].SerializeConstraints(info, context, i, true);
                     }
 
@@ -311,20 +389,24 @@ namespace System.Data {
                     SerializeRelations(info, context);
 
                     //Expression Columns
-                    for (int i = 0; i < Tables.Count; i++) {
+                    for (int i = 0; i < Tables.Count; i++)
+                    {
                         Tables[i].SerializeExpressionColumns(info, context, i);
                     }
                 }
-                else {
+                else
+                {
                     //Serialize  DataSet public properties.
                     SerializeDataSetProperties(info, context);
                 }
                 //Rows
-                for (int i = 0; i < Tables.Count; i++) {
+                for (int i = 0; i < Tables.Count; i++)
+                {
                     Tables[i].SerializeTableData(info, context, i);
                 }
-            } else { // old behaviour
-
+            }
+            else
+            { // old behaviour
                 String strSchema = this.GetXmlSchemaForRemoting(null);
 
                 String strData = null;
@@ -341,7 +423,13 @@ namespace System.Data {
         }
 
         //      Deserialize all the tables - marked internal so that DataTable can call into this
-        internal void DeserializeDataSet(SerializationInfo info, StreamingContext context, SerializationFormat remotingFormat, SchemaSerializationMode schemaSerializationMode) {
+        internal void DeserializeDataSet(
+            SerializationInfo info,
+            StreamingContext context,
+            SerializationFormat remotingFormat,
+            SchemaSerializationMode schemaSerializationMode
+        )
+        {
             // deserialize schema
             DeserializeDataSetSchema(info, context, remotingFormat, schemaSerializationMode);
             // deserialize data
@@ -349,9 +437,17 @@ namespace System.Data {
         }
 
         //      Deserialize schema.
-        private void DeserializeDataSetSchema(SerializationInfo info, StreamingContext context, SerializationFormat remotingFormat, SchemaSerializationMode schemaSerializationMode) {
-            if (remotingFormat != SerializationFormat.Xml) {
-                if (schemaSerializationMode == SchemaSerializationMode.IncludeSchema) {
+        private void DeserializeDataSetSchema(
+            SerializationInfo info,
+            StreamingContext context,
+            SerializationFormat remotingFormat,
+            SchemaSerializationMode schemaSerializationMode
+        )
+        {
+            if (remotingFormat != SerializationFormat.Xml)
+            {
+                if (schemaSerializationMode == SchemaSerializationMode.IncludeSchema)
+                {
                     //DataSet public state properties
                     DeserializeDataSetProperties(info, context);
 
@@ -359,58 +455,96 @@ namespace System.Data {
                     int tableCount = info.GetInt32("DataSet.Tables.Count");
 
                     //Tables, Columns, Rows
-                    for (int i = 0; i < tableCount; i++) {
-                        Byte[] buffer = (Byte[])info.GetValue(String.Format(CultureInfo.InvariantCulture, "DataSet.Tables_{0}", i), typeof(Byte[]));
+                    for (int i = 0; i < tableCount; i++)
+                    {
+                        Byte[] buffer = (Byte[])
+                            info.GetValue(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "DataSet.Tables_{0}",
+                                    i
+                                ),
+                                typeof(Byte[])
+                            );
                         MemoryStream memStream = new MemoryStream(buffer);
                         memStream.Position = 0;
-                        BinaryFormatter bf = new BinaryFormatter(null, new StreamingContext(context.State, false));
+                        BinaryFormatter bf = new BinaryFormatter(
+                            null,
+                            new StreamingContext(context.State, false)
+                        );
                         DataTable dt = (DataTable)bf.Deserialize(memStream);
                         Tables.Add(dt);
                     }
 
                     //Constraints
-                    for (int i = 0; i < tableCount; i++) {
-                        Tables[i].DeserializeConstraints(info, context,  /* table index */i,  /* serialize all constraints */ true); //
+                    for (int i = 0; i < tableCount; i++)
+                    {
+                        Tables[i]
+                            .DeserializeConstraints(
+                                info,
+                                context, /* table index */
+                                i, /* serialize all constraints */
+                                true
+                            ); //
                     }
 
                     //Relations
                     DeserializeRelations(info, context);
 
                     //Expression Columns
-                    for (int i = 0; i < tableCount; i++) {
+                    for (int i = 0; i < tableCount; i++)
+                    {
                         Tables[i].DeserializeExpressionColumns(info, context, i);
                     }
-                } else {
+                }
+                else
+                {
                     //DeSerialize DataSet public properties.[Locale, CaseSensitive and EnforceConstraints]
                     DeserializeDataSetProperties(info, context);
                 }
-            } else {
+            }
+            else
+            {
                 string strSchema = (String)info.GetValue(KEY_XMLSCHEMA, typeof(System.String));
 
-                if (strSchema != null) {
+                if (strSchema != null)
+                {
                     this.ReadXmlSchema(new XmlTextReader(new StringReader(strSchema)), true);
                 }
             }
         }
 
         //        Deserialize all  data.
-        private void DeserializeDataSetData(SerializationInfo info, StreamingContext context, SerializationFormat remotingFormat) {
-            if (remotingFormat != SerializationFormat.Xml) {
-                for (int i = 0; i < Tables.Count; i++) {
+        private void DeserializeDataSetData(
+            SerializationInfo info,
+            StreamingContext context,
+            SerializationFormat remotingFormat
+        )
+        {
+            if (remotingFormat != SerializationFormat.Xml)
+            {
+                for (int i = 0; i < Tables.Count; i++)
+                {
                     Tables[i].DeserializeTableData(info, context, i);
                 }
             }
-            else {
+            else
+            {
                 string strData = (String)info.GetValue(KEY_XMLDIFFGRAM, typeof(System.String));
 
-                if (strData != null) {
-                    this.ReadXml(new XmlTextReader(new StringReader(strData)), XmlReadMode.DiffGram);
+                if (strData != null)
+                {
+                    this.ReadXml(
+                        new XmlTextReader(new StringReader(strData)),
+                        XmlReadMode.DiffGram
+                    );
                 }
             }
         }
 
         //        Serialize just the dataset properties
-        private void SerializeDataSetProperties(SerializationInfo info, StreamingContext context) {
+        private void SerializeDataSetProperties(SerializationInfo info, StreamingContext context)
+        {
             //DataSet basic properties
             info.AddValue("DataSet.DataSetName", DataSetName);
             info.AddValue("DataSet.Namespace", Namespace);
@@ -425,7 +559,8 @@ namespace System.Data {
         }
 
         //      DeSerialize dataset properties
-        private void DeserializeDataSetProperties(SerializationInfo info, StreamingContext context) {
+        private void DeserializeDataSetProperties(SerializationInfo info, StreamingContext context)
+        {
             //DataSet basic properties
             dataSetName = info.GetString("DataSet.DataSetName");
             namespaceURI = info.GetString("DataSet.Namespace");
@@ -437,29 +572,32 @@ namespace System.Data {
             _cultureUserSet = true;
             enforceConstraints = info.GetBoolean("DataSet.EnforceConstraints");
 
-
-
             //ExtendedProperties
-            extendedProperties = (PropertyCollection)info.GetValue("DataSet.ExtendedProperties", typeof(PropertyCollection));
+            extendedProperties = (PropertyCollection)
+                info.GetValue("DataSet.ExtendedProperties", typeof(PropertyCollection));
         }
 
         //        Gets relation info from the dataset.
         //        ***Schema for Serializing ArrayList of Relations***
         //        Relations -> [relationName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[Nested]->[extendedProperties]
-        private void SerializeRelations(SerializationInfo info, StreamingContext context) {
+        private void SerializeRelations(SerializationInfo info, StreamingContext context)
+        {
             ArrayList relationList = new ArrayList();
 
-            foreach (DataRelation rel in Relations) {
+            foreach (DataRelation rel in Relations)
+            {
                 int[] parentInfo = new int[rel.ParentColumns.Length + 1];
 
                 parentInfo[0] = Tables.IndexOf(rel.ParentTable);
-                for (int j = 1; j < parentInfo.Length; j++) {
+                for (int j = 1; j < parentInfo.Length; j++)
+                {
                     parentInfo[j] = rel.ParentColumns[j - 1].Ordinal;
                 }
 
                 int[] childInfo = new int[rel.ChildColumns.Length + 1];
                 childInfo[0] = Tables.IndexOf(rel.ChildTable);
-                for (int j = 1; j < childInfo.Length; j++) {
+                for (int j = 1; j < childInfo.Length; j++)
+                {
                     childInfo[j] = rel.ChildColumns[j - 1].Ordinal;
                 }
 
@@ -480,10 +618,13 @@ namespace System.Data {
                 ***Schema for Serializing ArrayList of Relations***
                 Relations -> [relationName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[Nested]->[extendedProperties]
         */
-        private void DeserializeRelations(SerializationInfo info, StreamingContext context) {
-            ArrayList relationList = (ArrayList)info.GetValue("DataSet.Relations", typeof(ArrayList));
+        private void DeserializeRelations(SerializationInfo info, StreamingContext context)
+        {
+            ArrayList relationList = (ArrayList)
+                info.GetValue("DataSet.Relations", typeof(ArrayList));
 
-            foreach (ArrayList list in relationList) {
+            foreach (ArrayList list in relationList)
+            {
                 string relationName = (string)list[0];
                 int[] parentInfo = (int[])list[1];
                 int[] childInfo = (int[])list[2];
@@ -492,18 +633,25 @@ namespace System.Data {
 
                 //ParentKey Columns.
                 DataColumn[] parentkeyColumns = new DataColumn[parentInfo.Length - 1];
-                for (int i = 0; i < parentkeyColumns.Length; i++) {
+                for (int i = 0; i < parentkeyColumns.Length; i++)
+                {
                     parentkeyColumns[i] = Tables[parentInfo[0]].Columns[parentInfo[i + 1]];
                 }
 
                 //ChildKey Columns.
                 DataColumn[] childkeyColumns = new DataColumn[childInfo.Length - 1];
-                for (int i = 0; i < childkeyColumns.Length; i++) {
+                for (int i = 0; i < childkeyColumns.Length; i++)
+                {
                     childkeyColumns[i] = Tables[childInfo[0]].Columns[childInfo[i + 1]];
                 }
 
                 //Create the Relation, without any constraints[Assumption: The constraints are added earlier than the relations]
-                DataRelation rel = new DataRelation(relationName, parentkeyColumns, childkeyColumns, false);
+                DataRelation rel = new DataRelation(
+                    relationName,
+                    parentkeyColumns,
+                    childkeyColumns,
+                    false
+                );
                 rel.CheckMultipleNested = false; // disable the check for multiple nested parent
                 rel.Nested = isNested;
                 rel.extendedProperties = extendedProperties;
@@ -513,7 +661,8 @@ namespace System.Data {
             }
         }
 
-        internal void FailedEnableConstraints() {
+        internal void FailedEnableConstraints()
+        {
             this.EnforceConstraints = false;
             throw ExceptionBuilder.EnforceConstraint();
         }
@@ -527,36 +676,37 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        DefaultValue(false),
-        ResDescriptionAttribute(Res.DataSetCaseSensitiveDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            DefaultValue(false),
+            ResDescriptionAttribute(Res.DataSetCaseSensitiveDescr)
         ]
-        public bool CaseSensitive {
-            get {
-                return _caseSensitive;
-            }
-            set {
+        public bool CaseSensitive
+        {
+            get { return _caseSensitive; }
+            set
+            {
                 if (_caseSensitive != value)
                 {
                     bool oldValue = _caseSensitive;
                     _caseSensitive = value;
 
-                    if (!ValidateCaseConstraint()) {
+                    if (!ValidateCaseConstraint())
+                    {
                         _caseSensitive = oldValue;
                         throw ExceptionBuilder.CannotChangeCaseLocale();
                     }
 
-                    foreach (DataTable table in Tables) {
+                    foreach (DataTable table in Tables)
+                    {
                         table.SetCaseSensitiveValue(value, false, true);
                     }
                 }
             }
         }
 
-        bool System.ComponentModel.IListSource.ContainsListCollection {
-            get {
-                return true;
-            }
+        bool System.ComponentModel.IListSource.ContainsListCollection
+        {
+            get { return true; }
         }
 
         /// <devdoc>
@@ -564,11 +714,16 @@ namespace System.Data {
         ///    that allows filtering, searching, and navigating through the custom data view.</para>
         /// </devdoc>
         [Browsable(false), ResDescriptionAttribute(Res.DataSetDefaultViewDescr)]
-        public DataViewManager DefaultViewManager {
-            get {
-                if (defaultViewManager == null) {
-                    lock (_defaultViewManagerLock) {
-                        if (defaultViewManager == null) {
+        public DataViewManager DefaultViewManager
+        {
+            get
+            {
+                if (defaultViewManager == null)
+                {
+                    lock (_defaultViewManagerLock)
+                    {
+                        if (defaultViewManager == null)
+                        {
                             defaultViewManager = new DataViewManager(this, true);
                         }
                     }
@@ -582,27 +737,36 @@ namespace System.Data {
         ///       attempting any update operation.</para>
         /// </devdoc>
         [DefaultValue(true), ResDescriptionAttribute(Res.DataSetEnforceConstraintsDescr)]
-        public bool EnforceConstraints {
-            get {
-                return enforceConstraints;
-            }
-            set {
+        public bool EnforceConstraints
+        {
+            get { return enforceConstraints; }
+            set
+            {
                 IntPtr hscp;
-                Bid.ScopeEnter(out hscp, "<ds.DataSet.set_EnforceConstraints|API> %d#, %d{bool}\n", ObjectID, value);
-                try {
-                    if (this.enforceConstraints != value) {
+                Bid.ScopeEnter(
+                    out hscp,
+                    "<ds.DataSet.set_EnforceConstraints|API> %d#, %d{bool}\n",
+                    ObjectID,
+                    value
+                );
+                try
+                {
+                    if (this.enforceConstraints != value)
+                    {
                         if (value)
                             EnableConstraints();
                         this.enforceConstraints = value;
                     }
                 }
-                finally {
+                finally
+                {
                     Bid.ScopeLeave(ref hscp);
                 }
             }
         }
 
-        internal void RestoreEnforceConstraints(bool value) {
+        internal void RestoreEnforceConstraints(bool value)
+        {
             this.enforceConstraints = value;
         }
 
@@ -610,19 +774,29 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.EnableConstraints|INFO> %d#\n", ObjectID);
-            try {
+            try
+            {
                 bool errors = false;
-                for (ConstraintEnumerator constraints = new ConstraintEnumerator(this); constraints.GetNext(); ) {
+                for (
+                    ConstraintEnumerator constraints = new ConstraintEnumerator(this);
+                    constraints.GetNext();
+
+                )
+                {
                     Constraint constraint = (Constraint)constraints.GetConstraint();
                     errors |= constraint.IsConstraintViolated();
                 }
 
-                foreach (DataTable table in Tables) {
-                    foreach (DataColumn column in table.Columns) {
-                        if (!column.AllowDBNull) {
+                foreach (DataTable table in Tables)
+                {
+                    foreach (DataColumn column in table.Columns)
+                    {
+                        if (!column.AllowDBNull)
+                        {
                             errors |= column.IsNotAllowDBNullViolated();
                         }
-                        if (column.MaxLength >= 0) {
+                        if (column.MaxLength >= 0)
+                        {
                             errors |= column.IsMaxLengthViolated();
                         }
                     }
@@ -631,7 +805,8 @@ namespace System.Data {
                 if (errors)
                     this.FailedEnableConstraints();
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -641,17 +816,18 @@ namespace System.Data {
         ///       sets the name of this <see cref='System.Data.DataSet'/> .</para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        DefaultValue(""),
-        ResDescriptionAttribute(Res.DataSetDataSetNameDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            DefaultValue(""),
+            ResDescriptionAttribute(Res.DataSetDataSetNameDescr)
         ]
-        public string DataSetName {
-            get {
-                return dataSetName;
-            }
-            set {
+        public string DataSetName
+        {
+            get { return dataSetName; }
+            set
+            {
                 Bid.Trace("<ds.DataSet.set_DataSetName|API> %d#, '%ls'\n", ObjectID, value);
-                if (value != dataSetName) {
+                if (value != dataSetName)
+                {
                     if (value == null || value.Length == 0)
                         throw ExceptionBuilder.SetDataSetNameToEmpty();
                     DataTable conflicting = Tables[value, Namespace];
@@ -666,25 +842,33 @@ namespace System.Data {
         /// <devdoc>
         /// </devdoc>
         [
-        DefaultValue(""),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataSetNamespaceDescr)
+            DefaultValue(""),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataSetNamespaceDescr)
         ]
-        public string Namespace {
-            get {
-                return namespaceURI;
-            }
-            set {
+        public string Namespace
+        {
+            get { return namespaceURI; }
+            set
+            {
                 Bid.Trace("<ds.DataSet.set_Namespace|API> %d#, '%ls'\n", ObjectID, value);
                 if (value == null)
                     value = String.Empty;
-                if (value != namespaceURI) {
+                if (value != namespaceURI)
+                {
                     RaisePropertyChanging("Namespace");
-                    foreach (DataTable dt in Tables) {
+                    foreach (DataTable dt in Tables)
+                    {
                         if (dt.tableNamespace != null)
                             continue;
-                        if ((dt.NestedParentRelations.Length == 0) ||
-                            (dt.NestedParentRelations.Length == 1 && dt.NestedParentRelations[0].ChildTable == dt)) {
+                        if (
+                            (dt.NestedParentRelations.Length == 0)
+                            || (
+                                dt.NestedParentRelations.Length == 1
+                                && dt.NestedParentRelations[0].ChildTable == dt
+                            )
+                        )
+                        {
                             //                            dt.SelfNestedWithOneRelation) { // this is wrong bug it was previous behavior
                             if (Tables.Contains(dt.TableName, value, false, true))
                                 throw ExceptionBuilder.DuplicateTableName2(dt.TableName, value);
@@ -693,7 +877,6 @@ namespace System.Data {
                         }
                     }
                     namespaceURI = value;
-
 
                     if (Common.ADP.IsEmpty(value))
                         _datasetPrefix = String.Empty;
@@ -705,22 +888,26 @@ namespace System.Data {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        DefaultValue(""),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataSetPrefixDescr)
+            DefaultValue(""),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataSetPrefixDescr)
         ]
-        public string Prefix {
+        public string Prefix
+        {
             get { return _datasetPrefix; }
-            set {
+            set
+            {
                 if (value == null)
                     value = String.Empty;
 
-                if ((XmlConvert.DecodeName(value) == value) &&
-                    (XmlConvert.EncodeName(value) != value))
+                if (
+                    (XmlConvert.DecodeName(value) == value)
+                    && (XmlConvert.EncodeName(value) != value)
+                )
                     throw ExceptionBuilder.InvalidPrefix(value);
 
-
-                if (value != _datasetPrefix) {
+                if (value != _datasetPrefix)
+                {
                     RaisePropertyChanging("Prefix");
                     _datasetPrefix = value;
                 }
@@ -731,13 +918,16 @@ namespace System.Data {
         ///    <para>Gets the collection of custom user information.</para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        Browsable(false),
-        ResDescriptionAttribute(Res.ExtendedPropertiesDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            Browsable(false),
+            ResDescriptionAttribute(Res.ExtendedPropertiesDescr)
         ]
-        public PropertyCollection ExtendedProperties {
-            get {
-                if (extendedProperties == null) {
+        public PropertyCollection ExtendedProperties
+        {
+            get
+            {
+                if (extendedProperties == null)
+                {
                     extendedProperties = new PropertyCollection();
                 }
                 return extendedProperties;
@@ -751,9 +941,12 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [Browsable(false), ResDescriptionAttribute(Res.DataSetHasErrorsDescr)]
-        public bool HasErrors {
-            get {
-                for (int i = 0; i < Tables.Count; i++) {
+        public bool HasErrors
+        {
+            get
+            {
+                for (int i = 0; i < Tables.Count; i++)
+                {
                     if (Tables[i].HasErrors)
                         return true;
                 }
@@ -762,10 +955,9 @@ namespace System.Data {
         }
 
         [Browsable(false)]
-        public bool IsInitialized {
-            get {
-                return !fInitInProgress;
-            }
+        public bool IsInitialized
+        {
+            get { return !fInitInProgress; }
         }
 
         /// <devdoc>
@@ -774,33 +966,41 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataSetLocaleDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataSetLocaleDescr)
         ]
-        public CultureInfo Locale {
-            get {
+        public CultureInfo Locale
+        {
+            get
+            {
                 // used for comparing not formating/parsing
                 Debug.Assert(null != _culture, "DataSet.Locale: null culture");
                 return _culture;
             }
-            set {
+            set
+            {
                 IntPtr hscp;
                 Bid.ScopeEnter(out hscp, "<ds.DataSet.set_Locale|API> %d#\n", ObjectID);
-                try {
-                    if (value != null) {
-                        if (!_culture.Equals(value)) {
+                try
+                {
+                    if (value != null)
+                    {
+                        if (!_culture.Equals(value))
+                        {
                             SetLocaleValue(value, true);
                         }
                         _cultureUserSet = true;
                     }
                 }
-                finally {
+                finally
+                {
                     Bid.ScopeLeave(ref hscp);
                 }
             }
         }
 
-        internal void SetLocaleValue(CultureInfo value, bool userSet) {
+        internal void SetLocaleValue(CultureInfo value, bool userSet)
+        {
             bool flag = false;
             bool exceptionThrown = false;
             int tableCount = 0;
@@ -808,63 +1008,81 @@ namespace System.Data {
             CultureInfo oldLocale = _culture;
             bool oldUserSet = _cultureUserSet;
 
-            try {
+            try
+            {
                 _culture = value;
                 _cultureUserSet = userSet;
 
-                foreach (DataTable table in Tables) {
-                    if (!table.ShouldSerializeLocale()) {
+                foreach (DataTable table in Tables)
+                {
+                    if (!table.ShouldSerializeLocale())
+                    {
                         bool retchk = table.SetLocaleValue(value, false, false);
                         //Debug.Assert(retchk == table.ShouldSerializeLocale(), "unexpected setting of table locale"); may fire with Deserialize
                     }
                 }
 
                 flag = ValidateLocaleConstraint();
-                if (flag) {
+                if (flag)
+                {
                     flag = false;
-                    foreach (DataTable table in Tables) {
+                    foreach (DataTable table in Tables)
+                    {
                         tableCount++;
-                        if (!table.ShouldSerializeLocale()) {
+                        if (!table.ShouldSerializeLocale())
+                        {
                             table.SetLocaleValue(value, false, true);
                         }
                     }
                     flag = true;
                 }
             }
-            catch {
+            catch
+            {
                 exceptionThrown = true;
                 throw;
             }
-            finally {
-                if (!flag) { // reset old locale if ValidationFailed or exception thrown
+            finally
+            {
+                if (!flag)
+                { // reset old locale if ValidationFailed or exception thrown
                     _culture = oldLocale;
                     _cultureUserSet = oldUserSet;
-                    foreach (DataTable table in Tables) {
-                        if (!table.ShouldSerializeLocale()) {
+                    foreach (DataTable table in Tables)
+                    {
+                        if (!table.ShouldSerializeLocale())
+                        {
                             table.SetLocaleValue(oldLocale, false, false);
                         }
                     }
-                    try {
-                        for (int i = 0; i < tableCount; ++i) {
-                            if (!Tables[i].ShouldSerializeLocale()) {
+                    try
+                    {
+                        for (int i = 0; i < tableCount; ++i)
+                        {
+                            if (!Tables[i].ShouldSerializeLocale())
+                            {
                                 Tables[i].SetLocaleValue(oldLocale, false, true);
                             }
                         }
                     }
-                    catch (Exception e) {
-                        if (!Common.ADP.IsCatchableExceptionType(e)) {
+                    catch (Exception e)
+                    {
+                        if (!Common.ADP.IsCatchableExceptionType(e))
+                        {
                             throw;
                         }
                         Common.ADP.TraceExceptionWithoutRethrow(e);
                     }
-                    if (!exceptionThrown) {
+                    if (!exceptionThrown)
+                    {
                         throw ExceptionBuilder.CannotChangeCaseLocale(null);
                     }
                 }
             }
         }
 
-        internal bool ShouldSerializeLocale() {
+        internal bool ShouldSerializeLocale()
+        {
             // this method is used design-time scenarios via reflection
             //   by the property grid to show the Locale property in bold or not
             //   by the code dom for persisting the Locale property or not
@@ -878,18 +1096,22 @@ namespace System.Data {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override ISite Site {
-            get {
-                return base.Site;
-            }
-            set {
+        public override ISite Site
+        {
+            get { return base.Site; }
+            set
+            {
                 ISite oldSite = Site;
-                if (value == null && oldSite != null) {
+                if (value == null && oldSite != null)
+                {
                     IContainer cont = oldSite.Container;
 
-                    if (cont != null) {
-                        for (int i = 0; i < Tables.Count; i++) {
-                            if (Tables[i].Site != null) {
+                    if (cont != null)
+                    {
+                        for (int i = 0; i < Tables.Count; i++)
+                        {
+                            if (Tables[i].Site != null)
+                            {
                                 cont.Remove(Tables[i]);
                             }
                         }
@@ -899,8 +1121,6 @@ namespace System.Data {
             }
         }
 
-
-
         /// <devdoc>
         ///    <para>
         ///       Get the collection of relations that link tables and
@@ -908,14 +1128,13 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataSetRelationsDescr)
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataSetRelationsDescr)
         ]
-        public DataRelationCollection Relations {
-            get {
-                return relationCollection;
-            }
+        public DataRelationCollection Relations
+        {
+            get { return relationCollection; }
         }
 
         /// <devdoc>
@@ -923,7 +1142,8 @@ namespace System.Data {
         ///       Indicates whether <see cref='Relations'/> property should be persisted.
         ///    </para>
         /// </devdoc>
-        protected virtual bool ShouldSerializeRelations() {
+        protected virtual bool ShouldSerializeRelations()
+        {
             return true; /*Relations.Count > 0;*/ // VS7 300569
         }
 
@@ -941,14 +1161,13 @@ namespace System.Data {
         /// <para>Gets the collection of tables contained in the <see cref='System.Data.DataSet'/>.</para>
         /// </devdoc>
         [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataSetTablesDescr)
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataSetTablesDescr)
         ]
-        public DataTableCollection Tables {
-            get {
-                return tableCollection;
-            }
+        public DataTableCollection Tables
+        {
+            get { return tableCollection; }
         }
 
         /// <devdoc>
@@ -956,8 +1175,9 @@ namespace System.Data {
         ///       Indicates whether <see cref='System.Data.DataSet.Tables'/> property should be persisted.
         ///    </para>
         /// </devdoc>
-        protected virtual bool ShouldSerializeTables() {
-            return true;/*(Tables.Count > 0);*/ // VS7 300569
+        protected virtual bool ShouldSerializeTables()
+        {
+            return true; /*(Tables.Count > 0);*/ // VS7 300569
         }
 
         /// <devdoc>
@@ -970,13 +1190,10 @@ namespace System.Data {
             Tables.Clear();
         }
 
-        internal bool FBoundToDocument {
-            get {
-                return fBoundToDocument;
-            }
-            set {
-                fBoundToDocument = value;
-            }
+        internal bool FBoundToDocument
+        {
+            get { return fBoundToDocument; }
+            set { fBoundToDocument = value; }
         }
 
         /// <devdoc>
@@ -989,22 +1206,21 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.AcceptChanges|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 for (int i = 0; i < Tables.Count; i++)
                     Tables[i].AcceptChanges();
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        internal event PropertyChangedEventHandler PropertyChanging {
-            add {
-                onPropertyChangingDelegate += value;
-            }
-            remove {
-                onPropertyChangingDelegate -= value;
-            }
+        internal event PropertyChangedEventHandler PropertyChanging
+        {
+            add { onPropertyChangingDelegate += value; }
+            remove { onPropertyChangingDelegate -= value; }
         }
 
         /// <devdoc>
@@ -1012,60 +1228,52 @@ namespace System.Data {
         ///       name.</para>
         /// </devdoc>
         [
-         ResCategoryAttribute(Res.DataCategory_Action),
-         ResDescriptionAttribute(Res.DataSetMergeFailedDescr)
+            ResCategoryAttribute(Res.DataCategory_Action),
+            ResDescriptionAttribute(Res.DataSetMergeFailedDescr)
         ]
-        public event MergeFailedEventHandler MergeFailed {
-            add {
-                onMergeFailed += value;
-            }
-            remove {
-                onMergeFailed -= value;
-            }
+        public event MergeFailedEventHandler MergeFailed
+        {
+            add { onMergeFailed += value; }
+            remove { onMergeFailed -= value; }
         }
 
-        internal event DataRowCreatedEventHandler DataRowCreated {
-            add {
-                onDataRowCreated += value;
-            }
-            remove {
-                onDataRowCreated -= value;
-            }
+        internal event DataRowCreatedEventHandler DataRowCreated
+        {
+            add { onDataRowCreated += value; }
+            remove { onDataRowCreated -= value; }
         }
 
-        internal event DataSetClearEventhandler ClearFunctionCalled {
-            add {
-                onClearFunctionCalled += value;
-            }
-            remove {
-                onClearFunctionCalled -= value;
-            }
+        internal event DataSetClearEventhandler ClearFunctionCalled
+        {
+            add { onClearFunctionCalled += value; }
+            remove { onClearFunctionCalled -= value; }
         }
 
         [
-         ResCategoryAttribute(Res.DataCategory_Action),
-         ResDescriptionAttribute(Res.DataSetInitializedDescr)
+            ResCategoryAttribute(Res.DataCategory_Action),
+            ResDescriptionAttribute(Res.DataSetInitializedDescr)
         ]
-        public event System.EventHandler Initialized {
-            add {
-                onInitialized += value;
-            }
-            remove {
-                onInitialized -= value;
-            }
+        public event System.EventHandler Initialized
+        {
+            add { onInitialized += value; }
+            remove { onInitialized -= value; }
         }
 
-        public void BeginInit() {
+        public void BeginInit()
+        {
             fInitInProgress = true;
         }
 
-        public void EndInit() {
+        public void EndInit()
+        {
             Tables.FinishInitCollection();
-            for (int i = 0; i < Tables.Count; i++) {
+            for (int i = 0; i < Tables.Count; i++)
+            {
                 Tables[i].Columns.FinishInitCollection();
             }
 
-            for (int i = 0; i < Tables.Count; i++) {
+            for (int i = 0; i < Tables.Count; i++)
+            {
                 Tables[i].Constraints.FinishInitConstraints();
             }
 
@@ -1082,7 +1290,8 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.Clear|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 OnClearFunctionCalled(null);
                 bool fEnforce = EnforceConstraints;
                 EnforceConstraints = false;
@@ -1090,7 +1299,8 @@ namespace System.Data {
                     Tables[i].Clear();
                 EnforceConstraints = fEnforce;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -1100,14 +1310,16 @@ namespace System.Data {
         ///    constraints.</para>
         /// </devdoc>
         // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
-        [MethodImpl(MethodImplOptions.NoInlining)] 
-        public virtual DataSet Clone() {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public virtual DataSet Clone()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.Clone|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 DataSet ds = (DataSet)Activator.CreateInstance(this.GetType(), true);
 
-                if (ds.Tables.Count > 0)  // Microsoft : To clean up all the schema in strong typed dataset.
+                if (ds.Tables.Count > 0) // Microsoft : To clean up all the schema in strong typed dataset.
                     ds.Reset();
 
                 //copy some original dataset properties
@@ -1121,10 +1333,10 @@ namespace System.Data {
                 ds.RemotingFormat = RemotingFormat;
                 ds.fIsSchemaLoading = true; //delay expression evaluation
 
-
                 // ...Tables...
                 DataTableCollection tbls = Tables;
-                for (int i = 0; i < tbls.Count; i++) {
+                for (int i = 0; i < tbls.Count; i++)
+                {
                     DataTable dt = tbls[i].Clone(ds);
                     dt.tableNamespace = tbls[i].Namespace; // hardcode the namespace for a second to not mess up
                     // DataRelation cloning.
@@ -1132,21 +1344,24 @@ namespace System.Data {
                 }
 
                 // ...Constraints...
-                for (int i = 0; i < tbls.Count; i++) {
+                for (int i = 0; i < tbls.Count; i++)
+                {
                     ConstraintCollection constraints = tbls[i].Constraints;
-                    for (int j = 0; j < constraints.Count; j++) {
+                    for (int j = 0; j < constraints.Count; j++)
+                    {
                         if (constraints[j] is UniqueConstraint)
                             continue;
                         ForeignKeyConstraint foreign = constraints[j] as ForeignKeyConstraint;
                         if (foreign.Table == foreign.RelatedTable)
-                            continue;// we have already added this foreign key in while cloning the datatable
+                            continue; // we have already added this foreign key in while cloning the datatable
                         ds.Tables[i].Constraints.Add(constraints[j].Clone(ds));
                     }
                 }
 
                 // ...Relations...
                 DataRelationCollection rels = Relations;
-                for (int i = 0; i < rels.Count; i++) {
+                for (int i = 0; i < rels.Count; i++)
+                {
                     DataRelation rel = rels[i].Clone(ds);
                     rel.CheckMultipleNested = false; // disable the check for multiple nested parent
                     ds.Relations.Add(rel);
@@ -1154,18 +1369,23 @@ namespace System.Data {
                 }
 
                 // ...Extended Properties...
-                if (this.extendedProperties != null) {
-                    foreach (Object key in this.extendedProperties.Keys) {
+                if (this.extendedProperties != null)
+                {
+                    foreach (Object key in this.extendedProperties.Keys)
+                    {
                         ds.ExtendedProperties[key] = this.extendedProperties[key];
                     }
                 }
 
                 foreach (DataTable table in Tables)
-                    foreach (DataColumn col in table.Columns)
-                        if (col.Expression.Length != 0)
-                            ds.Tables[table.TableName, table.Namespace].Columns[col.ColumnName].Expression = col.Expression;
+                foreach (DataColumn col in table.Columns)
+                    if (col.Expression.Length != 0)
+                        ds.Tables[table.TableName, table.Namespace]
+                            .Columns[col.ColumnName]
+                            .Expression = col.Expression;
 
-                for (int i = 0; i < tbls.Count; i++) {
+                for (int i = 0; i < tbls.Count; i++)
+                {
                     ds.Tables[i].tableNamespace = tbls[i].tableNamespace; // undo the hardcoding of the namespace
                 }
 
@@ -1173,7 +1393,8 @@ namespace System.Data {
 
                 return ds;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -1185,7 +1406,8 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.Copy|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 DataSet dsNew = Clone();
                 bool fEnforceConstraints = dsNew.EnforceConstraints;
                 dsNew.EnforceConstraints = false;
@@ -1201,7 +1423,8 @@ namespace System.Data {
 
                 return dsNew;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -1209,10 +1432,12 @@ namespace System.Data {
         internal Int32 EstimatedXmlStringSize()
         {
             Int32 bytes = 100;
-            for (int i = 0; i < Tables.Count; i++) {
+            for (int i = 0; i < Tables.Count; i++)
+            {
                 Int32 rowBytes = (Tables[i].TableName.Length + 4) << 2;
                 DataTable table = Tables[i];
-                for (int j = 0; j < table.Columns.Count; j++) {
+                for (int j = 0; j < table.Columns.Count; j++)
+                {
                     rowBytes += ((table.Columns[j].ColumnName.Length + 4) << 2);
                     rowBytes += 20;
                 }
@@ -1232,21 +1457,27 @@ namespace System.Data {
             return GetChanges(DataRowState.Added | DataRowState.Deleted | DataRowState.Modified);
         }
 
-        private struct TableChanges {
+        private struct TableChanges
+        {
             private BitArray _rowChanges;
             private int _hasChanges;
 
-            internal TableChanges(int rowCount) {
+            internal TableChanges(int rowCount)
+            {
                 _rowChanges = new BitArray(rowCount);
                 _hasChanges = 0;
             }
-            internal int HasChanges {
+
+            internal int HasChanges
+            {
                 get { return _hasChanges; }
                 set { _hasChanges = value; }
             }
-            internal bool this[int index] {
+            internal bool this[int index]
+            {
                 get { return _rowChanges[index]; }
-                set {
+                set
+                {
                     Debug.Assert(value && !_rowChanges[index], "setting twice or to false");
                     _rowChanges[index] = value;
                     _hasChanges++;
@@ -1257,17 +1488,36 @@ namespace System.Data {
         public DataSet GetChanges(DataRowState rowStates)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.GetChanges|API> %d#, rowStates=%d{ds.DataRowState}\n", ObjectID, (int)rowStates);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.GetChanges|API> %d#, rowStates=%d{ds.DataRowState}\n",
+                ObjectID,
+                (int)rowStates
+            );
+            try
+            {
                 DataSet dsNew = null;
                 bool fEnforceConstraints = false;
-                if (0 != (rowStates & ~(DataRowState.Added | DataRowState.Deleted | DataRowState.Modified | DataRowState.Unchanged))) {
+                if (
+                    0
+                    != (
+                        rowStates
+                        & ~(
+                            DataRowState.Added
+                            | DataRowState.Deleted
+                            | DataRowState.Modified
+                            | DataRowState.Unchanged
+                        )
+                    )
+                )
+                {
                     throw ExceptionBuilder.InvalidRowState(rowStates);
                 }
 
                 // Initialize all the individual table bitmaps.
                 TableChanges[] bitMatrix = new TableChanges[Tables.Count];
-                for (int i = 0; i < bitMatrix.Length; ++i) {
+                for (int i = 0; i < bitMatrix.Length; ++i)
+                {
                     bitMatrix[i] = new TableChanges(Tables[i].Rows.Count);
                 }
 
@@ -1275,10 +1525,13 @@ namespace System.Data {
                 MarkModifiedRows(bitMatrix, rowStates);
 
                 // copy the changes to a cloned table
-                for (int i = 0; i < bitMatrix.Length; ++i) {
+                for (int i = 0; i < bitMatrix.Length; ++i)
+                {
                     Debug.Assert(0 <= bitMatrix[i].HasChanges, "negative change count");
-                    if (0 < bitMatrix[i].HasChanges) {
-                        if (null == dsNew) {
+                    if (0 < bitMatrix[i].HasChanges)
+                    {
+                        if (null == dsNew)
+                        {
                             dsNew = this.Clone();
                             fEnforceConstraints = dsNew.EnforceConstraints;
                             dsNew.EnforceConstraints = false;
@@ -1286,10 +1539,15 @@ namespace System.Data {
 
                         DataTable table = this.Tables[i];
                         DataTable destTable = dsNew.Tables[table.TableName, table.Namespace];
-                        Debug.Assert(bitMatrix[i].HasChanges <= table.Rows.Count, "to many changes");
+                        Debug.Assert(
+                            bitMatrix[i].HasChanges <= table.Rows.Count,
+                            "to many changes"
+                        );
 
-                        for (int j = 0; 0 < bitMatrix[i].HasChanges; ++j) { // Loop through the rows.
-                            if (bitMatrix[i][j]) {
+                        for (int j = 0; 0 < bitMatrix[i].HasChanges; ++j)
+                        { // Loop through the rows.
+                            if (bitMatrix[i][j])
+                            {
                                 table.CopyRow(destTable, table.Rows[j]);
                                 bitMatrix[i].HasChanges--;
                             }
@@ -1297,36 +1555,45 @@ namespace System.Data {
                     }
                 }
 
-                if (null != dsNew) {
+                if (null != dsNew)
+                {
                     dsNew.EnforceConstraints = fEnforceConstraints;
                 }
                 return dsNew;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        private void MarkModifiedRows(TableChanges[] bitMatrix, DataRowState rowStates) {
+        private void MarkModifiedRows(TableChanges[] bitMatrix, DataRowState rowStates)
+        {
             // for every table, every row & every relation find the modified rows and for non-deleted rows, their parents
-            for (int tableIndex = 0; tableIndex < bitMatrix.Length; ++tableIndex) {
+            for (int tableIndex = 0; tableIndex < bitMatrix.Length; ++tableIndex)
+            {
                 DataRowCollection rows = Tables[tableIndex].Rows;
                 int rowCount = rows.Count;
 
-                for (int rowIndex = 0; rowIndex < rowCount; ++rowIndex) {
+                for (int rowIndex = 0; rowIndex < rowCount; ++rowIndex)
+                {
                     DataRow row = rows[rowIndex];
                     DataRowState rowState = row.RowState;
-                    Debug.Assert(DataRowState.Added == rowState ||
-                                 DataRowState.Deleted == rowState ||
-                                 DataRowState.Modified == rowState ||
-                                 DataRowState.Unchanged == rowState,
-                                 "unexpected DataRowState");
+                    Debug.Assert(
+                        DataRowState.Added == rowState
+                            || DataRowState.Deleted == rowState
+                            || DataRowState.Modified == rowState
+                            || DataRowState.Unchanged == rowState,
+                        "unexpected DataRowState"
+                    );
 
                     // if bit not already set and row is modified
-                    if ((0 != (rowStates & rowState)) && !bitMatrix[tableIndex][rowIndex]) {
+                    if ((0 != (rowStates & rowState)) && !bitMatrix[tableIndex][rowIndex])
+                    {
                         bitMatrix[tableIndex][rowIndex] = true;
 
-                        if (DataRowState.Deleted != rowState) {
+                        if (DataRowState.Deleted != rowState)
+                        {
                             MarkRelatedRowsAsModified(bitMatrix, row);
                         }
                     }
@@ -1334,20 +1601,28 @@ namespace System.Data {
             }
         }
 
-        private void MarkRelatedRowsAsModified(TableChanges[] bitMatrix, DataRow row) {
+        private void MarkRelatedRowsAsModified(TableChanges[] bitMatrix, DataRow row)
+        {
             DataRelationCollection relations = row.Table.ParentRelations;
             int relationCount = relations.Count;
-            for (int relatedIndex = 0; relatedIndex < relationCount; ++relatedIndex) {
-                DataRow[] relatedRows = row.GetParentRows(relations[relatedIndex], DataRowVersion.Current);
+            for (int relatedIndex = 0; relatedIndex < relationCount; ++relatedIndex)
+            {
+                DataRow[] relatedRows = row.GetParentRows(
+                    relations[relatedIndex],
+                    DataRowVersion.Current
+                );
 
-                foreach (DataRow relatedRow in relatedRows) {
+                foreach (DataRow relatedRow in relatedRows)
+                {
                     int relatedTableIndex = this.Tables.IndexOf(relatedRow.Table);
                     int relatedRowIndex = relatedRow.Table.Rows.IndexOf(relatedRow);
 
-                    if (!bitMatrix[relatedTableIndex][relatedRowIndex]) {
+                    if (!bitMatrix[relatedTableIndex][relatedRowIndex])
+                    {
                         bitMatrix[relatedTableIndex][relatedRowIndex] = true;
 
-                        if (DataRowState.Deleted != relatedRow.RowState) {
+                        if (DataRowState.Deleted != relatedRow.RowState)
+                        {
                             // recurse into related rows
                             MarkRelatedRowsAsModified(bitMatrix, relatedRow);
                         }
@@ -1356,7 +1631,8 @@ namespace System.Data {
             }
         }
 
-        IList System.ComponentModel.IListSource.GetList() {
+        IList System.ComponentModel.IListSource.GetList()
+        {
             return DefaultViewManager;
         }
 
@@ -1365,7 +1641,8 @@ namespace System.Data {
             StringWriter strWriter = new StringWriter(CultureInfo.InvariantCulture);
             XmlTextWriter writer = new XmlTextWriter(strWriter);
             writer.Formatting = Formatting.Indented;
-            if (strWriter != null) {
+            if (strWriter != null)
+            {
                 // Create and save the updates
                 new NewDiffgramGen(table, false).Save(writer, table);
             }
@@ -1377,19 +1654,21 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.GetXml|API> %d#\n", ObjectID);
-            try {
-
+            try
+            {
                 // StringBuilder strBuilder = new StringBuilder(EstimatedXmlStringSize());
                 // StringWriter strWriter = new StringWriter(strBuilder);
                 StringWriter strWriter = new StringWriter(CultureInfo.InvariantCulture);
-                if (strWriter != null) {
+                if (strWriter != null)
+                {
                     XmlTextWriter w = new XmlTextWriter(strWriter);
                     w.Formatting = Formatting.Indented;
                     new XmlDataTreeWriter(this).Save(w, false);
                 }
                 return strWriter.ToString();
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -1398,17 +1677,20 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.GetXmlSchema|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 StringWriter strWriter = new StringWriter(CultureInfo.InvariantCulture);
                 XmlTextWriter writer = new XmlTextWriter(strWriter);
                 writer.Formatting = Formatting.Indented;
-                if (strWriter != null) {
+                if (strWriter != null)
+                {
                     (new XmlTreeGen(SchemaFormat.Public)).Save(this, writer);
                 }
 
                 return strWriter.ToString();
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -1418,21 +1700,23 @@ namespace System.Data {
             StringWriter strWriter = new StringWriter(CultureInfo.InvariantCulture);
             XmlTextWriter writer = new XmlTextWriter(strWriter);
             writer.Formatting = Formatting.Indented;
-            if (strWriter != null) {
-                if (table == null) {
+            if (strWriter != null)
+            {
+                if (table == null)
+                {
                     if (this.SchemaSerializationMode == SchemaSerializationMode.ExcludeSchema)
                         (new XmlTreeGen(SchemaFormat.RemotingSkipSchema)).Save(this, writer);
                     else
                         (new XmlTreeGen(SchemaFormat.Remoting)).Save(this, writer);
                 }
-                else { // no skip schema support for typed datatable
+                else
+                { // no skip schema support for typed datatable
                     (new XmlTreeGen(SchemaFormat.Remoting)).Save(table, writer);
                 }
             }
 
             return strWriter.ToString();
         }
-
 
         /// <devdoc>
         /// <para>Gets a value indicating whether the <see cref='System.Data.DataSet'/> has changes, including new,
@@ -1450,28 +1734,44 @@ namespace System.Data {
         public bool HasChanges(DataRowState rowStates)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.HasChanges|API> %d#, rowStates=%d{ds.DataRowState}\n", ObjectID, (int)rowStates);
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.HasChanges|API> %d#, rowStates=%d{ds.DataRowState}\n",
+                ObjectID,
+                (int)rowStates
+            );
 
-            try {
-                const DataRowState allRowStates = DataRowState.Detached | DataRowState.Unchanged | DataRowState.Added | DataRowState.Deleted | DataRowState.Modified;
+            try
+            {
+                const DataRowState allRowStates =
+                    DataRowState.Detached
+                    | DataRowState.Unchanged
+                    | DataRowState.Added
+                    | DataRowState.Deleted
+                    | DataRowState.Modified;
 
-                if ((rowStates & (~allRowStates)) != 0) {
+                if ((rowStates & (~allRowStates)) != 0)
+                {
                     throw ExceptionBuilder.ArgumentOutOfRange("rowState");
                 }
 
-                for (int i = 0; i < Tables.Count; i++) {
+                for (int i = 0; i < Tables.Count; i++)
+                {
                     DataTable table = Tables[i];
 
-                    for (int j = 0; j < table.Rows.Count; j++) {
+                    for (int j = 0; j < table.Rows.Count; j++)
+                    {
                         DataRow row = table.Rows[j];
-                        if ((row.RowState & rowStates) != 0) {
+                        if ((row.RowState & rowStates) != 0)
+                        {
                             return true;
                         }
                     }
                 }
                 return false;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -1483,12 +1783,14 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.InferXmlSchema|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 if (reader == null)
                     return;
 
                 XmlDocument xdoc = new XmlDocument();
-                if (reader.NodeType == XmlNodeType.Element) {
+                if (reader.NodeType == XmlNodeType.Element)
+                {
                     XmlNode node = xdoc.ReadNode(reader);
                     xdoc.AppendChild(node);
                 }
@@ -1499,7 +1801,8 @@ namespace System.Data {
 
                 InferSchema(xdoc, nsArray, XmlReadMode.InferSchema);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -1534,10 +1837,12 @@ namespace System.Data {
         public void InferXmlSchema(String fileName, string[] nsArray)
         {
             XmlTextReader xr = new XmlTextReader(fileName);
-            try {
+            try
+            {
                 InferXmlSchema(xr, nsArray);
             }
-            finally {
+            finally
+            {
                 xr.Close();
             }
         }
@@ -1554,8 +1859,14 @@ namespace System.Data {
         internal void ReadXmlSchema(XmlReader reader, bool denyResolving)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.ReadXmlSchema|INFO> %d#, reader, denyResolving=%d{bool}\n", ObjectID, denyResolving);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.ReadXmlSchema|INFO> %d#, reader, denyResolving=%d{bool}\n",
+                ObjectID,
+                denyResolving
+            );
+            try
+            {
                 int iCurrentDepth = -1;
 
                 if (reader == null)
@@ -1571,34 +1882,59 @@ namespace System.Data {
 
                 reader.MoveToContent();
 
-                if (reader.NodeType == XmlNodeType.Element) {
+                if (reader.NodeType == XmlNodeType.Element)
+                {
                     // if reader points to the schema load it...
 
-                    if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI == Keywords.XDRNS) {
+                    if (
+                        reader.LocalName == Keywords.XDR_SCHEMA
+                        && reader.NamespaceURI == Keywords.XDRNS
+                    )
+                    {
                         // load XDR schema and exit
                         ReadXDRSchema(reader);
                         return;
                     }
 
-                    if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS) {
+                    if (
+                        reader.LocalName == Keywords.XSD_SCHEMA
+                        && reader.NamespaceURI == Keywords.XSDNS
+                    )
+                    {
                         // load XSD schema and exit
                         ReadXSDSchema(reader, denyResolving);
                         return;
                     }
 
-                    if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))
+                    if (
+                        reader.LocalName == Keywords.XSD_SCHEMA
+                        && reader.NamespaceURI.StartsWith(
+                            Keywords.XSD_NS_START,
+                            StringComparison.Ordinal
+                        )
+                    )
                         throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
                     // ... otherwise backup the top node and all its attributes
-                    XmlElement topNode = xdoc.CreateElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-                    if (reader.HasAttributes) {
+                    XmlElement topNode = xdoc.CreateElement(
+                        reader.Prefix,
+                        reader.LocalName,
+                        reader.NamespaceURI
+                    );
+                    if (reader.HasAttributes)
+                    {
                         int attrCount = reader.AttributeCount;
-                        for (int i = 0; i < attrCount; i++) {
+                        for (int i = 0; i < attrCount; i++)
+                        {
                             reader.MoveToAttribute(i);
                             if (reader.NamespaceURI.Equals(Keywords.XSD_XMLNS_NS))
                                 topNode.SetAttribute(reader.Name, reader.GetAttribute(i));
-                            else {
-                                XmlAttribute attr = topNode.SetAttributeNode(reader.LocalName, reader.NamespaceURI);
+                            else
+                            {
+                                XmlAttribute attr = topNode.SetAttributeNode(
+                                    reader.LocalName,
+                                    reader.NamespaceURI
+                                );
                                 attr.Prefix = reader.Prefix;
                                 attr.Value = reader.GetAttribute(i);
                             }
@@ -1606,28 +1942,40 @@ namespace System.Data {
                     }
                     reader.Read();
 
-                    while (MoveToElement(reader, iCurrentDepth)) {
-
+                    while (MoveToElement(reader, iCurrentDepth))
+                    {
                         // if reader points to the schema load it...
-                        if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI == Keywords.XDRNS) {
+                        if (
+                            reader.LocalName == Keywords.XDR_SCHEMA
+                            && reader.NamespaceURI == Keywords.XDRNS
+                        )
+                        {
                             // load XDR schema and exit
                             ReadXDRSchema(reader);
                             return;
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS) {
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI == Keywords.XSDNS
+                        )
+                        {
                             // load XSD schema and exit
                             ReadXSDSchema(reader, denyResolving);
                             return;
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI.StartsWith(
+                                Keywords.XSD_NS_START,
+                                StringComparison.Ordinal
+                            )
+                        )
                             throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
-
 
                         XmlNode node = xdoc.ReadNode(reader);
                         topNode.AppendChild(node);
-
                     }
 
                     // read the closing tag of the current element
@@ -1640,59 +1988,88 @@ namespace System.Data {
                     InferSchema(xdoc, null, XmlReadMode.Auto);
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        internal bool MoveToElement(XmlReader reader, int depth) {
-            while (!reader.EOF && reader.NodeType != XmlNodeType.EndElement && reader.NodeType != XmlNodeType.Element && reader.Depth > depth) {
+        internal bool MoveToElement(XmlReader reader, int depth)
+        {
+            while (
+                !reader.EOF
+                && reader.NodeType != XmlNodeType.EndElement
+                && reader.NodeType != XmlNodeType.Element
+                && reader.Depth > depth
+            )
+            {
                 reader.Read();
             }
             return (reader.NodeType == XmlNodeType.Element);
         }
 
-        private static void MoveToElement(XmlReader reader) {
-            while (!reader.EOF && reader.NodeType != XmlNodeType.EndElement && reader.NodeType != XmlNodeType.Element) {
+        private static void MoveToElement(XmlReader reader)
+        {
+            while (
+                !reader.EOF
+                && reader.NodeType != XmlNodeType.EndElement
+                && reader.NodeType != XmlNodeType.Element
+            )
+            {
                 reader.Read();
             }
         }
-        internal void ReadEndElement(XmlReader reader) {
-            while (reader.NodeType == XmlNodeType.Whitespace) {
+
+        internal void ReadEndElement(XmlReader reader)
+        {
+            while (reader.NodeType == XmlNodeType.Whitespace)
+            {
                 reader.Skip();
             }
-            if (reader.NodeType == XmlNodeType.None) {
+            if (reader.NodeType == XmlNodeType.None)
+            {
                 reader.Skip();
             }
-            else if (reader.NodeType == XmlNodeType.EndElement) {
+            else if (reader.NodeType == XmlNodeType.EndElement)
+            {
                 reader.ReadEndElement();
             }
         }
 
-        internal void ReadXSDSchema(XmlReader reader, bool denyResolving) {
+        internal void ReadXSDSchema(XmlReader reader, bool denyResolving)
+        {
             XmlSchemaSet sSet = new XmlSchemaSet();
 
             int schemaFragmentCount = 1;
             //read from current schmema element
-            if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS) {
-                if (reader.HasAttributes) {
-                    string attribValue = reader.GetAttribute(Keywords.MSD_FRAGMENTCOUNT, Keywords.MSDNS); // this must not move the position
-                    if (!Common.ADP.IsEmpty(attribValue)) {
+            if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS)
+            {
+                if (reader.HasAttributes)
+                {
+                    string attribValue = reader.GetAttribute(
+                        Keywords.MSD_FRAGMENTCOUNT,
+                        Keywords.MSDNS
+                    ); // this must not move the position
+                    if (!Common.ADP.IsEmpty(attribValue))
+                    {
                         schemaFragmentCount = int.Parse(attribValue, null);
                     }
                 }
             }
 
-            while (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS) {
+            while (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS)
+            {
                 XmlSchema s = XmlSchema.Read(reader, null);
                 sSet.Add(s);
                 //read the end tag
                 ReadEndElement(reader);
 
-                if (--schemaFragmentCount > 0) {
+                if (--schemaFragmentCount > 0)
+                {
                     MoveToElement(reader);
                 }
-                while (reader.NodeType == XmlNodeType.Whitespace) {
+                while (reader.NodeType == XmlNodeType.Whitespace)
+                {
                     reader.Skip();
                 }
             }
@@ -1701,7 +2078,8 @@ namespace System.Data {
             schema.LoadSchema(sSet, this);
         }
 
-        internal void ReadXDRSchema(XmlReader reader) {
+        internal void ReadXDRSchema(XmlReader reader)
+        {
             XmlDocument xdoc = new XmlDocument(); // we may need this to infer the schema
             XmlNode schNode = xdoc.ReadNode(reader);
             xdoc.AppendChild(schNode);
@@ -1741,10 +2119,12 @@ namespace System.Data {
         public void ReadXmlSchema(String fileName)
         {
             XmlTextReader xr = new XmlTextReader(fileName);
-            try {
+            try
+            {
                 ReadXmlSchema(xr, false);
             }
-            finally {
+            finally
+            {
                 xr.Close();
             }
         }
@@ -1796,7 +2176,10 @@ namespace System.Data {
         /// <summary>Writes the <see cref='DataSet'/> structure as an XML schema to a <see cref='TextWriter'/> object.</summary>
         /// <param name="writer">The <see cref='TextWriter'/> object with which to write.</param>
         /// <param name="multipleTargetConverter">A delegate used to convert <see cref='Type'/> into string.</param>
-        public void WriteXmlSchema(TextWriter writer, Converter<Type, string> multipleTargetConverter)
+        public void WriteXmlSchema(
+            TextWriter writer,
+            Converter<Type, string> multipleTargetConverter
+        )
         {
             ADP.CheckArgumentNull(multipleTargetConverter, "multipleTargetConverter");
             this.WriteXmlSchema(writer, SchemaFormat.Public, multipleTargetConverter);
@@ -1812,7 +2195,10 @@ namespace System.Data {
         /// <summary>Writes the <see cref='DataSet'/> structure as an XML schema to an <see cref='XmlWriter'/> object.</summary>
         /// <param name="writer">The <see cref='XmlWriter'/> object with which to write.</param>
         /// <param name="multipleTargetConverter">A delegate used to convert <see cref='Type'/> into string.</param>
-        public void WriteXmlSchema(XmlWriter writer, Converter<Type, string> multipleTargetConverter)
+        public void WriteXmlSchema(
+            XmlWriter writer,
+            Converter<Type, string> multipleTargetConverter
+        )
         {
             ADP.CheckArgumentNull(multipleTargetConverter, "multipleTargetConverter");
             this.WriteXmlSchema(writer, SchemaFormat.Public, multipleTargetConverter);
@@ -1820,21 +2206,31 @@ namespace System.Data {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private void WriteXmlSchema(String fileName, SchemaFormat schemaFormat, Converter<Type, string> multipleTargetConverter)
+        private void WriteXmlSchema(
+            String fileName,
+            SchemaFormat schemaFormat,
+            Converter<Type, string> multipleTargetConverter
+        )
         {
-            XmlTextWriter xw = new XmlTextWriter( fileName, null );
-            try {
+            XmlTextWriter xw = new XmlTextWriter(fileName, null);
+            try
+            {
                 xw.Formatting = Formatting.Indented;
                 xw.WriteStartDocument(true);
                 this.WriteXmlSchema(xw, schemaFormat, multipleTargetConverter);
                 xw.WriteEndDocument();
             }
-            finally {
+            finally
+            {
                 xw.Close();
             }
         }
 
-        private void WriteXmlSchema(Stream stream, SchemaFormat schemaFormat, Converter<Type, string> multipleTargetConverter)
+        private void WriteXmlSchema(
+            Stream stream,
+            SchemaFormat schemaFormat,
+            Converter<Type, string> multipleTargetConverter
+        )
         {
             if (stream == null)
                 return;
@@ -1845,7 +2241,11 @@ namespace System.Data {
             this.WriteXmlSchema(w, schemaFormat, multipleTargetConverter);
         }
 
-        private void WriteXmlSchema(TextWriter writer, SchemaFormat schemaFormat, Converter<Type, string> multipleTargetConverter)
+        private void WriteXmlSchema(
+            TextWriter writer,
+            SchemaFormat schemaFormat,
+            Converter<Type, string> multipleTargetConverter
+        )
         {
             if (writer == null)
                 return;
@@ -1856,27 +2256,43 @@ namespace System.Data {
             this.WriteXmlSchema(w, schemaFormat, multipleTargetConverter);
         }
 
-        private void WriteXmlSchema(XmlWriter writer, SchemaFormat schemaFormat, Converter<Type, string> multipleTargetConverter)
+        private void WriteXmlSchema(
+            XmlWriter writer,
+            SchemaFormat schemaFormat,
+            Converter<Type, string> multipleTargetConverter
+        )
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.WriteXmlSchema|INFO> %d#, schemaFormat=%d{ds.SchemaFormat}\n", ObjectID, (int)schemaFormat);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.WriteXmlSchema|INFO> %d#, schemaFormat=%d{ds.SchemaFormat}\n",
+                ObjectID,
+                (int)schemaFormat
+            );
+            try
+            {
                 // Generate SchemaTree and write it out
-                if (writer != null) {
+                if (writer != null)
+                {
                     XmlTreeGen treeGen = null;
-                    if (schemaFormat == SchemaFormat.WebService &&
-                        SchemaSerializationMode == SchemaSerializationMode.ExcludeSchema &&
-                        writer.WriteState == WriteState.Element) {
+                    if (
+                        schemaFormat == SchemaFormat.WebService
+                        && SchemaSerializationMode == SchemaSerializationMode.ExcludeSchema
+                        && writer.WriteState == WriteState.Element
+                    )
+                    {
                         treeGen = new XmlTreeGen(SchemaFormat.WebServiceSkipSchema);
                     }
-                    else {
+                    else
+                    {
                         treeGen = new XmlTreeGen(schemaFormat);
                     }
 
                     treeGen.Save(this, (DataTable)null, writer, false, multipleTargetConverter);
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -1889,15 +2305,21 @@ namespace System.Data {
             return ReadXml(reader, false);
         }
 
-
         internal XmlReadMode ReadXml(XmlReader reader, bool denyResolving)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.ReadXml|INFO> %d#, denyResolving=%d{bool}\n", ObjectID, denyResolving);
-            try {
-                
-                DataTable.DSRowDiffIdUsageSection rowDiffIdUsage = new DataTable.DSRowDiffIdUsageSection();
-                try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.ReadXml|INFO> %d#, denyResolving=%d{bool}\n",
+                ObjectID,
+                denyResolving
+            );
+            try
+            {
+                DataTable.DSRowDiffIdUsageSection rowDiffIdUsage =
+                    new DataTable.DSRowDiffIdUsageSection();
+                try
+                {
                     bool fDataFound = false;
                     bool fSchemaFound = false;
                     bool fDiffsFound = false;
@@ -1914,7 +2336,8 @@ namespace System.Data {
                     if (reader == null)
                         return ret;
 
-                    if (Tables.Count == 0) {
+                    if (Tables.Count == 0)
+                    {
                         isEmptyDataSet = true;
                     }
 
@@ -1924,14 +2347,18 @@ namespace System.Data {
                     XmlDocument xdoc = new XmlDocument(); // we may need this to infer the schema
                     XmlDataLoader xmlload = null;
 
-
                     reader.MoveToContent();
 
                     if (reader.NodeType == XmlNodeType.Element)
                         iCurrentDepth = reader.Depth;
 
-                    if (reader.NodeType == XmlNodeType.Element) {
-                        if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
+                        if (
+                            (reader.LocalName == Keywords.DIFFGRAM)
+                            && (reader.NamespaceURI == Keywords.DFFNS)
+                        )
+                        {
                             this.ReadXmlDiffgram(reader);
                             // read the closing tag of the current element
                             ReadEndElement(reader);
@@ -1939,33 +2366,57 @@ namespace System.Data {
                         }
 
                         // if reader points to the schema load it
-                        if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI == Keywords.XDRNS) {
+                        if (
+                            reader.LocalName == Keywords.XDR_SCHEMA
+                            && reader.NamespaceURI == Keywords.XDRNS
+                        )
+                        {
                             // load XDR schema and exit
                             ReadXDRSchema(reader);
                             return XmlReadMode.ReadSchema; //since the top level element is a schema return
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS) {
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI == Keywords.XSDNS
+                        )
+                        {
                             // load XSD schema and exit
                             ReadXSDSchema(reader, denyResolving);
                             return XmlReadMode.ReadSchema; //since the top level element is a schema return
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI.StartsWith(
+                                Keywords.XSD_NS_START,
+                                StringComparison.Ordinal
+                            )
+                        )
                             throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
                         // now either the top level node is a table and we load it through dataReader...
 
                         // ... or backup the top node and all its attributes because we may need to InferSchema
-                        XmlElement topNode = xdoc.CreateElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-                        if (reader.HasAttributes) {
+                        XmlElement topNode = xdoc.CreateElement(
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        );
+                        if (reader.HasAttributes)
+                        {
                             int attrCount = reader.AttributeCount;
-                            for (int i = 0; i < attrCount; i++) {
+                            for (int i = 0; i < attrCount; i++)
+                            {
                                 reader.MoveToAttribute(i);
                                 if (reader.NamespaceURI.Equals(Keywords.XSD_XMLNS_NS))
                                     topNode.SetAttribute(reader.Name, reader.GetAttribute(i));
-                                else {
-                                    XmlAttribute attr = topNode.SetAttributeNode(reader.LocalName, reader.NamespaceURI);
+                                else
+                                {
+                                    XmlAttribute attr = topNode.SetAttributeNode(
+                                        reader.LocalName,
+                                        reader.NamespaceURI
+                                    );
                                     attr.Prefix = reader.Prefix;
                                     attr.Value = reader.GetAttribute(i);
                                 }
@@ -1974,9 +2425,13 @@ namespace System.Data {
                         reader.Read();
                         string rootNodeSimpleContent = reader.Value;
 
-                        while (MoveToElement(reader, iCurrentDepth)) {
-
-                            if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
+                        while (MoveToElement(reader, iCurrentDepth))
+                        {
+                            if (
+                                (reader.LocalName == Keywords.DIFFGRAM)
+                                && (reader.NamespaceURI == Keywords.DFFNS)
+                            )
+                            {
                                 this.ReadXmlDiffgram(reader);
                                 // read the closing tag of the current element
                                 // YUKON FIX                            ReadEndElement(reader);
@@ -1987,7 +2442,13 @@ namespace System.Data {
                             // if reader points to the schema load it...
 
 
-                            if (!fSchemaFound && !fDataFound && reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI == Keywords.XDRNS) {
+                            if (
+                                !fSchemaFound
+                                && !fDataFound
+                                && reader.LocalName == Keywords.XDR_SCHEMA
+                                && reader.NamespaceURI == Keywords.XDRNS
+                            )
+                            {
                                 // load XDR schema and exit
                                 ReadXDRSchema(reader);
                                 fSchemaFound = true;
@@ -1995,22 +2456,37 @@ namespace System.Data {
                                 continue;
                             }
 
-                            if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS) {
+                            if (
+                                reader.LocalName == Keywords.XSD_SCHEMA
+                                && reader.NamespaceURI == Keywords.XSDNS
+                            )
+                            {
                                 // load XSD schema and exit
                                 ReadXSDSchema(reader, denyResolving);
                                 fSchemaFound = true;
                                 continue;
                             }
 
-                            if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))
+                            if (
+                                reader.LocalName == Keywords.XSD_SCHEMA
+                                && reader.NamespaceURI.StartsWith(
+                                    Keywords.XSD_NS_START,
+                                    StringComparison.Ordinal
+                                )
+                            )
                                 throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
-                            if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
+                            if (
+                                (reader.LocalName == Keywords.DIFFGRAM)
+                                && (reader.NamespaceURI == Keywords.DFFNS)
+                            )
+                            {
                                 this.ReadXmlDiffgram(reader);
                                 fDiffsFound = true;
                                 ret = XmlReadMode.DiffGram;
                             }
-                            else {
+                            else
+                            {
                                 // We have found data IFF the reader.NodeType == Element and reader.depth == currentDepth-1
                                 // if reader.NodeType == whitespace, skip all white spaces.
                                 // skip processing i.e. continue if the first non-whitespace node is not of type element.
@@ -2021,11 +2497,13 @@ namespace System.Data {
                                 // we found data here
                                 fDataFound = true;
 
-                                if (!fSchemaFound && Tables.Count == 0) {
+                                if (!fSchemaFound && Tables.Count == 0)
+                                {
                                     XmlNode node = xdoc.ReadNode(reader);
                                     topNode.AppendChild(node);
                                 }
-                                else {
+                                else
+                                {
                                     if (xmlload == null)
                                         xmlload = new XmlDataLoader(this, fIsXdr, topNode, false);
                                     xmlload.LoadData(reader);
@@ -2036,20 +2514,21 @@ namespace System.Data {
                                         ret = XmlReadMode.IgnoreSchema;
                                 }
                             }
-
                         }
                         // read the closing tag of the current element
                         ReadEndElement(reader);
                         bool isfTopLevelTableSet = false;
                         bool tmpValue = this.fTopLevelTable;
                         //While inference we ignore root elements text content
-                        if (!fSchemaFound && Tables.Count == 0 && !topNode.HasChildNodes) { //We shoule not come add SC of root elemnt to topNode if we are not infering
+                        if (!fSchemaFound && Tables.Count == 0 && !topNode.HasChildNodes)
+                        { //We shoule not come add SC of root elemnt to topNode if we are not infering
                             this.fTopLevelTable = true;
                             isfTopLevelTableSet = true;
                             if ((rootNodeSimpleContent != null && rootNodeSimpleContent.Length > 0))
                                 topNode.InnerText = rootNodeSimpleContent;
                         }
-                        if (!isEmptyDataSet) {
+                        if (!isEmptyDataSet)
+                        {
                             if ((rootNodeSimpleContent != null && rootNodeSimpleContent.Length > 0))
                                 topNode.InnerText = rootNodeSimpleContent;
                         }
@@ -2060,41 +2539,66 @@ namespace System.Data {
                         if (xmlload == null)
                             xmlload = new XmlDataLoader(this, fIsXdr, topNode, false);
 
-                        if (!isEmptyDataSet && !topNodeIsProcessed) {
+                        if (!isEmptyDataSet && !topNodeIsProcessed)
+                        {
                             XmlElement root = xdoc.DocumentElement;
-                            Debug.Assert(root.NamespaceURI != null, "root.NamespaceURI should not ne null, it should be empty string");
+                            Debug.Assert(
+                                root.NamespaceURI != null,
+                                "root.NamespaceURI should not ne null, it should be empty string"
+                            );
                             // just recognize that below given Xml represents datatable in toplevel
                             //<table attr1="foo" attr2="bar" table_Text="junk">text</table>
                             // only allow root element with simple content, if any
-                            if (root.ChildNodes.Count == 0 ||
-                                ((root.ChildNodes.Count == 1) && root.FirstChild.GetType() == typeof(System.Xml.XmlText))) {
+                            if (
+                                root.ChildNodes.Count == 0
+                                || (
+                                    (root.ChildNodes.Count == 1)
+                                    && root.FirstChild.GetType() == typeof(System.Xml.XmlText)
+                                )
+                            )
+                            {
                                 bool initfTopLevelTable = this.fTopLevelTable;
                                 // if root element maps to a datatable
                                 // ds and dt cant have the samm name and ns at the same time, how to write to xml
-                                if (this.DataSetName != root.Name && this.namespaceURI != root.NamespaceURI &&
-                                    Tables.Contains(root.Name, (root.NamespaceURI.Length == 0) ? null : root.NamespaceURI, false, true)) {
+                                if (
+                                    this.DataSetName != root.Name
+                                    && this.namespaceURI != root.NamespaceURI
+                                    && Tables.Contains(
+                                        root.Name,
+                                        (root.NamespaceURI.Length == 0) ? null : root.NamespaceURI,
+                                        false,
+                                        true
+                                    )
+                                )
+                                {
                                     this.fTopLevelTable = true;
                                 }
-                                try {
+                                try
+                                {
                                     xmlload.LoadData(xdoc);
                                 }
-                                finally {
+                                finally
+                                {
                                     this.fTopLevelTable = initfTopLevelTable; // this is not for inference, we have schema and we were skipping
                                     // topnode where it was a datatable, We must restore the value
                                 }
                             }
-                        }// above check and below check are orthogonal
+                        } // above check and below check are orthogonal
                         // so we InferSchema
-                        if (!fDiffsFound) {
+                        if (!fDiffsFound)
+                        {
                             // Load Data
-                            if (!fSchemaFound && Tables.Count == 0) {
+                            if (!fSchemaFound && Tables.Count == 0)
+                            {
                                 InferSchema(xdoc, null, XmlReadMode.Auto);
                                 ret = XmlReadMode.InferSchema;
                                 xmlload.FromInference = true;
-                                try {
+                                try
+                                {
                                     xmlload.LoadData(xdoc);
                                 }
-                                finally {
+                                finally
+                                {
                                     xmlload.FromInference = false;
                                 }
                             }
@@ -2106,15 +2610,16 @@ namespace System.Data {
 
                     return ret;
                 }
-                finally {
+                finally
+                {
                     rowDiffIdUsage.Cleanup();
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
-
 
         /// <devdoc>
         /// </devdoc>
@@ -2125,7 +2630,7 @@ namespace System.Data {
 
             XmlTextReader xr = new XmlTextReader(stream);
 
-            // Prevent Dtd entity in dataset 
+            // Prevent Dtd entity in dataset
             xr.XmlResolver = null;
 
             return ReadXml(xr, false);
@@ -2140,7 +2645,7 @@ namespace System.Data {
 
             XmlTextReader xr = new XmlTextReader(reader);
 
-            // Prevent Dtd entity in dataset 
+            // Prevent Dtd entity in dataset
             xr.XmlResolver = null;
 
             return ReadXml(xr, false);
@@ -2154,28 +2659,38 @@ namespace System.Data {
         {
             XmlTextReader xr = new XmlTextReader(fileName);
 
-            // Prevent Dtd entity in dataset 
+            // Prevent Dtd entity in dataset
             xr.XmlResolver = null;
 
             try
             {
                 return ReadXml(xr, false);
             }
-            finally {
+            finally
+            {
                 xr.Close();
             }
         }
 
-        internal void InferSchema(XmlDocument xdoc, string[] excludedNamespaces, XmlReadMode mode) {
+        internal void InferSchema(XmlDocument xdoc, string[] excludedNamespaces, XmlReadMode mode)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.InferSchema|INFO> %d#, mode=%d{ds.XmlReadMode}\n", ObjectID, (int)mode);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.InferSchema|INFO> %d#, mode=%d{ds.XmlReadMode}\n",
+                ObjectID,
+                (int)mode
+            );
+            try
+            {
                 string ns = xdoc.DocumentElement.NamespaceURI;
-                if (null == excludedNamespaces) {
+                if (null == excludedNamespaces)
+                {
                     excludedNamespaces = new string[0];
                 }
                 XmlNodeReader xnr = new XmlIgnoreNamespaceReader(xdoc, excludedNamespaces);
-                System.Xml.Schema.XmlSchemaInference infer = new System.Xml.Schema.XmlSchemaInference();
+                System.Xml.Schema.XmlSchemaInference infer =
+                    new System.Xml.Schema.XmlSchemaInference();
 
                 infer.Occurrence = XmlSchemaInference.InferenceOption.Relaxed;
 
@@ -2190,79 +2705,122 @@ namespace System.Data {
                 XSDSchema schema = new XSDSchema();
                 schema.FromInference = true;
 
-                try {
+                try
+                {
                     schema.LoadSchema(schemaSet, this);
                 }
-                finally {
+                finally
+                {
                     schema.FromInference = false; // this is always false if you are not calling fron inference
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        private bool IsEmpty() {
+        private bool IsEmpty()
+        {
             foreach (DataTable table in this.Tables)
                 if (table.Rows.Count > 0)
                     return false;
             return true;
         }
 
-        private void ReadXmlDiffgram(XmlReader reader) {
+        private void ReadXmlDiffgram(XmlReader reader)
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.ReadXmlDiffgram|INFO> %d#\n", ObjectID);
-            try {
+            try
+            {
                 int d = reader.Depth;
                 bool fEnforce = this.EnforceConstraints;
                 this.EnforceConstraints = false;
                 DataSet newDs;
                 bool isEmpty = this.IsEmpty();
 
-                if (isEmpty) {
+                if (isEmpty)
+                {
                     newDs = this;
                 }
-                else {
+                else
+                {
                     newDs = this.Clone();
                     newDs.EnforceConstraints = false;
                 }
 
-                foreach (DataTable t in newDs.Tables) {
+                foreach (DataTable t in newDs.Tables)
+                {
                     t.Rows.nullInList = 0;
                 }
                 reader.MoveToContent();
-                if ((reader.LocalName != Keywords.DIFFGRAM) && (reader.NamespaceURI != Keywords.DFFNS))
+                if (
+                    (reader.LocalName != Keywords.DIFFGRAM)
+                    && (reader.NamespaceURI != Keywords.DFFNS)
+                )
                     return;
                 reader.Read();
                 if (reader.NodeType == XmlNodeType.Whitespace)
-                    MoveToElement(reader, reader.Depth - 1 /*iCurrentDepth*/); // skip over whitespaces.
+                    MoveToElement(
+                        reader,
+                        reader.Depth - 1 /*iCurrentDepth*/
+                    ); // skip over whitespaces.
 
                 newDs.fInLoadDiffgram = true;
 
-                if (reader.Depth > d) {
-                    if ((reader.NamespaceURI != Keywords.DFFNS) && (reader.NamespaceURI != Keywords.MSDNS)) {
+                if (reader.Depth > d)
+                {
+                    if (
+                        (reader.NamespaceURI != Keywords.DFFNS)
+                        && (reader.NamespaceURI != Keywords.MSDNS)
+                    )
+                    {
                         //we should be inside the dataset part
                         XmlDocument xdoc = new XmlDocument();
-                        XmlElement node = xdoc.CreateElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
+                        XmlElement node = xdoc.CreateElement(
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        );
                         reader.Read();
-                        if (reader.NodeType == XmlNodeType.Whitespace) {
-                            MoveToElement(reader, reader.Depth - 1 /*iCurrentDepth*/); // skip over whitespaces.
+                        if (reader.NodeType == XmlNodeType.Whitespace)
+                        {
+                            MoveToElement(
+                                reader,
+                                reader.Depth - 1 /*iCurrentDepth*/
+                            ); // skip over whitespaces.
                         }
-                        if (reader.Depth - 1 > d) {
+                        if (reader.Depth - 1 > d)
+                        {
                             XmlDataLoader xmlload = new XmlDataLoader(newDs, false, node, false);
                             xmlload.isDiffgram = true; // turn on the special processing
                             xmlload.LoadData(reader);
                         }
                         ReadEndElement(reader);
-                        if (reader.NodeType == XmlNodeType.Whitespace) {
-                            MoveToElement(reader, reader.Depth - 1 /*iCurrentDepth*/); // skip over whitespaces.
+                        if (reader.NodeType == XmlNodeType.Whitespace)
+                        {
+                            MoveToElement(
+                                reader,
+                                reader.Depth - 1 /*iCurrentDepth*/
+                            ); // skip over whitespaces.
                         }
                     }
-                    Debug.Assert(reader.NodeType != XmlNodeType.Whitespace, "Should not be on Whitespace node");
+                    Debug.Assert(
+                        reader.NodeType != XmlNodeType.Whitespace,
+                        "Should not be on Whitespace node"
+                    );
 
-                    if (((reader.LocalName == Keywords.SQL_BEFORE) && (reader.NamespaceURI == Keywords.DFFNS)) ||
-                        ((reader.LocalName == Keywords.MSD_ERRORS) && (reader.NamespaceURI == Keywords.DFFNS)))
-
+                    if (
+                        (
+                            (reader.LocalName == Keywords.SQL_BEFORE)
+                            && (reader.NamespaceURI == Keywords.DFFNS)
+                        )
+                        || (
+                            (reader.LocalName == Keywords.MSD_ERRORS)
+                            && (reader.NamespaceURI == Keywords.DFFNS)
+                        )
+                    )
                     {
                         //this will consume the changes and the errors part
                         XMLDiffLoader diffLoader = new XMLDiffLoader();
@@ -2270,14 +2828,16 @@ namespace System.Data {
                     }
 
                     // get to the closing diff tag
-                    while (reader.Depth > d) {
+                    while (reader.Depth > d)
+                    {
                         reader.Read();
                     }
                     // read the closing tag
                     ReadEndElement(reader);
                 }
 
-                foreach (DataTable t in newDs.Tables) {
+                foreach (DataTable t in newDs.Tables)
+                {
                     if (t.Rows.nullInList > 0)
                         throw ExceptionBuilder.RowInsertMissing(t.TableName);
                 }
@@ -2285,12 +2845,17 @@ namespace System.Data {
                 newDs.fInLoadDiffgram = false;
 
                 //terrible performance!
-                foreach (DataTable t in newDs.Tables) {
+                foreach (DataTable t in newDs.Tables)
+                {
                     DataRelation[] nestedParentRelations = t.NestedParentRelations;
-                    foreach (DataRelation rel in nestedParentRelations) {
-                        if (rel.ParentTable == t) {
-                            foreach (DataRow r in t.Rows) {
-                                foreach (DataRelation rel2 in nestedParentRelations) {
+                    foreach (DataRelation rel in nestedParentRelations)
+                    {
+                        if (rel.ParentTable == t)
+                        {
+                            foreach (DataRow r in t.Rows)
+                            {
+                                foreach (DataRelation rel2 in nestedParentRelations)
+                                {
                                     r.CheckForLoops(rel2);
                                 }
                             }
@@ -2298,7 +2863,8 @@ namespace System.Data {
                     }
                 }
 
-                if (!isEmpty) {
+                if (!isEmpty)
+                {
                     this.Merge(newDs);
                     if (this.dataSetName == "NewDataSet")
                         this.dataSetName = newDs.dataSetName;
@@ -2306,10 +2872,10 @@ namespace System.Data {
                 }
                 this.EnforceConstraints = fEnforce;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
-
         }
 
         /// <devdoc>
@@ -2322,22 +2888,30 @@ namespace System.Data {
         internal XmlReadMode ReadXml(XmlReader reader, XmlReadMode mode, bool denyResolving)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.ReadXml|INFO> %d#, mode=%d{ds.XmlReadMode}, denyResolving=%d{bool}\n", ObjectID, (int)mode, denyResolving);
-            try {
-
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.ReadXml|INFO> %d#, mode=%d{ds.XmlReadMode}, denyResolving=%d{bool}\n",
+                ObjectID,
+                (int)mode,
+                denyResolving
+            );
+            try
+            {
                 XmlReadMode ret = mode;
 
                 if (reader == null)
                     return ret;
 
-                if (mode == XmlReadMode.Auto) {
+                if (mode == XmlReadMode.Auto)
+                {
                     // Dev11 915079: nested ReadXml calls on the same DataSet must be done outside of RowDiffIdUsage scope
                     return ReadXml(reader);
                 }
 
-                DataTable.DSRowDiffIdUsageSection rowDiffIdUsage = new DataTable.DSRowDiffIdUsageSection();
-                try {
-
+                DataTable.DSRowDiffIdUsageSection rowDiffIdUsage =
+                    new DataTable.DSRowDiffIdUsageSection();
+                try
+                {
                     bool fSchemaFound = false;
                     bool fDataFound = false;
                     bool fIsXdr = false;
@@ -2357,42 +2931,69 @@ namespace System.Data {
                     reader.MoveToContent();
                     XmlDataLoader xmlload = null;
 
-                    if (reader.NodeType == XmlNodeType.Element) {
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
                         XmlElement topNode = null;
-                        if (mode == XmlReadMode.Fragment) {
+                        if (mode == XmlReadMode.Fragment)
+                        {
                             xdoc.AppendChild(xdoc.CreateElement("ds_sqlXmlWraPPeR"));
                             topNode = xdoc.DocumentElement;
                         }
-                        else { //handle the top node
-                            if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
-                                if ((mode == XmlReadMode.DiffGram) || (mode == XmlReadMode.IgnoreSchema)) {
+                        else
+                        { //handle the top node
+                            if (
+                                (reader.LocalName == Keywords.DIFFGRAM)
+                                && (reader.NamespaceURI == Keywords.DFFNS)
+                            )
+                            {
+                                if (
+                                    (mode == XmlReadMode.DiffGram)
+                                    || (mode == XmlReadMode.IgnoreSchema)
+                                )
+                                {
                                     this.ReadXmlDiffgram(reader);
                                     // read the closing tag of the current element
                                     ReadEndElement(reader);
                                 }
-                                else {
+                                else
+                                {
                                     reader.Skip();
                                 }
                                 return ret;
                             }
 
-                            if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI == Keywords.XDRNS) {
+                            if (
+                                reader.LocalName == Keywords.XDR_SCHEMA
+                                && reader.NamespaceURI == Keywords.XDRNS
+                            )
+                            {
                                 // load XDR schema and exit
-                                if ((mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema) &&
-                                    (mode != XmlReadMode.InferTypedSchema))
+                                if (
+                                    (mode != XmlReadMode.IgnoreSchema)
+                                    && (mode != XmlReadMode.InferSchema)
+                                    && (mode != XmlReadMode.InferTypedSchema)
+                                )
                                 {
                                     ReadXDRSchema(reader);
                                 }
-                                else {
+                                else
+                                {
                                     reader.Skip();
                                 }
                                 return ret; //since the top level element is a schema return
                             }
 
-                            if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS) {
+                            if (
+                                reader.LocalName == Keywords.XSD_SCHEMA
+                                && reader.NamespaceURI == Keywords.XSDNS
+                            )
+                            {
                                 // load XSD schema and exit
-                                if ((mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema) &&
-                                    (mode != XmlReadMode.InferTypedSchema))
+                                if (
+                                    (mode != XmlReadMode.IgnoreSchema)
+                                    && (mode != XmlReadMode.InferSchema)
+                                    && (mode != XmlReadMode.InferTypedSchema)
+                                )
                                 {
                                     ReadXSDSchema(reader, denyResolving);
                                 }
@@ -2401,20 +3002,36 @@ namespace System.Data {
                                 return ret; //since the top level element is a schema return
                             }
 
-                            if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))
+                            if (
+                                reader.LocalName == Keywords.XSD_SCHEMA
+                                && reader.NamespaceURI.StartsWith(
+                                    Keywords.XSD_NS_START,
+                                    StringComparison.Ordinal
+                                )
+                            )
                                 throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
                             // now either the top level node is a table and we load it through dataReader...
                             // ... or backup the top node and all its attributes
-                            topNode = xdoc.CreateElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-                            if (reader.HasAttributes) {
+                            topNode = xdoc.CreateElement(
+                                reader.Prefix,
+                                reader.LocalName,
+                                reader.NamespaceURI
+                            );
+                            if (reader.HasAttributes)
+                            {
                                 int attrCount = reader.AttributeCount;
-                                for (int i = 0; i < attrCount; i++) {
+                                for (int i = 0; i < attrCount; i++)
+                                {
                                     reader.MoveToAttribute(i);
                                     if (reader.NamespaceURI.Equals(Keywords.XSD_XMLNS_NS))
                                         topNode.SetAttribute(reader.Name, reader.GetAttribute(i));
-                                    else {
-                                        XmlAttribute attr = topNode.SetAttributeNode(reader.LocalName, reader.NamespaceURI);
+                                    else
+                                    {
+                                        XmlAttribute attr = topNode.SetAttributeNode(
+                                            reader.LocalName,
+                                            reader.NamespaceURI
+                                        );
                                         attr.Prefix = reader.Prefix;
                                         attr.Value = reader.GetAttribute(i);
                                     }
@@ -2423,52 +3040,86 @@ namespace System.Data {
                             reader.Read();
                         }
 
-                        while (MoveToElement(reader, iCurrentDepth)) {
-
-                            if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI == Keywords.XDRNS) {
+                        while (MoveToElement(reader, iCurrentDepth))
+                        {
+                            if (
+                                reader.LocalName == Keywords.XDR_SCHEMA
+                                && reader.NamespaceURI == Keywords.XDRNS
+                            )
+                            {
                                 // load XDR schema
-                                if (!fSchemaFound && !fDataFound && (mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema) &&
-                                    (mode != XmlReadMode.InferTypedSchema))
+                                if (
+                                    !fSchemaFound
+                                    && !fDataFound
+                                    && (mode != XmlReadMode.IgnoreSchema)
+                                    && (mode != XmlReadMode.InferSchema)
+                                    && (mode != XmlReadMode.InferTypedSchema)
+                                )
                                 {
                                     ReadXDRSchema(reader);
                                     fSchemaFound = true;
                                     fIsXdr = true;
                                 }
-                                else {
+                                else
+                                {
                                     reader.Skip();
                                 }
                                 continue;
                             }
 
-                            if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS) {
+                            if (
+                                reader.LocalName == Keywords.XSD_SCHEMA
+                                && reader.NamespaceURI == Keywords.XSDNS
+                            )
+                            {
                                 // load XSD schema and exit
-                                if ((mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema) &&
-                                    (mode != XmlReadMode.InferTypedSchema))
+                                if (
+                                    (mode != XmlReadMode.IgnoreSchema)
+                                    && (mode != XmlReadMode.InferSchema)
+                                    && (mode != XmlReadMode.InferTypedSchema)
+                                )
                                 {
                                     ReadXSDSchema(reader, denyResolving);
                                     fSchemaFound = true;
                                 }
-                                else {
+                                else
+                                {
                                     reader.Skip();
                                 }
                                 continue;
                             }
 
-                            if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
-                                if ((mode == XmlReadMode.DiffGram) || (mode == XmlReadMode.IgnoreSchema)) {
+                            if (
+                                (reader.LocalName == Keywords.DIFFGRAM)
+                                && (reader.NamespaceURI == Keywords.DFFNS)
+                            )
+                            {
+                                if (
+                                    (mode == XmlReadMode.DiffGram)
+                                    || (mode == XmlReadMode.IgnoreSchema)
+                                )
+                                {
                                     this.ReadXmlDiffgram(reader);
                                     ret = XmlReadMode.DiffGram;
                                 }
-                                else {
+                                else
+                                {
                                     reader.Skip();
                                 }
                                 continue;
                             }
 
-                            if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))
+                            if (
+                                reader.LocalName == Keywords.XSD_SCHEMA
+                                && reader.NamespaceURI.StartsWith(
+                                    Keywords.XSD_NS_START,
+                                    StringComparison.Ordinal
+                                )
+                            )
                                 throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
-                            if (mode == XmlReadMode.DiffGram) {
+                            if (mode == XmlReadMode.DiffGram)
+                            {
                                 reader.Skip();
                                 continue; // we do not read data in diffgram mode
                             }
@@ -2476,13 +3127,23 @@ namespace System.Data {
                             // if we are here we found some data
                             fDataFound = true;
 
-                            if (mode == XmlReadMode.InferSchema || mode == XmlReadMode.InferTypedSchema) { //save the node in DOM until the end;
+                            if (
+                                mode == XmlReadMode.InferSchema
+                                || mode == XmlReadMode.InferTypedSchema
+                            )
+                            { //save the node in DOM until the end;
                                 XmlNode node = xdoc.ReadNode(reader);
                                 topNode.AppendChild(node);
                             }
-                            else {
+                            else
+                            {
                                 if (xmlload == null)
-                                    xmlload = new XmlDataLoader(this, fIsXdr, topNode, mode == XmlReadMode.IgnoreSchema);
+                                    xmlload = new XmlDataLoader(
+                                        this,
+                                        fIsXdr,
+                                        topNode,
+                                        mode == XmlReadMode.IgnoreSchema
+                                    );
                                 xmlload.LoadData(reader);
                             }
                         } //end of the while
@@ -2493,23 +3154,31 @@ namespace System.Data {
                         // now top node contains the data part
                         xdoc.AppendChild(topNode);
                         if (xmlload == null)
-                            xmlload = new XmlDataLoader(this, fIsXdr, mode == XmlReadMode.IgnoreSchema);
+                            xmlload = new XmlDataLoader(
+                                this,
+                                fIsXdr,
+                                mode == XmlReadMode.IgnoreSchema
+                            );
 
-                        if (mode == XmlReadMode.DiffGram) {
+                        if (mode == XmlReadMode.DiffGram)
+                        {
                             // we already got the diffs through XmlReader interface
                             return ret;
                         }
 
                         // Load Data
-                        if (mode == XmlReadMode.InferSchema || mode == XmlReadMode.InferTypedSchema) {
+                        if (mode == XmlReadMode.InferSchema || mode == XmlReadMode.InferTypedSchema)
+                        {
                             InferSchema(xdoc, null, mode);
                             ret = XmlReadMode.InferSchema;
                             xmlload.FromInference = true;
                             //                }
-                            try {
+                            try
+                            {
                                 xmlload.LoadData(xdoc);
                             }
-                            finally {
+                            finally
+                            {
                                 xmlload.FromInference = false;
                             }
                         }
@@ -2517,16 +3186,17 @@ namespace System.Data {
 
                     return ret;
                 }
-                finally {
+                finally
+                {
                     // Dev11 904428: prepare and cleanup rowDiffId hashtable
                     rowDiffIdUsage.Cleanup();
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
-
 
         /// <devdoc>
         /// </devdoc>
@@ -2535,8 +3205,11 @@ namespace System.Data {
             if (stream == null)
                 return XmlReadMode.Auto;
 
-            XmlTextReader reader = (mode == XmlReadMode.Fragment) ? new XmlTextReader(stream, XmlNodeType.Element, null) : new XmlTextReader(stream);
-            // Prevent Dtd entity in dataset 
+            XmlTextReader reader =
+                (mode == XmlReadMode.Fragment)
+                    ? new XmlTextReader(stream, XmlNodeType.Element, null)
+                    : new XmlTextReader(stream);
+            // Prevent Dtd entity in dataset
             reader.XmlResolver = null;
             return ReadXml(reader, mode, false);
         }
@@ -2548,8 +3221,11 @@ namespace System.Data {
             if (reader == null)
                 return XmlReadMode.Auto;
 
-            XmlTextReader xmlreader = (mode == XmlReadMode.Fragment) ? new XmlTextReader(reader.ReadToEnd(), XmlNodeType.Element, null) : new XmlTextReader(reader);
-            // Prevent Dtd entity in dataset 
+            XmlTextReader xmlreader =
+                (mode == XmlReadMode.Fragment)
+                    ? new XmlTextReader(reader.ReadToEnd(), XmlNodeType.Element, null)
+                    : new XmlTextReader(reader);
+            // Prevent Dtd entity in dataset
             xmlreader.XmlResolver = null;
             return ReadXml(xmlreader, mode, false);
         }
@@ -2561,25 +3237,26 @@ namespace System.Data {
         public XmlReadMode ReadXml(string fileName, XmlReadMode mode)
         {
             XmlTextReader xr = null;
-            if (mode == XmlReadMode.Fragment) {
+            if (mode == XmlReadMode.Fragment)
+            {
                 FileStream stream = new FileStream(fileName, FileMode.Open);
                 xr = new XmlTextReader(stream, XmlNodeType.Element, null);
             }
             else
                 xr = new XmlTextReader(fileName);
 
-            // Prevent Dtd entity in dataset             
+            // Prevent Dtd entity in dataset
             xr.XmlResolver = null;
 
             try
             {
                 return ReadXml(xr, mode, false);
             }
-            finally {
+            finally
+            {
                 xr.Close();
             }
         }
-
 
         /// <devdoc>
         ///    Writes schema and data for the DataSet.
@@ -2618,7 +3295,8 @@ namespace System.Data {
         /// </devdoc>
         public void WriteXml(Stream stream, XmlWriteMode mode)
         {
-            if (stream != null) {
+            if (stream != null)
+            {
                 XmlTextWriter w = new XmlTextWriter(stream, null);
                 w.Formatting = Formatting.Indented;
 
@@ -2630,7 +3308,8 @@ namespace System.Data {
         /// </devdoc>
         public void WriteXml(TextWriter writer, XmlWriteMode mode)
         {
-            if (writer != null) {
+            if (writer != null)
+            {
                 XmlTextWriter w = new XmlTextWriter(writer);
                 w.Formatting = Formatting.Indented;
 
@@ -2643,23 +3322,32 @@ namespace System.Data {
         public void WriteXml(XmlWriter writer, XmlWriteMode mode)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.WriteXml|API> %d#, mode=%d{ds.XmlWriteMode}\n", ObjectID, (int)mode);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.WriteXml|API> %d#, mode=%d{ds.XmlWriteMode}\n",
+                ObjectID,
+                (int)mode
+            );
+            try
+            {
                 // Generate SchemaTree and write it out
-                if (writer != null) {
-
-                    if (mode == XmlWriteMode.DiffGram) {
+                if (writer != null)
+                {
+                    if (mode == XmlWriteMode.DiffGram)
+                    {
                         // Create and save the updates
                         //                    new UpdateTreeGen(UpdateTreeGen.UPDATE, (DataRowState)(-1), this).Save(writer, null);
                         new NewDiffgramGen(this).Save(writer);
                     }
-                    else {
+                    else
+                    {
                         // Create and save xml data
                         new XmlDataTreeWriter(this).Save(writer, mode == XmlWriteMode.WriteSchema);
                     }
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2672,24 +3360,35 @@ namespace System.Data {
         public void WriteXml(String fileName, XmlWriteMode mode)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.WriteXml|API> %d#, fileName='%ls', mode=%d{ds.XmlWriteMode}\n", ObjectID, fileName, (int)mode);
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.WriteXml|API> %d#, fileName='%ls', mode=%d{ds.XmlWriteMode}\n",
+                ObjectID,
+                fileName,
+                (int)mode
+            );
             XmlTextWriter xw = new XmlTextWriter(fileName, null);
-            try {
+            try
+            {
                 xw.Formatting = Formatting.Indented;
                 xw.WriteStartDocument(true);
-                if (xw != null) {
+                if (xw != null)
+                {
                     // Create and save the updates
-                    if (mode == XmlWriteMode.DiffGram) {
+                    if (mode == XmlWriteMode.DiffGram)
+                    {
                         new NewDiffgramGen(this).Save(xw);
                     }
-                    else {
+                    else
+                    {
                         // Create and save xml data
                         new XmlDataTreeWriter(this).Save(xw, mode == XmlWriteMode.WriteSchema);
                     }
                 }
                 xw.WriteEndDocument();
             }
-            finally {
+            finally
+            {
                 xw.Close();
                 Bid.ScopeLeave(ref hscp);
             }
@@ -2714,11 +3413,18 @@ namespace System.Data {
         public void Merge(DataSet dataSet)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.Merge|API> %d#, dataSet=%d\n", ObjectID, (dataSet != null) ? dataSet.ObjectID : 0);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.Merge|API> %d#, dataSet=%d\n",
+                ObjectID,
+                (dataSet != null) ? dataSet.ObjectID : 0
+            );
+            try
+            {
                 Merge(dataSet, false, MissingSchemaAction.Add);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2732,11 +3438,19 @@ namespace System.Data {
         public void Merge(DataSet dataSet, bool preserveChanges)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.Merge|API> %d#, dataSet=%d, preserveChanges=%d{bool}\n", ObjectID, (dataSet != null) ? dataSet.ObjectID : 0, preserveChanges);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.Merge|API> %d#, dataSet=%d, preserveChanges=%d{bool}\n",
+                ObjectID,
+                (dataSet != null) ? dataSet.ObjectID : 0,
+                preserveChanges
+            );
+            try
+            {
                 Merge(dataSet, preserveChanges, MissingSchemaAction.Add);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2748,16 +3462,29 @@ namespace System.Data {
         ///       specified argument.
         ///    </para>
         /// </devdoc>
-        public void Merge(DataSet dataSet, bool preserveChanges, MissingSchemaAction missingSchemaAction) {
+        public void Merge(
+            DataSet dataSet,
+            bool preserveChanges,
+            MissingSchemaAction missingSchemaAction
+        )
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.Merge|API> %d#, dataSet=%d, preserveChanges=%d{bool}, missingSchemaAction=%d{ds.MissingSchemaAction}\n", ObjectID, (dataSet != null) ? dataSet.ObjectID : 0, preserveChanges, (int)missingSchemaAction);
-            try {
-
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.Merge|API> %d#, dataSet=%d, preserveChanges=%d{bool}, missingSchemaAction=%d{ds.MissingSchemaAction}\n",
+                ObjectID,
+                (dataSet != null) ? dataSet.ObjectID : 0,
+                preserveChanges,
+                (int)missingSchemaAction
+            );
+            try
+            {
                 // Argument checks
                 if (dataSet == null)
                     throw ExceptionBuilder.ArgumentNull("dataSet");
 
-                switch (missingSchemaAction) { // @perfnote: Enum.IsDefined
+                switch (missingSchemaAction)
+                { // @perfnote: Enum.IsDefined
                     case MissingSchemaAction.Add:
                     case MissingSchemaAction.Ignore:
                     case MissingSchemaAction.Error:
@@ -2769,7 +3496,8 @@ namespace System.Data {
                         throw Common.ADP.InvalidMissingSchemaAction(missingSchemaAction);
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2782,11 +3510,18 @@ namespace System.Data {
         public void Merge(DataTable table)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.Merge|API> %d#, table=%d\n", ObjectID, (table != null) ? table.ObjectID : 0);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.Merge|API> %d#, table=%d\n",
+                ObjectID,
+                (table != null) ? table.ObjectID : 0
+            );
+            try
+            {
                 Merge(table, false, MissingSchemaAction.Add);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2797,16 +3532,29 @@ namespace System.Data {
         ///       made to the target, and a value to deal with missing schemas.
         ///    </para>
         /// </devdoc>
-        public void Merge(DataTable table, bool preserveChanges, MissingSchemaAction missingSchemaAction)
+        public void Merge(
+            DataTable table,
+            bool preserveChanges,
+            MissingSchemaAction missingSchemaAction
+        )
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.Merge|API> %d#, table=%d, preserveChanges=%d{bool}, missingSchemaAction=%d{ds.MissingSchemaAction}\n", ObjectID, (table != null) ? table.ObjectID : 0, preserveChanges, (int)missingSchemaAction);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.Merge|API> %d#, table=%d, preserveChanges=%d{bool}, missingSchemaAction=%d{ds.MissingSchemaAction}\n",
+                ObjectID,
+                (table != null) ? table.ObjectID : 0,
+                preserveChanges,
+                (int)missingSchemaAction
+            );
+            try
+            {
                 // Argument checks
                 if (table == null)
                     throw ExceptionBuilder.ArgumentNull("table");
 
-                switch (missingSchemaAction) { // @perfnote: Enum.IsDefined
+                switch (missingSchemaAction)
+                { // @perfnote: Enum.IsDefined
                     case MissingSchemaAction.Add:
                     case MissingSchemaAction.Ignore:
                     case MissingSchemaAction.Error:
@@ -2818,11 +3566,11 @@ namespace System.Data {
                         throw Common.ADP.InvalidMissingSchemaAction(missingSchemaAction);
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -2831,10 +3579,12 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.Merge|API> %d#, rows\n", ObjectID);
-            try {
+            try
+            {
                 Merge(rows, false, MissingSchemaAction.Add);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2842,16 +3592,28 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Merge(DataRow[] rows, bool preserveChanges, MissingSchemaAction missingSchemaAction)
+        public void Merge(
+            DataRow[] rows,
+            bool preserveChanges,
+            MissingSchemaAction missingSchemaAction
+        )
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.Merge|API> %d#, preserveChanges=%d{bool}, missingSchemaAction=%d{ds.MissingSchemaAction}\n", ObjectID, preserveChanges, (int)missingSchemaAction);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.Merge|API> %d#, preserveChanges=%d{bool}, missingSchemaAction=%d{ds.MissingSchemaAction}\n",
+                ObjectID,
+                preserveChanges,
+                (int)missingSchemaAction
+            );
+            try
+            {
                 // Argument checks
                 if (rows == null)
                     throw ExceptionBuilder.ArgumentNull("rows");
 
-                switch (missingSchemaAction) { // @perfnote: Enum.IsDefined
+                switch (missingSchemaAction)
+                { // @perfnote: Enum.IsDefined
                     case MissingSchemaAction.Add:
                     case MissingSchemaAction.Ignore:
                     case MissingSchemaAction.Error:
@@ -2863,7 +3625,8 @@ namespace System.Data {
                         throw Common.ADP.InvalidMissingSchemaAction(missingSchemaAction);
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2887,7 +3650,11 @@ namespace System.Data {
                 throw ExceptionBuilder.MergeFailed(mfevent.Conflict);
         }
 
-        internal void RaiseMergeFailed(DataTable table, string conflict, MissingSchemaAction missingSchemaAction)
+        internal void RaiseMergeFailed(
+            DataTable table,
+            string conflict,
+            MissingSchemaAction missingSchemaAction
+        )
         {
             if (MissingSchemaAction.Error == missingSchemaAction)
                 throw ExceptionBuilder.MergeFailed(conflict);
@@ -2897,18 +3664,22 @@ namespace System.Data {
             return;
         }
 
-        internal void OnDataRowCreated(DataRow row) {
+        internal void OnDataRowCreated(DataRow row)
+        {
             if (onDataRowCreated != null)
                 onDataRowCreated(this, row);
         }
 
-        internal void OnClearFunctionCalled(DataTable table) {
+        internal void OnClearFunctionCalled(DataTable table)
+        {
             if (onClearFunctionCalled != null)
                 onClearFunctionCalled(this, table);
         }
 
-        private void OnInitialized() {
-            if (onInitialized != null) {
+        private void OnInitialized()
+        {
+            if (onInitialized != null)
+            {
                 onInitialized(this, EventArgs.Empty);
             }
         }
@@ -2916,12 +3687,13 @@ namespace System.Data {
         /// <devdoc>
         /// This method should be overriden by subclasses to restrict tables being removed.
         /// </devdoc>
-        protected internal virtual void OnRemoveTable(DataTable table) {
-        }
+        protected internal virtual void OnRemoveTable(DataTable table) { }
 
-        internal void OnRemovedTable(DataTable table) {
+        internal void OnRemovedTable(DataTable table)
+        {
             DataViewManager viewManager = defaultViewManager;
-            if (null != viewManager) {
+            if (null != viewManager)
+            {
                 viewManager.DataViewSettings.Remove(table);
             }
         }
@@ -2929,16 +3701,13 @@ namespace System.Data {
         /// <devdoc>
         /// This method should be overriden by subclasses to restrict tables being removed.
         /// </devdoc>
-        protected virtual void OnRemoveRelation(DataRelation relation)
-        {
-        }
+        protected virtual void OnRemoveRelation(DataRelation relation) { }
 
-        // 
+        //
         internal void OnRemoveRelationHack(DataRelation relation)
         {
             OnRemoveRelation(relation);
         }
-
 
         protected internal void RaisePropertyChanging(string name)
         {
@@ -2956,7 +3725,8 @@ namespace System.Data {
             // the fact that all connected undirected graphs with n-1 edges are trees.
             List<DataTable> topTables = new List<DataTable>();
 
-            if (forSchema) {
+            if (forSchema)
+            {
                 // prepend the tables that are nested more than once
                 for (int i = 0; i < Tables.Count; i++)
                 {
@@ -2986,14 +3756,16 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.RejectChanges|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 bool fEnforce = EnforceConstraints;
                 EnforceConstraints = false;
                 for (int i = 0; i < Tables.Count; i++)
                     Tables[i].RejectChanges();
                 EnforceConstraints = fEnforce;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -3001,17 +3773,21 @@ namespace System.Data {
         /// <devdoc>
         ///    Resets the dataSet back to it's original state.  Subclasses should override
         ///    to restore back to it's original state.
-        ///    
+        ///
 
         public virtual void Reset()
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.Reset|API> %d#\n", ObjectID);
-            try {
-                for (int i = 0; i < Tables.Count; i++) {
+            try
+            {
+                for (int i = 0; i < Tables.Count; i++)
+                {
                     ConstraintCollection cons = Tables[i].Constraints;
-                    for (int j = 0; j < cons.Count; ) {
-                        if (cons[j] is ForeignKeyConstraint) {
+                    for (int j = 0; j < cons.Count; )
+                    {
+                        if (cons[j] is ForeignKeyConstraint)
+                        {
                             cons.Remove(cons[j]);
                         }
                         else
@@ -3024,17 +3800,21 @@ namespace System.Data {
                 Relations.Clear();
                 Tables.Clear();
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        internal bool ValidateCaseConstraint() {
+        internal bool ValidateCaseConstraint()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.ValidateCaseConstraint|INFO> %d#\n", ObjectID);
-            try {
+            try
+            {
                 DataRelation relation = null;
-                for (int i = 0; i < Relations.Count; i++) {
+                for (int i = 0; i < Relations.Count; i++)
+                {
                     relation = Relations[i];
                     if (relation.ChildTable.CaseSensitive != relation.ParentTable.CaseSensitive)
                         return false;
@@ -3042,29 +3822,39 @@ namespace System.Data {
 
                 ForeignKeyConstraint constraint = null;
                 ConstraintCollection constraints = null;
-                for (int i = 0; i < Tables.Count; i++) {
+                for (int i = 0; i < Tables.Count; i++)
+                {
                     constraints = Tables[i].Constraints;
-                    for (int j = 0; j < constraints.Count; j++) {
-                        if (constraints[j] is ForeignKeyConstraint) {
+                    for (int j = 0; j < constraints.Count; j++)
+                    {
+                        if (constraints[j] is ForeignKeyConstraint)
+                        {
                             constraint = (ForeignKeyConstraint)constraints[j];
-                            if (constraint.Table.CaseSensitive != constraint.RelatedTable.CaseSensitive)
+                            if (
+                                constraint.Table.CaseSensitive
+                                != constraint.RelatedTable.CaseSensitive
+                            )
                                 return false;
                         }
                     }
                 }
                 return true;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        internal bool ValidateLocaleConstraint() {
+        internal bool ValidateLocaleConstraint()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.ValidateLocaleConstraint|INFO> %d#\n", ObjectID);
-            try {
+            try
+            {
                 DataRelation relation = null;
-                for (int i = 0; i < Relations.Count; i++) {
+                for (int i = 0; i < Relations.Count; i++)
+                {
                     relation = Relations[i];
                     if (relation.ChildTable.Locale.LCID != relation.ParentTable.Locale.LCID)
                         return false;
@@ -3072,10 +3862,13 @@ namespace System.Data {
 
                 ForeignKeyConstraint constraint = null;
                 ConstraintCollection constraints = null;
-                for (int i = 0; i < Tables.Count; i++) {
+                for (int i = 0; i < Tables.Count; i++)
+                {
                     constraints = Tables[i].Constraints;
-                    for (int j = 0; j < constraints.Count; j++) {
-                        if (constraints[j] is ForeignKeyConstraint) {
+                    for (int j = 0; j < constraints.Count; j++)
+                    {
+                        if (constraints[j] is ForeignKeyConstraint)
+                        {
                             constraint = (ForeignKeyConstraint)constraints[j];
                             if (constraint.Table.Locale.LCID != constraint.RelatedTable.Locale.LCID)
                                 return false;
@@ -3084,91 +3877,126 @@ namespace System.Data {
                 }
                 return true;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
         // Microsoft: may be better to rewrite this as nonrecursive?
-        internal DataTable FindTable(DataTable baseTable, PropertyDescriptor[] props, int propStart) {
+        internal DataTable FindTable(DataTable baseTable, PropertyDescriptor[] props, int propStart)
+        {
             if (props.Length < propStart + 1)
                 return baseTable;
 
             PropertyDescriptor currentProp = props[propStart];
 
-            if (baseTable == null) {
+            if (baseTable == null)
+            {
                 // the accessor is the table name.  if we don't find it, return null.
-                if (currentProp is DataTablePropertyDescriptor) {
-                    return FindTable(((DataTablePropertyDescriptor)currentProp).Table, props, propStart + 1);
+                if (currentProp is DataTablePropertyDescriptor)
+                {
+                    return FindTable(
+                        ((DataTablePropertyDescriptor)currentProp).Table,
+                        props,
+                        propStart + 1
+                    );
                 }
                 return null;
             }
 
-            if (currentProp is DataRelationPropertyDescriptor) {
-                return FindTable(((DataRelationPropertyDescriptor)currentProp).Relation.ChildTable, props, propStart + 1);
+            if (currentProp is DataRelationPropertyDescriptor)
+            {
+                return FindTable(
+                    ((DataRelationPropertyDescriptor)currentProp).Relation.ChildTable,
+                    props,
+                    propStart + 1
+                );
             }
 
             return null;
         }
 
-        protected virtual void ReadXmlSerializable(XmlReader reader) {
+        protected virtual void ReadXmlSerializable(XmlReader reader)
+        {
             //WebData 96421 and 104709, this is DataSet side fix for the thrown exception
             // <DataSet xsi:nil="true"> does not mean DataSet is null,but it does not have any child
             // so  dont do anything, ignore the attributes and just return empty DataSet;
             this.UseDataSetSchemaOnly = false;
             this.UdtIsWrapped = false;
 
-            if (reader.HasAttributes) {
+            if (reader.HasAttributes)
+            {
                 const string xsinill = Keywords.XSI + ":" + Keywords.XSI_NIL;
-                if (reader.MoveToAttribute(xsinill)) {
+                if (reader.MoveToAttribute(xsinill))
+                {
                     string nilAttrib = reader.GetAttribute(xsinill);
-                    if (string.Compare(nilAttrib, "true", StringComparison.Ordinal) == 0) {// case sensitive true comparison
+                    if (string.Compare(nilAttrib, "true", StringComparison.Ordinal) == 0)
+                    { // case sensitive true comparison
                         MoveToElement(reader, 1);
                         return;
                     }
                 }
 
-                const string useDataSetSchemaOnlyString = Keywords.MSD + ":" + Keywords.USEDATASETSCHEMAONLY;
-                if (reader.MoveToAttribute(useDataSetSchemaOnlyString)) {
+                const string useDataSetSchemaOnlyString =
+                    Keywords.MSD + ":" + Keywords.USEDATASETSCHEMAONLY;
+                if (reader.MoveToAttribute(useDataSetSchemaOnlyString))
+                {
                     string _useDataSetSchemaOnly = reader.GetAttribute(useDataSetSchemaOnlyString);
-                    if (string.Equals(_useDataSetSchemaOnly, "true", StringComparison.Ordinal) ||
-                        string.Equals(_useDataSetSchemaOnly, "1", StringComparison.Ordinal))
+                    if (
+                        string.Equals(_useDataSetSchemaOnly, "true", StringComparison.Ordinal)
+                        || string.Equals(_useDataSetSchemaOnly, "1", StringComparison.Ordinal)
+                    )
                     {
                         this.UseDataSetSchemaOnly = true;
                     }
-                    else if (!string.Equals(_useDataSetSchemaOnly, "false", StringComparison.Ordinal) &&
-                             !string.Equals(_useDataSetSchemaOnly, "0", StringComparison.Ordinal))
+                    else if (
+                        !string.Equals(_useDataSetSchemaOnly, "false", StringComparison.Ordinal)
+                        && !string.Equals(_useDataSetSchemaOnly, "0", StringComparison.Ordinal)
+                    )
                     {
-                        throw ExceptionBuilder.InvalidAttributeValue(Keywords.USEDATASETSCHEMAONLY, _useDataSetSchemaOnly);
+                        throw ExceptionBuilder.InvalidAttributeValue(
+                            Keywords.USEDATASETSCHEMAONLY,
+                            _useDataSetSchemaOnly
+                        );
                     }
                 }
 
-                const string udtIsWrappedString = Keywords.MSD + ":" + Keywords.UDTCOLUMNVALUEWRAPPED;
-                if (reader.MoveToAttribute(udtIsWrappedString)) {
+                const string udtIsWrappedString =
+                    Keywords.MSD + ":" + Keywords.UDTCOLUMNVALUEWRAPPED;
+                if (reader.MoveToAttribute(udtIsWrappedString))
+                {
                     string _udtIsWrappedString = reader.GetAttribute(udtIsWrappedString);
-                    if (string.Equals(_udtIsWrappedString, "true", StringComparison.Ordinal) ||
-                        string.Equals(_udtIsWrappedString, "1", StringComparison.Ordinal))
+                    if (
+                        string.Equals(_udtIsWrappedString, "true", StringComparison.Ordinal)
+                        || string.Equals(_udtIsWrappedString, "1", StringComparison.Ordinal)
+                    )
                     {
                         this.UdtIsWrapped = true;
-
                     }
-                    else if (!string.Equals(_udtIsWrappedString, "false", StringComparison.Ordinal) &&
-                             !string.Equals(_udtIsWrappedString, "0", StringComparison.Ordinal))
+                    else if (
+                        !string.Equals(_udtIsWrappedString, "false", StringComparison.Ordinal)
+                        && !string.Equals(_udtIsWrappedString, "0", StringComparison.Ordinal)
+                    )
                     {
-                        throw ExceptionBuilder.InvalidAttributeValue(Keywords.UDTCOLUMNVALUEWRAPPED, _udtIsWrappedString);
+                        throw ExceptionBuilder.InvalidAttributeValue(
+                            Keywords.UDTCOLUMNVALUEWRAPPED,
+                            _udtIsWrappedString
+                        );
                     }
                 }
             }
             ReadXml(reader, XmlReadMode.DiffGram, true);
         }
 
-        protected virtual System.Xml.Schema.XmlSchema GetSchemaSerializable() {
+        protected virtual System.Xml.Schema.XmlSchema GetSchemaSerializable()
+        {
             return null;
         }
 
         /************************************************************************
         To publish
-        int_tools\webserviceadmin.exe -install Application Application.dll 
+        int_tools\webserviceadmin.exe -install Application Application.dll
 
         To test
         http://localhost/application/service.asmx?wsdl
@@ -3178,7 +4006,7 @@ namespace System.Data {
         The V1.0 & V1.1 WSDL for Untyped DataSet being returned as a result (no parameters)
         <s:element name="anyUserSpecifiedMethodName">
             <!--  This is where parameters go -->
-            <s:complexType /> 
+            <s:complexType />
         </s:element>
         <s:element name="anyUserSpecifiedMethodName"+"Response">
             <s:complexType>
@@ -3186,8 +4014,8 @@ namespace System.Data {
                     <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result">
                         <s:complexType>
                             <s:sequence>
-                                <s:element ref="s:schema" /> 
-                                <s:any /> 
+                                <s:element ref="s:schema" />
+                                <s:any />
                             </s:sequence>
                         </s:complexType>
                     </s:element>
@@ -3203,8 +4031,8 @@ namespace System.Data {
                     <s:element minOccurs="0" maxOccurs="1" name="set">
                         <s:complexType>
                             <s:sequence>
-                                <s:element ref="s:schema" /> 
-                                <s:any /> 
+                                <s:element ref="s:schema" />
+                                <s:any />
                             </s:sequence>
                         </s:complexType>
                     </s:element>
@@ -3214,7 +4042,7 @@ namespace System.Data {
         <s:element name="anyUserSpecifiedMethodName"+"Response">
             <s:complexType>
                 <s:sequence>
-                    <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result" type="s:string" /> 
+                    <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result" type="s:string" />
                 </s:sequence>
             </s:complexType>
         </s:element>
@@ -3222,7 +4050,7 @@ namespace System.Data {
         The V2.0 WSDL for Untyped DataSet being returned as a result (no parameters)
         <s:element name="anyUserSpecifiedMethodName">
             <!--  This is where parameters go -->
-            <s:complexType /> 
+            <s:complexType />
         </s:element>
         <s:element name="anyUserSpecifiedMethodName"+"Response">
             <s:complexType>
@@ -3230,8 +4058,8 @@ namespace System.Data {
                     <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result">
                         <s:complexType>
                             <s:sequence maxOccurs="unbounded">
-                                <s:any minOccurs="0" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" /> 
-                                <s:any minOccurs="0" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" /> 
+                                <s:any minOccurs="0" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                                <s:any minOccurs="0" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
                             </s:sequence>
                         </s:complexType>
                     </s:element>
@@ -3247,8 +4075,8 @@ namespace System.Data {
                     <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedParameterName">
                         <s:complexType>
                             <s:sequence maxOccurs="unbounded">
-                                <s:any minOccurs="0" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" /> 
-                                <s:any minOccurs="0" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" /> 
+                                <s:any minOccurs="0" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                                <s:any minOccurs="0" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
                             </s:sequence>
                         </s:complexType>
                     </s:element>
@@ -3258,16 +4086,16 @@ namespace System.Data {
         <s:element name="anyUserSpecifiedMethodName"+"Response">
             <s:complexType>
                 <s:sequence>
-                    <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result" type="s:string" /> 
+                    <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result" type="s:string" />
                 </s:sequence>
             </s:complexType>
         </s:element>
   
         The V1.0, V1.1 & V2.0 WSDL for Typed DataSet
-        <s:import schemaLocation="http://localhost/application/service.asmx?schema=typedDataSetName" namespace="typedDataSetName" /> 
+        <s:import schemaLocation="http://localhost/application/service.asmx?schema=typedDataSetName" namespace="typedDataSetName" />
         <s:element name="anyUserSpecifiedMethodName">
             <!--  This is where parameters go -->
-            <s:complexType /> 
+            <s:complexType />
         </s:element>
         <s:element name="anyUserSpecifiedMethodName"+"Response">
             <s:complexType>
@@ -3275,23 +4103,25 @@ namespace System.Data {
                     <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result">
                         <s:complexType>
                             <s:sequence>
-                                <s:any namespace="typedDataSetName" /> 
+                                <s:any namespace="typedDataSetName" />
                             </s:sequence>
                         </s:complexType>
                     </s:element>
                 </s:sequence>
             </s:complexType>
-        </s:element>  
+        </s:element>
         ************************************************************************/
-        public static XmlSchemaComplexType GetDataSetSchema(XmlSchemaSet schemaSet) {
-            // For performance resons we are exploiting the fact that config files content is constant 
+        public static XmlSchemaComplexType GetDataSetSchema(XmlSchemaSet schemaSet)
+        {
+            // For performance resons we are exploiting the fact that config files content is constant
             // for a given appdomain so we can safely cache the prepared schema complex type and reuse it
-            if (schemaTypeForWSDL == null) { // to change the config file, appdomain needs to restart; so it seems safe to cache the schema
+            if (schemaTypeForWSDL == null)
+            { // to change the config file, appdomain needs to restart; so it seems safe to cache the schema
                 XmlSchemaComplexType tempWSDL = new XmlSchemaComplexType();
                 XmlSchemaSequence sequence = new XmlSchemaSequence();
 
                 if (PublishLegacyWSDL())
-                {   // Default is Version 1.0
+                { // Default is Version 1.0
                     XmlSchemaElement elem = new XmlSchemaElement();
                     elem.RefName = new XmlQualifiedName(Keywords.XSD_SCHEMA, Keywords.XSDNS);
                     sequence.Items.Add(elem);
@@ -3299,7 +4129,7 @@ namespace System.Data {
                     sequence.Items.Add(any);
                 }
                 else
-                {   // this means Version == V2.0 or newer
+                { // this means Version == V2.0 or newer
                     XmlSchemaAny any = new XmlSchemaAny();
                     any.Namespace = XmlSchema.Namespace;
                     any.MinOccurs = 0;
@@ -3337,12 +4167,13 @@ namespace System.Data {
         {
             Single version = 1.0f; // Default is Version 1.0
 #if !NO_CONFIGURATION
-            NameValueCollection settings = (NameValueCollection)PrivilegedConfigurationManager.GetSection(Keywords.WS_DATASETFULLQNAME);
+            NameValueCollection settings = (NameValueCollection)
+                PrivilegedConfigurationManager.GetSection(Keywords.WS_DATASETFULLQNAME);
             if (settings != null)
             {
                 string[] values = settings.GetValues(Keywords.WS_VERSION);
                 if ((null != values) && (0 < values.Length) && (null != values[0]))
-                {   // will throw FormatException if not a valid number
+                { // will throw FormatException if not a valid number
                     version = Single.Parse(values[0], CultureInfo.InvariantCulture);
                 }
             }
@@ -3350,14 +4181,17 @@ namespace System.Data {
             return (version < 2.0f); // if config does not exist, Default is Version 1.0
         }
 
-        XmlSchema IXmlSerializable.GetSchema() {
-            if (GetType() == typeof(DataSet)) {
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            if (GetType() == typeof(DataSet))
+            {
                 return null;
             }
             MemoryStream stream = new MemoryStream();
             // WriteXmlSchema(new XmlTextWriter(stream, null));
             XmlWriter writer = new XmlTextWriter(stream, null);
-            if (writer != null) {
+            if (writer != null)
+            {
                 (new XmlTreeGen(SchemaFormat.WebService)).Save(this, writer);
             }
             stream.Position = 0;
@@ -3365,17 +4199,21 @@ namespace System.Data {
             //            return GetSchemaSerializable();
         }
 
-        void IXmlSerializable.ReadXml(XmlReader reader) {
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
             bool fNormalization = true;
             XmlTextReader xmlTextReader = null;
             IXmlTextParser xmlTextParser = reader as IXmlTextParser;
-            if (xmlTextParser != null) {
+            if (xmlTextParser != null)
+            {
                 fNormalization = xmlTextParser.Normalized;
                 xmlTextParser.Normalized = false;
             }
-            else {
+            else
+            {
                 xmlTextReader = reader as XmlTextReader;
-                if (xmlTextReader != null) {
+                if (xmlTextReader != null)
+                {
                     fNormalization = xmlTextReader.Normalization;
                     xmlTextReader.Normalization = false;
                 }
@@ -3389,48 +4227,69 @@ namespace System.Data {
                 xmlTextReader.Normalization = fNormalization;
         }
 
-        void IXmlSerializable.WriteXml(XmlWriter writer) {
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
             this.WriteXmlSchema(writer, SchemaFormat.WebService, (Converter<Type, string>)null);
             this.WriteXml(writer, XmlWriteMode.DiffGram);
         }
 
-        public virtual void Load(IDataReader reader, LoadOption loadOption, FillErrorEventHandler errorHandler, params DataTable[] tables) {
+        public virtual void Load(
+            IDataReader reader,
+            LoadOption loadOption,
+            FillErrorEventHandler errorHandler,
+            params DataTable[] tables
+        )
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataSet.Load|API> reader, loadOption=%d{ds.LoadOption}", (int)loadOption);
-            try {
-                foreach (DataTable dt in tables) {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataSet.Load|API> reader, loadOption=%d{ds.LoadOption}",
+                (int)loadOption
+            );
+            try
+            {
+                foreach (DataTable dt in tables)
+                {
                     Common.ADP.CheckArgumentNull(dt, "tables");
-                    if (dt.DataSet != this) {
+                    if (dt.DataSet != this)
+                    {
                         throw ExceptionBuilder.TableNotInTheDataSet(dt.TableName);
                     }
                 }
                 Common.LoadAdapter adapter = new Common.LoadAdapter();
                 adapter.FillLoadOption = loadOption;
                 adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                if (null != errorHandler) {
+                if (null != errorHandler)
+                {
                     adapter.FillError += errorHandler;
                 }
                 adapter.FillFromReader(tables, reader, 0, 0);
 
-                if (!reader.IsClosed && !reader.NextResult()) { // 
+                if (!reader.IsClosed && !reader.NextResult())
+                { //
                     reader.Close();
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        public void Load(IDataReader reader, LoadOption loadOption, params DataTable[] tables) {
+        public void Load(IDataReader reader, LoadOption loadOption, params DataTable[] tables)
+        {
             Load(reader, loadOption, null, tables);
         }
 
-        public void Load(IDataReader reader, LoadOption loadOption, params string[] tables) {
+        public void Load(IDataReader reader, LoadOption loadOption, params string[] tables)
+        {
             Common.ADP.CheckArgumentNull(tables, "tables");
             DataTable[] dataTables = new DataTable[tables.Length];
-            for (int i = 0; i < tables.Length; i++) {
+            for (int i = 0; i < tables.Length; i++)
+            {
                 DataTable tempDT = this.Tables[tables[i]];
-                if (null == tempDT) {
+                if (null == tempDT)
+                {
                     tempDT = new DataTable(tables[i]);
                     // fxcop: new DataTable should inherit the CaseSensitive, Locale, Namespace from DataSet
                     Tables.Add(tempDT);
@@ -3440,56 +4299,58 @@ namespace System.Data {
             Load(reader, loadOption, null, dataTables);
         }
 
-        public DataTableReader CreateDataReader() {
+        public DataTableReader CreateDataReader()
+        {
             if (Tables.Count == 0)
                 throw ExceptionBuilder.CannotCreateDataReaderOnEmptyDataSet();
 
             DataTable[] dataTables = new DataTable[Tables.Count];
-            for (int i = 0; i < Tables.Count; i++) {
+            for (int i = 0; i < Tables.Count; i++)
+            {
                 dataTables[i] = Tables[i];
             }
             return CreateDataReader(dataTables);
         }
 
-        public DataTableReader CreateDataReader(params DataTable[] dataTables) {
+        public DataTableReader CreateDataReader(params DataTable[] dataTables)
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataSet.GetDataReader|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 if (dataTables.Length == 0)
                     throw ExceptionBuilder.DataTableReaderArgumentIsEmpty();
 
-                for (int i = 0; i < dataTables.Length; i++) {
+                for (int i = 0; i < dataTables.Length; i++)
+                {
                     if (dataTables[i] == null)
                         throw ExceptionBuilder.ArgumentContainsNullValue();
                 }
 
                 return new DataTableReader(dataTables);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        internal string MainTableName {
-            get {
-                return mainTableName;
-            }
-            set {
-                this.mainTableName = value;
-            }
+        internal string MainTableName
+        {
+            get { return mainTableName; }
+            set { this.mainTableName = value; }
         }
 
-        internal int ObjectID {
-            get {
-                return _objectID;
-            }
+        internal int ObjectID
+        {
+            get { return _objectID; }
         }
-
     }
 #endif
 
 #if !NO_CODEDOM
- public class DataSetSchemaImporterExtension : SchemaImporterExtension {
+    public class DataSetSchemaImporterExtension : SchemaImporterExtension
+    {
         // DataSetSchemaImporterExtension is used for WebServices, it is used to recognize the schema of DataSet within wsdl
         // If a non 2.0 enabled DataSetSchemaImporterExtension, wsdl will generate a classes that you can't cast to dataset / datatable
 
@@ -3498,26 +4359,60 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string ImportSchemaType(string name, string schemaNamespace, XmlSchemaObject context, XmlSchemas schemas, XmlSchemaImporter importer, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeGenerationOptions options, CodeDomProvider codeProvider) {
+        public override string ImportSchemaType(
+            string name,
+            string schemaNamespace,
+            XmlSchemaObject context,
+            XmlSchemas schemas,
+            XmlSchemaImporter importer,
+            CodeCompileUnit compileUnit,
+            CodeNamespace mainNamespace,
+            CodeGenerationOptions options,
+            CodeDomProvider codeProvider
+        )
+        {
             IList values = schemas.GetSchemas(schemaNamespace);
-            if (values.Count != 1) {
+            if (values.Count != 1)
+            {
                 return null;
             }
             XmlSchema schema = values[0] as XmlSchema;
             if (schema == null)
                 return null;
-            XmlSchemaType type = (XmlSchemaType)schema.SchemaTypes[new XmlQualifiedName(name, schemaNamespace)];
-            return ImportSchemaType(type, context, schemas, importer, compileUnit, mainNamespace, options, codeProvider);
+            XmlSchemaType type = (XmlSchemaType)
+                schema.SchemaTypes[new XmlQualifiedName(name, schemaNamespace)];
+            return ImportSchemaType(
+                type,
+                context,
+                schemas,
+                importer,
+                compileUnit,
+                mainNamespace,
+                options,
+                codeProvider
+            );
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string ImportSchemaType(XmlSchemaType type, XmlSchemaObject context, XmlSchemas schemas, XmlSchemaImporter importer, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeGenerationOptions options, CodeDomProvider codeProvider) {
-            if (type == null) {
+        public override string ImportSchemaType(
+            XmlSchemaType type,
+            XmlSchemaObject context,
+            XmlSchemas schemas,
+            XmlSchemaImporter importer,
+            CodeCompileUnit compileUnit,
+            CodeNamespace mainNamespace,
+            CodeGenerationOptions options,
+            CodeDomProvider codeProvider
+        )
+        {
+            if (type == null)
+            {
                 return null;
             }
-            if (importedTypes[type] != null) {
+            if (importedTypes[type] != null)
+            {
                 mainNamespace.Imports.Add(new CodeNamespaceImport(typeof(DataSet).Namespace));
                 compileUnit.ReferencedAssemblies.Add("System.Data.dll");
                 return (string)importedTypes[type];
@@ -3535,18 +4430,26 @@ namespace System.Data {
             //    return GenerateTypedDataSet(e, schemas, mainNamespace, compileUnit.ReferencedAssemblies, codeProvider);
             //}
 
-            if (type is XmlSchemaComplexType) {
+            if (type is XmlSchemaComplexType)
+            {
                 XmlSchemaComplexType ct = (XmlSchemaComplexType)type;
 
                 if (ct.Particle is XmlSchemaSequence)
                 {
                     XmlSchemaObjectCollection items = ((XmlSchemaSequence)ct.Particle).Items;
-                    if ((2 == items.Count) && (items[0] is XmlSchemaAny) && (items[1] is XmlSchemaAny))
+                    if (
+                        (2 == items.Count)
+                        && (items[0] is XmlSchemaAny)
+                        && (items[1] is XmlSchemaAny)
+                    )
                     {
                         XmlSchemaAny any0 = (XmlSchemaAny)items[0];
                         XmlSchemaAny any1 = (XmlSchemaAny)items[1];
-                        if ((any0.Namespace == XmlSchema.Namespace) && (any1.Namespace == "urn:schemas-microsoft-com:xml-diffgram-v1"))
-                        {   // new diffgramm format
+                        if (
+                            (any0.Namespace == XmlSchema.Namespace)
+                            && (any1.Namespace == "urn:schemas-microsoft-com:xml-diffgram-v1")
+                        )
+                        { // new diffgramm format
                             string ns = null;
                             foreach (XmlSchemaAttribute a in ct.Attributes)
                             {
@@ -3573,15 +4476,19 @@ namespace System.Data {
                             }
 
                             if (ns == null)
-                            {   //Un-Typed DataSet / DataTable
-                                string typeName = isDataSet ? typeof(DataSet).FullName : typeof(DataTable).FullName;
+                            { //Un-Typed DataSet / DataTable
+                                string typeName = isDataSet
+                                    ? typeof(DataSet).FullName
+                                    : typeof(DataTable).FullName;
                                 importedTypes.Add(type, typeName);
-                                mainNamespace.Imports.Add(new CodeNamespaceImport(typeof(DataSet).Namespace));
+                                mainNamespace.Imports.Add(
+                                    new CodeNamespaceImport(typeof(DataSet).Namespace)
+                                );
                                 compileUnit.ReferencedAssemblies.Add("System.Data.dll");
                                 return typeName;
                             }
                             else
-                            {   // Typed DataSet / DataTable
+                            { // Typed DataSet / DataTable
                                 foreach (XmlSchema schema in schemas.GetSchemas(ns))
                                 {
                                     if ((schema != null) && (schema.Id != null))
@@ -3589,7 +4496,16 @@ namespace System.Data {
                                         XmlSchemaElement ds = FindDataSetElement(schema); // implement  FindDataTableElement(schema)
                                         if (ds != null)
                                         {
-                                            return ImportSchemaType(ds.SchemaType, ds, schemas, importer, compileUnit, mainNamespace, options, codeProvider);
+                                            return ImportSchemaType(
+                                                ds.SchemaType,
+                                                ds,
+                                                schemas,
+                                                importer,
+                                                compileUnit,
+                                                mainNamespace,
+                                                options,
+                                                codeProvider
+                                            );
                                         }
                                         // else return null
                                     }
@@ -3599,34 +4515,55 @@ namespace System.Data {
                         }
                     }
                 }
-                if (ct.Particle is XmlSchemaSequence || ct.Particle is XmlSchemaAll) {
+                if (ct.Particle is XmlSchemaSequence || ct.Particle is XmlSchemaAll)
+                {
                     XmlSchemaObjectCollection items = ((XmlSchemaGroupBase)ct.Particle).Items;
-                    if (items.Count == 2) {
-                        if (!(items[0] is XmlSchemaElement && items[1] is XmlSchemaAny)) return null;
+                    if (items.Count == 2)
+                    {
+                        if (!(items[0] is XmlSchemaElement && items[1] is XmlSchemaAny))
+                            return null;
                         XmlSchemaElement schema = (XmlSchemaElement)items[0];
-                        if (!(schema.RefName.Name == "schema" && schema.RefName.Namespace == XmlSchema.Namespace)) return null;
+                        if (
+                            !(
+                                schema.RefName.Name == "schema"
+                                && schema.RefName.Namespace == XmlSchema.Namespace
+                            )
+                        )
+                            return null;
                         string typeName = typeof(DataSet).FullName;
                         importedTypes.Add(type, typeName);
-                        mainNamespace.Imports.Add(new CodeNamespaceImport(typeof(DataSet).Namespace));
+                        mainNamespace.Imports.Add(
+                            new CodeNamespaceImport(typeof(DataSet).Namespace)
+                        );
                         compileUnit.ReferencedAssemblies.Add("System.Data.dll");
                         return typeName;
                     }
                     else if (1 == items.Count)
                     {
                         XmlSchemaAny any = items[0] as XmlSchemaAny;
-                        if ((null != any) &&
-                            (null != any.Namespace) &&
-                            (any.Namespace.IndexOfAny(new char[] { '#', ' ' }) < 0)) // special syntax (##any, ##other, ...) or more than one Uri present
+                        if (
+                            (null != any)
+                            && (null != any.Namespace)
+                            && (any.Namespace.IndexOfAny(new char[] { '#', ' ' }) < 0)
+                        ) // special syntax (##any, ##other, ...) or more than one Uri present
                         {
                             foreach (XmlSchema schema in schemas.GetSchemas(any.Namespace))
                             {
-                                if ((null != schema) &&
-                                    (null != schema.Id))
+                                if ((null != schema) && (null != schema.Id))
                                 {
                                     XmlSchemaElement ds = FindDataSetElement(schema);
                                     if (ds != null)
                                     {
-                                        return ImportSchemaType(ds.SchemaType, ds, schemas, importer, compileUnit, mainNamespace, options, codeProvider);
+                                        return ImportSchemaType(
+                                            ds.SchemaType,
+                                            ds,
+                                            schemas,
+                                            importer,
+                                            compileUnit,
+                                            mainNamespace,
+                                            options,
+                                            codeProvider
+                                        );
                                     }
                                     // else return null
                                 }
@@ -3640,17 +4577,26 @@ namespace System.Data {
             return null;
         }
 
-
-        internal XmlSchemaElement FindDataSetElement(XmlSchema schema) {
-            foreach (XmlSchemaObject item in schema.Items) {
-                if (item is XmlSchemaElement && IsDataSet((XmlSchemaElement)item)) {
+        internal XmlSchemaElement FindDataSetElement(XmlSchema schema)
+        {
+            foreach (XmlSchemaObject item in schema.Items)
+            {
+                if (item is XmlSchemaElement && IsDataSet((XmlSchemaElement)item))
+                {
                     return (XmlSchemaElement)item;
                 }
             }
             return null;
         }
 
-        internal string GenerateTypedDataSet(XmlSchemaElement element, XmlSchemas schemas, CodeNamespace codeNamespace, StringCollection references, CodeDomProvider codeProvider) {
+        internal string GenerateTypedDataSet(
+            XmlSchemaElement element,
+            XmlSchemas schemas,
+            CodeNamespace codeNamespace,
+            StringCollection references,
+            CodeDomProvider codeProvider
+        )
+        {
             if (element == null)
                 return null;
 
@@ -3658,7 +4604,8 @@ namespace System.Data {
                 return (string)importedTypes[element.SchemaType];
 
             IList values = schemas.GetSchemas(element.QualifiedName.Namespace);
-            if (values.Count != 1) {
+            if (values.Count != 1)
+            {
                 return null;
             }
             XmlSchema schema = values[0] as XmlSchema;
@@ -3667,15 +4614,20 @@ namespace System.Data {
 
             DataSet ds = new DataSet();
 
-            // 
-            using (MemoryStream stream = new MemoryStream()) {
+            //
+            using (MemoryStream stream = new MemoryStream())
+            {
                 schema.Write(stream);
                 stream.Position = 0;
                 ds.ReadXmlSchema(stream);
             }
 
 #pragma warning disable 618 // ignore obsolete warning about TypedDataSetGenerator
-            CodeTypeDeclaration dsClass = new TypedDataSetGenerator().GenerateCode(ds, codeNamespace, codeProvider.CreateGenerator());
+            CodeTypeDeclaration dsClass = new TypedDataSetGenerator().GenerateCode(
+                ds,
+                codeNamespace,
+                codeProvider.CreateGenerator()
+            );
 #pragma warning restore 618
             string typeName = dsClass.Name;
             importedTypes.Add(element.SchemaType, typeName);
@@ -3683,12 +4635,17 @@ namespace System.Data {
             return typeName;
         }
 
-        internal static bool IsDataSet(XmlSchemaElement e) {
-            if (e.UnhandledAttributes != null) {
-                foreach (XmlAttribute a in e.UnhandledAttributes) {
-                    if (a.LocalName == "IsDataSet" && a.NamespaceURI == Keywords.MSDNS) {
+        internal static bool IsDataSet(XmlSchemaElement e)
+        {
+            if (e.UnhandledAttributes != null)
+            {
+                foreach (XmlAttribute a in e.UnhandledAttributes)
+                {
+                    if (a.LocalName == "IsDataSet" && a.NamespaceURI == Keywords.MSDNS)
+                    {
                         // currently the msdata:IsDataSet uses its own format for the boolean values
-                        if (a.Value == "True" || a.Value == "true" || a.Value == "1") return true;
+                        if (a.Value == "True" || a.Value == "true" || a.Value == "1")
+                            return true;
                     }
                 }
             }

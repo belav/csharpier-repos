@@ -1,17 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="FileLevelControlBuilderAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 namespace System.Web.UI
 {
-
     using System;
     using System.Diagnostics.CodeAnalysis;
-
 
     /// <devdoc>
     /// <para>Allows a TemplateControl (e.g. Page or UserControl) derived class to specify
@@ -22,18 +20,15 @@ namespace System.Web.UI
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class FileLevelControlBuilderAttribute : Attribute
     {
-
-
         /// <internalonly/>
         /// <devdoc>
-        /// <para>The default <see cref='System.Web.UI.FileLevelControlBuilderAttribute'/> object is a 
+        /// <para>The default <see cref='System.Web.UI.FileLevelControlBuilderAttribute'/> object is a
         /// <see langword='null'/> builder. This field is read-only.</para>
         /// </devdoc>
-        public static readonly FileLevelControlBuilderAttribute Default = new FileLevelControlBuilderAttribute(null);
+        public static readonly FileLevelControlBuilderAttribute Default =
+            new FileLevelControlBuilderAttribute(null);
 
         private Type builderType = null;
-
-
 
         /// <devdoc>
         /// </devdoc>
@@ -42,30 +37,27 @@ namespace System.Web.UI
             this.builderType = builderType;
         }
 
-
         /// <devdoc>
         ///    <para> Indicates XXX. This property is read-only.</para>
         /// </devdoc>
         public Type BuilderType
         {
-            get
-            {
-                return builderType;
-            }
+            get { return builderType; }
         }
-
-
 
         /// <internalonly/>
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [SuppressMessage("Microsoft.Usage", "CA2303:FlagTypeGetHashCode", Justification = "The type is a ControlBuilder which is never going to be an interop class.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2303:FlagTypeGetHashCode",
+            Justification = "The type is a ControlBuilder which is never going to be an interop class."
+        )]
         public override int GetHashCode()
         {
             return builderType.GetHashCode();
         }
-
 
         /// <internalonly/>
         /// <devdoc>
@@ -83,7 +75,6 @@ namespace System.Web.UI
 
             return false;
         }
-
 
         /// <devdoc>
         /// </devdoc>

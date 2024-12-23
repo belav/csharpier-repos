@@ -5,7 +5,6 @@
 using System;
 using Xunit;
 
-
 namespace DefaultNamespace
 {
     public class X
@@ -16,17 +15,11 @@ namespace DefaultNamespace
             {
                 throw new Exception();
             }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-            }
-
+            catch (Exception) { }
+            finally { }
 
             return -1;
         }
-
 
         [Fact]
         public static void TestEntryPoint()

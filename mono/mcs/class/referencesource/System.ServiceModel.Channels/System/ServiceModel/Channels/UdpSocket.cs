@@ -22,7 +22,7 @@ namespace System.ServiceModel.Channels
 #if DEBUG
         StackTrace disposeStack;
 #endif
-        
+
         public UdpSocket(Socket socket, int interfaceIndex)
         {
             Fx.Assert(socket != null, "Socket argument cannot be null");
@@ -45,38 +45,33 @@ namespace System.ServiceModel.Channels
 
         public AddressFamily AddressFamily
         {
-            get
-            {
-                return this.socket.AddressFamily;
-            }
+            get { return this.socket.AddressFamily; }
         }
 
         public int PendingReceiveCount
         {
-            get
-            {
-                return this.pendingReceiveCount;
-            }
+            get { return this.pendingReceiveCount; }
         }
 
         //value of UdpConstants.Defaults.InterfaceIndex (-1) if not a multicast socket
-        internal int InterfaceIndex
-        {
-            get;
-            private set;
-        }    
+        internal int InterfaceIndex { get; private set; }
 
         internal bool IsDisposed
-        { get { return this.openCount < 0; } }
-
-        internal object ThisLock
         {
-            get;
-            private set;
+            get { return this.openCount < 0; }
         }
 
+        internal object ThisLock { get; private set; }
+
         //must be called under a lock in receive loop
-        public IAsyncResult BeginReceiveFrom(byte[] buffer, int offset, int size, ref EndPoint remoteEndPoint, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceiveFrom(
+            byte[] buffer,
+            int offset,
+            int size,
+            ref EndPoint remoteEndPoint,
+            AsyncCallback callback,
+            object state
+        )
         {
             UdpUtility.ValidateBufferBounds(buffer, offset, size);
 
@@ -95,7 +90,8 @@ namespace System.ServiceModel.Channels
                     size - offset,
                     this.timeToLive,
                     callback,
-                    state);
+                    state
+                );
                 success = true;
 
                 return asyncResult;
@@ -125,7 +121,7 @@ namespace System.ServiceModel.Channels
                 {
                     this.openCount--;
                 }
-                
+
                 if (this.openCount == 0)
                 {
                     cleanup = true;
@@ -181,26 +177,58 @@ namespace System.ServiceModel.Channels
         {
             ThrowIfNotOpen();
             UdpUtility.ValidateBufferBounds(buffer, offset, size);
-            
+
             try
             {
-                int count = this.socket.SendTo(buffer, offset, size, SocketFlags.None, remoteEndPoint);
-                Fx.Assert(count == size, "Bytes sent on the wire should be the same as the bytes specified");
+                int count = this.socket.SendTo(
+                    buffer,
+                    offset,
+                    size,
+                    SocketFlags.None,
+                    remoteEndPoint
+                );
+                Fx.Assert(
+                    count == size,
+                    "Bytes sent on the wire should be the same as the bytes specified"
+                );
 
                 return count;
             }
             catch (SocketException socketException)
             {
-                throw FxTrace.Exception.AsError(ConvertNetworkError(socketException, size - offset, TransferDirection.Send, this.timeToLive));
+                throw FxTrace.Exception.AsError(
+                    ConvertNetworkError(
+                        socketException,
+                        size - offset,
+                        TransferDirection.Send,
+                        this.timeToLive
+                    )
+                );
             }
         }
 
-        public IAsyncResult BeginSendTo(byte[] buffer, int offset, int size, EndPoint remoteEndPoint, AsyncCallback callback, object state)
+        public IAsyncResult BeginSendTo(
+            byte[] buffer,
+            int offset,
+            int size,
+            EndPoint remoteEndPoint,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfNotOpen();
             UdpUtility.ValidateBufferBounds(buffer, offset, size);
 
-            return new SendToAsyncResult(this.socket, buffer, offset, size, remoteEndPoint, this.timeToLive, callback, state);
+            return new SendToAsyncResult(
+                this.socket,
+                buffer,
+                offset,
+                size,
+                remoteEndPoint,
+                this.timeToLive,
+                callback,
+                state
+            );
         }
 
         public int EndSendTo(IAsyncResult result)
@@ -208,24 +236,42 @@ namespace System.ServiceModel.Channels
             return SendToAsyncResult.End(result);
         }
 
-        static Exception ConvertNetworkError(SocketException socketException, ReceiveFromAsyncResult result)
+        static Exception ConvertNetworkError(
+            SocketException socketException,
+            ReceiveFromAsyncResult result
+        )
         {
-            return ConvertNetworkError(socketException, result.MessageSize, TransferDirection.Receive, result.TimeToLive);
+            return ConvertNetworkError(
+                socketException,
+                result.MessageSize,
+                TransferDirection.Receive,
+                result.TimeToLive
+            );
         }
 
         //  size:   sending => the size of the data being sent
         //          Receiving => the max message size we can receive
         //  remoteEndPoint: remote endpoint reported when error occured
-        static Exception ConvertNetworkError(SocketException socketException, int size, TransferDirection direction, int timeToLive)
+        static Exception ConvertNetworkError(
+            SocketException socketException,
+            int size,
+            TransferDirection direction,
+            int timeToLive
+        )
         {
             Exception result = null;
 
             if (socketException.ErrorCode == UnsafeNativeMethods.ERROR_INVALID_HANDLE)
             {
-                //This would likely indicate a bug in our ref-counting 
+                //This would likely indicate a bug in our ref-counting
                 //for instance, a channel is closing the socket multiple times...
-                Fx.Assert("The socket appears to have been closed unexpectedly.  This probably indicates incorrect ref counting (i.e. a channel is closing the socket multiple times)");
-                result = new CommunicationObjectAbortedException(socketException.Message, socketException);
+                Fx.Assert(
+                    "The socket appears to have been closed unexpectedly.  This probably indicates incorrect ref counting (i.e. a channel is closing the socket multiple times)"
+                );
+                result = new CommunicationObjectAbortedException(
+                    socketException.Message,
+                    socketException
+                );
             }
             else
             {
@@ -233,22 +279,36 @@ namespace System.ServiceModel.Channels
                 switch (socketException.SocketErrorCode)
                 {
                     case SocketError.MessageSize: //10040
-                        errorMessage = (direction == TransferDirection.Send ? SR.UdpMaxMessageSendSizeExceeded(size) : SR.MaxReceivedMessageSizeExceeded(size));
+                        errorMessage = (
+                            direction == TransferDirection.Send
+                                ? SR.UdpMaxMessageSendSizeExceeded(size)
+                                : SR.MaxReceivedMessageSizeExceeded(size)
+                        );
                         Exception inner = new QuotaExceededException(errorMessage, socketException);
                         result = new ProtocolException(errorMessage, inner);
                         break;
                     case SocketError.NetworkReset: //10052
                         //ICMP: Time Exceeded (TTL expired)
                         //see http://tools.ietf.org/html/rfc792
-                        result = new CommunicationException(SR.IcmpTimeExpired(timeToLive), socketException);
+                        result = new CommunicationException(
+                            SR.IcmpTimeExpired(timeToLive),
+                            socketException
+                        );
                         break;
                     case SocketError.ConnectionReset: //10054
                         //ICMP: Destination Unreachable (target host/port/etc not reachable)
                         //see http://tools.ietf.org/html/rfc792
-                        result = new CommunicationException(SR.IcmpDestinationUnreachable, socketException);
+                        result = new CommunicationException(
+                            SR.IcmpDestinationUnreachable,
+                            socketException
+                        );
                         break;
                     default:
-                        errorMessage = (direction == TransferDirection.Send ? SR.UdpSendException : SR.UdpReceiveException);
+                        errorMessage = (
+                            direction == TransferDirection.Send
+                                ? SR.UdpSendException
+                                : SR.UdpReceiveException
+                        );
                         result = new CommunicationException(errorMessage, socketException);
                         break;
                 }
@@ -262,7 +322,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw FxTrace.Exception.AsError(new ObjectDisposedException(this.GetType().ToString()));
+                throw FxTrace.Exception.AsError(
+                    new ObjectDisposedException(this.GetType().ToString())
+                );
             }
         }
 
@@ -283,9 +345,18 @@ namespace System.ServiceModel.Channels
             int size;
             int timeToLive;
 
-            static AsyncCallback onSendToComplete = Fx.ThunkCallback(OnSendToComplete);            
+            static AsyncCallback onSendToComplete = Fx.ThunkCallback(OnSendToComplete);
 
-            public SendToAsyncResult(Socket socket, byte[] buffer, int offset, int size, EndPoint remoteEndPoint, int timeToLive, AsyncCallback callback, object state) 
+            public SendToAsyncResult(
+                Socket socket,
+                byte[] buffer,
+                int offset,
+                int size,
+                EndPoint remoteEndPoint,
+                int timeToLive,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.socket = socket;
@@ -296,7 +367,15 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult socketAsyncResult = this.socket.BeginSendTo(buffer, offset, size, SocketFlags.None, remoteEndPoint, onSendToComplete, this);
+                    IAsyncResult socketAsyncResult = this.socket.BeginSendTo(
+                        buffer,
+                        offset,
+                        size,
+                        SocketFlags.None,
+                        remoteEndPoint,
+                        onSendToComplete,
+                        this
+                    );
 
                     if (!socketAsyncResult.CompletedSynchronously)
                     {
@@ -307,12 +386,19 @@ namespace System.ServiceModel.Channels
                 }
                 catch (SocketException socketException)
                 {
-                    throw FxTrace.Exception.AsError(ConvertNetworkError(socketException, this.size - this.offset, TransferDirection.Send, this.timeToLive));
+                    throw FxTrace.Exception.AsError(
+                        ConvertNetworkError(
+                            socketException,
+                            this.size - this.offset,
+                            TransferDirection.Send,
+                            this.timeToLive
+                        )
+                    );
                 }
 
                 this.Complete(count, true);
             }
-           
+
             static void OnSendToComplete(IAsyncResult result)
             {
                 if (result.CompletedSynchronously)
@@ -320,17 +406,22 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                SendToAsyncResult thisPtr = (SendToAsyncResult)result.AsyncState; 
+                SendToAsyncResult thisPtr = (SendToAsyncResult)result.AsyncState;
                 Exception completionException = null;
                 int count = 0;
-                
+
                 try
                 {
-                    count = thisPtr.socket.EndSendTo(result);      
+                    count = thisPtr.socket.EndSendTo(result);
                 }
                 catch (SocketException socketException)
                 {
-                    completionException = ConvertNetworkError(socketException, thisPtr.size - thisPtr.offset, TransferDirection.Send, thisPtr.timeToLive);
+                    completionException = ConvertNetworkError(
+                        socketException,
+                        thisPtr.size - thisPtr.offset,
+                        TransferDirection.Send,
+                        thisPtr.timeToLive
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -349,17 +440,27 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     thisPtr.Complete(count, false);
-                }   
+                }
             }
         }
 
         class ReceiveFromAsyncResult : TypedAsyncResult<ArraySegment<byte>>
         {
-            static AsyncCallback onReceiveMessageFromCallback = Fx.ThunkCallback(new AsyncCallback(OnReceiveMessageFrom));
+            static AsyncCallback onReceiveMessageFromCallback = Fx.ThunkCallback(
+                new AsyncCallback(OnReceiveMessageFrom)
+            );
             Socket socket;
-   
-            public ReceiveFromAsyncResult(Socket socket, ArraySegment<byte> buffer, EndPoint remoteEndPoint, int messageSize, int timeToLive, AsyncCallback userCallback, object userState) :
-                base(userCallback, userState)
+
+            public ReceiveFromAsyncResult(
+                Socket socket,
+                ArraySegment<byte> buffer,
+                EndPoint remoteEndPoint,
+                int messageSize,
+                int timeToLive,
+                AsyncCallback userCallback,
+                object userState
+            )
+                : base(userCallback, userState)
             {
                 this.RemoteEndPoint = remoteEndPoint;
                 this.MessageSize = messageSize;
@@ -371,13 +472,15 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult socketAsyncResult = this.socket.BeginReceiveFrom(this.Buffer.Array,
+                    IAsyncResult socketAsyncResult = this.socket.BeginReceiveFrom(
+                        this.Buffer.Array,
                         this.Buffer.Offset,
                         this.Buffer.Count,
                         SocketFlags.None,
                         ref remoteEndPoint,
                         onReceiveMessageFromCallback,
-                        this);
+                        this
+                    );
 
                     if (!socketAsyncResult.CompletedSynchronously)
                     {
@@ -388,36 +491,22 @@ namespace System.ServiceModel.Channels
                 }
                 catch (SocketException socketException)
                 {
-                    throw FxTrace.Exception.AsError(UdpSocket.ConvertNetworkError(socketException, this));
+                    throw FxTrace.Exception.AsError(
+                        UdpSocket.ConvertNetworkError(socketException, this)
+                    );
                 }
 
-                Complete(data, true);                
+                Complete(data, true);
             }
 
-            public EndPoint RemoteEndPoint
-            {
-                get;
-                private set;
-            }
+            public EndPoint RemoteEndPoint { get; private set; }
 
-            public int TimeToLive
-            {
-                get;
-                private set;
-            }
+            public int TimeToLive { get; private set; }
 
             //used when generating error messages for the user...
-            internal int MessageSize
-            {
-                get;
-                private set;
-            }
+            internal int MessageSize { get; private set; }
 
-            ArraySegment<byte> Buffer
-            {
-                get;
-                set;
-            }
+            ArraySegment<byte> Buffer { get; set; }
 
             public static ArraySegment<byte> End(IAsyncResult result, ref EndPoint remoteEndPoint)
             {
@@ -445,7 +534,10 @@ namespace System.ServiceModel.Channels
                 }
                 catch (SocketException socketException)
                 {
-                    completionException = UdpSocket.ConvertNetworkError(socketException, asyncResult);
+                    completionException = UdpSocket.ConvertNetworkError(
+                        socketException,
+                        asyncResult
+                    );
                 }
                 catch (Exception exception)
                 {

@@ -6,7 +6,5 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public class Delegate
-    {
-    }
+    public class Delegate { }
 }

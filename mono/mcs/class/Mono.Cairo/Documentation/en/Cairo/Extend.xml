@@ -12,7 +12,8 @@
     <summary>Defines Pattern Extend types.</summary>
     <remarks>
       <example>
-        <code lang="C#">
+        <code lang="C#"
+          >
 image = new ImageSurface ("data/e.png");
 
 pattern = new SurfacePattern (image);
@@ -24,7 +25,8 @@ matrix.InitScale (w * 5.0, h * 5.0);
 pattern.Matrix = matrix;
 
 gr.Pattern = pattern;
-  </code>
+  </code
+        >
       </example>
     </remarks>
   </Docs>

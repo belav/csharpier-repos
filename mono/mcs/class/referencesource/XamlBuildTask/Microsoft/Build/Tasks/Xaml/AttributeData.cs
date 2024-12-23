@@ -4,27 +4,25 @@
 
 namespace Microsoft.Build.Tasks.Xaml
 {
-    using System.Collections.Generic;
-    using System.Xaml;
-    using System.Collections.ObjectModel;
-    using System.Runtime;
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Reflection;
     using System.Globalization;
+    using System.Reflection;
+    using System.Runtime;
+    using System.Xaml;
     using XamlBuildTask;
 
-    public sealed class AttributeData 
+    public sealed class AttributeData
     {
-        static CultureInfo invariantEnglishUS = CultureInfo.ReadOnly(new CultureInfo("en-us", false));
+        static CultureInfo invariantEnglishUS = CultureInfo.ReadOnly(
+            new CultureInfo("en-us", false)
+        );
         List<AttributeParameterData> parameters;
-        Dictionary<string, AttributeParameterData> properties;        
+        Dictionary<string, AttributeParameterData> properties;
 
-        public XamlType Type
-        {
-            get;
-            set;
-        }
+        public XamlType Type { get; set; }
 
         public IList<AttributeParameterData> Parameters
         {
@@ -51,7 +49,11 @@ namespace Microsoft.Build.Tasks.Xaml
         }
 
         // We get here when we are inside x:ClassAttributes or x:Property.Attributes. We expect the first element to be the Attribute SO.
-        internal static AttributeData LoadAttributeData(XamlReader reader, NamespaceTable namespaceTable, string rootNamespace)
+        internal static AttributeData LoadAttributeData(
+            XamlReader reader,
+            NamespaceTable namespaceTable,
+            string rootNamespace
+        )
         {
             AttributeData attributeData = null;
             reader.Read();
@@ -68,7 +70,13 @@ namespace Microsoft.Build.Tasks.Xaml
                     {
                         if (reader.Member == XamlLanguage.Arguments)
                         {
-                            foreach (AttributeParameterData parameterData in ReadParameters(reader.ReadSubtree(), namespaceTable, rootNamespace))
+                            foreach (
+                                AttributeParameterData parameterData in ReadParameters(
+                                    reader.ReadSubtree(),
+                                    namespaceTable,
+                                    rootNamespace
+                                )
+                            )
                             {
                                 attributeData.Parameters.Add(parameterData);
                             }
@@ -76,7 +84,12 @@ namespace Microsoft.Build.Tasks.Xaml
                         }
                         else if (!reader.Member.IsDirective)
                         {
-                            KeyValuePair<string, AttributeParameterData> propertyInfo = ReadAttributeProperty(reader.ReadSubtree(), namespaceTable, rootNamespace);
+                            KeyValuePair<string, AttributeParameterData> propertyInfo =
+                                ReadAttributeProperty(
+                                    reader.ReadSubtree(),
+                                    namespaceTable,
+                                    rootNamespace
+                                );
                             attributeData.Properties.Add(propertyInfo.Key, propertyInfo.Value);
                             readNext = true;
                         }
@@ -87,7 +100,11 @@ namespace Microsoft.Build.Tasks.Xaml
         }
 
         // Read the Property on the attribute.
-        private static KeyValuePair<string, AttributeParameterData> ReadAttributeProperty(XamlReader reader, NamespaceTable namespaceTable, string rootNamespace)
+        private static KeyValuePair<string, AttributeParameterData> ReadAttributeProperty(
+            XamlReader reader,
+            NamespaceTable namespaceTable,
+            string rootNamespace
+        )
         {
             reader.Read();
             Fx.Assert(reader.Member != null, "Member element should not be null");
@@ -98,15 +115,19 @@ namespace Microsoft.Build.Tasks.Xaml
             if (member.Type != null && !member.Type.IsUnknown)
             {
                 propertyInfo.Type = member.Type;
-            } 
-            
+            }
+
             ReadParamInfo(reader, member.Type, namespaceTable, rootNamespace, propertyInfo);
             return new KeyValuePair<string, AttributeParameterData>(member.Name, propertyInfo);
         }
 
         // Read the parameters on the Attribute. We expect the parameters to be in the order in which they are supposed to appear in the output code.
         // Here we are inside x:Arguments and we expect a list of parameters.
-        private static IList<AttributeParameterData> ReadParameters(XamlReader reader, NamespaceTable namespaceTable, string rootNamespace)
+        private static IList<AttributeParameterData> ReadParameters(
+            XamlReader reader,
+            NamespaceTable namespaceTable,
+            string rootNamespace
+        )
         {
             IList<AttributeParameterData> parameters = new List<AttributeParameterData>();
             bool readNext = false;
@@ -116,7 +137,13 @@ namespace Microsoft.Build.Tasks.Xaml
                 if (reader.NodeType == XamlNodeType.StartObject)
                 {
                     AttributeParameterData paramInfo = new AttributeParameterData();
-                    ReadParamInfo(reader.ReadSubtree(), null, namespaceTable, rootNamespace, paramInfo);
+                    ReadParamInfo(
+                        reader.ReadSubtree(),
+                        null,
+                        namespaceTable,
+                        rootNamespace,
+                        paramInfo
+                    );
                     parameters.Add(paramInfo);
                     readNext = true;
                 }
@@ -126,15 +153,24 @@ namespace Microsoft.Build.Tasks.Xaml
 
         // Read the actual parameter info, i.e. the type of the paramter and its value.
         // The first element could be a V or an SO.
-        private static void ReadParamInfo(XamlReader reader, XamlType type, NamespaceTable namespaceTable, string rootNamespace, AttributeParameterData paramInfo)
+        private static void ReadParamInfo(
+            XamlReader reader,
+            XamlType type,
+            NamespaceTable namespaceTable,
+            string rootNamespace,
+            AttributeParameterData paramInfo
+        )
         {
             reader.Read();
-            
+
             bool readNext = false;
             do
             {
                 readNext = false;
-                if (reader.NodeType == XamlNodeType.StartObject && reader.Type == XamlLanguage.Array)
+                if (
+                    reader.NodeType == XamlNodeType.StartObject
+                    && reader.Type == XamlLanguage.Array
+                )
                 {
                     paramInfo.IsArray = true;
                     XamlReader xamlArrayReader = reader.ReadSubtree();
@@ -142,38 +178,68 @@ namespace Microsoft.Build.Tasks.Xaml
                     while (readNext || xamlArrayReader.Read())
                     {
                         readNext = false;
-                        if (xamlArrayReader.NodeType == XamlNodeType.StartMember && xamlArrayReader.Member.Name == "Type")
+                        if (
+                            xamlArrayReader.NodeType == XamlNodeType.StartMember
+                            && xamlArrayReader.Member.Name == "Type"
+                        )
                         {
                             xamlArrayReader.Read();
                             if (xamlArrayReader.NodeType == XamlNodeType.Value)
                             {
-                                XamlType arrayType = XamlBuildTaskServices.GetXamlTypeFromString(xamlArrayReader.Value as string, namespaceTable, xamlArrayReader.SchemaContext);
+                                XamlType arrayType = XamlBuildTaskServices.GetXamlTypeFromString(
+                                    xamlArrayReader.Value as string,
+                                    namespaceTable,
+                                    xamlArrayReader.SchemaContext
+                                );
                                 if (arrayType.UnderlyingType != null)
                                 {
-                                    paramInfo.Type = xamlArrayReader.SchemaContext.GetXamlType(arrayType.UnderlyingType.MakeArrayType());
+                                    paramInfo.Type = xamlArrayReader.SchemaContext.GetXamlType(
+                                        arrayType.UnderlyingType.MakeArrayType()
+                                    );
                                 }
                                 else
                                 {
-                                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.AttributeParameterTypeUnknown(arrayType)));
+                                    throw FxTrace.Exception.AsError(
+                                        new InvalidOperationException(
+                                            SR.AttributeParameterTypeUnknown(arrayType)
+                                        )
+                                    );
                                 }
                             }
                         }
                         else if (xamlArrayReader.NodeType == XamlNodeType.StartObject)
                         {
                             AttributeParameterData arrayEntry = new AttributeParameterData();
-                            ReadParamInfo(xamlArrayReader.ReadSubtree(), null, namespaceTable, rootNamespace, arrayEntry);
+                            ReadParamInfo(
+                                xamlArrayReader.ReadSubtree(),
+                                null,
+                                namespaceTable,
+                                rootNamespace,
+                                arrayEntry
+                            );
                             paramInfo.AddArrayContentsEntry(arrayEntry);
                             readNext = true;
                         }
                     }
-                }                    
-                else if (reader.NodeType == XamlNodeType.StartObject || reader.NodeType == XamlNodeType.Value)
+                }
+                else if (
+                    reader.NodeType == XamlNodeType.StartObject
+                    || reader.NodeType == XamlNodeType.Value
+                )
                 {
                     paramInfo.IsArray = false;
                     string paramVal;
                     object paramObj = null;
                     XamlType paramType;
-                    GetParamValueType(reader.ReadSubtree(), type, namespaceTable, rootNamespace, out paramVal, out paramType, out paramObj);
+                    GetParamValueType(
+                        reader.ReadSubtree(),
+                        type,
+                        namespaceTable,
+                        rootNamespace,
+                        out paramVal,
+                        out paramType,
+                        out paramObj
+                    );
                     paramInfo.TextValue = paramVal;
                     paramInfo.Type = paramType;
                     paramInfo.Value = paramObj;
@@ -181,28 +247,50 @@ namespace Microsoft.Build.Tasks.Xaml
             } while (readNext || reader.Read());
         }
 
-        // Get the paramter value. If the value is enclosed inside nodes of the type, then get the parameter type as well. 
+        // Get the paramter value. If the value is enclosed inside nodes of the type, then get the parameter type as well.
         // Else infer the type from the type of the property.
-        private static void GetParamValueType(XamlReader reader, XamlType type, NamespaceTable namespaceTable, string rootNamespace, out string paramValue, out XamlType paramType, out Object paramObj)
+        private static void GetParamValueType(
+            XamlReader reader,
+            XamlType type,
+            NamespaceTable namespaceTable,
+            string rootNamespace,
+            out string paramValue,
+            out XamlType paramType,
+            out Object paramObj
+        )
         {
             paramValue = String.Empty;
             paramType = type;
             paramObj = null;
             while (reader.Read())
-            {                
+            {
                 if (reader.NodeType == XamlNodeType.Value)
                 {
                     if (paramType != null && paramType.UnderlyingType != null)
                     {
-                        if (!IsSupportedParameterType(paramType.UnderlyingType) || paramType.UnderlyingType.IsArray)
+                        if (
+                            !IsSupportedParameterType(paramType.UnderlyingType)
+                            || paramType.UnderlyingType.IsArray
+                        )
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.AttributeParamTypeNotSupported(paramType.UnderlyingType.FullName)));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR.AttributeParamTypeNotSupported(
+                                        paramType.UnderlyingType.FullName
+                                    )
+                                )
+                            );
                         }
 
                         paramValue = reader.Value as string;
                         if (typeof(Type).IsAssignableFrom(paramType.UnderlyingType))
                         {
-                            Tuple<string, Type> result = ParseParameterValueTypeName(paramValue, rootNamespace, reader.SchemaContext, namespaceTable);
+                            Tuple<string, Type> result = ParseParameterValueTypeName(
+                                paramValue,
+                                rootNamespace,
+                                reader.SchemaContext,
+                                namespaceTable
+                            );
                             paramValue = result.Item1;
                             paramObj = result.Item2;
                         }
@@ -210,10 +298,14 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             paramObj = ParseParameterValue(ref paramValue, paramType);
                         }
-                    }                    
+                    }
                     else
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.AttributeParameterTypeUnknown(reader.Value as string)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.AttributeParameterTypeUnknown(reader.Value as string)
+                            )
+                        );
                     }
                 }
                 else if (reader.NodeType == XamlNodeType.StartObject)
@@ -241,10 +333,10 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 return IsSupportedParameterType(type.GetElementType());
             }
-            return type.IsEnum || 
-                type.IsPrimitive ||
-                typeof(string) == type ||
-                typeof(Type).IsAssignableFrom(type);
+            return type.IsEnum
+                || type.IsPrimitive
+                || typeof(string) == type
+                || typeof(Type).IsAssignableFrom(type);
         }
 
         // Given a live value for an attribute parameter, returns the text that needs to be
@@ -270,7 +362,8 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 TypeConverter typeConverter = paramType.TypeConverter.ConverterInstance;
                 Fx.Assert(typeConverter != null, "All primitives have TypeConverters");
-                return (string)typeConverter.ConvertTo(null, invariantEnglishUS, value, typeof(string));
+                return (string)
+                    typeConverter.ConvertTo(null, invariantEnglishUS, value, typeof(string));
             }
             else
             {
@@ -290,14 +383,27 @@ namespace Microsoft.Build.Tasks.Xaml
         }
 
         // Parses a XAML QName to a CLR Type Name (and the corresponding ROL type, if available)
-        private static Tuple<string, Type> ParseParameterValueTypeName(string paramValue, string rootNamespace, XamlSchemaContext schemaContext, NamespaceTable namespaceTable)
+        private static Tuple<string, Type> ParseParameterValueTypeName(
+            string paramValue,
+            string rootNamespace,
+            XamlSchemaContext schemaContext,
+            NamespaceTable namespaceTable
+        )
         {
-            XamlType xamlType = XamlBuildTaskServices.GetXamlTypeFromString(paramValue, namespaceTable, schemaContext);
+            XamlType xamlType = XamlBuildTaskServices.GetXamlTypeFromString(
+                paramValue,
+                namespaceTable,
+                schemaContext
+            );
 
             string clrTypeName;
             if (!XamlBuildTaskServices.TryGetClrTypeName(xamlType, rootNamespace, out clrTypeName))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.TypeNameUnknown(XamlBuildTaskServices.GetFullTypeName(xamlType))));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.TypeNameUnknown(XamlBuildTaskServices.GetFullTypeName(xamlType))
+                    )
+                );
             }
             return Tuple.Create(clrTypeName, xamlType.UnderlyingType);
         }
@@ -323,7 +429,7 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             throw;
                         }
-                        // ----ing exceptions here to avoid throwing on 
+                        // ----ing exceptions here to avoid throwing on
                         // a format that we don't recognize, but the compiler
                         // might be able to interpret.
                     }
@@ -338,7 +444,10 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             string paramValue;
             Type type = xamlType.UnderlyingType;
-            Fx.Assert(!typeof(Type).IsAssignableFrom(type), "This method should not be called for Types");
+            Fx.Assert(
+                !typeof(Type).IsAssignableFrom(type),
+                "This method should not be called for Types"
+            );
 
             if (type.IsEnum)
             {
@@ -359,13 +468,17 @@ namespace Microsoft.Build.Tasks.Xaml
                     {
                         paramValue = "true";
                     }
-                    else if (string.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (
+                        string.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0
+                    )
                     {
                         paramValue = "false";
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnknownBooleanValue(value)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(SR.UnknownBooleanValue(value))
+                        );
                     }
                 }
                 else
@@ -381,4 +494,3 @@ namespace Microsoft.Build.Tasks.Xaml
         }
     }
 }
-

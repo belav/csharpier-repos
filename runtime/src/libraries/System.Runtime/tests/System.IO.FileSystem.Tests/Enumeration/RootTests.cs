@@ -13,15 +13,13 @@ namespace System.IO.Tests.Enumeration
             public string LastDirectory { get; private set; }
 
             public DirectoryRecursed(string directory, EnumerationOptions options)
-                : base(directory, options)
-            {
-            }
+                : base(directory, options) { }
 
-            protected override bool ShouldIncludeEntry(ref FileSystemEntry entry)
-                => !entry.IsDirectory;
+            protected override bool ShouldIncludeEntry(ref FileSystemEntry entry) =>
+                !entry.IsDirectory;
 
-            protected override string TransformEntry(ref FileSystemEntry entry)
-                => entry.ToFullPath();
+            protected override string TransformEntry(ref FileSystemEntry entry) =>
+                entry.ToFullPath();
 
             protected override bool ShouldRecurseIntoEntry(ref FileSystemEntry entry)
             {
@@ -31,12 +29,24 @@ namespace System.IO.Tests.Enumeration
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Android, "Test could not work on android since accessing '/' isn't allowed.")]
+        [SkipOnPlatform(
+            TestPlatforms.Android,
+            "Test could not work on android since accessing '/' isn't allowed."
+        )]
         public void CanRecurseFromRoot()
         {
             string root = Path.GetPathRoot(Path.GetTempPath());
 
-            using (var recursed = new DirectoryRecursed(root, new EnumerationOptions { AttributesToSkip = FileAttributes.System, RecurseSubdirectories = true }))
+            using (
+                var recursed = new DirectoryRecursed(
+                    root,
+                    new EnumerationOptions
+                    {
+                        AttributesToSkip = FileAttributes.System,
+                        RecurseSubdirectories = true,
+                    }
+                )
+            )
             {
                 while (recursed.MoveNext())
                 {
@@ -48,8 +58,10 @@ namespace System.IO.Tests.Enumeration
 
                     // Should start with the root and shouldn't have a separator after the root
                     Assert.StartsWith(root, recursed.Current);
-                    Assert.True(recursed.Current.LastIndexOf(Path.DirectorySeparatorChar) < root.Length,
-                        $"should have no separators past the root '{root}' in '{recursed.Current}'");
+                    Assert.True(
+                        recursed.Current.LastIndexOf(Path.DirectorySeparatorChar) < root.Length,
+                        $"should have no separators past the root '{root}' in '{recursed.Current}'"
+                    );
                 }
 
                 Assert.NotNull(recursed.LastDirectory);

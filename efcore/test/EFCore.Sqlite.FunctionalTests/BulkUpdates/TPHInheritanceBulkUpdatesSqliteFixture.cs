@@ -5,6 +5,5 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public class TPHInheritanceBulkUpdatesSqliteFixture : TPHInheritanceBulkUpdatesFixture
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 }

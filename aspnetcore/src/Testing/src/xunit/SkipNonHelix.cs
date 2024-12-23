@@ -20,20 +20,15 @@ public class SkipNonHelixAttribute : Attribute, ITestCondition
 
     public bool IsMet
     {
-        get
-        {
-            return OnHelix();
-        }
+        get { return OnHelix(); }
     }
 
     public string SkipReason
     {
-        get
-        {
-            return "This test is skipped if not on Helix";
-        }
+        get { return "This test is skipped if not on Helix"; }
     }
 
     public static bool OnHelix() => HelixHelper.OnHelix();
+
     public static string GetTargetHelixQueue() => HelixHelper.GetTargetHelixQueue();
 }

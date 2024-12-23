@@ -21,20 +21,27 @@ class Program
             title: "Hello, world!",
             hostPage: "wwwroot/webviewhost.html",
             services: serviceCollection.BuildServiceProvider(),
-            pathBase: "/subdir"); // The content in BasicTestApp assumes this
+            pathBase: "/subdir"
+        ); // The content in BasicTestApp assumes this
 
         AppDomain.CurrentDomain.UnhandledException += (sender, error) =>
         {
             Console.Write(
-                "Fatal exception" + Environment.NewLine +
-                error.ExceptionObject.ToString() + Environment.NewLine);
+                "Fatal exception"
+                    + Environment.NewLine
+                    + error.ExceptionObject.ToString()
+                    + Environment.NewLine
+            );
         };
 
         mainWindow.RootComponents.Add<BasicTestApp.Index>("root");
-        mainWindow.RootComponents.RegisterForJavaScript<BasicTestApp.DynamicallyAddedRootComponent>("my-dynamic-root-component");
+        mainWindow.RootComponents.RegisterForJavaScript<BasicTestApp.DynamicallyAddedRootComponent>(
+            "my-dynamic-root-component"
+        );
         mainWindow.RootComponents.RegisterForJavaScript<BasicTestApp.JavaScriptRootComponentParameterTypes>(
             "component-with-many-parameters",
-            javaScriptInitializer: "myJsRootComponentInitializers.testInitializer");
+            javaScriptInitializer: "myJsRootComponentInitializers.testInitializer"
+        );
 
         mainWindow.Run();
     }

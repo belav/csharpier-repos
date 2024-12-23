@@ -29,224 +29,239 @@
 
 
 using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 
-using System.CodeDom;
-
 namespace System.ComponentModel.Design.Serialization
 {
-	internal class RootCodeDomSerializer : CodeDomSerializer
-	{
+    internal class RootCodeDomSerializer : CodeDomSerializer
+    {
+        internal class CodeMap
+        {
+            private string _className;
+            private Type _classType;
+            private List<CodeMemberField> _fields;
+            private CodeStatementCollection _initializers;
+            private CodeStatementCollection _begin;
+            private CodeStatementCollection _default;
+            private CodeStatementCollection _end;
 
-		internal class CodeMap
-		{
+            public CodeMap(Type classType, string className)
+            {
+                if (classType == null)
+                    throw new ArgumentNullException("classType");
+                if (className == null)
+                    throw new ArgumentNullException("className");
 
-			private string _className;
-			private Type _classType;
-			private List<CodeMemberField> _fields;
-			private CodeStatementCollection _initializers;
-			private CodeStatementCollection _begin;
-			private CodeStatementCollection _default;
-			private CodeStatementCollection _end;
+                _classType = classType;
+                _className = className;
+                _fields = new List<CodeMemberField>();
+                _initializers = new CodeStatementCollection();
+                _begin = new CodeStatementCollection();
+                _default = new CodeStatementCollection();
+                _end = new CodeStatementCollection();
+            }
 
+            public void AddField(CodeMemberField field)
+            {
+                _fields.Add(field);
+            }
 
-			public CodeMap (Type classType, string className)
-			{
-				if (classType == null)
-					throw new ArgumentNullException ("classType");
-				if (className == null)
-					throw new ArgumentNullException ("className");
+            public void Add(CodeStatementCollection statements)
+            {
+                foreach (CodeStatement statement in statements)
+                    this.Add(statement);
+            }
 
-				_classType = classType;
-				_className = className;
-				_fields = new List<CodeMemberField> ();
-				_initializers = new CodeStatementCollection ();
-				_begin = new CodeStatementCollection ();
-				_default = new CodeStatementCollection ();
-				_end = new CodeStatementCollection ();
-			}
+            public void Add(CodeStatement statement)
+            {
+                if (statement.UserData["statement-order"] == null)
+                    _default.Add(statement);
+                else if ((string)statement.UserData["statement-order"] == "initializer")
+                    _initializers.Add(statement);
+                else if ((string)statement.UserData["statement-order"] == "begin")
+                    _begin.Add(statement);
+                else if ((string)statement.UserData["statement-order"] == "end")
+                    _end.Add(statement);
+            }
 
-			public void AddField (CodeMemberField field)
-			{
-				_fields.Add (field);
-			}
+            /*
+                class Type : BaseType
+                {
+                    #region Windows Form Designer generated code
 
-			public void Add (CodeStatementCollection statements)
-			{
-				foreach (CodeStatement statement in statements)
-					this.Add (statement);
-			}
+                    private void InitializeComponent ()
+                    {
+                        // statement-order:
+                        initializer
+                        pre-begin - e.g: // ComponentName
+                        begin - e.g: SuspendLayout
+                        default
+                        end - e.g: ResumeLayout
+                        post-end
+                    }
 
-			public void Add (CodeStatement statement)
-			{
-				if (statement.UserData["statement-order"] == null)
-					_default.Add (statement);
-				else if ((string)statement.UserData["statement-order"] == "initializer")
-					_initializers.Add (statement);
-				else if ((string)statement.UserData["statement-order"] == "begin")
-					_begin.Add (statement);
-				else if ((string)statement.UserData["statement-order"] == "end")
-					_end.Add (statement);
-			}
+                    private field1;
+                    private field2;
 
-			/*
-				class Type : BaseType
-				{
-					#region Windows Form Designer generated code
+                    #endregion
+                }
+            */
 
-					private void InitializeComponent ()
-					{
-						// statement-order:
-						initializer
-						pre-begin - e.g: // ComponentName
-						begin - e.g: SuspendLayout
-						default
-						end - e.g: ResumeLayout
-						post-end
-					}
+            public CodeTypeDeclaration GenerateClass()
+            {
+                CodeTypeDeclaration clas = new CodeTypeDeclaration(_className);
+                clas.BaseTypes.Add(_classType);
 
-					private field1;
-					private field2;
+                clas.StartDirectives.Add(
+                    new CodeRegionDirective(
+                        CodeRegionMode.Start,
+                        "Windows Form Designer generated code"
+                    )
+                );
 
-					#endregion
-				}
-			*/
+                CodeMemberMethod initialize = new CodeMemberMethod();
+                initialize.Name = "InitializeComponent";
+                initialize.ReturnType = new CodeTypeReference(typeof(void));
+                initialize.Attributes = MemberAttributes.Private;
 
-			public CodeTypeDeclaration GenerateClass ()
-			{
-				CodeTypeDeclaration clas = new CodeTypeDeclaration (_className);
-				clas.BaseTypes.Add (_classType);
+                initialize.Statements.AddRange(_initializers);
+                initialize.Statements.AddRange(_begin);
+                initialize.Statements.AddRange(_default);
+                initialize.Statements.AddRange(_end);
 
-				clas.StartDirectives.Add (new CodeRegionDirective (CodeRegionMode.Start, "Windows Form Designer generated code"));
+                clas.Members.Add(initialize);
 
-				CodeMemberMethod initialize = new CodeMemberMethod ();
-				initialize.Name = "InitializeComponent";
-				initialize.ReturnType = new CodeTypeReference (typeof (void));
-				initialize.Attributes = MemberAttributes.Private;
+                foreach (CodeMemberField field in _fields)
+                    clas.Members.Add(field);
 
-				initialize.Statements.AddRange (_initializers);
-				initialize.Statements.AddRange (_begin);
-				initialize.Statements.AddRange (_default);
-				initialize.Statements.AddRange (_end);
+                clas.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, null));
 
-				clas.Members.Add (initialize);
+                return clas;
+            }
 
-				foreach (CodeMemberField field in _fields)
-					clas.Members.Add (field);
+            public void Clear()
+            {
+                _fields.Clear();
+                _initializers.Clear();
+                _begin.Clear();
+                _default.Clear();
+                _end.Clear();
+            }
+        }
 
-				clas.EndDirectives.Add (new CodeRegionDirective (CodeRegionMode.End, null));
+        private CodeMap _codeMap;
 
-				return clas;
-			}
+        public RootCodeDomSerializer() { }
 
-			public void Clear ()
-			{
-				_fields.Clear ();
-				_initializers.Clear ();
-				_begin.Clear ();
-				_default.Clear ();
-				_end.Clear ();
-			}
-		}
+        public override object Serialize(IDesignerSerializationManager manager, object value)
+        {
+            if (manager == null)
+                throw new ArgumentNullException("manager");
+            if (value == null)
+                throw new ArgumentNullException("value");
 
+            if (_codeMap == null)
+                _codeMap = new CodeMap(value.GetType(), manager.GetName(value));
+            _codeMap.Clear();
 
-		private CodeMap _codeMap;
+            RootContext rootContext = new RootContext(new CodeThisReferenceExpression(), value);
+            manager.Context.Push(rootContext);
 
-		public RootCodeDomSerializer ()
-		{
-		}
+            this.SerializeComponents(
+                manager,
+                ((IComponent)value).Site.Container.Components,
+                (IComponent)value
+            );
 
-		public override object Serialize (IDesignerSerializationManager manager, object value)
-		{
-			if (manager == null)
-				throw new ArgumentNullException ("manager");
-			if (value == null)
-				throw new ArgumentNullException ("value");
+            // Serialize root component
+            //
+            CodeStatementCollection statements = new CodeStatementCollection();
+            statements.Add(new CodeCommentStatement(String.Empty));
+            statements.Add(new CodeCommentStatement(manager.GetName(value)));
+            statements.Add(new CodeCommentStatement(String.Empty));
+            // Note that during the serialization process below ComponentCodeDomSerializer
+            // will be invoked to serialize the rootcomponent during expression serialization.
+            // It will check for RootContext and return that.
+            base.SerializeProperties(manager, statements, value, new Attribute[0]);
+            base.SerializeEvents(manager, statements, value, new Attribute[0]);
+            _codeMap.Add(statements);
 
-			if (_codeMap == null)
-				_codeMap = new CodeMap (value.GetType (), manager.GetName (value));
-			_codeMap.Clear ();
+            manager.Context.Pop();
+            return _codeMap.GenerateClass();
+        }
 
-			RootContext rootContext = new RootContext (new CodeThisReferenceExpression (), value);
-			manager.Context.Push (rootContext);
+        private void SerializeComponents(
+            IDesignerSerializationManager manager,
+            ICollection components,
+            IComponent rootComponent
+        )
+        {
+            foreach (IComponent component in components)
+            {
+                if (!Object.ReferenceEquals(component, rootComponent))
+                    SerializeComponent(manager, component);
+            }
+        }
 
-			this.SerializeComponents (manager, ((IComponent) value).Site.Container.Components, (IComponent) value);
+        private void SerializeComponent(IDesignerSerializationManager manager, IComponent component)
+        {
+            CodeDomSerializer serializer =
+                base.GetSerializer(manager, component) as CodeDomSerializer; // ComponentCodeDomSerializer
+            if (serializer != null)
+            {
+                this._codeMap.AddField(
+                    new CodeMemberField(component.GetType(), manager.GetName(component))
+                );
+                // statements can be a CodeExpression if the full serialization has been completed prior
+                // to this serialization call (e.g when it is requested during the serialization of another
+                // component.
+                //
+                CodeStatementCollection statements =
+                    serializer.Serialize(manager, component) as CodeStatementCollection;
+                if (statements != null)
+                    _codeMap.Add(statements);
+                CodeStatement statement = serializer.Serialize(manager, component) as CodeStatement;
+                if (statement != null)
+                    _codeMap.Add(statement);
+            }
+        }
 
-			// Serialize root component
-			// 
-			CodeStatementCollection statements = new CodeStatementCollection ();
-			statements.Add (new CodeCommentStatement (String.Empty));
-			statements.Add (new CodeCommentStatement (manager.GetName (value)));
-			statements.Add (new CodeCommentStatement (String.Empty));
-			// Note that during the serialization process below ComponentCodeDomSerializer
-			// will be invoked to serialize the rootcomponent during expression serialization.
-			// It will check for RootContext and return that.
-			base.SerializeProperties (manager, statements, value, new Attribute[0]);
-			base.SerializeEvents (manager, statements, value, new Attribute[0]);
-			_codeMap.Add (statements);
+        public override object Deserialize(IDesignerSerializationManager manager, object codeObject)
+        {
+            CodeTypeDeclaration declaration = (CodeTypeDeclaration)codeObject;
+            Type rootType = manager.GetType(declaration.BaseTypes[0].BaseType);
+            object root = manager.CreateInstance(rootType, null, declaration.Name, true);
 
-			manager.Context.Pop ();
-			return _codeMap.GenerateClass ();
-		}
+            RootContext rootContext = new RootContext(new CodeThisReferenceExpression(), root);
+            manager.Context.Push(rootContext);
 
-		private void SerializeComponents (IDesignerSerializationManager manager, ICollection components, IComponent rootComponent)
-		{
-			foreach (IComponent component in components) {
-				if (!Object.ReferenceEquals (component, rootComponent))
-					SerializeComponent (manager, component);
-			}
-		}
+            CodeMemberMethod initComponentMethod = GetInitializeMethod(declaration);
+            if (initComponentMethod == null)
+                throw new InvalidOperationException(
+                    "InitializeComponent method is missing in: " + declaration.Name
+                );
 
-		private void SerializeComponent (IDesignerSerializationManager manager, IComponent component)
-		{
-			CodeDomSerializer serializer = base.GetSerializer (manager, component) as CodeDomSerializer; // ComponentCodeDomSerializer
-			if (serializer != null) {
-				this._codeMap.AddField (new CodeMemberField (component.GetType (), manager.GetName (component)));
-				// statements can be a CodeExpression if the full serialization has been completed prior 
-				// to this serialization call (e.g when it is requested during the serialization of another 
-				// component.
-				// 
-				CodeStatementCollection statements = serializer.Serialize (manager, component) as CodeStatementCollection;
-				if (statements != null)
-					_codeMap.Add (statements);
-				CodeStatement statement = serializer.Serialize (manager, component) as CodeStatement;
-				if (statement != null)
-					_codeMap.Add (statement);
-			}
-		}
+            foreach (CodeStatement statement in initComponentMethod.Statements)
+                base.DeserializeStatement(manager, statement);
 
-		public override object Deserialize (IDesignerSerializationManager manager, object codeObject)
-		{
-			CodeTypeDeclaration declaration = (CodeTypeDeclaration) codeObject;
-			Type rootType = manager.GetType (declaration.BaseTypes[0].BaseType);
-			object root = manager.CreateInstance (rootType, null, declaration.Name, true);
+            manager.Context.Pop();
+            return root;
+        }
 
-			RootContext rootContext = new RootContext (new CodeThisReferenceExpression (), root);
-			manager.Context.Push (rootContext);
-
-			CodeMemberMethod initComponentMethod = GetInitializeMethod (declaration);
-			if (initComponentMethod == null)
-				throw new InvalidOperationException ("InitializeComponent method is missing in: " + declaration.Name);
-
-			foreach (CodeStatement statement in initComponentMethod.Statements)
-				base.DeserializeStatement (manager, statement);
-
-			manager.Context.Pop ();
-			return root;
-		}
-
-		private CodeMemberMethod GetInitializeMethod (CodeTypeDeclaration declaration)
-		{
-			CodeMemberMethod method = null;
-			foreach (CodeTypeMember member in declaration.Members) {
-				method = member as CodeMemberMethod;
-				if (method != null && method.Name == "InitializeComponent")
-					break;
-			}
-			return method;
-		}
-	}
+        private CodeMemberMethod GetInitializeMethod(CodeTypeDeclaration declaration)
+        {
+            CodeMemberMethod method = null;
+            foreach (CodeTypeMember member in declaration.Members)
+            {
+                method = member as CodeMemberMethod;
+                if (method != null && method.Name == "InitializeComponent")
+                    break;
+            }
+            return method;
+        }
+    }
 }

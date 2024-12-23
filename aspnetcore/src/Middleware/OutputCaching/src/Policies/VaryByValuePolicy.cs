@@ -15,7 +15,9 @@ internal sealed class VaryByValuePolicy : IOutputCachePolicy
     /// <summary>
     /// Creates a policy that vary the cached content based on the specified value.
     /// </summary>
-    public VaryByValuePolicy(Func<HttpContext, CancellationToken, ValueTask<KeyValuePair<string, string>>> varyBy)
+    public VaryByValuePolicy(
+        Func<HttpContext, CancellationToken, ValueTask<KeyValuePair<string, string>>> varyBy
+    )
     {
         _varyByAsync = async (context, rules, cancellationToken) =>
         {
@@ -25,19 +27,32 @@ internal sealed class VaryByValuePolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return _varyByAsync.Invoke(context.HttpContext, context.CacheVaryByRules, cancellationToken);
+        return _varyByAsync.Invoke(
+            context.HttpContext,
+            context.CacheVaryByRules,
+            cancellationToken
+        );
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }

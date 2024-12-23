@@ -3,12 +3,11 @@
 //----------------------------------------------------------------------------
 
 using System.Collections.Generic;
-
+using System.Globalization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Globalization;
-using System.Web.Hosting;
 using System.Web;
+using System.Web.Hosting;
 
 namespace System.ServiceModel.Activation
 {
@@ -17,7 +16,7 @@ namespace System.ServiceModel.Activation
         List<BaseUriWithWildcard> listenAddresses;
         string scheme;
 
-        internal protected HostedTransportConfigurationBase(string scheme)
+        protected internal HostedTransportConfigurationBase(string scheme)
         {
             this.scheme = scheme;
             this.listenAddresses = new List<BaseUriWithWildcard>();
@@ -25,18 +24,12 @@ namespace System.ServiceModel.Activation
 
         internal string Scheme
         {
-            get
-            {
-                return scheme;
-            }
+            get { return scheme; }
         }
 
-        internal protected IList<BaseUriWithWildcard> ListenAddresses
+        protected internal IList<BaseUriWithWildcard> ListenAddresses
         {
-            get
-            {
-                return listenAddresses;
-            }
+            get { return listenAddresses; }
         }
 
         public override Uri[] GetBaseAddresses(string virtualPath)
@@ -45,7 +38,10 @@ namespace System.ServiceModel.Activation
             Uri[] addresses = new Uri[listenAddresses.Count];
             for (int i = 0; i < listenAddresses.Count; i++)
             {
-                string absoluteVirtualPath = VirtualPathUtility.ToAbsolute(virtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath);
+                string absoluteVirtualPath = VirtualPathUtility.ToAbsolute(
+                    virtualPath,
+                    HostingEnvironmentWrapper.ApplicationVirtualPath
+                );
                 addresses[i] = new Uri(listenAddresses[i].BaseAddress, absoluteVirtualPath);
             }
 
@@ -59,21 +55,42 @@ namespace System.ServiceModel.Activation
 
             for (int i = 0; i < listenAddresses.Count; i++)
             {
-                if ((string.Compare(listenAddresses[i].BaseAddress.Scheme, uri.Scheme, StringComparison.OrdinalIgnoreCase) == 0)
-                    && (listenAddresses[i].BaseAddress.Port == uri.Port))
+                if (
+                    (
+                        string.Compare(
+                            listenAddresses[i].BaseAddress.Scheme,
+                            uri.Scheme,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    ) && (listenAddresses[i].BaseAddress.Port == uri.Port)
+                )
                 {
-                    if (listenAddresses[i].HostNameComparisonMode == HostNameComparisonMode.StrongWildcard)
+                    if (
+                        listenAddresses[i].HostNameComparisonMode
+                        == HostNameComparisonMode.StrongWildcard
+                    )
                     {
                         return listenAddresses[i];
                     }
 
-                    if (listenAddresses[i].HostNameComparisonMode == HostNameComparisonMode.WeakWildcard)
+                    if (
+                        listenAddresses[i].HostNameComparisonMode
+                        == HostNameComparisonMode.WeakWildcard
+                    )
                     {
                         weakBaseAddress = listenAddresses[i];
                     }
 
-                    if ((listenAddresses[i].HostNameComparisonMode == HostNameComparisonMode.Exact)
-                        && (string.Compare(listenAddresses[i].BaseAddress.Host, uri.Host, StringComparison.OrdinalIgnoreCase) == 0))
+                    if (
+                        (listenAddresses[i].HostNameComparisonMode == HostNameComparisonMode.Exact)
+                        && (
+                            string.Compare(
+                                listenAddresses[i].BaseAddress.Host,
+                                uri.Host,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
                     {
                         foundBaseAddress = listenAddresses[i];
                     }

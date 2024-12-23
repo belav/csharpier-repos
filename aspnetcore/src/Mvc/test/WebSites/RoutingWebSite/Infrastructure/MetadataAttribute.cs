@@ -12,4 +12,3 @@ internal class MetadataAttribute : Attribute
         Value = value;
     }
 }
-

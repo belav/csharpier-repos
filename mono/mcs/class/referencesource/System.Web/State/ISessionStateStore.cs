@@ -1,45 +1,49 @@
 //------------------------------------------------------------------------------
 // <copyright file="SessionStateStore.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * SessionStateStoreProviderBase
- * 
+ *
  */
-namespace System.Web.SessionState {
-    using System.Xml;
-    using System.Security.Permissions;
+namespace System.Web.SessionState
+{
+    using System.Collections.Specialized;
     using System.Configuration.Provider;
-    using System.Collections.Specialized; 
+    using System.Security.Permissions;
+    using System.Xml;
 
     [FlagsAttribute()]
-    internal enum SessionStateItemFlags : int {
-        None =                          0x00000000,
-        Uninitialized =                 0x00000001,
-        IgnoreCacheItemRemoved =        0x00000002
+    internal enum SessionStateItemFlags : int
+    {
+        None = 0x00000000,
+        Uninitialized = 0x00000001,
+        IgnoreCacheItemRemoved = 0x00000002,
     }
 
     [FlagsAttribute()]
-    public enum SessionStateActions : int {
-        None  =             0x00000000,
-        InitializeItem =    0x00000001
+    public enum SessionStateActions : int
+    {
+        None = 0x00000000,
+        InitializeItem = 0x00000001,
     }
 
     // This interface is used by SessionStateModule to read/write the session state data
-    public abstract class SessionStateStoreProviderBase : ProviderBase {
+    public abstract class SessionStateStoreProviderBase : ProviderBase
+    {
         public abstract void Dispose();
 
         // Called by SessionStateModule to notify the provider that Session_End is defined
         // in global.asax, and so when an item expires, it should call the expireCallback
         // If the provider does not support session expiry, it should return false.
         public abstract bool SetItemExpireCallback(SessionStateItemExpireCallback expireCallback);
-        
+
         // Called at the beginning of the AcquireRequestState event
         public abstract void InitializeRequest(HttpContext context);
 
-        // Get and return a SessionStateStoreData. 
+        // Get and return a SessionStateStoreData.
         // Please note that we are implementing a reader/writer lock mechanism.
         //
         // If successful:
@@ -54,14 +58,16 @@ namespace System.Web.SessionState {
         //  - set 'lockAge' to how long has the item been locked
         //  - set 'lockId' to the context of the lock
         //  - returns null
-        public abstract SessionStateStoreData GetItem(HttpContext context,
-                                        String id, 
-                                        out bool locked,
-                                        out TimeSpan lockAge, 
-                                        out object lockId,
-                                        out SessionStateActions actions);
+        public abstract SessionStateStoreData GetItem(
+            HttpContext context,
+            String id,
+            out bool locked,
+            out TimeSpan lockAge,
+            out object lockId,
+            out SessionStateActions actions
+        );
 
-        // Get and lock a SessionStateStoreData. 
+        // Get and lock a SessionStateStoreData.
         // Please note that we are implementing a reader/writer lock mechanism.
         //
         // If successful:
@@ -77,37 +83,41 @@ namespace System.Web.SessionState {
         //  - set 'lockAge' to how long has the item been locked
         //  - set 'lockId' to the context of the lock
         //  - returns null
-        public abstract SessionStateStoreData GetItemExclusive(HttpContext context, 
-                                                String id, 
-                                                out bool locked,
-                                                out TimeSpan lockAge, 
-                                                out object lockId,
-                                                out SessionStateActions actions);
+        public abstract SessionStateStoreData GetItemExclusive(
+            HttpContext context,
+            String id,
+            out bool locked,
+            out TimeSpan lockAge,
+            out object lockId,
+            out SessionStateActions actions
+        );
 
         // Unlock an item locked by GetExclusive
         // 'lockId' is the lock context returned by previous call to GetExclusive
-        public abstract void ReleaseItemExclusive(HttpContext context, 
-                                                    String id, 
-                                                    object lockId);
+        public abstract void ReleaseItemExclusive(HttpContext context, String id, object lockId);
 
-        // Write an item.  
+        // Write an item.
         // Note: The item is originally obtained by GetExclusive
-        // Because SessionStateModule will release (by ReleaseExclusive) am item if 
+        // Because SessionStateModule will release (by ReleaseExclusive) am item if
         // it has been locked for too long, so it is possible that the request calling
         // Set() may have lost the lock to someone else already.  This can be
-        // discovered by comparing the supplied lockId with the lockId value 
+        // discovered by comparing the supplied lockId with the lockId value
         // stored with the state item.
-        public abstract void SetAndReleaseItemExclusive(HttpContext context, 
-                                    String id, 
-                                    SessionStateStoreData item, 
-                                    object lockId, 
-                                    bool newItem);
-        
+        public abstract void SetAndReleaseItemExclusive(
+            HttpContext context,
+            String id,
+            SessionStateStoreData item,
+            object lockId,
+            bool newItem
+        );
+
         // Remove an item.  See the note in Set.
-        public abstract void RemoveItem(HttpContext context, 
-                                        String id, 
-                                        object lockId, 
-                                        SessionStateStoreData item);
+        public abstract void RemoveItem(
+            HttpContext context,
+            String id,
+            object lockId,
+            SessionStateStoreData item
+        );
 
         // Reset the expire time of an item based on its timeout value
         public abstract void ResetItemTimeout(HttpContext context, String id);
@@ -121,43 +131,44 @@ namespace System.Web.SessionState {
         // Called during EndRequest event
         public abstract void EndRequest(HttpContext context);
 
-        internal virtual void Initialize(string name, NameValueCollection config, IPartitionResolver partitionResolver) {
-        }
+        internal virtual void Initialize(
+            string name,
+            NameValueCollection config,
+            IPartitionResolver partitionResolver
+        ) { }
     }
 
-    public class SessionStateStoreData {
-        ISessionStateItemCollection      _sessionItems;
+    public class SessionStateStoreData
+    {
+        ISessionStateItemCollection _sessionItems;
         HttpStaticObjectsCollection _staticObjects;
-        int                         _timeout;
+        int _timeout;
 
-        public SessionStateStoreData(ISessionStateItemCollection sessionItems,
-                                    HttpStaticObjectsCollection staticObjects,
-                                    int timeout) {
+        public SessionStateStoreData(
+            ISessionStateItemCollection sessionItems,
+            HttpStaticObjectsCollection staticObjects,
+            int timeout
+        )
+        {
             _sessionItems = sessionItems;
             _staticObjects = staticObjects;
             _timeout = timeout;
         }
 
-        virtual public ISessionStateItemCollection Items { 
-            get {
-                return _sessionItems;
-            }
+        public virtual ISessionStateItemCollection Items
+        {
+            get { return _sessionItems; }
         }
-        
-        virtual public HttpStaticObjectsCollection StaticObjects { 
-            get {
-                return _staticObjects;
-            }
+
+        public virtual HttpStaticObjectsCollection StaticObjects
+        {
+            get { return _staticObjects; }
         }
-        
-        virtual public int Timeout { 
-            get {
-                return _timeout;
-            }
-            
-            set {
-                _timeout = value;
-            }
+
+        public virtual int Timeout
+        {
+            get { return _timeout; }
+            set { _timeout = value; }
         }
     }
 }

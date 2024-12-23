@@ -55,11 +55,7 @@ namespace System.Collections.Immutable.Tests
             IImmutableDictionary<string, int> map = this.Empty<string, int>().SetItems(template);
             Assert.Equal(2, map.Count);
 
-            var changes = new Dictionary<string, int>
-            {
-                { "Microsoft", 150 },
-                { "Dogs", 90 },
-            };
+            var changes = new Dictionary<string, int> { { "Microsoft", 150 }, { "Dogs", 90 } };
             map = map.SetItems(changes);
             Assert.Equal(3, map.Count);
             Assert.Equal(150, map["Microsoft"]);
@@ -67,19 +63,26 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(90, map["Dogs"]);
 
             map = map.SetItems(
-                new[] {
+                new[]
+                {
                     new KeyValuePair<string, int>("Microsoft", 80),
                     new KeyValuePair<string, int>("Microsoft", 70),
-                });
+                }
+            );
             Assert.Equal(3, map.Count);
             Assert.Equal(70, map["Microsoft"]);
             Assert.Equal(50, map["Corporation"]);
             Assert.Equal(90, map["Dogs"]);
 
-            map = this.Empty<string, int>().SetItems(new[] { // use an array for code coverage
-                new KeyValuePair<string, int>("a", 1), new KeyValuePair<string, int>("b", 2),
-                new KeyValuePair<string, int>("a", 3),
-            });
+            map = this.Empty<string, int>()
+                .SetItems(
+                    new[]
+                    { // use an array for code coverage
+                        new KeyValuePair<string, int>("a", 1),
+                        new KeyValuePair<string, int>("b", 2),
+                        new KeyValuePair<string, int>("a", 3),
+                    }
+                );
             Assert.Equal(2, map.Count);
             Assert.Equal(3, map["a"]);
             Assert.Equal(2, map["b"]);
@@ -88,7 +91,11 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ContainsKeyTest()
         {
-            this.ContainsKeyTestHelper(Empty<int, GenericParameterHelper>(), 1, new GenericParameterHelper());
+            this.ContainsKeyTestHelper(
+                Empty<int, GenericParameterHelper>(),
+                1,
+                new GenericParameterHelper()
+            );
         }
 
         [Fact]
@@ -111,15 +118,22 @@ namespace System.Collections.Immutable.Tests
         public void GetHashCodeTest()
         {
             IImmutableDictionary<string, int> dictionary = Empty<string, int>();
-            Assert.Equal(EqualityComparer<object>.Default.GetHashCode(dictionary), dictionary.GetHashCode());
+            Assert.Equal(
+                EqualityComparer<object>.Default.GetHashCode(dictionary),
+                dictionary.GetHashCode()
+            );
         }
 
         [Fact]
         public void ICollectionOfKVMembers()
         {
             var dictionary = (ICollection<KeyValuePair<string, int>>)Empty<string, int>();
-            Assert.Throws<NotSupportedException>(() => dictionary.Add(new KeyValuePair<string, int>()));
-            Assert.Throws<NotSupportedException>(() => dictionary.Remove(new KeyValuePair<string, int>()));
+            Assert.Throws<NotSupportedException>(
+                () => dictionary.Add(new KeyValuePair<string, int>())
+            );
+            Assert.Throws<NotSupportedException>(
+                () => dictionary.Remove(new KeyValuePair<string, int>())
+            );
             Assert.Throws<NotSupportedException>(() => dictionary.Clear());
             Assert.True(dictionary.IsReadOnly);
         }
@@ -212,7 +226,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void TryGetKey()
         {
-            IImmutableDictionary<string, int> dictionary = Empty<int>(StringComparer.OrdinalIgnoreCase)
+            IImmutableDictionary<string, int> dictionary = Empty<int>(
+                    StringComparer.OrdinalIgnoreCase
+                )
                 .Add("a", 1);
             string actualKey;
             Assert.True(dictionary.TryGetKey("a", out actualKey));
@@ -242,7 +258,12 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(default(V), value);
         }
 
-        protected void AddExistingKeySameValueTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value1, TValue value2)
+        protected void AddExistingKeySameValueTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value1,
+            TValue value2
+        )
         {
             Assert.NotNull(map);
             Assert.NotNull(key);
@@ -266,7 +287,12 @@ namespace System.Collections.Immutable.Tests
         /// Adding a key-value pair to a map where that key already exists, but with a different value, cannot fit the
         /// semantic of "adding", either by just returning or mutating the value on the existing key.  Throwing is the only reasonable response.
         /// </remarks>
-        protected void AddExistingKeyDifferentValueTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value1, TValue value2)
+        protected void AddExistingKeyDifferentValueTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value1,
+            TValue value2
+        )
         {
             Assert.NotNull(map);
             Assert.NotNull(key);
@@ -278,13 +304,21 @@ namespace System.Collections.Immutable.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => map2.Add(key, value1));
         }
 
-        protected void ContainsKeyTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value)
+        protected void ContainsKeyTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value
+        )
         {
             Assert.False(map.ContainsKey(key));
             Assert.True(map.Add(key, value).ContainsKey(key));
         }
 
-        protected void ContainsTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value)
+        protected void ContainsTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value
+        )
         {
             Assert.False(map.Contains(new KeyValuePair<TKey, TValue>(key, value)));
             Assert.False(map.Contains(key, value));
@@ -292,7 +326,10 @@ namespace System.Collections.Immutable.Tests
             Assert.True(map.Add(key, value).Contains(key, value));
         }
 
-        protected void RemoveTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key)
+        protected void RemoveTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key
+        )
         {
             // no-op remove
             Assert.Same(map, map.Remove(key));
@@ -307,8 +344,12 @@ namespace System.Collections.Immutable.Tests
 
         protected abstract IImmutableDictionary<TKey, TValue> Empty<TKey, TValue>();
 
-        protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(StringComparer comparer);
+        protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(
+            StringComparer comparer
+        );
 
-        protected abstract IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(IImmutableDictionary<TKey, TValue> dictionary);
+        protected abstract IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> dictionary
+        );
     }
 }

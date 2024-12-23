@@ -62,7 +62,12 @@ internal sealed class ResponseCachingContext
             {
                 _parsedResponseDate = true;
                 DateTimeOffset date;
-                if (HeaderUtilities.TryParseDate(HttpContext.Response.Headers.Date.ToString(), out date))
+                if (
+                    HeaderUtilities.TryParseDate(
+                        HttpContext.Response.Headers.Date.ToString(),
+                        out date
+                    )
+                )
                 {
                     _responseDate = date;
                 }
@@ -89,7 +94,12 @@ internal sealed class ResponseCachingContext
             {
                 _parsedResponseExpires = true;
                 DateTimeOffset expires;
-                if (HeaderUtilities.TryParseDate(HttpContext.Response.Headers.Expires.ToString(), out expires))
+                if (
+                    HeaderUtilities.TryParseDate(
+                        HttpContext.Response.Headers.Expires.ToString(),
+                        out expires
+                    )
+                )
                 {
                     _responseExpires = expires;
                 }
@@ -109,7 +119,11 @@ internal sealed class ResponseCachingContext
             if (!_parsedResponseSharedMaxAge)
             {
                 _parsedResponseSharedMaxAge = true;
-                HeaderUtilities.TryParseSeconds(HttpContext.Response.Headers.CacheControl, CacheControlHeaderValue.SharedMaxAgeString, out _responseSharedMaxAge);
+                HeaderUtilities.TryParseSeconds(
+                    HttpContext.Response.Headers.CacheControl,
+                    CacheControlHeaderValue.SharedMaxAgeString,
+                    out _responseSharedMaxAge
+                );
             }
             return _responseSharedMaxAge;
         }
@@ -122,7 +136,11 @@ internal sealed class ResponseCachingContext
             if (!_parsedResponseMaxAge)
             {
                 _parsedResponseMaxAge = true;
-                HeaderUtilities.TryParseSeconds(HttpContext.Response.Headers.CacheControl, CacheControlHeaderValue.MaxAgeString, out _responseMaxAge);
+                HeaderUtilities.TryParseSeconds(
+                    HttpContext.Response.Headers.CacheControl,
+                    CacheControlHeaderValue.MaxAgeString,
+                    out _responseMaxAge
+                );
             }
             return _responseMaxAge;
         }

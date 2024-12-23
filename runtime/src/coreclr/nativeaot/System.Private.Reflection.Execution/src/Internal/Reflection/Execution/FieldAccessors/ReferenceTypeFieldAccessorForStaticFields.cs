@@ -2,20 +2,22 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.Runtime;
 using Internal.Runtime.Augments;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution.FieldAccessors
 {
     internal sealed class ReferenceTypeFieldAccessorForStaticFields : RegularStaticFieldAccessor
     {
-        public ReferenceTypeFieldAccessorForStaticFields(IntPtr cctorContext, IntPtr staticsBase, int fieldOffset, FieldTableFlags fieldBase, RuntimeTypeHandle fieldTypeHandle)
-            : base(cctorContext, staticsBase, fieldOffset, fieldBase, fieldTypeHandle)
-        {
-        }
+        public ReferenceTypeFieldAccessorForStaticFields(
+            IntPtr cctorContext,
+            IntPtr staticsBase,
+            int fieldOffset,
+            FieldTableFlags fieldBase,
+            RuntimeTypeHandle fieldTypeHandle
+        )
+            : base(cctorContext, staticsBase, fieldOffset, fieldBase, fieldTypeHandle) { }
 
         protected sealed override unsafe object GetFieldBypassCctor()
         {

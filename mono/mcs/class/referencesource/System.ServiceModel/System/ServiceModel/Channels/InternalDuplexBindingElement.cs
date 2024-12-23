@@ -13,11 +13,9 @@ namespace System.ServiceModel.Channels
         bool providesCorrelation;
 
         public InternalDuplexBindingElement()
-            : this(false)
-        {
-        }
+            : this(false) { }
 
-        // 
+        //
 
 
         internal InternalDuplexBindingElement(bool providesCorrelation)
@@ -48,7 +46,9 @@ namespace System.ServiceModel.Channels
             return new InternalDuplexBindingElement(this);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -58,10 +58,14 @@ namespace System.ServiceModel.Channels
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
-            IChannelFactory<IOutputChannel> innerChannelFactory = context.Clone().BuildInnerChannelFactory<IOutputChannel>();
+            IChannelFactory<IOutputChannel> innerChannelFactory = context
+                .Clone()
+                .BuildInnerChannelFactory<IOutputChannel>();
 
             if (this.clientChannelDemuxer == null)
             {
@@ -72,12 +76,22 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56506 // Microsoft, context.RemainingBindingElements will never be null
                 context.RemainingBindingElements.Clear();
             }
-            LocalAddressProvider localAddressProvider = context.BindingParameters.Remove<LocalAddressProvider>();
-            return (IChannelFactory<TChannel>)(object)
-                new InternalDuplexChannelFactory(this, context, this.clientChannelDemuxer, innerChannelFactory, localAddressProvider);
+            LocalAddressProvider localAddressProvider =
+                context.BindingParameters.Remove<LocalAddressProvider>();
+            return (IChannelFactory<TChannel>)
+                (object)
+                    new InternalDuplexChannelFactory(
+                        this,
+                        context,
+                        this.clientChannelDemuxer,
+                        innerChannelFactory,
+                        localAddressProvider
+                    );
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -86,11 +100,14 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IDuplexChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
-            return (IChannelListener<TChannel>)(object)new InternalDuplexChannelListener(this, context);
+            return (IChannelListener<TChannel>)
+                (object)new InternalDuplexChannelListener(this, context);
         }
 
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
@@ -115,14 +132,24 @@ namespace System.ServiceModel.Channels
 
         internal static T GetSecurityCapabilities<T>(ISecurityCapabilities lowerCapabilities)
         {
-            Fx.Assert(typeof(T) == typeof(ISecurityCapabilities), "Can only be used with ISecurityCapabilities");
+            Fx.Assert(
+                typeof(T) == typeof(ISecurityCapabilities),
+                "Can only be used with ISecurityCapabilities"
+            );
             if (lowerCapabilities != null)
             {
                 // composite duplex cannot ensure that messages it receives are from the part it sends
                 // messages to. So it cannot offer server auth
-                return (T)(object)(new SecurityCapabilities(lowerCapabilities.SupportsClientAuthentication,
-                    false, lowerCapabilities.SupportsClientWindowsIdentity, lowerCapabilities.SupportedRequestProtectionLevel,
-                    System.Net.Security.ProtectionLevel.None));
+                return (T)
+                    (object)(
+                        new SecurityCapabilities(
+                            lowerCapabilities.SupportsClientAuthentication,
+                            false,
+                            lowerCapabilities.SupportsClientWindowsIdentity,
+                            lowerCapabilities.SupportedRequestProtectionLevel,
+                            System.Net.Security.ProtectionLevel.None
+                        )
+                    );
             }
             else
             {
@@ -134,7 +161,9 @@ namespace System.ServiceModel.Channels
         {
             if (typeof(T) == typeof(ISecurityCapabilities) && !this.ProvidesCorrelation)
             {
-                return InternalDuplexBindingElement.GetSecurityCapabilities<T>(context.GetInnerProperty<ISecurityCapabilities>());
+                return InternalDuplexBindingElement.GetSecurityCapabilities<T>(
+                    context.GetInnerProperty<ISecurityCapabilities>()
+                );
             }
             else
             {
@@ -149,15 +178,20 @@ namespace System.ServiceModel.Channels
             return (b is InternalDuplexBindingElement);
         }
 
-        public static void AddDuplexFactorySupport(BindingContext context, ref InternalDuplexBindingElement internalDuplexBindingElement)
+        public static void AddDuplexFactorySupport(
+            BindingContext context,
+            ref InternalDuplexBindingElement internalDuplexBindingElement
+        )
         {
             if (context.CanBuildInnerChannelFactory<IDuplexChannel>())
                 return;
             if (context.RemainingBindingElements.Find<CompositeDuplexBindingElement>() == null)
                 return;
 
-            if (context.CanBuildInnerChannelFactory<IOutputChannel>() &&
-                context.CanBuildInnerChannelListener<IInputChannel>())
+            if (
+                context.CanBuildInnerChannelFactory<IOutputChannel>()
+                && context.CanBuildInnerChannelListener<IInputChannel>()
+            )
             {
                 if (context.CanBuildInnerChannelFactory<IRequestChannel>())
                     return;
@@ -174,15 +208,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static void AddDuplexListenerSupport(BindingContext context, ref InternalDuplexBindingElement internalDuplexBindingElement)
+        public static void AddDuplexListenerSupport(
+            BindingContext context,
+            ref InternalDuplexBindingElement internalDuplexBindingElement
+        )
         {
             if (context.CanBuildInnerChannelListener<IDuplexChannel>())
                 return;
             if (context.RemainingBindingElements.Find<CompositeDuplexBindingElement>() == null)
                 return;
 
-            if (context.CanBuildInnerChannelFactory<IOutputChannel>() &&
-                context.CanBuildInnerChannelListener<IInputChannel>())
+            if (
+                context.CanBuildInnerChannelFactory<IOutputChannel>()
+                && context.CanBuildInnerChannelListener<IInputChannel>()
+            )
             {
                 if (context.CanBuildInnerChannelListener<IReplyChannel>())
                     return;
@@ -199,15 +238,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static void AddDuplexListenerSupport(CustomBinding binding, ref InternalDuplexBindingElement internalDuplexBindingElement)
+        public static void AddDuplexListenerSupport(
+            CustomBinding binding,
+            ref InternalDuplexBindingElement internalDuplexBindingElement
+        )
         {
             if (binding.CanBuildChannelListener<IDuplexChannel>())
                 return;
             if (binding.Elements.Find<CompositeDuplexBindingElement>() == null)
                 return;
 
-            if (binding.CanBuildChannelFactory<IOutputChannel>() &&
-                binding.CanBuildChannelListener<IInputChannel>())
+            if (
+                binding.CanBuildChannelFactory<IOutputChannel>()
+                && binding.CanBuildChannelListener<IInputChannel>()
+            )
             {
                 if (binding.CanBuildChannelListener<IReplyChannel>())
                     return;
@@ -244,8 +288,12 @@ namespace System.ServiceModel.Channels
             this.localAddress = localAddress;
             this.filter = filter;
 
-            if (localAddress.Headers.FindHeader(XD.UtilityDictionary.UniqueEndpointHeaderName.Value,
-                    XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value) == null)
+            if (
+                localAddress.Headers.FindHeader(
+                    XD.UtilityDictionary.UniqueEndpointHeaderName.Value,
+                    XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value
+                ) == null
+            )
             {
                 this.priority = Int32.MaxValue - 1;
             }

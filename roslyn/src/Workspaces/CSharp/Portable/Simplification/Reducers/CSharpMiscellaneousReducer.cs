@@ -22,41 +22,68 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
     internal partial class CSharpMiscellaneousReducer : AbstractCSharpReducer
     {
         private static readonly ObjectPool<IReductionRewriter> s_pool = new(
-            () => new Rewriter(s_pool));
+            () => new Rewriter(s_pool)
+        );
 
-        private static readonly Func<ParameterSyntax, SemanticModel, SimplifierOptions, CancellationToken, SyntaxNode> s_simplifyParameter = SimplifyParameter;
+        private static readonly Func<
+            ParameterSyntax,
+            SemanticModel,
+            SimplifierOptions,
+            CancellationToken,
+            SyntaxNode
+        > s_simplifyParameter = SimplifyParameter;
 
-        public CSharpMiscellaneousReducer() : base(s_pool)
-        {
-        }
+        public CSharpMiscellaneousReducer()
+            : base(s_pool) { }
 
-        protected override bool IsApplicable(CSharpSimplifierOptions options)
-           => true;
+        protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 
         private static bool CanRemoveTypeFromParameter(
             ParameterSyntax parameterSyntax,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We reduce any the parameters that are contained inside ParameterList
-            if (parameterSyntax.IsParentKind(SyntaxKind.ParameterList) &&
-                parameterSyntax.Parent.IsParentKind(SyntaxKind.ParenthesizedLambdaExpression))
+            if (
+                parameterSyntax.IsParentKind(SyntaxKind.ParameterList)
+                && parameterSyntax.Parent.IsParentKind(SyntaxKind.ParenthesizedLambdaExpression)
+            )
             {
                 if (parameterSyntax.Type != null)
                 {
                     var annotation = new SyntaxAnnotation();
-                    var newParameterSyntax = parameterSyntax.WithType(null).WithAdditionalAnnotations(annotation);
+                    var newParameterSyntax = parameterSyntax
+                        .WithType(null)
+                        .WithAdditionalAnnotations(annotation);
 
-                    var oldLambda = parameterSyntax.FirstAncestorOrSelf<ParenthesizedLambdaExpressionSyntax>();
+                    var oldLambda =
+                        parameterSyntax.FirstAncestorOrSelf<ParenthesizedLambdaExpressionSyntax>();
                     var newLambda = oldLambda.ReplaceNode(parameterSyntax, newParameterSyntax);
-                    var speculationAnalyzer = new SpeculationAnalyzer(oldLambda, newLambda, semanticModel, cancellationToken);
-                    newParameterSyntax = (ParameterSyntax)speculationAnalyzer.ReplacedExpression.GetAnnotatedNodesAndTokens(annotation).First();
+                    var speculationAnalyzer = new SpeculationAnalyzer(
+                        oldLambda,
+                        newLambda,
+                        semanticModel,
+                        cancellationToken
+                    );
+                    newParameterSyntax = (ParameterSyntax)
+                        speculationAnalyzer
+                            .ReplacedExpression.GetAnnotatedNodesAndTokens(annotation)
+                            .First();
 
-                    var oldSymbol = semanticModel.GetDeclaredSymbol(parameterSyntax, cancellationToken);
-                    var newSymbol = speculationAnalyzer.SpeculativeSemanticModel.GetDeclaredSymbol(newParameterSyntax, cancellationToken);
-                    if (oldSymbol != null &&
-                        newSymbol != null &&
-                        Equals(oldSymbol.Type, newSymbol.Type))
+                    var oldSymbol = semanticModel.GetDeclaredSymbol(
+                        parameterSyntax,
+                        cancellationToken
+                    );
+                    var newSymbol = speculationAnalyzer.SpeculativeSemanticModel.GetDeclaredSymbol(
+                        newParameterSyntax,
+                        cancellationToken
+                    );
+                    if (
+                        oldSymbol != null
+                        && newSymbol != null
+                        && Equals(oldSymbol.Type, newSymbol.Type)
+                    )
                     {
                         return !speculationAnalyzer.ReplacementChangesSemantics();
                     }
@@ -70,28 +97,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             ParameterSyntax node,
             SemanticModel semanticModel,
             SimplifierOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (CanRemoveTypeFromParameter(node, semanticModel, cancellationToken))
             {
                 var newParameterSyntax = node.WithType(null);
-                newParameterSyntax = SimplificationHelpers.CopyAnnotations(node, newParameterSyntax).WithoutAnnotations(Simplifier.Annotation);
+                newParameterSyntax = SimplificationHelpers
+                    .CopyAnnotations(node, newParameterSyntax)
+                    .WithoutAnnotations(Simplifier.Annotation);
                 return newParameterSyntax;
             }
 
             return node;
         }
 
-        private static readonly Func<ParenthesizedLambdaExpressionSyntax, SemanticModel, SimplifierOptions, CancellationToken, SyntaxNode> s_simplifyParenthesizedLambdaExpression = SimplifyParenthesizedLambdaExpression;
+        private static readonly Func<
+            ParenthesizedLambdaExpressionSyntax,
+            SemanticModel,
+            SimplifierOptions,
+            CancellationToken,
+            SyntaxNode
+        > s_simplifyParenthesizedLambdaExpression = SimplifyParenthesizedLambdaExpression;
 
         private static SyntaxNode SimplifyParenthesizedLambdaExpression(
             ParenthesizedLambdaExpressionSyntax parenthesizedLambda,
             SemanticModel semanticModel,
             SimplifierOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            if (parenthesizedLambda.ParameterList != null &&
-                parenthesizedLambda.ParameterList.Parameters.Count == 1)
+            if (
+                parenthesizedLambda.ParameterList != null
+                && parenthesizedLambda.ParameterList.Parameters.Count == 1
+            )
             {
                 var parameter = parenthesizedLambda.ParameterList.Parameters.First();
                 if (CanRemoveTypeFromParameter(parameter, semanticModel, cancellationToken))
@@ -99,24 +138,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     var newParameterSyntax = parameter.WithType(null);
                     var newSimpleLambda = SyntaxFactory.SimpleLambdaExpression(
                         parenthesizedLambda.AsyncKeyword,
-                        newParameterSyntax.WithTrailingTrivia(parenthesizedLambda.ParameterList.GetTrailingTrivia()),
+                        newParameterSyntax.WithTrailingTrivia(
+                            parenthesizedLambda.ParameterList.GetTrailingTrivia()
+                        ),
                         parenthesizedLambda.ArrowToken,
-                        parenthesizedLambda.Body);
+                        parenthesizedLambda.Body
+                    );
 
-                    return SimplificationHelpers.CopyAnnotations(parenthesizedLambda, newSimpleLambda).WithoutAnnotations(Simplifier.Annotation);
+                    return SimplificationHelpers
+                        .CopyAnnotations(parenthesizedLambda, newSimpleLambda)
+                        .WithoutAnnotations(Simplifier.Annotation);
                 }
             }
 
             return parenthesizedLambda;
         }
 
-        private static readonly Func<BlockSyntax, SemanticModel, CSharpSimplifierOptions, CancellationToken, SyntaxNode> s_simplifyBlock = SimplifyBlock;
+        private static readonly Func<
+            BlockSyntax,
+            SemanticModel,
+            CSharpSimplifierOptions,
+            CancellationToken,
+            SyntaxNode
+        > s_simplifyBlock = SimplifyBlock;
 
         private static SyntaxNode SimplifyBlock(
             BlockSyntax node,
             SemanticModel semanticModel,
             CSharpSimplifierOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (node.Statements.Count != 1)
             {
@@ -147,19 +198,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         return node;
                     }
 
-                    if (node.Parent?.Parent is (kind: SyntaxKind.IfStatement or SyntaxKind.ElseClause))
+                    if (
+                        node.Parent?.Parent is
+
+                        (kind: SyntaxKind.IfStatement or SyntaxKind.ElseClause)
+                    )
                     {
                         // Braces are not removed from more complicated 'if' sequences
                         return node;
                     }
 
-                    if (!FormattingRangeHelper.AreTwoTokensOnSameLine(node.Statements[0].GetFirstToken(), node.Statements[0].GetLastToken()))
+                    if (
+                        !FormattingRangeHelper.AreTwoTokensOnSameLine(
+                            node.Statements[0].GetFirstToken(),
+                            node.Statements[0].GetLastToken()
+                        )
+                    )
                     {
                         // Braces are not removed when the embedded statement is multiline
                         return node;
                     }
 
-                    if (!FormattingRangeHelper.AreTwoTokensOnSameLine(node.Parent.GetFirstToken(), node.GetFirstToken().GetPreviousToken()))
+                    if (
+                        !FormattingRangeHelper.AreTwoTokensOnSameLine(
+                            node.Parent.GetFirstToken(),
+                            node.GetFirstToken().GetPreviousToken()
+                        )
+                    )
                     {
                         // Braces are not removed when the part of the 'if' statement preceding the embedded statement
                         // is multiline.

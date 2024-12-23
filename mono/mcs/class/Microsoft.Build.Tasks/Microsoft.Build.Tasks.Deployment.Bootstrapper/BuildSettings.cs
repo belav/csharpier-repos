@@ -30,88 +30,97 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("5D13802C-C830-4b41-8E7A-F69D9DD6A095")]
+    [ComVisible(true)]
+    public class BuildSettings : IBuildSettings
+    {
+        string applicationFile;
+        string applicationName;
+        string applicationUrl;
+        ComponentsLocation componentsLocation;
+        string componentsUrl;
+        bool copyComponents;
+        int fallbackLCID;
+        int lcid;
+        string outputPath;
+        ProductBuilderCollection productBuilders;
+        string supportUrl;
+        bool validate;
 
-	[ClassInterface (ClassInterfaceType.None)]
-	[Guid ("5D13802C-C830-4b41-8E7A-F69D9DD6A095")]
-	[ComVisible (true)]
-	public class BuildSettings : IBuildSettings {
-		
-		string	applicationFile;
-		string	applicationName;
-		string	applicationUrl;
-		ComponentsLocation	componentsLocation;
-		string	componentsUrl;
-		bool	copyComponents;
-		int	fallbackLCID;
-		int	lcid;
-		string	outputPath;
-		ProductBuilderCollection	productBuilders;
-		string	supportUrl;
-		bool	validate;
-		
-		public BuildSettings ()
-		{
-		}
-		
-		public string ApplicationFile {
-			get { return applicationFile; }
-			set { applicationFile = value; }
-		}
-		
-		public string ApplicationName {
-			get { return applicationName; }
-			set { applicationName = value; }
-		}
-		
-		public string ApplicationUrl {
-			get { return applicationUrl; }
-			set { applicationUrl = value; }
-		}
-		
-		public ComponentsLocation ComponentsLocation {
-			get { return componentsLocation; }
-			set { componentsLocation = value; }
-		}
-		
-		public string ComponentsUrl {
-			get { return componentsUrl; }
-			set { componentsUrl = value; }
-		}
-		
-		public bool CopyComponents {
-			get { return copyComponents; }
-			set { copyComponents = value; }
-		}
-		
-		public int FallbackLCID {
-			get { return fallbackLCID; }
-			set { fallbackLCID = value; }
-		}
-		
-		public int LCID {
-			get { return lcid; }
-			set { lcid = value; }
-		}
-		
-		public string OutputPath {
-			get { return outputPath; }
-			set { outputPath = value; }
-		}
-		
-		public ProductBuilderCollection ProductBuilders {
-			get { return productBuilders; }
-		}
-		
-		public string SupportUrl {
-			get { return supportUrl; }
-			set { supportUrl = value; }
-		}
-		
-		public bool Validate {
-			get { return validate; }
-			set { validate = value; }
-		}
-	}
+        public BuildSettings() { }
+
+        public string ApplicationFile
+        {
+            get { return applicationFile; }
+            set { applicationFile = value; }
+        }
+
+        public string ApplicationName
+        {
+            get { return applicationName; }
+            set { applicationName = value; }
+        }
+
+        public string ApplicationUrl
+        {
+            get { return applicationUrl; }
+            set { applicationUrl = value; }
+        }
+
+        public ComponentsLocation ComponentsLocation
+        {
+            get { return componentsLocation; }
+            set { componentsLocation = value; }
+        }
+
+        public string ComponentsUrl
+        {
+            get { return componentsUrl; }
+            set { componentsUrl = value; }
+        }
+
+        public bool CopyComponents
+        {
+            get { return copyComponents; }
+            set { copyComponents = value; }
+        }
+
+        public int FallbackLCID
+        {
+            get { return fallbackLCID; }
+            set { fallbackLCID = value; }
+        }
+
+        public int LCID
+        {
+            get { return lcid; }
+            set { lcid = value; }
+        }
+
+        public string OutputPath
+        {
+            get { return outputPath; }
+            set { outputPath = value; }
+        }
+
+        public ProductBuilderCollection ProductBuilders
+        {
+            get { return productBuilders; }
+        }
+
+        public string SupportUrl
+        {
+            get { return supportUrl; }
+            set { supportUrl = value; }
+        }
+
+        public bool Validate
+        {
+            get { return validate; }
+            set { validate = value; }
+        }
+    }
 }
-

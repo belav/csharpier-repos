@@ -16,9 +16,7 @@ namespace System.DirectoryServices
     /// <devdoc>
     /// Encapsulates a node or an object in the Active Directory hierarchy.
     /// </devdoc>
-    [
-    TypeConverterAttribute(typeof(DirectoryEntryConverter))
-    ]
+    [TypeConverterAttribute(typeof(DirectoryEntryConverter))]
     public class DirectoryEntry : Component
     {
         private string _path = "";
@@ -55,7 +53,8 @@ namespace System.DirectoryServices
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectoryEntry'/> class that will bind
         /// to the directory entry at <paramref name="path"/>.
         /// </devdoc>
-        public DirectoryEntry(string? path) : this()
+        public DirectoryEntry(string? path)
+            : this()
         {
             Path = path;
         }
@@ -63,14 +62,19 @@ namespace System.DirectoryServices
         /// <devdoc>
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectoryEntry'/> class.
         /// </devdoc>
-        public DirectoryEntry(string? path, string? username, string? password) : this(path, username, password, AuthenticationTypes.Secure)
-        {
-        }
+        public DirectoryEntry(string? path, string? username, string? password)
+            : this(path, username, password, AuthenticationTypes.Secure) { }
 
         /// <devdoc>
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectoryEntry'/> class.
         /// </devdoc>
-        public DirectoryEntry(string? path, string? username, string? password, AuthenticationTypes authenticationType) : this(path)
+        public DirectoryEntry(
+            string? path,
+            string? username,
+            string? password,
+            AuthenticationTypes authenticationType
+        )
+            : this(path)
         {
             _credentials = new NetworkCredential(username, password);
             if (username == null)
@@ -82,7 +86,13 @@ namespace System.DirectoryServices
             _authenticationType = authenticationType;
         }
 
-        internal DirectoryEntry(string path, bool useCache, string? username, string? password, AuthenticationTypes authenticationType)
+        internal DirectoryEntry(
+            string path,
+            bool useCache,
+            string? username,
+            string? password,
+            AuthenticationTypes authenticationType
+        )
         {
             _path = path;
             _useCache = useCache;
@@ -103,16 +113,25 @@ namespace System.DirectoryServices
         /// to the native Active Directory object which is passed in.
         /// </devdoc>
         public DirectoryEntry(object adsObject)
-            : this(adsObject, true, null, null, AuthenticationTypes.Secure, true)
-        {
-        }
+            : this(adsObject, true, null, null, AuthenticationTypes.Secure, true) { }
 
-        internal DirectoryEntry(object adsObject, bool useCache, string? username, string? password, AuthenticationTypes authenticationType)
-            : this(adsObject, useCache, username, password, authenticationType, false)
-        {
-        }
+        internal DirectoryEntry(
+            object adsObject,
+            bool useCache,
+            string? username,
+            string? password,
+            AuthenticationTypes authenticationType
+        )
+            : this(adsObject, useCache, username, password, authenticationType, false) { }
 
-        internal DirectoryEntry(object adsObject, bool useCache, string? username, string? password, AuthenticationTypes authenticationType, bool AdsObjIsExternal)
+        internal DirectoryEntry(
+            object adsObject,
+            bool useCache,
+            string? username,
+            string? password,
+            AuthenticationTypes authenticationType,
+            bool AdsObjIsExternal
+        )
         {
             _adsObject = adsObject as UnsafeNativeMethods.IAds;
             if (_adsObject == null)
@@ -203,7 +222,10 @@ namespace System.DirectoryServices
                     byte[] intGuid = new byte[16];
                     for (int j = 0; j < 16; j++)
                     {
-                        intGuid[j] = Convert.ToByte(new string(new char[] { guid[j * 2], guid[j * 2 + 1] }), 16);
+                        intGuid[j] = Convert.ToByte(
+                            new string(new char[] { guid[j * 2], guid[j * 2 + 1] }),
+                            16
+                        );
                     }
                     return new Guid(intGuid);
                     // return new Guid(guid.Substring(0, 8) + "-" + guid.Substring(8, 4) + "-" + guid.Substring(12, 4) + "-" + guid.Substring(16, 4) + "-" + guid.Substring(20));
@@ -296,7 +318,13 @@ namespace System.DirectoryServices
             get
             {
                 Bind();
-                return new DirectoryEntry(_adsObject.Parent, UsePropertyCache, GetUsername(), GetPassword(), AuthenticationType);
+                return new DirectoryEntry(
+                    _adsObject.Parent,
+                    UsePropertyCache,
+                    GetUsername(),
+                    GetPassword(),
+                    AuthenticationType
+                );
             }
         }
 
@@ -379,7 +407,13 @@ namespace System.DirectoryServices
             get
             {
                 Bind();
-                return new DirectoryEntry(_adsObject.Schema, UsePropertyCache, GetUsername(), GetPassword(), AuthenticationType);
+                return new DirectoryEntry(
+                    _adsObject.Schema,
+                    UsePropertyCache,
+                    GetUsername(),
+                    GetPassword(),
+                    AuthenticationType
+                );
             }
         }
 
@@ -405,7 +439,7 @@ namespace System.DirectoryServices
                 if (!value)
                     CommitChanges();
 
-                _cacheFilled = false;    // cache mode has been changed
+                _cacheFilled = false; // cache mode has been changed
                 _useCache = value;
             }
         }
@@ -466,11 +500,17 @@ namespace System.DirectoryServices
                 // check whether the new option is available
 
                 // 8 is ADS_OPTION_ACCUMULATIVE_MODIFICATION
-                unmanagedResult = ((UnsafeNativeMethods.IAdsObjectOptions2)_adsObject).GetOption(8, out o);
+                unmanagedResult = ((UnsafeNativeMethods.IAdsObjectOptions2)_adsObject).GetOption(
+                    8,
+                    out o
+                );
                 if (unmanagedResult != 0)
                 {
                     // rootdse does not support this option and invalid parameter due to without accumulative change fix in ADSI
-                    if ((unmanagedResult == unchecked((int)0x80004001)) || (unmanagedResult == unchecked((int)0x80005008)))
+                    if (
+                        (unmanagedResult == unchecked((int)0x80004001))
+                        || (unmanagedResult == unchecked((int)0x80005008))
+                    )
                     {
                         return;
                     }
@@ -513,11 +553,18 @@ namespace System.DirectoryServices
                 if (string.IsNullOrEmpty(pathToUse))
                 {
                     // get the default naming context. This should be the default root for the search.
-                    DirectoryEntry rootDSE = new DirectoryEntry("LDAP://RootDSE", true, null, null, AuthenticationTypes.Secure);
+                    DirectoryEntry rootDSE = new DirectoryEntry(
+                        "LDAP://RootDSE",
+                        true,
+                        null,
+                        null,
+                        AuthenticationTypes.Secure
+                    );
 
                     //SECREVIEW: Looking at the root of the DS will demand browse permissions
                     //                     on "*" or "LDAP://RootDSE".
-                    string defaultNamingContext = (string)rootDSE.Properties["defaultNamingContext"][0]!;
+                    string defaultNamingContext = (string)
+                        rootDSE.Properties["defaultNamingContext"][0]!;
                     rootDSE.Dispose();
 
                     pathToUse = "LDAP://" + defaultNamingContext;
@@ -529,7 +576,14 @@ namespace System.DirectoryServices
 
                 Guid g = new Guid("00000000-0000-0000-c000-000000000046"); // IID_IUnknown
                 object? value = null;
-                int hr = UnsafeNativeMethods.ADsOpenObject(pathToUse, GetUsername(), GetPassword(), (int)_authenticationType, ref g, out value);
+                int hr = UnsafeNativeMethods.ADsOpenObject(
+                    pathToUse,
+                    GetUsername(),
+                    GetPassword(),
+                    (int)_authenticationType,
+                    ref g,
+                    out value
+                );
 
                 if (hr != 0)
                 {
@@ -548,7 +602,13 @@ namespace System.DirectoryServices
         // Create new entry with the same data, but different IADs object, and grant it Browse Permission.
         internal DirectoryEntry CloneBrowsable()
         {
-            DirectoryEntry newEntry = new DirectoryEntry(this.Path, this.UsePropertyCache, this.GetUsername(), this.GetPassword(), this.AuthenticationType);
+            DirectoryEntry newEntry = new DirectoryEntry(
+                this.Path,
+                this.UsePropertyCache,
+                this.GetUsername(),
+                this.GetPassword(),
+                this.AuthenticationType
+            );
             return newEntry;
         }
 
@@ -625,7 +685,7 @@ namespace System.DirectoryServices
         internal void CommitIfNotCaching()
         {
             if (JustCreated)
-                return;   // Do not write changes, because the entry is just under construction until CommitChanges() is called.
+                return; // Do not write changes, because the entry is just under construction until CommitChanges() is called.
 
             if (_useCache)
                 return;
@@ -674,7 +734,13 @@ namespace System.DirectoryServices
             {
                 throw COMExceptionHelper.CreateFormattedComException(e);
             }
-            return new DirectoryEntry(copy, newParent.UsePropertyCache, GetUsername(), GetPassword(), AuthenticationType);
+            return new DirectoryEntry(
+                copy,
+                newParent.UsePropertyCache,
+                GetUsername(),
+                GetPassword(),
+                AuthenticationType
+            );
         }
 
         /// <devdoc>
@@ -720,14 +786,17 @@ namespace System.DirectoryServices
             DirectoryEntry entry = new DirectoryEntry(path);
             try
             {
-                entry.Bind(true);       // throws exceptions (possibly can break applications)
+                entry.Bind(true); // throws exceptions (possibly can break applications)
                 return entry.Bound;
             }
             catch (System.Runtime.InteropServices.COMException e)
             {
-                if (e.ErrorCode == unchecked((int)0x80072030) ||
-                     e.ErrorCode == unchecked((int)0x80070003) ||   // ERROR_DS_NO_SUCH_OBJECT and path not found (not found in strict sense)
-                     e.ErrorCode == unchecked((int)0x800708AC))     // Group name could not be found
+                if (
+                    e.ErrorCode == unchecked((int)0x80072030)
+                    || e.ErrorCode == unchecked((int)0x80070003)
+                    || // ERROR_DS_NO_SUCH_OBJECT and path not found (not found in strict sense)
+                    e.ErrorCode == unchecked((int)0x800708AC)
+                ) // Group name could not be found
                     return false;
                 throw;
             }
@@ -782,7 +851,14 @@ namespace System.DirectoryServices
             object? result = null;
             try
             {
-                result = type.InvokeMember(methodName, BindingFlags.InvokeMethod, null, target, args, CultureInfo.InvariantCulture);
+                result = type.InvokeMember(
+                    methodName,
+                    BindingFlags.InvokeMethod,
+                    null,
+                    target,
+                    args,
+                    CultureInfo.InvariantCulture
+                );
                 GC.KeepAlive(this);
             }
             catch (COMException e)
@@ -793,14 +869,23 @@ namespace System.DirectoryServices
             {
                 if (e.InnerException is COMException inner)
                 {
-                    throw new TargetInvocationException(e.Message, COMExceptionHelper.CreateFormattedComException(inner));
+                    throw new TargetInvocationException(
+                        e.Message,
+                        COMExceptionHelper.CreateFormattedComException(inner)
+                    );
                 }
 
                 throw;
             }
 
             if (result is UnsafeNativeMethods.IAds)
-                return new DirectoryEntry(result, UsePropertyCache, GetUsername(), GetPassword(), AuthenticationType);
+                return new DirectoryEntry(
+                    result,
+                    UsePropertyCache,
+                    GetUsername(),
+                    GetPassword(),
+                    AuthenticationType
+                );
             else
                 return result;
         }
@@ -815,7 +900,14 @@ namespace System.DirectoryServices
             object? result = null;
             try
             {
-                result = type.InvokeMember(propertyName, BindingFlags.GetProperty, null, target, null, CultureInfo.InvariantCulture);
+                result = type.InvokeMember(
+                    propertyName,
+                    BindingFlags.GetProperty,
+                    null,
+                    target,
+                    null,
+                    CultureInfo.InvariantCulture
+                );
                 GC.KeepAlive(this);
             }
             catch (COMException e)
@@ -826,7 +918,10 @@ namespace System.DirectoryServices
             {
                 if (e.InnerException is COMException inner)
                 {
-                    throw new TargetInvocationException(e.Message, COMExceptionHelper.CreateFormattedComException(inner));
+                    throw new TargetInvocationException(
+                        e.Message,
+                        COMExceptionHelper.CreateFormattedComException(inner)
+                    );
                 }
 
                 throw;
@@ -844,7 +939,14 @@ namespace System.DirectoryServices
             Type type = target.GetType();
             try
             {
-                type.InvokeMember(propertyName, BindingFlags.SetProperty, null, target, args, CultureInfo.InvariantCulture);
+                type.InvokeMember(
+                    propertyName,
+                    BindingFlags.SetProperty,
+                    null,
+                    target,
+                    args,
+                    CultureInfo.InvariantCulture
+                );
                 GC.KeepAlive(this);
             }
             catch (COMException e)
@@ -855,7 +957,10 @@ namespace System.DirectoryServices
             {
                 if (e.InnerException is COMException inner)
                 {
-                    throw new TargetInvocationException(e.Message, COMExceptionHelper.CreateFormattedComException(inner));
+                    throw new TargetInvocationException(
+                        e.Message,
+                        COMExceptionHelper.CreateFormattedComException(inner)
+                    );
                 }
 
                 throw;
@@ -885,14 +990,34 @@ namespace System.DirectoryServices
 
                     // we know ADsPath does not end with object type qualifier like ",computer" so it is fine to compare with whole newparent's adspath
                     // for the case that child has different components from newparent in the aspects other than case, we don't do any processing, just let ADSI decide in case future adsi change
-                    if (System.DirectoryServices.ActiveDirectory.Utils.Compare(childPath, 0, parentPath.Length, parentPath, 0, parentPath.Length) == 0)
+                    if (
+                        System.DirectoryServices.ActiveDirectory.Utils.Compare(
+                            childPath,
+                            0,
+                            parentPath.Length,
+                            parentPath,
+                            0,
+                            parentPath.Length
+                        ) == 0
+                    )
                     {
-                        uint compareFlags = System.DirectoryServices.ActiveDirectory.Utils.NORM_IGNORENONSPACE |
-                                    System.DirectoryServices.ActiveDirectory.Utils.NORM_IGNOREKANATYPE |
-                                    System.DirectoryServices.ActiveDirectory.Utils.NORM_IGNOREWIDTH |
-                                    System.DirectoryServices.ActiveDirectory.Utils.SORT_STRINGSORT;
+                        uint compareFlags =
+                            System.DirectoryServices.ActiveDirectory.Utils.NORM_IGNORENONSPACE
+                            | System.DirectoryServices.ActiveDirectory.Utils.NORM_IGNOREKANATYPE
+                            | System.DirectoryServices.ActiveDirectory.Utils.NORM_IGNOREWIDTH
+                            | System.DirectoryServices.ActiveDirectory.Utils.SORT_STRINGSORT;
                         // work around the ADSI case sensitive
-                        if (System.DirectoryServices.ActiveDirectory.Utils.Compare(childPath, 0, parentPath.Length, parentPath, 0, parentPath.Length, compareFlags) != 0)
+                        if (
+                            System.DirectoryServices.ActiveDirectory.Utils.Compare(
+                                childPath,
+                                0,
+                                parentPath.Length,
+                                parentPath,
+                                0,
+                                parentPath.Length,
+                                compareFlags
+                            ) != 0
+                        )
                         {
                             childPath = parentPath + childPath.Substring(parentPath.Length);
                         }
@@ -911,7 +1036,7 @@ namespace System.DirectoryServices
             }
 
             if (Bound)
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(_adsObject);     // release old handle
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(_adsObject); // release old handle
 
             _adsObject = (UnsafeNativeMethods.IAds)newEntry;
             _path = _adsObject.ADsPath;
@@ -922,7 +1047,7 @@ namespace System.DirectoryServices
             if (!_useCache)
                 CommitChanges();
             else
-                RefreshCache();     // in ADSI cache is lost after moving
+                RefreshCache(); // in ADSI cache is lost after moving
         }
 
         /// <devdoc>
@@ -1004,7 +1129,13 @@ namespace System.DirectoryServices
                         }
 
                         // if this is "ntSecurityDescriptor" we should refresh the objectSecurity property
-                        if (string.Equals(propertyNames[i], SecurityDescriptorProperty, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            string.Equals(
+                                propertyNames[i],
+                                SecurityDescriptorProperty,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             _objectSecurityInitialized = false;
                             _objectSecurityModified = false;
@@ -1086,9 +1217,15 @@ namespace System.DirectoryServices
                     if (!(NativeObject is UnsafeNativeMethods.IAdsPropertyList))
                         throw new NotSupportedException(SR.DSPropertyListUnsupported);
 
-                    UnsafeNativeMethods.IAdsPropertyList list = (UnsafeNativeMethods.IAdsPropertyList)NativeObject;
+                    UnsafeNativeMethods.IAdsPropertyList list =
+                        (UnsafeNativeMethods.IAdsPropertyList)NativeObject;
 
-                    UnsafeNativeMethods.IAdsPropertyEntry propertyEntry = (UnsafeNativeMethods.IAdsPropertyEntry)list.GetPropertyItem(SecurityDescriptorProperty, (int)AdsType.ADSTYPE_OCTET_STRING);
+                    UnsafeNativeMethods.IAdsPropertyEntry propertyEntry =
+                        (UnsafeNativeMethods.IAdsPropertyEntry)
+                            list.GetPropertyItem(
+                                SecurityDescriptorProperty,
+                                (int)AdsType.ADSTYPE_OCTET_STRING
+                            );
                     GC.KeepAlive(this);
 
                     //
@@ -1102,7 +1239,9 @@ namespace System.DirectoryServices
                     //
                     if (values.Length < 1)
                     {
-                        Debug.Fail("ntSecurityDescriptor property exists in cache but has no values.");
+                        Debug.Fail(
+                            "ntSecurityDescriptor property exists in cache but has no values."
+                        );
                         throw new InvalidOperationException(SR.DSSDNoValues);
                     }
 
@@ -1114,8 +1253,12 @@ namespace System.DirectoryServices
                         throw new NotSupportedException(SR.DSMultipleSDNotSupported);
                     }
 
-                    UnsafeNativeMethods.IAdsPropertyValue propertyValue = (UnsafeNativeMethods.IAdsPropertyValue)values[0];
-                    return new ActiveDirectorySecurity((byte[])propertyValue.OctetString, securityMasksUsedInRetrieval);
+                    UnsafeNativeMethods.IAdsPropertyValue propertyValue =
+                        (UnsafeNativeMethods.IAdsPropertyValue)values[0];
+                    return new ActiveDirectorySecurity(
+                        (byte[])propertyValue.OctetString,
+                        securityMasksUsedInRetrieval
+                    );
                 }
                 else
                 {
@@ -1128,7 +1271,7 @@ namespace System.DirectoryServices
             }
             catch (System.Runtime.InteropServices.COMException e)
             {
-                if (e.ErrorCode == unchecked((int)0x8000500D))    //  property not found exception
+                if (e.ErrorCode == unchecked((int)0x8000500D)) //  property not found exception
                     return null;
                 else
                     throw;
@@ -1137,14 +1280,19 @@ namespace System.DirectoryServices
 
         private void SetObjectSecurityInCache()
         {
-            if ((_objectSecurity != null) && (_objectSecurityModified || _objectSecurity.IsModified()))
+            if (
+                (_objectSecurity != null)
+                && (_objectSecurityModified || _objectSecurity.IsModified())
+            )
             {
-                UnsafeNativeMethods.IAdsPropertyValue sDValue = (UnsafeNativeMethods.IAdsPropertyValue)new UnsafeNativeMethods.PropertyValue();
+                UnsafeNativeMethods.IAdsPropertyValue sDValue =
+                    (UnsafeNativeMethods.IAdsPropertyValue)new UnsafeNativeMethods.PropertyValue();
 
                 sDValue.ADsType = (int)AdsType.ADSTYPE_OCTET_STRING;
                 sDValue.OctetString = _objectSecurity.GetSecurityDescriptorBinaryForm();
 
-                UnsafeNativeMethods.IAdsPropertyEntry newSDEntry = (UnsafeNativeMethods.IAdsPropertyEntry)new UnsafeNativeMethods.PropertyEntry();
+                UnsafeNativeMethods.IAdsPropertyEntry newSDEntry =
+                    (UnsafeNativeMethods.IAdsPropertyEntry)new UnsafeNativeMethods.PropertyEntry();
 
                 newSDEntry.Name = SecurityDescriptorProperty;
                 newSDEntry.ADsType = (int)AdsType.ADSTYPE_OCTET_STRING;

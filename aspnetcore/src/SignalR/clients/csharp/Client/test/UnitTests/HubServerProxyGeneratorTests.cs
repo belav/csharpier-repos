@@ -13,10 +13,7 @@ using Xunit;
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 [AttributeUsage(AttributeTargets.Method)]
-internal class HubServerProxyAttribute : Attribute
-{
-
-}
+internal class HubServerProxyAttribute : Attribute { }
 
 internal static partial class HubServerProxyExtensions
 {
@@ -34,15 +31,25 @@ public class HubServerProxyGeneratorTests
         Task<int> SetScalar(int a);
         Task<List<int>> SetCollection(List<int> a);
         Task<ChannelReader<int>> StreamToClientViaChannel();
-        Task<ChannelReader<int>> StreamToClientViaChannelWithToken(CancellationToken cancellationToken);
-        IAsyncEnumerable<int> StreamToClientViaEnumerableWithToken(CancellationToken cancellationToken);
+        Task<ChannelReader<int>> StreamToClientViaChannelWithToken(
+            CancellationToken cancellationToken
+        );
+        IAsyncEnumerable<int> StreamToClientViaEnumerableWithToken(
+            CancellationToken cancellationToken
+        );
         Task StreamFromClientViaChannel(ChannelReader<int> reader);
         Task StreamFromClientViaEnumerable(IAsyncEnumerable<int> reader);
         Task<int> StreamFromClientButAlsoReturnValue(ChannelReader<int> reader);
         Task<ChannelReader<int>> StreamBidirectionalViaChannel(ChannelReader<float> reader);
-        Task<ChannelReader<int>> StreamBidirectionalViaChannelWithToken(ChannelReader<float> reader, CancellationToken cancellationToken);
+        Task<ChannelReader<int>> StreamBidirectionalViaChannelWithToken(
+            ChannelReader<float> reader,
+            CancellationToken cancellationToken
+        );
         IAsyncEnumerable<int> StreamBidirectionalViaEnumerable(IAsyncEnumerable<float> reader);
-        IAsyncEnumerable<int> StreamBidirectionalViaEnumerableWithToken(IAsyncEnumerable<float> reader, CancellationToken cancellationToken);
+        IAsyncEnumerable<int> StreamBidirectionalViaEnumerableWithToken(
+            IAsyncEnumerable<float> reader,
+            CancellationToken cancellationToken
+        );
         ValueTask ReturnValueTask();
         ValueTask<int> ReturnGenericValueTask();
         Task<int?> HandleNullables(float? nullable);
@@ -54,11 +61,14 @@ public class HubServerProxyGeneratorTests
         // Arrange
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.InvokeCoreAsync(
-                nameof(IMyHub.GetNothing),
-                typeof(object),
-                Array.Empty<object>(),
-                default))
+            .Setup(x =>
+                x.InvokeCoreAsync(
+                    nameof(IMyHub.GetNothing),
+                    typeof(object),
+                    Array.Empty<object>(),
+                    default
+                )
+            )
             .Returns(Task.FromResult(default(object)));
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();
@@ -76,11 +86,14 @@ public class HubServerProxyGeneratorTests
         // Arrange
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.InvokeCoreAsync(
-                nameof(IMyHub.GetScalar),
-                typeof(int),
-                Array.Empty<object>(),
-                default))
+            .Setup(x =>
+                x.InvokeCoreAsync(
+                    nameof(IMyHub.GetScalar),
+                    typeof(int),
+                    Array.Empty<object>(),
+                    default
+                )
+            )
             .Returns(Task.FromResult((object)10));
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();
@@ -99,11 +112,14 @@ public class HubServerProxyGeneratorTests
         // Arrange
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.InvokeCoreAsync(
-                nameof(IMyHub.GetCollection),
-                typeof(List<int>),
-                Array.Empty<object>(),
-                default))
+            .Setup(x =>
+                x.InvokeCoreAsync(
+                    nameof(IMyHub.GetCollection),
+                    typeof(List<int>),
+                    Array.Empty<object>(),
+                    default
+                )
+            )
             .Returns(Task.FromResult((object)new List<int> { 10 }));
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();
@@ -125,11 +141,14 @@ public class HubServerProxyGeneratorTests
         // Arrange
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.InvokeCoreAsync(
-                nameof(IMyHub.SetScalar),
-                typeof(int),
-                It.Is<object[]>(y => ((object[])y).Any(z => (int)z == 20)),
-                default))
+            .Setup(x =>
+                x.InvokeCoreAsync(
+                    nameof(IMyHub.SetScalar),
+                    typeof(int),
+                    It.Is<object[]>(y => ((object[])y).Any(z => (int)z == 20)),
+                    default
+                )
+            )
             .Returns(Task.FromResult((object)10));
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();
@@ -149,11 +168,14 @@ public class HubServerProxyGeneratorTests
         var arg = new List<int>() { 20 };
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.InvokeCoreAsync(
-                nameof(IMyHub.SetCollection),
-                typeof(List<int>),
-                It.Is<object[]>(y => ((object[])y).Any(z => (List<int>)z == arg)),
-                default))
+            .Setup(x =>
+                x.InvokeCoreAsync(
+                    nameof(IMyHub.SetCollection),
+                    typeof(List<int>),
+                    It.Is<object[]>(y => ((object[])y).Any(z => (List<int>)z == arg)),
+                    default
+                )
+            )
             .Returns(Task.FromResult((object)new List<int> { 10 }));
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();
@@ -178,24 +200,33 @@ public class HubServerProxyGeneratorTests
         var token = cts.Token;
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.StreamAsChannelCoreAsync(
-                nameof(IMyHub.StreamToClientViaChannel),
-                typeof(int),
-                Array.Empty<object>(),
-                default))
+            .Setup(x =>
+                x.StreamAsChannelCoreAsync(
+                    nameof(IMyHub.StreamToClientViaChannel),
+                    typeof(int),
+                    Array.Empty<object>(),
+                    default
+                )
+            )
             .Returns(Task.FromResult(channel.Reader));
         mockConn
-            .Setup(x => x.StreamAsChannelCoreAsync(
-                nameof(IMyHub.StreamToClientViaChannelWithToken),
-                typeof(int),
-                Array.Empty<object>(),
-                token))
+            .Setup(x =>
+                x.StreamAsChannelCoreAsync(
+                    nameof(IMyHub.StreamToClientViaChannelWithToken),
+                    typeof(int),
+                    Array.Empty<object>(),
+                    token
+                )
+            )
             .Returns(Task.FromResult(channel.Reader));
         mockConn
-            .Setup(x => x.StreamAsyncCore<int>(
-                nameof(IMyHub.StreamToClientViaEnumerableWithToken),
-                Array.Empty<object>(),
-                token))
+            .Setup(x =>
+                x.StreamAsyncCore<int>(
+                    nameof(IMyHub.StreamToClientViaEnumerableWithToken),
+                    Array.Empty<object>(),
+                    token
+                )
+            )
             .Returns(asyncEnumerable);
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();
@@ -219,23 +250,38 @@ public class HubServerProxyGeneratorTests
         var asyncEnumerable = channelForEnumerable.Reader.ReadAllAsync();
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.SendCoreAsync(
-                nameof(IMyHub.StreamFromClientViaChannel),
-                It.Is<object[]>(y => ((object[])y).Any(z => (ChannelReader<int>)z == channelReader)),
-                default))
+            .Setup(x =>
+                x.SendCoreAsync(
+                    nameof(IMyHub.StreamFromClientViaChannel),
+                    It.Is<object[]>(y =>
+                        ((object[])y).Any(z => (ChannelReader<int>)z == channelReader)
+                    ),
+                    default
+                )
+            )
             .Returns(Task.CompletedTask);
         mockConn
-            .Setup(x => x.SendCoreAsync(
-                nameof(IMyHub.StreamFromClientViaEnumerable),
-                It.Is<object[]>(y => ((object[])y).Any(z => (IAsyncEnumerable<int>)z == asyncEnumerable)),
-                default))
+            .Setup(x =>
+                x.SendCoreAsync(
+                    nameof(IMyHub.StreamFromClientViaEnumerable),
+                    It.Is<object[]>(y =>
+                        ((object[])y).Any(z => (IAsyncEnumerable<int>)z == asyncEnumerable)
+                    ),
+                    default
+                )
+            )
             .Returns(Task.CompletedTask);
         mockConn
-            .Setup(x => x.InvokeCoreAsync(
-                nameof(IMyHub.StreamFromClientButAlsoReturnValue),
-                typeof(int),
-                It.Is<object[]>(y => ((object[])y).Any(z => (ChannelReader<int>)z == channelReader)),
-                default))
+            .Setup(x =>
+                x.InvokeCoreAsync(
+                    nameof(IMyHub.StreamFromClientButAlsoReturnValue),
+                    typeof(int),
+                    It.Is<object[]>(y =>
+                        ((object[])y).Any(z => (ChannelReader<int>)z == channelReader)
+                    ),
+                    default
+                )
+            )
             .Returns(Task.FromResult((object)6));
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();
@@ -265,30 +311,42 @@ public class HubServerProxyGeneratorTests
         var token = cts.Token;
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.StreamAsChannelCoreAsync(
-                nameof(IMyHub.StreamBidirectionalViaChannel),
-                typeof(int),
-                It.Is<object[]>(y => ((object[])y).Any(z => z is ChannelReader<float>)),
-                default))
+            .Setup(x =>
+                x.StreamAsChannelCoreAsync(
+                    nameof(IMyHub.StreamBidirectionalViaChannel),
+                    typeof(int),
+                    It.Is<object[]>(y => ((object[])y).Any(z => z is ChannelReader<float>)),
+                    default
+                )
+            )
             .Returns(Task.FromResult(retChannelReader));
         mockConn
-            .Setup(x => x.StreamAsChannelCoreAsync(
-                nameof(IMyHub.StreamBidirectionalViaChannelWithToken),
-                typeof(int),
-                It.Is<object[]>(y => ((object[])y).Any(z => z is ChannelReader<float>)),
-                token))
+            .Setup(x =>
+                x.StreamAsChannelCoreAsync(
+                    nameof(IMyHub.StreamBidirectionalViaChannelWithToken),
+                    typeof(int),
+                    It.Is<object[]>(y => ((object[])y).Any(z => z is ChannelReader<float>)),
+                    token
+                )
+            )
             .Returns(Task.FromResult(retChannelReader));
         mockConn
-            .Setup(x => x.StreamAsyncCore<int>(
-                nameof(IMyHub.StreamBidirectionalViaEnumerable),
-                It.Is<object[]>(y => ((object[])y).Any(z => z is IAsyncEnumerable<float>)),
-                default))
+            .Setup(x =>
+                x.StreamAsyncCore<int>(
+                    nameof(IMyHub.StreamBidirectionalViaEnumerable),
+                    It.Is<object[]>(y => ((object[])y).Any(z => z is IAsyncEnumerable<float>)),
+                    default
+                )
+            )
             .Returns(retEnumerable);
         mockConn
-            .Setup(x => x.StreamAsyncCore<int>(
-                nameof(IMyHub.StreamBidirectionalViaEnumerableWithToken),
-                It.Is<object[]>(y => ((object[])y).Any(z => z is IAsyncEnumerable<float>)),
-                token))
+            .Setup(x =>
+                x.StreamAsyncCore<int>(
+                    nameof(IMyHub.StreamBidirectionalViaEnumerableWithToken),
+                    It.Is<object[]>(y => ((object[])y).Any(z => z is IAsyncEnumerable<float>)),
+                    token
+                )
+            )
             .Returns(retEnumerable);
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();
@@ -309,18 +367,24 @@ public class HubServerProxyGeneratorTests
         // Arrange
         var mockConn = MockHubConnection.Get();
         mockConn
-            .Setup(x => x.InvokeCoreAsync(
-                nameof(IMyHub.ReturnValueTask),
-                typeof(object),
-                Array.Empty<object>(),
-                default))
+            .Setup(x =>
+                x.InvokeCoreAsync(
+                    nameof(IMyHub.ReturnValueTask),
+                    typeof(object),
+                    Array.Empty<object>(),
+                    default
+                )
+            )
             .Returns(Task.FromResult(default(object)));
         mockConn
-            .Setup(x => x.InvokeCoreAsync(
-                nameof(IMyHub.ReturnGenericValueTask),
-                typeof(int),
-                Array.Empty<object>(),
-                default))
+            .Setup(x =>
+                x.InvokeCoreAsync(
+                    nameof(IMyHub.ReturnGenericValueTask),
+                    typeof(int),
+                    Array.Empty<object>(),
+                    default
+                )
+            )
             .Returns(Task.FromResult((object)10));
         var conn = mockConn.Object;
         var myHub = conn.GetHubServer<IMyHub>();

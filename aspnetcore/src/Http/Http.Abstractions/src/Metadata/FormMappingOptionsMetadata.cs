@@ -6,7 +6,11 @@ namespace Microsoft.AspNetCore.Http.Metadata;
 /// <summary>
 /// Supports configuring the behavior of form mapping in a minimal API.
 /// </summary>
-public class FormMappingOptionsMetadata(int? maxCollectionSize = null, int? maxRecursionDepth = null, int? maxKeySize = null)
+public class FormMappingOptionsMetadata(
+    int? maxCollectionSize = null,
+    int? maxRecursionDepth = null,
+    int? maxKeySize = null
+)
 {
     /// <summary>
     /// Gets or sets the maximum number of elements allowed in a form collection.

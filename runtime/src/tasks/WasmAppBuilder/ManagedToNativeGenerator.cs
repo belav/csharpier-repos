@@ -44,13 +44,17 @@ public class ManagedToNativeGenerator : Task
     {
         if (Assemblies!.Length == 0)
         {
-            Log.LogError($"{nameof(ManagedToNativeGenerator)}.{nameof(Assemblies)} cannot be empty");
+            Log.LogError(
+                $"{nameof(ManagedToNativeGenerator)}.{nameof(Assemblies)} cannot be empty"
+            );
             return false;
         }
 
         if (PInvokeModules!.Length == 0)
         {
-            Log.LogError($"{nameof(ManagedToNativeGenerator)}.{nameof(PInvokeModules)} cannot be empty");
+            Log.LogError(
+                $"{nameof(ManagedToNativeGenerator)}.{nameof(PInvokeModules)} cannot be empty"
+            );
             return false;
         }
 
@@ -78,7 +82,10 @@ public class ManagedToNativeGenerator : Task
             using var mlc = new MetadataLoadContext(resolver, "System.Private.CoreLib");
             foreach (string asmPath in managedAssemblies)
             {
-                Log.LogMessage(MessageImportance.Low, $"Loading {asmPath} to scan for pinvokes, and icalls");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Loading {asmPath} to scan for pinvokes, and icalls"
+                );
                 Assembly asm = mlc.LoadFromAssemblyPath(asmPath);
                 pinvoke.ScanAssembly(asm);
                 icall.ScanAssembly(asm);
@@ -86,7 +93,8 @@ public class ManagedToNativeGenerator : Task
 
             IEnumerable<string> cookies = Enumerable.Concat(
                 pinvoke.Generate(PInvokeModules, PInvokeOutputPath),
-                icall.Generate(IcallOutputPath));
+                icall.Generate(IcallOutputPath)
+            );
 
             var m2n = new InterpToNativeGenerator(Log);
             m2n.Generate(cookies, InterpToNativeOutputPath);
@@ -108,7 +116,10 @@ public class ManagedToNativeGenerator : Task
     {
         if (string.IsNullOrEmpty(CacheFilePath) || !File.Exists(CacheFilePath))
         {
-            Log.LogMessage(MessageImportance.Low, $"Running because no cache file found at '{CacheFilePath}'.");
+            Log.LogMessage(
+                MessageImportance.Low,
+                $"Running because no cache file found at '{CacheFilePath}'."
+            );
             return true;
         }
 
@@ -116,16 +127,21 @@ public class ManagedToNativeGenerator : Task
         string newModules = string.Join(",", PInvokeModules.OrderBy(l => l));
         if (!string.Equals(oldModules, newModules, StringComparison.InvariantCulture))
         {
-            Log.LogMessage(MessageImportance.Low, $"Running because the list of pinvoke modules has changed from: {oldModules} to {newModules} .");
+            Log.LogMessage(
+                MessageImportance.Low,
+                $"Running because the list of pinvoke modules has changed from: {oldModules} to {newModules} ."
+            );
             return true;
         }
 
         // compare against the output files
         // get the timestamp for oldest output file
         DateTime oldestOutputDt = DateTime.MaxValue;
-        if (CheckShouldRunBecauseOfOutputFile(IcallOutputPath, ref oldestOutputDt) ||
-            CheckShouldRunBecauseOfOutputFile(PInvokeOutputPath, ref oldestOutputDt) ||
-            CheckShouldRunBecauseOfOutputFile(InterpToNativeOutputPath, ref oldestOutputDt))
+        if (
+            CheckShouldRunBecauseOfOutputFile(IcallOutputPath, ref oldestOutputDt)
+            || CheckShouldRunBecauseOfOutputFile(PInvokeOutputPath, ref oldestOutputDt)
+            || CheckShouldRunBecauseOfOutputFile(InterpToNativeOutputPath, ref oldestOutputDt)
+        )
         {
             return true;
         }
@@ -134,12 +150,18 @@ public class ManagedToNativeGenerator : Task
         {
             if (File.GetLastWriteTimeUtc(asm) >= oldestOutputDt)
             {
-                Log.LogMessage(MessageImportance.Low, $"Running because {asm} is newer than one of the output files.");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Running because {asm} is newer than one of the output files."
+                );
                 return true;
             }
         }
 
-        Log.LogMessage(MessageImportance.Low, $"Skipping because all of the assemblies are older than the output files.");
+        Log.LogMessage(
+            MessageImportance.Low,
+            $"Skipping because all of the assemblies are older than the output files."
+        );
         return false;
 
         bool CheckShouldRunBecauseOfOutputFile(string? path, ref DateTime oldestDt)
@@ -149,7 +171,10 @@ public class ManagedToNativeGenerator : Task
 
             if (!File.Exists(path))
             {
-                Log.LogMessage(MessageImportance.Low, $"Running because output file '{path}' does not exist.");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Running because output file '{path}' does not exist."
+                );
                 return true;
             }
             DateTime utc = File.GetLastWriteTimeUtc(path);
@@ -169,10 +194,12 @@ public class ManagedToNativeGenerator : Task
 
         foreach (byte b in bytes)
         {
-            if ((b >= (byte)'0' && b <= (byte)'9') ||
-                (b >= (byte)'a' && b <= (byte)'z') ||
-                (b >= (byte)'A' && b <= (byte)'Z') ||
-                (b == (byte)'_'))
+            if (
+                (b >= (byte)'0' && b <= (byte)'9')
+                || (b >= (byte)'a' && b <= (byte)'z')
+                || (b >= (byte)'A' && b <= (byte)'Z')
+                || (b == (byte)'_')
+            )
             {
                 sb.Append((char)b);
             }

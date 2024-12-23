@@ -25,40 +25,78 @@ public class FacebookHandler : OAuthHandler<FacebookOptions>
     /// </summary>
     /// <inheritdoc />
     [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public FacebookHandler(IOptionsMonitor<FacebookOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    { }
+    public FacebookHandler(
+        IOptionsMonitor<FacebookOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FacebookHandler"/>.
     /// </summary>
     /// <inheritdoc />
-    public FacebookHandler(IOptionsMonitor<FacebookOptions> options, ILoggerFactory logger, UrlEncoder encoder)
-        : base(options, logger, encoder)
-    { }
+    public FacebookHandler(
+        IOptionsMonitor<FacebookOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     /// <inheritdoc />
-    protected override async Task<AuthenticationTicket> CreateTicketAsync(ClaimsIdentity identity, AuthenticationProperties properties, OAuthTokenResponse tokens)
+    protected override async Task<AuthenticationTicket> CreateTicketAsync(
+        ClaimsIdentity identity,
+        AuthenticationProperties properties,
+        OAuthTokenResponse tokens
+    )
     {
-        var endpoint = QueryHelpers.AddQueryString(Options.UserInformationEndpoint, "access_token", tokens.AccessToken!);
+        var endpoint = QueryHelpers.AddQueryString(
+            Options.UserInformationEndpoint,
+            "access_token",
+            tokens.AccessToken!
+        );
         if (Options.SendAppSecretProof)
         {
-            endpoint = QueryHelpers.AddQueryString(endpoint, "appsecret_proof", GenerateAppSecretProof(tokens.AccessToken!));
+            endpoint = QueryHelpers.AddQueryString(
+                endpoint,
+                "appsecret_proof",
+                GenerateAppSecretProof(tokens.AccessToken!)
+            );
         }
         if (Options.Fields.Count > 0)
         {
-            endpoint = QueryHelpers.AddQueryString(endpoint, "fields", string.Join(",", Options.Fields));
+            endpoint = QueryHelpers.AddQueryString(
+                endpoint,
+                "fields",
+                string.Join(",", Options.Fields)
+            );
         }
 
         var response = await Backchannel.GetAsync(endpoint, Context.RequestAborted);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpRequestException($"An error occurred when retrieving Facebook user information ({response.StatusCode}). Please check if the authentication information is correct and the corresponding Facebook Graph API is enabled.");
+            throw new HttpRequestException(
+                $"An error occurred when retrieving Facebook user information ({response.StatusCode}). Please check if the authentication information is correct and the corresponding Facebook Graph API is enabled."
+            );
         }
 
-        using (var payload = JsonDocument.Parse(await response.Content.ReadAsStringAsync(Context.RequestAborted)))
+        using (
+            var payload = JsonDocument.Parse(
+                await response.Content.ReadAsStringAsync(Context.RequestAborted)
+            )
+        )
         {
-            var context = new OAuthCreatingTicketContext(new ClaimsPrincipal(identity), properties, Context, Scheme, Options, Backchannel, tokens, payload.RootElement);
+            var context = new OAuthCreatingTicketContext(
+                new ClaimsPrincipal(identity),
+                properties,
+                Context,
+                Scheme,
+                Options,
+                Backchannel,
+                tokens,
+                payload.RootElement
+            );
             context.RunClaimActions();
             await Events.CreatingTicket(context);
             return new AuthenticationTicket(context.Principal!, context.Properties, Scheme.Name);
@@ -88,6 +126,5 @@ public class FacebookHandler : OAuthHandler<FacebookOptions>
     }
 
     /// <inheritdoc />
-    protected override string FormatScope()
-        => base.FormatScope();
+    protected override string FormatScope() => base.FormatScope();
 }

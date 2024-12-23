@@ -15,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected AttributeTypeAndValue (string oid, int upperBound);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected AttributeTypeAndValue (string oid, int upperBound);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="oid" Type="System.String" />
@@ -33,7 +36,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected AttributeTypeAndValue (string oid, int upperBound, byte encoding);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected AttributeTypeAndValue (string oid, int upperBound, byte encoding);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="oid" Type="System.String" />

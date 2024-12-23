@@ -1,40 +1,38 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.Resources;
-    using System.Reflection;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Xml;
-    using System.Text;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using Microsoft.Win32;
-    using Microsoft.CSharp;
-    using Microsoft.VisualBasic;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Serialization;
-    using Microsoft.Build.Framework;
-    using Microsoft.Build.Utilities;
+    using System.Reflection;
+    using System.Resources;
     using System.Runtime.InteropServices;
-    using Microsoft.Build.Tasks;
-    using System.Collections.Generic;
-    using Microsoft.Workflow.Compiler;
     using System.Runtime.Versioning;
     using System.Security;
+    using System.Text;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
+    using Microsoft.Build.Framework;
+    using Microsoft.Build.Tasks;
+    using Microsoft.Build.Utilities;
+    using Microsoft.CSharp;
+    using Microsoft.VisualBasic;
+    using Microsoft.Win32;
+    using Microsoft.Workflow.Compiler;
 
     [Guid("59B2D1D0-5DB0-4F9F-9609-13F0168516D6")]
     [ComImport]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    internal interface IVsHierarchy
-    {
-    }
+    internal interface IVsHierarchy { }
 
     [Guid("6d5140c1-7436-11ce-8034-00aa006009fa")]
     [ComImport]
@@ -45,7 +43,11 @@ namespace System.Workflow.ComponentModel.Compiler
         int QueryService(ref Guid guidService, ref Guid riid, out IntPtr ppvObject);
     }
 
-    [ComImport(), Guid("8AA9644E-1F6A-4F4C-83E3-D0BAD4B2BB21"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport(),
+        Guid("8AA9644E-1F6A-4F4C-83E3-D0BAD4B2BB21"),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface IWorkflowBuildHostProperties
     {
         bool SkipWorkflowCompilation { get; set; }
@@ -53,12 +55,16 @@ namespace System.Workflow.ComponentModel.Compiler
 
     internal class ServiceProvider : IServiceProvider
     {
-        private static readonly Guid IID_IUnknown = new Guid("{00000000-0000-0000-C000-000000000046}");
+        private static readonly Guid IID_IUnknown = new Guid(
+            "{00000000-0000-0000-C000-000000000046}"
+        );
         private IOleServiceProvider serviceProvider;
+
         public ServiceProvider(IOleServiceProvider sp)
         {
             this.serviceProvider = sp;
         }
+
         public object GetService(Type serviceType)
         {
             if (serviceType == null)
@@ -98,10 +104,11 @@ namespace System.Workflow.ComponentModel.Compiler
     /// As such this component's assembly should not have direct or indirect dependencies
     /// on the Visual Studio assemblies to work in the standalone scenario.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class CompileWorkflowTask : Microsoft.Build.Utilities.Task, ITask
     {
-
         #region Members and Constructors
 
         private string projectExt = null;
@@ -124,7 +131,12 @@ namespace System.Workflow.ComponentModel.Compiler
         private string keyFile = null;
 
         public CompileWorkflowTask()
-            : base(new ResourceManager("System.Workflow.ComponentModel.BuildTasksStrings", Assembly.GetExecutingAssembly()))
+            : base(
+                new ResourceManager(
+                    "System.Workflow.ComponentModel.BuildTasksStrings",
+                    Assembly.GetExecutingAssembly()
+                )
+            )
         {
             this.BuildingProject = true;
         }
@@ -134,30 +146,27 @@ namespace System.Workflow.ComponentModel.Compiler
         #region Input parameters and property overrides
         public string ProjectDirectory
         {
-            get
-            {
-                return this.projectDirectory;
-            }
-            set
-            {
-                this.projectDirectory = value;
-            }
+            get { return this.projectDirectory; }
+            set { this.projectDirectory = value; }
         }
 
         public string ProjectExtension
         {
-            get
-            {
-                return this.projectExt;
-            }
+            get { return this.projectExt; }
             set
             {
                 this.projectExt = value;
-                if (String.Compare(this.projectExt, ".csproj", StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(this.projectExt, ".csproj", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     ProjectType = SupportedLanguages.CSharp;
                 }
-                else if (String.Compare(this.projectExt, ".vbproj", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(this.projectExt, ".vbproj", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     ProjectType = SupportedLanguages.VB;
                 }
@@ -166,46 +175,25 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public string RootNamespace
         {
-            get
-            {
-                return this.rootNamespace;
-            }
-            set
-            {
-                this.rootNamespace = value;
-            }
+            get { return this.rootNamespace; }
+            set { this.rootNamespace = value; }
         }
 
         public string AssemblyName
         {
-            get
-            {
-                return this.assemblyName;
-            }
-            set
-            {
-                this.assemblyName = value;
-            }
+            get { return this.assemblyName; }
+            set { this.assemblyName = value; }
         }
 
         public string Imports
         {
-            get
-            {
-                return this.imports;
-            }
-            set
-            {
-                this.imports = value;
-            }
+            get { return this.imports; }
+            set { this.imports = value; }
         }
 
         public ITaskItem[] WorkflowMarkupFiles
         {
-            get
-            {
-                return xomlFiles;
-            }
+            get { return xomlFiles; }
             set
             {
                 if (value != null)
@@ -216,7 +204,10 @@ namespace System.Workflow.ComponentModel.Compiler
                         if (inputFile != null)
                         {
                             string fileSpec = inputFile.ItemSpec;
-                            if (fileSpec != null && fileSpec.EndsWith(".xoml", StringComparison.OrdinalIgnoreCase))
+                            if (
+                                fileSpec != null
+                                && fileSpec.EndsWith(".xoml", StringComparison.OrdinalIgnoreCase)
+                            )
                             {
                                 xomlFilesOnly.Add(inputFile);
                             }
@@ -237,118 +228,61 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public ITaskItem[] ReferenceFiles
         {
-            get
-            {
-                return this.referenceFiles;
-            }
-            set
-            {
-                this.referenceFiles = value;
-            }
+            get { return this.referenceFiles; }
+            set { this.referenceFiles = value; }
         }
 
         public ITaskItem[] ResourceFiles
         {
-            get
-            {
-                return this.resourceFiles;
-            }
-            set
-            {
-                this.resourceFiles = value;
-            }
+            get { return this.resourceFiles; }
+            set { this.resourceFiles = value; }
         }
 
         public ITaskItem[] SourceCodeFiles
         {
-            get
-            {
-                return this.sourceCodeFiles;
-            }
-            set
-            {
-                this.sourceCodeFiles = value;
-            }
+            get { return this.sourceCodeFiles; }
+            set { this.sourceCodeFiles = value; }
         }
 
         public ITaskItem[] CompilationOptions
         {
-            get
-            {
-                return this.compilationOptions;
-            }
-            set
-            {
-                this.compilationOptions = value;
-            }
+            get { return this.compilationOptions; }
+            set { this.compilationOptions = value; }
         }
 
         public bool DelaySign
         {
-            get
-            {
-                return this.delaySign;
-            }
-            set
-            {
-                this.delaySign = value;
-            }
+            get { return this.delaySign; }
+            set { this.delaySign = value; }
         }
 
         public string TargetFramework
         {
-            get
-            {
-                return this.targetFramework;
-            }
-            set
-            {
-                this.targetFramework = value;
-            }
+            get { return this.targetFramework; }
+            set { this.targetFramework = value; }
         }
 
         public string KeyContainer
         {
-            get
-            {
-                return this.keyContainer;
-            }
-            set
-            {
-                this.keyContainer = value;
-            }
+            get { return this.keyContainer; }
+            set { this.keyContainer = value; }
         }
 
         public string KeyFile
         {
-            get
-            {
-                return this.keyFile;
-            }
-            set
-            {
-                this.keyFile = value;
-            }
+            get { return this.keyFile; }
+            set { this.keyFile = value; }
         }
 
         public new object HostObject
         {
-            get
-            {
-                return this.hostObject;
-            }
+            get { return this.hostObject; }
         }
 
         ITaskHost ITask.HostObject
         {
-            get
-            {
-                return (ITaskHost)this.hostObject;
-            }
-            set
-            {
-                this.hostObject = value;
-            }
+            get { return (ITaskHost)this.hostObject; }
+            set { this.hostObject = value; }
         }
 
         public bool BuildingProject { get; set; }
@@ -379,10 +313,7 @@ namespace System.Workflow.ComponentModel.Compiler
         [OutputAttribute]
         public string KeepTemporaryFiles
         {
-            get
-            {
-                return ShouldKeepTempFiles().ToString();
-            }
+            get { return ShouldKeepTempFiles().ToString(); }
         }
 
         [OutputAttribute]
@@ -424,14 +355,22 @@ namespace System.Workflow.ComponentModel.Compiler
                 this.Log.LogMessageFromResources(MessageImportance.Normal, "NoSourceCodeFiles");
 
             // we return early if this is not invoked during the build phase of the project (eg project load)
-            IWorkflowBuildHostProperties workflowBuildHostProperty = this.HostObject as IWorkflowBuildHostProperties;
-            if (!this.BuildingProject || (workflowBuildHostProperty != null && workflowBuildHostProperty.SkipWorkflowCompilation))
+            IWorkflowBuildHostProperties workflowBuildHostProperty =
+                this.HostObject as IWorkflowBuildHostProperties;
+            if (
+                !this.BuildingProject
+                || (
+                    workflowBuildHostProperty != null
+                    && workflowBuildHostProperty.SkipWorkflowCompilation
+                )
+            )
             {
                 return true;
             }
 
             // Create an instance of WorkflowCompilerParameters.
-            int errorCount = 0, warningCount = 0;
+            int errorCount = 0,
+                warningCount = 0;
             WorkflowCompilerParameters compilerParameters = new WorkflowCompilerParameters();
 
             // set the service provider
@@ -439,8 +378,12 @@ namespace System.Workflow.ComponentModel.Compiler
             IServiceProvider externalServiceProvider = null;
             if (this.HostObject is IOleServiceProvider)
             {
-                externalServiceProvider = new ServiceProvider(this.HostObject as IOleServiceProvider);
-                workflowErrorLogger = externalServiceProvider.GetService(typeof(IWorkflowCompilerErrorLogger)) as IWorkflowCompilerErrorLogger;
+                externalServiceProvider = new ServiceProvider(
+                    this.HostObject as IOleServiceProvider
+                );
+                workflowErrorLogger =
+                    externalServiceProvider.GetService(typeof(IWorkflowCompilerErrorLogger))
+                    as IWorkflowCompilerErrorLogger;
             }
 
             string[] userCodeFiles = GetFiles(this.SourceCodeFiles, this.ProjectDirectory);
@@ -451,7 +394,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 string defaultFrameworkName = null;
 
-                const string NDPSetupRegistryBranch = "SOFTWARE\\Microsoft\\NET Framework Setup\\NDP";
+                const string NDPSetupRegistryBranch =
+                    "SOFTWARE\\Microsoft\\NET Framework Setup\\NDP";
                 const string NetFrameworkIdentifier = ".NETFramework";
 
                 RegistryKey ndpSetupKey = null;
@@ -479,16 +423,34 @@ namespace System.Workflow.ComponentModel.Compiler
                                         string normalizedVersion = null;
                                         if (parts.Length > 1)
                                         {
-                                            normalizedVersion = string.Format(CultureInfo.InvariantCulture, "v{0}.{1}", parts[0], parts[1]);
+                                            normalizedVersion = string.Format(
+                                                CultureInfo.InvariantCulture,
+                                                "v{0}.{1}",
+                                                parts[0],
+                                                parts[1]
+                                            );
                                         }
                                         else
                                         {
-                                            normalizedVersion = string.Format(CultureInfo.InvariantCulture, "v{0}.0", parts[0]);
+                                            normalizedVersion = string.Format(
+                                                CultureInfo.InvariantCulture,
+                                                "v{0}.0",
+                                                parts[0]
+                                            );
                                         }
 
-                                        if (string.Compare(normalizedVersion, "v3.5", StringComparison.OrdinalIgnoreCase) == 0)
+                                        if (
+                                            string.Compare(
+                                                normalizedVersion,
+                                                "v3.5",
+                                                StringComparison.OrdinalIgnoreCase
+                                            ) == 0
+                                        )
                                         {
-                                            defaultFrameworkName = new FrameworkName(NetFrameworkIdentifier, new Version(3, 5)).ToString();
+                                            defaultFrameworkName = new FrameworkName(
+                                                NetFrameworkIdentifier,
+                                                new Version(3, 5)
+                                            ).ToString();
                                             break;
                                         }
                                     }
@@ -497,15 +459,9 @@ namespace System.Workflow.ComponentModel.Compiler
                         }
                     }
                 }
-                catch (SecurityException)
-                {
-                }
-                catch (UnauthorizedAccessException)
-                {
-                }
-                catch (IOException)
-                {
-                }
+                catch (SecurityException) { }
+                catch (UnauthorizedAccessException) { }
+                catch (IOException) { }
                 finally
                 {
                     if (ndpSetupKey != null)
@@ -516,14 +472,21 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 if (defaultFrameworkName == null)
                 {
-                    defaultFrameworkName = new FrameworkName(NetFrameworkIdentifier, new Version(2, 0)).ToString();
+                    defaultFrameworkName = new FrameworkName(
+                        NetFrameworkIdentifier,
+                        new Version(2, 0)
+                    ).ToString();
                 }
 
-                compilerParameters.MultiTargetingInformation = new MultiTargetingInfo(defaultFrameworkName);
+                compilerParameters.MultiTargetingInformation = new MultiTargetingInfo(
+                    defaultFrameworkName
+                );
             }
             else
             {
-                compilerParameters.MultiTargetingInformation = new MultiTargetingInfo(this.targetFramework);
+                compilerParameters.MultiTargetingInformation = new MultiTargetingInfo(
+                    this.targetFramework
+                );
             }
 
             CompilerOptionsBuilder optionsBuilder;
@@ -555,7 +518,7 @@ namespace System.Workflow.ComponentModel.Compiler
             compilerParameters.OutputAssembly = AssemblyName;
             if (!string.IsNullOrEmpty(assemblyName))
             {
-                // Normalizing the assembly name. 
+                // Normalizing the assembly name.
                 // The codeDomProvider expects the proper extension to be set.
                 string extension = (compilerParameters.GenerateExecutable) ? ".exe" : ".dll";
                 compilerParameters.OutputAssembly += extension;
@@ -563,11 +526,22 @@ namespace System.Workflow.ComponentModel.Compiler
 
             CodeDomProvider codeProvider = null;
             if (this.ProjectType == SupportedLanguages.VB)
-                codeProvider = CompilerHelpers.CreateCodeProviderInstance(typeof(VBCodeProvider), compilerParameters.CompilerVersion);
+                codeProvider = CompilerHelpers.CreateCodeProviderInstance(
+                    typeof(VBCodeProvider),
+                    compilerParameters.CompilerVersion
+                );
             else
-                codeProvider = CompilerHelpers.CreateCodeProviderInstance(typeof(CSharpCodeProvider), compilerParameters.CompilerVersion);
+                codeProvider = CompilerHelpers.CreateCodeProviderInstance(
+                    typeof(CSharpCodeProvider),
+                    compilerParameters.CompilerVersion
+                );
 
-            using (TempFileCollection tempFileCollection = new TempFileCollection(Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.User), true))
+            using (
+                TempFileCollection tempFileCollection = new TempFileCollection(
+                    Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.User),
+                    true
+                )
+            )
             {
                 this.outputFiles = new TaskItem[1];
 
@@ -575,10 +549,15 @@ namespace System.Workflow.ComponentModel.Compiler
                 string[] xomlFilesPaths;
                 if (this.WorkflowMarkupFiles != null)
                 {
-                    xomlFilesPaths = new string[WorkflowMarkupFiles.GetLength(0) + userCodeFiles.Length];
+                    xomlFilesPaths = new string[
+                        WorkflowMarkupFiles.GetLength(0) + userCodeFiles.Length
+                    ];
                     int index = 0;
                     for (; index < this.WorkflowMarkupFiles.GetLength(0); index++)
-                        xomlFilesPaths[index] = Path.Combine(ProjectDirectory, this.WorkflowMarkupFiles[index].ItemSpec);
+                        xomlFilesPaths[index] = Path.Combine(
+                            ProjectDirectory,
+                            this.WorkflowMarkupFiles[index].ItemSpec
+                        );
 
                     userCodeFiles.CopyTo(xomlFilesPaths, index);
                 }
@@ -588,7 +567,10 @@ namespace System.Workflow.ComponentModel.Compiler
                     userCodeFiles.CopyTo(xomlFilesPaths, 0);
                 }
 
-                WorkflowCompilerResults compilerResults = new CompilerWrapper().Compile(compilerParameters, xomlFilesPaths);
+                WorkflowCompilerResults compilerResults = new CompilerWrapper().Compile(
+                    compilerParameters,
+                    xomlFilesPaths
+                );
 
                 foreach (WorkflowCompilerError error in compilerResults.Errors)
                 {
@@ -602,7 +584,13 @@ namespace System.Workflow.ComponentModel.Compiler
                             workflowErrorLogger.LogMessage(error.ToString() + "\n");
                         }
                         else
-                            this.Log.LogWarning(error.ErrorText, error.ErrorNumber, error.FileName, error.Line, error.Column);
+                            this.Log.LogWarning(
+                                error.ErrorText,
+                                error.ErrorNumber,
+                                error.FileName,
+                                error.Line,
+                                error.Column
+                            );
                     }
                     else
                     {
@@ -614,7 +602,13 @@ namespace System.Workflow.ComponentModel.Compiler
                             workflowErrorLogger.LogMessage(error.ToString() + "\n");
                         }
                         else
-                            this.Log.LogError(error.ErrorText, error.ErrorNumber, error.FileName, error.Line, error.Column);
+                            this.Log.LogError(
+                                error.ErrorText,
+                                error.ErrorNumber,
+                                error.FileName,
+                                error.Line,
+                                error.Column
+                            );
                     }
                 }
 
@@ -624,10 +618,21 @@ namespace System.Workflow.ComponentModel.Compiler
                     if (ccu != null)
                     {
                         // Fix standard namespaces and root namespace.
-                        WorkflowMarkupSerializationHelpers.FixStandardNamespacesAndRootNamespace(ccu.Namespaces, this.RootNamespace, CompilerHelpers.GetSupportedLanguage(this.ProjectType.ToString())); //just add the standard namespaces
+                        WorkflowMarkupSerializationHelpers.FixStandardNamespacesAndRootNamespace(
+                            ccu.Namespaces,
+                            this.RootNamespace,
+                            CompilerHelpers.GetSupportedLanguage(this.ProjectType.ToString())
+                        ); //just add the standard namespaces
 
-                        string tempFile = tempFileCollection.AddExtension(codeProvider.FileExtension);
-                        using (StreamWriter fileStream = new StreamWriter(new FileStream(tempFile, FileMode.Create, FileAccess.Write), Encoding.UTF8))
+                        string tempFile = tempFileCollection.AddExtension(
+                            codeProvider.FileExtension
+                        );
+                        using (
+                            StreamWriter fileStream = new StreamWriter(
+                                new FileStream(tempFile, FileMode.Create, FileAccess.Write),
+                                Encoding.UTF8
+                            )
+                        )
                         {
                             CodeGeneratorOptions options = new CodeGeneratorOptions();
                             options.BracingStyle = "C";
@@ -636,17 +641,32 @@ namespace System.Workflow.ComponentModel.Compiler
 
                         this.outputFiles[0] = new TaskItem(tempFile);
                         this.temporaryFiles.Add(tempFile);
-                        this.Log.LogMessageFromResources(MessageImportance.Normal, "TempCodeFile", tempFile);
+                        this.Log.LogMessageFromResources(
+                            MessageImportance.Normal,
+                            "TempCodeFile",
+                            tempFile
+                        );
                     }
                 }
             }
             if ((errorCount > 0 || warningCount > 0) && workflowErrorLogger != null)
-                workflowErrorLogger.LogMessage(string.Format(CultureInfo.CurrentCulture, "\nCompile complete -- {0} errors, {1} warnings \n", new object[] { errorCount, warningCount }));
+                workflowErrorLogger.LogMessage(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "\nCompile complete -- {0} errors, {1} warnings \n",
+                        new object[] { errorCount, warningCount }
+                    )
+                );
 
 #if DEBUG
             DumpOutputParameters();
 #endif
-            this.Log.LogMessageFromResources(MessageImportance.Normal, "XomlValidationCompleted", errorCount, warningCount);
+            this.Log.LogMessageFromResources(
+                MessageImportance.Normal,
+                "XomlValidationCompleted",
+                errorCount,
+                warningCount
+            );
             return (errorCount == 0);
         }
 
@@ -655,14 +675,8 @@ namespace System.Workflow.ComponentModel.Compiler
         #region Private properties and methods
         private SupportedLanguages ProjectType
         {
-            get
-            {
-                return this.projectType;
-            }
-            set
-            {
-                this.projectType = value;
-            }
+            get { return this.projectType; }
+            set { this.projectType = value; }
         }
 
         /// <summary>
@@ -686,7 +700,11 @@ namespace System.Workflow.ComponentModel.Compiler
             }
 
             // If the project extension is not .csproj or .vbproj bail out with an error.
-            if (String.Compare(ProjectExtension, ".csproj", StringComparison.OrdinalIgnoreCase) != 0 && String.Compare(ProjectExtension, ".vbproj", StringComparison.OrdinalIgnoreCase) != 0)
+            if (
+                String.Compare(ProjectExtension, ".csproj", StringComparison.OrdinalIgnoreCase) != 0
+                && String.Compare(ProjectExtension, ".vbproj", StringComparison.OrdinalIgnoreCase)
+                    != 0
+            )
             {
                 this.Log.LogErrorFromResources("UnsupportedProjectType");
                 return false;
@@ -710,19 +728,30 @@ namespace System.Workflow.ComponentModel.Compiler
             DumpParametersTaskItems("resourceFiles", this.resourceFiles);
             DumpParametersTaskItems("referenceFiles", this.referenceFiles);
             DumpParametersTaskItems("compilationOptions", this.compilationOptions);
-            DumpParametersLine("  delaySign={0},keyContainer='{1}',keyFile='{2}'", this.delaySign, this.keyContainer, this.keyFile);
+            DumpParametersLine(
+                "  delaySign={0},keyContainer='{1}',keyFile='{2}'",
+                this.delaySign,
+                this.keyContainer,
+                this.keyFile
+            );
             DumpParametersLine("  targetFramework='{0}'", this.targetFramework);
         }
+
         void DumpOutputParameters()
         {
             DumpParametersLine("CompileWorkflowTask - Output Parameters:");
             DumpParametersTaskItems("outputFiles", this.outputFiles);
-            DumpParametersLine("  KeepTemporaryFiles={0},temporaryFiles=[{1} items]", this.KeepTemporaryFiles, this.temporaryFiles.Count);
+            DumpParametersLine(
+                "  KeepTemporaryFiles={0},temporaryFiles=[{1} items]",
+                this.KeepTemporaryFiles,
+                this.temporaryFiles.Count
+            );
             for (int i = 0; i < this.temporaryFiles.Count; i++)
             {
                 DumpParametersLine("    '{0}' [{1}]", this.temporaryFiles[i], i);
             }
         }
+
         void DumpParametersTaskItems(string name, ITaskItem[] items)
         {
             if (items == null)
@@ -744,12 +773,17 @@ namespace System.Workflow.ComponentModel.Compiler
                         DumpParametersLine("    {0} [{1}]", item.ItemSpec, i);
                         foreach (string metadataName in item.MetadataNames)
                         {
-                            DumpParametersLine("      {0}='{1}'", metadataName, item.GetMetadata(metadataName));
+                            DumpParametersLine(
+                                "      {0}='{1}'",
+                                metadataName,
+                                item.GetMetadata(metadataName)
+                            );
                         }
                     }
                 }
             }
         }
+
         void DumpParametersLine(string lineFormat, params object[] lineArguments)
         {
             if ((lineArguments != null) && (lineArguments.Length > 0))
@@ -767,7 +801,7 @@ namespace System.Workflow.ComponentModel.Compiler
 #endif
 
         /// <summary>
-        /// This method is used to get the absolute paths of the files 
+        /// This method is used to get the absolute paths of the files
         /// in a project.
         /// </summary>
         /// <param name="taskItems"></param>
@@ -794,7 +828,10 @@ namespace System.Workflow.ComponentModel.Compiler
             return itemSpecs;
         }
 
-        private static bool HasManifestResourceName(ITaskItem resourceFile, out string manifestResourceName)
+        private static bool HasManifestResourceName(
+            ITaskItem resourceFile,
+            out string manifestResourceName
+        )
         {
             IEnumerator metadataNames = resourceFile.MetadataNames.GetEnumerator();
 
@@ -825,7 +862,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 compilerOptions.AppendFormat(" /keycontainer:{0}", this.KeyContainer);
 
             if (this.KeyFile != null && this.KeyFile.Trim().Length > 0)
-                compilerOptions.AppendFormat(" /keyfile:\"{0}\"", Path.Combine(this.ProjectDirectory, this.KeyFile));
+                compilerOptions.AppendFormat(
+                    " /keyfile:\"{0}\"",
+                    Path.Combine(this.ProjectDirectory, this.KeyFile)
+                );
 
             if (this.compilationOptions != null && this.compilationOptions.Length > 0)
             {
@@ -843,13 +883,18 @@ namespace System.Workflow.ComponentModel.Compiler
 
                     if (HasManifestResourceName(resourceFile, out manifestResourceName))
                     {
-                        compilerOptions.AppendFormat(" /resource:\"{0}\",{1}",
-                            Path.Combine(this.ProjectDirectory, resourceFile.ItemSpec), manifestResourceName);
+                        compilerOptions.AppendFormat(
+                            " /resource:\"{0}\",{1}",
+                            Path.Combine(this.ProjectDirectory, resourceFile.ItemSpec),
+                            manifestResourceName
+                        );
                     }
                     else
                     {
-                        compilerOptions.AppendFormat(" /resource:\"{0}\"",
-                            Path.Combine(this.ProjectDirectory, resourceFile.ItemSpec));
+                        compilerOptions.AppendFormat(
+                            " /resource:\"{0}\"",
+                            Path.Combine(this.ProjectDirectory, resourceFile.ItemSpec)
+                        );
                     }
                 }
             }
@@ -883,16 +928,16 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 try
                 {
-                    RegistryKey winoeKey = Registry.LocalMachine.OpenSubKey(Helpers.ProductRootRegKey);
+                    RegistryKey winoeKey = Registry.LocalMachine.OpenSubKey(
+                        Helpers.ProductRootRegKey
+                    );
                     if (winoeKey != null)
                     {
                         object obj = winoeKey.GetValue("KeepTempFiles");
                         retVal = (Convert.ToInt32(obj, CultureInfo.InvariantCulture) != 0);
                     }
                 }
-                catch
-                {
-                }
+                catch { }
             }
 
             return retVal;
@@ -902,9 +947,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         class CompilerOptionsBuilder
         {
-            public CompilerOptionsBuilder()
-            {
-            }
+            public CompilerOptionsBuilder() { }
 
             public void AddCustomOption(StringBuilder options, ITaskItem option)
             {
@@ -924,32 +967,53 @@ namespace System.Workflow.ComponentModel.Compiler
                     }
                     else
                     {
-                        options.AppendFormat(" /{0}{1}{2}", optionName, optionDelimiter, optionValue);
+                        options.AppendFormat(
+                            " /{0}{1}{2}",
+                            optionName,
+                            optionDelimiter,
+                            optionValue
+                        );
                     }
                 }
             }
 
-            protected virtual void GetOptionInfo(ITaskItem option, out string optionName, out string optionValue, out string optionDelimiter)
+            protected virtual void GetOptionInfo(
+                ITaskItem option,
+                out string optionName,
+                out string optionValue,
+                out string optionDelimiter
+            )
             {
                 optionName = option.ItemSpec;
                 optionValue = option.GetMetadata("value");
                 optionDelimiter = option.GetMetadata("delimiter");
             }
         }
+
         abstract class VBCompilerOptionsBuilder : CompilerOptionsBuilder
         {
             const string SuppressWarningOption = "nowarn";
 
             protected VBCompilerOptionsBuilder()
-                : base()
-            {
-            }
+                : base() { }
 
-            sealed protected override void GetOptionInfo(ITaskItem option, out string optionName, out string optionValue, out string optionDelimiter)
+            protected sealed override void GetOptionInfo(
+                ITaskItem option,
+                out string optionName,
+                out string optionValue,
+                out string optionDelimiter
+            )
             {
                 base.GetOptionInfo(option, out optionName, out optionValue, out optionDelimiter);
-                if ((string.Compare(optionName, SuppressWarningOption, StringComparison.OrdinalIgnoreCase) == 0) &&
-                    !string.IsNullOrWhiteSpace(optionValue))
+                if (
+                    (
+                        string.Compare(
+                            optionName,
+                            SuppressWarningOption,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    ) && !string.IsNullOrWhiteSpace(optionValue)
+                )
                 {
                     string[] warnings = optionValue.Split(',');
                     StringBuilder validWarnings = new StringBuilder();
@@ -978,49 +1042,274 @@ namespace System.Workflow.ComponentModel.Compiler
 
             protected abstract bool IsValidWarning(string warning);
         }
+
         class WhidbeyVBCompilerOptionsBuilder : VBCompilerOptionsBuilder
         {
             static HashSet<string> validWarnings = new HashSet<string>(StringComparer.Ordinal)
-                { "40000", "40003", "40004", "40005", "40007", "40008", "40009", "40010", "40011", "40012", "40014", "40018", "40019",
-                    "40020", "40021", "40022", "40023", "40024", "40025", "40026", "40027", "40028", "40029", "40030", "40031", "40032",
-                    "40033", "40034", "40035", "40038", "40039", "40040", "40041", "40042", "40043", "40046", "40047", "40048", "40049",
-                    "40050", "40051", "40052", "40053", "40054", "40055", "40056", "40057", 
-                    "41000", "41001", "41002", "41003", "41004", "41005", "41006", "41998", "41999",
-                    "42000", "42001", "42002", "42003", "42004", "42014", "42015", "42016", "42017", "42018", "42019", "42020", "42021",
-                    "42022", "42024", "42025", "42026", "42028", "42029", "42030", "42031", "42032", "42033", "42034", "42035", "42036",
-                    "42101", "42102", "42104", "42105", "42106", "42107", "42108", "42109", "42200", "42203", "42204", "42205", "42206",
-                    "42300", "42301", "42302", "42303", "42304", "42305", "42306", "42307", "42308", "42309", "42310", "42311", "42312",
-                    "42313", "42314", "42315", "42316", "42317", "42318", "42319", "42320", "42321" };
+            {
+                "40000",
+                "40003",
+                "40004",
+                "40005",
+                "40007",
+                "40008",
+                "40009",
+                "40010",
+                "40011",
+                "40012",
+                "40014",
+                "40018",
+                "40019",
+                "40020",
+                "40021",
+                "40022",
+                "40023",
+                "40024",
+                "40025",
+                "40026",
+                "40027",
+                "40028",
+                "40029",
+                "40030",
+                "40031",
+                "40032",
+                "40033",
+                "40034",
+                "40035",
+                "40038",
+                "40039",
+                "40040",
+                "40041",
+                "40042",
+                "40043",
+                "40046",
+                "40047",
+                "40048",
+                "40049",
+                "40050",
+                "40051",
+                "40052",
+                "40053",
+                "40054",
+                "40055",
+                "40056",
+                "40057",
+                "41000",
+                "41001",
+                "41002",
+                "41003",
+                "41004",
+                "41005",
+                "41006",
+                "41998",
+                "41999",
+                "42000",
+                "42001",
+                "42002",
+                "42003",
+                "42004",
+                "42014",
+                "42015",
+                "42016",
+                "42017",
+                "42018",
+                "42019",
+                "42020",
+                "42021",
+                "42022",
+                "42024",
+                "42025",
+                "42026",
+                "42028",
+                "42029",
+                "42030",
+                "42031",
+                "42032",
+                "42033",
+                "42034",
+                "42035",
+                "42036",
+                "42101",
+                "42102",
+                "42104",
+                "42105",
+                "42106",
+                "42107",
+                "42108",
+                "42109",
+                "42200",
+                "42203",
+                "42204",
+                "42205",
+                "42206",
+                "42300",
+                "42301",
+                "42302",
+                "42303",
+                "42304",
+                "42305",
+                "42306",
+                "42307",
+                "42308",
+                "42309",
+                "42310",
+                "42311",
+                "42312",
+                "42313",
+                "42314",
+                "42315",
+                "42316",
+                "42317",
+                "42318",
+                "42319",
+                "42320",
+                "42321",
+            };
 
             public WhidbeyVBCompilerOptionsBuilder()
-                : base()
-            {
-            }
+                : base() { }
 
             protected override bool IsValidWarning(string warning)
             {
                 return validWarnings.Contains(warning);
             }
         }
+
         class OrcasVBCompilerOptionsBuilder : VBCompilerOptionsBuilder
         {
             static HashSet<string> validWarnings = new HashSet<string>(StringComparer.Ordinal)
-                { "40000", "40003", "40004", "40005", "40007", "40008", "40009", "40010", "40011", "40012", "40014", "40018", "40019",
-                    "40020", "40021", "40022", "40023", "40024", "40025", "40026", "40027", "40028", "40029", "40030", "40031", "40032",
-                    "40033", "40034", "40035", "40038", "40039", "40040", "40041", "40042", "40043", "40046", "40047", "40048", "40049",
-                    "40050", "40051", "40052", "40053", "40054", "40055", "40056", "40057",
-                    "41000", "41001", "41002", "41003", "41004", "41005", "41006", "41007", "41008", "41998", "41999",
-                    "42000", "42001", "42002", "42004", "42014", "42015", "42016", "42017", "42018", "42019", "42020", "42021", "42022",
-                    "42024", "42025", "42026", "42028", "42029", "42030", "42031", "42032", "42033", "42034", "42035", "42036", "42099",
-                    "42101", "42102", "42104", "42105", "42106", "42107", "42108", "42109", "42110", "42111", "42200", "42203", "42204",
-                    "42205", "42206", "42207", "42300", "42301", "42302", "42303", "42304", "42305", "42306", "42307", "42308", "42309",
-                    "42310", "42311", "42312", "42313", "42314", "42315", "42316", "42317", "42318", "42319", "42320", "42321", "42322",
-                    "42324", "42326", "42327", "42328" };
+            {
+                "40000",
+                "40003",
+                "40004",
+                "40005",
+                "40007",
+                "40008",
+                "40009",
+                "40010",
+                "40011",
+                "40012",
+                "40014",
+                "40018",
+                "40019",
+                "40020",
+                "40021",
+                "40022",
+                "40023",
+                "40024",
+                "40025",
+                "40026",
+                "40027",
+                "40028",
+                "40029",
+                "40030",
+                "40031",
+                "40032",
+                "40033",
+                "40034",
+                "40035",
+                "40038",
+                "40039",
+                "40040",
+                "40041",
+                "40042",
+                "40043",
+                "40046",
+                "40047",
+                "40048",
+                "40049",
+                "40050",
+                "40051",
+                "40052",
+                "40053",
+                "40054",
+                "40055",
+                "40056",
+                "40057",
+                "41000",
+                "41001",
+                "41002",
+                "41003",
+                "41004",
+                "41005",
+                "41006",
+                "41007",
+                "41008",
+                "41998",
+                "41999",
+                "42000",
+                "42001",
+                "42002",
+                "42004",
+                "42014",
+                "42015",
+                "42016",
+                "42017",
+                "42018",
+                "42019",
+                "42020",
+                "42021",
+                "42022",
+                "42024",
+                "42025",
+                "42026",
+                "42028",
+                "42029",
+                "42030",
+                "42031",
+                "42032",
+                "42033",
+                "42034",
+                "42035",
+                "42036",
+                "42099",
+                "42101",
+                "42102",
+                "42104",
+                "42105",
+                "42106",
+                "42107",
+                "42108",
+                "42109",
+                "42110",
+                "42111",
+                "42200",
+                "42203",
+                "42204",
+                "42205",
+                "42206",
+                "42207",
+                "42300",
+                "42301",
+                "42302",
+                "42303",
+                "42304",
+                "42305",
+                "42306",
+                "42307",
+                "42308",
+                "42309",
+                "42310",
+                "42311",
+                "42312",
+                "42313",
+                "42314",
+                "42315",
+                "42316",
+                "42317",
+                "42318",
+                "42319",
+                "42320",
+                "42321",
+                "42322",
+                "42324",
+                "42326",
+                "42327",
+                "42328",
+            };
 
             public OrcasVBCompilerOptionsBuilder()
-                : base()
-            {
-            }
+                : base() { }
 
             protected override bool IsValidWarning(string warning)
             {
@@ -1030,7 +1319,8 @@ namespace System.Workflow.ComponentModel.Compiler
     }
     #endregion
 
-    internal sealed class CreateWorkflowManifestResourceNameForCSharp : CreateCSharpManifestResourceName
+    internal sealed class CreateWorkflowManifestResourceNameForCSharp
+        : CreateCSharpManifestResourceName
     {
         private bool lastAskedFileWasXoml = false;
 
@@ -1047,34 +1337,54 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 return base.ResourceFilesWithManifestResourceNames;
             }
-            set
-            {
-                base.ResourceFilesWithManifestResourceNames = value;
-            }
+            set { base.ResourceFilesWithManifestResourceNames = value; }
         }
 
-        override protected string CreateManifestName(string fileName, string linkFileName, string rootNamespace, string dependentUponFileName, Stream binaryStream)
+        protected override string CreateManifestName(
+            string fileName,
+            string linkFileName,
+            string rootNamespace,
+            string dependentUponFileName,
+            Stream binaryStream
+        )
         {
             string manifestName = string.Empty;
             if (!this.lastAskedFileWasXoml)
             {
-                manifestName = base.CreateManifestName(fileName, linkFileName, rootNamespace, dependentUponFileName, binaryStream);
+                manifestName = base.CreateManifestName(
+                    fileName,
+                    linkFileName,
+                    rootNamespace,
+                    dependentUponFileName,
+                    binaryStream
+                );
             }
             else
             {
-                manifestName = TasksHelper.GetXomlManifestName(fileName, linkFileName, rootNamespace, binaryStream);
+                manifestName = TasksHelper.GetXomlManifestName(
+                    fileName,
+                    linkFileName,
+                    rootNamespace,
+                    binaryStream
+                );
             }
 
             string extension = Path.GetExtension(fileName);
-            if (String.Compare(extension, ".rules", StringComparison.OrdinalIgnoreCase) == 0 ||
-                String.Compare(extension, WorkflowDesignerLoader.DesignerLayoutFileExtension, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(extension, ".rules", StringComparison.OrdinalIgnoreCase) == 0
+                || String.Compare(
+                    extension,
+                    WorkflowDesignerLoader.DesignerLayoutFileExtension,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
                 manifestName += extension;
 
             this.lastAskedFileWasXoml = false;
             return manifestName;
         }
 
-        override protected bool IsSourceFile(string fileName)
+        protected override bool IsSourceFile(string fileName)
         {
             string extension = Path.GetExtension(fileName);
             if (String.Compare(extension, ".xoml", StringComparison.OrdinalIgnoreCase) == 0)
@@ -1086,32 +1396,56 @@ namespace System.Workflow.ComponentModel.Compiler
         }
     }
 
-    internal sealed class CreateWorkflowManifestResourceNameForVB : CreateVisualBasicManifestResourceName
+    internal sealed class CreateWorkflowManifestResourceNameForVB
+        : CreateVisualBasicManifestResourceName
     {
         private bool lastAskedFileWasXoml = false;
 
-        override protected string CreateManifestName(string fileName, string linkFileName, string rootNamespace, string dependentUponFileName, Stream binaryStream)
+        protected override string CreateManifestName(
+            string fileName,
+            string linkFileName,
+            string rootNamespace,
+            string dependentUponFileName,
+            Stream binaryStream
+        )
         {
             string manifestName = string.Empty;
             if (!this.lastAskedFileWasXoml)
             {
-                manifestName = base.CreateManifestName(fileName, linkFileName, rootNamespace, dependentUponFileName, binaryStream);
+                manifestName = base.CreateManifestName(
+                    fileName,
+                    linkFileName,
+                    rootNamespace,
+                    dependentUponFileName,
+                    binaryStream
+                );
             }
             else
             {
-                manifestName = TasksHelper.GetXomlManifestName(fileName, linkFileName, rootNamespace, binaryStream);
+                manifestName = TasksHelper.GetXomlManifestName(
+                    fileName,
+                    linkFileName,
+                    rootNamespace,
+                    binaryStream
+                );
             }
 
             string extension = Path.GetExtension(fileName);
-            if (String.Compare(extension, ".rules", StringComparison.OrdinalIgnoreCase) == 0 ||
-                String.Compare(extension, WorkflowDesignerLoader.DesignerLayoutFileExtension, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(extension, ".rules", StringComparison.OrdinalIgnoreCase) == 0
+                || String.Compare(
+                    extension,
+                    WorkflowDesignerLoader.DesignerLayoutFileExtension,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
                 manifestName += extension;
 
             this.lastAskedFileWasXoml = false;
             return manifestName;
         }
 
-        override protected bool IsSourceFile(string fileName)
+        protected override bool IsSourceFile(string fileName)
         {
             string extension = Path.GetExtension(fileName);
             if (String.Compare(extension, ".xoml", StringComparison.OrdinalIgnoreCase) == 0)
@@ -1125,7 +1459,12 @@ namespace System.Workflow.ComponentModel.Compiler
 
     internal static class TasksHelper
     {
-        internal static string GetXomlManifestName(string fileName, string linkFileName, string rootNamespace, Stream binaryStream)
+        internal static string GetXomlManifestName(
+            string fileName,
+            string linkFileName,
+            string rootNamespace,
+            Stream binaryStream
+        )
         {
             string manifestName = string.Empty;
 
@@ -1138,12 +1477,15 @@ namespace System.Workflow.ComponentModel.Compiler
 
             if (binaryStream != null)
             {
-                // Resource depends on a form. Now, get the form's class name fully 
+                // Resource depends on a form. Now, get the form's class name fully
                 // qualified with a namespace.
                 string name = null;
                 try
                 {
-                    Xml.XmlTextReader reader = new Xml.XmlTextReader(binaryStream) { DtdProcessing = DtdProcessing.Prohibit };
+                    Xml.XmlTextReader reader = new Xml.XmlTextReader(binaryStream)
+                    {
+                        DtdProcessing = DtdProcessing.Prohibit,
+                    };
                     if (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
                     {
                         if (reader.MoveToAttribute("Class", StandardXomlKeys.Definitions_XmlNs))
@@ -1159,7 +1501,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     manifestName = name;
 
-                    // Append the culture if there is one.        
+                    // Append the culture if there is one.
                     if (info.culture != null && info.culture.Length > 0)
                     {
                         manifestName = manifestName + "." + info.culture;
@@ -1168,7 +1510,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
 
             // If there's no manifest name at this point, then fall back to using the
-            // RootNamespace+Filename_with_slashes_converted_to_dots         
+            // RootNamespace+Filename_with_slashes_converted_to_dots
             if (manifestName.Length == 0)
             {
                 // If Rootnamespace was null, then it wasn't set from the project resourceFile.
@@ -1178,18 +1520,31 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 // Replace spaces in the directory name with underscores. Needed for compatibility with Everett.
                 // Note that spaces in the file name itself are preserved.
-                string everettCompatibleDirectoryName = CreateManifestResourceName.MakeValidEverettIdentifier(Path.GetDirectoryName(info.cultureNeutralFilename));
+                string everettCompatibleDirectoryName =
+                    CreateManifestResourceName.MakeValidEverettIdentifier(
+                        Path.GetDirectoryName(info.cultureNeutralFilename)
+                    );
 
                 // only strip extension for .resx files
-                if (0 == String.Compare(Path.GetExtension(info.cultureNeutralFilename), ".resx", StringComparison.OrdinalIgnoreCase))
+                if (
+                    0
+                    == String.Compare(
+                        Path.GetExtension(info.cultureNeutralFilename),
+                        ".resx",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    manifestName += Path.Combine(everettCompatibleDirectoryName, Path.GetFileNameWithoutExtension(info.cultureNeutralFilename));
+                    manifestName += Path.Combine(
+                        everettCompatibleDirectoryName,
+                        Path.GetFileNameWithoutExtension(info.cultureNeutralFilename)
+                    );
 
                     // Replace all '\' with '.'
                     manifestName = manifestName.Replace(Path.DirectorySeparatorChar, '.');
                     manifestName = manifestName.Replace(Path.AltDirectorySeparatorChar, '.');
 
-                    // Append the culture if there is one.        
+                    // Append the culture if there is one.
                     if (info.culture != null && info.culture.Length > 0)
                     {
                         manifestName = manifestName + "." + info.culture;
@@ -1197,13 +1552,16 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
                 else
                 {
-                    manifestName += Path.Combine(everettCompatibleDirectoryName, Path.GetFileName(info.cultureNeutralFilename));
+                    manifestName += Path.Combine(
+                        everettCompatibleDirectoryName,
+                        Path.GetFileName(info.cultureNeutralFilename)
+                    );
 
                     // Replace all '\' with '.'
                     manifestName = manifestName.Replace(Path.DirectorySeparatorChar, '.');
                     manifestName = manifestName.Replace(Path.AltDirectorySeparatorChar, '.');
 
-                    // Prepend the culture as a subdirectory if there is one.        
+                    // Prepend the culture as a subdirectory if there is one.
                     if (info.culture != null && info.culture.Length > 0)
                     {
                         manifestName = info.culture + Path.DirectorySeparatorChar + manifestName;
@@ -1212,12 +1570,11 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return manifestName;
         }
-
     }
 
     internal static class Culture
     {
-        static private string[] cultureInfoStrings;
+        private static string[] cultureInfoStrings;
 
         internal struct ItemCultureInfo
         {
@@ -1304,41 +1661,37 @@ namespace System.Workflow.ComponentModel.Compiler
     // This adds the temp file to the VB compiler project who would report an error if the file is deleted
     // when re-compilation happens in the back-ground.
 
-    // However, if we don't delete the temp file, we have another problem.  When we're in code-seperation mode, 
-    // we compile our xoml files on the fly and add the buffer that contains 
-    // the code generated based on the xoml to the project.  This code conflicts with the code in the temp file, 
-    // thus causing all sorts of type conflicting errors.  
+    // However, if we don't delete the temp file, we have another problem.  When we're in code-seperation mode,
+    // we compile our xoml files on the fly and add the buffer that contains
+    // the code generated based on the xoml to the project.  This code conflicts with the code in the temp file,
+    // thus causing all sorts of type conflicting errors.
 
     // Because the two reasons above, we wrote this cleanup task to keep the temp file but clear out the content
     // of the file, thus make it work for both cases.
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class CompileWorkflowCleanupTask : Microsoft.Build.Utilities.Task, ITask
     {
-
         #region Members and Constructors
 
         private ITaskItem[] temporaryFiles = null;
 
         public CompileWorkflowCleanupTask()
-            :
-            base(new ResourceManager("System.Workflow.ComponentModel.BuildTasksStrings",
-                                     Assembly.GetExecutingAssembly()))
-        {
-        }
+            : base(
+                new ResourceManager(
+                    "System.Workflow.ComponentModel.BuildTasksStrings",
+                    Assembly.GetExecutingAssembly()
+                )
+            ) { }
 
         #endregion
 
         #region Input parameters
         public ITaskItem[] TemporaryFiles
         {
-            get
-            {
-                return this.temporaryFiles;
-            }
-            set
-            {
-                this.temporaryFiles = value;
-            }
+            get { return this.temporaryFiles; }
+            set { this.temporaryFiles = value; }
         }
         #endregion
 

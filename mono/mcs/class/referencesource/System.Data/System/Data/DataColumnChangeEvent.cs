@@ -7,7 +7,8 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
     /// <devdoc>
@@ -15,13 +16,14 @@ namespace System.Data {
     ///       Provides data for the <see cref='System.Data.DataTable.ColumnChanging'/> event.
     ///    </para>
     /// </devdoc>
-    public class DataColumnChangeEventArgs : EventArgs {
-
+    public class DataColumnChangeEventArgs : EventArgs
+    {
         private readonly DataRow _row;
         private DataColumn _column;
         private object _proposedValue;
 
-        internal DataColumnChangeEventArgs(DataRow row) {
+        internal DataColumnChangeEventArgs(DataRow row)
+        {
             _row = row;
         }
 
@@ -30,7 +32,8 @@ namespace System.Data {
         ///       Initializes a new instance of the <see cref='System.Data.DataColumnChangeEventArgs'/> class.
         ///    </para>
         /// </devdoc>
-        public DataColumnChangeEventArgs(DataRow row, DataColumn column, object value) {
+        public DataColumnChangeEventArgs(DataRow row, DataColumn column, object value)
+        {
             _row = row;
             _column = column;
             _proposedValue = value;
@@ -39,34 +42,30 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>Gets the column whose value is changing.</para>
         /// </devdoc>
-        public DataColumn Column {
-            get {
-                return _column;
-            }
+        public DataColumn Column
+        {
+            get { return _column; }
         }
 
         /// <devdoc>
         ///    <para>Gets the row whose value is changing.</para>
         /// </devdoc>
-        public DataRow Row {
-            get {
-                return _row;
-            }
+        public DataRow Row
+        {
+            get { return _row; }
         }
 
         /// <devdoc>
         ///    <para>Gets or sets the proposed value.</para>
         /// </devdoc>
-        public object ProposedValue {
-            get {
-                return _proposedValue;
-            }
-            set {
-                _proposedValue = value;
-            }
+        public object ProposedValue
+        {
+            get { return _proposedValue; }
+            set { _proposedValue = value; }
         }
-        
-        internal void InitializeColumnChangeEvent(DataColumn column, object value) {            
+
+        internal void InitializeColumnChangeEvent(DataColumn column, object value)
+        {
             _column = column;
             _proposedValue = value;
         }

@@ -66,9 +66,7 @@ public class PageInformation : IDisposable
         {
             _logger.LogError(e.Failure);
         }
-        catch
-        {
-        }
+        catch { }
         FailedRequests.Add(e.Failure);
     }
 
@@ -79,9 +77,7 @@ public class PageInformation : IDisposable
         {
             _logger.LogError(e);
         }
-        catch
-        {
-        }
+        catch { }
 
         PageErrors.Add(e);
     }
@@ -90,10 +86,14 @@ public class PageInformation : IDisposable
     {
         try
         {
-            var messageText = message.Text.Replace(Environment.NewLine, $"{Environment.NewLine}      ");
+            var messageText = message.Text.Replace(
+                Environment.NewLine,
+                $"{Environment.NewLine}      "
+            );
             var location = message.Location;
 
-            var logMessage = $"[{_page.Url}]{Environment.NewLine}      {messageText}{Environment.NewLine}      ({location})";
+            var logMessage =
+                $"[{_page.Url}]{Environment.NewLine}      {messageText}{Environment.NewLine}      ({location})";
 
             var logLevel = message.Type switch
             {
@@ -101,7 +101,7 @@ public class PageInformation : IDisposable
                 "verbose" => LogLevel.Debug,
                 "warning" => LogLevel.Warning,
                 "error" => LogLevel.Error,
-                _ => LogLevel.Information
+                _ => LogLevel.Information,
             };
             _logger.Log(logLevel, logMessage);
 

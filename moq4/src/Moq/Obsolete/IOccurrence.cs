@@ -22,9 +22,12 @@ namespace Moq.Language
         ///     .AtMostOnce();
         /// </code>
         /// </example>
-        [Obsolete("Use 'mock.Verify(call, Times.AtMostOnce)' or 'setup.Verifiable(Times.AtMostOnce)' instead.")]
+        [Obsolete(
+            "Use 'mock.Verify(call, Times.AtMostOnce)' or 'setup.Verifiable(Times.AtMostOnce)' instead."
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         IVerifies AtMostOnce();
+
         /// <summary>
         /// The expected invocation can happen at most specified number of times.
         /// </summary>
@@ -36,7 +39,9 @@ namespace Moq.Language
         ///     .AtMost( 5 );
         /// </code>
         /// </example>
-        [Obsolete("Use 'mock.Verify(call, Times.AtMost(callCount))' or 'setup.Verifiable(Times.AtMost(callCount))' instead.")]
+        [Obsolete(
+            "Use 'mock.Verify(call, Times.AtMost(callCount))' or 'setup.Verifiable(Times.AtMost(callCount))' instead."
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         IVerifies AtMost(int callCount);
     }

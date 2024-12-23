@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataBoundControlMode.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.UI.WebControls {
-
-    public enum DataBoundControlMode {
+namespace System.Web.UI.WebControls
+{
+    public enum DataBoundControlMode
+    {
         ReadOnly,
         Edit,
-        Insert
+        Insert,
     }
-
 }

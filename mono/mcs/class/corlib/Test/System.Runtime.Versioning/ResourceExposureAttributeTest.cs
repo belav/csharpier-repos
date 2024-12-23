@@ -1,5 +1,5 @@
 //
-// ResourceExposureAttributeTest.cs - Unit tests for 
+// ResourceExposureAttributeTest.cs - Unit tests for
 //	System.Runtime.Versioning.ResourceExposureAttribute
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,32 +30,31 @@
 
 using System;
 using System.Runtime.Versioning;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Runtime.Versioning {
+namespace MonoTests.System.Runtime.Versioning
+{
+    [TestFixture]
+    public class ResourceExposureAttributeTest
+    {
+        [Test]
+        public void Constructor1()
+        {
+            ResourceExposureAttribute rea = null;
+            Array values = Enum.GetValues(typeof(ResourceScope));
+            foreach (ResourceScope resource in values)
+            {
+                rea = new ResourceExposureAttribute(resource);
+                Assert.AreEqual(resource, rea.ResourceExposureLevel, resource.ToString());
+            }
+        }
 
-	[TestFixture]
-	public class ResourceExposureAttributeTest {
-
-		[Test]
-		public void Constructor1 ()
-		{
-			ResourceExposureAttribute rea = null;
-			Array values = Enum.GetValues (typeof (ResourceScope));
-			foreach (ResourceScope resource in values) {
-				rea = new ResourceExposureAttribute (resource);
-				Assert.AreEqual (resource, rea.ResourceExposureLevel, resource.ToString ());
-			}
-		}
-
-		[Test]
-		public void InvalidResourceScope1 ()
-		{
-			ResourceScope bad = (ResourceScope) Int32.MinValue;
-			ResourceExposureAttribute rea = new ResourceExposureAttribute (bad);
-			Assert.AreEqual (bad, rea.ResourceExposureLevel, "ResourceScope");
-		}
-	}
+        [Test]
+        public void InvalidResourceScope1()
+        {
+            ResourceScope bad = (ResourceScope)Int32.MinValue;
+            ResourceExposureAttribute rea = new ResourceExposureAttribute(bad);
+            Assert.AreEqual(bad, rea.ResourceExposureLevel, "ResourceScope");
+        }
+    }
 }
-

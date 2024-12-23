@@ -12,11 +12,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class GlobalKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public GlobalKeywordRecommender()
-            : base(SyntaxKind.GlobalKeyword)
-        {
-        }
+            : base(SyntaxKind.GlobalKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
 
@@ -27,10 +29,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     return true;
             }
 
-            return
-                context.IsTypeContext ||
-                context.IsEnumBaseListContext ||
-                UsingKeywordRecommender.IsUsingDirectiveContext(context, forGlobalKeyword: true, cancellationToken);
+            return context.IsTypeContext
+                || context.IsEnumBaseListContext
+                || UsingKeywordRecommender.IsUsingDirectiveContext(
+                    context,
+                    forGlobalKeyword: true,
+                    cancellationToken
+                );
         }
     }
 }

@@ -28,17 +28,20 @@ internal partial class XmlSnippetParser
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public XmlSnippetParser()
-    {
-    }
+    public XmlSnippetParser() { }
 
-    internal ParsedXmlSnippet? GetParsedXmlSnippet(SnippetInfo matchingSnippetInfo, RequestContext context)
+    internal ParsedXmlSnippet? GetParsedXmlSnippet(
+        SnippetInfo matchingSnippetInfo,
+        RequestContext context
+    )
     {
         if (_parsedSnippetsCache.TryGetValue(matchingSnippetInfo.Title, out var cachedSnippet))
         {
             if (cachedSnippet == null)
             {
-                context.TraceWarning($"Returning a null cached snippet for {matchingSnippetInfo.Title}");
+                context.TraceWarning(
+                    $"Returning a null cached snippet for {matchingSnippetInfo.Title}"
+                );
             }
 
             return cachedSnippet;
@@ -47,12 +50,16 @@ internal partial class XmlSnippetParser
         ParsedXmlSnippet? parsedSnippet = null;
         try
         {
-            context.TraceInformation($"Reading snippet for {matchingSnippetInfo.Title} with path {matchingSnippetInfo.Path}");
+            context.TraceInformation(
+                $"Reading snippet for {matchingSnippetInfo.Title} with path {matchingSnippetInfo.Path}"
+            );
             parsedSnippet = GetAndParseSnippetFromFile(matchingSnippetInfo);
         }
         catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.General))
         {
-            context.TraceError($"Got exception parsing xml snippet {matchingSnippetInfo.Title} from file {matchingSnippetInfo.Path}");
+            context.TraceError(
+                $"Got exception parsing xml snippet {matchingSnippetInfo.Title} from file {matchingSnippetInfo.Path}"
+            );
             context.TraceException(ex);
         }
 
@@ -67,7 +74,10 @@ internal partial class XmlSnippetParser
         // Read the XML file to get the snippet and snippet metadata.
         var matchingSnippet = RetrieveSnippetXmlFromFile(snippetInfo);
 
-        Contract.ThrowIfFalse(matchingSnippet.IsExpansionSnippet(), "Only expansion snippets are supported");
+        Contract.ThrowIfFalse(
+            matchingSnippet.IsExpansionSnippet(),
+            "Only expansion snippets are supported"
+        );
 
         if (!matchingSnippet.IsExpansionSnippet())
         {
@@ -91,7 +101,9 @@ internal partial class XmlSnippetParser
 
         if (!File.Exists(path))
         {
-            throw new InvalidOperationException($"Snippet {snippetInfo.Title} has an invalid file path: {snippetInfo.Path}");
+            throw new InvalidOperationException(
+                $"Snippet {snippetInfo.Title} has an invalid file path: {snippetInfo.Path}"
+            );
         }
 
         // Load the xml for the snippet from disk.
@@ -105,6 +117,7 @@ internal partial class XmlSnippetParser
     internal readonly struct TestAccessor
     {
         private readonly XmlSnippetParser _snippetParser;
+
         public TestAccessor(XmlSnippetParser snippetParser)
         {
             _snippetParser = snippetParser;
@@ -112,6 +125,7 @@ internal partial class XmlSnippetParser
 
         public int GetCachedSnippetsCount() => _snippetParser._parsedSnippetsCache.Count;
 
-        public ParsedXmlSnippet GetCachedSnippet(string snippet) => _snippetParser._parsedSnippetsCache[snippet]!;
+        public ParsedXmlSnippet GetCachedSnippet(string snippet) =>
+            _snippetParser._parsedSnippetsCache[snippet]!;
     }
 }

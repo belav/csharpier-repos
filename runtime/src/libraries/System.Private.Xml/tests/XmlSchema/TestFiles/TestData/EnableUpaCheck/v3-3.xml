@@ -1,20 +1,20 @@
-<doc xmlns:a="a" xmlns:b="b">
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
-<e/>
+<doc {http://www.w3.org/2000/xmlns/}a="a" {http://www.w3.org/2000/xmlns/}b="b">
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
+  <e />
 </doc>

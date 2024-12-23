@@ -15,10 +15,17 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     internal override JumpTable CreateTable(
         int defaultDestination,
         int exitDestination,
-        params (string text, int destination)[] entries)
+        params (string text, int destination)[] entries
+    )
     {
         var fallback = new DictionaryJumpTable(defaultDestination, exitDestination, entries);
-        var table = new ILEmitTrieJumpTable(defaultDestination, exitDestination, entries, Vectorize, fallback);
+        var table = new ILEmitTrieJumpTable(
+            defaultDestination,
+            exitDestination,
+            entries,
+            Vectorize,
+            fallback
+        );
         table.InitializeILDelegate();
         return table;
     }
@@ -27,7 +34,13 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     public async Task InitializeILDelegateAsync_ReplacesDelegate()
     {
         // Arrange
-        var table = new ILEmitTrieJumpTable(0, -1, new[] { ("hi", 1), }, Vectorize, Mock.Of<JumpTable>());
+        var table = new ILEmitTrieJumpTable(
+            0,
+            -1,
+            new[] { ("hi", 1) },
+            Vectorize,
+            Mock.Of<JumpTable>()
+        );
         var original = table._getDestination;
 
         // Act
@@ -42,7 +55,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     // \u007F = lowest non-ASCII character
     // \uFFFF = highest non-ASCII character
     [Theory]
-
     // non-ASCII character in first section non-vectorized comparisons
     [InlineData("he\u007F", "he\u007Flo-world", 0, 3)]
     [InlineData("he\uFFFF", "he\uFFFFlo-world", 0, 3)]
@@ -50,7 +62,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("e\uFFFF", "he\uFFFFlo-world", 1, 2)]
     [InlineData("\u007F", "he\u007Flo-world", 2, 1)]
     [InlineData("\uFFFF", "he\uFFFFlo-world", 2, 1)]
-
     // non-ASCII character in first section vectorized comparions
     [InlineData("hel\u007F", "hel\u007Fo-world", 0, 4)]
     [InlineData("hel\uFFFF", "hel\uFFFFo-world", 0, 4)]
@@ -60,7 +71,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("l\uFFFFo-", "hel\uFFFFo-world", 2, 4)]
     [InlineData("\u007Fo-w", "hel\u007Fo-world", 3, 4)]
     [InlineData("\uFFFFo-w", "hel\uFFFFo-world", 3, 4)]
-
     // non-ASCII character in second section non-vectorized comparisons
     [InlineData("hello-\u007F", "hello-\u007Forld", 0, 7)]
     [InlineData("hello-\uFFFF", "hello-\uFFFForld", 0, 7)]
@@ -68,7 +78,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("ello-\uFFFF", "hello-\uFFFForld", 1, 6)]
     [InlineData("llo-\u007F", "hello-\u007Forld", 2, 5)]
     [InlineData("llo-\uFFFF", "hello-\uFFFFForld", 2, 5)]
-
     // non-ASCII character in first section vectorized comparions
     [InlineData("hello-w\u007F", "hello-w\u007Forld", 0, 8)]
     [InlineData("hello-w\uFFFF", "hello-w\uFFFForld", 0, 8)]
@@ -78,14 +87,19 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("llo-w\uFFFFor", "hello-w\uFFFForld", 2, 8)]
     [InlineData("lo-w\u007Forl", "hello-w\u007Forld", 3, 8)]
     [InlineData("lo-w\uFFFForl", "hello-w\uFFFForld", 3, 8)]
-    public void GetDestination_Found_IncludesNonAsciiCharacters(string entry, string path, int start, int length)
+    public void GetDestination_Found_IncludesNonAsciiCharacters(
+        string entry,
+        string path,
+        int start,
+        int length
+    )
     {
         // Makes it easy to spot invalid tests
         Assert.Equal(entry.Length, length);
         Assert.Equal(entry, path.Substring(start, length), ignoreCase: true);
 
         // Arrange
-        var table = CreateTable(0, -1, new[] { (entry, 1), });
+        var table = CreateTable(0, -1, new[] { (entry, 1) });
 
         var segment = new PathSegment(start, length);
 
@@ -103,7 +117,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     // 'A' and 'a' are 32 bits apart at the low end
     // 'Z' and 'z' are 32 bits apart at the high end
     [Theory]
-
     // character in first section non-vectorized comparisons
     [InlineData("heA", "healo-world", 0, 3)]
     [InlineData("heZ", "hezlo-world", 0, 3)]
@@ -111,7 +124,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("eZ", "hezlo-world", 1, 2)]
     [InlineData("A", "healo-world", 2, 1)]
     [InlineData("Z", "hezlo-world", 2, 1)]
-
     // character in first section vectorized comparions
     [InlineData("helA", "helao-world", 0, 4)]
     [InlineData("helZ", "helzo-world", 0, 4)]
@@ -121,7 +133,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("lZo-", "helzo-world", 2, 4)]
     [InlineData("Ao-w", "helao-world", 3, 4)]
     [InlineData("Zo-w", "helzo-world", 3, 4)]
-
     // character in second section non-vectorized comparisons
     [InlineData("hello-A", "hello-aorld", 0, 7)]
     [InlineData("hello-Z", "hello-zorld", 0, 7)]
@@ -129,7 +140,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("ello-Z", "hello-zorld", 1, 6)]
     [InlineData("llo-A", "hello-aorld", 2, 5)]
     [InlineData("llo-Z", "hello-zForld", 2, 5)]
-
     // character in first section vectorized comparions
     [InlineData("hello-wA", "hello-waorld", 0, 8)]
     [InlineData("hello-wZ", "hello-wzorld", 0, 8)]
@@ -139,14 +149,19 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("llo-wZor", "hello-wzorld", 2, 8)]
     [InlineData("lo-wAorl", "hello-waorld", 3, 8)]
     [InlineData("lo-wZorl", "hello-wzorld", 3, 8)]
-    public void GetDestination_Found_IncludesCharactersWithCasingDifference(string entry, string path, int start, int length)
+    public void GetDestination_Found_IncludesCharactersWithCasingDifference(
+        string entry,
+        string path,
+        int start,
+        int length
+    )
     {
         // Makes it easy to spot invalid tests
         Assert.Equal(entry.Length, length);
         Assert.Equal(entry, path.Substring(start, length), ignoreCase: true);
 
         // Arrange
-        var table = CreateTable(0, -1, new[] { (entry, 1), });
+        var table = CreateTable(0, -1, new[] { (entry, 1) });
 
         var segment = new PathSegment(start, length);
 
@@ -167,7 +182,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     // How to understand these tests:
     // "an @ should not be converted to a ` since it is out of range"
     [Theory]
-
     // character in first section non-vectorized comparisons
     [InlineData("he@", "he`lo-world", 0, 3)]
     [InlineData("he[", "he{lo-world", 0, 3)]
@@ -175,7 +189,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("e[", "he{lo-world", 1, 2)]
     [InlineData("@", "he`lo-world", 2, 1)]
     [InlineData("[", "he{lo-world", 2, 1)]
-
     // character in first section vectorized comparions
     [InlineData("hel@", "hel`o-world", 0, 4)]
     [InlineData("hel[", "hel{o-world", 0, 4)]
@@ -185,7 +198,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("l[o-", "hel{o-world", 2, 4)]
     [InlineData("@o-w", "hel`o-world", 3, 4)]
     [InlineData("[o-w", "hel{o-world", 3, 4)]
-
     // character in second section non-vectorized comparisons
     [InlineData("hello-@", "hello-`orld", 0, 7)]
     [InlineData("hello-[", "hello-{orld", 0, 7)]
@@ -193,7 +205,6 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("ello-[", "hello-{orld", 1, 6)]
     [InlineData("llo-@", "hello-`orld", 2, 5)]
     [InlineData("llo-[", "hello-{Forld", 2, 5)]
-
     // character in first section vectorized comparions
     [InlineData("hello-w@", "hello-w`orld", 0, 8)]
     [InlineData("hello-w[", "hello-w{orld", 0, 8)]
@@ -203,14 +214,19 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
     [InlineData("llo-w[or", "hello-w{orld", 2, 8)]
     [InlineData("lo-w@orl", "hello-w`orld", 3, 8)]
     [InlineData("lo-w[orl", "hello-w{orld", 3, 8)]
-    public void GetDestination_NotFound_IncludesCharactersWithCasingDifference(string entry, string path, int start, int length)
+    public void GetDestination_NotFound_IncludesCharactersWithCasingDifference(
+        string entry,
+        string path,
+        int start,
+        int length
+    )
     {
         // Makes it easy to spot invalid tests
         Assert.Equal(entry.Length, length);
         Assert.NotEqual(entry, path.Substring(start, length));
 
         // Arrange
-        var table = CreateTable(0, -1, new[] { (entry, 1), });
+        var table = CreateTable(0, -1, new[] { (entry, 1) });
 
         var segment = new PathSegment(start, length);
 

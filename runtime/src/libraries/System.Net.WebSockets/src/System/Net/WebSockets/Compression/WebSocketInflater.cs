@@ -80,7 +80,9 @@ namespace System.Net.WebSockets.Compression
             {
                 // Rent a buffer as close to the size of the user buffer as possible.
                 // If the payload is smaller than the user buffer, rent only as much as we need.
-                _buffer = ArrayPool<byte>.Shared.Rent((int)Math.Min(userBufferLength, payloadLength));
+                _buffer = ArrayPool<byte>.Shared.Rent(
+                    (int)Math.Min(userBufferLength, payloadLength)
+                );
             }
         }
 
@@ -105,7 +107,9 @@ namespace System.Net.WebSockets.Compression
                 {
                     if (_buffer.Length < _available + FlushMarkerLength)
                     {
-                        byte[] newBuffer = ArrayPool<byte>.Shared.Rent(_available + FlushMarkerLength);
+                        byte[] newBuffer = ArrayPool<byte>.Shared.Rent(
+                            _available + FlushMarkerLength
+                        );
                         _buffer.AsSpan(0, _available).CopyTo(newBuffer);
 
                         byte[] toReturn = _buffer;
@@ -225,7 +229,11 @@ namespace System.Net.WebSockets.Compression
             return false;
         }
 
-        private static unsafe int Inflate(ZLibStreamHandle stream, Span<byte> destination, FlushCode flushCode)
+        private static unsafe int Inflate(
+            ZLibStreamHandle stream,
+            Span<byte> destination,
+            FlushCode flushCode
+        )
         {
             Debug.Assert(destination.Length > 0);
             ErrorCode errorCode;
@@ -248,7 +256,7 @@ namespace System.Net.WebSockets.Compression
                 ErrorCode.MemError => SR.ZLibErrorNotEnoughMemory,
                 ErrorCode.DataError => SR.ZLibUnsupportedCompression,
                 ErrorCode.StreamError => SR.ZLibErrorInconsistentStream,
-                _ => SR.Format(SR.ZLibErrorUnexpected, (int)errorCode)
+                _ => SR.Format(SR.ZLibErrorUnexpected, (int)errorCode),
             };
             throw new WebSocketException(message);
         }
@@ -275,9 +283,10 @@ namespace System.Net.WebSockets.Compression
 
             stream.Dispose();
 
-            string message = errorCode == ErrorCode.MemError
-                ? SR.ZLibErrorNotEnoughMemory
-                : SR.Format(SR.ZLibErrorUnexpected, (int)errorCode);
+            string message =
+                errorCode == ErrorCode.MemError
+                    ? SR.ZLibErrorNotEnoughMemory
+                    : SR.Format(SR.ZLibErrorUnexpected, (int)errorCode);
             throw new WebSocketException(message);
         }
     }

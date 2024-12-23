@@ -15,11 +15,14 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program>>
+public class SimpleWithWebApplicationBuilderTests
+    : IClassFixture<MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program>>
 {
     private readonly MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program> _fixture;
 
-    public SimpleWithWebApplicationBuilderTests(MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program> fixture)
+    public SimpleWithWebApplicationBuilderTests(
+        MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program> fixture
+    )
     {
         _fixture = fixture;
         Client = _fixture.CreateDefaultClient();
@@ -137,7 +140,8 @@ public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture
     {
         // Arrange
         var expected = "Development";
-        using var client = new WebApplicationFactory<SimpleWebSiteWithWebApplicationBuilder.Program>().CreateClient();
+        using var client =
+            new WebApplicationFactory<SimpleWebSiteWithWebApplicationBuilder.Program>().CreateClient();
 
         // Act
         var content = await client.GetStringAsync("http://localhost/environment");
@@ -154,10 +158,7 @@ public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture
         {
             builder.ConfigureAppConfiguration(builder =>
             {
-                var config = new[]
-                {
-                        KeyValuePair.Create("Greeting", "Bonjour tout le monde"),
-                };
+                var config = new[] { KeyValuePair.Create("Greeting", "Bonjour tout le monde") };
 
                 builder.AddInMemoryCollection(config);
             });
@@ -200,7 +201,9 @@ public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture
         // Arrange
         var fixture = _fixture.WithWebHostBuilder(builder =>
         {
-            expectedWebRoot = Path.GetFullPath(Path.Combine(builder.GetSetting(WebHostDefaults.ContentRootKey), webRoot));
+            expectedWebRoot = Path.GetFullPath(
+                Path.Combine(builder.GetSetting(WebHostDefaults.ContentRootKey), webRoot)
+            );
             builder.UseSetting(WebHostDefaults.WebRootKey, webRoot);
         });
 
@@ -263,9 +266,17 @@ public class SimpleWithWebApplicationBuilderTests : IClassFixture<MvcTestFixture
 
         using var client = _fixture.CreateDefaultClient();
         var antiforgery = _fixture.Services.GetRequiredService<IAntiforgery>();
-        var antiforgeryOptions = _fixture.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
+        var antiforgeryOptions = _fixture.Services.GetRequiredService<
+            IOptions<AntiforgeryOptions>
+        >();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
-        client.DefaultRequestHeaders.Add("Cookie", new CookieHeaderValue(antiforgeryOptions.Value.Cookie.Name, tokens.CookieToken).ToString());
+        client.DefaultRequestHeaders.Add(
+            "Cookie",
+            new CookieHeaderValue(
+                antiforgeryOptions.Value.Cookie.Name,
+                tokens.CookieToken
+            ).ToString()
+        );
         client.DefaultRequestHeaders.Add(tokens.HeaderName, tokens.RequestToken);
 
         // Act

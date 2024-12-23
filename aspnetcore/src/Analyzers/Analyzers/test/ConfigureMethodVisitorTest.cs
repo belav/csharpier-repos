@@ -11,7 +11,8 @@ public class ConfigureMethodVisitorTest
     public void FindConfigureMethods_AtDifferentScopes()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 
 public class GlobalStartup
@@ -67,12 +68,12 @@ namespace ANamespace.Nested
 
         var expected = new string[]
         {
-                "global::ANamespace.Nested.Startup.Configure",
-                "global::ANamespace.Nested.Startup.NestedStartup.Configure",
-                "global::ANamespace.Startup.ConfigureDevelopment",
-                "global::ANamespace.Startup.NestedStartup.ConfigureTest",
-                "global::Another.AnotherStartup.Configure",
-                "global::GlobalStartup.Configure",
+            "global::ANamespace.Nested.Startup.Configure",
+            "global::ANamespace.Nested.Startup.NestedStartup.Configure",
+            "global::ANamespace.Startup.ConfigureDevelopment",
+            "global::ANamespace.Startup.NestedStartup.ConfigureTest",
+            "global::Another.AnotherStartup.Configure",
+            "global::GlobalStartup.Configure",
         };
 
         var compilation = TestCompilation.Create(source);
@@ -83,7 +84,11 @@ namespace ANamespace.Nested
 
         // Assert
         var actual = results
-            .Select(m => m.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + "." + m.Name)
+            .Select(m =>
+                m.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                + "."
+                + m.Name
+            )
             .OrderBy(s => s)
             .ToArray();
         Assert.Equal(expected, actual);

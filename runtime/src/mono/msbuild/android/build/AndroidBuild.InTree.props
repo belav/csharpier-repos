@@ -1,6 +1,5 @@
 <Project>
   <!-- This depends on the root Directory.Build.props imported this file -->
-
   <Import Project="$(MSBuildThisFileDirectory)AndroidBuild.props" />
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>

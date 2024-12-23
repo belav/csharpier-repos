@@ -37,14 +37,16 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
         ILoggerFactory loggerFactory,
         ParameterPolicyFactory parameterPolicyFactory,
         EndpointSelector selector,
-        IEnumerable<MatcherPolicy> policies)
+        IEnumerable<MatcherPolicy> policies
+    )
     {
         _loggerFactory = loggerFactory;
         // DfaMatcherBuilder is a transient service. Each instance has its own cache of parameter policies.
         _parameterPolicyFactory = new CachingParameterPolicyFactory(parameterPolicyFactory);
         _selector = selector;
 
-        var (nodeBuilderPolicies, endpointComparerPolicies, endpointSelectorPolicies) = ExtractPolicies(policies.OrderBy(p => p.Order));
+        var (nodeBuilderPolicies, endpointComparerPolicies, endpointSelectorPolicies) =
+            ExtractPolicies(policies.OrderBy(p => p.Order));
         _endpointSelectorPolicies = endpointSelectorPolicies;
         _nodeBuilders = nodeBuilderPolicies;
         _comparer = new EndpointComparer(endpointComparerPolicies);
@@ -80,7 +82,13 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
         {
             var endpoint = _endpoints[i];
             var precedenceDigit = GetPrecedenceDigitAtDepth(endpoint, depth: 0);
-            work.Add(new DfaBuilderWorkerWorkItem(endpoint, precedenceDigit, new List<DfaNode>() { root, }));
+            work.Add(
+                new DfaBuilderWorkerWorkItem(
+                    endpoint,
+                    precedenceDigit,
+                    new List<DfaNode>() { root }
+                )
+            );
             maxDepth = Math.Max(maxDepth, endpoint.RoutePattern.PathSegments.Count);
         }
 
@@ -93,12 +101,19 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
         //
         // We'll sort the matches again later using the *real* comparer once building the
         // precedence part of the DFA is over.
-        var precedenceDigitComparer = Comparer<DfaBuilderWorkerWorkItem>.Create((x, y) =>
-        {
-            return x.PrecedenceDigit.CompareTo(y.PrecedenceDigit);
-        });
+        var precedenceDigitComparer = Comparer<DfaBuilderWorkerWorkItem>.Create(
+            (x, y) =>
+            {
+                return x.PrecedenceDigit.CompareTo(y.PrecedenceDigit);
+            }
+        );
 
-        var dfaWorker = new DfaBuilderWorker(work, precedenceDigitComparer, includeLabel, _parameterPolicyFactory);
+        var dfaWorker = new DfaBuilderWorker(
+            work,
+            precedenceDigitComparer,
+            includeLabel,
+            _parameterPolicyFactory
+        );
 
         // Now we process the entries a level at a time.
         for (var depth = 0; depth <= maxDepth; depth++)
@@ -124,7 +139,10 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             _cachedParameters = new Dictionary<string, IParameterPolicy>(StringComparer.Ordinal);
         }
 
-        public override IParameterPolicy Create(RoutePatternParameterPart parameter, string inlineText)
+        public override IParameterPolicy Create(
+            RoutePatternParameterPart parameter,
+            string inlineText
+        )
         {
             // Blindly check the cache to see if it contains a match.
             // Only cachable parameter policies are in the cache, so a match will only be available if the parameter policy key is configured to a cachable parameter policy.
@@ -138,9 +156,10 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             parameterPolicy = _inner.Create(parameter, inlineText);
 
             // The created parameter policy can be wrapped in an OptionalRouteConstraint if RoutePatternParameterPart.IsOptional is true.
-            var createdParameterPolicy = (parameterPolicy is OptionalRouteConstraint optionalRouteConstraint)
-                ? optionalRouteConstraint.InnerConstraint
-                : parameterPolicy;
+            var createdParameterPolicy =
+                (parameterPolicy is OptionalRouteConstraint optionalRouteConstraint)
+                    ? optionalRouteConstraint.InnerConstraint
+                    : parameterPolicy;
 
             // Only cache policies in a known allow list. This is indicated by implementing ICachableParameterPolicy.
             // There is a chance that a user-defined constraint has state, such as an evaluation count. That would break if the constraint is shared between routes, so don't cache.
@@ -152,7 +171,10 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             return parameterPolicy;
         }
 
-        public override IParameterPolicy Create(RoutePatternParameterPart parameter, IParameterPolicy parameterPolicy)
+        public override IParameterPolicy Create(
+            RoutePatternParameterPart parameter,
+            IParameterPolicy parameterPolicy
+        )
         {
             return _inner.Create(parameter, parameterPolicy);
         }
@@ -171,7 +193,8 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             List<DfaBuilderWorkerWorkItem> work,
             Comparer<DfaBuilderWorkerWorkItem> precedenceDigitComparer,
             bool includeLabel,
-            ParameterPolicyFactory parameterPolicyFactory)
+            ParameterPolicyFactory parameterPolicyFactory
+        )
         {
             _work = work;
             _previousWork = new List<DfaBuilderWorkerWorkItem>();
@@ -216,7 +239,11 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                     nextParents.Clear();
 
                     var nextPrecedenceDigit = GetPrecedenceDigitAtDepth(endpoint, depth + 1);
-                    nextWork[nextWorkCount] = new DfaBuilderWorkerWorkItem(endpoint, nextPrecedenceDigit, nextParents);
+                    nextWork[nextWorkCount] = new DfaBuilderWorkerWorkItem(
+                        endpoint,
+                        nextPrecedenceDigit,
+                        nextParents
+                    );
                 }
                 else
                 {
@@ -225,7 +252,9 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                     // Add to the next set of work now so the list will be reused
                     // even if there are no parents
                     var nextPrecedenceDigit = GetPrecedenceDigitAtDepth(endpoint, depth + 1);
-                    nextWork.Add(new DfaBuilderWorkerWorkItem(endpoint, nextPrecedenceDigit, nextParents));
+                    nextWork.Add(
+                        new DfaBuilderWorkerWorkItem(endpoint, nextPrecedenceDigit, nextParents)
+                    );
                 }
 
                 var segment = GetCurrentSegment(endpoint, depth);
@@ -252,7 +281,8 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             RouteEndpoint endpoint,
             List<DfaNode> parents,
             List<DfaNode> nextParents,
-            RoutePatternPathSegment segment)
+            RoutePatternPathSegment segment
+        )
         {
             for (var i = 0; i < parents.Count; i++)
             {
@@ -297,13 +327,27 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
 
                     parent.CatchAll.AddMatch(endpoint);
                 }
-                else if (segment.IsSimple && parameterPart != null && TryGetRequiredValue(endpoint.RoutePattern, parameterPart, out var requiredValue))
+                else if (
+                    segment.IsSimple
+                    && parameterPart != null
+                    && TryGetRequiredValue(
+                        endpoint.RoutePattern,
+                        parameterPart,
+                        out var requiredValue
+                    )
+                )
                 {
                     // If the parameter has a matching required value, replace the parameter with the required value
                     // as a literal. This should use the parameter's transformer (if present)
                     // e.g. Template: Home/{action}, Required values: { action = "Index" }, Result: Home/Index
 
-                    AddRequiredLiteralValue(endpoint, nextParents, parent, parameterPart, requiredValue);
+                    AddRequiredLiteralValue(
+                        endpoint,
+                        nextParents,
+                        parent,
+                        parameterPart,
+                        requiredValue
+                    );
                 }
                 else if (segment.IsSimple && parameterPart != null)
                 {
@@ -322,11 +366,21 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                         // If the literal doesn't match any of the constraints, we can prune the branch.
                         // For example, for a parameter in a route {lang:length(2)} and a parent literal "ABC", we can check that "ABC"
                         // doesn't meet the parameter constraint (length(2)) when building the tree, and avoid the extra nodes.
-                        if (endpoint.RoutePattern.ParameterPolicies.TryGetValue(parameterPart.Name, out var parameterPolicyReferences))
+                        if (
+                            endpoint.RoutePattern.ParameterPolicies.TryGetValue(
+                                parameterPart.Name,
+                                out var parameterPolicyReferences
+                            )
+                        )
                         {
                             // We filter out sibling literals that don't match one of the constraints in the segment to avoid adding nodes to the DFA
                             // that will never match a route and which will result in a much higher memory usage.
-                            AddParentsWithMatchingLiteralConstraints(nextParents, parent, parameterPart, parameterPolicyReferences);
+                            AddParentsWithMatchingLiteralConstraints(
+                                nextParents,
+                                parent,
+                                parameterPart,
+                                parameterPolicyReferences
+                            );
                         }
                         else
                         {
@@ -362,14 +416,26 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
 
                         // We filter out sibling literals that don't match the complex parameter segment to avoid adding nodes to the DFA
                         // that will never match a route and which will result in a much higher memory usage.
-                        AddParentsMatchingComplexSegment(endpoint, nextParents, segment, parent, parameterPart);
+                        AddParentsMatchingComplexSegment(
+                            endpoint,
+                            nextParents,
+                            segment,
+                            parent,
+                            parameterPart
+                        );
                     }
                     nextParents.Add(parent.Parameters);
                 }
             }
         }
 
-        private void AddParentsMatchingComplexSegment(RouteEndpoint endpoint, List<DfaNode> nextParents, RoutePatternPathSegment segment, DfaNode parent, RoutePatternParameterPart parameterPart)
+        private void AddParentsMatchingComplexSegment(
+            RouteEndpoint endpoint,
+            List<DfaNode> nextParents,
+            RoutePatternPathSegment segment,
+            DfaNode parent,
+            RoutePatternParameterPart parameterPart
+        )
         {
             var routeValues = new RouteValueDictionary();
             foreach (var literal in parent.Literals.Keys)
@@ -397,13 +463,28 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                             continue;
                         }
 
-                        if (endpoint.RoutePattern.ParameterPolicies.TryGetValue(partParameter.Name, out var parameterPolicyReferences))
+                        if (
+                            endpoint.RoutePattern.ParameterPolicies.TryGetValue(
+                                partParameter.Name,
+                                out var parameterPolicyReferences
+                            )
+                        )
                         {
                             for (var j = 0; j < parameterPolicyReferences.Count; j++)
                             {
                                 var reference = parameterPolicyReferences[j];
-                                var parameterPolicy = _parameterPolicyFactory.Create(parameterPart, reference);
-                                if (parameterPolicy is IParameterLiteralNodeMatchingPolicy constraint && !constraint.MatchesLiteral(partParameter.Name, (string)parameterValue))
+                                var parameterPolicy = _parameterPolicyFactory.Create(
+                                    parameterPart,
+                                    reference
+                                );
+                                if (
+                                    parameterPolicy
+                                        is IParameterLiteralNodeMatchingPolicy constraint
+                                    && !constraint.MatchesLiteral(
+                                        partParameter.Name,
+                                        (string)parameterValue
+                                    )
+                                )
                                 {
                                     passedAllPolicies = false;
                                     break;
@@ -422,12 +503,18 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             }
         }
 
-        private void AddParentsWithMatchingLiteralConstraints(List<DfaNode> nextParents, DfaNode parent, RoutePatternParameterPart parameterPart, IReadOnlyList<RoutePatternParameterPolicyReference> parameterPolicyReferences)
+        private void AddParentsWithMatchingLiteralConstraints(
+            List<DfaNode> nextParents,
+            DfaNode parent,
+            RoutePatternParameterPart parameterPart,
+            IReadOnlyList<RoutePatternParameterPolicyReference> parameterPolicyReferences
+        )
         {
             // The list of parameters that fail to meet at least one IParameterLiteralNodeMatchingPolicy.
-            var hasFailingPolicy = parent.Literals.Keys.Count < 32 ?
-                (stackalloc bool[32]).Slice(0, parent.Literals.Keys.Count) :
-                new bool[parent.Literals.Keys.Count];
+            var hasFailingPolicy =
+                parent.Literals.Keys.Count < 32
+                    ? (stackalloc bool[32]).Slice(0, parent.Literals.Keys.Count)
+                    : new bool[parent.Literals.Keys.Count];
 
             // Whether or not all parameters have failed to meet at least one constraint.
             for (var i = 0; i < parameterPolicyReferences.Count; i++)
@@ -440,7 +527,10 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                     var allFailed = true;
                     foreach (var literal in parent.Literals.Keys)
                     {
-                        if (!hasFailingPolicy[literalIndex] && !constraint.MatchesLiteral(parameterPart.Name, literal))
+                        if (
+                            !hasFailingPolicy[literalIndex]
+                            && !constraint.MatchesLiteral(parameterPart.Name, literal)
+                        )
                         {
                             hasFailingPolicy[literalIndex] = true;
                         }
@@ -470,9 +560,20 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             }
         }
 
-        private void AddRequiredLiteralValue(RouteEndpoint endpoint, List<DfaNode> nextParents, DfaNode parent, RoutePatternParameterPart parameterPart, object requiredValue)
+        private void AddRequiredLiteralValue(
+            RouteEndpoint endpoint,
+            List<DfaNode> nextParents,
+            DfaNode parent,
+            RoutePatternParameterPart parameterPart,
+            object requiredValue
+        )
         {
-            if (endpoint.RoutePattern.ParameterPolicies.TryGetValue(parameterPart.Name, out var parameterPolicyReferences))
+            if (
+                endpoint.RoutePattern.ParameterPolicies.TryGetValue(
+                    parameterPart.Name,
+                    out var parameterPolicyReferences
+                )
+            )
             {
                 for (var k = 0; k < parameterPolicyReferences.Count; k++)
                 {
@@ -486,16 +587,24 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                 }
             }
 
-            var literalValue = requiredValue?.ToString() ?? throw new InvalidOperationException($"Required value for literal '{parameterPart.Name}' must evaluate to a non-null string.");
+            var literalValue =
+                requiredValue?.ToString()
+                ?? throw new InvalidOperationException(
+                    $"Required value for literal '{parameterPart.Name}' must evaluate to a non-null string."
+                );
 
             AddLiteralNode(_includeLabel, nextParents, parent, literalValue);
         }
     }
 
-    private static void AddLiteralNode(bool includeLabel, List<DfaNode> nextParents, DfaNode parent, string literal)
+    private static void AddLiteralNode(
+        bool includeLabel,
+        List<DfaNode> nextParents,
+        DfaNode parent,
+        string literal
+    )
     {
-        if (parent.Literals == null ||
-            !parent.Literals.TryGetValue(literal, out var next))
+        if (parent.Literals == null || !parent.Literals.TryGetValue(literal, out var next))
         {
             next = new DfaNode()
             {
@@ -520,8 +629,14 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             return null;
         }
 
-        var lastSegment = endpoint.RoutePattern.PathSegments[endpoint.RoutePattern.PathSegments.Count - 1];
-        if (lastSegment.IsSimple && lastSegment.Parts[0] is RoutePatternParameterPart parameterPart && parameterPart.IsCatchAll)
+        var lastSegment = endpoint.RoutePattern.PathSegments[
+            endpoint.RoutePattern.PathSegments.Count - 1
+        ];
+        if (
+            lastSegment.IsSimple
+            && lastSegment.Parts[0] is RoutePatternParameterPart parameterPart
+            && parameterPart.IsCatchAll
+        )
         {
             return lastSegment;
         }
@@ -554,11 +669,13 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
         // State count is the number of nodes plus an exit state
         var stateCount = 1;
         var maxSegmentCount = 0;
-        root.Visit((node) =>
-        {
-            stateCount++;
-            maxSegmentCount = Math.Max(maxSegmentCount, node.PathDepth);
-        });
+        root.Visit(
+            (node) =>
+            {
+                stateCount++;
+                maxSegmentCount = Math.Max(maxSegmentCount, node.PathDepth);
+            }
+        );
         _stateIndex = 0;
 
         // The max segment count is the maximum path-node-depth +1. We need
@@ -574,15 +691,18 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             Array.Empty<Candidate>(),
             Array.Empty<IEndpointSelectorPolicy>(),
             JumpTableBuilder.Build(exitDestination, exitDestination, null),
-            null);
+            null
+        );
 
-        return new DfaMatcher(_loggerFactory.CreateLogger<DfaMatcher>(), _selector, states, maxSegmentCount);
+        return new DfaMatcher(
+            _loggerFactory.CreateLogger<DfaMatcher>(),
+            _selector,
+            states,
+            maxSegmentCount
+        );
     }
 
-    private int AddNode(
-        DfaNode node,
-        DfaState[] states,
-        int exitDestination)
+    private int AddNode(DfaNode node, DfaState[] states, int exitDestination)
     {
         node.Matches?.Sort(_comparer);
 
@@ -605,9 +725,11 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             }
         }
 
-        if (node.Parameters != null &&
-            node.CatchAll != null &&
-            ReferenceEquals(node.Parameters, node.CatchAll))
+        if (
+            node.Parameters != null
+            && node.CatchAll != null
+            && ReferenceEquals(node.Parameters, node.CatchAll)
+        )
         {
             // This node has a single transition to but it should accept zero-width segments
             // this can happen when a node only has catchall parameters.
@@ -671,7 +793,8 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             // Use the final exit destination when building the policy state.
             // We don't want to use either of the current destinations because they refer routing states,
             // and a policy state should never transition back to a routing state.
-            BuildPolicy(exitDestination, node.NodeBuilder, policyEntries));
+            BuildPolicy(exitDestination, node.NodeBuilder, policyEntries)
+        );
 
         return currentStateIndex;
 
@@ -690,7 +813,11 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
         }
     }
 
-    private static PolicyJumpTable BuildPolicy(int exitDestination, INodeBuilderPolicy nodeBuilder, PolicyJumpTableEdge[] policyEntries)
+    private static PolicyJumpTable BuildPolicy(
+        int exitDestination,
+        INodeBuilderPolicy nodeBuilder,
+        PolicyJumpTableEdge[] policyEntries
+    )
     {
         if (policyEntries == null)
         {
@@ -771,14 +898,30 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
 
                     // A parameter can have a required value, default value/catch all, or be a normal parameter
                     // Add the required value or default value as the slot's initial value
-                    if (TryGetRequiredValue(routeEndpoint.RoutePattern, parameterPart, out var requiredValue))
+                    if (
+                        TryGetRequiredValue(
+                            routeEndpoint.RoutePattern,
+                            parameterPart,
+                            out var requiredValue
+                        )
+                    )
                     {
-                        _slots.Add(new KeyValuePair<string, object>(parameterPart.Name, requiredValue));
+                        _slots.Add(
+                            new KeyValuePair<string, object>(parameterPart.Name, requiredValue)
+                        );
                     }
                     else
                     {
-                        var hasDefaultValue = parameterPart.Default != null || parameterPart.IsCatchAll;
-                        _slots.Add(hasDefaultValue ? new KeyValuePair<string, object>(parameterPart.Name, parameterPart.Default) : default);
+                        var hasDefaultValue =
+                            parameterPart.Default != null || parameterPart.IsCatchAll;
+                        _slots.Add(
+                            hasDefaultValue
+                                ? new KeyValuePair<string, object>(
+                                    parameterPart.Name,
+                                    parameterPart.Default
+                                )
+                                : default
+                        );
                     }
                 }
 
@@ -818,7 +961,9 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                     var parameterPolicy = _parameterPolicyFactory.Create(parameter, reference);
                     if (parameterPolicy is IRouteConstraint routeConstraint)
                     {
-                        _constraints.Add(new KeyValuePair<string, IRouteConstraint>(kvp.Key, routeConstraint));
+                        _constraints.Add(
+                            new KeyValuePair<string, IRouteConstraint>(kvp.Key, routeConstraint)
+                        );
                     }
                 }
             }
@@ -830,7 +975,8 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                 _captures.ToArray(),
                 catchAll,
                 _complexSegments.ToArray(),
-                _constraints.ToArray());
+                _constraints.ToArray()
+            );
         }
         else
         {
@@ -841,7 +987,8 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                 Array.Empty<(string parameterName, int segmentIndex, int slotIndex)>(),
                 catchAll,
                 Array.Empty<(RoutePatternPathSegment pathSegment, int segmentIndex)>(),
-                Array.Empty<KeyValuePair<string, IRouteConstraint>>());
+                Array.Empty<KeyValuePair<string, IRouteConstraint>>()
+            );
         }
     }
 
@@ -863,9 +1010,11 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                 return true;
             }
 
-            if (!parameterPart.IsOptional &&
-                !parameterPart.IsCatchAll &&
-                parameterPart.Default == null)
+            if (
+                !parameterPart.IsOptional
+                && !parameterPart.IsCatchAll
+                && parameterPart.Default == null
+            )
             {
                 return true;
             }
@@ -886,7 +1035,7 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
         node.Matches.Sort(_comparer);
 
         // Start with the current node as the root.
-        var work = new List<DfaNode>() { node, };
+        var work = new List<DfaNode>() { node };
         List<DfaNode> previousWork = null;
         for (var i = 0; i < _nodeBuilders.Length; i++)
         {
@@ -908,7 +1057,11 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             for (var j = 0; j < work.Count; j++)
             {
                 var parent = work[j];
-                if (!nodeBuilder.AppliesToEndpoints(parent.Matches ?? (IReadOnlyList<Endpoint>)Array.Empty<Endpoint>()))
+                if (
+                    !nodeBuilder.AppliesToEndpoints(
+                        parent.Matches ?? (IReadOnlyList<Endpoint>)Array.Empty<Endpoint>()
+                    )
+                )
                 {
                     // This node-builder doesn't care about this node, so add it to the list
                     // to be processed by the next node-builder.
@@ -918,7 +1071,9 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
 
                 // This node-builder does apply to this node, so we need to create new nodes for each edge,
                 // and then attach them to the parent.
-                var edges = nodeBuilder.GetEdges(parent.Matches ?? (IReadOnlyList<Endpoint>)Array.Empty<Endpoint>());
+                var edges = nodeBuilder.GetEdges(
+                    parent.Matches ?? (IReadOnlyList<Endpoint>)Array.Empty<Endpoint>()
+                );
                 for (var k = 0; k < edges.Count; k++)
                 {
                     var edge = edges[k];
@@ -926,7 +1081,10 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                     var next = new DfaNode()
                     {
                         // If parent label is null then labels are not being included
-                        Label = (parent.Label != null) ? parent.Label + " " + edge.State.ToString() : null,
+                        Label =
+                            (parent.Label != null)
+                                ? parent.Label + " " + edge.State.ToString()
+                                : null,
                     };
 
                     if (edge.Endpoints.Count > 0)
@@ -950,7 +1108,11 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
         }
     }
 
-    private static (INodeBuilderPolicy[] nodeBuilderPolicies, IEndpointComparerPolicy[] endpointComparerPolicies, IEndpointSelectorPolicy[] endpointSelectorPolicies) ExtractPolicies(IEnumerable<MatcherPolicy> policies)
+    private static (
+        INodeBuilderPolicy[] nodeBuilderPolicies,
+        IEndpointComparerPolicy[] endpointComparerPolicies,
+        IEndpointSelectorPolicy[] endpointSelectorPolicies
+    ) ExtractPolicies(IEnumerable<MatcherPolicy> policies)
     {
         var nodeBuilderPolicies = new List<INodeBuilderPolicy>();
         var endpointComparerPolicies = new List<IEndpointComparerPolicy>();
@@ -974,10 +1136,18 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
             }
         }
 
-        return (nodeBuilderPolicies.ToArray(), endpointComparerPolicies.ToArray(), endpointSelectorPolicies.ToArray());
+        return (
+            nodeBuilderPolicies.ToArray(),
+            endpointComparerPolicies.ToArray(),
+            endpointSelectorPolicies.ToArray()
+        );
     }
 
-    private static bool TryGetRequiredValue(RoutePattern routePattern, RoutePatternParameterPart parameterPart, out object value)
+    private static bool TryGetRequiredValue(
+        RoutePattern routePattern,
+        RoutePatternParameterPart parameterPart,
+        out object value
+    )
     {
         if (!routePattern.RequiredValues.TryGetValue(parameterPart.Name, out value))
         {
@@ -995,14 +1165,22 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
 
         public List<DfaNode> Parents { get; }
 
-        public DfaBuilderWorkerWorkItem(RouteEndpoint endpoint, int precedenceDigit, List<DfaNode> parents)
+        public DfaBuilderWorkerWorkItem(
+            RouteEndpoint endpoint,
+            int precedenceDigit,
+            List<DfaNode> parents
+        )
         {
             Endpoint = endpoint;
             PrecedenceDigit = precedenceDigit;
             Parents = parents;
         }
 
-        public void Deconstruct(out RouteEndpoint endpoint, out int precedenceDigit, out List<DfaNode> parents)
+        public void Deconstruct(
+            out RouteEndpoint endpoint,
+            out int precedenceDigit,
+            out List<DfaNode> parents
+        )
         {
             endpoint = Endpoint;
             precedenceDigit = PrecedenceDigit;

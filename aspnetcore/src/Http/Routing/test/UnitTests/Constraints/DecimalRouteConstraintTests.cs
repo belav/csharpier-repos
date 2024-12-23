@@ -9,14 +9,7 @@ public class DecimalRouteConstraintTests
 {
     public static IEnumerable<object[]> GetDecimalObject
     {
-        get
-        {
-            yield return new object[]
-            {
-                    2m,
-                    true
-            };
-        }
+        get { yield return new object[] { 2m, true }; }
     }
 
     [Theory]

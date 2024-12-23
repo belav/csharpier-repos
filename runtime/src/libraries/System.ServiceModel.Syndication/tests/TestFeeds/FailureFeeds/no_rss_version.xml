@@ -1,5 +1,3 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom"  >
-<channel>
-
-</channel>
+<rss {http://www.w3.org/2000/xmlns/}a10="http://www.w3.org/2005/Atom">
+  <channel></channel>
 </rss>

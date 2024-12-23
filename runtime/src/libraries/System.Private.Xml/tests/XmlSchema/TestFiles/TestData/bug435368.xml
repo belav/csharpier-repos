@@ -1,6 +1,5 @@
-<root xml:lang="en-US">
+<root {http://www.w3.org/XML/1998/namespace}lang="en-US">
   <sg1></sg1>
   <a></a>
-  <b>
-  </b>
+  <b></b>
 </root>

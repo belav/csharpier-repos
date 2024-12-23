@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             NamedTypeSymbol? attributeClass,
             MethodSymbol? attributeConstructor,
             ImmutableArray<TypedConstant> constructorArguments,
-            ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments)
+            ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments
+        )
         {
             Debug.Assert(underlying is SourceAttributeData or SynthesizedAttributeData);
             Debug.Assert(attributeClass is object || underlying.HasErrors);
@@ -39,8 +40,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override NamedTypeSymbol? AttributeClass => _attributeClass;
         public override MethodSymbol? AttributeConstructor => _attributeConstructor;
-        protected internal override ImmutableArray<TypedConstant> CommonConstructorArguments => _constructorArguments;
-        protected internal override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments => _namedArguments;
+        protected internal override ImmutableArray<TypedConstant> CommonConstructorArguments =>
+            _constructorArguments;
+        protected internal override ImmutableArray<
+            KeyValuePair<string, TypedConstant>
+        > CommonNamedArguments => _namedArguments;
 
         public override SyntaxReference? ApplicationSyntaxReference => null;
 
@@ -66,7 +70,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         return AttributeClass.GetUseSiteInfo().DiagnosticInfo;
                     }
 
-                    return new CSDiagnosticInfo(ErrorCode.ERR_MissingPredefinedMember, AttributeClass, WellKnownMemberNames.InstanceConstructorName);
+                    return new CSDiagnosticInfo(
+                        ErrorCode.ERR_MissingPredefinedMember,
+                        AttributeClass,
+                        WellKnownMemberNames.InstanceConstructorName
+                    );
                 }
                 else
                 {
@@ -77,8 +85,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override bool IsConditionallyOmitted => _underlying.IsConditionallyOmitted;
 
-        internal override Location GetAttributeArgumentLocation(int parameterIndex) => _underlying.GetAttributeArgumentLocation(parameterIndex);
-        internal override int GetTargetAttributeSignatureIndex(AttributeDescription description) => _underlying.GetTargetAttributeSignatureIndex(description);
-        internal override bool IsTargetAttribute(string namespaceName, string typeName) => _underlying.IsTargetAttribute(namespaceName, typeName);
+        internal override Location GetAttributeArgumentLocation(int parameterIndex) =>
+            _underlying.GetAttributeArgumentLocation(parameterIndex);
+
+        internal override int GetTargetAttributeSignatureIndex(AttributeDescription description) =>
+            _underlying.GetTargetAttributeSignatureIndex(description);
+
+        internal override bool IsTargetAttribute(string namespaceName, string typeName) =>
+            _underlying.IsTargetAttribute(namespaceName, typeName);
     }
 }

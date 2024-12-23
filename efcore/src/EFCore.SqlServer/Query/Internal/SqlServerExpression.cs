@@ -28,14 +28,21 @@ public static class SqlServerExpression
         bool nullable,
         IEnumerable<bool> argumentsPropagateNullability,
         Type returnType,
-        RelationalTypeMapping? typeMapping = null)
-        => new(
+        RelationalTypeMapping? typeMapping = null
+    ) =>
+        new(
             name,
-            ProcessAggregateFunctionArguments(sqlExpressionFactory, arguments, enumerableExpression, enumerableArgumentIndex),
+            ProcessAggregateFunctionArguments(
+                sqlExpressionFactory,
+                arguments,
+                enumerableExpression,
+                enumerableArgumentIndex
+            ),
             nullable,
             argumentsPropagateNullability,
             returnType,
-            typeMapping);
+            typeMapping
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,25 +59,41 @@ public static class SqlServerExpression
         bool nullable,
         IEnumerable<bool> argumentsPropagateNullability,
         Type returnType,
-        RelationalTypeMapping? typeMapping = null)
-        => enumerableExpression.Orderings.Count == 0
+        RelationalTypeMapping? typeMapping = null
+    ) =>
+        enumerableExpression.Orderings.Count == 0
             ? AggregateFunction(
-                sqlExpressionFactory, name, arguments, enumerableExpression, enumerableArgumentIndex, nullable,
-                argumentsPropagateNullability, returnType, typeMapping)
+                sqlExpressionFactory,
+                name,
+                arguments,
+                enumerableExpression,
+                enumerableArgumentIndex,
+                nullable,
+                argumentsPropagateNullability,
+                returnType,
+                typeMapping
+            )
             : new SqlServerAggregateFunctionExpression(
                 name,
-                ProcessAggregateFunctionArguments(sqlExpressionFactory, arguments, enumerableExpression, enumerableArgumentIndex),
+                ProcessAggregateFunctionArguments(
+                    sqlExpressionFactory,
+                    arguments,
+                    enumerableExpression,
+                    enumerableArgumentIndex
+                ),
                 enumerableExpression.Orderings,
                 nullable,
                 argumentsPropagateNullability,
                 returnType,
-                typeMapping);
+                typeMapping
+            );
 
     private static IReadOnlyList<SqlExpression> ProcessAggregateFunctionArguments(
         ISqlExpressionFactory sqlExpressionFactory,
         IEnumerable<SqlExpression> arguments,
         EnumerableExpression enumerableExpression,
-        int enumerableArgumentIndex)
+        int enumerableArgumentIndex
+    )
     {
         var argIndex = 0;
         var typeMappedArguments = new List<SqlExpression>();
@@ -86,8 +109,12 @@ public static class SqlServerExpression
                 if (enumerableExpression.Predicate != null)
                 {
                     modifiedArgument = sqlExpressionFactory.Case(
-                        new List<CaseWhenClause> { new(enumerableExpression.Predicate, modifiedArgument) },
-                        elseResult: null);
+                        new List<CaseWhenClause>
+                        {
+                            new(enumerableExpression.Predicate, modifiedArgument),
+                        },
+                        elseResult: null
+                    );
                 }
 
                 if (enumerableExpression.IsDistinct)

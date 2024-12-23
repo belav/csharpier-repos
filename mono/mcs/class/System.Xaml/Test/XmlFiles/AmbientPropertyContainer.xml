@@ -1,12 +1,18 @@
-<ResourcesDict xmlns="http://www.domain.com/path" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <TestObject TestProperty="{x:Null}" x:Name="__ReferenceID0">
-    <x:Key>
-      <x:String>TestDictItem</x:String>
-    </x:Key>
+<ResourcesDict
+  xmlns="http://www.domain.com/path"
+  {http://www.w3.org/2000/xmlns/}x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+  <TestObject
+    TestProperty="{x:Null}"
+    {http://schemas.microsoft.com/winfx/2006/xaml}Name="__ReferenceID0"
+  >
+    <Key>
+      <String>TestDictItem</String>
+    </Key>
   </TestObject>
   <TestObject TestProperty="{x:Reference __ReferenceID0}">
-    <x:Key>
-      <x:String>okay</x:String>
-    </x:Key>
+    <Key>
+      <String>okay</String>
+    </Key>
   </TestObject>
 </ResourcesDict>

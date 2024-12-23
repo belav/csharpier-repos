@@ -5,25 +5,25 @@
 using System;
 using Xunit;
 
-
 public struct ValX1<T>
 {
     public T t;
+
     public ValX1(T t)
     {
         this.t = t;
     }
-
 }
+
 public class RefX1<T>
 {
     public T t;
+
     public RefX1(T t)
     {
         this.t = t;
     }
 }
-
 
 public struct Gen<T>
 {
@@ -33,14 +33,13 @@ public struct Gen<T>
     {
         Fld1 = fld1;
     }
-
-
 }
 
 public class Test_struct01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -49,18 +48,19 @@ public class Test_struct01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
         int size = 10;
-        int i, j, k;
+        int i,
+            j,
+            k;
         double sum = 0;
         int cLoc = 0;
 
-        Gen<int>[, ,] GenArray = new Gen<int>[size, size, size];
+        Gen<int>[,,] GenArray = new Gen<int>[size, size, size];
         for (i = 0; (i < size); i++)
         {
             for (j = 0; (j < size); j++)
@@ -85,9 +85,6 @@ public class Test_struct01
             }
         }
 
-
-
-
         Eval(sum == 499500);
         sum = 0;
 
@@ -102,6 +99,4 @@ public class Test_struct01
             return 1;
         }
     }
-
 }
-

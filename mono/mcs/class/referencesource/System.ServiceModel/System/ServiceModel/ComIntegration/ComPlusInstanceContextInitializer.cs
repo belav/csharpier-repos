@@ -18,7 +18,9 @@ namespace System.ServiceModel.ComIntegration
     {
         ServiceInfo info;
 
-        static readonly Guid IID_IServiceActivity = new Guid("67532E0C-9E2F-4450-A354-035633944E17");
+        static readonly Guid IID_IServiceActivity = new Guid(
+            "67532E0C-9E2F-4450-A354-035633944E17"
+        );
         static readonly Guid DefaultPartitionId = new Guid("41E90F3E-56C1-4633-81C3-6E8BAC8BDD70");
 
         private static object manifestLock = new object();
@@ -39,7 +41,6 @@ namespace System.ServiceModel.ComIntegration
                 string tempPath = String.Empty;
                 lock (manifestLock)
                 {
-
                     try
                     {
                         tempPath = Path.GetTempPath();
@@ -49,14 +50,15 @@ namespace System.ServiceModel.ComIntegration
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(tempPath));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(tempPath)
+                        );
                     }
 
                     string manifestDirectory = tempPath + this.info.AppID.ToString();
                     if (Directory.Exists(manifestDirectory))
                         Directory.Delete(manifestDirectory, true);
                 }
-
             }
         }
 
@@ -66,15 +68,12 @@ namespace System.ServiceModel.ComIntegration
             serviceConfig = SetupServiceConfig(instanceContext, message);
 
             IServiceActivity activity;
-            activity = (IServiceActivity)SafeNativeMethods.CoCreateActivity(
-                serviceConfig,
-                IID_IServiceActivity);
+            activity = (IServiceActivity)
+                SafeNativeMethods.CoCreateActivity(serviceConfig, IID_IServiceActivity);
 
             ComPlusSynchronizationContext syncContext;
-            bool postSynchronous = (this.info.ThreadingModel ==
-                                    ThreadingModel.MTA);
-            syncContext = new ComPlusSynchronizationContext(activity,
-                                                            postSynchronous);
+            bool postSynchronous = (this.info.ThreadingModel == ThreadingModel.MTA);
+            syncContext = new ComPlusSynchronizationContext(activity, postSynchronous);
             instanceContext.SynchronizationContext = syncContext;
 
             instanceContext.Closing += this.OnInstanceContextClosing;
@@ -87,7 +86,6 @@ namespace System.ServiceModel.ComIntegration
             ComPlusSynchronizationContext syncContext;
             syncContext = (ComPlusSynchronizationContext)instanceContext.SynchronizationContext;
             syncContext.Dispose();
-
         }
 
         static Assembly ResolveAssembly(object sender, ResolveEventArgs args)
@@ -96,7 +94,10 @@ namespace System.ServiceModel.ComIntegration
             if (indexOfComma != -1)
             {
                 Guid assemblyGuid = Guid.Empty;
-                string assemblyGuidString = args.Name.Substring(0, indexOfComma).Trim().ToLowerInvariant();
+                string assemblyGuidString = args
+                    .Name.Substring(0, indexOfComma)
+                    .Trim()
+                    .ToLowerInvariant();
 
                 if (Guid.TryParse(assemblyGuidString, out assemblyGuid))
                 {
@@ -106,7 +107,6 @@ namespace System.ServiceModel.ComIntegration
 
             return null;
         }
-
 
         object SetupServiceConfig(InstanceContext instanceContext, Message message)
         {
@@ -129,12 +129,14 @@ namespace System.ServiceModel.ComIntegration
                 default:
                     Fx.Assert("Unexpected threading model");
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.UnexpectedThreadingModel());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.UnexpectedThreadingModel()
+                    );
             }
             threadPoolConfig.SetBindingInfo(BindingOption.BindingToPoolThread);
 
             // SxS activation context properties
-            //                   
+            //
 
 
             // Manifest for VARIANT UDT types
@@ -146,7 +148,9 @@ namespace System.ServiceModel.ComIntegration
                 IServiceSxsConfig sxsConfig = serviceConfig as IServiceSxsConfig;
                 if (sxsConfig == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.QFENotPresent());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        System.ServiceModel.ComIntegration.Error.QFENotPresent()
+                    );
                 }
 
                 lock (manifestLock)
@@ -162,11 +166,12 @@ namespace System.ServiceModel.ComIntegration
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(tempPath));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(tempPath)
+                        );
                     }
 
                     string manifestDirectory = tempPath + this.info.AppID.ToString() + @"\";
-
 
                     if (!Directory.Exists(manifestDirectory))
                     {
@@ -179,11 +184,19 @@ namespace System.ServiceModel.ComIntegration
                             if (Fx.IsFatal(e))
                                 throw;
 
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(manifestDirectory));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                System.ServiceModel.ComIntegration.Error.CannotAccessDirectory(
+                                    manifestDirectory
+                                )
+                            );
                         }
 
                         Guid[] assemblyGuids = this.info.Assemblies;
-                        ComIntegrationManifestGenerator.GenerateManifestCollectionFile(assemblyGuids, manifestDirectory + manifestFileName + @".manifest", manifestFileName);
+                        ComIntegrationManifestGenerator.GenerateManifestCollectionFile(
+                            assemblyGuids,
+                            manifestDirectory + manifestFileName + @".manifest",
+                            manifestFileName
+                        );
 
                         foreach (Guid g in assemblyGuids)
                         {
@@ -191,18 +204,20 @@ namespace System.ServiceModel.ComIntegration
                             if (types.Length > 0)
                             {
                                 String guidStr = g.ToString();
-                                ComIntegrationManifestGenerator.GenerateWin32ManifestFile(types, manifestDirectory + guidStr + @".manifest", guidStr);
+                                ComIntegrationManifestGenerator.GenerateWin32ManifestFile(
+                                    types,
+                                    manifestDirectory + guidStr + @".manifest",
+                                    guidStr
+                                );
                             }
                         }
                     }
-
 
                     sxsConfig.SxsConfig(CSC_SxsConfig.CSC_NewSxs);
                     sxsConfig.SxsName(manifestFileName + @".manifest");
                     sxsConfig.SxsDirectory(manifestDirectory);
                 }
             }
-
 
             // Partitions
             //
@@ -218,11 +233,12 @@ namespace System.ServiceModel.ComIntegration
             //
             IServiceTransactionConfig transactionConfig;
             transactionConfig = (IServiceTransactionConfig)(serviceConfig);
-            transactionConfig.ConfigureTransaction(
-                TransactionConfig.NoTransaction);
+            transactionConfig.ConfigureTransaction(TransactionConfig.NoTransaction);
 
-            if ((this.info.TransactionOption == TransactionOption.Required) ||
-                (this.info.TransactionOption == TransactionOption.Supported))
+            if (
+                (this.info.TransactionOption == TransactionOption.Required)
+                || (this.info.TransactionOption == TransactionOption.Supported)
+            )
             {
                 Transaction messageTransaction = null;
                 messageTransaction = MessageUtil.GetMessageTransaction(message);

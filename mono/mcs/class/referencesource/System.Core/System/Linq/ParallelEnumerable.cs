@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -16,12 +16,12 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Threading;
 using System.Diagnostics.Contracts;
 using System.Linq.Parallel;
-using System.Collections.Concurrent;
-using System.Collections;
+using System.Threading;
 using System.Threading.Tasks;
 #if SILVERLIGHT
 using System.Core; // for System.Core.SR
@@ -54,15 +54,15 @@ namespace System.Linq
     //
 
     /// <summary>
-    /// Provides a set of methods for querying objects that implement 
-    /// ParallelQuery{TSource}.  This is the parallel equivalent of 
+    /// Provides a set of methods for querying objects that implement
+    /// ParallelQuery{TSource}.  This is the parallel equivalent of
     /// <see cref="System.Linq.Enumerable"/>.
     /// </summary>
     public static class ParallelEnumerable
     {
         // We pass this string constant to an attribute constructor. Unfortunately, we cannot access resources from
         // an attribute constructor, so we have to store this string in source code.
-        private const string RIGHT_SOURCE_NOT_PARALLEL_STR = 
+        private const string RIGHT_SOURCE_NOT_PARALLEL_STR =
             "The second data source of a binary operator must be of type System.Linq.ParallelQuery<T> rather than "
             + "System.Collections.Generic.IEnumerable<T>. To fix this problem, use the AsParallel() extension method "
             + "to convert the right data source to System.Linq.ParallelQuery<T>.";
@@ -86,7 +86,7 @@ namespace System.Linq
         /// Enables parallelization of a query.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
-        /// <param name="source">An <see cref="System.Collections.Generic.IEnumerable{T}"/> 
+        /// <param name="source">An <see cref="System.Collections.Generic.IEnumerable{T}"/>
         /// to convert to a <see cref="System.Linq.ParallelQuery{T}"/>.</param>
         /// <returns>The source as a <see cref="System.Linq.ParallelQuery{T}"/> to bind to
         /// ParallelEnumerable extension methods.</returns>
@@ -128,7 +128,6 @@ namespace System.Linq
             return new PartitionerQueryOperator<TSource>(source);
         }
 
-
         /// <summary>
         /// Enables treatment of a data source as if it was ordered, overriding the default of unordered.
         /// AsOrdered may only be invoked on sequences returned by AsParallel, ParallelEnumerable.Range,
@@ -143,8 +142,8 @@ namespace System.Linq
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         /// <remarks>
-        /// A natural tension exists between performance and preserving order in parallel processing. By default, 
-        /// a parallelized query behaves as if the ordering of the results is arbitrary 
+        /// A natural tension exists between performance and preserving order in parallel processing. By default,
+        /// a parallelized query behaves as if the ordering of the results is arbitrary
         /// unless AsOrdered is applied or there is an explicit OrderBy operator in the query.
         /// </remarks>
         /// <returns>The source sequence which will maintain ordering in the query.</returns>
@@ -155,23 +154,36 @@ namespace System.Linq
                 throw new ArgumentNullException("source");
             }
 
-            if (!(source is ParallelEnumerableWrapper<TSource> || source is IParallelPartitionable<TSource>))
+            if (
+                !(
+                    source is ParallelEnumerableWrapper<TSource>
+                    || source is IParallelPartitionable<TSource>
+                )
+            )
             {
-                PartitionerQueryOperator<TSource> partitionerOp = source as PartitionerQueryOperator<TSource>;
+                PartitionerQueryOperator<TSource> partitionerOp =
+                    source as PartitionerQueryOperator<TSource>;
                 if (partitionerOp != null)
                 {
                     if (!partitionerOp.Orderable)
                     {
-                        throw new InvalidOperationException(SR.GetString(SR.ParallelQuery_PartitionerNotOrderable));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.ParallelQuery_PartitionerNotOrderable)
+                        );
                     }
                 }
                 else
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.ParallelQuery_InvalidAsOrderedCall));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ParallelQuery_InvalidAsOrderedCall)
+                    );
                 }
             }
 
-            return new OrderingQueryOperator<TSource>(QueryOperator<TSource>.AsQueryOperator(source), true);
+            return new OrderingQueryOperator<TSource>(
+                QueryOperator<TSource>.AsQueryOperator(source),
+                true
+            );
         }
 
         /// <summary>
@@ -187,8 +199,8 @@ namespace System.Linq
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         /// <remarks>
-        /// A natural tension exists between performance and preserving order in parallel processing. By default, 
-        /// a parallelized query behaves as if the ordering of the results is arbitrary unless AsOrdered 
+        /// A natural tension exists between performance and preserving order in parallel processing. By default,
+        /// a parallelized query behaves as if the ordering of the results is arbitrary unless AsOrdered
         /// is applied or there is an explicit OrderBy operator in the query.
         /// </remarks>
         /// <returns>The source sequence which will maintain ordering in the query.</returns>
@@ -202,10 +214,15 @@ namespace System.Linq
             ParallelEnumerableWrapper wrapper = source as ParallelEnumerableWrapper;
             if (wrapper == null)
             {
-                throw new InvalidOperationException(SR.GetString(SR.ParallelQuery_InvalidNonGenericAsOrderedCall));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ParallelQuery_InvalidNonGenericAsOrderedCall)
+                );
             }
 
-            return new OrderingQueryOperator<object>(QueryOperator<object>.AsQueryOperator(wrapper), true);
+            return new OrderingQueryOperator<object>(
+                QueryOperator<object>.AsQueryOperator(wrapper),
+                true
+            );
         }
 
         /// <summary>
@@ -221,20 +238,25 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> AsUnordered<TSource>(this ParallelQuery<TSource> source)
+        public static ParallelQuery<TSource> AsUnordered<TSource>(
+            this ParallelQuery<TSource> source
+        )
         {
             if (source == null)
             {
                 throw new ArgumentNullException("source");
             }
 
-            return new OrderingQueryOperator<TSource>(QueryOperator<TSource>.AsQueryOperator(source), false);
+            return new OrderingQueryOperator<TSource>(
+                QueryOperator<TSource>.AsQueryOperator(source),
+                false
+            );
         }
 
         /// <summary>
         /// Enables parallelization of a query.
         /// </summary>
-        /// <param name="source">An <see cref="System.Collections.Generic.IEnumerable{T}"/> to convert 
+        /// <param name="source">An <see cref="System.Collections.Generic.IEnumerable{T}"/> to convert
         /// to a <see cref="System.Linq.ParallelQuery{T}"/>.</param>
         /// <returns>
         /// The source as a ParallelQuery to bind to
@@ -245,11 +267,11 @@ namespace System.Linq
         /// </exception>
         public static ParallelQuery AsParallel(this IEnumerable source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             return new ParallelEnumerableWrapper(source);
         }
-
 
         //-----------------------------------------------------------------------------------
         // Converts a parallel enumerable into something that forces sequential execution.
@@ -259,7 +281,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Converts a <see cref="ParallelQuery{T}"/> into an 
+        /// Converts a <see cref="ParallelQuery{T}"/> into an
         /// <see cref="System.Collections.Generic.IEnumerable{T}"/> to force sequential
         /// evaluation of the query.
         /// </summary>
@@ -272,10 +294,12 @@ namespace System.Linq
         /// </exception>
         public static IEnumerable<TSource> AsSequential<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // Ditch the wrapper, if there is one.
-            ParallelEnumerableWrapper<TSource> wrapper = source as ParallelEnumerableWrapper<TSource>;
+            ParallelEnumerableWrapper<TSource> wrapper =
+                source as ParallelEnumerableWrapper<TSource>;
             if (wrapper != null)
             {
                 return wrapper.WrappedEnumerable;
@@ -285,7 +309,6 @@ namespace System.Linq
                 return source;
             }
         }
-
 
         /// <summary>
         /// Sets the task scheduler to execute the query.
@@ -300,16 +323,23 @@ namespace System.Linq
         /// <exception cref="T:System.InvalidOperationException">
         /// WithTaskScheduler is used multiple times in the query.
         /// </exception>
-        internal static ParallelQuery<TSource> WithTaskScheduler<TSource>(this ParallelQuery<TSource> source, TaskScheduler taskScheduler)
+        internal static ParallelQuery<TSource> WithTaskScheduler<TSource>(
+            this ParallelQuery<TSource> source,
+            TaskScheduler taskScheduler
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (taskScheduler == null) throw new ArgumentNullException("taskScheduler");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (taskScheduler == null)
+                throw new ArgumentNullException("taskScheduler");
 
             QuerySettings settings = QuerySettings.Empty;
             settings.TaskScheduler = taskScheduler;
 
             return new QueryExecutionOption<TSource>(
-                QueryOperator<TSource>.AsQueryOperator(source), settings);
+                QueryOperator<TSource>.AsQueryOperator(source),
+                settings
+            );
         }
 
         /// <summary>
@@ -329,9 +359,13 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentOutOfRangeException">
         /// <paramref name="degreeOfParallelism"/> is less than 1 or greater than 512.
         /// </exception>
-        public static ParallelQuery<TSource> WithDegreeOfParallelism<TSource>(this ParallelQuery<TSource> source, int degreeOfParallelism)
+        public static ParallelQuery<TSource> WithDegreeOfParallelism<TSource>(
+            this ParallelQuery<TSource> source,
+            int degreeOfParallelism
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             if (degreeOfParallelism < 1 || degreeOfParallelism > Scheduling.MAX_SUPPORTED_DOP)
             {
                 throw new ArgumentOutOfRangeException("degreeOfParallelism");
@@ -341,7 +375,9 @@ namespace System.Linq
             settings.DegreeOfParallelism = degreeOfParallelism;
 
             return new QueryExecutionOption<TSource>(
-                QueryOperator<TSource>.AsQueryOperator(source), settings);
+                QueryOperator<TSource>.AsQueryOperator(source),
+                settings
+            );
         }
 
         /// <summary>
@@ -361,9 +397,13 @@ namespace System.Linq
         /// <exception cref="T:System.ObjectDisposedException">
         /// The <see cref="T:System.Threading.CancellationTokenSource"/> associated with the <paramref name="cancellationToken"/> has been disposed.
         /// </exception>
-        public static ParallelQuery<TSource> WithCancellation<TSource>(this ParallelQuery<TSource> source, CancellationToken cancellationToken)
+        public static ParallelQuery<TSource> WithCancellation<TSource>(
+            this ParallelQuery<TSource> source,
+            CancellationToken cancellationToken
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // also a convenience check whether the cancellationTokenSource backing the token is already disposed.
             // do this via a dummy registration as there is no public IsDipsosed property on CT.
@@ -374,7 +414,10 @@ namespace System.Linq
             }
             catch (ObjectDisposedException)
             {
-                throw new ArgumentException(SR.GetString(SR.ParallelEnumerable_WithCancellation_TokenSourceDisposed), "cancellationToken");
+                throw new ArgumentException(
+                    SR.GetString(SR.ParallelEnumerable_WithCancellation_TokenSourceDisposed),
+                    "cancellationToken"
+                );
             }
             finally
             {
@@ -385,7 +428,9 @@ namespace System.Linq
             settings.CancellationState = new CancellationState(cancellationToken);
 
             return new QueryExecutionOption<TSource>(
-                QueryOperator<TSource>.AsQueryOperator(source), settings);
+                QueryOperator<TSource>.AsQueryOperator(source),
+                settings
+            );
         }
 
         /// <summary>
@@ -394,7 +439,7 @@ namespace System.Linq
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A ParallelQuery on which to set the option.</param>
         /// <param name="executionMode">The mode in which to execute the query.</param>
-        /// <returns>ParallelQuery representing the same query as source, but with the 
+        /// <returns>ParallelQuery representing the same query as source, but with the
         /// <seealso cref="System.Linq.ParallelExecutionMode"/> registered.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
@@ -405,19 +450,30 @@ namespace System.Linq
         /// <exception cref="T:System.InvalidOperationException">
         /// WithExecutionMode is used multiple times in the query.
         /// </exception>
-        public static ParallelQuery<TSource> WithExecutionMode<TSource>(this ParallelQuery<TSource> source, ParallelExecutionMode executionMode)
+        public static ParallelQuery<TSource> WithExecutionMode<TSource>(
+            this ParallelQuery<TSource> source,
+            ParallelExecutionMode executionMode
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (executionMode != ParallelExecutionMode.Default && executionMode != ParallelExecutionMode.ForceParallelism)
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (
+                executionMode != ParallelExecutionMode.Default
+                && executionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                throw new ArgumentException(SR.GetString(SR.ParallelEnumerable_WithQueryExecutionMode_InvalidMode));
+                throw new ArgumentException(
+                    SR.GetString(SR.ParallelEnumerable_WithQueryExecutionMode_InvalidMode)
+                );
             }
 
             QuerySettings settings = QuerySettings.Empty;
             settings.ExecutionMode = executionMode;
 
             return new QueryExecutionOption<TSource>(
-                QueryOperator<TSource>.AsQueryOperator(source), settings);
+                QueryOperator<TSource>.AsQueryOperator(source),
+                settings
+            );
         }
 
         /// <summary>
@@ -426,7 +482,7 @@ namespace System.Linq
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A ParallelQuery on which to set the option.</param>
         /// <param name="mergeOptions">The merge optiosn to set for this query.</param>
-        /// <returns>ParallelQuery representing the same query as source, but with the 
+        /// <returns>ParallelQuery representing the same query as source, but with the
         /// <seealso cref="ParallelMergeOptions"/> registered.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
@@ -437,22 +493,32 @@ namespace System.Linq
         /// <exception cref="T:System.InvalidOperationException">
         /// WithMergeOptions is used multiple times in the query.
         /// </exception>
-        public static ParallelQuery<TSource> WithMergeOptions<TSource>(this ParallelQuery<TSource> source, ParallelMergeOptions mergeOptions)
+        public static ParallelQuery<TSource> WithMergeOptions<TSource>(
+            this ParallelQuery<TSource> source,
+            ParallelMergeOptions mergeOptions
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (mergeOptions != ParallelMergeOptions.Default
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (
+                mergeOptions != ParallelMergeOptions.Default
                 && mergeOptions != ParallelMergeOptions.AutoBuffered
                 && mergeOptions != ParallelMergeOptions.NotBuffered
-                && mergeOptions != ParallelMergeOptions.FullyBuffered)
+                && mergeOptions != ParallelMergeOptions.FullyBuffered
+            )
             {
-                throw new ArgumentException(SR.GetString(SR.ParallelEnumerable_WithMergeOptions_InvalidOptions));
+                throw new ArgumentException(
+                    SR.GetString(SR.ParallelEnumerable_WithMergeOptions_InvalidOptions)
+                );
             }
 
             QuerySettings settings = QuerySettings.Empty;
             settings.MergeOptions = mergeOptions;
 
             return new QueryExecutionOption<TSource>(
-                QueryOperator<TSource>.AsQueryOperator(source), settings);
+                QueryOperator<TSource>.AsQueryOperator(source),
+                settings
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -464,7 +530,7 @@ namespace System.Linq
         /// </summary>
         /// <param name="start">The value of the first integer in the sequence.</param>
         /// <param name="count">The number of sequential integers to generate.</param>
-        /// <returns>An <b>IEnumerable&lt;Int32&gt;</b> in C# or <B>IEnumerable(Of Int32)</B> in 
+        /// <returns>An <b>IEnumerable&lt;Int32&gt;</b> in C# or <B>IEnumerable(Of Int32)</B> in
         /// Visual Basic that contains a range of sequential integral numbers.</returns>
         /// <exception cref="T:System.ArgumentOutOfRangeException">
         /// <paramref name="count"/> is less than 0
@@ -473,7 +539,8 @@ namespace System.Linq
         /// </exception>
         public static ParallelQuery<int> Range(int start, int count)
         {
-            if (count < 0 || (count > 0 && Int32.MaxValue - (count - 1) < start)) throw new ArgumentOutOfRangeException("count");
+            if (count < 0 || (count > 0 && Int32.MaxValue - (count - 1) < start))
+                throw new ArgumentOutOfRangeException("count");
             return new RangeEnumerable(start, count);
         }
 
@@ -493,7 +560,8 @@ namespace System.Linq
         /// </exception>
         public static ParallelQuery<TResult> Repeat<TResult>(TResult element, int count)
         {
-            if (count < 0) throw new ArgumentOutOfRangeException("count");
+            if (count < 0)
+                throw new ArgumentOutOfRangeException("count");
 
             return new RepeatEnumerable<TResult>(element, count);
         }
@@ -505,7 +573,7 @@ namespace System.Linq
         /// <summary>
         /// Returns an empty ParallelQuery{TResult} that has the specified type argument.
         /// </summary>
-        /// <typeparam name="TResult">The type to assign to the type parameter of the returned 
+        /// <typeparam name="TResult">The type to assign to the type parameter of the returned
         /// generic sequence.</typeparam>
         /// <returns>An empty sequence whose type argument is <typeparamref name="TResult"/>.</returns>
         public static ParallelQuery<TResult> Empty<TResult>()
@@ -533,11 +601,11 @@ namespace System.Linq
         /// Invokes in parallel the specified action for each element in the <paramref name="source"/>.
         /// </summary>
         /// <remarks>
-        /// This is an efficient way to process the output from a parallelized query because it does 
+        /// This is an efficient way to process the output from a parallelized query because it does
         /// not require a merge step at the end.  However, order of execution is non-deterministic.
         /// </remarks>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
-        /// <param name="source">The <see cref="ParallelQuery{T}"/> whose elements will be processed by 
+        /// <param name="source">The <see cref="ParallelQuery{T}"/> whose elements will be processed by
         /// <paramref name="action"/>.</param>
         /// <param name="action">An Action to invoke on each element.</param>
         /// <exception cref="T:System.ArgumentNullException">
@@ -549,17 +617,20 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static void ForAll<TSource>(this ParallelQuery<TSource> source, Action<TSource> action)
+        public static void ForAll<TSource>(
+            this ParallelQuery<TSource> source,
+            Action<TSource> action
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (action == null) throw new ArgumentNullException("action");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (action == null)
+                throw new ArgumentNullException("action");
 
             // We just instantiate the forall operator and invoke it synchronously on this thread.
-            // By the time it returns, the entire query has been executed and the actions run.. 
+            // By the time it returns, the entire query has been executed and the actions run..
             new ForAllOperator<TSource>(source, action).RunSynchronously();
         }
-
-        
 
         /*===================================================================================
          * BASIC OPERATORS
@@ -576,15 +647,20 @@ namespace System.Linq
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <param name="source">A sequence to filter.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <returns>A sequence that contains elements from the input sequence that satisfy 
+        /// <returns>A sequence that contains elements from the input sequence that satisfy
         /// the condition.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="predicate"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> Where<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static ParallelQuery<TSource> Where<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             return new WhereQueryOperator<TSource>(source, predicate);
         }
@@ -599,10 +675,15 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="predicate"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> Where<TSource>(this ParallelQuery<TSource> source, Func<TSource, int, bool> predicate)
+        public static ParallelQuery<TSource> Where<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             return new IndexedWhereQueryOperator<TSource>(source, predicate);
         }
@@ -619,16 +700,20 @@ namespace System.Linq
         /// <typeparam name="TResult">The type of elements resturned by <b>selector</b>.</typeparam>
         /// <param name="source">A sequence of values to invoke a transform function on.</param>
         /// <param name="selector">A transform function to apply to each element.</param>
-        /// <returns>A sequence whose elements are the result of invoking the transform function on each 
+        /// <returns>A sequence whose elements are the result of invoking the transform function on each
         /// element of <paramref name="source"/>.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="selector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> Select<TSource, TResult>(
-            this ParallelQuery<TSource> source, Func<TSource, TResult> selector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (selector == null) throw new ArgumentNullException("selector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (selector == null)
+                throw new ArgumentNullException("selector");
 
             return new SelectQueryOperator<TSource, TResult>(source, selector);
         }
@@ -640,16 +725,20 @@ namespace System.Linq
         /// <typeparam name="TResult">The type of elements resturned by <b>selector</b>.</typeparam>
         /// <param name="source">A sequence of values to invoke a transform function on.</param>
         /// <param name="selector">A transform function to apply to each element.</param>
-        /// <returns>A sequence whose elements are the result of invoking the transform function on each 
+        /// <returns>A sequence whose elements are the result of invoking the transform function on each
         /// element of <paramref name="source"/>.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="selector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> Select<TSource, TResult>(
-             this ParallelQuery<TSource> source, Func<TSource, int, TResult> selector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, int, TResult> selector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (selector == null) throw new ArgumentNullException("selector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (selector == null)
+                throw new ArgumentNullException("selector");
 
             return new IndexedSelectQueryOperator<TSource, TResult>(source, selector);
         }
@@ -668,7 +757,7 @@ namespace System.Linq
         /// <param name="second">The second sequence to zip.</param>
         /// <param name="resultSelector">A function to create a result element from two matching elements.</param>
         /// <returns>
-        /// A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing 
+        /// A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing
         /// resultSelector pairwise on two sequences. If the sequence lengths are unequal, this truncates
         /// to the length of the shorter sequence.
         /// </returns>
@@ -676,18 +765,24 @@ namespace System.Linq
         /// <paramref name="first"/> or <paramref name="second"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> Zip<TFirst, TSecond, TResult>(
-            this ParallelQuery<TFirst> first, ParallelQuery<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+            this ParallelQuery<TFirst> first,
+            ParallelQuery<TSecond> second,
+            Func<TFirst, TSecond, TResult> resultSelector
+        )
         {
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (first == null)
+                throw new ArgumentNullException("first");
+            if (second == null)
+                throw new ArgumentNullException("second");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
             return new ZipQueryOperator<TFirst, TSecond, TResult>(first, second, resultSelector);
         }
 
         /// <summary>
-        /// This Zip overload should never be called. 
-        /// This method is marked as obsolete and always throws 
+        /// This Zip overload should never be called.
+        /// This method is marked as obsolete and always throws
         /// <see cref="System.NotSupportedException"/> when invoked.
         /// </summary>
         /// <typeparam name="TFirst">This type parameter is not used.</typeparam>
@@ -705,9 +800,14 @@ namespace System.Linq
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TResult> Zip<TFirst, TSecond, TResult>(
-            this ParallelQuery<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+            this ParallelQuery<TFirst> first,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, TResult> resultSelector
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -716,7 +816,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Correlates in parallel the elements of two sequences based on matching keys. 
+        /// Correlates in parallel the elements of two sequences based on matching keys.
         /// The default equality comparer is used to compare keys.
         /// </summary>
         /// <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
@@ -725,28 +825,37 @@ namespace System.Linq
         /// <typeparam name="TResult">The type of the result elements.</typeparam>
         /// <param name="outer">The first sequence to join.</param>
         /// <param name="inner">The sequence to join to the first sequence.</param>
-        /// <param name="outerKeySelector">A function to extract the join key from each element of 
+        /// <param name="outerKeySelector">A function to extract the join key from each element of
         /// the first sequence.</param>
-        /// <param name="innerKeySelector">A function to extract the join key from each element of 
+        /// <param name="innerKeySelector">A function to extract the join key from each element of
         /// the second sequence.</param>
         /// <param name="resultSelector">A function to create a result element from two matching elements.</param>
-        /// <returns>A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing 
+        /// <returns>A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing
         /// an inner join on two sequences.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="outer"/> or <paramref name="inner"/> or <paramref name="outerKeySelector"/> or
         /// <paramref name="innerKeySelector"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> Join<TOuter, TInner, TKey, TResult>(
-            this ParallelQuery<TOuter> outer, ParallelQuery<TInner> inner,
-            Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, TInner, TResult> resultSelector)
+            this ParallelQuery<TOuter> outer,
+            ParallelQuery<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector
+        )
         {
             return Join<TOuter, TInner, TKey, TResult>(
-                outer, inner, outerKeySelector, innerKeySelector, resultSelector, null);
+                outer,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                null
+            );
         }
 
         /// <summary>
-        /// This Join overload should never be called. 
+        /// This Join overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when invoked.
         /// </summary>
         /// <typeparam name="TOuter">This type parameter is not used.</typeparam>
@@ -767,15 +876,20 @@ namespace System.Linq
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TResult> Join<TOuter, TInner, TKey, TResult>(
-            this ParallelQuery<TOuter> outer, IEnumerable<TInner> inner,
-            Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, TInner, TResult> resultSelector)
+            this ParallelQuery<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         /// <summary>
-        /// Correlates in parallel the elements of two sequences based on matching keys. 
+        /// Correlates in parallel the elements of two sequences based on matching keys.
         /// A specified IEqualityComparer{T} is used to compare keys.
         /// </summary>
         /// <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
@@ -784,35 +898,50 @@ namespace System.Linq
         /// <typeparam name="TResult">The type of the result elements.</typeparam>
         /// <param name="outer">The first sequence to join.</param>
         /// <param name="inner">The sequence to join to the first sequence.</param>
-        /// <param name="outerKeySelector">A function to extract the join key from each element 
+        /// <param name="outerKeySelector">A function to extract the join key from each element
         /// of the first sequence.</param>
-        /// <param name="innerKeySelector">A function to extract the join key from each element 
+        /// <param name="innerKeySelector">A function to extract the join key from each element
         /// of the second sequence.</param>
         /// <param name="resultSelector">A function to create a result element from two matching elements.</param>
         /// <param name="comparer">An IEqualityComparer&lt;(Of &lt;(T&gt;)&gt;) to hash and compare keys.</param>
-        /// <returns>A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing 
+        /// <returns>A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing
         /// an inner join on two sequences.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="outer"/> or <paramref name="inner"/> or <paramref name="outerKeySelector"/> or
         /// <paramref name="innerKeySelector"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> Join<TOuter, TInner, TKey, TResult>(
-            this ParallelQuery<TOuter> outer, ParallelQuery<TInner> inner,
-            Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, TInner, TResult> resultSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TOuter> outer,
+            ParallelQuery<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (outer == null) throw new ArgumentNullException("outer");
-            if (inner == null) throw new ArgumentNullException("inner");
-            if (outerKeySelector == null) throw new ArgumentNullException("outerKeySelector");
-            if (innerKeySelector == null) throw new ArgumentNullException("innerKeySelector");
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (outer == null)
+                throw new ArgumentNullException("outer");
+            if (inner == null)
+                throw new ArgumentNullException("inner");
+            if (outerKeySelector == null)
+                throw new ArgumentNullException("outerKeySelector");
+            if (innerKeySelector == null)
+                throw new ArgumentNullException("innerKeySelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
             return new JoinQueryOperator<TOuter, TInner, TKey, TResult>(
-                outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+                outer,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer
+            );
         }
 
         /// <summary>
-        /// This Join overload should never be called. 
+        /// This Join overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when invoked.
         /// </summary>
         /// <typeparam name="TOuter">This type parameter is not used.</typeparam>
@@ -834,11 +963,17 @@ namespace System.Linq
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TResult> Join<TOuter, TInner, TKey, TResult>(
-            this ParallelQuery<TOuter> outer, IEnumerable<TInner> inner,
-            Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, TInner, TResult> resultSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -847,7 +982,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Correlates in parallel the elements of two sequences based on equality of keys and groups the results. 
+        /// Correlates in parallel the elements of two sequences based on equality of keys and groups the results.
         /// The default equality comparer is used to compare keys.
         /// </summary>
         /// <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
@@ -856,29 +991,38 @@ namespace System.Linq
         /// <typeparam name="TResult">The type of the result elements.</typeparam>
         /// <param name="outer">The first sequence to join.</param>
         /// <param name="inner">The sequence to join to the first sequence.</param>
-        /// <param name="outerKeySelector">A function to extract the join key from each element 
+        /// <param name="outerKeySelector">A function to extract the join key from each element
         /// of the first sequence.</param>
-        /// <param name="innerKeySelector">A function to extract the join key from each element 
+        /// <param name="innerKeySelector">A function to extract the join key from each element
         /// of the second sequence.</param>
-        /// <param name="resultSelector">A function to create a result element from an element from 
+        /// <param name="resultSelector">A function to create a result element from an element from
         /// the first sequence and a collection of matching elements from the second sequence.</param>
-        /// <returns>A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing 
+        /// <returns>A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing
         /// a grouped join on two sequences.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="outer"/> or <paramref name="inner"/> or <paramref name="outerKeySelector"/> or
         /// <paramref name="innerKeySelector"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
-            this ParallelQuery<TOuter> outer, ParallelQuery<TInner> inner,
-            Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, IEnumerable<TInner>, TResult> resultSelector)
+            this ParallelQuery<TOuter> outer,
+            ParallelQuery<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, IEnumerable<TInner>, TResult> resultSelector
+        )
         {
             return GroupJoin<TOuter, TInner, TKey, TResult>(
-                outer, inner, outerKeySelector, innerKeySelector, resultSelector, null);
+                outer,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                null
+            );
         }
 
         /// <summary>
-        /// This GroupJoin overload should never be called. 
+        /// This GroupJoin overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TOuter">This type parameter is not used.</typeparam>
@@ -895,20 +1039,25 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of GroupJoin with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TOuter}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TInner}"/>.
-        /// Otherwise, the GroupJoin operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the GroupJoin operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         ///</remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
-            this ParallelQuery<TOuter> outer, IEnumerable<TInner> inner,
-            Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, IEnumerable<TInner>, TResult> resultSelector)
+            this ParallelQuery<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, IEnumerable<TInner>, TResult> resultSelector
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         /// <summary>
-        /// Correlates in parallel the elements of two sequences based on key equality and groups the results. 
+        /// Correlates in parallel the elements of two sequences based on key equality and groups the results.
         /// A specified IEqualityComparer{T} is used to compare keys.
         /// </summary>
         /// <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
@@ -917,36 +1066,51 @@ namespace System.Linq
         /// <typeparam name="TResult">The type of the result elements.</typeparam>
         /// <param name="outer">The first sequence to join.</param>
         /// <param name="inner">The sequence to join to the first sequence.</param>
-        /// <param name="outerKeySelector">A function to extract the join key from each element 
+        /// <param name="outerKeySelector">A function to extract the join key from each element
         /// of the first sequence.</param>
-        /// <param name="innerKeySelector">A function to extract the join key from each element 
+        /// <param name="innerKeySelector">A function to extract the join key from each element
         /// of the second sequence.</param>
-        /// <param name="resultSelector">A function to create a result element from an element from 
+        /// <param name="resultSelector">A function to create a result element from an element from
         /// the first sequence and a collection of matching elements from the second sequence.</param>
         /// <param name="comparer">An IEqualityComparer&lt;(Of &lt;(T&gt;)&gt;) to hash and compare keys.</param>
-        /// <returns>A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing 
+        /// <returns>A sequence that has elements of type <typeparamref name="TResult"/> that are obtained by performing
         /// a grouped join on two sequences.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="outer"/> or <paramref name="inner"/> or <paramref name="outerKeySelector"/> or
         /// <paramref name="innerKeySelector"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
-            this ParallelQuery<TOuter> outer, ParallelQuery<TInner> inner,
-            Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, IEnumerable<TInner>, TResult> resultSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TOuter> outer,
+            ParallelQuery<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, IEnumerable<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (outer == null) throw new ArgumentNullException("outer");
-            if (inner == null) throw new ArgumentNullException("inner");
-            if (outerKeySelector == null) throw new ArgumentNullException("outerKeySelector");
-            if (innerKeySelector == null) throw new ArgumentNullException("innerKeySelector");
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (outer == null)
+                throw new ArgumentNullException("outer");
+            if (inner == null)
+                throw new ArgumentNullException("inner");
+            if (outerKeySelector == null)
+                throw new ArgumentNullException("outerKeySelector");
+            if (innerKeySelector == null)
+                throw new ArgumentNullException("innerKeySelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
-            return new GroupJoinQueryOperator<TOuter, TInner, TKey, TResult>(outer, inner,
-                outerKeySelector, innerKeySelector, resultSelector, comparer);
+            return new GroupJoinQueryOperator<TOuter, TInner, TKey, TResult>(
+                outer,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer
+            );
         }
 
         /// <summary>
-        /// This GroupJoin overload should never be called. 
+        /// This GroupJoin overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TOuter">This type parameter is not used.</typeparam>
@@ -964,16 +1128,22 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of GroupJoin with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TOuter}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TInner}"/>.
-        /// Otherwise, the GroupJoin operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the GroupJoin operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
-            this ParallelQuery<TOuter> outer, IEnumerable<TInner> inner,
-            Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, IEnumerable<TInner>, TResult> resultSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, IEnumerable<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -983,100 +1153,128 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Projects in parallel each element of a sequence to an IEnumerable{T} 
+        /// Projects in parallel each element of a sequence to an IEnumerable{T}
         /// and flattens the resulting sequences into one sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TResult">The type of the elements of the sequence returned by <B>selector</B>.</typeparam>
         /// <param name="source">A sequence of values to project.</param>
         /// <param name="selector">A transform function to apply to each element.</param>
-        /// <returns>A sequence whose elements are the result of invoking the one-to-many transform 
+        /// <returns>A sequence whose elements are the result of invoking the one-to-many transform
         /// function on each element of the input sequence.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="selector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> SelectMany<TSource, TResult>(
-            this ParallelQuery<TSource> source, Func<TSource, IEnumerable<TResult>> selector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, IEnumerable<TResult>> selector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (selector == null) throw new ArgumentNullException("selector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (selector == null)
+                throw new ArgumentNullException("selector");
 
-            return new SelectManyQueryOperator<TSource, TResult, TResult>(source, selector, null, null);
+            return new SelectManyQueryOperator<TSource, TResult, TResult>(
+                source,
+                selector,
+                null,
+                null
+            );
         }
 
         /// <summary>
-        /// Projects in parallel each element of a sequence to an IEnumerable{T}, and flattens the resulting 
-        /// sequences into one sequence. The index of each source element is used in the projected form of 
+        /// Projects in parallel each element of a sequence to an IEnumerable{T}, and flattens the resulting
+        /// sequences into one sequence. The index of each source element is used in the projected form of
         /// that element.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TResult">The type of the elements of the sequence returned by <B>selector</B>.</typeparam>
         /// <param name="source">A sequence of values to project.</param>
         /// <param name="selector">A transform function to apply to each element.</param>
-        /// <returns>A sequence whose elements are the result of invoking the one-to-many transform 
+        /// <returns>A sequence whose elements are the result of invoking the one-to-many transform
         /// function on each element of the input sequence.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="selector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> SelectMany<TSource, TResult>(
-             this ParallelQuery<TSource> source, Func<TSource, int, IEnumerable<TResult>> selector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, int, IEnumerable<TResult>> selector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (selector == null) throw new ArgumentNullException("selector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (selector == null)
+                throw new ArgumentNullException("selector");
 
-            return new SelectManyQueryOperator<TSource, TResult, TResult>(source, null, selector, null);
+            return new SelectManyQueryOperator<TSource, TResult, TResult>(
+                source,
+                null,
+                selector,
+                null
+            );
         }
 
         /// <summary>
-        /// Projects each element of a sequence to an IEnumerable{T}, 
-        /// flattens the resulting sequences into one sequence, and invokes a result selector 
+        /// Projects each element of a sequence to an IEnumerable{T},
+        /// flattens the resulting sequences into one sequence, and invokes a result selector
         /// function on each element therein.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TCollection">The type of the intermediate elements collected by <paramref name="collectionSelector"/>.</typeparam>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="source">A sequence of values to project.</param>
-        /// <param name="collectionSelector">A transform function to apply to each source element; 
+        /// <param name="collectionSelector">A transform function to apply to each source element;
         /// the second parameter of the function represents the index of the source element.</param>
-        /// <param name="resultSelector">A function to create a result element from an element from 
+        /// <param name="resultSelector">A function to create a result element from an element from
         /// the first sequence and a collection of matching elements from the second sequence.</param>
-        /// <returns>A sequence whose elements are the result of invoking the one-to-many transform 
-        /// function <paramref name="collectionSelector"/> on each element of <paramref name="source"/> and then mapping 
+        /// <returns>A sequence whose elements are the result of invoking the one-to-many transform
+        /// function <paramref name="collectionSelector"/> on each element of <paramref name="source"/> and then mapping
         /// each of those sequence elements and their corresponding source element to a result element.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="collectionSelector"/> or
         /// <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> SelectMany<TSource, TCollection, TResult>(
-            this ParallelQuery<TSource> source, Func<TSource, IEnumerable<TCollection>> collectionSelector,
-            Func<TSource, TCollection, TResult> resultSelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (collectionSelector == null) throw new ArgumentNullException("collectionSelector");
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (collectionSelector == null)
+                throw new ArgumentNullException("collectionSelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
-            return new SelectManyQueryOperator<TSource, TCollection, TResult>(source, collectionSelector, null, resultSelector);
+            return new SelectManyQueryOperator<TSource, TCollection, TResult>(
+                source,
+                collectionSelector,
+                null,
+                resultSelector
+            );
         }
 
         /// <summary>
-        /// Projects each element of a sequence to an IEnumerable{T}, flattens the resulting 
-        /// sequences into one sequence, and invokes a result selector function on each element 
-        /// therein. The index of each source element is used in the intermediate projected 
+        /// Projects each element of a sequence to an IEnumerable{T}, flattens the resulting
+        /// sequences into one sequence, and invokes a result selector function on each element
+        /// therein. The index of each source element is used in the intermediate projected
         /// form of that element.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
-        /// <typeparam name="TCollection">The type of the intermediate elements collected by 
+        /// <typeparam name="TCollection">The type of the intermediate elements collected by
         /// <paramref name="collectionSelector"/>.</typeparam>
         /// <typeparam name="TResult">The type of elements to return.</typeparam>
         /// <param name="source">A sequence of values to project.</param>
-        /// <param name="collectionSelector">A transform function to apply to each source element; 
+        /// <param name="collectionSelector">A transform function to apply to each source element;
         /// the second parameter of the function represents the index of the source element.</param>
-        /// <param name="resultSelector">A function to create a result element from an element from 
+        /// <param name="resultSelector">A function to create a result element from an element from
         /// the first sequence and a collection of matching elements from the second sequence.</param>
         /// <returns>
-        /// A sequence whose elements are the result of invoking the one-to-many transform 
-        /// function <paramref name="collectionSelector"/> on each element of <paramref name="source"/> and then mapping 
-        /// each of those sequence elements and their corresponding source element to a 
+        /// A sequence whose elements are the result of invoking the one-to-many transform
+        /// function <paramref name="collectionSelector"/> on each element of <paramref name="source"/> and then mapping
+        /// each of those sequence elements and their corresponding source element to a
         /// result element.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -1084,14 +1282,24 @@ namespace System.Linq
         /// <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> SelectMany<TSource, TCollection, TResult>(
-            this ParallelQuery<TSource> source, Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
-            Func<TSource, TCollection, TResult> resultSelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (collectionSelector == null) throw new ArgumentNullException("collectionSelector");
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (collectionSelector == null)
+                throw new ArgumentNullException("collectionSelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
-            return new SelectManyQueryOperator<TSource, TCollection, TResult>(source, null, collectionSelector, resultSelector);
+            return new SelectManyQueryOperator<TSource, TCollection, TResult>(
+                source,
+                null,
+                collectionSelector,
+                resultSelector
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -1103,7 +1311,7 @@ namespace System.Linq
         /// Sorts in parallel the elements of a sequence in ascending order according to a key.
         /// </summary>
         /// <remarks>
-        /// In contrast to the sequential implementation, this is not a stable sort. 
+        /// In contrast to the sequential implementation, this is not a stable sort.
         /// To achieve a stable sort, change a query of the form:
         /// <code>var ordered = source.OrderBy((e) => e.k);</code>
         /// to instead be formed as:
@@ -1113,19 +1321,24 @@ namespace System.Linq
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted
         /// according to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static OrderedParallelQuery<TSource> OrderBy<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             return new OrderedParallelQuery<TSource>(
-                new SortQueryOperator<TSource, TKey>(source, keySelector, null, false));
+                new SortQueryOperator<TSource, TKey>(source, keySelector, null, false)
+            );
         }
 
         /// <summary>
@@ -1133,7 +1346,7 @@ namespace System.Linq
         /// </summary>
         /// <remarks>
         /// In contrast to the sequential implementation, this is not a stable sort.
-        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for 
+        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for
         /// an approach to implementing a stable sort.
         /// </remarks>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -1141,19 +1354,25 @@ namespace System.Linq
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
         /// <param name="comparer">An IComparer{TKey} to compare keys.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted according 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted according
         /// to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static OrderedParallelQuery<TSource> OrderBy<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             return new OrderedParallelQuery<TSource>(
-                new SortQueryOperator<TSource, TKey>(source, keySelector, comparer, false));
+                new SortQueryOperator<TSource, TKey>(source, keySelector, comparer, false)
+            );
         }
 
         /// <summary>
@@ -1161,25 +1380,31 @@ namespace System.Linq
         /// </summary>
         /// <remarks>
         /// In contrast to the sequential implementation, this is not a stable sort.
-        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for 
+        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for
         /// an approach to implementing a stable sort.
         /// </remarks>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted
         /// descending according to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static OrderedParallelQuery<TSource> OrderByDescending<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
-            return new OrderedParallelQuery<TSource>(new SortQueryOperator<TSource, TKey>(source, keySelector, null, true));
+            return new OrderedParallelQuery<TSource>(
+                new SortQueryOperator<TSource, TKey>(source, keySelector, null, true)
+            );
         }
 
         /// <summary>
@@ -1187,7 +1412,7 @@ namespace System.Linq
         /// </summary>
         /// <remarks>
         /// In contrast to the sequential implementation, this is not a stable sort.
-        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for 
+        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for
         /// an approach to implementing a stable sort.
         /// </remarks>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -1195,137 +1420,177 @@ namespace System.Linq
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
         /// <param name="comparer">An IComparer{TKey} to compare keys.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted descending 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted descending
         /// according to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static OrderedParallelQuery<TSource> OrderByDescending<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             return new OrderedParallelQuery<TSource>(
-                new SortQueryOperator<TSource, TKey>(source, keySelector, comparer, true));
+                new SortQueryOperator<TSource, TKey>(source, keySelector, comparer, true)
+            );
         }
 
         /// <summary>
-        /// Performs in parallel a subsequent ordering of the elements in a sequence 
+        /// Performs in parallel a subsequent ordering of the elements in a sequence
         /// in ascending order according to a key.
         /// </summary>
         /// <remarks>
         /// In contrast to the sequential implementation, this is not a stable sort.
-        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for 
+        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for
         /// an approach to implementing a stable sort.
         /// </remarks>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <param name="source">An OrderedParallelQuery{TSource} than 
+        /// <param name="source">An OrderedParallelQuery{TSource} than
         /// contains elements to sort.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are
         /// sorted according to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
-            this OrderedParallelQuery<TSource> source, Func<TSource, TKey> keySelector)
+            this OrderedParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(keySelector, null, false));
+                (QueryOperator<TSource>)
+                    source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(keySelector, null, false)
+            );
         }
 
         /// <summary>
-        /// Performs in parallel a subsequent ordering of the elements in a sequence in 
+        /// Performs in parallel a subsequent ordering of the elements in a sequence in
         /// ascending order by using a specified comparer.
         /// </summary>
         /// <remarks>
         /// In contrast to the sequential implementation, this is not a stable sort.
-        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for 
+        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for
         /// an approach to implementing a stable sort.
         /// </remarks>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <param name="source">An OrderedParallelQuery{TSource} that contains 
+        /// <param name="source">An OrderedParallelQuery{TSource} that contains
         /// elements to sort.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
         /// <param name="comparer">An IComparer{TKey} to compare keys.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted
         /// according to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static OrderedParallelQuery<TSource> ThenBy<TSource, TKey>(
-            this OrderedParallelQuery<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
+            this OrderedParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(keySelector, comparer, false));
+                (QueryOperator<TSource>)
+                    source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
+                        keySelector,
+                        comparer,
+                        false
+                    )
+            );
         }
 
         /// <summary>
-        /// Performs in parallel a subsequent ordering of the elements in a sequence in 
+        /// Performs in parallel a subsequent ordering of the elements in a sequence in
         /// descending order, according to a key.
         /// </summary>
         /// <remarks>
         /// In contrast to the sequential implementation, this is not a stable sort.
-        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for 
+        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for
         /// an approach to implementing a stable sort.
         /// </remarks>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <param name="source">An OrderedParallelQuery{TSource} than contains 
+        /// <param name="source">An OrderedParallelQuery{TSource} than contains
         /// elements to sort.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted
         /// descending according to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
-            this OrderedParallelQuery<TSource> source, Func<TSource, TKey> keySelector)
+            this OrderedParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(keySelector, null, true));
+                (QueryOperator<TSource>)
+                    source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(keySelector, null, true)
+            );
         }
 
         /// <summary>
-        /// Performs in parallel a subsequent ordering of the elements in a sequence in descending 
+        /// Performs in parallel a subsequent ordering of the elements in a sequence in descending
         /// order by using a specified comparer.
         /// </summary>
         /// <remarks>
         /// In contrast to the sequential implementation, this is not a stable sort.
-        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for 
+        /// See the remarks for OrderBy(ParallelQuery{TSource}, Func{TSource,TKey}) for
         /// an approach to implementing a stable sort.
         /// </remarks>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <param name="source">An OrderedParallelQuery{TSource} than contains 
+        /// <param name="source">An OrderedParallelQuery{TSource} than contains
         /// elements to sort.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
         /// <param name="comparer">An IComparer{TKey} to compare keys.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted
         /// descending according to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static OrderedParallelQuery<TSource> ThenByDescending<TSource, TKey>(
-            this OrderedParallelQuery<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
+            this OrderedParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(keySelector, comparer, true));
+                (QueryOperator<TSource>)
+                    source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
+                        keySelector,
+                        comparer,
+                        true
+                    )
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -1338,13 +1603,15 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <param name="source">An OrderedParallelQuery{TSource}than contains 
+        /// <param name="source">An OrderedParallelQuery{TSource}than contains
         /// elements to sort.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
-        /// <returns>An OrderedParallelQuery{TSource}whose elements are sorted 
+        /// <returns>An OrderedParallelQuery{TSource}whose elements are sorted
         /// descending according to a key.</returns>
         public static ParallelQuery<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector
+        )
         {
             return GroupBy<TSource, TKey>(source, keySelector, null);
         }
@@ -1354,51 +1621,64 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>>.</typeparam>
-        /// <param name="source">An OrderedParallelQuery{TSource} than contains 
+        /// <param name="source">An OrderedParallelQuery{TSource} than contains
         /// elements to sort.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
         /// <param name="comparer">An IComparer{TSource} to compare keys.</param>
-        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted 
+        /// <returns>An OrderedParallelQuery{TSource} whose elements are sorted
         /// descending according to a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
-            return new GroupByQueryOperator<TSource, TKey, TSource>(source, keySelector, null, comparer);
+            return new GroupByQueryOperator<TSource, TKey, TSource>(
+                source,
+                keySelector,
+                null,
+                comparer
+            );
         }
 
         /// <summary>
-        /// Groups in parallel the elements of a sequence according to a specified key selector function and 
+        /// Groups in parallel the elements of a sequence according to a specified key selector function and
         /// projects the elements for each group by using a specified function.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
         /// <typeparam name="TElement">The type of the elements in the IGrouping</typeparam>
-        /// <param name="source">An OrderedParallelQuery&lt;(Of &lt;(TElement&gt;)&gt;) than contains 
+        /// <param name="source">An OrderedParallelQuery&lt;(Of &lt;(TElement&gt;)&gt;) than contains
         /// elements to sort.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
         /// <param name="elementSelector">A function to map each source element to an element in an  IGrouping.</param>
-        /// <returns>A ParallelQuery&lt;IGrouping&lt;TKey, TElement&gt;&gt; in C# or 
-        /// ParallelQuery(Of IGrouping(Of TKey, TElement)) in Visual Basic where each IGrouping 
+        /// <returns>A ParallelQuery&lt;IGrouping&lt;TKey, TElement&gt;&gt; in C# or
+        /// ParallelQuery(Of IGrouping(Of TKey, TElement)) in Visual Basic where each IGrouping
         /// generic object contains a collection of objects of type <typeparamref name="TElement"/> and a key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> or
         /// <paramref name="elementSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<IGrouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector
+        )
         {
             return GroupBy<TSource, TKey, TElement>(source, keySelector, elementSelector, null);
         }
 
         /// <summary>
-        /// Groups in parallel the elements of a sequence according to a key selector function. 
-        /// The keys are compared by using a comparer and each group's elements are projected by 
+        /// Groups in parallel the elements of a sequence according to a key selector function.
+        /// The keys are compared by using a comparer and each group's elements are projected by
         /// using a specified function.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -1409,8 +1689,8 @@ namespace System.Linq
         /// <param name="elementSelector">A function to map each source element to an element in an  IGrouping.</param>
         /// <param name="comparer">An IComparer{TSource} to compare keys.</param>
         /// <returns>
-        /// A ParallelQuery{IGrouping{TKey, TElement}} in C# or 
-        /// ParallelQuery(Of IGrouping(Of TKey, TElement)) in Visual Basic where each IGrouping 
+        /// A ParallelQuery{IGrouping{TKey, TElement}} in C# or
+        /// ParallelQuery(Of IGrouping(Of TKey, TElement)) in Visual Basic where each IGrouping
         /// generic object contains a collection of objects of type <typeparamref name="TElement"/> and a key.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -1418,13 +1698,25 @@ namespace System.Linq
         /// <paramref name="elementSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<IGrouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
-            if (elementSelector == null) throw new ArgumentNullException("elementSelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
+            if (elementSelector == null)
+                throw new ArgumentNullException("elementSelector");
 
-            return new GroupByQueryOperator<TSource, TKey, TElement>(source, keySelector, elementSelector, comparer);
+            return new GroupByQueryOperator<TSource, TKey, TElement>(
+                source,
+                keySelector,
+                elementSelector,
+                comparer
+            );
         }
 
         //
@@ -1441,7 +1733,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Groups in parallel the elements of a sequence according to a specified 
+        /// Groups in parallel the elements of a sequence according to a specified
         /// key selector function and creates a result value from each group and its key.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -1450,25 +1742,34 @@ namespace System.Linq
         /// <param name="source">A sequence whose elements to group.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <param name="resultSelector">A function to create a result value from each group.</param>
-        /// <returns>A collection of elements of type <typeparamref name="TResult"/> where each element represents a 
+        /// <returns>A collection of elements of type <typeparamref name="TResult"/> where each element represents a
         /// projection over a group and its key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> or
         /// <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> GroupBy<TSource, TKey, TResult>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TKey, IEnumerable<TSource>, TResult> resultSelector)
-        
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TKey, IEnumerable<TSource>, TResult> resultSelector
+        )
         {
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
-            return source.GroupBy<TSource, TKey>(keySelector)
-                .Select<IGrouping<TKey, TSource>, TResult>(delegate(IGrouping<TKey, TSource> grouping) { return resultSelector(grouping.Key, grouping); });
+            return source
+                .GroupBy<TSource, TKey>(keySelector)
+                .Select<IGrouping<TKey, TSource>, TResult>(
+                    delegate(IGrouping<TKey, TSource> grouping)
+                    {
+                        return resultSelector(grouping.Key, grouping);
+                    }
+                );
         }
 
         /// <summary>
-        /// Groups in parallel the elements of a sequence according to a specified key selector function 
-        /// and creates a result value from each group and its key. The keys are compared 
+        /// Groups in parallel the elements of a sequence according to a specified key selector function
+        /// and creates a result value from each group and its key. The keys are compared
         /// by using a specified comparer.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -1479,9 +1780,9 @@ namespace System.Linq
         /// <param name="resultSelector">A function to create a result value from each group.</param>
         /// <param name="comparer">An IEqualityComparer{TKey} to compare keys.</param>
         /// <returns>
-        /// An <B>ParallelQuery&lt;IGrouping&lt;TKey, TResult&gt;&gt;</B> in C# or 
-        /// <B>ParallelQuery(Of IGrouping(Of TKey, TResult))</B> in Visual Basic where each 
-        /// IGrouping&lt;(Of &lt;(TKey, TResult&gt;)&gt;) object contains a collection of objects 
+        /// An <B>ParallelQuery&lt;IGrouping&lt;TKey, TResult&gt;&gt;</B> in C# or
+        /// <B>ParallelQuery(Of IGrouping(Of TKey, TResult))</B> in Visual Basic where each
+        /// IGrouping&lt;(Of &lt;(TKey, TResult&gt;)&gt;) object contains a collection of objects
         /// of type <typeparamref name="TResult"/> and a key.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -1489,73 +1790,107 @@ namespace System.Linq
         /// <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> GroupBy<TSource, TKey, TResult>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TKey, IEnumerable<TSource>, TResult> resultSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TKey, IEnumerable<TSource>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
-            return source.GroupBy<TSource, TKey>(keySelector, comparer).Select<IGrouping<TKey, TSource>, TResult>(
-                delegate(IGrouping<TKey, TSource> grouping) { return resultSelector(grouping.Key, grouping); });            
+            return source
+                .GroupBy<TSource, TKey>(keySelector, comparer)
+                .Select<IGrouping<TKey, TSource>, TResult>(
+                    delegate(IGrouping<TKey, TSource> grouping)
+                    {
+                        return resultSelector(grouping.Key, grouping);
+                    }
+                );
         }
 
         /// <summary>
-        /// Groups in parallel the elements of a sequence according to a specified key 
-        /// selector function and creates a result value from each group and its key. 
+        /// Groups in parallel the elements of a sequence according to a specified key
+        /// selector function and creates a result value from each group and its key.
         /// The elements of each group are projected by using a specified function.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <typeparam name="TElement">The type of the elements in each 
+        /// <typeparam name="TElement">The type of the elements in each
         /// IGrouping{TKey, TElement}.</typeparam>
         /// <typeparam name="TResult">The type of the result value returned by <paramref name="resultSelector"/>.</typeparam>
         /// <param name="source">A sequence whose elements to group.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
-        /// <param name="elementSelector">A function to map each source element to an element in an 
+        /// <param name="elementSelector">A function to map each source element to an element in an
         /// IGrouping&lt;TKey, TElement&gt;.</param>
         /// <param name="resultSelector">A function to create a result value from each group.</param>
-        /// <returns>A collection of elements of type <typeparamref name="TElement"/> where each element represents a 
+        /// <returns>A collection of elements of type <typeparamref name="TElement"/> where each element represents a
         /// projection over a group and its key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> or
         /// <paramref name="elementSelector"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> GroupBy<TSource, TKey, TElement, TResult>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, Func<TKey, IEnumerable<TElement>, TResult> resultSelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector
+        )
         {
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
-            return source.GroupBy<TSource, TKey, TElement>(keySelector, elementSelector)
-                .Select<IGrouping<TKey, TElement>, TResult>(delegate(IGrouping<TKey, TElement> grouping) { return resultSelector(grouping.Key, grouping); });
+            return source
+                .GroupBy<TSource, TKey, TElement>(keySelector, elementSelector)
+                .Select<IGrouping<TKey, TElement>, TResult>(
+                    delegate(IGrouping<TKey, TElement> grouping)
+                    {
+                        return resultSelector(grouping.Key, grouping);
+                    }
+                );
         }
 
         /// <summary>
-        /// Groups the elements of a sequence according to a specified key selector function and 
-        /// creates a result value from each group and its key. Key values are compared by using a 
+        /// Groups the elements of a sequence according to a specified key selector function and
+        /// creates a result value from each group and its key. Key values are compared by using a
         /// specified comparer, and the elements of each group are projected by using a specified function.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <typeparam name="TElement">The type of the elements in each 
+        /// <typeparam name="TElement">The type of the elements in each
         /// IGrouping{TKey, TElement}.</typeparam>
         /// <typeparam name="TResult">The type of the result value returned by <paramref name="resultSelector"/>.</typeparam>
         /// <param name="source">A sequence whose elements to group.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
-        /// <param name="elementSelector">A function to map each source element to an element in an 
+        /// <param name="elementSelector">A function to map each source element to an element in an
         /// IGrouping{Key, TElement}.</param>
         /// <param name="resultSelector">A function to create a result value from each group.</param>
         /// <param name="comparer">An IEqualityComparer{TKey} to compare keys.</param>
-        /// <returns>A collection of elements of type <typeparamref name="TResult"/> where each element represents a 
+        /// <returns>A collection of elements of type <typeparamref name="TResult"/> where each element represents a
         /// projection over a group and its key.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="keySelector"/> or
         /// <paramref name="elementSelector"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TResult> GroupBy<TSource, TKey, TElement, TResult>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, Func<TKey, IEnumerable<TElement>, TResult> resultSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
-            return source.GroupBy<TSource, TKey, TElement>(keySelector, elementSelector, comparer)
-                .Select<IGrouping<TKey, TElement>, TResult>(delegate(IGrouping<TKey, TElement> grouping) { return resultSelector(grouping.Key, grouping); });
+            return source
+                .GroupBy<TSource, TKey, TElement>(keySelector, elementSelector, comparer)
+                .Select<IGrouping<TKey, TElement>, TResult>(
+                    delegate(IGrouping<TKey, TElement> grouping)
+                    {
+                        return resultSelector(grouping.Key, grouping);
+                    }
+                );
         }
 
         /*===================================================================================
@@ -1575,18 +1910,42 @@ namespace System.Linq
         //     The result of aggregation.
         //
 
-        private static T PerformAggregation<T>(this ParallelQuery<T> source,
-            Func<T, T, T> reduce, T seed, bool seedIsSpecified, bool throwIfEmpty, QueryAggregationOptions options)
+        private static T PerformAggregation<T>(
+            this ParallelQuery<T> source,
+            Func<T, T, T> reduce,
+            T seed,
+            bool seedIsSpecified,
+            bool throwIfEmpty,
+            QueryAggregationOptions options
+        )
         {
             Contract.Assert(source != null);
             Contract.Assert(reduce != null);
-            Contract.Assert(Enum.IsDefined(typeof(QueryAggregationOptions), options), "enum is out of range");
+            Contract.Assert(
+                Enum.IsDefined(typeof(QueryAggregationOptions), options),
+                "enum is out of range"
+            );
 
-            AssociativeAggregationOperator<T, T, T> op = new AssociativeAggregationOperator<T, T, T>(
-                source, seed, null, seedIsSpecified, reduce, reduce, delegate(T obj) { return obj; }, throwIfEmpty, options);
+            AssociativeAggregationOperator<T, T, T> op = new AssociativeAggregationOperator<
+                T,
+                T,
+                T
+            >(
+                source,
+                seed,
+                null,
+                seedIsSpecified,
+                reduce,
+                reduce,
+                delegate(T obj)
+                {
+                    return obj;
+                },
+                throwIfEmpty,
+                options
+            );
             return op.Aggregate();
         }
-
 
         /// <summary>
         /// Run an aggregation sequentially. If the user-provided reduction function throws an exception, wrap
@@ -1600,13 +1959,17 @@ namespace System.Linq
         /// </param>
         /// <param name="func"></param>
         private static TAccumulate PerformSequentialAggregation<TSource, TAccumulate>(
-            this ParallelQuery<TSource> source, TAccumulate seed, bool seedIsSpecified, Func<TAccumulate, TSource, TAccumulate> func)
+            this ParallelQuery<TSource> source,
+            TAccumulate seed,
+            bool seedIsSpecified,
+            Func<TAccumulate, TSource, TAccumulate> func
+        )
         {
             Contract.Assert(source != null);
             Contract.Assert(func != null);
             Contract.Assert(seedIsSpecified || typeof(TSource) == typeof(TAccumulate));
 
-            using(IEnumerator<TSource> enumerator = source.GetEnumerator())
+            using (IEnumerator<TSource> enumerator = source.GetEnumerator())
             {
                 TAccumulate acc;
                 if (seedIsSpecified)
@@ -1672,19 +2035,35 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static TSource Aggregate<TSource>(
-            this ParallelQuery<TSource> source, Func<TSource, TSource, TSource> func)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TSource, TSource> func
+        )
         {
             return Aggregate<TSource>(source, func, QueryAggregationOptions.AssociativeCommutative);
         }
 
         internal static TSource Aggregate<TSource>(
-            this ParallelQuery<TSource> source, Func<TSource, TSource, TSource> func, QueryAggregationOptions options)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TSource, TSource> func,
+            QueryAggregationOptions options
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (func == null) throw new ArgumentNullException("func");
-            if ((~(QueryAggregationOptions.Associative | QueryAggregationOptions.Commutative) & options) != 0) throw new ArgumentOutOfRangeException("options");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (func == null)
+                throw new ArgumentNullException("func");
+            if (
+                (
+                    ~(QueryAggregationOptions.Associative | QueryAggregationOptions.Commutative)
+                    & options
+                ) != 0
+            )
+                throw new ArgumentOutOfRangeException("options");
 
-            if ((options & QueryAggregationOptions.Associative) != QueryAggregationOptions.Associative)
+            if (
+                (options & QueryAggregationOptions.Associative)
+                != QueryAggregationOptions.Associative
+            )
             {
                 // Non associative aggregations must be run sequentially.  We run the query in parallel
                 // and then perform the reduction over the resulting list.
@@ -1695,12 +2074,18 @@ namespace System.Linq
                 // If associative, we can run this aggregation in parallel. The logic of the aggregation
                 // operator depends on whether the operator is commutative, so we also pass that information
                 // down to the query planning/execution engine.
-                return source.PerformAggregation<TSource>(func, default(TSource), false, true, options);
+                return source.PerformAggregation<TSource>(
+                    func,
+                    default(TSource),
+                    false,
+                    true,
+                    options
+                );
             }
         }
 
         /// <summary>
-        /// Applies in parallel an accumulator function over a sequence. 
+        /// Applies in parallel an accumulator function over a sequence.
         /// The specified seed value is used as the initial accumulator value.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -1719,24 +2104,44 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static TAccumulate Aggregate<TSource, TAccumulate>(
-            this ParallelQuery<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func)
+            this ParallelQuery<TSource> source,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> func
+        )
         {
-            return Aggregate<TSource, TAccumulate>(source, seed, func, QueryAggregationOptions.AssociativeCommutative);
+            return Aggregate<TSource, TAccumulate>(
+                source,
+                seed,
+                func,
+                QueryAggregationOptions.AssociativeCommutative
+            );
         }
 
         internal static TAccumulate Aggregate<TSource, TAccumulate>(
-            this ParallelQuery<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func, QueryAggregationOptions options)
+            this ParallelQuery<TSource> source,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> func,
+            QueryAggregationOptions options
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (func == null) throw new ArgumentNullException("func");
-            if ((~(QueryAggregationOptions.Associative | QueryAggregationOptions.Commutative) & options) != 0) throw new ArgumentOutOfRangeException("options");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (func == null)
+                throw new ArgumentNullException("func");
+            if (
+                (
+                    ~(QueryAggregationOptions.Associative | QueryAggregationOptions.Commutative)
+                    & options
+                ) != 0
+            )
+                throw new ArgumentOutOfRangeException("options");
 
             return source.PerformSequentialAggregation(seed, true, func);
         }
 
         /// <summary>
-        /// Applies in parallel an accumulator function over a sequence. The specified 
-        /// seed value is used as the initial accumulator value, and the specified 
+        /// Applies in parallel an accumulator function over a sequence. The specified
+        /// seed value is used as the initial accumulator value, and the specified
         /// function is used to select the result value.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -1745,7 +2150,7 @@ namespace System.Linq
         /// <param name="source">A sequence to aggregate over.</param>
         /// <param name="seed">The initial accumulator value.</param>
         /// <param name="func">An accumulator function to be invoked on each element.</param>
-        /// <param name="resultSelector">A function to transform the final accumulator value 
+        /// <param name="resultSelector">A function to transform the final accumulator value
         /// into the result value.</param>
         /// <returns>The transformed final accumulator value.</returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -1758,12 +2163,18 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
-            this ParallelQuery<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func,
-            Func<TAccumulate, TResult> resultSelector)
+            this ParallelQuery<TSource> source,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> func,
+            Func<TAccumulate, TResult> resultSelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (func == null) throw new ArgumentNullException("func");
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (func == null)
+                throw new ArgumentNullException("func");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
             TAccumulate acc = source.PerformSequentialAggregation(seed, true, func);
             try
@@ -1786,9 +2197,9 @@ namespace System.Linq
         /// available in the sequential implementation.
         /// </summary>
         /// <remarks>
-        /// This overload is specific to processing a parallelized query. A parallelized query may 
-        /// partition the data source sequence into several sub-sequences (partitions). 
-        /// The <paramref name="updateAccumulatorFunc"/> is invoked on each element within partitions. 
+        /// This overload is specific to processing a parallelized query. A parallelized query may
+        /// partition the data source sequence into several sub-sequences (partitions).
+        /// The <paramref name="updateAccumulatorFunc"/> is invoked on each element within partitions.
         /// Each partition then yields a single accumulated result. The <paramref name="combineAccumulatorsFunc"/>
         /// is then invoked on the results of each partition to yield a single element. This element is then
         /// transformed by the <paramref name="resultSelector"/> function.
@@ -1809,7 +2220,7 @@ namespace System.Linq
         /// </param>
         /// <returns>The transformed final accumulator value.</returns>
         /// <exception cref="T:System.ArgumentNullException">
-        /// <paramref name="source"/> or <paramref name="updateAccumulatorFunc"/> 
+        /// <paramref name="source"/> or <paramref name="updateAccumulatorFunc"/>
         /// or <paramref name="combineAccumulatorsFunc"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         /// <exception cref="T:System.AggregateException">
@@ -1819,17 +2230,33 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
-            this ParallelQuery<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> updateAccumulatorFunc,
-            Func<TAccumulate, TAccumulate, TAccumulate> combineAccumulatorsFunc, Func<TAccumulate, TResult> resultSelector)
+            this ParallelQuery<TSource> source,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> updateAccumulatorFunc,
+            Func<TAccumulate, TAccumulate, TAccumulate> combineAccumulatorsFunc,
+            Func<TAccumulate, TResult> resultSelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (updateAccumulatorFunc == null) throw new ArgumentNullException("updateAccumulatorFunc");
-            if (combineAccumulatorsFunc == null) throw new ArgumentNullException("combineAccumulatorsFunc");
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (updateAccumulatorFunc == null)
+                throw new ArgumentNullException("updateAccumulatorFunc");
+            if (combineAccumulatorsFunc == null)
+                throw new ArgumentNullException("combineAccumulatorsFunc");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
             return new AssociativeAggregationOperator<TSource, TAccumulate, TResult>(
-                source, seed, null, true, updateAccumulatorFunc, combineAccumulatorsFunc, resultSelector,
-                false, QueryAggregationOptions.AssociativeCommutative).Aggregate();
+                source,
+                seed,
+                null,
+                true,
+                updateAccumulatorFunc,
+                combineAccumulatorsFunc,
+                resultSelector,
+                false,
+                QueryAggregationOptions.AssociativeCommutative
+            ).Aggregate();
         }
 
         /// <summary>
@@ -1838,8 +2265,8 @@ namespace System.Linq
         /// </summary>
         /// <remarks>
         /// This overload is specific to parallelized queries. A parallelized query may partition the data source sequence
-        /// into several sub-sequences (partitions). The <paramref name="updateAccumulatorFunc"/> is invoked 
-        /// on each element within partitions. Each partition then yields a single accumulated result. 
+        /// into several sub-sequences (partitions). The <paramref name="updateAccumulatorFunc"/> is invoked
+        /// on each element within partitions. Each partition then yields a single accumulated result.
         /// The <paramref name="combineAccumulatorsFunc"/>
         /// is then invoked on the results of each partition to yield a single element. This element is then
         /// transformed by the <paramref name="resultSelector"/> function.
@@ -1855,14 +2282,14 @@ namespace System.Linq
         /// An accumulator function to be invoked on each element in a partition.
         /// </param>
         /// <param name="combineAccumulatorsFunc">
-        /// An accumulator function to be invoked on the yielded element from each partition. 
+        /// An accumulator function to be invoked on the yielded element from each partition.
         /// </param>
         /// <param name="resultSelector">
         /// A function to transform the final accumulator value into the result value.
         /// </param>
         /// <returns>The transformed final accumulator value.</returns>
         /// <exception cref="T:System.ArgumentNullException">
-        /// <paramref name="source"/> or <paramref name="seedFactory"/> or <paramref name="updateAccumulatorFunc"/> 
+        /// <paramref name="source"/> or <paramref name="seedFactory"/> or <paramref name="updateAccumulatorFunc"/>
         /// or <paramref name="combineAccumulatorsFunc"/> or <paramref name="resultSelector"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         /// <exception cref="T:System.AggregateException">
@@ -1876,19 +2303,32 @@ namespace System.Linq
             Func<TAccumulate> seedFactory,
             Func<TAccumulate, TSource, TAccumulate> updateAccumulatorFunc,
             Func<TAccumulate, TAccumulate, TAccumulate> combineAccumulatorsFunc,
-            Func<TAccumulate, TResult> resultSelector)
+            Func<TAccumulate, TResult> resultSelector
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (seedFactory == null) throw new ArgumentNullException("seedFactory");
-            if (updateAccumulatorFunc == null) throw new ArgumentNullException("updateAccumulatorFunc");
-            if (combineAccumulatorsFunc == null) throw new ArgumentNullException("combineAccumulatorsFunc");
-            if (resultSelector == null) throw new ArgumentNullException("resultSelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (seedFactory == null)
+                throw new ArgumentNullException("seedFactory");
+            if (updateAccumulatorFunc == null)
+                throw new ArgumentNullException("updateAccumulatorFunc");
+            if (combineAccumulatorsFunc == null)
+                throw new ArgumentNullException("combineAccumulatorsFunc");
+            if (resultSelector == null)
+                throw new ArgumentNullException("resultSelector");
 
             return new AssociativeAggregationOperator<TSource, TAccumulate, TResult>(
-                source, default(TAccumulate), seedFactory, true, updateAccumulatorFunc, combineAccumulatorsFunc, resultSelector,
-                false, QueryAggregationOptions.AssociativeCommutative).Aggregate();
+                source,
+                default(TAccumulate),
+                seedFactory,
+                true,
+                updateAccumulatorFunc,
+                combineAccumulatorsFunc,
+                resultSelector,
+                false,
+                QueryAggregationOptions.AssociativeCommutative
+            ).Aggregate();
         }
-
 
         //-----------------------------------------------------------------------------------
         // Count and LongCount reductions.
@@ -1913,19 +2353,21 @@ namespace System.Linq
         /// </exception>
         public static int Count<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // If the data source is a collection, we can just return the count right away.
-            ParallelEnumerableWrapper<TSource> sourceAsWrapper = source as ParallelEnumerableWrapper<TSource>;
+            ParallelEnumerableWrapper<TSource> sourceAsWrapper =
+                source as ParallelEnumerableWrapper<TSource>;
             if (sourceAsWrapper != null)
             {
-                ICollection<TSource> sourceAsCollection = sourceAsWrapper.WrappedEnumerable as ICollection<TSource>;
+                ICollection<TSource> sourceAsCollection =
+                    sourceAsWrapper.WrappedEnumerable as ICollection<TSource>;
                 if (sourceAsCollection != null)
                 {
                     return sourceAsCollection.Count;
                 }
             }
-
             // Otherwise, enumerate the whole thing and aggregate a count.
             checked
             {
@@ -1934,14 +2376,14 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns a number that represents how many elements in the specified 
+        /// Returns a number that represents how many elements in the specified
         /// parallel sequence satisfy a condition.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence that contains elements to be counted.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>
-        /// A number that represents how many elements in the sequence satisfy the condition 
+        /// A number that represents how many elements in the sequence satisfy the condition
         /// in the predicate function.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -1955,15 +2397,21 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static int Count<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static int Count<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
-
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
             // Construct a where operator to filter out unmatching elements, and then aggregate.
             checked
             {
-                return new CountAggregationOperator<TSource>(Where<TSource>(source, predicate)).Aggregate();
+                return new CountAggregationOperator<TSource>(
+                    Where<TSource>(source, predicate)
+                ).Aggregate();
             }
         }
 
@@ -1986,13 +2434,16 @@ namespace System.Linq
         /// </exception>
         public static long LongCount<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // If the data source is a collection, we can just return the count right away.
-            ParallelEnumerableWrapper<TSource> sourceAsWrapper = source as ParallelEnumerableWrapper<TSource>;
+            ParallelEnumerableWrapper<TSource> sourceAsWrapper =
+                source as ParallelEnumerableWrapper<TSource>;
             if (sourceAsWrapper != null)
             {
-                ICollection<TSource> sourceAsCollection = sourceAsWrapper.WrappedEnumerable as ICollection<TSource>;
+                ICollection<TSource> sourceAsCollection =
+                    sourceAsWrapper.WrappedEnumerable as ICollection<TSource>;
                 if (sourceAsCollection != null)
                 {
                     return sourceAsCollection.Count;
@@ -2010,7 +2461,7 @@ namespace System.Linq
         /// <param name="source">A sequence that contains elements to be counted.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>
-        /// A number that represents how many elements in the sequence satisfy the condition 
+        /// A number that represents how many elements in the sequence satisfy the condition
         /// in the predicate function.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -2024,13 +2475,20 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static long LongCount<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static long LongCount<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             // Construct a where operator to filter out unmatching elements, and then aggregate.
-            return new LongCountAggregationOperator<TSource>(Where<TSource>(source, predicate)).Aggregate();
+            return new LongCountAggregationOperator<TSource>(
+                Where<TSource>(source, predicate)
+            ).Aggregate();
         }
 
         //-----------------------------------------------------------------------------------
@@ -2055,7 +2513,8 @@ namespace System.Linq
         /// </exception>
         public static int Sum(this ParallelQuery<int> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new IntSumAggregationOperator(source).Aggregate();
         }
 
@@ -2077,7 +2536,8 @@ namespace System.Linq
         /// </exception>
         public static int? Sum(this ParallelQuery<int?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableIntSumAggregationOperator(source).Aggregate();
         }
 
@@ -2099,7 +2559,8 @@ namespace System.Linq
         /// </exception>
         public static long Sum(this ParallelQuery<long> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new LongSumAggregationOperator(source).Aggregate();
         }
 
@@ -2121,7 +2582,8 @@ namespace System.Linq
         /// </exception>
         public static long? Sum(this ParallelQuery<long?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableLongSumAggregationOperator(source).Aggregate();
         }
 
@@ -2141,7 +2603,8 @@ namespace System.Linq
         /// </exception>
         public static float Sum(this ParallelQuery<float> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new FloatSumAggregationOperator(source).Aggregate();
         }
 
@@ -2161,7 +2624,8 @@ namespace System.Linq
         /// </exception>
         public static float? Sum(this ParallelQuery<float?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableFloatSumAggregationOperator(source).Aggregate();
         }
 
@@ -2181,7 +2645,8 @@ namespace System.Linq
         /// </exception>
         public static double Sum(this ParallelQuery<double> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DoubleSumAggregationOperator(source).Aggregate();
         }
 
@@ -2201,7 +2666,8 @@ namespace System.Linq
         /// </exception>
         public static double? Sum(this ParallelQuery<double?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableDoubleSumAggregationOperator(source).Aggregate();
         }
 
@@ -2223,7 +2689,8 @@ namespace System.Linq
         /// </exception>
         public static decimal Sum(this ParallelQuery<decimal> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DecimalSumAggregationOperator(source).Aggregate();
         }
 
@@ -2245,12 +2712,13 @@ namespace System.Linq
         /// </exception>
         public static decimal? Sum(this ParallelQuery<decimal?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableDecimalSumAggregationOperator(source).Aggregate();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <param name="source">A sequence of values to calculate the sum of.</param>
@@ -2267,13 +2735,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static int Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, int> selector)
+        public static int Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2291,13 +2762,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static int? Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, int?> selector)
+        public static int? Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int?> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2315,13 +2789,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static long Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, long> selector)
+        public static long Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, long> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2339,13 +2816,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static long? Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, long?> selector)
+        public static long? Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, long?> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2361,13 +2841,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static float Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, float> selector)
+        public static float Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, float> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2383,13 +2866,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static float? Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, float?> selector)
+        public static float? Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, float?> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2405,13 +2891,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, double> selector)
+        public static double Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, double> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2427,13 +2916,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double? Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, double?> selector)
+        public static double? Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, double?> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2451,13 +2943,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static decimal Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, decimal> selector)
+        public static decimal Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, decimal> selector
+        )
         {
             return source.Select(selector).Sum();
         }
 
         /// <summary>
-        /// Computes in parallel the sum of the sequence of values that are obtained 
+        /// Computes in parallel the sum of the sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2475,7 +2970,10 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static decimal? Sum<TSource>(this ParallelQuery<TSource> source, Func<TSource, decimal?> selector)
+        public static decimal? Sum<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, decimal?> selector
+        )
         {
             return source.Select(selector).Sum();
         }
@@ -2513,7 +3011,8 @@ namespace System.Linq
         /// </exception>
         public static int Min(this ParallelQuery<int> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new IntMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2533,7 +3032,8 @@ namespace System.Linq
         /// </exception>
         public static int? Min(this ParallelQuery<int?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableIntMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2556,7 +3056,8 @@ namespace System.Linq
         /// </exception>
         public static long Min(this ParallelQuery<long> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new LongMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2576,7 +3077,8 @@ namespace System.Linq
         /// </exception>
         public static long? Min(this ParallelQuery<long?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableLongMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2599,7 +3101,8 @@ namespace System.Linq
         /// </exception>
         public static float Min(this ParallelQuery<float> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new FloatMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2619,7 +3122,8 @@ namespace System.Linq
         /// </exception>
         public static float? Min(this ParallelQuery<float?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableFloatMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2642,7 +3146,8 @@ namespace System.Linq
         /// </exception>
         public static double Min(this ParallelQuery<double> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DoubleMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2662,7 +3167,8 @@ namespace System.Linq
         /// </exception>
         public static double? Min(this ParallelQuery<double?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableDoubleMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2685,7 +3191,8 @@ namespace System.Linq
         /// </exception>
         public static decimal Min(this ParallelQuery<decimal> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DecimalMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2705,7 +3212,8 @@ namespace System.Linq
         /// </exception>
         public static decimal? Min(this ParallelQuery<decimal?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableDecimalMinMaxAggregationOperator(source, -1).Aggregate();
         }
 
@@ -2729,12 +3237,13 @@ namespace System.Linq
         /// </exception>
         public static TSource Min<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return AggregationMinMaxHelpers<TSource>.ReduceMin(source);
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2753,13 +3262,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static int Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, int> selector)
+        public static int Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int> selector
+        )
         {
             return source.Select<TSource, int>(selector).Min<int>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2775,13 +3287,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static int? Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, int?> selector)
+        public static int? Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int?> selector
+        )
         {
             return source.Select<TSource, int?>(selector).Min<int?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2800,13 +3315,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static long Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, long> selector)
+        public static long Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, long> selector
+        )
         {
             return source.Select<TSource, long>(selector).Min<long>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2822,13 +3340,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static long? Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, long?> selector)
+        public static long? Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, long?> selector
+        )
         {
             return source.Select<TSource, long?>(selector).Min<long?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2847,13 +3368,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static float Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, float> selector)
+        public static float Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, float> selector
+        )
         {
             return source.Select<TSource, float>(selector).Min<float>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2869,13 +3393,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static float? Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, float?> selector)
+        public static float? Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, float?> selector
+        )
         {
             return source.Select<TSource, float?>(selector).Min<float?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2894,13 +3421,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, double> selector)
+        public static double Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, double> selector
+        )
         {
             return source.Select<TSource, double>(selector).Min<double>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2916,13 +3446,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double? Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, double?> selector)
+        public static double? Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, double?> selector
+        )
         {
             return source.Select<TSource, double?>(selector).Min<double?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2941,13 +3474,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static decimal Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, decimal> selector)
+        public static decimal Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, decimal> selector
+        )
         {
             return source.Select<TSource, decimal>(selector).Min<decimal>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2963,13 +3499,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static decimal? Min<TSource>(this ParallelQuery<TSource> source, Func<TSource, decimal?> selector)
+        public static decimal? Min<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, decimal?> selector
+        )
         {
             return source.Select<TSource, decimal?>(selector).Min<decimal?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the minimum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -2989,7 +3528,10 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TResult Min<TSource, TResult>(this ParallelQuery<TSource> source, Func<TSource, TResult> selector)
+        public static TResult Min<TSource, TResult>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
             return source.Select<TSource, TResult>(selector).Min<TResult>();
         }
@@ -3017,7 +3559,8 @@ namespace System.Linq
         /// </exception>
         public static int Max(this ParallelQuery<int> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new IntMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3037,7 +3580,8 @@ namespace System.Linq
         /// </exception>
         public static int? Max(this ParallelQuery<int?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableIntMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3060,7 +3604,8 @@ namespace System.Linq
         /// </exception>
         public static long Max(this ParallelQuery<long> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new LongMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3080,7 +3625,8 @@ namespace System.Linq
         /// </exception>
         public static long? Max(this ParallelQuery<long?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableLongMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3103,7 +3649,8 @@ namespace System.Linq
         /// </exception>
         public static float Max(this ParallelQuery<float> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new FloatMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3123,7 +3670,8 @@ namespace System.Linq
         /// </exception>
         public static float? Max(this ParallelQuery<float?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableFloatMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3146,7 +3694,8 @@ namespace System.Linq
         /// </exception>
         public static double Max(this ParallelQuery<double> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DoubleMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3166,7 +3715,8 @@ namespace System.Linq
         /// </exception>
         public static double? Max(this ParallelQuery<double?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableDoubleMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3189,7 +3739,8 @@ namespace System.Linq
         /// </exception>
         public static decimal Max(this ParallelQuery<decimal> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DecimalMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3209,7 +3760,8 @@ namespace System.Linq
         /// </exception>
         public static decimal? Max(this ParallelQuery<decimal?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableDecimalMinMaxAggregationOperator(source, 1).Aggregate();
         }
 
@@ -3232,12 +3784,13 @@ namespace System.Linq
         /// </exception>
         public static TSource Max<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return AggregationMinMaxHelpers<TSource>.ReduceMax(source);
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3256,13 +3809,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static int Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, int> selector)
+        public static int Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int> selector
+        )
         {
             return source.Select<TSource, int>(selector).Max<int>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3278,13 +3834,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static int? Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, int?> selector)
+        public static int? Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int?> selector
+        )
         {
             return source.Select<TSource, int?>(selector).Max<int?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3303,13 +3862,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static long Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, long> selector)
+        public static long Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, long> selector
+        )
         {
             return source.Select<TSource, long>(selector).Max<long>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3325,13 +3887,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static long? Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, long?> selector)
+        public static long? Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, long?> selector
+        )
         {
             return source.Select<TSource, long?>(selector).Max<long?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3350,13 +3915,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static float Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, float> selector)
+        public static float Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, float> selector
+        )
         {
             return source.Select<TSource, float>(selector).Max<float>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3372,13 +3940,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static float? Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, float?> selector)
+        public static float? Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, float?> selector
+        )
         {
             return source.Select<TSource, float?>(selector).Max<float?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3397,13 +3968,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, double> selector)
+        public static double Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, double> selector
+        )
         {
             return source.Select<TSource, double>(selector).Max<double>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3419,13 +3993,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double? Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, double?> selector)
+        public static double? Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, double?> selector
+        )
         {
             return source.Select<TSource, double?>(selector).Max<double?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3444,13 +4021,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static decimal Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, decimal> selector)
+        public static decimal Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, decimal> selector
+        )
         {
             return source.Select<TSource, decimal>(selector).Max<decimal>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3466,13 +4046,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static decimal? Max<TSource>(this ParallelQuery<TSource> source, Func<TSource, decimal?> selector)
+        public static decimal? Max<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, decimal?> selector
+        )
         {
             return source.Select<TSource, decimal?>(selector).Max<decimal?>();
         }
 
         /// <summary>
-        /// Invokes in parallel a transform function on each element of a 
+        /// Invokes in parallel a transform function on each element of a
         /// sequence and returns the maximum value.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3492,7 +4075,10 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TResult Max<TSource, TResult>(this ParallelQuery<TSource> source, Func<TSource, TResult> selector)
+        public static TResult Max<TSource, TResult>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
             return source.Select<TSource, TResult>(selector).Max<TResult>();
         }
@@ -3522,7 +4108,8 @@ namespace System.Linq
         /// </exception>
         public static double Average(this ParallelQuery<int> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new IntAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3544,7 +4131,8 @@ namespace System.Linq
         /// </exception>
         public static double? Average(this ParallelQuery<int?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableIntAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3569,7 +4157,8 @@ namespace System.Linq
         /// </exception>
         public static double Average(this ParallelQuery<long> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new LongAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3591,7 +4180,8 @@ namespace System.Linq
         /// </exception>
         public static double? Average(this ParallelQuery<long?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableLongAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3614,7 +4204,8 @@ namespace System.Linq
         /// </exception>
         public static float Average(this ParallelQuery<float> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new FloatAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3634,7 +4225,8 @@ namespace System.Linq
         /// </exception>
         public static float? Average(this ParallelQuery<float?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableFloatAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3657,7 +4249,8 @@ namespace System.Linq
         /// </exception>
         public static double Average(this ParallelQuery<double> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DoubleAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3677,7 +4270,8 @@ namespace System.Linq
         /// </exception>
         public static double? Average(this ParallelQuery<double?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableDoubleAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3700,7 +4294,8 @@ namespace System.Linq
         /// </exception>
         public static decimal Average(this ParallelQuery<decimal> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DecimalAverageAggregationOperator(source).Aggregate();
         }
 
@@ -3720,12 +4315,13 @@ namespace System.Linq
         /// </exception>
         public static decimal? Average(this ParallelQuery<decimal?> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new NullableDecimalAverageAggregationOperator(source).Aggregate();
         }
 
         /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
+        /// Computes in parallel the average of a sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3746,13 +4342,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, int> selector)
+        public static double Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int> selector
+        )
         {
             return source.Select(selector).Average();
         }
 
         /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
+        /// Computes in parallel the average of a sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3770,13 +4369,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double? Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, int?> selector)
+        public static double? Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int?> selector
+        )
         {
             return source.Select(selector).Average();
         }
 
         /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
+        /// Computes in parallel the average of a sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3797,13 +4399,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, long> selector)
+        public static double Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, long> selector
+        )
         {
             return source.Select(selector).Average();
         }
 
         /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
+        /// Computes in parallel the average of a sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3821,13 +4426,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static double? Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, long?> selector)
+        public static double? Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, long?> selector
+        )
         {
             return source.Select(selector).Average();
         }
 
         /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
+        /// Computes in parallel the average of a sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3846,13 +4454,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static float Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, float> selector)
+        public static float Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, float> selector
+        )
         {
             return source.Select(selector).Average();
         }
 
         /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
+        /// Computes in parallel the average of a sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3868,60 +4479,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static float? Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, float?> selector)
+        public static float? Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, float?> selector
+        )
         {
             return source.Select(selector).Average();
         }
 
         /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
-        /// by invoking a transform function on each element of the input sequence.
-        /// </summary>
-        /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
-        /// <param name="source">A sequence of values that are used to calculate an average.</param>
-        /// <param name="selector">A transform function to apply to each element.</param>
-        /// <returns>The average of the sequence of values.</returns>
-        /// <exception cref="T:System.ArgumentNullException">
-        /// <paramref name="source"/> or <paramref name="selector"/> is a null reference (Nothing in Visual Basic).
-        /// </exception>
-        /// <exception cref="T:System.InvalidOperationException">
-        /// <paramref name="source"/> contains no elements.
-        /// </exception>
-        /// <exception cref="T:System.AggregateException">
-        /// One or more exceptions occurred during the evaluation of the query.
-        /// </exception>
-        /// <exception cref="T:System.OperationCanceledException">
-        /// The query was canceled.
-        /// </exception>
-        public static double Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, double> selector)
-        {
-            return source.Select(selector).Average();
-        }
-
-        /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
-        /// by invoking a transform function on each element of the input sequence.
-        /// </summary>
-        /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
-        /// <param name="source">A sequence of values that are used to calculate an average.</param>
-        /// <param name="selector">A transform function to apply to each element.</param>
-        /// <returns>The average of the sequence of values.</returns>
-        /// <exception cref="T:System.ArgumentNullException">
-        /// <paramref name="source"/> or <paramref name="selector"/> is a null reference (Nothing in Visual Basic).
-        /// </exception>
-        /// <exception cref="T:System.AggregateException">
-        /// One or more exceptions occurred during the evaluation of the query.
-        /// </exception>
-        /// <exception cref="T:System.OperationCanceledException">
-        /// The query was canceled.
-        /// </exception>
-        public static double? Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, double?> selector)
-        {
-            return source.Select(selector).Average();
-        }
-
-        /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
+        /// Computes in parallel the average of a sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3940,13 +4507,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static decimal Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, decimal> selector)
+        public static double Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, double> selector
+        )
         {
             return source.Select(selector).Average();
         }
 
         /// <summary>
-        /// Computes in parallel the average of a sequence of values that are obtained 
+        /// Computes in parallel the average of a sequence of values that are obtained
         /// by invoking a transform function on each element of the input sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -3962,7 +4532,63 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static decimal? Average<TSource>(this ParallelQuery<TSource> source, Func<TSource, decimal?> selector)
+        public static double? Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, double?> selector
+        )
+        {
+            return source.Select(selector).Average();
+        }
+
+        /// <summary>
+        /// Computes in parallel the average of a sequence of values that are obtained
+        /// by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate an average.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The average of the sequence of values.</returns>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="selector"/> is a null reference (Nothing in Visual Basic).
+        /// </exception>
+        /// <exception cref="T:System.InvalidOperationException">
+        /// <paramref name="source"/> contains no elements.
+        /// </exception>
+        /// <exception cref="T:System.AggregateException">
+        /// One or more exceptions occurred during the evaluation of the query.
+        /// </exception>
+        /// <exception cref="T:System.OperationCanceledException">
+        /// The query was canceled.
+        /// </exception>
+        public static decimal Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, decimal> selector
+        )
+        {
+            return source.Select(selector).Average();
+        }
+
+        /// <summary>
+        /// Computes in parallel the average of a sequence of values that are obtained
+        /// by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">A sequence of values that are used to calculate an average.</param>
+        /// <param name="selector">A transform function to apply to each element.</param>
+        /// <returns>The average of the sequence of values.</returns>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="source"/> or <paramref name="selector"/> is a null reference (Nothing in Visual Basic).
+        /// </exception>
+        /// <exception cref="T:System.AggregateException">
+        /// One or more exceptions occurred during the evaluation of the query.
+        /// </exception>
+        /// <exception cref="T:System.OperationCanceledException">
+        /// The query was canceled.
+        /// </exception>
+        public static decimal? Average<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, decimal?> selector
+        )
         {
             return source.Select(selector).Average();
         }
@@ -3989,10 +4615,15 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static bool Any<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static bool Any<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             return new AnyAllSearchOperator<TSource>(source, true, predicate).Aggregate();
         }
@@ -4014,7 +4645,8 @@ namespace System.Linq
         /// </exception>
         public static bool Any<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             return Any(source, x => true);
         }
@@ -4041,10 +4673,15 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static bool All<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static bool All<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             return new AnyAllSearchOperator<TSource>(source, false, predicate).Aggregate();
         }
@@ -4054,7 +4691,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Determines in parallel whether a sequence contains a specified element 
+        /// Determines in parallel whether a sequence contains a specified element
         /// by using the default equality comparer.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -4078,7 +4715,7 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Determines in parallel whether a sequence contains a specified element by using a 
+        /// Determines in parallel whether a sequence contains a specified element by using a
         /// specified IEqualityComparer{T}.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -4097,9 +4734,14 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static bool Contains<TSource>(this ParallelQuery<TSource> source, TSource value, IEqualityComparer<TSource> comparer)
+        public static bool Contains<TSource>(
+            this ParallelQuery<TSource> source,
+            TSource value,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // @PERF: there are many simple optimizations we can make for collection types with known sizes.
 
@@ -4126,9 +4768,13 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> Take<TSource>(this ParallelQuery<TSource> source, int count)
+        public static ParallelQuery<TSource> Take<TSource>(
+            this ParallelQuery<TSource> source,
+            int count
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             if (count > 0)
             {
@@ -4152,41 +4798,51 @@ namespace System.Linq
         /// <param name="source">The sequence to return elements from.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>
-        /// A sequence that contains the elements from the input sequence that occur before 
+        /// A sequence that contains the elements from the input sequence that occur before
         /// the element at which the test no longer passes.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="predicate"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> TakeWhile<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static ParallelQuery<TSource> TakeWhile<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             return new TakeOrSkipWhileQueryOperator<TSource>(source, predicate, null, true);
         }
 
         /// <summary>
-        /// Returns elements from a parallel sequence as long as a specified condition is true. 
+        /// Returns elements from a parallel sequence as long as a specified condition is true.
         /// The element's index is used in the logic of the predicate function.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The sequence to return elements from.</param>
         /// <param name="predicate">
-        /// A function to test each source element for a condition; the second parameter of the 
+        /// A function to test each source element for a condition; the second parameter of the
         /// function represents the index of the source element.
         /// </param>
         /// <returns>
-        /// A sequence that contains elements from the input sequence that occur before 
+        /// A sequence that contains elements from the input sequence that occur before
         /// the element at which the test no longer passes.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="predicate"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> TakeWhile<TSource>(this ParallelQuery<TSource> source, Func<TSource, int, bool> predicate)
+        public static ParallelQuery<TSource> TakeWhile<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             return new TakeOrSkipWhileQueryOperator<TSource>(source, null, predicate, true);
         }
@@ -4208,9 +4864,13 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> Skip<TSource>(this ParallelQuery<TSource> source, int count)
+        public static ParallelQuery<TSource> Skip<TSource>(
+            this ParallelQuery<TSource> source,
+            int count
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // If the count is 0 (or less) we just return the whole stream.
             if (count <= 0)
@@ -4228,49 +4888,59 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Bypasses elements in a parallel sequence as long as a specified 
+        /// Bypasses elements in a parallel sequence as long as a specified
         /// condition is true and then returns the remaining elements.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The sequence to return elements from.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
-        /// <returns>A sequence that contains the elements from the input sequence starting at 
-        /// the first element in the linear series that does not pass the test specified by 
+        /// <returns>A sequence that contains the elements from the input sequence starting at
+        /// the first element in the linear series that does not pass the test specified by
         /// <B>predicate</B>.</returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="predicate"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> SkipWhile<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static ParallelQuery<TSource> SkipWhile<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             return new TakeOrSkipWhileQueryOperator<TSource>(source, predicate, null, false);
         }
 
         /// <summary>
-        /// Bypasses elements in a parallel sequence as long as a specified condition is true and 
-        /// then returns the remaining elements. The element's index is used in the logic of 
+        /// Bypasses elements in a parallel sequence as long as a specified condition is true and
+        /// then returns the remaining elements. The element's index is used in the logic of
         /// the predicate function.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The sequence to return elements from.</param>
         /// <param name="predicate">
-        /// A function to test each source element for a condition; the 
+        /// A function to test each source element for a condition; the
         /// second parameter of the function represents the index of the source element.
         /// </param>
         /// <returns>
-        /// A sequence that contains the elements from the input sequence starting at the 
-        /// first element in the linear series that does not pass the test specified by 
+        /// A sequence that contains the elements from the input sequence starting at the
+        /// first element in the linear series that does not pass the test specified by
         /// <B>predicate</B>.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> or <paramref name="predicate"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> SkipWhile<TSource>(this ParallelQuery<TSource> source, Func<TSource, int, bool> predicate)
+        public static ParallelQuery<TSource> SkipWhile<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, int, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             return new TakeOrSkipWhileQueryOperator<TSource>(source, null, predicate, false);
         }
@@ -4293,15 +4963,20 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="first"/> or <paramref name="second"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> Concat<TSource>(this ParallelQuery<TSource> first, ParallelQuery<TSource> second)
+        public static ParallelQuery<TSource> Concat<TSource>(
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second
+        )
         {
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null)
+                throw new ArgumentNullException("first");
+            if (second == null)
+                throw new ArgumentNullException("second");
             return new ConcatQueryOperator<TSource>(first, second);
         }
 
         /// <summary>
-        /// This Concat overload should never be called. 
+        /// This Concat overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4312,13 +4987,18 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of Concat with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the Concat operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the Concat operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
-        public static ParallelQuery<TSource> Concat<TSource>(this ParallelQuery<TSource> first, IEnumerable<TSource> second)
+        public static ParallelQuery<TSource> Concat<TSource>(
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -4326,14 +5006,14 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Determines whether two parallel sequences are equal by comparing the elements by using 
+        /// Determines whether two parallel sequences are equal by comparing the elements by using
         /// the default equality comparer for their type.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <param name="first">A sequence to compare to <b>second</b>.</param>
         /// <param name="second">A sequence to compare to the first input sequence.</param>
         /// <returns>
-        /// true if the two source sequences are of equal length and their corresponding elements 
+        /// true if the two source sequences are of equal length and their corresponding elements
         /// are equal according to the default equality comparer for their type; otherwise, false.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -4345,15 +5025,20 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static bool SequenceEqual<TSource>(this ParallelQuery<TSource> first, ParallelQuery<TSource> second)
+        public static bool SequenceEqual<TSource>(
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second
+        )
         {
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null)
+                throw new ArgumentNullException("first");
+            if (second == null)
+                throw new ArgumentNullException("second");
             return SequenceEqual<TSource>(first, second, null);
         }
 
         /// <summary>
-        /// This SequenceEqual overload should never be called. 
+        /// This SequenceEqual overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4364,17 +5049,22 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of SequenceEqual with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the SequenceEqual operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the SequenceEqual operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
-        public static bool SequenceEqual<TSource>(this ParallelQuery<TSource> first, IEnumerable<TSource> second)
+        public static bool SequenceEqual<TSource>(
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         /// <summary>
-        /// Determines whether two parallel sequences are equal by comparing their elements by 
+        /// Determines whether two parallel sequences are equal by comparing their elements by
         /// using a specified IEqualityComparer{T}.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
@@ -4382,7 +5072,7 @@ namespace System.Linq
         /// <param name="second">A sequence to compare to the first input sequence.</param>
         /// <param name="comparer">An IEqualityComparer&lt;(Of &lt;(T&gt;)&gt;) to use to compare elements.</param>
         /// <returns>
-        /// true if the two source sequences are of equal length and their corresponding 
+        /// true if the two source sequences are of equal length and their corresponding
         /// elements are equal according to the default equality comparer for their type; otherwise, false.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -4394,10 +5084,16 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static bool SequenceEqual<TSource>(this ParallelQuery<TSource> first, ParallelQuery<TSource> second, IEqualityComparer<TSource> comparer)
+        public static bool SequenceEqual<TSource>(
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null)
+                throw new ArgumentNullException("first");
+            if (second == null)
+                throw new ArgumentNullException("second");
 
             // If comparer is null, use the default one
             comparer = comparer ?? EqualityComparer<TSource>.Default;
@@ -4407,9 +5103,13 @@ namespace System.Linq
 
             // We use a fully-qualified type name for Shared here to prevent the conflict between System.Linq.Parallel.Shared<>
             // and System.Threading.Shared<> in the 3.5 legacy build.
-            QuerySettings settings = leftOp.SpecifiedQuerySettings.Merge(rightOp.SpecifiedQuerySettings)
+            QuerySettings settings = leftOp
+                .SpecifiedQuerySettings.Merge(rightOp.SpecifiedQuerySettings)
                 .WithDefaults()
-                .WithPerExecutionSettings(new CancellationTokenSource(), new System.Linq.Parallel.Shared<bool>(false));
+                .WithPerExecutionSettings(
+                    new CancellationTokenSource(),
+                    new System.Linq.Parallel.Shared<bool>(false)
+                );
 
             // If first.GetEnumerator throws an exception, we don't want to wrap it with an AggregateException.
             IEnumerator<TSource> e1 = first.GetEnumerator();
@@ -4421,9 +5121,11 @@ namespace System.Linq
                 {
                     while (e1.MoveNext())
                     {
-                        if (!(e2.MoveNext() && comparer.Equals(e1.Current, e2.Current))) return false;
+                        if (!(e2.MoveNext() && comparer.Equals(e1.Current, e2.Current)))
+                            return false;
                     }
-                    if (e2.MoveNext()) return false;
+                    if (e2.MoveNext())
+                        return false;
                 }
                 catch (ThreadAbortException)
                 {
@@ -4432,7 +5134,10 @@ namespace System.Linq
                 }
                 catch (Exception ex)
                 {
-                    ExceptionAggregator.ThrowOCEorAggregateException(ex, settings.CancellationState);
+                    ExceptionAggregator.ThrowOCEorAggregateException(
+                        ex,
+                        settings.CancellationState
+                    );
                 }
                 finally
                 {
@@ -4448,10 +5153,13 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// A helper method for SequenceEqual to dispose an enumerator. If an exception is thrown by the disposal, 
+        /// A helper method for SequenceEqual to dispose an enumerator. If an exception is thrown by the disposal,
         /// it gets wrapped into an AggregateException, unless it is an OCE with the query's CancellationToken.
         /// </summary>
-        private static void DisposeEnumerator<TSource>(IEnumerator<TSource> e, CancellationState cancelState)
+        private static void DisposeEnumerator<TSource>(
+            IEnumerator<TSource> e,
+            CancellationState cancelState
+        )
         {
             try
             {
@@ -4469,7 +5177,7 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// This SequenceEqual overload should never be called. 
+        /// This SequenceEqual overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4481,13 +5189,19 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of SequenceEqual with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the SequenceEqual operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the SequenceEqual operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
-        public static bool SequenceEqual<TSource>(this ParallelQuery<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer)
+        public static bool SequenceEqual<TSource>(
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -4495,7 +5209,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Returns distinct elements from a parallel sequence by using the 
+        /// Returns distinct elements from a parallel sequence by using the
         /// default equality comparer to compare values.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -4504,14 +5218,13 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> Distinct<TSource>(
-            this ParallelQuery<TSource> source)
+        public static ParallelQuery<TSource> Distinct<TSource>(this ParallelQuery<TSource> source)
         {
             return Distinct(source, null);
         }
 
         /// <summary>
-        /// Returns distinct elements from a parallel sequence by using a specified 
+        /// Returns distinct elements from a parallel sequence by using a specified
         /// IEqualityComparer{T} to compare values.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -4522,9 +5235,12 @@ namespace System.Linq
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TSource> Distinct<TSource>(
-            this ParallelQuery<TSource> source, IEqualityComparer<TSource> comparer)
+            this ParallelQuery<TSource> source,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             return new DistinctQueryOperator<TSource>(source, comparer);
         }
@@ -4544,13 +5260,15 @@ namespace System.Linq
         /// <paramref name="first"/> or <paramref name="second"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TSource> Union<TSource>(
-            this ParallelQuery<TSource> first, ParallelQuery<TSource> second)
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second
+        )
         {
             return Union(first, second, null);
         }
 
         /// <summary>
-        /// This Union overload should never be called. 
+        /// This Union overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4561,14 +5279,18 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of Union with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the Union operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the Union operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TSource> Union<TSource>(
-            this ParallelQuery<TSource> first, IEnumerable<TSource> second)
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         /// <summary>
@@ -4583,16 +5305,21 @@ namespace System.Linq
         /// <paramref name="first"/> or <paramref name="second"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TSource> Union<TSource>(
-            this ParallelQuery<TSource> first, ParallelQuery<TSource> second, IEqualityComparer<TSource> comparer)
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null)
+                throw new ArgumentNullException("first");
+            if (second == null)
+                throw new ArgumentNullException("second");
 
             return new UnionQueryOperator<TSource>(first, second, comparer);
         }
 
         /// <summary>
-        /// This Union overload should never be called. 
+        /// This Union overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4604,14 +5331,19 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of Union with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the Union operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the Union operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TSource> Union<TSource>(
-            this ParallelQuery<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer)
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -4619,7 +5351,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Produces the set intersection of two parallel sequences by using the 
+        /// Produces the set intersection of two parallel sequences by using the
         /// default equality comparer to compare values.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
@@ -4634,13 +5366,15 @@ namespace System.Linq
         /// <paramref name="first"/> or <paramref name="second"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TSource> Intersect<TSource>(
-            this ParallelQuery<TSource> first, ParallelQuery<TSource> second)
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second
+        )
         {
             return Intersect(first, second, null);
         }
 
         /// <summary>
-        /// This Intersect overload should never be called. 
+        /// This Intersect overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4651,18 +5385,22 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of Intersect with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the Intersect operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the Intersect operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TSource> Intersect<TSource>(
-            this ParallelQuery<TSource> first, IEnumerable<TSource> second)
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         /// <summary>
-        /// Produces the set intersection of two parallel sequences by using 
+        /// Produces the set intersection of two parallel sequences by using
         /// the specified IEqualityComparer{T} to compare values.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
@@ -4678,16 +5416,21 @@ namespace System.Linq
         /// <paramref name="first"/> or <paramref name="second"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TSource> Intersect<TSource>(
-            this ParallelQuery<TSource> first, ParallelQuery<TSource> second, IEqualityComparer<TSource> comparer)
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null)
+                throw new ArgumentNullException("first");
+            if (second == null)
+                throw new ArgumentNullException("second");
 
             return new IntersectQueryOperator<TSource>(first, second, comparer);
         }
 
         /// <summary>
-        /// This Intersect overload should never be called. 
+        /// This Intersect overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4699,23 +5442,28 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of Intersect with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the Intersect operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the Intersect operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TSource> Intersect<TSource>(
-            this ParallelQuery<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer)
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         //-----------------------------------------------------------------------------------
         // Calculates the relative complement of the first and second data sources, that is,
         // the elements in first that are not found in second.
         //
-        
+
         /// <summary>
-        /// Produces the set difference of two parallel sequences by using 
+        /// Produces the set difference of two parallel sequences by using
         /// the default equality comparer to compare values.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
@@ -4723,7 +5471,7 @@ namespace System.Linq
         /// A sequence whose elements that are not also in <paramref name="second"/> will be returned.
         /// </param>
         /// <param name="second">
-        /// A sequence whose elements that also occur in the first sequence will cause those 
+        /// A sequence whose elements that also occur in the first sequence will cause those
         /// elements to be removed from the returned sequence.
         /// </param>
         /// <returns>A sequence that contains the set difference of the elements of two sequences.</returns>
@@ -4731,13 +5479,15 @@ namespace System.Linq
         /// <paramref name="first"/> or <paramref name="second"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TSource> Except<TSource>(
-            this ParallelQuery<TSource> first, ParallelQuery<TSource> second)
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second
+        )
         {
             return Except(first, second, null);
         }
 
         /// <summary>
-        /// This Except overload should never be called. 
+        /// This Except overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4748,24 +5498,28 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of Except with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the Except operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the Except operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TSource> Except<TSource>(
-            this ParallelQuery<TSource> first, IEnumerable<TSource> second)
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         /// <summary>
-        /// Produces the set difference of two parallel sequences by using the 
+        /// Produces the set difference of two parallel sequences by using the
         /// specified IEqualityComparer{T} to compare values.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <param name="first">A sequence whose elements that are not also in <paramref name="second"/> will be returned.</param>
         /// <param name="second">
-        /// A sequence whose elements that also occur in the first sequence will cause those elements 
+        /// A sequence whose elements that also occur in the first sequence will cause those elements
         /// to be removed from the returned sequence.
         /// </param>
         /// <param name="comparer">An IEqualityComparer&lt;(Of &lt;(T&gt;)&gt;) to compare values.</param>
@@ -4774,16 +5528,21 @@ namespace System.Linq
         /// <paramref name="first"/> or <paramref name="second"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
         public static ParallelQuery<TSource> Except<TSource>(
-            this ParallelQuery<TSource> first, ParallelQuery<TSource> second, IEqualityComparer<TSource> comparer)
+            this ParallelQuery<TSource> first,
+            ParallelQuery<TSource> second,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            if (first == null) throw new ArgumentNullException("first");
-            if (second == null) throw new ArgumentNullException("second");
+            if (first == null)
+                throw new ArgumentNullException("first");
+            if (second == null)
+                throw new ArgumentNullException("second");
 
             return new ExceptQueryOperator<TSource>(first, second, comparer);
         }
 
         /// <summary>
-        /// This Except overload should never be called. 
+        /// This Except overload should never be called.
         /// This method is marked as obsolete and always throws <see cref="System.NotSupportedException"/> when called.
         /// </summary>
         /// <typeparam name="TSource">This type parameter is not used.</typeparam>
@@ -4795,14 +5554,19 @@ namespace System.Linq
         /// <remarks>
         /// This overload exists to disallow usage of Except with a left data source of type
         /// <see cref="System.Linq.ParallelQuery{TSource}"/> and a right data source of type <see cref="System.Collections.Generic.IEnumerable{TSource}"/>.
-        /// Otherwise, the Except operator would appear to be binding to the parallel implementation, 
+        /// Otherwise, the Except operator would appear to be binding to the parallel implementation,
         /// but would in reality bind to the sequential implementation.
         /// </remarks>
         [Obsolete(RIGHT_SOURCE_NOT_PARALLEL_STR)]
         public static ParallelQuery<TSource> Except<TSource>(
-            this ParallelQuery<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer)
+            this ParallelQuery<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource> comparer
+        )
         {
-            throw new NotSupportedException(SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel));
+            throw new NotSupportedException(
+                SR.GetString(SR.ParallelEnumerable_BinaryOpMustUseAsParallel)
+            );
         }
 
         /*===================================================================================
@@ -4814,7 +5578,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Converts a <see cref="ParallelQuery{T}"/> into an 
+        /// Converts a <see cref="ParallelQuery{T}"/> into an
         /// <see cref="System.Collections.Generic.IEnumerable{T}"/> to force sequential
         /// evaluation of the query.
         /// </summary>
@@ -4829,7 +5593,7 @@ namespace System.Linq
             return AsSequential(source);
         }
 
-       //-----------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------
         // Simply generates a single-dimensional array containing the elements from the
         // provided enumerable object.
         //
@@ -4851,7 +5615,8 @@ namespace System.Linq
         /// </exception>
         public static TSource[] ToArray<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             QueryOperator<TSource> asOperator = source as QueryOperator<TSource>;
 
@@ -4885,7 +5650,8 @@ namespace System.Linq
         /// </exception>
         public static List<TSource> ToList<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // Allocate a growable list (optionally passing the length as the initial size).
             List<TSource> list = new List<TSource>();
@@ -4894,7 +5660,10 @@ namespace System.Linq
 
             if (asOperator != null)
             {
-                if (asOperator.OrdinalIndexState == OrdinalIndexState.Indexible && asOperator.OutputOrdered)
+                if (
+                    asOperator.OrdinalIndexState == OrdinalIndexState.Indexible
+                    && asOperator.OutputOrdered
+                )
                 {
                     // If the query is indexible and the output is ordered, we will use the array-based merge.
                     // That way, we avoid the ordering overhead. Due to limitations of the List<> class, the
@@ -4944,7 +5713,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Creates a Dictionary{TKey,TValue} from a ParallelQuery{T} according to 
+        /// Creates a Dictionary{TKey,TValue} from a ParallelQuery{T} according to
         /// a specified key selector function.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -4966,13 +5735,15 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector
+        )
         {
             return ToDictionary(source, keySelector, EqualityComparer<TKey>.Default);
         }
 
         /// <summary>
-        /// Creates a Dictionary{TKey,TValue} from a ParallelQuery{T} according to a 
+        /// Creates a Dictionary{TKey,TValue} from a ParallelQuery{T} according to a
         /// specified key selector function and key comparer.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -4995,18 +5766,26 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             // comparer may be null. In that case, the Dictionary constructor will use the default comparer.
             Dictionary<TKey, TSource> result = new Dictionary<TKey, TSource>(comparer);
 
             QueryOperator<TSource> op = source as QueryOperator<TSource>;
-            IEnumerator<TSource> input = (op == null) ? source.GetEnumerator() : op.GetEnumerator(ParallelMergeOptions.FullyBuffered, true);
+            IEnumerator<TSource> input =
+                (op == null)
+                    ? source.GetEnumerator()
+                    : op.GetEnumerator(ParallelMergeOptions.FullyBuffered, true);
 
-            using(input)
+            using (input)
             {
                 while (input.MoveNext())
                 {
@@ -5015,7 +5794,7 @@ namespace System.Linq
                     try
                     {
                         key = keySelector(val);
-                    	result.Add(key, val);
+                        result.Add(key, val);
                     }
                     catch (ThreadAbortException)
                     {
@@ -5033,7 +5812,7 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Creates a Dictionary{TKey,TValue} from a ParallelQuery{T} according to specified 
+        /// Creates a Dictionary{TKey,TValue} from a ParallelQuery{T} according to specified
         /// key selector and element selector functions.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -5045,7 +5824,7 @@ namespace System.Linq
         /// A transform function to produce a result element value from each element.
         /// </param>
         /// <returns>
-        /// A Dictionary&lt;(Of &lt;(TKey, TValue&gt;)&gt;) that contains values of type <typeparamref name="TElement"/> 
+        /// A Dictionary&lt;(Of &lt;(TKey, TValue&gt;)&gt;) that contains values of type <typeparamref name="TElement"/>
         /// selected from the input sequence
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5055,20 +5834,28 @@ namespace System.Linq
         /// <paramref name="keySelector"/> produces a key that is a null reference (Nothing in Visual Basic).
         /// -or-
         /// <paramref name="keySelector"/> produces duplicate keys for two elements.
-        /// -or- 
+        /// -or-
         /// One or more exceptions occurred during the evaluation of the query.
         /// </exception>
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
         public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector
+        )
         {
-            return ToDictionary(source, keySelector, elementSelector, EqualityComparer<TKey>.Default);
+            return ToDictionary(
+                source,
+                keySelector,
+                elementSelector,
+                EqualityComparer<TKey>.Default
+            );
         }
 
         /// <summary>
-        /// Creates a Dictionary{TKey,TValue from a ParallelQuery{T} according to a 
+        /// Creates a Dictionary{TKey,TValue from a ParallelQuery{T} according to a
         /// specified key selector function, a comparer, and an element selector function.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -5076,11 +5863,11 @@ namespace System.Linq
         /// <typeparam name="TElement">The type of the value returned by <paramref name="elementSelector"/>.</typeparam>
         /// <param name="source">A sequence to create a Dictionary&lt;(Of &lt;(TKey, TValue&gt;)&gt;) from.</param>
         /// <param name="keySelector">A function to extract a key from each element.</param>
-        /// <param name="elementSelector">A transform function to produce a result element 
+        /// <param name="elementSelector">A transform function to produce a result element
         /// value from each element.</param>
         /// <param name="comparer">An IEqualityComparer&lt;(Of &lt;(T&gt;)&gt;) to compare keys.</param>
         /// <returns>
-        /// A Dictionary&lt;(Of &lt;(TKey, TValue&gt;)&gt;) that contains values of type <typeparamref name="TElement"/> 
+        /// A Dictionary&lt;(Of &lt;(TKey, TValue&gt;)&gt;) that contains values of type <typeparamref name="TElement"/>
         /// selected from the input sequence
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5097,19 +5884,29 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
-            if (elementSelector == null) throw new ArgumentNullException("elementSelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
+            if (elementSelector == null)
+                throw new ArgumentNullException("elementSelector");
 
             // comparer may be null. In that case, the Dictionary constructor will use the default comparer.
             Dictionary<TKey, TElement> result = new Dictionary<TKey, TElement>(comparer);
 
             QueryOperator<TSource> op = source as QueryOperator<TSource>;
-            IEnumerator<TSource> input = (op == null) ? source.GetEnumerator() : op.GetEnumerator(ParallelMergeOptions.FullyBuffered, true);
+            IEnumerator<TSource> input =
+                (op == null)
+                    ? source.GetEnumerator()
+                    : op.GetEnumerator(ParallelMergeOptions.FullyBuffered, true);
 
-            using(input)
+            using (input)
             {
                 while (input.MoveNext())
                 {
@@ -5124,7 +5921,7 @@ namespace System.Linq
                         // Do not wrap ThreadAbortExceptions
                         throw;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         throw new AggregateException(ex);
                     }
@@ -5140,7 +5937,7 @@ namespace System.Linq
         // of lambda expressions specified by the caller. Multiple elements are allowed
         // to produce the same key.
         //
-        
+
         /// <summary>
         /// Creates an ILookup{TKey,T} from a ParallelQuery{T} according to a specified key selector function.
         /// </summary>
@@ -5159,13 +5956,15 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector
+        )
         {
             return ToLookup(source, keySelector, EqualityComparer<TKey>.Default);
         }
 
         /// <summary>
-        /// Creates an ILookup{TKey,T} from a ParallelQuery{T} according to a specified 
+        /// Creates an ILookup{TKey,T} from a ParallelQuery{T} according to a specified
         /// key selector function and key comparer.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -5184,24 +5983,36 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
 
             // comparer may be null, in which case we use the default comparer.
-	    comparer = comparer ?? EqualityComparer<TKey>.Default;
+            comparer = comparer ?? EqualityComparer<TKey>.Default;
 
-            ParallelQuery<IGrouping<TKey, TSource>> groupings = source.GroupBy(keySelector, comparer);
+            ParallelQuery<IGrouping<TKey, TSource>> groupings = source.GroupBy(
+                keySelector,
+                comparer
+            );
 
             Parallel.Lookup<TKey, TSource> lookup = new Parallel.Lookup<TKey, TSource>(comparer);
 
             Contract.Assert(groupings is QueryOperator<IGrouping<TKey, TSource>>);
-            QueryOperator<IGrouping<TKey, TSource>> op = groupings as QueryOperator<IGrouping<TKey, TSource>>;
+            QueryOperator<IGrouping<TKey, TSource>> op =
+                groupings as QueryOperator<IGrouping<TKey, TSource>>;
 
-            IEnumerator<IGrouping<TKey, TSource>> input = (op == null) ? groupings.GetEnumerator() : op.GetEnumerator(ParallelMergeOptions.FullyBuffered);
+            IEnumerator<IGrouping<TKey, TSource>> input =
+                (op == null)
+                    ? groupings.GetEnumerator()
+                    : op.GetEnumerator(ParallelMergeOptions.FullyBuffered);
 
-            using(input)
+            using (input)
             {
                 while (input.MoveNext())
                 {
@@ -5213,7 +6024,7 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Creates an ILookup{TKey,TElement} from a ParallelQuery{T} according to specified 
+        /// Creates an ILookup{TKey,TElement} from a ParallelQuery{T} according to specified
         /// key selector and element selector functions.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -5225,7 +6036,7 @@ namespace System.Linq
         /// A transform function to produce a result element value from each element.
         /// </param>
         /// <returns>
-        /// A Lookup&lt;(Of &lt;(TKey, TElement&gt;)&gt;) that contains values of type TElement 
+        /// A Lookup&lt;(Of &lt;(TKey, TElement&gt;)&gt;) that contains values of type TElement
         /// selected from the input sequence.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5238,13 +6049,16 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector
+        )
         {
             return ToLookup(source, keySelector, elementSelector, EqualityComparer<TKey>.Default);
         }
 
         /// <summary>
-        /// Creates an ILookup{TKey,TElement} from a ParallelQuery{T} according to 
+        /// Creates an ILookup{TKey,TElement} from a ParallelQuery{T} according to
         /// a specified key selector function, a comparer and an element selector function.
         /// </summary>
         /// <typeparam name="TSource">The type of elements of <paramref name="source"/>.</typeparam>
@@ -5257,7 +6071,7 @@ namespace System.Linq
         /// </param>
         /// <param name="comparer">An IEqualityComparer&lt;(Of &lt;(T&gt;)&gt;) to compare keys.</param>
         /// <returns>
-        /// A Lookup&lt;(Of &lt;(TKey, TElement&gt;)&gt;) that contains values of type TElement selected 
+        /// A Lookup&lt;(Of &lt;(TKey, TElement&gt;)&gt;) that contains values of type TElement selected
         /// from the input sequence.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5270,25 +6084,40 @@ namespace System.Linq
         /// The query was canceled.
         /// </exception>
         public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(
-            this ParallelQuery<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey> comparer)
+            this ParallelQuery<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (keySelector == null) throw new ArgumentNullException("keySelector");
-            if (elementSelector == null) throw new ArgumentNullException("elementSelector");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (keySelector == null)
+                throw new ArgumentNullException("keySelector");
+            if (elementSelector == null)
+                throw new ArgumentNullException("elementSelector");
 
             // comparer may be null, in which case we use the default comparer.
-	    comparer = comparer ?? EqualityComparer<TKey>.Default;
+            comparer = comparer ?? EqualityComparer<TKey>.Default;
 
-            ParallelQuery<IGrouping<TKey, TElement>> groupings = source.GroupBy(keySelector, elementSelector, comparer);
+            ParallelQuery<IGrouping<TKey, TElement>> groupings = source.GroupBy(
+                keySelector,
+                elementSelector,
+                comparer
+            );
 
             Parallel.Lookup<TKey, TElement> lookup = new Parallel.Lookup<TKey, TElement>(comparer);
 
             Contract.Assert(groupings is QueryOperator<IGrouping<TKey, TElement>>);
-            QueryOperator<IGrouping<TKey, TElement>> op = groupings as QueryOperator<IGrouping<TKey, TElement>>;
+            QueryOperator<IGrouping<TKey, TElement>> op =
+                groupings as QueryOperator<IGrouping<TKey, TElement>>;
 
-            IEnumerator<IGrouping<TKey, TElement>> input = (op == null) ? groupings.GetEnumerator() : op.GetEnumerator(ParallelMergeOptions.FullyBuffered);
+            IEnumerator<IGrouping<TKey, TElement>> input =
+                (op == null)
+                    ? groupings.GetEnumerator()
+                    : op.GetEnumerator(ParallelMergeOptions.FullyBuffered);
 
-            using(input)
+            using (input)
             {
                 while (input.MoveNext())
                 {
@@ -5318,7 +6147,8 @@ namespace System.Linq
         /// </exception>
         public static ParallelQuery<TSource> Reverse<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new ReverseQueryOperator<TSource>(source);
         }
 
@@ -5326,7 +6156,7 @@ namespace System.Linq
         // Both OfType and Cast convert a weakly typed stream to a strongly typed one:
         // the difference is that OfType filters out elements that aren't of the given type,
         // while Cast forces the cast, possibly resulting in InvalidCastExceptions.
-        // 
+        //
 
         /// <summary>
         /// Filters the elements of a ParallelQuery based on a specified type.
@@ -5339,7 +6169,8 @@ namespace System.Linq
         /// </exception>
         public static ParallelQuery<TResult> OfType<TResult>(this ParallelQuery source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             return source.OfType<TResult>();
         }
@@ -5376,11 +6207,16 @@ namespace System.Linq
         //
 
         private static TSource GetOneWithPossibleDefault<TSource>(
-            QueryOperator<TSource> queryOp, bool throwIfTwo, bool defaultIfEmpty)
+            QueryOperator<TSource> queryOp,
+            bool throwIfTwo,
+            bool defaultIfEmpty
+        )
         {
             Contract.Assert(queryOp != null, "expected query operator");
 
-            using (IEnumerator<TSource> e = queryOp.GetEnumerator(ParallelMergeOptions.FullyBuffered))
+            using (
+                IEnumerator<TSource> e = queryOp.GetEnumerator(ParallelMergeOptions.FullyBuffered)
+            )
             {
                 if (e.MoveNext())
                 {
@@ -5420,7 +6256,7 @@ namespace System.Linq
         // An exception is thrown for empty data sources. Alternatively, the FirstOrDefault
         // method can be used which returns defualt(T) if empty (or no elements satisfy the
         // predicate).
-        // 
+        //
 
         /// <summary>
         /// Returns the first element of a parallel sequence.</summary>
@@ -5443,18 +6279,28 @@ namespace System.Linq
         {
             // @PERF: optimize for seekable data sources.  E.g. if an array, we can
             //     seek directly to the 0th element.
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             FirstQueryOperator<TSource> queryOp = new FirstQueryOperator<TSource>(source, null);
 
             // If in conservative mode and a premature merge would be inserted by the First operator,
             // run the whole query sequentially.
             QuerySettings settings = queryOp.SpecifiedQuerySettings.WithDefaults();
-            if (queryOp.LimitsParallelism && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism)
+            if (
+                queryOp.LimitsParallelism
+                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
-                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, settings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(childWithCancelChecks, settings.CancellationState)
+                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                    childAsSequential,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(childWithCancelChecks, settings.CancellationState)
                     .First();
             }
 
@@ -5482,30 +6328,51 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TSource First<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static TSource First<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
-            FirstQueryOperator<TSource> queryOp = new FirstQueryOperator<TSource>(source, predicate);
+            FirstQueryOperator<TSource> queryOp = new FirstQueryOperator<TSource>(
+                source,
+                predicate
+            );
 
             // If in conservative mode and a premature merge would be inserted by the First operator,
             // run the whole query sequentially.
             QuerySettings settings = queryOp.SpecifiedQuerySettings.WithDefaults();
-            if (queryOp.LimitsParallelism && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism)
+            if (
+                queryOp.LimitsParallelism
+                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
-                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, settings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(childWithCancelChecks, settings.CancellationState)
-                    .First(ExceptionAggregator.WrapFunc<TSource, bool>(predicate, settings.CancellationState));
+                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                    childAsSequential,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(childWithCancelChecks, settings.CancellationState)
+                    .First(
+                        ExceptionAggregator.WrapFunc<TSource, bool>(
+                            predicate,
+                            settings.CancellationState
+                        )
+                    );
             }
 
             return GetOneWithPossibleDefault(queryOp, false, false);
-
         }
 
         /// <summary>
-        /// Returns the first element of a parallel sequence, or a default value if the 
+        /// Returns the first element of a parallel sequence, or a default value if the
         /// sequence contains no elements.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -5524,7 +6391,8 @@ namespace System.Linq
         /// </exception>
         public static TSource FirstOrDefault<TSource>(this ParallelQuery<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // @PERF: optimize for seekable data sources.  E.g. if an array, we can
             //     seek directly to the 0th element.
@@ -5533,20 +6401,28 @@ namespace System.Linq
             // If in conservative mode and a premature merge would be inserted by the First operator,
             // run the whole query sequentially.
             QuerySettings settings = queryOp.SpecifiedQuerySettings.WithDefaults();
-            if (queryOp.LimitsParallelism
-                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism)
+            if (
+                queryOp.LimitsParallelism
+                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
-                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, settings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(childWithCancelChecks,
-                    settings.CancellationState).FirstOrDefault();
+                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                    childAsSequential,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(childWithCancelChecks, settings.CancellationState)
+                    .FirstOrDefault();
             }
 
             return GetOneWithPossibleDefault(queryOp, false, true);
         }
 
         /// <summary>
-        /// Returns the first element of the parallel sequence that satisfies a condition or a 
+        /// Returns the first element of the parallel sequence that satisfies a condition or a
         /// default value if no such element is found.
         /// </summary>
         /// <remarks>There's a temporary difference from LINQ to Objects, this does not throw
@@ -5555,8 +6431,8 @@ namespace System.Linq
         /// <param name="source">The sequence to return an element from.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>
-        /// default(<B>TSource</B>) if <paramref name="source"/> is empty or if no element passes the test 
-        /// specified by <B>predicate</B>; otherwise, the first element in <paramref name="source"/> that 
+        /// default(<B>TSource</B>) if <paramref name="source"/> is empty or if no element passes the test
+        /// specified by <B>predicate</B>; otherwise, the first element in <paramref name="source"/> that
         /// passes the test specified by <B>predicate</B>.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5568,24 +6444,44 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TSource FirstOrDefault<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static TSource FirstOrDefault<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
-            FirstQueryOperator<TSource> queryOp = new FirstQueryOperator<TSource>(source, predicate);
+            FirstQueryOperator<TSource> queryOp = new FirstQueryOperator<TSource>(
+                source,
+                predicate
+            );
 
             // If in conservative mode and a premature merge would be inserted by the First operator,
             // run the whole query sequentially.
             QuerySettings settings = queryOp.SpecifiedQuerySettings.WithDefaults();
-            if (queryOp.LimitsParallelism
-                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism)
+            if (
+                queryOp.LimitsParallelism
+                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
-                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, settings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(
-                    childWithCancelChecks, settings.CancellationState)
-                    .FirstOrDefault(ExceptionAggregator.WrapFunc<TSource, bool>(predicate, settings.CancellationState));
+                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                    childAsSequential,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(childWithCancelChecks, settings.CancellationState)
+                    .FirstOrDefault(
+                        ExceptionAggregator.WrapFunc<TSource, bool>(
+                            predicate,
+                            settings.CancellationState
+                        )
+                    );
             }
 
             return GetOneWithPossibleDefault(queryOp, false, true);
@@ -5597,7 +6493,7 @@ namespace System.Linq
         // An exception is thrown for empty data sources. Alternatively, the LastOrDefault
         // method can be used which returns defualt(T) if empty (or no elements satisfy the
         // predicate).
-        // 
+        //
 
         /// <summary>
         /// Returns the last element of a parallel sequence.</summary>
@@ -5620,24 +6516,34 @@ namespace System.Linq
         {
             // @PERF: optimize for seekable data sources.  E.g. if an array, we can
             //     seek directly to the last element.
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             LastQueryOperator<TSource> queryOp = new LastQueryOperator<TSource>(source, null);
 
             // If in conservative mode and a premature merge would be inserted by the First operator,
             // run the whole query sequentially.
             QuerySettings settings = queryOp.SpecifiedQuerySettings.WithDefaults();
-            if (queryOp.LimitsParallelism
-                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism)
+            if (
+                queryOp.LimitsParallelism
+                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
-                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, settings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(childWithCancelChecks, settings.CancellationState).Last();
+                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                    childAsSequential,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(childWithCancelChecks, settings.CancellationState)
+                    .Last();
             }
 
             return GetOneWithPossibleDefault(queryOp, false, false);
         }
-        
+
         /// <summary>
         /// Returns the last element of a parallel sequence that satisfies a specified condition.
         /// </summary>
@@ -5659,31 +6565,48 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TSource Last<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static TSource Last<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             LastQueryOperator<TSource> queryOp = new LastQueryOperator<TSource>(source, predicate);
 
             // If in conservative mode and a premature merge would be inserted by the First operator,
             // run the whole query sequentially.
             QuerySettings settings = queryOp.SpecifiedQuerySettings.WithDefaults();
-            if (queryOp.LimitsParallelism
-                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism)
+            if (
+                queryOp.LimitsParallelism
+                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
-                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, settings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(
-                    childWithCancelChecks, settings.CancellationState)
-                    .Last(ExceptionAggregator.WrapFunc<TSource, bool>(predicate, settings.CancellationState));
+                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                    childAsSequential,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(childWithCancelChecks, settings.CancellationState)
+                    .Last(
+                        ExceptionAggregator.WrapFunc<TSource, bool>(
+                            predicate,
+                            settings.CancellationState
+                        )
+                    );
             }
 
             return GetOneWithPossibleDefault(queryOp, false, false);
         }
 
         /// <summary>
-        /// Returns the last element of a parallel sequence, or a default value if the 
+        /// Returns the last element of a parallel sequence, or a default value if the
         /// sequence contains no elements.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -5704,33 +6627,43 @@ namespace System.Linq
         {
             // @PERF: optimize for seekable data sources.  E.g. if an array, we can
             //     seek directly to the last element.
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             LastQueryOperator<TSource> queryOp = new LastQueryOperator<TSource>(source, null);
 
             // If in conservative mode and a premature merge would be inserted by the First operator,
             // run the whole query sequentially.
             QuerySettings settings = queryOp.SpecifiedQuerySettings.WithDefaults();
-            if (queryOp.LimitsParallelism
-                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism)
+            if (
+                queryOp.LimitsParallelism
+                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
-                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, settings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(childWithCancelChecks, settings.CancellationState).LastOrDefault();
+                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                    childAsSequential,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(childWithCancelChecks, settings.CancellationState)
+                    .LastOrDefault();
             }
 
             return GetOneWithPossibleDefault(queryOp, false, true);
         }
 
         /// <summary>
-        /// Returns the last element of a parallel sequence that satisfies a condition, or 
+        /// Returns the last element of a parallel sequence that satisfies a condition, or
         /// a default value if no such element is found.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The sequence to return an element from.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <returns>
-        /// default(<typeparamref name="TSource"/>) if the sequence is empty or if no elements pass the test in the 
+        /// default(<typeparamref name="TSource"/>) if the sequence is empty or if no elements pass the test in the
         /// predicate function; otherwise, the last element that passes the test in the predicate function.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5742,24 +6675,41 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TSource LastOrDefault<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static TSource LastOrDefault<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
             LastQueryOperator<TSource> queryOp = new LastQueryOperator<TSource>(source, predicate);
 
             // If in conservative mode and a premature merge would be inserted by the First operator,
             // run the whole query sequentially.
             QuerySettings settings = queryOp.SpecifiedQuerySettings.WithDefaults();
-            if (queryOp.LimitsParallelism
-                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism)
+            if (
+                queryOp.LimitsParallelism
+                && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
+            )
             {
-                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
-                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, settings.CancellationState.ExternalCancellationToken);
-                return ExceptionAggregator.WrapEnumerable(
-                    childWithCancelChecks, settings.CancellationState)
-                    .LastOrDefault(ExceptionAggregator.WrapFunc<TSource, bool>(predicate, settings.CancellationState));
+                IEnumerable<TSource> childAsSequential = queryOp.Child.AsSequentialQuery(
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                    childAsSequential,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+                return ExceptionAggregator
+                    .WrapEnumerable(childWithCancelChecks, settings.CancellationState)
+                    .LastOrDefault(
+                        ExceptionAggregator.WrapFunc<TSource, bool>(
+                            predicate,
+                            settings.CancellationState
+                        )
+                    );
             }
 
             return GetOneWithPossibleDefault(queryOp, false, true);
@@ -5772,7 +6722,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Returns the only element of a parallel sequence, and throws an exception if there is not 
+        /// Returns the only element of a parallel sequence, and throws an exception if there is not
         /// exactly one element in the sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -5794,13 +6744,18 @@ namespace System.Linq
         {
             // @PERF: optimize for ICollection-typed data sources, i.e. we can just
             //     check the Count property and avoid costly fork/join/synchronization.
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
-            return GetOneWithPossibleDefault(new SingleQueryOperator<TSource>(source, null), true, false);
+            return GetOneWithPossibleDefault(
+                new SingleQueryOperator<TSource>(source, null),
+                true,
+                false
+            );
         }
 
         /// <summary>
-        /// Returns the only element of a parallel sequence that satisfies a specified condition, 
+        /// Returns the only element of a parallel sequence that satisfies a specified condition,
         /// and throws an exception if more than one such element exists.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -5819,22 +6774,31 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TSource Single<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static TSource Single<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
-            return GetOneWithPossibleDefault(new SingleQueryOperator<TSource>(source, predicate), true, false);
+            return GetOneWithPossibleDefault(
+                new SingleQueryOperator<TSource>(source, predicate),
+                true,
+                false
+            );
         }
-        
+
         /// <summary>
-        /// Returns the only element of a parallel sequence, or a default value if the sequence is 
+        /// Returns the only element of a parallel sequence, or a default value if the sequence is
         /// empty; this method throws an exception if there is more than one element in the sequence.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The sequence to return the single element of.</param>
         /// <returns>
-        /// The single element of the input sequence, or default(<typeparamref name="TSource"/>) if the 
+        /// The single element of the input sequence, or default(<typeparamref name="TSource"/>) if the
         /// sequence contains no elements.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5850,21 +6814,26 @@ namespace System.Linq
         {
             // @PERF: optimize for ICollection-typed data sources, i.e. we can just
             //     check the Count property and avoid costly fork/join/synchronization.
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
-            return GetOneWithPossibleDefault(new SingleQueryOperator<TSource>(source, null), true, true);
+            return GetOneWithPossibleDefault(
+                new SingleQueryOperator<TSource>(source, null),
+                true,
+                true
+            );
         }
 
         /// <summary>
-        /// Returns the only element of a parallel sequence that satisfies a specified condition 
-        /// or a default value if no such element exists; this method throws an exception 
+        /// Returns the only element of a parallel sequence that satisfies a specified condition
+        /// or a default value if no such element exists; this method throws an exception
         /// if more than one element satisfies the condition.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">The sequence to return the single element of.</param>
         /// <param name="predicate">A function to test an element for a condition.</param>
         /// <returns>
-        /// The single element of the input sequence that satisfies the condition, or 
+        /// The single element of the input sequence that satisfies the condition, or
         /// default(<typeparamref name="TSource"/>) if no such element is found.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5876,12 +6845,21 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TSource SingleOrDefault<TSource>(this ParallelQuery<TSource> source, Func<TSource, bool> predicate)
+        public static TSource SingleOrDefault<TSource>(
+            this ParallelQuery<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (predicate == null) throw new ArgumentNullException("predicate");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
 
-            return GetOneWithPossibleDefault(new SingleQueryOperator<TSource>(source, predicate), true, true);
+            return GetOneWithPossibleDefault(
+                new SingleQueryOperator<TSource>(source, predicate),
+                true,
+                true
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -5890,7 +6868,7 @@ namespace System.Linq
         //
 
         /// <summary>
-        /// Returns the elements of the specified parallel sequence or the type parameter's 
+        /// Returns the elements of the specified parallel sequence or the type parameter's
         /// default value in a singleton collection if the sequence is empty.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -5901,13 +6879,15 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> DefaultIfEmpty<TSource>(this ParallelQuery<TSource> source)
+        public static ParallelQuery<TSource> DefaultIfEmpty<TSource>(
+            this ParallelQuery<TSource> source
+        )
         {
             return DefaultIfEmpty<TSource>(source, default(TSource));
         }
-        
+
         /// <summary>
-        /// Returns the elements of the specified parallel sequence or the specified value 
+        /// Returns the elements of the specified parallel sequence or the specified value
         /// in a singleton collection if the sequence is empty.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -5919,9 +6899,13 @@ namespace System.Linq
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="source"/> is a null reference (Nothing in Visual Basic).
         /// </exception>
-        public static ParallelQuery<TSource> DefaultIfEmpty<TSource>(this ParallelQuery<TSource> source, TSource defaultValue)
+        public static ParallelQuery<TSource> DefaultIfEmpty<TSource>(
+            this ParallelQuery<TSource> source,
+            TSource defaultValue
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
             return new DefaultIfEmptyQueryOperator<TSource>(source, defaultValue);
         }
 
@@ -5929,7 +6913,7 @@ namespace System.Linq
         // ElementAt yields an element at a specific index.  If the data source doesn't
         // contain such an element, an exception is thrown.  Alternatively, ElementAtOrDefault
         // will return a default value if the given index is invalid.
-        // 
+        //
 
         /// <summary>
         /// Returns the element at a specified index in a parallel sequence.
@@ -5952,8 +6936,10 @@ namespace System.Linq
         /// </exception>
         public static TSource ElementAt<TSource>(this ParallelQuery<TSource> source, int index)
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (index < 0) throw new ArgumentOutOfRangeException("index");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (index < 0)
+                throw new ArgumentOutOfRangeException("index");
 
             // @PERF: there are obvious optimization opportunities for indexible data sources,
             //          since we can just seek to the element requested.
@@ -5970,14 +6956,14 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the element at a specified index in a parallel sequence or a default value if the 
+        /// Returns the element at a specified index in a parallel sequence or a default value if the
         /// index is out of range.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence to return an element from.</param>
         /// <param name="index">The zero-based index of the element to retrieve.</param>
         /// <returns>
-        /// default(<B>TSource</B>) if the index is outside the bounds of the source sequence; 
+        /// default(<B>TSource</B>) if the index is outside the bounds of the source sequence;
         /// otherwise, the element at the specified position in the source sequence.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -5989,16 +6975,23 @@ namespace System.Linq
         /// <exception cref="T:System.OperationCanceledException">
         /// The query was canceled.
         /// </exception>
-        public static TSource ElementAtOrDefault<TSource>(this ParallelQuery<TSource> source, int index)
+        public static TSource ElementAtOrDefault<TSource>(
+            this ParallelQuery<TSource> source,
+            int index
+        )
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             // @PERF: there are obvious optimization opportunities for indexible data sources,
             //          since we can just seek to the element requested.
 
             if (index >= 0)
             {
-                ElementAtQueryOperator<TSource> op = new ElementAtQueryOperator<TSource>(source, index);
+                ElementAtQueryOperator<TSource> op = new ElementAtQueryOperator<TSource>(
+                    source,
+                    index
+                );
 
                 TSource result;
                 if (op.Aggregate(out result, true))
@@ -6009,6 +7002,5 @@ namespace System.Linq
 
             return default(TSource);
         }
-
     }
 }

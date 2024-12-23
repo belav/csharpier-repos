@@ -16,9 +16,11 @@ namespace System.CommandLine.Generator
         {
             ParseResult = GetType("System.CommandLine.ParseResult");
 
-            INamedTypeSymbol GetType(string typeName)
-                => compilation.GetTypeByMetadataName(typeName)
-                   ?? throw new InvalidOperationException($"Could not find well known type '{typeName}'");
+            INamedTypeSymbol GetType(string typeName) =>
+                compilation.GetTypeByMetadataName(typeName)
+                ?? throw new InvalidOperationException(
+                    $"Could not find well known type '{typeName}'"
+                );
 
             Comparer = comparer;
         }
@@ -33,7 +35,10 @@ namespace System.CommandLine.Generator
                 return true;
             }
 
-            if (symbol.MetadataName == "System.CommandLine.Binding.BindingContext" && symbol is INamedTypeSymbol bindingContext)
+            if (
+                symbol.MetadataName == "System.CommandLine.Binding.BindingContext"
+                && symbol is INamedTypeSymbol bindingContext
+            )
             {
                 parameter = new BindingContextParameter(bindingContext);
                 return true;

@@ -12,7 +12,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpRemoveUnreachableCodeDiagnosticAnalyzer, CSharpRemoveUnreachableCodeCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpRemoveUnreachableCodeDiagnosticAnalyzer,
+        CSharpRemoveUnreachableCodeCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
     public class RemoveUnreachableCodeTests
@@ -39,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -68,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -95,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -121,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -147,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -178,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         void Local() {}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -211,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         void Local2() {}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -248,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         void Local2() {}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -286,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         void Local2() {}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -316,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -346,7 +359,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -427,7 +441,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -459,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                                 return;
                         };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -495,7 +511,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -531,7 +548,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -575,7 +593,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                             System.Console.WriteLine(o.ToString());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -630,7 +649,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -675,7 +695,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -706,7 +727,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -740,7 +762,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -771,7 +794,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -800,7 +824,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -830,7 +855,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -868,7 +894,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -893,7 +920,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                         for (;;) { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61810")]
@@ -910,10 +938,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """;
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -933,10 +958,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """;
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -958,10 +980,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """;
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -989,10 +1008,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """;
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -1017,10 +1033,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """;
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -1044,10 +1057,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """;
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,

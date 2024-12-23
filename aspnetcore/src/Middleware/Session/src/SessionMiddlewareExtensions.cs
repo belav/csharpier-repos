@@ -29,7 +29,10 @@ public static class SessionMiddlewareExtensions
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
     /// <param name="options">The <see cref="SessionOptions"/>.</param>
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
-    public static IApplicationBuilder UseSession(this IApplicationBuilder app, SessionOptions options)
+    public static IApplicationBuilder UseSession(
+        this IApplicationBuilder app,
+        SessionOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);

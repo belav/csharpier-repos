@@ -32,7 +32,12 @@ namespace System.IO.Ports.Tests
         //The maximum buffer size when an exception is not expected
         private const int maxBufferSize = 8;
 
-        private enum ReadDataFromEnum { NonBuffered, Buffered, BufferedAndNonBuffered };
+        private enum ReadDataFromEnum
+        {
+            NonBuffered,
+            Buffered,
+            BufferedAndNonBuffered,
+        };
 
         #region Test Cases
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -44,7 +49,12 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_NEG1()
         {
-            VerifyReadException(new byte[defaultByteArraySize], -1, defaultByteCount, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new byte[defaultByteArraySize],
+                -1,
+                defaultByteCount,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -52,19 +62,34 @@ namespace System.IO.Ports.Tests
         {
             Random rndGen = new Random();
 
-            VerifyReadException(new byte[defaultByteArraySize], rndGen.Next(int.MinValue, 0), defaultByteCount, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new byte[defaultByteArraySize],
+                rndGen.Next(int.MinValue, 0),
+                defaultByteCount,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_MinInt()
         {
-            VerifyReadException(new byte[defaultByteArraySize], int.MinValue, defaultByteCount, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new byte[defaultByteArraySize],
+                int.MinValue,
+                defaultByteCount,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_NEG1()
         {
-            VerifyReadException(new byte[defaultByteArraySize], defaultByteOffset, -1, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new byte[defaultByteArraySize],
+                defaultByteOffset,
+                -1,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -72,13 +97,23 @@ namespace System.IO.Ports.Tests
         {
             Random rndGen = new Random();
 
-            VerifyReadException(new byte[defaultByteArraySize], defaultByteOffset, rndGen.Next(int.MinValue, 0), typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new byte[defaultByteArraySize],
+                defaultByteOffset,
+                rndGen.Next(int.MinValue, 0),
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_MinInt()
         {
-            VerifyReadException(new byte[defaultByteArraySize], defaultByteOffset, int.MinValue, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new byte[defaultByteArraySize],
+                defaultByteOffset,
+                int.MinValue,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
@@ -189,7 +224,13 @@ namespace System.IO.Ports.Tests
             int offset = 3;
             int count = 64;
 
-            VerifyRead(new byte[bufferLength], offset, count, 32, ReadDataFromEnum.BufferedAndNonBuffered);
+            VerifyRead(
+                new byte[bufferLength],
+                offset,
+                count,
+                32,
+                ReadDataFromEnum.BufferedAndNonBuffered
+            );
         }
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
@@ -199,7 +240,13 @@ namespace System.IO.Ports.Tests
             int offset = 3;
             int count = 3;
 
-            VerifyRead(new byte[bufferLength], offset, count, 32, ReadDataFromEnum.BufferedAndNonBuffered);
+            VerifyRead(
+                new byte[bufferLength],
+                offset,
+                count,
+                32,
+                ReadDataFromEnum.BufferedAndNonBuffered
+            );
         }
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
@@ -217,7 +264,8 @@ namespace System.IO.Ports.Tests
                 int numBytesRead;
 
                 Debug.WriteLine(
-                    "Verifying that Read(byte[], int, int) will read everything from internal buffer and drivers buffer");
+                    "Verifying that Read(byte[], int, int) will read everything from internal buffer and drivers buffer"
+                );
                 for (int i = 0; i < utf32CharBytes.Length; i++)
                 {
                     expectedBytes[i] = utf32CharBytes[i];
@@ -260,16 +308,28 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, 4 + byteXmitBuffer.Length);
 
-                if (expectedBytes.Length != (numBytesRead = com1.Read(byteRcvBuffer, 0, byteRcvBuffer.Length)))
+                if (
+                    expectedBytes.Length
+                    != (numBytesRead = com1.Read(byteRcvBuffer, 0, byteRcvBuffer.Length))
+                )
                 {
-                    Fail("Err_6481sfadw Expected read to read {0} chars actually read {1}", expectedBytes.Length, numBytesRead);
+                    Fail(
+                        "Err_6481sfadw Expected read to read {0} chars actually read {1}",
+                        expectedBytes.Length,
+                        numBytesRead
+                    );
                 }
 
                 for (int i = 0; i < expectedBytes.Length; i++)
                 {
                     if (expectedBytes[i] != byteRcvBuffer[i])
                     {
-                        Fail("Err_70782apzh Expected to read {0} actually read {1} at {2}", (int)expectedBytes[i], (int)byteRcvBuffer[i], i);
+                        Fail(
+                            "Err_70782apzh Expected to read {0} actually read {1} at {2}",
+                            (int)expectedBytes[i],
+                            (int)byteRcvBuffer[i],
+                            i
+                        );
                     }
                 }
 
@@ -301,9 +361,9 @@ namespace System.IO.Ports.Tests
                 ASyncRead asyncRead = new ASyncRead(com1, byteRcvBuffer, 0, byteRcvBuffer.Length);
                 var asyncReadTask = new Task(asyncRead.Read);
 
-
                 Debug.WriteLine(
-                    "Verifying that Read(byte[], int, int) will read characters that have been received after the call to Read was made");
+                    "Verifying that Read(byte[], int, int) will read characters that have been received after the call to Read was made"
+                );
 
                 com1.Encoding = Encoding.UTF8;
                 com2.Encoding = Encoding.UTF8;
@@ -324,21 +384,34 @@ namespace System.IO.Ports.Tests
 
                 if (null != asyncRead.Exception)
                 {
-                    Fail("Err_04448ajhied Unexpected exception thrown from async read:\n{0}", asyncRead.Exception);
+                    Fail(
+                        "Err_04448ajhied Unexpected exception thrown from async read:\n{0}",
+                        asyncRead.Exception
+                    );
                 }
                 else if (asyncRead.Result < 1)
                 {
-                    Fail("Err_0158ahei Expected Read to read at least one character {0}", asyncRead.Result);
+                    Fail(
+                        "Err_0158ahei Expected Read to read at least one character {0}",
+                        asyncRead.Result
+                    );
                 }
                 else
                 {
                     Thread.Sleep(1000); //We need to wait for all of the bytes to be received
-                    int readResult = com1.Read(byteRcvBuffer, asyncRead.Result, byteRcvBuffer.Length - asyncRead.Result);
+                    int readResult = com1.Read(
+                        byteRcvBuffer,
+                        asyncRead.Result,
+                        byteRcvBuffer.Length - asyncRead.Result
+                    );
 
                     if (asyncRead.Result + readResult != byteXmitBuffer.Length)
                     {
-                        Fail("Err_051884ajoedo Expected Read to read {0} characters actually read {1}",
-                            byteXmitBuffer.Length - asyncRead.Result, readResult);
+                        Fail(
+                            "Err_051884ajoedo Expected Read to read {0} characters actually read {1}",
+                            byteXmitBuffer.Length - asyncRead.Result,
+                            readResult
+                        );
                     }
                     else
                     {
@@ -348,7 +421,11 @@ namespace System.IO.Ports.Tests
                             {
                                 Fail(
                                     "Err_05188ahed Characters differ at {0} expected:{1}({1:X}) actual:{2}({2:X}) asyncRead.Result={3}",
-                                    i, byteXmitBuffer[i], byteRcvBuffer[i], asyncRead.Result);
+                                    i,
+                                    byteXmitBuffer[i],
+                                    byteRcvBuffer[i],
+                                    asyncRead.Result
+                                );
                             }
                         }
                     }
@@ -360,13 +437,28 @@ namespace System.IO.Ports.Tests
         #endregion
 
         #region Verification for Test Cases
-        private void VerifyReadException(byte[] buffer, int offset, int count, Type expectedException)
+        private void VerifyReadException(
+            byte[] buffer,
+            int offset,
+            int count,
+            Type expectedException
+        )
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
-                Debug.WriteLine("Verifying read method throws {0} buffer.Length={1}, offset={2}, count={3}", expectedException, bufferLength, offset, count);
+                Debug.WriteLine(
+                    "Verifying read method throws {0} buffer.Length={1}, offset={2}, count={3}",
+                    expectedException,
+                    bufferLength,
+                    offset,
+                    count
+                );
                 com.Open();
 
                 Assert.Throws(expectedException, () => com.Read(buffer, offset, count));
@@ -383,7 +475,13 @@ namespace System.IO.Ports.Tests
             VerifyRead(buffer, offset, count, numberOfBytesToRead, ReadDataFromEnum.NonBuffered);
         }
 
-        private void VerifyRead(byte[] buffer, int offset, int count, int numberOfBytesToRead, ReadDataFromEnum readDataFrom)
+        private void VerifyRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            int numberOfBytesToRead,
+            ReadDataFromEnum readDataFrom
+        )
         {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
@@ -407,8 +505,13 @@ namespace System.IO.Ports.Tests
                     buffer[i] = randByte;
                 }
 
-                Debug.WriteLine("Verifying read method buffer.Length={0}, offset={1}, count={2} with {3} random chars",
-                    buffer.Length, offset, count, bytesToWrite.Length);
+                Debug.WriteLine(
+                    "Verifying read method buffer.Length={0}, offset={1}, count={2} with {3} random chars",
+                    buffer.Length,
+                    offset,
+                    count,
+                    bytesToWrite.Length
+                );
 
                 com1.ReadTimeout = 500;
 
@@ -428,36 +531,82 @@ namespace System.IO.Ports.Tests
                         break;
 
                     case ReadDataFromEnum.BufferedAndNonBuffered:
-                        VerifyReadBufferedAndNonBuffered(com1, com2, bytesToWrite, buffer, offset, count);
+                        VerifyReadBufferedAndNonBuffered(
+                            com1,
+                            com2,
+                            bytesToWrite,
+                            buffer,
+                            offset,
+                            count
+                        );
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(readDataFrom), readDataFrom, null);
+                        throw new ArgumentOutOfRangeException(
+                            nameof(readDataFrom),
+                            readDataFrom,
+                            null
+                        );
                 }
             }
         }
 
-        private void VerifyReadNonBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite, byte[] rcvBuffer, int offset, int count)
+        private void VerifyReadNonBuffered(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            byte[] rcvBuffer,
+            int offset,
+            int count
+        )
         {
             VerifyBytesReadOnCom1FromCom2(com1, com2, bytesToWrite, rcvBuffer, offset, count);
         }
 
-        private void VerifyReadBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite, byte[] rcvBuffer, int offset, int count)
+        private void VerifyReadBuffered(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            byte[] rcvBuffer,
+            int offset,
+            int count
+        )
         {
             BufferData(com1, com2, bytesToWrite);
             PerformReadOnCom1FromCom2(com1, com2, bytesToWrite, rcvBuffer, offset, count);
         }
 
-        private void VerifyReadBufferedAndNonBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite, byte[] rcvBuffer, int offset, int count)
+        private void VerifyReadBufferedAndNonBuffered(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            byte[] rcvBuffer,
+            int offset,
+            int count
+        )
         {
             byte[] expectedBytes = new byte[(2 * bytesToWrite.Length)];
 
             BufferData(com1, com2, bytesToWrite);
 
             Buffer.BlockCopy(bytesToWrite, 0, expectedBytes, 0, bytesToWrite.Length);
-            Buffer.BlockCopy(bytesToWrite, 0, expectedBytes, bytesToWrite.Length, bytesToWrite.Length);
+            Buffer.BlockCopy(
+                bytesToWrite,
+                0,
+                expectedBytes,
+                bytesToWrite.Length,
+                bytesToWrite.Length
+            );
 
-            VerifyBytesReadOnCom1FromCom2(com1, com2, bytesToWrite, expectedBytes, rcvBuffer, offset, count);
+            VerifyBytesReadOnCom1FromCom2(
+                com1,
+                com2,
+                bytesToWrite,
+                expectedBytes,
+                rcvBuffer,
+                offset,
+                count
+            );
         }
 
         private void BufferData(SerialPort com1, SerialPort com2, byte[] bytesToWrite)
@@ -475,13 +624,35 @@ namespace System.IO.Ports.Tests
             Assert.Equal(bytesToWrite.Length, com1.BytesToRead);
         }
 
-        private void VerifyBytesReadOnCom1FromCom2(SerialPort com1, SerialPort com2, byte[] bytesToWrite, byte[] rcvBuffer, int offset, int count)
+        private void VerifyBytesReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            byte[] rcvBuffer,
+            int offset,
+            int count
+        )
         {
-            VerifyBytesReadOnCom1FromCom2(com1, com2, bytesToWrite, bytesToWrite, rcvBuffer, offset, count);
+            VerifyBytesReadOnCom1FromCom2(
+                com1,
+                com2,
+                bytesToWrite,
+                bytesToWrite,
+                rcvBuffer,
+                offset,
+                count
+            );
         }
 
-
-        private void VerifyBytesReadOnCom1FromCom2(SerialPort com1, SerialPort com2, byte[] bytesToWrite, byte[] expectedBytes, byte[] rcvBuffer, int offset, int count)
+        private void VerifyBytesReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            byte[] expectedBytes,
+            byte[] rcvBuffer,
+            int offset,
+            int count
+        )
         {
             com2.Write(bytesToWrite, 0, bytesToWrite.Length);
 
@@ -492,10 +663,18 @@ namespace System.IO.Ports.Tests
             PerformReadOnCom1FromCom2(com1, com2, expectedBytes, rcvBuffer, offset, count);
         }
 
-        private void PerformReadOnCom1FromCom2(SerialPort com1, SerialPort com2, byte[] expectedBytes, byte[] rcvBuffer, int offset, int count)
+        private void PerformReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] expectedBytes,
+            byte[] rcvBuffer,
+            int offset,
+            int count
+        )
         {
             byte[] buffer = new byte[expectedBytes.Length];
-            int bytesRead, totalBytesRead;
+            int bytesRead,
+                totalBytesRead;
             int bytesToRead;
             byte[] oldRcvBuffer = (byte[])rcvBuffer.Clone();
 
@@ -514,16 +693,24 @@ namespace System.IO.Ports.Tests
                 }
 
                 //While their are more characters to be read
-                if ((bytesToRead > bytesRead && count != bytesRead) || (bytesToRead <= bytesRead && bytesRead != bytesToRead))
+                if (
+                    (bytesToRead > bytesRead && count != bytesRead)
+                    || (bytesToRead <= bytesRead && bytesRead != bytesToRead)
+                )
                 {
                     //If we have not read all of the characters that we should have
-                    Fail("ERROR!!!: Read did not return all of the characters that were in SerialPort buffer");
+                    Fail(
+                        "ERROR!!!: Read did not return all of the characters that were in SerialPort buffer"
+                    );
                 }
 
                 if (expectedBytes.Length < totalBytesRead + bytesRead)
                 {
                     //If we have read in more characters then we expect
-                    Fail("ERROR!!!: We have received more characters then were sent {0}", totalBytesRead + bytesRead);
+                    Fail(
+                        "ERROR!!!: We have received more characters then were sent {0}",
+                        totalBytesRead + bytesRead
+                    );
                 }
 
                 VerifyBuffer(rcvBuffer, oldRcvBuffer, offset, bytesRead);
@@ -533,7 +720,11 @@ namespace System.IO.Ports.Tests
 
                 if (expectedBytes.Length - totalBytesRead != com1.BytesToRead)
                 {
-                    Fail("ERROR!!!: Expected BytesToRead={0} actual={1}", expectedBytes.Length - totalBytesRead, com1.BytesToRead);
+                    Fail(
+                        "ERROR!!!: Expected BytesToRead={0} actual={1}",
+                        expectedBytes.Length - totalBytesRead,
+                        com1.BytesToRead
+                    );
                 }
 
                 oldRcvBuffer = (byte[])rcvBuffer.Clone();
@@ -547,7 +738,12 @@ namespace System.IO.Ports.Tests
             {
                 if (expectedBytes[i] != buffer[i])
                 {
-                    Fail("ERROR!!!: Expected to read {0}  actual read  {1} at {2}", expectedBytes[i], buffer[i], i);
+                    Fail(
+                        "ERROR!!!: Expected to read {0}  actual read  {1} at {2}",
+                        expectedBytes[i],
+                        buffer[i],
+                        i
+                    );
                 }
             }
 
@@ -563,7 +759,6 @@ namespace System.IO.Ports.Tests
                 com2.Close();
         }
 
-
         private void VerifyBuffer(byte[] actualBuffer, byte[] expectedBuffer, int offset, int count)
         {
             //Verify all character before the offset
@@ -571,7 +766,12 @@ namespace System.IO.Ports.Tests
             {
                 if (actualBuffer[i] != expectedBuffer[i])
                 {
-                    Fail("Err_2038apzn!!!: Expected {0} in buffer at {1} actual {2}", (int)expectedBuffer[i], i, (int)actualBuffer[i]);
+                    Fail(
+                        "Err_2038apzn!!!: Expected {0} in buffer at {1} actual {2}",
+                        (int)expectedBuffer[i],
+                        i,
+                        (int)actualBuffer[i]
+                    );
                 }
             }
 
@@ -580,7 +780,12 @@ namespace System.IO.Ports.Tests
             {
                 if (actualBuffer[i] != expectedBuffer[i])
                 {
-                    Fail("Err_7025nbht!!!: Expected {0} in buffer at {1} actual {2}", (int)expectedBuffer[i], i, (int)actualBuffer[i]);
+                    Fail(
+                        "Err_7025nbht!!!: Expected {0} in buffer at {1} actual {2}",
+                        (int)expectedBuffer[i],
+                        i,
+                        (int)actualBuffer[i]
+                    );
                 }
             }
         }

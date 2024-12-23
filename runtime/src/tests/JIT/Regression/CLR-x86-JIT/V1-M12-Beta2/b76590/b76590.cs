@@ -36,7 +36,8 @@ public class Bug26518
             Console.WriteLine("PASS");
             return 100;
         }
-        else Console.WriteLine("FAIL");
+        else
+            Console.WriteLine("FAIL");
         return 101;
     }
 }

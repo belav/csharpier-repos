@@ -10,10 +10,7 @@ public class BoldTagHelper : TagHelper
 {
     public override int Order
     {
-        get
-        {
-            return int.MinValue;
-        }
+        get { return int.MinValue; }
     }
 
     public override void Process(TagHelperContext context, TagHelperOutput output)

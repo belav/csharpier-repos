@@ -13,11 +13,13 @@ namespace Microsoft.Extensions.Configuration.Json
     {
         private JsonConfigurationFileParser() { }
 
-        private readonly Dictionary<string, string?> _data = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, string?> _data = new Dictionary<string, string?>(
+            StringComparer.OrdinalIgnoreCase
+        );
         private readonly Stack<string> _paths = new Stack<string>();
 
-        public static IDictionary<string, string?> Parse(Stream input)
-            => new JsonConfigurationFileParser().ParseStream(input);
+        public static IDictionary<string, string?> Parse(Stream input) =>
+            new JsonConfigurationFileParser().ParseStream(input);
 
         private Dictionary<string, string?> ParseStream(Stream input)
         {
@@ -32,7 +34,9 @@ namespace Microsoft.Extensions.Configuration.Json
             {
                 if (doc.RootElement.ValueKind != JsonValueKind.Object)
                 {
-                    throw new FormatException(SR.Format(SR.Error_InvalidTopLevelJSONElement, doc.RootElement.ValueKind));
+                    throw new FormatException(
+                        SR.Format(SR.Error_InvalidTopLevelJSONElement, doc.RootElement.ValueKind)
+                    );
                 }
                 VisitObjectElement(doc.RootElement);
             }
@@ -106,14 +110,18 @@ namespace Microsoft.Extensions.Configuration.Json
                     break;
 
                 default:
-                    throw new FormatException(SR.Format(SR.Error_UnsupportedJSONToken, value.ValueKind));
+                    throw new FormatException(
+                        SR.Format(SR.Error_UnsupportedJSONToken, value.ValueKind)
+                    );
             }
         }
 
         private void EnterContext(string context) =>
-            _paths.Push(_paths.Count > 0 ?
-                _paths.Peek() + ConfigurationPath.KeyDelimiter + context :
-                context);
+            _paths.Push(
+                _paths.Count > 0
+                    ? _paths.Peek() + ConfigurationPath.KeyDelimiter + context
+                    : context
+            );
 
         private void ExitContext() => _paths.Pop();
     }

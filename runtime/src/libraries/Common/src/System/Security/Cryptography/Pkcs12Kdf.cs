@@ -29,15 +29,10 @@ namespace System.Security.Cryptography.Pkcs
             HashAlgorithmName hashAlgorithm,
             int iterationCount,
             ReadOnlySpan<byte> salt,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
-            Derive(
-                password,
-                hashAlgorithm,
-                iterationCount,
-                CipherKeyId,
-                salt,
-                destination);
+            Derive(password, hashAlgorithm, iterationCount, CipherKeyId, salt, destination);
         }
 
         internal static void DeriveIV(
@@ -45,15 +40,10 @@ namespace System.Security.Cryptography.Pkcs
             HashAlgorithmName hashAlgorithm,
             int iterationCount,
             ReadOnlySpan<byte> salt,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
-            Derive(
-                password,
-                hashAlgorithm,
-                iterationCount,
-                IvId,
-                salt,
-                destination);
+            Derive(password, hashAlgorithm, iterationCount, IvId, salt, destination);
         }
 
         internal static void DeriveMacKey(
@@ -61,15 +51,10 @@ namespace System.Security.Cryptography.Pkcs
             HashAlgorithmName hashAlgorithm,
             int iterationCount,
             ReadOnlySpan<byte> salt,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
-            Derive(
-                password,
-                hashAlgorithm,
-                iterationCount,
-                MacKeyId,
-                salt,
-                destination);
+            Derive(password, hashAlgorithm, iterationCount, MacKeyId, salt, destination);
         }
 
         private static void Derive(
@@ -78,12 +63,14 @@ namespace System.Security.Cryptography.Pkcs
             int iterationCount,
             byte id,
             ReadOnlySpan<byte> salt,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             // https://tools.ietf.org/html/rfc7292#appendix-B.2
             Debug.Assert(iterationCount >= 1);
 
-            int u = -1, v = -1;
+            int u = -1,
+                v = -1;
             foreach ((HashAlgorithmName, int, int) huv in s_uvLookup)
             {
                 if (huv.Item1 == hashAlgorithm)
@@ -96,7 +83,10 @@ namespace System.Security.Cryptography.Pkcs
 
             if (u == -1)
             {
-                throw new CryptographicException(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name);
+                throw new CryptographicException(
+                    SR.Cryptography_UnknownHashAlgorithm,
+                    hashAlgorithm.Name
+                );
             }
 
             Debug.Assert(v <= 1024);
@@ -173,9 +163,14 @@ namespace System.Security.Cryptography.Pkcs
 
                     for (int j = iterationCount; j > 0; j--)
                     {
-                        if (!hash.TryGetHashAndReset(hashBuf, out int bytesWritten) || bytesWritten != hashBuf.Length)
+                        if (
+                            !hash.TryGetHashAndReset(hashBuf, out int bytesWritten)
+                            || bytesWritten != hashBuf.Length
+                        )
                         {
-                            Debug.Fail($"Hash output wrote {bytesWritten} bytes when {hashBuf.Length} was expected");
+                            Debug.Fail(
+                                $"Hash output wrote {bytesWritten} bytes when {hashBuf.Length} was expected"
+                            );
                             throw new CryptographicException();
                         }
 
@@ -278,7 +273,10 @@ namespace System.Security.Cryptography.Pkcs
                     }
 
                     destination = destination.Slice(count);
-                    Span<byte> nullTerminator = destination.Slice(0, Math.Min(2, destination.Length));
+                    Span<byte> nullTerminator = destination.Slice(
+                        0,
+                        Math.Min(2, destination.Length)
+                    );
                     nullTerminator.Clear();
                     destination = destination.Slice(nullTerminator.Length);
                 }
@@ -290,7 +288,9 @@ namespace System.Security.Cryptography.Pkcs
 
                     if (count != destination.Length)
                     {
-                        Debug.Fail($"Partial copy wrote {count} bytes of {destination.Length} expected");
+                        Debug.Fail(
+                            $"Partial copy wrote {count} bytes of {destination.Length} expected"
+                        );
                         throw new CryptographicException();
                     }
 

@@ -13,7 +13,10 @@ namespace System.Runtime.InteropServices.Tests
         {
             var comObject = new ComImportObject();
             Assert.Same(comObject, Marshal.CreateWrapperOfType(comObject, typeof(ComImportObject)));
-            Assert.Same(comObject, Marshal.CreateWrapperOfType<ComImportObject, ComImportObject>(comObject));
+            Assert.Same(
+                comObject,
+                Marshal.CreateWrapperOfType<ComImportObject, ComImportObject>(comObject)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -23,20 +26,32 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Null(Marshal.CreateWrapperOfType<ComImportObject, ComImportObject>(null));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [InlineData(typeof(int))]
         [InlineData(typeof(GenericSubComImportObject<string>))]
         [InlineData(typeof(GenericSubComImportObject<>))]
         public void CreateWrapperOfType_InvalidComObjectType_ThrowsArgumentException(Type t)
         {
-            AssertExtensions.Throws<ArgumentException>("t", () => Marshal.CreateWrapperOfType(new ComImportObject(), t));
+            AssertExtensions.Throws<ArgumentException>(
+                "t",
+                () => Marshal.CreateWrapperOfType(new ComImportObject(), t)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void CreateWrappedOfType_ObjectNotComObject_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("o", () => Marshal.CreateWrapperOfType(10, typeof(ComImportObject)));
-            AssertExtensions.Throws<ArgumentException>("o", () => Marshal.CreateWrapperOfType<int, ComImportObject>(10));
+            AssertExtensions.Throws<ArgumentException>(
+                "o",
+                () => Marshal.CreateWrapperOfType(10, typeof(ComImportObject))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "o",
+                () => Marshal.CreateWrapperOfType<int, ComImportObject>(10)
+            );
         }
     }
 }

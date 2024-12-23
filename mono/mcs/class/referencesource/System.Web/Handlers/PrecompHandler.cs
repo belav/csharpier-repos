@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="PrecompHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 
@@ -10,27 +10,26 @@
 
 /*
  * PrecompHandler: precompiles the app
- * 
+ *
  * Copyright (c) 1998-1999, Microsoft Corporation
- * 
+ *
  */
-namespace System.Web.Handlers {
+namespace System.Web.Handlers
+{
     using System;
     using System.Web;
-    using System.Web.UI;
     using System.Web.Compilation;
-
+    using System.Web.UI;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    internal class PrecompHandler : IHttpHandler {
+    internal class PrecompHandler : IHttpHandler
+    {
+        internal PrecompHandler() { }
 
-        internal PrecompHandler() {
-        }
-
-        void IHttpHandler.ProcessRequest(HttpContext context) {
-
+        void IHttpHandler.ProcessRequest(HttpContext context)
+        {
             context.Server.ScriptTimeout = 3600;
 
             // Precompile the app starting at the current request's directory
@@ -41,11 +40,11 @@ namespace System.Web.Handlers {
             context.Response.Write("</h2></body></html>");
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsReusable {
+        public bool IsReusable
+        {
             get { return true; }
         }
     }

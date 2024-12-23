@@ -5,24 +5,25 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System;
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
+    using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.IdentityModel.Policy;
+    using System.ServiceModel;
 
     class NonValidatingSecurityTokenAuthenticator<TTokenType> : SecurityTokenAuthenticator
     {
         public NonValidatingSecurityTokenAuthenticator()
-            : base()
-        { }
+            : base() { }
 
         protected override bool CanValidateTokenCore(SecurityToken token)
         {
             return (token is TTokenType);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             return EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
         }

@@ -27,145 +27,102 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Security;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using SSA = System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
-using System.Security.Cryptography;
 
 namespace Mono.Security.Interface
 {
-	public interface IMonoSslStream : IDisposable
-	{
-		SslStream SslStream {
-			get;
-		}
+    public interface IMonoSslStream : IDisposable
+    {
+        SslStream SslStream { get; }
 
-		Task AuthenticateAsClientAsync (string targetHost, X509CertificateCollection clientCertificates, SSA.SslProtocols enabledSslProtocols, bool checkCertificateRevocation);
+        Task AuthenticateAsClientAsync(
+            string targetHost,
+            X509CertificateCollection clientCertificates,
+            SSA.SslProtocols enabledSslProtocols,
+            bool checkCertificateRevocation
+        );
 
-		Task AuthenticateAsServerAsync (X509Certificate serverCertificate, bool clientCertificateRequired, SSA.SslProtocols enabledSslProtocols, bool checkCertificateRevocation);
+        Task AuthenticateAsServerAsync(
+            X509Certificate serverCertificate,
+            bool clientCertificateRequired,
+            SSA.SslProtocols enabledSslProtocols,
+            bool checkCertificateRevocation
+        );
 
-		Task<int> ReadAsync (byte[] buffer, int offset, int count, CancellationToken cancellationToken);
+        Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        );
 
-		Task WriteAsync (byte[] buffer, int offset, int count, CancellationToken cancellationToken);
+        Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken);
 
-		Task ShutdownAsync ();
+        Task ShutdownAsync();
 
-		TransportContext TransportContext {
-			get;
-		}
+        TransportContext TransportContext { get; }
 
-		bool IsAuthenticated {
-			get;
-		}
+        bool IsAuthenticated { get; }
 
-		bool IsMutuallyAuthenticated {
-			get;
-		}
+        bool IsMutuallyAuthenticated { get; }
 
-		bool IsEncrypted {
-			get;
-		}
+        bool IsEncrypted { get; }
 
-		bool IsSigned {
-			get;
-		}
+        bool IsSigned { get; }
 
-		bool IsServer {
-			get;
-		}
+        bool IsServer { get; }
 
-		SSA.CipherAlgorithmType CipherAlgorithm {
-			get;
-		}
+        SSA.CipherAlgorithmType CipherAlgorithm { get; }
 
-		int CipherStrength {
-			get;
-		}
+        int CipherStrength { get; }
 
-		SSA.HashAlgorithmType HashAlgorithm {
-			get;
-		}
+        SSA.HashAlgorithmType HashAlgorithm { get; }
 
-		int HashStrength {
-			get;
-		}
+        int HashStrength { get; }
 
-		SSA.ExchangeAlgorithmType KeyExchangeAlgorithm {
-			get;
-		}
+        SSA.ExchangeAlgorithmType KeyExchangeAlgorithm { get; }
 
-		int KeyExchangeStrength {
-			get;
-		}
+        int KeyExchangeStrength { get; }
 
-		bool CanRead {
-			get;
-		}
+        bool CanRead { get; }
 
-		bool CanTimeout {
-			get;
-		}
+        bool CanTimeout { get; }
 
-		bool CanWrite {
-			get;
-		}
+        bool CanWrite { get; }
 
-		long Length {
-			get;
-		}
+        long Length { get; }
 
-		long Position {
-			get;
-		}
+        long Position { get; }
 
-		void SetLength (long value);
+        void SetLength(long value);
 
-		AuthenticatedStream AuthenticatedStream {
-			get;
-		}
+        AuthenticatedStream AuthenticatedStream { get; }
 
-		int ReadTimeout {
-			get; set;
-		}
+        int ReadTimeout { get; set; }
 
-		int WriteTimeout {
-			get; set;
-		}
+        int WriteTimeout { get; set; }
 
-		bool CheckCertRevocationStatus {
-			get;
-		}
+        bool CheckCertRevocationStatus { get; }
 
-		X509Certificate InternalLocalCertificate {
-			get;
-		}
+        X509Certificate InternalLocalCertificate { get; }
 
-		X509Certificate LocalCertificate {
-			get;
-		}
+        X509Certificate LocalCertificate { get; }
 
-		X509Certificate RemoteCertificate {
-			get;
-		}
+        X509Certificate RemoteCertificate { get; }
 
-		SSA.SslProtocols SslProtocol {
-			get;
-		}
+        SSA.SslProtocols SslProtocol { get; }
 
-		MonoTlsProvider Provider {
-			get;
-		}
+        MonoTlsProvider Provider { get; }
 
+        MonoTlsConnectionInfo GetConnectionInfo();
 
-		MonoTlsConnectionInfo GetConnectionInfo ();
+        bool CanRenegotiate { get; }
 
-		bool CanRenegotiate {
-			get;
-		}
-
-		Task RenegotiateAsync (CancellationToken cancellationToken);
-	}
+        Task RenegotiateAsync(CancellationToken cancellationToken);
+    }
 }
-

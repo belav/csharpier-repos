@@ -1,1 +1,1 @@
-<doc xml:foo="string"/>
+<doc {http://www.w3.org/XML/1998/namespace}foo="string" />

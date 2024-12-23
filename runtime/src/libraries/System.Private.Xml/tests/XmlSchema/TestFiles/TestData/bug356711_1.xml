@@ -1,3 +1,7 @@
-<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bug356711.xsd" xmlns:a="a">
-	<a:doc/>
+<root
+  {http://www.w3.org/2000/xmlns/}xsi="http://www.w3.org/2001/XMLSchema-instance"
+  {http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation="bug356711.xsd"
+  {http://www.w3.org/2000/xmlns/}a="a"
+>
+  <doc />
 </root>

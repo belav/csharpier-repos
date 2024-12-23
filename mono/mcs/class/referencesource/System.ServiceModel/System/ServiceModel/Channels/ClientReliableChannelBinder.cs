@@ -7,11 +7,12 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Runtime;
     using System.ServiceModel;
-    using System.ServiceModel.Security;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
 
-    abstract class ClientReliableChannelBinder<TChannel> : ReliableChannelBinder<TChannel>,
-        IClientReliableChannelBinder
+    abstract class ClientReliableChannelBinder<TChannel>
+        : ReliableChannelBinder<TChannel>,
+            IClientReliableChannelBinder
         where TChannel : class, IChannel
     {
         ChannelParameterCollection channelParameters;
@@ -19,15 +20,29 @@ namespace System.ServiceModel.Channels
         EndpointAddress to;
         Uri via;
 
-        protected ClientReliableChannelBinder(EndpointAddress to, Uri via, IChannelFactory<TChannel> factory,
-            MaskingMode maskingMode, TolerateFaultsMode faultMode, ChannelParameterCollection channelParameters,
-            TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
-            : base(factory.CreateChannel(to, via), maskingMode, faultMode,
-            defaultCloseTimeout, defaultSendTimeout)
+        protected ClientReliableChannelBinder(
+            EndpointAddress to,
+            Uri via,
+            IChannelFactory<TChannel> factory,
+            MaskingMode maskingMode,
+            TolerateFaultsMode faultMode,
+            ChannelParameterCollection channelParameters,
+            TimeSpan defaultCloseTimeout,
+            TimeSpan defaultSendTimeout
+        )
+            : base(
+                factory.CreateChannel(to, via),
+                maskingMode,
+                faultMode,
+                defaultCloseTimeout,
+                defaultSendTimeout
+            )
         {
             if (channelParameters == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("channelParameters");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "channelParameters"
+                );
             }
 
             this.to = to;
@@ -42,75 +57,71 @@ namespace System.ServiceModel.Channels
         // persistently throws.
         protected override bool CanGetChannelForReceive
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanSendAsynchronously
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override ChannelParameterCollection ChannelParameters
         {
-            get
-            {
-                return this.channelParameters;
-            }
+            get { return this.channelParameters; }
         }
 
         protected override bool MustCloseChannel
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override bool MustOpenChannel
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public Uri Via
         {
-            get
-            {
-                return this.via;
-            }
+            get { return this.via; }
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback,
-            object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.BeginRequest(message, timeout, this.DefaultMaskingMode, callback, state);
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, MaskingMode maskingMode,
-            AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            MaskingMode maskingMode,
+            AsyncCallback callback,
+            object state
+        )
         {
             RequestAsyncResult result = new RequestAsyncResult(this, callback, state);
             result.Start(message, timeout, maskingMode);
             return result;
         }
 
-        protected override IAsyncResult BeginTryGetChannel(TimeSpan timeout,
-            AsyncCallback callback, object state)
+        protected override IAsyncResult BeginTryGetChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             CommunicationState currentState = this.State;
             TChannel channel;
 
-            if ((currentState == CommunicationState.Created)
-               || (currentState == CommunicationState.Opening)
-               || (currentState == CommunicationState.Opened))
+            if (
+                (currentState == CommunicationState.Created)
+                || (currentState == CommunicationState.Opening)
+                || (currentState == CommunicationState.Opened)
+            )
             {
                 channel = this.factory.CreateChannel(this.to, this.via);
             }
@@ -122,36 +133,74 @@ namespace System.ServiceModel.Channels
             return new CompletedAsyncResult<TChannel>(channel, callback, state);
         }
 
-        public static IClientReliableChannelBinder CreateBinder(EndpointAddress to, Uri via,
-            IChannelFactory<TChannel> factory, MaskingMode maskingMode, TolerateFaultsMode faultMode,
+        public static IClientReliableChannelBinder CreateBinder(
+            EndpointAddress to,
+            Uri via,
+            IChannelFactory<TChannel> factory,
+            MaskingMode maskingMode,
+            TolerateFaultsMode faultMode,
             ChannelParameterCollection channelParameters,
-            TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
+            TimeSpan defaultCloseTimeout,
+            TimeSpan defaultSendTimeout
+        )
         {
             Type type = typeof(TChannel);
 
             if (type == typeof(IDuplexChannel))
             {
-                return new DuplexClientReliableChannelBinder(to, via, (IChannelFactory<IDuplexChannel>)(object)factory, maskingMode,
-                    channelParameters, defaultCloseTimeout, defaultSendTimeout);
+                return new DuplexClientReliableChannelBinder(
+                    to,
+                    via,
+                    (IChannelFactory<IDuplexChannel>)(object)factory,
+                    maskingMode,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                );
             }
             else if (type == typeof(IDuplexSessionChannel))
             {
-                return new DuplexSessionClientReliableChannelBinder(to, via, (IChannelFactory<IDuplexSessionChannel>)(object)factory, maskingMode,
-                    faultMode, channelParameters, defaultCloseTimeout, defaultSendTimeout);
+                return new DuplexSessionClientReliableChannelBinder(
+                    to,
+                    via,
+                    (IChannelFactory<IDuplexSessionChannel>)(object)factory,
+                    maskingMode,
+                    faultMode,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                );
             }
             else if (type == typeof(IRequestChannel))
             {
-                return new RequestClientReliableChannelBinder(to, via, (IChannelFactory<IRequestChannel>)(object)factory, maskingMode,
-                    channelParameters, defaultCloseTimeout, defaultSendTimeout);
+                return new RequestClientReliableChannelBinder(
+                    to,
+                    via,
+                    (IChannelFactory<IRequestChannel>)(object)factory,
+                    maskingMode,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                );
             }
             else if (type == typeof(IRequestSessionChannel))
             {
-                return new RequestSessionClientReliableChannelBinder(to, via, (IChannelFactory<IRequestSessionChannel>)(object)factory, maskingMode,
-                    faultMode, channelParameters, defaultCloseTimeout, defaultSendTimeout);
+                return new RequestSessionClientReliableChannelBinder(
+                    to,
+                    via,
+                    (IChannelFactory<IRequestSessionChannel>)(object)factory,
+                    maskingMode,
+                    faultMode,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                );
             }
             else
             {
-                throw Fx.AssertAndThrow("ClientReliableChannelBinder supports creation of IDuplexChannel, IDuplexSessionChannel, IRequestChannel, and IRequestSessionChannel only.");
+                throw Fx.AssertAndThrow(
+                    "ClientReliableChannelBinder supports creation of IDuplexChannel, IDuplexSessionChannel, IRequestChannel, and IRequestSessionChannel only."
+                );
             }
         }
 
@@ -177,31 +226,41 @@ namespace System.ServiceModel.Channels
             return this.Synchronizer.EnsureChannel();
         }
 
-        protected override void OnAbort()
-        {
-        }
+        protected override void OnAbort() { }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback,
-            object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback,
-            object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
 
-        protected virtual IAsyncResult OnBeginRequest(TChannel channel, Message message,
-            TimeSpan timeout, MaskingMode maskingMode, AsyncCallback callback, object state)
+        protected virtual IAsyncResult OnBeginRequest(
+            TChannel channel,
+            Message message,
+            TimeSpan timeout,
+            MaskingMode maskingMode,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw Fx.AssertAndThrow("The derived class does not support the OnBeginRequest operation.");
+            throw Fx.AssertAndThrow(
+                "The derived class does not support the OnBeginRequest operation."
+            );
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
         protected override void OnEndClose(IAsyncResult result)
         {
@@ -213,18 +272,25 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected virtual Message OnEndRequest(TChannel channel, MaskingMode maskingMode,
-            IAsyncResult result)
+        protected virtual Message OnEndRequest(
+            TChannel channel,
+            MaskingMode maskingMode,
+            IAsyncResult result
+        )
         {
-            throw Fx.AssertAndThrow("The derived class does not support the OnEndRequest operation.");
+            throw Fx.AssertAndThrow(
+                "The derived class does not support the OnEndRequest operation."
+            );
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
-        protected virtual Message OnRequest(TChannel channel, Message message, TimeSpan timeout,
-            MaskingMode maskingMode)
+        protected virtual Message OnRequest(
+            TChannel channel,
+            Message message,
+            TimeSpan timeout,
+            MaskingMode maskingMode
+        )
         {
             throw Fx.AssertAndThrow("The derived class does not support the OnRequest operation.");
         }
@@ -248,13 +314,19 @@ namespace System.ServiceModel.Channels
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                 TChannel channel;
 
-                if (!this.Synchronizer.TryGetChannelForOutput(timeoutHelper.RemainingTime(), maskingMode,
-                    out channel))
+                if (
+                    !this.Synchronizer.TryGetChannelForOutput(
+                        timeoutHelper.RemainingTime(),
+                        maskingMode,
+                        out channel
+                    )
+                )
                 {
                     if (!ReliableChannelBinderHelper.MaskHandled(maskingMode))
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout)));
+                            new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout))
+                        );
                     }
 
                     return null;
@@ -267,8 +339,12 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    return this.OnRequest(channel, message, timeoutHelper.RemainingTime(),
-                        maskingMode);
+                    return this.OnRequest(
+                        channel,
+                        message,
+                        timeoutHelper.RemainingTime(),
+                        maskingMode
+                    );
                 }
                 finally
                 {
@@ -297,9 +373,11 @@ namespace System.ServiceModel.Channels
             CommunicationState currentState = this.State;
             TChannel channel = null;
 
-            if ((currentState == CommunicationState.Created)
-               || (currentState == CommunicationState.Opening)
-               || (currentState == CommunicationState.Opened))
+            if (
+                (currentState == CommunicationState.Created)
+                || (currentState == CommunicationState.Opening)
+                || (currentState == CommunicationState.Opened)
+            )
             {
                 channel = this.factory.CreateChannel(this.to, this.via);
                 if (!this.Synchronizer.SetChannel(channel))
@@ -319,14 +397,26 @@ namespace System.ServiceModel.Channels
             : ClientReliableChannelBinder<TDuplexChannel>
             where TDuplexChannel : class, IDuplexChannel
         {
-            public DuplexClientReliableChannelBinder(EndpointAddress to, Uri via,
-                IChannelFactory<TDuplexChannel> factory, MaskingMode maskingMode, TolerateFaultsMode faultMode,
+            public DuplexClientReliableChannelBinder(
+                EndpointAddress to,
+                Uri via,
+                IChannelFactory<TDuplexChannel> factory,
+                MaskingMode maskingMode,
+                TolerateFaultsMode faultMode,
                 ChannelParameterCollection channelParameters,
-                TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
-                : base(to, via, factory, maskingMode, faultMode, channelParameters, defaultCloseTimeout,
-                defaultSendTimeout)
-            {
-            }
+                TimeSpan defaultCloseTimeout,
+                TimeSpan defaultSendTimeout
+            )
+                : base(
+                    to,
+                    via,
+                    factory,
+                    maskingMode,
+                    faultMode,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                ) { }
 
             public override EndpointAddress LocalAddress
             {
@@ -352,14 +442,23 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            protected override IAsyncResult OnBeginSend(TDuplexChannel channel, Message message,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginSend(
+                TDuplexChannel channel,
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return channel.BeginSend(message, timeout, callback, state);
             }
 
-            protected override IAsyncResult OnBeginTryReceive(TDuplexChannel channel,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginTryReceive(
+                TDuplexChannel channel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return channel.BeginTryReceive(timeout, callback, state);
             }
@@ -369,8 +468,11 @@ namespace System.ServiceModel.Channels
                 channel.EndSend(result);
             }
 
-            protected override bool OnEndTryReceive(TDuplexChannel channel, IAsyncResult result,
-                out RequestContext requestContext)
+            protected override bool OnEndTryReceive(
+                TDuplexChannel channel,
+                IAsyncResult result,
+                out RequestContext requestContext
+            )
             {
                 Message message;
                 bool success = channel.EndTryReceive(result, out message);
@@ -382,18 +484,22 @@ namespace System.ServiceModel.Channels
                 return success;
             }
 
-            protected virtual void OnReadNullMessage()
-            {
-            }
+            protected virtual void OnReadNullMessage() { }
 
-            protected override void OnSend(TDuplexChannel channel, Message message,
-                TimeSpan timeout)
+            protected override void OnSend(
+                TDuplexChannel channel,
+                Message message,
+                TimeSpan timeout
+            )
             {
                 channel.Send(message, timeout);
             }
 
-            protected override bool OnTryReceive(TDuplexChannel channel, TimeSpan timeout,
-                out RequestContext requestContext)
+            protected override bool OnTryReceive(
+                TDuplexChannel channel,
+                TimeSpan timeout,
+                out RequestContext requestContext
+            )
             {
                 Message message;
                 bool success = channel.TryReceive(timeout, out message);
@@ -409,21 +515,29 @@ namespace System.ServiceModel.Channels
         sealed class DuplexClientReliableChannelBinder
             : DuplexClientReliableChannelBinder<IDuplexChannel>
         {
-            public DuplexClientReliableChannelBinder(EndpointAddress to, Uri via,
-                IChannelFactory<IDuplexChannel> factory, MaskingMode maskingMode,
+            public DuplexClientReliableChannelBinder(
+                EndpointAddress to,
+                Uri via,
+                IChannelFactory<IDuplexChannel> factory,
+                MaskingMode maskingMode,
                 ChannelParameterCollection channelParameters,
-                TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
-                : base(to, via, factory, maskingMode, TolerateFaultsMode.Never, channelParameters,
-                defaultCloseTimeout, defaultSendTimeout)
-            {
-            }
+                TimeSpan defaultCloseTimeout,
+                TimeSpan defaultSendTimeout
+            )
+                : base(
+                    to,
+                    via,
+                    factory,
+                    maskingMode,
+                    TolerateFaultsMode.Never,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                ) { }
 
             public override bool HasSession
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override ISession GetInnerSession()
@@ -440,21 +554,30 @@ namespace System.ServiceModel.Channels
         sealed class DuplexSessionClientReliableChannelBinder
             : DuplexClientReliableChannelBinder<IDuplexSessionChannel>
         {
-            public DuplexSessionClientReliableChannelBinder(EndpointAddress to, Uri via,
-                IChannelFactory<IDuplexSessionChannel> factory, MaskingMode maskingMode, TolerateFaultsMode faultMode,
+            public DuplexSessionClientReliableChannelBinder(
+                EndpointAddress to,
+                Uri via,
+                IChannelFactory<IDuplexSessionChannel> factory,
+                MaskingMode maskingMode,
+                TolerateFaultsMode faultMode,
                 ChannelParameterCollection channelParameters,
-                TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
-                : base(to, via, factory, maskingMode, faultMode, channelParameters, defaultCloseTimeout,
-                defaultSendTimeout)
-            {
-            }
+                TimeSpan defaultCloseTimeout,
+                TimeSpan defaultSendTimeout
+            )
+                : base(
+                    to,
+                    via,
+                    factory,
+                    maskingMode,
+                    faultMode,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                ) { }
 
             public override bool HasSession
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override ISession GetInnerSession()
@@ -462,11 +585,20 @@ namespace System.ServiceModel.Channels
                 return this.Synchronizer.CurrentChannel.Session;
             }
 
-            protected override IAsyncResult BeginCloseChannel(IDuplexSessionChannel channel,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginCloseChannel(
+                IDuplexSessionChannel channel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return ReliableChannelBinderHelper.BeginCloseDuplexSessionChannel(this, channel,
-                    timeout, callback, state);
+                return ReliableChannelBinderHelper.BeginCloseDuplexSessionChannel(
+                    this,
+                    channel,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
             protected override void CloseChannel(IDuplexSessionChannel channel, TimeSpan timeout)
@@ -474,8 +606,10 @@ namespace System.ServiceModel.Channels
                 ReliableChannelBinderHelper.CloseDuplexSessionChannel(this, channel, timeout);
             }
 
-            protected override void EndCloseChannel(IDuplexSessionChannel channel,
-                IAsyncResult result)
+            protected override void EndCloseChannel(
+                IDuplexSessionChannel channel,
+                IAsyncResult result
+            )
             {
                 ReliableChannelBinderHelper.EndCloseDuplexSessionChannel(channel, result);
             }
@@ -497,23 +631,40 @@ namespace System.ServiceModel.Channels
         {
             InputQueue<Message> inputMessages;
 
-            public RequestClientReliableChannelBinder(EndpointAddress to, Uri via,
-                IChannelFactory<TRequestChannel> factory, MaskingMode maskingMode, TolerateFaultsMode faultMode,
+            public RequestClientReliableChannelBinder(
+                EndpointAddress to,
+                Uri via,
+                IChannelFactory<TRequestChannel> factory,
+                MaskingMode maskingMode,
+                TolerateFaultsMode faultMode,
                 ChannelParameterCollection channelParameters,
-                TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
-                : base(to, via, factory, maskingMode, faultMode, channelParameters, defaultCloseTimeout,
-                defaultSendTimeout)
-            {
-            }
+                TimeSpan defaultCloseTimeout,
+                TimeSpan defaultSendTimeout
+            )
+                : base(
+                    to,
+                    via,
+                    factory,
+                    maskingMode,
+                    faultMode,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                ) { }
 
-            public override IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback,
-                object state)
+            public override IAsyncResult BeginTryReceive(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.GetInputMessages().BeginDequeue(timeout, callback, state);
             }
 
-            public override bool EndTryReceive(IAsyncResult result,
-                out RequestContext requestContext)
+            public override bool EndTryReceive(
+                IAsyncResult result,
+                out RequestContext requestContext
+            )
             {
                 Message message;
                 bool success = this.GetInputMessages().EndDequeue(result, out message);
@@ -535,12 +686,16 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.State == CommunicationState.Created)
                     {
-                        throw Fx.AssertAndThrow("The method GetInputMessages() cannot be called when the binder is in the Created state.");
+                        throw Fx.AssertAndThrow(
+                            "The method GetInputMessages() cannot be called when the binder is in the Created state."
+                        );
                     }
 
                     if (this.State == CommunicationState.Opening)
                     {
-                        throw Fx.AssertAndThrow("The method GetInputMessages() cannot be called when the binder is in the Opening state.");
+                        throw Fx.AssertAndThrow(
+                            "The method GetInputMessages() cannot be called when the binder is in the Opening state."
+                        );
                     }
 
                     if (this.inputMessages == null)
@@ -554,10 +709,7 @@ namespace System.ServiceModel.Channels
 
             public override EndpointAddress LocalAddress
             {
-                get
-                {
-                    return EndpointAddress.AnonymousAddress;
-                }
+                get { return EndpointAddress.AnonymousAddress; }
             }
 
             public override EndpointAddress RemoteAddress
@@ -572,21 +724,34 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            protected override IAsyncResult OnBeginRequest(TRequestChannel channel,
-                Message message, TimeSpan timeout, MaskingMode maskingMode,
-                AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginRequest(
+                TRequestChannel channel,
+                Message message,
+                TimeSpan timeout,
+                MaskingMode maskingMode,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return channel.BeginRequest(message, timeout, callback, state);
             }
 
-            protected override IAsyncResult OnBeginSend(TRequestChannel channel, Message message,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginSend(
+                TRequestChannel channel,
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return channel.BeginRequest(message, timeout, callback, state);
             }
 
-            protected override Message OnEndRequest(TRequestChannel channel,
-                MaskingMode maskingMode, IAsyncResult result)
+            protected override Message OnEndRequest(
+                TRequestChannel channel,
+                MaskingMode maskingMode,
+                IAsyncResult result
+            )
             {
                 return channel.EndRequest(result);
             }
@@ -597,14 +762,21 @@ namespace System.ServiceModel.Channels
                 this.EnqueueMessageIfNotNull(message);
             }
 
-            protected override Message OnRequest(TRequestChannel channel, Message message,
-                TimeSpan timeout, MaskingMode maskingMode)
+            protected override Message OnRequest(
+                TRequestChannel channel,
+                Message message,
+                TimeSpan timeout,
+                MaskingMode maskingMode
+            )
             {
                 return channel.Request(message, timeout);
             }
 
-            protected override void OnSend(TRequestChannel channel, Message message,
-                TimeSpan timeout)
+            protected override void OnSend(
+                TRequestChannel channel,
+                Message message,
+                TimeSpan timeout
+            )
             {
                 message = channel.Request(message, timeout);
                 this.EnqueueMessageIfNotNull(message);
@@ -628,22 +800,37 @@ namespace System.ServiceModel.Channels
         }
 
         sealed class RequestAsyncResult
-            : ReliableChannelBinder<TChannel>.OutputAsyncResult<ClientReliableChannelBinder<TChannel>>
+            : ReliableChannelBinder<TChannel>.OutputAsyncResult<
+                ClientReliableChannelBinder<TChannel>
+            >
         {
             Message reply;
 
-            public RequestAsyncResult(ClientReliableChannelBinder<TChannel> binder,
-                AsyncCallback callback, object state)
-                : base(binder, callback, state)
-            {
-            }
+            public RequestAsyncResult(
+                ClientReliableChannelBinder<TChannel> binder,
+                AsyncCallback callback,
+                object state
+            )
+                : base(binder, callback, state) { }
 
             protected override IAsyncResult BeginOutput(
-                ClientReliableChannelBinder<TChannel> binder, TChannel channel, Message message,
-                TimeSpan timeout, MaskingMode maskingMode, AsyncCallback callback, object state)
+                ClientReliableChannelBinder<TChannel> binder,
+                TChannel channel,
+                Message message,
+                TimeSpan timeout,
+                MaskingMode maskingMode,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return binder.OnBeginRequest(channel, message, timeout, maskingMode, callback,
-                    state);
+                return binder.OnBeginRequest(
+                    channel,
+                    message,
+                    timeout,
+                    maskingMode,
+                    callback,
+                    state
+                );
             }
 
             public static Message End(IAsyncResult result)
@@ -652,8 +839,12 @@ namespace System.ServiceModel.Channels
                 return requestResult.reply;
             }
 
-            protected override void EndOutput(ClientReliableChannelBinder<TChannel> binder,
-                TChannel channel, MaskingMode maskingMode, IAsyncResult result)
+            protected override void EndOutput(
+                ClientReliableChannelBinder<TChannel> binder,
+                TChannel channel,
+                MaskingMode maskingMode,
+                IAsyncResult result
+            )
             {
                 this.reply = binder.OnEndRequest(channel, maskingMode, result);
             }
@@ -665,23 +856,31 @@ namespace System.ServiceModel.Channels
         }
 
         sealed class RequestClientReliableChannelBinder
-           : RequestClientReliableChannelBinder<IRequestChannel>
+            : RequestClientReliableChannelBinder<IRequestChannel>
         {
-            public RequestClientReliableChannelBinder(EndpointAddress to, Uri via,
-                IChannelFactory<IRequestChannel> factory, MaskingMode maskingMode,
+            public RequestClientReliableChannelBinder(
+                EndpointAddress to,
+                Uri via,
+                IChannelFactory<IRequestChannel> factory,
+                MaskingMode maskingMode,
                 ChannelParameterCollection channelParameters,
-                TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
-                : base(to, via, factory, maskingMode, TolerateFaultsMode.Never, channelParameters,
-                defaultCloseTimeout, defaultSendTimeout)
-            {
-            }
+                TimeSpan defaultCloseTimeout,
+                TimeSpan defaultSendTimeout
+            )
+                : base(
+                    to,
+                    via,
+                    factory,
+                    maskingMode,
+                    TolerateFaultsMode.Never,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                ) { }
 
             public override bool HasSession
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override ISession GetInnerSession()
@@ -698,21 +897,30 @@ namespace System.ServiceModel.Channels
         sealed class RequestSessionClientReliableChannelBinder
             : RequestClientReliableChannelBinder<IRequestSessionChannel>
         {
-            public RequestSessionClientReliableChannelBinder(EndpointAddress to, Uri via,
-                IChannelFactory<IRequestSessionChannel> factory, MaskingMode maskingMode, TolerateFaultsMode faultMode,
+            public RequestSessionClientReliableChannelBinder(
+                EndpointAddress to,
+                Uri via,
+                IChannelFactory<IRequestSessionChannel> factory,
+                MaskingMode maskingMode,
+                TolerateFaultsMode faultMode,
                 ChannelParameterCollection channelParameters,
-                TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
-                : base(to, via, factory, maskingMode, faultMode, channelParameters, defaultCloseTimeout,
-                defaultSendTimeout)
-            {
-            }
+                TimeSpan defaultCloseTimeout,
+                TimeSpan defaultSendTimeout
+            )
+                : base(
+                    to,
+                    via,
+                    factory,
+                    maskingMode,
+                    faultMode,
+                    channelParameters,
+                    defaultCloseTimeout,
+                    defaultSendTimeout
+                ) { }
 
             public override bool HasSession
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override ISession GetInnerSession()

@@ -23,7 +23,8 @@ public abstract class ObjectModelValidator : IObjectModelValidator
     /// <param name="validatorProviders">The list of <see cref="IModelValidatorProvider"/>.</param>
     public ObjectModelValidator(
         IModelMetadataProvider modelMetadataProvider,
-        IList<IModelValidatorProvider> validatorProviders)
+        IList<IModelValidatorProvider> validatorProviders
+    )
     {
         ArgumentNullException.ThrowIfNull(modelMetadataProvider);
         ArgumentNullException.ThrowIfNull(validatorProviders);
@@ -39,16 +40,19 @@ public abstract class ObjectModelValidator : IObjectModelValidator
         ActionContext actionContext,
         ValidationStateDictionary? validationState,
         string? prefix,
-        object? model)
+        object? model
+    )
     {
         var visitor = GetValidationVisitor(
             actionContext,
             _validatorProvider,
             _validatorCache,
             _modelMetadataProvider,
-            validationState);
+            validationState
+        );
 
-        var metadata = model == null ? null : _modelMetadataProvider.GetMetadataForType(model.GetType());
+        var metadata =
+            model == null ? null : _modelMetadataProvider.GetMetadataForType(model.GetType());
         visitor.Validate(metadata, prefix, model, alwaysValidateAtTopLevel: false);
     }
 
@@ -69,8 +73,8 @@ public abstract class ObjectModelValidator : IObjectModelValidator
         ValidationStateDictionary? validationState,
         string? prefix,
         object? model,
-        ModelMetadata metadata)
-        => Validate(actionContext, validationState, prefix, model, metadata, container: null);
+        ModelMetadata metadata
+    ) => Validate(actionContext, validationState, prefix, model, metadata, container: null);
 
     /// <summary>
     /// Validates the provided object model.
@@ -91,16 +95,24 @@ public abstract class ObjectModelValidator : IObjectModelValidator
         string? prefix,
         object? model,
         ModelMetadata metadata,
-        object? container)
+        object? container
+    )
     {
         var visitor = GetValidationVisitor(
             actionContext,
             _validatorProvider,
             _validatorCache,
             _modelMetadataProvider,
-            validationState);
+            validationState
+        );
 
-        visitor.Validate(metadata, prefix, model, alwaysValidateAtTopLevel: metadata.IsRequired, container);
+        visitor.Validate(
+            metadata,
+            prefix,
+            model,
+            alwaysValidateAtTopLevel: metadata.IsRequired,
+            container
+        );
     }
 
     /// <summary>
@@ -117,5 +129,6 @@ public abstract class ObjectModelValidator : IObjectModelValidator
         IModelValidatorProvider validatorProvider,
         ValidatorCache validatorCache,
         IModelMetadataProvider metadataProvider,
-        ValidationStateDictionary? validationState);
+        ValidationStateDictionary? validationState
+    );
 }

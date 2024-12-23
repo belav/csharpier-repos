@@ -6,14 +6,17 @@ namespace System.Activities
 {
     using System.Activities.Validation;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Windows.Markup;
-    using System.Collections.ObjectModel;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotHaveIncorrectSuffix,
-        Justification = "Part of the sanctioned, public WF OM")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotHaveIncorrectSuffix,
+        Justification = "Part of the sanctioned, public WF OM"
+    )]
     [ContentProperty("Handler")]
     public abstract class ActivityDelegate
     {
@@ -43,9 +46,7 @@ namespace System.Activities
         int cacheId;
         ActivityCollectionType parentCollectionType;
 
-        protected ActivityDelegate()
-        {
-        }
+        protected ActivityDelegate() { }
 
         public string DisplayName
         {
@@ -66,32 +67,18 @@ namespace System.Activities
         }
 
         [DefaultValue(null)]
-        public Activity Handler
-        {
-            get;
-            set;
-        }
+        public Activity Handler { get; set; }
 
-        internal LocationReferenceEnvironment Environment
-        {
-            get;
-            set;
-        }
+        internal LocationReferenceEnvironment Environment { get; set; }
 
         internal Activity Owner
         {
-            get
-            {
-                return this.owner;
-            }
+            get { return this.owner; }
         }
 
         internal ActivityCollectionType ParentCollectionType
         {
-            get
-            {
-                return this.parentCollectionType;
-            }
+            get { return this.parentCollectionType; }
         }
 
         internal IList<RuntimeDelegateArgument> RuntimeDelegateArguments
@@ -103,7 +90,9 @@ namespace System.Activities
                     return this.delegateParameters;
                 }
 
-                return new ReadOnlyCollection<RuntimeDelegateArgument>(InternalGetRuntimeDelegateArguments());
+                return new ReadOnlyCollection<RuntimeDelegateArgument>(
+                    InternalGetRuntimeDelegateArguments()
+                );
             }
         }
 
@@ -112,15 +101,30 @@ namespace System.Activities
             return null;
         }
 
-        protected virtual void OnGetRuntimeDelegateArguments(IList<RuntimeDelegateArgument> runtimeDelegateArguments)
+        protected virtual void OnGetRuntimeDelegateArguments(
+            IList<RuntimeDelegateArgument> runtimeDelegateArguments
+        )
         {
             foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(this))
             {
                 ArgumentDirection direction;
                 Type innerType;
-                if (ActivityUtilities.TryGetDelegateArgumentDirectionAndType(propertyDescriptor.PropertyType, out direction, out innerType))
+                if (
+                    ActivityUtilities.TryGetDelegateArgumentDirectionAndType(
+                        propertyDescriptor.PropertyType,
+                        out direction,
+                        out innerType
+                    )
+                )
                 {
-                    runtimeDelegateArguments.Add(new RuntimeDelegateArgument(propertyDescriptor.Name, innerType, direction, (DelegateArgument)propertyDescriptor.GetValue(this)));
+                    runtimeDelegateArguments.Add(
+                        new RuntimeDelegateArgument(
+                            propertyDescriptor.Name,
+                            innerType,
+                            direction,
+                            (DelegateArgument)propertyDescriptor.GetValue(this)
+                        )
+                    );
                 }
             }
         }
@@ -134,7 +138,9 @@ namespace System.Activities
 
         internal void InternalCacheMetadata()
         {
-            this.delegateParameters = new ReadOnlyCollection<RuntimeDelegateArgument>(InternalGetRuntimeDelegateArguments());
+            this.delegateParameters = new ReadOnlyCollection<RuntimeDelegateArgument>(
+                InternalGetRuntimeDelegateArguments()
+            );
         }
 
         internal bool CanBeScheduledBy(Activity parent)
@@ -146,15 +152,23 @@ namespace System.Activities
             }
             else
             {
-                return parent.Delegates.Contains(this) || parent.ImplementationDelegates.Contains(this);
+                return parent.Delegates.Contains(this)
+                    || parent.ImplementationDelegates.Contains(this);
             }
         }
 
-        internal bool InitializeRelationship(Activity parent, ActivityCollectionType collectionType, ref IList<ValidationError> validationErrors)
+        internal bool InitializeRelationship(
+            Activity parent,
+            ActivityCollectionType collectionType,
+            ref IList<ValidationError> validationErrors
+        )
         {
             if (this.cacheId == parent.CacheId)
             {
-                Fx.Assert(this.owner != null, "We must have set the owner when we set the cache ID");
+                Fx.Assert(
+                    this.owner != null,
+                    "We must have set the owner when we set the cache ID"
+                );
 
                 // This means that we've already encountered a parent in the tree
 
@@ -171,26 +185,73 @@ namespace System.Activities
 
                     if (handler == null)
                     {
-                        ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.ActivityDelegateCannotBeReferencedWithoutTargetNoHandler(parent.DisplayName, this.owner.DisplayName), false, parent));
+                        ActivityUtilities.Add(
+                            ref validationErrors,
+                            new ValidationError(
+                                SR.ActivityDelegateCannotBeReferencedWithoutTargetNoHandler(
+                                    parent.DisplayName,
+                                    this.owner.DisplayName
+                                ),
+                                false,
+                                parent
+                            )
+                        );
                     }
                     else
                     {
-                        ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.ActivityDelegateCannotBeReferencedWithoutTarget(handler.DisplayName, parent.DisplayName, this.owner.DisplayName), false, parent));
+                        ActivityUtilities.Add(
+                            ref validationErrors,
+                            new ValidationError(
+                                SR.ActivityDelegateCannotBeReferencedWithoutTarget(
+                                    handler.DisplayName,
+                                    parent.DisplayName,
+                                    this.owner.DisplayName
+                                ),
+                                false,
+                                parent
+                            )
+                        );
                     }
 
                     return false;
                 }
-                else if (!referenceTarget.Delegates.Contains(this) && !referenceTarget.ImportedDelegates.Contains(this))
+                else if (
+                    !referenceTarget.Delegates.Contains(this)
+                    && !referenceTarget.ImportedDelegates.Contains(this)
+                )
                 {
                     Activity handler = this.Handler;
 
                     if (handler == null)
                     {
-                        ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.ActivityDelegateCannotBeReferencedNoHandler(parent.DisplayName, referenceTarget.DisplayName, this.owner.DisplayName), false, parent));
+                        ActivityUtilities.Add(
+                            ref validationErrors,
+                            new ValidationError(
+                                SR.ActivityDelegateCannotBeReferencedNoHandler(
+                                    parent.DisplayName,
+                                    referenceTarget.DisplayName,
+                                    this.owner.DisplayName
+                                ),
+                                false,
+                                parent
+                            )
+                        );
                     }
                     else
                     {
-                        ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.ActivityDelegateCannotBeReferenced(handler.DisplayName, parent.DisplayName, referenceTarget.DisplayName, this.owner.DisplayName), false, parent));
+                        ActivityUtilities.Add(
+                            ref validationErrors,
+                            new ValidationError(
+                                SR.ActivityDelegateCannotBeReferenced(
+                                    handler.DisplayName,
+                                    parent.DisplayName,
+                                    referenceTarget.DisplayName,
+                                    this.owner.DisplayName
+                                ),
+                                false,
+                                parent
+                            )
+                        );
                     }
 
                     return false;
@@ -221,24 +282,40 @@ namespace System.Activities
 
             if (this.RuntimeDelegateArguments.Count > 0)
             {
-                ActivityLocationReferenceEnvironment newEnvironment = new ActivityLocationReferenceEnvironment(delegateEnvironment);
+                ActivityLocationReferenceEnvironment newEnvironment =
+                    new ActivityLocationReferenceEnvironment(delegateEnvironment);
                 delegateEnvironment = newEnvironment;
 
-                for (int argumentIndex = 0; argumentIndex < this.RuntimeDelegateArguments.Count; argumentIndex++)
+                for (
+                    int argumentIndex = 0;
+                    argumentIndex < this.RuntimeDelegateArguments.Count;
+                    argumentIndex++
+                )
                 {
-                    RuntimeDelegateArgument runtimeDelegateArgument = this.RuntimeDelegateArguments[argumentIndex];
+                    RuntimeDelegateArgument runtimeDelegateArgument = this.RuntimeDelegateArguments[
+                        argumentIndex
+                    ];
                     DelegateArgument delegateArgument = runtimeDelegateArgument.BoundArgument;
 
                     if (delegateArgument != null)
                     {
                         if (delegateArgument.Direction != runtimeDelegateArgument.Direction)
                         {
-                            ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.RuntimeDelegateArgumentDirectionIncorrect, parent));
+                            ActivityUtilities.Add(
+                                ref validationErrors,
+                                new ValidationError(
+                                    SR.RuntimeDelegateArgumentDirectionIncorrect,
+                                    parent
+                                )
+                            );
                         }
 
                         if (delegateArgument.Type != runtimeDelegateArgument.Type)
                         {
-                            ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.RuntimeDelegateArgumentTypeIncorrect, parent));
+                            ActivityUtilities.Add(
+                                ref validationErrors,
+                                new ValidationError(SR.RuntimeDelegateArgumentTypeIncorrect, parent)
+                            );
                         }
 
                         // NOTE: We don't initialize this relationship here because
@@ -254,7 +331,11 @@ namespace System.Activities
 
             if (this.Handler != null)
             {
-                return this.Handler.InitializeRelationship(this, collectionType, ref validationErrors);
+                return this.Handler.InitializeRelationship(
+                    this,
+                    collectionType,
+                    ref validationErrors
+                );
             }
 
             return true;

@@ -1,2 +1,5 @@
-<doc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-     xsi:noNamespaceSchemaLocation="v1.xsd" xml:foo="string"/>
+<doc
+  {http://www.w3.org/2000/xmlns/}xsi="http://www.w3.org/2001/XMLSchema-instance"
+  {http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation="v1.xsd"
+  {http://www.w3.org/XML/1998/namespace}foo="string"
+/>

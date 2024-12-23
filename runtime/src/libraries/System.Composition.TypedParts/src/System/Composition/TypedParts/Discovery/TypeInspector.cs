@@ -13,12 +13,16 @@ namespace System.Composition.TypedParts.Discovery
 {
     internal sealed class TypeInspector
     {
-        private static readonly IDictionary<string, object> s_noMetadata = new Dictionary<string, object>();
+        private static readonly IDictionary<string, object> s_noMetadata =
+            new Dictionary<string, object>();
 
         private readonly ActivationFeature[] _activationFeatures;
         private readonly AttributedModelProvider _attributeContext;
 
-        public TypeInspector(AttributedModelProvider attributeContext, ActivationFeature[] activationFeatures)
+        public TypeInspector(
+            AttributedModelProvider attributeContext,
+            ActivationFeature[] activationFeatures
+        )
         {
             _attributeContext = attributeContext;
             _activationFeatures = activationFeatures;
@@ -28,7 +32,14 @@ namespace System.Composition.TypedParts.Discovery
         {
             part = null;
 
-            if (type.IsAbstract || !type.IsClass || _attributeContext.GetDeclaredAttribute<PartNotDiscoverableAttribute>(type.AsType(), type) != null)
+            if (
+                type.IsAbstract
+                || !type.IsClass
+                || _attributeContext.GetDeclaredAttribute<PartNotDiscoverableAttribute>(
+                    type.AsType(),
+                    type
+                ) != null
+            )
                 return false;
 
             foreach (var export in DiscoverExports(type))
@@ -52,7 +63,12 @@ namespace System.Composition.TypedParts.Discovery
         private IEnumerable<DiscoveredExport> DiscoverInstanceExports(TypeInfo partType)
         {
             var partTypeAsType = partType.AsType();
-            foreach (var export in _attributeContext.GetDeclaredAttributes<ExportAttribute>(partTypeAsType, partType))
+            foreach (
+                var export in _attributeContext.GetDeclaredAttributes<ExportAttribute>(
+                    partTypeAsType,
+                    partType
+                )
+            )
             {
                 IDictionary<string, object> metadata = new Dictionary<string, object>();
                 ReadMetadataAttribute(export, metadata);
@@ -75,10 +91,18 @@ namespace System.Composition.TypedParts.Discovery
         private IEnumerable<DiscoveredExport> DiscoverPropertyExports(TypeInfo partType)
         {
             var partTypeAsType = partType.AsType();
-            foreach (var property in partTypeAsType.GetRuntimeProperties()
-                .Where(pi => pi.CanRead && pi.GetMethod.IsPublic && !pi.GetMethod.IsStatic))
+            foreach (
+                var property in partTypeAsType
+                    .GetRuntimeProperties()
+                    .Where(pi => pi.CanRead && pi.GetMethod.IsPublic && !pi.GetMethod.IsStatic)
+            )
             {
-                foreach (var export in _attributeContext.GetDeclaredAttributes<ExportAttribute>(partTypeAsType, property))
+                foreach (
+                    var export in _attributeContext.GetDeclaredAttributes<ExportAttribute>(
+                        partTypeAsType,
+                        property
+                    )
+                )
                 {
                     IDictionary<string, object> metadata = new Dictionary<string, object>();
                     ReadMetadataAttribute(export, metadata);
@@ -87,9 +111,16 @@ namespace System.Composition.TypedParts.Discovery
                     ReadLooseMetadata(applied, metadata);
 
                     var contractType = export.ContractType ?? property.PropertyType;
-                    CheckPropertyExportCompatibility(partType, property, contractType.GetTypeInfo());
+                    CheckPropertyExportCompatibility(
+                        partType,
+                        property,
+                        contractType.GetTypeInfo()
+                    );
 
-                    var exportKey = new CompositionContract(export.ContractType ?? property.PropertyType, export.ContractName);
+                    var exportKey = new CompositionContract(
+                        export.ContractType ?? property.PropertyType,
+                        export.ContractName
+                    );
 
                     if (metadata.Count == 0)
                         metadata = s_noMetadata;
@@ -99,7 +130,10 @@ namespace System.Composition.TypedParts.Discovery
             }
         }
 
-        private static void ReadLooseMetadata(object[] appliedAttributes, IDictionary<string, object> metadata)
+        private static void ReadLooseMetadata(
+            object[] appliedAttributes,
+            IDictionary<string, object> metadata
+        )
         {
             foreach (var attribute in appliedAttributes)
             {
@@ -119,7 +153,12 @@ namespace System.Composition.TypedParts.Discovery
             }
         }
 
-        private static void AddMetadata(IDictionary<string, object> metadata, string name, Type valueType, object value)
+        private static void AddMetadata(
+            IDictionary<string, object> metadata,
+            string name,
+            Type valueType,
+            object value
+        )
         {
             object existingValue;
             if (!metadata.TryGetValue(name, out existingValue))
@@ -145,7 +184,10 @@ namespace System.Composition.TypedParts.Discovery
             }
         }
 
-        private static void ReadMetadataAttribute(Attribute attribute, IDictionary<string, object> metadata)
+        private static void ReadMetadataAttribute(
+            Attribute attribute,
+            IDictionary<string, object> metadata
+        )
         {
             var attrType = attribute.GetType();
 
@@ -153,33 +195,55 @@ namespace System.Composition.TypedParts.Discovery
             if (attrType.GetTypeInfo().GetCustomAttribute<MetadataAttributeAttribute>(true) == null)
                 return;
 
-            foreach (var prop in attrType
-                .GetRuntimeProperties()
-                .Where(p => p.DeclaringType == attrType && p.CanRead))
+            foreach (
+                var prop in attrType
+                    .GetRuntimeProperties()
+                    .Where(p => p.DeclaringType == attrType && p.CanRead)
+            )
             {
                 AddMetadata(metadata, prop.Name, prop.PropertyType, prop.GetValue(attribute, null));
             }
         }
 
-        private static void CheckPropertyExportCompatibility(TypeInfo partType, PropertyInfo property, TypeInfo contractType)
+        private static void CheckPropertyExportCompatibility(
+            TypeInfo partType,
+            PropertyInfo property,
+            TypeInfo contractType
+        )
         {
             if (partType.IsGenericTypeDefinition)
             {
-                CheckGenericContractCompatibility(partType, property.PropertyType.GetTypeInfo(), contractType);
+                CheckGenericContractCompatibility(
+                    partType,
+                    property.PropertyType.GetTypeInfo(),
+                    contractType
+                );
             }
             else if (!contractType.IsAssignableFrom(property.PropertyType.GetTypeInfo()))
             {
-                string message = SR.Format(SR.TypeInspector_ExportedContractTypeNotAssignable,
-                                                contractType.Name, property.Name, partType.Name);
+                string message = SR.Format(
+                    SR.TypeInspector_ExportedContractTypeNotAssignable,
+                    contractType.Name,
+                    property.Name,
+                    partType.Name
+                );
                 throw new CompositionFailedException(message);
             }
         }
 
-        private static void CheckGenericContractCompatibility(TypeInfo partType, TypeInfo exportingMemberType, TypeInfo contractType)
+        private static void CheckGenericContractCompatibility(
+            TypeInfo partType,
+            TypeInfo exportingMemberType,
+            TypeInfo contractType
+        )
         {
             if (!contractType.IsGenericTypeDefinition)
             {
-                string message = SR.Format(SR.TypeInspector_NoExportNonGenericContract, partType.Name, contractType.Name);
+                string message = SR.Format(
+                    SR.TypeInspector_NoExportNonGenericContract,
+                    partType.Name,
+                    contractType.Name
+                );
                 throw new CompositionFailedException(message);
             }
 
@@ -187,12 +251,29 @@ namespace System.Composition.TypedParts.Discovery
 
             foreach (var ifce in GetAssignableTypes(exportingMemberType))
             {
-                if (ifce == contractType || (ifce.IsGenericType && ifce.GetGenericTypeDefinition() == contractType.AsType()))
+                if (
+                    ifce == contractType
+                    || (
+                        ifce.IsGenericType
+                        && ifce.GetGenericTypeDefinition() == contractType.AsType()
+                    )
+                )
                 {
                     var mappedType = ifce;
-                    if (!(mappedType == partType || mappedType.GenericTypeArguments.SequenceEqual(partType.GenericTypeParameters)))
+                    if (
+                        !(
+                            mappedType == partType
+                            || mappedType.GenericTypeArguments.SequenceEqual(
+                                partType.GenericTypeParameters
+                            )
+                        )
+                    )
                     {
-                        string message = SR.Format(SR.TypeInspector_ArgumentMismatch, contractType.Name, partType.Name);
+                        string message = SR.Format(
+                            SR.TypeInspector_ArgumentMismatch,
+                            contractType.Name,
+                            partType.Name
+                        );
                         throw new CompositionFailedException(message);
                     }
 
@@ -203,7 +284,12 @@ namespace System.Composition.TypedParts.Discovery
 
             if (!compatible)
             {
-                string message = SR.Format(SR.TypeInspector_ExportNotCompatible, exportingMemberType.Name, partType.Name, contractType.Name);
+                string message = SR.Format(
+                    SR.TypeInspector_ExportNotCompatible,
+                    exportingMemberType.Name,
+                    partType.Name,
+                    contractType.Name
+                );
                 throw new CompositionFailedException(message);
             }
         }
@@ -221,7 +307,10 @@ namespace System.Composition.TypedParts.Discovery
             }
         }
 
-        private static void CheckInstanceExportCompatibility(TypeInfo partType, TypeInfo contractType)
+        private static void CheckInstanceExportCompatibility(
+            TypeInfo partType,
+            TypeInfo contractType
+        )
         {
             if (partType.IsGenericTypeDefinition)
             {
@@ -229,7 +318,11 @@ namespace System.Composition.TypedParts.Discovery
             }
             else if (!contractType.IsAssignableFrom(partType))
             {
-                string message = SR.Format(SR.TypeInspector_ContractNotAssignable, contractType.Name, partType.Name);
+                string message = SR.Format(
+                    SR.TypeInspector_ContractNotAssignable,
+                    contractType.Name,
+                    partType.Name
+                );
                 throw new CompositionFailedException(message);
             }
         }

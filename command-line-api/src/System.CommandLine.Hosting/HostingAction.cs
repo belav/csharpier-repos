@@ -20,9 +20,17 @@ namespace System.CommandLine.Hosting
         private readonly Action<IHostBuilder> _configureHost;
         private readonly AsynchronousCliAction _actualAction;
 
-        internal static void SetHandlers(CliCommand command, Func<string[], IHostBuilder> hostBuilderFactory, Action<IHostBuilder> configureHost)
+        internal static void SetHandlers(
+            CliCommand command,
+            Func<string[], IHostBuilder> hostBuilderFactory,
+            Action<IHostBuilder> configureHost
+        )
         {
-            command.Action = new HostingAction(hostBuilderFactory, configureHost, (AsynchronousCliAction)command.Action);
+            command.Action = new HostingAction(
+                hostBuilderFactory,
+                configureHost,
+                (AsynchronousCliAction)command.Action
+            );
             command.TreatUnmatchedTokensAsErrors = false; // to pass unmatched Tokens to host builder factory
 
             foreach (CliCommand subCommand in command.Subcommands)
@@ -31,27 +39,37 @@ namespace System.CommandLine.Hosting
             }
         }
 
-        private HostingAction(Func<string[], IHostBuilder> hostBuilderFactory, Action<IHostBuilder> configureHost, AsynchronousCliAction actualAction)
+        private HostingAction(
+            Func<string[], IHostBuilder> hostBuilderFactory,
+            Action<IHostBuilder> configureHost,
+            AsynchronousCliAction actualAction
+        )
         {
             _hostBuilderFactory = hostBuilderFactory;
             _configureHost = configureHost;
             _actualAction = actualAction;
         }
 
-        public override BindingContext GetBindingContext(ParseResult parseResult)
-            => _actualAction is BindingHandler bindingHandler
-                   ? bindingHandler.GetBindingContext(parseResult)
-                   : base.GetBindingContext(parseResult);
+        public override BindingContext GetBindingContext(ParseResult parseResult) =>
+            _actualAction is BindingHandler bindingHandler
+                ? bindingHandler.GetBindingContext(parseResult)
+                : base.GetBindingContext(parseResult);
 
-        public override async Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken = default)
+        public override async Task<int> InvokeAsync(
+            ParseResult parseResult,
+            CancellationToken cancellationToken = default
+        )
         {
             var argsRemaining = parseResult.UnmatchedTokens;
-            var hostBuilder = _hostBuilderFactory?.Invoke(argsRemaining.ToArray())
-                              ?? new HostBuilder();
+            var hostBuilder =
+                _hostBuilderFactory?.Invoke(argsRemaining.ToArray()) ?? new HostBuilder();
             hostBuilder.Properties[typeof(ParseResult)] = parseResult;
 
-            if (parseResult.Configuration.RootCommand is CliRootCommand root &&
-                root.Directives.SingleOrDefault(d => d.Name == HostingDirectiveName) is { } directive)
+            if (
+                parseResult.Configuration.RootCommand is CliRootCommand root
+                && root.Directives.SingleOrDefault(d => d.Name == HostingDirectiveName)
+                    is { } directive
+            )
             {
                 if (parseResult.GetResult(directive) is { } directiveResult)
                 {
@@ -59,13 +77,17 @@ namespace System.CommandLine.Hosting
                     {
                         var kvpSeparator = new[] { '=' };
 
-                        config.AddInMemoryCollection(directiveResult.Values.Select(s =>
-                        {
-                            var parts = s.Split(kvpSeparator, count: 2);
-                            var key = parts[0];
-                            var value = parts.Length > 1 ? parts[1] : null;
-                            return new KeyValuePair<string, string>(key, value);
-                        }).ToList());
+                        config.AddInMemoryCollection(
+                            directiveResult
+                                .Values.Select(s =>
+                                {
+                                    var parts = s.Split(kvpSeparator, count: 2);
+                                    var key = parts[0];
+                                    var value = parts.Length > 1 ? parts[1] : null;
+                                    return new KeyValuePair<string, string>(key, value);
+                                })
+                                .ToList()
+                        );
                     });
                 }
             }
@@ -91,7 +113,10 @@ namespace System.CommandLine.Hosting
                     for (int i = registeredBefore; i < services.Count; i++)
                     {
                         Type captured = services[i].ServiceType;
-                        bindingContext.AddService(captured, c => c.GetService<IHost>().Services.GetService(captured));
+                        bindingContext.AddService(
+                            captured,
+                            c => c.GetService<IHost>().Services.GetService(captured)
+                        );
                     }
                 });
             }

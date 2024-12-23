@@ -28,16 +28,22 @@ namespace Microsoft.CSharp.RuntimeBinder
             }
         }
 
-
         public BindingFlag BindingFlags => 0;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
-            => runtimeBinder.BindUnaryOperation(this, arguments, locals);
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        ) => runtimeBinder.BindUnaryOperation(this, arguments, locals);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments)
-            => SymbolTable.PopulateSymbolTableWithName(Operation.GetCLROperatorName(), null, arguments[0].Type);
+        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments) =>
+            SymbolTable.PopulateSymbolTableWithName(
+                Operation.GetCLROperatorName(),
+                null,
+                arguments[0].Type
+            );
 
         public bool IsBinderThatCanHaveRefReceiver => false;
 
@@ -63,8 +69,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             ExpressionType operation,
             bool isChecked,
             Type callingContext,
-            IEnumerable<CSharpArgumentInfo> argumentInfo) :
-            base(operation)
+            IEnumerable<CSharpArgumentInfo> argumentInfo
+        )
+            : base(operation)
         {
             _argumentInfo = BinderHelper.ToArray(argumentInfo);
             Debug.Assert(_argumentInfo.Length == 1);
@@ -93,9 +100,11 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (Operation != otherBinder.Operation ||
-                IsChecked != otherBinder.IsChecked ||
-                _callingContext != otherBinder._callingContext)
+            if (
+                Operation != otherBinder.Operation
+                || IsChecked != otherBinder.IsChecked
+                || _callingContext != otherBinder._callingContext
+            )
             {
                 return false;
             }
@@ -109,12 +118,24 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="target">The target of the dynamic unary operation.</param>
         /// <param name="errorSuggestion">The binding result in case the binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject FallbackUnaryOperation(DynamicMetaObject target, DynamicMetaObject errorSuggestion)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject FallbackUnaryOperation(
+            DynamicMetaObject target,
+            DynamicMetaObject errorSuggestion
+        )
         {
             BinderHelper.ValidateBindArgument(target, nameof(target));
-            return BinderHelper.Bind(this, _binder, new[] { target }, _argumentInfo, errorSuggestion);
+            return BinderHelper.Bind(
+                this,
+                _binder,
+                new[] { target },
+                _argumentInfo,
+                errorSuggestion
+            );
         }
     }
 }

@@ -45,7 +45,9 @@ namespace IdeCoreBenchmarks
                         0 => _emptyProject,
                         100 => _hundredProject,
                         10000 => _thousandsProject,
-                        _ => throw new NotSupportedException($"'{nameof(DocumentCount)}' is out of range"),
+                        _ => throw new NotSupportedException(
+                            $"'{nameof(DocumentCount)}' is out of range"
+                        ),
                     };
                 }
             }

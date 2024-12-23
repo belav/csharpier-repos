@@ -7,13 +7,15 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
 
-    internal enum ValueType {
+    internal enum ValueType
+    {
         Unknown = -1,
         Null = 0,
         Bool = 1,
@@ -24,46 +26,51 @@ namespace System.Data {
         Object = 6,
         Date = 7,
     }
+
     /// <devdoc>
     ///     ExpressionParser: expression node types
     /// </devdoc>
-    enum Nodes {
+    enum Nodes
+    {
         Noop = 0,
-        Unop = 1,       /* Unary operator */
-        UnopSpec = 2,   /* Special unop: IFF does not eval args */
-        Binop = 3,      /* Binary operator */
-        BinopSpec = 4,  /* Special binop: BETWEEN, IN does not eval args */
-        Zop = 5,        /* "0-ary operator" - intrinsic constant. */
-        Call = 6,       /* Function call or rhs of IN or IFF */
-        Const = 7,      /* Constant value */
-        Name = 8,       /* Identifier */
-        Paren = 9,      /* Parentheses */
-        Conv = 10,      /* Type conversion */
+        Unop = 1, /* Unary operator */
+        UnopSpec = 2, /* Special unop: IFF does not eval args */
+        Binop = 3, /* Binary operator */
+        BinopSpec = 4, /* Special binop: BETWEEN, IN does not eval args */
+        Zop = 5, /* "0-ary operator" - intrinsic constant. */
+        Call = 6, /* Function call or rhs of IN or IFF */
+        Const = 7, /* Constant value */
+        Name = 8, /* Identifier */
+        Paren = 9, /* Parentheses */
+        Conv = 10, /* Type conversion */
     }
 
-    internal sealed class ExpressionParser {
+    internal sealed class ExpressionParser
+    {
         /// <devdoc>
         ///     Operand situations for parser
         /// </devdoc>
-        private const int    Empty = 0;  /* There was no previous operand */
-        private const int    Scalar = 1; /* The previous operand was a constant or id */
-        private const int    Expr = 2;   /* The previous operand was a complex expression */
+        private const int Empty = 0; /* There was no previous operand */
+        private const int Scalar = 1; /* The previous operand was a constant or id */
+        private const int Expr = 2; /* The previous operand was a complex expression */
 
-
-        private struct ReservedWords {
-            internal readonly string word;      // the word
+        private struct ReservedWords
+        {
+            internal readonly string word; // the word
             internal readonly Tokens token;
             internal readonly int op;
 
-            internal ReservedWords(string word, Tokens token, int op) {
+            internal ReservedWords(string word, Tokens token, int op)
+            {
                 this.word = word;
-                this.token =token;
+                this.token = token;
                 this.op = op;
             }
         }
 
         // this should be maintained as a invariantculture sorted array for binary searching
-        private static readonly ReservedWords[] reservedwords = new ReservedWords[] {
+        private static readonly ReservedWords[] reservedwords = new ReservedWords[]
+        {
             new ReservedWords("And", Tokens.BinaryOp, Operators.And),
             /*
             the following operator is not implemented in the current version of the
@@ -71,7 +78,6 @@ namespace System.Data {
             to prevent future compatibility problems.
             */
             new ReservedWords("Between", Tokens.BinaryOp, Operators.Between),
-
             new ReservedWords("Child", Tokens.Child, Operators.Noop),
             new ReservedWords("False", Tokens.ZeroOp, Operators.False),
             new ReservedWords("In", Tokens.BinaryOp, Operators.In),
@@ -84,15 +90,16 @@ namespace System.Data {
             new ReservedWords("True", Tokens.ZeroOp, Operators.True),
         };
 
-
         /* the following is the Scanner local configuration, Default settings is US
-         * 
+         *
 
 */
         private char Escape = '\\';
         private char DecimalSeparator = '.';
+
         //not used: private char ThousandSeparator = ',';
         private char ListSeparator = ',';
+
         //not used: private char DateSeparator = '/';
         private char ExponentL = 'e';
         private char ExponentU = 'E';
@@ -103,14 +110,14 @@ namespace System.Data {
         internal Tokens token;
         internal int op = Operators.Noop;
 
-        internal OperatorInfo[] ops =  new OperatorInfo[MaxPredicates];
+        internal OperatorInfo[] ops = new OperatorInfo[MaxPredicates];
         internal int topOperator = 0;
         internal int topNode = 0;
 
         private readonly DataTable _table;
 
         /// <devdoc>
-        ///     
+        ///
 
         private const int MaxPredicates = 100;
         internal ExpressionNode[] NodeStack = new ExpressionNode[MaxPredicates];
@@ -119,32 +126,38 @@ namespace System.Data {
 
         internal ExpressionNode expression = null;
 
-        internal ExpressionParser(DataTable table) {
+        internal ExpressionParser(DataTable table)
+        {
             _table = table;
         }
 
-        internal void LoadExpression(string data) {
+        internal void LoadExpression(string data)
+        {
             int length;
 
-            if (data == null) {
+            if (data == null)
+            {
                 length = 0;
-                this.text = new char[length+1];
+                this.text = new char[length + 1];
             }
-            else {
+            else
+            {
                 length = data.Length;
-                this.text = new char[length+1];
+                this.text = new char[length + 1];
                 data.CopyTo(0, this.text, 0, length);
             }
 
             this.text[length] = '\0';
 
-            if (expression != null) {
+            if (expression != null)
+            {
                 // free all nodes
                 expression = null;
             }
         }
 
-        internal void StartScan() {
+        internal void StartScan()
+        {
             op = Operators.Noop;
             pos = 0;
             start = 0;
@@ -153,9 +166,10 @@ namespace System.Data {
             ops[topOperator++] = new OperatorInfo(Nodes.Noop, Operators.Noop, Operators.priStart);
         }
 
-        // 
+        //
 
-        internal ExpressionNode Parse() {
+        internal ExpressionNode Parse()
+        {
             // free all nodes
             expression = null;
 
@@ -164,17 +178,21 @@ namespace System.Data {
             int cParens = 0;
             OperatorInfo opInfo;
 
-            while (token != Tokens.EOS) {
+            while (token != Tokens.EOS)
+            {
                 loop:
                 Scan();
 
-                switch (token) {
+                switch (token)
+                {
                     case Tokens.EOS:
                         // End of string: must be operand; force out expression;
                         // check for bomb; check nothing left on stack.
 
-                        if (prevOperand == Empty) {
-                            if (topNode == 0) {
+                        if (prevOperand == Empty)
+                        {
+                            if (topNode == 0)
+                            {
                                 // we have an empty expression
                                 break;
                             }
@@ -186,7 +204,8 @@ namespace System.Data {
                         }
                         // collect all nodes
                         BuildExpression(Operators.priLow);
-                        if (topOperator != 1) {
+                        if (topOperator != 1)
+                        {
                             throw ExprException.MissingRightParen();
                         }
                         break;
@@ -203,47 +222,62 @@ namespace System.Data {
 
                         /* Constants and identifiers: create leaf node */
 
-                        if (prevOperand != Empty) {
+                        if (prevOperand != Empty)
+                        {
                             // set error missing operator
-                            throw ExprException.MissingOperator(new string(text, start, pos - start));
+                            throw ExprException.MissingOperator(
+                                new string(text, start, pos - start)
+                            );
                         }
 
-                        if (topOperator > 0) {
+                        if (topOperator > 0)
+                        {
                             // special check for IN without parentheses
 
-                            opInfo = ops[topOperator-1];
+                            opInfo = ops[topOperator - 1];
 
-                            if (opInfo.type == Nodes.Binop && opInfo.op == Operators.In && token != Tokens.Parent) {
+                            if (
+                                opInfo.type == Nodes.Binop
+                                && opInfo.op == Operators.In
+                                && token != Tokens.Parent
+                            )
+                            {
                                 throw ExprException.InWithoutParentheses();
                             }
                         }
 
                         prevOperand = Scalar;
 
-                        switch (token) {
+                        switch (token)
+                        {
                             case Tokens.Parent:
                                 string relname;
                                 string colname;
 
                                 // parsing Parent[(relation_name)].column_name)
-                                try {
+                                try
+                                {
                                     // expecting an '(' or '.'
                                     Scan();
-                                    if (token == Tokens.LeftParen) {
+                                    if (token == Tokens.LeftParen)
+                                    {
                                         //read the relation name
                                         ScanToken(Tokens.Name);
                                         relname = NameNode.ParseName(text, start, pos);
                                         ScanToken(Tokens.RightParen);
                                         ScanToken(Tokens.Dot);
                                     }
-                                    else {
+                                    else
+                                    {
                                         relname = null;
                                         CheckToken(Tokens.Dot);
                                     }
                                 }
-                                catch (Exception e){
-                                    // 
-                                    if (!Common.ADP.IsCatchableExceptionType(e)) {
+                                catch (Exception e)
+                                {
+                                    //
+                                    if (!Common.ADP.IsCatchableExceptionType(e))
+                                    {
                                         throw;
                                     }
                                     throw ExprException.LookupArgument();
@@ -263,7 +297,7 @@ namespace System.Data {
                                 opInfo = ops[topOperator - 1];
 
                                 /* Create tree element -                */
-                                // 
+                                //
                                 node = new NameNode(_table, text, start, pos);
 
                                 break;
@@ -281,17 +315,29 @@ namespace System.Data {
                                 node = new ConstNode(_table, ValueType.Float, str);
                                 break;
                             case Tokens.StringConst:
-                                Debug.Assert(text[start] == '\'' && text[pos-1] == '\'', "The expression contains an invalid string constant");
-                                Debug.Assert(pos - start > 1, "The expression contains an invalid string constant");
+                                Debug.Assert(
+                                    text[start] == '\'' && text[pos - 1] == '\'',
+                                    "The expression contains an invalid string constant"
+                                );
+                                Debug.Assert(
+                                    pos - start > 1,
+                                    "The expression contains an invalid string constant"
+                                );
                                 // Store string without quotes..
-                                str = new string(text, start+1, pos - start-2);
+                                str = new string(text, start + 1, pos - start - 2);
                                 node = new ConstNode(_table, ValueType.Str, str);
                                 break;
                             case Tokens.Date:
-                                Debug.Assert(text[start] == '#' && text[pos-1] == '#', "The expression contains invalid date constant.");
-                                Debug.Assert(pos - start > 2, "The expression contains invalid date constant '{0}'.");
+                                Debug.Assert(
+                                    text[start] == '#' && text[pos - 1] == '#',
+                                    "The expression contains invalid date constant."
+                                );
+                                Debug.Assert(
+                                    pos - start > 2,
+                                    "The expression contains invalid date constant '{0}'."
+                                );
                                 // Store date without delimiters(#s)..
-                                str = new string(text, start+1, pos - start-2);
+                                str = new string(text, start + 1, pos - start - 2);
                                 node = new ConstNode(_table, ValueType.Date, str);
                                 break;
                             default:
@@ -304,27 +350,39 @@ namespace System.Data {
 
                     case Tokens.LeftParen:
                         cParens++;
-                        if (prevOperand == Empty) {
+                        if (prevOperand == Empty)
+                        {
                             // Check for ( following IN/IFF. if not, we have a normal (.
                             // Peek: take a look at the operators stack
 
                             Debug.Assert(topOperator > 0, "Empty operator stack!!");
                             opInfo = ops[topOperator - 1];
 
-                            if (opInfo.type == Nodes.Binop && opInfo.op == Operators.In) {
+                            if (opInfo.type == Nodes.Binop && opInfo.op == Operators.In)
+                            {
                                 /* IN - handle as procedure call */
 
                                 node = new FunctionNode(_table, "In");
                                 NodePush(node);
                                 /* Push operator decriptor */
-                                ops[topOperator++] = new OperatorInfo(Nodes.Call, Operators.Noop, Operators.priParen);
+                                ops[topOperator++] = new OperatorInfo(
+                                    Nodes.Call,
+                                    Operators.Noop,
+                                    Operators.priParen
+                                );
                             }
-                            else {  /* Normal ( */
+                            else
+                            { /* Normal ( */
                                 /* Push operator decriptor */
-                                ops[topOperator++] = new OperatorInfo(Nodes.Paren, Operators.Noop, Operators.priParen);
+                                ops[topOperator++] = new OperatorInfo(
+                                    Nodes.Paren,
+                                    Operators.Noop,
+                                    Operators.priParen
+                                );
                             }
                         }
-                        else {
+                        else
+                        {
                             // This is a procedure call or () qualification
                             // Force out any dot qualifiers; check for bomb
 
@@ -332,7 +390,8 @@ namespace System.Data {
                             prevOperand = Empty;
                             ExpressionNode nodebefore = NodePeek();
 
-                            if (nodebefore == null || nodebefore.GetType() != typeof(NameNode)) {
+                            if (nodebefore == null || nodebefore.GetType() != typeof(NameNode))
+                            {
                                 // this is more like an assert, so we not care about "nice" exception text..
                                 //
                                 throw ExprException.SyntaxError();
@@ -348,7 +407,8 @@ namespace System.Data {
 
                             // check to see if this is an aggregate function
                             Aggregate agg = (Aggregate)(int)((FunctionNode)node).Aggregate;
-                            if (agg != Aggregate.None) {
+                            if (agg != Aggregate.None)
+                            {
                                 node = ParseAggregateArgument((FunctionId)(int)agg);
                                 NodePush(node);
                                 prevOperand = Expr;
@@ -356,113 +416,135 @@ namespace System.Data {
                             }
 
                             NodePush(node);
-                            ops[topOperator++] = new OperatorInfo(Nodes.Call, Operators.Noop, Operators.priParen);
+                            ops[topOperator++] = new OperatorInfo(
+                                Nodes.Call,
+                                Operators.Noop,
+                                Operators.priParen
+                            );
                         }
                         goto loop;
 
                     case Tokens.RightParen:
+                    {
+                        /* Right parentheses: Build expression if we have an operand. */
+                        if (prevOperand != Empty)
                         {
-                            /* Right parentheses: Build expression if we have an operand. */
-                            if (prevOperand != Empty) {
-                                BuildExpression(Operators.priLow);
-                            }
-
-                            /* We must have Tokens.LeftParen on stack. If no operand, must be procedure call. */
-                            if (topOperator <= 1) {
-                                // set error, syntax: too many right parens..
-                                throw ExprException.TooManyRightParentheses();
-                            }
-
-                            Debug.Assert(topOperator > 1, "melformed operator stack.");
-                            topOperator--;
-                            opInfo = ops[topOperator];
-
-                            if (prevOperand == Empty && opInfo.type != Nodes.Call) {
-                                // set error, syntax: missing operand.
-                                throw ExprException.MissingOperand(opInfo);
-                            }
-
-                            Debug.Assert(opInfo.priority == Operators.priParen, "melformed operator stack.");
-
-                            if (opInfo.type == Nodes.Call) {
-                                /* add argument to the function call. */
-
-                                if (prevOperand != Empty) {
-                                    // read last function argument
-                                    ExpressionNode argument = NodePop();
-
-                                    /* Get the procedure name and append argument */
-                                    Debug.Assert(topNode > 0 && NodePeek().GetType() == typeof(FunctionNode), "The function node should be created on '('");
-
-                                    FunctionNode func = (FunctionNode)NodePop();
-                                    func.AddArgument(argument);
-                                    func.Check();
-                                    NodePush(func);
-                                }
-                            }
-                            else {
-                                /* Normal parentheses: create tree node */
-                                // Construct & Put the Nodes.Paren node on node stack
-                                node = NodePop();
-                                node = new UnaryNode(_table, Operators.Noop, node);
-                                NodePush(node);
-                            }
-
-                            prevOperand = Expr;
-                            cParens--;
-                            goto loop;
-                        }
-                    case Tokens.ListSeparator:
-                        {
-                            /* Comma encountered: Must be operand; force out subexpression */
-
-                            if (prevOperand == Empty) {
-                                throw ExprException.MissingOperandBefore(",");
-                            }
-
-                            /* We are be in a procedure call */
-
-                            /* build next argument */
                             BuildExpression(Operators.priLow);
-
-                            opInfo = ops[topOperator - 1];
-
-                            if (opInfo.type != Nodes.Call)
-                                //
-                                throw ExprException.SyntaxError();
-
-                            ExpressionNode argument2 = NodePop();
-
-                            /* Get the procedure name */
-
-                            FunctionNode func = (FunctionNode)NodePop();
-
-                            func.AddArgument(argument2);
-
-                            NodePush(func);
-
-                            prevOperand = Empty;
-
-                            goto loop;
                         }
+
+                        /* We must have Tokens.LeftParen on stack. If no operand, must be procedure call. */
+                        if (topOperator <= 1)
+                        {
+                            // set error, syntax: too many right parens..
+                            throw ExprException.TooManyRightParentheses();
+                        }
+
+                        Debug.Assert(topOperator > 1, "melformed operator stack.");
+                        topOperator--;
+                        opInfo = ops[topOperator];
+
+                        if (prevOperand == Empty && opInfo.type != Nodes.Call)
+                        {
+                            // set error, syntax: missing operand.
+                            throw ExprException.MissingOperand(opInfo);
+                        }
+
+                        Debug.Assert(
+                            opInfo.priority == Operators.priParen,
+                            "melformed operator stack."
+                        );
+
+                        if (opInfo.type == Nodes.Call)
+                        {
+                            /* add argument to the function call. */
+
+                            if (prevOperand != Empty)
+                            {
+                                // read last function argument
+                                ExpressionNode argument = NodePop();
+
+                                /* Get the procedure name and append argument */
+                                Debug.Assert(
+                                    topNode > 0 && NodePeek().GetType() == typeof(FunctionNode),
+                                    "The function node should be created on '('"
+                                );
+
+                                FunctionNode func = (FunctionNode)NodePop();
+                                func.AddArgument(argument);
+                                func.Check();
+                                NodePush(func);
+                            }
+                        }
+                        else
+                        {
+                            /* Normal parentheses: create tree node */
+                            // Construct & Put the Nodes.Paren node on node stack
+                            node = NodePop();
+                            node = new UnaryNode(_table, Operators.Noop, node);
+                            NodePush(node);
+                        }
+
+                        prevOperand = Expr;
+                        cParens--;
+                        goto loop;
+                    }
+                    case Tokens.ListSeparator:
+                    {
+                        /* Comma encountered: Must be operand; force out subexpression */
+
+                        if (prevOperand == Empty)
+                        {
+                            throw ExprException.MissingOperandBefore(",");
+                        }
+
+                        /* We are be in a procedure call */
+
+                        /* build next argument */
+                        BuildExpression(Operators.priLow);
+
+                        opInfo = ops[topOperator - 1];
+
+                        if (opInfo.type != Nodes.Call)
+                            //
+                            throw ExprException.SyntaxError();
+
+                        ExpressionNode argument2 = NodePop();
+
+                        /* Get the procedure name */
+
+                        FunctionNode func = (FunctionNode)NodePop();
+
+                        func.AddArgument(argument2);
+
+                        NodePush(func);
+
+                        prevOperand = Empty;
+
+                        goto loop;
+                    }
                     case Tokens.BinaryOp:
-                        if (prevOperand == Empty) {
+                        if (prevOperand == Empty)
+                        {
                             /* Check for unary plus/minus */
-                            if (op == Operators.Plus) {
+                            if (op == Operators.Plus)
+                            {
                                 op = Operators.UnaryPlus;
                                 // fall through to UnaryOperator;
                             }
-                            else if (op  == Operators.Minus) {
+                            else if (op == Operators.Minus)
+                            {
                                 /* Unary minus */
                                 op = Operators.Negative;
                                 // fall through to UnaryOperator;
                             }
-                            else {
+                            else
+                            {
                                 // Error missing operand:
                                 throw ExprException.MissingOperandBefore(Operators.ToString(op));
                             }
                         }
-                        else {
+                        else
+                        {
                             prevOperand = Empty;
 
                             /* CNSIDER: If we are going to support BETWEEN Translate AND to special BetweenAnd if it is. */
@@ -472,22 +554,32 @@ namespace System.Data {
                             BuildExpression(Operators.Priority(op));
 
                             // PushOperator descriptor
-                            ops[topOperator++] = new OperatorInfo(Nodes.Binop, op, Operators.Priority(op));
+                            ops[topOperator++] = new OperatorInfo(
+                                Nodes.Binop,
+                                op,
+                                Operators.Priority(op)
+                            );
                             goto loop;
                         }
-                        goto
-                    case Tokens.UnaryOp; // fall through to UnaryOperator;
+                        goto case Tokens.UnaryOp; // fall through to UnaryOperator;
 
                     case Tokens.UnaryOp:
                         /* Must be no operand. Push it. */
-                        ops[topOperator++] = new OperatorInfo(Nodes.Unop, op, Operators.Priority(op));
+                        ops[topOperator++] = new OperatorInfo(
+                            Nodes.Unop,
+                            op,
+                            Operators.Priority(op)
+                        );
                         goto loop;
 
                     case Tokens.ZeroOp:
                         // check the we have operator on the stack
-                        if (prevOperand != Empty) {
+                        if (prevOperand != Empty)
+                        {
                             // set error missing operator
-                            throw ExprException.MissingOperator(new string(text, start, pos - start));
+                            throw ExprException.MissingOperator(
+                                new string(text, start, pos - start)
+                            );
                         }
 
                         // PushOperator descriptor
@@ -499,13 +591,16 @@ namespace System.Data {
                         //if there is a name on the stack append it.
                         ExpressionNode before = NodePeek();
 
-                        if (before != null && before.GetType() == typeof(NameNode)) {
+                        if (before != null && before.GetType() == typeof(NameNode))
+                        {
                             Scan();
 
-                            if (token == Tokens.Name) {
+                            if (token == Tokens.Name)
+                            {
                                 NameNode nameBefore = (NameNode)NodePop();
                                 //Debug.WriteLine("Before name '" + nameBefore.name + "'");
-                                string newName = nameBefore.name + "." + NameNode.ParseName(text, start, pos);
+                                string newName =
+                                    nameBefore.name + "." + NameNode.ParseName(text, start, pos);
                                 //Debug.WriteLine("Create new NameNode " + newName);
                                 NodePush(new NameNode(_table, newName));
                                 goto loop;
@@ -514,7 +609,10 @@ namespace System.Data {
                         // fall through to default
                         goto default;
                     default:
-                        throw ExprException.UnknownToken(new string(text, start, pos - start), start+1);
+                        throw ExprException.UnknownToken(
+                            new string(text, start, pos - start),
+                            start + 1
+                        );
                 }
             }
             goto end_loop;
@@ -531,8 +629,12 @@ namespace System.Data {
         ///          Func(child[(relation_name)].column_name)
         ///     When the function is called we have already parsed the Aggregate name, and open paren
         /// </devdoc>
-        private ExpressionNode ParseAggregateArgument(FunctionId aggregate) {
-            Debug.Assert(token == Tokens.LeftParen, "ParseAggregateArgument(): Invalid argument, token <> '('");
+        private ExpressionNode ParseAggregateArgument(FunctionId aggregate)
+        {
+            Debug.Assert(
+                token == Tokens.LeftParen,
+                "ParseAggregateArgument(): Invalid argument, token <> '('"
+            );
 
             bool child;
             string relname;
@@ -540,8 +642,10 @@ namespace System.Data {
 
             Scan();
 
-            try {
-                if (token != Tokens.Child) {
+            try
+            {
+                if (token != Tokens.Child)
+                {
                     if (token != Tokens.Name)
                         throw ExprException.AggregateArgument();
 
@@ -556,14 +660,16 @@ namespace System.Data {
                 // expecting an '(' or '.'
                 Scan();
 
-                if (token == Tokens.LeftParen) {
+                if (token == Tokens.LeftParen)
+                {
                     //read the relation name
                     ScanToken(Tokens.Name);
                     relname = NameNode.ParseName(text, start, pos);
                     ScanToken(Tokens.RightParen);
                     ScanToken(Tokens.Dot);
                 }
-                else {
+                else
+                {
                     relname = null;
                     CheckToken(Tokens.Dot);
                 }
@@ -572,9 +678,11 @@ namespace System.Data {
                 colname = NameNode.ParseName(text, start, pos);
                 ScanToken(Tokens.RightParen);
             }
-            catch (Exception e){
-                // 
-                if (!Common.ADP.IsCatchableExceptionType(e)) {
+            catch (Exception e)
+            {
+                //
+                if (!Common.ADP.IsCatchableExceptionType(e))
+                {
                     throw;
                 }
                 throw ExprException.AggregateArgument();
@@ -585,8 +693,8 @@ namespace System.Data {
         /// <devdoc>
         ///     NodePop - Pop an operand node from the node stack.
         /// </devdoc>
-        private ExpressionNode NodePop() {
-
+        private ExpressionNode NodePop()
+        {
             Debug.Assert(topNode > 0, "NodePop(): Corrupted node stack");
             ExpressionNode node = NodeStack[--topNode];
             Debug.Assert(null != node, "null NodePop");
@@ -596,20 +704,23 @@ namespace System.Data {
         /// <devdoc>
         ///     NodePeek - Peek at the top node.
         /// </devdoc>
-        private ExpressionNode NodePeek() {
+        private ExpressionNode NodePeek()
+        {
             if (topNode <= 0)
                 return null;
 
-            return NodeStack[topNode-1];
+            return NodeStack[topNode - 1];
         }
 
         /// <devdoc>
         ///     Push an operand node onto the node stack
         /// </devdoc>
-        private void NodePush(ExpressionNode node) {
+        private void NodePush(ExpressionNode node)
+        {
             Debug.Assert(null != node, "null NodePush");
 
-            if (topNode >= MaxPredicates-2) {
+            if (topNode >= MaxPredicates - 2)
+            {
                 throw ExprException.ExpressionTooComplex();
             }
             NodeStack[topNode++] = node;
@@ -620,14 +731,19 @@ namespace System.Data {
         ///     operand of current operator. May cause errors - always do ErrorCheck() upin return.
         /// </devdoc>
 
-        private void BuildExpression(int pri) {
+        private void BuildExpression(int pri)
+        {
             ExpressionNode expr = null;
 
-            Debug.Assert(pri > Operators.priStart && pri <= Operators.priMax, "Invalid priority value");
+            Debug.Assert(
+                pri > Operators.priStart && pri <= Operators.priMax,
+                "Invalid priority value"
+            );
 
             /* For all operators of higher or same precedence (we are always
             left-associative) */
-            while (true) {
+            while (true)
+            {
                 Debug.Assert(topOperator > 0, "Empty operator stack!!");
                 OperatorInfo opInfo = ops[topOperator - 1];
 
@@ -639,67 +755,74 @@ namespace System.Data {
 
                 ExpressionNode nodeLeft;
                 ExpressionNode nodeRight;
-                switch (opInfo.type) {
-                    case Nodes.Binop: {
-                            // get right, left operands. Bind them.
+                switch (opInfo.type)
+                {
+                    case Nodes.Binop:
+                    {
+                        // get right, left operands. Bind them.
 
-                            nodeRight = NodePop();
-                            nodeLeft = NodePop();
+                        nodeRight = NodePop();
+                        nodeLeft = NodePop();
 
-                            /* This is the place to do type and other checks */
+                        /* This is the place to do type and other checks */
 
-                            switch (opInfo.op) {
-                                case Operators.Between:
-                                case Operators.BetweenAnd:
-                                case Operators.BitwiseAnd:
-                                case Operators.BitwiseOr:
-                                case Operators.BitwiseXor:
-                                case Operators.BitwiseNot:
-                                    throw ExprException.UnsupportedOperator(opInfo.op);
+                        switch (opInfo.op)
+                        {
+                            case Operators.Between:
+                            case Operators.BetweenAnd:
+                            case Operators.BitwiseAnd:
+                            case Operators.BitwiseOr:
+                            case Operators.BitwiseXor:
+                            case Operators.BitwiseNot:
+                                throw ExprException.UnsupportedOperator(opInfo.op);
 
-                                case Operators.Is: // 
-                                case Operators.Or:
-                                case Operators.And:
-                                case Operators.EqualTo:
-                                case Operators.NotEqual:
-                                case Operators.Like:
-                                case Operators.LessThen:
-                                case Operators.LessOrEqual:
-                                case Operators.GreaterThen:
-                                case Operators.GreaterOrEqual:
-                                case Operators.In:
-                                    break;
+                            case Operators.Is: //
+                            case Operators.Or:
+                            case Operators.And:
+                            case Operators.EqualTo:
+                            case Operators.NotEqual:
+                            case Operators.Like:
+                            case Operators.LessThen:
+                            case Operators.LessOrEqual:
+                            case Operators.GreaterThen:
+                            case Operators.GreaterOrEqual:
+                            case Operators.In:
+                                break;
 
-                                default:
-                                    Debug.Assert(opInfo.op == Operators.Plus ||
-                                                 opInfo.op == Operators.Minus ||
-                                                 opInfo.op == Operators.Multiply ||
-                                                 opInfo.op == Operators.Divide ||
-                                                 opInfo.op == Operators.Modulo,
-                                                 "Invalud Binary operation");
+                            default:
+                                Debug.Assert(
+                                    opInfo.op == Operators.Plus
+                                        || opInfo.op == Operators.Minus
+                                        || opInfo.op == Operators.Multiply
+                                        || opInfo.op == Operators.Divide
+                                        || opInfo.op == Operators.Modulo,
+                                    "Invalud Binary operation"
+                                );
 
-                                    break;
-                            }
-                            Debug.Assert(nodeLeft != null, "Invalid left operand");
-                            Debug.Assert(nodeRight != null, "Invalid right operand");
-
-                            if (opInfo.op == Operators.Like) {
-                                expr = new LikeNode(_table, opInfo.op, nodeLeft, nodeRight);
-                            }
-                            else {
-                                expr = new BinaryNode(_table, opInfo.op, nodeLeft, nodeRight);
-                            }
-
-                            break;
+                                break;
                         }
+                        Debug.Assert(nodeLeft != null, "Invalid left operand");
+                        Debug.Assert(nodeRight != null, "Invalid right operand");
+
+                        if (opInfo.op == Operators.Like)
+                        {
+                            expr = new LikeNode(_table, opInfo.op, nodeLeft, nodeRight);
+                        }
+                        else
+                        {
+                            expr = new BinaryNode(_table, opInfo.op, nodeLeft, nodeRight);
+                        }
+
+                        break;
+                    }
                     case Nodes.Unop:
                         /* Unary operator: Pop and bind right op. */
                         nodeLeft = null;
                         nodeRight = NodePop();
 
                         /* Check for special cases */
-                        switch (opInfo.op) {
-
+                        switch (opInfo.op)
+                        {
                             case Operators.Not:
                                 break;
 
@@ -734,25 +857,29 @@ namespace System.Data {
             ;
         }
 
-
-        internal void CheckToken(Tokens token) {
-            if (this.token != token) {
+        internal void CheckToken(Tokens token)
+        {
+            if (this.token != token)
+            {
                 throw ExprException.UnknownToken(token, this.token, pos);
             }
         }
 
-        internal Tokens Scan() {
+        internal Tokens Scan()
+        {
             char ch;
             char[] text = this.text;
 
             token = Tokens.None;
 
-            while (true) {
+            while (true)
+            {
                 loop:
                 start = pos;
                 op = Operators.Noop;
                 ch = text[pos++];
-                switch (ch) {
+                switch (ch)
+                {
                     case (char)0:
                         token = Tokens.EOS;
                         goto end_loop;
@@ -790,7 +917,8 @@ namespace System.Data {
                     case '>':
                         token = Tokens.BinaryOp;
                         ScanWhite();
-                        if (text[pos] == '=') {
+                        if (text[pos] == '=')
+                        {
                             pos++;
                             op = Operators.GreaterOrEqual;
                         }
@@ -800,11 +928,13 @@ namespace System.Data {
                     case '<':
                         token = Tokens.BinaryOp;
                         ScanWhite();
-                        if (text[pos] == '=') {
+                        if (text[pos] == '=')
+                        {
                             pos++;
                             op = Operators.LessOrEqual;
                         }
-                        else if (text[pos] == '>') {
+                        else if (text[pos] == '>')
+                        {
                             pos++;
                             op = Operators.NotEqual;
                         }
@@ -837,7 +967,7 @@ namespace System.Data {
                         op = Operators.Modulo;
                         goto end_loop;
 
-                        /* Beginning of bitwise operators */
+                    /* Beginning of bitwise operators */
                     case '&':
                         token = Tokens.BinaryOp;
                         op = Operators.BitwiseAnd;
@@ -856,9 +986,9 @@ namespace System.Data {
                         op = Operators.BitwiseNot;
                         goto end_loop;
 
-                        /* we have bracketed identifier */
+                    /* we have bracketed identifier */
                     case '[':
-                        // 
+                        //
                         ScanName(']', Escape, "]\\");
                         CheckToken(Tokens.Name);
                         goto end_loop;
@@ -871,45 +1001,54 @@ namespace System.Data {
                     default:
                         /* Check for list separator */
 
-                        if (ch == ListSeparator) {
+                        if (ch == ListSeparator)
+                        {
                             token = Tokens.ListSeparator;
                             goto end_loop;
                         }
 
-                        if (ch == '.') {
-                            if (prevOperand == Empty) {
+                        if (ch == '.')
+                        {
+                            if (prevOperand == Empty)
+                            {
                                 ScanNumeric();
                             }
-                            else {
+                            else
+                            {
                                 token = Tokens.Dot;
                             }
                             goto end_loop;
                         }
 
                         /* Check for binary constant */
-                        if (ch == '0' && (text[pos] == 'x' || text[pos] == 'X')) {
+                        if (ch == '0' && (text[pos] == 'x' || text[pos] == 'X'))
+                        {
                             ScanBinaryConstant();
                             token = Tokens.BinaryConst;
                             goto end_loop;
                         }
 
                         /* Check for number: digit is always good; . or - only if osNil. */
-                        if (IsDigit(ch)) {
+                        if (IsDigit(ch))
+                        {
                             ScanNumeric();
                             goto end_loop;
                         }
 
                         /* Check for reserved word */
                         ScanReserved();
-                        if (token != Tokens.None) {
+                        if (token != Tokens.None)
+                        {
                             goto end_loop;
                         }
 
                         /* Alpha means identifier */
 
-                        if (IsAlphaNumeric(ch)) {
+                        if (IsAlphaNumeric(ch))
+                        {
                             ScanName();
-                            if (token != Tokens.None) {
+                            if (token != Tokens.None)
+                            {
                                 CheckToken(Tokens.Name);
                                 goto end_loop;
                             }
@@ -917,7 +1056,10 @@ namespace System.Data {
 
                         /* Don't understand that banter at all. */
                         token = Tokens.Unknown;
-                        throw ExprException.UnknownToken(new string(text, start, pos - start), start+1);
+                        throw ExprException.UnknownToken(
+                            new string(text, start, pos - start),
+                            start + 1
+                        );
                 }
             }
             end_loop:
@@ -929,35 +1071,45 @@ namespace System.Data {
         ///     In format: [digit|.]*{[e|E]{[+|-]}{digit*}}
         ///     Further checking is done by constant parser.
         /// </devdoc>
-        private void ScanNumeric() {
+        private void ScanNumeric()
+        {
             char[] text = this.text;
             bool fDot = false;
             bool fSientific = false;
 
             Debug.Assert(pos != 0, "We have at least one digit in the buffer, ScanNumeric()");
-            Debug.Assert(IsDigit(text[pos-1]), "We have at least one digit in the buffer, ScanNumeric(), not a digit");
+            Debug.Assert(
+                IsDigit(text[pos - 1]),
+                "We have at least one digit in the buffer, ScanNumeric(), not a digit"
+            );
 
-            while (IsDigit(text[pos])) {
+            while (IsDigit(text[pos]))
+            {
                 pos++;
             }
 
-            if (text[pos] == DecimalSeparator) {
+            if (text[pos] == DecimalSeparator)
+            {
                 fDot = true;
-                pos ++;
-            }
-
-            while (IsDigit(text[pos])) {
                 pos++;
             }
 
-            if (text[pos] == ExponentL || text[pos] == ExponentU) {
+            while (IsDigit(text[pos]))
+            {
+                pos++;
+            }
+
+            if (text[pos] == ExponentL || text[pos] == ExponentU)
+            {
                 fSientific = true;
                 pos++;
 
-                if (text[pos] == '-' || text[pos] == '+') {
+                if (text[pos] == '-' || text[pos] == '+')
+                {
                     pos++;
                 }
-                while (IsDigit(text[pos])) {
+                while (IsDigit(text[pos]))
+                {
                     pos++;
                 }
             }
@@ -968,10 +1120,12 @@ namespace System.Data {
             else
                 token = Tokens.Numeric;
         }
+
         /// <devdoc>
         ///     Just a string of alphanumeric characters.
         /// </devdoc>
-        private void ScanName() {
+        private void ScanName()
+        {
             char[] text = this.text;
 
             while (IsAlphaNumeric(text[pos]))
@@ -984,22 +1138,29 @@ namespace System.Data {
         ///      recognize bracketed identifiers.
         ///      Special case: we are using '\' character to escape '[' and ']' only, so '\' by itself  is not an escape
         /// </devdoc>
-        private void ScanName(char chEnd, char esc, string charsToEscape) {
+        private void ScanName(char chEnd, char esc, string charsToEscape)
+        {
             char[] text = this.text;
 
             Debug.Assert(chEnd != '\0', "Invalid bracket value");
             Debug.Assert(esc != '\0', "Invalid escape value");
-            do {
-                if (text[pos] == esc) {
-                    if (pos+1 < text.Length && charsToEscape.IndexOf(text[pos+1]) >= 0) {
+            do
+            {
+                if (text[pos] == esc)
+                {
+                    if (pos + 1 < text.Length && charsToEscape.IndexOf(text[pos + 1]) >= 0)
+                    {
                         pos++;
                     }
                 }
                 pos++;
-            }while (pos < text.Length && text[pos] != chEnd);
+            } while (pos < text.Length && text[pos] != chEnd);
 
-            if (pos >= text.Length) {
-                throw ExprException.InvalidNameBracketing(new string(text, start, (pos - 1) - start));
+            if (pos >= text.Length)
+            {
+                throw ExprException.InvalidNameBracketing(
+                    new string(text, start, (pos - 1) - start)
+                );
             }
 
             Debug.Assert(text[pos] == chEnd, "Invalid bracket value");
@@ -1012,32 +1173,39 @@ namespace System.Data {
         /// <devdoc>
         ///     Just read the string between '#' signs, and parse it later
         /// </devdoc>
-        private void ScanDate() {
+        private void ScanDate()
+        {
             char[] text = this.text;
 
-            do pos++; while (pos < text.Length && text[pos] != '#');
+            do pos++;
+            while (pos < text.Length && text[pos] != '#');
 
-            if (pos >= text.Length || text[pos]!= '#') {
+            if (pos >= text.Length || text[pos] != '#')
+            {
                 // Bad date constant
                 if (pos >= text.Length)
                     throw ExprException.InvalidDate(new string(text, start, (pos - 1) - start));
                 else
                     throw ExprException.InvalidDate(new string(text, start, pos - start));
             }
-            else {
+            else
+            {
                 token = Tokens.Date;
             }
             pos++;
         }
 
-        private void ScanBinaryConstant() {
+        private void ScanBinaryConstant()
+        {
             char[] text = this.text;
         }
 
-        private void ScanReserved() {
+        private void ScanReserved()
+        {
             char[] text = this.text;
 
-            if (IsAlpha(text[pos])) {
+            if (IsAlpha(text[pos]))
+            {
                 this.ScanName();
 
                 Debug.Assert(token == Tokens.Name, "Exprecing an identifier.");
@@ -1046,26 +1214,36 @@ namespace System.Data {
                 string name = new string(text, start, pos - start);
                 Debug.Assert(name != null, "Make sure the arguments for Compare method are OK");
 
-
                 CompareInfo comparer = CultureInfo.InvariantCulture.CompareInfo;
                 // binary search reserved words
                 int lo = 0;
                 int hi = reservedwords.Length - 1;
-                do {
+                do
+                {
                     int i = (lo + hi) / 2;
-                    Debug.Assert(reservedwords[i].word != null, "Make sure the arguments for Compare method are OK");
-                    int c = comparer.Compare(reservedwords[i].word, name, CompareOptions.IgnoreCase);
+                    Debug.Assert(
+                        reservedwords[i].word != null,
+                        "Make sure the arguments for Compare method are OK"
+                    );
+                    int c = comparer.Compare(
+                        reservedwords[i].word,
+                        name,
+                        CompareOptions.IgnoreCase
+                    );
 
-                    if (c == 0) {
+                    if (c == 0)
+                    {
                         // we found the reserved word..
                         token = reservedwords[i].token;
                         op = reservedwords[i].op;
                         return;
                     }
-                    if (c < 0) {
+                    if (c < 0)
+                    {
                         lo = i + 1;
                     }
-                    else {
+                    else
+                    {
                         hi = i - 1;
                     }
                 } while (lo <= hi);
@@ -1074,20 +1252,24 @@ namespace System.Data {
             }
         }
 
-        private void ScanString(char escape) {
+        private void ScanString(char escape)
+        {
             char[] text = this.text;
 
-            while (pos < text.Length) {
+            while (pos < text.Length)
+            {
                 char ch = text[pos++];
 
-                if (ch == escape && pos < text.Length && text[pos] == escape) {
+                if (ch == escape && pos < text.Length && text[pos] == escape)
+                {
                     pos++;
                 }
                 else if (ch == escape)
                     break;
             }
 
-            if (pos >= text.Length) {
+            if (pos >= text.Length)
+            {
                 throw ExprException.InvalidString(new string(text, start, (pos - 1) - start));
             }
 
@@ -1095,15 +1277,18 @@ namespace System.Data {
         }
 
         // scan the next token, and error if it doesn't match the requested token
-        internal void ScanToken(Tokens token) {
+        internal void ScanToken(Tokens token)
+        {
             Scan();
             CheckToken(token);
         }
 
-        private void ScanWhite() {
+        private void ScanWhite()
+        {
             char[] text = this.text;
 
-            while (pos < text.Length && IsWhiteSpace(text[pos])) {
+            while (pos < text.Length && IsWhiteSpace(text[pos]))
+            {
                 pos++;
             }
         }
@@ -1118,16 +1303,19 @@ namespace System.Data {
         ///     Consider using CharacterInfo().IsWhiteSpace(ch) (System.Globalization)
         /// </devdoc>
 
-        private bool IsWhiteSpace(char ch) {
-            return ch <=32 && ch != '\0';
+        private bool IsWhiteSpace(char ch)
+        {
+            return ch <= 32 && ch != '\0';
         }
 
         /// <devdoc>
         ///     is the character an alphanumeric?
         /// </devdoc>
-        private bool IsAlphaNumeric(char ch) {
+        private bool IsAlphaNumeric(char ch)
+        {
             //single comparison
-            switch (ch) {
+            switch (ch)
+            {
                 case 'a':
                 case 'b':
                 case 'c':
@@ -1201,9 +1389,11 @@ namespace System.Data {
             }
         }
 
-        private bool IsDigit(char ch) {
+        private bool IsDigit(char ch)
+        {
             //single comparison
-            switch (ch) {
+            switch (ch)
+            {
                 case '0':
                 case '1':
                 case '2':
@@ -1223,9 +1413,11 @@ namespace System.Data {
         /// <devdoc>
         ///     is the character an alpha?
         /// </devdoc>
-        private bool IsAlpha(char ch) {
+        private bool IsAlpha(char ch)
+        {
             //single comparison
-            switch (ch) {
+            switch (ch)
+            {
                 case 'a':
                 case 'b':
                 case 'c':
@@ -1286,41 +1478,43 @@ namespace System.Data {
         }
     }
 
-    internal enum Tokens {
-        None            = 0,
-        Name            = 1, /* Identifier */
-        Numeric         = 2,
-        Decimal         = 3,
-        Float           = 4,
-        BinaryConst     = 5, /* Binary Constant e.g. 0x12ef */
-        StringConst     = 6,
-        Date            = 7,
-        ListSeparator   = 8, /* List Tokens.ListSeparator/Comma */
-        LeftParen       = 9, /* '('; */
-        RightParen      = 10, /* ')'; */
-        ZeroOp          = 11, /* 0-array operator like "NULL" */
-        UnaryOp         = 12,
-        BinaryOp        = 13,
-        Child           = 14,
-        Parent          = 15,
-        Dot             = 16,
-        Unknown         = 17, /* do not understend the token */
-        EOS             = 18, /* End of string */
+    internal enum Tokens
+    {
+        None = 0,
+        Name = 1, /* Identifier */
+        Numeric = 2,
+        Decimal = 3,
+        Float = 4,
+        BinaryConst = 5, /* Binary Constant e.g. 0x12ef */
+        StringConst = 6,
+        Date = 7,
+        ListSeparator = 8, /* List Tokens.ListSeparator/Comma */
+        LeftParen = 9, /* '('; */
+        RightParen = 10, /* ')'; */
+        ZeroOp = 11, /* 0-array operator like "NULL" */
+        UnaryOp = 12,
+        BinaryOp = 13,
+        Child = 14,
+        Parent = 15,
+        Dot = 16,
+        Unknown = 17, /* do not understend the token */
+        EOS = 18, /* End of string */
     }
 
     /// <devdoc>
     ///     Operator stack element
     /// </devdoc>
-    internal sealed class OperatorInfo {
+    internal sealed class OperatorInfo
+    {
         internal Nodes type = (Nodes)0;
         internal int op = 0;
         internal int priority = 0;
 
-        internal OperatorInfo(Nodes type, int op, int pri) {
+        internal OperatorInfo(Nodes type, int op, int pri)
+        {
             this.type = type;
             this.op = op;
             this.priority = pri;
         }
     }
-
 }

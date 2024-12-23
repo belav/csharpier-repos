@@ -1,8 +1,13 @@
-<NamedItem x:Name="__ReferenceID0" ItemName="foo" xmlns="clr-namespace:MonoTests.System.Xaml;assembly=System.Xaml_test_net_4_0" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<NamedItem
+  {http://schemas.microsoft.com/winfx/2006/xaml}Name="__ReferenceID0"
+  ItemName="foo"
+  xmlns="clr-namespace:MonoTests.System.Xaml;assembly=System.Xaml_test_net_4_0"
+  {http://www.w3.org/2000/xmlns/}x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
   <NamedItem.References>
     <NamedItem ItemName="bar">
       <NamedItem.References>
-        <x:Reference>__ReferenceID0</x:Reference>
+        <Reference>__ReferenceID0</Reference>
       </NamedItem.References>
     </NamedItem>
     <NamedItem ItemName="baz" />

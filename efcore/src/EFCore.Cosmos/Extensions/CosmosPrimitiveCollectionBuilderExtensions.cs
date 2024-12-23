@@ -29,7 +29,8 @@ public static class CosmosPrimitiveCollectionBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PrimitiveCollectionBuilder ToJsonProperty(
         this PrimitiveCollectionBuilder primitiveCollectionBuilder,
-        string name)
+        string name
+    )
     {
         Check.NotNull(name, nameof(name));
 
@@ -51,6 +52,8 @@ public static class CosmosPrimitiveCollectionBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PrimitiveCollectionBuilder<TProperty> ToJsonProperty<TProperty>(
         this PrimitiveCollectionBuilder<TProperty> primitiveCollectionBuilder,
-        string name)
-        => (PrimitiveCollectionBuilder<TProperty>)ToJsonProperty((PrimitiveCollectionBuilder)primitiveCollectionBuilder, name);
+        string name
+    ) =>
+        (PrimitiveCollectionBuilder<TProperty>)
+            ToJsonProperty((PrimitiveCollectionBuilder)primitiveCollectionBuilder, name);
 }

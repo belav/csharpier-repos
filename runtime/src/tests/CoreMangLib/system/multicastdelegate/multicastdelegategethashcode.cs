@@ -24,21 +24,31 @@ public class MulticastDelegateGetHashCode
     public bool PosTest1()
     {
         bool retVal = true;
-        
-        TestLibrary.TestFramework.BeginScenario("PosTest1: Hash code of two delegate with the same P/Invoke function from same type are equal");
+
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Hash code of two delegate with the same P/Invoke function from same type are equal"
+        );
 
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.VoidParameterValueDelegate =
-                new VoidParameterValueDelegate(DelegateDefinitions.GetCurrentProcessId);
+            dd.VoidParameterValueDelegate = new VoidParameterValueDelegate(
+                DelegateDefinitions.GetCurrentProcessId
+            );
             DelegateDefinitions dd1 = new DelegateDefinitions();
-            dd1.VoidParameterValueDelegate =
-                new VoidParameterValueDelegate(DelegateDefinitions.GetCurrentProcessId);
+            dd1.VoidParameterValueDelegate = new VoidParameterValueDelegate(
+                DelegateDefinitions.GetCurrentProcessId
+            );
 
-            if (dd.VoidParameterValueDelegate.GetHashCode() != dd1.VoidParameterValueDelegate.GetHashCode())
+            if (
+                dd.VoidParameterValueDelegate.GetHashCode()
+                != dd1.VoidParameterValueDelegate.GetHashCode()
+            )
             {
-                TestLibrary.TestFramework.LogError("001", "Hash code of two delegate with the same P/Invoke function from same type are not equal");
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "Hash code of two delegate with the same P/Invoke function from same type are not equal"
+                );
                 retVal = false;
             }
         }
@@ -56,21 +66,31 @@ public class MulticastDelegateGetHashCode
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: Hash code of two delegate with the same instance function from same type are equal");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Hash code of two delegate with the same instance function from same type are equal"
+        );
 
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(dd.TestValueParameterVoidCallback);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                dd.TestValueParameterVoidCallback
+            );
 
             DelegateDefinitions dd1 = new DelegateDefinitions();
-            dd1.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(dd.TestValueParameterVoidCallback);
+            dd1.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                dd.TestValueParameterVoidCallback
+            );
 
-            if (dd.ValueParameterVoidDelegate.GetHashCode() != dd1.ValueParameterVoidDelegate.GetHashCode())
+            if (
+                dd.ValueParameterVoidDelegate.GetHashCode()
+                != dd1.ValueParameterVoidDelegate.GetHashCode()
+            )
             {
-                TestLibrary.TestFramework.LogError("003", "Hash code of two delegate with the same instance function from same type are not equal");
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "Hash code of two delegate with the same instance function from same type are not equal"
+                );
                 retVal = false;
             }
         }

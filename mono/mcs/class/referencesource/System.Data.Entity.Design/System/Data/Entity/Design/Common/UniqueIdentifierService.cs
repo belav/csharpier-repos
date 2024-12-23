@@ -8,31 +8,39 @@
 //---------------------------------------------------------------------
 
 
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+
 namespace System.Data.Entity.Design.Common
 {
     /// <summary>
     /// Service making names within a scope unique. Initialize a new instance
     /// for every scope.
-    /// 
-    /// 
+    ///
+    ///
 
 
     internal sealed class UniqueIdentifierService
     {
         internal UniqueIdentifierService(bool caseSensitive)
         {
-            _knownIdentifiers = new Dictionary<string, bool>(caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase);
+            _knownIdentifiers = new Dictionary<string, bool>(
+                caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase
+            );
             _identifierToAdjustedIdentifier = new Dictionary<object, string>();
             _transform = s => s;
         }
 
         internal UniqueIdentifierService(bool caseSensitive, Func<string, string> transform)
         {
-            Debug.Assert(transform != null, "use the other constructor if you don't want any transform");
-            _knownIdentifiers = new Dictionary<string, bool>(caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                transform != null,
+                "use the other constructor if you don't want any transform"
+            );
+            _knownIdentifiers = new Dictionary<string, bool>(
+                caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase
+            );
             _identifierToAdjustedIdentifier = new Dictionary<object, string>();
             _transform = transform;
         }
@@ -49,10 +57,12 @@ namespace System.Data.Entity.Design.Common
         /// <param name="identifier"></param>
         internal void RegisterUsedIdentifier(string identifier)
         {
-            Debug.Assert(!_knownIdentifiers.ContainsKey(identifier), "don't register identifiers that already exist");
+            Debug.Assert(
+                !_knownIdentifiers.ContainsKey(identifier),
+                "don't register identifiers that already exist"
+            );
             _knownIdentifiers.Add(identifier, true);
         }
-
 
         /// <summary>
         /// Given an identifier, makes it unique within the scope by adding
@@ -72,23 +82,30 @@ namespace System.Data.Entity.Design.Common
             while (_knownIdentifiers.ContainsKey(adjustedIdentifier))
             {
                 ++numberOfConflicts;
-                adjustedIdentifier = _transform(identifier) + numberOfConflicts.ToString(CultureInfo.InvariantCulture);
+                adjustedIdentifier =
+                    _transform(identifier)
+                    + numberOfConflicts.ToString(CultureInfo.InvariantCulture);
             }
 
             // remember the identifier in this scope
-            Debug.Assert(!_knownIdentifiers.ContainsKey(adjustedIdentifier), "we just made it unique");
+            Debug.Assert(
+                !_knownIdentifiers.ContainsKey(adjustedIdentifier),
+                "we just made it unique"
+            );
             _knownIdentifiers.Add(adjustedIdentifier, true);
 
             if (null != value)
             {
-                Debug.Assert(!_identifierToAdjustedIdentifier.ContainsKey(value), "should never register one value twice");
+                Debug.Assert(
+                    !_identifierToAdjustedIdentifier.ContainsKey(value),
+                    "should never register one value twice"
+                );
                 _identifierToAdjustedIdentifier.Add(value, adjustedIdentifier);
             }
 
             return adjustedIdentifier;
         }
 
-        
         /// <summary>
         /// Simple overload when you don't need to track back to an object
         /// </summary>

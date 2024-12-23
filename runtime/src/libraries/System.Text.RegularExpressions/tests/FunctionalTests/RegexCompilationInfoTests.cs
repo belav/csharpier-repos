@@ -10,22 +10,59 @@ namespace System.Text.RegularExpressions.Tests
     {
         private RegexCompilationInfo Instance
         {
-            get => new RegexCompilationInfo("pattern", RegexOptions.None, "name", "fullnamespace", true, TimeSpan.FromSeconds(60));
+            get =>
+                new RegexCompilationInfo(
+                    "pattern",
+                    RegexOptions.None,
+                    "name",
+                    "fullnamespace",
+                    true,
+                    TimeSpan.FromSeconds(60)
+                );
         }
 
         public static IEnumerable<object[]> Ctor_MemberData()
         {
-            yield return new object[] { string.Empty, RegexOptions.None, "name", string.Empty, false, TimeSpan.FromSeconds(60) };
-            yield return new object[] { "pattern", RegexOptions.Compiled, "name", "fullnamespace", true, TimeSpan.FromSeconds(60) };
+            yield return new object[]
+            {
+                string.Empty,
+                RegexOptions.None,
+                "name",
+                string.Empty,
+                false,
+                TimeSpan.FromSeconds(60),
+            };
+            yield return new object[]
+            {
+                "pattern",
+                RegexOptions.Compiled,
+                "name",
+                "fullnamespace",
+                true,
+                TimeSpan.FromSeconds(60),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_MemberData))]
-        public void Ctor_ValidArguments_CheckProperties(string pattern, RegexOptions options, string name, string fullnamespace, bool ispublic, TimeSpan matchTimeout)
+        public void Ctor_ValidArguments_CheckProperties(
+            string pattern,
+            RegexOptions options,
+            string name,
+            string fullnamespace,
+            bool ispublic,
+            TimeSpan matchTimeout
+        )
         {
             RegexCompilationInfo regexCompilationInfo;
 
-            regexCompilationInfo = new RegexCompilationInfo(pattern, options, name, fullnamespace, ispublic);
+            regexCompilationInfo = new RegexCompilationInfo(
+                pattern,
+                options,
+                name,
+                fullnamespace,
+                ispublic
+            );
             Assert.Equal(pattern, regexCompilationInfo.Pattern);
             Assert.Equal(options, regexCompilationInfo.Options);
             Assert.Equal(name, regexCompilationInfo.Name);
@@ -33,7 +70,14 @@ namespace System.Text.RegularExpressions.Tests
             Assert.Equal(ispublic, regexCompilationInfo.IsPublic);
             Assert.Equal(Regex.InfiniteMatchTimeout, regexCompilationInfo.MatchTimeout);
 
-            regexCompilationInfo = new RegexCompilationInfo(pattern, options, name, fullnamespace, ispublic, matchTimeout);
+            regexCompilationInfo = new RegexCompilationInfo(
+                pattern,
+                options,
+                name,
+                fullnamespace,
+                ispublic,
+                matchTimeout
+            );
             Assert.Equal(pattern, regexCompilationInfo.Pattern);
             Assert.Equal(options, regexCompilationInfo.Options);
             Assert.Equal(name, regexCompilationInfo.Name);
@@ -70,8 +114,10 @@ namespace System.Text.RegularExpressions.Tests
         public void MatchTimeout_GetSet_Throws(TimeSpan matchTimeout)
         {
             RegexCompilationInfo regexCompilationInfo = Instance;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () =>
-                regexCompilationInfo.MatchTimeout = matchTimeout);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => regexCompilationInfo.MatchTimeout = matchTimeout
+            );
         }
 
         [Theory]
@@ -87,8 +133,16 @@ namespace System.Text.RegularExpressions.Tests
         public void Name_GetSet()
         {
             RegexCompilationInfo regexCompilationInfo = Instance;
-            AssertExtensions.Throws<ArgumentNullException>("Name", "value", () => regexCompilationInfo.Name = null);
-            AssertExtensions.Throws<ArgumentException>("Name", "value", () => regexCompilationInfo.Name = string.Empty);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "Name",
+                "value",
+                () => regexCompilationInfo.Name = null
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "Name",
+                "value",
+                () => regexCompilationInfo.Name = string.Empty
+            );
             regexCompilationInfo.Name = "Name";
             Assert.Equal("Name", regexCompilationInfo.Name);
         }
@@ -97,7 +151,11 @@ namespace System.Text.RegularExpressions.Tests
         public void Namespace_GetSet()
         {
             RegexCompilationInfo regexCompilationInfo = Instance;
-            AssertExtensions.Throws<ArgumentNullException>("Namespace", "value", () => regexCompilationInfo.Namespace = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "Namespace",
+                "value",
+                () => regexCompilationInfo.Namespace = null
+            );
             regexCompilationInfo.Namespace = string.Empty;
             Assert.Equal(string.Empty, regexCompilationInfo.Namespace);
             regexCompilationInfo.Namespace = "Namespace";
@@ -111,14 +169,21 @@ namespace System.Text.RegularExpressions.Tests
             regexCompilationInfo.Options = RegexOptions.None;
             Assert.Equal(RegexOptions.None, regexCompilationInfo.Options);
             regexCompilationInfo.Options = RegexOptions.Compiled | RegexOptions.CultureInvariant;
-            Assert.Equal(RegexOptions.Compiled | RegexOptions.CultureInvariant, regexCompilationInfo.Options);
+            Assert.Equal(
+                RegexOptions.Compiled | RegexOptions.CultureInvariant,
+                regexCompilationInfo.Options
+            );
         }
 
         [Fact]
         public void Pattern_GetSet()
         {
             RegexCompilationInfo regexCompilationInfo = Instance;
-            AssertExtensions.Throws<ArgumentNullException>("Pattern", "value", () => regexCompilationInfo.Pattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "Pattern",
+                "value",
+                () => regexCompilationInfo.Pattern = null
+            );
             regexCompilationInfo.Pattern = string.Empty;
             Assert.Equal(string.Empty, regexCompilationInfo.Pattern);
             regexCompilationInfo.Pattern = "Pattern";

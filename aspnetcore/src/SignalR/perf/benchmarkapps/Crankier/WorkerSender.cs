@@ -21,22 +21,26 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         public async Task PingAsync(int value)
         {
-            await Send("ping", JToken.FromObject(
-                new
-                {
-                    Value = value
-                }));
+            await Send("ping", JToken.FromObject(new { Value = value }));
         }
 
-        public async Task ConnectAsync(string targetAddress, HttpTransportType transportType, int numberOfConnections)
+        public async Task ConnectAsync(
+            string targetAddress,
+            HttpTransportType transportType,
+            int numberOfConnections
+        )
         {
-            await Send("connect", JToken.FromObject(
-                new
-                {
-                    TargetAddress = targetAddress,
-                    TransportType = transportType,
-                    NumberOfConnections = numberOfConnections
-                }));
+            await Send(
+                "connect",
+                JToken.FromObject(
+                    new
+                    {
+                        TargetAddress = targetAddress,
+                        TransportType = transportType,
+                        NumberOfConnections = numberOfConnections,
+                    }
+                )
+            );
         }
 
         public async Task StartTestAsync(TimeSpan sendInterval, int sendBytes)
@@ -44,7 +48,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             var parameters = new
             {
                 SendInterval = sendInterval.TotalMilliseconds,
-                SendBytes = sendBytes
+                SendBytes = sendBytes,
             };
 
             await Send("starttest", JToken.FromObject(parameters));
@@ -58,11 +62,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
         private async Task Send(string method, JToken parameters)
         {
             await _outputStreamWriter.WriteLineAsync(
-                JsonConvert.SerializeObject(new Message()
-                {
-                    Command = method,
-                    Value = parameters
-                }));
+                JsonConvert.SerializeObject(new Message() { Command = method, Value = parameters })
+            );
 
             await _outputStreamWriter.FlushAsync();
         }

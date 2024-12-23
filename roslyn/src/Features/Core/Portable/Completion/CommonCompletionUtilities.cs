@@ -26,14 +26,29 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         private const string NonBreakingSpaceString = "\x00A0";
 
-        public static TextSpan GetWordSpan(SourceText text, int position,
-            Func<char, bool> isWordStartCharacter, Func<char, bool> isWordCharacter)
+        public static TextSpan GetWordSpan(
+            SourceText text,
+            int position,
+            Func<char, bool> isWordStartCharacter,
+            Func<char, bool> isWordCharacter
+        )
         {
-            return GetWordSpan(text, position, isWordStartCharacter, isWordCharacter, alwaysExtendEndSpan: false);
+            return GetWordSpan(
+                text,
+                position,
+                isWordStartCharacter,
+                isWordCharacter,
+                alwaysExtendEndSpan: false
+            );
         }
 
-        public static TextSpan GetWordSpan(SourceText text, int position,
-            Func<char, bool> isWordStartCharacter, Func<char, bool> isWordCharacter, bool alwaysExtendEndSpan = false)
+        public static TextSpan GetWordSpan(
+            SourceText text,
+            int position,
+            Func<char, bool> isWordStartCharacter,
+            Func<char, bool> isWordCharacter,
+            bool alwaysExtendEndSpan = false
+        )
         {
             var start = position;
             while (start > 0 && isWordStartCharacter(text[start - 1]))
@@ -59,7 +74,12 @@ namespace Microsoft.CodeAnalysis.Completion
             return TextSpan.FromBounds(start, end);
         }
 
-        public static bool IsStartingNewWord(SourceText text, int characterPosition, Func<char, bool> isWordStartCharacter, Func<char, bool> isWordCharacter)
+        public static bool IsStartingNewWord(
+            SourceText text,
+            int characterPosition,
+            Func<char, bool> isWordStartCharacter,
+            Func<char, bool> isWordCharacter
+        )
         {
             var ch = text[characterPosition];
             if (!isWordStartCharacter(ch))
@@ -69,14 +89,12 @@ namespace Microsoft.CodeAnalysis.Completion
 
             // Only want to trigger if we're the first character in an identifier.  If there's a
             // character before or after us, then we don't want to trigger.
-            if (characterPosition > 0 &&
-                isWordCharacter(text[characterPosition - 1]))
+            if (characterPosition > 0 && isWordCharacter(text[characterPosition - 1]))
             {
                 return false;
             }
 
-            if (characterPosition < text.Length - 1 &&
-                isWordCharacter(text[characterPosition + 1]))
+            if (characterPosition < text.Length - 1 && isWordCharacter(text[characterPosition + 1]))
             {
                 return false;
             }
@@ -89,33 +107,96 @@ namespace Microsoft.CodeAnalysis.Completion
             SemanticModel semanticModel,
             int position,
             ISymbol symbol,
-            SymbolDescriptionOptions options)
+            SymbolDescriptionOptions options
+        )
         {
-            return CreateDescriptionFactory(workspaceServices, semanticModel, position, options, new[] { symbol });
+            return CreateDescriptionFactory(
+                workspaceServices,
+                semanticModel,
+                position,
+                options,
+                new[] { symbol }
+            );
         }
 
         public static Func<CancellationToken, Task<CompletionDescription>> CreateDescriptionFactory(
-            SolutionServices workspaceServices, SemanticModel semanticModel, int position, SymbolDescriptionOptions options, IReadOnlyList<ISymbol> symbols)
+            SolutionServices workspaceServices,
+            SemanticModel semanticModel,
+            int position,
+            SymbolDescriptionOptions options,
+            IReadOnlyList<ISymbol> symbols
+        )
         {
-            return c => CreateDescriptionAsync(workspaceServices, semanticModel, position, symbols, options, supportedPlatforms: null, cancellationToken: c);
+            return c =>
+                CreateDescriptionAsync(
+                    workspaceServices,
+                    semanticModel,
+                    position,
+                    symbols,
+                    options,
+                    supportedPlatforms: null,
+                    cancellationToken: c
+                );
         }
 
         public static Func<CancellationToken, Task<CompletionDescription>> CreateDescriptionFactory(
-            SolutionServices workspaceServices, SemanticModel semanticModel, int position, IReadOnlyList<ISymbol> symbols, SymbolDescriptionOptions options, SupportedPlatformData supportedPlatforms)
+            SolutionServices workspaceServices,
+            SemanticModel semanticModel,
+            int position,
+            IReadOnlyList<ISymbol> symbols,
+            SymbolDescriptionOptions options,
+            SupportedPlatformData supportedPlatforms
+        )
         {
-            return c => CreateDescriptionAsync(workspaceServices, semanticModel, position, symbols, options, supportedPlatforms: supportedPlatforms, cancellationToken: c);
+            return c =>
+                CreateDescriptionAsync(
+                    workspaceServices,
+                    semanticModel,
+                    position,
+                    symbols,
+                    options,
+                    supportedPlatforms: supportedPlatforms,
+                    cancellationToken: c
+                );
         }
 
         public static async Task<CompletionDescription> CreateDescriptionAsync(
-            SolutionServices workspaceServices, SemanticModel semanticModel, int position, ISymbol symbol, int overloadCount, SymbolDescriptionOptions options, SupportedPlatformData? supportedPlatforms, CancellationToken cancellationToken)
+            SolutionServices workspaceServices,
+            SemanticModel semanticModel,
+            int position,
+            ISymbol symbol,
+            int overloadCount,
+            SymbolDescriptionOptions options,
+            SupportedPlatformData? supportedPlatforms,
+            CancellationToken cancellationToken
+        )
         {
-            var symbolDisplayService = workspaceServices.GetRequiredLanguageService<ISymbolDisplayService>(semanticModel.Language);
-            var formatter = workspaceServices.GetRequiredLanguageService<IDocumentationCommentFormattingService>(semanticModel.Language);
+            var symbolDisplayService =
+                workspaceServices.GetRequiredLanguageService<ISymbolDisplayService>(
+                    semanticModel.Language
+                );
+            var formatter =
+                workspaceServices.GetRequiredLanguageService<IDocumentationCommentFormattingService>(
+                    semanticModel.Language
+                );
 
             // TODO(cyrusn): Figure out a way to cancel this.
-            var sections = await symbolDisplayService.ToDescriptionGroupsAsync(semanticModel, position, ImmutableArray.Create(symbol), options, cancellationToken).ConfigureAwait(false);
+            var sections = await symbolDisplayService
+                .ToDescriptionGroupsAsync(
+                    semanticModel,
+                    position,
+                    ImmutableArray.Create(symbol),
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            if (!sections.TryGetValue(SymbolDescriptionGroups.MainDescription, out var mainDescriptionTexts))
+            if (
+                !sections.TryGetValue(
+                    SymbolDescriptionGroups.MainDescription,
+                    out var mainDescriptionTexts
+                )
+            )
             {
                 return CompletionDescription.Empty;
             }
@@ -135,7 +216,9 @@ namespace Microsoft.CodeAnalysis.Completion
                         textContentBuilder.AddSpace();
                         textContentBuilder.AddPunctuation("(");
                         textContentBuilder.AddPunctuation("+");
-                        textContentBuilder.AddText(NonBreakingSpaceString + overloadCount.ToString());
+                        textContentBuilder.AddText(
+                            NonBreakingSpaceString + overloadCount.ToString()
+                        );
 
                         AddOverloadPart(textContentBuilder, overloadCount, isGeneric);
 
@@ -145,7 +228,14 @@ namespace Microsoft.CodeAnalysis.Completion
                     break;
             }
 
-            AddDocumentationPart(textContentBuilder, symbol, semanticModel, position, formatter, cancellationToken);
+            AddDocumentationPart(
+                textContentBuilder,
+                symbol,
+                semanticModel,
+                position,
+                formatter,
+                cancellationToken
+            );
 
             if (sections.TryGetValue(SymbolDescriptionGroups.AwaitableUsageText, out var parts))
             {
@@ -172,16 +262,36 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         public static Task<CompletionDescription> CreateDescriptionAsync(
-            SolutionServices workspaceServices, SemanticModel semanticModel, int position, IReadOnlyList<ISymbol> symbols, SymbolDescriptionOptions options, SupportedPlatformData? supportedPlatforms, CancellationToken cancellationToken)
+            SolutionServices workspaceServices,
+            SemanticModel semanticModel,
+            int position,
+            IReadOnlyList<ISymbol> symbols,
+            SymbolDescriptionOptions options,
+            SupportedPlatformData? supportedPlatforms,
+            CancellationToken cancellationToken
+        )
         {
             // Lets try to find the first non-obsolete symbol (overload) and fall-back
             // to the first symbol if all are obsolete.
             var symbol = symbols.FirstOrDefault(s => !s.IsObsolete()) ?? symbols[0];
 
-            return CreateDescriptionAsync(workspaceServices, semanticModel, position, symbol, overloadCount: symbols.Count - 1, options, supportedPlatforms, cancellationToken);
+            return CreateDescriptionAsync(
+                workspaceServices,
+                semanticModel,
+                position,
+                symbol,
+                overloadCount: symbols.Count - 1,
+                options,
+                supportedPlatforms,
+                cancellationToken
+            );
         }
 
-        private static void AddOverloadPart(List<TaggedText> textContentBuilder, int overloadCount, bool isGeneric)
+        private static void AddOverloadPart(
+            List<TaggedText> textContentBuilder,
+            int overloadCount,
+            bool isGeneric
+        )
         {
             var text = isGeneric
                 ? overloadCount == 1
@@ -195,9 +305,20 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         private static void AddDocumentationPart(
-            List<TaggedText> textContentBuilder, ISymbol symbol, SemanticModel semanticModel, int position, IDocumentationCommentFormattingService formatter, CancellationToken cancellationToken)
+            List<TaggedText> textContentBuilder,
+            ISymbol symbol,
+            SemanticModel semanticModel,
+            int position,
+            IDocumentationCommentFormattingService formatter,
+            CancellationToken cancellationToken
+        )
         {
-            var documentation = symbol.GetDocumentationParts(semanticModel, position, formatter, cancellationToken);
+            var documentation = symbol.GetDocumentationParts(
+                semanticModel,
+                position,
+                formatter,
+                cancellationToken
+            );
 
             if (documentation.Any())
             {
@@ -206,7 +327,11 @@ namespace Microsoft.CodeAnalysis.Completion
             }
         }
 
-        internal static bool IsTextualTriggerString(SourceText text, int characterPosition, string value)
+        internal static bool IsTextualTriggerString(
+            SourceText text,
+            int characterPosition,
+            string value
+        )
         {
             // The character position starts at the last character of 'value'.  So if 'value' has
             // length 1, then we don't want to move, if it has length 2 we want to move back one,
@@ -229,7 +354,11 @@ namespace Microsoft.CodeAnalysis.Completion
             return true;
         }
 
-        public static bool TryRemoveAttributeSuffix(ISymbol symbol, SyntaxContext context, [NotNullWhen(true)] out string? name)
+        public static bool TryRemoveAttributeSuffix(
+            ISymbol symbol,
+            SyntaxContext context,
+            [NotNullWhen(true)] out string? name
+        )
         {
             var isAttributeNameContext = context.IsAttributeNameContext;
             var syntaxFacts = context.GetRequiredLanguageService<ISyntaxFactsService>();
@@ -241,8 +370,10 @@ namespace Microsoft.CodeAnalysis.Completion
             }
 
             // Do the symbol textual check first. Then the more expensive symbolic check.
-            if (!symbol.Name.TryGetWithoutAttributeSuffix(syntaxFacts.IsCaseSensitive, out name) ||
-                !symbol.IsAttribute())
+            if (
+                !symbol.Name.TryGetWithoutAttributeSuffix(syntaxFacts.IsCaseSensitive, out name)
+                || !symbol.IsAttribute()
+            )
             {
                 return false;
             }

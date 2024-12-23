@@ -15,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName="Closed">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Closed { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Closed { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.VisualStyleElement</ReturnType>
@@ -31,7 +34,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Opened">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Opened { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Opened { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.VisualStyleElement</ReturnType>

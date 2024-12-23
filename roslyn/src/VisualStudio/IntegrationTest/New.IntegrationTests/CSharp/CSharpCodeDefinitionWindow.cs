@@ -20,16 +20,20 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpCodeDefinitionWindow()
-            : base(nameof(CSharpCodeDefinitionWindow))
-        {
-        }
+            : base(nameof(CSharpCodeDefinitionWindow)) { }
 
         [IdeTheory]
         [CombinatorialData]
         public async Task CodeDefinitionWindowOpensMetadataAsSource(bool enableDecompilation)
         {
-            var globalOptions = await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(HangMitigatingCancellationToken);
-            globalOptions.SetGlobalOption(MetadataAsSourceOptionsStorage.NavigateToDecompiledSources, enableDecompilation);
+            var globalOptions =
+                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+                    HangMitigatingCancellationToken
+                );
+            globalOptions.SetGlobalOption(
+                MetadataAsSourceOptionsStorage.NavigateToDecompiledSources,
+                enableDecompilation
+            );
 
             await TestServices.CodeDefinitionWindow.ShowAsync(HangMitigatingCancellationToken);
 
@@ -37,16 +41,31 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             // our regular file.
             await TestServices.Editor.ActivateAsync(HangMitigatingCancellationToken);
 
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 public class Test
 {
     $$int field;
 }
-", HangMitigatingCancellationToken);
+",
+                HangMitigatingCancellationToken
+            );
 
             // The structure line should be the same, and we'll check for the presence/absence of the decompilation marker
-            Assert.Contains("public struct Int32", await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(HangMitigatingCancellationToken));
-            Assert.Equal(enableDecompilation, (await TestServices.CodeDefinitionWindow.GetTextAsync(HangMitigatingCancellationToken)).Contains("Decompiled with ICSharpCode.Decompiler"));
+            Assert.Contains(
+                "public struct Int32",
+                await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(
+                    HangMitigatingCancellationToken
+                )
+            );
+            Assert.Equal(
+                enableDecompilation,
+                (
+                    await TestServices.CodeDefinitionWindow.GetTextAsync(
+                        HangMitigatingCancellationToken
+                    )
+                ).Contains("Decompiled with ICSharpCode.Decompiler")
+            );
         }
     }
 }

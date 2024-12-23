@@ -1,10 +1,11 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="Purpose.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security.Cryptography {
+namespace System.Web.Security.Cryptography
+{
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -26,28 +27,55 @@ namespace System.Web.Security.Cryptography {
     // the currently executing Page here, for example), but it is valid to seed this property with a secret obtained
     // at runtime (such as a nonce shared between two parties).
 
-    internal sealed class Purpose {
-
+    internal sealed class Purpose
+    {
         // predefined purposes
-        public static readonly Purpose AnonymousIdentificationModule_Ticket = new Purpose("AnonymousIdentificationModule.Ticket");
-        public static readonly Purpose AssemblyResourceLoader_WebResourceUrl = new Purpose("AssemblyResourceLoader.WebResourceUrl");
-        public static readonly Purpose FormsAuthentication_Ticket = new Purpose("FormsAuthentication.Ticket");
-        public static readonly Purpose WebForms_Page_PreviousPageID = new Purpose("WebForms.Page.PreviousPageID");
+        public static readonly Purpose AnonymousIdentificationModule_Ticket = new Purpose(
+            "AnonymousIdentificationModule.Ticket"
+        );
+        public static readonly Purpose AssemblyResourceLoader_WebResourceUrl = new Purpose(
+            "AssemblyResourceLoader.WebResourceUrl"
+        );
+        public static readonly Purpose FormsAuthentication_Ticket = new Purpose(
+            "FormsAuthentication.Ticket"
+        );
+        public static readonly Purpose WebForms_Page_PreviousPageID = new Purpose(
+            "WebForms.Page.PreviousPageID"
+        );
         public static readonly Purpose RolePrincipal_Ticket = new Purpose("RolePrincipal.Ticket");
-        public static readonly Purpose ScriptResourceHandler_ScriptResourceUrl = new Purpose("ScriptResourceHandler.ScriptResourceUrl");
+        public static readonly Purpose ScriptResourceHandler_ScriptResourceUrl = new Purpose(
+            "ScriptResourceHandler.ScriptResourceUrl"
+        );
 
         // predefined ViewState purposes; they won't be used as-is (they're combined with the page information)
-        public static readonly Purpose WebForms_ClientScriptManager_EventValidation = new Purpose("WebForms.ClientScriptManager.EventValidation");
-        public static readonly Purpose WebForms_DetailsView_KeyTable = new Purpose("WebForms.DetailsView.KeyTable");
-        public static readonly Purpose WebForms_GridView_DataKeys = new Purpose("WebForms.GridView.DataKeys");
-        public static readonly Purpose WebForms_GridView_SortExpression = new Purpose("WebForms.GridView.SortExpression");
-        public static readonly Purpose WebForms_HiddenFieldPageStatePersister_ClientState = new Purpose("WebForms.HiddenFieldPageStatePersister.ClientState");
-        public static readonly Purpose WebForms_ScriptManager_HistoryState = new Purpose("WebForms.ScriptManager.HistoryState");
-        public static readonly Purpose WebForms_SessionPageStatePersister_ClientState = new Purpose("WebForms.SessionPageStatePersister.ClientState");
+        public static readonly Purpose WebForms_ClientScriptManager_EventValidation = new Purpose(
+            "WebForms.ClientScriptManager.EventValidation"
+        );
+        public static readonly Purpose WebForms_DetailsView_KeyTable = new Purpose(
+            "WebForms.DetailsView.KeyTable"
+        );
+        public static readonly Purpose WebForms_GridView_DataKeys = new Purpose(
+            "WebForms.GridView.DataKeys"
+        );
+        public static readonly Purpose WebForms_GridView_SortExpression = new Purpose(
+            "WebForms.GridView.SortExpression"
+        );
+        public static readonly Purpose WebForms_HiddenFieldPageStatePersister_ClientState =
+            new Purpose("WebForms.HiddenFieldPageStatePersister.ClientState");
+        public static readonly Purpose WebForms_ScriptManager_HistoryState = new Purpose(
+            "WebForms.ScriptManager.HistoryState"
+        );
+        public static readonly Purpose WebForms_SessionPageStatePersister_ClientState = new Purpose(
+            "WebForms.SessionPageStatePersister.ClientState"
+        );
 
         // predefined miscellaneoous purposes; they won't be used as-is (they're combined with other specificPurposes)
-        public static readonly Purpose User_MachineKey_Protect = new Purpose("User.MachineKey.Protect"); // used by the MachineKey static class Protect / Unprotect methods
-        public static readonly Purpose User_ObjectStateFormatter_Serialize = new Purpose("User.ObjectStateFormatter.Serialize"); // used by ObjectStateFormatter.Serialize() if called manually
+        public static readonly Purpose User_MachineKey_Protect = new Purpose(
+            "User.MachineKey.Protect"
+        ); // used by the MachineKey static class Protect / Unprotect methods
+        public static readonly Purpose User_ObjectStateFormatter_Serialize = new Purpose(
+            "User.ObjectStateFormatter.Serialize"
+        ); // used by ObjectStateFormatter.Serialize() if called manually
 
         public readonly string PrimaryPurpose;
         public readonly string[] SpecificPurposes;
@@ -56,11 +84,16 @@ namespace System.Web.Security.Cryptography {
         private byte[] _derivedKeyContext;
 
         public Purpose(string primaryPurpose, params string[] specificPurposes)
-            : this(primaryPurpose, specificPurposes, null, null) {
-        }
+            : this(primaryPurpose, specificPurposes, null, null) { }
 
         // ctor for unit testing
-        internal Purpose(string primaryPurpose, string[] specificPurposes, CryptographicKey derivedEncryptionKey, CryptographicKey derivedValidationKey) {
+        internal Purpose(
+            string primaryPurpose,
+            string[] specificPurposes,
+            CryptographicKey derivedEncryptionKey,
+            CryptographicKey derivedValidationKey
+        )
+        {
             PrimaryPurpose = primaryPurpose;
             SpecificPurposes = specificPurposes ?? new string[0];
             DerivedEncryptionKey = derivedEncryptionKey;
@@ -82,7 +115,8 @@ namespace System.Web.Security.Cryptography {
 
         // Returns a new Purpose which is the specified Purpose plus the specified SpecificPurpose.
         // Leaves the original Purpose unmodified.
-        internal Purpose AppendSpecificPurpose(string specificPurpose) {
+        internal Purpose AppendSpecificPurpose(string specificPurpose)
+        {
             // Append the specified specificPurpose to the existing list
             string[] newSpecificPurposes = new string[SpecificPurposes.Length + 1];
             Array.Copy(SpecificPurposes, newSpecificPurposes, SpecificPurposes.Length);
@@ -92,28 +126,38 @@ namespace System.Web.Security.Cryptography {
 
         // Returns a new Purpose which is the specified Purpose plus the specified SpecificPurposes.
         // Leaves the original Purpose unmodified.
-        internal Purpose AppendSpecificPurposes(IList<string> specificPurposes) {
+        internal Purpose AppendSpecificPurposes(IList<string> specificPurposes)
+        {
             // No specific purposes to add
-            if (specificPurposes == null || specificPurposes.Count == 0) {
+            if (specificPurposes == null || specificPurposes.Count == 0)
+            {
                 return this;
             }
 
             // Append the specified specificPurposes to the existing list
-            string[] newSpecificPurposes = new string[SpecificPurposes.Length + specificPurposes.Count];
+            string[] newSpecificPurposes = new string[
+                SpecificPurposes.Length + specificPurposes.Count
+            ];
             Array.Copy(SpecificPurposes, newSpecificPurposes, SpecificPurposes.Length);
             specificPurposes.CopyTo(newSpecificPurposes, SpecificPurposes.Length);
             return new Purpose(PrimaryPurpose, newSpecificPurposes);
         }
 
-        public CryptographicKey GetDerivedEncryptionKey(IMasterKeyProvider masterKeyProvider, KeyDerivationFunction keyDerivationFunction) {
+        public CryptographicKey GetDerivedEncryptionKey(
+            IMasterKeyProvider masterKeyProvider,
+            KeyDerivationFunction keyDerivationFunction
+        )
+        {
             // has a key already been stored?
             CryptographicKey actualDerivedKey = DerivedEncryptionKey;
-            if (actualDerivedKey == null) {
+            if (actualDerivedKey == null)
+            {
                 CryptographicKey masterKey = masterKeyProvider.GetEncryptionKey();
                 actualDerivedKey = keyDerivationFunction(masterKey, this);
 
                 // only save the key back to storage if this Purpose is configured to do so
-                if (SaveDerivedKeys) {
+                if (SaveDerivedKeys)
+                {
                     DerivedEncryptionKey = actualDerivedKey;
                 }
             }
@@ -121,15 +165,21 @@ namespace System.Web.Security.Cryptography {
             return actualDerivedKey;
         }
 
-        public CryptographicKey GetDerivedValidationKey(IMasterKeyProvider masterKeyProvider, KeyDerivationFunction keyDerivationFunction) {
+        public CryptographicKey GetDerivedValidationKey(
+            IMasterKeyProvider masterKeyProvider,
+            KeyDerivationFunction keyDerivationFunction
+        )
+        {
             // has a key already been stored?
             CryptographicKey actualDerivedKey = DerivedValidationKey;
-            if (actualDerivedKey == null) {
+            if (actualDerivedKey == null)
+            {
                 CryptographicKey masterKey = masterKeyProvider.GetValidationKey();
                 actualDerivedKey = keyDerivationFunction(masterKey, this);
 
                 // only save the key back to storage if this Purpose is configured to do so
-                if (SaveDerivedKeys) {
+                if (SaveDerivedKeys)
+                {
                     DerivedValidationKey = actualDerivedKey;
                 }
             }
@@ -138,20 +188,27 @@ namespace System.Web.Security.Cryptography {
         }
 
         // Returns a label and context suitable for passing into the SP800-108 KDF.
-        internal void GetKeyDerivationParameters(out byte[] label, out byte[] context) {
+        internal void GetKeyDerivationParameters(out byte[] label, out byte[] context)
+        {
             // The primary purpose can just be used as the label directly, since ASP.NET
             // is always in full control of the primary purpose (it's never user-specified).
-            if (_derivedKeyLabel == null) {
+            if (_derivedKeyLabel == null)
+            {
                 _derivedKeyLabel = CryptoUtil.SecureUTF8Encoding.GetBytes(PrimaryPurpose);
             }
 
             // The specific purposes (which can contain nonce, identity, etc.) are concatenated
             // together to form the context. The BinaryWriter class prepends each element with
             // a 7-bit encoded length to guarantee uniqueness.
-            if (_derivedKeyContext == null) {
+            if (_derivedKeyContext == null)
+            {
                 using (MemoryStream stream = new MemoryStream())
-                using (BinaryWriter writer = new BinaryWriter(stream, CryptoUtil.SecureUTF8Encoding)) {
-                    foreach (string specificPurpose in SpecificPurposes) {
+                using (
+                    BinaryWriter writer = new BinaryWriter(stream, CryptoUtil.SecureUTF8Encoding)
+                )
+                {
+                    foreach (string specificPurpose in SpecificPurposes)
+                    {
                         writer.Write(specificPurpose);
                     }
                     _derivedKeyContext = stream.ToArray();
@@ -161,6 +218,5 @@ namespace System.Web.Security.Cryptography {
             label = _derivedKeyLabel;
             context = _derivedKeyContext;
         }
-
     }
 }

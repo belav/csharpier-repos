@@ -30,18 +30,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override string Name
         {
-            get
-            {
-                return Kind == GenericParameterKind.Method ? $"!!{_index}" : $"!{_index}";
-            }
+            get { return Kind == GenericParameterKind.Method ? $"!!{_index}" : $"!{_index}"; }
         }
 
         public override GenericParameterKind Kind
@@ -61,48 +55,34 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         public override TypeSystemEntity AssociatedTypeOrMethod
         {
-            get
-            {
-                 return (_owningMethod != null) ? _owningMethod : _owningType;
-            }
+            get { return (_owningMethod != null) ? _owningMethod : _owningType; }
         }
 
         public override int Index
         {
-            get
-            {
-                return _index;
-            }
+            get { return _index; }
         }
 
         public override GenericVariance Variance
         {
-            get
-            {
-                return GenericVariance.None;
-            }
+            get { return GenericVariance.None; }
         }
 
         public override GenericConstraints Constraints
         {
-            get
-            {
-                return GenericConstraints.None;
-            }
+            get { return GenericConstraints.None; }
         }
 
         public override IEnumerable<TypeDesc> TypeConstraints
         {
-            get
-            {
-                return Array.Empty<TypeDesc>();
-            }
+            get { return Array.Empty<TypeDesc>(); }
         }
 
         public override string DiagnosticName => Name;
 
         protected override int ClassCode => throw new NotImplementedException();
 
-        protected override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer) => throw new NotImplementedException();
+        protected override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer) =>
+            throw new NotImplementedException();
     }
 }

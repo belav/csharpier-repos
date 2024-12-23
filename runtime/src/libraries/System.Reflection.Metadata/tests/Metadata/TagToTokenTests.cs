@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using Xunit;
-
 using BitArithmetic = System.Reflection.Internal.BitArithmetic;
 
 namespace System.Reflection.Metadata.Tests
@@ -28,7 +27,8 @@ namespace System.Reflection.Metadata.Tests
 
         private IEnumerable<XxxTag> GetTags()
         {
-            Type[] types = new[] {
+            Type[] types = new[]
+            {
                 typeof(CustomAttributeTypeTag),
                 typeof(HasConstantTag),
                 typeof(HasCustomAttributeTag),
@@ -41,75 +41,108 @@ namespace System.Reflection.Metadata.Tests
                 typeof(MethodDefOrRefTag),
                 typeof(ResolutionScopeTag),
                 typeof(TypeDefOrRefTag),
-                typeof(TypeOrMethodDefTag)
+                typeof(TypeOrMethodDefTag),
             };
 
             return from type in types
-                   let typeInfo = type.GetTypeInfo()
-                   select new XxxTag
-                   {
-                       GetTagToTokenTypeArray = () =>
-                       {
-                           var array = typeInfo.GetDeclaredProperty("TagToTokenTypeArray");
-                           var vector = typeInfo.GetDeclaredField("TagToTokenTypeByteVector");
+                let typeInfo = type.GetTypeInfo()
+                select new XxxTag
+                {
+                    GetTagToTokenTypeArray = () =>
+                    {
+                        var array = typeInfo.GetDeclaredProperty("TagToTokenTypeArray");
+                        var vector = typeInfo.GetDeclaredField("TagToTokenTypeByteVector");
 
-                           Assert.True((array == null) ^ (vector == null), typeInfo.Name + " does not have exactly one of TagToTokenTypeArray or TagToTokenTypeByteVector");
+                        Assert.True(
+                            (array == null) ^ (vector == null),
+                            typeInfo.Name
+                                + " does not have exactly one of TagToTokenTypeArray or TagToTokenTypeByteVector"
+                        );
 
-                           if (array != null)
-                           {
-                               return ((GetTagToTokenTypeArrayFunc)array.GetGetMethod(nonPublic: true).CreateDelegate(typeof(GetTagToTokenTypeArrayFunc)))().ToArray();
-                           }
+                        if (array != null)
+                        {
+                            return (
+                                (GetTagToTokenTypeArrayFunc)
+                                    array
+                                        .GetGetMethod(nonPublic: true)
+                                        .CreateDelegate(typeof(GetTagToTokenTypeArrayFunc))
+                            )()
+                                .ToArray();
+                        }
 
-                           Assert.Contains(vector.FieldType, new[] { typeof(uint), typeof(ulong) });
-                           if (vector.FieldType == typeof(uint))
-                           {
-                               uint value = (uint)vector.GetValue(null);
-                               uint[] ret = new uint[4];
-                               for (uint i = 0; i < 4; i++)
-                               {
-                                   ret[i] = ((uint)(byte)value) << TokenTypeIds.RowIdBitCount;
-                                   value >>= 8;
-                               }
-                               return ret;
-                           }
-                           else
-                           {
-                               ulong value = (ulong)vector.GetValue(null);
-                               uint[] ret = new uint[8];
-                               for (uint i = 0; i < 8; i++)
-                               {
-                                   ret[i] = ((uint)(byte)value) << TokenTypeIds.RowIdBitCount;
-                                   value >>= 8;
-                               }
-                               return ret;
-                           }
-                       },
+                        Assert.Contains(vector.FieldType, new[] { typeof(uint), typeof(ulong) });
+                        if (vector.FieldType == typeof(uint))
+                        {
+                            uint value = (uint)vector.GetValue(null);
+                            uint[] ret = new uint[4];
+                            for (uint i = 0; i < 4; i++)
+                            {
+                                ret[i] = ((uint)(byte)value) << TokenTypeIds.RowIdBitCount;
+                                value >>= 8;
+                            }
+                            return ret;
+                        }
+                        else
+                        {
+                            ulong value = (ulong)vector.GetValue(null);
+                            uint[] ret = new uint[8];
+                            for (uint i = 0; i < 8; i++)
+                            {
+                                ret[i] = ((uint)(byte)value) << TokenTypeIds.RowIdBitCount;
+                                value >>= 8;
+                            }
+                            return ret;
+                        }
+                    },
 
-                       GetNumberOfBits = () => (int)typeInfo.GetDeclaredField("NumberOfBits").GetValue(null),
-                       ConvertToHandle = (Func<uint, EntityHandle>)typeInfo.GetDeclaredMethod("ConvertToHandle").CreateDelegate(typeof(Func<uint, EntityHandle>)),
-                       ConvertToTag = handle => { var m = typeInfo.GetDeclaredMethod("ConvertToTag"); return m == null ? null : (uint?)m.Invoke(null, new object[] { handle }); },
-                       GetTablesReferenced = () => (TableMask)typeInfo.GetDeclaredField("TablesReferenced").GetValue(null),
-                       GetTagMask = () => (uint)typeInfo.GetDeclaredField("TagMask").GetValue(null),
-                       GetTagValue = name => { var f = typeInfo.GetDeclaredField(name); return f == null ? null : (uint?)f.GetValue(null); },
-                       Name = typeInfo.Name
-                   };
+                    GetNumberOfBits = () =>
+                        (int)typeInfo.GetDeclaredField("NumberOfBits").GetValue(null),
+                    ConvertToHandle =
+                        (Func<uint, EntityHandle>)
+                            typeInfo
+                                .GetDeclaredMethod("ConvertToHandle")
+                                .CreateDelegate(typeof(Func<uint, EntityHandle>)),
+                    ConvertToTag = handle =>
+                    {
+                        var m = typeInfo.GetDeclaredMethod("ConvertToTag");
+                        return m == null ? null : (uint?)m.Invoke(null, new object[] { handle });
+                    },
+                    GetTablesReferenced = () =>
+                        (TableMask)typeInfo.GetDeclaredField("TablesReferenced").GetValue(null),
+                    GetTagMask = () => (uint)typeInfo.GetDeclaredField("TagMask").GetValue(null),
+                    GetTagValue = name =>
+                    {
+                        var f = typeInfo.GetDeclaredField(name);
+                        return f == null ? null : (uint?)f.GetValue(null);
+                    },
+                    Name = typeInfo.Name,
+                };
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
         public void ValidateTagToTokenConversion()
         {
             foreach (var tag in GetTags())
             {
-                Assert.True((1 << tag.GetNumberOfBits()) <= tag.GetTagToTokenTypeArray().Length,
-                    tag.Name + " has mismatch between NumberOfBits and TagToTokenTypeArray.Length");
+                Assert.True(
+                    (1 << tag.GetNumberOfBits()) <= tag.GetTagToTokenTypeArray().Length,
+                    tag.Name + " has mismatch between NumberOfBits and TagToTokenTypeArray.Length"
+                );
 
-                Assert.True(tag.GetTagMask() == (1 << tag.GetNumberOfBits()) - 1,
-                    tag.Name + " has mismatch between NumberOfBits and TagMask");
+                Assert.True(
+                    tag.GetTagMask() == (1 << tag.GetNumberOfBits()) - 1,
+                    tag.Name + " has mismatch between NumberOfBits and TagMask"
+                );
 
                 TableMask tablesNotUsed = tag.GetTablesReferenced();
 
-                Assert.True(tablesNotUsed != 0,
-                    tag.Name + " does not have anything in TablesReferenced.");
+                Assert.True(
+                    tablesNotUsed != 0,
+                    tag.Name + " does not have anything in TablesReferenced."
+                );
 
                 int badTagCount = 0;
                 Random random = new Random(42);
@@ -131,41 +164,77 @@ namespace System.Reflection.Metadata.Tests
                         continue;
                     }
 
-                    Assert.True(handle.RowId == rowId,
-                        tag.Name + " did not return correct row id.");
+                    Assert.True(
+                        handle.RowId == rowId,
+                        tag.Name + " did not return correct row id."
+                    );
 
                     uint badRowId = (uint)random.Next((int)TokenTypeIds.RIDMask + 1, int.MaxValue);
-                    Assert.Throws<BadImageFormatException>(() => tag.ConvertToHandle(i | ~tag.GetTagMask()));
-                    Assert.Throws<BadImageFormatException>(() => tag.ConvertToHandle(i | ((TokenTypeIds.RIDMask + 1) << tag.GetNumberOfBits())));
-                    Assert.Throws<BadImageFormatException>(() => tag.ConvertToHandle(i | (badRowId << tag.GetNumberOfBits())));
+                    Assert.Throws<BadImageFormatException>(
+                        () => tag.ConvertToHandle(i | ~tag.GetTagMask())
+                    );
+                    Assert.Throws<BadImageFormatException>(
+                        () =>
+                            tag.ConvertToHandle(
+                                i | ((TokenTypeIds.RIDMask + 1) << tag.GetNumberOfBits())
+                            )
+                    );
+                    Assert.Throws<BadImageFormatException>(
+                        () => tag.ConvertToHandle(i | (badRowId << tag.GetNumberOfBits()))
+                    );
 
-                    Assert.True((uint)(handle.Kind) << 24 == tag.GetTagToTokenTypeArray()[i],
-                        tag.Name + " did not return handle type matching its TagToTokenTypeArray or TagToTokenTypeByteVector");
+                    Assert.True(
+                        (uint)(handle.Kind) << 24 == tag.GetTagToTokenTypeArray()[i],
+                        tag.Name
+                            + " did not return handle type matching its TagToTokenTypeArray or TagToTokenTypeByteVector"
+                    );
 
                     TableMask handleTableMask = (TableMask)(1UL << (int)handle.Kind);
 
-                    Assert.True(tag.GetTagValue(handleTableMask.ToString()) == i,
-                        tag.Name + " does not have a constant for '" + handleTableMask.ToString() + "' with matching value: " + i);
+                    Assert.True(
+                        tag.GetTagValue(handleTableMask.ToString()) == i,
+                        tag.Name
+                            + " does not have a constant for '"
+                            + handleTableMask.ToString()
+                            + "' with matching value: "
+                            + i
+                    );
 
-                    Assert.True((tag.GetTablesReferenced() & handleTableMask) == handleTableMask,
-                        tag.Name + " does not declare that it references '" + handleTableMask.ToString() + "' table.");
+                    Assert.True(
+                        (tag.GetTablesReferenced() & handleTableMask) == handleTableMask,
+                        tag.Name
+                            + " does not declare that it references '"
+                            + handleTableMask.ToString()
+                            + "' table."
+                    );
 
                     TableMask tablesNotUsedPreviously = tablesNotUsed;
                     tablesNotUsed &= ~handleTableMask;
 
-                    Assert.True(handleTableMask == 0 || tablesNotUsedPreviously != tablesNotUsed,
-                        tag.Name + " did not use any table for tag value: " + i);
+                    Assert.True(
+                        handleTableMask == 0 || tablesNotUsedPreviously != tablesNotUsed,
+                        tag.Name + " did not use any table for tag value: " + i
+                    );
 
                     uint? roundTripped = tag.ConvertToTag(handle);
-                    Assert.True(roundTripped == null || roundTripped == codedIndex,
-                        tag.Name + " did not round trip coded index -> handle -> coded index");
+                    Assert.True(
+                        roundTripped == null || roundTripped == codedIndex,
+                        tag.Name + " did not round trip coded index -> handle -> coded index"
+                    );
                 }
 
-                Assert.True(badTagCount == (1 << tag.GetNumberOfBits()) - BitArithmetic.CountBits((ulong)tag.GetTablesReferenced()),
-                    tag.Name + " did not find the correct number of bad tags.");
+                Assert.True(
+                    badTagCount
+                        == (1 << tag.GetNumberOfBits())
+                            - BitArithmetic.CountBits((ulong)tag.GetTablesReferenced()),
+                    tag.Name + " did not find the correct number of bad tags."
+                );
 
-                Assert.True(tablesNotUsed == 0,
-                    tag.Name + " did not use all of TablesReferenced when passed all possible tag bits up to NumberOfBits.");
+                Assert.True(
+                    tablesNotUsed == 0,
+                    tag.Name
+                        + " did not use all of TablesReferenced when passed all possible tag bits up to NumberOfBits."
+                );
             }
         }
     }

@@ -30,13 +30,13 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	public enum AssemblyReferenceType {
-		Unspecified,
-		ClickOnceManifest,
-		ManagedAssembly,
-		NativeAssembly
-	}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    public enum AssemblyReferenceType
+    {
+        Unspecified,
+        ClickOnceManifest,
+        ManagedAssembly,
+        NativeAssembly,
+    }
 }
-

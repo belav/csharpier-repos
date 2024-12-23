@@ -1,12 +1,14 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.Security.Permissions;
 
     [Serializable()]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowValidationFailedException : Exception
     {
         private ValidationErrorCollection errors = null;
@@ -17,26 +19,23 @@ namespace System.Workflow.ComponentModel.Compiler
             if (info == null)
                 throw new ArgumentNullException("info");
 
-            this.errors = (ValidationErrorCollection)info.GetValue("errors", typeof(ValidationErrorCollection));
+            this.errors = (ValidationErrorCollection)
+                info.GetValue("errors", typeof(ValidationErrorCollection));
 
             if (this.errors == null)
-                throw new SerializationException(SR.GetString(SR.Error_SerializationInsufficientState));
+                throw new SerializationException(
+                    SR.GetString(SR.Error_SerializationInsufficientState)
+                );
         }
 
         public WorkflowValidationFailedException()
-            : base(SR.GetString(SR.Error_WorkflowLoadValidationFailed))
-        {
-        }
+            : base(SR.GetString(SR.Error_WorkflowLoadValidationFailed)) { }
 
         public WorkflowValidationFailedException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public WorkflowValidationFailedException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public WorkflowValidationFailedException(string message, ValidationErrorCollection errors)
             : base(message)
@@ -60,10 +59,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public ValidationErrorCollection Errors
         {
-            get
-            {
-                return this.errors;
-            }
+            get { return this.errors; }
         }
     }
 }

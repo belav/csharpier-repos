@@ -5,7 +5,5 @@
 namespace System.Activities.DurableInstancing
 {
     [Serializable]
-    struct DeletedMetadataValue
-    {
-    }
+    struct DeletedMetadataValue { }
 }

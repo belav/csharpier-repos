@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.Syntax
         {
             private readonly ArrayElement<SyntaxNode?>[] _children;
 
-            internal WithManyChildren(InternalSyntax.SyntaxList green, SyntaxNode? parent, int position)
+            internal WithManyChildren(
+                InternalSyntax.SyntaxList green,
+                SyntaxNode? parent,
+                int position
+            )
                 : base(green, parent, position)
             {
                 _children = new ArrayElement<SyntaxNode?>[green.SlotCount];

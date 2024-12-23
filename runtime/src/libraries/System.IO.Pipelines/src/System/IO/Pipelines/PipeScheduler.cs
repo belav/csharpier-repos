@@ -8,7 +8,8 @@ namespace System.IO.Pipelines
     /// <summary>Abstraction for running <see cref="System.IO.Pipelines.PipeReader" /> and <see cref="System.IO.Pipelines.PipeWriter" /> callbacks and continuations.</summary>
     public abstract class PipeScheduler
     {
-        private static readonly ThreadPoolScheduler s_threadPoolScheduler = new ThreadPoolScheduler();
+        private static readonly ThreadPoolScheduler s_threadPoolScheduler =
+            new ThreadPoolScheduler();
         private static readonly InlineScheduler s_inlineScheduler = new InlineScheduler();
 
         /// <summary>The <see cref="System.IO.Pipelines.PipeScheduler" /> implementation that queues callbacks to the thread pool.</summary>
@@ -24,7 +25,7 @@ namespace System.IO.Pipelines
         /// <param name="state">The parameter to pass to the <paramref name="action" /> delegate.</param>
         public abstract void Schedule(Action<object?> action, object? state);
 
-        internal virtual void UnsafeSchedule(Action<object?> action, object? state)
-            => Schedule(action, state);
+        internal virtual void UnsafeSchedule(Action<object?> action, object? state) =>
+            Schedule(action, state);
     }
 }

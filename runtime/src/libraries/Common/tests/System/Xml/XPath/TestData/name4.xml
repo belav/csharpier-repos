@@ -1,6 +1,6 @@
-<doc xmlns:prefix1="http://prefix1.htm">
-	<prefix1:elem/>
-	<prefix1:elem  xmlns:prefix2="http://prefix2.htm">
-		<prefix2:elem/>
-	</prefix1:elem>
+<doc {http://www.w3.org/2000/xmlns/}prefix1="http://prefix1.htm">
+  <elem />
+  <elem {http://www.w3.org/2000/xmlns/}prefix2="http://prefix2.htm">
+    <elem />
+  </elem>
 </doc>

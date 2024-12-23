@@ -1,8 +1,19 @@
-﻿<Dictionary x:TypeArguments="x:String, s:Type" xmlns="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <x:Type Type="x:Int32" x:Key="t1" />
-  <x:Type Type="s:Int32[]" x:Key="t2" />
-  <x:Type Type="s:Nullable(x:Int32)" x:Key="t3" />
-  <x:Type Type="List(x:Int32)" x:Key="t4" />
-  <x:Type Type="Dictionary(x:Int32, s:DateTime)" x:Key="t5" />
-  <x:Type Type="List(KeyValuePair(x:Int32, s:DateTime))" x:Key="t6" />
+﻿<Dictionary
+  {http://schemas.microsoft.com/winfx/2006/xaml}TypeArguments="x:String, s:Type"
+  xmlns="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+  {http://www.w3.org/2000/xmlns/}s="clr-namespace:System;assembly=mscorlib"
+  {http://www.w3.org/2000/xmlns/}x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+  <Type Type="x:Int32" {http://schemas.microsoft.com/winfx/2006/xaml}Key="t1" />
+  <Type Type="s:Int32[]" {http://schemas.microsoft.com/winfx/2006/xaml}Key="t2" />
+  <Type Type="s:Nullable(x:Int32)" {http://schemas.microsoft.com/winfx/2006/xaml}Key="t3" />
+  <Type Type="List(x:Int32)" {http://schemas.microsoft.com/winfx/2006/xaml}Key="t4" />
+  <Type
+    Type="Dictionary(x:Int32, s:DateTime)"
+    {http://schemas.microsoft.com/winfx/2006/xaml}Key="t5"
+  />
+  <Type
+    Type="List(KeyValuePair(x:Int32, s:DateTime))"
+    {http://schemas.microsoft.com/winfx/2006/xaml}Key="t6"
+  />
 </Dictionary>

@@ -22,5 +22,6 @@ public interface IPropertyElementTypeChangedConvention : IConvention
         IConventionPropertyBuilder propertyBuilder,
         IElementType? newElementType,
         IElementType? oldElementType,
-        IConventionContext<IElementType> context);
+        IConventionContext<IElementType> context
+    );
 }

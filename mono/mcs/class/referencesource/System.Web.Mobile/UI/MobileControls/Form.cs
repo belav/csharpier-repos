@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="Form.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-using System.Web.Mobile;
-using System.Web.UI;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.Security.Permissions;
+using System.Web.Mobile;
+using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
@@ -24,15 +24,22 @@ namespace System.Web.UI.MobileControls
         ToolboxData("<{0}:Form runat=\"server\"></{0}:Form>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class Form : Panel, ITemplateable, IPostBackEventHandler
     {
-
-        private static readonly Object EventActivate         = new Object();
-        private static readonly Object EventDeactivate       = new Object();
-        private static readonly Object EventPaginated        = new Object();
+        private static readonly Object EventActivate = new Object();
+        private static readonly Object EventDeactivate = new Object();
+        private static readonly Object EventPaginated = new Object();
 
         private PagerStyle _pagerStyle;
         private int _cachedCurrentPage = -1;
@@ -70,13 +77,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["Title"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["Title"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["Title"] = value;
-            }
+            set { ViewState["Title"] = value; }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.Method"]/*' />
@@ -93,18 +97,17 @@ namespace System.Web.UI.MobileControls
                 Object o = ViewState["Method"];
                 return ((o != null) ? (FormMethod)o : FormMethod.Post);
             }
-            set
-            {
-                ViewState["Method"] = value;
-            }
+            set { ViewState["Method"] = value; }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.Action"]/*' />
         [
             Bindable(true),
             DefaultValue(""),
-            Editor(typeof(System.Web.UI.Design.UrlEditor),
-                typeof(System.Drawing.Design.UITypeEditor)),
+            Editor(
+                typeof(System.Web.UI.Design.UrlEditor),
+                typeof(System.Drawing.Design.UITypeEditor)
+            ),
             MobileCategory(SR.Category_Behavior),
             MobileSysDescription(SR.Form_Action)
         ]
@@ -112,13 +115,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["Action"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["Action"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["Action"] = value;
-            }
+            set { ViewState["Action"] = value; }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.PagerStyle"]/*' />
@@ -131,10 +131,7 @@ namespace System.Web.UI.MobileControls
         ]
         public PagerStyle PagerStyle
         {
-            get
-            {
-                return _pagerStyle;
-            }
+            get { return _pagerStyle; }
         }
 
         /// <internalonly/>
@@ -162,7 +159,7 @@ namespace System.Web.UI.MobileControls
                     if (page > 0)
                     {
                         int oldPage = _currentPage;
-                        if(_cachedCurrentPage == -1)
+                        if (_cachedCurrentPage == -1)
                         {
                             _currentPage = page;
                             _cachedCurrentPage = page;
@@ -183,54 +180,27 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.Activate"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.Form_OnActivate)
-        ]
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.Form_OnActivate)]
         public event EventHandler Activate
         {
-            add
-            {
-                Events.AddHandler(EventActivate, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(EventActivate, value);
-            }
+            add { Events.AddHandler(EventActivate, value); }
+            remove { Events.RemoveHandler(EventActivate, value); }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.Deactivate"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.Form_OnDeactivate)
-        ]
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.Form_OnDeactivate)]
         public event EventHandler Deactivate
         {
-            add
-            {
-                Events.AddHandler(EventDeactivate, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(EventDeactivate, value);
-            }
+            add { Events.AddHandler(EventDeactivate, value); }
+            remove { Events.RemoveHandler(EventDeactivate, value); }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.Paginated"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.Form_OnPaginated)
-        ]
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.Form_OnPaginated)]
         public event EventHandler Paginated
         {
-            add
-            {
-                Events.AddHandler(EventPaginated, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(EventPaginated, value);
-            }
+            add { Events.AddHandler(EventPaginated, value); }
+            remove { Events.RemoveHandler(EventPaginated, value); }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.Header"]/*' />
@@ -241,10 +211,7 @@ namespace System.Web.UI.MobileControls
         ]
         public Panel Header
         {
-            get
-            {
-                return _headerContainer;
-            }
+            get { return _headerContainer; }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.Footer"]/*' />
@@ -255,10 +222,7 @@ namespace System.Web.UI.MobileControls
         ]
         public Panel Footer
         {
-            get
-            {
-                return _footerContainer;
-            }
+            get { return _footerContainer; }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.Script"]/*' />
@@ -269,10 +233,7 @@ namespace System.Web.UI.MobileControls
         ]
         public Panel Script
         {
-            get
-            {
-                return _scriptContainer;
-            }
+            get { return _scriptContainer; }
         }
 
         internal bool Activated = false;
@@ -348,13 +309,13 @@ namespace System.Web.UI.MobileControls
                     Form parentForm = control as Form;
                     if (parentForm != null)
                     {
-                        throw new Exception(SR.GetString(SR.Form_NestedForms,
-                            this.ID,
-                            parentForm.ID));
+                        throw new Exception(
+                            SR.GetString(SR.Form_NestedForms, this.ID, parentForm.ID)
+                        );
                     }
                 }
             }
-            
+
             base.OnInit(e);
         }
 
@@ -401,8 +362,11 @@ namespace System.Web.UI.MobileControls
             // More forms may have been linked than the total weight allows.
             // Remove these.
 
-            if (i != 0 &&  // i == 0 means only one form is in the list
-                i < set.Count)
+            if (
+                i != 0
+                && // i == 0 means only one form is in the list
+                i < set.Count
+            )
             {
                 for (int j = set.Count - 1; j >= i; j--)
                 {
@@ -414,7 +378,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.CreateDefaultTemplatedUI"]/*' />
-        public override void CreateDefaultTemplatedUI(bool doDataBind) 
+        public override void CreateDefaultTemplatedUI(bool doDataBind)
         {
             ITemplate headerTemplate = GetTemplate(Constants.HeaderTemplateTag);
             ITemplate footerTemplate = GetTemplate(Constants.FooterTemplateTag);
@@ -432,15 +396,15 @@ namespace System.Web.UI.MobileControls
             if (headerTemplate != null)
             {
                 _headerContainer = new TemplateContainer();
-                CheckedInstantiateTemplate (headerTemplate, _headerContainer, this);
+                CheckedInstantiateTemplate(headerTemplate, _headerContainer, this);
                 _headerContainer.EnablePagination = false;
                 Controls.AddAt(0, _headerContainer);
             }
-            
+
             if (footerTemplate != null)
             {
                 _footerContainer = new TemplateContainer();
-                CheckedInstantiateTemplate (footerTemplate, _footerContainer, this);
+                CheckedInstantiateTemplate(footerTemplate, _footerContainer, this);
                 _footerContainer.EnablePagination = false;
                 Controls.Add(_footerContainer);
             }
@@ -450,6 +414,7 @@ namespace System.Web.UI.MobileControls
         }
 
         private int _pageCount = -1;
+
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.PageCount"]/*' />
         [
             Bindable(false),
@@ -467,6 +432,7 @@ namespace System.Web.UI.MobileControls
         }
 
         private int _currentPage = 1;
+
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.CurrentPage"]/*' />
         [
             Bindable(false),
@@ -475,15 +441,12 @@ namespace System.Web.UI.MobileControls
         ]
         public int CurrentPage
         {
-            get
-            {
-                return _currentPage;
-            }
+            get { return _currentPage; }
             set
             {
-                if (_currentPage != value) 
+                if (_currentPage != value)
                 {
-                    OnPageChange (_currentPage, value);
+                    OnPageChange(_currentPage, value);
                 }
                 _currentPage = value;
                 _cachedCurrentPage = _currentPage;
@@ -505,15 +468,9 @@ namespace System.Web.UI.MobileControls
                 {
                     return true;
                 }
-                throw new Exception(
-                    SR.GetString(SR.Form_PropertyNotAccessible, "BreakAfter"));
+                throw new Exception(SR.GetString(SR.Form_PropertyNotAccessible, "BreakAfter"));
             }
-
-            set
-            {
-                throw new Exception(
-                    SR.GetString(SR.Form_PropertyNotSettable, "BreakAfter"));
-            }
+            set { throw new Exception(SR.GetString(SR.Form_PropertyNotSettable, "BreakAfter")); }
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.OnPreRender"]/*' />
@@ -527,7 +484,7 @@ namespace System.Web.UI.MobileControls
             // Clamp to 1 < _currentPage <= PageCount
 
             int page = Math.Max(Math.Min(_currentPage, _pageCount), 1);
-            if(_currentPage != page)
+            if (_currentPage != page)
             {
                 _currentPage = page;
             }
@@ -573,35 +530,39 @@ namespace System.Web.UI.MobileControls
                     base.PaginateRecursive(pager);
                     return pager.PageCount;
                 }
-                else if(ControlToPaginate != null)
+                else if (ControlToPaginate != null)
                 {
                     ControlPager pager = new ControlPager(this, pageWeight);
                     SetControlPage(1);
                     Control control = ControlToPaginate;
                     MobileControl ctp = control as MobileControl;
-                    if(ctp != null) 
+                    if (ctp != null)
                     {
                         ctp.PaginateRecursive(pager);
                     }
-                    else 
+                    else
                     {
                         int firstAssignedPage = -1;
                         DoPaginateChildren(pager, control, ref firstAssignedPage);
                     }
-                    while(control != this)
+                    while (control != this)
                     {
                         MobileControl mc = control as MobileControl;
-                        if(mc != null)
+                        if (mc != null)
                         {
-                            if(mc is Form)
+                            if (mc is Form)
                             {
-                                throw(new Exception(SR.GetString(SR.Form_InvalidControlToPaginateForm)));
+                                throw (
+                                    new Exception(
+                                        SR.GetString(SR.Form_InvalidControlToPaginateForm)
+                                    )
+                                );
                             }
                             if (mc.FirstPage > ctp.FirstPage)
                             {
                                 mc.FirstPage = ctp.FirstPage;
                             }
-                            if(mc.LastPage < ctp.LastPage)
+                            if (mc.LastPage < ctp.LastPage)
                             {
                                 mc.LastPage = ctp.LastPage;
                             }
@@ -609,18 +570,18 @@ namespace System.Web.UI.MobileControls
                         control = control.Parent;
                     }
                     this.LastPage = Math.Max(pager.PageCount, 1);
-                    if(Header != null)
+                    if (Header != null)
                     {
                         SetEnablePaginationRecursive(Header, false);
                     }
-                    if(Footer != null)
+                    if (Footer != null)
                     {
                         SetEnablePaginationRecursive(Footer, false);
                     }
                     return this.LastPage;
                 }
             }
-            
+
             return 1;
         }
 
@@ -637,9 +598,11 @@ namespace System.Web.UI.MobileControls
             String type = device.PreferredRenderingType;
             bool javascriptSupported = device.JavaScript;
 
-            return javascriptSupported || 
-                    (type != MobileCapabilities.PreferredRenderingTypeHtml32 &&
-                     type != MobileCapabilities.PreferredRenderingTypeChtml10);
+            return javascriptSupported
+                || (
+                    type != MobileCapabilities.PreferredRenderingTypeHtml32
+                    && type != MobileCapabilities.PreferredRenderingTypeChtml10
+                );
         }
 
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.PaginateRecursive"]/*' />
@@ -651,10 +614,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.PaginateChildren"]/*' />
         protected override bool PaginateChildren
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         private Control _controlToPaginate = null;
@@ -669,19 +629,21 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                if(_controlToPaginate != null)
+                if (_controlToPaginate != null)
                 {
                     return _controlToPaginate;
                 }
-                if(ViewState["ControlToPaginate"] != null)
+                if (ViewState["ControlToPaginate"] != null)
                 {
-                    _controlToPaginate = Page.FindControl((ViewState["ControlToPaginate"]).ToString());
+                    _controlToPaginate = Page.FindControl(
+                        (ViewState["ControlToPaginate"]).ToString()
+                    );
                 }
                 return _controlToPaginate;
             }
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     ViewState["ControlToPaginate"] = value.UniqueID;
                 }
@@ -716,7 +678,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\Form.uex' path='docs/doc[@for="Form.OnDataBinding"]/*' />
         protected override void OnDataBinding(EventArgs e)
         {
-            if(Script != null)
+            if (Script != null)
             {
                 Script.DataBind();
             }
@@ -724,6 +686,7 @@ namespace System.Web.UI.MobileControls
         }
 
         private IPostBackEventHandler _defaultEventHandler = null;
+
         internal void RegisterEventHandler(IPostBackEventHandler control)
         {
             if (_defaultEventHandler == null)
@@ -734,10 +697,7 @@ namespace System.Web.UI.MobileControls
 
         internal IPostBackEventHandler DefaultEventHandler
         {
-            get
-            {
-                return _defaultEventHandler;
-            }
+            get { return _defaultEventHandler; }
         }
 
         internal override void InvalidateParentStyles()
@@ -747,30 +707,43 @@ namespace System.Web.UI.MobileControls
         }
 
         #region IPostBackEventHandler implementation
-        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-        #endregion 
+        #endregion
     }
 
     /// <include file='doc\Form.uex' path='docs/doc[@for="FormControlBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class FormControlBuilder : LiteralTextContainerControlBuilder
     {
         /// <include file='doc\Form.uex' path='docs/doc[@for="FormControlBuilder.AppendSubBuilder"]/*' />
         public override void AppendSubBuilder(ControlBuilder subBuilder)
         {
             Type controlType = subBuilder.ControlType;
-            if(!(
-                 (subBuilder.GetType().FullName == "System.Web.UI.CodeBlockBuilder") ||
-                 (typeof(MobileControl).IsAssignableFrom(controlType)) ||
-                 (typeof(UserControl).IsAssignableFrom(controlType)) ||
-                 (typeof(DeviceSpecific).IsAssignableFrom(controlType))
-                 ))
+            if (
+                !(
+                    (subBuilder.GetType().FullName == "System.Web.UI.CodeBlockBuilder")
+                    || (typeof(MobileControl).IsAssignableFrom(controlType))
+                    || (typeof(UserControl).IsAssignableFrom(controlType))
+                    || (typeof(DeviceSpecific).IsAssignableFrom(controlType))
+                )
+            )
             {
-                throw(new Exception(SR.GetString(SR.Form_InvalidSubControlType, subBuilder.TagName)));
+                throw (
+                    new Exception(SR.GetString(SR.Form_InvalidSubControlType, subBuilder.TagName))
+                );
             }
             base.AppendSubBuilder(subBuilder);
         }

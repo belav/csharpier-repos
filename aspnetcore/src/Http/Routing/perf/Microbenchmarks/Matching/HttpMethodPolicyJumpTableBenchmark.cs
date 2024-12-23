@@ -22,8 +22,18 @@ public class HttpMethodPolicyJumpTableBenchmark
         _destinations.Add("MERGE", 10);
         var lookup = CreateLookup(_destinations);
 
-        _dictionaryJumptable = new HttpMethodDictionaryPolicyJumpTable(lookup, corsPreflightDestinations: null);
-        _singleEntryJumptable = new HttpMethodSingleEntryPolicyJumpTable(0, HttpMethods.Get, -1, supportsCorsPreflight: false, -1, 2);
+        _dictionaryJumptable = new HttpMethodDictionaryPolicyJumpTable(
+            lookup,
+            corsPreflightDestinations: null
+        );
+        _singleEntryJumptable = new HttpMethodSingleEntryPolicyJumpTable(
+            0,
+            HttpMethods.Get,
+            -1,
+            supportsCorsPreflight: false,
+            -1,
+            2
+        );
         _httpContext = new DefaultHttpContext();
         _httpContext.Request.Method = TestHttpMethod;
     }
@@ -40,7 +50,7 @@ public class HttpMethodPolicyJumpTableBenchmark
             KeyValuePair.Create(HttpMethods.Patch, 6),
             KeyValuePair.Create(HttpMethods.Put, 7),
             KeyValuePair.Create(HttpMethods.Post, 8),
-            KeyValuePair.Create(HttpMethods.Trace, 9)
+            KeyValuePair.Create(HttpMethods.Trace, 9),
         };
 
         foreach (var item in extra)

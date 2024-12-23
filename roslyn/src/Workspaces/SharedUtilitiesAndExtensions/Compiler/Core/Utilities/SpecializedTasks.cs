@@ -23,35 +23,64 @@ namespace Roslyn.Utilities
         [Obsolete("Use Task.CompletedTask instead which is available in the framework.")]
         public static readonly Task EmptyTask = Task.CompletedTask;
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
-        public static Task<T?> AsNullable<T>(this Task<T> task) where T : class
-            => task!;
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
+        public static Task<T?> AsNullable<T>(this Task<T> task)
+            where T : class => task!;
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
-        public static Task<T?> Default<T>()
-            => EmptyTasks<T>.Default;
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
+        public static Task<T?> Default<T>() => EmptyTasks<T>.Default;
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
-        public static Task<T?> Null<T>() where T : class
-            => Default<T>();
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
+        public static Task<T?> Null<T>()
+            where T : class => Default<T>();
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
-        public static Task<IReadOnlyList<T>> EmptyReadOnlyList<T>()
-            => EmptyTasks<T>.EmptyReadOnlyList;
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
+        public static Task<IReadOnlyList<T>> EmptyReadOnlyList<T>() =>
+            EmptyTasks<T>.EmptyReadOnlyList;
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
-        public static Task<IList<T>> EmptyList<T>()
-            => EmptyTasks<T>.EmptyList;
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
+        public static Task<IList<T>> EmptyList<T>() => EmptyTasks<T>.EmptyList;
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
-        public static Task<ImmutableArray<T>> EmptyImmutableArray<T>()
-            => EmptyTasks<T>.EmptyImmutableArray;
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
+        public static Task<ImmutableArray<T>> EmptyImmutableArray<T>() =>
+            EmptyTasks<T>.EmptyImmutableArray;
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
-        public static Task<IEnumerable<T>> EmptyEnumerable<T>()
-            => EmptyTasks<T>.EmptyEnumerable;
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
+        public static Task<IEnumerable<T>> EmptyEnumerable<T>() => EmptyTasks<T>.EmptyEnumerable;
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "Naming is modeled after Task.WhenAll.")]
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "Naming is modeled after Task.WhenAll."
+        )]
         public static ValueTask<T[]> WhenAll<T>(IEnumerable<ValueTask<T>> tasks)
         {
             var taskArray = tasks.AsArray();
@@ -84,8 +113,14 @@ namespace Roslyn.Utilities
             }
         }
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "Naming is modeled after Task.WhenAll.")]
-        public static async ValueTask<ImmutableArray<TResult>> WhenAll<TResult>(this IReadOnlyCollection<Task<TResult>> tasks)
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "Naming is modeled after Task.WhenAll."
+        )]
+        public static async ValueTask<ImmutableArray<TResult>> WhenAll<TResult>(
+            this IReadOnlyCollection<Task<TResult>> tasks
+        )
         {
             using var _ = ArrayBuilder<TResult>.GetInstance(tasks.Count, out var result);
 
@@ -121,11 +156,16 @@ namespace Roslyn.Utilities
         /// <param name="arg">The state to pass to <paramref name="func"/> and <paramref name="transform"/>.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> that the operation will observe.</param>
         /// <returns></returns>
-        public static ValueTask<TResult> TransformWithoutIntermediateCancellationExceptionAsync<TArg, TIntermediate, TResult>(
+        public static ValueTask<TResult> TransformWithoutIntermediateCancellationExceptionAsync<
+            TArg,
+            TIntermediate,
+            TResult
+        >(
             Func<TArg, CancellationToken, ValueTask<TIntermediate>> func,
             Func<TIntermediate, TArg, TResult> transform,
             TArg arg,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (func is null)
                 throw new ArgumentNullException(nameof(func));
@@ -150,10 +190,20 @@ namespace Roslyn.Utilities
             else
             {
                 // Asynchronous fallback path
-                return UnwrapAndTransformAsync(intermediateResult, transform, arg, cancellationToken);
+                return UnwrapAndTransformAsync(
+                    intermediateResult,
+                    transform,
+                    arg,
+                    cancellationToken
+                );
             }
 
-            static ValueTask<TResult> UnwrapAndTransformAsync(ValueTask<TIntermediate> intermediateResult, Func<TIntermediate, TArg, TResult> transform, TArg arg, CancellationToken cancellationToken)
+            static ValueTask<TResult> UnwrapAndTransformAsync(
+                ValueTask<TIntermediate> intermediateResult,
+                Func<TIntermediate, TArg, TResult> transform,
+                TArg arg,
+                CancellationToken cancellationToken
+            )
             {
                 // Apply the transformation function once a result is available. The behavior depends on the final
                 // status of 'intermediateResult' and the 'cancellationToken'.
@@ -174,21 +224,36 @@ namespace Roslyn.Utilities
                 //   instances. Indirect faults are exceptions captured by return an instance of
                 //   ValueTask<TIntermediate> which (immediately or eventually) transitions to the faulted state. The
                 //   direct fault behavior is currently handled without calling UnwrapAndTransformAsync.
-                return new ValueTask<TResult>(intermediateResult.AsTask().ContinueWith(
-                    task => transform(task.GetAwaiter().GetResult(), arg),
-                    cancellationToken,
-                    TaskContinuationOptions.LazyCancellation | TaskContinuationOptions.NotOnCanceled | TaskContinuationOptions.ExecuteSynchronously,
-                    TaskScheduler.Default));
+                return new ValueTask<TResult>(
+                    intermediateResult
+                        .AsTask()
+                        .ContinueWith(
+                            task => transform(task.GetAwaiter().GetResult(), arg),
+                            cancellationToken,
+                            TaskContinuationOptions.LazyCancellation
+                                | TaskContinuationOptions.NotOnCanceled
+                                | TaskContinuationOptions.ExecuteSynchronously,
+                            TaskScheduler.Default
+                        )
+                );
             }
         }
 
         private static class EmptyTasks<T>
         {
             public static readonly Task<T?> Default = Task.FromResult<T?>(default);
-            public static readonly Task<IEnumerable<T>> EmptyEnumerable = Task.FromResult<IEnumerable<T>>(SpecializedCollections.EmptyEnumerable<T>());
-            public static readonly Task<ImmutableArray<T>> EmptyImmutableArray = Task.FromResult(ImmutableArray<T>.Empty);
-            public static readonly Task<IList<T>> EmptyList = Task.FromResult(SpecializedCollections.EmptyList<T>());
-            public static readonly Task<IReadOnlyList<T>> EmptyReadOnlyList = Task.FromResult(SpecializedCollections.EmptyReadOnlyList<T>());
+            public static readonly Task<IEnumerable<T>> EmptyEnumerable = Task.FromResult<
+                IEnumerable<T>
+            >(SpecializedCollections.EmptyEnumerable<T>());
+            public static readonly Task<ImmutableArray<T>> EmptyImmutableArray = Task.FromResult(
+                ImmutableArray<T>.Empty
+            );
+            public static readonly Task<IList<T>> EmptyList = Task.FromResult(
+                SpecializedCollections.EmptyList<T>()
+            );
+            public static readonly Task<IReadOnlyList<T>> EmptyReadOnlyList = Task.FromResult(
+                SpecializedCollections.EmptyReadOnlyList<T>()
+            );
         }
     }
 }

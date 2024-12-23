@@ -9,19 +9,27 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-[ExportEventListener(
-    WellKnownEventListeners.Workspace,
-    WorkspaceKind.Host,
-    WorkspaceKind.MiscellaneousFiles,
-    WorkspaceKind.MetadataAsSource,
-    WorkspaceKind.Interactive), Shared]
-internal sealed class LspWorkspaceRegistrationEventListener : IEventListener<object>, IEventListenerStoppable
+[
+    ExportEventListener(
+        WellKnownEventListeners.Workspace,
+        WorkspaceKind.Host,
+        WorkspaceKind.MiscellaneousFiles,
+        WorkspaceKind.MetadataAsSource,
+        WorkspaceKind.Interactive
+    ),
+    Shared
+]
+internal sealed class LspWorkspaceRegistrationEventListener
+    : IEventListener<object>,
+        IEventListenerStoppable
 {
     private readonly LspWorkspaceRegistrationService _lspWorkspaceRegistrationService;
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LspWorkspaceRegistrationEventListener(LspWorkspaceRegistrationService lspWorkspaceRegistrationService)
+    public LspWorkspaceRegistrationEventListener(
+        LspWorkspaceRegistrationService lspWorkspaceRegistrationService
+    )
     {
         _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
     }
@@ -36,4 +44,3 @@ internal sealed class LspWorkspaceRegistrationEventListener : IEventListener<obj
         _lspWorkspaceRegistrationService.Deregister(workspace);
     }
 }
-

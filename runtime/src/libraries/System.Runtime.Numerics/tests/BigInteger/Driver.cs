@@ -297,33 +297,168 @@ namespace System.Numerics.Tests
             results[30][8] = MyBigIntImp.DoBinaryOperatorMine(b3, b3, "b+");
             // ...ModPow
             results[31] = new BigInteger[27];
-            results[31][0] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b1 < 0 ? -b1 : b1), b1, "tModPow");
-            results[31][1] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b1 < 0 ? -b1 : b1), b2, "tModPow");
-            results[31][2] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b1 < 0 ? -b1 : b1), b3, "tModPow");
-            results[31][3] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b2 < 0 ? -b2 : b2), b1, "tModPow");
-            results[31][4] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b2 < 0 ? -b2 : b2), b2, "tModPow");
-            results[31][5] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b2 < 0 ? -b2 : b2), b3, "tModPow");
-            results[31][6] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b3 < 0 ? -b3 : b3), b1, "tModPow");
-            results[31][7] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b3 < 0 ? -b3 : b3), b2, "tModPow");
-            results[31][8] = MyBigIntImp.DoTertanaryOperatorMine(b1, (b3 < 0 ? -b3 : b3), b3, "tModPow");
-            results[31][9] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b1 < 0 ? -b1 : b1), b1, "tModPow");
-            results[31][10] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b1 < 0 ? -b1 : b1), b2, "tModPow");
-            results[31][11] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b1 < 0 ? -b1 : b1), b3, "tModPow");
-            results[31][12] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b2 < 0 ? -b2 : b2), b1, "tModPow");
-            results[31][13] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b2 < 0 ? -b2 : b2), b2, "tModPow");
-            results[31][14] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b2 < 0 ? -b2 : b2), b3, "tModPow");
-            results[31][15] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b3 < 0 ? -b3 : b3), b1, "tModPow");
-            results[31][16] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b3 < 0 ? -b3 : b3), b2, "tModPow");
-            results[31][17] = MyBigIntImp.DoTertanaryOperatorMine(b2, (b3 < 0 ? -b3 : b3), b3, "tModPow");
-            results[31][18] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b1 < 0 ? -b1 : b1), b1, "tModPow");
-            results[31][19] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b1 < 0 ? -b1 : b1), b2, "tModPow");
-            results[31][20] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b1 < 0 ? -b1 : b1), b3, "tModPow");
-            results[31][21] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b2 < 0 ? -b2 : b2), b1, "tModPow");
-            results[31][22] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b2 < 0 ? -b2 : b2), b2, "tModPow");
-            results[31][23] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b2 < 0 ? -b2 : b2), b3, "tModPow");
-            results[31][24] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b3 < 0 ? -b3 : b3), b1, "tModPow");
-            results[31][25] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b3 < 0 ? -b3 : b3), b2, "tModPow");
-            results[31][26] = MyBigIntImp.DoTertanaryOperatorMine(b3, (b3 < 0 ? -b3 : b3), b3, "tModPow");
+            results[31][0] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b1 < 0 ? -b1 : b1),
+                b1,
+                "tModPow"
+            );
+            results[31][1] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b1 < 0 ? -b1 : b1),
+                b2,
+                "tModPow"
+            );
+            results[31][2] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b1 < 0 ? -b1 : b1),
+                b3,
+                "tModPow"
+            );
+            results[31][3] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b2 < 0 ? -b2 : b2),
+                b1,
+                "tModPow"
+            );
+            results[31][4] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b2 < 0 ? -b2 : b2),
+                b2,
+                "tModPow"
+            );
+            results[31][5] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b2 < 0 ? -b2 : b2),
+                b3,
+                "tModPow"
+            );
+            results[31][6] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b3 < 0 ? -b3 : b3),
+                b1,
+                "tModPow"
+            );
+            results[31][7] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b3 < 0 ? -b3 : b3),
+                b2,
+                "tModPow"
+            );
+            results[31][8] = MyBigIntImp.DoTertanaryOperatorMine(
+                b1,
+                (b3 < 0 ? -b3 : b3),
+                b3,
+                "tModPow"
+            );
+            results[31][9] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b1 < 0 ? -b1 : b1),
+                b1,
+                "tModPow"
+            );
+            results[31][10] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b1 < 0 ? -b1 : b1),
+                b2,
+                "tModPow"
+            );
+            results[31][11] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b1 < 0 ? -b1 : b1),
+                b3,
+                "tModPow"
+            );
+            results[31][12] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b2 < 0 ? -b2 : b2),
+                b1,
+                "tModPow"
+            );
+            results[31][13] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b2 < 0 ? -b2 : b2),
+                b2,
+                "tModPow"
+            );
+            results[31][14] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b2 < 0 ? -b2 : b2),
+                b3,
+                "tModPow"
+            );
+            results[31][15] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b3 < 0 ? -b3 : b3),
+                b1,
+                "tModPow"
+            );
+            results[31][16] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b3 < 0 ? -b3 : b3),
+                b2,
+                "tModPow"
+            );
+            results[31][17] = MyBigIntImp.DoTertanaryOperatorMine(
+                b2,
+                (b3 < 0 ? -b3 : b3),
+                b3,
+                "tModPow"
+            );
+            results[31][18] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b1 < 0 ? -b1 : b1),
+                b1,
+                "tModPow"
+            );
+            results[31][19] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b1 < 0 ? -b1 : b1),
+                b2,
+                "tModPow"
+            );
+            results[31][20] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b1 < 0 ? -b1 : b1),
+                b3,
+                "tModPow"
+            );
+            results[31][21] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b2 < 0 ? -b2 : b2),
+                b1,
+                "tModPow"
+            );
+            results[31][22] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b2 < 0 ? -b2 : b2),
+                b2,
+                "tModPow"
+            );
+            results[31][23] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b2 < 0 ? -b2 : b2),
+                b3,
+                "tModPow"
+            );
+            results[31][24] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b3 < 0 ? -b3 : b3),
+                b1,
+                "tModPow"
+            );
+            results[31][25] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b3 < 0 ? -b3 : b3),
+                b2,
+                "tModPow"
+            );
+            results[31][26] = MyBigIntImp.DoTertanaryOperatorMine(
+                b3,
+                (b3 < 0 ? -b3 : b3),
+                b3,
+                "tModPow"
+            );
 
             for (int i = 0; i < cycles; i++)
             {
@@ -368,11 +503,7 @@ namespace System.Numerics.Tests
         private Random random;
         private int id;
 
-        public bool Valid
-        {
-            get;
-            set;
-        }
+        public bool Valid { get; set; }
 
         public Worker(Random r, int i)
         {
@@ -389,41 +520,198 @@ namespace System.Numerics.Tests
             BigInteger b3 = Driver.b3;
             BigInteger[][] results = Driver.results;
 
-            var threeOrderOperations = new Action<BigInteger, BigInteger>[] {
-                new Action<BigInteger, BigInteger>((a, expected) => { Sign(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Op_Not(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Log10(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Log(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Abs(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Op_Decrement(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Op_Increment(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Negate(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Op_Negate(a, expected); }),
-                new Action<BigInteger, BigInteger>((a, expected) => { Op_Plus(a, expected); })
+            var threeOrderOperations = new Action<BigInteger, BigInteger>[]
+            {
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Sign(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Op_Not(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Log10(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Log(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Abs(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Op_Decrement(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Op_Increment(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Negate(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Op_Negate(a, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger>(
+                    (a, expected) =>
+                    {
+                        Op_Plus(a, expected);
+                    }
+                ),
             };
 
-            var nineOrderOperations = new Action<BigInteger, BigInteger, BigInteger>[] {
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Min(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Max(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_RightShift(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_LeftShift(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_Xor(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_Or(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_And(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Log(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { GCD(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Pow(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { DivRem(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Remainder(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_Modulus(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Divide(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_Divide(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Multiply(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_Multiply(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Subtract(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_Subtract(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Add(a, b, expected); }),
-                new Action<BigInteger, BigInteger, BigInteger>((a, b, expected) => { Op_Add(a, b, expected); })
+            var nineOrderOperations = new Action<BigInteger, BigInteger, BigInteger>[]
+            {
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Min(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Max(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_RightShift(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_LeftShift(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_Xor(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_Or(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_And(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Log(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        GCD(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Pow(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        DivRem(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Remainder(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_Modulus(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Divide(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_Divide(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Multiply(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_Multiply(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Subtract(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_Subtract(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Add(a, b, expected);
+                    }
+                ),
+                new Action<BigInteger, BigInteger, BigInteger>(
+                    (a, b, expected) =>
+                    {
+                        Op_Add(a, b, expected);
+                    }
+                ),
             };
 
             Stopwatch stopWatch = new Stopwatch();
@@ -436,9 +724,7 @@ namespace System.Numerics.Tests
                 do
                 {
                     op = random.Next(0, 32);
-                }
-                while (op == 19);
-
+                } while (op == 19);
 
                 int order = random.Next(0, 27);
                 switch (op)
@@ -493,31 +779,31 @@ namespace System.Numerics.Tests
                         switch (order % 9)
                         {
                             case 0:
-                                nineOrderOperations[op-10](b1, b1, results[op][0]);
+                                nineOrderOperations[op - 10](b1, b1, results[op][0]);
                                 break;
                             case 1:
-                                nineOrderOperations[op-10](b1, b2, results[op][1]);
+                                nineOrderOperations[op - 10](b1, b2, results[op][1]);
                                 break;
                             case 2:
-                                nineOrderOperations[op-10](b1, b3, results[op][2]);
+                                nineOrderOperations[op - 10](b1, b3, results[op][2]);
                                 break;
                             case 3:
-                                nineOrderOperations[op-10](b2, b1, results[op][3]);
+                                nineOrderOperations[op - 10](b2, b1, results[op][3]);
                                 break;
                             case 4:
-                                nineOrderOperations[op-10](b2, b2, results[op][4]);
+                                nineOrderOperations[op - 10](b2, b2, results[op][4]);
                                 break;
                             case 5:
-                                nineOrderOperations[op-10](b2, b3, results[op][5]);
+                                nineOrderOperations[op - 10](b2, b3, results[op][5]);
                                 break;
                             case 6:
-                                nineOrderOperations[op-10](b3, b1, results[op][6]);
+                                nineOrderOperations[op - 10](b3, b1, results[op][6]);
                                 break;
                             case 7:
-                                nineOrderOperations[op-10](b3, b2, results[op][7]);
+                                nineOrderOperations[op - 10](b3, b2, results[op][7]);
                                 break;
                             case 8:
-                                nineOrderOperations[op-10](b3, b3, results[op][8]);
+                                nineOrderOperations[op - 10](b3, b3, results[op][8]);
                                 break;
                             default:
                                 Valid = false;
@@ -618,7 +904,15 @@ namespace System.Numerics.Tests
                         break;
                 }
 
-                Assert.True(Valid, string.Format("Cycle {0} corrupted with operation {1} on order {2}", id, op, order));
+                Assert.True(
+                    Valid,
+                    string.Format(
+                        "Cycle {0} corrupted with operation {1} on order {2}",
+                        id,
+                        op,
+                        order
+                    )
+                );
             }
         }
 

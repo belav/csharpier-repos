@@ -11,8 +11,11 @@ namespace System.Web.Mvc.Test
         public void ConstructorThrowsIfDurationIsOutOfRange()
         {
             // Act & assert
-            Assert.ThrowsArgumentOutOfRange(() => new AsyncTimeoutAttribute(-1000), "duration",
-                @"The timeout value must be non-negative or Timeout.Infinite.");
+            Assert.ThrowsArgumentOutOfRange(
+                () => new AsyncTimeoutAttribute(-1000),
+                "duration",
+                @"The timeout value must be non-negative or Timeout.Infinite."
+            );
         }
 
         [Fact]
@@ -36,7 +39,7 @@ namespace System.Web.Mvc.Test
 
             ActionExecutingContext filterContext = new ActionExecutingContext()
             {
-                Controller = controller
+                Controller = controller,
             };
 
             // Act
@@ -54,13 +57,17 @@ namespace System.Web.Mvc.Test
 
             ActionExecutingContext filterContext = new ActionExecutingContext()
             {
-                Controller = new MyController()
+                Controller = new MyController(),
             };
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { attr.OnActionExecuting(filterContext); },
-                @"The controller of type 'System.Web.Mvc.Test.AsyncTimeoutAttributeTest+MyController' must subclass AsyncController or implement the IAsyncManagerContainer interface.");
+                delegate
+                {
+                    attr.OnActionExecuting(filterContext);
+                },
+                @"The controller of type 'System.Web.Mvc.Test.AsyncTimeoutAttributeTest+MyController' must subclass AsyncController or implement the IAsyncManagerContainer interface."
+            );
         }
 
         [Fact]
@@ -71,7 +78,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnActionExecuting(null); }, "filterContext");
+                delegate
+                {
+                    attr.OnActionExecuting(null);
+                },
+                "filterContext"
+            );
         }
 
         private class MyController : ControllerBase
@@ -82,8 +94,6 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private class MyAsyncController : AsyncController
-        {
-        }
+        private class MyAsyncController : AsyncController { }
     }
 }

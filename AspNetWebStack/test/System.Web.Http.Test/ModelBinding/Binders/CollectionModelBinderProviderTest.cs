@@ -17,12 +17,12 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(IEnumerable<int>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(IEnumerable<int>)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider
-                {
-                    { "foo[0]", "42" },
-                }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" } },
             };
 
             CollectionModelBinderProvider binderProvider = new CollectionModelBinderProvider();
@@ -40,12 +40,12 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider
-                {
-                    { "foo[0]", "42" },
-                }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" } },
             };
 
             CollectionModelBinderProvider binderProvider = new CollectionModelBinderProvider();
@@ -89,9 +89,12 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(IEnumerable<int>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(IEnumerable<int>)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
 
             CollectionModelBinderProvider binderProvider = new CollectionModelBinderProvider();

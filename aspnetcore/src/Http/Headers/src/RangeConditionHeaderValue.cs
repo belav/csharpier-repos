@@ -12,8 +12,8 @@ namespace Microsoft.Net.Http.Headers;
 /// </summary>
 public class RangeConditionHeaderValue
 {
-    private static readonly HttpHeaderParser<RangeConditionHeaderValue> Parser
-        = new GenericHeaderParser<RangeConditionHeaderValue>(false, GetRangeConditionLength);
+    private static readonly HttpHeaderParser<RangeConditionHeaderValue> Parser =
+        new GenericHeaderParser<RangeConditionHeaderValue>(false, GetRangeConditionLength);
 
     private DateTimeOffset? _lastModified;
     private EntityTagHeaderValue? _entityTag;
@@ -48,9 +48,7 @@ public class RangeConditionHeaderValue
     /// </summary>
     /// <param name="entityTag">An entity tag uniquely representing the requested resource.</param>
     public RangeConditionHeaderValue(string? entityTag)
-        : this(new EntityTagHeaderValue(entityTag))
-    {
-    }
+        : this(new EntityTagHeaderValue(entityTag)) { }
 
     /// <summary>
     /// Gets the LastModified date from header.
@@ -90,7 +88,8 @@ public class RangeConditionHeaderValue
 
         if (_entityTag == null)
         {
-            return (other._lastModified != null) && (_lastModified.GetValueOrDefault() == other._lastModified.GetValueOrDefault());
+            return (other._lastModified != null)
+                && (_lastModified.GetValueOrDefault() == other._lastModified.GetValueOrDefault());
         }
 
         return _entityTag.Equals(other._entityTag);
@@ -124,13 +123,20 @@ public class RangeConditionHeaderValue
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
     /// <returns><see langword="true"/> if input is a valid <see cref="RangeConditionHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParse(StringSegment input, [NotNullWhen(true)] out RangeConditionHeaderValue? parsedValue)
+    public static bool TryParse(
+        StringSegment input,
+        [NotNullWhen(true)] out RangeConditionHeaderValue? parsedValue
+    )
     {
         var index = 0;
         return Parser.TryParseValue(input, ref index, out parsedValue!);
     }
 
-    private static int GetRangeConditionLength(StringSegment input, int startIndex, out RangeConditionHeaderValue? parsedValue)
+    private static int GetRangeConditionLength(
+        StringSegment input,
+        int startIndex,
+        out RangeConditionHeaderValue? parsedValue
+    )
     {
         Contract.Requires(startIndex >= 0);
 
@@ -153,10 +159,17 @@ public class RangeConditionHeaderValue
         var firstChar = input[current];
         var secondChar = input[current + 1];
 
-        if ((firstChar == '\"') || (((firstChar == 'w') || (firstChar == 'W')) && (secondChar == '/')))
+        if (
+            (firstChar == '\"')
+            || (((firstChar == 'w') || (firstChar == 'W')) && (secondChar == '/'))
+        )
         {
             // trailing whitespaces are removed by GetEntityTagLength()
-            var entityTagLength = EntityTagHeaderValue.GetEntityTagLength(input, current, out entityTag);
+            var entityTagLength = EntityTagHeaderValue.GetEntityTagLength(
+                input,
+                current,
+                out entityTag
+            );
 
             if (entityTagLength == 0)
             {

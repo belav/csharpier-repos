@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
-    
+    using System.ServiceModel.Channels;
+
     public interface IMessageFilterTable<TFilterData> : IDictionary<MessageFilter, TFilterData>
     {
         // return a single match
@@ -23,5 +23,5 @@ namespace System.ServiceModel.Dispatcher
         bool GetMatchingFilter(MessageBuffer messageBuffer, out MessageFilter filter);
         bool GetMatchingFilters(Message message, ICollection<MessageFilter> results);
         bool GetMatchingFilters(MessageBuffer messageBuffer, ICollection<MessageFilter> results);
-    }    
+    }
 }

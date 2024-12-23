@@ -2,16 +2,21 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.AspNetCore.Http.RequestDelegateGenerator.StaticRouteHandlerModel.Emitters;
+
 internal static class EndpointEmitter
 {
-    internal static string EmitParameterPreparation(this IEnumerable<EndpointParameter> endpointParameters, EmitterContext emitterContext, int baseIndent = 0)
+    internal static string EmitParameterPreparation(
+        this IEnumerable<EndpointParameter> endpointParameters,
+        EmitterContext emitterContext,
+        int baseIndent = 0
+    )
     {
         using var stringWriter = new StringWriter(CultureInfo.InvariantCulture);
         using var parameterPreparationBuilder = new CodeWriter(stringWriter, baseIndent);
@@ -43,13 +48,20 @@ internal static class EndpointEmitter
                     parameter.EmitJsonBodyParameterPreparationString(parameterPreparationBuilder);
                     break;
                 case EndpointParameterSource.FormBody:
-                    parameter.EmitFormParameterPreparation(parameterPreparationBuilder, ref readFormEmitted);
+                    parameter.EmitFormParameterPreparation(
+                        parameterPreparationBuilder,
+                        ref readFormEmitted
+                    );
                     break;
                 case EndpointParameterSource.JsonBodyOrService:
-                    parameter.EmitJsonBodyOrServiceParameterPreparationString(parameterPreparationBuilder);
+                    parameter.EmitJsonBodyOrServiceParameterPreparationString(
+                        parameterPreparationBuilder
+                    );
                     break;
                 case EndpointParameterSource.JsonBodyOrQuery:
-                    parameter.EmitJsonBodyOrQueryParameterPreparationString(parameterPreparationBuilder);
+                    parameter.EmitJsonBodyOrQueryParameterPreparationString(
+                        parameterPreparationBuilder
+                    );
                     break;
                 case EndpointParameterSource.Service:
                     parameter.EmitServiceParameterPreparation(parameterPreparationBuilder);
@@ -58,7 +70,10 @@ internal static class EndpointEmitter
                     parameter.EmitKeyedServiceParameterPreparation(parameterPreparationBuilder);
                     break;
                 case EndpointParameterSource.AsParameters:
-                    parameter.EmitAsParametersParameterPreparation(parameterPreparationBuilder, emitterContext);
+                    parameter.EmitAsParametersParameterPreparation(
+                        parameterPreparationBuilder,
+                        emitterContext
+                    );
                     break;
             }
         }
@@ -71,7 +86,13 @@ internal static class EndpointEmitter
         foreach (var parameter in endpoint.Parameters)
         {
             ProcessParameter(parameter, codeWriter, endpoint);
-            if (parameter is { Source: EndpointParameterSource.AsParameters, EndpointParameters: {} innerParameters })
+            if (
+                parameter is
+                {
+                    Source: EndpointParameterSource.AsParameters,
+                    EndpointParameters: { } innerParameters
+                }
+            )
             {
                 foreach (var innerParameter in innerParameters)
                 {
@@ -80,13 +101,19 @@ internal static class EndpointEmitter
             }
         }
 
-        static void ProcessParameter(EndpointParameter parameter, CodeWriter codeWriter, Endpoint endpoint)
+        static void ProcessParameter(
+            EndpointParameter parameter,
+            CodeWriter codeWriter,
+            Endpoint endpoint
+        )
         {
             if (parameter.Source == EndpointParameterSource.RouteOrQuery)
             {
                 var parameterName = parameter.SymbolName;
                 codeWriter.Write($@"var {parameterName}_RouteOrQueryResolver = ");
-                codeWriter.WriteLine($@"GeneratedRouteBuilderExtensionsCore.ResolveFromRouteOrQuery(""{parameterName}"", options.RouteParameterNames);");
+                codeWriter.WriteLine(
+                    $@"GeneratedRouteBuilderExtensionsCore.ResolveFromRouteOrQuery(""{parameterName}"", options.RouteParameterNames);"
+                );
                 endpoint.EmitterContext.HasRouteOrQuery = true;
             }
         }
@@ -98,7 +125,13 @@ internal static class EndpointEmitter
         foreach (var parameter in endpoint.Parameters)
         {
             ProcessParameter(parameter, codeWriter, ref serviceProviderEmitted);
-            if (parameter is { Source: EndpointParameterSource.AsParameters, EndpointParameters: {} innerParameters })
+            if (
+                parameter is
+                {
+                    Source: EndpointParameterSource.AsParameters,
+                    EndpointParameters: { } innerParameters
+                }
+            )
             {
                 foreach (var innerParameter in innerParameters)
                 {
@@ -107,18 +140,28 @@ internal static class EndpointEmitter
             }
         }
 
-        static void ProcessParameter(EndpointParameter parameter, CodeWriter codeWriter, ref bool serviceProviderEmitted)
+        static void ProcessParameter(
+            EndpointParameter parameter,
+            CodeWriter codeWriter,
+            ref bool serviceProviderEmitted
+        )
         {
             if (parameter.Source == EndpointParameterSource.JsonBodyOrService)
             {
                 if (!serviceProviderEmitted)
                 {
-                    codeWriter.WriteLine("var serviceProviderIsService = serviceProvider?.GetService<IServiceProviderIsService>();");
+                    codeWriter.WriteLine(
+                        "var serviceProviderIsService = serviceProvider?.GetService<IServiceProviderIsService>();"
+                    );
                     serviceProviderEmitted = true;
                 }
                 codeWriter.Write($@"var {parameter.SymbolName}_JsonBodyOrServiceResolver = ");
-                var shortParameterTypeName = parameter.Type.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat);
-                codeWriter.WriteLine($"ResolveJsonBodyOrService<{parameter.Type.ToDisplayString(EmitterConstants.DisplayFormat)}>(logOrThrowExceptionHelper, {SymbolDisplay.FormatLiteral(shortParameterTypeName, true)}, {SymbolDisplay.FormatLiteral(parameter.SymbolName, true)}, jsonSerializerOptions, serviceProviderIsService);");
+                var shortParameterTypeName = parameter.Type.ToDisplayString(
+                    SymbolDisplayFormat.CSharpShortErrorMessageFormat
+                );
+                codeWriter.WriteLine(
+                    $"ResolveJsonBodyOrService<{parameter.Type.ToDisplayString(EmitterConstants.DisplayFormat)}>(logOrThrowExceptionHelper, {SymbolDisplay.FormatLiteral(shortParameterTypeName, true)}, {SymbolDisplay.FormatLiteral(parameter.SymbolName, true)}, jsonSerializerOptions, serviceProviderIsService);"
+                );
             }
         }
     }
@@ -127,9 +170,12 @@ internal static class EndpointEmitter
     {
         if (endpoint.EmitterContext.RequiresLoggingHelper)
         {
-            codeWriter.WriteLine("var logOrThrowExceptionHelper = new LogOrThrowExceptionHelper(serviceProvider, options);");
+            codeWriter.WriteLine(
+                "var logOrThrowExceptionHelper = new LogOrThrowExceptionHelper(serviceProvider, options);"
+            );
         }
     }
 
-    public static string EmitArgumentList(this Endpoint endpoint) => string.Join(", ", endpoint.Parameters.Select(p => p.EmitArgument()));
+    public static string EmitArgumentList(this Endpoint endpoint) =>
+        string.Join(", ", endpoint.Parameters.Select(p => p.EmitArgument()));
 }

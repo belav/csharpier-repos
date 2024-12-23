@@ -9,22 +9,26 @@ namespace Microsoft.AspNetCore.Certificates.Generation;
 
 internal sealed class UnixCertificateManager : CertificateManager
 {
-    public UnixCertificateManager()
-    {
-    }
+    public UnixCertificateManager() { }
 
     internal UnixCertificateManager(string subject, int version)
-        : base(subject, version)
-    {
-    }
+        : base(subject, version) { }
 
     public override bool IsTrusted(X509Certificate2 certificate) => false;
 
-    protected override X509Certificate2 SaveCertificateCore(X509Certificate2 certificate, StoreName storeName, StoreLocation storeLocation)
+    protected override X509Certificate2 SaveCertificateCore(
+        X509Certificate2 certificate,
+        StoreName storeName,
+        StoreLocation storeLocation
+    )
     {
         var export = certificate.Export(X509ContentType.Pkcs12, "");
         certificate.Dispose();
-        certificate = new X509Certificate2(export, "", X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+        certificate = new X509Certificate2(
+            export,
+            "",
+            X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable
+        );
         Array.Clear(export, 0, export.Length);
 
         using (var store = new X509Store(storeName, storeLocation))
@@ -32,12 +36,16 @@ internal sealed class UnixCertificateManager : CertificateManager
             store.Open(OpenFlags.ReadWrite);
             store.Add(certificate);
             store.Close();
-        };
+        }
+        ;
 
         return certificate;
     }
 
-    internal override CheckCertificateStateResult CheckCertificateState(X509Certificate2 candidate, bool interactive)
+    internal override CheckCertificateStateResult CheckCertificateState(
+        X509Certificate2 candidate,
+        bool interactive
+    )
     {
         // Return true as we don't perform any check.
         return new CheckCertificateStateResult(true, null);
@@ -58,8 +66,16 @@ internal sealed class UnixCertificateManager : CertificateManager
         // No-op here as is benign
     }
 
-    protected override IList<X509Certificate2> GetCertificatesToRemove(StoreName storeName, StoreLocation storeLocation)
+    protected override IList<X509Certificate2> GetCertificatesToRemove(
+        StoreName storeName,
+        StoreLocation storeLocation
+    )
     {
-        return ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false, requireExportable: false);
+        return ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: false,
+            requireExportable: false
+        );
     }
 }

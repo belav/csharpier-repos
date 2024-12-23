@@ -12,7 +12,8 @@ public class PocoUserLogin : PocoUserLogin<string> { }
 ///     Entity type for a user's login (i.e. facebook, google)
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public class PocoUserLogin<TKey> where TKey : IEquatable<TKey>
+public class PocoUserLogin<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     The login provider for the login (i.e. facebook, google)

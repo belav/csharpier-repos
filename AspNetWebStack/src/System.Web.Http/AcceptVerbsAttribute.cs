@@ -12,24 +12,26 @@ namespace System.Web.Http
     /// <summary>
     /// Specifies what HTTP methods an action supports.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "The accessor is exposed as an Collection<HttpMethod>.")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1019:DefineAccessorsForAttributeArguments",
+        Justification = "The accessor is exposed as an Collection<HttpMethod>."
+    )]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public sealed class AcceptVerbsAttribute : Attribute, IActionHttpMethodProvider
     {
         private readonly Collection<HttpMethod> _httpMethods;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AcceptVerbsAttribute" /> class.        
+        /// Initializes a new instance of the <see cref="AcceptVerbsAttribute" /> class.
         /// </summary>
         /// <param name="method">The HTTP method the action supports.</param>
         /// <remarks>
         /// This is a CLS compliant constructor.
         /// </remarks>
         public AcceptVerbsAttribute(string method)
-            : this(new string[] { method })
-        {
-        }
-        
+            : this(new string[] { method }) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AcceptVerbsAttribute" /> class.
         /// </summary>
@@ -39,9 +41,12 @@ namespace System.Web.Http
         /// </remarks>
         public AcceptVerbsAttribute(params string[] methods)
         {
-            _httpMethods = methods != null
-                                   ? new Collection<HttpMethod>(methods.Select(method => HttpMethodHelper.GetHttpMethod(method)).ToArray())
-                                   : new Collection<HttpMethod>(new HttpMethod[0]);
+            _httpMethods =
+                methods != null
+                    ? new Collection<HttpMethod>(
+                        methods.Select(method => HttpMethodHelper.GetHttpMethod(method)).ToArray()
+                    )
+                    : new Collection<HttpMethod>(new HttpMethod[0]);
         }
 
         /// <summary>
@@ -58,10 +63,7 @@ namespace System.Web.Http
         /// </summary>
         public Collection<HttpMethod> HttpMethods
         {
-            get
-            {
-                return _httpMethods;
-            }
+            get { return _httpMethods; }
         }
     }
 }

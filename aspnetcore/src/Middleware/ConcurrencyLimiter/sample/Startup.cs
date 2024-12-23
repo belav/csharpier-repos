@@ -32,9 +32,7 @@ public class Startup
         return new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                .UseKestrel()
-                .UseStartup<Startup>();
+                webHostBuilder.UseKestrel().UseStartup<Startup>();
             })
             .Build()
             .RunAsync();

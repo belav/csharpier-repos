@@ -15,21 +15,39 @@ namespace System.Security.Principal
 {
     internal static class Win32
     {
-        internal static int OpenThreadToken(TokenAccessLevels dwDesiredAccess, WinSecurityContext dwOpenAs, out SafeTokenHandle? phThreadToken)
+        internal static int OpenThreadToken(
+            TokenAccessLevels dwDesiredAccess,
+            WinSecurityContext dwOpenAs,
+            out SafeTokenHandle? phThreadToken
+        )
         {
             int hr = 0;
             bool openAsSelf = true;
             if (dwOpenAs == WinSecurityContext.Thread)
                 openAsSelf = false;
 
-            if (!Interop.Advapi32.OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken))
+            if (
+                !Interop.Advapi32.OpenThreadToken(
+                    (IntPtr)(-2),
+                    dwDesiredAccess,
+                    openAsSelf,
+                    out phThreadToken
+                )
+            )
             {
                 if (dwOpenAs == WinSecurityContext.Both)
                 {
                     openAsSelf = false;
                     hr = 0;
                     phThreadToken.Dispose();
-                    if (!Interop.Advapi32.OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken))
+                    if (
+                        !Interop.Advapi32.OpenThreadToken(
+                            (IntPtr)(-2),
+                            dwDesiredAccess,
+                            openAsSelf,
+                            out phThreadToken
+                        )
+                    )
                         hr = Marshal.GetHRForLastWin32Error();
                 }
                 else
@@ -64,12 +82,14 @@ namespace System.Security.Principal
     {
         Thread = 1, // OpenAsSelf = false
         Process = 2, // OpenAsSelf = true
-        Both = 3 // OpenAsSelf = true, then OpenAsSelf = false
+        Both =
+            3 // OpenAsSelf = true, then OpenAsSelf = false
+        ,
     }
 
     internal enum TokenType : int
     {
         TokenPrimary = 1,
-        TokenImpersonation
+        TokenImpersonation,
     }
 }

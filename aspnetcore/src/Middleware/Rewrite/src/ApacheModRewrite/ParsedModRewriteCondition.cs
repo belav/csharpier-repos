@@ -12,7 +12,12 @@ internal sealed class ParsedModRewriteInput
 
     public ParsedModRewriteInput() { }
 
-    public ParsedModRewriteInput(bool invert, ConditionType conditionType, OperationType operationType, string? operand)
+    public ParsedModRewriteInput(
+        bool invert,
+        ConditionType conditionType,
+        OperationType operationType,
+        string? operand
+    )
     {
         Invert = invert;
         ConditionType = conditionType;

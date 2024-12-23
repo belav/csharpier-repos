@@ -34,8 +34,8 @@ namespace System.Activities.Debugger
 
         internal object EvaluateExpression(string expressionString)
         {
-            // This is to shortcircuit a common case where 
-            // internally, vsdebugger calls our EE with literal "0"            
+            // This is to shortcircuit a common case where
+            // internally, vsdebugger calls our EE with literal "0"
             int intResult;
             if (int.TryParse(expressionString, out intResult))
             {
@@ -45,7 +45,10 @@ namespace System.Activities.Debugger
             // At refresh, Expression Evaluator may re-evaluate locals/arguments.
             // To speed up the process, locals/arguments are cached.
             LocalInfo cachedLocalInfo = null;
-            if (this.cachedLocalInfos != null && this.cachedLocalInfos.TryGetValue(expressionString, out cachedLocalInfo))
+            if (
+                this.cachedLocalInfos != null
+                && this.cachedLocalInfos.TryGetValue(expressionString, out cachedLocalInfo)
+            )
             {
                 return cachedLocalInfo;
             }
@@ -61,7 +64,15 @@ namespace System.Activities.Debugger
             try
             {
                 // First try as R-Value
-                if (!TryEvaluateExpression(expressionString, null, locationReferenceEnvironment, context, out result))
+                if (
+                    !TryEvaluateExpression(
+                        expressionString,
+                        null,
+                        locationReferenceEnvironment,
+                        context,
+                        out result
+                    )
+                )
                 {
                     return SR.DebugInfoCannotEvaluateExpression(expressionString);
                 }
@@ -83,13 +94,21 @@ namespace System.Activities.Debugger
             try
             {
                 object resultLocation;
-                if (TryEvaluateExpression(expressionString, result.GetType(), locationReferenceEnvironment, context, out resultLocation))
+                if (
+                    TryEvaluateExpression(
+                        expressionString,
+                        result.GetType(),
+                        locationReferenceEnvironment,
+                        context,
+                        out resultLocation
+                    )
+                )
                 {
                     LocalInfo localInfo = new LocalInfo()
-                                            {
-                                                Name = expressionString,
-                                                Location = resultLocation as Location
-                                            };
+                    {
+                        Name = expressionString,
+                        Location = resultLocation as Location,
+                    };
                     this.cachedLocalInfos[expressionString] = localInfo;
                     return localInfo;
                 }
@@ -113,17 +132,24 @@ namespace System.Activities.Debugger
 
         static bool TryEvaluateExpression(
             string expressionString,
-            Type locationValueType,                             // Non null for Reference type (location)
+            Type locationValueType, // Non null for Reference type (location)
             LocationReferenceEnvironment locationReferenceEnvironment,
             CodeActivityContext context,
-            out object result)
+            out object result
+        )
         {
-            expressionString = string.Format(CultureInfo.InvariantCulture, "[{0}]", expressionString);
+            expressionString = string.Format(
+                CultureInfo.InvariantCulture,
+                "[{0}]",
+                expressionString
+            );
 
             Type activityType;
             if (locationValueType != null)
             {
-                activityType = typeof(Activity<>).MakeGenericType(typeof(Location<>).MakeGenericType(locationValueType));
+                activityType = typeof(Activity<>).MakeGenericType(
+                    typeof(Location<>).MakeGenericType(locationValueType)
+                );
             }
             else
             {
@@ -132,19 +158,37 @@ namespace System.Activities.Debugger
 
             // General expression.
             ActivityWithResultConverter converter = new ActivityWithResultConverter(activityType);
-            ActivityWithResult expression = converter.ConvertFromString(
-                new TypeDescriptorContext { LocationReferenceEnvironment = locationReferenceEnvironment },
-                expressionString) as ActivityWithResult;
+            ActivityWithResult expression =
+                converter.ConvertFromString(
+                    new TypeDescriptorContext
+                    {
+                        LocationReferenceEnvironment = locationReferenceEnvironment,
+                    },
+                    expressionString
+                ) as ActivityWithResult;
 
             if (locationValueType != null)
             {
-                Type locationHelperType = typeof(LocationHelper<>).MakeGenericType(locationValueType);
-                LocationHelper helper = (LocationHelper)Activator.CreateInstance(locationHelperType);
-                return helper.TryGetValue(expression, locationReferenceEnvironment, context, out result);
+                Type locationHelperType = typeof(LocationHelper<>).MakeGenericType(
+                    locationValueType
+                );
+                LocationHelper helper = (LocationHelper)
+                    Activator.CreateInstance(locationHelperType);
+                return helper.TryGetValue(
+                    expression,
+                    locationReferenceEnvironment,
+                    context,
+                    out result
+                );
             }
             else
             {
-                return TryEvaluateExpression(expression, locationReferenceEnvironment, context, out result);
+                return TryEvaluateExpression(
+                    expression,
+                    locationReferenceEnvironment,
+                    context,
+                    out result
+                );
             }
         }
 
@@ -152,10 +196,16 @@ namespace System.Activities.Debugger
             ActivityWithResult element,
             LocationReferenceEnvironment locationReferenceEnvironment,
             CodeActivityContext context,
-            out object result)
+            out object result
+        )
         {
             // value is some expression type and needs to be opened
-            context.Reinitialize(context.CurrentInstance, context.CurrentExecutor, element, context.CurrentInstance.InternalId);
+            context.Reinitialize(
+                context.CurrentInstance,
+                context.CurrentExecutor,
+                element,
+                context.CurrentInstance.InternalId
+            );
             if (element != null && !element.IsRuntimeReady)
             {
                 WorkflowInspectionServices.CacheMetadata(element, locationReferenceEnvironment);
@@ -175,13 +225,13 @@ namespace System.Activities.Debugger
         {
             if (this.arguments == null || this.arguments.Length == 0)
             {
-                this.arguments =
-                    activityInstance.Activity.RuntimeArguments.Select(argument =>
-                        new LocalInfo
-                        {
-                            Name = argument.Name,
-                            Location = argument.InternalGetLocation(activityInstance.Environment)
-                        }).ToArray();
+                this.arguments = activityInstance
+                    .Activity.RuntimeArguments.Select(argument => new LocalInfo
+                    {
+                        Name = argument.Name,
+                        Location = argument.InternalGetLocation(activityInstance.Environment),
+                    })
+                    .ToArray();
 
                 if (this.arguments.Length > 0)
                 {
@@ -203,47 +253,68 @@ namespace System.Activities.Debugger
                 HashSet<string> existingNames = new HashSet<string>();
                 while (activity != null)
                 {
-                    allVariables.AddRange(RemoveHiddenVariables(existingNames, activity.RuntimeVariables));
-                    allVariables.AddRange(RemoveHiddenVariables(existingNames, activity.ImplementationVariables));
+                    allVariables.AddRange(
+                        RemoveHiddenVariables(existingNames, activity.RuntimeVariables)
+                    );
+                    allVariables.AddRange(
+                        RemoveHiddenVariables(existingNames, activity.ImplementationVariables)
+                    );
                     if (activity.HandlerOf != null)
                     {
-                        allDelegateArguments.AddRange(RemoveHiddenDelegateArguments(existingNames,
-                           activity.HandlerOf.RuntimeDelegateArguments.Select(delegateArgument =>
-                                delegateArgument.BoundArgument)));
+                        allDelegateArguments.AddRange(
+                            RemoveHiddenDelegateArguments(
+                                existingNames,
+                                activity.HandlerOf.RuntimeDelegateArguments.Select(
+                                    delegateArgument => delegateArgument.BoundArgument
+                                )
+                            )
+                        );
                     }
-                    allArguments.AddRange(RemoveHiddenArguments(existingNames, activity.RuntimeArguments));
+                    allArguments.AddRange(
+                        RemoveHiddenArguments(existingNames, activity.RuntimeArguments)
+                    );
                     activity = activity.Parent;
                 }
 
-                this.locals =
-                    new LocalInfo[] {
-                                new LocalInfo
-                                {
-                                    Name = "this",
-                                    Type = "System.Activities.ActivityInstance",
-                                    Value = activityInstance
-                                }
-                            }
-                        .Concat(allVariables.Select(variable =>
-                            new LocalInfo
+                this.locals = new LocalInfo[]
+                {
+                    new LocalInfo
+                    {
+                        Name = "this",
+                        Type = "System.Activities.ActivityInstance",
+                        Value = activityInstance,
+                    },
+                }
+                    .Concat(
+                        allVariables
+                            .Select(variable => new LocalInfo
                             {
                                 Name = variable.Name,
-                                Location = variable.InternalGetLocation(activityInstance.Environment)
+                                Location = variable.InternalGetLocation(
+                                    activityInstance.Environment
+                                ),
                             })
-                        .Concat(allArguments.Select(argument =>
-                            new LocalInfo
-                            {
-                                Name = argument.Name,
-                                Location = argument.InternalGetLocation(activityInstance.Environment)
-                            }))
-                        .Concat(allDelegateArguments.Select(argument =>
-                            new LocalInfo
-                            {
-                                Name = argument.Name,
-                                Location = argument.InternalGetLocation(activityInstance.Environment)
-                            }))
-                        .OrderBy(info => info.Name))
-                        .ToArray();
+                            .Concat(
+                                allArguments.Select(argument => new LocalInfo
+                                {
+                                    Name = argument.Name,
+                                    Location = argument.InternalGetLocation(
+                                        activityInstance.Environment
+                                    ),
+                                })
+                            )
+                            .Concat(
+                                allDelegateArguments.Select(argument => new LocalInfo
+                                {
+                                    Name = argument.Name,
+                                    Location = argument.InternalGetLocation(
+                                        activityInstance.Environment
+                                    ),
+                                })
+                            )
+                            .OrderBy(info => info.Name)
+                    )
+                    .ToArray();
 
                 if (this.locals.Length > 0)
                 {
@@ -255,7 +326,10 @@ namespace System.Activities.Debugger
 
         // Remove ancestor's variables that are hidden because the same name already define in the current scope.
         // This will also update existingNames to include ancestor variable names that are retained.
-        static List<Variable> RemoveHiddenVariables(HashSet<string> existingNames, IEnumerable<Variable> ancestorVariables)
+        static List<Variable> RemoveHiddenVariables(
+            HashSet<string> existingNames,
+            IEnumerable<Variable> ancestorVariables
+        )
         {
             List<Variable> cleanUpList = new List<Variable>();
             foreach (Variable variable in ancestorVariables)
@@ -265,8 +339,13 @@ namespace System.Activities.Debugger
                     continue;
                 }
 
-                if (!(variable.Name.StartsWith("_", StringComparison.Ordinal) ||                  // private variables that should be hidden
-                        existingNames.Contains(variable.Name)))         // variable name already exists in current scope
+                if (
+                    !(
+                        variable.Name.StartsWith("_", StringComparison.Ordinal)
+                        || // private variables that should be hidden
+                        existingNames.Contains(variable.Name)
+                    )
+                ) // variable name already exists in current scope
                 {
                     cleanUpList.Add(variable);
                     existingNames.Add(variable.Name);
@@ -277,7 +356,10 @@ namespace System.Activities.Debugger
 
         // Remove ancestor's arguments that are hidden because the same name already define in the current scope.
         // This will also update existingNames to include ancestor delegate argument names that are retained.
-        static List<DelegateArgument> RemoveHiddenDelegateArguments(HashSet<string> existingNames, IEnumerable<DelegateArgument> ancestorDelegateArguments)
+        static List<DelegateArgument> RemoveHiddenDelegateArguments(
+            HashSet<string> existingNames,
+            IEnumerable<DelegateArgument> ancestorDelegateArguments
+        )
         {
             List<DelegateArgument> cleanUpList = new List<DelegateArgument>();
             foreach (DelegateArgument delegateArgument in ancestorDelegateArguments)
@@ -296,7 +378,10 @@ namespace System.Activities.Debugger
 
         // Remove ancestor's arguments that are hidden because the same name already define in the current scope.
         // This will also update existingNames to include ancestor argument names that are retained.
-        static List<RuntimeArgument> RemoveHiddenArguments(HashSet<string> existingNames, IList<RuntimeArgument> ancestorArguments)
+        static List<RuntimeArgument> RemoveHiddenArguments(
+            HashSet<string> existingNames,
+            IList<RuntimeArgument> ancestorArguments
+        )
         {
             List<RuntimeArgument> cleanUpList = new List<RuntimeArgument>(ancestorArguments.Count);
             foreach (RuntimeArgument argument in ancestorArguments)
@@ -319,7 +404,11 @@ namespace System.Activities.Debugger
 
                 Type t = location.LocationType;
 
-                if (t == typeof(string) && value.StartsWith("\"", StringComparison.Ordinal) && value.EndsWith("\"", StringComparison.Ordinal))
+                if (
+                    t == typeof(string)
+                    && value.StartsWith("\"", StringComparison.Ordinal)
+                    && value.EndsWith("\"", StringComparison.Ordinal)
+                )
                 {
                     location.Value = RemoveQuotes(value);
                 }
@@ -329,12 +418,19 @@ namespace System.Activities.Debugger
                 }
                 else if (t == typeof(sbyte))
                 {
-                    location.Value = Convert.ToSByte(RemoveHexadecimalPrefix(value), Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture));
+                    location.Value = Convert.ToSByte(
+                        RemoveHexadecimalPrefix(value),
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (t == typeof(char))
                 {
                     char ch;
-                    succeed = ConvertToChar(value, Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture), out ch);
+                    succeed = ConvertToChar(
+                        value,
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture),
+                        out ch
+                    );
                     if (succeed)
                     {
                         location.Value = ch;
@@ -342,31 +438,52 @@ namespace System.Activities.Debugger
                 }
                 else if (t == typeof(Int16))
                 {
-                    location.Value = Convert.ToInt16(RemoveHexadecimalPrefix(value), Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture));
+                    location.Value = Convert.ToInt16(
+                        RemoveHexadecimalPrefix(value),
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (t == typeof(Int32))
                 {
-                    location.Value = Convert.ToInt32(RemoveHexadecimalPrefix(value), Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture));
+                    location.Value = Convert.ToInt32(
+                        RemoveHexadecimalPrefix(value),
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (t == typeof(Int64))
                 {
-                    location.Value = Convert.ToInt64(RemoveHexadecimalPrefix(value), Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture));
+                    location.Value = Convert.ToInt64(
+                        RemoveHexadecimalPrefix(value),
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (t == typeof(byte))
                 {
-                    location.Value = Convert.ToByte(RemoveHexadecimalPrefix(value), Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture));
+                    location.Value = Convert.ToByte(
+                        RemoveHexadecimalPrefix(value),
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (t == typeof(UInt16))
                 {
-                    location.Value = Convert.ToUInt16(RemoveHexadecimalPrefix(value), Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture));
+                    location.Value = Convert.ToUInt16(
+                        RemoveHexadecimalPrefix(value),
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (t == typeof(UInt32))
                 {
-                    location.Value = Convert.ToUInt32(RemoveHexadecimalPrefix(value), Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture));
+                    location.Value = Convert.ToUInt32(
+                        RemoveHexadecimalPrefix(value),
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (t == typeof(UInt64))
                 {
-                    location.Value = Convert.ToUInt64(RemoveHexadecimalPrefix(value), Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture));
+                    location.Value = Convert.ToUInt64(
+                        RemoveHexadecimalPrefix(value),
+                        Convert.ToInt32(stringRadix, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (t == typeof(Single))
                 {
@@ -393,10 +510,13 @@ namespace System.Activities.Debugger
                 else if (t == typeof(Decimal))
                 {
                     value = value.TrimEnd();
-                    if (value.EndsWith("M", StringComparison.OrdinalIgnoreCase) ||  // suffix for Decimal format in C#
-                        value.EndsWith("D", StringComparison.OrdinalIgnoreCase))    // suffix for Decimal format in VB
+                    if (
+                        value.EndsWith("M", StringComparison.OrdinalIgnoreCase)
+                        || // suffix for Decimal format in C#
+                        value.EndsWith("D", StringComparison.OrdinalIgnoreCase)
+                    ) // suffix for Decimal format in VB
                     {
-                        value = value.Substring(0, value.Length - 1);   // remove the suffix
+                        value = value.Substring(0, value.Length - 1); // remove the suffix
                     }
                     if (value.Contains(","))
                     {
@@ -440,7 +560,9 @@ namespace System.Activities.Debugger
         {
             if (this.cachedLocalInfos == null)
             {
-                this.cachedLocalInfos = new Dictionary<string, LocalInfo>(StringComparer.OrdinalIgnoreCase);
+                this.cachedLocalInfos = new Dictionary<string, LocalInfo>(
+                    StringComparer.OrdinalIgnoreCase
+                );
             }
             foreach (LocalInfo localInfo in localInfos)
             {
@@ -474,16 +596,16 @@ namespace System.Activities.Debugger
         static bool ConvertToChar(string stringValue, int radix, out char ch)
         {
             bool succeed = false;
-            ch = '\0';  // null character
+            ch = '\0'; // null character
             try
             {
-                if ((stringValue[0] == '\'') || (stringValue[0] == '"'))  // VB Char is using double quote
+                if ((stringValue[0] == '\'') || (stringValue[0] == '"')) // VB Char is using double quote
                 {
                     if (stringValue[1] == '\\')
                     {
                         switch (stringValue[2])
                         {
-                            case '\'':  // single quote
+                            case '\'': // single quote
                             case 'a':
                             case 'b':
                             case 'f':
@@ -491,7 +613,7 @@ namespace System.Activities.Debugger
                             case 'r':
                             case 't':
                             case 'v':
-                                if (stringValue[3] == stringValue[0])     // matched single/double quote
+                                if (stringValue[3] == stringValue[0]) // matched single/double quote
                                 {
                                     ch = stringValue[2];
                                 }
@@ -499,14 +621,14 @@ namespace System.Activities.Debugger
                                 break;
                         }
                     }
-                    else if (stringValue[2] == stringValue[0])  // matched single/double quote
+                    else if (stringValue[2] == stringValue[0]) // matched single/double quote
                     {
                         ch = stringValue[1];
                         succeed = true;
                     }
                 }
                 else
-                {   // It can be either an digit , e.g. 65, or 65'A'.
+                { // It can be either an digit , e.g. 65, or 65'A'.
                     // For the second case, we ignore the char.
                     int endIndex = stringValue.IndexOf('\'');
                     if (endIndex < 0)
@@ -522,24 +644,41 @@ namespace System.Activities.Debugger
                 }
             }
             catch (IndexOutOfRangeException)
-            {   // Invalid character length
+            { // Invalid character length
                 succeed = false;
             }
             return succeed;
         }
 
-
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.NestedTypesShouldNotBeVisible, Justification = "Needed for partial trust.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.NestedTypesShouldNotBeVisible,
+            Justification = "Needed for partial trust."
+        )]
         internal class LocalInfo
         {
             string type;
             object valueField;
-            [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DoNotDeclareVisibleInstanceFields, Justification = "Needed for partial trust.")]
+
+            [SuppressMessage(
+                FxCop.Category.Design,
+                FxCop.Rule.DoNotDeclareVisibleInstanceFields,
+                Justification = "Needed for partial trust."
+            )]
             public string Name;
-            [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DoNotDeclareVisibleInstanceFields, Justification = "Needed for partial trust.")]
+
+            [SuppressMessage(
+                FxCop.Category.Design,
+                FxCop.Rule.DoNotDeclareVisibleInstanceFields,
+                Justification = "Needed for partial trust."
+            )]
             public Location Location;
 
-            [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called by Expression Evaluator")]
+            [SuppressMessage(
+                FxCop.Category.Performance,
+                FxCop.Rule.AvoidUncalledPrivateCode,
+                Justification = "Called by Expression Evaluator"
+            )]
             public object Value
             {
                 get
@@ -550,13 +689,14 @@ namespace System.Activities.Debugger
                     }
                     return this.valueField;
                 }
-                set
-                {
-                    this.valueField = value;
-                }
+                set { this.valueField = value; }
             }
 
-            [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called by Expression Evaluator")]
+            [SuppressMessage(
+                FxCop.Category.Performance,
+                FxCop.Rule.AvoidUncalledPrivateCode,
+                Justification = "Called by Expression Evaluator"
+            )]
             public string Type
             {
                 get
@@ -567,18 +707,15 @@ namespace System.Activities.Debugger
                     }
                     return this.type;
                 }
-                set
-                {
-                    this.type = value;
-                }
-
+                set { this.type = value; }
             }
-
-
         }
 
-
-        class TypeDescriptorContext : ITypeDescriptorContext, IXamlNamespaceResolver, INameScope, INamespacePrefixLookup
+        class TypeDescriptorContext
+            : ITypeDescriptorContext,
+                IXamlNamespaceResolver,
+                INameScope,
+                INamespacePrefixLookup
         {
             public LocationReferenceEnvironment LocationReferenceEnvironment;
 
@@ -596,7 +733,6 @@ namespace System.Activities.Debugger
             {
                 get { throw FxTrace.Exception.AsError(new NotImplementedException()); }
             }
-
 
             public void OnComponentChanged()
             {
@@ -617,7 +753,6 @@ namespace System.Activities.Debugger
                 return null;
             }
 
-
             public string GetNamespace(string prefix)
             {
                 if (string.IsNullOrEmpty(prefix))
@@ -635,7 +770,9 @@ namespace System.Activities.Debugger
                     return result;
                 }
 
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.VariableOrArgumentDoesNotExist(name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.VariableOrArgumentDoesNotExist(name))
+                );
             }
 
             public void RegisterName(string name, object scopedElement)
@@ -662,21 +799,40 @@ namespace System.Activities.Debugger
         // to perform the generics dance around Locations we need these helpers
         abstract class LocationHelper
         {
-            public abstract bool TryGetValue(Activity expression, LocationReferenceEnvironment locationReferenceEnvironment, CodeActivityContext context, out object result);
+            public abstract bool TryGetValue(
+                Activity expression,
+                LocationReferenceEnvironment locationReferenceEnvironment,
+                CodeActivityContext context,
+                out object result
+            );
         }
 
         class LocationHelper<TLocationValue> : LocationHelper
         {
-            public override bool TryGetValue(Activity expression, LocationReferenceEnvironment locationReferenceEnvironment, CodeActivityContext context, out object result)
+            public override bool TryGetValue(
+                Activity expression,
+                LocationReferenceEnvironment locationReferenceEnvironment,
+                CodeActivityContext context,
+                out object result
+            )
             {
-                Activity<Location<TLocationValue>> activity = expression as Activity<Location<TLocationValue>>;
+                Activity<Location<TLocationValue>> activity =
+                    expression as Activity<Location<TLocationValue>>;
                 result = null;
                 if (activity != null)
                 {
-                    context.Reinitialize(context.CurrentInstance, context.CurrentExecutor, expression, context.CurrentInstance.InternalId);
+                    context.Reinitialize(
+                        context.CurrentInstance,
+                        context.CurrentExecutor,
+                        expression,
+                        context.CurrentInstance.InternalId
+                    );
                     if (activity != null && !activity.IsRuntimeReady)
                     {
-                        WorkflowInspectionServices.CacheMetadata(activity, locationReferenceEnvironment);
+                        WorkflowInspectionServices.CacheMetadata(
+                            activity,
+                            locationReferenceEnvironment
+                        );
                     }
                     if (activity.IsFastPath)
                     {

@@ -205,9 +205,15 @@ namespace System.Globalization.Tests
             yield return new object[] { new CultureInfo("zh-TW").DateTimeFormat, "tth:mm" };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsHybridGlobalizationOnBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsHybridGlobalizationOnBrowser)
+        )]
         [MemberData(nameof(ShortTimePattern_Get_TestData_HybridGlobalization))]
-        public void ShortTimePattern_Get_ReturnsExpected_HybridGlobalization(DateTimeFormatInfo format, string value)
+        public void ShortTimePattern_Get_ReturnsExpected_HybridGlobalization(
+            DateTimeFormatInfo format,
+            string value
+        )
         {
             Assert.Equal(value, format.ShortTimePattern);
         }
@@ -245,13 +251,18 @@ namespace System.Globalization.Tests
         public void ShortTimePattern_SetNull_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.ShortTimePattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.ShortTimePattern = null
+            );
         }
 
         [Fact]
         public void ShortTimePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.ShortTimePattern = "HH:mm");
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.ShortTimePattern = "HH:mm"
+            );
         }
     }
 }

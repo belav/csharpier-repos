@@ -29,7 +29,10 @@ unsafe partial class GenericsNative
     public static extern Point2<float> AddPoint2Fs(Point2<float>* pValues, int count);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point2<float> AddPoint2Fs([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<float>[] pValues, int count);
+    public static extern Point2<float> AddPoint2Fs(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<float>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point2<float> AddPoint2Fs(in Point2<float> pValues, int count);
@@ -56,7 +59,10 @@ unsafe partial class GenericsTest
         Assert.Equal(value4->e00, 1.0f);
         Assert.Equal(value4->e01, 2.0f);
 
-        ref readonly GenericsNative.Point2<float> value5 = ref GenericsNative.GetPoint2FRef(1.0f, 2.0f);
+        ref readonly GenericsNative.Point2<float> value5 = ref GenericsNative.GetPoint2FRef(
+            1.0f,
+            2.0f
+        );
         Assert.Equal(value5.e00, 1.0f);
         Assert.Equal(value5.e01, 2.0f);
 
@@ -64,17 +70,21 @@ unsafe partial class GenericsTest
         Assert.Equal(result.e00, 2.0f);
         Assert.Equal(result.e01, 4.0f);
 
-        GenericsNative.Point2<float>[] values = new GenericsNative.Point2<float>[] {
+        GenericsNative.Point2<float>[] values = new GenericsNative.Point2<float>[]
+        {
             value,
             value2,
             value3,
             *value4,
-            value5
+            value5,
         };
 
         fixed (GenericsNative.Point2<float>* pValues = &values[0])
         {
-            GenericsNative.Point2<float> result2 = GenericsNative.AddPoint2Fs(pValues, values.Length);
+            GenericsNative.Point2<float> result2 = GenericsNative.AddPoint2Fs(
+                pValues,
+                values.Length
+            );
             Assert.Equal(result2.e00, 5.0f);
             Assert.Equal(result2.e01, 10.0f);
         }
@@ -83,7 +93,10 @@ unsafe partial class GenericsTest
         Assert.Equal(result3.e00, 5.0f);
         Assert.Equal(result3.e01, 10.0f);
 
-        GenericsNative.Point2<float> result4 = GenericsNative.AddPoint2Fs(in values[0], values.Length);
+        GenericsNative.Point2<float> result4 = GenericsNative.AddPoint2Fs(
+            in values[0],
+            values.Length
+        );
         Assert.Equal(result4.e00, 5.0f);
         Assert.Equal(result4.e01, 10.0f);
     }

@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction to store a flag indicating whether a user has two factor authentication enabled.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserTwoFactorStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserTwoFactorStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Sets a flag indicating whether the specified <paramref name="user"/> has two factor authentication enabled or not,

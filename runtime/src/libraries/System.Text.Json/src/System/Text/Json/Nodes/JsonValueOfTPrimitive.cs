@@ -17,9 +17,17 @@ namespace System.Text.Json.Nodes
 
         private readonly JsonConverter<TValue> _converter;
 
-        public JsonValuePrimitive(TValue value, JsonConverter<TValue> converter, JsonNodeOptions? options = null) : base(value, options)
+        public JsonValuePrimitive(
+            TValue value,
+            JsonConverter<TValue> converter,
+            JsonNodeOptions? options = null
+        )
+            : base(value, options)
         {
-            Debug.Assert(converter is { IsInternalConverter: true, ConverterStrategy: ConverterStrategy.Value });
+            Debug.Assert(
+                converter
+                    is { IsInternalConverter: true, ConverterStrategy: ConverterStrategy.Value }
+            );
             _converter = converter;
         }
 
@@ -48,7 +56,11 @@ namespace System.Text.Json.Nodes
             // Primitive JsonValue's are generally speaking immutable so we don't need to do much here.
             // For the case of JsonElement clone the instance since it could be backed by pooled buffers.
             return Value is JsonElement element
-                ? new JsonValuePrimitive<JsonElement>(element.Clone(), JsonMetadataServices.JsonElementConverter, Options)
+                ? new JsonValuePrimitive<JsonElement>(
+                    element.Clone(),
+                    JsonMetadataServices.JsonElementConverter,
+                    Options
+                )
                 : new JsonValuePrimitive<TValue>(Value, _converter, Options);
         }
     }

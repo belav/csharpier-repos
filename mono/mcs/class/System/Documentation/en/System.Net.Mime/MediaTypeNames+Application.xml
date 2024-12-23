@@ -1,6 +1,9 @@
 <Type Name="MediaTypeNames+Application" FullName="System.Net.Mime.MediaTypeNames+Application">
   <TypeSignature Language="C#" Value="public static class MediaTypeNames.Application" />
-  <TypeSignature Language="ILAsm" Value=".class nested public auto ansi abstract sealed beforefieldinit MediaTypeNames/Application extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public auto ansi abstract sealed beforefieldinit MediaTypeNames/Application extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -10,7 +10,10 @@ namespace SignalRSamples;
 
 public class Startup
 {
-    private readonly JsonWriterOptions _jsonWriterOptions = new JsonWriterOptions { Indented = true };
+    private readonly JsonWriterOptions _jsonWriterOptions = new JsonWriterOptions
+    {
+        Indented = true,
+    };
 
     // This method gets called by the runtime. Use this method to add services to the container.
     // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
@@ -18,8 +21,7 @@ public class Startup
     {
         services.AddConnections();
 
-        services.AddSignalR()
-        .AddMessagePackProtocol();
+        services.AddSignalR().AddMessagePackProtocol();
         //.AddStackExchangeRedis();
     }
 
@@ -47,35 +49,48 @@ public class Startup
 
             endpoints.MapConnectionHandler<MessagesConnectionHandler>("/chat");
 
-            endpoints.MapGet("/deployment", async context =>
-            {
-                var attributes = Assembly.GetAssembly(typeof(Startup)).GetCustomAttributes<AssemblyMetadataAttribute>();
-
-                context.Response.ContentType = "application/json";
-                await using (var writer = new Utf8JsonWriter(context.Response.BodyWriter, _jsonWriterOptions))
+            endpoints.MapGet(
+                "/deployment",
+                async context =>
                 {
-                    writer.WriteStartObject();
-                    var commitHash = string.Empty;
+                    var attributes = Assembly
+                        .GetAssembly(typeof(Startup))
+                        .GetCustomAttributes<AssemblyMetadataAttribute>();
 
-                    foreach (var attribute in attributes)
+                    context.Response.ContentType = "application/json";
+                    await using (
+                        var writer = new Utf8JsonWriter(
+                            context.Response.BodyWriter,
+                            _jsonWriterOptions
+                        )
+                    )
                     {
-                        writer.WriteString(attribute.Key, attribute.Value);
+                        writer.WriteStartObject();
+                        var commitHash = string.Empty;
 
-                        if (string.Equals(attribute.Key, "CommitHash"))
+                        foreach (var attribute in attributes)
                         {
-                            commitHash = attribute.Value;
+                            writer.WriteString(attribute.Key, attribute.Value);
+
+                            if (string.Equals(attribute.Key, "CommitHash"))
+                            {
+                                commitHash = attribute.Value;
+                            }
                         }
-                    }
 
-                    if (!string.IsNullOrEmpty(commitHash))
-                    {
-                        writer.WriteString("GitHubUrl", $"https://github.com/aspnet/SignalR/commit/{commitHash}");
-                    }
+                        if (!string.IsNullOrEmpty(commitHash))
+                        {
+                            writer.WriteString(
+                                "GitHubUrl",
+                                $"https://github.com/aspnet/SignalR/commit/{commitHash}"
+                            );
+                        }
 
-                    writer.WriteEndObject();
-                    await writer.FlushAsync();
+                        writer.WriteEndObject();
+                        await writer.FlushAsync();
+                    }
                 }
-            });
+            );
         });
     }
 }

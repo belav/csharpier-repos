@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using ILCompiler.DependencyAnalysis.X64;
 using Internal.Text;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis.X64;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -15,7 +14,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     /// </summary>
     public partial class ImportThunk
     {
-        protected override void EmitCode(NodeFactory factory, ref X64Emitter instructionEncoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref X64Emitter instructionEncoder,
+            bool relocsOnly
+        )
         {
             switch (_thunkKind)
             {
@@ -29,7 +32,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (!relocsOnly)
                     {
                         // push table index
-                        instructionEncoder.EmitPUSH((sbyte)_containingImportSection.IndexFromBeginningOfArray);
+                        instructionEncoder.EmitPUSH(
+                            (sbyte)_containingImportSection.IndexFromBeginningOfArray
+                        );
                     }
 
                     // push [module]
@@ -43,7 +48,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (!relocsOnly)
                     {
                         // push table index
-                        instructionEncoder.EmitPUSH((sbyte)_containingImportSection.IndexFromBeginningOfArray);
+                        instructionEncoder.EmitPUSH(
+                            (sbyte)_containingImportSection.IndexFromBeginningOfArray
+                        );
                     }
 
                     // push [module]
@@ -60,7 +67,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (!relocsOnly)
                     {
                         // push table index
-                        instructionEncoder.EmitPUSH((sbyte)_containingImportSection.IndexFromBeginningOfArray);
+                        instructionEncoder.EmitPUSH(
+                            (sbyte)_containingImportSection.IndexFromBeginningOfArray
+                        );
                     }
 
                     // push [module]
@@ -69,7 +78,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     break;
 
                 case Kind.Lazy:
-                    instructionEncoder.EmitMOV(factory.Target.OperatingSystem == TargetOS.Windows ? Register.RDX : Register.RSI, factory.ModuleImport);
+                    instructionEncoder.EmitMOV(
+                        factory.Target.OperatingSystem == TargetOS.Windows
+                            ? Register.RDX
+                            : Register.RSI,
+                        factory.ModuleImport
+                    );
 
                     break;
 

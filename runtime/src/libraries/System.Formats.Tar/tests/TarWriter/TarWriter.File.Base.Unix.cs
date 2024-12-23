@@ -27,7 +27,11 @@ namespace System.Formats.Tar.Tests
                 Assert.Equal(gname, posix.GroupName);
                 Assert.Equal(uname, posix.UserName);
 
-                if (entry.EntryType is not TarEntryType.BlockDevice and not TarEntryType.CharacterDevice)
+                if (
+                    entry.EntryType
+                    is not TarEntryType.BlockDevice
+                        and not TarEntryType.CharacterDevice
+                )
                 {
                     Assert.Equal(DefaultDeviceMajor, posix.DeviceMajor);
                     Assert.Equal(DefaultDeviceMinor, posix.DeviceMinor);
@@ -68,7 +72,10 @@ namespace System.Formats.Tar.Tests
         protected int GetGroupId(string groupName)
         {
             string standardOutput = Execute("getent", $"group {groupName}");
-            string[] values = standardOutput.Split(':', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            string[] values = standardOutput.Split(
+                ':',
+                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+            );
             return int.Parse(values[^1]);
         }
 
@@ -110,10 +117,20 @@ namespace System.Formats.Tar.Tests
             p.StartInfo.RedirectStandardError = true;
 
             string standardError = string.Empty;
-            p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => { standardError += e.Data; });
+            p.ErrorDataReceived += new DataReceivedEventHandler(
+                (sender, e) =>
+                {
+                    standardError += e.Data;
+                }
+            );
 
             string standardOutput = string.Empty;
-            p.OutputDataReceived += new DataReceivedEventHandler((sender, e) => { standardOutput += e.Data; });
+            p.OutputDataReceived += new DataReceivedEventHandler(
+                (sender, e) =>
+                {
+                    standardOutput += e.Data;
+                }
+            );
 
             p.Start();
 
@@ -124,7 +141,9 @@ namespace System.Formats.Tar.Tests
 
             if (p.ExitCode != 0)
             {
-                throw new IOException($"Error '{p.ExitCode}' when executing '{command} {arguments}'. Message: {standardError}");
+                throw new IOException(
+                    $"Error '{p.ExitCode}' when executing '{command} {arguments}'. Message: {standardError}"
+                );
             }
 
             return standardOutput;

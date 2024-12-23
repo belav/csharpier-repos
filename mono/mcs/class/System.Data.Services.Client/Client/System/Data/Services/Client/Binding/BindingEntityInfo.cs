@@ -1,18 +1,18 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
 namespace System.Data.Services.Client
 {
-#region Namespaces
+    #region Namespaces
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Services.Common;
@@ -20,7 +20,7 @@ namespace System.Data.Services.Client
     using System.Linq;
     using System.Reflection;
     using System.Threading;
-#endregion
+    #endregion
 
     internal enum BindingPropertyKind
     {
@@ -28,7 +28,7 @@ namespace System.Data.Services.Client
 
         BindingPropertyKindEntity,
 
-        BindingPropertyKindCollection
+        BindingPropertyKindCollection,
     }
 
     internal class BindingEntityInfo
@@ -39,11 +39,15 @@ namespace System.Data.Services.Client
 
         private static readonly ReaderWriterLockSlim metadataCacheLock = new ReaderWriterLockSlim();
 
-        private static readonly HashSet<Type> knownNonEntityTypes = new HashSet<Type>(EqualityComparer<Type>.Default);
+        private static readonly HashSet<Type> knownNonEntityTypes = new HashSet<Type>(
+            EqualityComparer<Type>.Default
+        );
 
-        private static readonly Dictionary<Type, object> knownObservableCollectionTypes = new Dictionary<Type, object>(EqualityComparer<Type>.Default);
+        private static readonly Dictionary<Type, object> knownObservableCollectionTypes =
+            new Dictionary<Type, object>(EqualityComparer<Type>.Default);
 
-        private static readonly Dictionary<Type, BindingEntityInfoPerType> bindingEntityInfos = new Dictionary<Type, BindingEntityInfoPerType>(EqualityComparer<Type>.Default);
+        private static readonly Dictionary<Type, BindingEntityInfoPerType> bindingEntityInfos =
+            new Dictionary<Type, BindingEntityInfoPerType>(EqualityComparer<Type>.Default);
 
         internal static IList<BindingPropertyInfo> GetObservableProperties(Type entityType)
         {
@@ -55,12 +59,13 @@ namespace System.Data.Services.Client
             return GetBindingEntityInfoFor(entityType).ClientType;
         }
 
-        internal static string GetEntitySet(
-            object target,
-            string targetEntitySet)
+        internal static string GetEntitySet(object target, string targetEntitySet)
         {
             Debug.Assert(target != null, "Argument 'target' cannot be null.");
-            Debug.Assert(BindingEntityInfo.IsEntityType(target.GetType()), "Argument 'target' must be an entity type.");
+            Debug.Assert(
+                BindingEntityInfo.IsEntityType(target.GetType()),
+                "Argument 'target' must be an entity type."
+            );
 
             if (!String.IsNullOrEmpty(targetEntitySet))
             {
@@ -102,7 +107,10 @@ namespace System.Data.Services.Client
                     if (parms != null && parms.Length == 1 && IsEntityType(parms[0]))
                     {
                         Type dataServiceCollection = WebUtil.GetDataServiceCollectionOfT(parms);
-                        if (dataServiceCollection != null && dataServiceCollection.IsAssignableFrom(type))
+                        if (
+                            dataServiceCollection != null
+                            && dataServiceCollection.IsAssignableFrom(type)
+                        )
                         {
                             result = true;
                             break;
@@ -118,7 +126,9 @@ namespace System.Data.Services.Client
             {
                 if (!knownObservableCollectionTypes.ContainsKey(collectionType))
                 {
-                    knownObservableCollectionTypes[collectionType] = result ? TrueObject : FalseObject;
+                    knownObservableCollectionTypes[collectionType] = result
+                        ? TrueObject
+                        : FalseObject;
                 }
             }
             finally
@@ -174,18 +184,24 @@ namespace System.Data.Services.Client
             }
         }
 
-        internal static object GetPropertyValue(object source, string sourceProperty, out BindingPropertyInfo bindingPropertyInfo)
+        internal static object GetPropertyValue(
+            object source,
+            string sourceProperty,
+            out BindingPropertyInfo bindingPropertyInfo
+        )
         {
             Type sourceType = source.GetType();
 
-            bindingPropertyInfo = BindingEntityInfo.GetObservableProperties(sourceType)
-                                                   .SingleOrDefault(x => x.PropertyInfo.PropertyName == sourceProperty);
+            bindingPropertyInfo = BindingEntityInfo
+                .GetObservableProperties(sourceType)
+                .SingleOrDefault(x => x.PropertyInfo.PropertyName == sourceProperty);
 
             if (bindingPropertyInfo == null)
             {
-                return BindingEntityInfo.GetClientType(sourceType)
-                                        .GetProperty(sourceProperty, false)
-                                        .GetValue(source);
+                return BindingEntityInfo
+                    .GetClientType(sourceType)
+                    .GetProperty(sourceProperty, false)
+                    .GetValue(source);
             }
             else
             {
@@ -214,38 +230,51 @@ namespace System.Data.Services.Client
 
             object[] attributes = entityType.GetCustomAttributes(typeof(EntitySetAttribute), true);
 
-            bindingEntityInfo.EntitySet = (attributes != null && attributes.Length == 1) ? ((EntitySetAttribute)attributes[0]).EntitySet : null;
+            bindingEntityInfo.EntitySet =
+                (attributes != null && attributes.Length == 1)
+                    ? ((EntitySetAttribute)attributes[0]).EntitySet
+                    : null;
             bindingEntityInfo.ClientType = ClientType.Create(entityType);
-            
+
             foreach (ClientType.ClientProperty p in bindingEntityInfo.ClientType.Properties)
             {
                 BindingPropertyInfo bpi = null;
-            
+
                 Type propertyType = p.PropertyType;
-                
+
                 if (p.CollectionType != null)
                 {
                     if (BindingEntityInfo.IsDataServiceCollection(propertyType))
                     {
-                        bpi = new BindingPropertyInfo { PropertyKind = BindingPropertyKind.BindingPropertyKindCollection };
+                        bpi = new BindingPropertyInfo
+                        {
+                            PropertyKind = BindingPropertyKind.BindingPropertyKindCollection,
+                        };
                     }
                 }
-                else
-                if (BindingEntityInfo.IsEntityType(propertyType))
+                else if (BindingEntityInfo.IsEntityType(propertyType))
                 {
-                    bpi = new BindingPropertyInfo { PropertyKind = BindingPropertyKind.BindingPropertyKindEntity };
+                    bpi = new BindingPropertyInfo
+                    {
+                        PropertyKind = BindingPropertyKind.BindingPropertyKindEntity,
+                    };
                 }
-                else
-                if (BindingEntityInfo.CanBeComplexProperty(p))
+                else if (BindingEntityInfo.CanBeComplexProperty(p))
                 {
-                    bpi = new BindingPropertyInfo { PropertyKind = BindingPropertyKind.BindingPropertyKindComplex };
+                    bpi = new BindingPropertyInfo
+                    {
+                        PropertyKind = BindingPropertyKind.BindingPropertyKindComplex,
+                    };
                 }
-                
+
                 if (bpi != null)
                 {
                     bpi.PropertyInfo = p;
-                    
-                    if (bindingEntityInfo.ClientType.IsEntityType || bpi.PropertyKind == BindingPropertyKind.BindingPropertyKindComplex)
+
+                    if (
+                        bindingEntityInfo.ClientType.IsEntityType
+                        || bpi.PropertyKind == BindingPropertyKind.BindingPropertyKindComplex
+                    )
                     {
                         bindingEntityInfo.ObservableProperties.Add(bpi);
                     }
@@ -273,7 +302,10 @@ namespace System.Data.Services.Client
             Debug.Assert(property != null, "property != null");
             if (typeof(INotifyPropertyChanged).IsAssignableFrom(property.PropertyType))
             {
-                Debug.Assert(!property.IsKnownType, "Known types do not implement INotifyPropertyChanged.");
+                Debug.Assert(
+                    !property.IsKnownType,
+                    "Known types do not implement INotifyPropertyChanged."
+                );
                 return true;
             }
 
@@ -287,17 +319,9 @@ namespace System.Data.Services.Client
 
         internal class BindingPropertyInfo
         {
-            public ClientType.ClientProperty PropertyInfo
-            {
-                get;
-                set;
-            }
+            public ClientType.ClientProperty PropertyInfo { get; set; }
 
-            public BindingPropertyKind PropertyKind
-            {
-                get;
-                set;
-            }
+            public BindingPropertyKind PropertyKind { get; set; }
         }
 
         private sealed class BindingEntityInfoPerType
@@ -309,24 +333,13 @@ namespace System.Data.Services.Client
                 this.observableProperties = new List<BindingPropertyInfo>();
             }
 
-            public String EntitySet
-            {
-                get;
-                set;
-            }
+            public String EntitySet { get; set; }
 
-            public ClientType ClientType
-            {
-                get;
-                set;
-            }
+            public ClientType ClientType { get; set; }
 
             public List<BindingPropertyInfo> ObservableProperties
             {
-                get
-                {
-                    return this.observableProperties;
-                }
+                get { return this.observableProperties; }
             }
         }
 

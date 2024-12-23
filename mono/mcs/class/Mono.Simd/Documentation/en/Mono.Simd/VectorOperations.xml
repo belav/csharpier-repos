@@ -16,7 +16,10 @@
   </Docs>
   <Members>
     <Member MemberName="AddSub">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d AddSub (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d AddSub (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -42,7 +45,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddSub">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f AddSub (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f AddSub (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -68,7 +74,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddWithSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b AddWithSaturation (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b AddWithSaturation (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,18 +99,21 @@
         <param name="vb">The second vector.</param>
         <summary>Adds two vectors with saturation.</summary>
         <returns>The unsigned saturated addition of two vectors.</returns>
-      <remarks>
-	    <para>
+        <remarks>
+          <para>
 	      The resulting vector contains the unsigned saturated sum of the individual components of the vector.
 	    </para>
-	    <para>
+          <para>
 	      If the sum of two of the components would overflow, then the result of the saturated sum is Byte.MaxValue.
 	    </para>
-	  </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="AddWithSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb AddWithSaturation (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb AddWithSaturation (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -123,18 +135,21 @@
         <param name="vb">The second vector.</param>
         <summary>Adds two vectors with saturation.</summary>
         <returns>The signed saturated addition of two vectors.</returns>
-      <remarks>
-	    <para>
+        <remarks>
+          <para>
 	      The resulting vector contains the signed saturated sum of the individual components of the vector.
 	    </para>
-	    <para>
+          <para>
 	      If the sum of two of the components would overflow, then the result of the saturated sum is SByte.MaxValue.
 	    </para>
-	  </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="AddWithSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s AddWithSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s AddWithSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -156,18 +171,21 @@
         <param name="vb">The second vector.</param>
         <summary>Adds two vectors with saturation.</summary>
         <returns>The signed saturated addition of two vectors.</returns>
-      <remarks>
-	    <para>
+        <remarks>
+          <para>
 	      The resulting vector contains the signed saturated sum of the individual components of the vector.
 	    </para>
-	    <para>
+          <para>
 	      If the sum of two of the components would overflow, then the result of the saturated sum is Short.MaxValue.
 	    </para>
-	  </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="AddWithSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us AddWithSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us AddWithSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -189,18 +207,21 @@
         <param name="vb">The second vector.</param>
         <summary>Adds two vectors with saturation.</summary>
         <returns>The unsigned saturated addition of two vectors.</returns>
-      <remarks>
-	    <para>
+        <remarks>
+          <para>
 	      The resulting vector contains the unsigned saturated sum of the individual components of the vector.
 	    </para>
-	    <para>
+          <para>
 	      If the sum of two of the components would overflow, then the result of the saturated sum is UShort.MaxValue.
 	    </para>
-		  </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="AndNot">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d AndNot (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d AndNot (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -229,7 +250,10 @@
       </Docs>
     </Member>
     <Member MemberName="AndNot">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f AndNot (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f AndNot (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -258,7 +282,10 @@
       </Docs>
     </Member>
     <Member MemberName="ArithmeticRightShift">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui ArithmeticRightShift (this Mono.Simd.Vector4ui v1, int amount);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui ArithmeticRightShift (this Mono.Simd.Vector4ui v1, int amount);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -284,7 +311,10 @@
       </Docs>
     </Member>
     <Member MemberName="ArithmeticRightShift">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us ArithmeticRightShift (this Mono.Simd.Vector8us va, int amount);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us ArithmeticRightShift (this Mono.Simd.Vector8us va, int amount);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -310,7 +340,10 @@
       </Docs>
     </Member>
     <Member MemberName="Average">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b Average (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b Average (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -336,7 +369,10 @@
       </Docs>
     </Member>
     <Member MemberName="Average">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us Average (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us Average (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -362,7 +398,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b CompareEqual (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b CompareEqual (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -390,7 +429,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb CompareEqual (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb CompareEqual (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -412,13 +454,16 @@
         <param name="vb">Second Vector.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
-         <remarks>Equal components get all their bits set to 1;
+        <remarks>Equal components get all their bits set to 1;
 	        Unequal components gets the value set to zero.  You can compare the integer
 			properties to -1.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d CompareEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -447,7 +492,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l CompareEqual (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2l CompareEqual (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -475,7 +523,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul CompareEqual (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2ul CompareEqual (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -503,7 +554,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f CompareEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -532,7 +586,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i CompareEqual (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i CompareEqual (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -560,7 +617,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui CompareEqual (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui CompareEqual (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -588,7 +648,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s CompareEqual (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s CompareEqual (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -616,7 +679,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us CompareEqual (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us CompareEqual (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -644,7 +710,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareGreaterThan">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb CompareGreaterThan (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb CompareGreaterThan (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -670,7 +739,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareGreaterThan">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l CompareGreaterThan (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2l CompareGreaterThan (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -696,7 +768,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareGreaterThan">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i CompareGreaterThan (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i CompareGreaterThan (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -722,7 +797,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareGreaterThan">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s CompareGreaterThan (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s CompareGreaterThan (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -748,7 +826,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareLessEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareLessEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d CompareLessEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -774,7 +855,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareLessEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareLessEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f CompareLessEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -800,7 +884,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareLessThan">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareLessThan (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d CompareLessThan (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -826,7 +913,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareLessThan">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareLessThan (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f CompareLessThan (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -852,7 +942,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareNotEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareNotEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d CompareNotEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -878,7 +971,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareNotEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareNotEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f CompareNotEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -904,7 +1000,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareNotLessEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareNotLessEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d CompareNotLessEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -930,7 +1029,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareNotLessEqual">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareNotLessEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f CompareNotLessEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -956,7 +1058,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareNotLessThan">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareNotLessThan (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d CompareNotLessThan (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -982,7 +1087,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareNotLessThan">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareNotLessThan (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f CompareNotLessThan (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1008,7 +1116,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareOrdered">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareOrdered (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d CompareOrdered (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1034,7 +1145,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareOrdered">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareOrdered (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f CompareOrdered (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1060,7 +1174,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareUnordered">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareUnordered (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d CompareUnordered (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1086,7 +1203,10 @@
       </Docs>
     </Member>
     <Member MemberName="CompareUnordered">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareUnordered (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f CompareUnordered (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1112,7 +1232,10 @@
       </Docs>
     </Member>
     <Member MemberName="Duplicate">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d Duplicate (this Mono.Simd.Vector2d v1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d Duplicate (this Mono.Simd.Vector2d v1);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1136,7 +1259,10 @@
       </Docs>
     </Member>
     <Member MemberName="DuplicateHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f DuplicateHigh (this Mono.Simd.Vector4f v1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f DuplicateHigh (this Mono.Simd.Vector4f v1);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1160,7 +1286,10 @@
       </Docs>
     </Member>
     <Member MemberName="DuplicateLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f DuplicateLow (this Mono.Simd.Vector4f v1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f DuplicateLow (this Mono.Simd.Vector4f v1);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1184,7 +1313,10 @@
       </Docs>
     </Member>
     <Member MemberName="ExtractByteMask">
-      <MemberSignature Language="C#" Value="public static int ExtractByteMask (this Mono.Simd.Vector16b va);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int ExtractByteMask (this Mono.Simd.Vector16b va);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1208,7 +1340,10 @@
       </Docs>
     </Member>
     <Member MemberName="ExtractByteMask">
-      <MemberSignature Language="C#" Value="public static int ExtractByteMask (this Mono.Simd.Vector16sb va);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int ExtractByteMask (this Mono.Simd.Vector16sb va);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1232,7 +1367,10 @@
       </Docs>
     </Member>
     <Member MemberName="HorizontalAdd">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d HorizontalAdd (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d HorizontalAdd (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1258,7 +1396,10 @@
       </Docs>
     </Member>
     <Member MemberName="HorizontalAdd">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f HorizontalAdd (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f HorizontalAdd (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1284,7 +1425,10 @@
       </Docs>
     </Member>
     <Member MemberName="HorizontalSub">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d HorizontalSub (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d HorizontalSub (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1310,7 +1454,10 @@
       </Docs>
     </Member>
     <Member MemberName="HorizontalSub">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f HorizontalSub (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f HorizontalSub (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1336,7 +1483,10 @@
       </Docs>
     </Member>
     <Member MemberName="InterleaveHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d InterleaveHigh (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d InterleaveHigh (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1362,7 +1512,10 @@
       </Docs>
     </Member>
     <Member MemberName="InterleaveHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f InterleaveHigh (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f InterleaveHigh (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1388,7 +1541,10 @@
       </Docs>
     </Member>
     <Member MemberName="InterleaveLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d InterleaveLow (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d InterleaveLow (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1414,7 +1570,10 @@
       </Docs>
     </Member>
     <Member MemberName="InterleaveLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f InterleaveLow (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f InterleaveLow (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1440,7 +1599,10 @@
       </Docs>
     </Member>
     <Member MemberName="InvSqrt">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f InvSqrt (this Mono.Simd.Vector4f v1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f InvSqrt (this Mono.Simd.Vector4f v1);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1464,7 +1626,10 @@
       </Docs>
     </Member>
     <Member MemberName="LogicalRightShift">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l LogicalRightShift (this Mono.Simd.Vector2l v1, int amount);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2l LogicalRightShift (this Mono.Simd.Vector2l v1, int amount);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1490,7 +1655,10 @@
       </Docs>
     </Member>
     <Member MemberName="LogicalRightShift">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i LogicalRightShift (this Mono.Simd.Vector4i v1, int amount);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i LogicalRightShift (this Mono.Simd.Vector4i v1, int amount);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1516,7 +1684,10 @@
       </Docs>
     </Member>
     <Member MemberName="LogicalRightShift">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s LogicalRightShift (this Mono.Simd.Vector8s va, int amount);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s LogicalRightShift (this Mono.Simd.Vector8s va, int amount);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1542,7 +1713,10 @@
       </Docs>
     </Member>
     <Member MemberName="Max">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b Max (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b Max (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1568,7 +1742,10 @@
       </Docs>
     </Member>
     <Member MemberName="Max">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb Max (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb Max (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1594,7 +1771,10 @@
       </Docs>
     </Member>
     <Member MemberName="Max">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d Max (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d Max (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1620,7 +1800,10 @@
       </Docs>
     </Member>
     <Member MemberName="Max">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Max (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f Max (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1646,7 +1829,10 @@
       </Docs>
     </Member>
     <Member MemberName="Max">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i Max (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i Max (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1672,7 +1858,10 @@
       </Docs>
     </Member>
     <Member MemberName="Max">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui Max (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui Max (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1698,7 +1887,10 @@
       </Docs>
     </Member>
     <Member MemberName="Max">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s Max (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s Max (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1724,7 +1916,10 @@
       </Docs>
     </Member>
     <Member MemberName="Max">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us Max (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us Max (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1750,7 +1945,10 @@
       </Docs>
     </Member>
     <Member MemberName="Min">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b Min (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b Min (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1776,7 +1974,10 @@
       </Docs>
     </Member>
     <Member MemberName="Min">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb Min (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb Min (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1802,7 +2003,10 @@
       </Docs>
     </Member>
     <Member MemberName="Min">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d Min (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d Min (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1828,7 +2032,10 @@
       </Docs>
     </Member>
     <Member MemberName="Min">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Min (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f Min (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1854,7 +2061,10 @@
       </Docs>
     </Member>
     <Member MemberName="Min">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i Min (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i Min (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1880,7 +2090,10 @@
       </Docs>
     </Member>
     <Member MemberName="Min">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui Min (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui Min (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1906,7 +2119,10 @@
       </Docs>
     </Member>
     <Member MemberName="Min">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s Min (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s Min (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1932,7 +2148,10 @@
       </Docs>
     </Member>
     <Member MemberName="Min">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us Min (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us Min (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1958,7 +2177,10 @@
       </Docs>
     </Member>
     <Member MemberName="MultiplyStoreHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s MultiplyStoreHigh (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s MultiplyStoreHigh (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1978,13 +2200,16 @@
       <Docs>
         <param name="va">First Vector.</param>
         <param name="vb">Second Vector.</param>
-        <summary>Do (a * b) >> 16 for each element.</summary>
+        <summary>Do (a * b) &gt;&gt; 16 for each element.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MultiplyStoreHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us MultiplyStoreHigh (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us MultiplyStoreHigh (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2004,13 +2229,16 @@
       <Docs>
         <param name="va">First Vector.</param>
         <param name="vb">Second Vector.</param>
-        <summary>Do (a * b) >> 16 for each element.</summary>
+        <summary>Do (a * b) &gt;&gt; 16 for each element.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PackWithSignedSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s PackWithSignedSaturation (this Mono.Simd.Vector4i va, Mono.Simd.Vector4i vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s PackWithSignedSaturation (this Mono.Simd.Vector4i va, Mono.Simd.Vector4i vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2037,7 +2265,10 @@
       </Docs>
     </Member>
     <Member MemberName="PackWithSignedSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb PackWithSignedSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb PackWithSignedSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2067,7 +2298,10 @@
       </Docs>
     </Member>
     <Member MemberName="PackWithUnsignedSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us PackWithUnsignedSaturation (this Mono.Simd.Vector4i va, Mono.Simd.Vector4i vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us PackWithUnsignedSaturation (this Mono.Simd.Vector4i va, Mono.Simd.Vector4i vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2096,7 +2330,10 @@
       </Docs>
     </Member>
     <Member MemberName="PackWithUnsignedSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b PackWithUnsignedSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b PackWithUnsignedSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2122,7 +2359,10 @@
       </Docs>
     </Member>
     <Member MemberName="Reciprocal">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Reciprocal (this Mono.Simd.Vector4f v1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f Reciprocal (this Mono.Simd.Vector4f v1);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2146,7 +2386,10 @@
       </Docs>
     </Member>
     <Member MemberName="Shuffle">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Shuffle (this Mono.Simd.Vector4f v1, Mono.Simd.ShuffleSel sel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f Shuffle (this Mono.Simd.Vector4f v1, Mono.Simd.ShuffleSel sel);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2173,7 +2416,10 @@
       </Docs>
     </Member>
     <Member MemberName="Shuffle">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i Shuffle (this Mono.Simd.Vector4i v1, Mono.Simd.ShuffleSel sel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i Shuffle (this Mono.Simd.Vector4i v1, Mono.Simd.ShuffleSel sel);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2200,7 +2446,10 @@
       </Docs>
     </Member>
     <Member MemberName="Shuffle">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui Shuffle (this Mono.Simd.Vector4ui v1, Mono.Simd.ShuffleSel sel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui Shuffle (this Mono.Simd.Vector4ui v1, Mono.Simd.ShuffleSel sel);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2227,7 +2476,10 @@
       </Docs>
     </Member>
     <Member MemberName="ShuffleHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s ShuffleHigh (this Mono.Simd.Vector8s va, Mono.Simd.ShuffleSel sel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s ShuffleHigh (this Mono.Simd.Vector8s va, Mono.Simd.ShuffleSel sel);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2254,7 +2506,10 @@
       </Docs>
     </Member>
     <Member MemberName="ShuffleHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us ShuffleHigh (this Mono.Simd.Vector8us va, Mono.Simd.ShuffleSel sel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us ShuffleHigh (this Mono.Simd.Vector8us va, Mono.Simd.ShuffleSel sel);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2281,7 +2536,10 @@
       </Docs>
     </Member>
     <Member MemberName="ShuffleLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s ShuffleLow (this Mono.Simd.Vector8s va, Mono.Simd.ShuffleSel sel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s ShuffleLow (this Mono.Simd.Vector8s va, Mono.Simd.ShuffleSel sel);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2308,7 +2566,10 @@
       </Docs>
     </Member>
     <Member MemberName="ShuffleLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us ShuffleLow (this Mono.Simd.Vector8us va, Mono.Simd.ShuffleSel sel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us ShuffleLow (this Mono.Simd.Vector8us va, Mono.Simd.ShuffleSel sel);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2335,7 +2596,10 @@
       </Docs>
     </Member>
     <Member MemberName="SignedPackWithSignedSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s SignedPackWithSignedSaturation (this Mono.Simd.Vector4ui va, Mono.Simd.Vector4ui vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s SignedPackWithSignedSaturation (this Mono.Simd.Vector4ui va, Mono.Simd.Vector4ui vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2362,7 +2626,10 @@
       </Docs>
     </Member>
     <Member MemberName="SignedPackWithSignedSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb SignedPackWithSignedSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb SignedPackWithSignedSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2389,7 +2656,10 @@
       </Docs>
     </Member>
     <Member MemberName="SignedPackWithUnsignedSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us SignedPackWithUnsignedSaturation (this Mono.Simd.Vector4ui va, Mono.Simd.Vector4ui vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us SignedPackWithUnsignedSaturation (this Mono.Simd.Vector4ui va, Mono.Simd.Vector4ui vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2416,7 +2686,10 @@
       </Docs>
     </Member>
     <Member MemberName="SignedPackWithUnsignedSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b SignedPackWithUnsignedSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b SignedPackWithUnsignedSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2443,7 +2716,10 @@
       </Docs>
     </Member>
     <Member MemberName="Sqrt">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d Sqrt (this Mono.Simd.Vector2d v1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d Sqrt (this Mono.Simd.Vector2d v1);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2467,7 +2743,10 @@
       </Docs>
     </Member>
     <Member MemberName="Sqrt">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Sqrt (this Mono.Simd.Vector4f v1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f Sqrt (this Mono.Simd.Vector4f v1);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2491,7 +2770,10 @@
       </Docs>
     </Member>
     <Member MemberName="SubtractWithSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b SubtractWithSaturation (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b SubtractWithSaturation (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2513,18 +2795,21 @@
         <param name="vb">Second Vector.</param>
         <summary>Subtract two vectors with saturation.</summary>
         <returns>The unsigned saturated subtraction of two vectors.</returns>
-      <remarks>
-	    <para>
+        <remarks>
+          <para>
 	      The resulting vector contains the unsigned saturated subtraction of the individual components of the vector.
 	    </para>
-	    <para>
+          <para>
 	      If the subtraction of two of the components would be negative, then the result is zero.
 	    </para>
-	  </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="SubtractWithSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb SubtractWithSaturation (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb SubtractWithSaturation (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2546,18 +2831,21 @@
         <param name="vb">Second Vector.</param>
         <summary>Subtract two vectors with saturation.</summary>
         <returns>The unsigned saturated subtraction of two vectors.</returns>
-      <remarks>
-	    <para>
+        <remarks>
+          <para>
 	      The resulting vector contains the unsigned saturated subtraction of the individual components of the vector.
 	    </para>
-	    <para>
+          <para>
 	      If the subtraction of two of the components would undeflow, then the result is SByte.MinValue.
 	    </para>
-       </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="SubtractWithSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s SubtractWithSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s SubtractWithSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2579,18 +2867,21 @@
         <param name="vb">Second Vector.</param>
         <summary>Subtract two vectors with saturation.</summary>
         <returns>The unsigned saturated subtraction of two vectors.</returns>
-      <remarks>
-	    <para>
+        <remarks>
+          <para>
 	      The resulting vector contains the unsigned saturated subtraction of the individual components of the vector.
 	    </para>
-	    <para>
+          <para>
 	      If the subtraction of two of the components would undeflow, then the result is Short.MinValue.
 	    </para>
-       </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="SubtractWithSaturation">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us SubtractWithSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us SubtractWithSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2612,18 +2903,21 @@
         <param name="vb">Second Vector.</param>
         <summary>Subtract two vectors with saturation.</summary>
         <returns>The unsigned saturated subtraction of two vectors.</returns>
-      <remarks>
-	    <para>
+        <remarks>
+          <para>
 	      The resulting vector contains the unsigned saturated subtraction of the individual components of the vector.
 	    </para>
-	    <para>
+          <para>
 	      If the subtraction of two of the components would be negative, then the result is zero.
 	    </para>
-      </remarks>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="SumOfAbsoluteDifferences">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us SumOfAbsoluteDifferences (this Mono.Simd.Vector16b va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us SumOfAbsoluteDifferences (this Mono.Simd.Vector16b va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2652,7 +2946,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b UnpackHigh (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b UnpackHigh (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2678,7 +2975,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb UnpackHigh (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb UnpackHigh (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2704,7 +3004,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l UnpackHigh (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2l UnpackHigh (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2730,7 +3033,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul UnpackHigh (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2ul UnpackHigh (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2756,7 +3062,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i UnpackHigh (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i UnpackHigh (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2782,7 +3091,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui UnpackHigh (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui UnpackHigh (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2808,7 +3120,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s UnpackHigh (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s UnpackHigh (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2834,7 +3149,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackHigh">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us UnpackHigh (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us UnpackHigh (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2860,7 +3178,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b UnpackLow (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b UnpackLow (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2886,7 +3207,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb UnpackLow (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb UnpackLow (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2912,7 +3236,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l UnpackLow (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2l UnpackLow (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2938,7 +3265,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul UnpackLow (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2ul UnpackLow (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2964,7 +3294,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i UnpackLow (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i UnpackLow (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2990,7 +3323,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui UnpackLow (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui UnpackLow (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3016,7 +3352,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s UnpackLow (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s UnpackLow (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3042,7 +3381,10 @@
       </Docs>
     </Member>
     <Member MemberName="UnpackLow">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us UnpackLow (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us UnpackLow (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

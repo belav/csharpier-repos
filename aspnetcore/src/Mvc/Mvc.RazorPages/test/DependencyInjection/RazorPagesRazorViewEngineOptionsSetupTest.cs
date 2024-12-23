@@ -15,18 +15,16 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
         // Arrange
         var expected = new[]
         {
-                "/{1}/{0}.cshtml",
-                "/Shared/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
-            };
-
-        var razorPagesOptions = new RazorPagesOptions
-        {
-            RootDirectory = "/"
+            "/{1}/{0}.cshtml",
+            "/Shared/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
         };
+
+        var razorPagesOptions = new RazorPagesOptions { RootDirectory = "/" };
         var viewEngineOptions = GetViewEngineOptions();
         var setup = new RazorPagesRazorViewEngineOptionsSetup(
-            Options.Options.Create(razorPagesOptions));
+            Options.Options.Create(razorPagesOptions)
+        );
 
         // Act
         setup.Configure(viewEngineOptions);
@@ -41,15 +39,16 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
         // Arrange
         var expected = new[]
         {
-                "/Pages/{1}/{0}.cshtml",
-                "/Pages/Shared/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
-            };
+            "/Pages/{1}/{0}.cshtml",
+            "/Pages/Shared/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
+        };
 
         var razorPagesOptions = new RazorPagesOptions();
         var viewEngineOptions = GetViewEngineOptions();
         var setup = new RazorPagesRazorViewEngineOptionsSetup(
-            Options.Options.Create(razorPagesOptions));
+            Options.Options.Create(razorPagesOptions)
+        );
 
         // Act
         setup.Configure(viewEngineOptions);
@@ -64,17 +63,18 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
         // Arrange
         var expected = new[]
         {
-                "/Areas/{2}/Pages/{1}/{0}.cshtml",
-                "/Areas/{2}/Pages/Shared/{0}.cshtml",
-                "/Areas/{2}/Views/Shared/{0}.cshtml",
-                "/Pages/Shared/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
-            };
+            "/Areas/{2}/Pages/{1}/{0}.cshtml",
+            "/Areas/{2}/Pages/Shared/{0}.cshtml",
+            "/Areas/{2}/Views/Shared/{0}.cshtml",
+            "/Pages/Shared/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
+        };
 
         var razorPagesOptions = new RazorPagesOptions();
         var viewEngineOptions = GetViewEngineOptions();
         var setup = new RazorPagesRazorViewEngineOptionsSetup(
-            Options.Options.Create(razorPagesOptions));
+            Options.Options.Create(razorPagesOptions)
+        );
 
         // Act
         setup.Configure(viewEngineOptions);
@@ -89,20 +89,18 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
         // Arrange
         var expected = new[]
         {
-                "/Areas/{2}/Pages/{1}/{0}.cshtml",
-                "/Areas/{2}/Pages/Shared/{0}.cshtml",
-                "/Areas/{2}/Views/Shared/{0}.cshtml",
-                "/RazorFiles/Shared/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
-            };
-
-        var razorPagesOptions = new RazorPagesOptions
-        {
-            RootDirectory = "/RazorFiles/",
+            "/Areas/{2}/Pages/{1}/{0}.cshtml",
+            "/Areas/{2}/Pages/Shared/{0}.cshtml",
+            "/Areas/{2}/Views/Shared/{0}.cshtml",
+            "/RazorFiles/Shared/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
         };
+
+        var razorPagesOptions = new RazorPagesOptions { RootDirectory = "/RazorFiles/" };
         var viewEngineOptions = GetViewEngineOptions();
         var setup = new RazorPagesRazorViewEngineOptionsSetup(
-            Options.Options.Create(razorPagesOptions));
+            Options.Options.Create(razorPagesOptions)
+        );
 
         // Act
         setup.Configure(viewEngineOptions);
@@ -117,18 +115,16 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
         // Arrange
         var expected = new[]
         {
-                "/Views/{1}/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
-                "/PagesRoot/Shared/{0}.cshtml",
-            };
-
-        var razorPagesOptions = new RazorPagesOptions
-        {
-            RootDirectory = "/PagesRoot",
+            "/Views/{1}/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
+            "/PagesRoot/Shared/{0}.cshtml",
         };
+
+        var razorPagesOptions = new RazorPagesOptions { RootDirectory = "/PagesRoot" };
         var viewEngineOptions = GetViewEngineOptions();
         var setup = new RazorPagesRazorViewEngineOptionsSetup(
-            Options.Options.Create(razorPagesOptions));
+            Options.Options.Create(razorPagesOptions)
+        );
 
         // Act
         setup.Configure(viewEngineOptions);
@@ -143,19 +139,17 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
         // Arrange
         var expected = new[]
         {
-                "/Areas/{2}/Views/{1}/{0}.cshtml",
-                "/Areas/{2}/Views/Shared/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
-                "/PagesRoot/Shared/{0}.cshtml",
-            };
-
-        var razorPagesOptions = new RazorPagesOptions
-        {
-            RootDirectory = "/PagesRoot",
+            "/Areas/{2}/Views/{1}/{0}.cshtml",
+            "/Areas/{2}/Views/Shared/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
+            "/PagesRoot/Shared/{0}.cshtml",
         };
+
+        var razorPagesOptions = new RazorPagesOptions { RootDirectory = "/PagesRoot" };
         var viewEngineOptions = GetViewEngineOptions();
         var setup = new RazorPagesRazorViewEngineOptionsSetup(
-            Options.Options.Create(razorPagesOptions));
+            Options.Options.Create(razorPagesOptions)
+        );
 
         // Act
         setup.Configure(viewEngineOptions);
@@ -169,7 +163,9 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
     {
         // Arrange
         var viewEngineOptions = GetViewEngineOptions();
-        var setup = new RazorPagesRazorViewEngineOptionsSetup(Options.Options.Create(new RazorPagesOptions()));
+        var setup = new RazorPagesRazorViewEngineOptionsSetup(
+            Options.Options.Create(new RazorPagesOptions())
+        );
 
         // Act
         setup.Configure(viewEngineOptions);
@@ -177,7 +173,8 @@ public class RazorPagesRazorViewEngineOptionsSetupTest
         // Assert
         Assert.Collection(
             viewEngineOptions.ViewLocationExpanders,
-            expander => Assert.IsType<PageViewLocationExpander>(expander));
+            expander => Assert.IsType<PageViewLocationExpander>(expander)
+        );
     }
 
     private static RazorViewEngineOptions GetViewEngineOptions()

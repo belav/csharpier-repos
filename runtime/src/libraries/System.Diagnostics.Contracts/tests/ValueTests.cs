@@ -32,6 +32,5 @@ namespace System.Diagnostics.Contracts.Tests
             Assert.Null(Contract.ValueAtReturn(out strValue));
             Assert.Null(strValue);
         }
-
     }
 }

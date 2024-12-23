@@ -16,7 +16,10 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
     [InlineData(typeof(Aes), typeof(HMACSHA256))]
     [InlineData(typeof(Aes), typeof(HMACSHA384))]
     [InlineData(typeof(Aes), typeof(HMACSHA512))]
-    public void ImportFromXml_BuiltInTypes_CreatesAppropriateDescriptor(Type encryptionAlgorithmType, Type validationAlgorithmType)
+    public void ImportFromXml_BuiltInTypes_CreatesAppropriateDescriptor(
+        Type encryptionAlgorithmType,
+        Type validationAlgorithmType
+    )
     {
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
@@ -25,12 +28,14 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
             {
                 EncryptionAlgorithmType = encryptionAlgorithmType,
                 EncryptionAlgorithmKeySize = 192,
-                ValidationAlgorithmType = validationAlgorithmType
+                ValidationAlgorithmType = validationAlgorithmType,
             },
-            masterKey.ToSecret());
+            masterKey.ToSecret()
+        );
         var control = CreateEncryptorInstanceFromDescriptor(descriptor);
 
-        var xml = $@"
+        var xml =
+            $@"
                 <descriptor>
                   <encryption algorithm='{encryptionAlgorithmType.Name}' keyLength='192' />
                   <validation algorithm='{validationAlgorithmType.Name}' />
@@ -38,14 +43,25 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
                     <value>{masterKey}</value>
                   </masterKey>
                 </descriptor>";
-        var deserializedDescriptor = new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(XElement.Parse(xml));
-        var test = CreateEncryptorInstanceFromDescriptor(deserializedDescriptor as ManagedAuthenticatedEncryptorDescriptor);
+        var deserializedDescriptor =
+            new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
+                XElement.Parse(xml)
+            );
+        var test = CreateEncryptorInstanceFromDescriptor(
+            deserializedDescriptor as ManagedAuthenticatedEncryptorDescriptor
+        );
 
         // Act & assert
         byte[] plaintext = new byte[] { 1, 2, 3, 4, 5 };
         byte[] aad = new byte[] { 2, 4, 6, 8, 0 };
-        byte[] ciphertext = control.Encrypt(new ArraySegment<byte>(plaintext), new ArraySegment<byte>(aad));
-        byte[] roundTripPlaintext = test.Decrypt(new ArraySegment<byte>(ciphertext), new ArraySegment<byte>(aad));
+        byte[] ciphertext = control.Encrypt(
+            new ArraySegment<byte>(plaintext),
+            new ArraySegment<byte>(aad)
+        );
+        byte[] roundTripPlaintext = test.Decrypt(
+            new ArraySegment<byte>(ciphertext),
+            new ArraySegment<byte>(aad)
+        );
         Assert.Equal(plaintext, roundTripPlaintext);
     }
 
@@ -59,12 +75,14 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
             {
                 EncryptionAlgorithmType = typeof(Aes),
                 EncryptionAlgorithmKeySize = 192,
-                ValidationAlgorithmType = typeof(HMACSHA384)
+                ValidationAlgorithmType = typeof(HMACSHA384),
             },
-            masterKey.ToSecret());
+            masterKey.ToSecret()
+        );
         var control = CreateEncryptorInstanceFromDescriptor(descriptor);
 
-        var xml = $@"
+        var xml =
+            $@"
                 <descriptor>
                   <encryption algorithm='{typeof(Aes).AssemblyQualifiedName}' keyLength='192' />
                   <validation algorithm='{typeof(HMACSHA384).AssemblyQualifiedName}' />
@@ -72,14 +90,25 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
                     <value>{masterKey}</value>
                   </masterKey>
                 </descriptor>";
-        var deserializedDescriptor = new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(XElement.Parse(xml));
-        var test = CreateEncryptorInstanceFromDescriptor(deserializedDescriptor as ManagedAuthenticatedEncryptorDescriptor);
+        var deserializedDescriptor =
+            new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
+                XElement.Parse(xml)
+            );
+        var test = CreateEncryptorInstanceFromDescriptor(
+            deserializedDescriptor as ManagedAuthenticatedEncryptorDescriptor
+        );
 
         // Act & assert
         byte[] plaintext = new byte[] { 1, 2, 3, 4, 5 };
         byte[] aad = new byte[] { 2, 4, 6, 8, 0 };
-        byte[] ciphertext = control.Encrypt(new ArraySegment<byte>(plaintext), new ArraySegment<byte>(aad));
-        byte[] roundTripPlaintext = test.Decrypt(new ArraySegment<byte>(ciphertext), new ArraySegment<byte>(aad));
+        byte[] ciphertext = control.Encrypt(
+            new ArraySegment<byte>(plaintext),
+            new ArraySegment<byte>(aad)
+        );
+        byte[] roundTripPlaintext = test.Decrypt(
+            new ArraySegment<byte>(ciphertext),
+            new ArraySegment<byte>(aad)
+        );
         Assert.Equal(plaintext, roundTripPlaintext);
     }
 
@@ -89,7 +118,8 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
 
-        var xml = $@"
+        var xml =
+            $@"
                 <descriptor>
                   <encryption algorithm='{typeof(CustomAlgorithm).AssemblyQualifiedName}' keyLength='192' />
                   <validation algorithm='{typeof(HMACSHA384).AssemblyQualifiedName}' />
@@ -99,11 +129,17 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
                 </descriptor>";
 
         // Act
-        var deserializedDescriptor = new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(XElement.Parse(xml));
+        var deserializedDescriptor =
+            new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
+                XElement.Parse(xml)
+            );
         var managedDescriptor = (ManagedAuthenticatedEncryptorDescriptor)deserializedDescriptor;
 
         // Assert
-        Assert.Equal(typeof(CustomAlgorithm), managedDescriptor.Configuration.EncryptionAlgorithmType);
+        Assert.Equal(
+            typeof(CustomAlgorithm),
+            managedDescriptor.Configuration.EncryptionAlgorithmType
+        );
     }
 
     [Fact]
@@ -112,7 +148,8 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
 
-        var xml = $@"
+        var xml =
+            $@"
                 <descriptor>
                   <encryption algorithm='{typeof(CustomAlgorithmNoConstructor).AssemblyQualifiedName}' keyLength='192' />
                   <validation algorithm='{typeof(HMACSHA384).AssemblyQualifiedName}' />
@@ -122,17 +159,30 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
                 </descriptor>";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(XElement.Parse(xml)));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                new ManagedAuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(
+                    XElement.Parse(xml)
+                )
+        );
 
         // Assert
-        Assert.Equal($"Algorithm type {typeof(CustomAlgorithmNoConstructor).FullName} doesn't have a public parameterless constructor. If the app is published with trimming then the constructor may have been trimmed. Ensure the type's assembly is excluded from trimming.", ex.Message);
+        Assert.Equal(
+            $"Algorithm type {typeof(CustomAlgorithmNoConstructor).FullName} doesn't have a public parameterless constructor. If the app is published with trimming then the constructor may have been trimmed. Ensure the type's assembly is excluded from trimming.",
+            ex.Message
+        );
     }
 
     public class CustomAlgorithm : SymmetricAlgorithm
     {
-        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) => throw new NotImplementedException();
-        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV) => throw new NotImplementedException();
+        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) =>
+            throw new NotImplementedException();
+
+        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV) =>
+            throw new NotImplementedException();
+
         public override void GenerateIV() => throw new NotImplementedException();
+
         public override void GenerateKey() => throw new NotImplementedException();
     }
 
@@ -140,13 +190,20 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
     {
         private CustomAlgorithmNoConstructor() { }
 
-        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) => throw new NotImplementedException();
-        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV) => throw new NotImplementedException();
+        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) =>
+            throw new NotImplementedException();
+
+        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV) =>
+            throw new NotImplementedException();
+
         public override void GenerateIV() => throw new NotImplementedException();
+
         public override void GenerateKey() => throw new NotImplementedException();
     }
 
-    private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(ManagedAuthenticatedEncryptorDescriptor descriptor)
+    private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(
+        ManagedAuthenticatedEncryptorDescriptor descriptor
+    )
     {
         var encryptorFactory = new ManagedAuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
         var key = new Key(
@@ -155,7 +212,8 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
             DateTimeOffset.Now + TimeSpan.FromHours(1),
             DateTimeOffset.Now + TimeSpan.FromDays(30),
             descriptor,
-            new[] { encryptorFactory });
+            new[] { encryptorFactory }
+        );
 
         return key.CreateEncryptor();
     }

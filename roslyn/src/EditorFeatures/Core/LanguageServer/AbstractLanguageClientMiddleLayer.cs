@@ -13,8 +13,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
     {
         public abstract bool CanHandle(string methodName);
 
-        public abstract Task HandleNotificationAsync(string methodName, JToken methodParam, Func<JToken, Task> sendNotification);
+        public abstract Task HandleNotificationAsync(
+            string methodName,
+            JToken methodParam,
+            Func<JToken, Task> sendNotification
+        );
 
-        public abstract Task<JToken?> HandleRequestAsync(string methodName, JToken methodParam, Func<JToken, Task<JToken?>> sendRequest);
+        public abstract Task<JToken?> HandleRequestAsync(
+            string methodName,
+            JToken methodParam,
+            Func<JToken, Task<JToken?>> sendRequest
+        );
     }
 }

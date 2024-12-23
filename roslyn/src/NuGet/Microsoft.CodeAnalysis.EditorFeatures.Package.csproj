@@ -2,7 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
@@ -12,7 +11,6 @@
       .NET Compiler Platform ("Roslyn") support for editor features inside the Visual Studio editor.
     </PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\EditorFeatures\Core\Microsoft.CodeAnalysis.EditorFeatures.csproj" />
     <ProjectReference Include="..\EditorFeatures\CSharp\Microsoft.CodeAnalysis.CSharp.EditorFeatures.csproj" />

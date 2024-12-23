@@ -1,11 +1,11 @@
 //
 // System.Windows.Forms.Design.DataMemberListEditor
-// 
+//
 // Author:
 //   Ivan N. Zlatev <contact@i-nz.net>
-// 
+//
 // (C) 2007 Ivan N. Zlatev
-// 
+//
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,12 +36,9 @@ using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms.Design
 {
-
-	[MonoTODO]
-	internal sealed class DataMemberListEditor : UITypeEditor
-	{
-		public DataMemberListEditor ()
-		{
-		}
-	}
+    [MonoTODO]
+    internal sealed class DataMemberListEditor : UITypeEditor
+    {
+        public DataMemberListEditor() { }
+    }
 }

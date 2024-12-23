@@ -21,12 +21,36 @@ using Xunit;
 
 public static partial class MountHelper
 {
-    [DllImport("kernel32.dll", EntryPoint = "GetVolumeNameForVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
-    private static extern bool GetVolumeNameForVolumeMountPoint(string volumeName, StringBuilder uniqueVolumeName, int uniqueNameBufferCapacity);
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "GetVolumeNameForVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
+    private static extern bool GetVolumeNameForVolumeMountPoint(
+        string volumeName,
+        StringBuilder uniqueVolumeName,
+        int uniqueNameBufferCapacity
+    );
+
     // unique volume name must be "\\?\Volume{GUID}\"
-    [DllImport("kernel32.dll", EntryPoint = "SetVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "SetVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
     private static extern bool SetVolumeMountPoint(string mountPoint, string uniqueVolumeName);
-    [DllImport("kernel32.dll", EntryPoint = "DeleteVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
+
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "DeleteVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
     private static extern bool DeleteVolumeMountPoint(string mountPoint);
 
     // Helper for ConditionalClass attributes
@@ -47,15 +71,32 @@ public static partial class MountHelper
         string path = Path.GetTempFileName();
         string linkPath = path + ".link";
         success = CreateSymbolicLink(linkPath: linkPath, targetPath: path, isDirectory: false);
-        try { File.Delete(path); } catch { }
-        try { File.Delete(linkPath); } catch { }
+        try
+        {
+            File.Delete(path);
+        }
+        catch { }
+        try
+        {
+            File.Delete(linkPath);
+        }
+        catch { }
 
         // Verify directory symlink creation
         path = Path.GetTempFileName();
         linkPath = path + ".link";
-        success = success && CreateSymbolicLink(linkPath: linkPath, targetPath: path, isDirectory: true);
-        try { Directory.Delete(path); } catch { }
-        try { Directory.Delete(linkPath); } catch { }
+        success =
+            success && CreateSymbolicLink(linkPath: linkPath, targetPath: path, isDirectory: true);
+        try
+        {
+            Directory.Delete(path);
+        }
+        catch { }
+        try
+        {
+            Directory.Delete(linkPath);
+        }
+        catch { }
 
         // Reduce the risk we accidentally stop running these altogether
         // on Windows, due to a bug in CreateSymbolicLink
@@ -76,7 +117,12 @@ public static partial class MountHelper
 #if NETFRAMEWORK
         bool isWindows = true;
 #else
-        if (OperatingSystem.IsIOS() || OperatingSystem.IsTvOS() || OperatingSystem.IsMacCatalyst() || OperatingSystem.IsBrowser()) // OSes that don't support Process.Start()
+        if (
+            OperatingSystem.IsIOS()
+            || OperatingSystem.IsTvOS()
+            || OperatingSystem.IsMacCatalyst()
+            || OperatingSystem.IsBrowser()
+        ) // OSes that don't support Process.Start()
         {
             return false;
         }
@@ -87,12 +133,21 @@ public static partial class MountHelper
         if (isWindows)
         {
             symLinkProcess.StartInfo.FileName = "cmd";
-            symLinkProcess.StartInfo.Arguments = string.Format("/c mklink{0} \"{1}\" \"{2}\"", isDirectory ? " /D" : "", linkPath, targetPath);
+            symLinkProcess.StartInfo.Arguments = string.Format(
+                "/c mklink{0} \"{1}\" \"{2}\"",
+                isDirectory ? " /D" : "",
+                linkPath,
+                targetPath
+            );
         }
         else
         {
             symLinkProcess.StartInfo.FileName = "/bin/ln";
-            symLinkProcess.StartInfo.Arguments = string.Format("-s \"{0}\" \"{1}\"", targetPath, linkPath);
+            symLinkProcess.StartInfo.Arguments = string.Format(
+                "-s \"{0}\" \"{1}\"",
+                targetPath,
+                linkPath
+            );
         }
         symLinkProcess.StartInfo.UseShellExecute = false;
         symLinkProcess.StartInfo.RedirectStandardOutput = true;
@@ -112,7 +167,9 @@ public static partial class MountHelper
             throw new PlatformNotSupportedException();
         }
 
-        return RunProcess(CreateProcessStartInfo("cmd", "/c", "mklink", "/J", junctionPath, targetPath));
+        return RunProcess(
+            CreateProcessStartInfo("cmd", "/c", "mklink", "/J", junctionPath, targetPath)
+        );
     }
 
     public static void Mount(string volumeName, string mountPoint)
@@ -148,13 +205,16 @@ public static partial class MountHelper
             throw new Exception(string.Format("Win32 error: {0}", Marshal.GetLastWin32Error()));
     }
 
-    private static ProcessStartInfo CreateProcessStartInfo(string fileName, params string[] arguments)
+    private static ProcessStartInfo CreateProcessStartInfo(
+        string fileName,
+        params string[] arguments
+    )
     {
         var info = new ProcessStartInfo
         {
             FileName = fileName,
             UseShellExecute = false,
-            RedirectStandardOutput = true
+            RedirectStandardOutput = true,
         };
 
 #if NETFRAMEWORK
@@ -179,17 +239,16 @@ public static partial class MountHelper
     /// For standalone debugging help. Change Main0 to Main
     public static void Main0(string[] args)
     {
-         try
+        try
         {
-            if (args[0]=="-m")
+            if (args[0] == "-m")
                 Mount(args[1], args[2]);
-            if (args[0]=="-u")
+            if (args[0] == "-u")
                 Unmount(args[1]);
-         }
+        }
         catch (Exception ex)
         {
-             Console.WriteLine(ex);
+            Console.WriteLine(ex);
         }
     }
-
 }

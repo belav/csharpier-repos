@@ -8,17 +8,19 @@ namespace System.Composition
     /// <summary>
     ///     Specifies that a type, property, field, or method provides a particular export.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property,
-                    AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Property,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public class ExportAttribute : Attribute
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the
         ///     type or member marked with this attribute under the default contract name.
         /// </summary>
-        public ExportAttribute() : this(null, null)
-        {
-        }
+        public ExportAttribute()
+            : this(null, null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the
@@ -30,9 +32,8 @@ namespace System.Composition
         ///     member marked with this attribute, under; or <see langword="null"/> to use the
         ///     default contract name.
         /// </param>
-        public ExportAttribute(Type contractType) : this(null, contractType)
-        {
-        }
+        public ExportAttribute(Type contractType)
+            : this(null, contractType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the
@@ -43,9 +44,8 @@ namespace System.Composition
         ///      marked with this attribute, under; or <see langword="null"/> or an empty string
         ///      ("") to use the default contract name.
         /// </param>
-        public ExportAttribute(string contractName) : this(contractName, null)
-        {
-        }
+        public ExportAttribute(string contractName)
+            : this(contractName, null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportAttribute"/> class, exporting the

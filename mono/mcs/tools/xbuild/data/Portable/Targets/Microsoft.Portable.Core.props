@@ -11,22 +11,24 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
 ***********************************************************************************************
 -->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-    <Import Project="VisualStudio\v$(VisualStudioVersion)\Microsoft.Portable.CurrentVersion.props" Condition="Exists('VisualStudio\v$(VisualStudioVersion)\Microsoft.Portable.CurrentVersion.props')"/>
-
-    <PropertyGroup>
-        <TargetPlatformIdentifier>Portable</TargetPlatformIdentifier>
-        <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
-        <TargetFrameworkMonikerDisplayName>.NET Portable Subset</TargetFrameworkMonikerDisplayName>
-
-        <!-- Automatically reference all assemblies in the target framework -->
-        <ImplicitlyExpandTargetFramework Condition="'$(ImplicitlyExpandTargetFramework)' == '' AND '$(PortableNuGetMode)' != 'true'">true</ImplicitlyExpandTargetFramework>
-
-    </PropertyGroup>
-
-    <!-- Redefine AssemblySearchPaths to exclude {AssemblyFolders} and {GAC}, these represent .NET-specific locations -->
-    <PropertyGroup>
-        <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''">
+  <Import
+    Project="VisualStudio\v$(VisualStudioVersion)\Microsoft.Portable.CurrentVersion.props"
+    Condition="Exists('VisualStudio\v$(VisualStudioVersion)\Microsoft.Portable.CurrentVersion.props')"
+  />
+  <PropertyGroup>
+    <TargetPlatformIdentifier>Portable</TargetPlatformIdentifier>
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <TargetFrameworkMonikerDisplayName>.NET Portable Subset</TargetFrameworkMonikerDisplayName>
+    <!-- Automatically reference all assemblies in the target framework -->
+    <ImplicitlyExpandTargetFramework
+      Condition="'$(ImplicitlyExpandTargetFramework)' == '' AND '$(PortableNuGetMode)' != 'true'"
+      >true</ImplicitlyExpandTargetFramework
+    >
+  </PropertyGroup>
+  <!-- Redefine AssemblySearchPaths to exclude {AssemblyFolders} and {GAC}, these represent .NET-specific locations -->
+  <PropertyGroup>
+    <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''"
+      >
             {CandidateAssemblyFiles};
             $(ReferencePath);
             {HintPathFromItem};
@@ -34,7 +36,7 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
             {Registry:$(FrameworkRegistryBase),$(TargetFrameworkVersion),$(AssemblyFoldersSuffix)$(AssemblyFoldersExConditions)};
             {RawFileName};
             $(OutDir)
-        </AssemblySearchPaths>
-    </PropertyGroup>
-
+        </AssemblySearchPaths
+    >
+  </PropertyGroup>
 </Project>

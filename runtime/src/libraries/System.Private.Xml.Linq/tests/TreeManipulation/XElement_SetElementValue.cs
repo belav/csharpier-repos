@@ -22,20 +22,153 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Delete Element (non existing, text only, full)") { Params = new object[] { "<A></A>", "X", null }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add Element (empty)") { Params = new object[] { "<A/>", "X", "text" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add Element (text only)") { Params = new object[] { "<A>t1</A>", "X", "text" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add Element (Empty, full)") { Params = new object[] { "<A></A>", "X", "text" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add Element (mixed content)") { Params = new object[] { "<A><B/>t2<!--comm-->t3</A>", "X", "text" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Replace Element (the only child)") { Params = new object[] { "<A><X xmlns='' Id='Id'/></A>", "X", "text" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Replace Element (mixed content, empty)") { Params = new object[] { "<A><X/>tn<X xmlns='a'/></A>", "{a}X", "text" }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Replace Element (mixed content)") { Params = new object[] { "<A><X/>tn<X xmlns='a'><Y/>hum<?PI?></X></A>", "{a}X", "text" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Delete Element (only element, empty)") { Params = new object[] { "<A><X xmlns='a'>tralala</X></A>", "{a}X", null }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Delete Element (only element)") { Params = new object[] { "<A><X xmlns='a'>tralala</X></A>", "{a}X", null }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Delete Element (mixed content, empty)") { Params = new object[] { "<A>t1<X xmlns='a'/>t2</A>", "{a}X", null }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Delete Element (mixed content)") { Params = new object[] { "<A>t1<X xmlns='a'><m/></X>t2</A>", "{a}X", null }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Delete Element (non existing)") { Params = new object[] { "<A>t1<X xmlns='a'><m/></X>t2</A>", "X", null }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Delete Element (non existing, text only)") { Params = new object[] { "<A>t1</A>", "X", null }, Priority = 1 } });
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Delete Element (non existing, text only, full)"
+                    )
+                    {
+                        Params = new object[] { "<A></A>", "X", null },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add Element (empty)")
+                    {
+                        Params = new object[] { "<A/>", "X", "text" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add Element (text only)")
+                    {
+                        Params = new object[] { "<A>t1</A>", "X", "text" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add Element (Empty, full)")
+                    {
+                        Params = new object[] { "<A></A>", "X", "text" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add Element (mixed content)")
+                    {
+                        Params = new object[] { "<A><B/>t2<!--comm-->t3</A>", "X", "text" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Replace Element (the only child)")
+                    {
+                        Params = new object[] { "<A><X xmlns='' Id='Id'/></A>", "X", "text" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Replace Element (mixed content, empty)")
+                    {
+                        Params = new object[] { "<A><X/>tn<X xmlns='a'/></A>", "{a}X", "text" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Replace Element (mixed content)")
+                    {
+                        Params = new object[]
+                        {
+                            "<A><X/>tn<X xmlns='a'><Y/>hum<?PI?></X></A>",
+                            "{a}X",
+                            "text",
+                        },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Delete Element (only element, empty)")
+                    {
+                        Params = new object[] { "<A><X xmlns='a'>tralala</X></A>", "{a}X", null },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Delete Element (only element)")
+                    {
+                        Params = new object[] { "<A><X xmlns='a'>tralala</X></A>", "{a}X", null },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Delete Element (mixed content, empty)")
+                    {
+                        Params = new object[] { "<A>t1<X xmlns='a'/>t2</A>", "{a}X", null },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Delete Element (mixed content)")
+                    {
+                        Params = new object[] { "<A>t1<X xmlns='a'><m/></X>t2</A>", "{a}X", null },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Delete Element (non existing)")
+                    {
+                        Params = new object[] { "<A>t1<X xmlns='a'><m/></X>t2</A>", "X", null },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Delete Element (non existing, text only)")
+                    {
+                        Params = new object[] { "<A>t1</A>", "X", null },
+                        Priority = 1,
+                    },
+                }
+            );
         }
 
         //[Variation(Priority = 0, Desc = "Add Element (empty)", Params = new object[] { "<A/>", "X", "text" })]
@@ -64,8 +197,22 @@ namespace XLinqTests
 
             XElement changed = e.Element(newName);
 
-            IEnumerable<ExpectedValue> nodeIdentityExpValues = getExpectedValues(e, newName, newValue, true).ProcessNodes().ToList();
-            IEnumerable<ExpectedValue> valueExpectedValues = getExpectedValues(e, newName, newValue, false).ProcessNodes().ToList();
+            IEnumerable<ExpectedValue> nodeIdentityExpValues = getExpectedValues(
+                    e,
+                    newName,
+                    newValue,
+                    true
+                )
+                .ProcessNodes()
+                .ToList();
+            IEnumerable<ExpectedValue> valueExpectedValues = getExpectedValues(
+                    e,
+                    newName,
+                    newValue,
+                    false
+                )
+                .ProcessNodes()
+                .ToList();
             IEnumerable<XAttribute> attr = changed == null ? null : changed.Attributes().ToArray();
 
             if (_runWithEvents)
@@ -76,19 +223,38 @@ namespace XLinqTests
 
             if (newValue == null)
             {
-                TestLog.Compare(changed == null || changed.Parent == null, "delete: changed.Parent == null");
+                TestLog.Compare(
+                    changed == null || changed.Parent == null,
+                    "delete: changed.Parent == null"
+                );
                 TestLog.Compare(e.Element(newName) == null, "e.Element(newName)==null");
             }
             else
             {
-                TestLog.Compare(changed == null || ReferenceEquals(changed, e.Element(newName)), "changed==null || Object.ReferenceEquals(changed, e.Element(newName))");
-                TestLog.Compare(e.Element(newName).Value, newValue, "e.Element(newName).Value, newValue");
+                TestLog.Compare(
+                    changed == null || ReferenceEquals(changed, e.Element(newName)),
+                    "changed==null || Object.ReferenceEquals(changed, e.Element(newName))"
+                );
+                TestLog.Compare(
+                    e.Element(newName).Value,
+                    newValue,
+                    "e.Element(newName).Value, newValue"
+                );
                 TestLog.Compare(!e.Element(newName).HasElements, "!e.Element(newName).HasElements");
-                TestLog.Compare(attr == null || attr.SequenceEqual(changed.Attributes()), "attr.EqualAll(changed.Attributes())");
+                TestLog.Compare(
+                    attr == null || attr.SequenceEqual(changed.Attributes()),
+                    "attr.EqualAll(changed.Attributes())"
+                );
             }
 
-            TestLog.Compare(nodeIdentityExpValues.EqualAll(e.Nodes(), XNode.EqualityComparer), "nodeidentityExpValues.EqualAll (e.Nodes(), XNode.EqualityComparer)");
-            TestLog.Compare(valueExpectedValues.EqualAll(e.Nodes(), XNode.EqualityComparer), "valueExpectedValues.EqualAll(e.Nodes(), XNode.EqualityComparer)");
+            TestLog.Compare(
+                nodeIdentityExpValues.EqualAll(e.Nodes(), XNode.EqualityComparer),
+                "nodeidentityExpValues.EqualAll (e.Nodes(), XNode.EqualityComparer)"
+            );
+            TestLog.Compare(
+                valueExpectedValues.EqualAll(e.Nodes(), XNode.EqualityComparer),
+                "valueExpectedValues.EqualAll(e.Nodes(), XNode.EqualityComparer)"
+            );
 
             e.Verify();
         }
@@ -97,7 +263,12 @@ namespace XLinqTests
 
         #region Methods
 
-        private IEnumerable<ExpectedValue> getExpectedValues(XElement parent, XName newName, string newValue, bool isCopy)
+        private IEnumerable<ExpectedValue> getExpectedValues(
+            XElement parent,
+            XName newName,
+            string newValue,
+            bool isCopy
+        )
         {
             bool wasReplace = false;
             foreach (XNode node in parent.Nodes())
@@ -108,7 +279,12 @@ namespace XLinqTests
                     {
                         continue;
                     }
-                    yield return isCopy ? new ExpectedValue(true, node) : new ExpectedValue(false, new XElement(newName, (node as XElement).Attributes(), newValue));
+                    yield return isCopy
+                        ? new ExpectedValue(true, node)
+                        : new ExpectedValue(
+                            false,
+                            new XElement(newName, (node as XElement).Attributes(), newValue)
+                        );
                     wasReplace = true;
                 }
                 else

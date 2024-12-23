@@ -9,33 +9,34 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Text;
-    using System.Threading;
     using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Threading;
 
-    class TcpChannelFactory<TChannel> : ConnectionOrientedTransportChannelFactory<TChannel>,
-        ITcpChannelFactorySettings
+    class TcpChannelFactory<TChannel>
+        : ConnectionOrientedTransportChannelFactory<TChannel>,
+            ITcpChannelFactorySettings
     {
         static TcpConnectionPoolRegistry connectionPoolRegistry = new TcpConnectionPoolRegistry();
         TimeSpan leaseTimeout;
 
         public TcpChannelFactory(TcpTransportBindingElement bindingElement, BindingContext context)
-            : base(bindingElement, context,
-            bindingElement.ConnectionPoolSettings.GroupName,
-            bindingElement.ConnectionPoolSettings.IdleTimeout,
-            bindingElement.ConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint,
-            true)
+            : base(
+                bindingElement,
+                context,
+                bindingElement.ConnectionPoolSettings.GroupName,
+                bindingElement.ConnectionPoolSettings.IdleTimeout,
+                bindingElement.ConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint,
+                true
+            )
         {
             this.leaseTimeout = bindingElement.ConnectionPoolSettings.LeaseTimeout;
         }
 
         public TimeSpan LeaseTimeout
         {
-            get
-            {
-                return leaseTimeout;
-            }
+            get { return leaseTimeout; }
         }
 
         public override string Scheme
@@ -46,12 +47,16 @@ namespace System.ServiceModel.Channels
         internal override IConnectionInitiator GetConnectionInitiator()
         {
             IConnectionInitiator socketConnectionInitiator = new SocketConnectionInitiator(
-                ConnectionBufferSize);
+                ConnectionBufferSize
+            );
 #if CONNECTIONDUMP
             socketConnectionInitiator = new ConnectionDumpInitiator(socketConnectionInitiator);
 #endif
-            return new BufferedConnectionInitiator(socketConnectionInitiator,
-                MaxOutputDelay, ConnectionBufferSize);
+            return new BufferedConnectionInitiator(
+                socketConnectionInitiator,
+                MaxOutputDelay,
+                ConnectionBufferSize
+            );
         }
 
         internal override ConnectionPool GetConnectionPool()

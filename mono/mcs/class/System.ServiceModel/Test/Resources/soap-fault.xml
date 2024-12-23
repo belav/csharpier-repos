@@ -1,14 +1,23 @@
-<s:Envelope xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope">
-  <s:Header>
-    <a:Action s:mustUnderstand="1">http://www.w3.org/2005/08/addressing/soap/fault</a:Action>
-    <a:To s:mustUnderstand="1">http://www.w3.org/2005/08/addressing/anonymous</a:To>
-  </s:Header>
-  <s:Body>
-    <s:Fault>
-      <s:Code>
-        <s:Value>s:Sender</s:Value>
-      </s:Code>
-      <s:Reason><s:Text xml:lang='en'>There is some reason.</s:Text></s:Reason>
-    </s:Fault>
-  </s:Body>
-</s:Envelope>
+<Envelope
+  {http://www.w3.org/2000/xmlns/}a="http://www.w3.org/2005/08/addressing"
+  {http://www.w3.org/2000/xmlns/}s="http://www.w3.org/2003/05/soap-envelope"
+>
+  <Header>
+    <Action {http://www.w3.org/2003/05/soap-envelope}mustUnderstand="1"
+      >http://www.w3.org/2005/08/addressing/soap/fault</Action
+    >
+    <To {http://www.w3.org/2003/05/soap-envelope}mustUnderstand="1"
+      >http://www.w3.org/2005/08/addressing/anonymous</To
+    >
+  </Header>
+  <Body>
+    <Fault>
+      <Code>
+        <Value>s:Sender</Value>
+      </Code>
+      <Reason>
+        <Text {http://www.w3.org/XML/1998/namespace}lang="en">There is some reason.</Text>
+      </Reason>
+    </Fault>
+  </Body>
+</Envelope>

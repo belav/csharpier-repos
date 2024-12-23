@@ -1,11 +1,11 @@
 using System.Runtime.CompilerServices;
 
-#if !SILVERLIGHT 
-[assembly:StringFreezingAttribute()]
+#if !SILVERLIGHT
+[assembly: StringFreezingAttribute()]
 
-[assembly:DefaultDependencyAttribute(LoadHint.Always)]
+[assembly: DefaultDependencyAttribute(LoadHint.Always)]
 
-[assembly:System.Runtime.InteropServices.TypeLibVersion(2, 4)]
+[assembly: System.Runtime.InteropServices.TypeLibVersion(2, 4)]
 
 #if !FEATURE_PAL
 // Opts into the VS loading icons from the Icon Satellite assembly
@@ -13,4 +13,3 @@ using System.Runtime.CompilerServices;
 #endif
 
 #endif
-

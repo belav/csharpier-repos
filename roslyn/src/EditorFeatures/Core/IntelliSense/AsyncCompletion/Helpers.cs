@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 {
     internal static class Helpers
     {
-        private const string PromotedItemOriginalIndexPropertyName = nameof(PromotedItemOriginalIndexPropertyName);
+        private const string PromotedItemOriginalIndexPropertyName = nameof(
+            PromotedItemOriginalIndexPropertyName
+        );
 
         /// <summary>
         /// Add star to display text and store the index of the passed-in item in the original sorted list in
@@ -27,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public static RoslynCompletionItem PromoteItem(RoslynCompletionItem item, int index)
         {
             return item.WithDisplayText(Completion.Utilities.UnicodeStarAndSpace + item.DisplayText)
-            .AddProperty(PromotedItemOriginalIndexPropertyName, index.ToString());
+                .AddProperty(PromotedItemOriginalIndexPropertyName, index.ToString());
         }
 
         public static RoslynCompletionItem DemoteItem(RoslynCompletionItem item)
@@ -36,13 +38,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 return item;
 
             Debug.Assert(item.DisplayText.StartsWith(Completion.Utilities.UnicodeStarAndSpace));
-            var newProperties = item.GetProperties().WhereAsArray((kvp, propName) => kvp.Key != propName, PromotedItemOriginalIndexPropertyName);
-            return item
-                .WithDisplayText(item.DisplayText[Completion.Utilities.UnicodeStarAndSpace.Length..])
+            var newProperties = item.GetProperties()
+                .WhereAsArray(
+                    (kvp, propName) => kvp.Key != propName,
+                    PromotedItemOriginalIndexPropertyName
+                );
+            return item.WithDisplayText(
+                    item.DisplayText[Completion.Utilities.UnicodeStarAndSpace.Length..]
+                )
                 .WithProperties(newProperties);
         }
 
-        public static bool TryGetOriginalIndexOfPromotedItem(RoslynCompletionItem item, out int originalIndex)
+        public static bool TryGetOriginalIndexOfPromotedItem(
+            RoslynCompletionItem item,
+            out int originalIndex
+        )
         {
             if (item.TryGetProperty(PromotedItemOriginalIndexPropertyName, out var indexString))
             {
@@ -58,13 +68,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         /// Attempts to convert VS Completion trigger into Roslyn completion trigger
         /// </summary>
         /// <param name="trigger">VS completion trigger</param>
-        /// <param name="triggerLocation">Character. 
+        /// <param name="triggerLocation">Character.
         /// VS provides Backspace and Delete characters inside the trigger while Roslyn needs the char deleted by the trigger.
         /// Therefore, we provide this character separately and use it for Delete and Backspace cases only.
         /// We retrieve this character from triggerLocation.
         /// </param>
         /// <returns>Roslyn completion trigger</returns>
-        public static RoslynTrigger GetRoslynTrigger(EditorAsyncCompletionData.CompletionTrigger trigger, SnapshotPoint triggerLocation)
+        public static RoslynTrigger GetRoslynTrigger(
+            EditorAsyncCompletionData.CompletionTrigger trigger,
+            SnapshotPoint triggerLocation
+        )
         {
             var completionTriggerKind = GetRoslynTriggerKind(trigger.Reason);
             switch (completionTriggerKind)
@@ -72,9 +85,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 case CompletionTriggerKind.Deletion:
                     var snapshotBeforeEdit = trigger.ViewSnapshotBeforeTrigger;
                     char characterRemoved;
-                    if (triggerLocation.Position >= 0 && triggerLocation.Position < snapshotBeforeEdit.Length)
+                    if (
+                        triggerLocation.Position >= 0
+                        && triggerLocation.Position < snapshotBeforeEdit.Length
+                    )
                     {
-                        // If multiple characters were removed (selection), this finds the first character from the left. 
+                        // If multiple characters were removed (selection), this finds the first character from the left.
                         characterRemoved = snapshotBeforeEdit[triggerLocation.Position];
                     }
                     else
@@ -92,29 +108,45 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
         }
 
-        public static CompletionTriggerKind GetRoslynTriggerKind(EditorAsyncCompletionData.CompletionTriggerReason triggerReason)
+        public static CompletionTriggerKind GetRoslynTriggerKind(
+            EditorAsyncCompletionData.CompletionTriggerReason triggerReason
+        )
         {
             return triggerReason switch
             {
-                EditorAsyncCompletionData.CompletionTriggerReason.InvokeAndCommitIfUnique => CompletionTriggerKind.InvokeAndCommitIfUnique,
-                EditorAsyncCompletionData.CompletionTriggerReason.Insertion => CompletionTriggerKind.Insertion,
-                EditorAsyncCompletionData.CompletionTriggerReason.Deletion or EditorAsyncCompletionData.CompletionTriggerReason.Backspace => CompletionTriggerKind.Deletion,
-                EditorAsyncCompletionData.CompletionTriggerReason.SnippetsMode => CompletionTriggerKind.Snippets,
+                EditorAsyncCompletionData.CompletionTriggerReason.InvokeAndCommitIfUnique =>
+                    CompletionTriggerKind.InvokeAndCommitIfUnique,
+                EditorAsyncCompletionData.CompletionTriggerReason.Insertion =>
+                    CompletionTriggerKind.Insertion,
+                EditorAsyncCompletionData.CompletionTriggerReason.Deletion
+                or EditorAsyncCompletionData.CompletionTriggerReason.Backspace =>
+                    CompletionTriggerKind.Deletion,
+                EditorAsyncCompletionData.CompletionTriggerReason.SnippetsMode =>
+                    CompletionTriggerKind.Snippets,
                 _ => CompletionTriggerKind.Invoke,
             };
         }
 
-        public static CompletionFilterReason GetFilterReason(EditorAsyncCompletionData.CompletionTriggerReason triggerReason)
+        public static CompletionFilterReason GetFilterReason(
+            EditorAsyncCompletionData.CompletionTriggerReason triggerReason
+        )
         {
             return triggerReason switch
             {
-                EditorAsyncCompletionData.CompletionTriggerReason.Insertion => CompletionFilterReason.Insertion,
-                EditorAsyncCompletionData.CompletionTriggerReason.Deletion or EditorAsyncCompletionData.CompletionTriggerReason.Backspace => CompletionFilterReason.Deletion,
+                EditorAsyncCompletionData.CompletionTriggerReason.Insertion =>
+                    CompletionFilterReason.Insertion,
+                EditorAsyncCompletionData.CompletionTriggerReason.Deletion
+                or EditorAsyncCompletionData.CompletionTriggerReason.Backspace =>
+                    CompletionFilterReason.Deletion,
                 _ => CompletionFilterReason.Other,
             };
         }
 
-        public static bool IsFilterCharacter(RoslynCompletionItem item, char ch, string textTypedSoFar)
+        public static bool IsFilterCharacter(
+            RoslynCompletionItem item,
+            char ch,
+            string textTypedSoFar
+        )
         {
             // Exclude standard commit character upfront because TextTypedSoFarMatchesItem can miss them on non-Windows platforms.
             if (IsStandardCommitCharacter(ch))
@@ -157,23 +189,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             return false;
         }
 
-        public static bool TextTypedSoFarMatchesItem(RoslynCompletionItem item, string textTypedSoFar)
+        public static bool TextTypedSoFarMatchesItem(
+            RoslynCompletionItem item,
+            string textTypedSoFar
+        )
         {
             if (textTypedSoFar.Length > 0)
             {
-                using var _ = PooledDelegates.GetPooledFunction(static (filterText, pattern) => filterText.StartsWith(pattern, StringComparison.CurrentCultureIgnoreCase), textTypedSoFar, out Func<string, bool> isPrefixMatch);
+                using var _ = PooledDelegates.GetPooledFunction(
+                    static (filterText, pattern) =>
+                        filterText.StartsWith(pattern, StringComparison.CurrentCultureIgnoreCase),
+                    textTypedSoFar,
+                    out Func<string, bool> isPrefixMatch
+                );
 
                 // Note that StartsWith ignores \0 at the end of textTypedSoFar on VS Mac and Mono.
-                return item.DisplayText.StartsWith(textTypedSoFar, StringComparison.CurrentCultureIgnoreCase) ||
-                       item.HasDifferentFilterText && item.FilterText.StartsWith(textTypedSoFar, StringComparison.CurrentCultureIgnoreCase) ||
-                       item.HasAdditionalFilterTexts && item.AdditionalFilterTexts.Any(isPrefixMatch);
+                return item.DisplayText.StartsWith(
+                        textTypedSoFar,
+                        StringComparison.CurrentCultureIgnoreCase
+                    )
+                    || item.HasDifferentFilterText
+                        && item.FilterText.StartsWith(
+                            textTypedSoFar,
+                            StringComparison.CurrentCultureIgnoreCase
+                        )
+                    || item.HasAdditionalFilterTexts
+                        && item.AdditionalFilterTexts.Any(isPrefixMatch);
             }
 
             return false;
         }
 
-        // Tab, Enter and Null (call invoke commit) are always commit characters. 
-        public static bool IsStandardCommitCharacter(char c)
-            => c is '\t' or '\n' or '\0';
+        // Tab, Enter and Null (call invoke commit) are always commit characters.
+        public static bool IsStandardCommitCharacter(char c) => c is '\t' or '\n' or '\0';
     }
 }

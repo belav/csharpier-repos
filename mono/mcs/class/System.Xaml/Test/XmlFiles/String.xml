@@ -1,1 +1,1 @@
-﻿<x:String xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">foo</x:String>
+﻿<String {http://www.w3.org/2000/xmlns/}x="http://schemas.microsoft.com/winfx/2006/xaml">foo</String>

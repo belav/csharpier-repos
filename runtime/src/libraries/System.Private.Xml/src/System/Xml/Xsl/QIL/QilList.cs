@@ -18,7 +18,6 @@ namespace System.Xml.Xsl.Qil
         private int _count;
         private QilNode[] _members;
 
-
         //-----------------------------------------------
         // Constructor
         //-----------------------------------------------
@@ -26,12 +25,12 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new (empty) QilList
         /// </summary>
-        public QilList(QilNodeType nodeType) : base(nodeType)
+        public QilList(QilNodeType nodeType)
+            : base(nodeType)
         {
             _members = new QilNode[4];
             this.xmlType = null;
         }
-
 
         //-----------------------------------------------
         // QilNode methods
@@ -82,7 +81,6 @@ namespace System.Xml.Xsl.Qil
             f.TraceNode(n);
             return n;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override

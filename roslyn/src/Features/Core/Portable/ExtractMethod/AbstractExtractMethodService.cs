@@ -13,28 +13,48 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         TExtractor,
         TSelectionResult,
         TStatementSyntax,
-        TExpressionSyntax> : IExtractMethodService
+        TExpressionSyntax
+    > : IExtractMethodService
         where TValidator : SelectionValidator<TSelectionResult, TStatementSyntax>
         where TExtractor : MethodExtractor<TSelectionResult, TStatementSyntax, TExpressionSyntax>
         where TSelectionResult : SelectionResult<TStatementSyntax>
         where TStatementSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
     {
-        protected abstract TValidator CreateSelectionValidator(SemanticDocument document, TextSpan textSpan, ExtractMethodOptions options, bool localFunction);
-        protected abstract TExtractor CreateMethodExtractor(TSelectionResult selectionResult, ExtractMethodGenerationOptions options, bool localFunction);
+        protected abstract TValidator CreateSelectionValidator(
+            SemanticDocument document,
+            TextSpan textSpan,
+            ExtractMethodOptions options,
+            bool localFunction
+        );
+        protected abstract TExtractor CreateMethodExtractor(
+            TSelectionResult selectionResult,
+            ExtractMethodGenerationOptions options,
+            bool localFunction
+        );
 
         public async Task<ExtractMethodResult> ExtractMethodAsync(
             Document document,
             TextSpan textSpan,
             bool localFunction,
             ExtractMethodGenerationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+            var semanticDocument = await SemanticDocument
+                .CreateAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
-            var validator = CreateSelectionValidator(semanticDocument, textSpan, options.ExtractOptions, localFunction);
+            var validator = CreateSelectionValidator(
+                semanticDocument,
+                textSpan,
+                options.ExtractOptions,
+                localFunction
+            );
 
-            var (selectionResult, status) = await validator.GetValidSelectionAsync(cancellationToken).ConfigureAwait(false);
+            var (selectionResult, status) = await validator
+                .GetValidSelectionAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (selectionResult is null)
                 return ExtractMethodResult.Fail(status);
 

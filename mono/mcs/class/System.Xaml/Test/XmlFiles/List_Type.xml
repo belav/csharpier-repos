@@ -1,4 +1,11 @@
-<List x:TypeArguments="s:Type" Capacity="2" xmlns="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sx="clr-namespace:System.Xaml;assembly=System.Xaml" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <x:Type Type="x:Int32" />
-  <x:Type Type="Dictionary(s:Type, sx:XamlType)" />
+<List
+  {http://schemas.microsoft.com/winfx/2006/xaml}TypeArguments="s:Type"
+  Capacity="2"
+  xmlns="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+  {http://www.w3.org/2000/xmlns/}s="clr-namespace:System;assembly=mscorlib"
+  {http://www.w3.org/2000/xmlns/}sx="clr-namespace:System.Xaml;assembly=System.Xaml"
+  {http://www.w3.org/2000/xmlns/}x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+  <Type Type="x:Int32" />
+  <Type Type="Dictionary(s:Type, sx:XamlType)" />
 </List>

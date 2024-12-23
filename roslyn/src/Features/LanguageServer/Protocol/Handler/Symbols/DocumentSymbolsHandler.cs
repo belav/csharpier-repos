@@ -25,26 +25,39 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </summary>
     [ExportCSharpVisualBasicStatelessLspService(typeof(DocumentSymbolsHandler)), Shared]
     [Method(Methods.TextDocumentDocumentSymbolName)]
-    internal sealed class DocumentSymbolsHandler : ILspServiceDocumentRequestHandler<RoslynDocumentSymbolParams, object[]>
+    internal sealed class DocumentSymbolsHandler
+        : ILspServiceDocumentRequestHandler<RoslynDocumentSymbolParams, object[]>
     {
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentSymbolsHandler()
-        {
-        }
+        public DocumentSymbolsHandler() { }
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(RoslynDocumentSymbolParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(
+            RoslynDocumentSymbolParams request
+        ) => request.TextDocument;
 
-        public async Task<object[]> HandleRequestAsync(RoslynDocumentSymbolParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<object[]> HandleRequestAsync(
+            RoslynDocumentSymbolParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.GetRequiredDocument();
             var clientCapabilities = context.GetRequiredClientCapabilities();
 
-            var navBarService = document.Project.Services.GetRequiredService<INavigationBarItemService>();
-            var navBarItems = await navBarService.GetItemsAsync(document, supportsCodeGeneration: false, forceFrozenPartialSemanticsForCrossProcessOperations: false, cancellationToken).ConfigureAwait(false);
+            var navBarService =
+                document.Project.Services.GetRequiredService<INavigationBarItemService>();
+            var navBarItems = await navBarService
+                .GetItemsAsync(
+                    document,
+                    supportsCodeGeneration: false,
+                    forceFrozenPartialSemanticsForCrossProcessOperations: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (navBarItems.IsEmpty)
                 return Array.Empty<object>();
 
@@ -53,7 +66,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // TODO - Return more than 2 levels of symbols.
             // https://github.com/dotnet/roslyn/projects/45#card-20033869
             using var _ = ArrayBuilder<object>.GetInstance(out var symbols);
-            if (clientCapabilities.TextDocument?.DocumentSymbol?.HierarchicalDocumentSymbolSupport == true || request.UseHierarchicalSymbols)
+            if (
+                clientCapabilities.TextDocument?.DocumentSymbol?.HierarchicalDocumentSymbolSupport
+                    == true
+                || request.UseHierarchicalSymbols
+            )
             {
                 // only top level ones
                 foreach (var item in navBarItems)
@@ -63,10 +80,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             {
                 foreach (var item in navBarItems)
                 {
-                    symbols.AddIfNotNull(GetSymbolInformation(item, document, text, containerName: null));
+                    symbols.AddIfNotNull(
+                        GetSymbolInformation(item, document, text, containerName: null)
+                    );
 
                     foreach (var childItem in item.ChildItems)
-                        symbols.AddIfNotNull(GetSymbolInformation(childItem, document, text, item.Text));
+                        symbols.AddIfNotNull(
+                            GetSymbolInformation(childItem, document, text, item.Text)
+                        );
                 }
             }
 
@@ -78,12 +99,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// Get a symbol information from a specified nav bar item.
         /// </summary>
         private static SymbolInformation? GetSymbolInformation(
-            RoslynNavigationBarItem item, Document document, SourceText text, string? containerName = null)
+            RoslynNavigationBarItem item,
+            Document document,
+            SourceText text,
+            string? containerName = null
+        )
         {
-            if (item is not RoslynNavigationBarItem.SymbolItem symbolItem || symbolItem.Location.InDocumentInfo == null)
+            if (
+                item is not RoslynNavigationBarItem.SymbolItem symbolItem
+                || symbolItem.Location.InDocumentInfo == null
+            )
                 return null;
 
-            var service = document.Project.Solution.Services.GetRequiredService<ILspSymbolInformationCreationService>();
+            var service =
+                document.Project.Solution.Services.GetRequiredService<ILspSymbolInformationCreationService>();
             return service.Create(
                 GetDocumentSymbolName(item.Text),
                 containerName,
@@ -91,19 +120,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 new LSP.Location
                 {
                     Uri = document.GetURI(),
-                    Range = ProtocolConversions.TextSpanToRange(symbolItem.Location.InDocumentInfo.Value.navigationSpan, text),
+                    Range = ProtocolConversions.TextSpanToRange(
+                        symbolItem.Location.InDocumentInfo.Value.navigationSpan,
+                        text
+                    ),
                 },
-                item.Glyph);
+                item.Glyph
+            );
         }
 
         /// <summary>
         /// Get a document symbol from a specified nav bar item.
         /// </summary>
         private static RoslynDocumentSymbol? GetDocumentSymbol(
-            RoslynNavigationBarItem item, SourceText text, CancellationToken cancellationToken)
+            RoslynNavigationBarItem item,
+            SourceText text,
+            CancellationToken cancellationToken
+        )
         {
-            if (item is not RoslynNavigationBarItem.SymbolItem symbolItem ||
-                symbolItem.Location.InDocumentInfo == null)
+            if (
+                item is not RoslynNavigationBarItem.SymbolItem symbolItem
+                || symbolItem.Location.InDocumentInfo == null
+            )
             {
                 return null;
             }
@@ -125,9 +163,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             };
 
             static RoslynDocumentSymbol[] GetChildren(
-                ImmutableArray<RoslynNavigationBarItem> items, SourceText text, CancellationToken cancellationToken)
+                ImmutableArray<RoslynNavigationBarItem> items,
+                SourceText text,
+                CancellationToken cancellationToken
+            )
             {
-                using var _ = ArrayBuilder<RoslynDocumentSymbol>.GetInstance(items.Length, out var list);
+                using var _ = ArrayBuilder<RoslynDocumentSymbol>.GetInstance(
+                    items.Length,
+                    out var list
+                );
                 foreach (var item in items)
                     list.AddIfNotNull(GetDocumentSymbol(item, text, cancellationToken));
 

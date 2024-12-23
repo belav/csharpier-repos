@@ -1,9 +1,21 @@
-<n2:pdu xmlns:n1="http://example.com"
-        xmlns:n2="http://foo.example"
-        xml:lang="fr"
-        xml:space="preserve">
-    <n1:elem2 xmlns:n1="http://example.net"
-              xml:lang="en">
-        <n3:stuff xmlns:n3="ftp://example.org"/>
-    </n1:elem2>
-</n2:pdu>
+<pdu
+  {http://www.w3.org/2000/xmlns/}n1="http://example.com"
+  {http://www.w3.org/2000/xmlns/}n2="http://foo.example"
+  {http://www.w3.org/XML/1998/namespace}lang="fr"
+  {http://www.w3.org/XML/1998/namespace}space="preserve"
+  >
+    <elem2
+
+    {http://www.w3.org/2000/xmlns/}n1="http://example.net"
+    {http://www.w3.org/XML/1998/namespace}lang="en"
+    >
+        <stuff
+     {http://www.w3.org/2000/xmlns/}n3="ftp://example.org" />
+
+    
+    </elem2
+  >
+
+  
+</pdu
+>

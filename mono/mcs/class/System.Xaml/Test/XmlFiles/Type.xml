@@ -1,1 +1,4 @@
-﻿<x:Type Type="x:Int32" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+﻿<Type
+  Type="x:Int32"
+  {http://www.w3.org/2000/xmlns/}x="http://schemas.microsoft.com/winfx/2006/xaml"
+/>

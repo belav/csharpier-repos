@@ -17,48 +17,60 @@ public class StartupWithoutEndpointRouting : Startup
                 "NonParameterConstraintRoute",
                 "NonParameterConstraintRoute/{controller}/{action}",
                 defaults: null,
-                constraints: new { controller = "NonParameterConstraint", nonParameter = new QueryStringConstraint() });
+                constraints: new
+                {
+                    controller = "NonParameterConstraint",
+                    nonParameter = new QueryStringConstraint(),
+                }
+            );
 
             routes.MapRoute(
                 "DataTokensRoute",
                 "DataTokensRoute/{controller}/{action}",
                 defaults: null,
                 constraints: new { controller = "DataTokens" },
-                dataTokens: new { hasDataTokens = true });
+                dataTokens: new { hasDataTokens = true }
+            );
 
             routes.MapRoute(
                 "DefaultValuesRoute_OptionalParameter",
                 "DefaultValuesRoute/Optional/{controller=DEFAULTVALUES}/{action=OPTIONALPARAMETER}/{id?}/{**catchAll}",
                 defaults: null,
-                constraints: new { controller = "DefaultValues", action = "OptionalParameter" });
+                constraints: new { controller = "DefaultValues", action = "OptionalParameter" }
+            );
 
             routes.MapRoute(
                 "DefaultValuesRoute_DefaultParameter",
                 "DefaultValuesRoute/Default/{controller=DEFAULTVALUES}/{action=DEFAULTPARAMETER}/{id=17}/{**catchAll}",
                 defaults: null,
-                constraints: new { controller = "DefaultValues", action = "DefaultParameter" });
+                constraints: new { controller = "DefaultValues", action = "DefaultParameter" }
+            );
 
             routes.MapAreaRoute(
                 "flightRoute",
                 "adminRoute",
                 "{area:exists}/{controller}/{action}",
                 defaults: new { controller = "Home", action = "Index" },
-                constraints: new { area = "Travel" });
+                constraints: new { area = "Travel" }
+            );
 
             routes.MapRoute(
                 "ActionAsMethod",
                 "{controller}/{action}",
-                defaults: new { controller = "Home", action = "Index" });
+                defaults: new { controller = "Home", action = "Index" }
+            );
 
-            routes.MapRoute(
-                "RouteWithOptionalSegment",
-                "{controller}/{action}/{path?}");
+            routes.MapRoute("RouteWithOptionalSegment", "{controller}/{action}/{path?}");
         });
 
-        app.Map("/afterrouting", b => b.Run(c =>
-        {
-            return c.Response.WriteAsync("Hello from middleware after routing");
-        }));
+        app.Map(
+            "/afterrouting",
+            b =>
+                b.Run(c =>
+                {
+                    return c.Response.WriteAsync("Hello from middleware after routing");
+                })
+        );
     }
 
     // Do not call base implementations of these methods. Those are specific to endpoint routing.
@@ -80,9 +92,12 @@ public class StartupWithoutEndpointRouting : Startup
             new ControllerToRemove
             {
                 ControllerType = typeof(PageRouteController),
-                Actions = new[] { nameof(PageRouteController.AttributeRoute) }
-            });
+                Actions = new[] { nameof(PageRouteController.AttributeRoute) },
+            }
+        );
 
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IActionDescriptorProvider>(actionDescriptorProvider));
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IActionDescriptorProvider>(actionDescriptorProvider)
+        );
     }
 }

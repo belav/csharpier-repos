@@ -57,10 +57,8 @@
 using System;
 using System.IO;
 using System.Net.Sockets;
-
-using RabbitMQ.Util;
 using RabbitMQ.Client.Exceptions;
-
+using RabbitMQ.Util;
 // We use spec version 0-9 for common constants such as frame types,
 // error codes, and the frame end byte, since they don't vary *within
 // the versions we support*. Obviously we may need to revisit this if
@@ -75,9 +73,18 @@ namespace RabbitMQ.Client.Impl
         public int m_channel;
         public byte[] m_payload;
 
-        public int Type { get { return m_type; } }
-        public int Channel { get { return m_channel; } }
-        public byte[] Payload { get { return m_payload; } }
+        public int Type
+        {
+            get { return m_type; }
+        }
+        public int Channel
+        {
+            get { return m_channel; }
+        }
+        public byte[] Payload
+        {
+            get { return m_payload; }
+        }
 
         public MemoryStream m_accumulator;
 
@@ -98,7 +105,7 @@ namespace RabbitMQ.Client.Impl
             m_payload = payload;
             m_accumulator = null;
         }
-        
+
         public static Frame ReadFrom(NetworkBinaryReader reader)
         {
             int type;
@@ -113,9 +120,11 @@ namespace RabbitMQ.Client.Impl
                 // If it's a WSAETIMEDOUT SocketException, unwrap it.
                 // This might happen when the limit of half-open connections is
                 // reached.
-                if (ioe.InnerException == null ||
-                    !(ioe.InnerException is SocketException) ||
-                    ((SocketException)ioe.InnerException).SocketErrorCode != SocketError.TimedOut)
+                if (
+                    ioe.InnerException == null
+                    || !(ioe.InnerException is SocketException)
+                    || ((SocketException)ioe.InnerException).SocketErrorCode != SocketError.TimedOut
+                )
                     throw ioe;
                 throw ioe.InnerException;
             }
@@ -132,9 +141,13 @@ namespace RabbitMQ.Client.Impl
             if (payload.Length != payloadSize)
             {
                 // Early EOF.
-                throw new MalformedFrameException("Short frame - expected " +
-                                                  payloadSize + " bytes, got " +
-                                                  payload.Length + " bytes");
+                throw new MalformedFrameException(
+                    "Short frame - expected "
+                        + payloadSize
+                        + " bytes, got "
+                        + payload.Length
+                        + " bytes"
+                );
             }
 
             int frameEndMarker = reader.ReadByte();
@@ -162,10 +175,12 @@ namespace RabbitMQ.Client.Impl
                 int transportLow = reader.ReadByte();
                 int serverMajor = reader.ReadByte();
                 int serverMinor = reader.ReadByte();
-                throw new PacketNotRecognizedException(transportHigh,
-                                                       transportLow,
-                                                       serverMajor,
-                                                       serverMinor);
+                throw new PacketNotRecognizedException(
+                    transportHigh,
+                    transportLow,
+                    serverMajor,
+                    serverMinor
+                );
             }
             catch (EndOfStreamException)
             {
@@ -192,11 +207,11 @@ namespace RabbitMQ.Client.Impl
         public void WriteTo(NetworkBinaryWriter writer)
         {
             FinishWriting();
-            writer.Write((byte) m_type);
-            writer.Write((ushort) m_channel);
-            writer.Write((uint) m_payload.Length);
-            writer.Write((byte[]) m_payload);
-            writer.Write((byte) CommonFraming.Constants.FrameEnd);
+            writer.Write((byte)m_type);
+            writer.Write((ushort)m_channel);
+            writer.Write((uint)m_payload.Length);
+            writer.Write((byte[])m_payload);
+            writer.Write((byte)CommonFraming.Constants.FrameEnd);
         }
 
         public NetworkBinaryReader GetReader()
@@ -211,12 +226,13 @@ namespace RabbitMQ.Client.Impl
 
         public override string ToString()
         {
-            return base.ToString() + string.Format("(type={0}, channel={1}, {2} bytes of payload)",
-                                                   Type,
-                                                   Channel,
-                                                   Payload == null
-                                                     ? "(null)"
-                                                     : Payload.Length.ToString());
+            return base.ToString()
+                + string.Format(
+                    "(type={0}, channel={1}, {2} bytes of payload)",
+                    Type,
+                    Channel,
+                    Payload == null ? "(null)" : Payload.Length.ToString()
+                );
         }
     }
 }

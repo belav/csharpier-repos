@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse1
@@ -20,18 +20,26 @@ namespace IntelHardwareIntrinsicTest._Sse1
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 0 }, new float[4]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 0 },
+                        new float[4]
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     var vf2 = Sse.Sqrt(vf1);
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
 
-                    if (!floatTable.CheckResult((x, y) => {
-                        var expected = MathF.Sqrt(x);
-                        return (expected == y)
-                            || (float.IsNaN(expected) && float.IsNaN(y));
-                    }))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y) =>
+                            {
+                                var expected = MathF.Sqrt(x);
+                                return (expected == y) || (float.IsNaN(expected) && float.IsNaN(y));
+                            }
+                        )
+                    )
                     {
                         Console.WriteLine("SSE Sqrt failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -43,7 +51,6 @@ namespace IntelHardwareIntrinsicTest._Sse1
                     }
                 }
             }
-
 
             Assert.Equal(Pass, testResult);
         }

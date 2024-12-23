@@ -9,9 +9,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -19,7 +19,13 @@ namespace System.Workflow.Activities.Rules
     {
         RuleExpressionInfo Validate(RuleValidation validation, bool isWritten);
         RuleExpressionResult Evaluate(RuleExecution execution);
-        void AnalyzeUsage(RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier);
+        void AnalyzeUsage(
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        );
+
         [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "0#")]
         void Decompile(StringBuilder stringBuilder, CodeExpression parentExpression);
         bool Match(CodeExpression expression);
@@ -28,26 +34,53 @@ namespace System.Workflow.Activities.Rules
 
     internal abstract class RuleExpressionInternal
     {
-        internal abstract RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten);
-        internal abstract RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution);
-        internal abstract void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier);
-        internal abstract void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression);
+        internal abstract RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        );
+        internal abstract RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        );
+        internal abstract void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        );
+        internal abstract void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        );
         internal abstract bool Match(CodeExpression leftExpression, CodeExpression rightExpression);
         internal abstract CodeExpression Clone(CodeExpression expression);
     }
-
 
     #region "this" expression
 
     // CodeThisReferenceExpression
     internal class ThisExpression : RuleExpressionInternal
     {
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             if (isWritten)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodeThisReferenceExpression).ToString());
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodeThisReferenceExpression).ToString()
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidAssignTarget
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = expression;
                 validation.Errors.Add(error);
                 return null;
@@ -56,11 +89,17 @@ namespace System.Workflow.Activities.Rules
             return new RuleExpressionInfo(validation.ThisType);
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
-            if (analysis.ForWrites && !isWritten)            // If we're tracking writes, then ignore things that aren't written.
+            if (analysis.ForWrites && !isWritten) // If we're tracking writes, then ignore things that aren't written.
                 return;
-            else if (!analysis.ForWrites && !isRead)   // ... and vice-versa
+            else if (!analysis.ForWrites && !isRead) // ... and vice-versa
                 return;
 
             StringBuilder sb = new StringBuilder("this/");
@@ -82,12 +121,19 @@ namespace System.Workflow.Activities.Rules
             analysis.AddSymbol(sb.ToString());
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             return execution.ThisLiteralResult;
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             stringBuilder.Append("this");
         }
@@ -111,34 +157,59 @@ namespace System.Workflow.Activities.Rules
     // CodePrimitiveExpression
     internal class PrimitiveExpression : RuleExpressionInternal
     {
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             if (isWritten)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodePrimitiveExpression).ToString());
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodePrimitiveExpression).ToString()
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidAssignTarget
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = expression;
                 validation.Errors.Add(error);
                 return null;
             }
 
             CodePrimitiveExpression primitiveExpr = (CodePrimitiveExpression)expression;
-            Type resultType = (primitiveExpr.Value != null) ? primitiveExpr.Value.GetType() : typeof(NullLiteral);
+            Type resultType =
+                (primitiveExpr.Value != null) ? primitiveExpr.Value.GetType() : typeof(NullLiteral);
             return new RuleExpressionInfo(resultType);
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             // Literal values have no interesting dependencies or side-effects.
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             CodePrimitiveExpression primitiveExpr = (CodePrimitiveExpression)expression;
             return new RuleLiteralResult(primitiveExpr.Value);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             CodePrimitiveExpression primitiveExpr = (CodePrimitiveExpression)expression;
             RuleDecompiler.DecompileObjectLiteral(stringBuilder, primitiveExpr.Value);
@@ -176,7 +247,11 @@ namespace System.Workflow.Activities.Rules
         #region Validate
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             string message;
             ValidationError error;
@@ -189,7 +264,11 @@ namespace System.Workflow.Activities.Rules
 
             if (isWritten)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodeBinaryOperatorExpression).ToString());
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodeBinaryOperatorExpression).ToString()
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
                 error.UserData[RuleUserDataKeys.ErrorObject] = binaryExpr;
                 validation.Errors.Add(error);
@@ -200,7 +279,11 @@ namespace System.Workflow.Activities.Rules
 
             if (binaryExpr.Left == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.NullBinaryOpLHS, binaryExpr.Operator.ToString());
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullBinaryOpLHS,
+                    binaryExpr.Operator.ToString()
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_LeftOperandMissing);
                 error.UserData[RuleUserDataKeys.ErrorObject] = binaryExpr;
                 validation.Errors.Add(error);
@@ -209,8 +292,15 @@ namespace System.Workflow.Activities.Rules
             {
                 if (binaryExpr.Left is CodeTypeReferenceExpression)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.CodeExpressionNotHandled, binaryExpr.Left.GetType().FullName);
-                    error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.CodeExpressionNotHandled,
+                        binaryExpr.Left.GetType().FullName
+                    );
+                    error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_CodeExpressionNotHandled
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = binaryExpr.Left;
                     validation.AddError(error);
                     return null;
@@ -221,7 +311,11 @@ namespace System.Workflow.Activities.Rules
 
             if (binaryExpr.Right == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.NullBinaryOpRHS, binaryExpr.Operator.ToString());
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullBinaryOpRHS,
+                    binaryExpr.Operator.ToString()
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_RightOperandMissing);
                 error.UserData[RuleUserDataKeys.ErrorObject] = binaryExpr;
                 validation.Errors.Add(error);
@@ -230,8 +324,15 @@ namespace System.Workflow.Activities.Rules
             {
                 if (binaryExpr.Right is CodeTypeReferenceExpression)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.CodeExpressionNotHandled, binaryExpr.Right.GetType().FullName);
-                    error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.CodeExpressionNotHandled,
+                        binaryExpr.Right.GetType().FullName
+                    );
+                    error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_CodeExpressionNotHandled
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = binaryExpr.Right;
                     validation.AddError(error);
                     return null;
@@ -258,14 +359,34 @@ namespace System.Workflow.Activities.Rules
                     case CodeBinaryOperatorType.Modulus:
                     case CodeBinaryOperatorType.BitwiseAnd:
                     case CodeBinaryOperatorType.BitwiseOr:
-                        resultExprInfo = ArithmeticLiteral.ResultType(binaryExpr.Operator, lhsType, binaryExpr.Left, rhsType, binaryExpr.Right, validation, out error);
+                        resultExprInfo = ArithmeticLiteral.ResultType(
+                            binaryExpr.Operator,
+                            lhsType,
+                            binaryExpr.Left,
+                            rhsType,
+                            binaryExpr.Right,
+                            validation,
+                            out error
+                        );
                         if (resultExprInfo == null)
                         {
                             // check if constants are used with ulongs, as we should do some extra "conversions"
-                            if (((lhsType == typeof(ulong)) && (PromotionPossible(rhsType, binaryExpr.Right)))
-                                || ((rhsType == typeof(ulong)) && (PromotionPossible(lhsType, binaryExpr.Left))))
+                            if (
+                                (
+                                    (lhsType == typeof(ulong))
+                                    && (PromotionPossible(rhsType, binaryExpr.Right))
+                                )
+                                || (
+                                    (rhsType == typeof(ulong))
+                                    && (PromotionPossible(lhsType, binaryExpr.Left))
+                                )
+                            )
                             {
-                                resultExprInfo = new RuleBinaryExpressionInfo(lhsType, rhsType, typeof(ulong));
+                                resultExprInfo = new RuleBinaryExpressionInfo(
+                                    lhsType,
+                                    rhsType,
+                                    typeof(ulong)
+                                );
                             }
                             else
                             {
@@ -277,18 +398,42 @@ namespace System.Workflow.Activities.Rules
 
                     case CodeBinaryOperatorType.IdentityEquality:
                     case CodeBinaryOperatorType.IdentityInequality:
-                        resultExprInfo = new RuleBinaryExpressionInfo(lhsType, rhsType, typeof(bool));
+                        resultExprInfo = new RuleBinaryExpressionInfo(
+                            lhsType,
+                            rhsType,
+                            typeof(bool)
+                        );
                         break;
 
                     case CodeBinaryOperatorType.ValueEquality:
-                        resultExprInfo = Literal.AllowedComparison(lhsType, binaryExpr.Left, rhsType, binaryExpr.Right, binaryExpr.Operator, validation, out error);
+                        resultExprInfo = Literal.AllowedComparison(
+                            lhsType,
+                            binaryExpr.Left,
+                            rhsType,
+                            binaryExpr.Right,
+                            binaryExpr.Operator,
+                            validation,
+                            out error
+                        );
                         if (resultExprInfo == null)
                         {
                             // check if constants are used with ulongs, as we should do some extra "conversions"
-                            if (((lhsType == typeof(ulong)) && (PromotionPossible(rhsType, binaryExpr.Right)))
-                                || ((rhsType == typeof(ulong)) && (PromotionPossible(lhsType, binaryExpr.Left))))
+                            if (
+                                (
+                                    (lhsType == typeof(ulong))
+                                    && (PromotionPossible(rhsType, binaryExpr.Right))
+                                )
+                                || (
+                                    (rhsType == typeof(ulong))
+                                    && (PromotionPossible(lhsType, binaryExpr.Left))
+                                )
+                            )
                             {
-                                resultExprInfo = new RuleBinaryExpressionInfo(lhsType, rhsType, typeof(bool));
+                                resultExprInfo = new RuleBinaryExpressionInfo(
+                                    lhsType,
+                                    rhsType,
+                                    typeof(bool)
+                                );
                             }
                             else
                             {
@@ -302,14 +447,34 @@ namespace System.Workflow.Activities.Rules
                     case CodeBinaryOperatorType.LessThanOrEqual:
                     case CodeBinaryOperatorType.GreaterThan:
                     case CodeBinaryOperatorType.GreaterThanOrEqual:
-                        resultExprInfo = Literal.AllowedComparison(lhsType, binaryExpr.Left, rhsType, binaryExpr.Right, binaryExpr.Operator, validation, out error);
+                        resultExprInfo = Literal.AllowedComparison(
+                            lhsType,
+                            binaryExpr.Left,
+                            rhsType,
+                            binaryExpr.Right,
+                            binaryExpr.Operator,
+                            validation,
+                            out error
+                        );
                         if (resultExprInfo == null)
                         {
                             // check if constants are used with ulongs, as we should do some extra "conversions"
-                            if (((lhsType == typeof(ulong)) && (PromotionPossible(rhsType, binaryExpr.Right)))
-                                || ((rhsType == typeof(ulong)) && (PromotionPossible(lhsType, binaryExpr.Left))))
+                            if (
+                                (
+                                    (lhsType == typeof(ulong))
+                                    && (PromotionPossible(rhsType, binaryExpr.Right))
+                                )
+                                || (
+                                    (rhsType == typeof(ulong))
+                                    && (PromotionPossible(lhsType, binaryExpr.Left))
+                                )
+                            )
                             {
-                                resultExprInfo = new RuleBinaryExpressionInfo(lhsType, rhsType, typeof(bool));
+                                resultExprInfo = new RuleBinaryExpressionInfo(
+                                    lhsType,
+                                    rhsType,
+                                    typeof(bool)
+                                );
                             }
                             else
                             {
@@ -321,21 +486,43 @@ namespace System.Workflow.Activities.Rules
 
                     case CodeBinaryOperatorType.BooleanAnd:
                     case CodeBinaryOperatorType.BooleanOr:
-                        resultExprInfo = new RuleBinaryExpressionInfo(lhsType, rhsType, typeof(bool));
+                        resultExprInfo = new RuleBinaryExpressionInfo(
+                            lhsType,
+                            rhsType,
+                            typeof(bool)
+                        );
                         if (lhsType != typeof(bool))
                         {
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.LogicalOpBadTypeLHS, binaryExpr.Operator.ToString(),
-                                (lhsType == typeof(NullLiteral)) ? Messages.NullValue : RuleDecompiler.DecompileType(lhsType));
-                            error = new ValidationError(message, ErrorNumbers.Error_LeftOperandInvalidType);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.LogicalOpBadTypeLHS,
+                                binaryExpr.Operator.ToString(),
+                                (lhsType == typeof(NullLiteral))
+                                    ? Messages.NullValue
+                                    : RuleDecompiler.DecompileType(lhsType)
+                            );
+                            error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_LeftOperandInvalidType
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = binaryExpr;
                             validation.Errors.Add(error);
                             resultExprInfo = null;
                         }
                         if (rhsType != typeof(bool))
                         {
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.LogicalOpBadTypeRHS, binaryExpr.Operator.ToString(),
-                                (rhsType == typeof(NullLiteral)) ? Messages.NullValue : RuleDecompiler.DecompileType(rhsType));
-                            error = new ValidationError(message, ErrorNumbers.Error_RightOperandInvalidType);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.LogicalOpBadTypeRHS,
+                                binaryExpr.Operator.ToString(),
+                                (rhsType == typeof(NullLiteral))
+                                    ? Messages.NullValue
+                                    : RuleDecompiler.DecompileType(rhsType)
+                            );
+                            error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_RightOperandInvalidType
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = binaryExpr;
                             validation.Errors.Add(error);
                             resultExprInfo = null;
@@ -344,8 +531,15 @@ namespace System.Workflow.Activities.Rules
 
                     default:
                         {
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.BinaryOpNotSupported, binaryExpr.Operator.ToString());
-                            error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.BinaryOpNotSupported,
+                                binaryExpr.Operator.ToString()
+                            );
+                            error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_CodeExpressionNotHandled
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = binaryExpr;
                             validation.Errors.Add(error);
                         }
@@ -368,7 +562,14 @@ namespace System.Workflow.Activities.Rules
                         bool allAttributesValid = true;
                         foreach (RuleAttribute ruleAttr in attrs)
                         {
-                            if (!ruleAttr.Validate(validation, method, method.DeclaringType, method.GetParameters()))
+                            if (
+                                !ruleAttr.Validate(
+                                    validation,
+                                    method,
+                                    method.DeclaringType,
+                                    method.GetParameters()
+                                )
+                            )
                                 allAttributesValid = false;
                         }
 
@@ -415,12 +616,19 @@ namespace System.Workflow.Activities.Rules
         }
         #endregion
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             CodeBinaryOperatorExpression binaryExpr = (CodeBinaryOperatorExpression)expression;
 
             // Get the method info from the validation so we can look for [RuleRead] and [RuleWrite] attributes.
-            RuleBinaryExpressionInfo expressionInfo = analysis.Validation.ExpressionInfo(binaryExpr) as RuleBinaryExpressionInfo;
+            RuleBinaryExpressionInfo expressionInfo =
+                analysis.Validation.ExpressionInfo(binaryExpr) as RuleBinaryExpressionInfo;
             if (expressionInfo != null)
             {
                 // we may be calling a method, not a default operator
@@ -431,8 +639,17 @@ namespace System.Workflow.Activities.Rules
                     CodeExpressionCollection arguments = new CodeExpressionCollection();
                     arguments.Add(binaryExpr.Left);
                     arguments.Add(binaryExpr.Right);
-                    CodeExpression targetObject = new CodeTypeReferenceExpression(method.DeclaringType);
-                    analysis.AnalyzeRuleAttributes(method, targetObject, qualifier, arguments, method.GetParameters(), attributedExprs);
+                    CodeExpression targetObject = new CodeTypeReferenceExpression(
+                        method.DeclaringType
+                    );
+                    analysis.AnalyzeRuleAttributes(
+                        method,
+                        targetObject,
+                        qualifier,
+                        arguments,
+                        method.GetParameters(),
+                        attributedExprs
+                    );
                 }
             }
 
@@ -442,7 +659,10 @@ namespace System.Workflow.Activities.Rules
         }
 
         #region Evaluate
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             CodeBinaryOperatorExpression binaryExpr = (CodeBinaryOperatorExpression)expression;
 
@@ -454,7 +674,9 @@ namespace System.Workflow.Activities.Rules
                 if ((bool)lhsValue)
                 {
                     // LHS is true, need to look at RHS
-                    object rhsValue = RuleExpressionWalker.Evaluate(execution, binaryExpr.Right).Value;
+                    object rhsValue = RuleExpressionWalker
+                        .Evaluate(execution, binaryExpr.Right)
+                        .Value;
                     return new RuleLiteralResult(rhsValue);
                 }
                 else
@@ -469,7 +691,9 @@ namespace System.Workflow.Activities.Rules
                 else
                 {
                     // LHS is false, so need to look at RHS
-                    object rhsValue = RuleExpressionWalker.Evaluate(execution, binaryExpr.Right).Value;
+                    object rhsValue = RuleExpressionWalker
+                        .Evaluate(execution, binaryExpr.Right)
+                        .Value;
                     return new RuleLiteralResult(rhsValue);
                 }
             }
@@ -477,10 +701,14 @@ namespace System.Workflow.Activities.Rules
             {
                 object resultValue;
                 object rhsValue = RuleExpressionWalker.Evaluate(execution, binaryExpr.Right).Value;
-                RuleBinaryExpressionInfo expressionInfo = execution.Validation.ExpressionInfo(binaryExpr) as RuleBinaryExpressionInfo;
-                if (expressionInfo == null)  // Oops, someone forgot to validate.
+                RuleBinaryExpressionInfo expressionInfo =
+                    execution.Validation.ExpressionInfo(binaryExpr) as RuleBinaryExpressionInfo;
+                if (expressionInfo == null) // Oops, someone forgot to validate.
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.ExpressionNotValidated
+                    );
                     InvalidOperationException exception = new InvalidOperationException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = binaryExpr;
                     throw exception;
@@ -496,21 +724,43 @@ namespace System.Workflow.Activities.Rules
                     {
                         ParameterInfo[] existingParameters = methodInfo.GetParameters();
                         object[] parameters = new object[2];
-                        parameters[0] = Executor.AdjustType(expressionInfo.LeftType, lhsValue, existingParameters[0].ParameterType);
-                        parameters[1] = Executor.AdjustType(expressionInfo.RightType, rhsValue, existingParameters[1].ParameterType);
+                        parameters[0] = Executor.AdjustType(
+                            expressionInfo.LeftType,
+                            lhsValue,
+                            existingParameters[0].ParameterType
+                        );
+                        parameters[1] = Executor.AdjustType(
+                            expressionInfo.RightType,
+                            rhsValue,
+                            existingParameters[1].ParameterType
+                        );
                         resultValue = methodInfo.Invoke(null, parameters);
                     }
                 }
                 else
                 {
-                    resultValue = EvaluateBinaryOperation(binaryExpr, expressionInfo.LeftType, lhsValue, operation, expressionInfo.RightType, rhsValue);
+                    resultValue = EvaluateBinaryOperation(
+                        binaryExpr,
+                        expressionInfo.LeftType,
+                        lhsValue,
+                        operation,
+                        expressionInfo.RightType,
+                        rhsValue
+                    );
                 }
                 return new RuleLiteralResult(resultValue);
             }
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        private static object EvaluateBinaryOperation(CodeBinaryOperatorExpression binaryExpr, Type lhsType, object lhsValue, CodeBinaryOperatorType operation, Type rhsType, object rhsValue)
+        private static object EvaluateBinaryOperation(
+            CodeBinaryOperatorExpression binaryExpr,
+            Type lhsType,
+            object lhsValue,
+            CodeBinaryOperatorType operation,
+            Type rhsType,
+            object rhsValue
+        )
         {
             Literal leftLiteral;
             Literal rightLiteral;
@@ -628,17 +878,23 @@ namespace System.Workflow.Activities.Rules
                     // should never happen
                     // BooleanAnd & BooleanOr short-circuited before call
                     // Assign disallowed at validation time
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.BinaryOpNotSupported, operation.ToString());
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.BinaryOpNotSupported,
+                        operation.ToString()
+                    );
                     exception = new RuleEvaluationException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = binaryExpr;
                     throw exception;
             }
 
-            message = string.Format(CultureInfo.CurrentCulture,
+            message = string.Format(
+                CultureInfo.CurrentCulture,
                 Messages.BinaryOpFails,
                 operation.ToString(),
                 RuleDecompiler.DecompileType(lhsType),
-                RuleDecompiler.DecompileType(rhsType));
+                RuleDecompiler.DecompileType(rhsType)
+            );
             exception = new RuleEvaluationException(message);
             exception.Data[RuleUserDataKeys.ErrorObject] = binaryExpr;
             throw exception;
@@ -648,21 +904,33 @@ namespace System.Workflow.Activities.Rules
         #region Decompile
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             bool mustParenthesize = false;
             CodeBinaryOperatorExpression binaryExpr = (CodeBinaryOperatorExpression)expression;
 
             if (binaryExpr.Left == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.NullBinaryOpLHS, binaryExpr.Operator.ToString());
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullBinaryOpLHS,
+                    binaryExpr.Operator.ToString()
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = binaryExpr;
                 throw exception;
             }
             if (binaryExpr.Right == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.NullBinaryOpRHS, binaryExpr.Operator.ToString());
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullBinaryOpRHS,
+                    binaryExpr.Operator.ToString()
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = binaryExpr;
                 throw exception;
@@ -727,7 +995,11 @@ namespace System.Workflow.Activities.Rules
                     break;
 
                 default:
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.BinaryOpNotSupported, binaryExpr.Operator.ToString());
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.BinaryOpNotSupported,
+                        binaryExpr.Operator.ToString()
+                    );
                     NotSupportedException exception = new NotSupportedException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = binaryExpr;
                     throw exception;
@@ -735,7 +1007,6 @@ namespace System.Workflow.Activities.Rules
 
             CodeExpression leftExpr = binaryExpr.Left;
             CodeExpression rightExpr = binaryExpr.Right;
-
 
             if (binaryExpr.Operator == CodeBinaryOperatorType.ValueEquality)
             {
@@ -755,8 +1026,12 @@ namespace System.Workflow.Activities.Rules
                         {
                             // We have comparison "== false".
 
-                            CodeBinaryOperatorExpression lhsBinary = leftExpr as CodeBinaryOperatorExpression;
-                            if (lhsBinary != null && lhsBinary.Operator == CodeBinaryOperatorType.ValueEquality)
+                            CodeBinaryOperatorExpression lhsBinary =
+                                leftExpr as CodeBinaryOperatorExpression;
+                            if (
+                                lhsBinary != null
+                                && lhsBinary.Operator == CodeBinaryOperatorType.ValueEquality
+                            )
                             {
                                 // We have the pattern
                                 //      (expr1 == expr2) == false
@@ -775,7 +1050,10 @@ namespace System.Workflow.Activities.Rules
                                 // Treat this as:
                                 //      ! LHS
 
-                                mustParenthesize = RuleDecompiler.MustParenthesize(leftExpr, parentExpression);
+                                mustParenthesize = RuleDecompiler.MustParenthesize(
+                                    leftExpr,
+                                    parentExpression
+                                );
                                 if (mustParenthesize)
                                     stringBuilder.Append("(");
 
@@ -783,7 +1061,11 @@ namespace System.Workflow.Activities.Rules
                                 // built-in operation that has "unary" precedence, so pass that as the parent
                                 // to get the parenthesization right. .
                                 stringBuilder.Append("!");
-                                RuleExpressionWalker.Decompile(stringBuilder, leftExpr, new CodeCastExpression());
+                                RuleExpressionWalker.Decompile(
+                                    stringBuilder,
+                                    leftExpr,
+                                    new CodeCastExpression()
+                                );
 
                                 if (mustParenthesize)
                                     stringBuilder.Append(")");
@@ -805,7 +1087,7 @@ namespace System.Workflow.Activities.Rules
                     object lhsValue = lhsPrimitive.Value;
 
                     // Check if the LHS is zero.  We'll only check a few types (decimal,
-                    // double, float, int, long), since these occur most often (and the 
+                    // double, float, int, long), since these occur most often (and the
                     // unsigned types are all illegal).
                     TypeCode tc = Type.GetTypeCode(lhsValue.GetType());
                     bool isZero = false;
@@ -834,15 +1116,22 @@ namespace System.Workflow.Activities.Rules
 
                     if (isZero)
                     {
-                        mustParenthesize = RuleDecompiler.MustParenthesize(rightExpr, parentExpression);
+                        mustParenthesize = RuleDecompiler.MustParenthesize(
+                            rightExpr,
+                            parentExpression
+                        );
                         if (mustParenthesize)
                             stringBuilder.Append("(");
 
                         // Note the "parentExpression" passed to the child decompile... cast is the only
                         // built-in operation that has "unary" precedence, so pass that as the parent
-                        // to get the parenthesization right.  
+                        // to get the parenthesization right.
                         stringBuilder.Append("-");
-                        RuleExpressionWalker.Decompile(stringBuilder, rightExpr, new CodeCastExpression());
+                        RuleExpressionWalker.Decompile(
+                            stringBuilder,
+                            rightExpr,
+                            new CodeCastExpression()
+                        );
 
                         if (mustParenthesize)
                             stringBuilder.Append(")");
@@ -881,9 +1170,11 @@ namespace System.Workflow.Activities.Rules
             CodeBinaryOperatorExpression binaryExpr = (CodeBinaryOperatorExpression)expression;
 
             CodeBinaryOperatorExpression comperandBinary = (CodeBinaryOperatorExpression)comperand;
-            return (binaryExpr.Operator == comperandBinary.Operator
+            return (
+                binaryExpr.Operator == comperandBinary.Operator
                 && RuleExpressionWalker.Match(binaryExpr.Left, comperandBinary.Left)
-                && RuleExpressionWalker.Match(binaryExpr.Right, comperandBinary.Right));
+                && RuleExpressionWalker.Match(binaryExpr.Right, comperandBinary.Right)
+            );
         }
     }
 
@@ -894,7 +1185,11 @@ namespace System.Workflow.Activities.Rules
     // CodeFieldReferenceExpression
     internal class FieldReferenceExpression : RuleExpressionInternal
     {
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             string message;
 
@@ -902,8 +1197,15 @@ namespace System.Workflow.Activities.Rules
 
             if (fieldRefExpr.TargetObject == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.NullFieldTarget, fieldRefExpr.FieldName);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullFieldTarget,
+                    fieldRefExpr.FieldName
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = fieldRefExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -913,21 +1215,32 @@ namespace System.Workflow.Activities.Rules
             if (!validation.PushParentExpression(fieldRefExpr))
                 return null;
 
-            RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(validation, fieldRefExpr.TargetObject, false);
+            RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(
+                validation,
+                fieldRefExpr.TargetObject,
+                false
+            );
 
             validation.PopParentExpression();
 
-            if (targetExprInfo == null)     // error occurred, so simply return
+            if (targetExprInfo == null) // error occurred, so simply return
                 return null;
 
             Type targetType = targetExprInfo.ExpressionType;
-            if (targetType == null)         // no type, so must have been an error already
+            if (targetType == null) // no type, so must have been an error already
                 return null;
 
             if (targetType == typeof(NullLiteral))
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.NullFieldTarget, fieldRefExpr.FieldName);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_BindingTypeMissing);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullFieldTarget,
+                    fieldRefExpr.FieldName
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_BindingTypeMissing
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = fieldRefExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -944,8 +1257,16 @@ namespace System.Workflow.Activities.Rules
             FieldInfo fi = targetType.GetField(fieldRefExpr.FieldName, bindingFlags);
             if (fi == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownField, fieldRefExpr.FieldName, RuleDecompiler.DecompileType(targetType));
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CannotResolveMember);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownField,
+                    fieldRefExpr.FieldName,
+                    RuleDecompiler.DecompileType(targetType)
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CannotResolveMember
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = fieldRefExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -954,8 +1275,15 @@ namespace System.Workflow.Activities.Rules
             if (fi.FieldType == null)
             {
                 // This can only happen with a design-time type.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CouldNotDetermineMemberType, fieldRefExpr.FieldName);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CouldNotDetermineMemberType);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CouldNotDetermineMemberType,
+                    fieldRefExpr.FieldName
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CouldNotDetermineMemberType
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = fieldRefExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -963,14 +1291,30 @@ namespace System.Workflow.Activities.Rules
 
             if (isWritten && fi.IsLiteral)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.FieldSetNotAllowed, fieldRefExpr.FieldName, RuleDecompiler.DecompileType(targetType));
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.FieldSetNotAllowed,
+                    fieldRefExpr.FieldName,
+                    RuleDecompiler.DecompileType(targetType)
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidAssignTarget
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = fieldRefExpr;
                 validation.Errors.Add(error);
                 return null;
             }
 
-            if (!validation.ValidateMemberAccess(fieldRefExpr.TargetObject, targetType, fi, fi.Name, fieldRefExpr))
+            if (
+                !validation.ValidateMemberAccess(
+                    fieldRefExpr.TargetObject,
+                    targetType,
+                    fi,
+                    fi.Name,
+                    fieldRefExpr
+                )
+            )
                 return null;
 
             // Is it possible to set fi by validation.ResolveFieldOrProperty(targetType, fieldExpr.FieldName)?
@@ -978,22 +1322,43 @@ namespace System.Workflow.Activities.Rules
             return new RuleFieldExpressionInfo(fi);
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             CodeFieldReferenceExpression fieldRefExpr = (CodeFieldReferenceExpression)expression;
             CodeExpression targetObject = fieldRefExpr.TargetObject;
-            RuleExpressionWalker.AnalyzeUsage(analysis, targetObject, isRead, isWritten, new RulePathQualifier(fieldRefExpr.FieldName, qualifier));
+            RuleExpressionWalker.AnalyzeUsage(
+                analysis,
+                targetObject,
+                isRead,
+                isWritten,
+                new RulePathQualifier(fieldRefExpr.FieldName, qualifier)
+            );
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             CodeFieldReferenceExpression fieldRefExpr = (CodeFieldReferenceExpression)expression;
-            object target = RuleExpressionWalker.Evaluate(execution, fieldRefExpr.TargetObject).Value;
+            object target = RuleExpressionWalker
+                .Evaluate(execution, fieldRefExpr.TargetObject)
+                .Value;
 
-            RuleFieldExpressionInfo fieldExprInfo = execution.Validation.ExpressionInfo(fieldRefExpr) as RuleFieldExpressionInfo;
-            if (fieldExprInfo == null)  // Oops, someone forgot to validate.
+            RuleFieldExpressionInfo fieldExprInfo =
+                execution.Validation.ExpressionInfo(fieldRefExpr) as RuleFieldExpressionInfo;
+            if (fieldExprInfo == null) // Oops, someone forgot to validate.
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = fieldRefExpr;
                 throw exception;
@@ -1004,14 +1369,22 @@ namespace System.Workflow.Activities.Rules
             return new RuleFieldResult(target, fi);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             CodeFieldReferenceExpression fieldRefExpr = (CodeFieldReferenceExpression)expression;
 
             CodeExpression targetObject = fieldRefExpr.TargetObject;
             if (targetObject == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.NullFieldTarget, fieldRefExpr.FieldName);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullFieldTarget,
+                    fieldRefExpr.FieldName
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = fieldRefExpr;
                 throw exception;
@@ -1037,8 +1410,10 @@ namespace System.Workflow.Activities.Rules
             CodeFieldReferenceExpression fieldRefExpr = (CodeFieldReferenceExpression)expression;
 
             CodeFieldReferenceExpression newField = (CodeFieldReferenceExpression)comperand;
-            return (fieldRefExpr.FieldName == newField.FieldName
-                && RuleExpressionWalker.Match(fieldRefExpr.TargetObject, newField.TargetObject));
+            return (
+                fieldRefExpr.FieldName == newField.FieldName
+                && RuleExpressionWalker.Match(fieldRefExpr.TargetObject, newField.TargetObject)
+            );
         }
     }
 
@@ -1049,16 +1424,28 @@ namespace System.Workflow.Activities.Rules
     // CodePropertyReferenceExpression
     internal class PropertyReferenceExpression : RuleExpressionInternal
     {
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             string message;
 
-            CodePropertyReferenceExpression propGetExpr = (CodePropertyReferenceExpression)expression;
+            CodePropertyReferenceExpression propGetExpr =
+                (CodePropertyReferenceExpression)expression;
 
             if (propGetExpr.TargetObject == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.NullPropertyTarget, propGetExpr.PropertyName);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullPropertyTarget,
+                    propGetExpr.PropertyName
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = propGetExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -1068,39 +1455,66 @@ namespace System.Workflow.Activities.Rules
             if (!validation.PushParentExpression(propGetExpr))
                 return null;
 
-            RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(validation, propGetExpr.TargetObject, false);
+            RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(
+                validation,
+                propGetExpr.TargetObject,
+                false
+            );
 
             validation.PopParentExpression();
 
-            if (targetExprInfo == null)     // error occurred, so simply return
+            if (targetExprInfo == null) // error occurred, so simply return
                 return null;
 
             Type targetType = targetExprInfo.ExpressionType;
-            if (targetType == null)         // no type, so must have been an error already
+            if (targetType == null) // no type, so must have been an error already
                 return null;
 
             if (targetType == typeof(NullLiteral))
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.NullPropertyTarget, propGetExpr.PropertyName);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_BindingTypeMissing);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullPropertyTarget,
+                    propGetExpr.PropertyName
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_BindingTypeMissing
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = propGetExpr;
                 validation.Errors.Add(error);
                 return null;
             }
 
             bool includeNonPublic = false;
-            BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy;
+            BindingFlags bindingFlags =
+                BindingFlags.Public
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.FlattenHierarchy;
             if (validation.AllowInternalMembers(targetType))
             {
                 bindingFlags |= BindingFlags.NonPublic;
                 includeNonPublic = true;
             }
-            PropertyInfo pi = validation.ResolveProperty(targetType, propGetExpr.PropertyName, bindingFlags);
+            PropertyInfo pi = validation.ResolveProperty(
+                targetType,
+                propGetExpr.PropertyName,
+                bindingFlags
+            );
 
             if (pi == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownProperty, propGetExpr.PropertyName, RuleDecompiler.DecompileType(targetType));
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CannotResolveMember);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownProperty,
+                    propGetExpr.PropertyName,
+                    RuleDecompiler.DecompileType(targetType)
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CannotResolveMember
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = propGetExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -1109,25 +1523,52 @@ namespace System.Workflow.Activities.Rules
             if (pi.PropertyType == null)
             {
                 // This can only happen with a design-time type.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CouldNotDetermineMemberType, propGetExpr.PropertyName);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CouldNotDetermineMemberType);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CouldNotDetermineMemberType,
+                    propGetExpr.PropertyName
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CouldNotDetermineMemberType
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = propGetExpr;
                 validation.Errors.Add(error);
                 return null;
             }
 
-            MethodInfo accessorMethod = isWritten ? pi.GetSetMethod(includeNonPublic) : pi.GetGetMethod(includeNonPublic);
+            MethodInfo accessorMethod = isWritten
+                ? pi.GetSetMethod(includeNonPublic)
+                : pi.GetGetMethod(includeNonPublic);
             if (accessorMethod == null)
             {
-                string baseMessage = isWritten ? Messages.UnknownPropertySet : Messages.UnknownPropertyGet;
-                message = string.Format(CultureInfo.CurrentCulture, baseMessage, propGetExpr.PropertyName, RuleDecompiler.DecompileType(targetType));
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CannotResolveMember);
+                string baseMessage = isWritten
+                    ? Messages.UnknownPropertySet
+                    : Messages.UnknownPropertyGet;
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    baseMessage,
+                    propGetExpr.PropertyName,
+                    RuleDecompiler.DecompileType(targetType)
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CannotResolveMember
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = propGetExpr;
                 validation.Errors.Add(error);
                 return null;
             }
 
-            if (!validation.ValidateMemberAccess(propGetExpr.TargetObject, targetType, accessorMethod, propGetExpr.PropertyName, propGetExpr))
+            if (
+                !validation.ValidateMemberAccess(
+                    propGetExpr.TargetObject,
+                    targetType,
+                    accessorMethod,
+                    propGetExpr.PropertyName,
+                    propGetExpr
+                )
+            )
                 return null;
 
             // Validate any RuleAttributes, if present.
@@ -1153,29 +1594,42 @@ namespace System.Workflow.Activities.Rules
             return new RulePropertyExpressionInfo(pi, pi.PropertyType, false);
         }
 
-
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             string message;
 
-            CodePropertyReferenceExpression propGetExpr = (CodePropertyReferenceExpression)expression;
+            CodePropertyReferenceExpression propGetExpr =
+                (CodePropertyReferenceExpression)expression;
 
             // Evaluate the target object and get its type.
             CodeExpression targetObject = propGetExpr.TargetObject;
             RuleExpressionInfo targetExprInfo = analysis.Validation.ExpressionInfo(targetObject);
-            if (targetExprInfo == null)  // Oops, someone forgot to validate.
+            if (targetExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = targetObject;
                 throw exception;
             }
 
             // Get the property info from the validator so we can look for [RuleRead] and [RuleWrite] attributes.
-            RulePropertyExpressionInfo propExprInfo = analysis.Validation.ExpressionInfo(propGetExpr) as RulePropertyExpressionInfo;
-            if (propExprInfo == null)  // Oops, someone forgot to validate.
+            RulePropertyExpressionInfo propExprInfo =
+                analysis.Validation.ExpressionInfo(propGetExpr) as RulePropertyExpressionInfo;
+            if (propExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = propGetExpr;
                 throw exception;
@@ -1185,27 +1639,50 @@ namespace System.Workflow.Activities.Rules
 
             // Look for RuleAttribute's on the invoked property.
             List<CodeExpression> attributedExprs = new List<CodeExpression>();
-            analysis.AnalyzeRuleAttributes(pi, targetObject, qualifier, null, null, attributedExprs);
+            analysis.AnalyzeRuleAttributes(
+                pi,
+                targetObject,
+                qualifier,
+                null,
+                null,
+                attributedExprs
+            );
 
             // See if the target object needs default analysis.
             if (!attributedExprs.Contains(targetObject))
             {
                 // The property had no [RuleRead] or [RuleWrite] attributes.  Just qualify the target object with
                 // the property name and proceed with the analysis.
-                RuleExpressionWalker.AnalyzeUsage(analysis, targetObject, isRead, isWritten, new RulePathQualifier(pi.Name, qualifier));
+                RuleExpressionWalker.AnalyzeUsage(
+                    analysis,
+                    targetObject,
+                    isRead,
+                    isWritten,
+                    new RulePathQualifier(pi.Name, qualifier)
+                );
             }
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
-            CodePropertyReferenceExpression propGetExpr = (CodePropertyReferenceExpression)expression;
+            CodePropertyReferenceExpression propGetExpr =
+                (CodePropertyReferenceExpression)expression;
 
-            object target = RuleExpressionWalker.Evaluate(execution, propGetExpr.TargetObject).Value;
+            object target = RuleExpressionWalker
+                .Evaluate(execution, propGetExpr.TargetObject)
+                .Value;
 
-            RulePropertyExpressionInfo propExprInfo = execution.Validation.ExpressionInfo(propGetExpr) as RulePropertyExpressionInfo;
-            if (propExprInfo == null)  // Oops, someone forgot to validate.
+            RulePropertyExpressionInfo propExprInfo =
+                execution.Validation.ExpressionInfo(propGetExpr) as RulePropertyExpressionInfo;
+            if (propExprInfo == null) // Oops, someone forgot to validate.
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = propGetExpr;
                 throw exception;
@@ -1215,14 +1692,23 @@ namespace System.Workflow.Activities.Rules
             return new RulePropertyResult(pi, target, null);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
-            CodePropertyReferenceExpression propGetExpr = (CodePropertyReferenceExpression)expression;
+            CodePropertyReferenceExpression propGetExpr =
+                (CodePropertyReferenceExpression)expression;
 
             CodeExpression targetObject = propGetExpr.TargetObject;
             if (targetObject == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.NullPropertyTarget, propGetExpr.PropertyName);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullPropertyTarget,
+                    propGetExpr.PropertyName
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = propGetExpr;
                 throw exception;
@@ -1235,7 +1721,8 @@ namespace System.Workflow.Activities.Rules
 
         internal override CodeExpression Clone(CodeExpression expression)
         {
-            CodePropertyReferenceExpression propGetExpr = (CodePropertyReferenceExpression)expression;
+            CodePropertyReferenceExpression propGetExpr =
+                (CodePropertyReferenceExpression)expression;
 
             CodePropertyReferenceExpression newProperty = new CodePropertyReferenceExpression();
             newProperty.PropertyName = propGetExpr.PropertyName;
@@ -1245,11 +1732,15 @@ namespace System.Workflow.Activities.Rules
 
         internal override bool Match(CodeExpression expression, CodeExpression comperand)
         {
-            CodePropertyReferenceExpression propGetExpr = (CodePropertyReferenceExpression)expression;
+            CodePropertyReferenceExpression propGetExpr =
+                (CodePropertyReferenceExpression)expression;
 
-            CodePropertyReferenceExpression newProperty = (CodePropertyReferenceExpression)comperand;
-            return (propGetExpr.PropertyName == newProperty.PropertyName
-                && RuleExpressionWalker.Match(propGetExpr.TargetObject, newProperty.TargetObject));
+            CodePropertyReferenceExpression newProperty =
+                (CodePropertyReferenceExpression)comperand;
+            return (
+                propGetExpr.PropertyName == newProperty.PropertyName
+                && RuleExpressionWalker.Match(propGetExpr.TargetObject, newProperty.TargetObject)
+            );
         }
     }
 
@@ -1261,7 +1752,11 @@ namespace System.Workflow.Activities.Rules
     internal class MethodInvokeExpression : RuleExpressionInternal
     {
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             Type targetType = null;
             RuleMethodInvokeExpressionInfo methodInvokeInfo = null;
@@ -1273,7 +1768,11 @@ namespace System.Workflow.Activities.Rules
 
             if (isWritten)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodeMethodInvokeExpression).ToString());
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodeMethodInvokeExpression).ToString()
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
                 error.UserData[RuleUserDataKeys.ErrorObject] = invokeExpr;
                 validation.Errors.Add(error);
@@ -1282,16 +1781,26 @@ namespace System.Workflow.Activities.Rules
 
             if ((invokeExpr.Method == null) || (invokeExpr.Method.TargetObject == null))
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.NullMethodTarget, invokeExpr.Method.MethodName);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullMethodTarget,
+                    invokeExpr.Method.MethodName
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
                 error.UserData[RuleUserDataKeys.ErrorObject] = invokeExpr;
                 validation.Errors.Add(error);
                 return null; // Fatal error; discontinue validation of this object.
             }
 
-            if ((invokeExpr.Method.TypeArguments != null) && (invokeExpr.Method.TypeArguments.Count > 0))
+            if (
+                (invokeExpr.Method.TypeArguments != null)
+                && (invokeExpr.Method.TypeArguments.Count > 0)
+            )
             {
-                error = new ValidationError(Messages.GenericMethodsNotSupported, ErrorNumbers.Error_CodeExpressionNotHandled);
+                error = new ValidationError(
+                    Messages.GenericMethodsNotSupported,
+                    ErrorNumbers.Error_CodeExpressionNotHandled
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = invokeExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -1303,8 +1812,12 @@ namespace System.Workflow.Activities.Rules
                 if (!validation.PushParentExpression(invokeExpr))
                     return null;
 
-                RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(validation, invokeExpr.Method.TargetObject, false);
-                if (targetExprInfo == null)     // error occurred, so simply return
+                RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    invokeExpr.Method.TargetObject,
+                    false
+                );
+                if (targetExprInfo == null) // error occurred, so simply return
                     return null;
 
                 targetType = targetExprInfo.ExpressionType;
@@ -1314,7 +1827,11 @@ namespace System.Workflow.Activities.Rules
                 // if an error occurred (targetType == null), continue on to validate the arguments
                 if (targetType == typeof(NullLiteral))
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.NullMethodTarget, invokeExpr.Method.MethodName);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.NullMethodTarget,
+                        invokeExpr.Method.MethodName
+                    );
                     error = new ValidationError(message, ErrorNumbers.Error_BindingTypeMissing);
                     error.UserData[RuleUserDataKeys.ErrorObject] = invokeExpr;
                     validation.Errors.Add(error);
@@ -1331,8 +1848,16 @@ namespace System.Workflow.Activities.Rules
                         CodeExpression argExpr = invokeExpr.Parameters[i];
                         if (argExpr == null)
                         {
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.NullMethodParameter, i.ToString(CultureInfo.CurrentCulture), invokeExpr.Method.MethodName);
-                            error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.NullMethodParameter,
+                                i.ToString(CultureInfo.CurrentCulture),
+                                invokeExpr.Method.MethodName
+                            );
+                            error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_ParameterNotSet
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = invokeExpr;
                             validation.Errors.Add(error);
                             targetType = null; // force exit after validating the rest of the arguments
@@ -1341,8 +1866,15 @@ namespace System.Workflow.Activities.Rules
                         {
                             if (argExpr is CodeTypeReferenceExpression)
                             {
-                                message = string.Format(CultureInfo.CurrentCulture, Messages.CodeExpressionNotHandled, argExpr.GetType().FullName);
-                                error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                                message = string.Format(
+                                    CultureInfo.CurrentCulture,
+                                    Messages.CodeExpressionNotHandled,
+                                    argExpr.GetType().FullName
+                                );
+                                error = new ValidationError(
+                                    message,
+                                    ErrorNumbers.Error_CodeExpressionNotHandled
+                                );
                                 error.UserData[RuleUserDataKeys.ErrorObject] = argExpr;
                                 validation.AddError(error);
 
@@ -1350,7 +1882,11 @@ namespace System.Workflow.Activities.Rules
                             }
 
                             // Validate the argument.
-                            RuleExpressionInfo argExprInfo = RuleExpressionWalker.Validate(validation, argExpr, false);
+                            RuleExpressionInfo argExprInfo = RuleExpressionWalker.Validate(
+                                validation,
+                                argExpr,
+                                false
+                            );
                             if (argExprInfo == null)
                                 hasInvalidArgument = true;
                             argExprs.Add(argExpr);
@@ -1374,17 +1910,33 @@ namespace System.Workflow.Activities.Rules
                     bindingFlags |= BindingFlags.NonPublic;
 
                 // Everything okay so far, try to resolve the method.
-                methodInvokeInfo = validation.ResolveMethod(targetType, invokeExpr.Method.MethodName, bindingFlags, argExprs, out error);
-                if ((methodInvokeInfo == null) && (invokeExpr.UserData.Contains(RuleUserDataKeys.QualifiedName)))
+                methodInvokeInfo = validation.ResolveMethod(
+                    targetType,
+                    invokeExpr.Method.MethodName,
+                    bindingFlags,
+                    argExprs,
+                    out error
+                );
+                if (
+                    (methodInvokeInfo == null)
+                    && (invokeExpr.UserData.Contains(RuleUserDataKeys.QualifiedName))
+                )
                 {
                     // failed to resolve the method, but a fully qualified type name is around
                     // load the type, add it to the assemblies, and try again
-                    string qualifiedName = invokeExpr.UserData[RuleUserDataKeys.QualifiedName] as string;
+                    string qualifiedName =
+                        invokeExpr.UserData[RuleUserDataKeys.QualifiedName] as string;
                     Type containingClassType = validation.ResolveType(qualifiedName);
                     if (containingClassType != null)
                     {
                         validation.DetermineExtensionMethods(containingClassType.Assembly);
-                        methodInvokeInfo = validation.ResolveMethod(targetType, invokeExpr.Method.MethodName, bindingFlags, argExprs, out error);
+                        methodInvokeInfo = validation.ResolveMethod(
+                            targetType,
+                            invokeExpr.Method.MethodName,
+                            bindingFlags,
+                            argExprs,
+                            out error
+                        );
                     }
                 }
                 if (methodInvokeInfo == null)
@@ -1399,20 +1951,34 @@ namespace System.Workflow.Activities.Rules
                 validation.PopParentExpression();
             }
 
-
             MethodInfo mi = methodInvokeInfo.MethodInfo;
 
             if (mi.ReturnType == null)
             {
                 // This can only happen with a design-time type.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CouldNotDetermineMemberType, invokeExpr.Method.MethodName);
-                error = new ValidationError(message, ErrorNumbers.Error_CouldNotDetermineMemberType);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CouldNotDetermineMemberType,
+                    invokeExpr.Method.MethodName
+                );
+                error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CouldNotDetermineMemberType
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = invokeExpr;
                 validation.Errors.Add(error);
                 return null;
             }
 
-            if (!validation.ValidateMemberAccess(invokeExpr.Method.TargetObject, targetType, mi, invokeExpr.Method.MethodName, invokeExpr))
+            if (
+                !validation.ValidateMemberAccess(
+                    invokeExpr.Method.TargetObject,
+                    targetType,
+                    mi,
+                    invokeExpr.Method.MethodName,
+                    invokeExpr
+                )
+            )
                 return null;
 
             // Validate any RuleAttributes, if present.
@@ -1438,13 +2004,20 @@ namespace System.Workflow.Activities.Rules
             // if this is an extension method, save the type information
             if (mi is ExtensionMethodInfo)
             {
-                invokeExpr.UserData[RuleUserDataKeys.QualifiedName] = mi.DeclaringType.AssemblyQualifiedName;
+                invokeExpr.UserData[RuleUserDataKeys.QualifiedName] =
+                    mi.DeclaringType.AssemblyQualifiedName;
             }
 
             return methodInvokeInfo;
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             string message;
 
@@ -1453,19 +2026,26 @@ namespace System.Workflow.Activities.Rules
             // Get the target object's type.
             CodeExpression targetObject = invokeExpr.Method.TargetObject;
             RuleExpressionInfo targetExprInfo = analysis.Validation.ExpressionInfo(targetObject);
-            if (targetExprInfo == null)  // Oops, someone forgot to validate.
+            if (targetExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = targetObject;
                 throw exception;
             }
 
             // Get the method info from the validation so we can look for [RuleRead] and [RuleWrite] attributes.
-            RuleMethodInvokeExpressionInfo methodExprInfo = analysis.Validation.ExpressionInfo(invokeExpr) as RuleMethodInvokeExpressionInfo;
-            if (methodExprInfo == null)  // Oops, someone forgot to validate.
+            RuleMethodInvokeExpressionInfo methodExprInfo =
+                analysis.Validation.ExpressionInfo(invokeExpr) as RuleMethodInvokeExpressionInfo;
+            if (methodExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = invokeExpr;
                 throw exception;
@@ -1475,7 +2055,14 @@ namespace System.Workflow.Activities.Rules
 
             // Look for RuleAttribute's on the invoked method.
             List<CodeExpression> attributedExprs = new List<CodeExpression>();
-            analysis.AnalyzeRuleAttributes(mi, targetObject, qualifier, invokeExpr.Parameters, mi.GetParameters(), attributedExprs);
+            analysis.AnalyzeRuleAttributes(
+                mi,
+                targetObject,
+                qualifier,
+                invokeExpr.Parameters,
+                mi.GetParameters(),
+                attributedExprs
+            );
 
             // See if the target object needs default analysis.
             if (!attributedExprs.Contains(targetObject))
@@ -1502,18 +2089,27 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             string message;
 
             CodeMethodInvokeExpression invokeExpr = (CodeMethodInvokeExpression)expression;
 
-            object target = RuleExpressionWalker.Evaluate(execution, invokeExpr.Method.TargetObject).Value;
+            object target = RuleExpressionWalker
+                .Evaluate(execution, invokeExpr.Method.TargetObject)
+                .Value;
 
-            RuleMethodInvokeExpressionInfo invokeExprInfo = execution.Validation.ExpressionInfo(invokeExpr) as RuleMethodInvokeExpressionInfo;
-            if (invokeExprInfo == null)  // Oops, someone forgot to validate.
+            RuleMethodInvokeExpressionInfo invokeExprInfo =
+                execution.Validation.ExpressionInfo(invokeExpr) as RuleMethodInvokeExpressionInfo;
+            if (invokeExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = invokeExpr;
                 throw exception;
@@ -1523,7 +2119,11 @@ namespace System.Workflow.Activities.Rules
 
             if (!mi.IsStatic && target == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.TargetEvaluatedNullMethod, invokeExpr.Method.MethodName);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.TargetEvaluatedNullMethod,
+                    invokeExpr.Method.MethodName
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = invokeExpr;
                 throw exception;
@@ -1549,27 +2149,49 @@ namespace System.Workflow.Activities.Rules
                 // Evaluate the fixed portion of the parameter list.
                 for (i = 0; i < numFixedParameters; ++i)
                 {
-                    Type argType = execution.Validation.ExpressionInfo(invokeExpr.Parameters[i]).ExpressionType;
-                    RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(execution, invokeExpr.Parameters[i]);
+                    Type argType = execution
+                        .Validation.ExpressionInfo(invokeExpr.Parameters[i])
+                        .ExpressionType;
+                    RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
+                        execution,
+                        invokeExpr.Parameters[i]
+                    );
 
                     // Special procesing of direction expressions to keep track of out arguments (& ref).
-                    CodeDirectionExpression direction = invokeExpr.Parameters[i] as CodeDirectionExpression;
-                    if (direction != null && (direction.Direction == FieldDirection.Ref || direction.Direction == FieldDirection.Out))
+                    CodeDirectionExpression direction =
+                        invokeExpr.Parameters[i] as CodeDirectionExpression;
+                    if (
+                        direction != null
+                        && (
+                            direction.Direction == FieldDirection.Ref
+                            || direction.Direction == FieldDirection.Out
+                        )
+                    )
                     {
                         // lazy creation of fieldsToSet
                         if (outArgumentResults == null)
-                            outArgumentResults = new RuleExpressionResult[invokeExpr.Parameters.Count];
+                            outArgumentResults = new RuleExpressionResult[
+                                invokeExpr.Parameters.Count
+                            ];
                         // keep track of this out expression so we can set it later
                         outArgumentResults[i] = argResult;
 
                         // don't evaluate out arguments
                         if (direction.Direction != FieldDirection.Out)
-                            arguments[i] = Executor.AdjustType(argType, argResult.Value, parmInfos[i].ParameterType);
+                            arguments[i] = Executor.AdjustType(
+                                argType,
+                                argResult.Value,
+                                parmInfos[i].ParameterType
+                            );
                     }
                     else
                     {
                         // treat as in
-                        arguments[i] = Executor.AdjustType(argType, argResult.Value, parmInfos[i].ParameterType);
+                        arguments[i] = Executor.AdjustType(
+                            argType,
+                            argResult.Value,
+                            parmInfos[i].ParameterType
+                        );
                     }
                 }
 
@@ -1589,12 +2211,28 @@ namespace System.Workflow.Activities.Rules
                     System.Diagnostics.Debug.Assert(arrayType.IsArray);
                     Type elementType = arrayType.GetElementType();
 
-                    Array paramsArray = (Array)arrayType.InvokeMember(arrayType.Name, BindingFlags.CreateInstance, null, null, new object[] { actualArgCount - i }, CultureInfo.CurrentCulture);
+                    Array paramsArray = (Array)
+                        arrayType.InvokeMember(
+                            arrayType.Name,
+                            BindingFlags.CreateInstance,
+                            null,
+                            null,
+                            new object[] { actualArgCount - i },
+                            CultureInfo.CurrentCulture
+                        );
                     for (; i < actualArgCount; ++i)
                     {
-                        Type argType = execution.Validation.ExpressionInfo(invokeExpr.Parameters[i]).ExpressionType;
-                        RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(execution, invokeExpr.Parameters[i]);
-                        paramsArray.SetValue(Executor.AdjustType(argType, argResult.Value, elementType), i - numFixedParameters);
+                        Type argType = execution
+                            .Validation.ExpressionInfo(invokeExpr.Parameters[i])
+                            .ExpressionType;
+                        RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
+                            execution,
+                            invokeExpr.Parameters[i]
+                        );
+                        paramsArray.SetValue(
+                            Executor.AdjustType(argType, argResult.Value, elementType),
+                            i - numFixedParameters
+                        );
                     }
 
                     arguments[numFixedParameters] = paramsArray;
@@ -1611,8 +2249,13 @@ namespace System.Workflow.Activities.Rules
                 // if there is no inner exception, leave it untouched
                 if (e.InnerException == null)
                     throw;
-                message = string.Format(CultureInfo.CurrentCulture, Messages.Error_MethodInvoke,
-                    RuleDecompiler.DecompileType(mi.ReflectedType), mi.Name, e.InnerException.Message);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.Error_MethodInvoke,
+                    RuleDecompiler.DecompileType(mi.ReflectedType),
+                    mi.Name,
+                    e.InnerException.Message
+                );
                 throw new TargetInvocationException(message, e.InnerException);
             }
 
@@ -1629,13 +2272,21 @@ namespace System.Workflow.Activities.Rules
             return new RuleLiteralResult(result);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             CodeMethodInvokeExpression invokeExpr = (CodeMethodInvokeExpression)expression;
 
             if ((invokeExpr.Method == null) || (invokeExpr.Method.TargetObject == null))
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.NullMethodTarget, invokeExpr.Method.MethodName);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.NullMethodTarget,
+                    invokeExpr.Method.MethodName
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = invokeExpr;
                 throw exception;
@@ -1658,7 +2309,12 @@ namespace System.Workflow.Activities.Rules
                     CodeExpression paramExpr = invokeExpr.Parameters[i];
                     if (paramExpr == null)
                     {
-                        string message = string.Format(CultureInfo.CurrentCulture, Messages.NullMethodTypeParameter, i.ToString(CultureInfo.CurrentCulture), invokeExpr.Method.MethodName);
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.NullMethodTypeParameter,
+                            i.ToString(CultureInfo.CurrentCulture),
+                            invokeExpr.Method.MethodName
+                        );
                         RuleEvaluationException exception = new RuleEvaluationException(message);
                         exception.Data[RuleUserDataKeys.ErrorObject] = invokeExpr;
                         throw exception;
@@ -1685,7 +2341,9 @@ namespace System.Workflow.Activities.Rules
             return newMethod;
         }
 
-        private static CodeMethodReferenceExpression CloneMethodReference(CodeMethodReferenceExpression oldReference)
+        private static CodeMethodReferenceExpression CloneMethodReference(
+            CodeMethodReferenceExpression oldReference
+        )
         {
             CodeMethodReferenceExpression newReference = new CodeMethodReferenceExpression();
             newReference.MethodName = oldReference.MethodName;
@@ -1703,7 +2361,12 @@ namespace System.Workflow.Activities.Rules
             CodeMethodInvokeExpression newMethod = (CodeMethodInvokeExpression)comperand;
             if (invokeExpr.Method.MethodName != newMethod.Method.MethodName)
                 return false;
-            if (!RuleExpressionWalker.Match(invokeExpr.Method.TargetObject, newMethod.Method.TargetObject))
+            if (
+                !RuleExpressionWalker.Match(
+                    invokeExpr.Method.TargetObject,
+                    newMethod.Method.TargetObject
+                )
+            )
                 return false;
             if (invokeExpr.Parameters.Count != newMethod.Parameters.Count)
                 return false;
@@ -1723,14 +2386,25 @@ namespace System.Workflow.Activities.Rules
     // CodeDirectionExpression
     internal class DirectionExpression : RuleExpressionInternal
     {
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             CodeDirectionExpression directionExpr = (CodeDirectionExpression)expression;
 
             if (isWritten)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodeDirectionExpression).ToString());
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodeDirectionExpression).ToString()
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidAssignTarget
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = directionExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -1739,7 +2413,10 @@ namespace System.Workflow.Activities.Rules
             // direction specified, make sure that something is specified
             if (directionExpr.Expression == null)
             {
-                ValidationError error = new ValidationError(Messages.NullDirectionTarget, ErrorNumbers.Error_ParameterNotSet);
+                ValidationError error = new ValidationError(
+                    Messages.NullDirectionTarget,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = directionExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -1747,8 +2424,15 @@ namespace System.Workflow.Activities.Rules
 
             if (directionExpr.Expression is CodeTypeReferenceExpression)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.CodeExpressionNotHandled, directionExpr.Expression.GetType().FullName);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CodeExpressionNotHandled,
+                    directionExpr.Expression.GetType().FullName
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CodeExpressionNotHandled
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = directionExpr.Expression;
                 validation.AddError(error);
                 return null;
@@ -1761,22 +2445,38 @@ namespace System.Workflow.Activities.Rules
             {
                 // ref parameters require that we both read and write the value
                 isRef = true;
-                paramExprInfo = RuleExpressionWalker.Validate(validation, directionExpr.Expression, false);
+                paramExprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    directionExpr.Expression,
+                    false
+                );
                 if (paramExprInfo == null)
                     return null;
-                paramExprInfo = RuleExpressionWalker.Validate(validation, directionExpr.Expression, true);
+                paramExprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    directionExpr.Expression,
+                    true
+                );
             }
             else if (directionExpr.Direction == FieldDirection.Out)
             {
                 // out parameters mean that we only write to it
                 isRef = true;
-                paramExprInfo = RuleExpressionWalker.Validate(validation, directionExpr.Expression, true);
+                paramExprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    directionExpr.Expression,
+                    true
+                );
             }
             else
             {
                 // other parameters are treated as in, so we need to be able to read them
                 isRef = false;
-                paramExprInfo = RuleExpressionWalker.Validate(validation, directionExpr.Expression, false);
+                paramExprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    directionExpr.Expression,
+                    false
+                );
             }
             if (paramExprInfo == null)
                 return null;
@@ -1795,7 +2495,13 @@ namespace System.Workflow.Activities.Rules
             return new RuleExpressionInfo(parameterType);
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             CodeDirectionExpression directionExpr = (CodeDirectionExpression)expression;
             CodeExpression paramExpr = directionExpr.Expression;
@@ -1830,10 +2536,19 @@ namespace System.Workflow.Activities.Rules
                     break;
             }
 
-            RuleExpressionWalker.AnalyzeUsage(analysis, paramExpr, argIsRead, argIsWritten, argQualifier);
+            RuleExpressionWalker.AnalyzeUsage(
+                analysis,
+                paramExpr,
+                argIsRead,
+                argIsWritten,
+                argQualifier
+            );
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             // For evaluation purposes, ignore the direction.  It is handled specifically in the
             // method invoke Evaluate method.
@@ -1841,7 +2556,11 @@ namespace System.Workflow.Activities.Rules
             return RuleExpressionWalker.Evaluate(execution, directionExpr.Expression);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             CodeDirectionExpression directionExpr = (CodeDirectionExpression)expression;
 
@@ -1870,8 +2589,10 @@ namespace System.Workflow.Activities.Rules
         {
             CodeDirectionExpression directionExpr = (CodeDirectionExpression)expression;
             CodeDirectionExpression newDirection = (CodeDirectionExpression)comperand;
-            return (directionExpr.Direction == newDirection.Direction &&
-                RuleExpressionWalker.Match(directionExpr.Expression, newDirection.Expression));
+            return (
+                directionExpr.Direction == newDirection.Direction
+                && RuleExpressionWalker.Match(directionExpr.Expression, newDirection.Expression)
+            );
         }
     }
 
@@ -1882,13 +2603,20 @@ namespace System.Workflow.Activities.Rules
     // CodeTypeReferenceExpression
     internal class TypeReferenceExpression : RuleExpressionInternal
     {
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             CodeTypeReferenceExpression typeRefExpr = (CodeTypeReferenceExpression)expression;
 
             if (typeRefExpr.Type == null)
             {
-                ValidationError error = new ValidationError(Messages.NullTypeType, ErrorNumbers.Error_ParameterNotSet);
+                ValidationError error = new ValidationError(
+                    Messages.NullTypeType,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = typeRefExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -1896,8 +2624,15 @@ namespace System.Workflow.Activities.Rules
 
             if (isWritten)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodeTypeReferenceExpression).ToString());
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodeTypeReferenceExpression).ToString()
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidAssignTarget
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = typeRefExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -1908,18 +2643,31 @@ namespace System.Workflow.Activities.Rules
             return new RuleExpressionInfo(resultType);
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             // These introduce no interesting dependencies or side-effects.
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             // Type references don't evaluate to any value.
             return new RuleLiteralResult(null);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             CodeTypeReferenceExpression typeRefExpr = (CodeTypeReferenceExpression)expression;
             RuleDecompiler.DecompileType(stringBuilder, typeRefExpr.Type);
@@ -1928,11 +2676,13 @@ namespace System.Workflow.Activities.Rules
         internal override CodeExpression Clone(CodeExpression expression)
         {
             CodeTypeReferenceExpression typeRefExpr = (CodeTypeReferenceExpression)expression;
-            CodeTypeReferenceExpression newType = new CodeTypeReferenceExpression(CloneType(typeRefExpr.Type));
+            CodeTypeReferenceExpression newType = new CodeTypeReferenceExpression(
+                CloneType(typeRefExpr.Type)
+            );
             return newType;
         }
 
-        static internal CodeTypeReference CloneType(CodeTypeReference oldType)
+        internal static CodeTypeReference CloneType(CodeTypeReference oldType)
         {
             if (oldType == null)
                 return null;
@@ -1956,7 +2706,7 @@ namespace System.Workflow.Activities.Rules
             return MatchType(typeRefExpr.Type, newType.Type);
         }
 
-        static internal bool MatchType(CodeTypeReference typeRef1, CodeTypeReference typeRef2)
+        internal static bool MatchType(CodeTypeReference typeRef1, CodeTypeReference typeRef2)
         {
             if (typeRef1.BaseType != typeRef2.BaseType)
                 return false;
@@ -1984,7 +2734,11 @@ namespace System.Workflow.Activities.Rules
     internal class CastExpression : RuleExpressionInternal
     {
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             string message;
 
@@ -1992,8 +2746,15 @@ namespace System.Workflow.Activities.Rules
 
             if (isWritten)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodeCastExpression).ToString());
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodeCastExpression).ToString()
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidAssignTarget
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = castExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -2001,7 +2762,10 @@ namespace System.Workflow.Activities.Rules
 
             if (castExpr.Expression == null)
             {
-                ValidationError error = new ValidationError(Messages.NullCastExpr, ErrorNumbers.Error_ParameterNotSet);
+                ValidationError error = new ValidationError(
+                    Messages.NullCastExpr,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = castExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -2009,8 +2773,15 @@ namespace System.Workflow.Activities.Rules
 
             if (castExpr.Expression is CodeTypeReferenceExpression)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CodeExpressionNotHandled, castExpr.Expression.GetType().FullName);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CodeExpressionNotHandled,
+                    castExpr.Expression.GetType().FullName
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CodeExpressionNotHandled
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = castExpr.Expression;
                 validation.AddError(error);
                 return null;
@@ -2018,14 +2789,21 @@ namespace System.Workflow.Activities.Rules
 
             if (castExpr.TargetType == null)
             {
-                ValidationError error = new ValidationError(Messages.NullCastType, ErrorNumbers.Error_ParameterNotSet);
+                ValidationError error = new ValidationError(
+                    Messages.NullCastType,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = castExpr;
                 validation.Errors.Add(error);
                 return null;
             }
 
             // Figure out the operand type.
-            RuleExpressionInfo operandInfo = RuleExpressionWalker.Validate(validation, castExpr.Expression, false);
+            RuleExpressionInfo operandInfo = RuleExpressionWalker.Validate(
+                validation,
+                castExpr.Expression,
+                false
+            );
             if (operandInfo == null)
                 return null;
             Type fromType = operandInfo.ExpressionType;
@@ -2039,8 +2817,15 @@ namespace System.Workflow.Activities.Rules
                 // Casting from null value.
                 if (ConditionHelper.IsNonNullableValueType(toType))
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.CastOfNullInvalid, RuleDecompiler.DecompileType(toType));
-                    ValidationError error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.CastOfNullInvalid,
+                        RuleDecompiler.DecompileType(toType)
+                    );
+                    ValidationError error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_ParameterNotSet
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = castExpr;
                     validation.Errors.Add(error);
                     return null;
@@ -2085,7 +2870,11 @@ namespace System.Workflow.Activities.Rules
                         {
                             // note: this also allows bool <--> numeric conversions
                             object fromValueDefault = Activator.CreateInstance(fromType2);
-                            Convert.ChangeType(fromValueDefault, toType2, CultureInfo.CurrentCulture);
+                            Convert.ChangeType(
+                                fromValueDefault,
+                                toType2,
+                                CultureInfo.CurrentCulture
+                            );
                             canConvert = true;
                         }
                         catch (Exception)
@@ -2100,7 +2889,11 @@ namespace System.Workflow.Activities.Rules
                     // We can cast up or down an inheritence hierarchy,
                     // as well as support explicit and implicit overrides
                     ValidationError error;
-                    canConvert = RuleValidation.ExplicitConversionSpecified(fromType, toType, out error);
+                    canConvert = RuleValidation.ExplicitConversionSpecified(
+                        fromType,
+                        toType,
+                        out error
+                    );
                     if (error != null)
                     {
                         error.UserData[RuleUserDataKeys.ErrorObject] = castExpr;
@@ -2111,8 +2904,16 @@ namespace System.Workflow.Activities.Rules
 
                 if (!canConvert)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.CastIncompatibleTypes, RuleDecompiler.DecompileType(fromType), RuleDecompiler.DecompileType(toType));
-                    ValidationError error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.CastIncompatibleTypes,
+                        RuleDecompiler.DecompileType(fromType),
+                        RuleDecompiler.DecompileType(toType)
+                    );
+                    ValidationError error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_ParameterNotSet
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = castExpr;
                     validation.Errors.Add(error);
                     return null;
@@ -2144,27 +2945,41 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             // Just analyze the child.
             CodeCastExpression castExpr = (CodeCastExpression)expression;
             RuleExpressionWalker.AnalyzeUsage(analysis, castExpr.Expression, true, false, null);
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             string message;
 
             CodeCastExpression castExpr = (CodeCastExpression)expression;
 
             // Evaluate the operand.
-            object operandValue = RuleExpressionWalker.Evaluate(execution, castExpr.Expression).Value;
+            object operandValue = RuleExpressionWalker
+                .Evaluate(execution, castExpr.Expression)
+                .Value;
 
             // Get the cast-to type.
             RuleExpressionInfo castExprInfo = execution.Validation.ExpressionInfo(castExpr);
-            if (castExprInfo == null)  // Oops, someone forgot to validate.
+            if (castExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = castExpr;
                 throw exception;
@@ -2177,7 +2992,12 @@ namespace System.Workflow.Activities.Rules
                 // Here we are casting null to something. If it is a value type we can't do it.
                 if (ConditionHelper.IsNonNullableValueType(toType))
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.CastIncompatibleTypes, Messages.NullValue, RuleDecompiler.DecompileType(toType));
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.CastIncompatibleTypes,
+                        Messages.NullValue,
+                        RuleDecompiler.DecompileType(toType)
+                    );
                     RuleEvaluationException exception = new RuleEvaluationException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = castExpr;
                     throw exception;
@@ -2186,28 +3006,38 @@ namespace System.Workflow.Activities.Rules
             }
             else
             {
-                Type operandType = execution.Validation.ExpressionInfo(castExpr.Expression).ExpressionType;
+                Type operandType = execution
+                    .Validation.ExpressionInfo(castExpr.Expression)
+                    .ExpressionType;
                 operandValue = Executor.AdjustTypeWithCast(operandType, operandValue, toType);
             }
 
             return new RuleLiteralResult(operandValue);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             CodeCastExpression castExpr = (CodeCastExpression)expression;
 
             CodeExpression targetObject = castExpr.Expression;
             if (targetObject == null)
             {
-                RuleEvaluationException exception = new RuleEvaluationException(Messages.NullCastExpr);
+                RuleEvaluationException exception = new RuleEvaluationException(
+                    Messages.NullCastExpr
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = castExpr;
                 throw exception;
             }
 
             if (castExpr.TargetType == null)
             {
-                RuleEvaluationException exception = new RuleEvaluationException(Messages.NullCastType);
+                RuleEvaluationException exception = new RuleEvaluationException(
+                    Messages.NullCastType
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = castExpr;
                 throw exception;
             }
@@ -2239,8 +3069,8 @@ namespace System.Workflow.Activities.Rules
             CodeCastExpression castExpr = (CodeCastExpression)expression;
             CodeCastExpression castComperand = (CodeCastExpression)comperand;
 
-            return TypeReferenceExpression.MatchType(castExpr.TargetType, castComperand.TargetType) &&
-                RuleExpressionWalker.Match(castExpr.Expression, castComperand.Expression);
+            return TypeReferenceExpression.MatchType(castExpr.TargetType, castComperand.TargetType)
+                && RuleExpressionWalker.Match(castExpr.Expression, castComperand.Expression);
         }
     }
 
@@ -2252,7 +3082,11 @@ namespace System.Workflow.Activities.Rules
     internal class IndexerPropertyExpression : RuleExpressionInternal
     {
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             string message;
             ValidationError error = null;
@@ -2265,7 +3099,10 @@ namespace System.Workflow.Activities.Rules
             CodeExpression targetObject = indexerExpr.TargetObject;
             if (targetObject == null)
             {
-                error = new ValidationError(Messages.NullIndexerTarget, ErrorNumbers.Error_ParameterNotSet);
+                error = new ValidationError(
+                    Messages.NullIndexerTarget,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = indexerExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -2273,7 +3110,10 @@ namespace System.Workflow.Activities.Rules
 
             if (targetObject is CodeTypeReferenceExpression)
             {
-                error = new ValidationError(Messages.IndexersCannotBeStatic, ErrorNumbers.Error_ParameterNotSet);
+                error = new ValidationError(
+                    Messages.IndexersCannotBeStatic,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = indexerExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -2281,7 +3121,10 @@ namespace System.Workflow.Activities.Rules
 
             if (indexerExpr.Indices == null || indexerExpr.Indices.Count == 0)
             {
-                error = new ValidationError(Messages.MissingIndexExpressions, ErrorNumbers.Error_ParameterNotSet);
+                error = new ValidationError(
+                    Messages.MissingIndexExpressions,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = indexerExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -2293,8 +3136,12 @@ namespace System.Workflow.Activities.Rules
                 if (!validation.PushParentExpression(indexerExpr))
                     return null;
 
-                RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(validation, indexerExpr.TargetObject, false);
-                if (targetExprInfo == null)     // error occurred, so simply return
+                RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    indexerExpr.TargetObject,
+                    false
+                );
+                if (targetExprInfo == null) // error occurred, so simply return
                     return null;
 
                 targetType = targetExprInfo.ExpressionType;
@@ -2319,7 +3166,10 @@ namespace System.Workflow.Activities.Rules
                     CodeExpression argExpr = indexerExpr.Indices[i];
                     if (argExpr == null)
                     {
-                        error = new ValidationError(Messages.NullIndexExpression, ErrorNumbers.Error_ParameterNotSet);
+                        error = new ValidationError(
+                            Messages.NullIndexExpression,
+                            ErrorNumbers.Error_ParameterNotSet
+                        );
                         error.UserData[RuleUserDataKeys.ErrorObject] = indexerExpr;
                         validation.Errors.Add(error);
                         hasInvalidArgument = true;
@@ -2330,7 +3180,10 @@ namespace System.Workflow.Activities.Rules
                         if (argDirection != null && argDirection.Direction != FieldDirection.In)
                         {
                             // No "ref" or "out" arguments are allowed on indexer arguments.
-                            error = new ValidationError(Messages.IndexerArgCannotBeRefOrOut, ErrorNumbers.Error_IndexerArgCannotBeRefOrOut);
+                            error = new ValidationError(
+                                Messages.IndexerArgCannotBeRefOrOut,
+                                ErrorNumbers.Error_IndexerArgCannotBeRefOrOut
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = indexerExpr;
                             validation.Errors.Add(error);
                             hasInvalidArgument = true;
@@ -2338,15 +3191,26 @@ namespace System.Workflow.Activities.Rules
 
                         if (argExpr is CodeTypeReferenceExpression)
                         {
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.CodeExpressionNotHandled, argExpr.GetType().FullName);
-                            error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.CodeExpressionNotHandled,
+                                argExpr.GetType().FullName
+                            );
+                            error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_CodeExpressionNotHandled
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = argExpr;
                             validation.AddError(error);
                             hasInvalidArgument = true;
                         }
 
                         // Validate the argument.
-                        RuleExpressionInfo argExprInfo = RuleExpressionWalker.Validate(validation, argExpr, false);
+                        RuleExpressionInfo argExprInfo = RuleExpressionWalker.Validate(
+                            validation,
+                            argExpr,
+                            false
+                        );
                         if (argExprInfo == null)
                             hasInvalidArgument = true;
                         else
@@ -2370,7 +3234,12 @@ namespace System.Workflow.Activities.Rules
                 }
 
                 // Everything okay so far, try to resolve the method.
-                propExprInfo = validation.ResolveIndexerProperty(targetType, bindingFlags, argExprs, out error);
+                propExprInfo = validation.ResolveIndexerProperty(
+                    targetType,
+                    bindingFlags,
+                    argExprs,
+                    out error
+                );
                 if (propExprInfo == null)
                 {
                     error.UserData[RuleUserDataKeys.ErrorObject] = indexerExpr;
@@ -2385,18 +3254,35 @@ namespace System.Workflow.Activities.Rules
 
             PropertyInfo pi = propExprInfo.PropertyInfo;
 
-            MethodInfo accessorMethod = isWritten ? pi.GetSetMethod(includeNonPublic) : pi.GetGetMethod(includeNonPublic);
+            MethodInfo accessorMethod = isWritten
+                ? pi.GetSetMethod(includeNonPublic)
+                : pi.GetGetMethod(includeNonPublic);
             if (accessorMethod == null)
             {
-                string baseMessage = isWritten ? Messages.UnknownPropertySet : Messages.UnknownPropertyGet;
-                message = string.Format(CultureInfo.CurrentCulture, baseMessage, pi.Name, RuleDecompiler.DecompileType(targetType));
+                string baseMessage = isWritten
+                    ? Messages.UnknownPropertySet
+                    : Messages.UnknownPropertyGet;
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    baseMessage,
+                    pi.Name,
+                    RuleDecompiler.DecompileType(targetType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_CannotResolveMember);
                 error.UserData[RuleUserDataKeys.ErrorObject] = indexerExpr;
                 validation.Errors.Add(error);
                 return null;
             }
 
-            if (!validation.ValidateMemberAccess(targetObject, targetType, accessorMethod, pi.Name, indexerExpr))
+            if (
+                !validation.ValidateMemberAccess(
+                    targetObject,
+                    targetType,
+                    accessorMethod,
+                    pi.Name,
+                    indexerExpr
+                )
+            )
                 return null;
 
             // Validate any RuleAttributes, if present.
@@ -2422,8 +3308,13 @@ namespace System.Workflow.Activities.Rules
             return propExprInfo;
         }
 
-
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             string message;
 
@@ -2432,19 +3323,26 @@ namespace System.Workflow.Activities.Rules
             // Evaluate the target object and get its type.
             CodeExpression targetObject = indexerExpr.TargetObject;
             RuleExpressionInfo targetExprInfo = analysis.Validation.ExpressionInfo(targetObject);
-            if (targetExprInfo == null)  // Oops, someone forgot to validate.
+            if (targetExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = targetObject;
                 throw exception;
             }
 
             // Get the property info from the validator so we can look for [RuleRead] and [RuleWrite] attributes.
-            RulePropertyExpressionInfo propExprInfo = analysis.Validation.ExpressionInfo(indexerExpr) as RulePropertyExpressionInfo;
-            if (propExprInfo == null)  // Oops, someone forgot to validate.
+            RulePropertyExpressionInfo propExprInfo =
+                analysis.Validation.ExpressionInfo(indexerExpr) as RulePropertyExpressionInfo;
+            if (propExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = indexerExpr;
                 throw exception;
@@ -2454,7 +3352,14 @@ namespace System.Workflow.Activities.Rules
 
             // Look for RuleAttribute's on the invoked indexer property.
             List<CodeExpression> attributedExprs = new List<CodeExpression>();
-            analysis.AnalyzeRuleAttributes(pi, targetObject, qualifier, indexerExpr.Indices, pi.GetIndexParameters(), attributedExprs);
+            analysis.AnalyzeRuleAttributes(
+                pi,
+                targetObject,
+                qualifier,
+                indexerExpr.Indices,
+                pi.GetIndexParameters(),
+                attributedExprs
+            );
 
             // See if the target object needs default analysis.
             if (!attributedExprs.Contains(targetObject))
@@ -2462,7 +3367,13 @@ namespace System.Workflow.Activities.Rules
                 // The property had no [RuleRead] or [RuleWrite] attributes.  The target object is read or
                 // written (as the case may be).
 
-                RuleExpressionWalker.AnalyzeUsage(analysis, targetObject, isRead, isWritten, qualifier);
+                RuleExpressionWalker.AnalyzeUsage(
+                    analysis,
+                    targetObject,
+                    isRead,
+                    isWritten,
+                    qualifier
+                );
             }
 
             // See if any of the arguments need default analysis.
@@ -2479,16 +3390,23 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             string message;
 
             CodeIndexerExpression indexerExpr = (CodeIndexerExpression)expression;
 
-            RulePropertyExpressionInfo propExprInfo = execution.Validation.ExpressionInfo(indexerExpr) as RulePropertyExpressionInfo;
-            if (propExprInfo == null)  // Oops, someone forgot to validate.
+            RulePropertyExpressionInfo propExprInfo =
+                execution.Validation.ExpressionInfo(indexerExpr) as RulePropertyExpressionInfo;
+            if (propExprInfo == null) // Oops, someone forgot to validate.
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ExpressionNotValidated);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ExpressionNotValidated
+                );
                 InvalidOperationException exception = new InvalidOperationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = indexerExpr;
                 throw exception;
@@ -2497,11 +3415,16 @@ namespace System.Workflow.Activities.Rules
             PropertyInfo pi = propExprInfo.PropertyInfo;
 
             // Evaluate the target...
-            object target = RuleExpressionWalker.Evaluate(execution, indexerExpr.TargetObject).Value;
+            object target = RuleExpressionWalker
+                .Evaluate(execution, indexerExpr.TargetObject)
+                .Value;
 
             if (target == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.TargetEvaluatedNullIndexer);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.TargetEvaluatedNullIndexer
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = indexerExpr;
                 throw exception;
@@ -2519,9 +3442,18 @@ namespace System.Workflow.Activities.Rules
             int i;
             for (i = 0; i < numFixedParameters; ++i)
             {
-                Type argType = execution.Validation.ExpressionInfo(indexerExpr.Indices[i]).ExpressionType;
-                RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(execution, indexerExpr.Indices[i]);
-                indexArgs[i] = Executor.AdjustType(argType, argResult.Value, parmInfos[i].ParameterType);
+                Type argType = execution
+                    .Validation.ExpressionInfo(indexerExpr.Indices[i])
+                    .ExpressionType;
+                RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
+                    execution,
+                    indexerExpr.Indices[i]
+                );
+                indexArgs[i] = Executor.AdjustType(
+                    argType,
+                    argResult.Value,
+                    parmInfos[i].ParameterType
+                );
             }
 
             if (numFixedParameters < actualArgCount)
@@ -2540,12 +3472,28 @@ namespace System.Workflow.Activities.Rules
                 System.Diagnostics.Debug.Assert(arrayType.IsArray);
                 Type elementType = arrayType.GetElementType();
 
-                Array paramsArray = (Array)arrayType.InvokeMember(arrayType.Name, BindingFlags.CreateInstance, null, null, new object[] { actualArgCount - i }, CultureInfo.CurrentCulture);
+                Array paramsArray = (Array)
+                    arrayType.InvokeMember(
+                        arrayType.Name,
+                        BindingFlags.CreateInstance,
+                        null,
+                        null,
+                        new object[] { actualArgCount - i },
+                        CultureInfo.CurrentCulture
+                    );
                 for (; i < actualArgCount; ++i)
                 {
-                    Type argType = execution.Validation.ExpressionInfo(indexerExpr.Indices[i]).ExpressionType;
-                    RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(execution, indexerExpr.Indices[i]);
-                    paramsArray.SetValue(Executor.AdjustType(argType, argResult.Value, elementType), i - numFixedParameters);
+                    Type argType = execution
+                        .Validation.ExpressionInfo(indexerExpr.Indices[i])
+                        .ExpressionType;
+                    RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
+                        execution,
+                        indexerExpr.Indices[i]
+                    );
+                    paramsArray.SetValue(
+                        Executor.AdjustType(argType, argResult.Value, elementType),
+                        i - numFixedParameters
+                    );
                 }
 
                 indexArgs[numFixedParameters] = paramsArray;
@@ -2555,7 +3503,11 @@ namespace System.Workflow.Activities.Rules
             return result;
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             string message;
 
@@ -2572,7 +3524,10 @@ namespace System.Workflow.Activities.Rules
 
             if (indexerExpr.Indices == null || indexerExpr.Indices.Count == 0)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.MissingIndexExpressions);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.MissingIndexExpressions
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = indexerExpr;
                 throw exception;
@@ -2608,7 +3563,9 @@ namespace System.Workflow.Activities.Rules
             CodeIndexerExpression indexerExpr = (CodeIndexerExpression)expression;
 
             CodeIndexerExpression indexerComperand = (CodeIndexerExpression)comperand;
-            if (!RuleExpressionWalker.Match(indexerExpr.TargetObject, indexerComperand.TargetObject))
+            if (
+                !RuleExpressionWalker.Match(indexerExpr.TargetObject, indexerComperand.TargetObject)
+            )
                 return false;
 
             if (indexerExpr.Indices.Count != indexerComperand.Indices.Count)
@@ -2616,7 +3573,9 @@ namespace System.Workflow.Activities.Rules
 
             for (int i = 0; i < indexerExpr.Indices.Count; ++i)
             {
-                if (!RuleExpressionWalker.Match(indexerExpr.Indices[i], indexerComperand.Indices[i]))
+                if (
+                    !RuleExpressionWalker.Match(indexerExpr.Indices[i], indexerComperand.Indices[i])
+                )
                     return false;
             }
 
@@ -2631,7 +3590,11 @@ namespace System.Workflow.Activities.Rules
     // CodeArrayIndexerExpression
     internal class ArrayIndexerExpression : RuleExpressionInternal
     {
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             string message;
             ValidationError error = null;
@@ -2642,7 +3605,10 @@ namespace System.Workflow.Activities.Rules
             CodeExpression targetObject = arrayIndexerExpr.TargetObject;
             if (targetObject == null)
             {
-                error = new ValidationError(Messages.NullIndexerTarget, ErrorNumbers.Error_ParameterNotSet);
+                error = new ValidationError(
+                    Messages.NullIndexerTarget,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -2650,7 +3616,10 @@ namespace System.Workflow.Activities.Rules
 
             if (targetObject is CodeTypeReferenceExpression)
             {
-                error = new ValidationError(Messages.IndexersCannotBeStatic, ErrorNumbers.Error_ParameterNotSet);
+                error = new ValidationError(
+                    Messages.IndexersCannotBeStatic,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -2658,7 +3627,10 @@ namespace System.Workflow.Activities.Rules
 
             if (arrayIndexerExpr.Indices == null || arrayIndexerExpr.Indices.Count == 0)
             {
-                error = new ValidationError(Messages.MissingIndexExpressions, ErrorNumbers.Error_ParameterNotSet);
+                error = new ValidationError(
+                    Messages.MissingIndexExpressions,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                 validation.Errors.Add(error);
                 return null;
@@ -2670,8 +3642,12 @@ namespace System.Workflow.Activities.Rules
                 if (!validation.PushParentExpression(arrayIndexerExpr))
                     return null;
 
-                RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(validation, arrayIndexerExpr.TargetObject, false);
-                if (targetExprInfo == null)     // error occurred, so simply return
+                RuleExpressionInfo targetExprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    arrayIndexerExpr.TargetObject,
+                    false
+                );
+                if (targetExprInfo == null) // error occurred, so simply return
                     return null;
 
                 targetType = targetExprInfo.ExpressionType;
@@ -2681,7 +3657,10 @@ namespace System.Workflow.Activities.Rules
                 // if an error occurred (targetType == null), continue on to validate the arguments
                 if (targetType == typeof(NullLiteral))
                 {
-                    error = new ValidationError(Messages.NullIndexerTarget, ErrorNumbers.Error_ParameterNotSet);
+                    error = new ValidationError(
+                        Messages.NullIndexerTarget,
+                        ErrorNumbers.Error_ParameterNotSet
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                     validation.Errors.Add(error);
                     return null;
@@ -2690,7 +3669,11 @@ namespace System.Workflow.Activities.Rules
                 // The target type better be an array.
                 if (!targetType.IsArray)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.CannotIndexType, RuleDecompiler.DecompileType(targetType));
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.CannotIndexType,
+                        RuleDecompiler.DecompileType(targetType)
+                    );
                     error = new ValidationError(message, ErrorNumbers.Error_CannotIndexType);
                     error.UserData[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                     validation.Errors.Add(error);
@@ -2700,7 +3683,11 @@ namespace System.Workflow.Activities.Rules
                 int rank = targetType.GetArrayRank();
                 if (arrayIndexerExpr.Indices.Count != rank)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.ArrayIndexBadRank, rank);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.ArrayIndexBadRank,
+                        rank
+                    );
                     error = new ValidationError(message, ErrorNumbers.Error_ArrayIndexBadRank);
                     error.UserData[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                     validation.Errors.Add(error);
@@ -2713,7 +3700,10 @@ namespace System.Workflow.Activities.Rules
                     CodeExpression argExpr = arrayIndexerExpr.Indices[i];
                     if (argExpr == null)
                     {
-                        error = new ValidationError(Messages.NullIndexExpression, ErrorNumbers.Error_ParameterNotSet);
+                        error = new ValidationError(
+                            Messages.NullIndexExpression,
+                            ErrorNumbers.Error_ParameterNotSet
+                        );
                         error.UserData[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                         validation.Errors.Add(error);
                         hasInvalidArgument = true;
@@ -2724,7 +3714,10 @@ namespace System.Workflow.Activities.Rules
                         if (argDirection != null)
                         {
                             // No "ref" or "out" arguments are allowed on indexer arguments.
-                            error = new ValidationError(Messages.IndexerArgCannotBeRefOrOut, ErrorNumbers.Error_IndexerArgCannotBeRefOrOut);
+                            error = new ValidationError(
+                                Messages.IndexerArgCannotBeRefOrOut,
+                                ErrorNumbers.Error_IndexerArgCannotBeRefOrOut
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = argExpr;
                             validation.Errors.Add(error);
                             hasInvalidArgument = true;
@@ -2732,15 +3725,26 @@ namespace System.Workflow.Activities.Rules
 
                         if (argExpr is CodeTypeReferenceExpression)
                         {
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.CodeExpressionNotHandled, argExpr.GetType().FullName);
-                            error = new ValidationError(message, ErrorNumbers.Error_CodeExpressionNotHandled);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.CodeExpressionNotHandled,
+                                argExpr.GetType().FullName
+                            );
+                            error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_CodeExpressionNotHandled
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = argExpr;
                             validation.AddError(error);
                             hasInvalidArgument = true;
                         }
 
                         // Validate the argument.
-                        RuleExpressionInfo argExprInfo = RuleExpressionWalker.Validate(validation, argExpr, false);
+                        RuleExpressionInfo argExprInfo = RuleExpressionWalker.Validate(
+                            validation,
+                            argExpr,
+                            false
+                        );
                         if (argExprInfo != null)
                         {
                             Type argType = argExprInfo.ExpressionType;
@@ -2759,8 +3763,15 @@ namespace System.Workflow.Activities.Rules
                                     break;
 
                                 default:
-                                    message = string.Format(CultureInfo.CurrentCulture, Messages.ArrayIndexBadType, RuleDecompiler.DecompileType(argType));
-                                    error = new ValidationError(message, ErrorNumbers.Error_ArrayIndexBadType);
+                                    message = string.Format(
+                                        CultureInfo.CurrentCulture,
+                                        Messages.ArrayIndexBadType,
+                                        RuleDecompiler.DecompileType(argType)
+                                    );
+                                    error = new ValidationError(
+                                        message,
+                                        ErrorNumbers.Error_ArrayIndexBadType
+                                    );
                                     error.UserData[RuleUserDataKeys.ErrorObject] = argExpr;
                                     validation.Errors.Add(error);
                                     hasInvalidArgument = true;
@@ -2787,8 +3798,13 @@ namespace System.Workflow.Activities.Rules
             return new RuleExpressionInfo(targetType.GetElementType());
         }
 
-
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             // Analyze the target object, flowing down the qualifier from above.  An expression
             // like:
@@ -2797,23 +3813,43 @@ namespace System.Workflow.Activities.Rules
             //      this/a/b/c/d
 
             CodeArrayIndexerExpression arrayIndexerExpr = (CodeArrayIndexerExpression)expression;
-            RuleExpressionWalker.AnalyzeUsage(analysis, arrayIndexerExpr.TargetObject, isRead, isWritten, qualifier);
+            RuleExpressionWalker.AnalyzeUsage(
+                analysis,
+                arrayIndexerExpr.TargetObject,
+                isRead,
+                isWritten,
+                qualifier
+            );
 
             // Analyze the indexer arguments.  They are read.
             for (int i = 0; i < arrayIndexerExpr.Indices.Count; ++i)
-                RuleExpressionWalker.AnalyzeUsage(analysis, arrayIndexerExpr.Indices[i], true, false, null);
+                RuleExpressionWalker.AnalyzeUsage(
+                    analysis,
+                    arrayIndexerExpr.Indices[i],
+                    true,
+                    false,
+                    null
+                );
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             CodeArrayIndexerExpression arrayIndexerExpr = (CodeArrayIndexerExpression)expression;
 
             // Evaluate the target...
-            object target = RuleExpressionWalker.Evaluate(execution, arrayIndexerExpr.TargetObject).Value;
+            object target = RuleExpressionWalker
+                .Evaluate(execution, arrayIndexerExpr.TargetObject)
+                .Value;
 
             if (target == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.TargetEvaluatedNullIndexer);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.TargetEvaluatedNullIndexer
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                 throw exception;
@@ -2825,8 +3861,12 @@ namespace System.Workflow.Activities.Rules
 
             for (int i = 0; i < actualArgCount; ++i)
             {
-                Type argType = execution.Validation.ExpressionInfo(arrayIndexerExpr.Indices[i]).ExpressionType;
-                object argValue = RuleExpressionWalker.Evaluate(execution, arrayIndexerExpr.Indices[i]).Value;
+                Type argType = execution
+                    .Validation.ExpressionInfo(arrayIndexerExpr.Indices[i])
+                    .ExpressionType;
+                object argValue = RuleExpressionWalker
+                    .Evaluate(execution, arrayIndexerExpr.Indices[i])
+                    .Value;
                 indexArgs[i] = (long)Executor.AdjustType(argType, argValue, typeof(long));
             }
 
@@ -2834,7 +3874,11 @@ namespace System.Workflow.Activities.Rules
             return result;
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             string message;
 
@@ -2851,7 +3895,10 @@ namespace System.Workflow.Activities.Rules
 
             if (arrayIndexerExpr.Indices == null || arrayIndexerExpr.Indices.Count == 0)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.MissingIndexExpressions);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.MissingIndexExpressions
+                );
                 RuleEvaluationException exception = new RuleEvaluationException(message);
                 exception.Data[RuleUserDataKeys.ErrorObject] = arrayIndexerExpr;
                 throw exception;
@@ -2878,7 +3925,10 @@ namespace System.Workflow.Activities.Rules
             for (int i = 0; i < indices.Length; ++i)
                 indices[i] = RuleExpressionWalker.Clone(arrayIndexerExpr.Indices[i]);
 
-            CodeArrayIndexerExpression newIndexer = new CodeArrayIndexerExpression(targetObject, indices);
+            CodeArrayIndexerExpression newIndexer = new CodeArrayIndexerExpression(
+                targetObject,
+                indices
+            );
             return newIndexer;
         }
 
@@ -2887,7 +3937,12 @@ namespace System.Workflow.Activities.Rules
             CodeArrayIndexerExpression arrayIndexerExpr = (CodeArrayIndexerExpression)expression;
 
             CodeArrayIndexerExpression indexerComperand = (CodeArrayIndexerExpression)comperand;
-            if (!RuleExpressionWalker.Match(arrayIndexerExpr.TargetObject, indexerComperand.TargetObject))
+            if (
+                !RuleExpressionWalker.Match(
+                    arrayIndexerExpr.TargetObject,
+                    indexerComperand.TargetObject
+                )
+            )
                 return false;
 
             if (arrayIndexerExpr.Indices.Count != indexerComperand.Indices.Count)
@@ -2895,7 +3950,12 @@ namespace System.Workflow.Activities.Rules
 
             for (int i = 0; i < arrayIndexerExpr.Indices.Count; ++i)
             {
-                if (!RuleExpressionWalker.Match(arrayIndexerExpr.Indices[i], indexerComperand.Indices[i]))
+                if (
+                    !RuleExpressionWalker.Match(
+                        arrayIndexerExpr.Indices[i],
+                        indexerComperand.Indices[i]
+                    )
+                )
                     return false;
             }
 
@@ -2908,7 +3968,11 @@ namespace System.Workflow.Activities.Rules
     #region Object Create expression
     internal class ObjectCreateExpression : RuleExpressionInternal
     {
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             string message;
             ValidationError error;
@@ -2917,7 +3981,11 @@ namespace System.Workflow.Activities.Rules
 
             if (isWritten)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodeObjectCreateExpression).ToString());
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodeObjectCreateExpression).ToString()
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
                 error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                 validation.Errors.Add(error);
@@ -2926,7 +3994,10 @@ namespace System.Workflow.Activities.Rules
 
             if (createExpression.CreateType == null)
             {
-                error = new ValidationError(Messages.NullTypeType, ErrorNumbers.Error_ParameterNotSet);
+                error = new ValidationError(
+                    Messages.NullTypeType,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                 validation.Errors.Add(error);
                 return null;
@@ -2950,7 +4021,12 @@ namespace System.Workflow.Activities.Rules
                     CodeExpression parameter = createExpression.Parameters[i];
                     if (parameter == null)
                     {
-                        message = string.Format(CultureInfo.CurrentCulture, Messages.NullConstructorParameter, i.ToString(CultureInfo.CurrentCulture), RuleDecompiler.DecompileType(resultType));
+                        message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.NullConstructorParameter,
+                            i.ToString(CultureInfo.CurrentCulture),
+                            RuleDecompiler.DecompileType(resultType)
+                        );
                         error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
                         error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                         validation.Errors.Add(error);
@@ -2958,7 +4034,11 @@ namespace System.Workflow.Activities.Rules
                     }
                     else
                     {
-                        RuleExpressionInfo parameterInfo = RuleExpressionWalker.Validate(validation, parameter, false);
+                        RuleExpressionInfo parameterInfo = RuleExpressionWalker.Validate(
+                            validation,
+                            parameter,
+                            false
+                        );
                         if (parameterInfo == null)
                             hasInvalidArgument = true;
                         parameters.Add(parameter);
@@ -2985,17 +4065,30 @@ namespace System.Workflow.Activities.Rules
             // error if type is an abstract type
             if (resultType.IsAbstract)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownConstructor, RuleDecompiler.DecompileType(resultType));
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownConstructor,
+                    RuleDecompiler.DecompileType(resultType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_MethodNotExists);
                 error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                 validation.Errors.Add(error);
                 return null;
             }
 
-            RuleConstructorExpressionInfo constructorInvokeInfo = validation.ResolveConstructor(resultType, bindingFlags, parameters, out error);
+            RuleConstructorExpressionInfo constructorInvokeInfo = validation.ResolveConstructor(
+                resultType,
+                bindingFlags,
+                parameters,
+                out error
+            );
             if (constructorInvokeInfo == null)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownConstructor, RuleDecompiler.DecompileType(resultType));
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownConstructor,
+                    RuleDecompiler.DecompileType(resultType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_MethodNotExists);
                 error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                 validation.Errors.Add(error);
@@ -3005,7 +4098,13 @@ namespace System.Workflow.Activities.Rules
             return constructorInvokeInfo;
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             CodeObjectCreateExpression createExpression = (CodeObjectCreateExpression)expression;
 
@@ -3016,30 +4115,42 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             CodeObjectCreateExpression createExpression = (CodeObjectCreateExpression)expression;
 
             if (createExpression.CreateType == null)
             {
-                RuleEvaluationException exception = new RuleEvaluationException(Messages.NullTypeType);
+                RuleEvaluationException exception = new RuleEvaluationException(
+                    Messages.NullTypeType
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = createExpression;
                 throw exception;
             }
 
-            RuleExpressionInfo expressionInfo = execution.Validation.ExpressionInfo(createExpression);
-            if (expressionInfo == null)  // Oops, someone forgot to validate.
+            RuleExpressionInfo expressionInfo = execution.Validation.ExpressionInfo(
+                createExpression
+            );
+            if (expressionInfo == null) // Oops, someone forgot to validate.
             {
-                InvalidOperationException exception = new InvalidOperationException(Messages.ExpressionNotValidated);
+                InvalidOperationException exception = new InvalidOperationException(
+                    Messages.ExpressionNotValidated
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = createExpression;
                 throw exception;
             }
 
-            RuleConstructorExpressionInfo createExpressionInfo = expressionInfo as RuleConstructorExpressionInfo;
+            RuleConstructorExpressionInfo createExpressionInfo =
+                expressionInfo as RuleConstructorExpressionInfo;
             if (createExpressionInfo == null)
             {
                 // it's just a regular RuleExpressionInfo, which means this is a value-type with no parameters
-                return new RuleLiteralResult(Activator.CreateInstance(expressionInfo.ExpressionType));
+                return new RuleLiteralResult(
+                    Activator.CreateInstance(expressionInfo.ExpressionType)
+                );
             }
 
             ConstructorInfo constructor = createExpressionInfo.ConstructorInfo;
@@ -3062,12 +4173,24 @@ namespace System.Workflow.Activities.Rules
                 // Evaluate the fixed portion of the parameter list.
                 for (i = 0; i < numFixedParameters; ++i)
                 {
-                    Type argType = execution.Validation.ExpressionInfo(createExpression.Parameters[i]).ExpressionType;
-                    RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(execution, createExpression.Parameters[i]);
+                    Type argType = execution
+                        .Validation.ExpressionInfo(createExpression.Parameters[i])
+                        .ExpressionType;
+                    RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
+                        execution,
+                        createExpression.Parameters[i]
+                    );
 
                     // Special procesing of direction expressions to keep track of out arguments (& ref).
-                    CodeDirectionExpression direction = createExpression.Parameters[i] as CodeDirectionExpression;
-                    if (direction != null && (direction.Direction == FieldDirection.Ref || direction.Direction == FieldDirection.Out))
+                    CodeDirectionExpression direction =
+                        createExpression.Parameters[i] as CodeDirectionExpression;
+                    if (
+                        direction != null
+                        && (
+                            direction.Direction == FieldDirection.Ref
+                            || direction.Direction == FieldDirection.Out
+                        )
+                    )
                     {
                         // lazy creation of fieldsToSet
                         if (outArgumentResults == null)
@@ -3076,7 +4199,11 @@ namespace System.Workflow.Activities.Rules
                         outArgumentResults[i] = argResult;
                     }
 
-                    arguments[i] = Executor.AdjustType(argType, argResult.Value, parmInfos[i].ParameterType);
+                    arguments[i] = Executor.AdjustType(
+                        argType,
+                        argResult.Value,
+                        parmInfos[i].ParameterType
+                    );
                 }
 
                 if (numFixedParameters < actualArgCount)
@@ -3098,9 +4225,17 @@ namespace System.Workflow.Activities.Rules
                     Array paramsArray = Array.CreateInstance(elementType, actualArgCount - i);
                     for (; i < actualArgCount; ++i)
                     {
-                        Type argType = execution.Validation.ExpressionInfo(createExpression.Parameters[i]).ExpressionType;
-                        RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(execution, createExpression.Parameters[i]);
-                        paramsArray.SetValue(Executor.AdjustType(argType, argResult.Value, elementType), i - numFixedParameters);
+                        Type argType = execution
+                            .Validation.ExpressionInfo(createExpression.Parameters[i])
+                            .ExpressionType;
+                        RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
+                            execution,
+                            createExpression.Parameters[i]
+                        );
+                        paramsArray.SetValue(
+                            Executor.AdjustType(argType, argResult.Value, elementType),
+                            i - numFixedParameters
+                        );
                     }
 
                     arguments[numFixedParameters] = paramsArray;
@@ -3117,10 +4252,12 @@ namespace System.Workflow.Activities.Rules
                 // if there is no inner exception, leave it untouched
                 if (e.InnerException == null)
                     throw;
-                string message = string.Format(CultureInfo.CurrentCulture,
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
                     Messages.Error_ConstructorInvoke,
                     RuleDecompiler.DecompileType(createExpressionInfo.ExpressionType),
-                    e.InnerException.Message);
+                    e.InnerException.Message
+                );
                 throw new TargetInvocationException(message, e.InnerException);
             }
 
@@ -3136,11 +4273,18 @@ namespace System.Workflow.Activities.Rules
             return new RuleLiteralResult(result);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             CodeObjectCreateExpression createExpression = (CodeObjectCreateExpression)expression;
 
-            bool mustParenthesize = RuleDecompiler.MustParenthesize(createExpression, parentExpression);
+            bool mustParenthesize = RuleDecompiler.MustParenthesize(
+                createExpression,
+                parentExpression
+            );
             if (mustParenthesize)
                 stringBuilder.Append("(");
 
@@ -3154,7 +4298,12 @@ namespace System.Workflow.Activities.Rules
                 CodeExpression paramExpr = createExpression.Parameters[i];
                 if (paramExpr == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.NullConstructorTypeParameter, i.ToString(CultureInfo.CurrentCulture), createExpression.CreateType);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.NullConstructorTypeParameter,
+                        i.ToString(CultureInfo.CurrentCulture),
+                        createExpression.CreateType
+                    );
                     RuleEvaluationException exception = new RuleEvaluationException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = createExpression;
                     throw exception;
@@ -3192,13 +4341,23 @@ namespace System.Workflow.Activities.Rules
             if (createComperand == null)
                 return false;
             // check types
-            if (!TypeReferenceExpression.MatchType(createExpression.CreateType, createComperand.CreateType))
+            if (
+                !TypeReferenceExpression.MatchType(
+                    createExpression.CreateType,
+                    createComperand.CreateType
+                )
+            )
                 return false;
             // check parameters
             if (createExpression.Parameters.Count != createComperand.Parameters.Count)
                 return false;
             for (int i = 0; i < createExpression.Parameters.Count; ++i)
-                if (!RuleExpressionWalker.Match(createExpression.Parameters[i], createComperand.Parameters[i]))
+                if (
+                    !RuleExpressionWalker.Match(
+                        createExpression.Parameters[i],
+                        createComperand.Parameters[i]
+                    )
+                )
                     return false;
             return true;
         }
@@ -3209,7 +4368,11 @@ namespace System.Workflow.Activities.Rules
     internal class ArrayCreateExpression : RuleExpressionInternal
     {
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal override RuleExpressionInfo Validate(CodeExpression expression, RuleValidation validation, bool isWritten)
+        internal override RuleExpressionInfo Validate(
+            CodeExpression expression,
+            RuleValidation validation,
+            bool isWritten
+        )
         {
             string message;
 
@@ -3217,8 +4380,15 @@ namespace System.Workflow.Activities.Rules
 
             if (isWritten)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CannotWriteToExpression, typeof(CodeObjectCreateExpression).ToString());
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_InvalidAssignTarget);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotWriteToExpression,
+                    typeof(CodeObjectCreateExpression).ToString()
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidAssignTarget
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                 validation.Errors.Add(error);
                 return null;
@@ -3226,7 +4396,10 @@ namespace System.Workflow.Activities.Rules
 
             if (createExpression.CreateType == null)
             {
-                ValidationError error = new ValidationError(Messages.NullTypeType, ErrorNumbers.Error_ParameterNotSet);
+                ValidationError error = new ValidationError(
+                    Messages.NullTypeType,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                 validation.Errors.Add(error);
                 return null;
@@ -3238,13 +4411,20 @@ namespace System.Workflow.Activities.Rules
 
             // size CodeDom has limited support for arrays (only 1 dimensional, not more)
             // we limit CodeArrayCreateExpression to a single dimension
-            // (i.e. CodeArrayCreateExpression cannot define int[5,3] or int[5][3], 
-            // but it is possible to define int[][3] and then use initializers to 
+            // (i.e. CodeArrayCreateExpression cannot define int[5,3] or int[5][3],
+            // but it is possible to define int[][3] and then use initializers to
             // fill it in. But we only support int[] or int[3].)
             if (resultType.IsArray)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.ArrayTypeInvalid, resultType.Name);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ArrayTypeInvalid,
+                    resultType.Name
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                 validation.Errors.Add(error);
                 return null;
@@ -3258,7 +4438,10 @@ namespace System.Workflow.Activities.Rules
 
                 if (createExpression.Size < 0)
                 {
-                    ValidationError error = new ValidationError(Messages.ArraySizeInvalid, ErrorNumbers.Error_ParameterNotSet);
+                    ValidationError error = new ValidationError(
+                        Messages.ArraySizeInvalid,
+                        ErrorNumbers.Error_ParameterNotSet
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                     validation.Errors.Add(error);
                     return null;
@@ -3267,16 +4450,29 @@ namespace System.Workflow.Activities.Rules
                 // look up size (if specified)
                 if (createExpression.SizeExpression != null)
                 {
-                    RuleExpressionInfo sizeInfo = RuleExpressionWalker.Validate(validation, createExpression.SizeExpression, false);
+                    RuleExpressionInfo sizeInfo = RuleExpressionWalker.Validate(
+                        validation,
+                        createExpression.SizeExpression,
+                        false
+                    );
                     if (sizeInfo == null)
                         return null;
-                    if ((sizeInfo.ExpressionType != typeof(int))
+                    if (
+                        (sizeInfo.ExpressionType != typeof(int))
                         && (sizeInfo.ExpressionType != typeof(uint))
                         && (sizeInfo.ExpressionType != typeof(long))
-                        && (sizeInfo.ExpressionType != typeof(ulong)))
+                        && (sizeInfo.ExpressionType != typeof(ulong))
+                    )
                     {
-                        message = string.Format(CultureInfo.CurrentCulture, Messages.ArraySizeTypeInvalid, sizeInfo.ExpressionType.Name);
-                        ValidationError error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
+                        message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.ArraySizeTypeInvalid,
+                            sizeInfo.ExpressionType.Name
+                        );
+                        ValidationError error = new ValidationError(
+                            message,
+                            ErrorNumbers.Error_ParameterNotSet
+                        );
                         error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                         validation.Errors.Add(error);
                         return null;
@@ -3288,13 +4484,24 @@ namespace System.Workflow.Activities.Rules
                     CodeExpression init = createExpression.Initializers[i];
                     if (init == null)
                     {
-                        message = string.Format(CultureInfo.CurrentCulture, Messages.MissingInitializer, resultType.Name);
-                        ValidationError error = new ValidationError(message, ErrorNumbers.Error_ParameterNotSet);
+                        message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.MissingInitializer,
+                            resultType.Name
+                        );
+                        ValidationError error = new ValidationError(
+                            message,
+                            ErrorNumbers.Error_ParameterNotSet
+                        );
                         error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                         validation.Errors.Add(error);
                         return null;
                     }
-                    RuleExpressionInfo parameterInfo = RuleExpressionWalker.Validate(validation, init, false);
+                    RuleExpressionInfo parameterInfo = RuleExpressionWalker.Validate(
+                        validation,
+                        init,
+                        false
+                    );
                     if (parameterInfo == null)
                     {
                         parameterInvalid = true;
@@ -3303,7 +4510,14 @@ namespace System.Workflow.Activities.Rules
                     {
                         // can we convert the result type to the array type?
                         ValidationError error;
-                        if (!RuleValidation.StandardImplicitConversion(parameterInfo.ExpressionType, resultType, init, out error))
+                        if (
+                            !RuleValidation.StandardImplicitConversion(
+                                parameterInfo.ExpressionType,
+                                resultType,
+                                init,
+                                out error
+                            )
+                        )
                         {
                             // types must match
                             if (error != null)
@@ -3312,8 +4526,16 @@ namespace System.Workflow.Activities.Rules
                                 error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                                 validation.Errors.Add(error);
                             }
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.InitializerMismatch, i, resultType.Name);
-                            error = new ValidationError(message, ErrorNumbers.Error_OperandTypesIncompatible);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.InitializerMismatch,
+                                i,
+                                resultType.Name
+                            );
+                            error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_OperandTypesIncompatible
+                            );
                             error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                             validation.Errors.Add(error);
                             return null;
@@ -3333,13 +4555,18 @@ namespace System.Workflow.Activities.Rules
                 double size = -1;
                 if (createExpression.SizeExpression != null)
                 {
-                    CodePrimitiveExpression prim = createExpression.SizeExpression as CodePrimitiveExpression;
+                    CodePrimitiveExpression prim =
+                        createExpression.SizeExpression as CodePrimitiveExpression;
                     if ((prim != null) && (prim.Value != null))
-                        size = (double)Executor.AdjustType(prim.Value.GetType(), prim.Value, typeof(double));
+                        size = (double)
+                            Executor.AdjustType(prim.Value.GetType(), prim.Value, typeof(double));
                     if (createExpression.Size > 0)
                     {
                         // both size and SizeExpression specified, complain
-                        ValidationError error = new ValidationError(Messages.ArraySizeBoth, ErrorNumbers.Error_ParameterNotSet);
+                        ValidationError error = new ValidationError(
+                            Messages.ArraySizeBoth,
+                            ErrorNumbers.Error_ParameterNotSet
+                        );
                         error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                         validation.Errors.Add(error);
                         return null;
@@ -3350,8 +4577,16 @@ namespace System.Workflow.Activities.Rules
 
                 if ((size >= 0) && (createExpression.Initializers.Count > size))
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.InitializerCountMismatch, createExpression.Initializers.Count, size);
-                    ValidationError error = new ValidationError(message, ErrorNumbers.Error_OperandTypesIncompatible);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.InitializerCountMismatch,
+                        createExpression.Initializers.Count,
+                        size
+                    );
+                    ValidationError error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_OperandTypesIncompatible
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = createExpression;
                     validation.Errors.Add(error);
                     return null;
@@ -3364,31 +4599,52 @@ namespace System.Workflow.Activities.Rules
             return new RuleExpressionInfo(resultType.MakeArrayType());
         }
 
-        internal override void AnalyzeUsage(CodeExpression expression, RuleAnalysis analysis, bool isRead, bool isWritten, RulePathQualifier qualifier)
+        internal override void AnalyzeUsage(
+            CodeExpression expression,
+            RuleAnalysis analysis,
+            bool isRead,
+            bool isWritten,
+            RulePathQualifier qualifier
+        )
         {
             CodeArrayCreateExpression createExpression = (CodeArrayCreateExpression)expression;
 
             if (createExpression.SizeExpression != null)
-                RuleExpressionWalker.AnalyzeUsage(analysis, createExpression.SizeExpression, true, false, null);
+                RuleExpressionWalker.AnalyzeUsage(
+                    analysis,
+                    createExpression.SizeExpression,
+                    true,
+                    false,
+                    null
+                );
             foreach (CodeExpression p in createExpression.Initializers)
                 RuleExpressionWalker.AnalyzeUsage(analysis, p, true, false, null);
         }
 
-        internal override RuleExpressionResult Evaluate(CodeExpression expression, RuleExecution execution)
+        internal override RuleExpressionResult Evaluate(
+            CodeExpression expression,
+            RuleExecution execution
+        )
         {
             CodeArrayCreateExpression createExpression = (CodeArrayCreateExpression)expression;
 
             if (createExpression.CreateType == null)
             {
-                RuleEvaluationException exception = new RuleEvaluationException(Messages.NullTypeType);
+                RuleEvaluationException exception = new RuleEvaluationException(
+                    Messages.NullTypeType
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = createExpression;
                 throw exception;
             }
 
-            RuleExpressionInfo createExpressionInfo = execution.Validation.ExpressionInfo(createExpression);
-            if (createExpression == null)  // Oops, someone forgot to validate.
+            RuleExpressionInfo createExpressionInfo = execution.Validation.ExpressionInfo(
+                createExpression
+            );
+            if (createExpression == null) // Oops, someone forgot to validate.
             {
-                InvalidOperationException exception = new InvalidOperationException(Messages.ExpressionNotValidated);
+                InvalidOperationException exception = new InvalidOperationException(
+                    Messages.ExpressionNotValidated
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = createExpression;
                 throw exception;
             }
@@ -3401,8 +4657,13 @@ namespace System.Workflow.Activities.Rules
             int size = 0;
             if (createExpression.SizeExpression != null)
             {
-                Type sizeType = execution.Validation.ExpressionInfo(createExpression.SizeExpression).ExpressionType;
-                RuleExpressionResult sizeResult = RuleExpressionWalker.Evaluate(execution, createExpression.SizeExpression);
+                Type sizeType = execution
+                    .Validation.ExpressionInfo(createExpression.SizeExpression)
+                    .ExpressionType;
+                RuleExpressionResult sizeResult = RuleExpressionWalker.Evaluate(
+                    execution,
+                    createExpression.SizeExpression
+                );
                 if (sizeType == typeof(int))
                     size = (int)sizeResult.Value;
                 else if (sizeType == typeof(long))
@@ -3422,18 +4683,33 @@ namespace System.Workflow.Activities.Rules
                 for (int i = 0; i < createExpression.Initializers.Count; ++i)
                 {
                     CodeExpression initializer = createExpression.Initializers[i];
-                    Type initializerType = execution.Validation.ExpressionInfo(initializer).ExpressionType;
-                    RuleExpressionResult initializerResult = RuleExpressionWalker.Evaluate(execution, initializer);
-                    result.SetValue(Executor.AdjustType(initializerType, initializerResult.Value, elementType), i);
+                    Type initializerType = execution
+                        .Validation.ExpressionInfo(initializer)
+                        .ExpressionType;
+                    RuleExpressionResult initializerResult = RuleExpressionWalker.Evaluate(
+                        execution,
+                        initializer
+                    );
+                    result.SetValue(
+                        Executor.AdjustType(initializerType, initializerResult.Value, elementType),
+                        i
+                    );
                 }
             return new RuleLiteralResult(result);
         }
 
-        internal override void Decompile(CodeExpression expression, StringBuilder stringBuilder, CodeExpression parentExpression)
+        internal override void Decompile(
+            CodeExpression expression,
+            StringBuilder stringBuilder,
+            CodeExpression parentExpression
+        )
         {
             CodeArrayCreateExpression createExpression = (CodeArrayCreateExpression)expression;
 
-            bool mustParenthesize = RuleDecompiler.MustParenthesize(createExpression, parentExpression);
+            bool mustParenthesize = RuleDecompiler.MustParenthesize(
+                createExpression,
+                parentExpression
+            );
             if (mustParenthesize)
                 stringBuilder.Append("(");
 
@@ -3441,7 +4717,11 @@ namespace System.Workflow.Activities.Rules
             RuleDecompiler.DecompileType(stringBuilder, createExpression.CreateType);
             stringBuilder.Append('[');
             if (createExpression.SizeExpression != null)
-                RuleExpressionWalker.Decompile(stringBuilder, createExpression.SizeExpression, null);
+                RuleExpressionWalker.Decompile(
+                    stringBuilder,
+                    createExpression.SizeExpression,
+                    null
+                );
             else if ((createExpression.Size != 0) || (createExpression.Initializers.Count == 0))
                 stringBuilder.Append(createExpression.Size);
             stringBuilder.Append(']');
@@ -3453,7 +4733,12 @@ namespace System.Workflow.Activities.Rules
                     CodeExpression paramExpr = createExpression.Initializers[i];
                     if (paramExpr == null)
                     {
-                        string message = string.Format(CultureInfo.CurrentCulture, Messages.NullConstructorTypeParameter, i.ToString(CultureInfo.CurrentCulture), createExpression.CreateType);
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.NullConstructorTypeParameter,
+                            i.ToString(CultureInfo.CurrentCulture),
+                            createExpression.CreateType
+                        );
                         RuleEvaluationException exception = new RuleEvaluationException(message);
                         exception.Data[RuleUserDataKeys.ErrorObject] = createExpression;
                         throw exception;
@@ -3479,7 +4764,9 @@ namespace System.Workflow.Activities.Rules
             newCreate.CreateType = TypeReferenceExpression.CloneType(createExpression.CreateType);
             newCreate.Size = createExpression.Size;
             if (createExpression.SizeExpression != null)
-                newCreate.SizeExpression = RuleExpressionWalker.Clone(createExpression.SizeExpression);
+                newCreate.SizeExpression = RuleExpressionWalker.Clone(
+                    createExpression.SizeExpression
+                );
             foreach (CodeExpression p in createExpression.Initializers)
                 newCreate.Initializers.Add(RuleExpressionWalker.Clone(p));
             return newCreate;
@@ -3490,16 +4777,28 @@ namespace System.Workflow.Activities.Rules
             CodeArrayCreateExpression createExpression = (CodeArrayCreateExpression)expression;
 
             CodeArrayCreateExpression createComperand = comperand as CodeArrayCreateExpression;
-            if ((createComperand == null)
+            if (
+                (createComperand == null)
                 || (createExpression.Size != createComperand.Size)
-                || (!TypeReferenceExpression.MatchType(createExpression.CreateType, createComperand.CreateType)))
+                || (
+                    !TypeReferenceExpression.MatchType(
+                        createExpression.CreateType,
+                        createComperand.CreateType
+                    )
+                )
+            )
                 return false;
             // check SizeExpression, if it exists
             if (createExpression.SizeExpression != null)
             {
                 if (createComperand.SizeExpression == null)
                     return false;
-                if (!RuleExpressionWalker.Match(createExpression.SizeExpression, createComperand.SizeExpression))
+                if (
+                    !RuleExpressionWalker.Match(
+                        createExpression.SizeExpression,
+                        createComperand.SizeExpression
+                    )
+                )
                     return false;
             }
             else
@@ -3511,7 +4810,12 @@ namespace System.Workflow.Activities.Rules
             if (createExpression.Initializers.Count != createComperand.Initializers.Count)
                 return false;
             for (int i = 0; i < createExpression.Initializers.Count; ++i)
-                if (!RuleExpressionWalker.Match(createExpression.Initializers[i], createComperand.Initializers[i]))
+                if (
+                    !RuleExpressionWalker.Match(
+                        createExpression.Initializers[i],
+                        createComperand.Initializers[i]
+                    )
+                )
                     return false;
             return true;
         }

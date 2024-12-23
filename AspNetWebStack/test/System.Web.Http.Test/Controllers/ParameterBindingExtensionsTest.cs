@@ -32,7 +32,8 @@ namespace System.Web.Http.Controllers
         {
             HttpParameterDescriptor param = CreateParameterDescriptor();
 
-            ModelBinderParameterBinding binding = (ModelBinderParameterBinding) param.BindWithModelBinding();
+            ModelBinderParameterBinding binding = (ModelBinderParameterBinding)
+                param.BindWithModelBinding();
 
             Assert.NotNull(binding);
         }
@@ -43,7 +44,8 @@ namespace System.Web.Http.Controllers
             HttpParameterDescriptor param = CreateParameterDescriptor();
 
             ModelBinderAttribute attribute = new ModelBinderAttribute(typeof(CustomModelBinder));
-            ModelBinderParameterBinding binding = (ModelBinderParameterBinding) param.BindWithAttribute(attribute);
+            ModelBinderParameterBinding binding = (ModelBinderParameterBinding)
+                param.BindWithAttribute(attribute);
 
             Assert.NotNull(binding);
             Assert.IsType<CustomModelBinder>(binding.Binder);
@@ -55,7 +57,8 @@ namespace System.Web.Http.Controllers
             HttpParameterDescriptor param = CreateParameterDescriptor();
 
             var binder = new CustomModelBinder();
-            ModelBinderParameterBinding binding = (ModelBinderParameterBinding) param.BindWithModelBinding(binder);
+            ModelBinderParameterBinding binding = (ModelBinderParameterBinding)
+                param.BindWithModelBinding(binder);
 
             Assert.NotNull(binding);
             Assert.Equal(binder, binding.Binder);
@@ -66,12 +69,16 @@ namespace System.Web.Http.Controllers
         {
             HttpParameterDescriptor param = CreateParameterDescriptor();
 
-            ModelBinderParameterBinding binding = (ModelBinderParameterBinding) param.BindWithModelBinding(new CustomValueProviderFactory1(), new CustomValueProviderFactory2());
+            ModelBinderParameterBinding binding = (ModelBinderParameterBinding)
+                param.BindWithModelBinding(
+                    new CustomValueProviderFactory1(),
+                    new CustomValueProviderFactory2()
+                );
 
             Assert.NotNull(binding);
 
             ValueProviderFactory[] vpfs = binding.ValueProviderFactories.ToArray();
-            Assert.Equal(2, vpfs.Length);            
+            Assert.Equal(2, vpfs.Length);
             Assert.IsType<CustomValueProviderFactory1>(vpfs[0]);
             Assert.IsType<CustomValueProviderFactory2>(vpfs[1]);
         }
@@ -82,7 +89,15 @@ namespace System.Web.Http.Controllers
             HttpParameterDescriptor param = CreateParameterDescriptor();
 
             var binder = new CustomModelBinder();
-            ModelBinderParameterBinding binding = (ModelBinderParameterBinding) param.BindWithModelBinding(binder, new List<ValueProviderFactory>() { new CustomValueProviderFactory1(), new CustomValueProviderFactory2() });
+            ModelBinderParameterBinding binding = (ModelBinderParameterBinding)
+                param.BindWithModelBinding(
+                    binder,
+                    new List<ValueProviderFactory>()
+                    {
+                        new CustomValueProviderFactory1(),
+                        new CustomValueProviderFactory2(),
+                    }
+                );
 
             Assert.NotNull(binding);
             Assert.Equal(binder, binding.Binder);
@@ -98,7 +113,14 @@ namespace System.Web.Http.Controllers
         {
             HttpParameterDescriptor param = CreateParameterDescriptor();
 
-            ModelBinderParameterBinding binding = (ModelBinderParameterBinding) param.BindWithModelBinding(new List<ValueProviderFactory>() { new CustomValueProviderFactory1(), new CustomValueProviderFactory2() });
+            ModelBinderParameterBinding binding = (ModelBinderParameterBinding)
+                param.BindWithModelBinding(
+                    new List<ValueProviderFactory>()
+                    {
+                        new CustomValueProviderFactory1(),
+                        new CustomValueProviderFactory2(),
+                    }
+                );
 
             Assert.NotNull(binding);
 
@@ -113,7 +135,8 @@ namespace System.Web.Http.Controllers
         {
             HttpParameterDescriptor param = CreateParameterDescriptor();
 
-            FormatterParameterBinding binding = (FormatterParameterBinding) param.BindWithFormatter();
+            FormatterParameterBinding binding = (FormatterParameterBinding)
+                param.BindWithFormatter();
 
             Assert.NotNull(binding);
         }
@@ -126,8 +149,9 @@ namespace System.Web.Http.Controllers
             MediaTypeFormatter formatter1 = new XmlMediaTypeFormatter();
             MediaTypeFormatter formatter2 = new JsonMediaTypeFormatter();
 
-            FormatterParameterBinding binding = (FormatterParameterBinding) param.BindWithFormatter(formatter1, formatter2);
-            
+            FormatterParameterBinding binding = (FormatterParameterBinding)
+                param.BindWithFormatter(formatter1, formatter2);
+
             Assert.NotNull(binding);
             MediaTypeFormatter[] formatters = binding.Formatters.ToArray();
             Assert.Equal(2, formatters.Length);
@@ -143,7 +167,8 @@ namespace System.Web.Http.Controllers
             MediaTypeFormatter formatter1 = new XmlMediaTypeFormatter();
             MediaTypeFormatter formatter2 = new JsonMediaTypeFormatter();
 
-            FormatterParameterBinding binding = (FormatterParameterBinding) param.BindWithFormatter(new List<MediaTypeFormatter> { formatter1, formatter2 });
+            FormatterParameterBinding binding = (FormatterParameterBinding)
+                param.BindWithFormatter(new List<MediaTypeFormatter> { formatter1, formatter2 });
 
             Assert.NotNull(binding);
             MediaTypeFormatter[] formatters = binding.Formatters.ToArray();
@@ -161,7 +186,11 @@ namespace System.Web.Http.Controllers
             MediaTypeFormatter formatter1 = new XmlMediaTypeFormatter();
             MediaTypeFormatter formatter2 = new JsonMediaTypeFormatter();
 
-            FormatterParameterBinding binding = (FormatterParameterBinding) param.BindWithFormatter(new List<MediaTypeFormatter> { formatter1, formatter2 }, bodyModelValidator);
+            FormatterParameterBinding binding = (FormatterParameterBinding)
+                param.BindWithFormatter(
+                    new List<MediaTypeFormatter> { formatter1, formatter2 },
+                    bodyModelValidator
+                );
 
             Assert.NotNull(binding);
             Assert.Equal(bodyModelValidator, binding.BodyModelValidator);
@@ -171,7 +200,7 @@ namespace System.Web.Http.Controllers
             Assert.Equal(formatter2, formatters[1]);
         }
 
-        // Create a parameter that's sufficiently complete that we can run a basic Bind() operation on it. 
+        // Create a parameter that's sufficiently complete that we can run a basic Bind() operation on it.
         private static HttpParameterDescriptor CreateParameterDescriptor()
         {
             // Need config because bind looks up in config.
@@ -194,7 +223,10 @@ namespace System.Web.Http.Controllers
 
         public class CustomModelBinder : IModelBinder
         {
-            public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+            public bool BindModel(
+                HttpActionContext actionContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }
@@ -207,6 +239,7 @@ namespace System.Web.Http.Controllers
                 throw new NotImplementedException();
             }
         }
+
         public class CustomValueProviderFactory2 : ValueProviderFactory
         {
             public override IValueProvider GetValueProvider(HttpActionContext actionContext)

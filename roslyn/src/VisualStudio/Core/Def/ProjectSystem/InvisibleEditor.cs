@@ -39,29 +39,48 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// <see cref="IVsUIShellOpenDocument4.IsDocumentInAProject2"/>, which performs a much slower query of all
         /// projects in the solution.</para>
         /// </remarks>
-        public InvisibleEditor(IServiceProvider serviceProvider, string filePath, IVsHierarchy? hierarchy, bool needsSave, bool needsUndoDisabled)
+        public InvisibleEditor(
+            IServiceProvider serviceProvider,
+            string filePath,
+            IVsHierarchy? hierarchy,
+            bool needsSave,
+            bool needsUndoDisabled
+        )
             : base(serviceProvider.GetMefService<IThreadingContext>(), assertIsForeground: true)
         {
             _serviceProvider = serviceProvider;
             _filePath = filePath;
             _needsSave = needsSave;
 
-            var invisibleEditorManager = (IIntPtrReturningVsInvisibleEditorManager)serviceProvider.GetService(typeof(SVsInvisibleEditorManager));
+            var invisibleEditorManager = (IIntPtrReturningVsInvisibleEditorManager)
+                serviceProvider.GetService(typeof(SVsInvisibleEditorManager));
             var vsProject = hierarchy as IVsProject;
-            Marshal.ThrowExceptionForHR(invisibleEditorManager.RegisterInvisibleEditor(filePath, vsProject, 0, null, out var invisibleEditorPtr));
+            Marshal.ThrowExceptionForHR(
+                invisibleEditorManager.RegisterInvisibleEditor(
+                    filePath,
+                    vsProject,
+                    0,
+                    null,
+                    out var invisibleEditorPtr
+                )
+            );
 
             try
             {
-                _invisibleEditor = (IVsInvisibleEditor)Marshal.GetUniqueObjectForIUnknown(invisibleEditorPtr);
+                _invisibleEditor = (IVsInvisibleEditor)
+                    Marshal.GetUniqueObjectForIUnknown(invisibleEditorPtr);
 
                 _vsTextLines = RetrieveDocData(_invisibleEditor, needsSave);
 
-                var editorAdapterFactoryService = serviceProvider.GetMefService<IVsEditorAdaptersFactoryService>();
+                var editorAdapterFactoryService =
+                    serviceProvider.GetMefService<IVsEditorAdaptersFactoryService>();
                 _buffer = editorAdapterFactoryService.GetDocumentBuffer(_vsTextLines);
                 if (needsUndoDisabled)
                 {
                     Marshal.ThrowExceptionForHR(_vsTextLines.GetUndoManager(out _manager));
-                    Marshal.ThrowExceptionForHR(((IVsUndoState)_manager).IsEnabled(out var isEnabled));
+                    Marshal.ThrowExceptionForHR(
+                        ((IVsUndoState)_manager).IsEnabled(out var isEnabled)
+                    );
                     _needsUndoRestored = isEnabled != 0;
                     if (_needsUndoRestored)
                     {
@@ -83,19 +102,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 IVsTextLines? buffer = null;
                 var docDataPtrViaTextBufferProvider = IntPtr.Zero;
 
-                var hr = invisibleEditor.GetDocData(fEnsureWritable: needsSave ? 1 : 0, riid: typeof(IVsTextLines).GUID, ppDocData: out var docDataPtrViaTextLines);
+                var hr = invisibleEditor.GetDocData(
+                    fEnsureWritable: needsSave ? 1 : 0,
+                    riid: typeof(IVsTextLines).GUID,
+                    ppDocData: out var docDataPtrViaTextLines
+                );
                 try
                 {
-                    if (ErrorHandler.Succeeded(hr) &&
-                        Marshal.GetObjectForIUnknown(docDataPtrViaTextLines) is IVsTextLines vsTextLines)
+                    if (
+                        ErrorHandler.Succeeded(hr)
+                        && Marshal.GetObjectForIUnknown(docDataPtrViaTextLines)
+                            is IVsTextLines vsTextLines
+                    )
                     {
                         buffer = vsTextLines;
                     }
                     else
                     {
-                        hr = invisibleEditor.GetDocData(fEnsureWritable: needsSave ? 1 : 0, riid: typeof(IVsTextBufferProvider).GUID, ppDocData: out docDataPtrViaTextBufferProvider);
-                        if (ErrorHandler.Succeeded(hr) &&
-                            Marshal.GetObjectForIUnknown(docDataPtrViaTextBufferProvider) is IVsTextBufferProvider vsTextBufferProvider)
+                        hr = invisibleEditor.GetDocData(
+                            fEnsureWritable: needsSave ? 1 : 0,
+                            riid: typeof(IVsTextBufferProvider).GUID,
+                            ppDocData: out docDataPtrViaTextBufferProvider
+                        );
+                        if (
+                            ErrorHandler.Succeeded(hr)
+                            && Marshal.GetObjectForIUnknown(docDataPtrViaTextBufferProvider)
+                                is IVsTextBufferProvider vsTextBufferProvider
+                        )
                         {
                             hr = vsTextBufferProvider.GetTextBuffer(out buffer);
                         }
@@ -111,7 +144,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
 
                 Marshal.ThrowExceptionForHR(hr);
-                Contract.ThrowIfNull(buffer, $"We were unable to fetch a buffer in {nameof(InvisibleEditor)}.");
+                Contract.ThrowIfNull(
+                    buffer,
+                    $"We were unable to fetch a buffer in {nameof(InvisibleEditor)}."
+                );
 
                 return buffer;
             }
@@ -119,10 +155,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         public IVsTextLines VsTextLines
         {
-            get
-            {
-                return _vsTextLines;
-            }
+            get { return _vsTextLines; }
         }
 
         public ITextBuffer TextBuffer
@@ -156,7 +189,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     // the invisible editor never actually makes the document go away. Check out CLockHolder::ReleaseEditLock
                     // in env\msenv\core\editmgr.cpp for details. We choose this particular technique for saving files
                     // since it's what the old cslangsvc.dll used.
-                    var runningDocumentTable4 = (IVsRunningDocumentTable4)_serviceProvider.GetService(typeof(SVsRunningDocumentTable));
+                    var runningDocumentTable4 = (IVsRunningDocumentTable4)
+                        _serviceProvider.GetService(typeof(SVsRunningDocumentTable));
 
                     if (runningDocumentTable4.IsMonikerValid(_filePath))
                     {
@@ -165,9 +199,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                         // Old cslangsvc.dll requested not to add to MRU for, and I quote, "performance!". Makes sense not
                         // to include it in the MRU anyways.
-                        ErrorHandler.ThrowOnFailure(runningDocumentTable.ModifyDocumentFlags(cookie, (uint)_VSRDTFLAGS.RDT_DontAddToMRU, fSet: 1));
+                        ErrorHandler.ThrowOnFailure(
+                            runningDocumentTable.ModifyDocumentFlags(
+                                cookie,
+                                (uint)_VSRDTFLAGS.RDT_DontAddToMRU,
+                                fSet: 1
+                            )
+                        );
 
-                        runningDocumentTable.SaveDocuments((uint)__VSRDTSAVEOPTIONS.RDTSAVEOPT_SaveIfDirty, pHier: null, itemid: 0, docCookie: cookie);
+                        runningDocumentTable.SaveDocuments(
+                            (uint)__VSRDTSAVEOPTIONS.RDTSAVEOPT_SaveIfDirty,
+                            pHier: null,
+                            itemid: 0,
+                            docCookie: cookie
+                        );
                     }
                 }
 
@@ -190,8 +235,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         }
 
 #if DEBUG
-        ~InvisibleEditor()
-            => Debug.Assert(Environment.HasShutdownStarted, GetType().Name + " was leaked without Dispose being called.");
+        ~InvisibleEditor() =>
+            Debug.Assert(
+                Environment.HasShutdownStarted,
+                GetType().Name + " was leaked without Dispose being called."
+            );
 #endif
     }
 }

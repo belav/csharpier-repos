@@ -10,11 +10,13 @@ namespace System
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.ServiceModel;
     using System.Runtime.CompilerServices;
+    using System.ServiceModel;
 
     // this class is thread-safe
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class UriTemplateTable
     {
         Uri baseAddress;
@@ -29,39 +31,40 @@ namespace System
         bool addTrailingSlashToBaseAddress;
 
         public UriTemplateTable()
-            : this(null, null, true)
-        {
-        }
+            : this(null, null, true) { }
+
         public UriTemplateTable(IEnumerable<KeyValuePair<UriTemplate, object>> keyValuePairs)
-            : this(null, keyValuePairs, true)
-        {
-        }
+            : this(null, keyValuePairs, true) { }
+
         public UriTemplateTable(Uri baseAddress)
-            : this(baseAddress, null, true)
-        {
-        }
+            : this(baseAddress, null, true) { }
 
         internal UriTemplateTable(Uri baseAddress, bool addTrailingSlashToBaseAddress)
-            : this(baseAddress, null, addTrailingSlashToBaseAddress)
-        {
-        }
+            : this(baseAddress, null, addTrailingSlashToBaseAddress) { }
 
-        public UriTemplateTable(Uri baseAddress, IEnumerable<KeyValuePair<UriTemplate, object>> keyValuePairs)
-            : this(baseAddress, keyValuePairs, true)
-        {
-        }
+        public UriTemplateTable(
+            Uri baseAddress,
+            IEnumerable<KeyValuePair<UriTemplate, object>> keyValuePairs
+        )
+            : this(baseAddress, keyValuePairs, true) { }
 
-        internal UriTemplateTable(Uri baseAddress, IEnumerable<KeyValuePair<UriTemplate, object>> keyValuePairs, bool addTrailingSlashToBaseAddress)
+        internal UriTemplateTable(
+            Uri baseAddress,
+            IEnumerable<KeyValuePair<UriTemplate, object>> keyValuePairs,
+            bool addTrailingSlashToBaseAddress
+        )
         {
             if (baseAddress != null && !baseAddress.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("baseAddress", SR.GetString(
-                    SR.UTTMustBeAbsolute));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "baseAddress",
+                    SR.GetString(SR.UTTMustBeAbsolute)
+                );
             }
-            
+
             this.addTrailingSlashToBaseAddress = addTrailingSlashToBaseAddress;
             this.originalUncanonicalizedBaseAddress = baseAddress;
-            
+
             if (keyValuePairs != null)
             {
                 this.templates = new UriTemplatesCollection(keyValuePairs);
@@ -78,10 +81,7 @@ namespace System
 
         public Uri BaseAddress
         {
-            get
-            {
-                return this.baseAddress;
-            }
+            get { return this.baseAddress; }
             set
             {
                 if (value == null)
@@ -92,15 +92,20 @@ namespace System
                 {
                     if (this.IsReadOnly)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                            SR.GetString(SR.UTTCannotChangeBaseAddress)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.UTTCannotChangeBaseAddress)
+                            )
+                        );
                     }
                     else
                     {
                         if (!value.IsAbsoluteUri)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(
-                                SR.UTTBaseAddressMustBeAbsolute));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                                "value",
+                                SR.GetString(SR.UTTBaseAddressMustBeAbsolute)
+                            );
                         }
                         else
                         {
@@ -115,25 +120,16 @@ namespace System
 
         public Uri OriginalBaseAddress
         {
-            get
-            {
-                return this.originalUncanonicalizedBaseAddress;
-            }
+            get { return this.originalUncanonicalizedBaseAddress; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return this.templates.IsFrozen;
-            }
+            get { return this.templates.IsFrozen; }
         }
         public IList<KeyValuePair<UriTemplate, object>> KeyValuePairs
         {
-            get
-            {
-                return this.templates;
-            }
+            get { return this.templates; }
         }
 
         public void MakeReadOnly(bool allowDuplicateEquivalentUriTemplates)
@@ -149,6 +145,7 @@ namespace System
                 }
             }
         }
+
         public Collection<UriTemplateMatch> Match(Uri uri)
         {
             if (uri == null)
@@ -173,22 +170,33 @@ namespace System
             NameValueCollection queryParameters = null;
             if (!this.noTemplateHasQueryPart && AtLeastOneCandidateHasQueryPart(candidates))
             {
-                Collection<UriTemplateTableMatchCandidate> nextCandidates = new Collection<UriTemplateTableMatchCandidate>();
+                Collection<UriTemplateTableMatchCandidate> nextCandidates =
+                    new Collection<UriTemplateTableMatchCandidate>();
                 Fx.Assert(nextCandidates.Count == 0, "nextCandidates should be empty");
 
                 // then deal with query
                 queryParameters = UriTemplateHelpers.ParseQueryString(uri.Query);
-                bool mustBeEspeciallyInteresting = NoCandidateHasQueryLiteralRequirementsAndThereIsAnEmptyFallback(candidates);
+                bool mustBeEspeciallyInteresting =
+                    NoCandidateHasQueryLiteralRequirementsAndThereIsAnEmptyFallback(candidates);
                 for (int i = 0; i < candidates.Count; i++)
                 {
-                    if (UriTemplateHelpers.CanMatchQueryInterestingly(candidates[i].Template, queryParameters, mustBeEspeciallyInteresting))
+                    if (
+                        UriTemplateHelpers.CanMatchQueryInterestingly(
+                            candidates[i].Template,
+                            queryParameters,
+                            mustBeEspeciallyInteresting
+                        )
+                    )
                     {
                         nextCandidates.Add(candidates[i]);
                     }
                 }
                 if (nextCandidates.Count > 1)
                 {
-                    Fx.Assert(AllEquivalent(nextCandidates, 0, nextCandidates.Count), "demux algorithm problem, multiple non-equivalent matches");
+                    Fx.Assert(
+                        AllEquivalent(nextCandidates, 0, nextCandidates.Count),
+                        "demux algorithm problem, multiple non-equivalent matches"
+                    );
                 }
 
                 if (nextCandidates.Count == 0)
@@ -207,7 +215,10 @@ namespace System
                 }
                 if (nextCandidates.Count > 1)
                 {
-                    Fx.Assert(AllEquivalent(nextCandidates, 0, nextCandidates.Count), "demux algorithm problem, multiple non-equivalent matches");
+                    Fx.Assert(
+                        AllEquivalent(nextCandidates, 0, nextCandidates.Count),
+                        "demux algorithm problem, multiple non-equivalent matches"
+                    );
                 }
 
                 candidates = nextCandidates;
@@ -221,7 +232,8 @@ namespace System
             //  the smallest number of segments - this will prefer ".../" over ".../{x=1}[/...]".
             if (NotAllCandidatesArePathFullyEquivalent(candidates))
             {
-                Collection<UriTemplateTableMatchCandidate> nextCandidates = new Collection<UriTemplateTableMatchCandidate>();
+                Collection<UriTemplateTableMatchCandidate> nextCandidates =
+                    new Collection<UriTemplateTableMatchCandidate>();
                 int minSegmentsCount = -1;
                 for (int i = 0; i < candidates.Count; i++)
                 {
@@ -242,8 +254,14 @@ namespace System
                         nextCandidates.Add(candidate);
                     }
                 }
-                Fx.Assert(minSegmentsCount != -1, "At least the first entry in the list should be kept");
-                Fx.Assert(nextCandidates.Count >= 1, "At least the first entry in the list should be kept");
+                Fx.Assert(
+                    minSegmentsCount != -1,
+                    "At least the first entry in the list should be kept"
+                );
+                Fx.Assert(
+                    nextCandidates.Count >= 1,
+                    "At least the first entry in the list should be kept"
+                );
                 Fx.Assert(nextCandidates[0].Template.segments.Count == minSegmentsCount, "Trivial");
                 candidates = nextCandidates;
             }
@@ -253,12 +271,19 @@ namespace System
             for (int i = 0; i < candidates.Count; i++)
             {
                 UriTemplateTableMatchCandidate candidate = candidates[i];
-                UriTemplateMatch match = candidate.Template.CreateUriTemplateMatch(this.originalUncanonicalizedBaseAddress,
-                    uri, candidate.Data, candidate.SegmentsCount, relativeSegments, queryParameters);
+                UriTemplateMatch match = candidate.Template.CreateUriTemplateMatch(
+                    this.originalUncanonicalizedBaseAddress,
+                    uri,
+                    candidate.Data,
+                    candidate.SegmentsCount,
+                    relativeSegments,
+                    queryParameters
+                );
                 actualResults.Add(match);
             }
             return actualResults;
         }
+
         public UriTemplateMatch MatchSingle(Uri uri)
         {
             Collection<UriTemplateMatch> c = this.Match(uri);
@@ -270,16 +295,27 @@ namespace System
             {
                 return c[0];
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new UriTemplateMatchException(SR.GetString(
-                SR.UTTMultipleMatches)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new UriTemplateMatchException(SR.GetString(SR.UTTMultipleMatches))
+            );
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "This method is called within a Debug assert")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode",
+            Justification = "This method is called within a Debug assert"
+        )]
         static bool AllEquivalent(IList<UriTemplateTableMatchCandidate> list, int a, int b)
         {
             for (int i = a; i < b - 1; ++i)
             {
-                if (!list[i].Template.IsPathPartiallyEquivalentAt(list[i + 1].Template, list[i].SegmentsCount))
+                if (
+                    !list[i]
+                        .Template.IsPathPartiallyEquivalentAt(
+                            list[i + 1].Template,
+                            list[i].SegmentsCount
+                        )
+                )
                 {
                     return false;
                 }
@@ -291,7 +327,9 @@ namespace System
             return true;
         }
 
-        static bool AtLeastOneCandidateHasQueryPart(IList<UriTemplateTableMatchCandidate> candidates)
+        static bool AtLeastOneCandidateHasQueryPart(
+            IList<UriTemplateTableMatchCandidate> candidates
+        )
         {
             for (int i = 0; i < candidates.Count; i++)
             {
@@ -302,8 +340,10 @@ namespace System
             }
             return false;
         }
+
         static bool NoCandidateHasQueryLiteralRequirementsAndThereIsAnEmptyFallback(
-            IList<UriTemplateTableMatchCandidate> candidates)
+            IList<UriTemplateTableMatchCandidate> candidates
+        )
         {
             bool thereIsAmEmptyFallback = false;
             for (int i = 0; i < candidates.Count; i++)
@@ -324,7 +364,10 @@ namespace System
         {
             return new Collection<UriTemplateMatch>();
         }
-        static bool NotAllCandidatesArePathFullyEquivalent(IList<UriTemplateTableMatchCandidate> candidates)
+
+        static bool NotAllCandidatesArePathFullyEquivalent(
+            IList<UriTemplateTableMatchCandidate> candidates
+        )
         {
             if (candidates.Count <= 1)
             {
@@ -346,31 +389,40 @@ namespace System
             return false;
         }
 
-        bool ComputeRelativeSegmentsAndLookup(Uri uri,
+        bool ComputeRelativeSegmentsAndLookup(
+            Uri uri,
             ICollection<string> relativePathSegments, // add to this
-            ICollection<UriTemplateTableMatchCandidate> candidates) // matched candidates
+            ICollection<UriTemplateTableMatchCandidate> candidates
+        ) // matched candidates
         {
             string[] uriSegments = uri.Segments;
             int numRelativeSegments = uriSegments.Length - this.numSegmentsInBaseAddress;
             Fx.Assert(numRelativeSegments >= 0, "bad num segments");
-            UriTemplateLiteralPathSegment[] uSegments = new UriTemplateLiteralPathSegment[numRelativeSegments];
+            UriTemplateLiteralPathSegment[] uSegments = new UriTemplateLiteralPathSegment[
+                numRelativeSegments
+            ];
             for (int i = 0; i < numRelativeSegments; ++i)
             {
                 string seg = uriSegments[i + this.numSegmentsInBaseAddress];
                 // compute representation for matching
-                UriTemplateLiteralPathSegment lps = UriTemplateLiteralPathSegment.CreateFromWireData(seg);
+                UriTemplateLiteralPathSegment lps =
+                    UriTemplateLiteralPathSegment.CreateFromWireData(seg);
                 uSegments[i] = lps;
                 // compute representation to project out into results
                 string relPathSeg = Uri.UnescapeDataString(seg);
                 if (lps.EndsWithSlash)
                 {
-                    Fx.Assert(relPathSeg.EndsWith("/", StringComparison.Ordinal), "problem with relative path segment");
+                    Fx.Assert(
+                        relPathSeg.EndsWith("/", StringComparison.Ordinal),
+                        "problem with relative path segment"
+                    );
                     relPathSeg = relPathSeg.Substring(0, relPathSeg.Length - 1); // trim slash
                 }
                 relativePathSegments.Add(relPathSeg);
             }
             return rootNode.Match(uSegments, candidates);
         }
+
         void ConstructFastPathTable()
         {
             this.noTemplateHasQueryPart = true;
@@ -397,8 +449,13 @@ namespace System
                     else
                     {
                         FastPathInfo fpInfo = new FastPathInfo();
-                        if (ComputeRelativeSegmentsAndLookup(uri, fpInfo.RelativePathSegments,
-                            fpInfo.Candidates))
+                        if (
+                            ComputeRelativeSegmentsAndLookup(
+                                uri,
+                                fpInfo.RelativePathSegments,
+                                fpInfo.Candidates
+                            )
+                        )
                         {
                             fpInfo.Freeze();
                             this.fastPathTable.Add(uriPath, fpInfo);
@@ -407,9 +464,13 @@ namespace System
                 }
             }
         }
+
         // this method checks the literal cache for a match if none, goes through the slower path of cracking the segments
-        bool FastComputeRelativeSegmentsAndLookup(Uri uri, out Collection<string> relativePathSegments,
-            out IList<UriTemplateTableMatchCandidate> candidates)
+        bool FastComputeRelativeSegmentsAndLookup(
+            Uri uri,
+            out Collection<string> relativePathSegments,
+            out IList<UriTemplateTableMatchCandidate> candidates
+        )
         {
             // Consider fast-path and lookup
             // return false if not under base uri
@@ -426,7 +487,12 @@ namespace System
             {
                 relativePathSegments = new Collection<string>();
                 candidates = new Collection<UriTemplateTableMatchCandidate>();
-                return SlowComputeRelativeSegmentsAndLookup(uri, uriPath, relativePathSegments, candidates);
+                return SlowComputeRelativeSegmentsAndLookup(
+                    uri,
+                    uriPath,
+                    relativePathSegments,
+                    candidates
+                );
             }
         }
 
@@ -436,7 +502,10 @@ namespace System
             {
                 // ensure trailing slash on baseAddress, so that IsBaseOf will work later
                 UriBuilder ub = new UriBuilder(this.baseAddress);
-                if (this.addTrailingSlashToBaseAddress && !ub.Path.EndsWith("/", StringComparison.Ordinal))
+                if (
+                    this.addTrailingSlashToBaseAddress
+                    && !ub.Path.EndsWith("/", StringComparison.Ordinal)
+                )
                 {
                     ub.Path = ub.Path + "/";
                 }
@@ -450,8 +519,13 @@ namespace System
                 basePath = UriTemplateHelpers.GetUriPath(this.baseAddress);
             }
         }
-        bool SlowComputeRelativeSegmentsAndLookup(Uri uri, string uriPath, Collection<string> relativePathSegments,
-            ICollection<UriTemplateTableMatchCandidate> candidates)
+
+        bool SlowComputeRelativeSegmentsAndLookup(
+            Uri uri,
+            string uriPath,
+            Collection<string> relativePathSegments,
+            ICollection<UriTemplateTableMatchCandidate> candidates
+        )
         {
             // ensure 'under' the base address
             if (uriPath.Length < basePath.Length)
@@ -467,7 +541,11 @@ namespace System
             {
                 // uriPath StartsWith basePath, but this check is not enough - basePath 'service1' should not match with uriPath 'service123'
                 // make sure that after the match the next character is /, this is to avoid a uriPath of the form /service12/ matching with a basepath of the form /service1
-                if (uriPath.Length > basePath.Length && !basePath.EndsWith("/", StringComparison.Ordinal) && uriPath[basePath.Length] != '/')
+                if (
+                    uriPath.Length > basePath.Length
+                    && !basePath.EndsWith("/", StringComparison.Ordinal)
+                    && uriPath[basePath.Length] != '/'
+                )
                 {
                     return false;
                 }
@@ -480,27 +558,43 @@ namespace System
         {
             if (this.baseAddress == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.UTTBaseAddressNotSet)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.UTTBaseAddressNotSet))
+                );
             }
             this.numSegmentsInBaseAddress = this.baseAddress.Segments.Length;
             if (this.templates.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.UTTEmptyKeyValuePairs)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.UTTEmptyKeyValuePairs))
+                );
             }
             // build the trie and
             // validate that forall Uri u, at most one UriTemplate is a best match for u
-            rootNode = UriTemplateTrieNode.Make(this.templates, allowDuplicateEquivalentUriTemplates);
+            rootNode = UriTemplateTrieNode.Make(
+                this.templates,
+                allowDuplicateEquivalentUriTemplates
+            );
         }
+
         [Conditional("DEBUG")]
-        void VerifyThatFastPathAndSlowPathHaveSameResults(Uri uri, Collection<string> fastPathRelativePathSegments,
-            IList<UriTemplateTableMatchCandidate> fastPathCandidates)
+        void VerifyThatFastPathAndSlowPathHaveSameResults(
+            Uri uri,
+            Collection<string> fastPathRelativePathSegments,
+            IList<UriTemplateTableMatchCandidate> fastPathCandidates
+        )
         {
             Collection<string> slowPathRelativePathSegments = new Collection<string>();
-            List<UriTemplateTableMatchCandidate> slowPathCandidates = new List<UriTemplateTableMatchCandidate>();
-            if (!SlowComputeRelativeSegmentsAndLookup(uri, UriTemplateHelpers.GetUriPath(uri),
-                slowPathRelativePathSegments, slowPathCandidates))
+            List<UriTemplateTableMatchCandidate> slowPathCandidates =
+                new List<UriTemplateTableMatchCandidate>();
+            if (
+                !SlowComputeRelativeSegmentsAndLookup(
+                    uri,
+                    UriTemplateHelpers.GetUriPath(uri),
+                    slowPathRelativePathSegments,
+                    slowPathCandidates
+                )
+            )
             {
                 Fx.Assert("fast path yielded a result but slow path yielded no result");
             }
@@ -539,20 +633,15 @@ namespace System
                 this.relativePathSegments = new FreezableCollection<string>();
                 this.candidates = new FreezableCollection<UriTemplateTableMatchCandidate>();
             }
+
             public Collection<UriTemplateTableMatchCandidate> Candidates
             {
-                get
-                {
-                    return this.candidates;
-                }
+                get { return this.candidates; }
             }
 
             public Collection<string> RelativePathSegments
             {
-                get
-                {
-                    return this.relativePathSegments;
-                }
+                get { return this.relativePathSegments; }
             }
 
             public void Freeze()
@@ -565,11 +654,16 @@ namespace System
         class UriTemplatesCollection : FreezableCollection<KeyValuePair<UriTemplate, object>>
         {
             public UriTemplatesCollection()
-                : base()
-            {
-            }
-            [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "This is a private class; virtual methods cannot be overriden")]
-            public UriTemplatesCollection(IEnumerable<KeyValuePair<UriTemplate, object>> keyValuePairs)
+                : base() { }
+
+            [SuppressMessage(
+                "Microsoft.Usage",
+                "CA2214:DoNotCallOverridableMethodsInConstructors",
+                Justification = "This is a private class; virtual methods cannot be overriden"
+            )]
+            public UriTemplatesCollection(
+                IEnumerable<KeyValuePair<UriTemplate, object>> keyValuePairs
+            )
                 : base()
             {
                 foreach (KeyValuePair<UriTemplate, object> kvp in keyValuePairs)
@@ -584,6 +678,7 @@ namespace System
                 ThrowIfInvalid(item.Key, "item");
                 base.InsertItem(index, item);
             }
+
             protected override void SetItem(int index, KeyValuePair<UriTemplate, object> item)
             {
                 ThrowIfInvalid(item.Key, "item");
@@ -594,13 +689,17 @@ namespace System
             {
                 if (template == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(argName,
-                        SR.GetString(SR.UTTNullTemplateKey));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        argName,
+                        SR.GetString(SR.UTTNullTemplateKey)
+                    );
                 }
                 if (template.IgnoreTrailingSlash)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(argName,
-                        SR.GetString(SR.UTTInvalidTemplateKey, template));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        argName,
+                        SR.GetString(SR.UTTInvalidTemplateKey, template)
+                    );
                 }
             }
         }

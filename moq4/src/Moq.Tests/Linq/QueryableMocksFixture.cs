@@ -13,14 +13,15 @@ namespace Moq.Tests.Linq
         [Fact]
         public void ShouldSupportReturningMultipleMocks()
         {
-            var target = (from foo in Mocks.Of<IFoo>()
-                          from bar in Mocks.Of<IBar>()
-                          where
-                            foo.Name == "Foo" &&
-                            foo.Find("1").Baz(It.IsAny<string>()).Value == 1 &&
-                            bar.Id == "A"
-                          select new { Foo = foo, Bar = bar })
-                          .First();
+            var target = (
+                from foo in Mocks.Of<IFoo>()
+                from bar in Mocks.Of<IBar>()
+                where
+                    foo.Name == "Foo"
+                    && foo.Find("1").Baz(It.IsAny<string>()).Value == 1
+                    && bar.Id == "A"
+                select new { Foo = foo, Bar = bar }
+            ).First();
 
             Assert.Equal("Foo", target.Foo.Name);
             Assert.Equal(1, target.Foo.Find("1").Baz("hello").Value);
@@ -30,16 +31,17 @@ namespace Moq.Tests.Linq
         [Fact]
         public void ShouldSupportMultipleSetups()
         {
-            var target = (from f in Mocks.Of<IFoo>()
-                          where
-                            f.Name == "Foo" &&
-                            f.Find("1").Baz(It.Is<string>(s => s.Length > 0)).Value == 99 &&
-                            f.Bar.Id == "25" &&
-                            f.Bar.Ping(It.IsAny<string>()) == "ack" &&
-                            f.Bar.Ping("error") == "error" &&
-                            f.Bar.Baz(It.IsAny<string>()).Value == 5
-                          select f)
-                          .First();
+            var target = (
+                from f in Mocks.Of<IFoo>()
+                where
+                    f.Name == "Foo"
+                    && f.Find("1").Baz(It.Is<string>(s => s.Length > 0)).Value == 99
+                    && f.Bar.Id == "25"
+                    && f.Bar.Ping(It.IsAny<string>()) == "ack"
+                    && f.Bar.Ping("error") == "error"
+                    && f.Bar.Baz(It.IsAny<string>()).Value == 5
+                select f
+            ).First();
 
             Assert.Equal("Foo", target.Name);
             Assert.Equal(99, target.Find("1").Baz("asdf").Value);
@@ -162,11 +164,9 @@ namespace Moq.Tests.Linq
         [Fact]
         public void ShouldAllowFluentOnReadOnlyGetterProperty()
         {
-            var target = Mock.Of<IFoo>(x => x.Bars == new[]
-            {
-                Mock.Of<IBar>(b => b.Id == "1"),
-                Mock.Of<IBar>(b => b.Id == "2"),
-            });
+            var target = Mock.Of<IFoo>(x =>
+                x.Bars == new[] { Mock.Of<IBar>(b => b.Id == "1"), Mock.Of<IBar>(b => b.Id == "2") }
+            );
 
             Assert.NotNull(Mock.Get(target));
             Assert.Equal(2, target.Bars.Count());
@@ -214,21 +214,23 @@ namespace Moq.Tests.Linq
         [Fact]
         public void Multiple_mocks_with_query_comprehension_syntax__predicates_in_where_clause()
         {
-            var x = (from x1 in Mocks.Of<IFoo>()
-                     from __ in Mocks.Of<IFoo>()
-                     where x1.Name == "1" && __.Name == "2"
-                     select x1)
-                    .First();
+            var x = (
+                from x1 in Mocks.Of<IFoo>()
+                from __ in Mocks.Of<IFoo>()
+                where x1.Name == "1" && __.Name == "2"
+                select x1
+            ).First();
             Assert.Equal("1", x.Name);
         }
 
         [Fact]
         public void Multiple_mocks_with_query_comprehension_syntax__predicates_in_from_clause()
         {
-            var x = (from x1 in Mocks.Of<IFoo>(_ => _.Name == "1")
-                     from __ in Mocks.Of<IFoo>(_ => _.Name == "2")
-                     select x1)
-                    .First();
+            var x = (
+                from x1 in Mocks.Of<IFoo>(_ => _.Name == "1")
+                from __ in Mocks.Of<IFoo>(_ => _.Name == "2")
+                select x1
+            ).First();
             Assert.Equal("1", x.Name);
         }
 
@@ -266,9 +268,7 @@ namespace Moq.Tests.Linq
 
     public class Foo
     {
-        protected Foo()
-        {
-        }
+        protected Foo() { }
 
         public virtual string Value { get; private set; }
     }

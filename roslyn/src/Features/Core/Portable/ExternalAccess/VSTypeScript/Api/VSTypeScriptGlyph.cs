@@ -114,6 +114,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 
         AddReference,
         NuGet,
-        TargetTypeMatch
+        TargetTypeMatch,
     }
 }

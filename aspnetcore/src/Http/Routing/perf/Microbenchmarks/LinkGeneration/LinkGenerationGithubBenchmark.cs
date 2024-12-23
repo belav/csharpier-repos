@@ -46,17 +46,21 @@ public partial class LinkGenerationGithubBenchmark
     [Benchmark(Baseline = true)]
     public void Baseline()
     {
-        var url = $"/repos/{_lookUpValues["owner"]}/{_lookUpValues["repo"]}/issues/comments/{_lookUpValues["commentId"]}";
+        var url =
+            $"/repos/{_lookUpValues["owner"]}/{_lookUpValues["repo"]}/issues/comments/{_lookUpValues["commentId"]}";
         AssertUrl("/repos/aspnet/routing/issues/comments/20202", url);
     }
 
     [Benchmark]
     public void TreeRouter()
     {
-        var virtualPathData = _treeRouter.GetVirtualPath(new VirtualPathContext(
-            _requestContext.HttpContext,
-            ambientValues: _requestContext.AmbientValues,
-            values: new RouteValueDictionary(_lookUpValues)));
+        var virtualPathData = _treeRouter.GetVirtualPath(
+            new VirtualPathContext(
+                _requestContext.HttpContext,
+                ambientValues: _requestContext.AmbientValues,
+                values: new RouteValueDictionary(_lookUpValues)
+            )
+        );
 
         AssertUrl("/repos/aspnet/routing/issues/comments/20202", virtualPathData?.VirtualPath);
     }
@@ -67,7 +71,8 @@ public partial class LinkGenerationGithubBenchmark
         var actualUrl = _linkGenerator.GetPathByRouteValues(
             _requestContext.HttpContext,
             routeName: null,
-            values: _lookUpValues);
+            values: _lookUpValues
+        );
 
         AssertUrl("/repos/aspnet/routing/issues/comments/20202", actualUrl);
     }

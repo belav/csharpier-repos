@@ -12,13 +12,24 @@ using System.Security;
 using System.Text;
 using System.Xml;
 
-
 namespace System.Xml
 {
     public interface IXmlTextReaderInitializer
     {
-        void SetInput(byte[] buffer, int offset, int count, Encoding? encoding, XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose);
-        void SetInput(Stream stream, Encoding? encoding, XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose);
+        void SetInput(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        );
+        void SetInput(
+            Stream stream,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        );
     }
 
     internal sealed class XmlUTF8TextReader : XmlBaseReader, IXmlLineInfo, IXmlTextReaderInitializer
@@ -34,517 +45,1563 @@ namespace System.Xml
         private static ReadOnlySpan<byte> CharTypeMap => // 256
             [
                 /*  0 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  1 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  2 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  3 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  4 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  5 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  6 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  7 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  8 (.) */
-                         CharType.None,
+                CharType.None,
                 /*  9 (.) */
-                         CharType.None|CharType.Comment|CharType.Whitespace|CharType.Text|CharType.SpecialWhitespace,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Whitespace
+                    | CharType.Text
+                    | CharType.SpecialWhitespace,
                 /*  A (.) */
-                         CharType.None|CharType.Comment|CharType.Whitespace|CharType.Text|CharType.SpecialWhitespace,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Whitespace
+                    | CharType.Text
+                    | CharType.SpecialWhitespace,
                 /*  B (.) */
-                         CharType.None,
+                CharType.None,
                 /*  C (.) */
-                         CharType.None,
+                CharType.None,
                 /*  D (.) */
-                         CharType.None|CharType.Comment|CharType.Whitespace,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Whitespace,
                 /*  E (.) */
-                         CharType.None,
+                CharType.None,
                 /*  F (.) */
-                         CharType.None,
+                CharType.None,
                 /* 10 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 11 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 12 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 13 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 14 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 15 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 16 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 17 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 18 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 19 (.) */
-                         CharType.None,
+                CharType.None,
                 /* 1A (.) */
-                         CharType.None,
+                CharType.None,
                 /* 1B (.) */
-                         CharType.None,
+                CharType.None,
                 /* 1C (.) */
-                         CharType.None,
+                CharType.None,
                 /* 1D (.) */
-                         CharType.None,
+                CharType.None,
                 /* 1E (.) */
-                         CharType.None,
+                CharType.None,
                 /* 1F (.) */
-                         CharType.None,
+                CharType.None,
                 /* 20 ( ) */
-                         CharType.None|CharType.Comment|CharType.Whitespace|CharType.Text|CharType.AttributeText|CharType.SpecialWhitespace,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Whitespace
+                    | CharType.Text
+                    | CharType.AttributeText
+                    | CharType.SpecialWhitespace,
                 /* 21 (!) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 22 (") */
-                         CharType.None|CharType.Comment|CharType.Text,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text,
                 /* 23 (#) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 24 ($) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 25 (%) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 26 (&) */
-                         CharType.None|CharType.Comment,
+                CharType.None | CharType.Comment,
                 /* 27 (') */
-                         CharType.None|CharType.Comment|CharType.Text,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text,
                 /* 28 (() */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 29 ()) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 2A (*) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 2B (+) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 2C (,) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 2D (-) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 2E (.) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 2F (/) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 30 (0) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 31 (1) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 32 (2) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 33 (3) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 34 (4) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 35 (5) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 36 (6) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 37 (7) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 38 (8) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 39 (9) */
-                         CharType.None|CharType.Comment|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 3A (:) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 3B (;) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 3C (<) */
-                         CharType.None|CharType.Comment,
+                CharType.None | CharType.Comment,
                 /* 3D (=) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 3E (>) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 3F (?) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 40 (@) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 41 (A) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 42 (B) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 43 (C) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 44 (D) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 45 (E) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 46 (F) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 47 (G) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 48 (H) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 49 (I) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 4A (J) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 4B (K) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 4C (L) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 4D (M) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 4E (N) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 4F (O) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 50 (P) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 51 (Q) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 52 (R) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 53 (S) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 54 (T) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 55 (U) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 56 (V) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 57 (W) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 58 (X) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 59 (Y) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 5A (Z) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 5B ([) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 5C (\) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 5D (]) */
-                         CharType.None|CharType.Comment|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.AttributeText,
                 /* 5E (^) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 5F (_) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 60 (`) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 61 (a) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 62 (b) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 63 (c) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 64 (d) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 65 (e) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 66 (f) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 67 (g) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 68 (h) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 69 (i) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 6A (j) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 6B (k) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 6C (l) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 6D (m) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 6E (n) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 6F (o) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 70 (p) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 71 (q) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 72 (r) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 73 (s) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 74 (t) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 75 (u) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 76 (v) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 77 (w) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 78 (x) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 79 (y) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 7A (z) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 7B ({) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 7C (|) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 7D (}) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 7E (~) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 7F (.) */
-                         CharType.None|CharType.Comment|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 80 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 81 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 82 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 83 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 84 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 85 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 86 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 87 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 88 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 89 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 8A (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 8B (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 8C (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 8D (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 8E (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 8F (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 90 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 91 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 92 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 93 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 94 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 95 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 96 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 97 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 98 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 99 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 9A (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 9B (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 9C (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 9D (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 9E (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* 9F (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A0 (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A1 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A2 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A3 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A4 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A5 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A6 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A7 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A8 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* A9 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* AA (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* AB (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* AC (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* AD (.) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* AE (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* AF (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B0 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B1 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B2 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B3 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B4 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B5 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B6 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B7 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B8 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* B9 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* BA (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* BB (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* BC (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* BD (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* BE (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* BF (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C0 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C1 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C2 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C3 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C4 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C5 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C6 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C7 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C8 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* C9 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* CA (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* CB (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* CC (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* CD (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* CE (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* CF (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D0 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D1 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D2 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D3 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D4 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D5 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D6 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D7 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D8 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* D9 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* DA (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* DB (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* DC (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* DD (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* DE (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* DF (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E0 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E1 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E2 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E3 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E4 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E5 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E6 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E7 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E8 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* E9 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* EA (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* EB (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* EC (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* ED (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* EE (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* EF (?) */
-                         CharType.None|CharType.FirstName|CharType.Name,
+                CharType.None
+                    | CharType.FirstName
+                    | CharType.Name,
                 /* F0 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F1 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F2 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F3 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F4 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F5 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F6 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F7 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F8 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* F9 (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* FA (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* FB (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* FC (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* FD (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* FE (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
                 /* FF (?) */
-                         CharType.None|CharType.Comment|CharType.FirstName|CharType.Name|CharType.Text|CharType.AttributeText,
+                CharType.None
+                    | CharType.Comment
+                    | CharType.FirstName
+                    | CharType.Name
+                    | CharType.Text
+                    | CharType.AttributeText,
             ];
 
         public XmlUTF8TextReader()
@@ -553,23 +1610,46 @@ namespace System.Xml
             _localName = new StringHandle(BufferReader);
         }
 
-        public void SetInput(byte[] buffer, int offset, int count, Encoding? encoding, XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose)
+        public void SetInput(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             ArgumentNullException.ThrowIfNull(buffer);
 
             ArgumentOutOfRangeException.ThrowIfNegative(offset);
             if (offset > buffer.Length)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, buffer.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (count > buffer.Length - offset)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                );
             MoveToInitial(quotas, onClose);
-            ArraySegment<byte> seg = EncodingStreamWrapper.ProcessBuffer(buffer, offset, count, encoding);
+            ArraySegment<byte> seg = EncodingStreamWrapper.ProcessBuffer(
+                buffer,
+                offset,
+                count,
+                encoding
+            );
             BufferReader.SetBuffer(seg.Array!, seg.Offset, seg.Count, null, null);
             _buffered = true;
         }
 
-        public void SetInput(Stream stream, Encoding? encoding, XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose)
+        public void SetInput(
+            Stream stream,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             ArgumentNullException.ThrowIfNull(stream);
 
@@ -579,7 +1659,10 @@ namespace System.Xml
             _buffered = false;
         }
 
-        private void MoveToInitial(XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose)
+        private void MoveToInitial(
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             MoveToInitial(quotas);
             _maxBytesPerRead = quotas.MaxBytesPerRead;
@@ -597,7 +1680,10 @@ namespace System.Xml
 
         private void SkipWhitespace()
         {
-            while (!BufferReader.EndOfFile && (CharTypeMap[BufferReader.GetByte()] & CharType.Whitespace) != 0)
+            while (
+                !BufferReader.EndOfFile
+                && (CharTypeMap[BufferReader.GetByte()] & CharType.Whitespace) != 0
+            )
                 BufferReader.SkipByte();
         }
 
@@ -607,11 +1693,13 @@ namespace System.Xml
                 BufferElement();
             int offset;
             byte[] buffer = BufferReader.GetBuffer(5, out offset);
-            if (buffer[offset + 0] != (byte)'?' ||
-                buffer[offset + 1] != (byte)'x' ||
-                buffer[offset + 2] != (byte)'m' ||
-                buffer[offset + 3] != (byte)'l' ||
-                (CharTypeMap[buffer[offset + 4]] & CharType.Whitespace) == 0)
+            if (
+                buffer[offset + 0] != (byte)'?'
+                || buffer[offset + 1] != (byte)'x'
+                || buffer[offset + 2] != (byte)'m'
+                || buffer[offset + 3] != (byte)'l'
+                || (CharTypeMap[buffer[offset + 4]] & CharType.Whitespace) == 0
+            )
             {
                 XmlExceptionHelper.ThrowProcessingInstructionNotSupported(this);
             }
@@ -640,10 +1728,13 @@ namespace System.Xml
             }
 
             buffer = BufferReader.GetBuffer(2, out offset);
-            if (buffer[offset + 0] != (byte)'?' ||
-                buffer[offset + 1] != (byte)'>')
+            if (buffer[offset + 0] != (byte)'?' || buffer[offset + 1] != (byte)'>')
             {
-                XmlExceptionHelper.ThrowTokenExpected(this, "?>", Encoding.UTF8.GetString(buffer, offset, 2));
+                XmlExceptionHelper.ThrowTokenExpected(
+                    this,
+                    "?>",
+                    Encoding.UTF8.GetString(buffer, offset, 2)
+                );
             }
             BufferReader.Advance(2);
             XmlDeclarationNode declarationNode = MoveToDeclaration();
@@ -748,7 +1839,9 @@ namespace System.Xml
         {
             ReadOnlySpan<byte> charTypeMap = XmlUTF8TextReader.CharTypeMap;
             int textOffset = offset;
-            while (offset < offsetMax && (charTypeMap[buffer[offset]] & CharType.AttributeText) != 0)
+            while (
+                offset < offsetMax && (charTypeMap[buffer[offset]] & CharType.AttributeText) != 0
+            )
                 offset++;
             return offset - textOffset;
         }
@@ -767,7 +1860,11 @@ namespace System.Xml
                 {
                     SkipWhitespace();
                     if (BufferReader.GetByte() != '=')
-                        XmlExceptionHelper.ThrowTokenExpected(this, "=", (char)BufferReader.GetByte());
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            "=",
+                            (char)BufferReader.GetByte()
+                        );
                 }
                 BufferReader.SkipByte();
                 byte quoteChar = BufferReader.GetByte();
@@ -776,14 +1873,19 @@ namespace System.Xml
                     SkipWhitespace();
                     quoteChar = BufferReader.GetByte();
                     if (quoteChar != '"' && quoteChar != '\'')
-                        XmlExceptionHelper.ThrowTokenExpected(this, "\"", (char)BufferReader.GetByte());
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            "\"",
+                            (char)BufferReader.GetByte()
+                        );
                 }
                 BufferReader.SkipByte();
                 bool escaped = false;
                 int valueOffset = BufferReader.Offset;
                 while (true)
                 {
-                    int offset, offsetMax;
+                    int offset,
+                        offsetMax;
                     byte[] buffer = BufferReader.GetBuffer(out offset, out offsetMax);
                     int length = ReadAttributeText(buffer, offset, offsetMax);
                     BufferReader.Advance(length);
@@ -810,7 +1912,11 @@ namespace System.Xml
                     }
                     else
                     {
-                        XmlExceptionHelper.ThrowTokenExpected(this, ((char)quoteChar).ToString(), (char)ch);
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            ((char)quoteChar).ToString(),
+                            (char)ch
+                        );
                     }
                 }
                 int valueLength = BufferReader.Offset - valueOffset;
@@ -835,7 +1941,11 @@ namespace System.Xml
                     attributeNode = AddXmlAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode.Value.SetValue((escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8), valueOffset, valueLength);
+                    attributeNode.Value.SetValue(
+                        (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
+                        valueOffset,
+                        valueLength
+                    );
                     FixXmlAttribute(attributeNode);
                 }
                 else
@@ -843,7 +1953,11 @@ namespace System.Xml
                     attributeNode = AddAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode.Value.SetValue((escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8), valueOffset, valueLength);
+                    attributeNode.Value.SetValue(
+                        (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
+                        valueOffset,
+                        valueLength
+                    );
                 }
 
                 attributeNode.QuoteChar = (char)quoteChar;
@@ -863,7 +1977,10 @@ namespace System.Xml
                     break;
 
                 if (!space)
-                    XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlSpaceBetweenAttributes));
+                    XmlExceptionHelper.ThrowXmlException(
+                        this,
+                        new XmlException(SR.XmlSpaceBetweenAttributes)
+                    );
             }
 
             if (_buffered && (BufferReader.Offset - startOffset) > _maxBytesPerRead)
@@ -878,7 +1995,10 @@ namespace System.Xml
         {
             Debug.Assert(buffer[offset] == 0xEF, "buffer[offset] MUST be 0xEF.");
 
-            if (buffer[offset + 1] == 0xBF && (buffer[offset + 2] == 0xBE || buffer[offset + 2] == 0xBF))
+            if (
+                buffer[offset + 1] == 0xBF
+                && (buffer[offset + 2] == 0xBE || buffer[offset + 2] == 0xBF)
+            )
             {
                 // 0xFFFE : 0xEF 0xBF 0xBE
                 // 0xFFFF : 0xEF 0xBF 0xBF
@@ -984,7 +2104,13 @@ namespace System.Xml
                 if (buffer[offset + i] != buffer[nameOffset + i])
                 {
                     ReadQualifiedName(_prefix, _localName);
-                    XmlExceptionHelper.ThrowTagMismatch(this, elementNode.Prefix.GetString(), elementNode.LocalName.GetString(), _prefix.GetString(), _localName.GetString());
+                    XmlExceptionHelper.ThrowTagMismatch(
+                        this,
+                        elementNode.Prefix.GetString(),
+                        elementNode.LocalName.GetString(),
+                        _prefix.GetString(),
+                        _localName.GetString()
+                    );
                 }
             }
             BufferReader.Advance(nameLength);
@@ -1027,12 +2153,14 @@ namespace System.Xml
 
                 int offset;
                 byte[] buffer = BufferReader.GetBuffer(3, out offset);
-                if (buffer[offset + 0] == (byte)'-' &&
-                    buffer[offset + 1] == (byte)'-')
+                if (buffer[offset + 0] == (byte)'-' && buffer[offset + 1] == (byte)'-')
                 {
                     if (buffer[offset + 2] == (byte)'>')
                         break;
-                    XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlInvalidCommentChars));
+                    XmlExceptionHelper.ThrowXmlException(
+                        this,
+                        new XmlException(SR.XmlInvalidCommentChars)
+                    );
                 }
                 BufferReader.SkipByte();
             }
@@ -1045,15 +2173,21 @@ namespace System.Xml
         {
             int offset;
             byte[] buffer = BufferReader.GetBuffer(7, out offset);
-            if (buffer[offset + 0] != (byte)'[' ||
-                buffer[offset + 1] != (byte)'C' ||
-                buffer[offset + 2] != (byte)'D' ||
-                buffer[offset + 3] != (byte)'A' ||
-                buffer[offset + 4] != (byte)'T' ||
-                buffer[offset + 5] != (byte)'A' ||
-                buffer[offset + 6] != (byte)'[')
+            if (
+                buffer[offset + 0] != (byte)'['
+                || buffer[offset + 1] != (byte)'C'
+                || buffer[offset + 2] != (byte)'D'
+                || buffer[offset + 3] != (byte)'A'
+                || buffer[offset + 4] != (byte)'T'
+                || buffer[offset + 5] != (byte)'A'
+                || buffer[offset + 6] != (byte)'['
+            )
             {
-                XmlExceptionHelper.ThrowTokenExpected(this, "[CDATA[", Encoding.UTF8.GetString(buffer, offset, 7));
+                XmlExceptionHelper.ThrowTokenExpected(
+                    this,
+                    "[CDATA[",
+                    Encoding.UTF8.GetString(buffer, offset, 7)
+                );
             }
             BufferReader.Advance(7);
             int cdataOffset = BufferReader.Offset;
@@ -1072,9 +2206,11 @@ namespace System.Xml
                         BufferReader.SkipByte();
                 }
                 buffer = BufferReader.GetBuffer(3, out offset);
-                if (buffer[offset + 0] == (byte)']' &&
-                    buffer[offset + 1] == (byte)']' &&
-                    buffer[offset + 2] == (byte)'>')
+                if (
+                    buffer[offset + 0] == (byte)']'
+                    && buffer[offset + 1] == (byte)']'
+                    && buffer[offset + 2] == (byte)'>'
+                )
                     break;
                 BufferReader.SkipByte();
             }
@@ -1097,7 +2233,6 @@ namespace System.Xml
             BufferReader.Advance(charEntityLength);
             return ch;
         }
-
 
         private void ReadWhitespace()
         {
@@ -1126,7 +2261,10 @@ namespace System.Xml
         {
             ReadOnlySpan<byte> charTypeMap = XmlUTF8TextReader.CharTypeMap;
             int wsOffset = offset;
-            while (offset < offsetMax && (charTypeMap[buffer[offset]] & CharType.SpecialWhitespace) != 0)
+            while (
+                offset < offsetMax
+                && (charTypeMap[buffer[offset]] & CharType.SpecialWhitespace) != 0
+            )
                 offset++;
             return offset - wsOffset;
         }
@@ -1146,7 +2284,10 @@ namespace System.Xml
             ReadOnlySpan<byte> charTypeMap = XmlUTF8TextReader.CharTypeMap;
             int textOffset = offset;
 
-            while (offset < offsetMax && ((charTypeMap[buffer[offset]] & CharType.Text) != 0 || buffer[offset] == 0xEF))
+            while (
+                offset < offsetMax
+                && ((charTypeMap[buffer[offset]] & CharType.Text) != 0 || buffer[offset] == 0xEF)
+            )
             {
                 if (buffer[offset] != 0xEF)
                 {
@@ -1165,7 +2306,10 @@ namespace System.Xml
                         }
                         else
                         {
-                            XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlInvalidFFFE));
+                            XmlExceptionHelper.ThrowXmlException(
+                                this,
+                                new XmlException(SR.XmlInvalidFFFE)
+                            );
                         }
                     }
                     else
@@ -1205,8 +2349,7 @@ namespace System.Xml
                 do
                 {
                     length--;
-                }
-                while (length > 0 && (buffer[offset + length] & 0xC0) != 0xC0);
+                } while (length > 0 && (buffer[offset + length] & 0xC0) != 0xC0);
                 // Couldn't find the lead char
                 if (length == 0)
                     return originalLength; // Invalid utf8 sequence - can't break
@@ -1261,7 +2404,12 @@ namespace System.Xml
             }
             BufferReader.Advance(length);
 
-            if (offset < offsetMax - 1 - length && (buffer[offset + length] == (byte)'<' && buffer[offset + length + 1] != (byte)'!'))
+            if (
+                offset < offsetMax - 1 - length
+                && (
+                    buffer[offset + length] == (byte)'<' && buffer[offset + length + 1] != (byte)'!'
+                )
+            )
             {
                 MoveToAtomicText().Value.SetValue(ValueHandleType.UTF8, offset, length);
             }
@@ -1323,7 +2471,10 @@ namespace System.Xml
                     else
                     {
                         if (OutsideRootElement)
-                            XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlCDATAInvalidAtTopLevel));
+                            XmlExceptionHelper.ThrowXmlException(
+                                this,
+                                new XmlException(SR.XmlCDATAInvalidAtTopLevel)
+                            );
 
                         ReadCData();
                     }
@@ -1362,17 +2513,19 @@ namespace System.Xml
             {
                 int offset;
                 byte[] buffer = BufferReader.GetBuffer(3, out offset);
-                if (buffer[offset + 0] == (byte)']' &&
-                    buffer[offset + 1] == (byte)']' &&
-                    buffer[offset + 2] == (byte)'>')
+                if (
+                    buffer[offset + 0] == (byte)']'
+                    && buffer[offset + 1] == (byte)']'
+                    && buffer[offset + 2] == (byte)'>'
+                )
                 {
                     XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlCloseCData));
                 }
 
                 BufferReader.SkipByte();
-                MoveToComplexText().Value.SetCharValue(']');  // Need to get past the ']' and keep going.
+                MoveToComplexText().Value.SetCharValue(']'); // Need to get past the ']' and keep going.
             }
-            else if (ch == 0xEF)  // Watch for invalid characters 0xfffe and 0xffff
+            else if (ch == 0xEF) // Watch for invalid characters 0xfffe and 0xffff
             {
                 ReadText(true);
             }

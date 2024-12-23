@@ -22,13 +22,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     {
         // Guid of the FindRefs window.  Defined here:
         // https://devdiv.visualstudio.com/DevDiv/_git/VS?path=/src/env/ErrorList/Pkg/Guids.cs&version=GBmain&line=24
-        internal static readonly Guid FindReferencesWindowGuid = new("{a80febb4-e7e0-4147-b476-21aaf2453969}");
+        internal static readonly Guid FindReferencesWindowGuid = new(
+            "{a80febb4-e7e0-4147-b476-21aaf2453969}"
+        );
 
-        public async Task<ImmutableArray<ITableEntryHandle2>> GetContentsAsync(CancellationToken cancellationToken)
+        public async Task<ImmutableArray<ITableEntryHandle2>> GetContentsAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.FindReferences, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.FindReferences,
+                cancellationToken
+            );
 
             // Find the tool window
             var tableControl = await GetFindReferencesWindowAsync(cancellationToken);
@@ -44,7 +51,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     state.Width,
                     state.SortPriority,
                     state.DescendingSort,
-                    groupingPriority: 0);
+                    groupingPriority: 0
+                );
                 newColumnsStates.Add(newState);
             }
 
@@ -53,32 +61,55 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             // Force a refresh, if necessary. This doesn't re-run the Find References or
             // Find Implementations operation itself, it just forces the results to be
             // realized in the table.
-            var forcedUpdateResult = await tableControl.ForceUpdateAsync().WithCancellation(cancellationToken);
+            var forcedUpdateResult = await tableControl
+                .ForceUpdateAsync()
+                .WithCancellation(cancellationToken);
 
             // Extract the basic text of the results.
             return forcedUpdateResult.AllEntries.Cast<ITableEntryHandle2>().ToImmutableArray();
         }
 
-        public async Task NavigateToAsync(ITableEntryHandle2 referenceInGeneratedFile, bool isPreview, bool shouldActivate, CancellationToken cancellationToken)
+        public async Task NavigateToAsync(
+            ITableEntryHandle2 referenceInGeneratedFile,
+            bool isPreview,
+            bool shouldActivate,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             referenceInGeneratedFile.NavigateTo(isPreview, shouldActivate);
 
             // Navigation operations handled by Roslyn are tracked by FeatureAttribute.FindReferences
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace, FeatureAttribute.FindReferences], cancellationToken);
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [FeatureAttribute.Workspace, FeatureAttribute.FindReferences],
+                cancellationToken
+            );
 
             // Navigation operations handled by the editor are tracked within its own JoinableTaskFactory instance
             await TestServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
         }
 
-        private async Task<IWpfTableControl2> GetFindReferencesWindowAsync(CancellationToken cancellationToken)
+        private async Task<IWpfTableControl2> GetFindReferencesWindowAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var shell = await GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(cancellationToken);
-            ErrorHandler.ThrowOnFailure(shell.FindToolWindowEx((uint)__VSFINDTOOLWIN.FTW_fFindFirst, FindReferencesWindowGuid, dwToolWinId: 0, out var windowFrame));
-            ErrorHandler.ThrowOnFailure(windowFrame.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out var toolWindow));
+            var shell = await GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(
+                cancellationToken
+            );
+            ErrorHandler.ThrowOnFailure(
+                shell.FindToolWindowEx(
+                    (uint)__VSFINDTOOLWIN.FTW_fFindFirst,
+                    FindReferencesWindowGuid,
+                    dwToolWinId: 0,
+                    out var windowFrame
+                )
+            );
+            ErrorHandler.ThrowOnFailure(
+                windowFrame.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out var toolWindow)
+            );
 
             // Dig through to get the Find References control.
             var toolWindowType = toolWindow.GetType();

@@ -27,13 +27,15 @@ namespace Microsoft.DotNet.CoreSetup.Test
         {
             _testContextVariableFilePath = Path.Combine(
                 Directory.GetCurrentDirectory(),
-                "TestContextVariables.txt");
+                "TestContextVariables.txt"
+            );
 
             _testContextVariables = File.ReadAllLines(_testContextVariableFilePath)
                 .ToImmutableDictionary(
                     line => line.Substring(0, line.IndexOf('=')),
                     line => line.Substring(line.IndexOf('=') + 1),
-                    StringComparer.OrdinalIgnoreCase);
+                    StringComparer.OrdinalIgnoreCase
+                );
 
             BuildArchitecture = GetTestContextVariable("BUILD_ARCHITECTURE");
             BuildRID = GetTestContextVariable("BUILDRID");
@@ -51,8 +53,10 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public static string GetTestContextVariable(string name)
         {
-            return GetTestContextVariableOrNull(name) ?? throw new ArgumentException(
-                $"Unable to find variable '{name}' in test context variable file '{_testContextVariableFilePath}'");
+            return GetTestContextVariableOrNull(name)
+                ?? throw new ArgumentException(
+                    $"Unable to find variable '{name}' in test context variable file '{_testContextVariableFilePath}'"
+                );
         }
 
         public static string GetTestContextVariableOrNull(string name)

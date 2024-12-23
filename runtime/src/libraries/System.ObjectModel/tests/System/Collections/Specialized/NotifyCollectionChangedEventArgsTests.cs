@@ -26,9 +26,14 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Replace)]
         [InlineData(NotifyCollectionChangedAction.Add - 1)]
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
-        public void Ctor_InvalidActionForReset_ThrowsArgumentException(NotifyCollectionChangedAction action)
+        public void Ctor_InvalidActionForReset_ThrowsArgumentException(
+            NotifyCollectionChangedAction action
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action));
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action)
+            );
         }
 
         public static IEnumerable<object[]> Ctor_NotifyCollectionChangedAction_Object_TestData()
@@ -42,13 +47,24 @@ namespace System.Collections.Specialized.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_NotifyCollectionChangedAction_Object_TestData))]
-        public void Ctor_NotifyCollectionChangedAction_Object(NotifyCollectionChangedAction action, object changedItem)
+        public void Ctor_NotifyCollectionChangedAction_Object(
+            NotifyCollectionChangedAction action,
+            object changedItem
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, changedItem);
             Assert.Equal(action, e.Action);
-            Assert.Equal(action == NotifyCollectionChangedAction.Add ? new object[] { changedItem } : null, e.NewItems);
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Add ? new object[] { changedItem } : null,
+                e.NewItems
+            );
             Assert.Equal(-1, e.NewStartingIndex);
-            Assert.Equal(action == NotifyCollectionChangedAction.Remove ? new object[] { changedItem } : null, e.OldItems);
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Remove
+                    ? new object[] { changedItem }
+                    : null,
+                e.OldItems
+            );
             Assert.Equal(-1, e.OldStartingIndex);
         }
 
@@ -67,60 +83,141 @@ namespace System.Collections.Specialized.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_NotifyCollectionChangedAction_Object_Int_TestData))]
-        public void Ctor_NotifyCollectionChangedAction_Object_Int(NotifyCollectionChangedAction action, object changedItem, int index)
+        public void Ctor_NotifyCollectionChangedAction_Object_Int(
+            NotifyCollectionChangedAction action,
+            object changedItem,
+            int index
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, changedItem, index);
             Assert.Equal(action, e.Action);
-            Assert.Equal(action == NotifyCollectionChangedAction.Add ? new object[] { changedItem } : null, e.NewItems);
-            Assert.Equal(action == NotifyCollectionChangedAction.Add ? index : -1, e.NewStartingIndex);
-            Assert.Equal(action == NotifyCollectionChangedAction.Remove ? new object[] { changedItem } : null, e.OldItems);
-            Assert.Equal(action == NotifyCollectionChangedAction.Remove ? index : -1, e.OldStartingIndex);
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Add ? new object[] { changedItem } : null,
+                e.NewItems
+            );
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Add ? index : -1,
+                e.NewStartingIndex
+            );
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Remove
+                    ? new object[] { changedItem }
+                    : null,
+                e.OldItems
+            );
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Remove ? index : -1,
+                e.OldStartingIndex
+            );
         }
 
         public static IEnumerable<object[]> Ctor_NotifyCollectionChangedAction_IList_TestData()
         {
             yield return new object[] { NotifyCollectionChangedAction.Add, new object[0] };
-            yield return new object[] { NotifyCollectionChangedAction.Add, new object[] { "item" } };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Add,
+                new object[] { "item" },
+            };
             yield return new object[] { NotifyCollectionChangedAction.Remove, new object[0] };
-            yield return new object[] { NotifyCollectionChangedAction.Remove, new object[] { "item" } };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Remove,
+                new object[] { "item" },
+            };
             yield return new object[] { NotifyCollectionChangedAction.Reset, null };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_NotifyCollectionChangedAction_IList_TestData))]
-        public void Ctor_NotifyCollectionChangedAction_IList(NotifyCollectionChangedAction action, IList changedItems)
+        public void Ctor_NotifyCollectionChangedAction_IList(
+            NotifyCollectionChangedAction action,
+            IList changedItems
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, changedItems);
             Assert.Equal(action, e.Action);
-            Assert.Equal(action == NotifyCollectionChangedAction.Add ? changedItems : null, e.NewItems);
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Add ? changedItems : null,
+                e.NewItems
+            );
             Assert.Equal(-1, e.NewStartingIndex);
-            Assert.Equal(action == NotifyCollectionChangedAction.Remove ? changedItems : null, e.OldItems);
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Remove ? changedItems : null,
+                e.OldItems
+            );
             Assert.Equal(-1, e.OldStartingIndex);
         }
 
         public static IEnumerable<object[]> Ctor_NotifyCollectionChangedAction_IList_Int_TestData()
         {
             yield return new object[] { NotifyCollectionChangedAction.Add, new object[0], 10 };
-            yield return new object[] { NotifyCollectionChangedAction.Add, new object[] { "item" }, 10 };
-            yield return new object[] { NotifyCollectionChangedAction.Add, new object[] { "item" }, 0 };
-            yield return new object[] { NotifyCollectionChangedAction.Add, new object[] { "item" }, -1 };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Add,
+                new object[] { "item" },
+                10,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Add,
+                new object[] { "item" },
+                0,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Add,
+                new object[] { "item" },
+                -1,
+            };
             yield return new object[] { NotifyCollectionChangedAction.Remove, new object[0], 10 };
-            yield return new object[] { NotifyCollectionChangedAction.Remove, new object[] { "item" }, 10 };
-            yield return new object[] { NotifyCollectionChangedAction.Remove, new object[] { "item" }, 0 };
-            yield return new object[] { NotifyCollectionChangedAction.Remove, new object[] { "item" }, -1 };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Remove,
+                new object[] { "item" },
+                10,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Remove,
+                new object[] { "item" },
+                0,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Remove,
+                new object[] { "item" },
+                -1,
+            };
             yield return new object[] { NotifyCollectionChangedAction.Reset, null, -1 };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_NotifyCollectionChangedAction_IList_Int_TestData))]
-        public void Ctor_NotifyCollectionChangedAction_IList_Int(NotifyCollectionChangedAction action, IList changedItems, int startingIndex)
+        public void Ctor_NotifyCollectionChangedAction_IList_Int(
+            NotifyCollectionChangedAction action,
+            IList changedItems,
+            int startingIndex
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, changedItems, startingIndex);
             Assert.Equal(action, e.Action);
-            Assert.Equal(action == NotifyCollectionChangedAction.Add ? changedItems : null, e.NewItems);
-            Assert.Equal(action == NotifyCollectionChangedAction.Add ? startingIndex : -1, e.NewStartingIndex);
-            Assert.Equal(action == NotifyCollectionChangedAction.Remove ? changedItems : null, e.OldItems);
-            Assert.Equal(action == NotifyCollectionChangedAction.Remove ? startingIndex : -1, e.OldStartingIndex);
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Add ? changedItems : null,
+                e.NewItems
+            );
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Add ? startingIndex : -1,
+                e.NewStartingIndex
+            );
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Remove ? changedItems : null,
+                e.OldItems
+            );
+            Assert.Equal(
+                action == NotifyCollectionChangedAction.Remove ? startingIndex : -1,
+                e.OldStartingIndex
+            );
         }
 
         [Theory]
@@ -128,38 +225,96 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Replace)]
         [InlineData(NotifyCollectionChangedAction.Add - 1)]
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
-        public void Ctor_InvalidActionForAddRemove_ThrowsArgumentException(NotifyCollectionChangedAction action)
+        public void Ctor_InvalidActionForAddRemove_ThrowsArgumentException(
+            NotifyCollectionChangedAction action
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, "value"));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, "value", 1));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, new object[0]));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, new object[0], 1));
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, "value")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, "value", 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, new object[0])
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, new object[0], 1)
+            );
         }
 
         [Theory]
         [InlineData(NotifyCollectionChangedAction.Add)]
         [InlineData(NotifyCollectionChangedAction.Remove)]
-        public void Ctor_ChangedNullForAddOrRemove_ThrowsArgumentNullException(NotifyCollectionChangedAction action)
+        public void Ctor_ChangedNullForAddOrRemove_ThrowsArgumentNullException(
+            NotifyCollectionChangedAction action
+        )
         {
-            AssertExtensions.Throws<ArgumentNullException>("changedItems", () => new NotifyCollectionChangedEventArgs(action, (IList)null));
-            AssertExtensions.Throws<ArgumentNullException>("changedItems", () => new NotifyCollectionChangedEventArgs(action, (IList)null, -1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "changedItems",
+                () => new NotifyCollectionChangedEventArgs(action, (IList)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "changedItems",
+                () => new NotifyCollectionChangedEventArgs(action, (IList)null, -1)
+            );
         }
 
         [Fact]
         public void Ctor_ChangedNonNullForReset_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, "item"));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, "item", -1));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, new object[] { "item" }));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, new object[] { "item" }, -1));
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Reset,
+                        "item"
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Reset,
+                        "item",
+                        -1
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Reset,
+                        new object[] { "item" }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Reset,
+                        new object[] { "item" },
+                        -1
+                    )
+            );
         }
 
         [Theory]
         [InlineData(NotifyCollectionChangedAction.Add, -2)]
         [InlineData(NotifyCollectionChangedAction.Remove, -2)]
-        public void Ctor_ChangedIndexLessThanMinusOneForAddOrRemove_ThrowsArgumentOutOfRangeException(NotifyCollectionChangedAction action, int startingIndex)
+        public void Ctor_ChangedIndexLessThanMinusOneForAddOrRemove_ThrowsArgumentOutOfRangeException(
+            NotifyCollectionChangedAction action,
+            int startingIndex
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("startingIndex", () => new NotifyCollectionChangedEventArgs(action, new object[0], startingIndex));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "startingIndex",
+                () => new NotifyCollectionChangedEventArgs(action, new object[0], startingIndex)
+            );
         }
 
         [Theory]
@@ -167,8 +322,24 @@ namespace System.Collections.Specialized.Tests
         [InlineData(0)]
         public void Ctor_ChangedIndexNotMinusOneForReset_ThrowsArgumentException(int startingIndex)
         {
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, (object)null, startingIndex));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, (IList)null, startingIndex));
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Reset,
+                        (object)null,
+                        startingIndex
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Reset,
+                        (IList)null,
+                        startingIndex
+                    )
+            );
         }
 
         [Theory]
@@ -176,12 +347,26 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Replace)]
         [InlineData(NotifyCollectionChangedAction.Add - 1)]
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
-        public void Ctor_InvalidActionForChanged_ThrowsArgumentException(NotifyCollectionChangedAction action)
+        public void Ctor_InvalidActionForChanged_ThrowsArgumentException(
+            NotifyCollectionChangedAction action
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, "item"));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, "item", -1));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, new object[] { "item" }));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, new object[] { "item", -1 }));
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, "item")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, "item", -1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, new object[] { "item" })
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, new object[] { "item", -1 })
+            );
         }
 
         [Theory]
@@ -189,7 +374,11 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Replace, "oldItem", "oldItem")]
         [InlineData(NotifyCollectionChangedAction.Replace, null, "item")]
         [InlineData(NotifyCollectionChangedAction.Replace, "item", null)]
-        public void Ctor_NotifyCollectionChangedAction_Object_Object(NotifyCollectionChangedAction action, object newItem, object oldItem)
+        public void Ctor_NotifyCollectionChangedAction_Object_Object(
+            NotifyCollectionChangedAction action,
+            object newItem,
+            object oldItem
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, newItem, oldItem);
             Assert.Equal(action, e.Action);
@@ -204,7 +393,12 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Replace, "oldItem", "oldItem", 0)]
         [InlineData(NotifyCollectionChangedAction.Replace, null, "item", -10)]
         [InlineData(NotifyCollectionChangedAction.Replace, "item", null, -1)]
-        public void Ctor_NotifyCollectionChangedAction_Object_Object_Int(NotifyCollectionChangedAction action, object newItem, object oldItem, int index)
+        public void Ctor_NotifyCollectionChangedAction_Object_Object_Int(
+            NotifyCollectionChangedAction action,
+            object newItem,
+            object oldItem,
+            int index
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index);
             Assert.Equal(action, e.Action);
@@ -216,15 +410,39 @@ namespace System.Collections.Specialized.Tests
 
         public static IEnumerable<object[]> Ctor_NotifyCollectionChangedAction_IList_IList_TestData()
         {
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[] { "newItem" }, new object[] { "oldItem" } };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[] { "newItem" }, new object[0] };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[0], new object[] { "oldItem "} };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[0], new object[0] };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "newItem" },
+                new object[] { "oldItem" },
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "newItem" },
+                new object[0],
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[0],
+                new object[] { "oldItem " },
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[0],
+                new object[0],
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_NotifyCollectionChangedAction_IList_IList_TestData))]
-        public void Ctor_NotifyCollectionChangedAction_IList_IList(NotifyCollectionChangedAction action, IList newItems, IList oldItems)
+        public void Ctor_NotifyCollectionChangedAction_IList_IList(
+            NotifyCollectionChangedAction action,
+            IList newItems,
+            IList oldItems
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, newItems, oldItems);
             Assert.Equal(action, e.Action);
@@ -236,18 +454,65 @@ namespace System.Collections.Specialized.Tests
 
         public static IEnumerable<object[]> Ctor_NotifyCollectionChangedAction_IList_IList_Int_TestData()
         {
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[] { "newItem" }, new object[] { "oldItem" }, 10 };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[] { "newItem" }, new object[] { "oldItem" }, 0 };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[] { "newItem" }, new object[] { "oldItem" }, -1 };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[] { "newItem" }, new object[] { "oldItem" }, -2 };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[] { "newItem" }, new object[0], 1 };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[0], new object[] { "oldItem "}, 1 };
-            yield return new object[] { NotifyCollectionChangedAction.Replace, new object[0], new object[0], 1 };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "newItem" },
+                new object[] { "oldItem" },
+                10,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "newItem" },
+                new object[] { "oldItem" },
+                0,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "newItem" },
+                new object[] { "oldItem" },
+                -1,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "newItem" },
+                new object[] { "oldItem" },
+                -2,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "newItem" },
+                new object[0],
+                1,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[0],
+                new object[] { "oldItem " },
+                1,
+            };
+            yield return new object[]
+            {
+                NotifyCollectionChangedAction.Replace,
+                new object[0],
+                new object[0],
+                1,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_NotifyCollectionChangedAction_IList_IList_Int_TestData))]
-        public void Ctor_NotifyCollectionChangedAction_IList_IList_Int(NotifyCollectionChangedAction action, IList newItems, IList oldItems, int index)
+        public void Ctor_NotifyCollectionChangedAction_IList_IList_Int(
+            NotifyCollectionChangedAction action,
+            IList newItems,
+            IList oldItems,
+            int index
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, newItems, oldItems, index);
             Assert.Equal(action, e.Action);
@@ -264,26 +529,85 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Reset)]
         [InlineData(NotifyCollectionChangedAction.Add - 1)]
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
-        public void Ctor_InvalidActionForReplace_ThrowsArgumentException(NotifyCollectionChangedAction action)
+        public void Ctor_InvalidActionForReplace_ThrowsArgumentException(
+            NotifyCollectionChangedAction action
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, "newItem", "oldItem"));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, "newItem", "oldItem", -1));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, new object[] { "newItem" }, new object[] { "oldItem" }));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, new object[] { "newItem" }, new object[] { "oldItem" }, -1));
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, "newItem", "oldItem")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, "newItem", "oldItem", -1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        action,
+                        new object[] { "newItem" },
+                        new object[] { "oldItem" }
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        action,
+                        new object[] { "newItem" },
+                        new object[] { "oldItem" },
+                        -1
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_NullNewItemsForReplace_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("newItems", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, null, new object[0]));
-            AssertExtensions.Throws<ArgumentNullException>("newItems", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, null, new object[0], -1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "newItems",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Replace,
+                        null,
+                        new object[0]
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "newItems",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Replace,
+                        null,
+                        new object[0],
+                        -1
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_NullOldItemsForReplace_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("oldItems", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[0], null));
-            AssertExtensions.Throws<ArgumentNullException>("oldItems", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[0], null, -1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "oldItems",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Replace,
+                        new object[0],
+                        null
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "oldItems",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Replace,
+                        new object[0],
+                        null,
+                        -1
+                    )
+            );
         }
 
         [Theory]
@@ -291,7 +615,12 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Move, "item", 1, 1)]
         [InlineData(NotifyCollectionChangedAction.Move, "item", 1, -2)]
         [InlineData(NotifyCollectionChangedAction.Move, null, 1, 2)]
-        public void Ctor_NotifyCollectionChangedAction_Object_Int_Int(NotifyCollectionChangedAction action, object changedItem, int index, int oldIndex)
+        public void Ctor_NotifyCollectionChangedAction_Object_Int_Int(
+            NotifyCollectionChangedAction action,
+            object changedItem,
+            int index,
+            int oldIndex
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, changedItem, index, oldIndex);
             Assert.Equal(action, e.Action);
@@ -306,7 +635,12 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Move, new object[] { "item" }, 1, 1)]
         [InlineData(NotifyCollectionChangedAction.Move, new object[0], 1, -2)]
         [InlineData(NotifyCollectionChangedAction.Move, null, 1, 2)]
-        public void Ctor_NotifyCollectionChangedAction_IList_Int_Int(NotifyCollectionChangedAction action, IList changedItems, int index, int oldIndex)
+        public void Ctor_NotifyCollectionChangedAction_IList_Int_Int(
+            NotifyCollectionChangedAction action,
+            IList changedItems,
+            int index,
+            int oldIndex
+        )
         {
             var e = new NotifyCollectionChangedEventArgs(action, changedItems, index, oldIndex);
             Assert.Equal(action, e.Action);
@@ -323,10 +657,18 @@ namespace System.Collections.Specialized.Tests
         [InlineData(NotifyCollectionChangedAction.Reset)]
         [InlineData(NotifyCollectionChangedAction.Add - 1)]
         [InlineData(NotifyCollectionChangedAction.Reset + 1)]
-        public void Ctor_InvalidActionForMove_ThrowsArgumentException(NotifyCollectionChangedAction action)
+        public void Ctor_InvalidActionForMove_ThrowsArgumentException(
+            NotifyCollectionChangedAction action
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, "item", 1, 1));
-            AssertExtensions.Throws<ArgumentException>("action", () => new NotifyCollectionChangedEventArgs(action, new object[] { "item" }, 1, 1));
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, "item", 1, 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "action",
+                () => new NotifyCollectionChangedEventArgs(action, new object[] { "item" }, 1, 1)
+            );
         }
 
         [Theory]
@@ -334,14 +676,36 @@ namespace System.Collections.Specialized.Tests
         [InlineData(-2)]
         public void Ctor_LessThanZeroIndexForMove_ThrowsArgumentOutOfRangeException(int index)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, "item", index, 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, new object[] { "item" }, index, 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Move,
+                        "item",
+                        index,
+                        1
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () =>
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Move,
+                        new object[] { "item" },
+                        index,
+                        1
+                    )
+            );
         }
 
         [Fact]
         public void List_GetProperties_ReturnsExpected()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item1", "item2" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item1", "item2" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Equal(2, list.Count);
             Assert.True(list.IsFixedSize);
@@ -353,7 +717,11 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void List_Add_ThrowsNotSupportedException()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Throws<NotSupportedException>(() => list.Add(1));
         }
@@ -361,7 +729,11 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void List_ItemGet_ReturnsExpected()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Equal("item", list[0]);
         }
@@ -369,7 +741,11 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void List_ItemSet_ThrowsNotSupportedException()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Throws<NotSupportedException>(() => list[0] = 1);
         }
@@ -377,7 +753,11 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void List_Clear_ThrowsNotSupportedException()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Throws<NotSupportedException>(() => list.Clear());
         }
@@ -388,7 +768,11 @@ namespace System.Collections.Specialized.Tests
         [InlineData(null, false)]
         public void List_Contains_ReturnsExpected(object value, bool expected)
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Equal(expected, list.Contains(value));
         }
@@ -396,7 +780,11 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void List_CopyToInvoke_Success()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             object[] array = new object[] { 1, 2, 3 };
             list.CopyTo(array, 1);
@@ -409,7 +797,11 @@ namespace System.Collections.Specialized.Tests
         [InlineData(null, -1)]
         public void List_IndexOf_ReturnsExpected(object value, int expected)
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Equal(expected, list.IndexOf(value));
         }
@@ -417,7 +809,11 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void List_Insert_ThrowsNotSupportedException()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Throws<NotSupportedException>(() => list.Insert(0, 1));
         }
@@ -425,7 +821,11 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void List_Remove_ThrowsNotSupportedException()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Throws<NotSupportedException>(() => list.Remove(1));
         }
@@ -433,7 +833,11 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void List_RemoveAt_ThrowsNotSupportedException()
         {
-            var e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new object[] { "item" }, new object[0]);
+            var e = new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                new object[] { "item" },
+                new object[0]
+            );
             IList list = e.NewItems;
             Assert.Throws<NotSupportedException>(() => list.RemoveAt(0));
         }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
@@ -10,14 +11,14 @@ using Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitializer
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseCollectionInitializerDiagnosticAnalyzer,
-        CSharpUseCollectionInitializerCodeFixProvider>;
+        CSharpUseCollectionInitializerCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionInitializer)]
     public partial class UseCollectionInitializerTests
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         private static async Task TestInRegularAndScriptAsync(
             string testCode,
             string fixedCode,
-            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary
+        )
         {
             var test = new VerifyCS.Test
             {
@@ -39,13 +41,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
             await test.RunAsync();
         }
 
-        private static async Task TestMissingInRegularAndScriptAsync(string testCode, LanguageVersion? languageVersion = null)
+        private static async Task TestMissingInRegularAndScriptAsync(
+            string testCode,
+            LanguageVersion? languageVersion = null
+        )
         {
-            var test = new VerifyCS.Test
-            {
-                TestCode = testCode,
-                FixedCode = testCode,
-            };
+            var test = new VerifyCS.Test { TestCode = testCode, FixedCode = testCode };
 
             if (languageVersion != null)
                 test.LanguageVersion = languageVersion.Value;
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                 {
                     List<int> v = new List<int>();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -110,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                 {
                     List<int> v = new List<int>() { 1, 2, 3 };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         c.AddRange(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -180,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                             c.Add(v);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -216,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                             c.Add(2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -256,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                             c.Add(3);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -296,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -326,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -343,7 +353,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         c[1] = 2;
                     }
                 }
-                """, LanguageVersion.CSharp5);
+                """,
+                LanguageVersion.CSharp5
+            );
         }
 
         [Fact]
@@ -395,7 +407,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -427,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -481,7 +495,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                     public IEnumerator GetEnumerator() => null;
                     public void Add(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -513,7 +528,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         c.Add(0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -545,7 +561,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         c[1] = 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -585,7 +602,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         c.Add(4);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -603,7 +621,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         c.Add(1);
                     }
                 }
-                """, LanguageVersion.CSharp2);
+                """,
+                LanguageVersion.CSharp2
+            );
         }
 
         [Fact]
@@ -623,7 +643,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
 
                     void Add(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -645,7 +666,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -677,7 +699,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -711,7 +734,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -737,7 +761,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -771,7 +796,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -789,7 +815,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         c.Add(item: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -825,7 +852,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -861,7 +889,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -903,7 +932,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -964,7 +994,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                     public IEnumerator GetEnumerator() => null;
                     public void Add(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -972,64 +1003,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                using System;
-                using System.Collections.Generic;
+                TestCode = """
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var list1 = [|new|] List<Action>();
-                        [|list1.Add(|]() => {
-                            var list2 = [|new|] List<int>();
-                            [|list2.Add(|]2);
-                        });
-                    }
-                }
-                """,
-                FixedCode =
-                """
-                using System;
-                using System.Collections.Generic;
-
-                class C
-                {
-                    void M()
-                    {
-                        var list1 = new List<Action>
+                        void M()
                         {
-                            () =>
-                            {
-                                var list2 = new List<int> { 2 };
-                            }
-                        };
+                            var list1 = [|new|] List<Action>();
+                            [|list1.Add(|]() => {
+                                var list2 = [|new|] List<int>();
+                                [|list2.Add(|]2);
+                            });
+                        }
                     }
-                }
-                """,
-                BatchFixedCode =
-                """
-                using System;
-                using System.Collections.Generic;
+                    """,
+                FixedCode = """
+                    using System;
+                    using System.Collections.Generic;
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var list1 = new List<Action>
+                        void M()
                         {
-                            () =>
+                            var list1 = new List<Action>
                             {
-                                var list2 = new List<int>
+                                () =>
                                 {
-                                    2
-                                };
-                            }
-                        };
+                                    var list2 = new List<int> { 2 };
+                                }
+                            };
+                        }
                     }
-                }
-                """,
+                    """,
+                BatchFixedCode = """
+                    using System;
+                    using System.Collections.Generic;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            var list1 = new List<Action>
+                            {
+                                () =>
+                                {
+                                    var list2 = new List<int>
+                                    {
+                                        2
+                                    };
+                                }
+                            };
+                        }
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -1062,7 +1090,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
@@ -1102,7 +1131,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1136,7 +1166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16158")]
@@ -1176,7 +1207,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         values.AddRange(items);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16241")]
@@ -1196,7 +1228,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         myStringList.Add("Done");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17823")]
@@ -1214,7 +1247,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         items[0] = items[0];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17823")]
@@ -1248,7 +1282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         items[1] = items[0];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17823")]
@@ -1267,7 +1302,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         t.Add(t.Min() - 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18260")]
@@ -1303,7 +1339,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         items[1] = items[0];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18260")]
@@ -1323,7 +1360,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         t.Add(t.Min() - 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18260")]
@@ -1342,7 +1380,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         myField.Add(this.myField.Count);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17853")]
@@ -1360,7 +1399,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         body[0] = new ExpandoObject();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17953")]
@@ -1380,7 +1420,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17953")]
@@ -1416,7 +1457,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18242")]
@@ -1450,7 +1492,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18242")]
@@ -1484,7 +1527,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19253")]
@@ -1520,7 +1564,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         int horse = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23672")]
@@ -1541,7 +1586,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         obj.Add(" object", new { X = 1, Y = 2 });
                         }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47632")]
@@ -1575,7 +1621,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         items[items.Count - 1] = 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47632")]
@@ -1609,7 +1656,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         items[^1] = 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47632")]
@@ -1641,7 +1689,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
@@ -1663,7 +1712,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
                     1
                 };
 
-                """, OutputKind.ConsoleApplication);
+                """,
+                OutputKind.ConsoleApplication
+            );
         }
     }
 }

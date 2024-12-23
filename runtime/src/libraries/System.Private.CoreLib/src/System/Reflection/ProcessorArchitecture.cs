@@ -10,6 +10,6 @@ namespace System.Reflection
         X86 = 0x0002,
         IA64 = 0x0003,
         Amd64 = 0x0004,
-        Arm = 0x0005
+        Arm = 0x0005,
     }
 }

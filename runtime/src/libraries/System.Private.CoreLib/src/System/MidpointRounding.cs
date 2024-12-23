@@ -9,6 +9,6 @@ namespace System
         AwayFromZero = 1,
         ToZero = 2,
         ToNegativeInfinity = 3,
-        ToPositiveInfinity = 4
+        ToPositiveInfinity = 4,
     }
 }

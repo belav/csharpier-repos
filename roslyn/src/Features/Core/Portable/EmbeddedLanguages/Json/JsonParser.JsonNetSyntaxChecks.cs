@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 {
     using static EmbeddedSyntaxHelpers;
-
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
 
     internal partial struct JsonParser
@@ -50,13 +49,13 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 }
             }
 
-            private static EmbeddedDiagnostic? CheckLiteral(JsonLiteralNode node)
-                => node.LiteralToken.Kind == JsonKind.NumberToken
+            private static EmbeddedDiagnostic? CheckLiteral(JsonLiteralNode node) =>
+                node.LiteralToken.Kind == JsonKind.NumberToken
                     ? CheckNumber(node.LiteralToken)
                     : null;
 
-            private static EmbeddedDiagnostic? CheckNegativeLiteral(JsonNegativeLiteralNode node)
-                => node.LiteralToken.Kind == JsonKind.NumberToken
+            private static EmbeddedDiagnostic? CheckNegativeLiteral(JsonNegativeLiteralNode node) =>
+                node.LiteralToken.Kind == JsonKind.NumberToken
                     ? CheckNumber(node.LiteralToken)
                     : null;
 
@@ -73,8 +72,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     return null;
 
                 var nonBase10 =
-                    firstChar == '0' && chars.Length > 1 &&
-                    chars[1] != '.' && chars[1] != 'e' && chars[1] != 'E';
+                    firstChar == '0'
+                    && chars.Length > 1
+                    && chars[1] != '.'
+                    && chars[1] != 'e'
+                    && chars[1] != 'E';
 
                 var literalText = numberToken.VirtualChars.CreateString();
                 if (nonBase10)
@@ -88,12 +90,20 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     }
                     catch (Exception)
                     {
-                        return new EmbeddedDiagnostic(FeaturesResources.Invalid_number, GetSpan(chars));
+                        return new EmbeddedDiagnostic(
+                            FeaturesResources.Invalid_number,
+                            GetSpan(chars)
+                        );
                     }
                 }
-                else if (!double.TryParse(
-                    literalText, NumberStyles.Float,
-                    CultureInfo.InvariantCulture, out _))
+                else if (
+                    !double.TryParse(
+                        literalText,
+                        NumberStyles.Float,
+                        CultureInfo.InvariantCulture,
+                        out _
+                    )
+                )
                 {
                     return new EmbeddedDiagnostic(FeaturesResources.Invalid_number, GetSpan(chars));
                 }
@@ -101,12 +111,15 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 return null;
             }
 
-            private static EmbeddedDiagnostic? CheckArray(JsonArrayNode node)
-                => CheckCommasBetweenSequenceElements(node.Sequence);
+            private static EmbeddedDiagnostic? CheckArray(JsonArrayNode node) =>
+                CheckCommasBetweenSequenceElements(node.Sequence);
 
-            private static EmbeddedDiagnostic? CheckConstructor(JsonConstructorNode node)
-                => !IsValidConstructorName(node.NameToken)
-                    ? new EmbeddedDiagnostic(FeaturesResources.Invalid_constructor_name, node.NameToken.GetSpan())
+            private static EmbeddedDiagnostic? CheckConstructor(JsonConstructorNode node) =>
+                !IsValidConstructorName(node.NameToken)
+                    ? new EmbeddedDiagnostic(
+                        FeaturesResources.Invalid_constructor_name,
+                        node.NameToken.GetSpan()
+                    )
                     : CheckCommasBetweenSequenceElements(node.Sequence);
 
             private static bool IsValidConstructorName(JsonToken nameToken)
@@ -120,7 +133,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 return true;
             }
 
-            private static EmbeddedDiagnostic? CheckCommasBetweenSequenceElements(ImmutableArray<JsonValueNode> sequence)
+            private static EmbeddedDiagnostic? CheckCommasBetweenSequenceElements(
+                ImmutableArray<JsonValueNode> sequence
+            )
             {
                 // Json.net allows sequences of commas.  But after every non-comma value, you need
                 // a comma.
@@ -129,7 +144,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     var child = sequence[i];
                     var nextChild = sequence[i + 1];
                     if (child.Kind != JsonKind.CommaValue && nextChild.Kind != JsonKind.CommaValue)
-                        return new EmbeddedDiagnostic(string.Format(FeaturesResources._0_expected, ','), GetFirstToken(nextChild).GetSpan());
+                        return new EmbeddedDiagnostic(
+                            string.Format(FeaturesResources._0_expected, ','),
+                            GetFirstToken(nextChild).GetSpan()
+                        );
                 }
 
                 return null;
@@ -140,15 +158,22 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 foreach (var child in node.Sequence)
                 {
                     if (child.Kind != JsonKind.Property)
-                        return new EmbeddedDiagnostic(FeaturesResources.Only_properties_allowed_in_an_object, GetFirstToken(child).GetSpan());
+                        return new EmbeddedDiagnostic(
+                            FeaturesResources.Only_properties_allowed_in_an_object,
+                            GetFirstToken(child).GetSpan()
+                        );
                 }
 
                 return null;
             }
 
-            private static EmbeddedDiagnostic? CheckProperty(JsonPropertyNode node)
-                => node.NameToken.Kind != JsonKind.StringToken && !IsLegalPropertyNameText(node.NameToken)
-                    ? new EmbeddedDiagnostic(FeaturesResources.Invalid_property_name, node.NameToken.GetSpan())
+            private static EmbeddedDiagnostic? CheckProperty(JsonPropertyNode node) =>
+                node.NameToken.Kind != JsonKind.StringToken
+                && !IsLegalPropertyNameText(node.NameToken)
+                    ? new EmbeddedDiagnostic(
+                        FeaturesResources.Invalid_property_name,
+                        node.NameToken.GetSpan()
+                    )
                     : null;
 
             private static bool IsLegalPropertyNameText(JsonToken textToken)
@@ -162,8 +187,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 return true;
             }
 
-            private static bool IsLegalPropertyNameChar(VirtualChar ch)
-                => ch.IsLetterOrDigit || ch == '_' || ch == '$';
+            private static bool IsLegalPropertyNameChar(VirtualChar ch) =>
+                ch.IsLetterOrDigit || ch == '_' || ch == '$';
         }
     }
 }

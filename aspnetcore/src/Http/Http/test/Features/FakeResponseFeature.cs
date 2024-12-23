@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Http.Features;
 
 public class FakeResponseFeature : HttpResponseFeature
 {
-    List<Tuple<Func<object, Task>, object>> _onCompletedCallbacks = new List<Tuple<Func<object, Task>, object>>();
+    List<Tuple<Func<object, Task>, object>> _onCompletedCallbacks =
+        new List<Tuple<Func<object, Task>, object>>();
 
     public override void OnCompleted(Func<object, Task> callback, object state)
     {

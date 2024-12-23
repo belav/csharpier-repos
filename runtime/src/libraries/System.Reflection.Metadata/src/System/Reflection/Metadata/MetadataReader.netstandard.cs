@@ -11,14 +11,24 @@ namespace System.Reflection.Metadata
 {
     public sealed partial class MetadataReader
     {
-        internal AssemblyName GetAssemblyName(StringHandle nameHandle, Version version, StringHandle cultureHandle, BlobHandle publicKeyOrTokenHandle, AssemblyHashAlgorithm assemblyHashAlgorithm, AssemblyFlags flags)
+        internal AssemblyName GetAssemblyName(
+            StringHandle nameHandle,
+            Version version,
+            StringHandle cultureHandle,
+            BlobHandle publicKeyOrTokenHandle,
+            AssemblyHashAlgorithm assemblyHashAlgorithm,
+            AssemblyFlags flags
+        )
         {
             string name = GetString(nameHandle);
             // compat: normalize Nil culture name to "" to match original behavior of AssemblyName.GetAssemblyName()
             string cultureName = (!cultureHandle.IsNil) ? GetString(cultureHandle) : "";
-            var hashAlgorithm = (Configuration.Assemblies.AssemblyHashAlgorithm)assemblyHashAlgorithm;
+            var hashAlgorithm =
+                (Configuration.Assemblies.AssemblyHashAlgorithm)assemblyHashAlgorithm;
             // compat: original native implementation used to guarantee that publicKeyOrToken is never null in this scenario.
-            byte[]? publicKeyOrToken = !publicKeyOrTokenHandle.IsNil ? GetBlobBytes(publicKeyOrTokenHandle) : Array.Empty<byte>();
+            byte[]? publicKeyOrToken = !publicKeyOrTokenHandle.IsNil
+                ? GetBlobBytes(publicKeyOrTokenHandle)
+                : Array.Empty<byte>();
 
             var assemblyName = new AssemblyName()
             {
@@ -29,7 +39,7 @@ namespace System.Reflection.Metadata
                 HashAlgorithm = hashAlgorithm,
 #pragma warning restore
                 Flags = GetAssemblyNameFlags(flags),
-                ContentType = GetContentTypeFromAssemblyFlags(flags)
+                ContentType = GetContentTypeFromAssemblyFlags(flags),
             };
 
             bool hasPublicKey = (flags & AssemblyFlags.PublicKey) != 0;
@@ -71,19 +81,40 @@ namespace System.Reflection.Metadata
                 try
                 {
                     // Create stream because CreateFromFile(string, ...) uses FileShare.None which is too strict
-                    fileStream = new FileStream(assemblyFile, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1, useAsync: false);
+                    fileStream = new FileStream(
+                        assemblyFile,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        bufferSize: 1,
+                        useAsync: false
+                    );
                     if (fileStream.Length == 0)
                     {
-                        throw new BadImageFormatException(SR.PEImageDoesNotHaveMetadata, assemblyFile);
+                        throw new BadImageFormatException(
+                            SR.PEImageDoesNotHaveMetadata,
+                            assemblyFile
+                        );
                     }
 
                     mappedFile = MemoryMappedFile.CreateFromFile(
-                        fileStream, null, fileStream.Length, MemoryMappedFileAccess.Read, HandleInheritability.None, true);
+                        fileStream,
+                        null,
+                        fileStream.Length,
+                        MemoryMappedFileAccess.Read,
+                        HandleInheritability.None,
+                        true
+                    );
                     accessor = mappedFile.CreateViewAccessor(0, 0, MemoryMappedFileAccess.Read);
 
                     SafeMemoryMappedViewHandle? safeBuffer = accessor.SafeMemoryMappedViewHandle;
-                    peReader = new PEReader((byte*)safeBuffer.DangerousGetHandle(), (int)safeBuffer.ByteLength);
-                    MetadataReader mdReader = peReader.GetMetadataReader(MetadataReaderOptions.None);
+                    peReader = new PEReader(
+                        (byte*)safeBuffer.DangerousGetHandle(),
+                        (int)safeBuffer.ByteLength
+                    );
+                    MetadataReader mdReader = peReader.GetMetadataReader(
+                        MetadataReaderOptions.None
+                    );
                     AssemblyName assemblyName = mdReader.GetAssemblyDefinition().GetAssemblyName();
                     return assemblyName;
                 }

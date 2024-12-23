@@ -12,7 +12,12 @@ namespace System.IO.Pipelines
         public ExecutionContext? ExecutionContext { get; }
         public SynchronizationContext? SynchronizationContext { get; }
 
-        public CompletionData(Action<object?> completion, object? completionState, ExecutionContext? executionContext, SynchronizationContext? synchronizationContext)
+        public CompletionData(
+            Action<object?> completion,
+            object? completionState,
+            ExecutionContext? executionContext,
+            SynchronizationContext? synchronizationContext
+        )
         {
             Completion = completion;
             CompletionState = completionState;

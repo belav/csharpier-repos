@@ -12,7 +12,9 @@ namespace System
     /// typically because it should have been implemented on a subclass.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class NotSupportedException : SystemException
     {
         public NotSupportedException()
@@ -33,10 +35,13 @@ namespace System
             HResult = HResults.COR_E_NOTSUPPORTED;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected NotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected NotSupportedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

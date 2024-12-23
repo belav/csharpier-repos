@@ -4,11 +4,11 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
-using System;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
@@ -22,13 +22,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var node2 = SyntaxFactory.Token(SyntaxKind.VirtualKeyword);
 
             EqualityTesting.AssertEqual(default(SyntaxTriviaList), default(SyntaxTriviaList));
-            EqualityTesting.AssertEqual(new SyntaxTriviaList(node1, node1.Node, 0, 0), new SyntaxTriviaList(node1, node1.Node, 0, 0));
-            EqualityTesting.AssertNotEqual(new SyntaxTriviaList(node1, node1.Node, 0, 1), new SyntaxTriviaList(node1, node1.Node, 0, 0));
-            EqualityTesting.AssertNotEqual(new SyntaxTriviaList(node1, node2.Node, 0, 0), new SyntaxTriviaList(node1, node1.Node, 0, 0));
-            EqualityTesting.AssertNotEqual(new SyntaxTriviaList(node2, node1.Node, 0, 0), new SyntaxTriviaList(node1, node1.Node, 0, 0));
+            EqualityTesting.AssertEqual(
+                new SyntaxTriviaList(node1, node1.Node, 0, 0),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0)
+            );
+            EqualityTesting.AssertNotEqual(
+                new SyntaxTriviaList(node1, node1.Node, 0, 1),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0)
+            );
+            EqualityTesting.AssertNotEqual(
+                new SyntaxTriviaList(node1, node2.Node, 0, 0),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0)
+            );
+            EqualityTesting.AssertNotEqual(
+                new SyntaxTriviaList(node2, node1.Node, 0, 0),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0)
+            );
 
             // position not considered:
-            EqualityTesting.AssertEqual(new SyntaxTriviaList(node1, node1.Node, 1, 0), new SyntaxTriviaList(node1, node1.Node, 0, 0));
+            EqualityTesting.AssertEqual(
+                new SyntaxTriviaList(node1, node1.Node, 1, 0),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0)
+            );
         }
 
         [Fact]
@@ -37,14 +52,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var node1 = SyntaxFactory.Token(SyntaxKind.AbstractKeyword);
             var node2 = SyntaxFactory.Token(SyntaxKind.VirtualKeyword);
 
-            EqualityTesting.AssertEqual(default(SyntaxTriviaList.Reversed), default(SyntaxTriviaList.Reversed));
-            EqualityTesting.AssertEqual(new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse(), new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse());
-            EqualityTesting.AssertNotEqual(new SyntaxTriviaList(node1, node1.Node, 0, 1).Reverse(), new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse());
-            EqualityTesting.AssertNotEqual(new SyntaxTriviaList(node1, node2.Node, 0, 0).Reverse(), new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse());
-            EqualityTesting.AssertNotEqual(new SyntaxTriviaList(node2, node1.Node, 0, 0).Reverse(), new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse());
+            EqualityTesting.AssertEqual(
+                default(SyntaxTriviaList.Reversed),
+                default(SyntaxTriviaList.Reversed)
+            );
+            EqualityTesting.AssertEqual(
+                new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse(),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse()
+            );
+            EqualityTesting.AssertNotEqual(
+                new SyntaxTriviaList(node1, node1.Node, 0, 1).Reverse(),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse()
+            );
+            EqualityTesting.AssertNotEqual(
+                new SyntaxTriviaList(node1, node2.Node, 0, 0).Reverse(),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse()
+            );
+            EqualityTesting.AssertNotEqual(
+                new SyntaxTriviaList(node2, node1.Node, 0, 0).Reverse(),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse()
+            );
 
             // position not considered:
-            EqualityTesting.AssertEqual(new SyntaxTriviaList(node1, node1.Node, 1, 0).Reverse(), new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse());
+            EqualityTesting.AssertEqual(
+                new SyntaxTriviaList(node1, node1.Node, 1, 0).Reverse(),
+                new SyntaxTriviaList(node1, node1.Node, 0, 0).Reverse()
+            );
         }
 
         [Fact]
@@ -168,21 +201,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(-1, list.IndexOf(triviaD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, triviaD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, triviaD));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { triviaD }));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(list.Count + 1, new[] { triviaD }));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.InsertRange(-1, new[] { triviaD })
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.InsertRange(list.Count + 1, new[] { triviaD })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(list.Count));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Add(default(SyntaxTrivia)));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(0, default(SyntaxTrivia)));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxTrivia>)null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxTrivia>)null));
-            Assert.Throws<ArgumentNullException>(() => list.ReplaceRange(elementA, (IEnumerable<SyntaxTrivia>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => list.AddRange((IEnumerable<SyntaxTrivia>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => list.InsertRange(0, (IEnumerable<SyntaxTrivia>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => list.ReplaceRange(elementA, (IEnumerable<SyntaxTrivia>)null)
+            );
         }
 
         [Fact]
         public void TestAddInsertRemoveReplaceOnEmptyList()
         {
-            DoTestAddInsertRemoveReplaceOnEmptyList(SyntaxFactory.ParseLeadingTrivia("/*A*/").RemoveAt(0));
+            DoTestAddInsertRemoveReplaceOnEmptyList(
+                SyntaxFactory.ParseLeadingTrivia("/*A*/").RemoveAt(0)
+            );
             DoTestAddInsertRemoveReplaceOnEmptyList(default(SyntaxTriviaList));
         }
 
@@ -216,14 +261,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(0));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(1, triviaD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, triviaD));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(1, new[] { triviaD }));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { triviaD }));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.InsertRange(1, new[] { triviaD })
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.InsertRange(-1, new[] { triviaD })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Replace(triviaD, triviaE));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.ReplaceRange(triviaD, new[] { triviaE }));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.ReplaceRange(triviaD, new[] { triviaE })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Add(default(SyntaxTrivia)));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(0, default(SyntaxTrivia)));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxTrivia>)null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxTrivia>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => list.AddRange((IEnumerable<SyntaxTrivia>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => list.InsertRange(0, (IEnumerable<SyntaxTrivia>)null)
+            );
         }
 
         [Fact]

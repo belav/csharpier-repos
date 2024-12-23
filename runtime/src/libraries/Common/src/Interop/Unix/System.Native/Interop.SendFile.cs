@@ -7,7 +7,17 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SendFile", SetLastError = true)]
-        internal static partial Error SendFile(SafeHandle out_fd, SafeHandle in_fd, long offset, long count, out long sent);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SendFile",
+            SetLastError = true
+        )]
+        internal static partial Error SendFile(
+            SafeHandle out_fd,
+            SafeHandle in_fd,
+            long offset,
+            long count,
+            out long sent
+        );
     }
 }

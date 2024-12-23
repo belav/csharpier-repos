@@ -40,7 +40,6 @@ namespace System.Text.Tests
             {
                 Assert.Equal(new byte[] { 43, 65, 67, 69, 45 }, encoding.GetBytes("!"));
             }
-
         }
 
         public static IEnumerable<object[]> Encodings_TestData()
@@ -118,7 +117,10 @@ namespace System.Text.Tests
         public void EqualsTest(UTF7Encoding encoding, object value, bool expected)
         {
             Assert.Equal(expected, encoding.Equals(value));
-            Assert.Equal(value is UTF7Encoding, encoding.GetHashCode().Equals(value?.GetHashCode()));
+            Assert.Equal(
+                value is UTF7Encoding,
+                encoding.GetHashCode().Equals(value?.GetHashCode())
+            );
         }
     }
 }

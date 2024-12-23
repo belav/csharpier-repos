@@ -17,7 +17,9 @@ public class SqliteMethodCallTranslatorProvider : RelationalMethodCallTranslator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteMethodCallTranslatorProvider(RelationalMethodCallTranslatorProviderDependencies dependencies)
+    public SqliteMethodCallTranslatorProvider(
+        RelationalMethodCallTranslatorProviderDependencies dependencies
+    )
         : base(dependencies)
     {
         var sqlExpressionFactory = (SqliteSqlExpressionFactory)dependencies.SqlExpressionFactory;
@@ -36,7 +38,8 @@ public class SqliteMethodCallTranslatorProvider : RelationalMethodCallTranslator
                 new SqliteRandomTranslator(sqlExpressionFactory),
                 new SqliteRegexMethodTranslator(sqlExpressionFactory),
                 new SqliteStringMethodTranslator(sqlExpressionFactory),
-                new SqliteSubstrMethodTranslator(sqlExpressionFactory)
-            });
+                new SqliteSubstrMethodTranslator(sqlExpressionFactory),
+            }
+        );
     }
 }

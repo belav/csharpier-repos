@@ -11,6 +11,9 @@ internal sealed class ComponentDescriptor
 
     public int Sequence { get; set; }
 
-    public void Deconstruct(out Type componentType, out ParameterView parameters, out int sequence) =>
-        (componentType, sequence, parameters) = (ComponentType, Sequence, Parameters);
+    public void Deconstruct(
+        out Type componentType,
+        out ParameterView parameters,
+        out int sequence
+    ) => (componentType, sequence, parameters) = (ComponentType, Sequence, Parameters);
 }

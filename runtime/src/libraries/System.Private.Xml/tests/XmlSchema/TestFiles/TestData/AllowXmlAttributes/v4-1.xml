@@ -1,1 +1,4 @@
-<doc xml:space="preserve" xml:base="abc"/>
+<doc
+  {http://www.w3.org/XML/1998/namespace}space="preserve"
+  {http://www.w3.org/XML/1998/namespace}base="abc"
+/>

@@ -21,7 +21,7 @@ namespace System.Net.Test.Common
             }
 
             public const string DefaultRequestStringTemplate =
-@"GET / HTTP/1.0
+                @"GET / HTTP/1.0
 Host: {0}
 User-Agent: Testing application
 
@@ -57,19 +57,32 @@ User-Agent: Testing application
 
         public async Task HttpsRequestAsync(Func<string, Task<string>> httpConversation = null)
         {
-            _log.WriteLine("[Client] Disabling SslPolicyErrors: {0}", _options.IgnoreSslPolicyErrors.ToString());
+            _log.WriteLine(
+                "[Client] Disabling SslPolicyErrors: {0}",
+                _options.IgnoreSslPolicyErrors.ToString()
+            );
 
             if (httpConversation == null)
             {
                 httpConversation = DefaultHttpConversation;
             }
 
-            using (var certValidationPolicy = new SslStreamCertificatePolicy(_options.IgnoreSslPolicyErrors))
+            using (
+                var certValidationPolicy = new SslStreamCertificatePolicy(
+                    _options.IgnoreSslPolicyErrors
+                )
+            )
             using (var tcp = new TcpClient())
             {
                 await ConnectToHostAsync(tcp);
 
-                using (Stream = new SslStream(tcp.GetStream(), false, certValidationPolicy.SslStreamCallback))
+                using (
+                    Stream = new SslStream(
+                        tcp.GetStream(),
+                        false,
+                        certValidationPolicy.SslStreamCallback
+                    )
+                )
                 {
                     X509CertificateCollection clientCerts = null;
 
@@ -82,15 +95,21 @@ User-Agent: Testing application
                     _log.WriteLine(
                         "[Client] Connected. Authenticating: server={0}; clientCert={1}",
                         _options.ServerName,
-                        _options.ClientCertificate != null ? _options.ClientCertificate.Subject : "<null>");
+                        _options.ClientCertificate != null
+                            ? _options.ClientCertificate.Subject
+                            : "<null>"
+                    );
 
                     try
                     {
-                        await Stream.AuthenticateAsClientAsync(
-                            _options.ServerName,
-                            clientCerts,
-                            _options.AllowedProtocols,
-                            checkCertificateRevocation: false).ConfigureAwait(false);
+                        await Stream
+                            .AuthenticateAsClientAsync(
+                                _options.ServerName,
+                                clientCerts,
+                                _options.AllowedProtocols,
+                                checkCertificateRevocation: false
+                            )
+                            .ConfigureAwait(false);
                     }
                     catch (Exception ex)
                     {
@@ -105,7 +124,8 @@ User-Agent: Testing application
 
                     while (true)
                     {
-                        string requestString = await httpConversation(responseString).ConfigureAwait(false);
+                        string requestString = await httpConversation(responseString)
+                            .ConfigureAwait(false);
                         if (requestString == null)
                         {
                             return;
@@ -115,16 +135,27 @@ User-Agent: Testing application
                         {
                             byte[] requestBuffer = Encoding.UTF8.GetBytes(requestString);
 
-                            _log.WriteLine("[Client] Sending request ({0} Bytes)", requestBuffer.Length);
-                            await Stream.WriteAsync(requestBuffer, 0, requestBuffer.Length).ConfigureAwait(false);
+                            _log.WriteLine(
+                                "[Client] Sending request ({0} Bytes)",
+                                requestBuffer.Length
+                            );
+                            await Stream
+                                .WriteAsync(requestBuffer, 0, requestBuffer.Length)
+                                .ConfigureAwait(false);
                         }
 
                         _log.WriteLine("[Client] Waiting for reply...");
 
                         byte[] responseBuffer = new byte[2048];
-                        bytesRead = await Stream.ReadAsync(responseBuffer, 0, responseBuffer.Length).ConfigureAwait(false);
+                        bytesRead = await Stream
+                            .ReadAsync(responseBuffer, 0, responseBuffer.Length)
+                            .ConfigureAwait(false);
                         responseString = Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
-                        _log.WriteLine("[Client] {0} Bytes, Response: <{1}>", bytesRead, responseString);
+                        _log.WriteLine(
+                            "[Client] {0} Bytes, Response: <{1}>",
+                            bytesRead,
+                            responseString
+                        );
                     }
                 }
             }
@@ -166,7 +197,10 @@ User-Agent: Testing application
             string requestString = null;
             if (read == null)
             {
-                requestString = string.Format(Options.DefaultRequestStringTemplate, _options.ServerName);
+                requestString = string.Format(
+                    Options.DefaultRequestStringTemplate,
+                    _options.ServerName
+                );
             }
 
             _requestCount++;

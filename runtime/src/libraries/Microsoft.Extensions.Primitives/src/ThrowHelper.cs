@@ -34,7 +34,10 @@ namespace Microsoft.Extensions.Primitives
         }
 
         [DoesNotReturn]
-        internal static void ThrowInvalidOperationException(ExceptionResource resource, params object[] args)
+        internal static void ThrowInvalidOperationException(
+            ExceptionResource resource,
+            params object[] args
+        )
         {
             string message = string.Format(GetResourceText(resource), args);
 
@@ -46,7 +49,9 @@ namespace Microsoft.Extensions.Primitives
             return new ArgumentNullException(GetArgumentName(argument));
         }
 
-        internal static ArgumentOutOfRangeException GetArgumentOutOfRangeException(ExceptionArgument argument)
+        internal static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
+            ExceptionArgument argument
+        )
         {
             return new ArgumentOutOfRangeException(GetArgumentName(argument));
         }
@@ -58,16 +63,23 @@ namespace Microsoft.Extensions.Primitives
 
         private static string GetResourceText(ExceptionResource resource)
         {
-            Debug.Assert(Enum.IsDefined(typeof(ExceptionResource), resource),
-                "The enum value is not defined, please check the ExceptionResource Enum.");
+            Debug.Assert(
+                Enum.IsDefined(typeof(ExceptionResource), resource),
+                "The enum value is not defined, please check the ExceptionResource Enum."
+            );
 
             switch (resource)
             {
-                case ExceptionResource.Argument_InvalidOffsetLength: return SR.Argument_InvalidOffsetLength;
-                case ExceptionResource.Argument_InvalidOffsetLengthStringSegment: return SR.Argument_InvalidOffsetLengthStringSegment;
-                case ExceptionResource.Capacity_CannotChangeAfterWriteStarted: return SR.Capacity_CannotChangeAfterWriteStarted;
-                case ExceptionResource.Capacity_NotEnough: return SR.Capacity_NotEnough;
-                case ExceptionResource.Capacity_NotUsedEntirely: return SR.Capacity_NotUsedEntirely;
+                case ExceptionResource.Argument_InvalidOffsetLength:
+                    return SR.Argument_InvalidOffsetLength;
+                case ExceptionResource.Argument_InvalidOffsetLengthStringSegment:
+                    return SR.Argument_InvalidOffsetLengthStringSegment;
+                case ExceptionResource.Capacity_CannotChangeAfterWriteStarted:
+                    return SR.Capacity_CannotChangeAfterWriteStarted;
+                case ExceptionResource.Capacity_NotEnough:
+                    return SR.Capacity_NotEnough;
+                case ExceptionResource.Capacity_NotUsedEntirely:
+                    return SR.Capacity_NotUsedEntirely;
                 default:
                     Debug.Fail($"Unexpected resource {resource}");
                     return "";
@@ -76,8 +88,10 @@ namespace Microsoft.Extensions.Primitives
 
         private static string GetArgumentName(ExceptionArgument argument)
         {
-            Debug.Assert(Enum.IsDefined(typeof(ExceptionArgument), argument),
-                "The enum value is not defined, please check the ExceptionArgument Enum.");
+            Debug.Assert(
+                Enum.IsDefined(typeof(ExceptionArgument), argument),
+                "The enum value is not defined, please check the ExceptionArgument Enum."
+            );
 
             return argument.ToString();
         }
@@ -108,6 +122,6 @@ namespace Microsoft.Extensions.Primitives
         Argument_InvalidOffsetLengthStringSegment,
         Capacity_CannotChangeAfterWriteStarted,
         Capacity_NotEnough,
-        Capacity_NotUsedEntirely
+        Capacity_NotUsedEntirely,
     }
 }

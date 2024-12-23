@@ -6,17 +6,16 @@
 //
 
 
-namespace System.Net {
-
+namespace System.Net
+{
     using System.Collections;
     using System.IO;
-    using System.Security.Cryptography.X509Certificates ;
     using System.Net.Sockets;
+    using System.Security.Authentication;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Security.Authentication;
-
 
     /// <devdoc>
     /// <para>
@@ -26,10 +25,14 @@ namespace System.Net {
     ///     server.
     /// </para>
     /// </devdoc>
-    internal class CommandStream : PooledStream {
-
-        private static readonly AsyncCallback m_WriteCallbackDelegate = new AsyncCallback(WriteCallback);
-        private static readonly AsyncCallback m_ReadCallbackDelegate = new AsyncCallback(ReadCallback);
+    internal class CommandStream : PooledStream
+    {
+        private static readonly AsyncCallback m_WriteCallbackDelegate = new AsyncCallback(
+            WriteCallback
+        );
+        private static readonly AsyncCallback m_ReadCallbackDelegate = new AsyncCallback(
+            ReadCallback
+        );
 
         private bool m_RecoverableFailure;
 
@@ -37,20 +40,19 @@ namespace System.Net {
         // Active variables used for the command state machine
         //
 
-        protected WebRequest        m_Request;
-        protected bool              m_Async;
-        private   bool              m_Aborted;
+        protected WebRequest m_Request;
+        protected bool m_Async;
+        private bool m_Aborted;
 
-        protected PipelineEntry []  m_Commands;
-        protected int               m_Index;
-        private bool                m_DoRead;
-        private bool                m_DoSend;
+        protected PipelineEntry[] m_Commands;
+        protected int m_Index;
+        private bool m_DoRead;
+        private bool m_DoSend;
         private ResponseDescription m_CurrentResponseDescription;
-        protected string            m_AbortReason;
+        protected string m_AbortReason;
 
         const int _WaitingForPipeline = 1;
-        const int _CompletedPipeline  = 2;
-
+        const int _CompletedPipeline = 2;
 
         /// <devdoc>
         ///    <para>
@@ -58,32 +60,40 @@ namespace System.Net {
         ///     perform any initalization if needed
         ///    </para>
         /// </devdoc>
-        internal CommandStream(
-            ConnectionPool connectionPool,
-            TimeSpan lifetime,
-            bool checkLifetime
-            ) : base(connectionPool, lifetime, checkLifetime) {
-                m_Decoder = m_Encoding.GetDecoder();
+        internal CommandStream(ConnectionPool connectionPool, TimeSpan lifetime, bool checkLifetime)
+            : base(connectionPool, lifetime, checkLifetime)
+        {
+            m_Decoder = m_Encoding.GetDecoder();
         }
 
+        internal virtual void Abort(Exception e)
+        {
+            GlobalLog.Print(
+                "CommandStream"
+                    + ValidationHelper.HashString(this)
+                    + "::Abort() - closing control Stream"
+            );
 
-        internal virtual void Abort(Exception e) {
-            GlobalLog.Print("CommandStream"+ValidationHelper.HashString(this)+"::Abort() - closing control Stream");
-
-            lock (this) {
+            lock (this)
+            {
                 if (m_Aborted)
                     return;
                 m_Aborted = true;
                 CanBePooled = false;
             }
 
-            try {
+            try
+            {
                 base.Close(0);
             }
-            finally {
-                if (e != null) {
+            finally
+            {
+                if (e != null)
+                {
                     InvokeRequestCallback(e);
-                } else {
+                }
+                else
+                {
                     InvokeRequestCallback(null);
                 }
             }
@@ -92,12 +102,13 @@ namespace System.Net {
         /// <summary>
         ///    <para>Used to reset the connection</para>
         /// </summary>
-        protected override void Dispose(bool disposing) {
-            GlobalLog.Print("CommandStream"+ValidationHelper.HashString(this)+"::Close()");
+        protected override void Dispose(bool disposing)
+        {
+            GlobalLog.Print("CommandStream" + ValidationHelper.HashString(this) + "::Close()");
             InvokeRequestCallback(null);
 
             // Do not call base.Dispose(bool), which would close the web request.
-            // This stream effectively should be a wrapper around a web 
+            // This stream effectively should be a wrapper around a web
             // request that does not own the web request.
         }
 
@@ -105,9 +116,11 @@ namespace System.Net {
         ///    <para>A WebRequest can use a different Connection after an Exception is set, or a null is passed
         ///         to mark completion.  We shouldn't continue calling the Request.RequestCallback after that point</para>
         /// </summary>
-        protected void InvokeRequestCallback(object obj) {
+        protected void InvokeRequestCallback(object obj)
+        {
             WebRequest webRequest = m_Request;
-            if (webRequest != null) {
+            if (webRequest != null)
+            {
                 webRequest.RequestCallback(obj);
             }
         }
@@ -115,17 +128,18 @@ namespace System.Net {
         /// <summary>
         ///    <para>Indicates that we caught an error that should allow us to resubmit a request</para>
         /// </summary>
-        internal bool RecoverableFailure {
-            get {
-                return m_RecoverableFailure;
-            }
+        internal bool RecoverableFailure
+        {
+            get { return m_RecoverableFailure; }
         }
 
         /// <summary>
         ///    <para>We only offer recovery, if we're at the start of the first command</para>
         /// </summary>
-        protected void MarkAsRecoverableFailure() {
-            if (m_Index <= 1) {
+        protected void MarkAsRecoverableFailure()
+        {
+            if (m_Index <= 1)
+            {
                 m_RecoverableFailure = true;
             }
         }
@@ -137,43 +151,63 @@ namespace System.Net {
         ///    </para>
         /// </devdoc>
 
-        internal Stream SubmitRequest(WebRequest request, bool async, bool readInitalResponseOnConnect) {
+        internal Stream SubmitRequest(
+            WebRequest request,
+            bool async,
+            bool readInitalResponseOnConnect
+        )
+        {
             ClearState();
             UpdateLifetime();
-            PipelineEntry [] commands = BuildCommandsList(request);
+            PipelineEntry[] commands = BuildCommandsList(request);
             InitCommandPipeline(request, commands, async);
-            if(readInitalResponseOnConnect && JustConnected){
+            if (readInitalResponseOnConnect && JustConnected)
+            {
                 m_DoSend = false;
                 m_Index = -1;
             }
             return ContinueCommandPipeline();
         }
 
-        protected virtual void ClearState() {
+        protected virtual void ClearState()
+        {
             InitCommandPipeline(null, null, false);
         }
 
-        protected virtual PipelineEntry [] BuildCommandsList(WebRequest request) {
+        protected virtual PipelineEntry[] BuildCommandsList(WebRequest request)
+        {
             return null;
         }
 
-        protected Exception GenerateException(WebExceptionStatus status, Exception innerException) {
+        protected Exception GenerateException(WebExceptionStatus status, Exception innerException)
+        {
             return new WebException(
-                            NetRes.GetWebStatusString("net_connclosed", status),
-                            innerException,
-                            status,
-                            null /* no response */ );
+                NetRes.GetWebStatusString("net_connclosed", status),
+                innerException,
+                status,
+                null /* no response */
+            );
         }
 
-
-        protected Exception GenerateException(FtpStatusCode code, string statusDescription, Exception innerException) {
-
-            return new WebException(SR.GetString(SR.net_servererror,NetRes.GetWebStatusCodeString(code, statusDescription)),
-                                    innerException,WebExceptionStatus.ProtocolError,null );
+        protected Exception GenerateException(
+            FtpStatusCode code,
+            string statusDescription,
+            Exception innerException
+        )
+        {
+            return new WebException(
+                SR.GetString(
+                    SR.net_servererror,
+                    NetRes.GetWebStatusCodeString(code, statusDescription)
+                ),
+                innerException,
+                WebExceptionStatus.ProtocolError,
+                null
+            );
         }
 
-
-        protected void InitCommandPipeline(WebRequest request, PipelineEntry [] commands, bool async) {
+        protected void InitCommandPipeline(WebRequest request, PipelineEntry[] commands, bool async)
+        {
             m_Commands = commands;
             m_Index = 0;
             m_Request = request;
@@ -186,13 +220,16 @@ namespace System.Net {
             m_AbortReason = string.Empty;
         }
 
-        internal void CheckContinuePipeline() 
+        internal void CheckContinuePipeline()
         {
             if (m_Async)
                 return;
-            try {
+            try
+            {
                 ContinueCommandPipeline();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Abort(e);
             }
         }
@@ -208,8 +245,8 @@ namespace System.Net {
         {
             // In async case, The BeginWrite can actually result in a
             // series of synchronous completions that eventually close
-            // the connection. So we need to save the members that 
-            // we need to access, since they may not be valid after 
+            // the connection. So we need to save the members that
+            // we need to access, since they may not be valid after
             // BeginWrite returns
             bool async = m_Async;
             while (m_Index < m_Commands.Length)
@@ -220,31 +257,51 @@ namespace System.Net {
                         throw new InternalException();
 
                     byte[] sendBuffer = Encoding.GetBytes(m_Commands[m_Index].Command);
-                    if (Logging.On) 
+                    if (Logging.On)
                     {
-                        string sendCommand = m_Commands[m_Index].Command.Substring(0, m_Commands[m_Index].Command.Length-2);
+                        string sendCommand = m_Commands[m_Index]
+                            .Command.Substring(0, m_Commands[m_Index].Command.Length - 2);
                         if (m_Commands[m_Index].HasFlag(PipelineEntryFlags.DontLogParameter))
                         {
                             int index = sendCommand.IndexOf(' ');
                             if (index != -1)
-                            sendCommand = sendCommand.Substring(0, index) + " ********";
+                                sendCommand = sendCommand.Substring(0, index) + " ********";
                         }
-                        Logging.PrintInfo(Logging.Web, this, SR.GetString(SR.net_log_sending_command, sendCommand));
+                        Logging.PrintInfo(
+                            Logging.Web,
+                            this,
+                            SR.GetString(SR.net_log_sending_command, sendCommand)
+                        );
                     }
-                    try {
-                        if (async) {
-                            BeginWrite(sendBuffer, 0, sendBuffer.Length, m_WriteCallbackDelegate, this);
-                        } else {
+                    try
+                    {
+                        if (async)
+                        {
+                            BeginWrite(
+                                sendBuffer,
+                                0,
+                                sendBuffer.Length,
+                                m_WriteCallbackDelegate,
+                                this
+                            );
+                        }
+                        else
+                        {
                             Write(sendBuffer, 0, sendBuffer.Length);
                         }
-                    } catch (IOException) {
+                    }
+                    catch (IOException)
+                    {
                         MarkAsRecoverableFailure();
                         throw;
-                    } catch {
+                    }
+                    catch
+                    {
                         throw;
                     }
 
-                    if (async) {
+                    if (async)
+                    {
                         return null;
                     }
                 }
@@ -264,50 +321,59 @@ namespace System.Net {
 
             return null;
         }
+
         //
         private bool PostSendCommandProcessing(ref Stream stream)
         {
-/*
-            ** I don;t see how this code can be still relevant, remove it of no problems observed **
-
-            //
-            // This is a general race condition in Sync mode, if the server returns an error
-            // after we open the data connection, we will be off reading the data connection,
-            // and not the control connection. The best we can do is try to poll, and in the
-            // the worst case, we will timeout on establishing the data connection.
-            //
-            if (!m_DoRead && !m_Async) {
-                m_DoRead = Poll(100 * 1000, SelectMode.SelectRead);   // Poll is in Microseconds.
-            }
-*/
+            /*
+                        ** I don;t see how this code can be still relevant, remove it of no problems observed **
+            
+                        //
+                        // This is a general race condition in Sync mode, if the server returns an error
+                        // after we open the data connection, we will be off reading the data connection,
+                        // and not the control connection. The best we can do is try to poll, and in the
+                        // the worst case, we will timeout on establishing the data connection.
+                        //
+                        if (!m_DoRead && !m_Async) {
+                            m_DoRead = Poll(100 * 1000, SelectMode.SelectRead);   // Poll is in Microseconds.
+                        }
+            */
             if (m_DoRead)
             {
                 // In async case, The next call can actually result in a
                 // series of synchronous completions that eventually close
-                // the connection. So we need to save the members that 
-                // we need to access, since they may not be valid after the 
+                // the connection. So we need to save the members that
+                // we need to access, since they may not be valid after the
                 // next call returns
-                bool async               = m_Async;
-                int index                = m_Index;
+                bool async = m_Async;
+                int index = m_Index;
                 PipelineEntry[] commands = m_Commands;
 
-                try {
+                try
+                {
                     ResponseDescription response = ReceiveCommandResponse();
-                    if (async) {
+                    if (async)
+                    {
                         return true;
                     }
                     m_CurrentResponseDescription = response;
-                } catch {
-                    // If we get an exception on the QUIT command (which is 
+                }
+                catch
+                {
+                    // If we get an exception on the QUIT command (which is
                     // always the last command), ignore the final exception
                     // and continue with the pipeline regardlss of sync/async
-                    if (index < 0 || index >= commands.Length ||
-                        commands[index].Command != "QUIT\r\n")
+                    if (
+                        index < 0
+                        || index >= commands.Length
+                        || commands[index].Command != "QUIT\r\n"
+                    )
                         throw;
                 }
             }
             return PostReadCommandProcessing(ref stream);
         }
+
         //
         private bool PostReadCommandProcessing(ref Stream stream)
         {
@@ -320,17 +386,17 @@ namespace System.Net {
 
             PipelineInstruction result;
             PipelineEntry entry;
-            if(m_Index == -1)
+            if (m_Index == -1)
                 entry = null;
             else
                 entry = m_Commands[m_Index];
 
-            // Final QUIT command may get exceptions since the connectin 
-            // may be already closed by the server. So there is no response 
+            // Final QUIT command may get exceptions since the connectin
+            // may be already closed by the server. So there is no response
             // to process, just advance the pipeline to continue
             if (m_CurrentResponseDescription == null && entry.Command == "QUIT\r\n")
                 result = PipelineInstruction.Advance;
-            else 
+            else
                 result = PipelineCallback(entry, m_CurrentResponseDescription, false, ref stream);
 
             if (result == PipelineInstruction.Abort)
@@ -349,7 +415,6 @@ namespace System.Net {
                 m_DoSend = true;
                 m_DoRead = true;
                 m_Index++;
-
             }
             else if (result == PipelineInstruction.Pause)
             {
@@ -383,38 +448,53 @@ namespace System.Net {
             return false;
         }
 
-        internal enum PipelineInstruction {
-            Abort,          // aborts the pipeline
-            Advance,        // advances to the next pipelined command
-            Pause,          // Let async callback to continue the pipeline
-            Reread,         // rereads from the command socket
-            GiveStream,     // returns with open data stream, let stream close to continue
+        internal enum PipelineInstruction
+        {
+            Abort, // aborts the pipeline
+            Advance, // advances to the next pipelined command
+            Pause, // Let async callback to continue the pipeline
+            Reread, // rereads from the command socket
+            GiveStream, // returns with open data stream, let stream close to continue
         }
 
         [Flags]
-        internal enum PipelineEntryFlags {
-            UserCommand           = 0x1,
-            GiveDataStream        = 0x2,
-            CreateDataConnection  = 0x4,
-            DontLogParameter      = 0x8
+        internal enum PipelineEntryFlags
+        {
+            UserCommand = 0x1,
+            GiveDataStream = 0x2,
+            CreateDataConnection = 0x4,
+            DontLogParameter = 0x8,
         }
 
-        internal class PipelineEntry {
-            internal PipelineEntry(string command) {
+        internal class PipelineEntry
+        {
+            internal PipelineEntry(string command)
+            {
                 Command = command;
             }
-            internal PipelineEntry(string command, PipelineEntryFlags flags) {
+
+            internal PipelineEntry(string command, PipelineEntryFlags flags)
+            {
                 Command = command;
                 Flags = flags;
             }
-            internal bool HasFlag(PipelineEntryFlags flags) {
+
+            internal bool HasFlag(PipelineEntryFlags flags)
+            {
                 return (Flags & flags) != 0;
             }
+
             internal string Command;
             internal PipelineEntryFlags Flags;
         }
 
-        protected virtual PipelineInstruction PipelineCallback(PipelineEntry entry, ResponseDescription response, bool timeout, ref Stream stream) {
+        protected virtual PipelineInstruction PipelineCallback(
+            PipelineEntry entry,
+            ResponseDescription response,
+            bool timeout,
+            ref Stream stream
+        )
+        {
             return PipelineInstruction.Abort;
         }
 
@@ -425,52 +505,65 @@ namespace System.Net {
         /// <summary>
         ///    <para>Provides a wrapper for the async operations, so that the code can be shared with sync</para>
         /// </summary>
-        private static void ReadCallback(IAsyncResult asyncResult) {
+        private static void ReadCallback(IAsyncResult asyncResult)
+        {
             ReceiveState state = (ReceiveState)asyncResult.AsyncState;
-            try {
+            try
+            {
                 Stream stream = (Stream)state.Connection;
                 int bytesRead = 0;
-                try {
+                try
+                {
                     bytesRead = stream.EndRead(asyncResult);
                     if (bytesRead == 0)
                         state.Connection.CloseSocket();
-                } 
-                catch (IOException) {
+                }
+                catch (IOException)
+                {
                     state.Connection.MarkAsRecoverableFailure();
                     throw;
                 }
-                catch {
+                catch
+                {
                     throw;
                 }
 
                 state.Connection.ReceiveCommandResponseCallback(state, bytesRead);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 state.Connection.Abort(e);
             }
         }
 
-
         /// <summary>
         ///    <para>Provides a wrapper for the async write operations</para>
         /// </summary>
-        private static void WriteCallback(IAsyncResult asyncResult) {
+        private static void WriteCallback(IAsyncResult asyncResult)
+        {
             CommandStream connection = (CommandStream)asyncResult.AsyncState;
-            try {
-                try {
+            try
+            {
+                try
+                {
                     connection.EndWrite(asyncResult);
-                } 
-                catch (IOException) {
+                }
+                catch (IOException)
+                {
                     connection.MarkAsRecoverableFailure();
                     throw;
                 }
-                catch {
+                catch
+                {
                     throw;
                 }
                 Stream stream = null;
                 if (connection.PostSendCommandProcessing(ref stream))
                     return;
                 connection.ContinueCommandPipeline();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 connection.Abort(e);
             }
         }
@@ -483,12 +576,11 @@ namespace System.Net {
         private Encoding m_Encoding = Encoding.UTF8;
         private Decoder m_Decoder;
 
-
-        protected Encoding Encoding {
-            get {
-                return m_Encoding;
-            }
-            set {
+        protected Encoding Encoding
+        {
+            get { return m_Encoding; }
+            set
+            {
                 m_Encoding = value;
                 m_Decoder = m_Encoding.GetDecoder();
             }
@@ -497,7 +589,12 @@ namespace System.Net {
         /// <summary>
         /// This function is called a derived class to determine whether a response is valid, and when it is complete.
         /// </summary>
-        protected virtual bool CheckValid(ResponseDescription response, ref int validThrough, ref int completeLength) {
+        protected virtual bool CheckValid(
+            ResponseDescription response,
+            ref int validThrough,
+            ref int completeLength
+        )
+        {
             return false;
         }
 
@@ -516,7 +613,7 @@ namespace System.Net {
                 // If a string of nonzero length was decoded from the buffered bytes after the last complete response, then we
                 // will use this string as our first string to append to the response StatusBuffer, and we will
                 // forego a Connection.Receive here.
-                if(m_Buffer.Length > 0)
+                if (m_Buffer.Length > 0)
                 {
                     ReceiveCommandResponseCallback(state, -1);
                 }
@@ -524,34 +621,46 @@ namespace System.Net {
                 {
                     int bytesRead;
 
-                    try {
-                        if (m_Async) {
-                            BeginRead(state.Buffer, 0, state.Buffer.Length, m_ReadCallbackDelegate, state);
+                    try
+                    {
+                        if (m_Async)
+                        {
+                            BeginRead(
+                                state.Buffer,
+                                0,
+                                state.Buffer.Length,
+                                m_ReadCallbackDelegate,
+                                state
+                            );
                             return null;
-                        } else {
+                        }
+                        else
+                        {
                             bytesRead = Read(state.Buffer, 0, state.Buffer.Length);
                             if (bytesRead == 0)
                                 CloseSocket();
                             ReceiveCommandResponseCallback(state, bytesRead);
                         }
-                    } 
-                    catch (IOException) {
+                    }
+                    catch (IOException)
+                    {
                         MarkAsRecoverableFailure();
                         throw;
                     }
-                    catch {
+                    catch
+                    {
                         throw;
                     }
                 }
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 if (e is WebException)
                     throw;
                 throw GenerateException(WebExceptionStatus.ReceiveFailure, e);
             }
             return state.Resp;
         }
-
 
         /// <summary>
         /// ReceiveCommandResponseCallback is the main "while loop" of the ReceiveCommandResponse function family.
@@ -575,25 +684,26 @@ namespace System.Net {
             {
                 int validThrough = state.ValidThrough; // passed to checkvalid
 
-
                 // If we have a Buffered response (ie data was received with the last response that was past the end of that response)
                 // deal with it as if we had just received it now instead of actually doing another receive
-                if(m_Buffer.Length > 0)
+                if (m_Buffer.Length > 0)
                 {
                     // Append the string we got from the buffer, and flush it out.
                     state.Resp.StatusBuffer.Append(m_Buffer);
                     m_Buffer = string.Empty;
 
                     // invoke checkvalid.
-                    if(!CheckValid(state.Resp, ref validThrough, ref completeLength)) {
+                    if (!CheckValid(state.Resp, ref validThrough, ref completeLength))
+                    {
                         throw GenerateException(WebExceptionStatus.ServerProtocolViolation, null);
                     }
                 }
                 else // we did a Connection.BeginReceive.  Note that in this case, all bytes received are in the receive buffer (because bytes from
-                    // the buffer were transferred there if necessary
+                // the buffer were transferred there if necessary
                 {
                     // this indicates the connection was closed.
-                    if(bytesRead <= 0)  {
+                    if (bytesRead <= 0)
+                    {
                         throw GenerateException(WebExceptionStatus.ServerProtocolViolation, null);
                     }
 
@@ -602,21 +712,25 @@ namespace System.Net {
 
                     char[] chars = new char[m_Decoder.GetCharCount(state.Buffer, 0, bytesRead)];
                     int numChars = m_Decoder.GetChars(state.Buffer, 0, bytesRead, chars, 0, false);
-                    
+
                     string szResponse = new string(chars, 0, numChars);
 
                     state.Resp.StatusBuffer.Append(szResponse);
-                    if(!CheckValid(state.Resp, ref validThrough, ref completeLength))
+                    if (!CheckValid(state.Resp, ref validThrough, ref completeLength))
                     {
                         throw GenerateException(WebExceptionStatus.ServerProtocolViolation, null);
                     }
 
                     // If the response is complete, then determine how many characters are left over...these bytes need to be set into Buffer.
-                    if(completeLength >= 0)
+                    if (completeLength >= 0)
                     {
                         int unusedChars = state.Resp.StatusBuffer.Length - completeLength;
-                        if (unusedChars > 0) {
-                            m_Buffer = szResponse.Substring(szResponse.Length-unusedChars, unusedChars);
+                        if (unusedChars > 0)
+                        {
+                            m_Buffer = szResponse.Substring(
+                                szResponse.Length - unusedChars,
+                                unusedChars
+                            );
                         }
                     }
                 }
@@ -625,25 +739,37 @@ namespace System.Net {
                 // and perform the next receive.
                 // Note that there may NOT be bytes in the beginning of the receive buffer (even if there were partial characters left over after the
                 // last encoding), because they get tracked in the Decoder.
-                if(completeLength < 0)
+                if (completeLength < 0)
                 {
                     state.ValidThrough = validThrough;
-                    try {
-                        if (m_Async) {
-                            BeginRead(state.Buffer, 0, state.Buffer.Length, m_ReadCallbackDelegate, state);
+                    try
+                    {
+                        if (m_Async)
+                        {
+                            BeginRead(
+                                state.Buffer,
+                                0,
+                                state.Buffer.Length,
+                                m_ReadCallbackDelegate,
+                                state
+                            );
                             return;
-                        } else {
+                        }
+                        else
+                        {
                             bytesRead = Read(state.Buffer, 0, state.Buffer.Length);
                             if (bytesRead == 0)
                                 CloseSocket();
                             continue;
                         }
-                    } 
-                    catch (IOException) {
+                    }
+                    catch (IOException)
+                    {
                         MarkAsRecoverableFailure();
                         throw;
                     }
-                    catch {
+                    catch
+                    {
                         throw;
                     }
                 }
@@ -651,17 +777,26 @@ namespace System.Net {
                 break;
             }
 
-
             // Otherwise, we have a complete response.
             string responseString = state.Resp.StatusBuffer.ToString();
             state.Resp.StatusDescription = responseString.Substring(0, completeLength);
             // set the StatusDescription to the complete part of the response.  Note that the Buffer has already been taken care of above.
 
-            if (Logging.On) Logging.PrintInfo(Logging.Web, this, SR.GetString(SR.net_log_received_response, responseString.Substring(0, completeLength-2)));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.Web,
+                    this,
+                    SR.GetString(
+                        SR.net_log_received_response,
+                        responseString.Substring(0, completeLength - 2)
+                    )
+                );
 
-            if (m_Async) {
+            if (m_Async)
+            {
                 // Tell who is listening what was received.
-                if (state.Resp != null) {
+                if (state.Resp != null)
+                {
                     m_CurrentResponseDescription = state.Resp;
                 }
                 Stream stream = null;
@@ -670,31 +805,45 @@ namespace System.Net {
                 ContinueCommandPipeline();
             }
         }
-
     } // class CommandStream
-
 
     /// <summary>
     /// Contains the parsed status line from the server
     /// </summary>
-    internal class ResponseDescription {
+    internal class ResponseDescription
+    {
         internal const int NoStatus = -1;
         internal bool Multiline = false;
 
-        internal int           Status = NoStatus;
-        internal string        StatusDescription;
+        internal int Status = NoStatus;
+        internal string StatusDescription;
         internal StringBuilder StatusBuffer = new StringBuilder();
 
-        internal string        StatusCodeString;
+        internal string StatusCodeString;
 
-        internal bool PositiveIntermediate   { get { return (Status >= 100 && Status <= 199); } }
-        internal bool PositiveCompletion     { get { return (Status >= 200 && Status <= 299); } }
+        internal bool PositiveIntermediate
+        {
+            get { return (Status >= 100 && Status <= 199); }
+        }
+        internal bool PositiveCompletion
+        {
+            get { return (Status >= 200 && Status <= 299); }
+        }
+
         //internal bool PositiveAuthRelated { get { return (Status >= 300 && Status <= 399); } }
-        internal bool TransientFailure { get { return (Status >= 400 && Status <= 499); }     }
-        internal bool PermanentFailure { get { return (Status >= 500 && Status <= 599); }    }
-        internal bool InvalidStatusCode { get { return (Status < 100 || Status > 599); }    }
+        internal bool TransientFailure
+        {
+            get { return (Status >= 400 && Status <= 499); }
+        }
+        internal bool PermanentFailure
+        {
+            get { return (Status >= 500 && Status <= 599); }
+        }
+        internal bool InvalidStatusCode
+        {
+            get { return (Status < 100 || Status > 599); }
+        }
     }
-
 
     /// <summary>
     /// State information that is used during ReceiveCommandResponse()'s async operations
@@ -712,11 +861,8 @@ namespace System.Net {
         {
             Connection = connection;
             Resp = new ResponseDescription();
-            Buffer = new byte[bufferSize];  //1024
+            Buffer = new byte[bufferSize]; //1024
             ValidThrough = 0;
         }
     }
-
-
-
 } // namespace System.Net

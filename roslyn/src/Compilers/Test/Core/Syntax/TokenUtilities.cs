@@ -15,8 +15,7 @@ namespace Roslyn.Test.Utilities
 {
     public static class TokenUtilities
     {
-        public static void AssertTokensEqual(
-            string expected, string actual, string language)
+        public static void AssertTokensEqual(string expected, string actual, string language)
         {
             var expectedTokens = GetTokens(expected, language);
             var actualTokens = GetTokens(actual, language);
@@ -46,7 +45,9 @@ namespace Roslyn.Test.Utilities
                         }
                     }
 
-                    AssertEx.Fail($"Unexpected token.  Actual '{actualAll}' Expected '{expectedAll}'\r\nActual:\r\n{actual}");
+                    AssertEx.Fail(
+                        $"Unexpected token.  Actual '{actualAll}' Expected '{expectedAll}'\r\nActual:\r\n{actual}"
+                    );
                 }
             }
 
@@ -54,8 +55,13 @@ namespace Roslyn.Test.Utilities
             {
                 var expectedDisplay = string.Join(" ", expectedTokens.Select(t => t.ToString()));
                 var actualDisplay = string.Join(" ", actualTokens.Select(t => t.ToString()));
-                AssertEx.Fail(@"Wrong token count. Expected '{0}', Actual '{1}', Expected Text: '{2}', Actual Text: '{3}'",
-                    expectedTokens.Count, actualTokens.Count, expectedDisplay, actualDisplay);
+                AssertEx.Fail(
+                    @"Wrong token count. Expected '{0}', Actual '{1}', Expected Text: '{2}', Actual Text: '{3}'",
+                    expectedTokens.Count,
+                    actualTokens.Count,
+                    expectedDisplay,
+                    actualDisplay
+                );
             }
         }
 
@@ -73,11 +79,19 @@ namespace Roslyn.Test.Utilities
         {
             if (language == LanguageNames.CSharp)
             {
-                return CS.SyntaxFactory.ParseTokens(text).Select(t => (SyntaxToken)t).Where(t => !SkipCSharpToken(t)).ToList();
+                return CS
+                    .SyntaxFactory.ParseTokens(text)
+                    .Select(t => (SyntaxToken)t)
+                    .Where(t => !SkipCSharpToken(t))
+                    .ToList();
             }
             else
             {
-                return VB.SyntaxFactory.ParseTokens(text).Select(t => (SyntaxToken)t).Where(t => !SkipVisualBasicToken(t)).ToList();
+                return VB
+                    .SyntaxFactory.ParseTokens(text)
+                    .Select(t => (SyntaxToken)t)
+                    .Where(t => !SkipVisualBasicToken(t))
+                    .ToList();
             }
         }
 
@@ -93,15 +107,25 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        internal static SyntaxNode GetSyntaxRoot(string expectedText, string language, ParseOptions options = null)
+        internal static SyntaxNode GetSyntaxRoot(
+            string expectedText,
+            string language,
+            ParseOptions options = null
+        )
         {
             if (language == LanguageNames.CSharp)
             {
-                return CS.SyntaxFactory.ParseCompilationUnit(expectedText, options: (CS.CSharpParseOptions)options);
+                return CS.SyntaxFactory.ParseCompilationUnit(
+                    expectedText,
+                    options: (CS.CSharpParseOptions)options
+                );
             }
             else
             {
-                return VB.SyntaxFactory.ParseCompilationUnit(expectedText, options: (VB.VisualBasicParseOptions)options);
+                return VB.SyntaxFactory.ParseCompilationUnit(
+                    expectedText,
+                    options: (VB.VisualBasicParseOptions)options
+                );
             }
         }
     }

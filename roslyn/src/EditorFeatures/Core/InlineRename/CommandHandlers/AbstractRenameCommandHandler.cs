@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         protected AbstractRenameCommandHandler(
             IThreadingContext threadingContext,
             InlineRenameService renameService,
-            IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider)
+            IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _renameService = renameService;
@@ -53,10 +54,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             return nextHandler();
         }
 
-        private CommandState GetCommandState()
-            => _renameService.ActiveSession != null ? CommandState.Available : CommandState.Unspecified;
+        private CommandState GetCommandState() =>
+            _renameService.ActiveSession != null
+                ? CommandState.Available
+                : CommandState.Unspecified;
 
-        private void HandlePossibleTypingCommand<TArgs>(TArgs args, Action nextHandler, Action<InlineRenameSession, SnapshotSpan> actionIfInsideActiveSpan)
+        private void HandlePossibleTypingCommand<TArgs>(
+            TArgs args,
+            Action nextHandler,
+            Action<InlineRenameSession, SnapshotSpan> actionIfInsideActiveSpan
+        )
             where TArgs : EditorCommandArgs
         {
             if (_renameService.ActiveSession == null)
@@ -65,7 +72,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return;
             }
 
-            var selectedSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(args.SubjectBuffer);
+            var selectedSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(
+                args.SubjectBuffer
+            );
 
             if (selectedSpans.Count > 1)
             {
@@ -76,14 +85,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
 
             var singleSpan = selectedSpans.Single();
-            if (_renameService.ActiveSession.TryGetContainingEditableSpan(singleSpan.Start, out var containingSpan) &&
-                containingSpan.Contains(singleSpan))
+            if (
+                _renameService.ActiveSession.TryGetContainingEditableSpan(
+                    singleSpan.Start,
+                    out var containingSpan
+                ) && containingSpan.Contains(singleSpan)
+            )
             {
                 actionIfInsideActiveSpan(_renameService.ActiveSession, containingSpan);
             }
             else if (_renameService.ActiveSession.IsInOpenTextBuffer(singleSpan.Start))
             {
-                // It's in a read-only area that is open, so let's commit the rename 
+                // It's in a read-only area that is open, so let's commit the rename
                 // and then let the character go through
 
                 CommitIfActiveAndCallNextHandler(args, nextHandler);
@@ -103,7 +116,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                 _renameService.ActiveSession.Commit();
 
-                var translatedSelection = selection.TranslateTo(args.TextView.TextBuffer.CurrentSnapshot);
+                var translatedSelection = selection.TranslateTo(
+                    args.TextView.TextBuffer.CurrentSnapshot
+                );
                 args.TextView.Selection.Select(translatedSelection.Start, translatedSelection.End);
                 args.TextView.Caret.MoveTo(translatedSelection.End);
             }

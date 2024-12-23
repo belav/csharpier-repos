@@ -3,8 +3,8 @@
 //
 // Basic test for dependent handles.
 //
-// Note that though this test uses ConditionalWeakTable it is not a test for that class. This is a stress 
-// test that utilizes ConditionalWeakTable features, which would be used heavily if Dynamic Language Runtime 
+// Note that though this test uses ConditionalWeakTable it is not a test for that class. This is a stress
+// test that utilizes ConditionalWeakTable features, which would be used heavily if Dynamic Language Runtime
 // catches on.
 //
 // Basic test overview:
@@ -46,20 +46,22 @@ using Xunit;
 // How we assign nodes to dependent handles.
 enum TableStyle
 {
-    Unconnected,    // The primary and secondary handles are assigned completely disjoint objects
-    ForwardLinked,  // The primary of each handle is the secondary of the previous handle
+    Unconnected, // The primary and secondary handles are assigned completely disjoint objects
+    ForwardLinked, // The primary of each handle is the secondary of the previous handle
     BackwardLinked, // The primary of each handle is the secondary of the next handle
-    Random          // The primaries are each object in sequence, the secondaries are selected randomly from
-                    // the same set
+    Random // The primaries are each object in sequence, the secondaries are selected randomly from
+    ,
+    // the same set
 }
 
 // How we choose object references in the array to null out (and thus potentially become collected).
 enum CollectStyle
 {
-    None,           // Don't null out any (nothing should be collected)
-    All,            // Null them all out (any remaining live objects should be collected)
-    Alternate,      // Null out every second reference
-    Random          // Null out each entry with a 50% probability
+    None, // Don't null out any (nothing should be collected)
+    All, // Null them all out (any remaining live objects should be collected)
+    Alternate, // Null out every second reference
+    Random // Null out each entry with a 50% probability
+    ,
 }
 
 // We report errors by throwing an exception. Define our own Exception subclass so we can identify these
@@ -67,9 +69,8 @@ enum CollectStyle
 class TestException : Exception
 {
     // We just supply a simple message string on error.
-    public TestException(string message) : base(message)
-    {
-    }
+    public TestException(string message)
+        : base(message) { }
 }
 
 // Class encapsulating test runs over a set of objects/handles allocated with the specified TableStyle.
@@ -87,12 +88,12 @@ class TestSet
         m_style = ts;
 
         // Various arrays.
-        m_nodes = new Node[count];      // The array of objects
-        m_collected = new bool[count];  // Records whether each object has been collected (entries are set by
-                                        // the finalizer on Node)
-        m_marks = new bool[count];      // Array used during individual test runs to calculate whether each
-                                        // object should still be alive (allocated once here to avoid
-                                        // injecting further garbage collections at run time)
+        m_nodes = new Node[count]; // The array of objects
+        m_collected = new bool[count]; // Records whether each object has been collected (entries are set by
+        // the finalizer on Node)
+        m_marks = new bool[count]; // Array used during individual test runs to calculate whether each
+        // object should still be alive (allocated once here to avoid
+        // injecting further garbage collections at run time)
 
         // Allocate each object (Node). Each knows its own unique ID (the index into the node array) and has a
         // back pointer to this test object (so it can phone home to report its own collection at finalization
@@ -104,29 +105,29 @@ class TestSet
         // table style.
         switch (ts)
         {
-        case TableStyle.Unconnected:
-            // Primaries and secondaries are completely different objects so we split our nodes in half and
-            // allocate that many handles.
-            m_handleCount = count / 2;
-            break;
+            case TableStyle.Unconnected:
+                // Primaries and secondaries are completely different objects so we split our nodes in half and
+                // allocate that many handles.
+                m_handleCount = count / 2;
+                break;
 
-        case TableStyle.ForwardLinked:
-            // Nodes are primaries in one handle and secondary in another except one that falls off the end.
-            // So we have as many handles as nodes - 1.
-            m_handleCount = count - 1;
-            break;
+            case TableStyle.ForwardLinked:
+                // Nodes are primaries in one handle and secondary in another except one that falls off the end.
+                // So we have as many handles as nodes - 1.
+                m_handleCount = count - 1;
+                break;
 
-        case TableStyle.BackwardLinked:
-            // Nodes are primaries in one handle and secondary in another except one that falls off the end.
-            // So we have as many handles as nodes - 1.
-            m_handleCount = count - 1;
-            break;
+            case TableStyle.BackwardLinked:
+                // Nodes are primaries in one handle and secondary in another except one that falls off the end.
+                // So we have as many handles as nodes - 1.
+                m_handleCount = count - 1;
+                break;
 
-        case TableStyle.Random:
-            // Each node is a primary in some handle (secondaries are selected from amongst all the same nodes
-            // randomly). So we have as many nodes as handles.
-            m_handleCount = count;
-            break;
+            case TableStyle.Random:
+                // Each node is a primary in some handle (secondaries are selected from amongst all the same nodes
+                // randomly). So we have as many nodes as handles.
+                m_handleCount = count;
+                break;
         }
 
         // Allocate an array of HandleSpecs. These aren't the real handles, just structures that allow us
@@ -139,33 +140,34 @@ class TestSet
         // Initialize the handle specs to assign objects to handles based on the table style.
         for (int i = 0; i < m_handleCount; i++)
         {
-            int primary = -1, secondary = -1;
+            int primary = -1,
+                secondary = -1;
 
             switch (ts)
             {
-            case TableStyle.Unconnected:
-                // Assign adjacent nodes to the primary and secondary of each handle.
-                primary = i * 2;
-                secondary = (i * 2) + 1;
-                break;
+                case TableStyle.Unconnected:
+                    // Assign adjacent nodes to the primary and secondary of each handle.
+                    primary = i * 2;
+                    secondary = (i * 2) + 1;
+                    break;
 
-            case TableStyle.ForwardLinked:
-                // Primary of each handle is the secondary of the last handle.
-                primary = i;
-                secondary = i + 1;
-                break;
+                case TableStyle.ForwardLinked:
+                    // Primary of each handle is the secondary of the last handle.
+                    primary = i;
+                    secondary = i + 1;
+                    break;
 
-            case TableStyle.BackwardLinked:
-                // Primary of each handle is the secondary of the next handle.
-                primary = i + 1;
-                secondary = i;
-                break;
+                case TableStyle.BackwardLinked:
+                    // Primary of each handle is the secondary of the next handle.
+                    primary = i + 1;
+                    secondary = i;
+                    break;
 
-            case TableStyle.Random:
-                // Primary is each node in sequence, secondary is any of the nodes randomly.
-                primary = i;
-                secondary = m_rng.Next(m_handleCount);
-                break;
+                case TableStyle.Random:
+                    // Primary is each node in sequence, secondary is any of the nodes randomly.
+                    primary = i;
+                    secondary = m_rng.Next(m_handleCount);
+                    break;
             }
 
             m_handles[i].Set(primary, secondary);
@@ -196,10 +198,12 @@ class TestSet
     // collect all nodes, rendering further runs relatively uninteresting.
     public void Run(CollectStyle cs)
     {
-        Console.WriteLine("Running test TS:{0} CS:{1} {2} entries...",
-                          Enum.GetName(typeof(TableStyle), m_style),
-                          Enum.GetName(typeof(CollectStyle), cs),
-                          m_count);
+        Console.WriteLine(
+            "Running test TS:{0} CS:{1} {2} entries...",
+            Enum.GetName(typeof(TableStyle), m_style),
+            Enum.GetName(typeof(CollectStyle), cs),
+            m_count
+        );
 
         // Iterate over the array of nodes deciding for each whether to sever the reference (null out the
         // entry).
@@ -208,26 +212,26 @@ class TestSet
             bool sever = false;
             switch (cs)
             {
-            case CollectStyle.All:
-                // Sever all references.
-                sever = true;
-                break;
-
-            case CollectStyle.None:
-                // Don't sever any references.
-                break;
-
-            case CollectStyle.Alternate:
-                // Sever every second reference (starting with the first).
-                if ((i % 2) == 0)
+                case CollectStyle.All:
+                    // Sever all references.
                     sever = true;
-                break;
+                    break;
 
-            case CollectStyle.Random:
-                // Sever any reference with a 50% probability.
-                if (m_rng.Next(100) > 50)
-                    sever = true;
-                break;
+                case CollectStyle.None:
+                    // Don't sever any references.
+                    break;
+
+                case CollectStyle.Alternate:
+                    // Sever every second reference (starting with the first).
+                    if ((i % 2) == 0)
+                        sever = true;
+                    break;
+
+                case CollectStyle.Random:
+                    // Sever any reference with a 50% probability.
+                    if (m_rng.Next(100) > 50)
+                        sever = true;
+                    break;
             }
 
             if (sever)
@@ -263,7 +267,6 @@ class TestSet
 
             // Look at each handle in turn.
             for (int i = 0; i < m_handleCount; i++)
-
                 if (m_marks[m_handles[i].m_primary])
                 {
                     // Primary is live.
@@ -315,8 +318,8 @@ class TestSet
     // are identified by ID (their index into the node array).
     struct HandleSpec
     {
-        public int                      m_primary;
-        public int                      m_secondary;
+        public int m_primary;
+        public int m_secondary;
 
         public void Set(int primary, int secondary)
         {
@@ -325,15 +328,15 @@ class TestSet
         }
     }
 
-    int                                 m_count;        // Count of nodes in array
-    TableStyle                          m_style;        // Style of handle creation
-    Node[]                              m_nodes;        // Array of nodes
-    bool[]                              m_collected;    // Array indicating which nodes have been collected
-    bool[]                              m_marks;        // Array indicating which nodes should be live 
-    ConditionalWeakTable<Node, Node>    m_table;        // Table that creates and holds our dependent handles
-    int                                 m_handleCount;  // Number of handles we create
-    HandleSpec[]                        m_handles;      // Array of descriptions of each handle
-    Random                              m_rng;          // Random number generator
+    int m_count; // Count of nodes in array
+    TableStyle m_style; // Style of handle creation
+    Node[] m_nodes; // Array of nodes
+    bool[] m_collected; // Array indicating which nodes have been collected
+    bool[] m_marks; // Array indicating which nodes should be live
+    ConditionalWeakTable<Node, Node> m_table; // Table that creates and holds our dependent handles
+    int m_handleCount; // Number of handles we create
+    HandleSpec[] m_handles; // Array of descriptions of each handle
+    Random m_rng; // Random number generator
 }
 
 // The type of object we reference from our dependent handles. Doesn't do much except report its own garbage
@@ -353,8 +356,8 @@ class Node
         m_owner.Collected(m_id);
     }
 
-    TestSet                             m_owner;        // TestSet which created us
-    int                                 m_id;           // Our index into above TestSet's node array
+    TestSet m_owner; // TestSet which created us
+    int m_id; // Our index into above TestSet's node array
 }
 
 // The test class itself.
@@ -433,4 +436,3 @@ public class DhTest1
         return true;
     }
 }
-

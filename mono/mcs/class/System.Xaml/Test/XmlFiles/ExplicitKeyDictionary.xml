@@ -1,8 +1,11 @@
-<ExplicitKeyDictionary xmlns="clr-namespace:MonoTests.System.Xaml;assembly=System.Xaml_test_net_4_0" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <MyNamedItem x:Key="X">
-    <x:Arguments>
-      <x:String>foo</x:String>
-      <x:String>v1</x:String>
-    </x:Arguments>
+<ExplicitKeyDictionary
+  xmlns="clr-namespace:MonoTests.System.Xaml;assembly=System.Xaml_test_net_4_0"
+  {http://www.w3.org/2000/xmlns/}x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+  <MyNamedItem {http://schemas.microsoft.com/winfx/2006/xaml}Key="X">
+    <Arguments>
+      <String>foo</String>
+      <String>v1</String>
+    </Arguments>
   </MyNamedItem>
 </ExplicitKeyDictionary>
