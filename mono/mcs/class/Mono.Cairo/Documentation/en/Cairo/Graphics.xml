@@ -27,11 +27,15 @@
 
           
 
+          
+
            on which this Graphics object will render everything.</param
         >
         <summary
           >Creates a <see
            cref="T:Cairo.Graphics" />
+
+          
 
           
 
@@ -45,13 +49,19 @@ Note that the <paramref
 
           
 
+          
+
            can be a <see
            cref="T:Cairo.Surface" />
 
           
 
+          
+
            or <see
            cref="T:Cairo.ImageSurface" />
+
+          
 
           
 
@@ -77,6 +87,8 @@ Note that the <paramref
 
           
 
+          
+
            class.</summary
         >
         <remarks />
@@ -98,6 +110,8 @@ Note that the <paramref
         <remarks
           >This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports <see
            cref="F:Cairo.Antialias.Subpixel" />
+
+          
 
           
 
@@ -135,6 +149,8 @@ Note that the <paramref
         <summary
           >The current Color in the drawing context (obsolete, use <see
            cref="P:Cairo.Graphics.Color" />
+
+          
 
           
 
@@ -202,6 +218,8 @@ Note that the <paramref
 
           
 
+          
+
            structure</value
         >
         <remarks />
@@ -223,6 +241,8 @@ Note that the <paramref
         <remarks
           >The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see <see
            cref="M:Cairo.Graphics.SetFontSize()" />
+
+          
 
           
 
@@ -280,6 +300,8 @@ Note that the <paramref
 
           
 
+          
+
           .</value
         >
         <remarks />
@@ -300,6 +322,8 @@ Note that the <paramref
         <value
           >See <see
            cref="T:Cairo.LineJoin" />
+
+          
 
           
 
@@ -395,11 +419,15 @@ Note that the <paramref
 
           
 
+          
+
           .</summary
         >
         <value
           >See <see
            cref="P:Cairo.Graphics.Source" />
+
+          
 
           
 
@@ -425,11 +453,15 @@ Note that the <paramref
 
           
 
+          
+
           .</summary
         >
         <value
           >A <see
            cref="T:Cairo.Pattern" />
+
+          
 
           
 
@@ -469,6 +501,8 @@ Note that the <paramref
         <summary
           >Gets the target surface for the cairo context as passed to <see
            cref="C:Cairo.Graphics()" />
+
+          
 
           
 

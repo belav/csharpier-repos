@@ -12,6 +12,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -57,11 +59,15 @@
 
           
 
+          
+
            representing the PE file to hash.</param
         >
         <param name="hashName"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 

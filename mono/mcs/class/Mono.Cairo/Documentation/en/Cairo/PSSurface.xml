@@ -37,11 +37,15 @@
 
           
 
+          
+
            (1 point == 1/72.0 inch)</param
         >
         <param name="height"
           >height of the surface, in points as <see
            cref="t:System.Double" />
+
+          
 
           
 
@@ -67,6 +71,8 @@
         <remarks
           >Note that it is only necessary to call <see
            cref="M:Cairo.PSSurface.BeginPageSetup" />
+
+          
 
           
 
@@ -133,11 +139,15 @@
 
           
 
+          
+
            (1 point == 1/72.0 inch)</param
         >
         <param name="height"
           >The new surface height in points as <see
            cref="t:System.Double" />
+
+          
 
           
 

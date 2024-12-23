@@ -15,12 +15,16 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
     <summary
       >Represents a list of <see
        cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+
+      
 
       
 
@@ -58,6 +62,8 @@
 
           
 
+          
+
            to be added.</param
         >
         <remarks>To be added.</remarks>
@@ -84,11 +90,15 @@
 
           
 
+          
+
            that indicates the position.</param
         >
         <param name="p"
           >a <see
            cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+
+          
 
           
 
@@ -114,6 +124,8 @@
         <param name="p"
           >a <see
            cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+
+          
 
           
 
@@ -152,11 +164,15 @@
 
           
 
+          
+
            that indicates the location.</param
         >
         <value
           >a <see
            cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
+
+          
 
           
 

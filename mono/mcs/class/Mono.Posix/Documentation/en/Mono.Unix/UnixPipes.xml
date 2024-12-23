@@ -32,9 +32,13 @@
 
         
 
+        
+
          is an object allowing bidirectional data flow
         through a pair of <see
          cref="T:Mono.Unix.UnixStream" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          is the <i
         >read end</i>
+
+        
 
         
 
@@ -57,9 +65,13 @@
 
         
 
+        
+
          is the
         <i
         >write end</i>
+
+        
 
         
 
@@ -69,9 +81,13 @@
 
         
 
+        
+
          can be read through 
         <see
          cref="F:Mono.Unix.UnixPipes.Reading" />
+
+        
 
         
 
@@ -90,9 +106,13 @@
 
         
 
+        
+
          and
         <see
          cref="F:Mono.Unix.UnixPipes.Writing" />
+
+        
 
         
 
@@ -105,6 +125,8 @@
         Writing on such a pipe causes the writing process to receive a 
         <see
          cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
+
+        
 
         
 
@@ -144,15 +166,21 @@
 
           
 
+          
+
            that permits reading.  
           Data written to <paramref
            name="writing" />
 
           
 
+          
+
            can be read from 
           <paramref
            name="reading" />
+
+          
 
           
 
@@ -166,15 +194,21 @@
 
           
 
+          
+
            that permits writing.  
           Data written to <paramref
            name="writing" />
 
           
 
+          
+
            can be read from 
           <paramref
            name="reading" />
+
+          
 
           
 
@@ -189,14 +223,20 @@
 
           
 
+          
+
            class using the specified
           <paramref
            name="reading" />
 
           
 
+          
+
            and <paramref
            name="writing" />
+
+          
 
           
 
@@ -231,15 +271,21 @@
 
           
 
+          
+
            instance containing the "read
           end" (<see
            cref="F:Mono.Unix.UnixPipes.Reading" />
 
           
 
+          
+
           )
           and the "write end" (<see
            cref="F:Mono.Unix.UnixPipes.Writing" />
+
+          
 
           
 
@@ -257,6 +303,8 @@
 
             
 
+            
+
              instances.
           </para
           >
@@ -270,6 +318,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -279,6 +329,8 @@
             The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -314,6 +366,8 @@
 
           
 
+          
+
            to compare the current instance
           against.
         </param
@@ -327,14 +381,20 @@
 
           
 
+          
+
            if <paramref
            name="obj" />
+
+          
 
           
 
            is a 
           <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -345,15 +405,21 @@
 
           
 
+          
+
            and
           <see
            cref="F:Mono.Unix.UnixPipes.Writing" />
 
           
 
+          
+
            match; otherwise, 
           <see
            langword="false" />
+
+          
 
           
 
@@ -440,6 +506,8 @@
 
           
 
+          
+
            to compare.
         </param
         >
@@ -447,6 +515,8 @@
           >
           The second <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -460,9 +530,13 @@
 
           
 
+          
+
            value indicating whether
           the two specified <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -475,8 +549,12 @@
 
           
 
+          
+
            if <paramref
            name="lhs" />
+
+          
 
           
 
@@ -486,9 +564,13 @@
 
           
 
+          
+
            represent the same 
           <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -530,6 +612,8 @@
 
           
 
+          
+
            to compare.
         </param
         >
@@ -537,6 +621,8 @@
           >
           The second <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -550,9 +636,13 @@
 
           
 
+          
+
            value indicating whether
           the two specified <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -565,8 +655,12 @@
 
           
 
+          
+
            if <paramref
            name="lhs" />
+
+          
 
           
 
@@ -576,9 +670,13 @@
 
           
 
+          
+
            do not represent the same 
           <see
            cref="T:Mono.Unix.UnixPipes" />
+
+          
 
           
 
@@ -610,9 +708,13 @@
 
           
 
+          
+
            instance that reads any data
           written to the <see
            cref="F:Mono.Unix.UnixPipes.Writing" />
+
+          
 
           
 
@@ -626,6 +728,8 @@
             Writing on such a pipe causes the writing process to receive a 
             <see
              cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
+
+            
 
             
 
@@ -658,10 +762,14 @@
 
           
 
+          
+
            instance that, when written
           to, makes all data available for reading from the
           <see
            cref="F:Mono.Unix.UnixPipes.Reading" />
+
+          
 
           
 
@@ -675,6 +783,8 @@
             Writing on such a pipe causes the writing process to receive a 
             <see
              cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
+
+            
 
             
 

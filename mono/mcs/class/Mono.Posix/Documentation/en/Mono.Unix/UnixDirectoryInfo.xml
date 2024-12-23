@@ -27,6 +27,8 @@
 
         
 
+        
+
          class presents
       information about a directory.  It also allows basic manipulations of 
       filesystem structure:</para
@@ -37,6 +39,8 @@
             >Directory creation with 
           <see
              cref="M:Mono.Unix.UnixDirectoryInfo.Create" />
+
+            
 
             
 
@@ -51,6 +55,8 @@
 
             
 
+            
+
             .</term
           >
         </item>
@@ -59,6 +65,8 @@
             >Movement with 
           <see
              cref="M:Mono.Unix.UnixDirectoryInfo.SetCurrentDirectory" />
+
+            
 
             
 
@@ -72,9 +80,13 @@
 
             
 
+            
+
              and 
           <see
              cref="M:Mono.Unix.UnixDirectoryInfo.GetFileSystemEntries" />
+
+            
 
             
 
@@ -109,11 +121,15 @@
 
           
 
+          
+
            containing the directory to query.</param
         >
         <summary
           >Creates a new <see
            cref="T:Mono.Unix.UnixDirectoryInfo" />
+
+          
 
           
 
@@ -124,12 +140,16 @@
 
           
 
+          
+
           .</summary
         >
         <remarks>
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -145,6 +165,8 @@
 
               
 
+              
+
               .
           </block
             >
@@ -156,10 +178,14 @@
 
             
 
+            
+
              objects for directories 
           that do not exist or for files.  However, attempts to use
           the <see
              cref="T:Mono.Unix.UnixDirectoryInfo" />
+
+            
 
             
 
@@ -169,9 +195,13 @@
 
             
 
+            
+
             s.
           Use <see
              cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
+
+            
 
             
 
@@ -181,15 +211,21 @@
 
             
 
+            
+
              exists and 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.IsDirectory" />
 
             
 
+            
+
              to ensure
           that <paramref
              name="path" />
+
+            
 
             
 
@@ -201,8 +237,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -214,9 +254,13 @@
 
           
 
+          
+
            contains invalid characters; see
           <see
            cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+
+          
 
           
 
@@ -249,6 +293,8 @@
 
           
 
+          
+
           .</summary
         >
         <remarks
@@ -260,13 +306,19 @@
             
 
             
+
+            
             (<see
              cref="F:Mono.Unix.FileAccessPermissions.AllPermissions" />
 
             
 
+            
+
             )</c
           >
+
+          
 
           
 
@@ -279,9 +331,13 @@
 
             
 
+            
+
              obeys the process'
             <see
              cref="M:Mono.Unix.Native.Syscall.umask" />
+
+            
 
             
 
@@ -297,9 +353,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -314,9 +374,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -332,10 +396,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -347,10 +415,14 @@
 
           
 
+          
+
            does not
           exist.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -366,6 +438,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -375,6 +449,8 @@
           file system.
           [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -390,12 +466,16 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -407,9 +487,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -425,6 +509,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -434,9 +520,13 @@
 
           
 
+          
+
            was too long.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -451,9 +541,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -463,6 +557,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -473,12 +569,16 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -490,6 +590,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -499,11 +601,15 @@
 
             
 
+            
+
              cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
           [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -542,6 +648,8 @@
 
           
 
+          
+
            instance containing
         the file permissions the created directory should have.</param
         >
@@ -549,6 +657,8 @@
           >Create the directory 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -562,9 +672,13 @@
 
             
 
+            
+
              obeys the process'
             <see
              cref="M:Mono.Unix.Native.Syscall.umask" />
+
+            
 
             
 
@@ -580,9 +694,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -597,9 +715,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -615,10 +737,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -630,10 +756,14 @@
 
           
 
+          
+
            does not
           exist.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -649,6 +779,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -658,6 +790,8 @@
           file system.
           [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -673,12 +807,16 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -690,9 +828,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -708,6 +850,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -717,9 +861,13 @@
 
           
 
+          
+
            was too long.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -734,9 +882,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -746,6 +898,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -756,12 +910,16 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -773,6 +931,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -782,11 +942,15 @@
 
             
 
+            
+
              cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
           [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -831,6 +995,8 @@
 
           
 
+          
+
            instance containing
         the file permissions the created directory should have.</param
         >
@@ -838,6 +1004,8 @@
           >Create the directory 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -852,9 +1020,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -869,9 +1041,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -887,10 +1063,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -902,10 +1082,14 @@
 
           
 
+          
+
            does not
           exist.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -921,6 +1105,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -930,6 +1116,8 @@
           file system.
           [<see
              cref="F:Mono.Unix.Native.Errno.EIO" />
+
+            
 
             
 
@@ -945,12 +1133,16 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -962,9 +1154,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -980,6 +1176,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -989,9 +1187,13 @@
 
           
 
+          
+
            was too long.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -1006,9 +1208,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -1018,6 +1224,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1028,12 +1236,16 @@
 
             
 
+            
+
             ]
           </para
           >
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1045,6 +1257,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1054,11 +1268,15 @@
 
             
 
+            
+
              cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
           [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1115,15 +1333,21 @@
 
           
 
+          
+
            to delete all files
         and sub-directories in <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
 
           
 
+          
+
           ; 
         otherwise, specify <see
            langword="false" />
+
+          
 
           
 
@@ -1136,9 +1360,13 @@
           
 
           
+
+          
         and, if indicated, removes all files and directories within
         Deletes <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1151,15 +1379,21 @@
 
             
 
+            
+
              is the default value for the 
           <paramref
              name="recursive" />
 
             
 
+            
+
              parameter.  Thus, 
           <see
              cref="M:Mono.Unix.UnixFileSystemInfo.Delete" />
+
+            
 
             
 
@@ -1175,10 +1409,14 @@
 
             
 
+            
+
              does not
           support the removal of file system entries.
           [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -1193,9 +1431,13 @@
 
             
 
+            
+
              
           has the <see
              cref="F:Mono.Unix.FileSpecialAttributes.Sticky" />
+
+            
 
             
 
@@ -1206,11 +1448,15 @@
 
             
 
+            
+
              is
           neither the uid of the file to be deleted nor that of the directory
           containing it.
           [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -1226,6 +1472,8 @@
 
             
 
+            
+
              was not
           allowed for the processe's effective user id 
           <see
@@ -1233,9 +1481,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -1250,10 +1502,14 @@
 
             
 
+            
+
              did not have
           search (execute) permissions.
           [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -1269,10 +1525,14 @@
 
           
 
+          
+
            is not a
           directory.  
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -1284,10 +1544,14 @@
 
           
 
+          
+
            does not
           exist.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -1300,9 +1564,13 @@
 
             
 
+            
+
              contains 
           files other than '<c
             >.</c>
+
+            
 
             
 
@@ -1311,9 +1579,13 @@
 
             
 
+            
+
             ' in it.
           [<see
              cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />
+
+            
 
             
 
@@ -1329,6 +1601,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1341,6 +1615,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1350,9 +1626,13 @@
 
           
 
+          
+
            was too long.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -1367,9 +1647,13 @@
 
             
 
+            
+
             .
           [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -1382,6 +1666,8 @@
           filesystem.
           [<see
              cref="F:Mono.Unix.Native.Errno.EBUSY" />
+
+            
 
             
 
@@ -1417,6 +1703,8 @@
 
             
 
+            
+
              containing the path of the current working directory.</para
           >
         </returns>
@@ -1430,6 +1718,8 @@
 
           
 
+          
+
           ]
         </exception
         >
@@ -1438,6 +1728,8 @@
           The current working directory has been unlinked.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -1471,6 +1763,8 @@
 
           
 
+          
+
            directory.</summary
         >
         <returns
@@ -1479,10 +1773,14 @@
 
           
 
+          
+
            array containing
         all file system entries within the 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+
+          
 
           
 
@@ -1496,9 +1794,13 @@
 
             
 
+            
+
              field of
           the returned <see
              cref="T:Mono.Unix.Native.Dirent" />
+
+            
 
             
 
@@ -1511,10 +1813,14 @@
 
             
 
+            
+
             , e.g.
           <c
             >
               <see cref="M:Mono.Unix.UnixPath.Combine" />
+
+              
 
               
 
@@ -1524,9 +1830,13 @@
 
               
 
+              
+
               , 
           <paramref
                name="dirent[index]" />
+
+              
 
               
 
@@ -1535,8 +1845,12 @@
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -1550,9 +1864,13 @@
 
           
 
+          
+
           .
           [<see
            cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+          
 
           
 
@@ -1564,10 +1882,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -1579,10 +1901,14 @@
 
           
 
+          
+
            doesn't exist,
           or is an empty string.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -1597,6 +1923,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1608,6 +1936,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1616,6 +1946,8 @@
             >Too many files are currently open in the system.
           [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -1653,6 +1985,8 @@
 
           
 
+          
+
            containing a
         regular expression that is used for matching against directory entry
         names.</param
@@ -1664,9 +1998,13 @@
 
           
 
+          
+
            directory 
         that match the provided regular expression <paramref
            name="regex" />
+
+          
 
           
 
@@ -1678,10 +2016,14 @@
 
           
 
+          
+
            array containing
         all file system entries within the 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+
+          
 
           
 
@@ -1694,9 +2036,13 @@
 
             
 
+            
+
              is matched against 
           <see
              cref="F:Mono.Unix.Native.Dirent.d_name" />
+
+            
 
             
 
@@ -1709,9 +2055,13 @@
 
             
 
+            
+
              field of
           the returned <see
              cref="T:Mono.Unix.Native.Dirent" />
+
+            
 
             
 
@@ -1724,10 +2074,14 @@
 
             
 
+            
+
             , e.g.
           <c
             >
               <see cref="M:Mono.Unix.UnixPath.Combine" />
+
+              
 
               
 
@@ -1737,9 +2091,13 @@
 
               
 
+              
+
               , 
           <paramref
                name="dirent[index]" />
+
+              
 
               
 
@@ -1748,8 +2106,12 @@
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -1763,9 +2125,13 @@
 
           
 
+          
+
           .
           [<see
            cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+          
 
           
 
@@ -1777,10 +2143,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -1792,10 +2162,14 @@
 
           
 
+          
+
            doesn't exist,
           or is an empty string.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -1810,6 +2184,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1821,6 +2197,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1829,6 +2207,8 @@
             >Too many files are currently open in the system.
           [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -1867,6 +2247,8 @@
 
           
 
+          
+
            instance which
         is used for matching against directory entry names.</param
         >
@@ -1877,9 +2259,13 @@
 
           
 
+          
+
            directory 
         that match the provided regular expression <paramref
            name="regex" />
+
+          
 
           
 
@@ -1891,10 +2277,14 @@
 
           
 
+          
+
            array containing
         all file system entries within the 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+
+          
 
           
 
@@ -1907,9 +2297,13 @@
 
             
 
+            
+
              is matched against 
           <see
              cref="F:Mono.Unix.Native.Dirent.d_name" />
+
+            
 
             
 
@@ -1922,9 +2316,13 @@
 
             
 
+            
+
              field of
           the returned <see
              cref="T:Mono.Unix.Native.Dirent" />
+
+            
 
             
 
@@ -1937,10 +2335,14 @@
 
             
 
+            
+
             , e.g.
           <c
             >
               <see cref="M:Mono.Unix.UnixPath.Combine" />
+
+              
 
               
 
@@ -1950,9 +2352,13 @@
 
               
 
+              
+
               , 
           <paramref
                name="dirent[index]" />
+
+              
 
               
 
@@ -1961,8 +2367,12 @@
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -1976,9 +2386,13 @@
 
           
 
+          
+
           .
           [<see
            cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+          
 
           
 
@@ -1990,10 +2404,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -2005,10 +2423,14 @@
 
           
 
+          
+
            doesn't exist,
           or is an empty string.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -2023,6 +2445,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2034,6 +2458,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2042,6 +2468,8 @@
             >Too many files are currently open in the system.
           [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -2078,6 +2506,8 @@
 
           
 
+          
+
            directory.</summary
         >
         <returns
@@ -2086,10 +2516,14 @@
 
           
 
+          
+
            array containing
         all file system entries within the 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+
+          
 
           
 
@@ -2104,9 +2538,13 @@
 
           
 
+          
+
           .
           [<see
            cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+          
 
           
 
@@ -2118,10 +2556,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -2133,10 +2575,14 @@
 
           
 
+          
+
            doesn't exist,
           or is an empty string.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -2151,6 +2597,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2162,6 +2610,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2170,6 +2620,8 @@
             >Too many files are currently open in the system.
           [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -2207,6 +2659,8 @@
 
           
 
+          
+
            containing a
         regular expression that is used for matching against directory entry
         names.</param
@@ -2218,6 +2672,8 @@
 
           
 
+          
+
            directory.</summary
         >
         <returns
@@ -2226,10 +2682,14 @@
 
           
 
+          
+
            array containing
         all file system entries within the 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+
+          
 
           
 
@@ -2244,9 +2704,13 @@
 
           
 
+          
+
           .
           [<see
            cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+          
 
           
 
@@ -2258,10 +2722,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -2273,10 +2741,14 @@
 
           
 
+          
+
            doesn't exist,
           or is an empty string.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -2291,6 +2763,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2302,6 +2776,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2310,6 +2786,8 @@
             >Too many files are currently open in the system.
           [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -2348,6 +2826,8 @@
 
           
 
+          
+
            instance which
         is used for matching against directory entry names.</param
         >
@@ -2355,6 +2835,8 @@
           >Returnes all the file system entries 
         the <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+
+          
 
           
 
@@ -2366,10 +2848,14 @@
 
           
 
+          
+
            array containing
         all file system entries within the 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />
+
+          
 
           
 
@@ -2384,9 +2870,13 @@
 
           
 
+          
+
           .
           [<see
            cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+          
 
           
 
@@ -2398,10 +2888,14 @@
 
           
 
+          
+
            is not a
           directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -2413,10 +2907,14 @@
 
           
 
+          
+
            doesn't exist,
           or is an empty string.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -2431,6 +2929,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2442,6 +2942,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2450,6 +2952,8 @@
             >Too many files are currently open in the system.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -2501,10 +3005,14 @@
 
           
 
+          
+
            instance
         containing information about the parent directory.  Otherwise, 
         <see
            langword="null" />
+
+          
 
           
 
@@ -2537,6 +3045,8 @@
 
           
 
+          
+
           . </summary
         >
         <value
@@ -2545,10 +3055,14 @@
 
           
 
+          
+
            containing
         information about the path root component for
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2563,8 +3077,12 @@
 
             
 
+            
+
             ("/")</c
           >
+
+          
 
           
 
@@ -2601,6 +3119,8 @@
 
           
 
+          
+
            containing the path to which the current working directory is set.</param
         >
         <summary>Sets the application's current working directory to the
@@ -2609,6 +3129,8 @@
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -2624,6 +3146,8 @@
 
               
 
+              
+
               .
           </block
             >
@@ -2636,9 +3160,13 @@
 
           
 
+          
+
           .
           [<see
            cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+          
 
           
 
@@ -2652,9 +3180,13 @@
 
           
 
+          
+
            is not a directory.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -2666,9 +3198,13 @@
 
           
 
+          
+
            does not exist.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -2680,9 +3216,13 @@
 
           
 
+          
+
            is too long.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -2697,6 +3237,8 @@
 
           
 
+          
+
           ]
         </exception
         >
@@ -2708,9 +3250,13 @@
 
           
 
+          
+
           .
           [<see
            cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+          
 
           
 

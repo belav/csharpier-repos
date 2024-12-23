@@ -22,6 +22,8 @@
 
       
 
+      
+
       .</summary
     >
     <remarks>
@@ -36,8 +38,12 @@
 
         
 
+        
+
         (1) accident (try <c
         >touch "$(printf "test\xffname")"</c>
+
+        
 
         
 
@@ -47,12 +53,16 @@
 
         
 
+        
+
         (1) shell for an example).</para
       >
       <para
         >On the other hand, developers and users expect filenames to be
     strings, and the <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          and <see
          cref="N:Mono.Unix.Native" />
+
+        
 
         
 
@@ -79,9 +93,13 @@
 
         
 
+        
+
         .
     <c
         >UnixEncoding</c>
+
+        
 
         
 
@@ -97,9 +115,13 @@
 
               
 
+              
+
               ),
       <c
               >UnixEncoding</c>
+
+              
 
               
 
@@ -113,9 +135,13 @@
 
               
 
+              
+
                sequence of 
       <see
                cref="F:Mono.Unix.UnixEncoding.EscapeByte" />
+
+              
 
               
 
@@ -133,9 +159,13 @@
 
             
 
+            
+
              or 
       <see
              cref="M:Mono.Unix.Native.Syscall.stat" />
+
+            
 
             
 
@@ -146,9 +176,13 @@
 
             
 
+            
+
              is encountered, 
       in which case the <c
             >EscapeByte</c>
+
+            
 
             
 
@@ -164,9 +198,13 @@
 
         
 
+        
+
          and
     <c
         >Mono.Unix.Native</c>
+
+        
 
         
 
@@ -180,8 +218,12 @@
 
         
 
+        
+
          and <c
         >Mono.Unix.Native</c>
+
+        
 
         
 
@@ -200,8 +242,12 @@
 
             
 
+            
+
              and <c
             >Mono.Unix.Native</c>
+
+            
 
             
 
@@ -227,8 +273,12 @@
 
             
 
+            
+
              and <c
             >Mono.Unix.Native</c>
+
+            
 
             
 
@@ -247,14 +297,20 @@
 
               
 
+              
+
                classes to use a file 
       obtained via <c
               >Mono.Unix</c>
 
               
 
+              
+
                and <c
               >Mono.Unix.Native</c>
+
+              
 
               
 
@@ -265,8 +321,12 @@
               
 
               
+
+              
       doesn't know about <c
               >UnixEncoding</c>
+
+              
 
               
 
@@ -276,10 +336,14 @@
 
               
 
+              
+
                classes 
       couldn't open these files anyway -- they weren't returned by
       <see
                cref="M:System.IO.Directory.GetFiles" />
+
+              
 
               
 
@@ -292,9 +356,13 @@
 
               
 
+              
+
               , 
       then you won't be able to use <c
               >System.IO</c>
+
+              
 
               
 
@@ -304,9 +372,13 @@
 
               
 
+              
+
               , it can be used with 
       <c
               >System.IO</c>
+
+              
 
               
 
@@ -322,6 +394,8 @@
       UTF-8 strings or as an encoding listed in the 
       <c
             >MONO_EXTERNAL_ENCODINGS</c>
+
+            
 
             
 
@@ -342,6 +416,8 @@
             >Why UTF-8?  Why not use 
         <see
              cref="M:System.Text.Encoding.Default" />
+
+            
 
             
 
@@ -376,6 +452,8 @@
 
             
 
+            
+
             ?</description
           >
         </item>
@@ -395,9 +473,13 @@
 
             
 
+            
+
              instead of 
         <see
              cref="System.String" />
+
+            
 
             
 
@@ -407,9 +489,13 @@
 
             
 
+            
+
             , 
         <see
              cref="M:Mono.Unix.Native.Syscall.stat" />
+
+            
 
             
 
@@ -423,6 +509,8 @@
             <para
               >Because <c
               >byte[]</c>
+
+              
 
               
 
@@ -448,9 +536,13 @@ public static int open (byte[] pathname, OpenFlags flags);
 
               
 
+              
+
                be (or
         <see
                cref="F:Mono.Unix.Native.Fstab.fs_file" />
+
+              
 
               
 
@@ -460,12 +552,16 @@ public static int open (byte[] pathname, OpenFlags flags);
 
               
 
+              
+
               , developers 
         will still need a way to convert it to a string for debugging and 
         display to the user, but the developer can't know what encoding to use 
         (it could be anything), so this becomes an impossible problem.  
         <c
               >UnixEncoding</c>
+
+              
 
               
 
@@ -533,6 +629,8 @@ public static int open (byte[] pathname, OpenFlags flags);
           >Constructs a new instance of the 
         <see
            cref="T:Mono.Unix.UnixEncoding" />
+
+          
 
           
 
@@ -969,12 +1067,16 @@ public static int open (byte[] pathname, OpenFlags flags);
 
           
 
+          
+
            instance.</summary
         >
         <remarks
           >This member can be used instead of constructing a new
         <see
            cref="T:Mono.Unix.UnixEncoding" />
+
+          
 
           
 

@@ -260,6 +260,8 @@
 
           
 
+          
+
            in the case the AtomicBoolean is already set to true because it first uses a normal read to check the value.</remarks
         >
       </Docs>

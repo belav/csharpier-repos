@@ -21,6 +21,8 @@
 
         
 
+        
+
          with parameters (2.0, 2.0), the text will be drawn
   twice as big, but the reported text extents will not be
   doubled. They will change slightly due to hinting (so you can not

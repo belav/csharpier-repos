@@ -26,11 +26,15 @@
 
         
 
+        
+
          method is a
 	convenient way of executing expressions and stamtements and
 	discarding the result.  If you want to get the results of
 	executing an expression use the <see
          cref="M:Mono.CSharp.Evaluator.Evaluate(string)" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
 	that are not explicitly referenced through the Evaluator's
 	<see
          cref="M:Mono.CSharp.Evaluator.ReferenceAssembly(System.Reflection.Assembly)" />
+
+        
 
         
 
@@ -75,6 +81,8 @@
 	across multiple evaluations, you will have to create a new
 	<see
          cref="T:System.AppDomain" />
+
+        
 
         
 

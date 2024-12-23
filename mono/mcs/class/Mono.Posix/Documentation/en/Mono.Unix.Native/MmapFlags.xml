@@ -29,6 +29,8 @@
 
       
 
+      
+
        values.</summary
     >
     <remarks></remarks>
@@ -59,8 +61,12 @@
           
 
           
+
+          
         must be -1.  The <paramref
            name="offset" />
+
+          
 
           
 
@@ -169,14 +175,20 @@
 
           
 
+          
+
            will fail.  If
         <c
           >MAP_FIXED</c>
 
           
 
+          
+
            is specified, <paramref
            name="addr" />
+
+          
 
           
 

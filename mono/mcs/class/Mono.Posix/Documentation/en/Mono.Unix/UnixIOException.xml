@@ -28,9 +28,13 @@
 
         
 
+        
+
         , or the
 				<see
          cref="P:System.Exception.InnerException" />
+
+        
 
         
 
@@ -40,9 +44,13 @@
 
         
 
+        
+
         .  In either case, the
 				<see
          cref="P:Mono.Unix.UnixIOException.ErrorCode" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
 
           
 
+          
+
            class using the last
           error generated.
         </summary
@@ -91,9 +101,13 @@
             
 
             
+
+            
             property to the value returned by
             <see
              cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" />
+
+            
 
             
 
@@ -101,6 +115,8 @@
             and initializes the 
             <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -115,9 +131,13 @@
 
             
 
+            
+
              property is
             initialized to <see
              langword="null" />
+
+            
 
             
 
@@ -130,6 +150,8 @@
           The value returned by 
           <see
            cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" />
+
+          
 
           
 
@@ -166,6 +188,8 @@
 
           
 
+          
+
            that specifies which 
           error occurred.
         </param
@@ -175,6 +199,8 @@
           Constructs and initializes a new instance of the 
           <see
            cref="T:Mono.Unix.UnixIOException" />
+
+          
 
           
 
@@ -192,8 +218,12 @@
             
 
             
+
+            
             property to <paramref
              name="errno" />
+
+            
 
             
 
@@ -203,9 +233,13 @@
 
             
 
+            
+
              property to a
             system-supplied message that describes <paramref
              name="errno" />
+
+            
 
             
 
@@ -219,9 +253,13 @@
 
             
 
+            
+
              property is
             initialized to <see
              langword="null" />
+
+            
 
             
 
@@ -233,6 +271,8 @@
           >
           The value <paramref
            name="errno" />
+
+          
 
           
 
@@ -266,6 +306,8 @@
 
           
 
+          
+
            that specifies which error occurred.
         </param
         >
@@ -274,6 +316,8 @@
           Constructs and initializes a new instance of the 
           <see
            cref="T:Mono.Unix.UnixIOException" />
+
+          
 
           
 
@@ -291,8 +335,12 @@
             
 
             
+
+            
             property to <paramref
              name="errno" />
+
+            
 
             
 
@@ -302,9 +350,13 @@
 
             
 
+            
+
              property to a
             system-supplied message that describes <paramref
              name="errno" />
+
+            
 
             
 
@@ -318,9 +370,13 @@
 
             
 
+            
+
              property is
             initialized to <see
              langword="null" />
+
+            
 
             
 
@@ -332,6 +388,8 @@
           >
           The value <paramref
            name="errno" />
+
+          
 
           
 
@@ -365,9 +423,13 @@
 
           
 
+          
+
            that describes the error.  The
           contents of <paramref
            name="message" />
+
+          
 
           
 
@@ -381,6 +443,8 @@
           Constructs and initializes a new instance of the 
           <see
            cref="T:Mono.Unix.UnixIOException" />
+
+          
 
           
 
@@ -398,15 +462,21 @@
             
 
             
+
+            
             property to 0, and initializes the
             <see
              cref="P:System.Exception.Message" />
 
             
 
+            
+
              property to 
             <paramref
              name="message" />
+
+            
 
             
 
@@ -420,9 +490,13 @@
 
             
 
+            
+
              property is
             initialized to <see
              langword="null" />
+
+            
 
             
 
@@ -459,6 +533,8 @@
 
           
 
+          
+
            that specifies which error occurred.
         </param
         >
@@ -469,9 +545,13 @@
 
           
 
+          
+
            that is the cause
           of the current exception.  If <paramref
            name="inner" />
+
+          
 
           
 
@@ -481,9 +561,13 @@
 
           
 
+          
+
           , then the current Exception was raised
           in a catch block handling <paramref
            name="inner" />
+
+          
 
           
 
@@ -495,6 +579,8 @@
           Constructs and initializes a new instance of the 
           <see
            cref="T:Mono.Unix.UnixIOException" />
+
+          
 
           
 
@@ -512,8 +598,12 @@
             
 
             
+
+            
             property to <paramref
              name="errno" />
+
+            
 
             
 
@@ -523,9 +613,13 @@
 
             
 
+            
+
              property to a
             system-supplied message that describes <paramref
              name="errno" />
+
+            
 
             
 
@@ -536,9 +630,13 @@
 
             
 
+            
+
              property to
             <paramref
              name="inner" />
+
+            
 
             
 
@@ -550,6 +648,8 @@
           >
           The value <paramref
            name="errno" />
+
+          
 
           
 
@@ -584,6 +684,8 @@
 
           
 
+          
+
            that specifies which error occurred.
         </param
         >
@@ -594,9 +696,13 @@
 
           
 
+          
+
            that is the cause
           of the current exception.  If <paramref
            name="inner" />
+
+          
 
           
 
@@ -606,9 +712,13 @@
 
           
 
+          
+
           , then the current Exception was raised
           in a catch block handling <paramref
            name="inner" />
+
+          
 
           
 
@@ -620,6 +730,8 @@
           Constructs and initializes a new instance of the 
           <see
            cref="T:Mono.Unix.UnixIOException" />
+
+          
 
           
 
@@ -637,8 +749,12 @@
             
 
             
+
+            
             property to <paramref
              name="errno" />
+
+            
 
             
 
@@ -648,9 +764,13 @@
 
             
 
+            
+
              property to a
             system-supplied message that describes <paramref
              name="errno" />
+
+            
 
             
 
@@ -661,9 +781,13 @@
 
             
 
+            
+
              property to
             <paramref
              name="inner" />
+
+            
 
             
 
@@ -675,6 +799,8 @@
           >
           The value <paramref
            name="errno" />
+
+          
 
           
 
@@ -713,6 +839,8 @@
           
 
           
+
+          
           instance.
         </param
         >
@@ -720,6 +848,8 @@
           >
           A <see
            cref="System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -759,9 +889,13 @@
 
           
 
+          
+
            that describes the error.  The
           contents of <paramref
            name="message" />
+
+          
 
           
 
@@ -777,9 +911,13 @@
 
           
 
+          
+
            that is the cause
           of the current exception.  If <paramref
            name="inner" />
+
+          
 
           
 
@@ -789,9 +927,13 @@
 
           
 
+          
+
           , then the current Exception was raised
           in a catch block handling <paramref
            name="inner" />
+
+          
 
           
 
@@ -803,6 +945,8 @@
           Constructs and initializes a new instance of the 
           <see
            cref="T:Mono.Unix.UnixIOException" />
+
+          
 
           
 
@@ -820,9 +964,13 @@
             
 
             
+
+            
             property to 0, initializes the
             <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -832,15 +980,21 @@
 
             
 
+            
+
             , and initializes the
             <see
              cref="P:System.Exception.InnerException" />
 
             
 
+            
+
              property 
             to <paramref
              name="inner" />
+
+            
 
             
 
@@ -874,6 +1028,8 @@
 
           
 
+          
+
            value describing the error
           specified in the constructor.
         </value
@@ -884,6 +1040,8 @@
             This is the translated value of 
             <see
              cref="P:Mono.Unix.UnixIOException.NativeErrorCode" />
+
+            
 
             
 
@@ -915,6 +1073,8 @@
 
           
 
+          
+
            containing the native error value
           specified in the constructor.
         </value
@@ -925,6 +1085,8 @@
             The native error value and the value of 
             <see
              cref="P:Mono.Unix.UnixIOException.ErrorCode" />
+
+            
 
             
 

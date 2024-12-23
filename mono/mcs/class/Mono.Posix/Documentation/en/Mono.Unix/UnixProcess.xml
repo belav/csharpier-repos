@@ -27,6 +27,8 @@
 
         
 
+        
+
          class provides the means 
         for inspecting and interacting with an operating system process.
       </para
@@ -45,6 +47,8 @@
 
             
 
+            
+
              filesystem, but not all
           operating systems provide that.
         </term
@@ -55,6 +59,8 @@
             >Many methods, such as
           <see
              cref="M:Mono.Unix.UnixProcess.WaitForExit" />
+
+            
 
             
 
@@ -90,6 +96,8 @@
 
           
 
+          
+
            containing the value the process
           exited with.
         </value
@@ -100,9 +108,13 @@
 
           
 
+          
+
            returns 
           <see
            langword="false" />
+
+          
 
           
 
@@ -140,6 +152,8 @@
 
           
 
+          
+
            instance providing
           information about the current process.
         </returns
@@ -173,6 +187,8 @@
 
           
 
+          
+
            containing the process ID of the
           current process.
         </returns
@@ -200,9 +216,13 @@
 
           
 
+          
+
            if the process has exited; otherwise, 
           <see
            langword="false" />
+
+          
 
           
 
@@ -215,6 +235,8 @@
             If the process has exited, 
             <see
              cref="M:Mono.Unix.UnixProcess.ExitCode" />
+
+            
 
             
 
@@ -233,6 +255,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -248,6 +272,8 @@
             
 
             
+
+            
             or setting the flag
             <see
              cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
@@ -255,9 +281,13 @@
             
 
             
+
+            
             for that signal.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -275,9 +305,13 @@
             
 
             
+
+            
             flag set.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINTR" />
+
+            
 
             
 
@@ -307,9 +341,13 @@
 
           
 
+          
+
            if the process terminated due to an unhandled 
           signal; otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -324,6 +362,8 @@
             child processes.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -342,6 +382,8 @@
             
 
             
+
+            
             or setting the flag
             <see
              cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
@@ -349,9 +391,13 @@
             
 
             
+
+            
             for that signal.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -369,9 +415,13 @@
             
 
             
+
+            
             flag set.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINTR" />
+
+            
 
             
 
@@ -401,9 +451,13 @@
 
           
 
+          
+
            if the process has been stopped; otherwise, 
           <see
            langword="false" />
+
+          
 
           
 
@@ -418,6 +472,8 @@
             child processes.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -436,6 +492,8 @@
             
 
             
+
+            
             or setting the flag
             <see
              cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
@@ -443,9 +501,13 @@
             
 
             
+
+            
             for that signal.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -463,9 +525,13 @@
             
 
             
+
+            
             flag set.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINTR" />
+
+            
 
             
 
@@ -494,6 +560,8 @@
           >
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -528,6 +596,8 @@
 
           
 
+          
+
            signal to
           the process.
         </summary
@@ -542,6 +612,8 @@
             of the group could not be signaled.
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -570,6 +642,8 @@
           >
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -611,6 +685,8 @@
 
           
 
+          
+
            containing the session ID of the
           process.
         </value
@@ -649,6 +725,8 @@
 
           
 
+          
+
            containing the signal to
           send to the process.
         </param
@@ -656,6 +734,8 @@
         <summary
           >Send the <paramref
            name="signal" />
+
+          
 
           
 
@@ -671,6 +751,8 @@
             if any members of the group could not be signaled.
             [<see
              cref="F:Mono.Unix.Native.Errno.EPERM" />
+
+            
 
             
 
@@ -704,6 +786,8 @@
 
           
 
+          
+
            containing the signal
           which caused the process to stop.
         </value
@@ -714,9 +798,13 @@
 
           
 
+          
+
            returns 
           <see
            langword="false" />
+
+          
 
           
 
@@ -753,6 +841,8 @@
 
           
 
+          
+
            containing the signal
           which terminated the process.
         </value
@@ -763,9 +853,13 @@
 
           
 
+          
+
            returns 
           <see
            langword="false" />
+
+          
 
           
 
@@ -802,9 +896,13 @@
 
             
 
+            
+
              returned by
             <see
              cref="M:Mono.Unix.UnixProcess.GetCurrentProcess" />
+
+            
 
             
 
@@ -815,9 +913,13 @@
 
             
 
+            
+
              
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -832,6 +934,8 @@
             child processes.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -850,6 +954,8 @@
             
 
             
+
+            
             or setting the flag
             <see
              cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
@@ -857,9 +963,13 @@
             
 
             
+
+            
             for that signal.
             [<see
              cref="F:Mono.Unix.Native.Errno.ECHILD" />
+
+            
 
             
 
@@ -877,9 +987,13 @@
             
 
             
+
+            
             flag set.
             [<see
              cref="F:Mono.Unix.Native.Errno.EINTR" />
+
+            
 
             
 

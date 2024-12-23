@@ -15,6 +15,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -28,6 +30,8 @@
 
         
 
+        
+
          instance. The datatype class abstract and can be used to support custom datatypes.
 	</para
       >
@@ -35,6 +39,8 @@
         <para
           >By default, <see
            cref="P:Commons.Xml.Relaxng.RelaxngMergedProvider.DefaultProvider" />
+
+          
 
           
 
@@ -72,11 +78,15 @@
 
           
 
+          
+
            that represents the local name of the datatype.</param
         >
         <param name="ns"
           >a URI <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -88,11 +98,15 @@
 
           
 
+          
+
           ; list of datatype parameters.</param
         >
         <returns
           >a <see
            cref="T:Commons.Xml.Relaxng.RelaxngDatatype" />
+
+          
 
           
 

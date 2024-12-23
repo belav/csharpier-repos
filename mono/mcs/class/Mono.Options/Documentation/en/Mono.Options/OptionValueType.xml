@@ -23,6 +23,8 @@
       
 
       
+
+      
       takes a value, and if it does, whether it's optional or required.
 		</summary
     >
@@ -57,14 +59,20 @@
 
             
 
+            
+
              if the value is 
           <see
              langword="false" />
 
             
 
+            
+
              (e.g. <c
             >-optionName-</c>
+
+            
 
             
 
@@ -74,8 +82,12 @@
 
             
 
+            
+
              if the value is <see
              langword="true" />
+
+            
 
             
 
@@ -85,8 +97,12 @@
 
             
 
+            
+
             , <c
             >-optionName+</c>
+
+            
 
             
 
@@ -121,9 +137,13 @@
 
             
 
+            
+
              after the option name
             within <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -136,9 +156,13 @@
 
             
 
+            
+
              value if no value is provided, and will 
             otherwise receive a non-<see
              langword="null" />
+
+            
 
             
 
@@ -151,9 +175,13 @@
 
             
 
+            
+
              will 
             pass <c
             >"foo"</c>
+
+            
 
             
 
@@ -162,8 +190,12 @@
 
             
 
+            
+
             , but <c
             >-opt foo</c>
+
+            
 
             
 
@@ -173,8 +205,12 @@
 
             
 
+            
+
              as the value to <c
             >-opt</c>
+
+            
 
             
 
@@ -210,9 +246,13 @@
 
             
 
+            
+
              after the option name
             within <see
              cref="P:Mono.Options.Option.Prototype" />
+
+            
 
             
 
@@ -226,8 +266,12 @@
 
             
 
+            
+
              and <c
             >-opt foo</c>
+
+            
 
             
 
@@ -237,8 +281,12 @@
 
             
 
+            
+
              as the value to <c
             >-opt</c>
+
+            
 
             
 

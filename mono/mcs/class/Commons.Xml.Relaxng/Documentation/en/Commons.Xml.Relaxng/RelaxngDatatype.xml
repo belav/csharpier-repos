@@ -11,6 +11,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -43,11 +45,15 @@
 
           
 
+          
+
            that represents a value being parsed.</param
         >
         <param name="reader"
           >a <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -59,8 +65,12 @@
 
           
 
+          
+
            that represents the validated value. This method <strong
           >must</strong>
+
+          
 
           
 
@@ -69,11 +79,15 @@
 
           
 
+          
+
            for explicit NULL value.</returns
         >
         <remarks
           >The context represented by the XmlReader parameter is used for example to acquire namespace URI using <see
            cref="M:System.Xml.XmlREader.LookupNamespace" />
+
+          
 
           
 
@@ -99,11 +113,15 @@
 
           
 
+          
+
            that is being compared.</param
         >
         <param name="o2"
           >a <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -135,11 +153,15 @@
 
           
 
+          
+
            that is being compared.</param
         >
         <param name="s2"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -174,11 +196,15 @@
 
           
 
+          
+
            that represents a value being parsed.</param
         >
         <param name="reader"
           >a <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 

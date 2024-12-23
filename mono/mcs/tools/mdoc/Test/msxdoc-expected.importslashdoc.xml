@@ -10,6 +10,8 @@
 
         
 
+        
+
         ]</summary
       >
       <remarks>
@@ -27,9 +29,13 @@
 
         
 
+        
+
         .
               Namespace Test: [<see
          cref="N:Mono.DocTest" />
+
+        
 
         
 
@@ -47,6 +53,8 @@
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -57,6 +65,8 @@
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -64,6 +74,8 @@
       <summary>Insert Red summary here</summary>
       <remarks>
         <c>F:Mono.DocTest.Color.Red</c>
+
+        
 
         
 
@@ -85,6 +97,8 @@
           >
               cref=<c
           >T:Mono.DocTest.DocAttribute</c>
+
+          
 
           
 
@@ -148,6 +162,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -158,11 +174,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <see cref="M:Mono.DocTest.DocValueType.M(System.Int32)" />
+
+        
 
         
 
@@ -176,6 +196,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -186,6 +208,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -193,6 +217,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.UseLists</c>
+
+        
 
         
 
@@ -211,6 +237,8 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
@@ -220,10 +248,14 @@ class Example {
 
         
 
+        
+
          instance.</returns
       >
       <remarks>
         <c>M:Mono.DocTest.UseLists.GetValues``1(``0)</c>
+
+        
 
         
 
@@ -237,11 +269,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.UseLists.Process(Mono.DocTest.MyList{System.Int32})</c>
+
+        
 
         
 
@@ -255,12 +291,16 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <para>
           <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Int32})</c>
+
+          
 
           
 
@@ -279,11 +319,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})</c>
+
+        
 
         
 
@@ -298,11 +342,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})</c>
+
+        
 
         
 
@@ -325,11 +373,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>
+
+        
 
         
 
@@ -340,6 +392,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Widget</c>
+
+        
 
         
 
@@ -356,10 +410,14 @@ class Example {
 
           
 
+          
+
           .</para
         >
         <para>
           <c>M:Mono.DocTest.Widget.#ctor</c>
+
+          
 
           
 
@@ -380,12 +438,16 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <para>
           <c>C:Mono.DocTest.Widget(System.Converter{System.String,System.String})</c>
+
+          
 
           
 
@@ -400,6 +462,8 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
@@ -409,10 +473,14 @@ class Example {
 
           
 
+          
+
           .</para
         >
         <para>
           <c>M:Mono.DocTest.Widget.#ctor(System.String)</c>
+
+          
 
           
 
@@ -427,6 +495,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -434,6 +504,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>E:Mono.DocTest.Widget.AnotherEvent</c>
+
+        
 
         
 
@@ -447,6 +519,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -457,6 +531,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -464,6 +540,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>F:Mono.DocTest.Widget.classCtorError</c>
+
+        
 
         
 
@@ -490,6 +568,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>F:Mono.DocTest.Widget.defaultColor</c>
+
+        
 
         
 
@@ -562,10 +642,14 @@ class Example {
 
         
 
+        
+
          value...</value
       >
       <remarks>
         <c>P:Mono.DocTest.Widget.Height</c>
+
+        
 
         
 
@@ -581,10 +665,14 @@ class Example {
 
         
 
+        
+
          instance.</value
       >
       <remarks>
         <c>P:Mono.DocTest.Widget.Item(System.Int32)</c>
+
+        
 
         
 
@@ -598,11 +686,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <param name="i"
         >I love <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -615,10 +707,14 @@ class Example {
 
         
 
+        
+
          instance.</value
       >
       <remarks>
         <c>P:Mono.DocTest.Widget.Item(System.String,System.Int32)</c>
+
+        
 
         
 
@@ -632,6 +728,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -639,6 +737,8 @@ class Example {
       <param name="c"
         >A <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -650,6 +750,8 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <param name="v"
@@ -658,11 +760,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.M1(System.Char,System.Signle@,Mono.DocTest.DocValueType@)</c>
+
+        
 
         
 
@@ -676,11 +782,15 @@ class Example {
 
         
 
+        
+
          array.</param
       >
       <param name="x2"
         >A <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -692,11 +802,15 @@ class Example {
 
         
 
+        
+
          array.</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[0:,0:],System.Int64[][])</c>
+
+        
 
         
 
@@ -710,6 +824,8 @@ class Example {
 
         
 
+        
+
          array.</param
       >
       <param name="x4"
@@ -718,11 +834,15 @@ class Example {
 
         
 
+        
+
          array.</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[0:,0:,0:][])</c>
+
+        
 
         
 
@@ -736,6 +856,8 @@ class Example {
 
         
 
+        
+
          pointer.</param
       >
       <param name="ppf"
@@ -744,11 +866,15 @@ class Example {
 
         
 
+        
+
          pointer.</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.M4(System.Char*,Mono.DocTest.Color**)</c>
+
+        
 
         
 
@@ -762,6 +888,8 @@ class Example {
 
         
 
+        
+
          pointer.</param
       >
       <param name="pd"
@@ -770,11 +898,15 @@ class Example {
 
         
 
+        
+
          array.</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.M5(System.Void*,System.Double*[0:,0:][])</c>
+
+        
 
         
 
@@ -788,6 +920,8 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <param name="args"
@@ -796,11 +930,15 @@ class Example {
 
         
 
+        
+
          array.</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.M6(System.Int32,System.Object[])</c>
+
+        
 
         
 
@@ -815,6 +953,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -822,6 +962,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>F:Mono.DocTest.Widget.message</c>
+
+        
 
         
 
@@ -835,6 +977,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -845,11 +989,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <param name="x2"
         >Yay, <see
          cref="T:Mono.DocTest.Widget" />
+
+        
 
         
 
@@ -862,10 +1010,14 @@ class Example {
 
         
 
+        
+
          instance (2).</returns
       >
       <remarks>
         <c>M:Mono.DocTest.Widget.op_Addition(Mono.DocTest.Widget,Mono.DocTest.Widget)</c>
+
+        
 
         
 
@@ -880,10 +1032,14 @@ class Example {
 
         
 
+        
+
          instance.</returns
       >
       <remarks>
         <c>M:Mono.DocTest.Widget.op_Division</c>
+
+        
 
         
 
@@ -896,6 +1052,8 @@ class Example {
 
         
 
+        
+
         s are fun!.</param
       >
       <summary>To be added.</summary>
@@ -905,10 +1063,14 @@ class Example {
 
         
 
+        
+
          instance.</returns
       >
       <remarks>
         <c>M:Mono.DocTest.Widget.op_Explicit(Mono.DocTest.Widget)~System.Int32</c>
+
+        
 
         
 
@@ -921,8 +1083,12 @@ class Example {
 
         
 
+        
+
         ; <see
          cref="T:Mono.DocTest.Widget" />
+
+        
 
         
 
@@ -935,10 +1101,14 @@ class Example {
 
         
 
+        
+
          instance.</returns
       >
       <remarks>
         <c>M:Mono.DocTest.Widget.op_Implicit(Mono.DocTest.Widget)~System.Int64</c>
+
+        
 
         
 
@@ -952,6 +1122,8 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
@@ -961,10 +1133,14 @@ class Example {
 
         
 
+        
+
          instance.</returns
       >
       <remarks>
         <c>M:Mono.DocTest.Widget.op_UnaryPlus(Mono.DocTest.Widget)</c>
+
+        
 
         
 
@@ -978,6 +1154,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -988,6 +1166,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -995,6 +1175,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>F:Mono.DocTest.Widget.ppValues</c>
+
+        
 
         
 
@@ -1009,10 +1191,14 @@ class Example {
 
         
 
+        
+
          value...</value
       >
       <remarks>
         <c>P:Mono.DocTest.Widget.Width</c>
+
+        
 
         
 
@@ -1027,10 +1213,14 @@ class Example {
 
         
 
+        
+
          value...</value
       >
       <remarks>
         <c>P:Mono.DocTest.Widget.X</c>
+
+        
 
         
 
@@ -1045,10 +1235,14 @@ class Example {
 
         
 
+        
+
          value...</value
       >
       <remarks>
         <c>P:Mono.DocTest.Widget.Y</c>
+
+        
 
         
 
@@ -1063,6 +1257,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1070,6 +1266,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Widget.Direction</c>
+
+        
 
         
 
@@ -1083,6 +1281,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1090,6 +1290,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Widget.Direction.North</c>
+
+        
 
         
 
@@ -1103,6 +1305,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1110,6 +1314,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Widget.Direction.West</c>
+
+        
 
         
 
@@ -1123,6 +1329,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1130,6 +1338,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.IMenuItem.A</c>
+
+        
 
         
 
@@ -1144,6 +1354,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1151,6 +1363,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Widget.NestedClass</c>
+
+        
 
         
 
@@ -1168,11 +1382,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.NestedClass.M(System.Int32)</c>
+
+        
 
         
 
@@ -1186,6 +1404,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1194,6 +1414,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Widget.NestedClass`1</c>
+
+        
 
         
 
@@ -1211,11 +1433,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Widget.NestedClass`1.M(System.Int32)</c>
+
+        
 
         
 
@@ -1229,6 +1455,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1236,6 +1464,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Widget.NestedClass.Double</c>
+
+        
 
         
 
@@ -1253,6 +1483,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1264,6 +1496,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Widget.NestedClass.Double.Triple.Quadruple</c>
+
+        
 
         
 
@@ -1289,6 +1523,8 @@ class Example {
 
         
 
+        
+
          extension method</summary
       >
       <remarks>
@@ -1304,6 +1540,8 @@ class Example {
 
         
 
+        
+
          extension method</summary
       >
       <remarks>
@@ -1314,6 +1552,8 @@ class Example {
       <param name="list">To be added.</param>
       <summary>
         <see cref="T:System.Collections.Generic.IEnumerable{System.Int32}" />
+
+        
 
         
 
@@ -1334,6 +1574,8 @@ class Example {
 
         
 
+        
+
          extension method.
             </summary
       >
@@ -1347,6 +1589,8 @@ class Example {
       <param name="self">To be added.</param>
       <summary>
         <c>System.Object</c>
+
+        
 
         
 
@@ -1368,6 +1612,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1378,11 +1624,15 @@ class Example {
 
         
 
+        
+
          here.</typeparam
       >
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Generic.GenericBase`1</c>
+
+        
 
         
 
@@ -1400,6 +1650,8 @@ class Example {
 
         
 
+        
+
          here.</typeparam
       >
       <param name="genericParameter">Something</param>
@@ -1407,6 +1659,8 @@ class Example {
       <returns>The default value.</returns>
       <remarks>
         <c>M:Mono.DocTest.GenericBase`1.BaseMethod``1(``0)</c>
+
+        
 
         
 
@@ -1433,6 +1687,8 @@ class Example {
       <returns
         >The default value for <typeparamref
          name="U" />
+
+        
 
         
 
@@ -1476,6 +1732,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1490,6 +1748,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1498,6 +1758,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.Generic.MyList`1</c>
+
+        
 
         
 
@@ -1516,6 +1778,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1528,10 +1792,14 @@ class Example {
 
         
 
+        
+
         .</returns
       >
       <remarks>
         <c>M:Mono.DocTest.Generic.MyList`1.GetHelper``2</c>
+
+        
 
         
 
@@ -1545,6 +1813,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.MyList`1.Method``1(`0,``0)</c>
+
+        
 
         
 
@@ -1566,6 +1836,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1574,6 +1846,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.MyList`1.Test(`0)</c>
+
+        
 
         
 
@@ -1589,11 +1863,15 @@ class Example {
 
         
 
+        
+
         .</param
       >
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.Generic.MyList`1.UseHelper``2(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>
+
+        
 
         
 
@@ -1608,11 +1886,15 @@ class Example {
 
         
 
+        
+
          docs!</typeparam
       >
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.MyList`1.Helper`2</c>
+
+        
 
         
 
@@ -1633,6 +1915,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1642,6 +1926,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>T:Mono.DocTest.MyList`2</c>
+
+        
 
         
 
@@ -1661,6 +1947,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1672,10 +1960,14 @@ class Example {
 
         
 
+        
+
         .</value
       >
       <remarks>
         <c>P:Mono.DocTest.MyList`2.Count</c>
+
+        
 
         
 
@@ -1690,6 +1982,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1697,6 +1991,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.MyList`2.Dispose</c>
+
+        
 
         
 
@@ -1716,10 +2012,14 @@ class Example {
 
         
 
+        
+
         .</returns
       >
       <remarks>
         <c>M:Mono.DocTest.MyList`2.GetEnumerator</c>
+
+        
 
         
 
@@ -1737,6 +2037,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1750,6 +2052,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1757,6 +2061,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.MyList`2.Reset</c>
+
+        
 
         
 
@@ -1771,6 +2077,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1778,6 +2086,8 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Clear</c>
+
+        
 
         
 
@@ -1793,8 +2103,12 @@ class Example {
 
         
 
+        
+
          instance (<see
          langword="false" />
+
+        
 
         
 
@@ -1802,6 +2116,8 @@ class Example {
       >
       <remarks>
         <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}.Contains(`0)</c>
+
+        
 
         
 
@@ -1816,10 +2132,14 @@ class Example {
 
         
 
+        
+
         .</value
       >
       <remarks>
         <c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>
+
+        
 
         
 
@@ -1835,6 +2155,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1846,10 +2168,14 @@ class Example {
 
         
 
+        
+
         .</returns
       >
       <remarks>
         <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator</c>
+
+        
 
         
 
@@ -1864,6 +2190,8 @@ class Example {
 
         
 
+        
+
         .</remarks
       >
     </member>
@@ -1872,6 +2200,8 @@ class Example {
       <returns>To be added.</returns>
       <remarks>
         <c>M:Mono.DocTest.MyList`2.System#Collections#GetEnumerator</c>
+
+        
 
         
 
@@ -1938,6 +2268,8 @@ class Example {
         >
               A <see
          cref="T:System.Environment+SpecialFolder" />
+
+        
 
         
 

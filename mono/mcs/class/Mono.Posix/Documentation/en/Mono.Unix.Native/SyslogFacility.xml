@@ -27,6 +27,8 @@
 
       
 
+      
+
        values.</remarks
     >
     <altmember cref="M:Mono.Unix.Native.Syscall.openlog" />
@@ -54,14 +56,20 @@
 
           
 
+          
+
           (1), <c
           >su</c>
+
+          
 
           
 
           (1),
         <c
           >getty</c>
+
+          
 
           
 
@@ -92,6 +100,8 @@
 
           
 
+          
+
           ,
         but logged to a file readable only by selected individuals.</summary
         >
@@ -119,6 +129,8 @@
 
           
 
+          
+
           (8).</summary
         >
       </Docs>
@@ -142,6 +154,8 @@
         <summary
           >System daemons, such as <c
           >routed</c>
+
+          
 
           
 
@@ -172,9 +186,13 @@
 
           
 
+          
+
           (8),
         <c
           >tftpd</c>
+
+          
 
           
 
@@ -376,14 +394,20 @@
 
           
 
+          
+
           (1),
         <c
           >lpc</c>
 
           
 
+          
+
           (8), <c
           >lpd</c>
+
+          
 
           
 
@@ -448,6 +472,8 @@
         <summary
           >Messages generated internally by <c
           >syslogd</c>
+
+          
 
           
 

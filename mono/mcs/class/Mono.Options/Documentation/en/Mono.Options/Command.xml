@@ -15,6 +15,8 @@
 
     
 
+    
+
      members of this type are thread safe.
     Any instance members are not guaranteed to be thread safe.
   </ThreadingSafetyStatement
@@ -35,10 +37,14 @@
 
         
 
+        
+
          of commands, with a single
         "outer" command and multiple commands. Examples of this style of
         utility includes <b
         >git</b>
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
         , and <b
         >mdoc</b>
+
+        
 
         
 
@@ -62,9 +72,13 @@
 
         
 
+        
+
          represents a specific command in such a suite.
         It has a <see
          cref="P:Mono.Options.Command.Name" />
+
+        
 
         
 
@@ -75,15 +89,21 @@
 
         
 
+        
+
          property, an optional
         <see
          cref="T:Mono.Options.OptionSet" />
 
         
 
+        
+
          accessible through the
         <see
          cref="P:Mono.Options.Command.Options" />
+
+        
 
         
 
@@ -94,9 +114,13 @@
 
         
 
+        
+
          property and
         the <see
          cref="M:Mono.Options.Command.Invoke" />
+
+        
 
         
 
@@ -128,6 +152,8 @@
 
           
 
+          
+
            which is the command name.
         </param
         >
@@ -138,6 +164,8 @@
 
           
 
+          
+
            which is the command help text.
         </param
         >
@@ -145,6 +173,8 @@
           >
           Creates and initializes a new instance of the <c
           >Command</c>
+
+          
 
           
 
@@ -160,9 +190,13 @@
 
             
 
+            
+
              property of the new
           instance using <paramref
              name="name" />
+
+            
 
             
 
@@ -172,9 +206,13 @@
 
             
 
+            
+
              property of the new
           instance using <paramref
              name="help" />
+
+            
 
             
 
@@ -187,8 +225,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -218,9 +260,13 @@
 
           
 
+          
+
            instance which owns the
           <c
           >Command</c>
+
+          
 
           
 
@@ -234,9 +280,13 @@
 
           
 
+          
+
            instance which owns the
           <c
           >Command</c>
+
+          
 
           
 
@@ -251,9 +301,13 @@
 
             
 
+            
+
              instance may belong to only one
             <see
              cref="T:Mono.Options.CommandSet" />
+
+            
 
             
 
@@ -263,9 +317,13 @@
 
             
 
+            
+
              property is set upon calling
             <see
              cref="M:Mono.Options.CommandSet.Add(Mono.Options.Command)" />
+
+            
 
             
 
@@ -279,14 +337,20 @@
 
             
 
+            
+
              instance has not yet been added to a
             <c
             >CommandSet</c>
 
             
 
+            
+
             , then this property is <see
              langword="null" />
+
+            
 
             
 
@@ -300,15 +364,21 @@
 
             
 
+            
+
              instance from either the
             <see
              cref="P:Mono.Options.Command.Run" />
 
             
 
+            
+
              property or an overridden
             <see
              cref="M:Mono.Options.Command.Invoke" />
+
+            
 
             
 
@@ -319,10 +389,14 @@
 
             
 
+            
+
             , the
             preferred message output stream through
             <see
              cref="P:Mono.Options.CommandSet.Out" />
+
+            
 
             
 
@@ -350,6 +424,8 @@
 
           
 
+          
+
           .
         </summary
         >
@@ -360,9 +436,13 @@
 
           
 
+          
+
            containing the optional help text
           of the <c
           >Command</c>
+
+          
 
           
 
@@ -377,8 +457,12 @@
 
             
 
+            
+
              property text is shown when the <c
             >help</c>
+
+            
 
             
 
@@ -420,6 +504,8 @@
           
 
           
+
+          
           which contains the unprocessed command-line arguments.
         </param
         >
@@ -427,6 +513,8 @@
           >
           Invoked by <see
            cref="M:Mono.Options.CommandSet.Run" />
+
+          
 
           
 
@@ -438,6 +526,8 @@
           >
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -453,9 +543,13 @@
 
             
 
+            
+
              is the return value of
             <see
              cref="M:Mono.Options.CommandSet.Run" />
+
+            
 
             
 
@@ -471,9 +565,13 @@
 
               
 
+              
+
                method is not overridden by a subclass,
               the <c
               >Invoke()</c>
+
+              
 
               
 
@@ -483,15 +581,21 @@
 
               
 
+              
+
                to parse
               <paramref
                name="arguments" />
 
               
 
+              
+
               , and pass any un-processed values
               on to <see
                cref="P:Mono.Options.Command.Run" />
+
+              
 
               
 
@@ -505,8 +609,12 @@
 
               
 
+              
+
                property is <see
                langword="null" />
+
+              
 
               
 
@@ -517,8 +625,12 @@
               
 
               
+
+              
               will be provided to the <c
               >Run</c>
+
+              
 
               
 
@@ -532,8 +644,12 @@
 
               
 
+              
+
                property is <see
                langword="null" />
+
+              
 
               
 
@@ -568,6 +684,8 @@
 
           
 
+          
+
           , which is used for command invocation.
         </summary
         >
@@ -578,8 +696,12 @@
 
           
 
+          
+
            which is the name of the <c
           >Command</c>
+
+          
 
           
 
@@ -594,14 +716,20 @@
 
             
 
+            
+
              value must be unique across all <c
             >Commmand</c>
+
+            
 
             
 
              instances
             referred to by a <see
              cref="T:Mono.Options.CommandSet" />
+
+            
 
             
 
@@ -635,9 +763,13 @@
 
           
 
+          
+
            instance which contains the
           available command-line options for the <c
           >Command</c>
+
+          
 
           
 
@@ -652,8 +784,12 @@
 
             
 
+            
+
              property is not <see
              langword="null" />
+
+            
 
             
 
@@ -664,9 +800,13 @@
 
             
 
+            
+
              will be invoked on
             the <c
             >Options</c>
+
+            
 
             
 
@@ -676,9 +816,13 @@
 
             
 
+            
+
              will be forwarded to
             <see
              cref="M:Mono.Options.Command.Invoke" />
+
+            
 
             
 
@@ -716,9 +860,13 @@
           
 
           
+
+          
           delegate which is executed by
           <see
            cref="M:Mono.Options.Command.Invoke" />
+
+          
 
           
 
@@ -733,9 +881,13 @@
 
             
 
+            
+
              property is executed by the the 
             <see
              cref="M:Mono.Options.Command.Invoke" />
+
+            
 
             
 
@@ -745,9 +897,13 @@
 
             
 
+            
+
              dispatches to a
             <c
             >Command</c>
+
+            
 
             
 

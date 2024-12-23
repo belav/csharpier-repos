@@ -28,6 +28,8 @@
 
       
 
+      
+
       .</summary
     >
     <remarks>
@@ -37,13 +39,19 @@
 
         
 
+        
+
          parameter for <see
          cref="M:Mono.Unix.Native.Syscall.fcntl" />
 
         
 
+        
+
         .  They may only be used with the <see
          cref="F:Mono.Unix.Native.FcntlCommand.F_NOTIFY" />
+
+        
 
         
 

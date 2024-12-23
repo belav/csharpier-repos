@@ -21,6 +21,8 @@
 
       
 
+      
+
        implementation for abstract UNIX sockets as network addresses.</summary
     >
     <remarks>
@@ -28,6 +30,8 @@
         >
         This class implements abstract UNIX domain sockets as found in the Linux operating system. Unlike <see
          cref="T:Mono.Unix.UnixEndPoint" />
+
+        
 
         
 
@@ -76,12 +80,16 @@ catch (Exception ex)
 
           
 
+          
+
            representing the socket name.</param
         >
         <summary>Constructor with socketName as parameter.</summary>
         <remarks
           >Unlike <see
            cref="T:Mono.Unix.UnixEndPoint" />
+
+          
 
           
 

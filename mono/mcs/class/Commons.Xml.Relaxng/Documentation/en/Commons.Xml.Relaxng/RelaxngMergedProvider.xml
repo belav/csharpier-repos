@@ -15,12 +15,16 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
     <summary
       >A <see
        cref="Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+
+      
 
       
 
@@ -60,6 +64,8 @@
 
           
 
+          
+
            that represents the local type name.</param
         >
         <param name="ns"
@@ -68,11 +74,15 @@
 
           
 
+          
+
            that represents the namespace (datatype library).</param
         >
         <param name="parameters"
           >a <see
            cref="T:Commons.Xml.Relaxng.RelaxngParamList" />
+
+          
 
           
 
@@ -111,6 +121,8 @@
 
           
 
+          
+
           . This provider support default namespace types ("string" and "token") and XML Schema datatypes (identified by the namespace http://www.w3.org/2001/XMLSchema-datatypes ).</summary
         >
         <value
@@ -139,11 +151,15 @@
 
           
 
+          
+
            instance indexed by the parameter datatype library URI.</summary
         >
         <param name="ns"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -155,6 +171,8 @@
 
           
 
+          
+
            that is identified by the namespace. Returns null if no datatype provider is registered by this provider.</value
         >
         <remarks
@@ -163,8 +181,12 @@
 
           
 
+          
+
            does not always support the datatypes indicated by the datatype library URI. <see
            cref="M:Commons.Xml.Relaxng.RelaxngDatatypeProvider.GetDatatype" />
+
+          
 
           
 

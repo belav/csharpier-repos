@@ -27,6 +27,8 @@
 
         
 
+        
+
          class provides
       information about a file.  It also allows basic file manipulation:</para
       >
@@ -39,9 +41,13 @@
 
             
 
+            
+
              and
           <see
              cref="M:Mono.Unix.UnixFileInfo.Open" />
+
+            
 
             
 
@@ -53,6 +59,8 @@
             >File deletion with 
           <see
              cref="M:Mono.Unix.UnixFileInfo.Delete" />
+
+            
 
             
 
@@ -87,6 +95,8 @@
 
           
 
+          
+
            containing the file 
         to query.</param
         >
@@ -97,9 +107,13 @@
           
 
           
+
+          
         instance containing information about the file
         <paramref
            name="path" />
+
+          
 
           
 
@@ -109,6 +123,8 @@
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -124,6 +140,8 @@
 
               
 
+              
+
               .
           </block
             >
@@ -135,10 +153,14 @@
 
             
 
+            
+
              objects for files
           that do not exist or for directories.  However, attempts to use
           the <see
              cref="T:Mono.Unix.UnixFileInfo" />
+
+            
 
             
 
@@ -148,9 +170,13 @@
 
             
 
+            
+
             s.
           Use <see
              cref="P:Mono.Unix.UnixFileSystemInfo.Exists" />
+
+            
 
             
 
@@ -160,15 +186,21 @@
 
             
 
+            
+
              exists and 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.IsFile" />
 
             
 
+            
+
              to ensure
           that <paramref
              name="path" />
+
+            
 
             
 
@@ -180,8 +212,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -193,9 +229,13 @@
 
           
 
+          
+
            contains invalid characters; see
           <see
            cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />
+
+          
 
           
 
@@ -227,6 +267,8 @@
 
           
 
+          
+
           .</summary
         >
         <returns
@@ -235,9 +277,13 @@
 
           
 
+          
+
            that provides
         write access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -248,6 +294,8 @@
             >If 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -266,9 +314,13 @@
 
               
 
+              
+
               (
               <see
                cref="F:Mono.Unix.Native.FilePermissions.S_IRUSR" />
+
+              
 
               
 
@@ -278,9 +330,13 @@
 
               
 
+              
+
                |
               <see
                cref="F:Mono.Unix.Native.FilePermissions.S_IRGRP" />
+
+              
 
               
 
@@ -291,8 +347,12 @@
               
 
               
+
+              
             )</c
             >
+
+            
 
             
 
@@ -306,11 +366,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -322,6 +386,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -337,9 +403,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -355,6 +425,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -364,9 +436,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -377,6 +453,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -386,10 +464,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -405,10 +487,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -422,10 +508,14 @@
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -438,10 +528,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -451,6 +545,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -462,6 +558,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -471,11 +569,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -489,11 +591,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -509,6 +615,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -521,6 +629,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -530,9 +640,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -547,9 +661,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -565,6 +683,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -573,6 +693,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -587,9 +709,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -602,11 +728,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -619,6 +749,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -626,10 +758,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -669,12 +805,16 @@
 
           
 
+          
+
            instance containing
           the file permissions the created file should have.</param
         >
         <summary
           >Creates or overwrites <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -687,9 +827,13 @@
 
           
 
+          
+
            that provides
         write access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -700,6 +844,8 @@
             >If 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -714,11 +860,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -730,6 +880,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -745,9 +897,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -763,6 +919,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -772,9 +930,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -785,6 +947,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -794,10 +958,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -813,10 +981,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -830,10 +1002,14 @@
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -846,10 +1022,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -859,6 +1039,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -870,6 +1052,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -879,11 +1063,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -897,11 +1085,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -917,6 +1109,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -929,6 +1123,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -938,9 +1134,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -955,9 +1155,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -973,6 +1177,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -981,6 +1187,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -995,9 +1203,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1010,11 +1222,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1027,6 +1243,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -1034,10 +1252,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -1082,12 +1304,16 @@
 
           
 
+          
+
            instance containing
         the file permissions the created file should have.</param
         >
         <summary
           >Creates or overwrites <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1100,9 +1326,13 @@
 
           
 
+          
+
            that provides
         write access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1113,6 +1343,8 @@
             >If 
           <see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1127,11 +1359,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -1143,6 +1379,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -1158,9 +1396,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -1176,6 +1418,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1185,9 +1429,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -1198,6 +1446,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1207,10 +1457,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -1226,10 +1480,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -1243,10 +1501,14 @@
 
           
 
+          
+
            
           that must exist does not exist.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+          
 
           
 
@@ -1259,10 +1521,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -1272,6 +1538,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1283,6 +1551,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1292,11 +1562,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -1310,11 +1584,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -1330,6 +1608,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1342,6 +1622,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1351,9 +1633,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -1368,9 +1654,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -1386,6 +1676,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1394,6 +1686,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -1408,9 +1702,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1423,11 +1721,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -1440,6 +1742,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -1447,10 +1751,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -1507,10 +1815,14 @@
 
           
 
+          
+
            instance
         containing information about the directory that
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1522,10 +1834,14 @@
 
           
 
+          
+
            instance
         containing information about the directory 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1540,8 +1856,12 @@
 
             
 
+            
+
             (<see
              cref="P:Mono.Unix.UnixFileInfo.DirectoryName" />
+
+            
 
             
 
@@ -1571,6 +1891,8 @@
 
           
 
+          
+
            resides in.</summary
         >
         <value
@@ -1579,9 +1901,13 @@
 
           
 
+          
+
            containing the directory that 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1595,8 +1921,12 @@
 
             
 
+            
+
             (<see
              cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1657,10 +1987,14 @@
 
           
 
+          
+
            value
         which controls how 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1673,9 +2007,13 @@
 
           
 
+          
+
            with the specified
         access <paramref
            name="flags" />
+
+          
 
           
 
@@ -1687,9 +2025,13 @@
 
           
 
+          
+
            that provides
         access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -1705,9 +2047,13 @@
 
             
 
+            
+
             ,
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+
+            
 
             
 
@@ -1717,9 +2063,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -1732,15 +2082,21 @@
 
             
 
+            
+
              was
           specified in <paramref
              name="flags" />
 
             
 
+            
+
             .  
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -1755,6 +2111,8 @@
             
 
             
+
+            
           instead.</para
           >
         </exception>
@@ -1764,9 +2122,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+
+            
 
             
 
@@ -1774,6 +2136,8 @@
             but the underlying file system does not support locking.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -1786,11 +2150,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -1808,9 +2176,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -1826,6 +2198,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1835,9 +2209,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -1848,6 +2226,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1857,10 +2237,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -1876,10 +2260,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -1893,10 +2281,14 @@
 
             
 
+            
+
              
           that must exist does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -1909,9 +2301,13 @@
 
             
 
+            
+
              does not exist
           and <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -1919,6 +2315,8 @@
           set.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -1932,10 +2330,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -1945,6 +2347,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -1956,6 +2360,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -1965,11 +2371,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -1983,11 +2393,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -2003,6 +2417,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2015,6 +2431,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2024,9 +2442,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -2041,9 +2463,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -2059,6 +2485,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2067,6 +2495,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -2079,10 +2509,14 @@
 
             
 
+            
+
              was
           specified and the target is a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMLINK" />
+
+            
 
             
 
@@ -2095,9 +2529,13 @@
 
             
 
+            
+
              and one of
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+
+            
 
             
 
@@ -2107,10 +2545,14 @@
 
             
 
+            
+
              is specified
             and the file is locked.
             [<see
              cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+
+            
 
             
 
@@ -2125,9 +2567,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -2140,11 +2586,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -2157,6 +2607,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -2164,10 +2616,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -2180,9 +2636,13 @@
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+
+            
 
             
 
@@ -2194,9 +2654,13 @@
             
 
             
+
+            
             exists.
             [<see
              cref="F:Mono.Unix.Native.Errno.EEXIST" />
+
+            
 
             
 
@@ -2235,6 +2699,8 @@
 
           
 
+          
+
            value that
         specifies whether a file is created if one does not exist, and
         determines whether the contents of existing files are retained or
@@ -2246,9 +2712,13 @@
 
           
 
+          
+
            with the specified
         access <paramref
            name="mode" />
+
+          
 
           
 
@@ -2260,9 +2730,13 @@
 
           
 
+          
+
            that provides
         access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2280,6 +2754,8 @@
               
 
               
+
+              
             (<see
 
                 cref="M:Mono.Unix.Native.NativeConvert.ToOpenFlags(System.IO.FileMode)"
@@ -2288,13 +2764,19 @@
 
               
 
+              
+
                (<paramref
                name="mode" />
 
               
 
+              
+
               ))</c
             >
+
+            
 
             
 
@@ -2311,9 +2793,13 @@
 
             
 
+            
+
             ,
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+
+            
 
             
 
@@ -2323,9 +2809,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -2338,15 +2828,21 @@
 
             
 
+            
+
              was
           specified in <paramref
              name="flags" />
 
             
 
+            
+
             .  
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -2361,6 +2857,8 @@
             
 
             
+
+            
           instead.</para
           >
         </exception>
@@ -2370,9 +2868,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+
+            
 
             
 
@@ -2380,6 +2882,8 @@
             but the underlying file system does not support locking.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -2392,11 +2896,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -2408,6 +2916,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -2423,9 +2933,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -2441,6 +2955,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2450,9 +2966,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -2463,6 +2983,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2472,10 +2994,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -2491,10 +3017,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -2508,10 +3038,14 @@
 
             
 
+            
+
              
           that must exist does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -2524,9 +3058,13 @@
 
             
 
+            
+
              does not exist
           and <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -2534,6 +3072,8 @@
           set.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -2547,10 +3087,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -2560,6 +3104,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -2571,6 +3117,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2580,11 +3128,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -2598,11 +3150,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -2618,6 +3174,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2630,6 +3188,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2639,9 +3199,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -2656,9 +3220,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -2674,6 +3242,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -2682,6 +3252,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -2694,10 +3266,14 @@
 
             
 
+            
+
              was
           specified and the target is a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMLINK" />
+
+            
 
             
 
@@ -2710,9 +3286,13 @@
 
             
 
+            
+
              and one of
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+
+            
 
             
 
@@ -2722,10 +3302,14 @@
 
             
 
+            
+
              is specified
             and the file is locked.
             [<see
              cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+
+            
 
             
 
@@ -2740,9 +3324,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -2755,11 +3343,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -2772,6 +3364,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -2779,10 +3373,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -2795,9 +3393,13 @@
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+
+            
 
             
 
@@ -2809,9 +3411,13 @@
             
 
             
+
+            
             exists.
             [<see
              cref="F:Mono.Unix.Native.Errno.EEXIST" />
+
+            
 
             
 
@@ -2855,10 +3461,14 @@
 
           
 
+          
+
            value
         which controls how 
         <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2872,6 +3482,8 @@
 
           
 
+          
+
            instance containing
         the file permissions the created file should have.</param
         >
@@ -2881,15 +3493,21 @@
 
           
 
+          
+
            with the specified
         access <paramref
            name="flags" />
 
           
 
+          
+
            (read/write/etc.) and
         file permissions <paramref
            name="mode" />
+
+          
 
           
 
@@ -2901,9 +3519,13 @@
 
           
 
+          
+
            that provides
         access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -2919,9 +3541,13 @@
 
             
 
+            
+
             ,
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+
+            
 
             
 
@@ -2931,9 +3557,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -2946,15 +3576,21 @@
 
             
 
+            
+
              was
           specified in <paramref
              name="flags" />
 
             
 
+            
+
             .  
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -2969,6 +3605,8 @@
             
 
             
+
+            
           instead.</para
           >
         </exception>
@@ -2978,9 +3616,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+
+            
 
             
 
@@ -2988,6 +3630,8 @@
             but the underlying file system does not support locking.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -3000,11 +3644,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -3016,6 +3664,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -3031,9 +3681,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -3049,6 +3703,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3058,9 +3714,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -3071,6 +3731,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3080,10 +3742,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -3099,10 +3765,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -3116,10 +3786,14 @@
 
             
 
+            
+
              
           that must exist does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -3132,9 +3806,13 @@
 
             
 
+            
+
              does not exist
           and <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -3142,6 +3820,8 @@
           set.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -3155,10 +3835,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -3168,6 +3852,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -3179,6 +3865,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3188,11 +3876,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -3206,11 +3898,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -3226,6 +3922,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3238,6 +3936,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3247,9 +3947,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -3264,9 +3968,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -3282,6 +3990,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3290,6 +4000,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -3302,10 +4014,14 @@
 
             
 
+            
+
              was
           specified and the target is a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMLINK" />
+
+            
 
             
 
@@ -3318,9 +4034,13 @@
 
             
 
+            
+
              and one of
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+
+            
 
             
 
@@ -3330,10 +4050,14 @@
 
             
 
+            
+
              is specified
             and the file is locked.
             [<see
              cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+
+            
 
             
 
@@ -3348,9 +4072,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -3363,11 +4091,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -3380,6 +4112,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -3387,10 +4121,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -3403,9 +4141,13 @@
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+
+            
 
             
 
@@ -3417,9 +4159,13 @@
             
 
             
+
+            
             exists.
             [<see
              cref="F:Mono.Unix.Native.Errno.EEXIST" />
+
+            
 
             
 
@@ -3459,6 +4205,8 @@
 
           
 
+          
+
            value that
         specifies whether a file is created if one does not exist, and
         dtermines whether the contents of existing files are retained or
@@ -3467,6 +4215,8 @@
         <param name="access"
           >A <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -3479,14 +4229,20 @@
 
           
 
+          
+
            with the specified
         <paramref
            name="mode" />
 
           
 
+          
+
            and <paramref
            name="access" />
+
+          
 
           
 
@@ -3498,9 +4254,13 @@
 
           
 
+          
+
            that provides
         access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -3518,6 +4278,8 @@
               
 
               
+
+              
             (<see
 
                 cref="M:Mono.Unix.Native.NativeConvert.ToOpenFlags(System.IO.FileMode,System.IO.FileAccess)"
@@ -3526,8 +4288,12 @@
 
               
 
+              
+
                (<paramref
                name="mode" />
+
+              
 
               
 
@@ -3537,8 +4303,12 @@
 
               
 
+              
+
               ))</c
             >
+
+            
 
             
 
@@ -3555,9 +4325,13 @@
 
             
 
+            
+
             ,
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+
+            
 
             
 
@@ -3567,9 +4341,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -3582,15 +4360,21 @@
 
             
 
+            
+
              was
           specified in <paramref
              name="flags" />
 
             
 
+            
+
             .  
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -3605,6 +4389,8 @@
             
 
             
+
+            
           instead.</para
           >
         </exception>
@@ -3614,9 +4400,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+
+            
 
             
 
@@ -3624,6 +4414,8 @@
             but the underlying file system does not support locking.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -3636,11 +4428,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -3652,6 +4448,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -3667,9 +4465,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -3685,6 +4487,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3694,9 +4498,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -3707,6 +4515,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3716,10 +4526,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -3735,10 +4549,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -3752,10 +4570,14 @@
 
             
 
+            
+
              
           that must exist does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -3768,9 +4590,13 @@
 
             
 
+            
+
              does not exist
           and <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -3778,6 +4604,8 @@
           set.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -3791,10 +4619,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -3804,6 +4636,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -3815,6 +4649,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3824,11 +4660,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -3842,11 +4682,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -3862,6 +4706,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3874,6 +4720,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3883,9 +4731,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -3900,9 +4752,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -3918,6 +4774,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -3926,6 +4784,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -3938,10 +4798,14 @@
 
             
 
+            
+
              was
           specified and the target is a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMLINK" />
+
+            
 
             
 
@@ -3954,9 +4818,13 @@
 
             
 
+            
+
              and one of
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+
+            
 
             
 
@@ -3966,10 +4834,14 @@
 
             
 
+            
+
              is specified
             and the file is locked.
             [<see
              cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+
+            
 
             
 
@@ -3984,9 +4856,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -3999,11 +4875,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -4016,6 +4896,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -4023,10 +4905,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -4039,9 +4925,13 @@
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+
+            
 
             
 
@@ -4053,9 +4943,13 @@
             
 
             
+
+            
             exists.
             [<see
              cref="F:Mono.Unix.Native.Errno.EEXIST" />
+
+            
 
             
 
@@ -4100,6 +4994,8 @@
 
           
 
+          
+
            value that
         specifies whether a file is created if one does not exist, and
         dtermines whether the contents of existing files are retained or
@@ -4108,6 +5004,8 @@
         <param name="access"
           >A <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -4121,6 +5019,8 @@
 
           
 
+          
+
            instance containing
         the file permissions the created file should have.</param
         >
@@ -4130,9 +5030,13 @@
 
           
 
+          
+
            
         with the specified <paramref
            name="mode" />
+
+          
 
           
 
@@ -4142,9 +5046,13 @@
 
           
 
+          
+
            with file permissions 
         <paramref
            name="perms" />
+
+          
 
           
 
@@ -4156,9 +5064,13 @@
 
           
 
+          
+
            that provides
         access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -4176,6 +5088,8 @@
               
 
               
+
+              
             (<see
 
                 cref="M:Mono.Unix.Native.NativeConvert.ToOpenFlags(System.IO.FileMode,System.IO.FileAccess)"
@@ -4184,8 +5098,12 @@
 
               
 
+              
+
                (<paramref
                name="mode" />
+
+              
 
               
 
@@ -4195,13 +5113,19 @@
 
               
 
+              
+
               ), <paramref
                name="perms" />
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -4218,9 +5142,13 @@
 
             
 
+            
+
             ,
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+
+            
 
             
 
@@ -4230,9 +5158,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -4245,15 +5177,21 @@
 
             
 
+            
+
              was
           specified in <paramref
              name="flags" />
 
             
 
+            
+
             .  
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -4268,6 +5206,8 @@
             
 
             
+
+            
           instead.</para
           >
         </exception>
@@ -4277,9 +5217,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+
+            
 
             
 
@@ -4287,6 +5231,8 @@
             but the underlying file system does not support locking.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -4299,11 +5245,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -4315,6 +5265,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -4330,9 +5282,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -4348,6 +5304,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -4357,9 +5315,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -4370,6 +5332,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -4379,10 +5343,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -4398,10 +5366,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -4415,10 +5387,14 @@
 
             
 
+            
+
              
           that must exist does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -4431,9 +5407,13 @@
 
             
 
+            
+
              does not exist
           and <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -4441,6 +5421,8 @@
           set.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -4454,10 +5436,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -4467,6 +5453,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -4478,6 +5466,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -4487,11 +5477,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -4505,11 +5499,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -4525,6 +5523,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -4537,6 +5537,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -4546,9 +5548,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -4563,9 +5569,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -4581,6 +5591,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -4589,6 +5601,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -4601,10 +5615,14 @@
 
             
 
+            
+
              was
           specified and the target is a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMLINK" />
+
+            
 
             
 
@@ -4617,9 +5635,13 @@
 
             
 
+            
+
              and one of
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+
+            
 
             
 
@@ -4629,10 +5651,14 @@
 
             
 
+            
+
              is specified
             and the file is locked.
             [<see
              cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+
+            
 
             
 
@@ -4647,9 +5673,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -4662,11 +5692,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -4679,6 +5713,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -4686,10 +5722,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -4702,9 +5742,13 @@
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+
+            
 
             
 
@@ -4716,9 +5760,13 @@
             
 
             
+
+            
             exists.
             [<see
              cref="F:Mono.Unix.Native.Errno.EEXIST" />
+
+            
 
             
 
@@ -4751,6 +5799,8 @@
 
           
 
+          
+
            for
         reading.</summary
         >
@@ -4760,9 +5810,13 @@
 
           
 
+          
+
            that provides
         read access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -4780,8 +5834,12 @@
 
               
 
+              
+
                (<see
                cref="F:System.IO.FileMode.Open" />
+
+              
 
               
 
@@ -4791,8 +5849,12 @@
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -4809,9 +5871,13 @@
 
             
 
+            
+
             ,
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+
+            
 
             
 
@@ -4821,9 +5887,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -4836,15 +5906,21 @@
 
             
 
+            
+
              was
           specified in <paramref
              name="flags" />
 
             
 
+            
+
             .  
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -4859,6 +5935,8 @@
             
 
             
+
+            
           instead.</para
           >
         </exception>
@@ -4868,9 +5946,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+
+            
 
             
 
@@ -4878,6 +5960,8 @@
             but the underlying file system does not support locking.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -4890,11 +5974,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -4906,6 +5994,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -4921,9 +6011,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -4939,6 +6033,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -4948,9 +6044,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -4961,6 +6061,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -4970,10 +6072,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -4989,10 +6095,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -5006,10 +6116,14 @@
 
             
 
+            
+
              
           that must exist does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -5022,9 +6136,13 @@
 
             
 
+            
+
              does not exist
           and <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -5032,6 +6150,8 @@
           set.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -5045,10 +6165,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -5058,6 +6182,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -5069,6 +6195,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5078,11 +6206,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -5096,11 +6228,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -5116,6 +6252,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5128,6 +6266,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5137,9 +6277,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -5154,9 +6298,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -5172,6 +6320,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5180,6 +6330,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -5192,10 +6344,14 @@
 
             
 
+            
+
              was
           specified and the target is a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMLINK" />
+
+            
 
             
 
@@ -5208,9 +6364,13 @@
 
             
 
+            
+
              and one of
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+
+            
 
             
 
@@ -5220,10 +6380,14 @@
 
             
 
+            
+
              is specified
             and the file is locked.
             [<see
              cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+
+            
 
             
 
@@ -5238,9 +6402,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -5253,11 +6421,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -5270,6 +6442,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -5277,10 +6451,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -5293,9 +6471,13 @@
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+
+            
 
             
 
@@ -5307,9 +6489,13 @@
             
 
             
+
+            
             exists.
             [<see
              cref="F:Mono.Unix.Native.Errno.EEXIST" />
+
+            
 
             
 
@@ -5342,6 +6528,8 @@
 
           
 
+          
+
            for
         writing.</summary
         >
@@ -5351,9 +6539,13 @@
 
           
 
+          
+
            that provides
         write access to <see
            cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+          
 
           
 
@@ -5371,8 +6563,12 @@
 
               
 
+              
+
                (<see
                cref="F:System.IO.FileMode.OpenOrCreate" />
+
+              
 
               
 
@@ -5382,8 +6578,12 @@
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -5400,9 +6600,13 @@
 
             
 
+            
+
             ,
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />
+
+            
 
             
 
@@ -5412,9 +6616,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EINVAL" />
+
+            
 
             
 
@@ -5427,15 +6635,21 @@
 
             
 
+            
+
              was
           specified in <paramref
              name="flags" />
 
             
 
+            
+
             .  
           <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -5450,6 +6664,8 @@
             
 
             
+
+            
           instead.</para
           >
         </exception>
@@ -5459,9 +6675,13 @@
 
             
 
+            
+
              or
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" />
+
+            
 
             
 
@@ -5469,6 +6689,8 @@
             but the underlying file system does not support locking.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -5481,11 +6703,15 @@
 
             
 
+            
+
              is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -5497,6 +6723,8 @@
             >An attempt was made to open a socket.
             [<see
              cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />
+
+            
 
             
 
@@ -5512,9 +6740,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.EACCESS" />
+
+            
 
             
 
@@ -5530,6 +6762,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5539,9 +6773,13 @@
 
             
 
+            
+
              does not
           exist, and <see
              cref="P:Mono.Unix.UnixFileInfo.Directory" />
+
+            
 
             
 
@@ -5552,6 +6790,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5561,10 +6801,14 @@
 
             
 
+            
+
              is a
           directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.EISDIR" />
+
+            
 
             
 
@@ -5580,10 +6824,14 @@
 
           
 
+          
+
            is not a
           directory.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENOTDIR" />
+
+          
 
           
 
@@ -5597,10 +6845,14 @@
 
             
 
+            
+
              
           that must exist does not exist.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -5613,9 +6865,13 @@
 
             
 
+            
+
              does not exist
           and <see
              cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />
+
+            
 
             
 
@@ -5623,6 +6879,8 @@
           set.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOENT" />
+
+            
 
             
 
@@ -5636,10 +6894,14 @@
 
             
 
+            
+
              resides on a
           read-only file system.
             [<see
              cref="F:Mono.Unix.Native.Errno.EROFS" />
+
+            
 
             
 
@@ -5649,6 +6911,8 @@
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
+
+            
 
             
 
@@ -5660,6 +6924,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5669,11 +6935,15 @@
 
             
 
+            
+
              is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENXIO" />
+
+            
 
             
 
@@ -5687,11 +6957,15 @@
 
             
 
+            
+
              
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENOSPC" />
+
+            
 
             
 
@@ -5707,6 +6981,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5719,6 +6995,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5728,9 +7006,13 @@
 
           
 
+          
+
            was too long.
             [<see
            cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />
+
+          
 
           
 
@@ -5745,9 +7027,13 @@
 
             
 
+            
+
             .
             [<see
              cref="F:Mono.Unix.Native.Errno.ELOOP" />
+
+            
 
             
 
@@ -5763,6 +7049,8 @@
 
             
 
+            
+
             ]
           </para
           >
@@ -5771,6 +7059,8 @@
             >The system file table is full.
             [<see
              cref="F:Mono.Unix.Native.Errno.ENFILE" />
+
+            
 
             
 
@@ -5783,10 +7073,14 @@
 
             
 
+            
+
              was
           specified and the target is a symbolic link.
             [<see
              cref="F:Mono.Unix.Native.Errno.EMLINK" />
+
+            
 
             
 
@@ -5799,9 +7093,13 @@
 
             
 
+            
+
              and one of
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_SHLOCK" />
+
+            
 
             
 
@@ -5811,10 +7109,14 @@
 
             
 
+            
+
              is specified
             and the file is locked.
             [<see
              cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />
+
+            
 
             
 
@@ -5829,9 +7131,13 @@
 
             
 
+            
+
              has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -5844,11 +7150,15 @@
 
             
 
+            
+
              cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see
              cref="F:Mono.Unix.Native.Errno.EDQUOT" />
+
+            
 
             
 
@@ -5861,6 +7171,8 @@
 
             
 
+            
+
              is a
           pure procedure (shared text) file that is being executed and 
           <see
@@ -5868,10 +7180,14 @@
 
             
 
+            
+
              requests write
           access.
             [<see
              cref="F:Mono.Unix.Native.Errno.ETXTBSY" />
+
+            
 
             
 
@@ -5884,9 +7200,13 @@
 
             
 
+            
+
              and
             <see
              cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" />
+
+            
 
             
 
@@ -5898,9 +7218,13 @@
             
 
             
+
+            
             exists.
             [<see
              cref="F:Mono.Unix.Native.Errno.EEXIST" />
+
+            
 
             
 
