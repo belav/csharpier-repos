@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -177,13 +176,19 @@ namespace Moq.Tests
             mock.Setup(originalExpression);
 
             var setups = new List<ISetup>();
-            for (var setup = mock.Setups.Single(); setup.InnerMock != null; setup = setup.InnerMock.Setups.Single())
+            for (
+                var setup = mock.Setups.Single();
+                setup.InnerMock != null;
+                setup = setup.InnerMock.Setups.Single()
+            )
             {
                 setups.Add(setup);
             }
 
             // (using `HashSet` to automatically filter out duplicates:)
-            var originalExpressions = new HashSet<Expression>(setups.Select(s => s.OriginalExpression));
+            var originalExpressions = new HashSet<Expression>(
+                setups.Select(s => s.OriginalExpression)
+            );
             Assert.Single(originalExpressions);
         }
 
@@ -289,7 +294,7 @@ namespace Moq.Tests
             mock.Setup(m => m.ToString());
             var setup = mock.Setups.First();
 
-            Assert.False(setup.IsVerifiable);  // the root setup should be verified despite this
+            Assert.False(setup.IsVerifiable); // the root setup should be verified despite this
             Assert.False(setup.IsMatched);
             Assert.Throws<MockException>(() => setup.Verify());
         }
@@ -320,7 +325,7 @@ namespace Moq.Tests
 
             Assert.True(setup.IsMatched);
             Assert.True(innerMockSetup.IsVerifiable);
-            Assert.False(innerMockSetup.IsMatched);  // this should make recursive verification fail
+            Assert.False(innerMockSetup.IsMatched); // this should make recursive verification fail
             Assert.Throws<MockException>(() => setup.Verify());
         }
 
@@ -335,8 +340,8 @@ namespace Moq.Tests
             var innerMockSetup = Mock.Get(innerMock).Setups.First();
 
             Assert.True(setup.IsMatched);
-            Assert.False(innerMockSetup.IsVerifiable);  // which means that the inner mock setup will be ignored
-            Assert.False(innerMockSetup.IsMatched);  // this would make verification fail if that setup were not ignored
+            Assert.False(innerMockSetup.IsVerifiable); // which means that the inner mock setup will be ignored
+            Assert.False(innerMockSetup.IsMatched); // this would make verification fail if that setup were not ignored
             setup.Verify();
         }
 
@@ -353,7 +358,7 @@ namespace Moq.Tests
             Assert.True(setup.IsMatched);
             Assert.True(innerMockSetup.IsVerifiable);
             Assert.False(innerMockSetup.IsMatched);
-            setup.Verify(recursive: false);  // which means that verification will never get to `innerMockSetup`
+            setup.Verify(recursive: false); // which means that verification will never get to `innerMockSetup`
         }
 
         [Fact]
@@ -367,7 +372,7 @@ namespace Moq.Tests
             var innerMockSetup = Mock.Get(innerMock).Setups.First();
 
             Assert.True(setup.IsMatched);
-            Assert.False(innerMockSetup.IsMatched);  // this will make verification fail only if it is recursive
+            Assert.False(innerMockSetup.IsMatched); // this will make verification fail only if it is recursive
             Assert.Throws<MockException>(() => setup.VerifyAll());
         }
 
@@ -382,7 +387,7 @@ namespace Moq.Tests
             var innerMockSetup = Mock.Get(innerMock).Setups.First();
 
             Assert.True(setup.IsMatched);
-            Assert.False(innerMockSetup.IsVerifiable);  // this should not exclude the inner mock setup from verification
+            Assert.False(innerMockSetup.IsVerifiable); // this should not exclude the inner mock setup from verification
             Assert.Throws<MockException>(() => setup.VerifyAll());
         }
 

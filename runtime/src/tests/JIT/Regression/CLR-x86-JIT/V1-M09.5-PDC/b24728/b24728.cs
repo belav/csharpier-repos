@@ -14,18 +14,16 @@
 // </Description>
 //<Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 
 using System;
 using Xunit;
 
 public class MyClass
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
-
         float test1 = 2.0f;
         float test2 = test1++;
         float test3 = ++test1;
@@ -42,4 +40,4 @@ public class MyClass
         //return 1;
     }
 }
-// </Code> 
+// </Code>

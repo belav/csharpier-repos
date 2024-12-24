@@ -1,7 +1,7 @@
 ﻿///----------- ----------- ----------- ----------- ----------- -----------
 /// <copyright file="DictionaryKeyCollection.cs" company="Microsoft">
 ///     Copyright (c) Microsoft Corporation.  All rights reserved.
-/// </copyright>                               
+/// </copyright>
 ///
 /// <owner>gpaperin</owner>
 ///----------- ----------- ----------- ----------- ----------- -----------
@@ -34,9 +34,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (index < 0)
                 throw new ArgumentOutOfRangeException("index");
             if (array.Length <= index && this.Count > 0)
-                throw new ArgumentException(Environment.GetResourceString("Arg_IndexOutOfRangeException"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_IndexOutOfRangeException")
+                );
             if (array.Length - index < dictionary.Count)
-                throw new ArgumentException(Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection")
+                );
 
             int i = index;
             foreach (KeyValuePair<TKey, TValue> mapping in dictionary)
@@ -45,22 +49,28 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
         }
 
-        public int Count {
+        public int Count
+        {
             get { return dictionary.Count; }
         }
 
-        bool ICollection<TKey>.IsReadOnly {
+        bool ICollection<TKey>.IsReadOnly
+        {
             get { return true; }
         }
 
         void ICollection<TKey>.Add(TKey item)
         {
-            throw new NotSupportedException(Environment.GetResourceString("NotSupported_KeyCollectionSet"));
+            throw new NotSupportedException(
+                Environment.GetResourceString("NotSupported_KeyCollectionSet")
+            );
         }
 
         void ICollection<TKey>.Clear()
         {
-            throw new NotSupportedException(Environment.GetResourceString("NotSupported_KeyCollectionSet"));
+            throw new NotSupportedException(
+                Environment.GetResourceString("NotSupported_KeyCollectionSet")
+            );
         }
 
         public bool Contains(TKey item)
@@ -70,7 +80,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         bool ICollection<TKey>.Remove(TKey item)
         {
-            throw new NotSupportedException(Environment.GetResourceString("NotSupported_KeyCollectionSet"));
+            throw new NotSupportedException(
+                Environment.GetResourceString("NotSupported_KeyCollectionSet")
+            );
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -82,8 +94,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             return new DictionaryKeyEnumerator<TKey, TValue>(dictionary);
         }
-    }  // public class DictionaryKeyCollection<TKey, TValue>
-
+    } // public class DictionaryKeyCollection<TKey, TValue>
 
     [Serializable]
     internal sealed class DictionaryKeyEnumerator<TKey, TValue> : IEnumerator<TKey>
@@ -110,11 +121,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return enumeration.MoveNext();
         }
 
-        Object IEnumerator.Current {
+        Object IEnumerator.Current
+        {
             get { return ((IEnumerator<TKey>)this).Current; }
         }
 
-        public TKey Current {
+        public TKey Current
+        {
             get { return enumeration.Current.Key; }
         }
 
@@ -122,7 +135,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             enumeration = dictionary.GetEnumerator();
         }
-    }  // class DictionaryKeyEnumerator<TKey, TValue>
+    } // class DictionaryKeyEnumerator<TKey, TValue>
 }
 
 // DictionaryKeyCollection.cs

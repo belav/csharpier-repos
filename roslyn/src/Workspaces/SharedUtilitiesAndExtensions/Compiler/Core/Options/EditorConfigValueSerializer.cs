@@ -11,33 +11,36 @@ namespace Microsoft.CodeAnalysis.Options
 {
     internal static class EditorConfigValueSerializer
     {
-        private static string EscapeLineBreaks(string str)
-            => str.Replace("\\r", "\r").Replace("\\n", "\n");
+        private static string EscapeLineBreaks(string str) =>
+            str.Replace("\\r", "\r").Replace("\\n", "\n");
 
-        private static string UnescapeLineBreaks(string str)
-            => str.Replace("\r", "\\r").Replace("\n", "\\n");
+        private static string UnescapeLineBreaks(string str) =>
+            str.Replace("\r", "\\r").Replace("\n", "\\n");
 
         private static readonly EditorConfigValueSerializer<bool> s_bool = new(
             parseValue: ParseBoolean,
-            serializeValue: SerializeBoolean);
+            serializeValue: SerializeBoolean
+        );
 
         private static readonly EditorConfigValueSerializer<int> s_int32 = new(
             parseValue: str => int.TryParse(str, out var result) ? result : new Optional<int>(),
-            serializeValue: StringExtensions.GetNumeral);
+            serializeValue: StringExtensions.GetNumeral
+        );
 
         private static readonly EditorConfigValueSerializer<string> s_string = new(
             parseValue: str => EscapeLineBreaks(str),
-            serializeValue: UnescapeLineBreaks);
+            serializeValue: UnescapeLineBreaks
+        );
 
         private static readonly EditorConfigValueSerializer<bool?> s_nullableBoolean = new(
             parseValue: ParseNullableBoolean,
-            serializeValue: value => value == null ? "null" : SerializeBoolean(value.Value));
+            serializeValue: value => value == null ? "null" : SerializeBoolean(value.Value)
+        );
 
-        private static Optional<bool> ParseBoolean(string str)
-            => bool.TryParse(str, out var result) ? result : new Optional<bool>();
+        private static Optional<bool> ParseBoolean(string str) =>
+            bool.TryParse(str, out var result) ? result : new Optional<bool>();
 
-        private static string SerializeBoolean(bool value)
-            => value ? "true" : "false";
+        private static string SerializeBoolean(bool value) => value ? "true" : "false";
 
         private static Optional<bool?> ParseNullableBoolean(string str)
         {
@@ -47,7 +50,9 @@ namespace Microsoft.CodeAnalysis.Options
             }
 
             var optionalBool = ParseBoolean(str);
-            return optionalBool.HasValue ? new Optional<bool?>(optionalBool.Value) : new Optional<bool?>();
+            return optionalBool.HasValue
+                ? new Optional<bool?>(optionalBool.Value)
+                : new Optional<bool?>();
         }
 
         public static EditorConfigValueSerializer<T> Default<T>()
@@ -70,39 +75,86 @@ namespace Microsoft.CodeAnalysis.Options
             return EditorConfigValueSerializer<T>.Unsupported;
         }
 
-        public static EditorConfigValueSerializer<string> String(string emptyStringRepresentation)
-            => new(parseValue: str => str.Equals(emptyStringRepresentation, StringComparison.Ordinal) ? default(Optional<string>) : EscapeLineBreaks(str),
-                   serializeValue: value => string.IsNullOrEmpty(value) ? emptyStringRepresentation : UnescapeLineBreaks(value));
+        public static EditorConfigValueSerializer<string> String(
+            string emptyStringRepresentation
+        ) =>
+            new(
+                parseValue: str =>
+                    str.Equals(emptyStringRepresentation, StringComparison.Ordinal)
+                        ? default(Optional<string>)
+                        : EscapeLineBreaks(str),
+                serializeValue: value =>
+                    string.IsNullOrEmpty(value)
+                        ? emptyStringRepresentation
+                        : UnescapeLineBreaks(value)
+            );
 
-        public static EditorConfigValueSerializer<CodeStyleOption2<T>> CodeStyle<T>(CodeStyleOption2<T> defaultValue)
+        public static EditorConfigValueSerializer<CodeStyleOption2<T>> CodeStyle<T>(
+            CodeStyleOption2<T> defaultValue
+        )
         {
             if (typeof(T) == typeof(bool))
-                return (EditorConfigValueSerializer<CodeStyleOption2<T>>)(object)CodeStyle((CodeStyleOption2<bool>)(object)defaultValue);
+                return (EditorConfigValueSerializer<CodeStyleOption2<T>>)
+                    (object)CodeStyle((CodeStyleOption2<bool>)(object)defaultValue);
 
             if (typeof(T) == typeof(string))
-                return (EditorConfigValueSerializer<CodeStyleOption2<T>>)(object)CodeStyle((CodeStyleOption2<string>)(object)defaultValue);
+                return (EditorConfigValueSerializer<CodeStyleOption2<T>>)
+                    (object)CodeStyle((CodeStyleOption2<string>)(object)defaultValue);
 
             throw ExceptionUtilities.UnexpectedValue(typeof(T));
         }
 
-        public static EditorConfigValueSerializer<CodeStyleOption2<bool>> CodeStyle(CodeStyleOption2<bool> defaultValue)
-            => new(parseValue: str => CodeStyleHelpers.TryParseBoolEditorConfigCodeStyleOption(str, defaultValue, out var result) ? result : new Optional<CodeStyleOption2<bool>>(),
-                   serializeValue: value => (value.Value ? "true" : "false") + CodeStyleHelpers.GetEditorConfigStringNotificationPart(value, defaultValue));
+        public static EditorConfigValueSerializer<CodeStyleOption2<bool>> CodeStyle(
+            CodeStyleOption2<bool> defaultValue
+        ) =>
+            new(
+                parseValue: str =>
+                    CodeStyleHelpers.TryParseBoolEditorConfigCodeStyleOption(
+                        str,
+                        defaultValue,
+                        out var result
+                    )
+                        ? result
+                        : new Optional<CodeStyleOption2<bool>>(),
+                serializeValue: value =>
+                    (value.Value ? "true" : "false")
+                    + CodeStyleHelpers.GetEditorConfigStringNotificationPart(value, defaultValue)
+            );
 
-        public static EditorConfigValueSerializer<CodeStyleOption2<string>> CodeStyle(CodeStyleOption2<string> defaultValue)
-            => new(parseValue: str => CodeStyleHelpers.TryParseStringEditorConfigCodeStyleOption(str, defaultValue, out var result) ? result : new Optional<CodeStyleOption2<string>>(),
-                   serializeValue: value => value.Value.ToLowerInvariant() + CodeStyleHelpers.GetEditorConfigStringNotificationPart(value, defaultValue));
+        public static EditorConfigValueSerializer<CodeStyleOption2<string>> CodeStyle(
+            CodeStyleOption2<string> defaultValue
+        ) =>
+            new(
+                parseValue: str =>
+                    CodeStyleHelpers.TryParseStringEditorConfigCodeStyleOption(
+                        str,
+                        defaultValue,
+                        out var result
+                    )
+                        ? result
+                        : new Optional<CodeStyleOption2<string>>(),
+                serializeValue: value =>
+                    value.Value.ToLowerInvariant()
+                    + CodeStyleHelpers.GetEditorConfigStringNotificationPart(value, defaultValue)
+            );
 
-        public static EditorConfigValueSerializer<T> CreateSerializerForEnum<T>() where T : struct, Enum
-            => new(
-                parseValue: str => TryParseEnum<T>(str, out var result) ? new Optional<T>(result) : new Optional<T>(),
-                serializeValue: value => value.ToString());
+        public static EditorConfigValueSerializer<T> CreateSerializerForEnum<T>()
+            where T : struct, Enum =>
+            new(
+                parseValue: str =>
+                    TryParseEnum<T>(str, out var result)
+                        ? new Optional<T>(result)
+                        : new Optional<T>(),
+                serializeValue: value => value.ToString()
+            );
 
-        public static EditorConfigValueSerializer<T?> CreateSerializerForNullableEnum<T>() where T : struct, Enum
+        public static EditorConfigValueSerializer<T?> CreateSerializerForNullableEnum<T>()
+            where T : struct, Enum
         {
             return new EditorConfigValueSerializer<T?>(
                 parseValue: ParseValueForNullableEnum,
-                serializeValue: value => value == null ? "null" : value.Value.ToString());
+                serializeValue: value => value == null ? "null" : value.Value.ToString()
+            );
 
             static Optional<T?> ParseValueForNullableEnum(string str)
             {
@@ -120,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Options
             }
         }
 
-        private static bool TryParseEnum<T>(string str, out T result) where T : struct, Enum
+        private static bool TryParseEnum<T>(string str, out T result)
+            where T : struct, Enum
         {
             result = default;
             // Block any int value.

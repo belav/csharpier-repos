@@ -14,10 +14,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree;
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal sealed partial class SymbolTreeInfoCacheServiceFactory(
-    IAsynchronousOperationListenerProvider listenerProvider) : IWorkspaceServiceFactory
+    IAsynchronousOperationListenerProvider listenerProvider
+) : IWorkspaceServiceFactory
 {
-    private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(FeatureAttribute.SolutionCrawlerLegacy);
+    private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(
+        FeatureAttribute.SolutionCrawlerLegacy
+    );
 
-    public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-        => new SymbolTreeInfoCacheService(workspaceServices.Workspace, _listener);
+    public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+        new SymbolTreeInfoCacheService(workspaceServices.Workspace, _listener);
 }

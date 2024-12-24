@@ -12,9 +12,11 @@ namespace Microsoft.CodeAnalysis.Editor
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    internal class ExportCompletionProviderMef1Attribute(string name, string language) : ExportAttribute(typeof(CompletionProvider))
+    internal class ExportCompletionProviderMef1Attribute(string name, string language)
+        : ExportAttribute(typeof(CompletionProvider))
     {
         public string Name { get; } = name ?? throw new ArgumentNullException(nameof(name));
-        public string Language { get; } = language ?? throw new ArgumentNullException(nameof(language));
+        public string Language { get; } =
+            language ?? throw new ArgumentNullException(nameof(language));
     }
 }

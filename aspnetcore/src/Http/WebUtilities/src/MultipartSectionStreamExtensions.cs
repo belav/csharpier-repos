@@ -16,8 +16,8 @@ public static class MultipartSectionStreamExtensions
     /// </summary>
     /// <param name="section">The section to read from</param>
     /// <returns>The body steam as string</returns>
-    public static Task<string> ReadAsStringAsync(this MultipartSection section)
-        => section.ReadAsStringAsync(CancellationToken.None).AsTask();
+    public static Task<string> ReadAsStringAsync(this MultipartSection section) =>
+        section.ReadAsStringAsync(CancellationToken.None).AsTask();
 
     /// <summary>
     /// Reads the body of the section as a string
@@ -25,13 +25,19 @@ public static class MultipartSectionStreamExtensions
     /// <param name="section">The section to read from</param>
     /// <param name="cancellationToken">The cancellationt token.</param>
     /// <returns>The body steam as string</returns>
-    public static async ValueTask<string> ReadAsStringAsync(this MultipartSection section, CancellationToken cancellationToken)
+    public static async ValueTask<string> ReadAsStringAsync(
+        this MultipartSection section,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(section);
 
         if (section.Body is null)
         {
-            throw new ArgumentException("Multipart section must have a body to be read.", nameof(section));
+            throw new ArgumentException(
+                "Multipart section must have a body to be read.",
+                nameof(section)
+            );
         }
 
         _ = MediaTypeHeaderValue.TryParse(section.ContentType, out var sectionMediaType);
@@ -48,7 +54,8 @@ public static class MultipartSectionStreamExtensions
             streamEncoding,
             detectEncodingFromByteOrderMarks: true,
             bufferSize: 1024,
-            leaveOpen: true);
+            leaveOpen: true
+        );
         return await reader.ReadToEndAsync(cancellationToken);
     }
 }

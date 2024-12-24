@@ -8,5 +8,5 @@ internal enum CommandOptionType
     MultipleValue,
     SingleValue,
     BoolValue,
-    NoValue
+    NoValue,
 }

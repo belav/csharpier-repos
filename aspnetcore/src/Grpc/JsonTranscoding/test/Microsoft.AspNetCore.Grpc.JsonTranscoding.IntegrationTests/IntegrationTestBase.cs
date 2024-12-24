@@ -37,4 +37,3 @@ public class IntegrationTestBase : IClassFixture<GrpcTestFixture<Startup>>, IDis
         _channel = null;
     }
 }
-

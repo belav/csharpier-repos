@@ -1,7 +1,7 @@
 using System;
-using System.Globalization;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Transactions;
 using System.Workflow.ComponentModel;
@@ -17,8 +17,18 @@ namespace System.Workflow.Runtime
         #region data
 
         // state to be persisted for the scheduler
-        internal static DependencyProperty HighPriorityEntriesQueueProperty = DependencyProperty.RegisterAttached("HighPriorityEntriesQueue", typeof(Queue<SchedulableItem>), typeof(Scheduler));
-        internal static DependencyProperty NormalPriorityEntriesQueueProperty = DependencyProperty.RegisterAttached("NormalPriorityEntriesQueue", typeof(Queue<SchedulableItem>), typeof(Scheduler));
+        internal static DependencyProperty HighPriorityEntriesQueueProperty =
+            DependencyProperty.RegisterAttached(
+                "HighPriorityEntriesQueue",
+                typeof(Queue<SchedulableItem>),
+                typeof(Scheduler)
+            );
+        internal static DependencyProperty NormalPriorityEntriesQueueProperty =
+            DependencyProperty.RegisterAttached(
+                "NormalPriorityEntriesQueue",
+                typeof(Queue<SchedulableItem>),
+                typeof(Scheduler)
+            );
         Queue<SchedulableItem> highPriorityEntriesQueue;
         Queue<SchedulableItem> normalPriorityEntriesQueue;
 
@@ -45,20 +55,33 @@ namespace System.Workflow.Runtime
             // false if loading from a persisted state. Will be set to true later at ResumeOnIdle
             this.canRun = canRun;
 
-            this.highPriorityEntriesQueue = (Queue<SchedulableItem>)rootExec.RootActivity.GetValue(Scheduler.HighPriorityEntriesQueueProperty);
-            this.normalPriorityEntriesQueue = (Queue<SchedulableItem>)rootExec.RootActivity.GetValue(Scheduler.NormalPriorityEntriesQueueProperty);
+            this.highPriorityEntriesQueue =
+                (Queue<SchedulableItem>)
+                    rootExec.RootActivity.GetValue(Scheduler.HighPriorityEntriesQueueProperty);
+            this.normalPriorityEntriesQueue =
+                (Queue<SchedulableItem>)
+                    rootExec.RootActivity.GetValue(Scheduler.NormalPriorityEntriesQueueProperty);
             if (this.highPriorityEntriesQueue == null)
             {
                 this.highPriorityEntriesQueue = new Queue<SchedulableItem>();
-                rootExec.RootActivity.SetValue(Scheduler.HighPriorityEntriesQueueProperty, this.highPriorityEntriesQueue);
+                rootExec.RootActivity.SetValue(
+                    Scheduler.HighPriorityEntriesQueueProperty,
+                    this.highPriorityEntriesQueue
+                );
             }
             if (this.normalPriorityEntriesQueue == null)
             {
                 this.normalPriorityEntriesQueue = new Queue<SchedulableItem>();
-                rootExec.RootActivity.SetValue(Scheduler.NormalPriorityEntriesQueueProperty, this.normalPriorityEntriesQueue);
+                rootExec.RootActivity.SetValue(
+                    Scheduler.NormalPriorityEntriesQueueProperty,
+                    this.normalPriorityEntriesQueue
+                );
             }
 
-            this.empty = ((this.normalPriorityEntriesQueue.Count == 0) && (this.highPriorityEntriesQueue.Count == 0));
+            this.empty = (
+                (this.normalPriorityEntriesQueue.Count == 0)
+                && (this.highPriorityEntriesQueue.Count == 0)
+            );
         }
 
         #endregion ctors
@@ -67,7 +90,9 @@ namespace System.Workflow.Runtime
 
         public override string ToString()
         {
-            return "Scheduler('" + ((Activity)this.RootWorkflowExecutor.WorkflowDefinition).QualifiedName + "')";
+            return "Scheduler('"
+                + ((Activity)this.RootWorkflowExecutor.WorkflowDefinition).QualifiedName
+                + "')";
         }
 
         protected WorkflowExecutor RootWorkflowExecutor
@@ -77,35 +102,19 @@ namespace System.Workflow.Runtime
 
         public bool IsStalledNow
         {
-            get
-            {
-                return empty;
-            }
+            get { return empty; }
         }
 
         public bool CanRun
         {
-            get
-            {
-                return canRun;
-            }
-
-            set
-            {
-                canRun = value;
-            }
+            get { return canRun; }
+            set { canRun = value; }
         }
 
         internal bool AbortOrTerminateRequested
         {
-            get
-            {
-                return abortOrTerminateRequested;
-            }
-            set
-            {
-                abortOrTerminateRequested = value;
-            }
+            get { return abortOrTerminateRequested; }
+            set { abortOrTerminateRequested = value; }
         }
 
         #endregion Misc properties
@@ -132,9 +141,13 @@ namespace System.Workflow.Runtime
                 int contextId = item.ContextId;
 
                 // This function gets the root or enclosing while-loop activity
-                Activity contextActivity = this.RootWorkflowExecutor.GetContextActivityForId(contextId);
+                Activity contextActivity = this.RootWorkflowExecutor.GetContextActivityForId(
+                    contextId
+                );
                 if (contextActivity == null)
-                    throw new InvalidOperationException(ExecutionStringManager.InvalidExecutionContext);
+                    throw new InvalidOperationException(
+                        ExecutionStringManager.InvalidExecutionContext
+                    );
 
                 // This is the activity corresponding to the item's ActivityId
                 itemActivity = contextActivity.GetActivityByName(item.ActivityId);
@@ -145,32 +158,58 @@ namespace System.Workflow.Runtime
 
                     try
                     {
-                        // item preamble 
+                        // item preamble
                         // set up the item transactional context if necessary
                         //
                         Debug.Assert(itemActivity != null, "null itemActivity");
                         if (itemActivity == null)
-                            throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InvalidActivityName, item.ActivityId));
+                            throw new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.CurrentCulture,
+                                    ExecutionStringManager.InvalidActivityName,
+                                    item.ActivityId
+                                )
+                            );
 
                         Activity atomicActivity = null;
-                        if (this.RootWorkflowExecutor.IsActivityInAtomicContext(itemActivity, out atomicActivity))
+                        if (
+                            this.RootWorkflowExecutor.IsActivityInAtomicContext(
+                                itemActivity,
+                                out atomicActivity
+                            )
+                        )
                         {
-                            transactionalProperties = (TransactionalProperties)atomicActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
+                            transactionalProperties = (TransactionalProperties)
+                                atomicActivity.GetValue(
+                                    WorkflowExecutor.TransactionalPropertiesProperty
+                                );
                             // If we've aborted for any reason stop now!
                             // If we attempt to enter a new TransactionScope the com+ context will get corrupted
                             // See windows se bug 137267
-                            if (!WorkflowExecutor.CheckAndProcessTransactionAborted(transactionalProperties))
+                            if (
+                                !WorkflowExecutor.CheckAndProcessTransactionAborted(
+                                    transactionalProperties
+                                )
+                            )
                             {
                                 if (transactionalProperties.TransactionScope == null)
                                 {
                                     // Use TimeSpan.Zero so scope will not create timeout independent of the transaction
                                     // Use EnterpriseServicesInteropOption.Full to flow transaction to COM+
-                                    transactionalProperties.TransactionScope =
-                                        new TransactionScope(transactionalProperties.Transaction, TimeSpan.Zero, EnterpriseServicesInteropOption.Full);
+                                    transactionalProperties.TransactionScope = new TransactionScope(
+                                        transactionalProperties.Transaction,
+                                        TimeSpan.Zero,
+                                        EnterpriseServicesInteropOption.Full
+                                    );
 
-                                    WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0,
-                                        "Workflow Runtime: Scheduler: instanceId: " + this.RootWorkflowExecutor.InstanceIdString +
-                                        "Entered into TransactionScope, Current atomic acitivity " + atomicActivity.Name);
+                                    WorkflowTrace.Runtime.TraceEvent(
+                                        TraceEventType.Information,
+                                        0,
+                                        "Workflow Runtime: Scheduler: instanceId: "
+                                            + this.RootWorkflowExecutor.InstanceIdString
+                                            + "Entered into TransactionScope, Current atomic acitivity "
+                                            + atomicActivity.Name
+                                    );
                                 }
                             }
                         }
@@ -178,9 +217,15 @@ namespace System.Workflow.Runtime
                         // Run the item
                         //
                         runningItem = true;
-                        WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 1, "Workflow Runtime: Scheduler: InstanceId: {0} : Running scheduled entry: {1}", this.RootWorkflowExecutor.InstanceIdString, item.ToString());
+                        WorkflowTrace.Runtime.TraceEvent(
+                            TraceEventType.Information,
+                            1,
+                            "Workflow Runtime: Scheduler: InstanceId: {0} : Running scheduled entry: {1}",
+                            this.RootWorkflowExecutor.InstanceIdString,
+                            item.ToString()
+                        );
 
-                        // running any entry implicitly changes some state of the workflow instance                    
+                        // running any entry implicitly changes some state of the workflow instance
                         this.RootWorkflowExecutor.stateChangedSincePersistence = true;
 
                         item.Run(this.RootWorkflowExecutor);
@@ -195,7 +240,8 @@ namespace System.Workflow.Runtime
                         else
                         {
                             if (transactionalProperties != null)
-                                transactionalProperties.TransactionState = TransactionProcessState.AbortProcessed;
+                                transactionalProperties.TransactionState =
+                                    TransactionProcessState.AbortProcessed;
                             exp = e;
                         }
                     }
@@ -204,14 +250,24 @@ namespace System.Workflow.Runtime
                         if (!ignoreFinallyBlock)
                         {
                             if (runningItem)
-                                WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 1, "Workflow Runtime: Scheduler: InstanceId: {0} : Done with running scheduled entry: {1}", this.RootWorkflowExecutor.InstanceIdString, item.ToString());
+                                WorkflowTrace.Runtime.TraceEvent(
+                                    TraceEventType.Information,
+                                    1,
+                                    "Workflow Runtime: Scheduler: InstanceId: {0} : Done with running scheduled entry: {1}",
+                                    this.RootWorkflowExecutor.InstanceIdString,
+                                    item.ToString()
+                                );
 
                             // Process exception
                             //
                             if (exp != null)
                             {
-                                // 
-                                this.RootWorkflowExecutor.ExceptionOccured(exp, itemActivity == null ? contextActivity : itemActivity, null);
+                                //
+                                this.RootWorkflowExecutor.ExceptionOccured(
+                                    exp,
+                                    itemActivity == null ? contextActivity : itemActivity,
+                                    null
+                                );
                                 exp = null;
                             }
                         }
@@ -227,7 +283,10 @@ namespace System.Workflow.Runtime
             lock (this.syncObject)
             {
                 bool workToDo = false;
-                if ((this.highPriorityEntriesQueue.Count > 0) || (this.normalPriorityEntriesQueue.Count > 0))
+                if (
+                    (this.highPriorityEntriesQueue.Count > 0)
+                    || (this.normalPriorityEntriesQueue.Count > 0)
+                )
                 {
                     workToDo = true;
 
@@ -250,8 +309,11 @@ namespace System.Workflow.Runtime
 
                         // pick an entry to run
                         //
-                        if (((IWorkflowCoreRuntime)this.RootWorkflowExecutor).CurrentAtomicActivity == null &&
-                            (this.normalPriorityEntriesQueue.Count > 0))
+                        if (
+                            ((IWorkflowCoreRuntime)this.RootWorkflowExecutor).CurrentAtomicActivity
+                                == null
+                            && (this.normalPriorityEntriesQueue.Count > 0)
+                        )
                             ret = this.normalPriorityEntriesQueue.Dequeue();
                     }
                     else
@@ -311,9 +373,17 @@ namespace System.Workflow.Runtime
         {
             lock (this.syncObject)
             {
-                WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 1, "Workflow Runtime: Scheduler: InstanceId: {0} : Scheduling entry: {1}", this.RootWorkflowExecutor.InstanceIdString, s.ToString());
+                WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Information,
+                    1,
+                    "Workflow Runtime: Scheduler: InstanceId: {0} : Scheduling entry: {1}",
+                    this.RootWorkflowExecutor.InstanceIdString,
+                    s.ToString()
+                );
                 // SchedulableItems in AtomicTransaction has higher priority
-                Queue<SchedulableItem> q = isInAtomicTransaction ? this.highPriorityEntriesQueue : this.normalPriorityEntriesQueue;
+                Queue<SchedulableItem> q = isInAtomicTransaction
+                    ? this.highPriorityEntriesQueue
+                    : this.normalPriorityEntriesQueue;
                 q.Enqueue(s);
 
                 if (transacted)

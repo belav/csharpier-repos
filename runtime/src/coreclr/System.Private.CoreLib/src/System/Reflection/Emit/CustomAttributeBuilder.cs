@@ -31,28 +31,60 @@ namespace System.Reflection.Emit
 
         // public constructor to form the custom attribute with constructor and constructor
         // parameters.
-        public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs) :
-            this(con, constructorArgs, Array.Empty<PropertyInfo>(), Array.Empty<object>(), Array.Empty<FieldInfo>(), Array.Empty<object>())
-        {
-        }
+        public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs)
+            : this(
+                con,
+                constructorArgs,
+                Array.Empty<PropertyInfo>(),
+                Array.Empty<object>(),
+                Array.Empty<FieldInfo>(),
+                Array.Empty<object>()
+            ) { }
 
         // public constructor to form the custom attribute with constructor, constructor
         // parameters and named properties.
-        public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs, PropertyInfo[] namedProperties, object?[] propertyValues) :
-            this(con, constructorArgs, namedProperties, propertyValues, Array.Empty<FieldInfo>(), Array.Empty<object>())
-        {
-        }
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object?[] constructorArgs,
+            PropertyInfo[] namedProperties,
+            object?[] propertyValues
+        )
+            : this(
+                con,
+                constructorArgs,
+                namedProperties,
+                propertyValues,
+                Array.Empty<FieldInfo>(),
+                Array.Empty<object>()
+            ) { }
 
         // public constructor to form the custom attribute with constructor and constructor
         // parameters.
-        public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs, FieldInfo[] namedFields, object?[] fieldValues) :
-            this(con, constructorArgs, Array.Empty<PropertyInfo>(), Array.Empty<object>(), namedFields, fieldValues)
-        {
-        }
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object?[] constructorArgs,
+            FieldInfo[] namedFields,
+            object?[] fieldValues
+        )
+            : this(
+                con,
+                constructorArgs,
+                Array.Empty<PropertyInfo>(),
+                Array.Empty<object>(),
+                namedFields,
+                fieldValues
+            ) { }
 
         // public constructor to form the custom attribute with constructor and constructor
         // parameters.
-        public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs, PropertyInfo[] namedProperties, object?[] propertyValues, FieldInfo[] namedFields, object?[] fieldValues)
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object?[] constructorArgs,
+            PropertyInfo[] namedProperties,
+            object?[] propertyValues,
+            FieldInfo[] namedFields,
+            object?[] fieldValues
+        )
         {
             ArgumentNullException.ThrowIfNull(con);
             ArgumentNullException.ThrowIfNull(constructorArgs);
@@ -65,16 +97,23 @@ namespace System.Reflection.Emit
 
 #pragma warning disable CA2208 // Instantiate argument exceptions correctly, combination of arguments used
             if (namedProperties.Length != propertyValues.Length)
-                throw new ArgumentException(SR.Arg_ArrayLengthsDiffer, "namedProperties, propertyValues");
+                throw new ArgumentException(
+                    SR.Arg_ArrayLengthsDiffer,
+                    "namedProperties, propertyValues"
+                );
             if (namedFields.Length != fieldValues.Length)
                 throw new ArgumentException(SR.Arg_ArrayLengthsDiffer, "namedFields, fieldValues");
 #pragma warning restore CA2208
 
-            if ((con.Attributes & MethodAttributes.Static) == MethodAttributes.Static ||
-                (con.Attributes & MethodAttributes.MemberAccessMask) == MethodAttributes.Private)
+            if (
+                (con.Attributes & MethodAttributes.Static) == MethodAttributes.Static
+                || (con.Attributes & MethodAttributes.MemberAccessMask) == MethodAttributes.Private
+            )
                 throw new ArgumentException(SR.Argument_BadConstructor);
 
-            if ((con.CallingConvention & CallingConventions.Standard) != CallingConventions.Standard)
+            if (
+                (con.CallingConvention & CallingConventions.Standard) != CallingConventions.Standard
+            )
                 throw new ArgumentException(SR.Argument_BadConstructorCallConv);
 
             // Cache information used elsewhere.
@@ -109,7 +148,11 @@ namespace System.Reflection.Emit
                     }
                     continue;
                 }
-                VerifyTypeAndPassedObjectType(paramTypes[i], constructorArg.GetType(), $"{nameof(constructorArgs)}[{i}]");
+                VerifyTypeAndPassedObjectType(
+                    paramTypes[i],
+                    constructorArg.GetType(),
+                    $"{nameof(constructorArgs)}[{i}]"
+                );
             }
 
             // Allocate a memory stream to represent the CA blob in the metadata and a binary writer to help format it.
@@ -149,9 +192,11 @@ namespace System.Reflection.Emit
                     throw new ArgumentException(SR.Argument_NotAWritableProperty);
 
                 // Property has to be from the same class or base class as ConstructorInfo.
-                if (property.DeclaringType != con.DeclaringType
+                if (
+                    property.DeclaringType != con.DeclaringType
                     && (!(con.DeclaringType is TypeBuilderInstantiation))
-                    && !con.DeclaringType!.IsSubclassOf(property.DeclaringType!))
+                    && !con.DeclaringType!.IsSubclassOf(property.DeclaringType!)
+                )
                 {
                     // Might have failed check because one type is a XXXBuilder
                     // and the other is not. Deal with these special cases
@@ -162,9 +207,15 @@ namespace System.Reflection.Emit
                         // the constructor is a TypeBuilder, but we still need
                         // to deal with the case where the property's declaring
                         // type is one.
-                        if (!(property.DeclaringType is TypeBuilder) ||
-                            !con.DeclaringType.IsSubclassOf(((RuntimeTypeBuilder)property.DeclaringType).BakedRuntimeType))
-                            throw new ArgumentException(SR.Argument_BadPropertyForConstructorBuilder);
+                        if (
+                            !(property.DeclaringType is TypeBuilder)
+                            || !con.DeclaringType.IsSubclassOf(
+                                ((RuntimeTypeBuilder)property.DeclaringType).BakedRuntimeType
+                            )
+                        )
+                            throw new ArgumentException(
+                                SR.Argument_BadPropertyForConstructorBuilder
+                            );
                     }
                 }
 
@@ -172,7 +223,11 @@ namespace System.Reflection.Emit
                 // Note that there will be no coercion.
                 if (propertyValue != null)
                 {
-                    VerifyTypeAndPassedObjectType(propType, propertyValue.GetType(), $"{nameof(propertyValues)}[{i}]");
+                    VerifyTypeAndPassedObjectType(
+                        propType,
+                        propertyValue.GetType(),
+                        $"{nameof(propertyValues)}[{i}]"
+                    );
                 }
 
                 // First a byte indicating that this is a property.
@@ -203,21 +258,29 @@ namespace System.Reflection.Emit
                     throw new ArgumentException(SR.Argument_BadTypeInCustomAttribute);
 
                 // Field has to be from the same class or base class as ConstructorInfo.
-                if (namedField.DeclaringType != con.DeclaringType
+                if (
+                    namedField.DeclaringType != con.DeclaringType
                     && (!(con.DeclaringType is TypeBuilderInstantiation))
-                    && !con.DeclaringType!.IsSubclassOf(namedField.DeclaringType!))
+                    && !con.DeclaringType!.IsSubclassOf(namedField.DeclaringType!)
+                )
                 {
                     // Might have failed check because one type is a XXXBuilder
                     // and the other is not. Deal with these special cases
                     // separately.
-                    if (!RuntimeTypeBuilder.IsTypeEqual(namedField.DeclaringType, con.DeclaringType))
+                    if (
+                        !RuntimeTypeBuilder.IsTypeEqual(namedField.DeclaringType, con.DeclaringType)
+                    )
                     {
                         // IsSubclassOf is overloaded to do the right thing if
                         // the constructor is a TypeBuilder, but we still need
                         // to deal with the case where the field's declaring
                         // type is one.
-                        if (!(namedField.DeclaringType is TypeBuilder) ||
-                            !con.DeclaringType.IsSubclassOf(((RuntimeTypeBuilder)namedFields[i].DeclaringType!).BakedRuntimeType))
+                        if (
+                            !(namedField.DeclaringType is TypeBuilder)
+                            || !con.DeclaringType.IsSubclassOf(
+                                ((RuntimeTypeBuilder)namedFields[i].DeclaringType!).BakedRuntimeType
+                            )
+                        )
                             throw new ArgumentException(SR.Argument_BadFieldForConstructorBuilder);
                     }
                 }
@@ -226,7 +289,11 @@ namespace System.Reflection.Emit
                 // Note that there will be no coercion.
                 if (fieldValue != null)
                 {
-                    VerifyTypeAndPassedObjectType(fldType, fieldValue.GetType(), $"{nameof(fieldValues)}[{i}]");
+                    VerifyTypeAndPassedObjectType(
+                        fldType,
+                        fieldValue.GetType(),
+                        $"{nameof(fieldValues)}[{i}]"
+                    );
                 }
 
                 // First a byte indicating that this is a field.
@@ -277,7 +344,11 @@ namespace System.Reflection.Emit
             return t == typeof(object);
         }
 
-        private static void VerifyTypeAndPassedObjectType(Type type, Type passedType, string paramName)
+        private static void VerifyTypeAndPassedObjectType(
+            Type type,
+            Type passedType,
+            string paramName
+        )
         {
             if (type != typeof(object) && Type.GetTypeCode(passedType) != Type.GetTypeCode(type))
             {
@@ -285,7 +356,10 @@ namespace System.Reflection.Emit
             }
             if (passedType == typeof(IntPtr) || passedType == typeof(UIntPtr))
             {
-                throw new ArgumentException(SR.Format(SR.Argument_BadParameterTypeForCAB, passedType), paramName);
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_BadParameterTypeForCAB, passedType),
+                    paramName
+                );
             }
         }
 
@@ -429,9 +503,14 @@ namespace System.Reflection.Emit
                     writer.Write((byte)0xff);
                 else
                 {
-                    string? typeName = TypeNameBuilder.ToString((Type)value, TypeNameBuilder.Format.AssemblyQualifiedName);
+                    string? typeName = TypeNameBuilder.ToString(
+                        (Type)value,
+                        TypeNameBuilder.Format.AssemblyQualifiedName
+                    );
                     if (typeName == null)
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidTypeForCA, value.GetType()));
+                        throw new ArgumentException(
+                            SR.Format(SR.Argument_InvalidTypeForCA, value.GetType())
+                        );
                     EmitString(writer, typeName);
                 }
             }
@@ -499,7 +578,10 @@ namespace System.Reflection.Emit
                 // TypeBuilder), so we need to canonicalize this case back to Type. If we have a null value we follow the convention
                 // used by C# and emit a null typed as a string (it doesn't really matter what type we pick as long as it's a
                 // reference type).
-                Type ot = value == null ? typeof(string) : value is Type ? typeof(Type) : value.GetType();
+                Type ot =
+                    value == null ? typeof(string)
+                    : value is Type ? typeof(Type)
+                    : value.GetType();
 
                 // value cannot be a "System.Object" object.
                 // If we allow this we will get into an infinite recursion
@@ -516,14 +598,21 @@ namespace System.Reflection.Emit
                 if (value != null)
                     typename = value.GetType().ToString();
 
-                throw new ArgumentException(SR.Format(SR.Argument_BadParameterTypeForCAB, typename));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_BadParameterTypeForCAB, typename)
+                );
             }
         }
 
         // return the byte interpretation of the custom attribute
         internal void CreateCustomAttribute(RuntimeModuleBuilder mod, int tkOwner)
         {
-            RuntimeTypeBuilder.DefineCustomAttribute(mod, tkOwner, mod.GetMethodMetadataToken(m_con), m_blob);
+            RuntimeTypeBuilder.DefineCustomAttribute(
+                mod,
+                tkOwner,
+                mod.GetMethodMetadataToken(m_con),
+                m_blob
+            );
         }
     }
 }

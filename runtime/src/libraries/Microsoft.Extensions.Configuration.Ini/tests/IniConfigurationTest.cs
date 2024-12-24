@@ -13,13 +13,16 @@ namespace Microsoft.Extensions.Configuration.Ini.Test
         [Fact]
         public void CanLoadValidIniFromStreamProvider()
         {
-            var ini = @"[DefaultConnection]
+            var ini =
+                @"[DefaultConnection]
 ConnectionString=TestConnectionString
 Provider=SqlClient
 [Data:Inventory]
 ConnectionString=AnotherTestConnectionString
 SubHeader:Provider=MySql";
-            var config = new ConfigurationBuilder().AddIniStream(TestStreamHelpers.StringToStream(ini)).Build();
+            var config = new ConfigurationBuilder()
+                .AddIniStream(TestStreamHelpers.StringToStream(ini))
+                .Build();
 
             Assert.Equal("TestConnectionString", config["defaultconnection:ConnectionString"]);
             Assert.Equal("SqlClient", config["DEFAULTCONNECTION:PROVIDER"]);
@@ -30,20 +33,24 @@ SubHeader:Provider=MySql";
         [Fact]
         public void ReloadThrowsFromIniStreamProvider()
         {
-            var ini = @"[DefaultConnection]
+            var ini =
+                @"[DefaultConnection]
 ConnectionString=TestConnectionString
 Provider=SqlClient
 [Data:Inventory]
 ConnectionString=AnotherTestConnectionString
 SubHeader:Provider=MySql";
-            var config = new ConfigurationBuilder().AddIniStream(TestStreamHelpers.StringToStream(ini)).Build();
+            var config = new ConfigurationBuilder()
+                .AddIniStream(TestStreamHelpers.StringToStream(ini))
+                .Build();
             Assert.Throws<InvalidOperationException>(() => config.Reload());
         }
 
         [Fact]
         public void LoadKeyValuePairsFromValidIniFile()
         {
-            var ini = @"[DefaultConnection]
+            var ini =
+                @"[DefaultConnection]
 ConnectionString=TestConnectionString
 Provider=SqlClient
 [Data:Inventory]
@@ -53,9 +60,15 @@ SubHeader:Provider=MySql";
 
             iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini));
 
-            Assert.Equal("TestConnectionString", iniConfigSrc.Get("defaultconnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                iniConfigSrc.Get("defaultconnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", iniConfigSrc.Get("DEFAULTCONNECTION:PROVIDER"));
-            Assert.Equal("AnotherTestConnectionString", iniConfigSrc.Get("Data:Inventory:CONNECTIONSTRING"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                iniConfigSrc.Get("Data:Inventory:CONNECTIONSTRING")
+            );
             Assert.Equal("MySql", iniConfigSrc.Get("Data:Inventory:SubHeader:Provider"));
         }
 
@@ -73,54 +86,70 @@ SubHeader:Provider=MySql";
         [Fact]
         public void LoadKeyValuePairsFromValidIniFileWithQuotedValues()
         {
-            var ini = "[DefaultConnection]\n" +
-                      "ConnectionString=\"TestConnectionString\"\n" +
-                      "Provider=\"SqlClient\"\n" +
-                      "[Data:Inventory]\n" +
-                      "ConnectionString=\"AnotherTestConnectionString\"\n" +
-                      "Provider=\"MySql\"";
+            var ini =
+                "[DefaultConnection]\n"
+                + "ConnectionString=\"TestConnectionString\"\n"
+                + "Provider=\"SqlClient\"\n"
+                + "[Data:Inventory]\n"
+                + "ConnectionString=\"AnotherTestConnectionString\"\n"
+                + "Provider=\"MySql\"";
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
 
             iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini));
 
-            Assert.Equal("TestConnectionString", iniConfigSrc.Get("DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                iniConfigSrc.Get("DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", iniConfigSrc.Get("DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", iniConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                iniConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", iniConfigSrc.Get("Data:Inventory:Provider"));
         }
 
         [Fact]
         public void DoubleQuoteIsPartOfValueIfNotPaired()
         {
-            var ini = "[ConnectionString]\n" +
-                      "DefaultConnection=\"TestConnectionString\n" +
-                      "Provider=SqlClient\"";
+            var ini =
+                "[ConnectionString]\n"
+                + "DefaultConnection=\"TestConnectionString\n"
+                + "Provider=SqlClient\"";
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
 
             iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini));
 
-            Assert.Equal("\"TestConnectionString", iniConfigSrc.Get("ConnectionString:DefaultConnection"));
+            Assert.Equal(
+                "\"TestConnectionString",
+                iniConfigSrc.Get("ConnectionString:DefaultConnection")
+            );
             Assert.Equal("SqlClient\"", iniConfigSrc.Get("ConnectionString:Provider"));
         }
 
         [Fact]
         public void DoubleQuoteIsPartOfValueIfAppearInTheMiddleOfValue()
         {
-            var ini = "[ConnectionString]\n" +
-                      "DefaultConnection=Test\"Connection\"String\n" +
-                      "Provider=Sql\"Client";
+            var ini =
+                "[ConnectionString]\n"
+                + "DefaultConnection=Test\"Connection\"String\n"
+                + "Provider=Sql\"Client";
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
 
             iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini));
 
-            Assert.Equal("Test\"Connection\"String", iniConfigSrc.Get("ConnectionString:DefaultConnection"));
+            Assert.Equal(
+                "Test\"Connection\"String",
+                iniConfigSrc.Get("ConnectionString:DefaultConnection")
+            );
             Assert.Equal("Sql\"Client", iniConfigSrc.Get("ConnectionString:Provider"));
         }
 
         [Fact]
         public void LoadKeyValuePairsFromValidIniFileWithoutSectionHeader()
         {
-            var ini = @"
+            var ini =
+                @"
             DefaultConnection:ConnectionString=TestConnectionString
             DefaultConnection:Provider=SqlClient
             Data:Inventory:ConnectionString=AnotherTestConnectionString
@@ -130,16 +159,23 @@ SubHeader:Provider=MySql";
 
             iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini));
 
-            Assert.Equal("TestConnectionString", iniConfigSrc.Get("DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                iniConfigSrc.Get("DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", iniConfigSrc.Get("DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", iniConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                iniConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", iniConfigSrc.Get("Data:Inventory:Provider"));
         }
 
         [Fact]
         public void SupportAndIgnoreComments()
         {
-            var ini = @"
+            var ini =
+                @"
             ; Comments
             [DefaultConnection]
             # Comments
@@ -154,17 +190,22 @@ SubHeader:Provider=MySql";
 
             iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini));
 
-            Assert.Equal("TestConnectionString", iniConfigSrc.Get("DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                iniConfigSrc.Get("DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", iniConfigSrc.Get("DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", iniConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                iniConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", iniConfigSrc.Get("Data:Inventory:Provider"));
         }
 
         [Fact]
         public void ShouldRemoveLeadingAndTrailingWhiteSpacesFromKeyAndValue()
         {
-            var ini = "[section]\n" +
-                      " \t key \t = \t value\t ";
+            var ini = "[section]\n" + " \t key \t = \t value\t ";
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
             iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini));
 
@@ -174,8 +215,7 @@ SubHeader:Provider=MySql";
         [Fact]
         public void ShouldRemoveLeadingAndTrailingWhiteSpacesFromSectionName()
         {
-            var ini = "[ \t section \t ]\n" +
-                      "key=value";
+            var ini = "[ \t section \t ]\n" + "key=value";
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
             iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini));
 
@@ -185,13 +225,16 @@ SubHeader:Provider=MySql";
         [Fact]
         public void ThrowExceptionWhenFoundInvalidLine()
         {
-            var ini = @"
+            var ini =
+                @"
 ConnectionString
             ";
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
             var expectedMsg = SR.Format(SR.Error_UnrecognizedLineFormat, "ConnectionString");
 
-            var exception = Assert.Throws<FormatException>(() => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
+            var exception = Assert.Throws<FormatException>(
+                () => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -199,14 +242,17 @@ ConnectionString
         [Fact]
         public void ThrowExceptionWhenFoundBrokenSectionHeader()
         {
-            var ini = @"
+            var ini =
+                @"
 [ConnectionString
 DefaultConnection=TestConnectionString
             ";
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
             var expectedMsg = SR.Format(SR.Error_UnrecognizedLineFormat, "[ConnectionString");
 
-            var exception = Assert.Throws<FormatException>(() => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
+            var exception = Assert.Throws<FormatException>(
+                () => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -216,7 +262,9 @@ DefaultConnection=TestConnectionString
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(() => new ConfigurationBuilder().AddIniFile(path: null));
+            var exception = Assert.Throws<ArgumentException>(
+                () => new ConfigurationBuilder().AddIniFile(path: null)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -226,7 +274,9 @@ DefaultConnection=TestConnectionString
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(() => new ConfigurationBuilder().AddIniFile(string.Empty));
+            var exception = Assert.Throws<ArgumentException>(
+                () => new ConfigurationBuilder().AddIniFile(string.Empty)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -234,7 +284,8 @@ DefaultConnection=TestConnectionString
         [Fact]
         public void ThrowExceptionWhenKeyIsDuplicated()
         {
-            var ini = @"
+            var ini =
+                @"
             [Data:DefaultConnection]
             ConnectionString=TestConnectionString
             Provider=SqlClient
@@ -243,9 +294,14 @@ DefaultConnection=TestConnectionString
             Provider=MySql
             ";
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
-            var expectedMsg = SR.Format(SR.Error_KeyIsDuplicated, "Data:DefaultConnection:ConnectionString");
+            var expectedMsg = SR.Format(
+                SR.Error_KeyIsDuplicated,
+                "Data:DefaultConnection:ConnectionString"
+            );
 
-            var exception = Assert.Throws<FormatException>(() => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
+            var exception = Assert.Throws<FormatException>(
+                () => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -254,16 +310,23 @@ DefaultConnection=TestConnectionString
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50867", TestPlatforms.Android)]
         public void IniConfiguration_Throws_On_Missing_Configuration_File()
         {
-            var exception = Assert.Throws<FileNotFoundException>(() => new ConfigurationBuilder().AddIniFile("NotExistingConfig.ini").Build());
+            var exception = Assert.Throws<FileNotFoundException>(
+                () => new ConfigurationBuilder().AddIniFile("NotExistingConfig.ini").Build()
+            );
 
             // Assert
-            Assert.StartsWith($"The configuration file 'NotExistingConfig.ini' was not found and is not optional. The expected physical path was '", exception.Message);
+            Assert.StartsWith(
+                $"The configuration file 'NotExistingConfig.ini' was not found and is not optional. The expected physical path was '",
+                exception.Message
+            );
         }
 
         [Fact]
         public void IniConfiguration_Does_Not_Throw_On_Optional_Configuration()
         {
-            var config = new ConfigurationBuilder().AddIniFile("NotExistingConfig.ini", optional: true).Build();
+            var config = new ConfigurationBuilder()
+                .AddIniFile("NotExistingConfig.ini", optional: true)
+                .Build();
         }
     }
 }

@@ -23,7 +23,8 @@ namespace System.Linq.Parallel
     /// the 0th partition which yields the default value.
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
-    internal sealed class DefaultIfEmptyQueryOperator<TSource> : UnaryQueryOperator<TSource, TSource>
+    internal sealed class DefaultIfEmptyQueryOperator<TSource>
+        : UnaryQueryOperator<TSource, TSource>
     {
         private readonly TSource _defaultValue; // The default value to use (if empty).
 
@@ -39,7 +40,9 @@ namespace System.Linq.Parallel
         {
             Debug.Assert(child != null, "child data source cannot be null");
             _defaultValue = defaultValue;
-            SetOrdinalIndexState(ExchangeUtilities.Worse(Child.OrdinalIndexState, OrdinalIndexState.Correct));
+            SetOrdinalIndexState(
+                ExchangeUtilities.Worse(Child.OrdinalIndexState, OrdinalIndexState.Correct)
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -55,7 +58,11 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
             if (ParallelEnumerable.SinglePartitionMode)
@@ -65,13 +72,23 @@ namespace System.Linq.Parallel
             Shared<int> sharedEmptyCount = new Shared<int>(0);
             CountdownEvent sharedLatch = new CountdownEvent(partitionCount - 1);
 
-            PartitionedStream<TSource, TKey> outputStream =
-                new PartitionedStream<TSource, TKey>(partitionCount, inputStream.KeyComparer, OrdinalIndexState);
+            PartitionedStream<TSource, TKey> outputStream = new PartitionedStream<TSource, TKey>(
+                partitionCount,
+                inputStream.KeyComparer,
+                OrdinalIndexState
+            );
 
             for (int i = 0; i < partitionCount; i++)
             {
                 outputStream[i] = new DefaultIfEmptyQueryOperatorEnumerator<TKey>(
-                    inputStream[i], _defaultValue, i, partitionCount, sharedEmptyCount, sharedLatch, settings.CancellationState.MergedCancellationToken);
+                    inputStream[i],
+                    _defaultValue,
+                    i,
+                    partitionCount,
+                    sharedEmptyCount,
+                    sharedLatch,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
@@ -100,7 +117,8 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for executing the default-if-empty operation.
         //
 
-        private sealed class DefaultIfEmptyQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TSource, TKey>
+        private sealed class DefaultIfEmptyQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TSource, TKey>
         {
             private readonly QueryOperatorEnumerator<TSource, TKey> _source; // The data source to enumerate.
             private bool _lookedForEmpty; // Whether this partition has looked for empty yet.
@@ -119,8 +137,14 @@ namespace System.Linq.Parallel
             //
 
             internal DefaultIfEmptyQueryOperatorEnumerator(
-                QueryOperatorEnumerator<TSource, TKey> source, TSource defaultValue, int partitionIndex, int partitionCount,
-                Shared<int> sharedEmptyCount, CountdownEvent sharedLatch, CancellationToken cancelToken)
+                QueryOperatorEnumerator<TSource, TKey> source,
+                TSource defaultValue,
+                int partitionIndex,
+                int partitionCount,
+                Shared<int> sharedEmptyCount,
+                CountdownEvent sharedLatch,
+                CancellationToken cancelToken
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(0 <= partitionIndex && partitionIndex < partitionCount);
@@ -141,7 +165,10 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TSource currentElement, [AllowNull] ref TKey currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
+                [AllowNull] ref TKey currentKey
+            )
             {
                 Debug.Assert(_source != null);
 

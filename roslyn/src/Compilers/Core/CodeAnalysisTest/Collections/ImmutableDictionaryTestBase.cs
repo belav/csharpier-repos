@@ -65,11 +65,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var map = this.Empty<string, int>().SetItems(template);
             Assert.Equal(2, map.Count);
 
-            var changes = new Dictionary<string, int>
-            {
-                { "Microsoft", 150 },
-                { "Dogs", 90 },
-            };
+            var changes = new Dictionary<string, int> { { "Microsoft", 150 }, { "Dogs", 90 } };
             map = map.SetItems(changes);
             Assert.Equal(3, map.Count);
             Assert.Equal(150, map["Microsoft"]);
@@ -77,19 +73,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(90, map["Dogs"]);
 
             map = map.SetItems(
-                new[] {
+                new[]
+                {
                     new KeyValuePair<string, int>("Microsoft", 80),
                     new KeyValuePair<string, int>("Microsoft", 70),
-                });
+                }
+            );
             Assert.Equal(3, map.Count);
             Assert.Equal(70, map["Microsoft"]);
             Assert.Equal(50, map["Corporation"]);
             Assert.Equal(90, map["Dogs"]);
 
-            map = this.Empty<string, int>().SetItems(new[] { // use an array for code coverage
-                new KeyValuePair<string, int>("a", 1), new KeyValuePair<string, int>("b", 2),
-                new KeyValuePair<string, int>("a", 3),
-            });
+            map = this.Empty<string, int>()
+                .SetItems(
+                    new[]
+                    { // use an array for code coverage
+                        new KeyValuePair<string, int>("a", 1),
+                        new KeyValuePair<string, int>("b", 2),
+                        new KeyValuePair<string, int>("a", 3),
+                    }
+                );
             Assert.Equal(2, map.Count);
             Assert.Equal(3, map["a"]);
             Assert.Equal(2, map["b"]);
@@ -98,7 +101,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ContainsKeyTest()
         {
-            ContainsKeyTestHelper(Empty<int, GenericParameterHelper>(), 1, new GenericParameterHelper());
+            ContainsKeyTestHelper(
+                Empty<int, GenericParameterHelper>(),
+                1,
+                new GenericParameterHelper()
+            );
         }
 
         [Fact]
@@ -121,15 +128,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void GetHashCodeTest()
         {
             var dictionary = Empty<string, int>();
-            Assert.Equal(EqualityComparer<object>.Default.GetHashCode(dictionary), dictionary.GetHashCode());
+            Assert.Equal(
+                EqualityComparer<object>.Default.GetHashCode(dictionary),
+                dictionary.GetHashCode()
+            );
         }
 
         [Fact]
         public void ICollectionOfKVMembers()
         {
             var dictionary = (ICollection<KeyValuePair<string, int>>)Empty<string, int>();
-            Assert.Throws<NotSupportedException>(() => dictionary.Add(new KeyValuePair<string, int>()));
-            Assert.Throws<NotSupportedException>(() => dictionary.Remove(new KeyValuePair<string, int>()));
+            Assert.Throws<NotSupportedException>(
+                () => dictionary.Add(new KeyValuePair<string, int>())
+            );
+            Assert.Throws<NotSupportedException>(
+                () => dictionary.Remove(new KeyValuePair<string, int>())
+            );
             Assert.Throws<NotSupportedException>(() => dictionary.Clear());
             Assert.True(dictionary.IsReadOnly);
         }
@@ -222,8 +236,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void TryGetKey()
         {
-            var dictionary = Empty<int>(StringComparer.OrdinalIgnoreCase)
-                .Add("a", 1);
+            var dictionary = Empty<int>(StringComparer.OrdinalIgnoreCase).Add("a", 1);
             Assert.True(dictionary.TryGetKey("a", out string actualKey));
             Assert.Equal("a", actualKey);
 
@@ -251,7 +264,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(default(V), value);
         }
 
-        protected void AddExistingKeySameValueTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value1, TValue value2)
+        protected void AddExistingKeySameValueTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value1,
+            TValue value2
+        )
             where TKey : notnull
         {
             Assert.NotNull(map);
@@ -260,7 +278,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             map = map.Add(key, value1);
             Assert.True(IsSame(map, map.Add(key, value2)));
-            Assert.True(IsSame(map, map.AddRange(new[] { new KeyValuePair<TKey, TValue>(key, value2) })));
+            Assert.True(
+                IsSame(map, map.AddRange(new[] { new KeyValuePair<TKey, TValue>(key, value2) }))
+            );
         }
 
         /// <summary>
@@ -276,7 +296,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// Adding a key-value pair to a map where that key already exists, but with a different value, cannot fit the
         /// semantic of "adding", either by just returning or mutating the value on the existing key.  Throwing is the only reasonable response.
         /// </remarks>
-        protected void AddExistingKeyDifferentValueTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value1, TValue value2)
+        protected void AddExistingKeyDifferentValueTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value1,
+            TValue value2
+        )
             where TKey : notnull
         {
             Assert.NotNull(map);
@@ -289,13 +314,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<ArgumentException>(null, () => map2.Add(key, value1));
         }
 
-        protected static void ContainsKeyTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value)
+        protected static void ContainsKeyTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value
+        )
         {
             Assert.False(map.ContainsKey(key));
             Assert.True(map.Add(key, value).ContainsKey(key));
         }
 
-        protected static void ContainsTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value)
+        protected static void ContainsTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value
+        )
             where TKey : notnull
         {
             Assert.False(map.Contains(new KeyValuePair<TKey, TValue>(key, value)));
@@ -304,7 +337,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.True(map.Add(key, value).Contains(key, value));
         }
 
-        protected void RemoveTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue?> map, TKey key)
+        protected void RemoveTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue?> map,
+            TKey key
+        )
             where TKey : notnull
         {
             // no-op remove
@@ -321,9 +357,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected abstract IImmutableDictionary<TKey, TValue> Empty<TKey, TValue>()
             where TKey : notnull;
 
-        protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(StringComparer comparer);
+        protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(
+            StringComparer comparer
+        );
 
-        protected abstract IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(IImmutableDictionary<TKey, TValue> dictionary)
+        protected abstract IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> dictionary
+        )
             where TKey : notnull;
     }
 }

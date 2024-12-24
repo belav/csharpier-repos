@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Runtime.CompilerServices;
-
 using Internal.LowLevelLinq;
 using Internal.Reflection.Augments;
 using Internal.Reflection.Core.Execution;
@@ -25,16 +24,14 @@ namespace Internal.Reflection.Core.Execution
             Debug.Assert(s_executionEnvironment == null);
             s_executionEnvironment = executionEnvironment;
 
-            ReflectionCoreCallbacks reflectionCallbacks = new ReflectionCoreCallbacksImplementation();
+            ReflectionCoreCallbacks reflectionCallbacks =
+                new ReflectionCoreCallbacksImplementation();
             ReflectionAugments.Initialize(reflectionCallbacks);
         }
 
         internal static ExecutionEnvironment ExecutionEnvironment
         {
-            get
-            {
-                return s_executionEnvironment;
-            }
+            get { return s_executionEnvironment; }
         }
 
         private static volatile ExecutionEnvironment s_executionEnvironment;

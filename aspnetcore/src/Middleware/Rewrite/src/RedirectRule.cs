@@ -14,12 +14,17 @@ internal sealed class RedirectRule : IRule
     public Regex InitialMatch { get; }
     public string Replacement { get; }
     public int StatusCode { get; }
+
     public RedirectRule(string regex, string replacement, int statusCode)
     {
         ArgumentException.ThrowIfNullOrEmpty(regex);
         ArgumentException.ThrowIfNullOrEmpty(replacement);
 
-        InitialMatch = new Regex(regex, RegexOptions.Compiled | RegexOptions.CultureInvariant, _regexTimeout);
+        InitialMatch = new Regex(
+            regex,
+            RegexOptions.Compiled | RegexOptions.CultureInvariant,
+            _regexTimeout
+        );
         Replacement = replacement;
         StatusCode = statusCode;
     }
@@ -72,7 +77,9 @@ internal sealed class RedirectRule : IRule
                     }
                     else
                     {
-                        host = new HostString(newPath.Substring(schemeSplit, pathSplit - schemeSplit));
+                        host = new HostString(
+                            newPath.Substring(schemeSplit, pathSplit - schemeSplit)
+                        );
                         newPath = newPath.Substring(pathSplit);
                     }
                 }
@@ -87,12 +94,21 @@ internal sealed class RedirectRule : IRule
                 var querySplit = newPath.IndexOf('?');
                 if (querySplit >= 0)
                 {
-                    resolvedQuery = request.QueryString.Add(QueryString.FromUriComponent(newPath.Substring(querySplit)));
+                    resolvedQuery = request.QueryString.Add(
+                        QueryString.FromUriComponent(newPath.Substring(querySplit))
+                    );
                     resolvedPath = newPath.Substring(0, querySplit);
                 }
 
                 encodedPath = host.HasValue
-                    ? UriHelper.BuildAbsolute(scheme, host, pathBase, resolvedPath, resolvedQuery, default)
+                    ? UriHelper.BuildAbsolute(
+                        scheme,
+                        host,
+                        pathBase,
+                        resolvedPath,
+                        resolvedQuery,
+                        default
+                    )
                     : UriHelper.BuildRelative(pathBase, resolvedPath, resolvedQuery, default);
             }
 

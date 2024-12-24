@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +13,10 @@ public class ApiConventionTypeAttributeTest
     public void Constructor_ThrowsIfConventionMethodIsAnnotatedWithProducesAttribute()
     {
         // Arrange
-        var methodName = typeof(ConventionWithProducesAttribute).FullName + '.' + nameof(ConventionWithProducesAttribute.Get);
+        var methodName =
+            typeof(ConventionWithProducesAttribute).FullName
+            + '.'
+            + nameof(ConventionWithProducesAttribute.Get);
         var attribute = new ProducesAttribute(typeof(object));
 
         var expected = GetErrorMessage(methodName, attribute);
@@ -22,7 +25,8 @@ public class ApiConventionTypeAttributeTest
         ExceptionAssert.ThrowsArgument(
             () => new ApiConventionTypeAttribute(typeof(ConventionWithProducesAttribute)),
             "conventionType",
-            expected);
+            expected
+        );
     }
 
     public static class ConventionWithProducesAttribute
@@ -35,7 +39,10 @@ public class ApiConventionTypeAttributeTest
     public void Constructor_ThrowsIfConventionMethodHasRouteAttribute()
     {
         // Arrange
-        var methodName = typeof(ConventionWithRouteAttribute).FullName + '.' + nameof(ConventionWithRouteAttribute.Get);
+        var methodName =
+            typeof(ConventionWithRouteAttribute).FullName
+            + '.'
+            + nameof(ConventionWithRouteAttribute.Get);
         var attribute = new HttpGetAttribute();
         var expected = GetErrorMessage(methodName, attribute);
 
@@ -43,7 +50,8 @@ public class ApiConventionTypeAttributeTest
         ExceptionAssert.ThrowsArgument(
             () => new ApiConventionTypeAttribute(typeof(ConventionWithRouteAttribute)),
             "conventionType",
-            expected);
+            expected
+        );
     }
 
     public static class ConventionWithRouteAttribute
@@ -56,15 +64,24 @@ public class ApiConventionTypeAttributeTest
     public void Constructor_ThrowsIfMultipleUnsupportedAttributesArePresentOnConvention()
     {
         // Arrange
-        var methodName = typeof(ConventionWitUnsupportedAttributes).FullName + '.' + nameof(ConventionWitUnsupportedAttributes.Get);
-        var attributes = new Attribute[] { new ProducesAttribute(typeof(object)), new ServiceFilterAttribute(typeof(object)), new AuthorizeAttribute() };
+        var methodName =
+            typeof(ConventionWitUnsupportedAttributes).FullName
+            + '.'
+            + nameof(ConventionWitUnsupportedAttributes.Get);
+        var attributes = new Attribute[]
+        {
+            new ProducesAttribute(typeof(object)),
+            new ServiceFilterAttribute(typeof(object)),
+            new AuthorizeAttribute(),
+        };
         var expected = GetErrorMessage(methodName, attributes);
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
             () => new ApiConventionTypeAttribute(typeof(ConventionWitUnsupportedAttributes)),
             "conventionType",
-            expected);
+            expected
+        );
     }
 
     public static class ConventionWitUnsupportedAttributes
@@ -78,10 +95,10 @@ public class ApiConventionTypeAttributeTest
 
     private static string GetErrorMessage(string methodName, params Attribute[] attributes)
     {
-        return $"Method {methodName} is decorated with the following attributes that are not allowed on an API convention method:" +
-            Environment.NewLine +
-            string.Join(Environment.NewLine, attributes.Select(a => a.ToString())) +
-            Environment.NewLine +
-            $"The following attributes are allowed on API convention methods: {nameof(ProducesResponseTypeAttribute)}, {nameof(ProducesDefaultResponseTypeAttribute)}, {nameof(ApiConventionNameMatchAttribute)}";
+        return $"Method {methodName} is decorated with the following attributes that are not allowed on an API convention method:"
+            + Environment.NewLine
+            + string.Join(Environment.NewLine, attributes.Select(a => a.ToString()))
+            + Environment.NewLine
+            + $"The following attributes are allowed on API convention methods: {nameof(ProducesResponseTypeAttribute)}, {nameof(ProducesDefaultResponseTypeAttribute)}, {nameof(ApiConventionNameMatchAttribute)}";
     }
 }

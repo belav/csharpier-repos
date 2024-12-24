@@ -8,7 +8,10 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.InternalTesting;
 
-[TestCaseOrderer("Microsoft.AspNetCore.InternalTesting.AlphabeticalOrderer", "Microsoft.AspNetCore.InternalTesting.Tests")]
+[TestCaseOrderer(
+    "Microsoft.AspNetCore.InternalTesting.AlphabeticalOrderer",
+    "Microsoft.AspNetCore.InternalTesting.Tests"
+)]
 public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.ConditionalTheoryAsserter>
 {
     public ConditionalTheoryTest(ConditionalTheoryAsserter asserter)
@@ -34,7 +37,10 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     public void ConditionalTheoryRunOncePerDataLine(int arg)
     {
         _conditionalTheoryRuns++;
-        Assert.True(_conditionalTheoryRuns <= 2, $"Theory should run 2 times, but ran {_conditionalTheoryRuns} times.");
+        Assert.True(
+            _conditionalTheoryRuns <= 2,
+            $"Theory should run 2 times, but ran {_conditionalTheoryRuns} times."
+        );
     }
 
     [ConditionalTheory, Trait("Color", "Blue")]
@@ -59,11 +65,13 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     public void ConditionalTheoriesWithMemberData(int arg)
     {
         _conditionalMemberDataRuns++;
-        Assert.True(_conditionalTheoryRuns <= 3, $"Theory should run 2 times, but ran {_conditionalMemberDataRuns} times.");
+        Assert.True(
+            _conditionalTheoryRuns <= 3,
+            $"Theory should run 2 times, but ran {_conditionalMemberDataRuns} times."
+        );
     }
 
-    public static TheoryData<int> GetInts
-        => new TheoryData<int> { 0, 1 };
+    public static TheoryData<int> GetInts => new TheoryData<int> { 0, 1 };
 
     [ConditionalTheory]
     [OSSkipCondition(OperatingSystems.Windows)]
@@ -109,19 +117,14 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
         Assert.True(Asserter.TestRan);
     }
 
-    public static TheoryData<Func<int, int>> GetActionTestData
-        => new TheoryData<Func<int, int>>
-        {
-            (i) => i * 1
-        };
+    public static TheoryData<Func<int, int>> GetActionTestData =>
+        new TheoryData<Func<int, int>> { (i) => i * 1 };
 
     public class ConditionalTheoryAsserter : IDisposable
     {
         public bool TestRan { get; set; }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     [ConditionalTheory]
@@ -132,15 +135,17 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
         Assert.Equal(1, skippable.Data);
     }
 
-    public static TheoryData<Skippable> SkippableData => new TheoryData<Skippable>
-    {
-        new Skippable() { Data = 1 },
-        new Skippable() { Data = 2, Skip = "This row should be skipped." }
-    };
+    public static TheoryData<Skippable> SkippableData =>
+        new TheoryData<Skippable>
+        {
+            new Skippable() { Data = 1 },
+            new Skippable() { Data = 2, Skip = "This row should be skipped." },
+        };
 
     public class Skippable : IXunitSerializable
     {
         public Skippable() { }
+
         public int Data { get; set; }
         public string Skip { get; set; }
 

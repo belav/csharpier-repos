@@ -29,15 +29,15 @@ using System.Security.Cryptography;
 
 namespace Mono.Btls.Interface
 {
-	// Keep in sync with MonoBtlsX509StoreType
-	public enum BtlsX509StoreType
-	{
-		Custom,
-		MachineTrustedRoots,
-		MachineIntermediateCA,
-		MachineUntrusted,
-		UserTrustedRoots,
-		UserIntermediateCA,
-		UserUntrusted
-	}
+    // Keep in sync with MonoBtlsX509StoreType
+    public enum BtlsX509StoreType
+    {
+        Custom,
+        MachineTrustedRoots,
+        MachineIntermediateCA,
+        MachineUntrusted,
+        UserTrustedRoots,
+        UserIntermediateCA,
+        UserUntrusted,
+    }
 }

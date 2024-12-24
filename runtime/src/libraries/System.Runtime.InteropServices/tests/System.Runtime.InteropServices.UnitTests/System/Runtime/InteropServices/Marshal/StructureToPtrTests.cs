@@ -15,7 +15,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             var structure1 = new StructWithBoolArray()
             {
-                array = new bool[] { true, true, true, true }
+                array = new bool[] { true, true, true, true },
             };
 
             int size = Marshal.SizeOf(structure1);
@@ -44,8 +44,8 @@ namespace System.Runtime.InteropServices.Tests
                     new StructWithIntField { value = 2 },
                     new StructWithIntField { value = 3 },
                     new StructWithIntField { value = 4 },
-                    new StructWithIntField { value = 5 }
-                }
+                    new StructWithIntField { value = 5 },
+                },
             };
             int size = Marshal.SizeOf(structure);
             IntPtr memory = Marshal.AllocHGlobal(size);
@@ -72,8 +72,8 @@ namespace System.Runtime.InteropServices.Tests
                     new StructWithIntField { value = 3 },
                     new StructWithIntField { value = 4 },
                     new StructWithIntField { value = 5 },
-                    new StructWithIntField { value = 6 }
-                }
+                    new StructWithIntField { value = 6 },
+                },
             };
 
             int size = Marshal.SizeOf(structure);
@@ -97,8 +97,15 @@ namespace System.Runtime.InteropServices.Tests
             {
                 array = new DateTime[]
                 {
-                    DateTime.Now, DateTime.Now , DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now , DateTime.Now, DateTime.Now
-                }
+                    DateTime.Now,
+                    DateTime.Now,
+                    DateTime.Now,
+                    DateTime.Now,
+                    DateTime.Now,
+                    DateTime.Now,
+                    DateTime.Now,
+                    DateTime.Now,
+                },
             };
 
             int size = Marshal.SizeOf(structure);
@@ -118,15 +125,33 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_NullPtr_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.StructureToPtr((object)new SomeTestStruct_Auto(), IntPtr.Zero, fDeleteOld: true));
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.StructureToPtr(new SomeTestStruct_Auto(), IntPtr.Zero, fDeleteOld: true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () =>
+                    Marshal.StructureToPtr(
+                        (object)new SomeTestStruct_Auto(),
+                        IntPtr.Zero,
+                        fDeleteOld: true
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () =>
+                    Marshal.StructureToPtr(new SomeTestStruct_Auto(), IntPtr.Zero, fDeleteOld: true)
+            );
         }
 
         [Fact]
         public void StructureToPtr_NullStructure_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("structure", () => Marshal.StructureToPtr(null, (IntPtr)1, fDeleteOld: true));
-            AssertExtensions.Throws<ArgumentNullException>("structure", () => Marshal.StructureToPtr<object>(null, (IntPtr)1, fDeleteOld: true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structure",
+                () => Marshal.StructureToPtr(null, (IntPtr)1, fDeleteOld: true)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structure",
+                () => Marshal.StructureToPtr<object>(null, (IntPtr)1, fDeleteOld: true)
+            );
         }
 
         public static IEnumerable<object[]> StructureToPtr_GenericClass_TestData()
@@ -139,8 +164,14 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(StructureToPtr_GenericClass_TestData))]
         public void StructureToPtr_GenericObject_ThrowsArgumentException(object o)
         {
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.StructureToPtr(o, (IntPtr)1, fDeleteOld: true));
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.StructureToPtr<object>(o, (IntPtr)1, fDeleteOld: true));
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.StructureToPtr(o, (IntPtr)1, fDeleteOld: true)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.StructureToPtr<object>(o, (IntPtr)1, fDeleteOld: true)
+            );
         }
 
         public static IEnumerable<object[]> StructureToPtr_NonBlittableObject_TestData()
@@ -150,25 +181,49 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         [MemberData(nameof(StructureToPtr_NonBlittableObject_TestData))]
         public void StructureToPtr_NonBlittable_ThrowsArgumentException(object o)
         {
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.StructureToPtr(o, (IntPtr)1, fDeleteOld: true));
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.StructureToPtr<object>(o, (IntPtr)1, fDeleteOld: true));
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.StructureToPtr(o, (IntPtr)1, fDeleteOld: true)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.StructureToPtr<object>(o, (IntPtr)1, fDeleteOld: true)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public void StructureToPtr_AutoLayout_ThrowsArgumentException()
         {
             var someTs_Auto = new SomeTestStruct_Auto();
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.StructureToPtr((object)someTs_Auto, (IntPtr)1, fDeleteOld: true));
-            AssertExtensions.Throws<ArgumentException>("structure", () => Marshal.StructureToPtr(someTs_Auto, (IntPtr)1, fDeleteOld: true));
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.StructureToPtr((object)someTs_Auto, (IntPtr)1, fDeleteOld: true)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "structure",
+                () => Marshal.StructureToPtr(someTs_Auto, (IntPtr)1, fDeleteOld: true)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/15104", TestRuntimes.Mono)]
         public void StructureToPtr_InvalidLengthByValArrayInStruct_ThrowsArgumentException()
         {
@@ -179,15 +234,19 @@ namespace System.Runtime.InteropServices.Tests
                     new StructWithIntField { value = 1 },
                     new StructWithIntField { value = 2 },
                     new StructWithIntField { value = 3 },
-                    new StructWithIntField { value = 4 }
-                }
+                    new StructWithIntField { value = 4 },
+                },
             };
             int size = Marshal.SizeOf(structure);
             IntPtr memory = Marshal.AllocHGlobal(size);
             try
             {
-                Assert.Throws<ArgumentException>(() => Marshal.StructureToPtr(structure, memory, false));
-                Assert.Throws<ArgumentException>(() => Marshal.StructureToPtr(structure, memory, true));
+                Assert.Throws<ArgumentException>(
+                    () => Marshal.StructureToPtr(structure, memory, false)
+                );
+                Assert.Throws<ArgumentException>(
+                    () => Marshal.StructureToPtr(structure, memory, true)
+                );
             }
             finally
             {
@@ -208,7 +267,9 @@ namespace System.Runtime.InteropServices.Tests
             HasFixedBuffer* original = (HasFixedBuffer*)ptr;
 
             // Marshal the parent struct.
-            var parentStructIntPtr = Marshal.AllocHGlobal(Marshal.SizeOf<NonBlittableContainingBuffer>());
+            var parentStructIntPtr = Marshal.AllocHGlobal(
+                Marshal.SizeOf<NonBlittableContainingBuffer>()
+            );
             Marshal.StructureToPtr(str, parentStructIntPtr, false);
             try
             {
@@ -235,7 +296,8 @@ namespace System.Runtime.InteropServices.Tests
             int size = Marshal.SizeOf(typeof(NonBlittableWithBlittableBuffer));
             byte* p = stackalloc byte[size];
             Marshal.StructureToPtr(x, (IntPtr)p, false);
-            NonBlittableWithBlittableBuffer y = Marshal.PtrToStructure<NonBlittableWithBlittableBuffer>((IntPtr)p);
+            NonBlittableWithBlittableBuffer y =
+                Marshal.PtrToStructure<NonBlittableWithBlittableBuffer>((IntPtr)p);
 
             Assert.Equal(x.f[0], y.f[0]);
             Assert.Equal(x.f[1], y.f[1]);
@@ -260,22 +322,18 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/73008", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/73008",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void StructureToPtr_Flat_And_Nested_NonBlittableStructure_Success()
         {
-            MarshalAndDestroy(new NonBlittableStruct_Flat
-            {
-                del = null,
-                b = 0x55,
-            });
+            MarshalAndDestroy(new NonBlittableStruct_Flat { del = null, b = 0x55 });
 
-            MarshalAndDestroy(new NonBlittableStruct_Nested
-            {
-                s = { del = null },
-                b = 0x55,
-            });
+            MarshalAndDestroy(new NonBlittableStruct_Nested { s = { del = null }, b = 0x55 });
 
-            static unsafe void MarshalAndDestroy<T>(T value) where T : struct
+            static unsafe void MarshalAndDestroy<T>(T value)
+                where T : struct
             {
                 int sizeof_T = Marshal.SizeOf<T>();
                 void* ptr = stackalloc byte[sizeof_T];
@@ -336,10 +394,7 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 1)]
-        public struct OpaqueStruct
-        {
-
-        }
+        public struct OpaqueStruct { }
 
         public struct NonBlittableWithOpaque
         {

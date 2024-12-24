@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
 
-internal struct EmbeddedSyntaxToken<TSyntaxKind> where TSyntaxKind : struct
+internal struct EmbeddedSyntaxToken<TSyntaxKind>
+    where TSyntaxKind : struct
 {
     public readonly TSyntaxKind Kind;
     public readonly VirtualCharSequence VirtualChars;
@@ -25,7 +26,9 @@ internal struct EmbeddedSyntaxToken<TSyntaxKind> where TSyntaxKind : struct
     public EmbeddedSyntaxToken(
         TSyntaxKind kind,
         VirtualCharSequence virtualChars,
-        ImmutableArray<EmbeddedDiagnostic> diagnostics, object? value)
+        ImmutableArray<EmbeddedDiagnostic> diagnostics,
+        object? value
+    )
     {
         Debug.Assert(!diagnostics.IsDefault);
         Kind = kind;
@@ -36,27 +39,29 @@ internal struct EmbeddedSyntaxToken<TSyntaxKind> where TSyntaxKind : struct
 
     public bool IsMissing => VirtualChars.Length == 0;
 
-    public EmbeddedSyntaxToken<TSyntaxKind> AddDiagnosticIfNone(EmbeddedDiagnostic diagnostic)
-        => Diagnostics.Length > 0 ? this : WithDiagnostics(ImmutableArray.Create(diagnostic));
+    public EmbeddedSyntaxToken<TSyntaxKind> AddDiagnosticIfNone(EmbeddedDiagnostic diagnostic) =>
+        Diagnostics.Length > 0 ? this : WithDiagnostics(ImmutableArray.Create(diagnostic));
 
-    public EmbeddedSyntaxToken<TSyntaxKind> WithDiagnostics(ImmutableArray<EmbeddedDiagnostic> diagnostics)
-        => With(diagnostics: diagnostics);
+    public EmbeddedSyntaxToken<TSyntaxKind> WithDiagnostics(
+        ImmutableArray<EmbeddedDiagnostic> diagnostics
+    ) => With(diagnostics: diagnostics);
 
     public EmbeddedSyntaxToken<TSyntaxKind> With(
         Optional<TSyntaxKind> kind = default,
         Optional<VirtualCharSequence> virtualChars = default,
         Optional<ImmutableArray<EmbeddedDiagnostic>> diagnostics = default,
-        Optional<object> value = default)
+        Optional<object> value = default
+    )
     {
         return new EmbeddedSyntaxToken<TSyntaxKind>(
             kind.HasValue ? kind.Value : Kind,
             virtualChars.HasValue ? virtualChars.Value : VirtualChars,
             diagnostics.HasValue ? diagnostics.Value : Diagnostics,
-            value.HasValue ? value.Value : Value);
+            value.HasValue ? value.Value : Value
+        );
     }
 
-    public TextSpan GetSpan()
-        => EmbeddedSyntaxHelpers.GetSpan(VirtualChars);
+    public TextSpan GetSpan() => EmbeddedSyntaxHelpers.GetSpan(VirtualChars);
 
     public TextSpan? GetFullSpan()
     {
@@ -66,7 +71,10 @@ internal struct EmbeddedSyntaxToken<TSyntaxKind> where TSyntaxKind : struct
         }
 
         var start = VirtualChars.Length == 0 ? int.MaxValue : VirtualChars[0].Span.Start;
-        var end = VirtualChars.Length == 0 ? int.MinValue : VirtualChars[VirtualChars.Length - 1].Span.End;
+        var end =
+            VirtualChars.Length == 0
+                ? int.MinValue
+                : VirtualChars[VirtualChars.Length - 1].Span.End;
 
         return TextSpan.FromBounds(start, end);
     }

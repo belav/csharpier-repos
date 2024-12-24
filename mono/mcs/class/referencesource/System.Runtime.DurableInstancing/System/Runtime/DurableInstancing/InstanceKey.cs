@@ -13,7 +13,10 @@ namespace System.Runtime.DurableInstancing
     [DataContract]
     public class InstanceKey
     {
-        static IDictionary<XName, InstanceValue> emptyMetadata = new ReadOnlyDictionaryInternal<XName, InstanceValue>(new Dictionary<XName, InstanceValue>(0));
+        static IDictionary<XName, InstanceValue> emptyMetadata = new ReadOnlyDictionaryInternal<
+            XName,
+            InstanceValue
+        >(new Dictionary<XName, InstanceValue>(0));
         static InstanceKey invalidKey = new InstanceKey();
 
         bool invalid; // Comparisons to Guid.Empty are too slow.
@@ -26,9 +29,7 @@ namespace System.Runtime.DurableInstancing
         }
 
         public InstanceKey(Guid value)
-            : this(value, null)
-        {
-        }
+            : this(value, null) { }
 
         public InstanceKey(Guid value, IDictionary<XName, InstanceValue> metadata)
         {
@@ -46,10 +47,11 @@ namespace System.Runtime.DurableInstancing
                 }
                 else
                 {
-                    Dictionary<XName, InstanceValue> copy = new Dictionary<XName, InstanceValue>(metadata);
+                    Dictionary<XName, InstanceValue> copy = new Dictionary<XName, InstanceValue>(
+                        metadata
+                    );
                     this.Metadata = new ReadOnlyDictionaryInternal<XName, InstanceValue>(copy);
                 }
-
             }
             else
             {
@@ -59,17 +61,10 @@ namespace System.Runtime.DurableInstancing
 
         public bool IsValid
         {
-            get
-            {
-                return !this.invalid;
-            }
+            get { return !this.invalid; }
         }
 
-        public Guid Value
-        {
-            get;
-            private set;
-        }
+        public Guid Value { get; private set; }
 
         public IDictionary<XName, InstanceValue> Metadata
         {
@@ -82,18 +77,12 @@ namespace System.Runtime.DurableInstancing
                 }
                 return this.metadata;
             }
-            private set
-            {
-                this.metadata = value;
-            }
+            private set { this.metadata = value; }
         }
 
         public static InstanceKey InvalidKey
         {
-            get
-            {
-                return InstanceKey.invalidKey;
-            }
+            get { return InstanceKey.invalidKey; }
         }
 
         public override bool Equals(object obj)
@@ -107,13 +96,14 @@ namespace System.Runtime.DurableInstancing
         }
 
         [DataMember(Name = "Value")]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal Guid SerializedValue
         {
-            get
-            {
-                return this.Value;
-            }
+            get { return this.Value; }
             set
             {
                 if (value.CompareTo(Guid.Empty) == 0)
@@ -128,7 +118,11 @@ namespace System.Runtime.DurableInstancing
         }
 
         [DataMember(Name = "Metadata", EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal IDictionary<XName, InstanceValue> SerializedMetadata
         {
             get
@@ -144,7 +138,10 @@ namespace System.Runtime.DurableInstancing
             }
             set
             {
-                Fx.Assert(value != null, "A null value should not have been serialized because EmitDefaultValue is false");
+                Fx.Assert(
+                    value != null,
+                    "A null value should not have been serialized because EmitDefaultValue is false"
+                );
                 this.Metadata = value;
             }
         }

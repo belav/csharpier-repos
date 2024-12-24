@@ -12,25 +12,25 @@ namespace System.Runtime.Intrinsics
     /// <typeparam name="T">The type of the elements in the vector.</typeparam>
     internal unsafe interface ISimdVector<TSelf, T>
         : IAdditionOperators<TSelf, TSelf, TSelf>,
-       // IAdditiveIdentity<TSelf, TSelf>,
-          IBitwiseOperators<TSelf, TSelf, TSelf>,
-       // IComparisonOperators<TSelf, TSelf, bool>,
-       // IDecrementOperators<TSelf>,
-          IDivisionOperators<TSelf, TSelf, TSelf>,
-          IEqualityOperators<TSelf, TSelf, bool>,
-          IEquatable<TSelf>,
-       // IIncrementOperators<TSelf>,
-       // IMinMaxValue<TSelf>,
-       // IModulusOperators<TSelf, TSelf, TSelf>,
-       // IMultiplicativeIdentity<TSelf, TSelf>,
-          IMultiplyOperators<TSelf, TSelf, TSelf>,
-          IShiftOperators<TSelf, int, TSelf>,
-       // ISpanFormattable,
-          ISubtractionOperators<TSelf, TSelf, TSelf>,
-          IUnaryNegationOperators<TSelf, TSelf>,
-          IUnaryPlusOperators<TSelf, TSelf>
-       // IUtf8SpanFormattable
-       where TSelf : ISimdVector<TSelf, T>?
+            // IAdditiveIdentity<TSelf, TSelf>,
+            IBitwiseOperators<TSelf, TSelf, TSelf>,
+            // IComparisonOperators<TSelf, TSelf, bool>,
+            // IDecrementOperators<TSelf>,
+            IDivisionOperators<TSelf, TSelf, TSelf>,
+            IEqualityOperators<TSelf, TSelf, bool>,
+            IEquatable<TSelf>,
+            // IIncrementOperators<TSelf>,
+            // IMinMaxValue<TSelf>,
+            // IModulusOperators<TSelf, TSelf, TSelf>,
+            // IMultiplicativeIdentity<TSelf, TSelf>,
+            IMultiplyOperators<TSelf, TSelf, TSelf>,
+            IShiftOperators<TSelf, int, TSelf>,
+            // ISpanFormattable,
+            ISubtractionOperators<TSelf, TSelf, TSelf>,
+            IUnaryNegationOperators<TSelf, TSelf>,
+            IUnaryPlusOperators<TSelf, TSelf>
+        // IUtf8SpanFormattable
+        where TSelf : ISimdVector<TSelf, T>?
     {
         /// <summary>Gets the natural alignment of the vector.</summary>
         /// <exception cref="NotSupportedException">The type of the elements in the vector (<typeparamref name="T" />) is not supported.</exception>
@@ -124,7 +124,8 @@ namespace System.Runtime.Intrinsics
         /// <param name="right">The vector that is selected when the corresponding bit in <paramref name="condition" /> is zero.</param>
         /// <returns>A vector whose bits come from <paramref name="left" /> or <paramref name="right" /> based on the value of <paramref name="condition" />.</returns>
         /// <exception cref="NotSupportedException">The type of the elements in the vector (<typeparamref name="T" />) is not supported.</exception>
-        static virtual TSelf ConditionalSelect(TSelf condition, TSelf left, TSelf right) => (left & condition) | (right & ~condition);
+        static virtual TSelf ConditionalSelect(TSelf condition, TSelf left, TSelf right) =>
+            (left & condition) | (right & ~condition);
 
         /// <summary>Copies a vector to a given array.</summary>
         /// <param name="vector">The vector to be copied.</param>
@@ -132,7 +133,8 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="ArgumentException">The length of <paramref name="destination" /> is less than <see cref="Count" />.</exception>
         /// <exception cref="NotSupportedException">The type of the elements in the vector (<typeparamref name="T" />) is not supported.</exception>
         /// <exception cref="NullReferenceException"><paramref name="destination" /> is <c>null</c>.</exception>
-        static virtual void CopyTo(TSelf vector, T[] destination) => TSelf.CopyTo(vector, destination.AsSpan());
+        static virtual void CopyTo(TSelf vector, T[] destination) =>
+            TSelf.CopyTo(vector, destination.AsSpan());
 
         /// <summary>Copies a vector to a given array starting at the specified index.</summary>
         /// <param name="vector">The vector to be copied.</param>
@@ -142,7 +144,8 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="startIndex" /> is negative or greater than the length of <paramref name="destination" />.</exception>
         /// <exception cref="NotSupportedException">The type of the elements in the vector (<typeparamref name="T" />) is not supported.</exception>
         /// <exception cref="NullReferenceException"><paramref name="destination" /> is <c>null</c>.</exception>
-        static virtual void CopyTo(TSelf vector, T[] destination, int startIndex) => TSelf.CopyTo(vector, destination.AsSpan(startIndex));
+        static virtual void CopyTo(TSelf vector, T[] destination, int startIndex) =>
+            TSelf.CopyTo(vector, destination.AsSpan(startIndex));
 
         /// <summary>Copies a vector to a given span.</summary>
         /// <param name="vector">The vector to be copied.</param>
@@ -384,7 +387,8 @@ namespace System.Runtime.Intrinsics
         /// <param name="source">The source from which the vector will be loaded.</param>
         /// <returns>The vector loaded from <paramref name="source" />.</returns>
         /// <exception cref="NotSupportedException">The type of the elements in the vector (<typeparamref name="T" />) is not supported.</exception>
-        static virtual TSelf LoadUnsafe(ref readonly T source) => TSelf.LoadUnsafe(in source, elementOffset: 0);
+        static virtual TSelf LoadUnsafe(ref readonly T source) =>
+            TSelf.LoadUnsafe(in source, elementOffset: 0);
 
         /// <summary>Loads a vector from the given source and element offset.</summary>
         /// <param name="source">The source to which <paramref name="elementOffset" /> will be added before loading the vector.</param>
@@ -443,13 +447,15 @@ namespace System.Runtime.Intrinsics
         /// <param name="vector">The vector whose elements are to be shifted.</param>
         /// <param name="shiftCount">The number of bits by which to shift each element.</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" />.</returns>
-        static virtual TSelf ShiftRightArithmetic(TSelf vector, int shiftCount) => vector >> shiftCount;
+        static virtual TSelf ShiftRightArithmetic(TSelf vector, int shiftCount) =>
+            vector >> shiftCount;
 
         /// <summary>Shifts (unsigned) each element of a vector right by the specified amount.</summary>
         /// <param name="vector">The vector whose elements are to be shifted.</param>
         /// <param name="shiftCount">The number of bits by which to shift each element.</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" />.</returns>
-        static virtual TSelf ShiftRightLogical(TSelf vector, int shiftCount) => vector >>> shiftCount;
+        static virtual TSelf ShiftRightLogical(TSelf vector, int shiftCount) =>
+            vector >>> shiftCount;
 
         /// <summary>Computes the square root of a vector on a per-element basis.</summary>
         /// <param name="vector">The vector whose square root is to be computed.</param>
@@ -462,7 +468,8 @@ namespace System.Runtime.Intrinsics
         /// <param name="source">The vector that will be stored.</param>
         /// <param name="destination">The destination at which <paramref name="source" /> will be stored.</param>
         /// <exception cref="NotSupportedException">The type of <paramref name="source" /> (<typeparamref name="T" />) is not supported.</exception>
-        static virtual void Store(TSelf source, T* destination) => TSelf.StoreUnsafe(source, ref *destination);
+        static virtual void Store(TSelf source, T* destination) =>
+            TSelf.StoreUnsafe(source, ref *destination);
 
         /// <summary>Stores a vector at the given aligned destination.</summary>
         /// <param name="source">The vector that will be stored.</param>
@@ -482,14 +489,16 @@ namespace System.Runtime.Intrinsics
         /// <param name="destination">The aligned destination at which <paramref name="source" /> will be stored.</param>
         /// <remarks>This method may bypass the cache on certain platforms.</remarks>
         /// <exception cref="NotSupportedException">The type of <paramref name="source" /> (<typeparamref name="T" />) is not supported.</exception>
-        static virtual void StoreAlignedNonTemporal(TSelf source, T* destination) => TSelf.StoreAligned(source, destination);
+        static virtual void StoreAlignedNonTemporal(TSelf source, T* destination) =>
+            TSelf.StoreAligned(source, destination);
 #pragma warning restore CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
 
         /// <summary>Stores a vector at the given destination.</summary>
         /// <param name="vector">The vector that will be stored.</param>
         /// <param name="destination">The destination at which <paramref name="vector" /> will be stored.</param>
         /// <exception cref="NotSupportedException">The type of the elements in the vector (<typeparamref name="T" />) is not supported.</exception>
-        static virtual void StoreUnsafe(TSelf vector, ref T destination) => TSelf.StoreUnsafe(vector, ref destination, elementOffset: 0);
+        static virtual void StoreUnsafe(TSelf vector, ref T destination) =>
+            TSelf.StoreUnsafe(vector, ref destination, elementOffset: 0);
 
         /// <summary>Stores a vector at the given destination.</summary>
         /// <param name="vector">The vector that will be stored.</param>

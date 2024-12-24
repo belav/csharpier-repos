@@ -42,8 +42,7 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
     private readonly TimeSpan _maxServerToServerClockSkew;
 
     public DefaultKeyResolver()
-        : this(NullLoggerFactory.Instance)
-    { }
+        : this(NullLoggerFactory.Instance) { }
 
     public DefaultKeyResolver(ILoggerFactory loggerFactory)
     {
@@ -66,25 +65,43 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
         }
         catch (Exception ex)
         {
-            _logger.KeyIsIneligibleToBeTheDefaultKeyBecauseItsMethodFailed(key.KeyId, nameof(IKey.CreateEncryptor), ex);
+            _logger.KeyIsIneligibleToBeTheDefaultKeyBecauseItsMethodFailed(
+                key.KeyId,
+                nameof(IKey.CreateEncryptor),
+                ex
+            );
             return false;
         }
     }
 
-    private IKey? FindDefaultKey(DateTimeOffset now, IEnumerable<IKey> allKeys, out IKey? fallbackKey, out bool callerShouldGenerateNewKey)
+    private IKey? FindDefaultKey(
+        DateTimeOffset now,
+        IEnumerable<IKey> allKeys,
+        out IKey? fallbackKey,
+        out bool callerShouldGenerateNewKey
+    )
     {
         // find the preferred default key (allowing for server-to-server clock skew)
-        var preferredDefaultKey = (from key in allKeys
-                                   where key.ActivationDate <= now + _maxServerToServerClockSkew
-                                   orderby key.ActivationDate descending, key.KeyId ascending
-                                   select key).FirstOrDefault();
+        var preferredDefaultKey = (
+            from key in allKeys
+            where key.ActivationDate <= now + _maxServerToServerClockSkew
+            orderby key.ActivationDate descending, key.KeyId ascending
+            select key
+        ).FirstOrDefault();
 
         if (preferredDefaultKey != null)
         {
-            _logger.ConsideringKeyWithExpirationDateAsDefaultKey(preferredDefaultKey.KeyId, preferredDefaultKey.ExpirationDate);
+            _logger.ConsideringKeyWithExpirationDateAsDefaultKey(
+                preferredDefaultKey.KeyId,
+                preferredDefaultKey.ExpirationDate
+            );
 
             // if the key has been revoked or is expired, it is no longer a candidate
-            if (preferredDefaultKey.IsRevoked || preferredDefaultKey.IsExpired(now) || !CanCreateAuthenticatedEncryptor(preferredDefaultKey))
+            if (
+                preferredDefaultKey.IsRevoked
+                || preferredDefaultKey.IsExpired(now)
+                || !CanCreateAuthenticatedEncryptor(preferredDefaultKey)
+            )
             {
                 _logger.KeyIsNoLongerUnderConsiderationAsDefault(preferredDefaultKey.KeyId);
                 preferredDefaultKey = null;
@@ -103,9 +120,11 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
             // remain valid one propagation cycle from now? If so, the caller doesn't need to add a
             // new key.
             callerShouldGenerateNewKey = !allKeys.Any(key =>
-               key.ActivationDate <= (preferredDefaultKey.ExpirationDate + _maxServerToServerClockSkew)
-               && !key.IsExpired(now + _keyPropagationWindow)
-               && !key.IsRevoked);
+                key.ActivationDate
+                    <= (preferredDefaultKey.ExpirationDate + _maxServerToServerClockSkew)
+                && !key.IsExpired(now + _keyPropagationWindow)
+                && !key.IsRevoked
+            );
 
             if (callerShouldGenerateNewKey)
             {
@@ -121,14 +140,16 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
         // the caller is configured not to generate a new key. We should try to make sure the fallback
         // key has propagated to all callers (so its creation date should be before the previous
         // propagation period), and we cannot use revoked keys. The fallback key may be expired.
-        fallbackKey = (from key in (from key in allKeys
-                                    where key.CreationDate <= now - _keyPropagationWindow
-                                    orderby key.CreationDate descending
-                                    select key).Concat(from key in allKeys
-                                                       orderby key.CreationDate ascending
-                                                       select key)
-                       where !key.IsRevoked && CanCreateAuthenticatedEncryptor(key)
-                       select key).FirstOrDefault();
+        fallbackKey = (
+            from key in (
+                from key in allKeys
+                where key.CreationDate <= now - _keyPropagationWindow
+                orderby key.CreationDate descending
+                select key
+            ).Concat(from key in allKeys orderby key.CreationDate ascending select key)
+            where !key.IsRevoked && CanCreateAuthenticatedEncryptor(key)
+            select key
+        ).FirstOrDefault();
 
         _logger.RepositoryContainsNoViableDefaultKey();
 
@@ -136,10 +157,18 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
         return null;
     }
 
-    public DefaultKeyResolution ResolveDefaultKeyPolicy(DateTimeOffset now, IEnumerable<IKey> allKeys)
+    public DefaultKeyResolution ResolveDefaultKeyPolicy(
+        DateTimeOffset now,
+        IEnumerable<IKey> allKeys
+    )
     {
         var retVal = default(DefaultKeyResolution);
-        retVal.DefaultKey = FindDefaultKey(now, allKeys, out retVal.FallbackKey, out retVal.ShouldGenerateNewKey);
+        retVal.DefaultKey = FindDefaultKey(
+            now,
+            allKeys,
+            out retVal.FallbackKey,
+            out retVal.ShouldGenerateNewKey
+        );
         return retVal;
     }
 }

@@ -14,7 +14,11 @@ public class OAuthCodeExchangeContext
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <param name="code">The code returned from the authorization endpoint.</param>
     /// <param name="redirectUri">The redirect uri used in the authorization request.</param>
-    public OAuthCodeExchangeContext(AuthenticationProperties properties, string code, string redirectUri)
+    public OAuthCodeExchangeContext(
+        AuthenticationProperties properties,
+        string code,
+        string redirectUri
+    )
     {
         Properties = properties;
         Code = code;

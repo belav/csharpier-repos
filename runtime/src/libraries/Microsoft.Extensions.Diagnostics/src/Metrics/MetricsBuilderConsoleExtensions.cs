@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         /// </summary>
         /// <param name="builder">The metrics builder.</param>
         /// <returns>The original metrics builder for chaining.</returns>
-        public static IMetricsBuilder AddDebugConsole(this IMetricsBuilder builder) => builder.AddListener<DebugConsoleMetricListener>();
+        public static IMetricsBuilder AddDebugConsole(this IMetricsBuilder builder) =>
+            builder.AddListener<DebugConsoleMetricListener>();
     }
 }

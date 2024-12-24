@@ -17,10 +17,9 @@ public class ErrorNotificationTest : ServerTestBase<ToggleExecutionModeServerFix
     public ErrorNotificationTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -40,7 +39,10 @@ public class ErrorNotificationTest : ServerTestBase<ToggleExecutionModeServerFix
         var causeErrorButton = Browser.Exists(By.Id("throw-simple-exception"));
         causeErrorButton.Click();
 
-        Browser.Exists(By.CssSelector("#blazor-error-ui[style='display: block;']"), TimeSpan.FromSeconds(10));
+        Browser.Exists(
+            By.CssSelector("#blazor-error-ui[style='display: block;']"),
+            TimeSpan.FromSeconds(10)
+        );
 
         var reload = Browser.Exists(By.ClassName("reload"));
         reload.Click();

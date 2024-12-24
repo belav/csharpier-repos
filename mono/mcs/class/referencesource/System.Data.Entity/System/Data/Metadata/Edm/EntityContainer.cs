@@ -10,8 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Metadata.Edm
 {
@@ -34,8 +34,12 @@ namespace System.Data.Metadata.Edm
 
             _name = name;
             this.DataSpace = dataSpace;
-            _baseEntitySets = new ReadOnlyMetadataCollection<EntitySetBase>(new EntitySetBaseCollection(this));
-            _functionImports = new ReadOnlyMetadataCollection<EdmFunction>(new MetadataCollection<EdmFunction>());
+            _baseEntitySets = new ReadOnlyMetadataCollection<EntitySetBase>(
+                new EntitySetBaseCollection(this)
+            );
+            _functionImports = new ReadOnlyMetadataCollection<EdmFunction>(
+                new MetadataCollection<EdmFunction>()
+            );
         }
         #endregion
 
@@ -49,17 +53,17 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.EntityContainer; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.EntityContainer; }
+        }
 
         /// <summary>
         /// Gets the identity for this item as a string
         /// </summary>
         internal override string Identity
         {
-            get
-            {
-                return this.Name;
-            }
+            get { return this.Name; }
         }
 
         /// <summary>
@@ -68,10 +72,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         public String Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         /// <summary>
@@ -80,10 +81,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.EntitySetBase, true)]
         public ReadOnlyMetadataCollection<EntitySetBase> BaseEntitySets
         {
-            get
-            {
-                return _baseEntitySets;
-            }
+            get { return _baseEntitySets; }
         }
 
         /// <summary>
@@ -92,10 +90,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.EdmFunction, true)]
         public ReadOnlyMetadataCollection<EdmFunction> FunctionImports
         {
-            get
-            {
-                return _functionImports;
-            }
+            get { return _functionImports; }
         }
         #endregion
 
@@ -167,7 +162,6 @@ namespace System.Data.Metadata.Edm
                 throw EntityUtil.InvalidRelationshipSetName(name);
             }
             return relationshipSet;
-
         }
 
         /// <summary>
@@ -178,7 +172,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="relationshipSet">out parameter that will have the result</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">if name argument is null</exception>
-        public bool TryGetRelationshipSetByName(string name, bool ignoreCase, out RelationshipSet relationshipSet)
+        public bool TryGetRelationshipSetByName(
+            string name,
+            bool ignoreCase,
+            out RelationshipSet relationshipSet
+        )
         {
             EntityUtil.CheckArgumentNull(name, "name");
             EntitySetBase baseEntitySet = null;
@@ -195,7 +193,7 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Overriding System.Object.ToString to provide better String representation 
+        /// Overriding System.Object.ToString to provide better String representation
         /// for this type.
         /// </summary>
         public override string ToString()

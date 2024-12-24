@@ -17,18 +17,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
 {
     public class CSharpPDBTestBase : CSharpTestBase
     {
-        public static void TestSequencePoints(string markup, CSharpCompilationOptions compilationOptions, CSharpParseOptions parseOptions = null, string methodName = "")
+        public static void TestSequencePoints(
+            string markup,
+            CSharpCompilationOptions compilationOptions,
+            CSharpParseOptions parseOptions = null,
+            string methodName = ""
+        )
         {
             int? position;
             TextSpan? expectedSpan;
             string source;
             MarkupTestFile.GetPositionAndSpan(markup, out source, out position, out expectedSpan);
 
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: compilationOptions, parseOptions: parseOptions);
-            compilation.GetDiagnostics().Where(d => d.Severity == DiagnosticSeverity.Error).Verify();
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: compilationOptions,
+                parseOptions: parseOptions
+            );
+            compilation
+                .GetDiagnostics()
+                .Where(d => d.Severity == DiagnosticSeverity.Error)
+                .Verify();
 
             var pdb = PdbValidation.GetPdbXml(compilation, qualifiedMethodName: methodName);
-            bool hasBreakpoint = CheckIfSpanWithinSequencePoints(expectedSpan.GetValueOrDefault(), source, pdb);
+            bool hasBreakpoint = CheckIfSpanWithinSequencePoints(
+                expectedSpan.GetValueOrDefault(),
+                source,
+                pdb
+            );
 
             Assert.True(hasBreakpoint);
         }
@@ -46,7 +62,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             var endColumn = span.End - endLine.Start + 1;
 
             var doc = new XmlDocument() { XmlResolver = null };
-            using (var reader = new XmlTextReader(new StringReader(pdb)) { DtdProcessing = DtdProcessing.Prohibit })
+            using (
+                var reader = new XmlTextReader(new StringReader(pdb))
+                {
+                    DtdProcessing = DtdProcessing.Prohibit,
+                }
+            )
             {
                 doc.Load(reader);
             }
@@ -55,10 +76,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             {
                 foreach (XmlElement item in entry.ChildNodes)
                 {
-                    if (startRow.ToString() == item.GetAttribute("startLine") &&
-                        startColumn.ToString() == item.GetAttribute("startColumn") &&
-                        endRow.ToString() == item.GetAttribute("endLine") &&
-                        endColumn.ToString() == item.GetAttribute("endColumn"))
+                    if (
+                        startRow.ToString() == item.GetAttribute("startLine")
+                        && startColumn.ToString() == item.GetAttribute("startColumn")
+                        && endRow.ToString() == item.GetAttribute("endLine")
+                        && endColumn.ToString() == item.GetAttribute("endColumn")
+                    )
                     {
                         return true;
                     }

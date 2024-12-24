@@ -24,7 +24,13 @@ namespace Microsoft.Extensions.Logging
         public MessageLogger[]? MessageLoggers { get; set; }
         public ScopeLogger[]? ScopeLoggers { get; set; }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        )
         {
             MessageLogger[]? loggers = MessageLoggers;
             if (loggers == null)
@@ -41,7 +47,15 @@ namespace Microsoft.Extensions.Logging
                     continue;
                 }
 
-                LoggerLog(logLevel, eventId, loggerInfo.Logger, exception, formatter, ref exceptions, state);
+                LoggerLog(
+                    logLevel,
+                    eventId,
+                    loggerInfo.Logger,
+                    exception,
+                    formatter,
+                    ref exceptions,
+                    state
+                );
             }
 
             if (exceptions != null && exceptions.Count > 0)
@@ -49,7 +63,15 @@ namespace Microsoft.Extensions.Logging
                 ThrowLoggingError(exceptions);
             }
 
-            static void LoggerLog(LogLevel logLevel, EventId eventId, ILogger logger, Exception? exception, Func<TState, Exception?, string> formatter, ref List<Exception>? exceptions, in TState state)
+            static void LoggerLog(
+                LogLevel logLevel,
+                EventId eventId,
+                ILogger logger,
+                Exception? exception,
+                Func<TState, Exception?, string> formatter,
+                ref List<Exception>? exceptions,
+                in TState state
+            )
             {
                 try
                 {
@@ -94,7 +116,11 @@ namespace Microsoft.Extensions.Logging
 
             return i < loggers.Length ? true : false;
 
-            static bool LoggerIsEnabled(LogLevel logLevel, ILogger logger, ref List<Exception>? exceptions)
+            static bool LoggerIsEnabled(
+                LogLevel logLevel,
+                ILogger logger,
+                ref List<Exception>? exceptions
+            )
             {
                 try
                 {
@@ -113,7 +139,8 @@ namespace Microsoft.Extensions.Logging
             }
         }
 
-        public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+        public IDisposable? BeginScope<TState>(TState state)
+            where TState : notnull
         {
             ScopeLogger[]? loggers = ScopeLoggers;
 
@@ -155,7 +182,9 @@ namespace Microsoft.Extensions.Logging
         private static void ThrowLoggingError(List<Exception> exceptions)
         {
             throw new AggregateException(
-                message: "An error occurred while writing to logger(s).", innerExceptions: exceptions);
+                message: "An error occurred while writing to logger(s).",
+                innerExceptions: exceptions
+            );
         }
 
         internal string DebuggerToString()
@@ -177,8 +206,12 @@ namespace Microsoft.Extensions.Logging
                     for (int i = 0; i < logger.Loggers.Length; i++)
                     {
                         LoggerInformation loggerInfo = logger.Loggers[i];
-                        string providerName = ProviderAliasUtilities.GetAlias(loggerInfo.ProviderType) ?? loggerInfo.ProviderType.Name;
-                        MessageLogger? messageLogger = logger.MessageLoggers?.FirstOrDefault(messageLogger => messageLogger.Logger == loggerInfo.Logger);
+                        string providerName =
+                            ProviderAliasUtilities.GetAlias(loggerInfo.ProviderType)
+                            ?? loggerInfo.ProviderType.Name;
+                        MessageLogger? messageLogger = logger.MessageLoggers?.FirstOrDefault(
+                            messageLogger => messageLogger.Logger == loggerInfo.Logger
+                        );
 
                         providers.Add(new LoggerProviderDebugView(providerName, messageLogger));
                     }
@@ -203,11 +236,15 @@ namespace Microsoft.Extensions.Logging
                 }
             }
             public LogLevel? MinLevel => DebuggerDisplayFormatting.CalculateEnabledLogLevel(logger);
-            public bool Enabled => DebuggerDisplayFormatting.CalculateEnabledLogLevel(logger) != null;
+            public bool Enabled =>
+                DebuggerDisplayFormatting.CalculateEnabledLogLevel(logger) != null;
         }
 
         [DebuggerDisplay("{DebuggerToString(),nq}")]
-        private sealed class LoggerProviderDebugView(string providerName, MessageLogger? messageLogger)
+        private sealed class LoggerProviderDebugView(
+            string providerName,
+            MessageLogger? messageLogger
+        )
         {
             public string Name => providerName;
             public LogLevel LogLevel => CalculateEnabledLogLevel(messageLogger) ?? LogLevel.None;
@@ -219,15 +256,15 @@ namespace Microsoft.Extensions.Logging
                     return null;
                 }
 
-                ReadOnlySpan<LogLevel> logLevels = stackalloc LogLevel[]
-                {
-                    LogLevel.Critical,
-                    LogLevel.Error,
-                    LogLevel.Warning,
-                    LogLevel.Information,
-                    LogLevel.Debug,
-                    LogLevel.Trace,
-                };
+                ReadOnlySpan<LogLevel> logLevels =
+                    stackalloc LogLevel[] {
+                        LogLevel.Critical,
+                        LogLevel.Error,
+                        LogLevel.Warning,
+                        LogLevel.Information,
+                        LogLevel.Debug,
+                        LogLevel.Trace,
+                    };
 
                 LogLevel? minimumLevel = null;
 

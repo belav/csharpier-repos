@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for user validation.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserValidator<TUser> where TUser : class
+public interface IUserValidator<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Validates the specified <paramref name="user"/> as an asynchronous operation.

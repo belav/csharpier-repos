@@ -20,7 +20,8 @@ public class ActionConstraintProviderContext
     public ActionConstraintProviderContext(
         HttpContext context,
         ActionDescriptor action,
-        IList<ActionConstraintItem> items)
+        IList<ActionConstraintItem> items
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(action);

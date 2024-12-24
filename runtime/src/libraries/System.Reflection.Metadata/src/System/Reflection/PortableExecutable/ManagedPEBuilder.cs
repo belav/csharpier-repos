@@ -11,7 +11,8 @@ namespace System.Reflection.PortableExecutable
 {
     public class ManagedPEBuilder : PEBuilder
     {
-        public const int ManagedResourcesDataAlignment = ManagedTextSection.ManagedResourcesDataAlignment;
+        public const int ManagedResourcesDataAlignment =
+            ManagedTextSection.ManagedResourcesDataAlignment;
         public const int MappedFieldDataAlignment = ManagedTextSection.MappedFieldDataAlignment;
 
         private const int DefaultStrongNameSignatureSize = 128;
@@ -45,7 +46,8 @@ namespace System.Reflection.PortableExecutable
             int strongNameSignatureSize = DefaultStrongNameSignatureSize,
             MethodDefinitionHandle entryPoint = default(MethodDefinitionHandle),
             CorFlags flags = CorFlags.ILOnly,
-            Func<IEnumerable<Blob>, BlobContentId>? deterministicIdProvider = null)
+            Func<IEnumerable<Blob>, BlobContentId>? deterministicIdProvider = null
+        )
             : base(header, deterministicIdProvider)
         {
             if (header is null)
@@ -73,7 +75,8 @@ namespace System.Reflection.PortableExecutable
             _nativeResourcesOpt = nativeResources;
             _strongNameSignatureSize = strongNameSignatureSize;
             _entryPointOpt = entryPoint;
-            _debugDirectoryBuilderOpt = debugDirectoryBuilder ?? CreateDefaultDebugDirectoryBuilder();
+            _debugDirectoryBuilderOpt =
+                debugDirectoryBuilder ?? CreateDefaultDebugDirectoryBuilder();
             _corFlags = flags;
 
             _peDirectoriesBuilder = new PEDirectoriesBuilder();
@@ -94,16 +97,36 @@ namespace System.Reflection.PortableExecutable
         protected override ImmutableArray<Section> CreateSections()
         {
             var builder = ImmutableArray.CreateBuilder<Section>(3);
-            builder.Add(new Section(TextSectionName, SectionCharacteristics.MemRead | SectionCharacteristics.MemExecute | SectionCharacteristics.ContainsCode));
+            builder.Add(
+                new Section(
+                    TextSectionName,
+                    SectionCharacteristics.MemRead
+                        | SectionCharacteristics.MemExecute
+                        | SectionCharacteristics.ContainsCode
+                )
+            );
 
             if (_nativeResourcesOpt != null)
             {
-                builder.Add(new Section(ResourceSectionName, SectionCharacteristics.MemRead | SectionCharacteristics.ContainsInitializedData));
+                builder.Add(
+                    new Section(
+                        ResourceSectionName,
+                        SectionCharacteristics.MemRead
+                            | SectionCharacteristics.ContainsInitializedData
+                    )
+                );
             }
 
             if (Header.Machine == Machine.I386 || Header.Machine == 0)
             {
-                builder.Add(new Section(RelocationSectionName, SectionCharacteristics.MemRead | SectionCharacteristics.MemDiscardable | SectionCharacteristics.ContainsInitializedData));
+                builder.Add(
+                    new Section(
+                        RelocationSectionName,
+                        SectionCharacteristics.MemRead
+                            | SectionCharacteristics.MemDiscardable
+                            | SectionCharacteristics.ContainsInitializedData
+                    )
+                );
             }
 
             return builder.ToImmutable();
@@ -115,7 +138,10 @@ namespace System.Reflection.PortableExecutable
                 TextSectionName => SerializeTextSection(location),
                 ResourceSectionName => SerializeResourceSection(location),
                 RelocationSectionName => SerializeRelocationSection(location),
-                _ => throw new ArgumentException(SR.Format(SR.UnknownSectionName, name), nameof(name)),
+                _ => throw new ArgumentException(
+                    SR.Format(SR.UnknownSectionName, name),
+                    nameof(name)
+                ),
             };
 
         private BlobBuilder SerializeTextSection(SectionLocation location)
@@ -133,11 +159,19 @@ namespace System.Reflection.PortableExecutable
                 resourceDataSize: _managedResourcesOpt?.Count ?? 0,
                 strongNameSignatureSize: _strongNameSignatureSize,
                 debugDataSize: _debugDirectoryBuilderOpt?.Size ?? 0,
-                mappedFieldDataSize: _mappedFieldDataOpt?.Count ?? 0);
+                mappedFieldDataSize: _mappedFieldDataOpt?.Count ?? 0
+            );
 
-            int methodBodyStreamRva = location.RelativeVirtualAddress + textSection.OffsetToILStream;
-            int mappedFieldDataStreamRva = location.RelativeVirtualAddress + textSection.CalculateOffsetToMappedFieldDataStream();
-            _metadataRootBuilder.Serialize(metadataBuilder, methodBodyStreamRva, mappedFieldDataStreamRva);
+            int methodBodyStreamRva =
+                location.RelativeVirtualAddress + textSection.OffsetToILStream;
+            int mappedFieldDataStreamRva =
+                location.RelativeVirtualAddress
+                + textSection.CalculateOffsetToMappedFieldDataStream();
+            _metadataRootBuilder.Serialize(
+                metadataBuilder,
+                methodBodyStreamRva,
+                mappedFieldDataStreamRva
+            );
 
             DirectoryEntry debugDirectoryEntry;
             BlobBuilder? debugTableBuilderOpt;
@@ -145,12 +179,17 @@ namespace System.Reflection.PortableExecutable
             {
                 int debugDirectoryOffset = textSection.ComputeOffsetToDebugDirectory();
                 debugTableBuilderOpt = new BlobBuilder(_debugDirectoryBuilderOpt.TableSize);
-                _debugDirectoryBuilderOpt.Serialize(debugTableBuilderOpt, location, debugDirectoryOffset);
+                _debugDirectoryBuilderOpt.Serialize(
+                    debugTableBuilderOpt,
+                    location,
+                    debugDirectoryOffset
+                );
 
                 // Only the size of the fixed part of the debug table goes here.
                 debugDirectoryEntry = new DirectoryEntry(
                     location.RelativeVirtualAddress + debugDirectoryOffset,
-                    _debugDirectoryBuilderOpt.TableSize);
+                    _debugDirectoryBuilderOpt.TableSize
+                );
             }
             else
             {
@@ -158,7 +197,9 @@ namespace System.Reflection.PortableExecutable
                 debugDirectoryEntry = default(DirectoryEntry);
             }
 
-            _lazyEntryPointAddress = textSection.GetEntryPointAddress(location.RelativeVirtualAddress);
+            _lazyEntryPointAddress = textSection.GetEntryPointAddress(
+                location.RelativeVirtualAddress
+            );
 
             textSection.Serialize(
                 sectionBuilder,
@@ -171,13 +212,19 @@ namespace System.Reflection.PortableExecutable
                 _mappedFieldDataOpt,
                 _managedResourcesOpt,
                 debugTableBuilderOpt,
-                out _lazyStrongNameSignature);
+                out _lazyStrongNameSignature
+            );
 
             _peDirectoriesBuilder.AddressOfEntryPoint = _lazyEntryPointAddress;
             _peDirectoriesBuilder.DebugTable = debugDirectoryEntry;
-            _peDirectoriesBuilder.ImportAddressTable = textSection.GetImportAddressTableDirectoryEntry(location.RelativeVirtualAddress);
-            _peDirectoriesBuilder.ImportTable = textSection.GetImportTableDirectoryEntry(location.RelativeVirtualAddress);
-            _peDirectoriesBuilder.CorHeaderTable = textSection.GetCorHeaderDirectoryEntry(location.RelativeVirtualAddress);
+            _peDirectoriesBuilder.ImportAddressTable =
+                textSection.GetImportAddressTableDirectoryEntry(location.RelativeVirtualAddress);
+            _peDirectoriesBuilder.ImportTable = textSection.GetImportTableDirectoryEntry(
+                location.RelativeVirtualAddress
+            );
+            _peDirectoriesBuilder.CorHeaderTable = textSection.GetCorHeaderDirectoryEntry(
+                location.RelativeVirtualAddress
+            );
 
             return sectionBuilder;
         }
@@ -189,7 +236,10 @@ namespace System.Reflection.PortableExecutable
             var sectionBuilder = new BlobBuilder();
             _nativeResourcesOpt.Serialize(sectionBuilder, location);
 
-            _peDirectoriesBuilder.ResourceTable = new DirectoryEntry(location.RelativeVirtualAddress, sectionBuilder.Count);
+            _peDirectoriesBuilder.ResourceTable = new DirectoryEntry(
+                location.RelativeVirtualAddress,
+                sectionBuilder.Count
+            );
             return sectionBuilder;
         }
 
@@ -198,18 +248,28 @@ namespace System.Reflection.PortableExecutable
             var sectionBuilder = new BlobBuilder();
             WriteRelocationSection(sectionBuilder, Header.Machine, _lazyEntryPointAddress);
 
-            _peDirectoriesBuilder.BaseRelocationTable = new DirectoryEntry(location.RelativeVirtualAddress, sectionBuilder.Count);
+            _peDirectoriesBuilder.BaseRelocationTable = new DirectoryEntry(
+                location.RelativeVirtualAddress,
+                sectionBuilder.Count
+            );
             return sectionBuilder;
         }
 
-        private static void WriteRelocationSection(BlobBuilder builder, Machine machine, int entryPointAddress)
+        private static void WriteRelocationSection(
+            BlobBuilder builder,
+            Machine machine,
+            int entryPointAddress
+        )
         {
             Debug.Assert(builder.Count == 0);
 
             builder.WriteUInt32((((uint)entryPointAddress + 2) / 0x1000) * 0x1000);
             builder.WriteUInt32((machine == Machine.IA64) ? 14u : 12u);
             uint offsetWithinPage = ((uint)entryPointAddress + 2) % 0x1000;
-            uint relocType = (machine == Machine.Amd64 || machine == Machine.IA64 || machine == Machine.Arm64) ? 10u : 3u;
+            uint relocType =
+                (machine == Machine.Amd64 || machine == Machine.IA64 || machine == Machine.Arm64)
+                    ? 10u
+                    : 3u;
             ushort s = (ushort)((relocType << 12) | offsetWithinPage);
             builder.WriteUInt16(s);
             if (machine == Machine.IA64)

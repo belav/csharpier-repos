@@ -29,21 +29,18 @@
 
 
 using System;
+using System.CodeDom;
 using System.Collections;
-using System.Reflection;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
-using System.CodeDom;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-	internal class ControlCollectionCodeDomSerializaer : CollectionCodeDomSerializer
-	{
-
-		public ControlCollectionCodeDomSerializaer ()
-		{
-		}
-	}
+    internal class ControlCollectionCodeDomSerializaer : CollectionCodeDomSerializer
+    {
+        public ControlCollectionCodeDomSerializaer() { }
+    }
 }

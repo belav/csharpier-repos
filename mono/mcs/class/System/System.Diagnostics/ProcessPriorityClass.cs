@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,14 +28,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Diagnostics {
-
-	public enum ProcessPriorityClass {
-		AboveNormal=0x08000,
-		BelowNormal=0x04000,
-		High=0x00080,
-		Idle=0x00040,
-		Normal=0x00020,
-		RealTime=0x00100,
-	}
+namespace System.Diagnostics
+{
+    public enum ProcessPriorityClass
+    {
+        AboveNormal = 0x08000,
+        BelowNormal = 0x04000,
+        High = 0x00080,
+        Idle = 0x00040,
+        Normal = 0x00020,
+        RealTime = 0x00100,
+    }
 }

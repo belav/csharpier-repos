@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.Tools
         None = 0,
         Whitespace = 1,
         CodeStyle = 2,
-        Analyzers = 4
+        Analyzers = 4,
     }
 }

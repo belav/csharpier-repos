@@ -19,7 +19,12 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 _childOffsets = CalculateOffsets(children);
             }
 
-            internal WithLotsOfChildren(DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations, ArrayElement<GreenNode>[] children, int[] childOffsets)
+            internal WithLotsOfChildren(
+                DiagnosticInfo[]? diagnostics,
+                SyntaxAnnotation[]? annotations,
+                ArrayElement<GreenNode>[] children,
+                int[] childOffsets
+            )
                 : base(diagnostics, annotations, children)
             {
                 _childOffsets = childOffsets;
@@ -60,12 +65,22 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[]? errors)
             {
-                return new WithLotsOfChildren(errors, this.GetAnnotations(), children, _childOffsets);
+                return new WithLotsOfChildren(
+                    errors,
+                    this.GetAnnotations(),
+                    children,
+                    _childOffsets
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[]? annotations)
             {
-                return new WithLotsOfChildren(GetDiagnostics(), annotations, children, _childOffsets);
+                return new WithLotsOfChildren(
+                    GetDiagnostics(),
+                    annotations,
+                    children,
+                    _childOffsets
+                );
             }
         }
     }

@@ -3,14 +3,14 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime;
+using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.Runtime.Serialization;
+using System.Text;
 using System.Xml;
-using System.Reflection;
-using System.Diagnostics;
-using System.Runtime;
 
 namespace System.ServiceModel.Dispatcher
 {
@@ -22,12 +22,16 @@ namespace System.ServiceModel.Dispatcher
         {
             List<FaultContractInfo> faultContractInfoList = new List<FaultContractInfo>();
             for (int i = 0; i < detailTypes.Length; i++)
-                faultContractInfoList.Add(new FaultContractInfo(MessageHeaders.WildcardAction, detailTypes[i]));
+                faultContractInfoList.Add(
+                    new FaultContractInfo(MessageHeaders.WildcardAction, detailTypes[i])
+                );
             AddInfrastructureFaults(faultContractInfoList);
             faultContractInfos = GetSortedArray(faultContractInfoList);
         }
 
-        internal FaultFormatter(SynchronizedCollection<FaultContractInfo> faultContractInfoCollection)
+        internal FaultFormatter(
+            SynchronizedCollection<FaultContractInfo> faultContractInfoCollection
+        )
         {
             List<FaultContractInfo> faultContractInfoList;
             lock (faultContractInfoCollection.SyncRoot)
@@ -45,9 +49,16 @@ namespace System.ServiceModel.Dispatcher
             string faultExceptionAction = action = faultException.Action;
 
             Type faultExceptionOfT = null;
-            for (Type faultType = faultException.GetType(); faultType != typeof(FaultException); faultType = faultType.BaseType)
+            for (
+                Type faultType = faultException.GetType();
+                faultType != typeof(FaultException);
+                faultType = faultType.BaseType
+            )
             {
-                if (faultType.IsGenericType && (faultType.GetGenericTypeDefinition() == typeof(FaultException<>)))
+                if (
+                    faultType.IsGenericType
+                    && (faultType.GetGenericTypeDefinition() == typeof(FaultException<>))
+                )
                 {
                     faultExceptionOfT = faultType;
                     break;
@@ -69,7 +80,11 @@ namespace System.ServiceModel.Dispatcher
             return CreateFaultException(messageFault, action);
         }
 
-        protected virtual XmlObjectSerializer GetSerializer(Type detailType, string faultExceptionAction, out string action)
+        protected virtual XmlObjectSerializer GetSerializer(
+            Type detailType,
+            string faultExceptionAction,
+            out string action
+        )
         {
             action = faultExceptionAction;
             FaultContractInfo faultInfo = null;
@@ -89,10 +104,16 @@ namespace System.ServiceModel.Dispatcher
                 return faultInfo.Serializer;
             }
             else
-                return DataContractSerializerDefaults.CreateSerializer(detailType, int.MaxValue /* maxItemsInObjectGraph */ );
+                return DataContractSerializerDefaults.CreateSerializer(
+                    detailType,
+                    int.MaxValue /* maxItemsInObjectGraph */
+                );
         }
 
-        protected virtual FaultException CreateFaultException(MessageFault messageFault, string action)
+        protected virtual FaultException CreateFaultException(
+            MessageFault messageFault,
+            string action
+        )
         {
             IList<FaultContractInfo> faultInfos;
             if (action != null)
@@ -100,7 +121,10 @@ namespace System.ServiceModel.Dispatcher
                 faultInfos = new List<FaultContractInfo>();
                 for (int i = 0; i < faultContractInfos.Length; i++)
                 {
-                    if (faultContractInfos[i].Action == action || faultContractInfos[i].Action == MessageHeaders.WildcardAction)
+                    if (
+                        faultContractInfos[i].Action == action
+                        || faultContractInfos[i].Action == MessageHeaders.WildcardAction
+                    )
                     {
                         faultInfos.Add(faultContractInfos[i]);
                     }
@@ -124,27 +148,37 @@ namespace System.ServiceModel.Dispatcher
                     try
                     {
                         detailObj = serializer.ReadObject(detailReader);
-                        FaultException faultException = CreateFaultException(messageFault, action,
-                            detailObj, detailType, detailReader);
+                        FaultException faultException = CreateFaultException(
+                            messageFault,
+                            action,
+                            detailObj,
+                            detailType,
+                            detailReader
+                        );
                         if (faultException != null)
                             return faultException;
                     }
-                    catch (SerializationException)
-                    {
-                    }
+                    catch (SerializationException) { }
                 }
             }
             return new FaultException(messageFault, action);
         }
 
-        protected FaultException CreateFaultException(MessageFault messageFault, string action,
-            object detailObj, Type detailType, XmlDictionaryReader detailReader)
+        protected FaultException CreateFaultException(
+            MessageFault messageFault,
+            string action,
+            object detailObj,
+            Type detailType,
+            XmlDictionaryReader detailReader
+        )
         {
             if (!detailReader.EOF)
             {
                 detailReader.MoveToContent();
                 if (detailReader.NodeType != XmlNodeType.EndElement && !detailReader.EOF)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.ExtraContentIsPresentInFaultDetail)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FormatException(SR.GetString(SR.ExtraContentIsPresentInFaultDetail))
+                    );
             }
             bool isDetailObjectValid = true;
             if (detailObj == null)
@@ -158,11 +192,14 @@ namespace System.ServiceModel.Dispatcher
             if (isDetailObjectValid)
             {
                 Type knownFaultType = typeof(FaultException<>).MakeGenericType(detailType);
-                return (FaultException)Activator.CreateInstance(knownFaultType,
-                                                            detailObj,
-                                                            messageFault.Reason,
-                                                            messageFault.Code,
-                                                            action);
+                return (FaultException)
+                    Activator.CreateInstance(
+                        knownFaultType,
+                        detailObj,
+                        messageFault.Reason,
+                        messageFault.Code,
+                        action
+                    );
             }
             return null;
         }
@@ -170,19 +207,31 @@ namespace System.ServiceModel.Dispatcher
         static FaultContractInfo[] GetSortedArray(List<FaultContractInfo> faultContractInfoList)
         {
             FaultContractInfo[] temp = faultContractInfoList.ToArray();
-            Array.Sort<FaultContractInfo>(temp,
+            Array.Sort<FaultContractInfo>(
+                temp,
                 delegate(FaultContractInfo x, FaultContractInfo y)
-                { return string.CompareOrdinal(x.Action, y.Action); }
-                );
+                {
+                    return string.CompareOrdinal(x.Action, y.Action);
+                }
+            );
             return temp;
         }
 
         static void AddInfrastructureFaults(List<FaultContractInfo> faultContractInfos)
         {
-            faultContractInfos.Add(new FaultContractInfo(FaultCodeConstants.Actions.NetDispatcher, typeof(ExceptionDetail)));
+            faultContractInfos.Add(
+                new FaultContractInfo(
+                    FaultCodeConstants.Actions.NetDispatcher,
+                    typeof(ExceptionDetail)
+                )
+            );
         }
 
-        static MessageFault CreateMessageFault(XmlObjectSerializer serializer, FaultException faultException, Type detailType)
+        static MessageFault CreateMessageFault(
+            XmlObjectSerializer serializer,
+            FaultException faultException,
+            Type detailType
+        )
         {
             if (detailType == null)
             {
@@ -193,19 +242,22 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(serializer != null, "");
 
             Type operationFaultType = typeof(OperationFault<>).MakeGenericType(detailType);
-            return (MessageFault)Activator.CreateInstance(operationFaultType, serializer, faultException);
+            return (MessageFault)
+                Activator.CreateInstance(operationFaultType, serializer, faultException);
         }
 
         internal class OperationFault<T> : XmlObjectSerializerFault
         {
-            public OperationFault(XmlObjectSerializer serializer, FaultException<T> faultException) :
-                base(faultException.Code, faultException.Reason,
-                      faultException.Detail,
-                      serializer,
-                      string.Empty/*actor*/,
-                      string.Empty/*node*/)
-            {
-            }
+            public OperationFault(XmlObjectSerializer serializer, FaultException<T> faultException)
+                : base(
+                    faultException.Code,
+                    faultException.Reason,
+                    faultException.Detail,
+                    serializer,
+                    string.Empty /*actor*/
+                    ,
+                    string.Empty /*node*/
+                ) { }
         }
     }
 }

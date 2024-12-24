@@ -27,12 +27,14 @@ namespace System.Web.Cors.Test
         public void SettingNegativePreflightMaxAge_Throws()
         {
             CorsResult result = new CorsResult();
-            Assert.ThrowsArgumentOutOfRange(() =>
-            {
-                result.PreflightMaxAge = -2;
-            },
-            "value",
-            "PreflightMaxAge must be greater than or equal to 0.");
+            Assert.ThrowsArgumentOutOfRange(
+                () =>
+                {
+                    result.PreflightMaxAge = -2;
+                },
+                "value",
+                "PreflightMaxAge must be greater than or equal to 0."
+            );
         }
 
         [Fact]
@@ -57,10 +59,7 @@ namespace System.Web.Cors.Test
         [Fact]
         public void ToResponseHeaders_AllowOrigin_AllowOriginHeaderAdded()
         {
-            CorsResult result = new CorsResult
-            {
-                AllowedOrigin = "http://example.com"
-            };
+            CorsResult result = new CorsResult { AllowedOrigin = "http://example.com" };
 
             IDictionary<string, string> headers = result.ToResponseHeaders();
 
@@ -70,10 +69,7 @@ namespace System.Web.Cors.Test
         [Fact]
         public void ToResponseHeaders_NoAllowOrigin_AllowOriginHeaderNotAdded()
         {
-            CorsResult result = new CorsResult
-            {
-                AllowedOrigin = null
-            };
+            CorsResult result = new CorsResult { AllowedOrigin = null };
 
             IDictionary<string, string> headers = result.ToResponseHeaders();
 
@@ -83,10 +79,7 @@ namespace System.Web.Cors.Test
         [Fact]
         public void ToResponseHeaders_AllowCredentials_AllowCredentialsHeaderAdded()
         {
-            CorsResult result = new CorsResult
-            {
-                SupportsCredentials = true
-            };
+            CorsResult result = new CorsResult { SupportsCredentials = true };
 
             IDictionary<string, string> headers = result.ToResponseHeaders();
 
@@ -96,10 +89,7 @@ namespace System.Web.Cors.Test
         [Fact]
         public void ToResponseHeaders_NoAllowCredentials_AllowCredentialsHeaderNotAdded()
         {
-            CorsResult result = new CorsResult
-            {
-                SupportsCredentials = false
-            };
+            CorsResult result = new CorsResult { SupportsCredentials = false };
 
             IDictionary<string, string> headers = result.ToResponseHeaders();
 
@@ -279,10 +269,7 @@ namespace System.Web.Cors.Test
         [Fact]
         public void ToResponseHeaders_NoPreflightMaxAge_MaxAgeHeaderNotAdded()
         {
-            CorsResult result = new CorsResult
-            {
-                PreflightMaxAge = null
-            };
+            CorsResult result = new CorsResult { PreflightMaxAge = null };
 
             IDictionary<string, string> headers = result.ToResponseHeaders();
 
@@ -292,10 +279,7 @@ namespace System.Web.Cors.Test
         [Fact]
         public void ToResponseHeaders_PreflightMaxAge_MaxAgeHeaderAdded()
         {
-            CorsResult result = new CorsResult
-            {
-                PreflightMaxAge = 30
-            };
+            CorsResult result = new CorsResult { PreflightMaxAge = 30 };
 
             IDictionary<string, string> headers = result.ToResponseHeaders();
 
@@ -309,7 +293,7 @@ namespace System.Web.Cors.Test
             {
                 SupportsCredentials = true,
                 PreflightMaxAge = 20,
-                AllowedOrigin = "*"
+                AllowedOrigin = "*",
             };
             corsResult.AllowedExposedHeaders.Add("foo");
             corsResult.AllowedHeaders.Add("bar");
@@ -318,7 +302,10 @@ namespace System.Web.Cors.Test
             corsResult.ErrorMessages.Add("error1");
             corsResult.ErrorMessages.Add("error2");
 
-            Assert.Equal(@"IsValid: False, AllowCredentials: True, PreflightMaxAge: 20, AllowOrigin: *, AllowExposedHeaders: {foo}, AllowHeaders: {bar,baz}, AllowMethods: {GET}, ErrorMessages: {error1,error2}", corsResult.ToString());
+            Assert.Equal(
+                @"IsValid: False, AllowCredentials: True, PreflightMaxAge: 20, AllowOrigin: *, AllowExposedHeaders: {foo}, AllowHeaders: {bar,baz}, AllowMethods: {GET}, ErrorMessages: {error1,error2}",
+                corsResult.ToString()
+            );
         }
     }
 }

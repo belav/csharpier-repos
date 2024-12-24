@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.Versioning;
-
 using EditorBrowsableAttribute = System.ComponentModel.EditorBrowsableAttribute;
 using EditorBrowsableState = System.ComponentModel.EditorBrowsableState;
 
@@ -29,6 +28,7 @@ namespace System
     {
         /// <summary>A byref or a native ptr.</summary>
         internal readonly ref T _reference;
+
         /// <summary>The number of elements this ReadOnlySpan contains.</summary>
         private readonly int _length;
 
@@ -80,7 +80,10 @@ namespace System
                 ThrowHelper.ThrowArgumentOutOfRangeException();
 #endif
 
-            _reference = ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), (nint)(uint)start /* force zero-extension */);
+            _reference = ref Unsafe.Add(
+                ref MemoryMarshal.GetArrayDataReference(array),
+                (nint)(uint)start /* force zero-extension */
+            );
             _length = length;
         }
 
@@ -149,7 +152,10 @@ namespace System
             {
                 if ((uint)index >= (uint)_length)
                     ThrowHelper.ThrowIndexOutOfRangeException();
-                return ref Unsafe.Add(ref _reference, (nint)(uint)index /* force zero-extension */);
+                return ref Unsafe.Add(
+                    ref _reference,
+                    (nint)(uint)index /* force zero-extension */
+                );
             }
         }
 
@@ -177,7 +183,8 @@ namespace System
         /// Returns false if left and right point at the same memory and have the same length.  Note that
         /// this does *not* check to see if the *contents* are equal.
         /// </summary>
-        public static bool operator !=(ReadOnlySpan<T> left, ReadOnlySpan<T> right) => !(left == right);
+        public static bool operator !=(ReadOnlySpan<T> left, ReadOnlySpan<T> right) =>
+            !(left == right);
 
         /// <summary>
         /// This method is not supported as spans cannot be boxed. To compare two spans, use operator==.
@@ -185,7 +192,9 @@ namespace System
         /// <exception cref="NotSupportedException">
         /// Always thrown by this method.
         /// </exception>
-        [Obsolete("Equals() on ReadOnlySpan will always throw an exception. Use the equality operator instead.")]
+        [Obsolete(
+            "Equals() on ReadOnlySpan will always throw an exception. Use the equality operator instead."
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj) =>
             throw new NotSupportedException(SR.NotSupported_CannotCallEqualsOnSpan);
@@ -209,8 +218,8 @@ namespace System
         /// <summary>
         /// Defines an implicit conversion of a <see cref="ArraySegment{T}"/> to a <see cref="ReadOnlySpan{T}"/>
         /// </summary>
-        public static implicit operator ReadOnlySpan<T>(ArraySegment<T> segment)
-            => new ReadOnlySpan<T>(segment.Array, segment.Offset, segment.Count);
+        public static implicit operator ReadOnlySpan<T>(ArraySegment<T> segment) =>
+            new ReadOnlySpan<T>(segment.Array, segment.Offset, segment.Count);
 
         /// <summary>
         /// Returns a 0-length read-only span whose base is the null pointer.
@@ -225,6 +234,7 @@ namespace System
         {
             /// <summary>The span being enumerated.</summary>
             private readonly ReadOnlySpan<T> _span;
+
             /// <summary>The next index to yield.</summary>
             private int _index;
 
@@ -268,7 +278,8 @@ namespace System
         {
             // Ensure that the native code has just one forward branch that is predicted-not-taken.
             ref T ret = ref Unsafe.NullRef<T>();
-            if (_length != 0) ret = ref _reference;
+            if (_length != 0)
+                ret = ref _reference;
             return ref ret;
         }
 
@@ -322,8 +333,8 @@ namespace System
         /// this does *not* check to see if the *contents* are equal.
         /// </summary>
         public static bool operator ==(ReadOnlySpan<T> left, ReadOnlySpan<T> right) =>
-            left._length == right._length &&
-            Unsafe.AreSame(ref left._reference, ref right._reference);
+            left._length == right._length
+            && Unsafe.AreSame(ref left._reference, ref right._reference);
 
         /// <summary>
         /// For <see cref="ReadOnlySpan{Char}"/>, returns a new instance of string that represents the characters pointed to by the span.
@@ -333,7 +344,9 @@ namespace System
         {
             if (typeof(T) == typeof(char))
             {
-                return new string(new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _reference), _length));
+                return new string(
+                    new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _reference), _length)
+                );
             }
             return $"System.ReadOnlySpan<{typeof(T).Name}>[{_length}]";
         }
@@ -351,7 +364,13 @@ namespace System
             if ((uint)start > (uint)_length)
                 ThrowHelper.ThrowArgumentOutOfRangeException();
 
-            return new ReadOnlySpan<T>(ref Unsafe.Add(ref _reference, (nint)(uint)start /* force zero-extension */), _length - start);
+            return new ReadOnlySpan<T>(
+                ref Unsafe.Add(
+                    ref _reference,
+                    (nint)(uint)start /* force zero-extension */
+                ),
+                _length - start
+            );
         }
 
         /// <summary>
@@ -374,7 +393,13 @@ namespace System
                 ThrowHelper.ThrowArgumentOutOfRangeException();
 #endif
 
-            return new ReadOnlySpan<T>(ref Unsafe.Add(ref _reference, (nint)(uint)start /* force zero-extension */), length);
+            return new ReadOnlySpan<T>(
+                ref Unsafe.Add(
+                    ref _reference,
+                    (nint)(uint)start /* force zero-extension */
+                ),
+                length
+            );
         }
 
         /// <summary>
@@ -388,7 +413,11 @@ namespace System
                 return Array.Empty<T>();
 
             var destination = new T[_length];
-            Buffer.Memmove(ref MemoryMarshal.GetArrayDataReference(destination), ref _reference, (uint)_length);
+            Buffer.Memmove(
+                ref MemoryMarshal.GetArrayDataReference(destination),
+                ref _reference,
+                (uint)_length
+            );
             return destination;
         }
     }

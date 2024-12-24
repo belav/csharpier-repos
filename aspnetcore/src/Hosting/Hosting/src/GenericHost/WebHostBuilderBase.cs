@@ -15,8 +15,7 @@ internal abstract class WebHostBuilderBase : IWebHostBuilder, ISupportsUseDefaul
     public WebHostBuilderBase(IHostBuilder builder, WebHostBuilderOptions options)
     {
         _builder = builder;
-        var configBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection();
+        var configBuilder = new ConfigurationBuilder().AddInMemoryCollection();
 
         if (!options.SuppressEnvironmentConfiguration)
         {
@@ -28,16 +27,22 @@ internal abstract class WebHostBuilderBase : IWebHostBuilder, ISupportsUseDefaul
 
     public IWebHost Build()
     {
-        throw new NotSupportedException($"Building this implementation of {nameof(IWebHostBuilder)} is not supported.");
+        throw new NotSupportedException(
+            $"Building this implementation of {nameof(IWebHostBuilder)} is not supported."
+        );
     }
 
-    public IWebHostBuilder ConfigureAppConfiguration(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate)
+    public IWebHostBuilder ConfigureAppConfiguration(
+        Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
+    )
     {
-        _builder.ConfigureAppConfiguration((context, builder) =>
-        {
-            var webhostBuilderContext = GetWebHostBuilderContext(context);
-            configureDelegate(webhostBuilderContext, builder);
-        });
+        _builder.ConfigureAppConfiguration(
+            (context, builder) =>
+            {
+                var webhostBuilderContext = GetWebHostBuilderContext(context);
+                configureDelegate(webhostBuilderContext, builder);
+            }
+        );
 
         return this;
     }
@@ -47,18 +52,24 @@ internal abstract class WebHostBuilderBase : IWebHostBuilder, ISupportsUseDefaul
         return ConfigureServices((context, services) => configureServices(services));
     }
 
-    public IWebHostBuilder ConfigureServices(Action<WebHostBuilderContext, IServiceCollection> configureServices)
+    public IWebHostBuilder ConfigureServices(
+        Action<WebHostBuilderContext, IServiceCollection> configureServices
+    )
     {
-        _builder.ConfigureServices((context, builder) =>
-        {
-            var webhostBuilderContext = GetWebHostBuilderContext(context);
-            configureServices(webhostBuilderContext, builder);
-        });
+        _builder.ConfigureServices(
+            (context, builder) =>
+            {
+                var webhostBuilderContext = GetWebHostBuilderContext(context);
+                configureServices(webhostBuilderContext, builder);
+            }
+        );
 
         return this;
     }
 
-    public IWebHostBuilder UseDefaultServiceProvider(Action<WebHostBuilderContext, ServiceProviderOptions> configure)
+    public IWebHostBuilder UseDefaultServiceProvider(
+        Action<WebHostBuilderContext, ServiceProviderOptions> configure
+    )
     {
         _builder.UseServiceProviderFactory(context =>
         {
@@ -76,13 +87,21 @@ internal abstract class WebHostBuilderBase : IWebHostBuilder, ISupportsUseDefaul
         if (!context.Properties.TryGetValue(typeof(WebHostBuilderContext), out var contextVal))
         {
             // Use _config as a fallback for WebHostOptions in case the chained source was removed from the hosting IConfigurationBuilder.
-            var options = new WebHostOptions(context.Configuration, fallbackConfiguration: _config, environment: context.HostingEnvironment);
+            var options = new WebHostOptions(
+                context.Configuration,
+                fallbackConfiguration: _config,
+                environment: context.HostingEnvironment
+            );
             var webHostBuilderContext = new WebHostBuilderContext
             {
                 Configuration = context.Configuration,
                 HostingEnvironment = new HostingEnvironment(),
             };
-            webHostBuilderContext.HostingEnvironment.Initialize(context.HostingEnvironment.ContentRootPath, options, baseEnvironment: context.HostingEnvironment);
+            webHostBuilderContext.HostingEnvironment.Initialize(
+                context.HostingEnvironment.ContentRootPath,
+                options,
+                baseEnvironment: context.HostingEnvironment
+            );
             context.Properties[typeof(WebHostBuilderContext)] = webHostBuilderContext;
             context.Properties[typeof(WebHostOptions)] = options;
             return webHostBuilderContext;

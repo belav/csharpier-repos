@@ -50,7 +50,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 accuracyMicrosec,
                 testData.IsOrdering,
                 nonceMemory,
-                tsaMemory);
+                tsaMemory
+            );
 
             // Since AssertEqual will check all the fields the remaining checks in this method are about
             // input/output value/reference associations.
@@ -65,13 +66,15 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(messageHash.ByteArrayToHex(), tokenInfo.GetMessageHash().ByteArrayToHex());
             // Detached from the original data
             messageHash[0] ^= 0xFF;
-            Assert.NotEqual(messageHash.ByteArrayToHex(), tokenInfo.GetMessageHash().ByteArrayToHex());
+            Assert.NotEqual(
+                messageHash.ByteArrayToHex(),
+                tokenInfo.GetMessageHash().ByteArrayToHex()
+            );
 
             Assert.Equal(serial.ByteArrayToHex(), tokenInfo.GetSerialNumber().ByteArrayToHex());
             // Detached from the original data
             serial[1] ^= 0xFF;
             Assert.NotEqual(serial.ByteArrayToHex(), tokenInfo.GetSerialNumber().ByteArrayToHex());
-
 
             if (nonce != null)
             {
@@ -92,7 +95,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 Assert.Equal(tsaNameBytes.ByteArrayToHex(), nameFromToken.Value.ByteArrayToHex());
                 // Detached from the original data
                 tsaNameBytes[5] ^= 0xFF;
-                Assert.NotEqual(tsaNameBytes.ByteArrayToHex(), nameFromToken.Value.ByteArrayToHex());
+                Assert.NotEqual(
+                    tsaNameBytes.ByteArrayToHex(),
+                    nameFromToken.Value.ByteArrayToHex()
+                );
             }
 
             if (testData.ExtensionsBytes == null)
@@ -116,7 +122,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
 
             // Because the token is DER encoded, we should produce byte-for-byte the same value.
-            Assert.Equal(testData.TokenInfoBytes.ByteArrayToHex(), tokenInfo.Encode().ByteArrayToHex());
+            Assert.Equal(
+                testData.TokenInfoBytes.ByteArrayToHex(),
+                tokenInfo.Encode().ByteArrayToHex()
+            );
         }
 
         [Theory]
@@ -133,19 +142,26 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ValidateTokenInfo(
                 testData.TokenInfoBytes,
                 testData,
-                viaTry ? testData.TokenInfoBytes.Length : (int?)null);
+                viaTry ? testData.TokenInfoBytes.Length : (int?)null
+            );
         }
 
         private static void ValidateTokenInfo(
             ReadOnlyMemory<byte> tokenInfoBytes,
             TimestampTokenTestData testData,
-            int? lengthFromTry)
+            int? lengthFromTry
+        )
         {
             Rfc3161TimestampTokenInfo tokenInfo;
 
             Assert.True(
-                Rfc3161TimestampTokenInfo.TryDecode(tokenInfoBytes, out tokenInfo, out int bytesRead),
-                "Rfc3161TimestampTokenInfo.TryDecode");
+                Rfc3161TimestampTokenInfo.TryDecode(
+                    tokenInfoBytes,
+                    out tokenInfo,
+                    out int bytesRead
+                ),
+                "Rfc3161TimestampTokenInfo.TryDecode"
+            );
 
             Assert.NotNull(tokenInfo);
 
@@ -184,7 +200,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 Rfc3161TimestampTokenInfo.TryDecode(
                     inputData.Slice(0, inputData.Length - 1),
                     out Rfc3161TimestampTokenInfo tokenInfo,
-                    out int bytesRead));
+                    out int bytesRead
+                )
+            );
 
             Assert.Equal(0, bytesRead);
             Assert.Null(tokenInfo);
@@ -195,7 +213,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "policyId",
-                () => new Rfc3161TimestampTokenInfo(null, null, default, default, default));
+                () => new Rfc3161TimestampTokenInfo(null, null, default, default, default)
+            );
         }
 
         [Fact]
@@ -205,7 +224,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "hashAlgorithmId",
-                () => new Rfc3161TimestampTokenInfo(policyId, null, default, default, default));
+                () => new Rfc3161TimestampTokenInfo(policyId, null, default, default, default)
+            );
         }
 
         [Fact]
@@ -219,11 +239,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 hashAlgorithmId,
                 new byte[256 / 8],
                 new byte[] { 1 },
-                DateTimeOffset.UtcNow);
+                DateTimeOffset.UtcNow
+            );
 
             Assert.False(tokenInfo.GetTimestampAuthorityName().HasValue);
 
-            Assert.True(Rfc3161TimestampTokenInfo.TryDecode(tokenInfo.Encode(), out tokenInfo, out _));
+            Assert.True(
+                Rfc3161TimestampTokenInfo.TryDecode(tokenInfo.Encode(), out tokenInfo, out _)
+            );
             Assert.False(tokenInfo.GetTimestampAuthorityName().HasValue);
         }
 
@@ -238,11 +261,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 hashAlgorithmId,
                 new byte[256 / 8],
                 new byte[] { 2 },
-                DateTimeOffset.UtcNow);
+                DateTimeOffset.UtcNow
+            );
 
             Assert.False(tokenInfo.AccuracyInMicroseconds.HasValue);
 
-            Assert.True(Rfc3161TimestampTokenInfo.TryDecode(tokenInfo.Encode(), out tokenInfo, out _));
+            Assert.True(
+                Rfc3161TimestampTokenInfo.TryDecode(tokenInfo.Encode(), out tokenInfo, out _)
+            );
             Assert.False(tokenInfo.AccuracyInMicroseconds.HasValue);
         }
 
@@ -250,17 +276,19 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void TsaName_SameDataSecondInvocation()
         {
             const string InputHex =
-                "3081F8020101060B6086480186F845010717033031300D060960864801650304" +
-                "020105000420315F5BDB76D078C43B8AC0064E4A0164612B1FCE77C869345BFC" +
-                "94C75894EDD302146C77B12D5FCF9F6DC1D4A481E935F446FBA376C4180F3230" +
-                "3137313031303232303835325A300302011EA08186A48183308180310B300906" +
-                "0355040613025553311D301B060355040A131453796D616E74656320436F7270" +
-                "6F726174696F6E311F301D060355040B131653796D616E746563205472757374" +
-                "204E6574776F726B3131302F0603550403132853796D616E7465632053484132" +
-                "35362054696D655374616D70696E67205369676E6572202D204732";
+                "3081F8020101060B6086480186F845010717033031300D060960864801650304"
+                + "020105000420315F5BDB76D078C43B8AC0064E4A0164612B1FCE77C869345BFC"
+                + "94C75894EDD302146C77B12D5FCF9F6DC1D4A481E935F446FBA376C4180F3230"
+                + "3137313031303232303835325A300302011EA08186A48183308180310B300906"
+                + "0355040613025553311D301B060355040A131453796D616E74656320436F7270"
+                + "6F726174696F6E311F301D060355040B131653796D616E746563205472757374"
+                + "204E6574776F726B3131302F0603550403132853796D616E7465632053484132"
+                + "35362054696D655374616D70696E67205369676E6572202D204732";
 
             Rfc3161TimestampTokenInfo tokenInfo;
-            Assert.True(Rfc3161TimestampTokenInfo.TryDecode(InputHex.HexToByteArray(), out tokenInfo, out _));
+            Assert.True(
+                Rfc3161TimestampTokenInfo.TryDecode(InputHex.HexToByteArray(), out tokenInfo, out _)
+            );
 
             ReadOnlyMemory<byte>? tsaName = tokenInfo.GetTimestampAuthorityName();
             Assert.True(tsaName.HasValue, "tsaName.HasValue");
@@ -272,8 +300,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.True(
                 Unsafe.AreSame(
                     ref MemoryMarshal.GetReference(tsaName1.Span),
-                    ref MemoryMarshal.GetReference(tsaName2.Span)),
-                "Second call to GetTimestampAuthorityName is over the same memory");
+                    ref MemoryMarshal.GetReference(tsaName2.Span)
+                ),
+                "Second call to GetTimestampAuthorityName is over the same memory"
+            );
         }
 
         [Fact]
@@ -293,11 +323,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 extensions: new X509ExtensionCollection
                 {
                     new X509Extension(new Oid("0.0.0", "0.0.0"), extensionValue, true),
-                });
+                }
+            );
 
             Assert.True(tokenInfo.HasExtensions);
 
-            Assert.True(Rfc3161TimestampTokenInfo.TryDecode(tokenInfo.Encode(), out tokenInfo, out _));
+            Assert.True(
+                Rfc3161TimestampTokenInfo.TryDecode(tokenInfo.Encode(), out tokenInfo, out _)
+            );
 
             Assert.True(tokenInfo.HasExtensions);
             X509ExtensionCollection extensions = tokenInfo.GetExtensions();
@@ -322,11 +355,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 new byte[256 / 8],
                 new byte[] { 7 },
                 DateTimeOffset.UtcNow,
-                isOrdering: true);
+                isOrdering: true
+            );
 
             Assert.True(tokenInfo.IsOrdering, "tokenInfo.IsOrdering");
 
-            Assert.True(Rfc3161TimestampTokenInfo.TryDecode(tokenInfo.Encode(), out tokenInfo, out _));
+            Assert.True(
+                Rfc3161TimestampTokenInfo.TryDecode(tokenInfo.Encode(), out tokenInfo, out _)
+            );
             Assert.True(tokenInfo.IsOrdering, "tokenInfo.IsOrdering");
         }
 
@@ -350,7 +386,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 hashAlgorithmId1,
                 new byte[256 / 8],
                 new byte[] { 6 },
-                experiment);
+                experiment
+            );
 
             Assert.Equal(experiment, tokenInfo.Timestamp);
         }
@@ -371,13 +408,15 @@ namespace System.Security.Cryptography.Pkcs.Tests
             string description,
             string accuracyHex,
             bool shouldParse,
-            long? expectedTotalMicroseconds)
+            long? expectedTotalMicroseconds
+        )
         {
             _ = description;
             string inputHex =
-                "305A0201010601003031300D0609608648016503040201050004200000000000" +
-                "0000000000000000000000000000000000000000000000000000000201081817" +
-                "32303137313231383138313235342E373438363336345A" + accuracyHex;
+                "305A0201010601003031300D0609608648016503040201050004200000000000"
+                + "0000000000000000000000000000000000000000000000000000000201081817"
+                + "32303137313231383138313235342E373438363336345A"
+                + accuracyHex;
 
             byte[] inputData = inputHex.HexToByteArray();
             inputData[1] = checked((byte)(0x55 + accuracyHex.Length / 2));
@@ -387,7 +426,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 int bytesRead;
                 Rfc3161TimestampTokenInfo tokenInfo;
 
-                Assert.True(Rfc3161TimestampTokenInfo.TryDecode(inputData, out tokenInfo, out bytesRead));
+                Assert.True(
+                    Rfc3161TimestampTokenInfo.TryDecode(inputData, out tokenInfo, out bytesRead)
+                );
                 Assert.Equal(inputData.Length, bytesRead);
                 Assert.NotNull(tokenInfo);
                 Assert.Equal(expectedTotalMicroseconds, tokenInfo.AccuracyInMicroseconds);
@@ -422,7 +463,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 new byte[256 / 8],
                 new byte[] { 1 },
                 DateTimeOffset.UtcNow,
-                accuracyInMicroseconds: totalMicroseconds);
+                accuracyInMicroseconds: totalMicroseconds
+            );
 
             Assert.True(info.AccuracyInMicroseconds.HasValue);
             Assert.Equal(totalMicroseconds, info.AccuracyInMicroseconds.Value);
@@ -432,8 +474,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Rfc3161TimestampTokenInfo info2;
             int bytesConsumed;
 
-            Assert.True(
-                Rfc3161TimestampTokenInfo.TryDecode(encoded, out info2, out bytesConsumed));
+            Assert.True(Rfc3161TimestampTokenInfo.TryDecode(encoded, out info2, out bytesConsumed));
 
             Assert.Equal(encoded.Length, bytesConsumed);
             Assert.NotNull(info2);
@@ -446,24 +487,39 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "accuracyInMicroseconds",
-                () => new Rfc3161TimestampTokenInfo(
-                    new Oid("0.0", "0.0"),
-                    new Oid(Oids.Sha256),
-                    new byte[256 / 8],
-                    new byte[] { 2 },
-                    DateTimeOffset.UtcNow,
-                    accuracyInMicroseconds: -1));
+                () =>
+                    new Rfc3161TimestampTokenInfo(
+                        new Oid("0.0", "0.0"),
+                        new Oid(Oids.Sha256),
+                        new byte[256 / 8],
+                        new byte[] { 2 },
+                        DateTimeOffset.UtcNow,
+                        accuracyInMicroseconds: -1
+                    )
+            );
         }
 
-        internal static void AssertEqual(TimestampTokenTestData testData, Rfc3161TimestampTokenInfo tokenInfo)
+        internal static void AssertEqual(
+            TimestampTokenTestData testData,
+            Rfc3161TimestampTokenInfo tokenInfo
+        )
         {
             Assert.Equal(testData.Version, tokenInfo.Version);
             Assert.Equal(testData.PolicyId, tokenInfo.PolicyId.Value);
             Assert.Equal(testData.HashAlgorithmId, tokenInfo.HashAlgorithmId.Value);
             // FriendlyName should be set for known digest algorithms
-            Assert.NotEqual(tokenInfo.HashAlgorithmId.Value, tokenInfo.HashAlgorithmId.FriendlyName);
-            Assert.Equal(testData.HashBytes.ByteArrayToHex(), tokenInfo.GetMessageHash().ByteArrayToHex());
-            Assert.Equal(testData.SerialNumberBytes.ByteArrayToHex(), tokenInfo.GetSerialNumber().ByteArrayToHex());
+            Assert.NotEqual(
+                tokenInfo.HashAlgorithmId.Value,
+                tokenInfo.HashAlgorithmId.FriendlyName
+            );
+            Assert.Equal(
+                testData.HashBytes.ByteArrayToHex(),
+                tokenInfo.GetMessageHash().ByteArrayToHex()
+            );
+            Assert.Equal(
+                testData.SerialNumberBytes.ByteArrayToHex(),
+                tokenInfo.GetSerialNumber().ByteArrayToHex()
+            );
             Assert.Equal(testData.Timestamp, tokenInfo.Timestamp);
             Assert.Equal(TimeSpan.Zero, tokenInfo.Timestamp.Offset);
             Assert.Equal(testData.AccuracyInMicroseconds, tokenInfo.AccuracyInMicroseconds);
@@ -477,8 +533,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 Assert.False(tokenInfo.IsOrdering, "tokenInfo.IsOrdering");
             }
 
-            Assert.Equal(testData.NonceBytes?.ByteArrayToHex(), tokenInfo.GetNonce()?.ByteArrayToHex());
-            Assert.Equal(testData.TsaNameBytes?.ByteArrayToHex(), tokenInfo.GetTimestampAuthorityName()?.ByteArrayToHex());
+            Assert.Equal(
+                testData.NonceBytes?.ByteArrayToHex(),
+                tokenInfo.GetNonce()?.ByteArrayToHex()
+            );
+            Assert.Equal(
+                testData.TsaNameBytes?.ByteArrayToHex(),
+                tokenInfo.GetTimestampAuthorityName()?.ByteArrayToHex()
+            );
 
             if (testData.ExtensionsBytes == null)
             {

@@ -83,7 +83,8 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
                 Assert.Equal("$[1]", kvp.Key);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.StartsWith("''' is an invalid start of a value", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -95,7 +96,10 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
         var contentBytes = Encoding.UTF8.GetBytes("{\"dateValue\":\"not-a-date\"}");
         var httpContext = GetHttpContext(contentBytes);
 
-        var formatterContext = CreateInputFormatterContext(typeof(TypeWithBadConverters), httpContext);
+        var formatterContext = CreateInputFormatterContext(
+            typeof(TypeWithBadConverters),
+            httpContext
+        );
 
         // Act
         await formatter.ReadAsync(formatterContext);
@@ -116,7 +120,10 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
         var contentBytes = Encoding.UTF8.GetBytes("{\"shortValue\":\"32768\"}");
         var httpContext = GetHttpContext(contentBytes);
 
-        var formatterContext = CreateInputFormatterContext(typeof(TypeWithBadConverters), httpContext);
+        var formatterContext = CreateInputFormatterContext(
+            typeof(TypeWithBadConverters),
+            httpContext
+        );
 
         // Act
         await formatter.ReadAsync(formatterContext);
@@ -129,14 +136,31 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
     }
 
     [Theory]
-    [InlineData("{", "$", "Expected depth to be zero at the end of the JSON payload. There is an open JSON object or array that should be closed. Path: $ | LineNumber: 0 | BytePositionInLine: 1.")]
-    [InlineData("{\"a\":{\"b\"}}", "$.a", "'}' is invalid after a property name. Expected a ':'. Path: $.a | LineNumber: 0 | BytePositionInLine: 9.")]
-    [InlineData("{\"age\":\"x\"}", "$.age", "The JSON value could not be converted to System.Decimal. Path: $.age | LineNumber: 0 | BytePositionInLine: 10.")]
-    [InlineData("{\"login\":1}", "$.login", "The JSON value could not be converted to Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatterTest+UserLogin. Path: $.login | LineNumber: 0 | BytePositionInLine: 10.")]
+    [InlineData(
+        "{",
+        "$",
+        "Expected depth to be zero at the end of the JSON payload. There is an open JSON object or array that should be closed. Path: $ | LineNumber: 0 | BytePositionInLine: 1."
+    )]
+    [InlineData(
+        "{\"a\":{\"b\"}}",
+        "$.a",
+        "'}' is invalid after a property name. Expected a ':'. Path: $.a | LineNumber: 0 | BytePositionInLine: 9."
+    )]
+    [InlineData(
+        "{\"age\":\"x\"}",
+        "$.age",
+        "The JSON value could not be converted to System.Decimal. Path: $.age | LineNumber: 0 | BytePositionInLine: 10."
+    )]
+    [InlineData(
+        "{\"login\":1}",
+        "$.login",
+        "The JSON value could not be converted to Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatterTest+UserLogin. Path: $.login | LineNumber: 0 | BytePositionInLine: 10."
+    )]
     public async Task ReadAsync_WithAllowInputFormatterExceptionMessages_RegistersJsonInputExceptionsAsInputFormatterException(
-                string content,
-                string modelStateKey,
-                string expectedMessage)
+        string content,
+        string modelStateKey,
+        string expectedMessage
+    )
     {
         // Arrange
         var formatter = GetInputFormatter(allowInputFormatterExceptionMessages: true);
@@ -181,14 +205,17 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
         Assert.Empty(modelError.ErrorMessage);
     }
 
-    protected override TextInputFormatter GetInputFormatter(bool allowInputFormatterExceptionMessages = true)
+    protected override TextInputFormatter GetInputFormatter(
+        bool allowInputFormatterExceptionMessages = true
+    )
     {
         return new SystemTextJsonInputFormatter(
             new JsonOptions
             {
-                AllowInputFormatterExceptionMessages = allowInputFormatterExceptionMessages
+                AllowInputFormatterExceptionMessages = allowInputFormatterExceptionMessages,
             },
-            LoggerFactory.CreateLogger<SystemTextJsonInputFormatter>());
+            LoggerFactory.CreateLogger<SystemTextJsonInputFormatter>()
+        );
     }
 
     internal override string ReadAsync_AddsModelValidationErrorsToModelState_Expected => "$.Age";
@@ -201,9 +228,11 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
 
     internal override string ReadAsync_ArrayOfObjects_HasCorrectKey_Expected => "$[2].Age";
 
-    internal override string ReadAsync_InvalidArray_AddsOverflowErrorsToModelState_Expected => "$[2]";
+    internal override string ReadAsync_InvalidArray_AddsOverflowErrorsToModelState_Expected =>
+        "$[2]";
 
-    internal override string ReadAsync_InvalidComplexArray_AddsOverflowErrorsToModelState_Expected => "$[1].Small";
+    internal override string ReadAsync_InvalidComplexArray_AddsOverflowErrorsToModelState_Expected =>
+        "$[1].Small";
 
     internal override string ReadAsync_ComplexPoco_Expected => "$.Person.Numbers[2]";
 
@@ -220,12 +249,20 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
 
     private class ShortConverter : JsonConverter<short>
     {
-        public override short Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override short Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return short.Parse(reader.GetString(), CultureInfo.InvariantCulture);
         }
 
-        public override void Write(Utf8JsonWriter writer, short value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            short value,
+            JsonSerializerOptions options
+        )
         {
             throw new NotImplementedException();
         }
@@ -233,12 +270,20 @@ public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
 
     private class DateTimeConverter : JsonConverter<DateTime>
     {
-        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override DateTime Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return DateTime.Parse(reader.GetString(), CultureInfo.InvariantCulture);
         }
 
-        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            DateTime value,
+            JsonSerializerOptions options
+        )
         {
             throw new NotImplementedException();
         }

@@ -27,10 +27,11 @@ namespace Microsoft.NET.HostModel.Bundle
 
         public bool IsValid()
         {
-            return !string.IsNullOrWhiteSpace(SourcePath) &&
-                   !string.IsNullOrWhiteSpace(BundleRelativePath);
+            return !string.IsNullOrWhiteSpace(SourcePath)
+                && !string.IsNullOrWhiteSpace(BundleRelativePath);
         }
 
-        public override string ToString() => $"SourcePath: {SourcePath}, RelativePath: {BundleRelativePath} {(Excluded ? "[Excluded]" : "")}";
+        public override string ToString() =>
+            $"SourcePath: {SourcePath}, RelativePath: {BundleRelativePath} {(Excluded ? "[Excluded]" : "")}";
     }
 }

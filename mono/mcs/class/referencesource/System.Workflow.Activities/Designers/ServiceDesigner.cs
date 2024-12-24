@@ -3,26 +3,26 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Text;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Reflection.Emit;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
-    using Microsoft.CSharp;
     using System.Diagnostics;
-    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.IO;
+    using System.Reflection;
+    using System.Reflection.Emit;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
+    using Microsoft.CSharp;
 
     #endregion
 
@@ -41,17 +41,19 @@ namespace System.Workflow.Activities
 
         #endregion
 
-        //TBD: NOTE, there needs to be two way protocol, the roots must indicate 
+        //TBD: NOTE, there needs to be two way protocol, the roots must indicate
         //what activities that they support and the activities must indicate
         //what root they support. The latter, is missing right now.
         //The following method just checks for the former.
         protected override bool IsSupportedActivityType(Type activityType)
         {
             //we specifically, do not support state machine related activities.
-            if (typeof(SetStateActivity).IsAssignableFrom(activityType) ||
-                typeof(StateActivity).IsAssignableFrom(activityType) ||
-                typeof(StateInitializationActivity).IsAssignableFrom(activityType) ||
-                typeof(StateFinalizationActivity).IsAssignableFrom(activityType))
+            if (
+                typeof(SetStateActivity).IsAssignableFrom(activityType)
+                || typeof(StateActivity).IsAssignableFrom(activityType)
+                || typeof(StateInitializationActivity).IsAssignableFrom(activityType)
+                || typeof(StateFinalizationActivity).IsAssignableFrom(activityType)
+            )
                 return false;
 
             return base.IsSupportedActivityType(activityType);
@@ -62,7 +64,8 @@ namespace System.Workflow.Activities
         {
             base.OnViewChanged(view);
 
-            ActivityDesigner hostedDesigner = (ActiveView != null) ? ActiveView.AssociatedDesigner : null;
+            ActivityDesigner hostedDesigner =
+                (ActiveView != null) ? ActiveView.AssociatedDesigner : null;
             if (hostedDesigner.Activity is FaultHandlersActivity)
             {
                 Header.Text = DR.GetString(DR.WorkflowExceptions);
@@ -99,7 +102,8 @@ namespace System.Workflow.Activities
         public SequentialWorkflowDesignerTheme(WorkflowTheme theme)
             : base(theme)
         {
-            this.WatermarkImagePath = "System.Workflow.Activities.ActivityDesignerResources.SequentialWorkflowDesigner";
+            this.WatermarkImagePath =
+                "System.Workflow.Activities.ActivityDesignerResources.SequentialWorkflowDesigner";
             this.WatermarkAlignment = DesignerContentAlignment.BottomRight;
             this.ShowDropShadow = true;
             this.ConnectorStartCap = LineAnchor.None;

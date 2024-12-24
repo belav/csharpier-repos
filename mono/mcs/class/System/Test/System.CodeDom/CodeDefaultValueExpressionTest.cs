@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,47 +28,46 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeDefaultValueExpressionTest
-	{
-		[Test]
-		public void Constructor0 ()
-		{
-			CodeDefaultValueExpression cdve = new CodeDefaultValueExpression ();
+    [TestFixture]
+    public class CodeDefaultValueExpressionTest
+    {
+        [Test]
+        public void Constructor0()
+        {
+            CodeDefaultValueExpression cdve = new CodeDefaultValueExpression();
 
-			Assert.IsNotNull (cdve.Type, "#1");
-			Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#2");
+            Assert.IsNotNull(cdve.Type, "#1");
+            Assert.AreEqual(typeof(void).FullName, cdve.Type.BaseType, "#2");
 
-			cdve.Type = null;
-			Assert.IsNotNull (cdve.Type, "#3");
-			Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#4");
+            cdve.Type = null;
+            Assert.IsNotNull(cdve.Type, "#3");
+            Assert.AreEqual(typeof(void).FullName, cdve.Type.BaseType, "#4");
 
-			CodeTypeReference type = new CodeTypeReference ("mono");
-			cdve.Type = type;
-			Assert.IsNotNull (cdve.Type, "#5");
-			Assert.AreSame (type, cdve.Type, "#6");
-		}
+            CodeTypeReference type = new CodeTypeReference("mono");
+            cdve.Type = type;
+            Assert.IsNotNull(cdve.Type, "#5");
+            Assert.AreSame(type, cdve.Type, "#6");
+        }
 
-		[Test]
-		public void Constructor1 () {
-			CodeTypeReference type = new CodeTypeReference ("mono");
+        [Test]
+        public void Constructor1()
+        {
+            CodeTypeReference type = new CodeTypeReference("mono");
 
-			CodeDefaultValueExpression cdve = new CodeDefaultValueExpression (type);
+            CodeDefaultValueExpression cdve = new CodeDefaultValueExpression(type);
 
-			Assert.IsNotNull (cdve.Type, "#1");
-			Assert.AreSame (type, cdve.Type, "#2");
+            Assert.IsNotNull(cdve.Type, "#1");
+            Assert.AreSame(type, cdve.Type, "#2");
 
-			cdve = new CodeDefaultValueExpression ((CodeTypeReference) null);
-			Assert.IsNotNull (cdve.Type, "#3");
-			Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#4");
-		}
-	}
+            cdve = new CodeDefaultValueExpression((CodeTypeReference)null);
+            Assert.IsNotNull(cdve.Type, "#3");
+            Assert.AreEqual(typeof(void).FullName, cdve.Type.BaseType, "#4");
+        }
+    }
 }
-

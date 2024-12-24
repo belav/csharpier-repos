@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,29 +33,37 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
-	public sealed class ScriptResourceAttribute : Attribute
-	{
-		string _scriptName;
-		string _scriptResourceName;
-		string _typeName;
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+    public sealed class ScriptResourceAttribute : Attribute
+    {
+        string _scriptName;
+        string _scriptResourceName;
+        string _typeName;
 
-		public ScriptResourceAttribute (string scriptName, string stringResourceName, string stringResourceClientTypeName) {
-			_scriptName = scriptName;
-			_scriptResourceName = stringResourceName;
-			_typeName = stringResourceClientTypeName;
-		}
+        public ScriptResourceAttribute(
+            string scriptName,
+            string stringResourceName,
+            string stringResourceClientTypeName
+        )
+        {
+            _scriptName = scriptName;
+            _scriptResourceName = stringResourceName;
+            _typeName = stringResourceClientTypeName;
+        }
 
-		public string ScriptName {
-			get { return _scriptName; }
-		}
+        public string ScriptName
+        {
+            get { return _scriptName; }
+        }
 
-		public string ScriptResourceName {
-			get { return _scriptResourceName; }
-		}
+        public string ScriptResourceName
+        {
+            get { return _scriptResourceName; }
+        }
 
-		public string TypeName {
-			get { return _typeName; }
-		}
-	}
+        public string TypeName
+        {
+            get { return _typeName; }
+        }
+    }
 }

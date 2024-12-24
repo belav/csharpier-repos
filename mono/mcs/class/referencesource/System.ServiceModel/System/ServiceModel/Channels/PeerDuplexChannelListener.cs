@@ -4,13 +4,14 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Diagnostics;
-    using System.Threading;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
 
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
-    sealed class PeerDuplexChannelAcceptor : SingletonChannelAcceptor<IDuplexChannel, PeerDuplexChannel, Message>
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    sealed class PeerDuplexChannelAcceptor
+        : SingletonChannelAcceptor<IDuplexChannel, PeerDuplexChannel, Message>
     {
         PeerNodeImplementation peerNode;
         PeerNodeImplementation.Registration registration;
@@ -18,7 +19,13 @@ namespace System.ServiceModel.Channels
         Uri via;
         PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel> dispatcher = null;
 
-        public PeerDuplexChannelAcceptor(PeerNodeImplementation peerNode, PeerNodeImplementation.Registration registration, ChannelManagerBase channelManager, EndpointAddress localAddress, Uri via)
+        public PeerDuplexChannelAcceptor(
+            PeerNodeImplementation peerNode,
+            PeerNodeImplementation.Registration registration,
+            ChannelManagerBase channelManager,
+            EndpointAddress localAddress,
+            Uri via
+        )
             : base(channelManager)
         {
             this.registration = registration;
@@ -26,13 +33,23 @@ namespace System.ServiceModel.Channels
             this.localAddress = localAddress;
             this.via = via;
 
-            PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel>.PeerMessageQueueAdapter queueHandler = new PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel>.PeerMessageQueueAdapter(this);
-            this.dispatcher = new PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel>(queueHandler, peerNode, ChannelManager, localAddress, via);
+            PeerMessageDispatcher<
+                IDuplexChannel,
+                PeerDuplexChannel
+            >.PeerMessageQueueAdapter queueHandler = new PeerMessageDispatcher<
+                IDuplexChannel,
+                PeerDuplexChannel
+            >.PeerMessageQueueAdapter(this);
+            this.dispatcher = new PeerMessageDispatcher<IDuplexChannel, PeerDuplexChannel>(
+                queueHandler,
+                peerNode,
+                ChannelManager,
+                localAddress,
+                via
+            );
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
         protected override void OnClosing()
         {
@@ -53,7 +70,6 @@ namespace System.ServiceModel.Channels
                 dispatcher.Unregister(true);
                 dispatcher = null;
             }
-
         }
 
         protected override PeerDuplexChannel OnCreateChannel()
@@ -65,21 +81,30 @@ namespace System.ServiceModel.Channels
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.MessageReceived,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.MessageReceived,
                     SR.GetString(SR.TraceCodeMessageReceived),
-                    MessageTransmitTraceRecord.CreateReceiveTraceRecord(message), this, null);
+                    MessageTransmitTraceRecord.CreateReceiveTraceRecord(message),
+                    this,
+                    null
+                );
             }
         }
     }
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
-    sealed class PeerDuplexChannelListener : PeerChannelListener<IDuplexChannel, PeerDuplexChannelAcceptor>
+
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    sealed class PeerDuplexChannelListener
+        : PeerChannelListener<IDuplexChannel, PeerDuplexChannelAcceptor>
     {
         PeerDuplexChannelAcceptor duplexAcceptor;
 
-        public PeerDuplexChannelListener(PeerTransportBindingElement bindingElement, BindingContext context, PeerResolver peerResolver)
-            : base(bindingElement, context, peerResolver)
-        {
-        }
+        public PeerDuplexChannelListener(
+            PeerTransportBindingElement bindingElement,
+            BindingContext context,
+            PeerResolver peerResolver
+        )
+            : base(bindingElement, context, peerResolver) { }
 
         protected override PeerDuplexChannelAcceptor ChannelAcceptor
         {
@@ -88,7 +113,13 @@ namespace System.ServiceModel.Channels
 
         protected override void CreateAcceptor()
         {
-            this.duplexAcceptor = new PeerDuplexChannelAcceptor(this.InnerNode, this.Registration, this, new EndpointAddress(this.Uri), this.BaseUri);
+            this.duplexAcceptor = new PeerDuplexChannelAcceptor(
+                this.InnerNode,
+                this.Registration,
+                this,
+                new EndpointAddress(this.Uri),
+                this.BaseUri
+            );
         }
     }
 }

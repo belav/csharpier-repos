@@ -8,6 +8,4 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// <summary>
 /// An <see cref="IStatusCodeActionResult"/> that can be transformed to a more descriptive client error.
 /// </summary>
-public interface IClientErrorActionResult : IStatusCodeActionResult
-{
-}
+public interface IClientErrorActionResult : IStatusCodeActionResult { }

@@ -13,12 +13,10 @@ using Internal.TypeSystem.Ecma;
 
 namespace Microsoft.Diagnostics.Tools.Pgo
 {
-    struct R2RSigProviderContext
-    {
+    struct R2RSigProviderContext { }
 
-    }
-
-    class R2RSignatureTypeProvider : IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>
+    class R2RSignatureTypeProvider
+        : IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>
     {
         public R2RSignatureTypeProvider(TraceTypeSystemContext tsc)
         {
@@ -27,7 +25,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         TraceTypeSystemContext _tsc;
 
-        TypeDesc IConstructedTypeProvider<TypeDesc>.GetArrayType(TypeDesc elementType, ArrayShape shape)
+        TypeDesc IConstructedTypeProvider<TypeDesc>.GetArrayType(
+            TypeDesc elementType,
+            ArrayShape shape
+        )
         {
             if (elementType == null)
                 return null;
@@ -41,24 +42,37 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return elementType.MakeByRefType();
         }
 
-        TypeDesc IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>.GetCanonType()
+        TypeDesc IR2RSignatureTypeProvider<
+            TypeDesc,
+            MethodDesc,
+            R2RSigProviderContext
+        >.GetCanonType()
         {
             return _tsc.CanonType;
         }
 
-        MethodDesc IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>.GetConstrainedMethod(MethodDesc method, TypeDesc constraint)
+        MethodDesc IR2RSignatureTypeProvider<
+            TypeDesc,
+            MethodDesc,
+            R2RSigProviderContext
+        >.GetConstrainedMethod(MethodDesc method, TypeDesc constraint)
         {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
 
-        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetFunctionPointerType(MethodSignature<TypeDesc> signature)
+        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetFunctionPointerType(
+            MethodSignature<TypeDesc> signature
+        )
         {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
 
-        TypeDesc IConstructedTypeProvider<TypeDesc>.GetGenericInstantiation(TypeDesc genericType, ImmutableArray<TypeDesc> typeArguments)
+        TypeDesc IConstructedTypeProvider<TypeDesc>.GetGenericInstantiation(
+            TypeDesc genericType,
+            ImmutableArray<TypeDesc> typeArguments
+        )
         {
             if (genericType == null)
                 return null;
@@ -68,22 +82,38 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (type == null)
                     return null;
             }
-            return _tsc.GetInstantiatedType((MetadataType)genericType, new Instantiation(typeArguments.ToArray()));
+            return _tsc.GetInstantiatedType(
+                (MetadataType)genericType,
+                new Instantiation(typeArguments.ToArray())
+            );
         }
 
-        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetGenericMethodParameter(R2RSigProviderContext genericContext, int index)
+        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetGenericMethodParameter(
+            R2RSigProviderContext genericContext,
+            int index
+        )
         {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
 
-        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetGenericTypeParameter(R2RSigProviderContext genericContext, int index)
+        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetGenericTypeParameter(
+            R2RSigProviderContext genericContext,
+            int index
+        )
         {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
 
-        MethodDesc IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>.GetInstantiatedMethod(MethodDesc uninstantiatedMethod, ImmutableArray<TypeDesc> instantiation)
+        MethodDesc IR2RSignatureTypeProvider<
+            TypeDesc,
+            MethodDesc,
+            R2RSigProviderContext
+        >.GetInstantiatedMethod(
+            MethodDesc uninstantiatedMethod,
+            ImmutableArray<TypeDesc> instantiation
+        )
         {
             if (uninstantiatedMethod == null)
                 return null;
@@ -96,9 +126,18 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return uninstantiatedMethod.MakeInstantiatedMethod(instantiation.ToArray());
         }
 
-        MethodDesc IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>.GetMethodFromMemberRef(MetadataReader reader, MemberReferenceHandle handle, TypeDesc owningTypeOverride)
+        MethodDesc IR2RSignatureTypeProvider<
+            TypeDesc,
+            MethodDesc,
+            R2RSigProviderContext
+        >.GetMethodFromMemberRef(
+            MetadataReader reader,
+            MemberReferenceHandle handle,
+            TypeDesc owningTypeOverride
+        )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             var method = (MethodDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
             if (method == null)
             {
@@ -106,14 +145,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
             if (owningTypeOverride != null)
             {
-                return _tsc.GetMethodForInstantiatedType(method.GetTypicalMethodDefinition(), (InstantiatedType)owningTypeOverride);
+                return _tsc.GetMethodForInstantiatedType(
+                    method.GetTypicalMethodDefinition(),
+                    (InstantiatedType)owningTypeOverride
+                );
             }
             return method;
         }
 
-        protected MethodDesc GetMethodFromMethodDef(MetadataReader reader, MethodDefinitionHandle handle, TypeDesc owningTypeOverride)
+        protected MethodDesc GetMethodFromMethodDef(
+            MetadataReader reader,
+            MethodDefinitionHandle handle,
+            TypeDesc owningTypeOverride
+        )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             var method = (MethodDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
             if (method == null)
             {
@@ -123,29 +170,50 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 if (owningTypeOverride != method.OwningType)
                 {
-                    return _tsc.GetMethodForInstantiatedType(method.GetTypicalMethodDefinition(), (InstantiatedType)owningTypeOverride);
+                    return _tsc.GetMethodForInstantiatedType(
+                        method.GetTypicalMethodDefinition(),
+                        (InstantiatedType)owningTypeOverride
+                    );
                 }
             }
             return method;
         }
 
-        MethodDesc IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>.GetMethodFromMethodDef(MetadataReader reader, MethodDefinitionHandle handle, TypeDesc owningTypeOverride)
+        MethodDesc IR2RSignatureTypeProvider<
+            TypeDesc,
+            MethodDesc,
+            R2RSigProviderContext
+        >.GetMethodFromMethodDef(
+            MetadataReader reader,
+            MethodDefinitionHandle handle,
+            TypeDesc owningTypeOverride
+        )
         {
             return GetMethodFromMethodDef(reader, handle, owningTypeOverride);
         }
 
-        MethodDesc IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>.GetMethodWithFlags(ReadyToRunMethodSigFlags flags, MethodDesc method)
+        MethodDesc IR2RSignatureTypeProvider<
+            TypeDesc,
+            MethodDesc,
+            R2RSigProviderContext
+        >.GetMethodWithFlags(ReadyToRunMethodSigFlags flags, MethodDesc method)
         {
             return method;
         }
 
-        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetModifiedType(TypeDesc modifier, TypeDesc unmodifiedType, bool isRequired)
+        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetModifiedType(
+            TypeDesc modifier,
+            TypeDesc unmodifiedType,
+            bool isRequired
+        )
         {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
         }
 
-        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetPinnedType(TypeDesc elementType)
+        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetPinnedType(
+            TypeDesc elementType
+        )
         {
             // Cannot exist in entrypoint definition
             throw new System.NotImplementedException();
@@ -229,42 +297,77 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return elementType.MakeArrayType();
         }
 
-        TypeDesc ISimpleTypeProvider<TypeDesc>.GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+        TypeDesc ISimpleTypeProvider<TypeDesc>.GetTypeFromDefinition(
+            MetadataReader reader,
+            TypeDefinitionHandle handle,
+            byte rawTypeKind
+        )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             return (TypeDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
         }
 
-        TypeDesc ISimpleTypeProvider<TypeDesc>.GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+        TypeDesc ISimpleTypeProvider<TypeDesc>.GetTypeFromReference(
+            MetadataReader reader,
+            TypeReferenceHandle handle,
+            byte rawTypeKind
+        )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             return (TypeDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
         }
 
-        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetTypeFromSpecification(MetadataReader reader, R2RSigProviderContext genericContext, TypeSpecificationHandle handle, byte rawTypeKind)
+        TypeDesc ISignatureTypeProvider<TypeDesc, R2RSigProviderContext>.GetTypeFromSpecification(
+            MetadataReader reader,
+            R2RSigProviderContext genericContext,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind
+        )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             return (TypeDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
         }
     }
 
-    class R2RSignatureTypeProviderForGlobalTables : R2RSignatureTypeProvider, IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>
+    class R2RSignatureTypeProviderForGlobalTables
+        : R2RSignatureTypeProvider,
+            IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>
     {
-        public R2RSignatureTypeProviderForGlobalTables(TraceTypeSystemContext tsc) : base(tsc)
-        {
-        }
+        public R2RSignatureTypeProviderForGlobalTables(TraceTypeSystemContext tsc)
+            : base(tsc) { }
 
-        MethodDesc IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>.GetMethodFromMethodDef(MetadataReader reader, MethodDefinitionHandle handle, TypeDesc owningTypeOverride)
+        MethodDesc IR2RSignatureTypeProvider<
+            TypeDesc,
+            MethodDesc,
+            R2RSigProviderContext
+        >.GetMethodFromMethodDef(
+            MetadataReader reader,
+            MethodDefinitionHandle handle,
+            TypeDesc owningTypeOverride
+        )
         {
             if (owningTypeOverride != null)
             {
-                reader = ((EcmaModule)((MetadataType)owningTypeOverride.GetTypeDefinition()).Module).MetadataReader;
+                reader = (
+                    (EcmaModule)((MetadataType)owningTypeOverride.GetTypeDefinition()).Module
+                ).MetadataReader;
             }
             Debug.Assert(reader != null);
             return GetMethodFromMethodDef(reader, handle, owningTypeOverride);
         }
 
-        MethodDesc IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>.GetMethodFromMemberRef(MetadataReader reader, MemberReferenceHandle handle, TypeDesc owningTypeOverride)
+        MethodDesc IR2RSignatureTypeProvider<
+            TypeDesc,
+            MethodDesc,
+            R2RSigProviderContext
+        >.GetMethodFromMemberRef(
+            MetadataReader reader,
+            MemberReferenceHandle handle,
+            TypeDesc owningTypeOverride
+        )
         {
             // Global signature cannot have MemberRef entries in them as such things aren't uniquely identifiable
             throw new NotSupportedException();

@@ -7,11 +7,12 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
-using System.Data.Common.Utils;
-using System.Data.Common.CommandTrees;
 using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
 using System.Linq;
+
 namespace System.Data.Mapping.Update.Internal
 {
     /// <summary>
@@ -26,29 +27,41 @@ namespace System.Data.Mapping.Update.Internal
         /// on some property of the end)
         /// </summary>
         internal readonly Set<AssociationEndMember> RequiredEnds;
+
         /// <summary>
         /// Gets association ends that may be implicitly modified as a result
         /// of changes to the association (e.g. collocated entity with server
         /// generated value)
         /// </summary>
         internal readonly Set<AssociationEndMember> OptionalEnds;
+
         /// <summary>
         /// Gets association ends whose values may influence the association
         /// (e.g. where there is a ReferentialIntegrity or "foreign key" constraint)
         /// </summary>
         internal readonly Set<AssociationEndMember> IncludedValueEnds;
+
         /// <summary>
         /// true iff. there are interesting ends for this association set.
         /// </summary>
         internal bool HasEnds
         {
-            get { return 0 < RequiredEnds.Count || 0 < OptionalEnds.Count || 0 < IncludedValueEnds.Count; }
+            get
+            {
+                return 0 < RequiredEnds.Count
+                    || 0 < OptionalEnds.Count
+                    || 0 < IncludedValueEnds.Count;
+            }
         }
 
         /// <summary>
         /// Initialize Metadata for an AssociationSet
         /// </summary>
-        internal AssociationSetMetadata(Set<EntitySet> affectedTables, AssociationSet associationSet, MetadataWorkspace workspace)
+        internal AssociationSetMetadata(
+            Set<EntitySet> affectedTables,
+            AssociationSet associationSet,
+            MetadataWorkspace workspace
+        )
         {
             // If there is only 1 table, there can be no ambiguity about the "destination" of a relationship, so such
             // sets are not typically required.
@@ -61,8 +74,11 @@ namespace System.Data.Mapping.Update.Internal
             foreach (EntitySet table in affectedTables)
             {
                 // Find extents influencing the table
-                var influencingExtents = MetadataHelper.GetInfluencingEntitySetsForTable(table, workspace);
-               
+                var influencingExtents = MetadataHelper.GetInfluencingEntitySetsForTable(
+                    table,
+                    workspace
+                );
+
                 foreach (EntitySet influencingExtent in influencingExtents)
                 {
                     foreach (var end in ends)
@@ -75,7 +91,10 @@ namespace System.Data.Mapping.Update.Internal
                             {
                                 AddEnd(ref RequiredEnds, end.CorrespondingAssociationEndMember);
                             }
-                            else if (null == RequiredEnds || !RequiredEnds.Contains(end.CorrespondingAssociationEndMember))
+                            else if (
+                                null == RequiredEnds
+                                || !RequiredEnds.Contains(end.CorrespondingAssociationEndMember)
+                            )
                             {
                                 AddEnd(ref OptionalEnds, end.CorrespondingAssociationEndMember);
                             }
@@ -90,13 +109,16 @@ namespace System.Data.Mapping.Update.Internal
 
             // for associations with referential constraints, the principal end is always interesting
             // since its key values may take precedence over the key values of the dependent end
-            foreach (ReferentialConstraint constraint in associationSet.ElementType.ReferentialConstraints)
+            foreach (
+                ReferentialConstraint constraint in associationSet
+                    .ElementType
+                    .ReferentialConstraints
+            )
             {
                 // FromRole is the principal end in the referential constraint
                 AssociationEndMember principalEnd = (AssociationEndMember)constraint.FromRole;
 
-                if (!RequiredEnds.Contains(principalEnd) &&
-                    !OptionalEnds.Contains(principalEnd))
+                if (!RequiredEnds.Contains(principalEnd) && !OptionalEnds.Contains(principalEnd))
                 {
                     AddEnd(ref IncludedValueEnds, principalEnd);
                 }
@@ -106,7 +128,7 @@ namespace System.Data.Mapping.Update.Internal
         }
 
         /// <summary>
-        /// Initialize given required ends. 
+        /// Initialize given required ends.
         /// </summary>
         internal AssociationSetMetadata(IEnumerable<AssociationEndMember> requiredEnds)
         {
@@ -118,8 +140,8 @@ namespace System.Data.Mapping.Update.Internal
             FixSet(ref OptionalEnds);
             FixSet(ref IncludedValueEnds);
         }
-        
-        static private void AddEnd(ref Set<AssociationEndMember> set, AssociationEndMember element)
+
+        private static void AddEnd(ref Set<AssociationEndMember> set, AssociationEndMember element)
         {
             if (null == set)
             {
@@ -128,7 +150,7 @@ namespace System.Data.Mapping.Update.Internal
             set.Add(element);
         }
 
-        static private void FixSet(ref Set<AssociationEndMember> set)
+        private static void FixSet(ref Set<AssociationEndMember> set)
         {
             if (null == set)
             {

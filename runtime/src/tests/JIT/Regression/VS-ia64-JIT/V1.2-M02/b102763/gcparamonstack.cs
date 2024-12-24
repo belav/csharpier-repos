@@ -21,8 +21,18 @@ public class test
         return ParamOnStackHelper(1, 2, 3, 4, 5, 6, 7, 8, 9, strLoc);
     }
 
-    public static int ParamOnStackHelper(int i1, int i2, int i3,
-        int i4, int i5, int i6, int i7, int i8, int i9, String strParam)
+    public static int ParamOnStackHelper(
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        int i8,
+        int i9,
+        String strParam
+    )
     {
         return Func1(strParam);
     }
@@ -32,6 +42,3 @@ public class test
         return 3;
     }
 }
-
-
-

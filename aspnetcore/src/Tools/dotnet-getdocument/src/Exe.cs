@@ -16,7 +16,8 @@ internal static class Exe
         IReadOnlyList<string> args,
         IReporter reporter,
         string workingDirectory = null,
-        bool interceptOutput = false)
+        bool interceptOutput = false
+    )
     {
         reporter.WriteVerbose(executable + " " + string.Join(" ", args));
 
@@ -24,7 +25,7 @@ internal static class Exe
         {
             FileName = executable,
             UseShellExecute = false,
-            RedirectStandardOutput = interceptOutput
+            RedirectStandardOutput = interceptOutput,
         };
         foreach (var argument in args)
         {

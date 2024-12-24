@@ -30,7 +30,7 @@ internal unsafe struct BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
         info = new BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
         {
             cbSize = (uint)sizeof(BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO),
-            dwInfoVersion = BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO_VERSION
+            dwInfoVersion = BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO_VERSION,
         };
     }
 }

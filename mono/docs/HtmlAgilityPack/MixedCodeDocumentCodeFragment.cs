@@ -15,10 +15,7 @@ namespace HtmlAgilityPack
         #region Constructors
 
         internal MixedCodeDocumentCodeFragment(MixedCodeDocument doc)
-            :
-                base(doc, MixedCodeDocumentFragmentType.Code)
-        {
-        }
+            : base(doc, MixedCodeDocumentFragmentType.Code) { }
 
         #endregion
 
@@ -33,9 +30,15 @@ namespace HtmlAgilityPack
             {
                 if (_code == null)
                 {
-                    _code = FragmentText.Substring(Doc.TokenCodeStart.Length,
-                                                   FragmentText.Length - Doc.TokenCodeEnd.Length -
-                                                   Doc.TokenCodeStart.Length - 1).Trim();
+                    _code = FragmentText
+                        .Substring(
+                            Doc.TokenCodeStart.Length,
+                            FragmentText.Length
+                                - Doc.TokenCodeEnd.Length
+                                - Doc.TokenCodeStart.Length
+                                - 1
+                        )
+                        .Trim();
                     if (_code.StartsWith("="))
                     {
                         _code = Doc.TokenResponseWrite + _code.Substring(1, _code.Length - 1);

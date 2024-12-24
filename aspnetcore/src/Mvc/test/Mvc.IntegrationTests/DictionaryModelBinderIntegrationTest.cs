@@ -22,7 +22,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -62,7 +62,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -99,13 +99,14 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.index=low&parameter[low].Key=key0&parameter[low].Value=10");
+            request.QueryString = new QueryString(
+                "?parameter.index=low&parameter[low].Key=key0&parameter[low].Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -140,20 +141,20 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?prefix[0].Key=key0&prefix[0].Value=10")]
     [InlineData("?prefix.index=low&prefix[low].Key=key0&prefix[low].Value=10")]
     [InlineData("?prefix.index=index&prefix[index].Key=key0&prefix[index].Value=10")]
-    [InlineData("?prefix.index=index&prefix[index].Key=key0&prefix[index].Value=10&prefix[extra].Key=key4&prefix[extra].Value=5")]
+    [InlineData(
+        "?prefix.index=index&prefix[index].Key=key0&prefix[index].Value=10&prefix[extra].Key=key4&prefix[extra].Value=5"
+    )]
     public async Task DictionaryModelBinder_BindsDictionaryOfSimpleType_WithExplicitPrefix_Success(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix",
-            },
-            ParameterType = typeof(Dictionary<string, int>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -170,7 +171,7 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, int>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, int>() { { "key0", 10 }, }, model);
+        Assert.Equal(new Dictionary<string, int>() { { "key0", 10 } }, model);
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -183,14 +184,16 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?index=low&[low].Key=key0&[low].Value=10")]
     [InlineData("?index=index&[index].Key=key0&[index].Value=10")]
     [InlineData("?index=index&[index].Key=key0&[index].Value=10&[extra].Key=key4&[extra].Value=5")]
-    public async Task DictionaryModelBinder_BindsDictionaryOfSimpleType_EmptyPrefix_Success(string queryString)
+    public async Task DictionaryModelBinder_BindsDictionaryOfSimpleType_EmptyPrefix_Success(
+        string queryString
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -207,7 +210,7 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, int>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, int>() { { "key0", 10 }, }, model);
+        Assert.Equal(new Dictionary<string, int>() { { "key0", 10 } }, model);
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -218,122 +221,125 @@ public class DictionaryModelBinderIntegrationTest
     {
         get
         {
-            var impliedPrefixQueryString = "?parameter[archive]=1&parameter[correlation]=2&parameter[index]=3";
+            var impliedPrefixQueryString =
+                "?parameter[archive]=1&parameter[correlation]=2&parameter[index]=3";
             var noPrefixQueryString = "?[archive]=1&[correlation]=2&[index]=3";
             var reversedNoPrefixQueryString = "?[index]=3&[correlation]=2&[archive]=1";
             var impliedPrefixDictionary = new Dictionary<string, StringValues>
-                {
-                    { "parameter[archive]", "1" },
-                    { "parameter[correlation]", "2" },
-                    { "parameter[index]", "3" },
-                };
+            {
+                { "parameter[archive]", "1" },
+                { "parameter[correlation]", "2" },
+                { "parameter[index]", "3" },
+            };
             var reversedImpliedPrefixDictionary = new Dictionary<string, StringValues>
-                {
-                    { "parameter[index]", "3" },
-                    { "parameter[correlation]", "2" },
-                    { "parameter[archive]", "1" },
-                };
+            {
+                { "parameter[index]", "3" },
+                { "parameter[correlation]", "2" },
+                { "parameter[archive]", "1" },
+            };
             var longFormDictionary = new Dictionary<string, StringValues>
-                {
-                    { "parameter[0].Key", "archive" },
-                    { "parameter[0].Value", "1" },
-                    { "parameter[1].Key", "correlation" },
-                    { "parameter[1].Value", "2" },
-                    { "parameter[2].Key", "index" },
-                    { "parameter[2].Value", "3" },
-                };
+            {
+                { "parameter[0].Key", "archive" },
+                { "parameter[0].Value", "1" },
+                { "parameter[1].Key", "correlation" },
+                { "parameter[1].Value", "2" },
+                { "parameter[2].Key", "index" },
+                { "parameter[2].Value", "3" },
+            };
             var longerFormDictionary = new Dictionary<string, StringValues>
-                {
-                    { "parameter[indexer].Key", "archive" },
-                    { "parameter[indexer].Value", "1" },
-                    { "parameter[index].Key", "correlation" },
-                    { "parameter.index", new[] { "indexer", "index", "indexes" } },
-                    { "parameter[index].Value", "2" },
-                    { "parameter[indexes].Key", "index" },
-                    { "parameter[indexes].Value", "3" },
-                };
+            {
+                { "parameter[indexer].Key", "archive" },
+                { "parameter[indexer].Value", "1" },
+                { "parameter[index].Key", "correlation" },
+                { "parameter.index", new[] { "indexer", "index", "indexes" } },
+                { "parameter[index].Value", "2" },
+                { "parameter[indexes].Key", "index" },
+                { "parameter[indexes].Value", "3" },
+            };
             var longestFormDictionary = new Dictionary<string, StringValues>
-                {
-                    { "parameter[indexer].Key", "archive" },
-                    { "parameter[indexer].Value", "1" },
-                    { "parameter[index].Key", "correlation" },
-                    { "parameter[extra].Key", "index" },
-                    { "parameter[extra].Value", "4" },
-                    { "parameter.index", new[] { "indexer", "index", "indexes" } },
-                    { "parameter[index].Value", "2" },
-                    { "parameter[indexes].Key", "index" },
-                    { "parameter[indexes].Value", "3" },
-                    { "parameter[another].Key", "index" },
-                    { "parameter[another].Value", "5" },
-                };
+            {
+                { "parameter[indexer].Key", "archive" },
+                { "parameter[indexer].Value", "1" },
+                { "parameter[index].Key", "correlation" },
+                { "parameter[extra].Key", "index" },
+                { "parameter[extra].Value", "4" },
+                { "parameter.index", new[] { "indexer", "index", "indexes" } },
+                { "parameter[index].Value", "2" },
+                { "parameter[indexes].Key", "index" },
+                { "parameter[indexes].Value", "3" },
+                { "parameter[another].Key", "index" },
+                { "parameter[another].Value", "5" },
+            };
             var noPrefixDictionary = new Dictionary<string, StringValues>
-                {
-                    { "[archive]", "1" },
-                    { "[correlation]", "2" },
-                    { "[index]", "3" },
-                };
+            {
+                { "[archive]", "1" },
+                { "[correlation]", "2" },
+                { "[index]", "3" },
+            };
             var reversedNoPrefixDictionary = new Dictionary<string, StringValues>
-                {
-                    { "[index]", "3" },
-                    { "[correlation]", "2" },
-                    { "[archive]", "1" },
-                };
+            {
+                { "[index]", "3" },
+                { "[correlation]", "2" },
+                { "[archive]", "1" },
+            };
 
             return new TheoryData<Action<HttpRequest>>
+            {
+                request => request.QueryString = new QueryString(impliedPrefixQueryString),
+                request => request.QueryString = new QueryString(noPrefixQueryString),
+                request => request.QueryString = new QueryString(reversedNoPrefixQueryString),
+                request =>
                 {
-                    request => request.QueryString = new QueryString(impliedPrefixQueryString),
-                    request => request.QueryString = new QueryString(noPrefixQueryString),
-                    request => request.QueryString = new QueryString(reversedNoPrefixQueryString),
-                    request =>
-                    {
-                        request.ContentType = "application/x-www-form-urlencoded";
-                        request.Form = new FormCollection(impliedPrefixDictionary);
-                    },
-                    request =>
-                    {
-                        request.ContentType = "application/x-www-form-urlencoded";
-                        request.Form = new FormCollection(reversedImpliedPrefixDictionary);
-                    },
-                    request =>
-                    {
-                        request.ContentType = "application/x-www-form-urlencoded";
-                        request.Form = new FormCollection(longFormDictionary);
-                    },
-                    request =>
-                    {
-                        request.ContentType = "application/x-www-form-urlencoded";
-                        request.Form = new FormCollection(longerFormDictionary);
-                    },
-                    request =>
-                    {
-                        request.ContentType = "application/x-www-form-urlencoded";
-                        request.Form = new FormCollection(longestFormDictionary);
-                    },
-                    request =>
-                    {
-                        request.ContentType = "application/x-www-form-urlencoded";
-                        request.Form = new FormCollection(noPrefixDictionary);
-                    },
-                    request =>
-                    {
-                        request.ContentType = "application/x-www-form-urlencoded";
-                        request.Form = new FormCollection(reversedNoPrefixDictionary);
-                    },
-                };
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.Form = new FormCollection(impliedPrefixDictionary);
+                },
+                request =>
+                {
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.Form = new FormCollection(reversedImpliedPrefixDictionary);
+                },
+                request =>
+                {
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.Form = new FormCollection(longFormDictionary);
+                },
+                request =>
+                {
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.Form = new FormCollection(longerFormDictionary);
+                },
+                request =>
+                {
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.Form = new FormCollection(longestFormDictionary);
+                },
+                request =>
+                {
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.Form = new FormCollection(noPrefixDictionary);
+                },
+                request =>
+                {
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.Form = new FormCollection(reversedNoPrefixDictionary);
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ThreeEntryTestData))]
-    public async Task DictionaryModelBinder_Binds3EntriesOfSimpleType(Action<HttpRequest> updateRequest)
+    public async Task DictionaryModelBinder_Binds3EntriesOfSimpleType(
+        Action<HttpRequest> updateRequest
+    )
     {
         // Arrange
         var expectedDictionary = new Dictionary<string, int>
-            {
-                { "archive", 1 },
-                { "correlation", 2 },
-                { "index", 3 },
-            };
+        {
+            { "archive", 1 },
+            { "correlation", 2 },
+            { "index", 3 },
+        };
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var testContext = ModelBindingTestHelper.GetTestContext(updateRequest);
@@ -360,20 +366,23 @@ public class DictionaryModelBinderIntegrationTest
     [Theory]
     [MemberData(nameof(ThreeEntryTestData))]
     public async Task DictionaryModelBinder_Binds3EntriesOfSimpleType_WithJQueryQueryString(
-        Action<HttpRequest> updateRequest)
+        Action<HttpRequest> updateRequest
+    )
     {
         // Arrange
         var expectedDictionary = new Dictionary<string, int>
-            {
-                { "archive", 1 },
-                { "correlation", 2 },
-                { "index", 3 },
-            };
+        {
+            { "archive", 1 },
+            { "correlation", 2 },
+            { "index", 3 },
+        };
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var testContext = ModelBindingTestHelper.GetTestContext(
             updateRequest,
-            options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+        );
         var modelState = testContext.ModelState;
         var parameter = new ParameterDescriptor
         {
@@ -402,7 +411,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -432,13 +441,16 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameterInfo = typeof(DictionaryModelBinderIntegrationTest)
-            .GetMethod(nameof(SampleMethod_SimpleType), BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetMethod(
+                nameof(SampleMethod_SimpleType),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )
             .GetParameters()[0];
         var parameter = new Controllers.ControllerParameterDescriptor()
         {
             Name = "parameter",
             ParameterType = typeof(Dictionary<string, int>),
-            ParameterInfo = parameterInfo
+            ParameterInfo = parameterInfo,
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -477,7 +489,7 @@ public class DictionaryModelBinderIntegrationTest
 
         public override string ToString()
         {
-            return $"{{ { Id } }}";
+            return $"{{ {Id} }}";
         }
     }
 
@@ -486,28 +498,30 @@ public class DictionaryModelBinderIntegrationTest
         get
         {
             return new TheoryData<string>
-                {
-                    "?[key0].Id=10",
-                    "?[0].Key=key0&[0].Value.Id=10",
-                    "?index=low&[low].Key=key0&[low].Value.Id=10",
-                    "?parameter[key0].Id=10",
-                    "?parameter[0].Key=key0&parameter[0].Value.Id=10",
-                    "?parameter.index=low&parameter[low].Key=key0&parameter[low].Value.Id=10",
-                    "?parameter.index=index&parameter[index].Key=key0&parameter[index].Value.Id=10",
-                };
+            {
+                "?[key0].Id=10",
+                "?[0].Key=key0&[0].Value.Id=10",
+                "?index=low&[low].Key=key0&[low].Value.Id=10",
+                "?parameter[key0].Id=10",
+                "?parameter[0].Key=key0&parameter[0].Value.Id=10",
+                "?parameter.index=low&parameter[low].Key=key0&parameter[low].Value.Id=10",
+                "?parameter.index=index&parameter[index].Key=key0&parameter[index].Value.Id=10",
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ComplexType_ImpliedPrefixData))]
-    public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefix(string queryString)
+    public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefix(
+        string queryString
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -524,7 +538,16 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+        Assert.Equal(
+            new Dictionary<string, Person>
+            {
+                {
+                    "key0",
+                    new Person { Id = 10 }
+                },
+            },
+            model
+        );
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -538,21 +561,32 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?parameter[0][Key]=key0&parameter[0][Value][Id]=10")]
     [MemberData(nameof(ComplexType_ImpliedPrefixData))]
     public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixAndJQuery(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, Person> { { "key0", new Person { Id = 10 } } };
+        var expectedDictionary = new Dictionary<string, Person>
+        {
+            {
+                "key0",
+                new Person { Id = 10 }
+            },
+        };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory after default factories.
-            options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         // Act
@@ -576,21 +610,35 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?parameter[0][Key]=key0&parameter[0][Value][Id]=10")]
     [MemberData(nameof(ComplexType_ImpliedPrefixData))]
     public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixAndJQueryFirst(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, Person> { { "key0", new Person { Id = 10 } } };
+        var expectedDictionary = new Dictionary<string, Person>
+        {
+            {
+                "key0",
+                new Person { Id = 10 }
+            },
+        };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
-            options => options.ValueProviderFactories.Insert(0, new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Insert(
+                    0,
+                    new JQueryQueryStringValueProviderFactory()
+                )
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         // Act
@@ -611,21 +659,32 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?[42][Id]=10")] // Only Id segment will be rewritten.
     [InlineData("?parameter[42][Id]=10")]
     public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixIntegralKeysAndJQuery(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, Person> { { "42", new Person { Id = 10 } } };
+        var expectedDictionary = new Dictionary<string, Person>
+        {
+            {
+                "42",
+                new Person { Id = 10 }
+            },
+        };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory after default factories.
-            options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         // Act
@@ -646,21 +705,35 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?[42][Id]=10")] // Only Id segment will be rewritten.
     [InlineData("?parameter[42][Id]=10")]
     public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixIntegralKeysAndJQueryFirst(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, Person> { { "42", new Person { Id = 10 } } };
+        var expectedDictionary = new Dictionary<string, Person>
+        {
+            {
+                "42",
+                new Person { Id = 10 }
+            },
+        };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
-            options => options.ValueProviderFactories.Insert(0, new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Insert(
+                    0,
+                    new JQueryQueryStringValueProviderFactory()
+                )
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         // Act
@@ -682,30 +755,28 @@ public class DictionaryModelBinderIntegrationTest
         get
         {
             return new TheoryData<string>
-                {
-                    "?prefix[key0].Id=10",
-                    "?prefix[0].Key=key0&prefix[0].Value.Id=10",
-                    "?prefix.index=low&prefix[low].Key=key0&prefix[low].Value.Id=10",
-                    "?prefix.index=index&prefix[index].Key=key0&prefix[index].Value.Id=10",
-                };
+            {
+                "?prefix[key0].Id=10",
+                "?prefix[0].Key=key0&prefix[0].Value.Id=10",
+                "?prefix.index=low&prefix[low].Key=key0&prefix[low].Value.Id=10",
+                "?prefix.index=index&prefix[index].Key=key0&prefix[index].Value.Id=10",
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ComplexType_ExplicitPrefixData))]
     public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithExplicitPrefix(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix",
-            },
-            ParameterType = typeof(Dictionary<string, Person>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -722,7 +793,16 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+        Assert.Equal(
+            new Dictionary<string, Person>
+            {
+                {
+                    "key0",
+                    new Person { Id = 10 }
+                },
+            },
+            model
+        );
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -733,23 +813,25 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?prefix[key0][Id]=10")]
     [MemberData(nameof(ComplexType_ExplicitPrefixData))]
     public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithExplicitPrefixAndJQuery(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory after default factories.
-            options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+        );
 
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix",
-            },
-            ParameterType = typeof(Dictionary<string, Person>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var modelState = testContext.ModelState;
@@ -761,7 +843,16 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+        Assert.Equal(
+            new Dictionary<string, Person>
+            {
+                {
+                    "key0",
+                    new Person { Id = 10 }
+                },
+            },
+            model
+        );
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -777,14 +868,15 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?parameter.index=low&parameter[low].Key=key0&parameter[low].Value.Id=100")]
     [InlineData("?parameter.index=index&parameter[index].Key=key0&parameter[index].Value.Id=100")]
     public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_ImpliedPrefix_FindsValidationErrors(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -801,17 +893,32 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 100 } }, }, model);
+        Assert.Equal(
+            new Dictionary<string, Person>
+            {
+                {
+                    "key0",
+                    new Person { Id = 100 }
+                },
+            },
+            model
+        );
 
         Assert.NotEmpty(modelState);
         Assert.False(modelState.IsValid);
-        Assert.All(modelState, kvp =>
-        {
-            Assert.NotEqual(ModelValidationState.Unvalidated, kvp.Value.ValidationState);
-            Assert.NotEqual(ModelValidationState.Skipped, kvp.Value.ValidationState);
-        });
+        Assert.All(
+            modelState,
+            kvp =>
+            {
+                Assert.NotEqual(ModelValidationState.Unvalidated, kvp.Value.ValidationState);
+                Assert.NotEqual(ModelValidationState.Skipped, kvp.Value.ValidationState);
+            }
+        );
 
-        var entry = Assert.Single(modelState, kvp => kvp.Value.ValidationState == ModelValidationState.Invalid);
+        var entry = Assert.Single(
+            modelState,
+            kvp => kvp.Value.ValidationState == ModelValidationState.Invalid
+        );
         var error = Assert.Single(entry.Value.Errors);
         Assert.Equal("You're out of range.", error.ErrorMessage);
     }
@@ -824,7 +931,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -854,13 +961,16 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameterInfo = typeof(DictionaryModelBinderIntegrationTest)
-            .GetMethod(nameof(SampleMethod_ComplexType), BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetMethod(
+                nameof(SampleMethod_ComplexType),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )
             .GetParameters()[0];
         var parameter = new Controllers.ControllerParameterDescriptor()
         {
             Name = "parameter",
             ParameterType = typeof(Dictionary<string, Person>),
-            ParameterInfo = parameterInfo
+            ParameterInfo = parameterInfo,
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -887,35 +997,41 @@ public class DictionaryModelBinderIntegrationTest
         get
         {
             return new TheoryData<string>
-                {
-                    "?[key0]=10&[key0]=11",
-                    "?[key0][0]=10&[key0][1]=11",
-                    "?[0].Key=key0&[0].Value[0]=10&[0].Value[1]=11",
-                    "?index=low&[low].Key=key0&[low].Value[0]=10&[low].Value[1]=11",
-                    "?parameter[key0]=10&parameter[key0]=11",
-                    "?parameter[key0][0]=10&parameter[key0][1]=11",
-                    "?parameter[0].Key=key0&parameter[0].Value[0]=10&parameter[0].Value[1]=11",
-                    "?parameter.index=low&parameter[low].Key=key0&parameter[low].Value[0]=10&parameter[low].Value[1]=11",
-                    "?parameter.index=index&parameter[index].Key=key0&parameter[index].Value[0]=10&parameter[index].Value[1]=11",
-                };
+            {
+                "?[key0]=10&[key0]=11",
+                "?[key0][0]=10&[key0][1]=11",
+                "?[0].Key=key0&[0].Value[0]=10&[0].Value[1]=11",
+                "?index=low&[low].Key=key0&[low].Value[0]=10&[low].Value[1]=11",
+                "?parameter[key0]=10&parameter[key0]=11",
+                "?parameter[key0][0]=10&parameter[key0][1]=11",
+                "?parameter[0].Key=key0&parameter[0].Value[0]=10&parameter[0].Value[1]=11",
+                "?parameter.index=low&parameter[low].Key=key0&parameter[low].Value[0]=10&parameter[low].Value[1]=11",
+                "?parameter.index=index&parameter[index].Key=key0&parameter[index].Value[0]=10&parameter[index].Value[1]=11",
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(CollectionType_ImpliedPrefixData))]
-    public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefix(string queryString)
+    public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefix(
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, string[]> { { "key0", new[] { "10", "11" } } };
+        var expectedDictionary = new Dictionary<string, string[]>
+        {
+            { "key0", new[] { "10", "11" } },
+        };
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => request.QueryString = new QueryString(queryString));
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            request.QueryString = new QueryString(queryString)
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -935,21 +1051,29 @@ public class DictionaryModelBinderIntegrationTest
     [Theory]
     [MemberData(nameof(CollectionType_ImpliedPrefixData))]
     public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixAndJQuery(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, string[]> { { "key0", new[] { "10", "11" } } };
+        var expectedDictionary = new Dictionary<string, string[]>
+        {
+            { "key0", new[] { "10", "11" } },
+        };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory after default factories.
-            options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         // Act
@@ -969,21 +1093,32 @@ public class DictionaryModelBinderIntegrationTest
     [Theory]
     [MemberData(nameof(CollectionType_ImpliedPrefixData))]
     public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixAndJQueryFirst(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, string[]> { { "key0", new[] { "10", "11" } } };
+        var expectedDictionary = new Dictionary<string, string[]>
+        {
+            { "key0", new[] { "10", "11" } },
+        };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
-            options => options.ValueProviderFactories.Insert(0, new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Insert(
+                    0,
+                    new JQueryQueryStringValueProviderFactory()
+                )
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         // Act
@@ -1008,21 +1143,29 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?parameter[42][]=10&parameter[42][]=11")]
     [InlineData("?parameter[42][0]=10&parameter[42][1]=11")]
     public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixIntegralKeysAndJQuery(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, string[]> { { "42", new[] { "10", "11" } } };
+        var expectedDictionary = new Dictionary<string, string[]>
+        {
+            { "42", new[] { "10", "11" } },
+        };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory after default factories.
-            options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         // Act
@@ -1047,21 +1190,32 @@ public class DictionaryModelBinderIntegrationTest
     [InlineData("?parameter[42][]=10&parameter[42][]=11")]
     [InlineData("?parameter[42][0]=10&parameter[42][1]=11")]
     public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixIntegralKeysAndJQueryFirst(
-        string queryString)
+        string queryString
+    )
     {
         // Arrange
-        var expectedDictionary = new Dictionary<string, string[]> { { "42", new[] { "10", "11" } } };
+        var expectedDictionary = new Dictionary<string, string[]>
+        {
+            { "42", new[] { "10", "11" } },
+        };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
-            options => options.ValueProviderFactories.Insert(0, new JQueryQueryStringValueProviderFactory()));
+            options =>
+                options.ValueProviderFactories.Insert(
+                    0,
+                    new JQueryQueryStringValueProviderFactory()
+                )
+        );
 
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         // Act
@@ -1084,68 +1238,68 @@ public class DictionaryModelBinderIntegrationTest
         get
         {
             return new TheoryData<Type, string, Type>
+            {
                 {
-                    {
-                        typeof(IDictionary<string, string>),
-                        "?[key0]=hello&[key1]=world",
-                        typeof(Dictionary<string, string>)
-                    },
-                    {
-                        typeof(Dictionary<string, string>),
-                        "?[key0]=hello&[key1]=world",
-                        typeof(Dictionary<string, string>)
-                    },
-                    {
-                        typeof(ClosedGenericDictionary),
-                        "?[key0]=hello&[key1]=world",
-                        typeof(ClosedGenericDictionary)
-                    },
-                    {
-                        typeof(ClosedGenericKeyDictionary<string>),
-                        "?[key0]=hello&[key1]=world",
-                        typeof(ClosedGenericKeyDictionary<string>)
-                    },
-                    {
-                        typeof(ExplicitClosedGenericDictionary),
-                        "?[key0]=hello&[key1]=world",
-                        typeof(ExplicitClosedGenericDictionary)
-                    },
-                    {
-                        typeof(ExplicitDictionary<string, string>),
-                        "?[key0]=hello&[key1]=world",
-                        typeof(ExplicitDictionary<string, string>)
-                    },
-                    {
-                        typeof(IDictionary<string, string>),
-                        "?index=low&index=high&[low].Key=key0&[low].Value=hello&[high].Key=key1&[high].Value=world",
-                        typeof(Dictionary<string, string>)
-                    },
-                    {
-                        typeof(Dictionary<string, string>),
-                        "?[0].Key=key0&[0].Value=hello&[1].Key=key1&[1].Value=world",
-                        typeof(Dictionary<string, string>)
-                    },
-                    {
-                        typeof(ClosedGenericDictionary),
-                        "?index=low&index=high&[low].Key=key0&[low].Value=hello&[high].Key=key1&[high].Value=world",
-                        typeof(ClosedGenericDictionary)
-                    },
-                    {
-                        typeof(ClosedGenericKeyDictionary<string>),
-                        "?[0].Key=key0&[0].Value=hello&[1].Key=key1&[1].Value=world",
-                        typeof(ClosedGenericKeyDictionary<string>)
-                    },
-                    {
-                        typeof(ExplicitClosedGenericDictionary),
-                        "?index=low&index=high&[low].Key=key0&[low].Value=hello&[high].Key=key1&[high].Value=world",
-                        typeof(ExplicitClosedGenericDictionary)
-                    },
-                    {
-                        typeof(ExplicitDictionary<string, string>),
-                        "?[0].Key=key0&[0].Value=hello&[1].Key=key1&[1].Value=world",
-                        typeof(ExplicitDictionary<string, string>)
-                    },
-                };
+                    typeof(IDictionary<string, string>),
+                    "?[key0]=hello&[key1]=world",
+                    typeof(Dictionary<string, string>)
+                },
+                {
+                    typeof(Dictionary<string, string>),
+                    "?[key0]=hello&[key1]=world",
+                    typeof(Dictionary<string, string>)
+                },
+                {
+                    typeof(ClosedGenericDictionary),
+                    "?[key0]=hello&[key1]=world",
+                    typeof(ClosedGenericDictionary)
+                },
+                {
+                    typeof(ClosedGenericKeyDictionary<string>),
+                    "?[key0]=hello&[key1]=world",
+                    typeof(ClosedGenericKeyDictionary<string>)
+                },
+                {
+                    typeof(ExplicitClosedGenericDictionary),
+                    "?[key0]=hello&[key1]=world",
+                    typeof(ExplicitClosedGenericDictionary)
+                },
+                {
+                    typeof(ExplicitDictionary<string, string>),
+                    "?[key0]=hello&[key1]=world",
+                    typeof(ExplicitDictionary<string, string>)
+                },
+                {
+                    typeof(IDictionary<string, string>),
+                    "?index=low&index=high&[low].Key=key0&[low].Value=hello&[high].Key=key1&[high].Value=world",
+                    typeof(Dictionary<string, string>)
+                },
+                {
+                    typeof(Dictionary<string, string>),
+                    "?[0].Key=key0&[0].Value=hello&[1].Key=key1&[1].Value=world",
+                    typeof(Dictionary<string, string>)
+                },
+                {
+                    typeof(ClosedGenericDictionary),
+                    "?index=low&index=high&[low].Key=key0&[low].Value=hello&[high].Key=key1&[high].Value=world",
+                    typeof(ClosedGenericDictionary)
+                },
+                {
+                    typeof(ClosedGenericKeyDictionary<string>),
+                    "?[0].Key=key0&[0].Value=hello&[1].Key=key1&[1].Value=world",
+                    typeof(ClosedGenericKeyDictionary<string>)
+                },
+                {
+                    typeof(ExplicitClosedGenericDictionary),
+                    "?index=low&index=high&[low].Key=key0&[low].Value=hello&[high].Key=key1&[high].Value=world",
+                    typeof(ExplicitClosedGenericDictionary)
+                },
+                {
+                    typeof(ExplicitDictionary<string, string>),
+                    "?[0].Key=key0&[0].Value=hello&[1].Key=key1&[1].Value=world",
+                    typeof(ExplicitDictionary<string, string>)
+                },
+            };
         }
     }
 
@@ -1154,14 +1308,15 @@ public class DictionaryModelBinderIntegrationTest
     public async Task DictionaryModelBinder_BindsParameterToExpectedType(
         Type parameterType,
         string queryString,
-        Type expectedType)
+        Type expectedType
+    )
     {
         // Arrange
         var expectedDictionary = new Dictionary<string, string>
-            {
-                { "key0", "hello" },
-                { "key1", "world" },
-            };
+        {
+            { "key0", "hello" },
+            { "key1", "world" },
+        };
         var parameter = new ParameterDescriptor
         {
             Name = "parameter",
@@ -1197,13 +1352,14 @@ public class DictionaryModelBinderIntegrationTest
     public async Task DictionaryModelBinder_ThrowsOn1025Items_AtTopLevel()
     {
         // Arrange
-        var expectedMessage = $"Collection bound to 'parameter' exceeded " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} (1024). This limit is a " +
-            $"safeguard against incorrect model binders and models. Address issues in " +
-            $"'{typeof(KeyValuePair<SuccessfulModel, SuccessfulModel>)}'. For example, this type may have a " +
-            $"property with a model binder that always succeeds. See the " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} documentation for more " +
-            $"information.";
+        var expectedMessage =
+            $"Collection bound to 'parameter' exceeded "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} (1024). This limit is a "
+            + $"safeguard against incorrect model binders and models. Address issues in "
+            + $"'{typeof(KeyValuePair<SuccessfulModel, SuccessfulModel>)}'. For example, this type may have a "
+            + $"property with a model binder that always succeeds. See the "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} documentation for more "
+            + $"information.";
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
@@ -1223,7 +1379,8 @@ public class DictionaryModelBinderIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -1236,7 +1393,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string>)
+            ParameterType = typeof(Dictionary<string, string>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1259,7 +1416,8 @@ public class DictionaryModelBinderIntegrationTest
             {
                 Assert.Equal("key0", kvp.Key);
                 Assert.Null(kvp.Value);
-            });
+            }
+        );
 
         Assert.Collection(
             modelState.OrderBy(kvp => kvp.Key),
@@ -1267,7 +1425,8 @@ public class DictionaryModelBinderIntegrationTest
             {
                 Assert.Equal("parameter[key0]", kvp.Key);
                 Assert.Equal(ModelValidationState.Valid, kvp.Value.ValidationState);
-            });
+            }
+        );
         Assert.Equal(0, modelState.ErrorCount);
         Assert.True(modelState.IsValid);
     }
@@ -1280,6 +1439,7 @@ public class DictionaryModelBinderIntegrationTest
         // This should be implicitly required
         public string Name { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -1290,12 +1450,14 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, NonNullPerson>)
+            ParameterType = typeof(Dictionary<string, NonNullPerson>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name=");
+            request.QueryString = new QueryString(
+                "?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name="
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1322,7 +1484,8 @@ public class DictionaryModelBinderIntegrationTest
                 var person = kvp.Value;
                 Assert.Equal(27, person.Age);
                 Assert.Null(person.Name);
-            });
+            }
+        );
 
         Assert.Collection(
             modelState.OrderBy(kvp => kvp.Key),
@@ -1330,7 +1493,10 @@ public class DictionaryModelBinderIntegrationTest
             {
                 Assert.Equal("parameter[key0].Age", kvp.Key);
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                Assert.Equal("The value '' is invalid.", Assert.Single(kvp.Value.Errors).ErrorMessage);
+                Assert.Equal(
+                    "The value '' is invalid.",
+                    Assert.Single(kvp.Value.Errors).ErrorMessage
+                );
             },
             kvp =>
             {
@@ -1346,8 +1512,12 @@ public class DictionaryModelBinderIntegrationTest
             {
                 Assert.Equal("parameter[key1].Name", kvp.Key);
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                Assert.Equal("The Name field is required.", Assert.Single(kvp.Value.Errors).ErrorMessage);
-            });
+                Assert.Equal(
+                    "The Name field is required.",
+                    Assert.Single(kvp.Value.Errors).ErrorMessage
+                );
+            }
+        );
         Assert.Equal(2, modelState.ErrorCount);
         Assert.False(modelState.IsValid);
     }
@@ -1365,12 +1535,14 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<DayOfWeek, string>)
+            ParameterType = typeof(Dictionary<DayOfWeek, string>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?parameter[Monday]=hello&parameter[Tuesday]=world&parameter[Invalid]=exclamation");
+            request.QueryString = new QueryString(
+                "?parameter[Monday]=hello&parameter[Tuesday]=world&parameter[Invalid]=exclamation"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1384,7 +1556,10 @@ public class DictionaryModelBinderIntegrationTest
         Assert.NotEmpty(modelState);
         Assert.Equal(1, modelState.ErrorCount);
         Assert.False(modelState.IsValid);
-        Assert.Equal("Invalid is not a valid value for DayOfWeek.", modelState["parameter"].Errors[0].ErrorMessage);
+        Assert.Equal(
+            "Invalid is not a valid value for DayOfWeek.",
+            modelState["parameter"].Errors[0].ErrorMessage
+        );
     }
 
     [Fact]
@@ -1401,12 +1576,14 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, DayOfWeek>)
+            ParameterType = typeof(Dictionary<string, DayOfWeek>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?parameter[hello]=Monday&parameter[world]=Tuesday&parameter[exclamation]=BadEnumValue");
+            request.QueryString = new QueryString(
+                "?parameter[hello]=Monday&parameter[world]=Tuesday&parameter[exclamation]=BadEnumValue"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1422,7 +1599,10 @@ public class DictionaryModelBinderIntegrationTest
         Assert.NotEmpty(modelState);
         Assert.Equal(1, modelState.ErrorCount);
         Assert.False(modelState.IsValid);
-        Assert.Equal("The value 'BadEnumValue' is not valid for Value.", modelState["parameter[exclamation]"].Errors[0].ErrorMessage);
+        Assert.Equal(
+            "The value 'BadEnumValue' is not valid for Value.",
+            modelState["parameter[exclamation]"].Errors[0].ErrorMessage
+        );
     }
 
 #nullable enable
@@ -1433,6 +1613,7 @@ public class DictionaryModelBinderIntegrationTest
         [Required]
         public string? Name { get; set; }
     }
+
 #nullable restore
 
     [Fact]
@@ -1443,12 +1624,14 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, NonNullPersonWithRequiredProperties>)
+            ParameterType = typeof(Dictionary<string, NonNullPersonWithRequiredProperties>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name=");
+            request.QueryString = new QueryString(
+                "?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name="
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1459,7 +1642,9 @@ public class DictionaryModelBinderIntegrationTest
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
 
-        var model = Assert.IsType<Dictionary<string, NonNullPersonWithRequiredProperties>>(modelBindingResult.Model);
+        var model = Assert.IsType<Dictionary<string, NonNullPersonWithRequiredProperties>>(
+            modelBindingResult.Model
+        );
         Assert.Collection(
             model.OrderBy(kvp => kvp.Key),
             kvp =>
@@ -1475,7 +1660,8 @@ public class DictionaryModelBinderIntegrationTest
                 var person = kvp.Value;
                 Assert.Equal(27, person.Age);
                 Assert.Null(person.Name);
-            });
+            }
+        );
 
         Assert.Collection(
             modelState.OrderBy(kvp => kvp.Key),
@@ -1483,7 +1669,10 @@ public class DictionaryModelBinderIntegrationTest
             {
                 Assert.Equal("parameter[key0].Age", kvp.Key);
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                Assert.Equal("The value '' is invalid.", Assert.Single(kvp.Value.Errors).ErrorMessage);
+                Assert.Equal(
+                    "The value '' is invalid.",
+                    Assert.Single(kvp.Value.Errors).ErrorMessage
+                );
             },
             kvp =>
             {
@@ -1499,19 +1688,19 @@ public class DictionaryModelBinderIntegrationTest
             {
                 Assert.Equal("parameter[key1].Name", kvp.Key);
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                Assert.Equal("The Name field is required.", Assert.Single(kvp.Value.Errors).ErrorMessage);
-            });
+                Assert.Equal(
+                    "The Name field is required.",
+                    Assert.Single(kvp.Value.Errors).ErrorMessage
+                );
+            }
+        );
         Assert.Equal(2, modelState.ErrorCount);
         Assert.False(modelState.IsValid);
     }
 
-    private class ClosedGenericDictionary : Dictionary<string, string>
-    {
-    }
+    private class ClosedGenericDictionary : Dictionary<string, string> { }
 
-    private class ClosedGenericKeyDictionary<TValue> : Dictionary<string, TValue>
-    {
-    }
+    private class ClosedGenericKeyDictionary<TValue> : Dictionary<string, TValue> { }
 
     private class ExplicitClosedGenericDictionary : IDictionary<string, string>
     {
@@ -1519,47 +1708,28 @@ public class DictionaryModelBinderIntegrationTest
 
         string IDictionary<string, string>.this[string key]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                _data[key] = value;
-            }
+            get { throw new NotImplementedException(); }
+            set { _data[key] = value; }
         }
 
         int ICollection<KeyValuePair<string, string>>.Count
         {
-            get
-            {
-                return _data.Count;
-            }
+            get { return _data.Count; }
         }
 
         bool ICollection<KeyValuePair<string, string>>.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         ICollection<string> IDictionary<string, string>.Keys
         {
-            get
-            {
-                return _data.Keys;
-            }
+            get { return _data.Keys; }
         }
 
         ICollection<string> IDictionary<string, string>.Values
         {
-            get
-            {
-                return _data.Values;
-            }
+            get { return _data.Values; }
         }
 
         void ICollection<KeyValuePair<string, string>>.Add(KeyValuePair<string, string> item)
@@ -1587,7 +1757,10 @@ public class DictionaryModelBinderIntegrationTest
             throw new NotImplementedException();
         }
 
-        void ICollection<KeyValuePair<string, string>>.CopyTo(KeyValuePair<string, string>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<string, string>>.CopyTo(
+            KeyValuePair<string, string>[] array,
+            int arrayIndex
+        )
         {
             throw new NotImplementedException();
         }
@@ -1597,7 +1770,9 @@ public class DictionaryModelBinderIntegrationTest
             return _data.GetEnumerator();
         }
 
-        IEnumerator<KeyValuePair<string, string>> IEnumerable<KeyValuePair<string, string>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, string>> IEnumerable<
+            KeyValuePair<string, string>
+        >.GetEnumerator()
         {
             return _data.GetEnumerator();
         }
@@ -1624,47 +1799,28 @@ public class DictionaryModelBinderIntegrationTest
 
         TValue IDictionary<TKey, TValue>.this[TKey key]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                _data[key] = value;
-            }
+            get { throw new NotImplementedException(); }
+            set { _data[key] = value; }
         }
 
         int ICollection<KeyValuePair<TKey, TValue>>.Count
         {
-            get
-            {
-                return _data.Count;
-            }
+            get { return _data.Count; }
         }
 
         bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         ICollection<TKey> IDictionary<TKey, TValue>.Keys
         {
-            get
-            {
-                return _data.Keys;
-            }
+            get { return _data.Keys; }
         }
 
         ICollection<TValue> IDictionary<TKey, TValue>.Values
         {
-            get
-            {
-                return _data.Values;
-            }
+            get { return _data.Values; }
         }
 
         void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
@@ -1692,7 +1848,10 @@ public class DictionaryModelBinderIntegrationTest
             throw new NotImplementedException();
         }
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+            KeyValuePair<TKey, TValue>[] array,
+            int arrayIndex
+        )
         {
             throw new NotImplementedException();
         }
@@ -1702,7 +1861,9 @@ public class DictionaryModelBinderIntegrationTest
             return _data.GetEnumerator();
         }
 
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator()
         {
             return _data.GetEnumerator();
         }
@@ -1724,5 +1885,6 @@ public class DictionaryModelBinderIntegrationTest
     }
 
     private void SampleMethod_ComplexType(Dictionary<string, Person> parameter = null) { }
+
     private void SampleMethod_SimpleType(Dictionary<string, int> parameter = null) { }
 }

@@ -48,51 +48,97 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestNullTarget_OfferMessage()
         {
-            DataflowTestHelpers.TestOfferMessage_ArgumentValidation(DataflowBlock.NullTarget<int>());
-            DataflowTestHelpers.TestOfferMessage_AcceptsDataDirectly(DataflowBlock.NullTarget<string>());
-            await DataflowTestHelpers.TestOfferMessage_AcceptsViaLinking(DataflowBlock.NullTarget<double>());
+            DataflowTestHelpers.TestOfferMessage_ArgumentValidation(
+                DataflowBlock.NullTarget<int>()
+            );
+            DataflowTestHelpers.TestOfferMessage_AcceptsDataDirectly(
+                DataflowBlock.NullTarget<string>()
+            );
+            await DataflowTestHelpers.TestOfferMessage_AcceptsViaLinking(
+                DataflowBlock.NullTarget<double>()
+            );
 
             // Test OfferMessage(consumeToAccept: false)
             Assert.Equal(
                 expected: DataflowMessageStatus.Accepted,
-                actual: DataflowBlock.NullTarget<double>().OfferMessage(new DataflowMessageHeader(1), 3.14, null, consumeToAccept: false));
+                actual: DataflowBlock
+                    .NullTarget<double>()
+                    .OfferMessage(new DataflowMessageHeader(1), 3.14, null, consumeToAccept: false)
+            );
 
             // Test OfferMessage(consumeToAccept: true)
             long consumedId = -1;
-            DataflowBlock.NullTarget<int>().OfferMessage(new DataflowMessageHeader(42), 84, new DelegatePropagator<int, int>()
-            {
-                ConsumeMessageDelegate = delegate(DataflowMessageHeader messageHeader, ITargetBlock<int> target, out bool messageConsumed) {
-                    consumedId = messageHeader.Id;
-                    messageConsumed = true;
-                    return 0;
-                }
-            }, consumeToAccept: true);
+            DataflowBlock
+                .NullTarget<int>()
+                .OfferMessage(
+                    new DataflowMessageHeader(42),
+                    84,
+                    new DelegatePropagator<int, int>()
+                    {
+                        ConsumeMessageDelegate = delegate(
+                            DataflowMessageHeader messageHeader,
+                            ITargetBlock<int> target,
+                            out bool messageConsumed
+                        )
+                        {
+                            consumedId = messageHeader.Id;
+                            messageConsumed = true;
+                            return 0;
+                        },
+                    },
+                    consumeToAccept: true
+                );
             Assert.Equal(expected: 42, actual: consumedId);
 
             // Test bad source
-            Assert.Throws<InvalidOperationException>(() => {
+            Assert.Throws<InvalidOperationException>(() =>
+            {
                 var target = DataflowBlock.NullTarget<int>();
-                DataflowBlock.NullTarget<int>().OfferMessage(new DataflowMessageHeader(42), 84, new DelegatePropagator<int, int>()
-                {
-                    ConsumeMessageDelegate = delegate(DataflowMessageHeader _, ITargetBlock<int> __, out bool ___) {
-                        throw new InvalidOperationException();
-                    }
-                }, consumeToAccept: true);
+                DataflowBlock
+                    .NullTarget<int>()
+                    .OfferMessage(
+                        new DataflowMessageHeader(42),
+                        84,
+                        new DelegatePropagator<int, int>()
+                        {
+                            ConsumeMessageDelegate = delegate(
+                                DataflowMessageHeader _,
+                                ITargetBlock<int> __,
+                                out bool ___
+                            )
+                            {
+                                throw new InvalidOperationException();
+                            },
+                        },
+                        consumeToAccept: true
+                    );
                 Assert.True(target.Post(42));
             });
 
             // Test message no longer available
             var stingySource = new DelegatePropagator<int, int>
             {
-                ConsumeMessageDelegate = (DataflowMessageHeader messageHeader, ITargetBlock<int> target, out bool messageConsumed) => {
+                ConsumeMessageDelegate = (
+                    DataflowMessageHeader messageHeader,
+                    ITargetBlock<int> target,
+                    out bool messageConsumed
+                ) =>
+                {
                     messageConsumed = false;
                     return 0;
-                }
+                },
             };
             Assert.Equal(
                 expected: DataflowMessageStatus.NotAvailable,
-                actual: DataflowBlock.NullTarget<int>().OfferMessage(
-                    new DataflowMessageHeader(1), 1, stingySource, consumeToAccept: true));
+                actual: DataflowBlock
+                    .NullTarget<int>()
+                    .OfferMessage(
+                        new DataflowMessageHeader(1),
+                        1,
+                        stingySource,
+                        consumeToAccept: true
+                    )
+            );
         }
 
         [Fact]
@@ -109,10 +155,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             Assert.NotSame(
                 DataflowBlock.NullTarget<object>().Completion,
-                DataflowBlock.NullTarget<object>().Completion);
+                DataflowBlock.NullTarget<object>().Completion
+            );
             Assert.NotSame(
                 DataflowBlock.NullTarget<int>().Completion,
-                DataflowBlock.NullTarget<int>().Completion);
+                DataflowBlock.NullTarget<int>().Completion
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
@@ -152,7 +200,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             Assert.Throws<ArgumentNullException>(() => ((ISourceBlock<int>)null).AsObservable());
             Assert.Throws<ArgumentNullException>(() => ((ITargetBlock<int>)null).AsObserver());
-            Assert.Throws<ArgumentNullException>(() => new BufferBlock<int>().AsObservable().Subscribe(null));
+            Assert.Throws<ArgumentNullException>(
+                () => new BufferBlock<int>().AsObservable().Subscribe(null)
+            );
         }
 
         [Fact]
@@ -161,10 +211,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var tcs = new TaskCompletionSource<int>();
 
             var source = new BufferBlock<int>();
-            source.AsObservable().Subscribe(new DelegateObserver<int>
-            {
-                OnNextDelegate = i => tcs.TrySetResult(i)
-            });
+            source
+                .AsObservable()
+                .Subscribe(new DelegateObserver<int> { OnNextDelegate = i => tcs.TrySetResult(i) });
 
             source.Post(42);
             Assert.Equal(expected: 42, actual: await tcs.Task);
@@ -180,8 +229,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 bb.Complete();
 
                 int nextValueExpected = 0;
-                var ab = new ActionBlock<int>(i => {
-                    Assert.True(i == nextValueExpected, string.Format("Expected next value to be {0} but got {1}", nextValueExpected, i));
+                var ab = new ActionBlock<int>(i =>
+                {
+                    Assert.True(
+                        i == nextValueExpected,
+                        string.Format(
+                            "Expected next value to be {0} but got {1}",
+                            nextValueExpected,
+                            i
+                        )
+                    );
                     nextValueExpected++;
                 });
 
@@ -192,8 +249,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
             // Test that new data flows correctly
             {
                 int nextValueExpected = -2;
-                var ab = new ActionBlock<int>(i => {
-                    Assert.True(i == nextValueExpected, string.Format("Expected next value to be {0} but got {1}", nextValueExpected, i));
+                var ab = new ActionBlock<int>(i =>
+                {
+                    Assert.True(
+                        i == nextValueExpected,
+                        string.Format(
+                            "Expected next value to be {0} but got {1}",
+                            nextValueExpected,
+                            i
+                        )
+                    );
                     nextValueExpected++;
                 });
 
@@ -236,18 +301,25 @@ namespace System.Threading.Tasks.Dataflow.Tests
             // Test that exceptional data flows when exception occurs before and after subscription
             foreach (bool beforeSubscription in DataflowTestHelpers.BooleanValues)
             {
-                var tb = new TransformBlock<int, int>(i => {
-                    if (i == 42) throw new InvalidOperationException("uh oh");
+                var tb = new TransformBlock<int, int>(i =>
+                {
+                    if (i == 42)
+                        throw new InvalidOperationException("uh oh");
                     return i;
                 });
 
                 if (beforeSubscription)
                 {
                     tb.Post(42);
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () => await tb.Completion);
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await tb.Completion
+                    );
                 }
 
-                ITargetBlock<int>[] targets = Enumerable.Range(0, 3).Select(_ => new WriteOnceBlock<int>(i => i)).ToArray();
+                ITargetBlock<int>[] targets = Enumerable
+                    .Range(0, 3)
+                    .Select(_ => new WriteOnceBlock<int>(i => i))
+                    .ToArray();
                 foreach (var target in targets)
                 {
                     tb.AsObservable().Subscribe(target.AsObserver());
@@ -300,24 +372,35 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var o = b.AsObservable();
             for (int i = 0; i < 2; i++)
             {
-                IDisposable[] unlinkers = Enumerable.Range(0, 5).Select(_ => o.Subscribe(new DelegateObserver<int>())).ToArray();
-                foreach (var unlinker in unlinkers) unlinker.Dispose();
-                foreach (var unlinker in unlinkers) unlinker.Dispose(); // make sure it's ok to dispose twice
+                IDisposable[] unlinkers = Enumerable
+                    .Range(0, 5)
+                    .Select(_ => o.Subscribe(new DelegateObserver<int>()))
+                    .ToArray();
+                foreach (var unlinker in unlinkers)
+                    unlinker.Dispose();
+                foreach (var unlinker in unlinkers)
+                    unlinker.Dispose(); // make sure it's ok to dispose twice
             }
 
             // Validate sane behavior with a bad LinkTo
-            new DelegatePropagator<int, int>
-            {
-                LinkToDelegate = (_, __) => null
-            }.AsObservable().Subscribe(DataflowBlock.NullTarget<int>().AsObserver()).Dispose();
+            new DelegatePropagator<int, int> { LinkToDelegate = (_, __) => null }
+                .AsObservable()
+                .Subscribe(DataflowBlock.NullTarget<int>().AsObserver())
+                .Dispose();
         }
 
         [Fact]
         public async Task TestAsObservableAndAsObserver_AllObserversGetData()
         {
             int total = 0;
-            var options = new ExecutionDataflowBlockOptions { TaskScheduler = new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler };
-            ITargetBlock<int>[] targets = Enumerable.Range(0, 3).Select(_ => new ActionBlock<int>(i => total += i, options)).ToArray();
+            var options = new ExecutionDataflowBlockOptions
+            {
+                TaskScheduler = new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler,
+            };
+            ITargetBlock<int>[] targets = Enumerable
+                .Range(0, 3)
+                .Select(_ => new ActionBlock<int>(i => total += i, options))
+                .ToArray();
 
             var source = new BufferBlock<int>();
             var sourceObservable = source.AsObservable();
@@ -366,7 +449,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 GC.Collect();
             }
 
-            int remaining = blockReferences.Count(wr => {
+            int remaining = blockReferences.Count(wr =>
+            {
                 BufferBlock<int> b;
                 return wr.TryGetTarget(out b);
             });
@@ -381,7 +465,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 new BufferBlock<int>(),
                 new BufferBlock<int>(new DataflowBlockOptions() { BoundedCapacity = 1 }), // This target will apply back pressure
-                new BufferBlock<int>()
+                new BufferBlock<int>(),
             };
 
             // Link the observable to the observers
@@ -424,18 +508,26 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var targets = new ITargetBlock<int>[]
             {
                 new BufferBlock<int>(),
-                new DelegatePropagator<int, int>() { OfferMessageDelegate = delegate { throw new InvalidOperationException(); } },
-                new BufferBlock<int>()
+                new DelegatePropagator<int, int>()
+                {
+                    OfferMessageDelegate = delegate
+                    {
+                        throw new InvalidOperationException();
+                    },
+                },
+                new BufferBlock<int>(),
             };
 
             var source = new BufferBlock<int>();
-            foreach (var target in targets) source.AsObservable().Subscribe(target.AsObserver());
+            foreach (var target in targets)
+                source.AsObservable().Subscribe(target.AsObserver());
 
             source.Post(1);
 
             await Task.WhenAll(
                 Assert.ThrowsAsync<AggregateException>(() => targets[0].Completion),
-                Assert.ThrowsAsync<AggregateException>(() => targets[2].Completion));
+                Assert.ThrowsAsync<AggregateException>(() => targets[2].Completion)
+            );
         }
 
         [Fact]
@@ -445,12 +537,21 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var target = new ActionBlock<int>(i => { });
 
             Assert.Throws<ArgumentNullException>(() => source.LinkTo(null));
-            Assert.Throws<ArgumentNullException>(() => ((IPropagatorBlock<int, int>)null).LinkTo(target));
+            Assert.Throws<ArgumentNullException>(
+                () => ((IPropagatorBlock<int, int>)null).LinkTo(target)
+            );
             Assert.Throws<ArgumentNullException>(() => source.LinkTo(null, i => true));
-            Assert.Throws<ArgumentNullException>(() => source.LinkTo(null, new DataflowLinkOptions(), i => true));
+            Assert.Throws<ArgumentNullException>(
+                () => source.LinkTo(null, new DataflowLinkOptions(), i => true)
+            );
             Assert.Throws<ArgumentNullException>(() => source.LinkTo(target, null));
-            Assert.Throws<ArgumentNullException>(() => source.LinkTo(target, new DataflowLinkOptions(), null));
-            Assert.Throws<ArgumentNullException>(() => ((IPropagatorBlock<int, int>)null).LinkTo(null, new DataflowLinkOptions(), null));
+            Assert.Throws<ArgumentNullException>(
+                () => source.LinkTo(target, new DataflowLinkOptions(), null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    ((IPropagatorBlock<int, int>)null).LinkTo(null, new DataflowLinkOptions(), null)
+            );
             Assert.Throws<ArgumentNullException>(() => source.LinkTo(target, null, i => true));
         }
 
@@ -459,7 +560,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var source1 = new BufferBlock<int>();
             var source2 = new BufferBlock<int>();
-            var jb = new JoinBlock<int, int>(new GroupingDataflowBlockOptions { Greedy = false, MaxNumberOfGroups = 1 });
+            var jb = new JoinBlock<int, int>(
+                new GroupingDataflowBlockOptions { Greedy = false, MaxNumberOfGroups = 1 }
+            );
 
             source1.Completion.ContinueWith(_ => jb.Target1.Complete(), TaskScheduler.Default);
             source2.Completion.ContinueWith(_ => jb.Target2.Complete(), TaskScheduler.Default);
@@ -486,10 +589,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 var source1 = new BufferBlock<int>();
                 var source2 = new BufferBlock<int>();
-                var jb = new JoinBlock<int, int>(new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1, Greedy = greedy });
+                var jb = new JoinBlock<int, int>(
+                    new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1, Greedy = greedy }
+                );
 
-                var ignored = source1.Completion.ContinueWith(_ => jb.Target1.Complete(), TaskScheduler.Default);
-                ignored = source2.Completion.ContinueWith(_ => jb.Target2.Complete(), TaskScheduler.Default);
+                var ignored = source1.Completion.ContinueWith(
+                    _ => jb.Target1.Complete(),
+                    TaskScheduler.Default
+                );
+                ignored = source2.Completion.ContinueWith(
+                    _ => jb.Target2.Complete(),
+                    TaskScheduler.Default
+                );
 
                 using (source1.LinkTo(jb.Target1))
                 {
@@ -516,7 +627,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
             using (source.LinkTo(target))
             {
                 source.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true });
-                source.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true }, f => false);
+                source.LinkTo(
+                    target,
+                    new DataflowLinkOptions { PropagateCompletion = true },
+                    f => false
+                );
             }
             source.Fault(new FormatException());
             await Assert.ThrowsAsync<AggregateException>(() => target.Completion);
@@ -545,11 +660,17 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         nopPropagator.ReleaseReservation(header, target);
 
                         // Make sure its LinkTo doesn't work; that wouldn't make sense
-                        Assert.Throws<NotSupportedException>(() => nopPropagator.LinkTo(DataflowBlock.NullTarget<int>(), new DataflowLinkOptions()));
+                        Assert.Throws<NotSupportedException>(
+                            () =>
+                                nopPropagator.LinkTo(
+                                    DataflowBlock.NullTarget<int>(),
+                                    new DataflowLinkOptions()
+                                )
+                        );
                     }
                     return DataflowMessageStatus.Accepted;
                 },
-                CompleteDelegate = () => tcs.SetResult(true)
+                CompleteDelegate = () => tcs.SetResult(true),
             };
 
             // Link from the source to the target, ensuring that we do so via a nop propagator
@@ -576,7 +697,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 var source = new BufferBlock<int>();
                 var target = new ActionBlock<int>(i => counter++);
 
-                using (source.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = propagateCompletion }))
+                using (
+                    source.LinkTo(
+                        target,
+                        new DataflowLinkOptions { PropagateCompletion = propagateCompletion }
+                    )
+                )
                 {
                     source.PostRange(0, 2);
                     source.Complete();
@@ -615,7 +741,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 source.PostRange(0, 6);
                 source.Complete();
-                await source.Completion.ContinueWith(delegate { target.Complete(); }, TaskScheduler.Default);
+                await source.Completion.ContinueWith(
+                    delegate
+                    {
+                        target.Complete();
+                    },
+                    TaskScheduler.Default
+                );
                 await target.Completion;
             }
             Assert.Equal(expected: 3, actual: counter);
@@ -624,14 +756,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestLinkTo_MaxMessages()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DataflowLinkOptions { MaxMessages = -2 });
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DataflowLinkOptions { MaxMessages = 0 });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new DataflowLinkOptions { MaxMessages = -2 }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new DataflowLinkOptions { MaxMessages = 0 }
+            );
 
-            const int MaxMessages = 3, ExtraMessages = 2;
+            const int MaxMessages = 3,
+                ExtraMessages = 2;
 
             for (int mode = 0; mode < 3; mode++)
             {
-                int consumedMessages = 0, remainingMessages = 0;
+                int consumedMessages = 0,
+                    remainingMessages = 0;
                 var options = new DataflowLinkOptions() { MaxMessages = MaxMessages };
                 var source = new BufferBlock<int>();
                 var target = new ActionBlock<int>(x => consumedMessages++);
@@ -646,7 +784,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         source.LinkTo(target, options, x => true); // Injects FilteredLinkPropagator
                         break;
                     case 2:
-                        using (source.LinkTo(target)) source.LinkTo(target, options); // Injects NopLinkPropagator
+                        using (source.LinkTo(target))
+                            source.LinkTo(target, options); // Injects NopLinkPropagator
                         break;
                 }
                 source.LinkTo(otherTarget);
@@ -728,7 +867,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestSendAsync_ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(() => { ((ITargetBlock<int>)null).SendAsync(42); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((ITargetBlock<int>)null).SendAsync(42);
+            });
         }
 
         [Fact]
@@ -793,7 +935,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool withCancellation in DataflowTestHelpers.BooleanValues)
             {
                 var target = new DelegatePropagator<int, int>();
-                target.OfferMessageDelegate = (messageHeader, messageValue, source, consumeToAccept) => {
+                target.OfferMessageDelegate = (
+                    messageHeader,
+                    messageValue,
+                    source,
+                    consumeToAccept
+                ) =>
+                {
                     if (source == null)
                         return DataflowMessageStatus.Declined;
 
@@ -808,9 +956,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     return DataflowMessageStatus.Accepted;
                 };
 
-                t = withCancellation ?
-                    target.SendAsync(1, new CancellationTokenSource().Token) :
-                    target.SendAsync(2);
+                t = withCancellation
+                    ? target.SendAsync(1, new CancellationTokenSource().Token)
+                    : target.SendAsync(2);
                 Assert.True(await t);
             }
         }
@@ -825,7 +973,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 var cts = new CancellationTokenSource();
 
                 DelegatePropagator<int, int> target = new DelegatePropagator<int, int>();
-                target.OfferMessageDelegate = (messageHeader, messageValue, source, consumeToAccept) => {
+                target.OfferMessageDelegate = (
+                    messageHeader,
+                    messageValue,
+                    source,
+                    consumeToAccept
+                ) =>
+                {
                     Assert.True(messageHeader.IsValid);
                     Assert.Equal(expected: 42, actual: messageValue);
 
@@ -839,7 +993,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     if (!alreadyReservedReleased)
                     {
                         alreadyReservedReleased = true;
-                        Task.Run(() => {
+                        Task.Run(() =>
+                        {
                             Assert.True(source.ReserveMessage(messageHeader, target));
                             if (withCancellation)
                                 cts.Cancel();
@@ -855,7 +1010,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
                 if (withCancellation)
                 {
-                    await AssertExtensions.CanceledAsync(cts.Token, () => target.SendAsync(42, cts.Token));
+                    await AssertExtensions.CanceledAsync(
+                        cts.Token,
+                        () => target.SendAsync(42, cts.Token)
+                    );
                 }
                 else
                 {
@@ -869,11 +1027,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var target = new DelegatePropagator<int, int>
             {
-                OfferMessageDelegate = (header, value, source, consumeToAccept) => {
+                OfferMessageDelegate = (header, value, source, consumeToAccept) =>
+                {
                     if (source == null)
                         return DataflowMessageStatus.Declined;
                     throw new FormatException();
-                }
+                },
             };
             await Assert.ThrowsAsync<FormatException>(() => target.SendAsync(1));
         }
@@ -884,14 +1043,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ISourceBlock<int> sendSource = null;
             ITargetBlock<int> capturingTarget = new DelegatePropagator<int, int>
             {
-                OfferMessageDelegate = delegate(DataflowMessageHeader header, int value, ISourceBlock<int> source, bool consumeToAccept) {
+                OfferMessageDelegate = delegate(
+                    DataflowMessageHeader header,
+                    int value,
+                    ISourceBlock<int> source,
+                    bool consumeToAccept
+                )
+                {
                     if (source == null)
                     {
                         return DataflowMessageStatus.Declined;
                     }
                     sendSource = source;
                     return DataflowMessageStatus.Postponed;
-                }
+                },
             };
 
             Task<bool> sendTask = capturingTarget.SendAsync(42);
@@ -899,7 +1064,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.NotNull(sendSource);
 
             DataflowTestHelpers.TestConsumeReserveReleaseArgumentsExceptions(sendSource);
-            Assert.Throws<NotSupportedException>(() => sendSource.LinkTo(DataflowBlock.NullTarget<int>()));
+            Assert.Throws<NotSupportedException>(
+                () => sendSource.LinkTo(DataflowBlock.NullTarget<int>())
+            );
             Assert.Throws<NotSupportedException>(() => sendSource.Fault(new Exception()));
             Assert.Throws<NotSupportedException>(() => sendSource.Complete());
         }
@@ -911,7 +1078,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             DelegatePropagator<int, int> target = null;
             target = new DelegatePropagator<int, int>
             {
-                OfferMessageDelegate = delegate(DataflowMessageHeader header, int value, ISourceBlock<int> source, bool consumeToAccept) {
+                OfferMessageDelegate = delegate(
+                    DataflowMessageHeader header,
+                    int value,
+                    ISourceBlock<int> source,
+                    bool consumeToAccept
+                )
+                {
                     if (source == null)
                     {
                         return DataflowMessageStatus.Declined;
@@ -925,7 +1098,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     Assert.False(consumed);
                     Assert.Equal(expected: 0, actual: consumedMessage);
                     return DataflowMessageStatus.Postponed; // should really be NotAvailable, but doing so causes an (expected) assert in the product code
-                }
+                },
             };
             Task<bool> send = target.SendAsync(42, cts.Token);
             await AssertExtensions.CanceledAsync(cts.Token, send);
@@ -936,13 +1109,30 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var buffer = new BufferBlock<int>();
             int item;
-            Assert.Throws<ArgumentNullException>(() => ((IReceivableSourceBlock<int>)null).TryReceive(out item));
-            Assert.Throws<ArgumentNullException>(() => ((IReceivableSourceBlock<int>)null).Receive());
-            Assert.Throws<ArgumentNullException>(() => ((IReceivableSourceBlock<int>)null).Receive(new CancellationToken(true)));
-            Assert.Throws<ArgumentNullException>(() => { ((IReceivableSourceBlock<int>)null).ReceiveAsync(); });
-            Assert.Throws<ArgumentNullException>(() => { ((IReceivableSourceBlock<int>)null).ReceiveAsync(new CancellationToken(true)); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => buffer.Receive(TimeSpan.FromSeconds(-2)));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { buffer.ReceiveAsync(TimeSpan.FromSeconds(-2)); });
+            Assert.Throws<ArgumentNullException>(
+                () => ((IReceivableSourceBlock<int>)null).TryReceive(out item)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => ((IReceivableSourceBlock<int>)null).Receive()
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => ((IReceivableSourceBlock<int>)null).Receive(new CancellationToken(true))
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((IReceivableSourceBlock<int>)null).ReceiveAsync();
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((IReceivableSourceBlock<int>)null).ReceiveAsync(new CancellationToken(true));
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => buffer.Receive(TimeSpan.FromSeconds(-2))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                buffer.ReceiveAsync(TimeSpan.FromSeconds(-2));
+            });
         }
 
         [Fact]
@@ -957,17 +1147,29 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Equal(expected: 2, actual: buffer.Count);
             Assert.Equal(expected: 3, actual: buffer.Receive(TimeSpan.FromDays(1)));
             Assert.Equal(expected: 1, actual: buffer.Count);
-            Assert.Equal(expected: 4, actual: buffer.Receive(TimeSpan.FromDays(1), new CancellationTokenSource().Token));
+            Assert.Equal(
+                expected: 4,
+                actual: buffer.Receive(TimeSpan.FromDays(1), new CancellationTokenSource().Token)
+            );
             Assert.Equal(expected: 0, actual: buffer.Count);
 
             buffer.PostItems(1, 2, 3, 4);
             Assert.Equal(expected: 1, actual: await buffer.ReceiveAsync());
             Assert.Equal(expected: 3, actual: buffer.Count);
-            Assert.Equal(expected: 2, actual: await buffer.ReceiveAsync(new CancellationTokenSource().Token));
+            Assert.Equal(
+                expected: 2,
+                actual: await buffer.ReceiveAsync(new CancellationTokenSource().Token)
+            );
             Assert.Equal(expected: 2, actual: buffer.Count);
             Assert.Equal(expected: 3, actual: await buffer.ReceiveAsync(TimeSpan.FromDays(1)));
             Assert.Equal(expected: 1, actual: buffer.Count);
-            Assert.Equal(expected: 4, actual: await buffer.ReceiveAsync(TimeSpan.FromDays(1), new CancellationTokenSource().Token));
+            Assert.Equal(
+                expected: 4,
+                actual: await buffer.ReceiveAsync(
+                    TimeSpan.FromDays(1),
+                    new CancellationTokenSource().Token
+                )
+            );
             Assert.Equal(expected: 0, actual: buffer.Count);
         }
 
@@ -987,7 +1189,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ignored = Task.Run(() => buffer.Post(3));
             Assert.Equal(expected: 3, actual: buffer.Receive(TimeSpan.FromDays(1)));
             ignored = Task.Run(() => buffer.Post(4));
-            Assert.Equal(expected: 4, actual: buffer.Receive(TimeSpan.FromDays(1), new CancellationTokenSource().Token));
+            Assert.Equal(
+                expected: 4,
+                actual: buffer.Receive(TimeSpan.FromDays(1), new CancellationTokenSource().Token)
+            );
 
             // The following are non-racy.
             var t1 = buffer.ReceiveAsync();
@@ -1012,11 +1217,17 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var bb = new BufferBlock<int>();
 
             Assert.Throws<TimeoutException>(() => bb.Receive(TimeSpan.FromMilliseconds(1)));
-            await Assert.ThrowsAsync<TimeoutException>(() => bb.ReceiveAsync(TimeSpan.FromMilliseconds(1)));
+            await Assert.ThrowsAsync<TimeoutException>(
+                () => bb.ReceiveAsync(TimeSpan.FromMilliseconds(1))
+            );
 
             var cts = new CancellationTokenSource();
-            Assert.Throws<TimeoutException>(() => bb.Receive(TimeSpan.FromMilliseconds(1), cts.Token));
-            await Assert.ThrowsAsync<TimeoutException>(() => bb.ReceiveAsync(TimeSpan.FromMilliseconds(1), cts.Token));
+            Assert.Throws<TimeoutException>(
+                () => bb.Receive(TimeSpan.FromMilliseconds(1), cts.Token)
+            );
+            await Assert.ThrowsAsync<TimeoutException>(
+                () => bb.ReceiveAsync(TimeSpan.FromMilliseconds(1), cts.Token)
+            );
         }
 
         [Fact]
@@ -1024,9 +1235,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var bb = new BufferBlock<int>();
             Assert.Throws<TimeoutException>(() => bb.Receive(TimeSpan.FromMilliseconds(0)));
-            await Assert.ThrowsAsync<TimeoutException>(() => bb.ReceiveAsync(TimeSpan.FromMilliseconds(0)));
+            await Assert.ThrowsAsync<TimeoutException>(
+                () => bb.ReceiveAsync(TimeSpan.FromMilliseconds(0))
+            );
         }
-
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task TestReceive_Cancellation()
@@ -1076,7 +1288,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool beforeReceive in DataflowTestHelpers.BooleanValues)
             {
                 var cts = new CancellationTokenSource();
-                var bb = new BufferBlock<int>(new DataflowBlockOptions { CancellationToken = cts.Token });
+                var bb = new BufferBlock<int>(
+                    new DataflowBlockOptions { CancellationToken = cts.Token }
+                );
 
                 if (beforeReceive)
                 {
@@ -1092,7 +1306,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool beforeReceive in DataflowTestHelpers.BooleanValues)
             {
                 var cts = new CancellationTokenSource();
-                var bb = new BufferBlock<int>(new DataflowBlockOptions { CancellationToken = cts.Token });
+                var bb = new BufferBlock<int>(
+                    new DataflowBlockOptions { CancellationToken = cts.Token }
+                );
 
                 if (beforeReceive)
                 {
@@ -1135,8 +1351,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Task t = bb.ReceiveAsync();
             for (int i = 1; i < Length; i++)
             {
-                t = t.ContinueWith(_ => bb.ReceiveAsync(),
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap();
+                t = t.ContinueWith(
+                        _ => bb.ReceiveAsync(),
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    )
+                    .Unwrap();
             }
 
             bb.PostRange(0, Length);
@@ -1150,15 +1371,19 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ITargetBlock<int> receiveTarget = null;
             var source = new DelegateReceivablePropagator<int, int>
             {
-                LinkToDelegate = (target, options) => {
+                LinkToDelegate = (target, options) =>
+                {
                     receiveTarget = target;
                     return new DelegateDisposable();
-                }
+                },
             };
             Task<int> receiveTask = source.ReceiveAsync();
             Assert.NotNull(receiveTarget);
             DataflowTestHelpers.TestOfferMessage_ArgumentValidation(receiveTarget);
-            Assert.Throws<NotSupportedException>(() => { var ignored = receiveTarget.Completion; });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var ignored = receiveTarget.Completion;
+            });
             receiveTarget.Fault(new Exception()); // shouldn't throw
         }
 
@@ -1168,17 +1393,28 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ITargetBlock<int> receiveTarget = null;
             var source = new DelegateReceivablePropagator<int, int>
             {
-                LinkToDelegate = (target, options) => {
+                LinkToDelegate = (target, options) =>
+                {
                     receiveTarget = target;
                     return new DelegateDisposable();
                 },
-                ConsumeMessageDelegate = delegate(DataflowMessageHeader messageHeader, ITargetBlock<int> target, out bool messageConsumed) {
+                ConsumeMessageDelegate = delegate(
+                    DataflowMessageHeader messageHeader,
+                    ITargetBlock<int> target,
+                    out bool messageConsumed
+                )
+                {
                     throw new FormatException();
-                }
+                },
             };
             Task<int> receiveTask = source.ReceiveAsync();
             Assert.NotNull(receiveTarget);
-            receiveTarget.OfferMessage(new DataflowMessageHeader(1), 1, source, consumeToAccept: true);
+            receiveTarget.OfferMessage(
+                new DataflowMessageHeader(1),
+                1,
+                source,
+                consumeToAccept: true
+            );
             await Assert.ThrowsAsync<FormatException>(() => receiveTask);
         }
 
@@ -1187,9 +1423,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var source = new DelegateReceivablePropagator<int, int>
             {
-                TryReceiveDelegate = delegate(Predicate<int> filter, out int item) {
+                TryReceiveDelegate = delegate(Predicate<int> filter, out int item)
+                {
                     throw new InvalidProgramException();
-                }
+                },
             };
             Task<int> receiveTask = source.ReceiveAsync();
             await Assert.ThrowsAsync<InvalidProgramException>(() => receiveTask);
@@ -1198,31 +1435,121 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestChoose_ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int>(null, i => { }, new BufferBlock<int>(), i => { }); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int>(new BufferBlock<int>(), i => { }, null, i => { }); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int>(new BufferBlock<int>(), null, new BufferBlock<int>(), i => { }); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int>(new BufferBlock<int>(), i => { }, new BufferBlock<int>(), null); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int>(new BufferBlock<int>(), i => { }, new BufferBlock<int>(), i => { }, null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int>(null, i => { }, new BufferBlock<int>(), i => { });
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int>(new BufferBlock<int>(), i => { }, null, i => { });
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int>(
+                    new BufferBlock<int>(),
+                    null,
+                    new BufferBlock<int>(),
+                    i => { }
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int>(
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    null
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int>(
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { },
+                    null
+                );
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int, int>(null, i => { }, new BufferBlock<int>(), i => { }, new BufferBlock<int>(), i => { }); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int, int>(new BufferBlock<int>(), i => { }, null, i => { }, new BufferBlock<int>(), i => { }); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int, int>(new BufferBlock<int>(), i => { }, new BufferBlock<int>(), i => { }, null, i => { }); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int, int>(new BufferBlock<int>(), null, new BufferBlock<int>(), i => { }, new BufferBlock<int>(), i => { }); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int, int>(new BufferBlock<int>(), i => { }, new BufferBlock<int>(), null, new BufferBlock<int>(), i => { }); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int, int>(new BufferBlock<int>(), i => { }, new BufferBlock<int>(), i => { }, new BufferBlock<int>(), null); });
-            Assert.Throws<ArgumentNullException>(
-                () => { DataflowBlock.Choose<int, int, int>(new BufferBlock<int>(), i => { }, new BufferBlock<int>(), i => { }, new BufferBlock<int>(), i => { }, null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int, int>(
+                    null,
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { }
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int, int>(
+                    new BufferBlock<int>(),
+                    i => { },
+                    null,
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { }
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int, int>(
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { },
+                    null,
+                    i => { }
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int, int>(
+                    new BufferBlock<int>(),
+                    null,
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { }
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int, int>(
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    null,
+                    new BufferBlock<int>(),
+                    i => { }
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int, int>(
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    null
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.Choose<int, int, int>(
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { },
+                    new BufferBlock<int>(),
+                    i => { },
+                    null
+                );
+            });
         }
 
         [Fact]
@@ -1231,22 +1558,39 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int chooseTestCase = 0; chooseTestCase < 5; chooseTestCase++)
             {
                 var cesp = new ConcurrentExclusiveSchedulerPair(); // ensure BufferBlocks are serialized
-                var source1 = new BufferBlock<int>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
-                var source2 = new BufferBlock<string>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
+                var source1 = new BufferBlock<int>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
+                var source2 = new BufferBlock<string>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
 
                 int intValue = 0;
                 string stringValue = null;
-                TaskScheduler usedScheduler = null, requestedScheduler = new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler;
+                TaskScheduler usedScheduler = null,
+                    requestedScheduler = new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler;
                 var cts = new CancellationTokenSource();
 
-                var t = chooseTestCase < 2 ?
-                    DataflowBlock.Choose(
-                        source1, i => intValue = i,
-                        source2, s => stringValue = s) :
-                    DataflowBlock.Choose(
-                        source1, i => usedScheduler = TaskScheduler.Current,
-                        source2, s => usedScheduler = TaskScheduler.Current,
-                        new DataflowBlockOptions { TaskScheduler = requestedScheduler, MaxMessagesPerTask = 1, CancellationToken = cts.Token });
+                var t =
+                    chooseTestCase < 2
+                        ? DataflowBlock.Choose(
+                            source1,
+                            i => intValue = i,
+                            source2,
+                            s => stringValue = s
+                        )
+                        : DataflowBlock.Choose(
+                            source1,
+                            i => usedScheduler = TaskScheduler.Current,
+                            source2,
+                            s => usedScheduler = TaskScheduler.Current,
+                            new DataflowBlockOptions
+                            {
+                                TaskScheduler = requestedScheduler,
+                                MaxMessagesPerTask = 1,
+                                CancellationToken = cts.Token,
+                            }
+                        );
 
                 switch (chooseTestCase)
                 {
@@ -1316,8 +1660,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
                 int item = 0;
                 int branch = await DataflowBlock.Choose(
-                    sources[0], v => item = v,
-                    sources[1], v => item = v);
+                    sources[0],
+                    v => item = v,
+                    sources[1],
+                    v => item = v
+                );
 
                 switch (i)
                 {
@@ -1346,7 +1693,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             for (int i = 0; i < 4; i++)
             {
-                var sources = new[] { new BufferBlock<int>(), new BufferBlock<int>(), new BufferBlock<int>() };
+                var sources = new[]
+                {
+                    new BufferBlock<int>(),
+                    new BufferBlock<int>(),
+                    new BufferBlock<int>(),
+                };
                 switch (i)
                 {
                     case 0:
@@ -1367,9 +1719,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
                 int item = 0;
                 int branch = await DataflowBlock.Choose(
-                    sources[0], v => item = v,
-                    sources[1], v => item = v,
-                    sources[2], v => item = v);
+                    sources[0],
+                    v => item = v,
+                    sources[1],
+                    v => item = v,
+                    sources[2],
+                    v => item = v
+                );
 
                 switch (i)
                 {
@@ -1405,11 +1761,24 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int test = 0; test < 2; test++)
             {
                 var cesp = new ConcurrentExclusiveSchedulerPair(); // ensure BufferBlocks are serialized
-                var source1 = new BufferBlock<int>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
-                var source2 = new BufferBlock<string>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
+                var source1 = new BufferBlock<int>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
+                var source2 = new BufferBlock<string>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
                 var t = DataflowBlock.Choose(
-                    source1, i => { throw new InvalidOperationException(); },
-                    source2, s => { throw new InvalidCastException(); });
+                    source1,
+                    i =>
+                    {
+                        throw new InvalidOperationException();
+                    },
+                    source2,
+                    s =>
+                    {
+                        throw new InvalidCastException();
+                    }
+                );
                 Assert.False(t.IsCompleted);
 
                 switch (test)
@@ -1439,25 +1808,46 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int chooseTestCase = 0; chooseTestCase < 5; chooseTestCase++)
             {
                 var cesp = new ConcurrentExclusiveSchedulerPair(); // ensure BufferBlocks are serialized
-                var source1 = new BufferBlock<int>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
-                var source2 = new BufferBlock<string>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
-                var source3 = new BufferBlock<double>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
+                var source1 = new BufferBlock<int>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
+                var source2 = new BufferBlock<string>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
+                var source3 = new BufferBlock<double>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
                 int intValue = 0;
                 string stringValue = null;
                 double doubleValue = 0.0;
 
-                TaskScheduler usedScheduler = null, requestedScheduler = new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler;
+                TaskScheduler usedScheduler = null,
+                    requestedScheduler = new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler;
                 var cts = new CancellationTokenSource();
-                var t = chooseTestCase < 6 ?
-                    DataflowBlock.Choose(
-                        source1, i => intValue = i,
-                        source2, s => stringValue = s,
-                        source3, d => doubleValue = d) :
-                    DataflowBlock.Choose(
-                        source1, i => usedScheduler = TaskScheduler.Current,
-                        source2, s => usedScheduler = TaskScheduler.Current,
-                        source3, d => usedScheduler = TaskScheduler.Current,
-                        new DataflowBlockOptions { TaskScheduler = requestedScheduler, MaxMessagesPerTask = 1, CancellationToken = cts.Token });
+                var t =
+                    chooseTestCase < 6
+                        ? DataflowBlock.Choose(
+                            source1,
+                            i => intValue = i,
+                            source2,
+                            s => stringValue = s,
+                            source3,
+                            d => doubleValue = d
+                        )
+                        : DataflowBlock.Choose(
+                            source1,
+                            i => usedScheduler = TaskScheduler.Current,
+                            source2,
+                            s => usedScheduler = TaskScheduler.Current,
+                            source3,
+                            d => usedScheduler = TaskScheduler.Current,
+                            new DataflowBlockOptions
+                            {
+                                TaskScheduler = requestedScheduler,
+                                MaxMessagesPerTask = 1,
+                                CancellationToken = cts.Token,
+                            }
+                        );
 
                 switch (chooseTestCase)
                 {
@@ -1557,13 +1947,32 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int test = 1; test <= 3; test++)
             {
                 var cesp = new ConcurrentExclusiveSchedulerPair(); // ensure BufferBlocks are serialized
-                var source1 = new BufferBlock<int>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
-                var source2 = new BufferBlock<string>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
-                var source3 = new BufferBlock<double>(new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler });
+                var source1 = new BufferBlock<int>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
+                var source2 = new BufferBlock<string>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
+                var source3 = new BufferBlock<double>(
+                    new DataflowBlockOptions { TaskScheduler = cesp.ExclusiveScheduler }
+                );
                 var t = DataflowBlock.Choose(
-                    source1, i => { throw new InvalidOperationException(); },
-                    source2, s => { throw new InvalidCastException(); },
-                    source3, d => { throw new FormatException(); });
+                    source1,
+                    i =>
+                    {
+                        throw new InvalidOperationException();
+                    },
+                    source2,
+                    s =>
+                    {
+                        throw new InvalidCastException();
+                    },
+                    source3,
+                    d =>
+                    {
+                        throw new FormatException();
+                    }
+                );
                 Assert.False(t.IsCompleted);
 
                 switch (test)
@@ -1608,24 +2017,46 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 foreach (bool cancelBeforeChoose in DataflowTestHelpers.BooleanValues)
                 {
-                    int[] linkCounts = new int[n], unlinkCounts = new int[n];
-                    ISourceBlock<int>[] sources = Enumerable.Range(0, n).Select(i => new DelegatePropagator<int, int>
-                    {
-                        LinkToDelegate = (target, linkOptions) => {
-                            Interlocked.Increment(ref linkCounts[i]);
-                            return new DelegateDisposable { DisposeDelegate = () => Interlocked.Increment(ref unlinkCounts[i]) };
-                        }
-                    }).ToArray();
+                    int[] linkCounts = new int[n],
+                        unlinkCounts = new int[n];
+                    ISourceBlock<int>[] sources = Enumerable
+                        .Range(0, n)
+                        .Select(i => new DelegatePropagator<int, int>
+                        {
+                            LinkToDelegate = (target, linkOptions) =>
+                            {
+                                Interlocked.Increment(ref linkCounts[i]);
+                                return new DelegateDisposable
+                                {
+                                    DisposeDelegate = () =>
+                                        Interlocked.Increment(ref unlinkCounts[i]),
+                                };
+                            },
+                        })
+                        .ToArray();
 
                     var cts = new CancellationTokenSource();
                     if (cancelBeforeChoose)
                         cts.Cancel();
 
-                    var options = new DataflowBlockOptions { MaxMessagesPerTask = 1, CancellationToken = cts.Token };
+                    var options = new DataflowBlockOptions
+                    {
+                        MaxMessagesPerTask = 1,
+                        CancellationToken = cts.Token,
+                    };
                     Action<int> nop = x => { };
-                    Task<int> choose = n == 2 ?
-                        DataflowBlock.Choose(sources[0], nop, sources[1], nop, options) :
-                        DataflowBlock.Choose(sources[0], nop, sources[1], nop, sources[2], nop, options);
+                    Task<int> choose =
+                        n == 2
+                            ? DataflowBlock.Choose(sources[0], nop, sources[1], nop, options)
+                            : DataflowBlock.Choose(
+                                sources[0],
+                                nop,
+                                sources[1],
+                                nop,
+                                sources[2],
+                                nop,
+                                options
+                            );
 
                     if (!cancelBeforeChoose)
                         cts.Cancel();
@@ -1633,8 +2064,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     await AssertExtensions.CanceledAsync(cts.Token, choose);
 
                     int expectedLinkCount = cancelBeforeChoose ? 0 : 1;
-                    Assert.All(linkCounts, i => Assert.Equal(expected: expectedLinkCount, actual: i));
-                    Assert.All(unlinkCounts, i => Assert.Equal(expected: expectedLinkCount, actual: i));
+                    Assert.All(
+                        linkCounts,
+                        i => Assert.Equal(expected: expectedLinkCount, actual: i)
+                    );
+                    Assert.All(
+                        unlinkCounts,
+                        i => Assert.Equal(expected: expectedLinkCount, actual: i)
+                    );
                 }
             }
         }
@@ -1644,10 +2081,21 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             const int iterations = 1000;
 
-            BufferBlock<int> source1 = new BufferBlock<int>(), source2 = new BufferBlock<int>();
-            int branch1 = 0, branch2 = 0;
-            Task<int>[] tasks = Enumerable.Range(0, iterations).Select(_ =>
-                DataflowBlock.Choose(source1, x => Interlocked.Increment(ref branch1), source2, x => Interlocked.Increment(ref branch2))).ToArray();
+            BufferBlock<int> source1 = new BufferBlock<int>(),
+                source2 = new BufferBlock<int>();
+            int branch1 = 0,
+                branch2 = 0;
+            Task<int>[] tasks = Enumerable
+                .Range(0, iterations)
+                .Select(_ =>
+                    DataflowBlock.Choose(
+                        source1,
+                        x => Interlocked.Increment(ref branch1),
+                        source2,
+                        x => Interlocked.Increment(ref branch2)
+                    )
+                )
+                .ToArray();
 
             foreach (Task task in tasks)
             {
@@ -1666,25 +2114,31 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ITargetBlock<int> chooseTarget = null;
             var source = new DelegateReceivablePropagator<int, int>
             {
-                LinkToDelegate = (target, options) => {
+                LinkToDelegate = (target, options) =>
+                {
                     chooseTarget = target;
                     return new DelegateDisposable();
-                }
+                },
             };
             Task<int> chooseTask = DataflowBlock.Choose(source, i => { }, source, i => { });
             Assert.NotNull(chooseTarget);
             DataflowTestHelpers.TestOfferMessage_ArgumentValidation(chooseTarget);
-            Assert.Throws<NotSupportedException>(() => { var ignored = chooseTarget.Completion; });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var ignored = chooseTarget.Completion;
+            });
             chooseTarget.Fault(new Exception()); // shouldn't throw
         }
 
         [Fact]
         public void TestChoose_FaultySource()
         {
-            var source = new DelegateReceivablePropagator<int, int> {
-                TryReceiveDelegate = delegate(Predicate<int> filter, out int item) {
+            var source = new DelegateReceivablePropagator<int, int>
+            {
+                TryReceiveDelegate = delegate(Predicate<int> filter, out int item)
+                {
                     throw new FormatException();
-                }
+                },
             };
             Task<int> t = DataflowBlock.Choose(source, i => { }, source, i => { });
             Assert.Throws<FormatException>(() => t.GetAwaiter().GetResult());
@@ -1704,11 +2158,17 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public void TestEncapsulate_ArgumentValidation()
         {
             Assert.Throws<ArgumentNullException>(
-                () => DataflowBlock.Encapsulate<int, int>(null, new BufferBlock<int>()));
+                () => DataflowBlock.Encapsulate<int, int>(null, new BufferBlock<int>())
+            );
             Assert.Throws<ArgumentNullException>(
-                () => DataflowBlock.Encapsulate<int, int>(new BufferBlock<int>(), null));
+                () => DataflowBlock.Encapsulate<int, int>(new BufferBlock<int>(), null)
+            );
             Assert.Throws<ArgumentNullException>(
-                () => DataflowBlock.Encapsulate<int, int>(new BufferBlock<int>(), new BufferBlock<int>()).Fault(null));
+                () =>
+                    DataflowBlock
+                        .Encapsulate<int, int>(new BufferBlock<int>(), new BufferBlock<int>())
+                        .Fault(null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1716,7 +2176,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var buffer = new BufferBlock<int>();
             var action = new ActionBlock<int>(i => buffer.Post(i));
-            action.Completion.ContinueWith(delegate { buffer.Complete(); }, TaskScheduler.Default);
+            action.Completion.ContinueWith(
+                delegate
+                {
+                    buffer.Complete();
+                },
+                TaskScheduler.Default
+            );
             IPropagatorBlock<int, int> encapsulated = DataflowBlock.Encapsulate(action, buffer);
 
             var endTarget = new BufferBlock<int>();
@@ -1743,21 +2209,31 @@ namespace System.Threading.Tasks.Dataflow.Tests
             // source->||BoundedTransform->buffer||->sink
 
             int messagesReceived = 0;
-            var transform = new TransformBlock<int, int>(x => {
-                messagesReceived++;
-                return x;
-            }, new ExecutionDataflowBlockOptions() { BoundedCapacity = 1 });
+            var transform = new TransformBlock<int, int>(
+                x =>
+                {
+                    messagesReceived++;
+                    return x;
+                },
+                new ExecutionDataflowBlockOptions() { BoundedCapacity = 1 }
+            );
 
             var buffer = new BufferBlock<int>();
             transform.LinkTo(buffer);
-            var ignored = transform.Completion.ContinueWith(completion => buffer.Complete(), TaskScheduler.Default);
+            var ignored = transform.Completion.ContinueWith(
+                completion => buffer.Complete(),
+                TaskScheduler.Default
+            );
 
             IPropagatorBlock<int, int> encapsulated = DataflowBlock.Encapsulate(transform, buffer);
             encapsulated.LinkTo(new ActionBlock<int>(x => { }));
 
             var source = new BufferBlock<int>();
             source.LinkTo(encapsulated);
-            ignored = source.Completion.ContinueWith(completion => encapsulated.Complete(), TaskScheduler.Default);
+            ignored = source.Completion.ContinueWith(
+                completion => encapsulated.Complete(),
+                TaskScheduler.Default
+            );
 
             // Feed
             const int messagesSent = 10;
@@ -1773,17 +2249,40 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var buffer1 = new BufferBlock<int>();
             var action1 = new ActionBlock<int>(i => buffer1.Post(i));
-            var ignored = action1.Completion.ContinueWith(delegate { buffer1.Complete(); }, TaskScheduler.Default);
+            var ignored = action1.Completion.ContinueWith(
+                delegate
+                {
+                    buffer1.Complete();
+                },
+                TaskScheduler.Default
+            );
             IPropagatorBlock<int, int> encapsulated1 = DataflowBlock.Encapsulate(action1, buffer1);
 
             var buffer2 = new BufferBlock<string>();
             var action2 = new ActionBlock<string>(i => buffer2.Post(i));
-            ignored = action2.Completion.ContinueWith(delegate { buffer2.Complete(); }, TaskScheduler.Default);
-            IPropagatorBlock<string, string> encapsulated2 = DataflowBlock.Encapsulate(action2, buffer2);
+            ignored = action2.Completion.ContinueWith(
+                delegate
+                {
+                    buffer2.Complete();
+                },
+                TaskScheduler.Default
+            );
+            IPropagatorBlock<string, string> encapsulated2 = DataflowBlock.Encapsulate(
+                action2,
+                buffer2
+            );
 
-            var join = new JoinBlock<int, string>(new GroupingDataflowBlockOptions { Greedy = false });
-            encapsulated1.LinkTo(join.Target1, new DataflowLinkOptions { PropagateCompletion = true });
-            encapsulated2.LinkTo(join.Target2, new DataflowLinkOptions { PropagateCompletion = true });
+            var join = new JoinBlock<int, string>(
+                new GroupingDataflowBlockOptions { Greedy = false }
+            );
+            encapsulated1.LinkTo(
+                join.Target1,
+                new DataflowLinkOptions { PropagateCompletion = true }
+            );
+            encapsulated2.LinkTo(
+                join.Target2,
+                new DataflowLinkOptions { PropagateCompletion = true }
+            );
 
             for (int i = 0; i < 2; i++)
             {
@@ -1822,11 +2321,19 @@ namespace System.Threading.Tasks.Dataflow.Tests
             await action2.Completion;
 
             int item;
-            Assert.False(((IReceivableSourceBlock<int>)encapsulated2).TryReceive(f => false, out item));
+            Assert.False(
+                ((IReceivableSourceBlock<int>)encapsulated2).TryReceive(f => false, out item)
+            );
             Assert.True(((IReceivableSourceBlock<int>)encapsulated2).TryReceive(out item));
             Assert.Equal(expected: 4, actual: item);
-            Assert.Equal(expected: 5, actual: ((IReceivableSourceBlock<int>)encapsulated2).Receive());
-            Assert.Equal(expected: 6, actual: await ((IReceivableSourceBlock<int>)encapsulated2).ReceiveAsync());
+            Assert.Equal(
+                expected: 5,
+                actual: ((IReceivableSourceBlock<int>)encapsulated2).Receive()
+            );
+            Assert.Equal(
+                expected: 6,
+                actual: await ((IReceivableSourceBlock<int>)encapsulated2).ReceiveAsync()
+            );
         }
 
         [Fact]
@@ -1848,8 +2355,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestOutputAvailableAsync_ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(() => { DataflowBlock.OutputAvailableAsync<int>(null); });
-            Assert.Throws<ArgumentNullException>(() => { DataflowBlock.OutputAvailableAsync<int>(null, CancellationToken.None); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.OutputAvailableAsync<int>(null);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataflowBlock.OutputAvailableAsync<int>(null, CancellationToken.None);
+            });
         }
 
         [Fact]
@@ -1858,71 +2371,73 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var buffer = new BufferBlock<int>();
 
             foreach (bool withUncanceledToken in DataflowTestHelpers.BooleanValues)
-                foreach (bool beforeData in DataflowTestHelpers.BooleanValues)
+            foreach (bool beforeData in DataflowTestHelpers.BooleanValues)
+            {
+                if (beforeData)
                 {
-                    if (beforeData)
-                    {
-                        var t = withUncanceledToken ?
-                            buffer.OutputAvailableAsync(new CancellationTokenSource().Token) :
-                            buffer.OutputAvailableAsync();
-                        Assert.False(t.IsCompleted);
-                        buffer.Post(42);
-                        Assert.True(await t);
-                    }
-                    else
-                    {
-                        buffer.Post(42);
-                        var t = withUncanceledToken ?
-                            buffer.OutputAvailableAsync(new CancellationTokenSource().Token) :
-                            buffer.OutputAvailableAsync();
-                        Assert.True(t.IsCompleted);
-                        Assert.True(t.Result);
-                    }
-                    Assert.Equal(expected: 1, actual: buffer.Count);
-                    Assert.Equal(expected: 42, actual: await buffer.ReceiveAsync());
+                    var t = withUncanceledToken
+                        ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
+                        : buffer.OutputAvailableAsync();
+                    Assert.False(t.IsCompleted);
+                    buffer.Post(42);
+                    Assert.True(await t);
                 }
+                else
+                {
+                    buffer.Post(42);
+                    var t = withUncanceledToken
+                        ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
+                        : buffer.OutputAvailableAsync();
+                    Assert.True(t.IsCompleted);
+                    Assert.True(t.Result);
+                }
+                Assert.Equal(expected: 1, actual: buffer.Count);
+                Assert.Equal(expected: 42, actual: await buffer.ReceiveAsync());
+            }
         }
 
         [Fact]
         public async Task TestOutputAvailableAsync_NoDataAfterCompletion()
         {
             foreach (bool withUncanceledToken in DataflowTestHelpers.BooleanValues)
-                foreach (bool completeBefore in DataflowTestHelpers.BooleanValues)
-                {
-                    var buffer = new BufferBlock<int>();
-                    Task<bool> t;
+            foreach (bool completeBefore in DataflowTestHelpers.BooleanValues)
+            {
+                var buffer = new BufferBlock<int>();
+                Task<bool> t;
 
-                    if (completeBefore) buffer.Complete();
+                if (completeBefore)
+                    buffer.Complete();
 
-                    t = withUncanceledToken ?
-                        buffer.OutputAvailableAsync(new CancellationTokenSource().Token) :
-                        buffer.OutputAvailableAsync();
+                t = withUncanceledToken
+                    ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
+                    : buffer.OutputAvailableAsync();
 
-                    if (!completeBefore) buffer.Complete();
+                if (!completeBefore)
+                    buffer.Complete();
 
-                    Assert.False(await t);
-                }
+                Assert.False(await t);
+            }
         }
 
         [Fact]
         public async Task TestOutputAvailableAsync_DataAfterCompletion()
         {
             foreach (bool withUncanceledToken in DataflowTestHelpers.BooleanValues)
-                foreach (bool withData in DataflowTestHelpers.BooleanValues)
-                {
-                    var wob = new WriteOnceBlock<int>(_ => _);
-                    if (withData)
-                        wob.Post(42);
-                    else
-                        wob.Complete();
-                    await wob.Completion;
+            foreach (bool withData in DataflowTestHelpers.BooleanValues)
+            {
+                var wob = new WriteOnceBlock<int>(_ => _);
+                if (withData)
+                    wob.Post(42);
+                else
+                    wob.Complete();
+                await wob.Completion;
 
-                    Task<bool> t = withUncanceledToken ?
-                        wob.OutputAvailableAsync(new CancellationTokenSource().Token) :
-                        wob.OutputAvailableAsync();
+                Task<bool> t = withUncanceledToken
+                    ? wob.OutputAvailableAsync(new CancellationTokenSource().Token)
+                    : wob.OutputAvailableAsync();
 
-                    Assert.Equal(expected: withData, actual: await t);
-                }
+                Assert.Equal(expected: withData, actual: await t);
+            }
         }
 
         [Fact]
@@ -1935,8 +2450,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Task t = source.OutputAvailableAsync();
             for (int i = 1; i < iterations; i++)
             {
-                t = t.ContinueWith(_ => source.OutputAvailableAsync(),
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap();
+                t = t.ContinueWith(
+                        _ => source.OutputAvailableAsync(),
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    )
+                    .Unwrap();
             }
 
             source.Post(42);
@@ -1956,7 +2476,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             cts.Cancel();
             await AssertExtensions.CanceledAsync(
                 PlatformDetection.IsNetFramework ? default : cts.Token, // token doesn't currently flow in netstandard2.0 build due to lack of necessary API
-                t);
+                t
+            );
 
             cts = new CancellationTokenSource();
             t = buffer.OutputAvailableAsync(cts.Token);
@@ -1970,7 +2491,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var source = new DelegatePropagator<int, int>
             {
-                LinkToDelegate = delegate { throw new InvalidCastException(); }
+                LinkToDelegate = delegate
+                {
+                    throw new InvalidCastException();
+                },
             };
             var t = source.OutputAvailableAsync();
             await Assert.ThrowsAsync<InvalidCastException>(() => t);

@@ -9,8 +9,8 @@ public
 #endif
 class Test
 {
-	public static int Main ()
-	{
-		return 0;
-	}
+    public static int Main()
+    {
+        return 0;
+    }
 }

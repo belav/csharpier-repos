@@ -1,21 +1,17 @@
 using System;
-using System.Security;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
 using Xunit;
 
 namespace PInvokeTests
 {
     [StructLayout(LayoutKind.Sequential)]
-    public class EmptyBase
-    {
-    }
+    public class EmptyBase { }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class EmptyBase2 : EmptyBase
-    {
-    }
+    public class EmptyBase2 : EmptyBase { }
 
     [StructLayout(LayoutKind.Sequential)]
     public class SeqDerivedClass : EmptyBase
@@ -76,6 +72,7 @@ namespace PInvokeTests
             c = num;
             i = num;
         }
+
         public ExpClass(DialogResult t, double dnum)
         {
             type = t;
@@ -83,6 +80,7 @@ namespace PInvokeTests
             i = 0;
             c = dnum;
         }
+
         public ExpClass(DialogResult t, bool bnum)
         {
             type = t;
@@ -96,7 +94,7 @@ namespace PInvokeTests
     {
         None = 0,
         OK = 1,
-        Cancel = 2
+        Cancel = 2,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -139,7 +137,9 @@ namespace PInvokeTests
 
     public class StructureTests
     {
-        private const string SimpleBlittableSeqLayoutClass_UpdateField = nameof(SimpleBlittableSeqLayoutClass_UpdateField);
+        private const string SimpleBlittableSeqLayoutClass_UpdateField = nameof(
+            SimpleBlittableSeqLayoutClass_UpdateField
+        );
 
         [DllImport("LayoutClassNative")]
         private static extern bool SimpleSeqLayoutClassByRef(SeqClass p);
@@ -306,10 +306,7 @@ namespace PInvokeTests
 
             string s = "before";
             var p = new SeqClass(0, false, s);
-            var target = new NestedLayout
-            {
-                value = p
-            };
+            var target = new NestedLayout { value = p };
             Assert.True(SimpleNestedLayoutClassByValue(target));
         }
 
@@ -317,7 +314,9 @@ namespace PInvokeTests
         {
             Console.WriteLine($"Running {nameof(RecursiveNativeLayout)}...");
 
-            Assert.Throws<TypeLoadException>(() => RecursiveNativeLayoutInvalid(new RecursiveTestStruct()));
+            Assert.Throws<TypeLoadException>(
+                () => RecursiveNativeLayoutInvalid(new RecursiveTestStruct())
+            );
         }
 
         [Fact]

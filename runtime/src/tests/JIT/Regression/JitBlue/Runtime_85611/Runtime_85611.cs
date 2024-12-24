@@ -44,12 +44,17 @@ public class Runtime_85611
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Use(ref S s)
-    {
-    }
+    private static void Use(ref S s) { }
 
     private struct S
     {
-        public int A, B, C, D, E, F, G, H;
+        public int A,
+            B,
+            C,
+            D,
+            E,
+            F,
+            G,
+            H;
     }
 }

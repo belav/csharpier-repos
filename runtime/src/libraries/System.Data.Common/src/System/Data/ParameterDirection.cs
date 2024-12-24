@@ -11,6 +11,6 @@ namespace System.Data
 
         InputOutput = 3,
 
-        ReturnValue = 6
+        ReturnValue = 6,
     }
 }

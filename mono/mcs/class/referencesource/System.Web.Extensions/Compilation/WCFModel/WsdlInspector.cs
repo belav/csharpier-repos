@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Web.Services.Description;
 using System.Xml;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 #else
@@ -24,7 +23,7 @@ namespace Microsoft.VSDesigner.WCFModel
 #endif
 {
     /// <summary>
-    /// This class check whether there are duplicated wsdl files in the metadata collection, and report error messages, if any contract is 
+    /// This class check whether there are duplicated wsdl files in the metadata collection, and report error messages, if any contract is
     /// defined differently in two wsdl files.
     /// </summary>
     internal class WsdlInspector
@@ -50,7 +49,10 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="wsdlFiles"></param>
         /// <param name="importErrors"></param>
         /// <remarks></remarks>
-        internal static void CheckDuplicatedWsdlItems(ICollection<ServiceDescription> wsdlFiles, IList<ProxyGenerationError> importErrors)
+        internal static void CheckDuplicatedWsdlItems(
+            ICollection<ServiceDescription> wsdlFiles,
+            IList<ProxyGenerationError> importErrors
+        )
         {
             WsdlInspector inspector = new WsdlInspector(importErrors);
             inspector.CheckServiceDescriptions(wsdlFiles);
@@ -73,7 +75,10 @@ namespace Microsoft.VSDesigner.WCFModel
                 // check all portTypes...
                 foreach (PortType portType in wsdl.PortTypes)
                 {
-                    XmlQualifiedName portTypeName = new XmlQualifiedName(portType.Name, targetNamespace);
+                    XmlQualifiedName portTypeName = new XmlQualifiedName(
+                        portType.Name,
+                        targetNamespace
+                    );
                     PortType definedPortType;
                     if (portTypes.TryGetValue(portTypeName, out definedPortType))
                     {
@@ -88,7 +93,10 @@ namespace Microsoft.VSDesigner.WCFModel
                 // check all messages...
                 foreach (Message message in wsdl.Messages)
                 {
-                    XmlQualifiedName messageName = new XmlQualifiedName(message.Name, targetNamespace);
+                    XmlQualifiedName messageName = new XmlQualifiedName(
+                        message.Name,
+                        targetNamespace
+                    );
                     Message definedMessage;
                     if (messages.TryGetValue(messageName, out definedMessage))
                     {
@@ -116,41 +124,47 @@ namespace Microsoft.VSDesigner.WCFModel
             y.Operations.CopyTo(operationsY, 0);
             Array.Sort(operationsY, new OperationComparer());
 
-            MatchCollections<Operation>(operationsX, operationsY,
-                    delegate(Operation operationX, Operation operationY)
+            MatchCollections<Operation>(
+                operationsX,
+                operationsY,
+                delegate(Operation operationX, Operation operationY)
+                {
+                    if (operationX != null && operationY != null)
                     {
-                        if (operationX != null && operationY != null)
-                        {
-                            int nameDifferent = String.Compare(operationX.Name, operationY.Name, StringComparison.Ordinal);
-                            if (nameDifferent < 0)
-                            {
-                                ReportUniqueOperation(operationX, x, y);
-                                return false;
-                            }
-                            else if (nameDifferent > 0)
-                            {
-                                ReportUniqueOperation(operationY, y, x);
-                                return false;
-                            }
-                            else if (!MatchOperations(operationX, operationY))
-                            {
-                                return false;
-                            }
-                            return true;
-                        }
-                        else if (operationX != null)
+                        int nameDifferent = String.Compare(
+                            operationX.Name,
+                            operationY.Name,
+                            StringComparison.Ordinal
+                        );
+                        if (nameDifferent < 0)
                         {
                             ReportUniqueOperation(operationX, x, y);
                             return false;
                         }
-                        else if (operationY != null)
+                        else if (nameDifferent > 0)
                         {
                             ReportUniqueOperation(operationY, y, x);
                             return false;
                         }
+                        else if (!MatchOperations(operationX, operationY))
+                        {
+                            return false;
+                        }
                         return true;
                     }
-                    );
+                    else if (operationX != null)
+                    {
+                        ReportUniqueOperation(operationX, x, y);
+                        return false;
+                    }
+                    else if (operationY != null)
+                    {
+                        ReportUniqueOperation(operationY, y, x);
+                        return false;
+                    }
+                    return true;
+                }
+            );
         }
 
         /// <summary>
@@ -178,7 +192,10 @@ namespace Microsoft.VSDesigner.WCFModel
             y.Faults.CopyTo(faultsY, 0);
             Array.Sort(faultsY, new OperationFaultComparer());
 
-            if (!MatchCollections<OperationFault>(faultsX, faultsY,
+            if (
+                !MatchCollections<OperationFault>(
+                    faultsX,
+                    faultsY,
                     delegate(OperationFault faultX, OperationFault faultY)
                     {
                         if (faultX != null && faultY != null)
@@ -191,7 +208,8 @@ namespace Microsoft.VSDesigner.WCFModel
                         }
                         return true;
                     }
-                    ))
+                )
+            )
             {
                 ReportOperationDefinedDifferently(x, y);
                 return false;
@@ -230,41 +248,47 @@ namespace Microsoft.VSDesigner.WCFModel
             y.Parts.CopyTo(partsY, 0);
             Array.Sort(partsY, new MessagePartComparer());
 
-            MatchCollections<MessagePart>(partsX, partsY,
-                    delegate(MessagePart partX, MessagePart partY)
+            MatchCollections<MessagePart>(
+                partsX,
+                partsY,
+                delegate(MessagePart partX, MessagePart partY)
+                {
+                    if (partX != null && partY != null)
                     {
-                        if (partX != null && partY != null)
-                        {
-                            int nameDifferent = String.Compare(partX.Name, partY.Name, StringComparison.Ordinal);
-                            if (nameDifferent < 0)
-                            {
-                                ReportUniqueMessagePart(partX, x, y);
-                                return false;
-                            }
-                            else if (nameDifferent > 0)
-                            {
-                                ReportUniqueMessagePart(partY, y, x);
-                                return false;
-                            }
-                            else if (!MatchMessageParts(partX, partY))
-                            {
-                                return false;
-                            }
-                            return true;
-                        }
-                        else if (partX != null)
+                        int nameDifferent = String.Compare(
+                            partX.Name,
+                            partY.Name,
+                            StringComparison.Ordinal
+                        );
+                        if (nameDifferent < 0)
                         {
                             ReportUniqueMessagePart(partX, x, y);
                             return false;
                         }
-                        else if (partY != null)
+                        else if (nameDifferent > 0)
                         {
                             ReportUniqueMessagePart(partY, y, x);
                             return false;
                         }
+                        else if (!MatchMessageParts(partX, partY))
+                        {
+                            return false;
+                        }
                         return true;
                     }
-                    );
+                    else if (partX != null)
+                    {
+                        ReportUniqueMessagePart(partX, x, y);
+                        return false;
+                    }
+                    else if (partY != null)
+                    {
+                        ReportUniqueMessagePart(partY, y, x);
+                        return false;
+                    }
+                    return true;
+                }
+            );
         }
 
         /// <summary>
@@ -273,7 +297,10 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private bool MatchMessageParts(MessagePart partX, MessagePart partY)
         {
-            if (!MatchXmlQualifiedNames(partX.Type, partY.Type) || !MatchXmlQualifiedNames(partX.Element, partY.Element))
+            if (
+                !MatchXmlQualifiedNames(partX.Type, partY.Type)
+                || !MatchXmlQualifiedNames(partX.Element, partY.Element)
+            )
             {
                 ReportMessageDefinedDifferently(partX, partX.Message, partY.Message);
                 return false;
@@ -298,20 +325,28 @@ namespace Microsoft.VSDesigner.WCFModel
         /// Report an error when we find operation defined in one place but not another
         /// </summary>
         /// <remarks></remarks>
-        private void ReportUniqueOperation(Operation operation, PortType portType1, PortType portType2)
+        private void ReportUniqueOperation(
+            Operation operation,
+            PortType portType1,
+            PortType portType2
+        )
         {
-            importErrors.Add(new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.MergeMetadata,
-                                        String.Empty,
-                                        new InvalidOperationException(
-                                            String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_OperationDefinedInOneOfDuplicatedServiceContract,
-                                                portType1.Name,
-                                                portType1.ServiceDescription.RetrievalUrl,
-                                                portType2.ServiceDescription.RetrievalUrl,
-                                                operation.Name)
-                                        )
-                                )
-                        );
+            importErrors.Add(
+                new ProxyGenerationError(
+                    ProxyGenerationError.GeneratorState.MergeMetadata,
+                    String.Empty,
+                    new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WCFModelStrings.ReferenceGroup_OperationDefinedInOneOfDuplicatedServiceContract,
+                            portType1.Name,
+                            portType1.ServiceDescription.RetrievalUrl,
+                            portType2.ServiceDescription.RetrievalUrl,
+                            operation.Name
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -320,18 +355,22 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private void ReportOperationDefinedDifferently(Operation x, Operation y)
         {
-            importErrors.Add(new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.MergeMetadata,
-                                        String.Empty,
-                                        new InvalidOperationException(
-                                            String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_OperationDefinedDifferently,
-                                                x.Name,
-                                                x.PortType.Name,
-                                                x.PortType.ServiceDescription.RetrievalUrl,
-                                                y.PortType.ServiceDescription.RetrievalUrl)
-                                        )
-                                )
-                            );
+            importErrors.Add(
+                new ProxyGenerationError(
+                    ProxyGenerationError.GeneratorState.MergeMetadata,
+                    String.Empty,
+                    new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WCFModelStrings.ReferenceGroup_OperationDefinedDifferently,
+                            x.Name,
+                            x.PortType.Name,
+                            x.PortType.ServiceDescription.RetrievalUrl,
+                            y.PortType.ServiceDescription.RetrievalUrl
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -340,18 +379,22 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private void ReportUniqueMessagePart(MessagePart part, Message message1, Message message2)
         {
-            importErrors.Add(new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.MergeMetadata,
-                                        String.Empty,
-                                        new InvalidOperationException(
-                                            String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_FieldDefinedInOneOfDuplicatedMessage,
-                                                message1.Name,
-                                                message1.ServiceDescription.RetrievalUrl,
-                                                message2.ServiceDescription.RetrievalUrl,
-                                                part.Name)
-                                        )
-                                )
-                        );
+            importErrors.Add(
+                new ProxyGenerationError(
+                    ProxyGenerationError.GeneratorState.MergeMetadata,
+                    String.Empty,
+                    new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WCFModelStrings.ReferenceGroup_FieldDefinedInOneOfDuplicatedMessage,
+                            message1.Name,
+                            message1.ServiceDescription.RetrievalUrl,
+                            message2.ServiceDescription.RetrievalUrl,
+                            part.Name
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -360,18 +403,22 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private void ReportMessageDefinedDifferently(MessagePart part, Message x, Message y)
         {
-            importErrors.Add(new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.MergeMetadata,
-                                        String.Empty,
-                                        new InvalidOperationException(
-                                            String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_FieldDefinedDifferentlyInDuplicatedMessage,
-                                                part.Name,
-                                                x.Name,
-                                                x.ServiceDescription.RetrievalUrl,
-                                                y.ServiceDescription.RetrievalUrl)
-                                        )
-                                )
-                            );
+            importErrors.Add(
+                new ProxyGenerationError(
+                    ProxyGenerationError.GeneratorState.MergeMetadata,
+                    String.Empty,
+                    new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WCFModelStrings.ReferenceGroup_FieldDefinedDifferentlyInDuplicatedMessage,
+                            part.Name,
+                            x.Name,
+                            x.ServiceDescription.RetrievalUrl,
+                            y.ServiceDescription.RetrievalUrl
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -380,7 +427,6 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private class OperationComparer : System.Collections.Generic.IComparer<Operation>
         {
-
             public int Compare(Operation x, Operation y)
             {
                 return String.Compare(x.Name, y.Name, StringComparison.Ordinal);
@@ -393,10 +439,13 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private class OperationFaultComparer : System.Collections.Generic.IComparer<OperationFault>
         {
-
             public int Compare(OperationFault x, OperationFault y)
             {
-                int namespaceResult = String.Compare(x.Message.Namespace, y.Message.Namespace, StringComparison.Ordinal);
+                int namespaceResult = String.Compare(
+                    x.Message.Namespace,
+                    y.Message.Namespace,
+                    StringComparison.Ordinal
+                );
                 if (namespaceResult != 0)
                 {
                     return namespaceResult;
@@ -412,7 +461,6 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private class MessagePartComparer : System.Collections.Generic.IComparer<MessagePart>
         {
-
             public int Compare(MessagePart x, MessagePart y)
             {
                 return String.Compare(x.Name, y.Name, StringComparison.Ordinal);
@@ -424,7 +472,9 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <remarks></remarks>
         private delegate bool MatchCollectionItemDelegate<T>(T x, T y);
-        private bool MatchCollections<T>(T[] x, T[] y, MatchCollectionItemDelegate<T> compareItems) where T : class
+
+        private bool MatchCollections<T>(T[] x, T[] y, MatchCollectionItemDelegate<T> compareItems)
+            where T : class
         {
             System.Collections.IEnumerator enumeratorX = x.GetEnumerator();
             System.Collections.IEnumerator enumeratorY = y.GetEnumerator();
@@ -443,12 +493,9 @@ namespace Microsoft.VSDesigner.WCFModel
                         return false;
                     }
                 }
-            }
-            while (tX != null && tY != null);
+            } while (tX != null && tY != null);
 
             return compareItems(tX, tY);
         }
-
     }
 }
-

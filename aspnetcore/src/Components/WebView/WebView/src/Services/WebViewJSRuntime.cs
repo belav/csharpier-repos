@@ -17,8 +17,8 @@ internal sealed class WebViewJSRuntime : JSRuntime
     {
         ElementReferenceContext = new WebElementReferenceContext(this);
         JsonSerializerOptions.Converters.Add(
-            new ElementReferenceJsonConverter(
-                new WebElementReferenceContext(this)));
+            new ElementReferenceJsonConverter(new WebElementReferenceContext(this))
+        );
     }
 
     public void AttachToWebView(IpcSender ipcSender)
@@ -28,22 +28,37 @@ internal sealed class WebViewJSRuntime : JSRuntime
 
     public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;
 
-    protected override void BeginInvokeJS(long taskId, string identifier, string argsJson, JSCallResultType resultType, long targetInstanceId)
+    protected override void BeginInvokeJS(
+        long taskId,
+        string identifier,
+        string argsJson,
+        JSCallResultType resultType,
+        long targetInstanceId
+    )
     {
         if (_ipcSender is null)
         {
-            throw new InvalidOperationException("Cannot invoke JavaScript outside of a WebView context.");
+            throw new InvalidOperationException(
+                "Cannot invoke JavaScript outside of a WebView context."
+            );
         }
 
         _ipcSender.BeginInvokeJS(taskId, identifier, argsJson, resultType, targetInstanceId);
     }
 
-    protected override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
+    protected override void EndInvokeDotNet(
+        DotNetInvocationInfo invocationInfo,
+        in DotNetInvocationResult invocationResult
+    )
     {
         var resultJsonOrErrorMessage = invocationResult.Success
             ? invocationResult.ResultJson
             : invocationResult.Exception.ToString();
-        _ipcSender.EndInvokeDotNet(invocationInfo.CallId, invocationResult.Success, resultJsonOrErrorMessage);
+        _ipcSender.EndInvokeDotNet(
+            invocationInfo.CallId,
+            invocationResult.Success,
+            resultJsonOrErrorMessage
+        );
     }
 
     protected override void SendByteArray(int id, byte[] data)
@@ -51,11 +66,30 @@ internal sealed class WebViewJSRuntime : JSRuntime
         _ipcSender.SendByteArray(id, data);
     }
 
-    protected override Task<Stream> ReadJSDataAsStreamAsync(IJSStreamReference jsStreamReference, long totalLength, CancellationToken cancellationToken = default)
-        => Task.FromResult<Stream>(PullFromJSDataStream.CreateJSDataStream(this, jsStreamReference, totalLength, cancellationToken));
+    protected override Task<Stream> ReadJSDataAsStreamAsync(
+        IJSStreamReference jsStreamReference,
+        long totalLength,
+        CancellationToken cancellationToken = default
+    ) =>
+        Task.FromResult<Stream>(
+            PullFromJSDataStream.CreateJSDataStream(
+                this,
+                jsStreamReference,
+                totalLength,
+                cancellationToken
+            )
+        );
 
-    protected override Task TransmitStreamAsync(long streamId, DotNetStreamReference dotNetStreamReference)
+    protected override Task TransmitStreamAsync(
+        long streamId,
+        DotNetStreamReference dotNetStreamReference
+    )
     {
-        return TransmitDataStreamToJS.TransmitStreamAsync(this, "Blazor._internal.receiveWebViewDotNetDataStream", streamId, dotNetStreamReference);
+        return TransmitDataStreamToJS.TransmitStreamAsync(
+            this,
+            "Blazor._internal.receiveWebViewDotNetDataStream",
+            streamId,
+            dotNetStreamReference
+        );
     }
 }

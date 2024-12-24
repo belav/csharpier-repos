@@ -3,10 +3,9 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class InMemoryServiceCollectionExtensionsTest : EntityFrameworkServiceCollectionExtensionsTestBase
+public class InMemoryServiceCollectionExtensionsTest
+    : EntityFrameworkServiceCollectionExtensionsTestBase
 {
     public InMemoryServiceCollectionExtensionsTest()
-        : base(InMemoryTestHelpers.Instance)
-    {
-    }
+        : base(InMemoryTestHelpers.Instance) { }
 }

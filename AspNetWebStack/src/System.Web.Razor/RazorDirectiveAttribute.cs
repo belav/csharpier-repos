@@ -6,7 +6,7 @@ using Microsoft.Internal.Web.Utils;
 namespace System.Web.Razor
 {
     /// <summary>
-    /// Specifies a Razor directive that is rendered as an attribute on the generated class. 
+    /// Specifies a Razor directive that is rendered as an attribute on the generated class.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public sealed class RazorDirectiveAttribute : Attribute
@@ -17,7 +17,10 @@ namespace System.Web.Razor
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
             Name = name;
@@ -36,15 +39,15 @@ namespace System.Web.Razor
         public override bool Equals(object obj)
         {
             RazorDirectiveAttribute attribute = obj as RazorDirectiveAttribute;
-            return attribute != null &&
-                   Name.Equals(attribute.Name, StringComparison.OrdinalIgnoreCase) &&
-                   StringComparer.OrdinalIgnoreCase.Equals(Value, attribute.Value);
+            return attribute != null
+                && Name.Equals(attribute.Name, StringComparison.OrdinalIgnoreCase)
+                && StringComparer.OrdinalIgnoreCase.Equals(Value, attribute.Value);
         }
 
         public override int GetHashCode()
         {
-            return (StringComparer.OrdinalIgnoreCase.GetHashCode(Name) * 31) +
-                   (Value == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(Value));
+            return (StringComparer.OrdinalIgnoreCase.GetHashCode(Name) * 31)
+                + (Value == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(Value));
         }
     }
 }

@@ -42,16 +42,14 @@ namespace System.Xml.Xsl.Runtime
                 do
                 {
                     idx++;
-                }
-                while (bytesKey[idx] != 1);
+                } while (bytesKey[idx] != 1);
 
                 // Invert all case weights (including terminating 0x1)
                 do
                 {
                     idx++;
                     bytesKey[idx] ^= 0xff;
-                }
-                while (bytesKey[idx] != 0xfe);
+                } while (bytesKey[idx] != 0xfe);
             }
 
             return new XmlStringSortKey(bytesKey, DescendingOrder);

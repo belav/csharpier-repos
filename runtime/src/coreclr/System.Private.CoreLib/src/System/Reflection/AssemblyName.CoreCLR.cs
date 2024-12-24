@@ -14,7 +14,10 @@ namespace System.Reflection
     internal unsafe struct NativeAssemblyNameParts
     {
         public char* _pName;
-        public ushort _major, _minor, _build, _revision;
+        public ushort _major,
+            _minor,
+            _build,
+            _revision;
         public char* _pCultureName;
         public byte* _pPublicKeyOrToken;
         public int _cbPublicKeyOrToken;
@@ -77,7 +80,10 @@ namespace System.Reflection
 
             if (pParts->_pPublicKeyOrToken != null)
             {
-                byte[] publicKeyOrToken = new ReadOnlySpan<byte>(pParts->_pPublicKeyOrToken, pParts->_cbPublicKeyOrToken).ToArray();
+                byte[] publicKeyOrToken = new ReadOnlySpan<byte>(
+                    pParts->_pPublicKeyOrToken,
+                    pParts->_cbPublicKeyOrToken
+                ).ToArray();
 
                 if ((pParts->_flags & AssemblyNameFlags.PublicKey) != 0)
                 {
@@ -110,7 +116,11 @@ namespace System.Reflection
 #pragma warning restore SYSLIB0037
         }
 
-        private static ProcessorArchitecture CalculateProcArch(PortableExecutableKinds pek, ImageFileMachine ifm, AssemblyNameFlags aFlags)
+        private static ProcessorArchitecture CalculateProcArch(
+            PortableExecutableKinds pek,
+            ImageFileMachine ifm,
+            AssemblyNameFlags aFlags
+        )
         {
             // 0x70 specifies "reference assembly".
             // For these, CLR wants to return None as arch so they can be always loaded, regardless of process type.
@@ -126,17 +136,19 @@ namespace System.Reflection
                 case ImageFileMachine.AMD64:
                     return ProcessorArchitecture.Amd64;
                 case ImageFileMachine.I386:
+                {
+                    if (
+                        (pek & PortableExecutableKinds.ILOnly) != 0
+                        && (pek & PortableExecutableKinds.Required32Bit) == 0
+                    )
                     {
-                        if ((pek & PortableExecutableKinds.ILOnly) != 0 &&
-                            (pek & PortableExecutableKinds.Required32Bit) == 0)
-                        {
-                            // platform neutral.
-                            return ProcessorArchitecture.MSIL;
-                        }
-
-                        // requires x86
-                        return ProcessorArchitecture.X86;
+                        // platform neutral.
+                        return ProcessorArchitecture.MSIL;
                     }
+
+                    // requires x86
+                    return ProcessorArchitecture.X86;
+                }
             }
 
             // ProcessorArchitecture is a legacy API and does not cover other Machine kinds.
@@ -146,7 +158,9 @@ namespace System.Reflection
 
         private static unsafe void ParseAsAssemblySpec(char* pAssemblyName, void* pAssemblySpec)
         {
-            AssemblyNameParser.AssemblyNameParts parts = AssemblyNameParser.Parse(MemoryMarshal.CreateReadOnlySpanFromNullTerminated(pAssemblyName));
+            AssemblyNameParser.AssemblyNameParts parts = AssemblyNameParser.Parse(
+                MemoryMarshal.CreateReadOnlySpanFromNullTerminated(pAssemblyName)
+            );
 
             fixed (char* pName = parts._name)
             fixed (char* pCultureName = parts._cultureName)
@@ -159,7 +173,8 @@ namespace System.Reflection
                 nameParts._pCultureName = pCultureName;
 
                 nameParts._pPublicKeyOrToken = pPublicKeyOrToken;
-                nameParts._cbPublicKeyOrToken = (parts._publicKeyOrToken != null) ? parts._publicKeyOrToken.Length : 0;
+                nameParts._cbPublicKeyOrToken =
+                    (parts._publicKeyOrToken != null) ? parts._publicKeyOrToken.Length : 0;
 
                 nameParts.SetVersion(parts._version, defaultValue: ushort.MaxValue);
 
@@ -168,6 +183,9 @@ namespace System.Reflection
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyName_InitializeAssemblySpec")]
-        private static unsafe partial void InitializeAssemblySpec(NativeAssemblyNameParts* pAssemblyNameParts, void* pAssemblySpec);
+        private static unsafe partial void InitializeAssemblySpec(
+            NativeAssemblyNameParts* pAssemblyNameParts,
+            void* pAssemblySpec
+        );
     }
 }

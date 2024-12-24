@@ -2,30 +2,30 @@
 
 public class Stack<T>
 {
-	T[] data;
+    T[] data;
 
-	public Stack ()
-	{
-		data = new T [10];
-	}
+    public Stack()
+    {
+        data = new T[10];
+    }
 
-	public void Add (T t)
-	{
-		data [0] = t;
-	}
+    public void Add(T t)
+    {
+        data[0] = t;
+    }
 }
 
 struct Foo
 {
-	int a;
+    int a;
 }
 
 class X
 {
-	public static void Main ()
-	{
-		Foo foo = new Foo ();
-		Stack<Foo> stack = new Stack<Foo> ();
-		stack.Add (foo);
-	}
+    public static void Main()
+    {
+        Foo foo = new Foo();
+        Stack<Foo> stack = new Stack<Foo>();
+        stack.Add(foo);
+    }
 }

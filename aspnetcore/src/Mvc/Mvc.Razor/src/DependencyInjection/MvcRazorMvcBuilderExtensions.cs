@@ -20,7 +20,8 @@ public static class MvcRazorMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddRazorOptions(
         this IMvcBuilder builder,
-        Action<RazorViewEngineOptions> setupAction)
+        Action<RazorViewEngineOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(setupAction);
@@ -56,7 +57,8 @@ public static class MvcRazorMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/> instance this method extends.</returns>
     public static IMvcBuilder InitializeTagHelper<TTagHelper>(
         this IMvcBuilder builder,
-        Action<TTagHelper, ViewContext> initialize)
+        Action<TTagHelper, ViewContext> initialize
+    )
         where TTagHelper : ITagHelper
     {
         ArgumentNullException.ThrowIfNull(builder);

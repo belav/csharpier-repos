@@ -34,10 +34,7 @@ namespace System.Web.Mvc
                 }
                 return _html;
             }
-            set
-            {
-                _html = value;
-            }
+            set { _html = value; }
         }
 
         public AjaxHelper<object> Ajax
@@ -50,10 +47,7 @@ namespace System.Web.Mvc
                 }
                 return _ajax;
             }
-            set
-            {
-                _ajax = value;
-            }
+            set { _ajax = value; }
         }
 
         public object Model
@@ -84,7 +78,11 @@ namespace System.Web.Mvc
 
         public ViewContext ViewContext { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the mechanism by which the ViewPage gets its ViewDataDictionary object.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is the mechanism by which the ViewPage gets its ViewDataDictionary object."
+        )]
         public ViewDataDictionary ViewData
         {
             get
@@ -106,7 +104,13 @@ namespace System.Web.Mvc
                 // TODO : review if this check is even necessary.
                 // When this method is called by the framework parentPage should already be an instance of WebViewPage
                 // Need to review what happens if this method gets called in Plan9 pointing at an MVC view
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, MvcResources.CshtmlView_WrongViewBase, parentPage.VirtualPath));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.CshtmlView_WrongViewBase,
+                        parentPage.VirtualPath
+                    )
+                );
             }
 
             // Set ViewContext and ViewData here so that the layout page inherits ViewData from the main page

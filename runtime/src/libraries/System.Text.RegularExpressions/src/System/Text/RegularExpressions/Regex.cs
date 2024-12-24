@@ -22,17 +22,16 @@ namespace System.Text.RegularExpressions
     public partial class Regex : ISerializable
     {
         [StringSyntax(StringSyntaxAttribute.Regex)]
-        protected internal string? pattern;                   // The string pattern provided
-        protected internal RegexOptions roptions;             // the top-level options from the options string
-        protected internal RegexRunnerFactory? factory;       // Factory used to create runner instances for executing the regex
-        protected internal Hashtable? caps;                   // if captures are sparse, this is the hashtable capnum->index
-        protected internal Hashtable? capnames;               // if named captures are used, this maps names->index
-        protected internal string[]? capslist;                // if captures are sparse or named captures are used, this is the sorted list of names
-        protected internal int capsize;                       // the size of the capture array
+        protected internal string? pattern; // The string pattern provided
+        protected internal RegexOptions roptions; // the top-level options from the options string
+        protected internal RegexRunnerFactory? factory; // Factory used to create runner instances for executing the regex
+        protected internal Hashtable? caps; // if captures are sparse, this is the hashtable capnum->index
+        protected internal Hashtable? capnames; // if named captures are used, this maps names->index
+        protected internal string[]? capslist; // if captures are sparse or named captures are used, this is the sorted list of names
+        protected internal int capsize; // the size of the capture array
 
-        private WeakReference<RegexReplacement?>? _replref;   // cached parsed replacement pattern
-        private volatile RegexRunner? _runner;                // cached runner
-
+        private WeakReference<RegexReplacement?>? _replref; // cached parsed replacement pattern
+        private volatile RegexRunner? _runner; // cached runner
 #if DEBUG
         // These members aren't used from Regex(), but we want to keep them in debug builds for now,
         // so this is a convenient place to include them rather than needing a debug-only illink file.
@@ -49,23 +48,24 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Creates a regular expression object for the specified regular expression.
         /// </summary>
-        public Regex([StringSyntax(StringSyntaxAttribute.Regex)] string pattern) :
-            this(pattern, culture: null)
-        {
-        }
+        public Regex([StringSyntax(StringSyntaxAttribute.Regex)] string pattern)
+            : this(pattern, culture: null) { }
 
         /// <summary>
         /// Creates a regular expression object for the specified regular expression, with options that modify the pattern.
         /// </summary>
-        public Regex([StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options) :
-            this(pattern, options, s_defaultMatchTimeout, culture: null)
-        {
-        }
+        public Regex(
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options
+        )
+            : this(pattern, options, s_defaultMatchTimeout, culture: null) { }
 
-        public Regex([StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options, TimeSpan matchTimeout) :
-            this(pattern, options, matchTimeout, culture: null)
-        {
-        }
+        public Regex(
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        )
+            : this(pattern, options, matchTimeout, culture: null) { }
 
         internal Regex(string pattern, CultureInfo? culture)
         {
@@ -83,9 +83,17 @@ namespace System.Text.RegularExpressions
             // if no options are ever used.
         }
 
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-            Justification = "Compiled Regex is only used when RuntimeFeature.IsDynamicCodeCompiled is true. Workaround https://github.com/dotnet/linker/issues/2715.")]
-        internal Regex(string pattern, RegexOptions options, TimeSpan matchTimeout, CultureInfo? culture)
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:RequiresDynamicCode",
+            Justification = "Compiled Regex is only used when RuntimeFeature.IsDynamicCodeCompiled is true. Workaround https://github.com/dotnet/linker/issues/2715."
+        )]
+        internal Regex(
+            string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout,
+            CultureInfo? culture
+        )
         {
             // Validate arguments.
             ValidatePattern(pattern);
@@ -117,7 +125,12 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>Stores the supplied arguments and capture information, returning the parsed expression.</summary>
-        private RegexTree Init(string pattern, RegexOptions options, TimeSpan matchTimeout, [NotNull] ref CultureInfo? culture)
+        private RegexTree Init(
+            string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout,
+            [NotNull] ref CultureInfo? culture
+        )
         {
             this.pattern = pattern;
             roptions = options;
@@ -147,9 +160,26 @@ namespace System.Text.RegularExpressions
         internal static void ValidateOptions(RegexOptions options)
         {
             const int MaxOptionShift = 11;
-            if (((((uint)options) >> MaxOptionShift) != 0) ||
-                ((options & RegexOptions.ECMAScript) != 0 && (options & ~(RegexOptions.ECMAScript | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled | RegexOptions.CultureInvariant)) != 0) ||
-                ((options & RegexOptions.NonBacktracking) != 0 && (options & (RegexOptions.ECMAScript | RegexOptions.RightToLeft)) != 0))
+            if (
+                ((((uint)options) >> MaxOptionShift) != 0)
+                || (
+                    (options & RegexOptions.ECMAScript) != 0
+                    && (
+                        options
+                        & ~(
+                            RegexOptions.ECMAScript
+                            | RegexOptions.IgnoreCase
+                            | RegexOptions.Multiline
+                            | RegexOptions.Compiled
+                            | RegexOptions.CultureInvariant
+                        )
+                    ) != 0
+                )
+                || (
+                    (options & RegexOptions.NonBacktracking) != 0
+                    && (options & (RegexOptions.ECMAScript | RegexOptions.RightToLeft)) != 0
+                )
+            )
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.options);
             }
@@ -164,13 +194,20 @@ namespace System.Text.RegularExpressions
         protected internal static void ValidateMatchTimeout(TimeSpan matchTimeout)
         {
             long matchTimeoutTicks = matchTimeout.Ticks;
-            if (matchTimeoutTicks != InfiniteMatchTimeoutTicks && ((ulong)(matchTimeoutTicks - 1) >= MaximumMatchTimeoutTicks))
+            if (
+                matchTimeoutTicks != InfiniteMatchTimeoutTicks
+                && ((ulong)(matchTimeoutTicks - 1) >= MaximumMatchTimeoutTicks)
+            )
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.matchTimeout);
             }
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected Regex(SerializationInfo info, StreamingContext context) =>
             throw new PlatformNotSupportedException();
@@ -215,20 +252,45 @@ namespace System.Text.RegularExpressions
         /// </summary>
         [RequiresDynamicCode("Compiling a RegEx requires dynamic code.")]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static RegexRunnerFactory? Compile(string pattern, RegexTree regexTree, RegexOptions options, bool hasTimeout) =>
-            RegexCompiler.Compile(pattern, regexTree, options, hasTimeout);
+        private static RegexRunnerFactory? Compile(
+            string pattern,
+            RegexTree regexTree,
+            RegexOptions options,
+            bool hasTimeout
+        ) => RegexCompiler.Compile(pattern, regexTree, options, hasTimeout);
 
-        [Obsolete(Obsoletions.RegexCompileToAssemblyMessage, DiagnosticId = Obsoletions.RegexCompileToAssemblyDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void CompileToAssembly(RegexCompilationInfo[] regexinfos, AssemblyName assemblyname) =>
-            CompileToAssembly(regexinfos, assemblyname, null, null);
+        [Obsolete(
+            Obsoletions.RegexCompileToAssemblyMessage,
+            DiagnosticId = Obsoletions.RegexCompileToAssemblyDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void CompileToAssembly(
+            RegexCompilationInfo[] regexinfos,
+            AssemblyName assemblyname
+        ) => CompileToAssembly(regexinfos, assemblyname, null, null);
 
-        [Obsolete(Obsoletions.RegexCompileToAssemblyMessage, DiagnosticId = Obsoletions.RegexCompileToAssemblyDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void CompileToAssembly(RegexCompilationInfo[] regexinfos, AssemblyName assemblyname, CustomAttributeBuilder[]? attributes) =>
-            CompileToAssembly(regexinfos, assemblyname, attributes, null);
+        [Obsolete(
+            Obsoletions.RegexCompileToAssemblyMessage,
+            DiagnosticId = Obsoletions.RegexCompileToAssemblyDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void CompileToAssembly(
+            RegexCompilationInfo[] regexinfos,
+            AssemblyName assemblyname,
+            CustomAttributeBuilder[]? attributes
+        ) => CompileToAssembly(regexinfos, assemblyname, attributes, null);
 
-        [Obsolete(Obsoletions.RegexCompileToAssemblyMessage, DiagnosticId = Obsoletions.RegexCompileToAssemblyDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static void CompileToAssembly(RegexCompilationInfo[] regexinfos, AssemblyName assemblyname, CustomAttributeBuilder[]? attributes, string? resourceFile) =>
-            throw new PlatformNotSupportedException(SR.PlatformNotSupported_CompileToAssembly);
+        [Obsolete(
+            Obsoletions.RegexCompileToAssemblyMessage,
+            DiagnosticId = Obsoletions.RegexCompileToAssemblyDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static void CompileToAssembly(
+            RegexCompilationInfo[] regexinfos,
+            AssemblyName assemblyname,
+            CustomAttributeBuilder[]? attributes,
+            string? resourceFile
+        ) => throw new PlatformNotSupportedException(SR.PlatformNotSupported_CompileToAssembly);
 
         /// <summary>
         /// Escapes a minimal set of metacharacters (\, *, +, ?, |, {, [, (, ), ^, $, ., #, and
@@ -357,17 +419,34 @@ namespace System.Text.RegularExpressions
             else
             {
                 // Otherwise, try to parse it as a number.
-                return uint.TryParse(name, NumberStyles.None, CultureInfo.InvariantCulture, out uint result) && result < capsize ? (int)result : -1;
+                return
+                    uint.TryParse(
+                        name,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out uint result
+                    )
+                    && result < capsize
+                    ? (int)result
+                    : -1;
             }
         }
 
         /// <summary>A weak reference to a regex replacement, lazily initialized.</summary>
         internal WeakReference<RegexReplacement?> RegexReplacementWeakReference =>
-            _replref ??
-            Interlocked.CompareExchange(ref _replref, new WeakReference<RegexReplacement?>(null), null) ??
-            _replref;
+            _replref
+            ?? Interlocked.CompareExchange(
+                ref _replref,
+                new WeakReference<RegexReplacement?>(null),
+                null
+            )
+            ?? _replref;
 
-        [Obsolete(Obsoletions.RegexExtensibilityImplMessage, DiagnosticId = Obsoletions.RegexExtensibilityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.RegexExtensibilityImplMessage,
+            DiagnosticId = Obsoletions.RegexExtensibilityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected void InitializeReferences()
         {
@@ -377,15 +456,28 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>Internal worker which will scan the passed in string <paramref name="input"/> for a match. Used by public APIs.</summary>
-        internal Match? RunSingleMatch(RegexRunnerMode mode, int prevlen, string input, int beginning, int length, int startat)
+        internal Match? RunSingleMatch(
+            RegexRunnerMode mode,
+            int prevlen,
+            string input,
+            int beginning,
+            int length,
+            int startat
+        )
         {
             if ((uint)startat > (uint)input.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startat, ExceptionResource.BeginIndexNotNegative);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.startat,
+                    ExceptionResource.BeginIndexNotNegative
+                );
             }
             if ((uint)length > (uint)input.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length, ExceptionResource.LengthNotNegative);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.length,
+                    ExceptionResource.LengthNotNegative
+                );
             }
 
             RegexRunner runner = Interlocked.Exchange(ref _runner, null) ?? CreateRunner();
@@ -415,7 +507,15 @@ namespace System.Text.RegularExpressions
                     runner.runtextpos += bump;
                 }
 
-                return ScanInternal(mode, reuseMatchObject: mode == RegexRunnerMode.ExistenceRequired, input, beginning, runner, span, returnNullIfReuseMatchObject: true);
+                return ScanInternal(
+                    mode,
+                    reuseMatchObject: mode == RegexRunnerMode.ExistenceRequired,
+                    input,
+                    beginning,
+                    runner,
+                    span,
+                    returnNullIfReuseMatchObject: true
+                );
             }
             finally
             {
@@ -425,7 +525,12 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>Internal worker which will scan the passed in span <paramref name="input"/> for a match. Used by public APIs.</summary>
-        internal (bool Success, int Index, int Length, int TextPosition) RunSingleMatch(RegexRunnerMode mode, int prevlen, ReadOnlySpan<char> input, int startat)
+        internal (bool Success, int Index, int Length, int TextPosition) RunSingleMatch(
+            RegexRunnerMode mode,
+            int prevlen,
+            ReadOnlySpan<char> input,
+            int startat
+        )
         {
             Debug.Assert(mode <= RegexRunnerMode.BoundsRequired);
 
@@ -485,13 +590,51 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>Internal worker which will scan the passed in string <paramref name="input"/> for all matches, and will call <paramref name="callback"/> for each match found.</summary>
-        internal void RunAllMatchesWithCallback<TState>(string? input, int startat, ref TState state, MatchCallback<TState> callback, RegexRunnerMode mode, bool reuseMatchObject) =>
-            RunAllMatchesWithCallback(input, (ReadOnlySpan<char>)input, startat, ref state, callback, mode, reuseMatchObject);
+        internal void RunAllMatchesWithCallback<TState>(
+            string? input,
+            int startat,
+            ref TState state,
+            MatchCallback<TState> callback,
+            RegexRunnerMode mode,
+            bool reuseMatchObject
+        ) =>
+            RunAllMatchesWithCallback(
+                input,
+                (ReadOnlySpan<char>)input,
+                startat,
+                ref state,
+                callback,
+                mode,
+                reuseMatchObject
+            );
 
-        internal void RunAllMatchesWithCallback<TState>(ReadOnlySpan<char> input, int startat, ref TState state, MatchCallback<TState> callback, RegexRunnerMode mode, bool reuseMatchObject) =>
-            RunAllMatchesWithCallback(inputString: null, input, startat, ref state, callback, mode, reuseMatchObject);
+        internal void RunAllMatchesWithCallback<TState>(
+            ReadOnlySpan<char> input,
+            int startat,
+            ref TState state,
+            MatchCallback<TState> callback,
+            RegexRunnerMode mode,
+            bool reuseMatchObject
+        ) =>
+            RunAllMatchesWithCallback(
+                inputString: null,
+                input,
+                startat,
+                ref state,
+                callback,
+                mode,
+                reuseMatchObject
+            );
 
-        private void RunAllMatchesWithCallback<TState>(string? inputString, ReadOnlySpan<char> inputSpan, int startat, ref TState state, MatchCallback<TState> callback, RegexRunnerMode mode, bool reuseMatchObject)
+        private void RunAllMatchesWithCallback<TState>(
+            string? inputString,
+            ReadOnlySpan<char> inputSpan,
+            int startat,
+            ref TState state,
+            MatchCallback<TState> callback,
+            RegexRunnerMode mode,
+            bool reuseMatchObject
+        )
         {
             Debug.Assert(inputString is null || inputSpan.SequenceEqual(inputString));
             Debug.Assert((uint)startat <= (uint)inputSpan.Length);
@@ -510,7 +653,15 @@ namespace System.Text.RegularExpressions
 
                     // We get the Match by calling Scan. 'input' parameter is used to set the Match text which is only relevant if we are using the Run<TState> string
                     // overload, as APIs that call the span overload (like Count) don't require match.Text to be set, so we pass null in that case.
-                    Match? match = ScanInternal(mode, reuseMatchObject, inputString, 0, runner, inputSpan, returnNullIfReuseMatchObject: false);
+                    Match? match = ScanInternal(
+                        mode,
+                        reuseMatchObject,
+                        inputString,
+                        0,
+                        runner,
+                        inputSpan,
+                        returnNullIfReuseMatchObject: false
+                    );
                     Debug.Assert(match is not null);
 
                     // If we failed to match again, we're done.
@@ -571,7 +722,15 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>Helper method used by RunSingleMatch and RunAllMatchesWithCallback which calls runner.Scan to find a match on the passed in span.</summary>
-        private static Match? ScanInternal(RegexRunnerMode mode, bool reuseMatchObject, string? input, int beginning, RegexRunner runner, ReadOnlySpan<char> span, bool returnNullIfReuseMatchObject)
+        private static Match? ScanInternal(
+            RegexRunnerMode mode,
+            bool reuseMatchObject,
+            string? input,
+            int beginning,
+            RegexRunner runner,
+            ReadOnlySpan<char> span,
+            bool returnNullIfReuseMatchObject
+        )
         {
             runner.Scan(span);
 
@@ -617,12 +776,20 @@ namespace System.Text.RegularExpressions
             factory!.CreateInstance();
 
         /// <summary>True if the <see cref="RegexOptions.Compiled"/> option was set.</summary>
-        [Obsolete(Obsoletions.RegexExtensibilityImplMessage, DiagnosticId = Obsoletions.RegexExtensibilityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.RegexExtensibilityImplMessage,
+            DiagnosticId = Obsoletions.RegexExtensibilityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected bool UseOptionC() => (roptions & RegexOptions.Compiled) != 0;
 
         /// <summary>True if the <see cref="RegexOptions.RightToLeft"/> option was set.</summary>
-        [Obsolete(Obsoletions.RegexExtensibilityImplMessage, DiagnosticId = Obsoletions.RegexExtensibilityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.RegexExtensibilityImplMessage,
+            DiagnosticId = Obsoletions.RegexExtensibilityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected bool UseOptionR() => RightToLeft;
     }

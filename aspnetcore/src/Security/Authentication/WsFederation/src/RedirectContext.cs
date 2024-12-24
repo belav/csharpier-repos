@@ -23,7 +23,8 @@ public class RedirectContext : PropertiesContext<WsFederationOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         WsFederationOptions options,
-        AuthenticationProperties? properties)
+        AuthenticationProperties? properties
+    )
         : base(context, scheme, options, properties) { }
 
     /// <summary>

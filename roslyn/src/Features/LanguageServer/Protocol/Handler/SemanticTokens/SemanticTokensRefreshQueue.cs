@@ -22,10 +22,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens;
 /// </summary>
 /// <remarks>This implements <see cref="IOnInitialized"/> to avoid race conditions
 /// related to creating the queue on the first request.</remarks>
-internal class SemanticTokensRefreshQueue :
-    IOnInitialized,
-    ILspService,
-    IDisposable
+internal class SemanticTokensRefreshQueue : IOnInitialized, ILspService, IDisposable
 {
     /// <summary>
     /// Lock over the mutable state that follows.
@@ -35,7 +32,10 @@ internal class SemanticTokensRefreshQueue :
     /// <summary>
     /// Mapping from project id to the workqueue for producing the corresponding compilation for it on the OOP server.
     /// </summary>
-    private readonly Dictionary<ProjectId, CompilationAvailableEventSource> _projectIdToEventSource = new();
+    private readonly Dictionary<
+        ProjectId,
+        CompilationAvailableEventSource
+    > _projectIdToEventSource = new();
 
     /// <summary>
     /// Mapping from project id to the project-cone-checksum for it we were at when the project for it had its
@@ -52,7 +52,7 @@ internal class SemanticTokensRefreshQueue :
 
     /// <summary>
     /// Debouncing queue so that we don't attempt to issue a semantic tokens refresh notification too often.
-    /// 
+    ///
     /// Null when the client does not support sending refresh notifications.
     /// </summary>
     private AsyncBatchingWorkQueue<Uri?>? _semanticTokenRefreshQueue;
@@ -64,9 +64,12 @@ internal class SemanticTokensRefreshQueue :
         LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
         LspWorkspaceManager lspWorkspaceManager,
         IClientLanguageServerManager notificationManager,
-        ICapabilitiesProvider capabilitiesProvider)
+        ICapabilitiesProvider capabilitiesProvider
+    )
     {
-        _asyncListener = asynchronousOperationListenerProvider.GetListener(FeatureAttribute.Classification);
+        _asyncListener = asynchronousOperationListenerProvider.GetListener(
+            FeatureAttribute.Classification
+        );
 
         _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
         _disposalTokenSource = new();
@@ -76,11 +79,18 @@ internal class SemanticTokensRefreshQueue :
         _capabilitiesProvider = capabilitiesProvider;
     }
 
-    public Task OnInitializedAsync(ClientCapabilities clientCapabilities, RequestContext context, CancellationToken _)
+    public Task OnInitializedAsync(
+        ClientCapabilities clientCapabilities,
+        RequestContext context,
+        CancellationToken _
+    )
     {
-        if (_semanticTokenRefreshQueue is null
+        if (
+            _semanticTokenRefreshQueue is null
             && clientCapabilities.Workspace?.SemanticTokens?.RefreshSupport is true
-            && _capabilitiesProvider.GetCapabilities(clientCapabilities).SemanticTokensOptions is not null)
+            && _capabilitiesProvider.GetCapabilities(clientCapabilities).SemanticTokensOptions
+                is not null
+        )
         {
             // Only send a refresh notification to the client every 2s (if needed) in order to avoid
             // sending too many notifications at once.  This ensures we batch up workspace notifications,
@@ -88,11 +98,17 @@ internal class SemanticTokensRefreshQueue :
             // an enormous amount of time.
             _semanticTokenRefreshQueue = new AsyncBatchingWorkQueue<Uri?>(
                 delay: TimeSpan.FromMilliseconds(2000),
-                processBatchAsync: (documentUris, cancellationToken)
-                    => FilterLspTrackedDocumentsAsync(_lspWorkspaceManager, _notificationManager, documentUris, cancellationToken),
+                processBatchAsync: (documentUris, cancellationToken) =>
+                    FilterLspTrackedDocumentsAsync(
+                        _lspWorkspaceManager,
+                        _notificationManager,
+                        documentUris,
+                        cancellationToken
+                    ),
                 equalityComparer: EqualityComparer<Uri?>.Default,
                 asyncListener: _asyncListener,
-                _disposalTokenSource.Token);
+                _disposalTokenSource.Token
+            );
 
             _lspWorkspaceRegistrationService.LspSolutionChanged += OnLspSolutionChanged;
         }
@@ -100,13 +116,18 @@ internal class SemanticTokensRefreshQueue :
         return Task.CompletedTask;
     }
 
-    public async Task TryEnqueueRefreshComputationAsync(Project project, CancellationToken cancellationToken)
+    public async Task TryEnqueueRefreshComputationAsync(
+        Project project,
+        CancellationToken cancellationToken
+    )
     {
         if (_semanticTokenRefreshQueue is not null)
         {
             // Determine the checksum for this project cone.  Note: this should be fast in practice because this is
             // the same project-cone-checksum we used to even call into OOP above when we computed semantic tokens.
-            var projectChecksum = await project.Solution.State.GetChecksumAsync(project.Id, cancellationToken).ConfigureAwait(false);
+            var projectChecksum = await project
+                .Solution.State.GetChecksumAsync(project.Id, cancellationToken)
+                .ConfigureAwait(false);
 
             lock (_gate)
             {
@@ -121,7 +142,10 @@ internal class SemanticTokensRefreshQueue :
                     _projectIdToEventSource.Add(project.Id, eventSource);
                 }
 
-                eventSource.EnsureCompilationAvailability(project, () => OnCompilationAvailable(project, projectChecksum));
+                eventSource.EnsureCompilationAvailability(
+                    project,
+                    () => OnCompilationAvailable(project, projectChecksum)
+                );
             }
         }
     }
@@ -130,14 +154,18 @@ internal class SemanticTokensRefreshQueue :
         LspWorkspaceManager lspWorkspaceManager,
         IClientLanguageServerManager notificationManager,
         ImmutableSegmentedList<Uri?> documentUris,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var trackedDocuments = lspWorkspaceManager.GetTrackedLspText();
         foreach (var documentUri in documentUris)
         {
             if (documentUri is null || !trackedDocuments.ContainsKey(documentUri))
             {
-                return notificationManager.SendRequestAsync(Methods.WorkspaceSemanticTokensRefreshName, cancellationToken);
+                return notificationManager.SendRequestAsync(
+                    Methods.WorkspaceSemanticTokensRefreshName,
+                    cancellationToken
+                );
             }
         }
 
@@ -221,8 +249,9 @@ internal class SemanticTokensRefreshQueue :
         EnqueueSemanticTokenRefreshNotification(documentUri: null);
     }
 
-    private bool ChecksumIsUnchanged_NoLock(Project project, Checksum projectChecksum)
-        => _projectIdToLastComputedChecksum.TryGetValue(project.Id, out var lastChecksum) && lastChecksum == projectChecksum;
+    private bool ChecksumIsUnchanged_NoLock(Project project, Checksum projectChecksum) =>
+        _projectIdToLastComputedChecksum.TryGetValue(project.Id, out var lastChecksum)
+        && lastChecksum == projectChecksum;
 
     public void Dispose()
     {

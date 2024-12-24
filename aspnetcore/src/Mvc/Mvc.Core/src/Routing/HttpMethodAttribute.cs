@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 /// Identifies an action that supports a given set of HTTP methods.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-public abstract class HttpMethodAttribute : Attribute, IActionHttpMethodProvider, IRouteTemplateProvider
+public abstract class HttpMethodAttribute
+    : Attribute,
+        IActionHttpMethodProvider,
+        IRouteTemplateProvider
 {
     private readonly List<string> _httpMethods;
 
@@ -22,9 +25,7 @@ public abstract class HttpMethodAttribute : Attribute, IActionHttpMethodProvider
     /// <param name="httpMethods">The set of supported HTTP methods. May not be null.</param>
     /// </summary>
     public HttpMethodAttribute(IEnumerable<string> httpMethods)
-        : this(httpMethods, null)
-    {
-    }
+        : this(httpMethods, null) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpMethodAttribute"/> with the given
@@ -32,7 +33,10 @@ public abstract class HttpMethodAttribute : Attribute, IActionHttpMethodProvider
     /// </summary>
     /// <param name="httpMethods">The set of supported methods. May not be null.</param>
     /// <param name="template">The route template.</param>
-    public HttpMethodAttribute(IEnumerable<string> httpMethods, [StringSyntax("Route")] string? template)
+    public HttpMethodAttribute(
+        IEnumerable<string> httpMethods,
+        [StringSyntax("Route")] string? template
+    )
     {
         ArgumentNullException.ThrowIfNull(httpMethods);
 

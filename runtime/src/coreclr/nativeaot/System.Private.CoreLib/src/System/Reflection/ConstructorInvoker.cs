@@ -4,9 +4,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Runtime.MethodInfos;
-
 using Internal.Reflection.Core.Execution;
-
 using static System.Reflection.DynamicInvokeInfo;
 
 namespace System.Reflection
@@ -28,7 +26,10 @@ namespace System.Reflection
         {
             if (constructor is not RuntimeConstructorInfo runtimeConstructor)
             {
-                throw new ArgumentException(SR.Argument_MustBeRuntimeConstructorInfo, nameof(constructor));
+                throw new ArgumentException(
+                    SR.Argument_MustBeRuntimeConstructorInfo,
+                    nameof(constructor)
+                );
             }
 
             return new ConstructorInvoker(runtimeConstructor);
@@ -55,7 +56,9 @@ namespace System.Reflection
                 ThrowForArgCountMismatch();
             }
 
-            object result = _methodBaseInvoker.CreateInstanceWithFewArgs(new Span<object?>(ref arg1, _parameterCount));
+            object result = _methodBaseInvoker.CreateInstanceWithFewArgs(
+                new Span<object?>(ref arg1, _parameterCount)
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -71,7 +74,9 @@ namespace System.Reflection
             StackAllocatedArguments argStorage = default;
             argStorage._args.Set(0, arg1);
             argStorage._args.Set(1, arg2);
-            object result = _methodBaseInvoker.CreateInstanceWithFewArgs(argStorage._args.AsSpan(_parameterCount));
+            object result = _methodBaseInvoker.CreateInstanceWithFewArgs(
+                argStorage._args.AsSpan(_parameterCount)
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -88,7 +93,9 @@ namespace System.Reflection
             argStorage._args.Set(0, arg1);
             argStorage._args.Set(1, arg2);
             argStorage._args.Set(2, arg3);
-            object result = _methodBaseInvoker.CreateInstanceWithFewArgs(argStorage._args.AsSpan(_parameterCount));
+            object result = _methodBaseInvoker.CreateInstanceWithFewArgs(
+                argStorage._args.AsSpan(_parameterCount)
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -106,7 +113,9 @@ namespace System.Reflection
             argStorage._args.Set(1, arg2);
             argStorage._args.Set(2, arg3);
             argStorage._args.Set(3, arg4);
-            object result = _methodBaseInvoker.CreateInstanceWithFewArgs(argStorage._args.AsSpan(_parameterCount));
+            object result = _methodBaseInvoker.CreateInstanceWithFewArgs(
+                argStorage._args.AsSpan(_parameterCount)
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }

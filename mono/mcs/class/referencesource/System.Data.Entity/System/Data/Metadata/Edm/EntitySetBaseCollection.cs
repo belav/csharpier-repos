@@ -12,9 +12,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.Data.Metadata.Edm
 {
@@ -33,9 +33,7 @@ namespace System.Data.Metadata.Edm
         /// <param name="entityContainer">The entity container that has this entity set collection</param>
         /// <exception cref="System.ArgumentNullException">Thrown if the argument entityContainer is null</exception>
         internal EntitySetBaseCollection(EntityContainer entityContainer)
-            : this(entityContainer, null)
-        {
-        }
+            : this(entityContainer, null) { }
 
         /// <summary>
         /// The constructor for constructing the collection with the given items
@@ -43,7 +41,10 @@ namespace System.Data.Metadata.Edm
         /// <param name="entityContainer">The entity container that has this entity set collection</param>
         /// <param name="items">The items to populate the collection</param>
         /// <exception cref="System.ArgumentNullException">Thrown if the argument entityContainer is null</exception>
-        internal EntitySetBaseCollection(EntityContainer entityContainer, IEnumerable<EntitySetBase> items)
+        internal EntitySetBaseCollection(
+            EntityContainer entityContainer,
+            IEnumerable<EntitySetBase> items
+        )
             : base(items)
         {
             EntityUtil.GenericCheckArgumentNull(entityContainer, "entityContainer");
@@ -65,14 +66,8 @@ namespace System.Data.Metadata.Edm
         /// <exception cref="System.InvalidOperationException">Always thrown on setter</exception>
         public override EntitySetBase this[int index]
         {
-            get
-            {
-                return base[index];
-            }
-            set
-            {
-                throw EntityUtil.OperationOnReadOnlyCollection();
-            }
+            get { return base[index]; }
+            set { throw EntityUtil.OperationOnReadOnlyCollection(); }
         }
 
         /// <summary>
@@ -85,20 +80,14 @@ namespace System.Data.Metadata.Edm
         /// <exception cref="System.InvalidOperationException">Always thrown on setter</exception>
         public override EntitySetBase this[string identity]
         {
-            get
-            {
-                return base[identity];
-            }
-            set
-            {
-                throw EntityUtil.OperationOnReadOnlyCollection();
-            }
+            get { return base[identity]; }
+            set { throw EntityUtil.OperationOnReadOnlyCollection(); }
         }
         #endregion
 
         #region Methods
         /// <summary>
-        /// Adds an item to the collection 
+        /// Adds an item to the collection
         /// </summary>
         /// <param name="item">The item to add to the list</param>
         /// <exception cref="System.ArgumentNullException">Thrown if item argument is null</exception>
@@ -121,7 +110,10 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="entitySet">The entity set to check for</param>
         /// <param name="argumentName">The name of the argument from the caller</param>
-        private static void ThrowIfItHasEntityContainer(EntitySetBase entitySet, string argumentName)
+        private static void ThrowIfItHasEntityContainer(
+            EntitySetBase entitySet,
+            string argumentName
+        )
         {
             EntityUtil.GenericCheckArgumentNull(entitySet, argumentName);
             if (entitySet.EntityContainer != null)

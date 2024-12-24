@@ -30,11 +30,15 @@ namespace Roslyn.Test.Utilities.Desktop
                 }
             }
 
-            return AppDomain.CreateDomain(name, null, new AppDomainSetup()
-            {
-                ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile,
-                ApplicationBase = basePath
-            });
+            return AppDomain.CreateDomain(
+                name,
+                null,
+                new AppDomainSetup()
+                {
+                    ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile,
+                    ApplicationBase = basePath,
+                }
+            );
         }
 
         /// <summary>
@@ -47,7 +51,8 @@ namespace Roslyn.Test.Utilities.Desktop
             var assemblyName = new AssemblyName(e.Name);
             var fullPath = Path.Combine(
                 Path.GetDirectoryName(typeof(AppDomainUtils).Assembly.Location),
-                assemblyName.Name + ".dll");
+                assemblyName.Name + ".dll"
+            );
             if (File.Exists(fullPath))
             {
                 return Assembly.LoadFrom(fullPath);

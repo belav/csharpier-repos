@@ -23,17 +23,22 @@ internal sealed class DefaultPageModelActivatorProvider : IPageModelActivatorPro
         var modelTypeInfo = actionDescriptor.ModelTypeInfo?.AsType();
         if (modelTypeInfo == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(actionDescriptor.ModelTypeInfo),
-                nameof(actionDescriptor)),
-                nameof(actionDescriptor));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(actionDescriptor.ModelTypeInfo),
+                    nameof(actionDescriptor)
+                ),
+                nameof(actionDescriptor)
+            );
         }
 
         var factory = ActivatorUtilities.CreateFactory(modelTypeInfo, Type.EmptyTypes);
         return (context) => factory(context.HttpContext.RequestServices, Array.Empty<object>());
     }
 
-    public Action<PageContext, object>? CreateReleaser(CompiledPageActionDescriptor actionDescriptor)
+    public Action<PageContext, object>? CreateReleaser(
+        CompiledPageActionDescriptor actionDescriptor
+    )
     {
         ArgumentNullException.ThrowIfNull(actionDescriptor);
 
@@ -45,7 +50,9 @@ internal sealed class DefaultPageModelActivatorProvider : IPageModelActivatorPro
         return null;
     }
 
-    public Func<PageContext, object, ValueTask>? CreateAsyncReleaser(CompiledPageActionDescriptor actionDescriptor)
+    public Func<PageContext, object, ValueTask>? CreateAsyncReleaser(
+        CompiledPageActionDescriptor actionDescriptor
+    )
     {
         ArgumentNullException.ThrowIfNull(actionDescriptor);
 

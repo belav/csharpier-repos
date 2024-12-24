@@ -14,15 +14,21 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
         where TSyntaxNode : EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>
         where TDerivedNode : TSyntaxNode
     {
-        public ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>> NodesAndTokens { get; }
+        public ImmutableArray<
+            EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>
+        > NodesAndTokens { get; }
         public int Length { get; }
         public int SeparatorLength { get; }
 
-        public static readonly EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNode, TDerivedNode> Empty
-            = new(ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>>.Empty);
+        public static readonly EmbeddedSeparatedSyntaxNodeList<
+            TSyntaxKind,
+            TSyntaxNode,
+            TDerivedNode
+        > Empty = new(ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>>.Empty);
 
         public EmbeddedSeparatedSyntaxNodeList(
-            ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>> nodesAndTokens)
+            ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>> nodesAndTokens
+        )
         {
             Contract.ThrowIfTrue(nodesAndTokens.IsDefault);
             NodesAndTokens = nodesAndTokens;
@@ -43,11 +49,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
                 {
                     // All even values should be TNode
                     Debug.Assert(NodesAndTokens[i].IsNode);
-                    Debug.Assert(NodesAndTokens[i].Node is EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>);
+                    Debug.Assert(
+                        NodesAndTokens[i].Node is EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>
+                    );
                 }
                 else
                 {
-                    // All odd values should be separator tokens 
+                    // All odd values should be separator tokens
                     Debug.Assert(!NodesAndTokens[i].IsNode);
                 }
             }
@@ -62,7 +70,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             {
                 if (index < Length && index >= 0)
                 {
-                    // x2 here to get only even indexed numbers. Follows same logic 
+                    // x2 here to get only even indexed numbers. Follows same logic
                     // as SeparatedSyntaxList in that the separator tokens are not returned
                     var nodeOrToken = NodesAndTokens[index * 2];
                     Debug.Assert(nodeOrToken.IsNode);
@@ -76,7 +84,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
 
         public Enumerator GetEnumerator() => new(this);
 
-        public struct Enumerator(EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNode, TDerivedNode> list)
+        public struct Enumerator(
+            EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNode, TDerivedNode> list
+        )
         {
             private int _currentIndex = -1;
 

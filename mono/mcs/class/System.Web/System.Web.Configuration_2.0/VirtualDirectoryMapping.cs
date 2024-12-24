@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,50 +31,58 @@ using System.Collections.Specialized;
 
 namespace System.Web.Configuration
 {
-	public sealed class VirtualDirectoryMapping
-	{
-		string physicalDirectory;
-		bool isAppRoot;
-		string configFileBaseName;
-		string virtualDirectory;
-		
-		public VirtualDirectoryMapping (string physicalDirectory, bool isAppRoot)
-		{
-			this.physicalDirectory = physicalDirectory;
-			this.isAppRoot = isAppRoot;
-		}
-		
-		public VirtualDirectoryMapping (string physicalDirectory, bool isAppRoot, string configFileBaseName)
-		{
-			this.physicalDirectory = physicalDirectory;
-			this.isAppRoot = isAppRoot;
-			this.configFileBaseName = configFileBaseName;
-		}
-		
-		internal void SetVirtualDirectory (string dir)
-		{
-			virtualDirectory = dir;
-		}
-		
-		[MonoTODO ("Do something with this")]
-		public string ConfigFileBaseName {
-			get { return configFileBaseName; }
-			set { configFileBaseName = value; }
-		}
-		
-		[MonoTODO ("Do something with this")]
-		public bool IsAppRoot {
-			get { return isAppRoot; }
-			set { isAppRoot = value; }
-		}
-		
-		public string PhysicalDirectory {
-			get { return physicalDirectory; }
-			set { physicalDirectory = value; }
-		}
-		
-		public string VirtualDirectory {
-			get { return virtualDirectory; }
-		}
-	}
+    public sealed class VirtualDirectoryMapping
+    {
+        string physicalDirectory;
+        bool isAppRoot;
+        string configFileBaseName;
+        string virtualDirectory;
+
+        public VirtualDirectoryMapping(string physicalDirectory, bool isAppRoot)
+        {
+            this.physicalDirectory = physicalDirectory;
+            this.isAppRoot = isAppRoot;
+        }
+
+        public VirtualDirectoryMapping(
+            string physicalDirectory,
+            bool isAppRoot,
+            string configFileBaseName
+        )
+        {
+            this.physicalDirectory = physicalDirectory;
+            this.isAppRoot = isAppRoot;
+            this.configFileBaseName = configFileBaseName;
+        }
+
+        internal void SetVirtualDirectory(string dir)
+        {
+            virtualDirectory = dir;
+        }
+
+        [MonoTODO("Do something with this")]
+        public string ConfigFileBaseName
+        {
+            get { return configFileBaseName; }
+            set { configFileBaseName = value; }
+        }
+
+        [MonoTODO("Do something with this")]
+        public bool IsAppRoot
+        {
+            get { return isAppRoot; }
+            set { isAppRoot = value; }
+        }
+
+        public string PhysicalDirectory
+        {
+            get { return physicalDirectory; }
+            set { physicalDirectory = value; }
+        }
+
+        public string VirtualDirectory
+        {
+            get { return virtualDirectory; }
+        }
+    }
 }

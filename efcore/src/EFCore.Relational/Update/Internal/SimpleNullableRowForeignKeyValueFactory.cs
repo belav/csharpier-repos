@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SimpleNullableRowForeignKeyValueFactory<TKey, TForeignKey> : RowForeignKeyValueFactory<TKey, TForeignKey>
+public class SimpleNullableRowForeignKeyValueFactory<TKey, TForeignKey>
+    : RowForeignKeyValueFactory<TKey, TForeignKey>
     where TKey : struct
 {
     /// <summary>
@@ -24,7 +25,8 @@ public class SimpleNullableRowForeignKeyValueFactory<TKey, TForeignKey> : RowFor
         IForeignKeyConstraint foreignKey,
         IColumn column,
         ColumnAccessors columnAccessors,
-        IValueConverterSelector valueConverterSelector)
+        IValueConverterSelector valueConverterSelector
+    )
         : base(foreignKey, column, columnAccessors, valueConverterSelector)
     {
         EqualityComparer = CreateKeyEqualityComparer(column);
@@ -34,13 +36,16 @@ public class SimpleNullableRowForeignKeyValueFactory<TKey, TForeignKey> : RowFor
     public override IEqualityComparer<TKey> EqualityComparer { get; }
 
     /// <inheritdoc />
-    public override bool TryCreateDependentKeyValue(object?[] keyValues, [NotNullWhen(true)] out TKey key)
-        => HandleNullableValue((TKey?)keyValues[0], out key);
+    public override bool TryCreateDependentKeyValue(
+        object?[] keyValues,
+        [NotNullWhen(true)] out TKey key
+    ) => HandleNullableValue((TKey?)keyValues[0], out key);
 
     /// <inheritdoc />
     public override bool TryCreateDependentKeyValue(
         IDictionary<string, object?> keyPropertyValues,
-        [NotNullWhen(true)] out TKey key)
+        [NotNullWhen(true)] out TKey key
+    )
     {
         if (keyPropertyValues.TryGetValue(Column.Name, out var value))
         {
@@ -55,11 +60,17 @@ public class SimpleNullableRowForeignKeyValueFactory<TKey, TForeignKey> : RowFor
     public override bool TryCreateDependentKeyValue(
         IReadOnlyModificationCommand command,
         bool fromOriginalValues,
-        [NotNullWhen(true)] out TKey key)
+        [NotNullWhen(true)] out TKey key
+    )
     {
         var (keyValue, present) = fromOriginalValues
-            ? ((Func<IReadOnlyModificationCommand, (TKey, bool)>)ColumnAccessors.OriginalValueGetter)(command)
-            : ((Func<IReadOnlyModificationCommand, (TKey, bool)>)ColumnAccessors.CurrentValueGetter)(command);
+            ? (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)
+                    ColumnAccessors.OriginalValueGetter
+            )(command)
+            : (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)ColumnAccessors.CurrentValueGetter
+            )(command);
         return HandleNullableValue(present ? keyValue : null, out key);
     }
 

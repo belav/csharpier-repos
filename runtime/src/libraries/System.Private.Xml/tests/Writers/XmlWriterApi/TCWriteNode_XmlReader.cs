@@ -24,7 +24,11 @@ namespace System.Xml.XmlWriterApiTests
                 }
                 catch (ArgumentNullException)
                 {
-                    CError.Compare(w.WriteState, WriteState.Element, "WriteState should be Element");
+                    CError.Compare(
+                        w.WriteState,
+                        WriteState.Element,
+                        "WriteState should be Element"
+                    );
                     return;
                 }
             }
@@ -117,7 +121,9 @@ namespace System.Xml.XmlWriterApiTests
                 CError.Compare(xr.NodeType, XmlNodeType.Comment, "Error");
                 CError.Compare(xr.Value, "WriteComment", "Error");
             }
-            Assert.True(utils.CompareReader("<node2>Node Text<node3></node3><?name Instruction?></node2>"));
+            Assert.True(
+                utils.CompareReader("<node2>Node Text<node3></node3><?name Instruction?></node2>")
+            );
         }
 
         [Theory]
@@ -126,8 +132,7 @@ namespace System.Xml.XmlWriterApiTests
         {
             using (XmlReader xr = CreateReaderIgnoreWS("XmlReader.xml"))
             {
-                while (xr.Read())
-                { }
+                while (xr.Read()) { }
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -144,8 +149,7 @@ namespace System.Xml.XmlWriterApiTests
         public void writeNode_XmlReader7(XmlWriterUtils utils)
         {
             XmlReader xr = CreateReaderIgnoreWS("XmlReader.xml");
-            while (xr.Read())
-            { }
+            while (xr.Read()) { }
             xr.Dispose();
 
             using (XmlWriter w = utils.CreateWriter())
@@ -229,10 +233,16 @@ namespace System.Xml.XmlWriterApiTests
 
             if (IsXPathDataModelReader())
             {
-                Assert.True(utils.CompareReader("<node1><?PI Instruction?><!--Comment-->Textcdata</node1>"));
+                Assert.True(
+                    utils.CompareReader("<node1><?PI Instruction?><!--Comment-->Textcdata</node1>")
+                );
             }
 
-            Assert.True(utils.CompareReader("<node1><?PI Instruction?><!--Comment-->Text<![CDATA[cdata]]></node1>"));
+            Assert.True(
+                utils.CompareReader(
+                    "<node1><?PI Instruction?><!--Comment-->Text<![CDATA[cdata]]></node1>"
+                )
+            );
         }
 
         [Theory]
@@ -261,7 +271,11 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData]
         public void writeNode_XmlReader12(XmlWriterUtils utils)
         {
-            using (XmlReader xr = CreateReaderIgnoreWSFromString("<!DOCTYPE node [ <!ENTITY test \"Test Entity\"> ]><node>&test;</node>"))
+            using (
+                XmlReader xr = CreateReaderIgnoreWSFromString(
+                    "<!DOCTYPE node [ <!ENTITY test \"Test Entity\"> ]><node>&test;</node>"
+                )
+            )
             {
                 bool sanityCheck = false;
                 while (xr.Read())
@@ -307,7 +321,11 @@ namespace System.Xml.XmlWriterApiTests
             }
             xr.Dispose();
 
-            Assert.True(utils.CompareReader("<x:bar xmlns:x=\"foo\"><z:node xmlns:z=\"foo\" /><x:blah /></x:bar>"));
+            Assert.True(
+                utils.CompareReader(
+                    "<x:bar xmlns:x=\"foo\"><z:node xmlns:z=\"foo\" /><x:blah /></x:bar>"
+                )
+            );
         }
 
         [Theory]
@@ -333,7 +351,9 @@ namespace System.Xml.XmlWriterApiTests
             if (!ReaderParsesDTD())
                 Assert.True(utils.CompareReader("<Root><name a='b' /></Root>"));
             else
-                Assert.True(utils.CompareReader("<Root><name a='b' FIRST='KEVIN' LAST='WHITE'/></Root>"));
+                Assert.True(
+                    utils.CompareReader("<Root><name a='b' FIRST='KEVIN' LAST='WHITE'/></Root>")
+                );
         }
 
         [Theory]
@@ -357,7 +377,9 @@ namespace System.Xml.XmlWriterApiTests
             }
             xr.Dispose();
             if (ReaderLoosesDefaultAttrInfo())
-                Assert.True(utils.CompareReader("<Root><name a='b' FIRST='KEVIN' LAST='WHITE'/></Root>"));
+                Assert.True(
+                    utils.CompareReader("<Root><name a='b' FIRST='KEVIN' LAST='WHITE'/></Root>")
+                );
             else
                 Assert.True(utils.CompareReader("<Root><name a='b' /></Root>"));
         }
@@ -420,9 +442,9 @@ namespace System.Xml.XmlWriterApiTests
         {
             string strxml = "<!DOCTYPE ROOT []><ROOT/>";
 
-            string exp = utils.IsIndent() ?
-                "<!DOCTYPE ROOT []>" + Environment.NewLine + "<ROOT />" :
-                "<!DOCTYPE ROOT []><ROOT />";
+            string exp = utils.IsIndent()
+                ? "<!DOCTYPE ROOT []>" + Environment.NewLine + "<ROOT />"
+                : "<!DOCTYPE ROOT []><ROOT />";
 
             using (XmlReader xr = CreateReader(new StringReader(strxml)))
             using (XmlWriter w = utils.CreateWriter())
@@ -457,7 +479,8 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData]
         public void writeNode_XmlReader21a(XmlWriterUtils utils)
         {
-            string strxml = "<a xmlns=\"p1\"><b xmlns=\"p2\"><c xmlns=\"p1\" /></b><d xmlns=\"\"><e xmlns=\"p1\"><f xmlns=\"\" /></d></a>";
+            string strxml =
+                "<a xmlns=\"p1\"><b xmlns=\"p2\"><c xmlns=\"p1\" /></b><d xmlns=\"\"><e xmlns=\"p1\"><f xmlns=\"\" /></d></a>";
             try
             {
                 using (XmlWriter w = utils.CreateWriter())
@@ -470,10 +493,18 @@ namespace System.Xml.XmlWriterApiTests
                             CError.Compare(false, "Failed");
                         }
                     }
-                    catch (XmlException xe) { CError.WriteLine(xe.Message); return; }
+                    catch (XmlException xe)
+                    {
+                        CError.WriteLine(xe.Message);
+                        return;
+                    }
                 }
             }
-            catch (ObjectDisposedException e) { CError.WriteLine(e.Message); return; }
+            catch (ObjectDisposedException e)
+            {
+                CError.WriteLine(e.Message);
+                return;
+            }
             Assert.Fail();
         }
 
@@ -481,22 +512,23 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData]
         public void writeNode_XmlReader21b(XmlWriterUtils utils)
         {
-            string strxml = "<!DOCTYPE doc " +
-"[<!ELEMENT doc ANY>" +
-"<!ELEMENT test1 (#PCDATA)>" +
-"<!ELEMENT test2 ANY>" +
-"<!ELEMENT test3 (#PCDATA)>" +
-"<!ENTITY e1 \"&e2;\">" +
-"<!ENTITY e2 \"xmlns=\"x\"\">" +
-"<!ATTLIST test3 a1 CDATA #IMPLIED>" +
-"<!ATTLIST test3 a2 CDATA #IMPLIED>" +
-"]>" +
-"<doc>" +
-"    &e2;" +
-"    <test1>AA&e2;AA</test1>" +
-"    <test2>BB&e1;BB</test2>" +
-"    <test3 a1=\"&e2;\" a2=\"&e1;\">World</test3>" +
-"</doc>";
+            string strxml =
+                "<!DOCTYPE doc "
+                + "[<!ELEMENT doc ANY>"
+                + "<!ELEMENT test1 (#PCDATA)>"
+                + "<!ELEMENT test2 ANY>"
+                + "<!ELEMENT test3 (#PCDATA)>"
+                + "<!ENTITY e1 \"&e2;\">"
+                + "<!ENTITY e2 \"xmlns=\"x\"\">"
+                + "<!ATTLIST test3 a1 CDATA #IMPLIED>"
+                + "<!ATTLIST test3 a2 CDATA #IMPLIED>"
+                + "]>"
+                + "<doc>"
+                + "    &e2;"
+                + "    <test1>AA&e2;AA</test1>"
+                + "    <test2>BB&e1;BB</test2>"
+                + "    <test3 a1=\"&e2;\" a2=\"&e1;\">World</test3>"
+                + "</doc>";
             try
             {
                 using (XmlWriter w = utils.CreateWriter())
@@ -509,10 +541,18 @@ namespace System.Xml.XmlWriterApiTests
                             CError.Compare(false, "Failed");
                         }
                     }
-                    catch (XmlException xe) { CError.WriteLine(xe.Message); return; }
+                    catch (XmlException xe)
+                    {
+                        CError.WriteLine(xe.Message);
+                        return;
+                    }
                 }
             }
-            catch (ObjectDisposedException e) { CError.WriteLine(e.Message); return; }
+            catch (ObjectDisposedException e)
+            {
+                CError.WriteLine(e.Message);
+                return;
+            }
             Assert.Fail();
         }
 
@@ -572,7 +612,10 @@ namespace System.Xml.XmlWriterApiTests
         {
             if (IsXPathDataModelReader())
             {
-                CError.WriteLine("XPath data model does not have CDATA node type, so {0} can not be positioned on CDATA", readerType);
+                CError.WriteLine(
+                    "XPath data model does not have CDATA node type, so {0} can not be positioned on CDATA",
+                    readerType
+                );
                 return;
             }
 
@@ -683,7 +726,9 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             xr.Dispose();
             w.Dispose();
-            strxml = utils.IsIndent() ? "<?xml version=\"1.0\" standalone=\"yes\"?>" + Environment.NewLine + "<Root />" : strxml;
+            strxml = utils.IsIndent()
+                ? "<?xml version=\"1.0\" standalone=\"yes\"?>" + Environment.NewLine + "<Root />"
+                : strxml;
             Assert.True(utils.CompareString(strxml));
         }
 
@@ -710,7 +755,8 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData]
         public void writeNode_XmlReader28b(XmlWriterUtils utils)
         {
-            string strxml = @"<root xmlns:p1='p1'><p2:child xmlns:p2='p2' xmlns:xml='http://www.w3.org/XML/1998/namespace' /></root>";
+            string strxml =
+                @"<root xmlns:p1='p1'><p2:child xmlns:p2='p2' xmlns:xml='http://www.w3.org/XML/1998/namespace' /></root>";
             XmlReader xr = CreateReader(new StringReader(strxml));
             while (xr.Read())
             {
@@ -722,7 +768,10 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteNode(xr, false);
                 xr.Dispose();
             }
-            string exp = (utils.WriterType == WriterType.UnicodeWriter) ? "<p2:child xmlns:p2=\"p2\" />" : "<p2:child xmlns:p2=\"p2\" xmlns:xml='http://www.w3.org/XML/1998/namespace' />";
+            string exp =
+                (utils.WriterType == WriterType.UnicodeWriter)
+                    ? "<p2:child xmlns:p2=\"p2\" />"
+                    : "<p2:child xmlns:p2=\"p2\" xmlns:xml='http://www.w3.org/XML/1998/namespace' />";
             Assert.True(utils.CompareReader(exp));
         }
 
@@ -730,7 +779,8 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData]
         public void writeNode_XmlReader29(XmlWriterUtils utils)
         {
-            string strxml = @"<root xmlns:p1='p1' xmlns:xml='http://www.w3.org/XML/1998/namespace'><p2:child xmlns:p2='p2' /></root>";
+            string strxml =
+                @"<root xmlns:p1='p1' xmlns:xml='http://www.w3.org/XML/1998/namespace'><p2:child xmlns:p2='p2' /></root>";
             XmlReader xr = CreateReader(new StringReader(strxml));
             while (xr.Read())
             {
@@ -847,7 +897,8 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData(ConformanceLevel.Auto)]
         public void writeNode_XmlReader35(XmlWriterUtils utils, ConformanceLevel conformanceLevel)
         {
-            string strxml = @"<?xml version='1.0'?><?pi?><?pi?>  <shouldbeindented><a>text</a></shouldbeindented><?pi?>";
+            string strxml =
+                @"<?xml version='1.0'?><?pi?><?pi?>  <shouldbeindented><a>text</a></shouldbeindented><?pi?>";
             CError.WriteLine(strxml);
             XmlReader xr = CreateReader(new StringReader(strxml));
             XmlWriterSettings ws = new XmlWriterSettings();
@@ -888,9 +939,9 @@ namespace System.Xml.XmlWriterApiTests
         public void writeNode_XmlReader37(XmlWriterUtils utils, bool defattr)
         {
             string strxml = "<!DOCTYPE root PUBLIC \"\" \"#\"><root/>";
-            string exp = utils.IsIndent() ?
-               "<!DOCTYPE root PUBLIC \"\" \"#\"[]>" + Environment.NewLine + "<root />" :
-               "<!DOCTYPE root PUBLIC \"\" \"#\"[]><root />";
+            string exp = utils.IsIndent()
+                ? "<!DOCTYPE root PUBLIC \"\" \"#\"[]>" + Environment.NewLine + "<root />"
+                : "<!DOCTYPE root PUBLIC \"\" \"#\"[]><root />";
 
             using (XmlReader xr = CreateReader(new StringReader(strxml)))
             using (XmlWriter w = utils.CreateWriter())
@@ -920,7 +971,11 @@ namespace System.Xml.XmlWriterApiTests
                     }
                 }
             }
-            catch (XmlException e) { CError.WriteLine(e); return; }
+            catch (XmlException e)
+            {
+                CError.WriteLine(e);
+                return;
+            }
             Assert.Fail();
         }
 
@@ -930,9 +985,9 @@ namespace System.Xml.XmlWriterApiTests
         public void writeNode_XmlReader39(XmlWriterUtils utils, bool defattr)
         {
             string strxml = "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"><root/>";
-            string exp = utils.IsIndent() ?
-                "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"[]>" + Environment.NewLine + "<root />" :
-                "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"[]><root />";
+            string exp = utils.IsIndent()
+                ? "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"[]>" + Environment.NewLine + "<root />"
+                : "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"[]><root />";
 
             using (XmlReader xr = CreateReader(new StringReader(strxml)))
             {

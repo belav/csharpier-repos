@@ -9,7 +9,7 @@ namespace BoxTest_enum_cs
     internal enum ToPrintOrNotToPrint
     {
         Print,
-        DoNotPrint
+        DoNotPrint,
     }
 
     public class Test
@@ -29,8 +29,9 @@ namespace BoxTest_enum_cs
             if ((int)num <= 1)
                 N = (int)num;
             else
-                N = (int)Fibonacci((int)num - 2,
-                        ToPrintOrNotToPrint.DoNotPrint) + (int)Fibonacci((int)num - 1, flag);
+                N =
+                    (int)Fibonacci((int)num - 2, ToPrintOrNotToPrint.DoNotPrint)
+                    + (int)Fibonacci((int)num - 1, flag);
             if ((ToPrintOrNotToPrint)flag == ToPrintOrNotToPrint.Print)
                 Console.Write(N.ToString() + " ");
             return N;

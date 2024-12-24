@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,46 +29,44 @@
 
 using System;
 using System.ComponentModel;
+using System.Security.Principal;
 using System.Web;
 using System.Web.SessionState;
-using System.Security.Principal;
 
 namespace System.Runtime.Remoting.Services
 {
-	public class RemotingService: Component
-	{
-		public RemotingService ()
-		{
-		}
-		
-		[MonoTODO]
-		public HttpApplicationState Application
-		{
-			get { throw new NotImplementedException (); }
-		}
-		
-		[MonoTODO]
-		public HttpContext Context
-		{
-			get { throw new NotImplementedException (); }
-		}
-		
-		[MonoTODO]
-		public HttpServerUtility Server
-		{
-			get { throw new NotImplementedException (); }
-		}
-		
-		[MonoTODO]
-		public HttpSessionState Session
-		{
-			get { throw new NotImplementedException (); }
-		}
-		
-		[MonoTODO]
-		public IPrincipal User
-		{
-			get { throw new NotImplementedException (); }
-		}
-	}
+    public class RemotingService : Component
+    {
+        public RemotingService() { }
+
+        [MonoTODO]
+        public HttpApplicationState Application
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public HttpContext Context
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public HttpServerUtility Server
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public HttpSessionState Session
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public IPrincipal User
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

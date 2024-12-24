@@ -11,12 +11,13 @@ namespace System.Dynamic.Tests
         private class MinimumOverrideInvokeBinder : InvokeBinder
         {
             public MinimumOverrideInvokeBinder(CallInfo callInfo)
-                : base(callInfo)
-            {
-            }
+                : base(callInfo) { }
 
             public override DynamicMetaObject FallbackInvoke(
-                DynamicMetaObject target, DynamicMetaObject[] args, DynamicMetaObject errorSuggestion)
+                DynamicMetaObject target,
+                DynamicMetaObject[] args,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
@@ -70,7 +71,10 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NullCallInfo()
         {
-            AssertExtensions.Throws<ArgumentNullException>("callInfo", () => new MinimumOverrideInvokeBinder(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "callInfo",
+                () => new MinimumOverrideInvokeBinder(null)
+            );
         }
 
         [Fact]
@@ -83,22 +87,34 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ReturnTypeObject()
         {
-            Assert.Equal(typeof(object), new MinimumOverrideInvokeBinder(new CallInfo(0)).ReturnType);
+            Assert.Equal(
+                typeof(object),
+                new MinimumOverrideInvokeBinder(new CallInfo(0)).ReturnType
+            );
         }
 
         [Fact]
         public void NullTarget()
         {
             var binder = new MinimumOverrideInvokeBinder(new CallInfo(0));
-            var arg = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentNullException>("target", () => binder.Bind(null, new[] { arg }));
+            var arg = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => binder.Bind(null, new[] { arg })
+            );
         }
 
         [Fact]
         public void NullArgs()
         {
             var binder = new MinimumOverrideInvokeBinder(new CallInfo(0));
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
             AssertExtensions.Throws<ArgumentNullException>("args", () => binder.Bind(target, null));
         }
 
@@ -106,9 +122,18 @@ namespace System.Dynamic.Tests
         public void NullArg()
         {
             var binder = new MinimumOverrideInvokeBinder(new CallInfo(0));
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            var arg = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentNullException>("args[1]", () => binder.Bind(target, new[] { arg, null, arg }));
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            var arg = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "args[1]",
+                () => binder.Bind(target, new[] { arg, null, arg })
+            );
         }
     }
 }

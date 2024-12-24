@@ -17,8 +17,8 @@ namespace Microsoft.Net.Http.Headers;
 /// </summary>
 public class RangeHeaderValue
 {
-    private static readonly HttpHeaderParser<RangeHeaderValue> Parser
-        = new GenericHeaderParser<RangeHeaderValue>(false, GetRangeLength);
+    private static readonly HttpHeaderParser<RangeHeaderValue> Parser =
+        new GenericHeaderParser<RangeHeaderValue>(false, GetRangeLength);
 
     private StringSegment _unit;
     private ICollection<RangeItemHeaderValue>? _ranges;
@@ -109,8 +109,8 @@ public class RangeHeaderValue
             return false;
         }
 
-        return StringSegment.Equals(_unit, other._unit, StringComparison.OrdinalIgnoreCase) &&
-            HeaderUtilities.AreEqualCollections(Ranges, other.Ranges);
+        return StringSegment.Equals(_unit, other._unit, StringComparison.OrdinalIgnoreCase)
+            && HeaderUtilities.AreEqualCollections(Ranges, other.Ranges);
     }
 
     /// <inheritdoc />
@@ -143,13 +143,20 @@ public class RangeHeaderValue
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
     /// <returns><see langword="true"/> if input is a valid <see cref="RangeHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParse(StringSegment input, [NotNullWhen(true)] out RangeHeaderValue? parsedValue)
+    public static bool TryParse(
+        StringSegment input,
+        [NotNullWhen(true)] out RangeHeaderValue? parsedValue
+    )
     {
         var index = 0;
         return Parser.TryParseValue(input, ref index, out parsedValue);
     }
 
-    private static int GetRangeLength(StringSegment input, int startIndex, out RangeHeaderValue? parsedValue)
+    private static int GetRangeLength(
+        StringSegment input,
+        int startIndex,
+        out RangeHeaderValue? parsedValue
+    )
     {
         Contract.Requires(startIndex >= 0);
 
@@ -181,7 +188,11 @@ public class RangeHeaderValue
         current++; // skip '=' separator
         current = current + HttpRuleParser.GetWhitespaceLength(input, current);
 
-        var rangesLength = RangeItemHeaderValue.GetRangeItemListLength(input, current, result.Ranges);
+        var rangesLength = RangeItemHeaderValue.GetRangeItemListLength(
+            input,
+            current,
+            result.Ranges
+        );
 
         if (rangesLength == 0)
         {
@@ -189,7 +200,10 @@ public class RangeHeaderValue
         }
 
         current = current + rangesLength;
-        Contract.Assert(current == input.Length, "GetRangeItemListLength() should consume the whole string or fail.");
+        Contract.Assert(
+            current == input.Length,
+            "GetRangeItemListLength() should consume the whole string or fail."
+        );
 
         parsedValue = result;
         return current - startIndex;

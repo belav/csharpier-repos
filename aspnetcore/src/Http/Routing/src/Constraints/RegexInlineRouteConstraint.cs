@@ -22,8 +22,12 @@ internal class RegexInlineRouteConstraint : RegexRouteConstraint
     /// Initializes a new instance of the <see cref="RegexInlineRouteConstraint" /> class.
     /// </summary>
     /// <param name="regexPattern">The regular expression pattern to match.</param>
-    public RegexInlineRouteConstraint([StringSyntax(StringSyntaxAttribute.Regex, RegexOptions.CultureInvariant | RegexOptions.IgnoreCase)] string regexPattern)
-        : base(regexPattern)
-    {
-    }
+    public RegexInlineRouteConstraint(
+        [StringSyntax(
+            StringSyntaxAttribute.Regex,
+            RegexOptions.CultureInvariant | RegexOptions.IgnoreCase
+        )]
+            string regexPattern
+    )
+        : base(regexPattern) { }
 }

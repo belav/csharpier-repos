@@ -14,9 +14,15 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private sealed class NuintValueSet : IValueSet<uint>, IValueSet
         {
-            public static readonly NuintValueSet AllValues = new NuintValueSet(values: NumericValueSet<uint, UIntTC>.AllValues, hasLarge: true);
+            public static readonly NuintValueSet AllValues = new NuintValueSet(
+                values: NumericValueSet<uint, UIntTC>.AllValues,
+                hasLarge: true
+            );
 
-            public static readonly NuintValueSet NoValues = new NuintValueSet(values: NumericValueSet<uint, UIntTC>.NoValues, hasLarge: false);
+            public static readonly NuintValueSet NoValues = new NuintValueSet(
+                values: NumericValueSet<uint, UIntTC>.NoValues,
+                hasLarge: false
+            );
 
             private readonly IValueSet<uint> _values;
 
@@ -55,28 +61,46 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public bool All(BinaryOperatorKind relation, uint value)
             {
-                if (_hasLarge && relation switch { LessThan => true, LessThanOrEqual => true, _ => false })
+                if (
+                    _hasLarge
+                    && relation switch
+                    {
+                        LessThan => true,
+                        LessThanOrEqual => true,
+                        _ => false,
+                    }
+                )
                     return false;
                 return _values.All(relation, value);
             }
 
-            bool IValueSet.All(BinaryOperatorKind relation, ConstantValue value) => value.IsBad || All(relation, value.UInt32Value);
+            bool IValueSet.All(BinaryOperatorKind relation, ConstantValue value) =>
+                value.IsBad || All(relation, value.UInt32Value);
 
             public bool Any(BinaryOperatorKind relation, uint value)
             {
-                if (_hasLarge && relation switch { GreaterThan => true, GreaterThanOrEqual => true, _ => false })
+                if (
+                    _hasLarge
+                    && relation switch
+                    {
+                        GreaterThan => true,
+                        GreaterThanOrEqual => true,
+                        _ => false,
+                    }
+                )
                     return true;
                 return _values.Any(relation, value);
             }
 
-            bool IValueSet.Any(BinaryOperatorKind relation, ConstantValue value) => value.IsBad || Any(relation, value.UInt32Value);
+            bool IValueSet.Any(BinaryOperatorKind relation, ConstantValue value) =>
+                value.IsBad || Any(relation, value.UInt32Value);
 
             public IValueSet<uint> Complement()
             {
                 return new NuintValueSet(
                     values: this._values.Complement(),
                     hasLarge: !this._hasLarge
-                    );
+                );
             }
 
             IValueSet IValueSet.Complement() => this.Complement();
@@ -87,7 +111,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return new NuintValueSet(
                     values: this._values.Intersect(other._values),
                     hasLarge: this._hasLarge && other._hasLarge
-                    );
+                );
             }
 
             IValueSet IValueSet.Intersect(IValueSet other) => this.Intersect((NuintValueSet)other);
@@ -98,14 +122,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return new NuintValueSet(
                     values: this._values.Union(other._values),
                     hasLarge: this._hasLarge || other._hasLarge
-                    );
+                );
             }
 
             IValueSet IValueSet.Union(IValueSet other) => this.Union((NuintValueSet)other);
 
-            public override bool Equals(object? obj) => obj is NuintValueSet other &&
-                this._hasLarge == other._hasLarge &&
-                this._values.Equals(other._values);
+            public override bool Equals(object? obj) =>
+                obj is NuintValueSet other
+                && this._hasLarge == other._hasLarge
+                && this._values.Equals(other._values);
 
             public override int GetHashCode() =>
                 Hash.Combine(this._hasLarge.GetHashCode(), this._values.GetHashCode());

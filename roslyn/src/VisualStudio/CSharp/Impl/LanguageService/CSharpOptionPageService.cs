@@ -23,7 +23,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpOptionPageService(IThreadingContext threadingContext, SVsServiceProvider serviceProvider)
+        public CSharpOptionPageService(
+            IThreadingContext threadingContext,
+            SVsServiceProvider serviceProvider
+        )
         {
             var shell = (IVsShell)serviceProvider.GetService(typeof(SVsShell));
             ErrorHandler.ThrowOnFailure(shell.LoadPackage(Guids.CSharpPackageId, out var package));

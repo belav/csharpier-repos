@@ -57,7 +57,8 @@ internal partial class XmlSnippetParser
 
         public bool IsExpansionSnippet()
         {
-            return _snippetTypes?.Contains(ExpansionSnippetType, StringComparer.OrdinalIgnoreCase) == true;
+            return _snippetTypes?.Contains(ExpansionSnippetType, StringComparer.OrdinalIgnoreCase)
+                == true;
         }
 
         public static CodeSnippet ReadSnippetFromFile(string filePath, string snippetTitle)
@@ -66,7 +67,9 @@ internal partial class XmlSnippetParser
             var snippets = ReadSnippets(document);
             Contract.ThrowIfNull(snippets, $"Did not find any code snippets in {filePath}");
 
-            var matchingSnippet = snippets.Value.Single(s => string.Equals(s.Title, snippetTitle, StringComparison.OrdinalIgnoreCase));
+            var matchingSnippet = snippets.Value.Single(s =>
+                string.Equals(s.Title, snippetTitle, StringComparison.OrdinalIgnoreCase)
+            );
             return matchingSnippet;
         }
 
@@ -76,11 +79,26 @@ internal partial class XmlSnippetParser
             if (codeSnippetsElement is null)
                 return null;
 
-            if (codeSnippetsElement.Name.LocalName.Equals("CodeSnippets", StringComparison.OrdinalIgnoreCase))
+            if (
+                codeSnippetsElement.Name.LocalName.Equals(
+                    "CodeSnippets",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                return codeSnippetsElement.Elements().Where(e => e.Name.LocalName.Equals("CodeSnippet", StringComparison.OrdinalIgnoreCase)).ToImmutableArray();
+                return codeSnippetsElement
+                    .Elements()
+                    .Where(e =>
+                        e.Name.LocalName.Equals("CodeSnippet", StringComparison.OrdinalIgnoreCase)
+                    )
+                    .ToImmutableArray();
             }
-            else if (codeSnippetsElement.Name.LocalName.Equals("CodeSnippet", StringComparison.OrdinalIgnoreCase))
+            else if (
+                codeSnippetsElement.Name.LocalName.Equals(
+                    "CodeSnippet",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return ImmutableArray.Create(codeSnippetsElement);
             }
@@ -88,14 +106,23 @@ internal partial class XmlSnippetParser
             return null;
         }
 
-        public static IEnumerable<XElement> GetElementsWithoutNamespace(XElement element, string localName)
+        public static IEnumerable<XElement> GetElementsWithoutNamespace(
+            XElement element,
+            string localName
+        )
         {
-            return element.Elements().Where(e => e.Name.LocalName.Equals(localName, StringComparison.OrdinalIgnoreCase));
+            return element
+                .Elements()
+                .Where(e => e.Name.LocalName.Equals(localName, StringComparison.OrdinalIgnoreCase));
         }
 
         public static XElement? GetElementWithoutNamespace(XElement? element, string localName)
         {
-            return element?.Elements().FirstOrDefault(e => e.Name.LocalName.Equals(localName, StringComparison.OrdinalIgnoreCase));
+            return element
+                ?.Elements()
+                .FirstOrDefault(e =>
+                    e.Name.LocalName.Equals(localName, StringComparison.OrdinalIgnoreCase)
+                );
         }
 
         public static string GetElementInnerText(XElement element, string subElementName)
@@ -109,7 +136,9 @@ internal partial class XmlSnippetParser
         /// </summary>
         internal static ImmutableArray<CodeSnippet>? ReadSnippets(XDocument document)
         {
-            return ReadCodeSnippetElements(document)?.Select(element => new CodeSnippet(element)).ToImmutableArray();
+            return ReadCodeSnippetElements(document)
+                ?.Select(element => new CodeSnippet(element))
+                .ToImmutableArray();
         }
     }
 
@@ -119,7 +148,13 @@ internal partial class XmlSnippetParser
     /// </summary>
     private class ExpansionTemplate
     {
-        private record ExpansionField(string ID, string Default, string? FunctionName, string? FunctionParam, bool IsEditable);
+        private record ExpansionField(
+            string ID,
+            string Default,
+            string? FunctionName,
+            string? FunctionParam,
+            bool IsEditable
+        );
 
         private const string Selected = "selected";
         private const string End = "end";
@@ -131,8 +166,14 @@ internal partial class XmlSnippetParser
 
         public ExpansionTemplate(CodeSnippet snippet)
         {
-            var snippetElement = CodeSnippet.GetElementWithoutNamespace(snippet.CodeSnippetElement, "Snippet");
-            var declarationsElement = CodeSnippet.GetElementWithoutNamespace(snippetElement, "Declarations");
+            var snippetElement = CodeSnippet.GetElementWithoutNamespace(
+                snippet.CodeSnippetElement,
+                "Snippet"
+            );
+            var declarationsElement = CodeSnippet.GetElementWithoutNamespace(
+                snippetElement,
+                "Declarations"
+            );
             ReadDeclarations(declarationsElement);
             var code = CodeSnippet.GetElementWithoutNamespace(snippetElement, "Code");
             if (code == null)
@@ -141,7 +182,10 @@ internal partial class XmlSnippetParser
             }
 
             _code = Regex.Replace(code.Value, "(?<!\r)\n", "\r\n");
-            var delimiterAttribute = code.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("Delimiter", StringComparison.OrdinalIgnoreCase));
+            var delimiterAttribute = code.Attributes()
+                .FirstOrDefault(a =>
+                    a.Name.LocalName.Equals("Delimiter", StringComparison.OrdinalIgnoreCase)
+                );
             if (delimiterAttribute != null)
             {
                 _delimiter = delimiterAttribute.Value;
@@ -158,14 +202,30 @@ internal partial class XmlSnippetParser
             foreach (var declarationElement in declarations.Elements())
             {
                 var editableAttribute = declarationElement.Attribute("Editable");
-                var functionElement = CodeSnippet.GetElementWithoutNamespace(declarationElement, "Function");
-                SnippetFunctionService.TryGetSnippetFunctionInfo(functionElement?.Value, out var functionName, out var functionParam);
-                _tokens.Add(new ExpansionField(
-                    CodeSnippet.GetElementInnerText(declarationElement, "ID"),
-                    CodeSnippet.GetElementInnerText(declarationElement, "Default") ?? " ",
-                    functionName,
-                    functionParam,
-                    editableAttribute == null || string.Equals(editableAttribute.Value, "true", StringComparison.Ordinal) || string.Equals(editableAttribute.Value, "1", StringComparison.Ordinal)));
+                var functionElement = CodeSnippet.GetElementWithoutNamespace(
+                    declarationElement,
+                    "Function"
+                );
+                SnippetFunctionService.TryGetSnippetFunctionInfo(
+                    functionElement?.Value,
+                    out var functionName,
+                    out var functionParam
+                );
+                _tokens.Add(
+                    new ExpansionField(
+                        CodeSnippet.GetElementInnerText(declarationElement, "ID"),
+                        CodeSnippet.GetElementInnerText(declarationElement, "Default") ?? " ",
+                        functionName,
+                        functionParam,
+                        editableAttribute == null
+                            || string.Equals(
+                                editableAttribute.Value,
+                                "true",
+                                StringComparison.Ordinal
+                            )
+                            || string.Equals(editableAttribute.Value, "1", StringComparison.Ordinal)
+                    )
+                );
             }
         }
 
@@ -190,7 +250,13 @@ internal partial class XmlSnippetParser
                 switch (sps)
                 {
                     case SnippetParseState.Code:
-                        if (string.Equals(_code[currentCharIndex].ToString(CultureInfo.CurrentCulture), _delimiter, StringComparison.Ordinal))
+                        if (
+                            string.Equals(
+                                _code[currentCharIndex].ToString(CultureInfo.CurrentCulture),
+                                _delimiter,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             // we just hit a $, denoting a literal
                             sps = SnippetParseState.Literal;
@@ -211,7 +277,13 @@ internal partial class XmlSnippetParser
                         break;
 
                     case SnippetParseState.Literal:
-                        if (string.Equals(_code[currentCharIndex].ToString(CultureInfo.CurrentCulture), _delimiter, StringComparison.Ordinal))
+                        if (
+                            string.Equals(
+                                _code[currentCharIndex].ToString(CultureInfo.CurrentCulture),
+                                _delimiter,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             // we just hit the $, ending the literal
                             sps = SnippetParseState.Code;
@@ -222,7 +294,10 @@ internal partial class XmlSnippetParser
                                 // allocate a buffer and get the string name of this literal
                                 var fieldNameLength = currentCharIndex - currentTokenCharIndex;
 
-                                var fieldName = _code.Substring(currentTokenCharIndex, fieldNameLength);
+                                var fieldName = _code.Substring(
+                                    currentTokenCharIndex,
+                                    fieldNameLength
+                                );
 
                                 // first check to see if this is a "special" literal
                                 if (string.Equals(fieldName, Selected, StringComparison.Ordinal))
@@ -241,17 +316,32 @@ internal partial class XmlSnippetParser
                                     if (field != null)
                                     {
                                         // If we have an editable field we need to know its order in the snippet so we can place the appropriate tab stop indices.
-                                        int? fieldIndex = field.IsEditable ? fieldNameToSnippetIndex.GetOrAdd(field.ID, (key) => currentTabStopIndex++) : null;
+                                        int? fieldIndex = field.IsEditable
+                                            ? fieldNameToSnippetIndex.GetOrAdd(
+                                                field.ID,
+                                                (key) => currentTabStopIndex++
+                                            )
+                                            : null;
                                         var fieldPart = string.IsNullOrEmpty(field.FunctionName)
-                                                    ? new SnippetFieldPart(field.ID, field.Default, fieldIndex)
-                                                    : new SnippetFunctionPart(field.ID, field.Default, fieldIndex, field.FunctionName, field.FunctionParam);
+                                            ? new SnippetFieldPart(
+                                                field.ID,
+                                                field.Default,
+                                                fieldIndex
+                                            )
+                                            : new SnippetFunctionPart(
+                                                field.ID,
+                                                field.Default,
+                                                fieldIndex,
+                                                field.FunctionName,
+                                                field.FunctionParam
+                                            );
                                         snippetParts.Add(fieldPart);
                                     }
                                 }
                             }
                             else
                             {
-                                // simply append a '$'    
+                                // simply append a '$'
                                 snippetParts.Add(new SnippetStringPart(_delimiter));
                             }
 
@@ -280,13 +370,15 @@ internal partial class XmlSnippetParser
 
         private ExpansionField? FindField(string fieldName)
         {
-            return _tokens.FirstOrDefault(t => string.Equals(t.ID, fieldName, StringComparison.Ordinal));
+            return _tokens.FirstOrDefault(t =>
+                string.Equals(t.ID, fieldName, StringComparison.Ordinal)
+            );
         }
 
         private enum SnippetParseState
         {
             Code,
-            Literal
+            Literal,
         }
     }
 }

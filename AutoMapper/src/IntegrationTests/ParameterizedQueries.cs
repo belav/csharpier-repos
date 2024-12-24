@@ -24,21 +24,24 @@ public class ParameterizedQueries : IntegrationTest<ParameterizedQueries.Databas
     {
         protected override void Seed(ClientContext context)
         {
-            context.Entities.AddRange(new[]
-            {
-                new Entity {Value = "Value1"},
-                new Entity {Value = "Value2"}
-            });
+            context.Entities.AddRange(
+                new[]
+                {
+                    new Entity { Value = "Value1" },
+                    new Entity { Value = "Value2" },
+                }
+            );
             base.Seed(context);
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        string username = null;
-        cfg.CreateProjection<Entity, EntityDto>()
-            .ForMember(d => d.UserName, opt => opt.MapFrom(s => username));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            string username = null;
+            cfg.CreateProjection<Entity, EntityDto>()
+                .ForMember(d => d.UserName, opt => opt.MapFrom(s => username));
+        });
 
     [Fact]
     public async Task Should_parameterize_value()
@@ -56,7 +59,10 @@ public class ParameterizedQueries : IntegrationTest<ParameterizedQueries.Databas
             dtos.All(dto => dto.UserName == username).ShouldBeTrue();
 
             username = "Joe";
-            query = ProjectTo<EntityDto>(db.Entities, new Dictionary<string, object> { { "username", username }});
+            query = ProjectTo<EntityDto>(
+                db.Entities,
+                new Dictionary<string, object> { { "username", username } }
+            );
             dtos = await query.ToListAsync();
             constantVisitor = new ConstantVisitor();
             constantVisitor.Visit(query.Expression);
@@ -68,7 +74,7 @@ public class ParameterizedQueries : IntegrationTest<ParameterizedQueries.Databas
             {
                 Id = e.Id,
                 Value = e.Value,
-                UserName = username
+                UserName = username,
             });
             dtos = await query.ToListAsync();
             dtos.All(dto => dto.UserName == username).ShouldBeTrue();

@@ -10,16 +10,23 @@ namespace Microsoft.Extensions.Http
 {
     internal class TestMessageHandler : HttpMessageHandler
     {
-        private Func<HttpRequestMessage, HttpResponseMessage> _responseFactory = _ => new HttpResponseMessage();
+        private Func<HttpRequestMessage, HttpResponseMessage> _responseFactory =
+            _ => new HttpResponseMessage();
 
-        public TestMessageHandler(Func<HttpRequestMessage, HttpResponseMessage>? responseFactory = null)
+        public TestMessageHandler(
+            Func<HttpRequestMessage, HttpResponseMessage>? responseFactory = null
+        )
         {
             if (responseFactory is not null)
             {
                 _responseFactory = responseFactory;
             }
         }
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             var response = _responseFactory(request);
 
@@ -27,7 +34,10 @@ namespace Microsoft.Extensions.Http
         }
 
 #if NET5_0_OR_GREATER
-        protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken) => _responseFactory(request);
+        protected override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) => _responseFactory(request);
 #endif
     }
 }

@@ -16,7 +16,7 @@ namespace System.Xml.XmlDiff
         Before = 0,
         After = 1,
         Unknown = 2,
-        Same = 3
+        Same = 3,
     }
 
     public enum XmlDiffNodeType
@@ -29,14 +29,24 @@ namespace System.Xml.XmlDiff
         Comment = 5,
         PI = 6,
         WS = 7,
-        Document = 8
+        Document = 8,
     }
 
     internal class PositionInfo : IXmlLineInfo
     {
-        public virtual bool HasLineInfo() { return false; }
-        public virtual int LineNumber { get { return 0; } }
-        public virtual int LinePosition { get { return 0; } }
+        public virtual bool HasLineInfo()
+        {
+            return false;
+        }
+
+        public virtual int LineNumber
+        {
+            get { return 0; }
+        }
+        public virtual int LinePosition
+        {
+            get { return 0; }
+        }
 
         public static PositionInfo GetPositionInfo(object o)
         {
@@ -61,8 +71,15 @@ namespace System.Xml.XmlDiff
             _mlineInfo = lineInfo;
         }
 
-        public override bool HasLineInfo() { return true; }
-        public override int LineNumber { get { return _mlineInfo.LineNumber; } }
+        public override bool HasLineInfo()
+        {
+            return true;
+        }
+
+        public override int LineNumber
+        {
+            get { return _mlineInfo.LineNumber; }
+        }
         public override int LinePosition
         {
             get { return _mlineInfo.LinePosition; }
@@ -99,7 +116,9 @@ namespace System.Xml.XmlDiff
         {
             set
             {
-                this.IgnoreAttributeOrder = (((int)value & (int)(XmlDiffOption.IgnoreAttributeOrder)) > 0);
+                this.IgnoreAttributeOrder = (
+                    ((int)value & (int)(XmlDiffOption.IgnoreAttributeOrder)) > 0
+                );
                 this.IgnoreChildOrder = (((int)value & (int)(XmlDiffOption.IgnoreChildOrder)) > 0);
                 this.IgnoreComments = (((int)value & (int)(XmlDiffOption.IgnoreComments)) > 0);
                 this.IgnoreWhitespace = (((int)value & (int)(XmlDiffOption.IgnoreWhitespace)) > 0);
@@ -110,7 +129,10 @@ namespace System.Xml.XmlDiff
                 this.NormalizeNewline = (((int)value & (int)(XmlDiffOption.NormalizeNewline)) > 0);
             }
         }
-        public override XmlDiffNodeType NodeType { get { return XmlDiffNodeType.Document; } }
+        public override XmlDiffNodeType NodeType
+        {
+            get { return XmlDiffNodeType.Document; }
+        }
 
         public bool IgnoreAttributeOrder
         {
@@ -192,11 +214,17 @@ namespace System.Xml.XmlDiff
             }
             else if (nt1 == (int)XmlDiffNodeType.PI)
             {
-                return ComparePIs(node1 as XmlDiffProcessingInstruction, node2 as XmlDiffProcessingInstruction);
+                return ComparePIs(
+                    node1 as XmlDiffProcessingInstruction,
+                    node2 as XmlDiffProcessingInstruction
+                );
             }
             else if (node1 is XmlDiffCharacterData)
             {
-                return CompareTextLikeNodes(node1 as XmlDiffCharacterData, node2 as XmlDiffCharacterData);
+                return CompareTextLikeNodes(
+                    node1 as XmlDiffCharacterData,
+                    node2 as XmlDiffCharacterData
+                );
             }
             else
             {
@@ -213,7 +241,10 @@ namespace System.Xml.XmlDiff
             int nCompare = 0;
             if ((nCompare = CompareText(elem2.LocalName, elem1.LocalName)) == 0)
             {
-                if (IgnoreNS || (nCompare = CompareText(elem2.NamespaceURI, elem1.NamespaceURI)) == 0)
+                if (
+                    IgnoreNS
+                    || (nCompare = CompareText(elem2.NamespaceURI, elem1.NamespaceURI)) == 0
+                )
                 {
                     if (IgnorePrefix || (nCompare = CompareText(elem2.Prefix, elem1.Prefix)) == 0)
                     {
@@ -253,9 +284,17 @@ namespace System.Xml.XmlDiff
                 {
                     if ((nCompare = CompareText(current2.LocalName, current1.LocalName)) == 0)
                     {
-                        if (IgnoreNS || (nCompare = CompareText(current2.NamespaceURI, current1.NamespaceURI)) == 0)
+                        if (
+                            IgnoreNS
+                            || (
+                                nCompare = CompareText(current2.NamespaceURI, current1.NamespaceURI)
+                            ) == 0
+                        )
                         {
-                            if (IgnorePrefix || (nCompare = CompareText(current2.Prefix, current1.Prefix)) == 0)
+                            if (
+                                IgnorePrefix
+                                || (nCompare = CompareText(current2.Prefix, current1.Prefix)) == 0
+                            )
                             {
                                 if ((nCompare = CompareText(current2.Value, current1.Value)) == 0)
                                 {
@@ -284,7 +323,10 @@ namespace System.Xml.XmlDiff
             int nCompare = 0;
             if ((nCompare = CompareText(attr2.LocalName, attr1.LocalName)) == 0)
             {
-                if (IgnoreNS || (nCompare = CompareText(attr2.NamespaceURI, attr1.NamespaceURI)) == 0)
+                if (
+                    IgnoreNS
+                    || (nCompare = CompareText(attr2.NamespaceURI, attr1.NamespaceURI)) == 0
+                )
                 {
                     if (IgnorePrefix || (nCompare = CompareText(attr2.Prefix, attr1.Prefix)) == 0)
                     {
@@ -315,7 +357,10 @@ namespace System.Xml.XmlDiff
                 return NodePosition.Before;
         }
 
-        private NodePosition ComparePIs(XmlDiffProcessingInstruction pi1, XmlDiffProcessingInstruction pi2)
+        private NodePosition ComparePIs(
+            XmlDiffProcessingInstruction pi1,
+            XmlDiffProcessingInstruction pi2
+        )
         {
             Debug.Assert(pi1 != null);
             Debug.Assert(pi2 != null);
@@ -372,13 +417,16 @@ namespace System.Xml.XmlDiff
                 return -1; //s1 < s2
             else if (s2.Length < s1.Length)
                 return 1; //s1 > s2
-            else return 0;
+            else
+                return 0;
         }
 
         public virtual void Load(XmlReader reader)
         {
             if (_bLoaded)
-                throw new InvalidOperationException("The document already contains data and should not be used again.");
+                throw new InvalidOperationException(
+                    "The document already contains data and should not be used again."
+                );
             if (reader.ReadState == ReadState.Initial)
             {
                 if (!reader.Read())
@@ -423,7 +471,13 @@ namespace System.Xml.XmlDiff
                         {
                             StringBuilder text = new StringBuilder();
                             text.Append(reader.Value);
-                            while ((lookAhead = reader.Read()) && (reader.NodeType == XmlNodeType.Text || reader.NodeType == XmlNodeType.CDATA))
+                            while (
+                                (lookAhead = reader.Read())
+                                && (
+                                    reader.NodeType == XmlNodeType.Text
+                                    || reader.NodeType == XmlNodeType.CDATA
+                                )
+                            )
                             {
                                 text.Append(reader.Value);
                             }
@@ -439,7 +493,13 @@ namespace System.Xml.XmlDiff
                         {
                             StringBuilder text = new StringBuilder();
                             text.Append(reader.Value);
-                            while ((lookAhead = reader.Read()) && (reader.NodeType == XmlNodeType.Text || reader.NodeType == XmlNodeType.CDATA))
+                            while (
+                                (lookAhead = reader.Read())
+                                && (
+                                    reader.NodeType == XmlNodeType.Text
+                                    || reader.NodeType == XmlNodeType.CDATA
+                                )
+                            )
                             {
                                 text.Append(reader.Value);
                             }
@@ -468,7 +528,11 @@ namespace System.Xml.XmlDiff
             XmlDiffElement elem = null;
             bool bEmptyElement = reader.IsEmptyElement;
             if (bEmptyElement)
-                elem = new XmlDiffEmptyElement(reader.LocalName, reader.Prefix, reader.NamespaceURI);
+                elem = new XmlDiffEmptyElement(
+                    reader.LocalName,
+                    reader.Prefix,
+                    reader.NamespaceURI
+                );
             else
                 elem = new XmlDiffElement(reader.LocalName, reader.Prefix, reader.NamespaceURI);
             elem.LineNumber = pInfo.LineNumber;
@@ -486,14 +550,24 @@ namespace System.Xml.XmlDiff
         {
             if (reader.MoveToFirstAttribute())
             {
-                XmlDiffAttribute attr = new XmlDiffAttribute(reader.LocalName, reader.Prefix, reader.NamespaceURI, reader.Value);
+                XmlDiffAttribute attr = new XmlDiffAttribute(
+                    reader.LocalName,
+                    reader.Prefix,
+                    reader.NamespaceURI,
+                    reader.Value
+                );
                 attr.LineNumber = pInfo.LineNumber;
                 attr.LinePosition = pInfo.LinePosition;
                 InsertAttribute(parent, attr);
 
                 while (reader.MoveToNextAttribute())
                 {
-                    attr = new XmlDiffAttribute(reader.LocalName, reader.Prefix, reader.NamespaceURI, reader.Value);
+                    attr = new XmlDiffAttribute(
+                        reader.LocalName,
+                        reader.Prefix,
+                        reader.NamespaceURI,
+                        reader.Value
+                    );
                     attr.LineNumber = pInfo.LineNumber;
                     attr.LinePosition = pInfo.LinePosition;
                     InsertAttribute(parent, attr);
@@ -501,25 +575,52 @@ namespace System.Xml.XmlDiff
             }
         }
 
-        private void LoadTextNode(XmlDiffNode parent, XmlReader reader, PositionInfo pInfo, XmlDiffNodeType nt)
+        private void LoadTextNode(
+            XmlDiffNode parent,
+            XmlReader reader,
+            PositionInfo pInfo,
+            XmlDiffNodeType nt
+        )
         {
-            XmlDiffCharacterData textNode = new XmlDiffCharacterData(reader.Value, nt, this.NormalizeNewline);
+            XmlDiffCharacterData textNode = new XmlDiffCharacterData(
+                reader.Value,
+                nt,
+                this.NormalizeNewline
+            );
             textNode.LineNumber = pInfo.LineNumber;
             textNode.LinePosition = pInfo.LinePosition;
             InsertChild(parent, textNode);
         }
 
-        private void LoadTextNode(XmlDiffNode parent, string text, PositionInfo pInfo, XmlDiffNodeType nt)
+        private void LoadTextNode(
+            XmlDiffNode parent,
+            string text,
+            PositionInfo pInfo,
+            XmlDiffNodeType nt
+        )
         {
-            XmlDiffCharacterData textNode = new XmlDiffCharacterData(text, nt, this.NormalizeNewline);
+            XmlDiffCharacterData textNode = new XmlDiffCharacterData(
+                text,
+                nt,
+                this.NormalizeNewline
+            );
             textNode.LineNumber = pInfo.LineNumber;
             textNode.LinePosition = pInfo.LinePosition;
             InsertChild(parent, textNode);
         }
 
-        private void LoadTopLevelAttribute(XmlDiffNode parent, string text, PositionInfo pInfo, XmlDiffNodeType nt)
+        private void LoadTopLevelAttribute(
+            XmlDiffNode parent,
+            string text,
+            PositionInfo pInfo,
+            XmlDiffNodeType nt
+        )
         {
-            XmlDiffCharacterData textNode = new XmlDiffCharacterData(text, nt, this.NormalizeNewline);
+            XmlDiffCharacterData textNode = new XmlDiffCharacterData(
+                text,
+                nt,
+                this.NormalizeNewline
+            );
             textNode.LineNumber = pInfo.LineNumber;
             textNode.LinePosition = pInfo.LinePosition;
             InsertTopLevelAttributeAsText(parent, textNode);
@@ -527,7 +628,10 @@ namespace System.Xml.XmlDiff
 
         private void LoadPI(XmlDiffNode parent, XmlReader reader, PositionInfo pInfo)
         {
-            XmlDiffProcessingInstruction pi = new XmlDiffProcessingInstruction(reader.Name, reader.Value);
+            XmlDiffProcessingInstruction pi = new XmlDiffProcessingInstruction(
+                reader.Name,
+                reader.Value
+            );
             pi.LineNumber = pInfo.LineNumber;
             pi.LinePosition = pInfo.LinePosition;
             InsertChild(parent, pi);
@@ -548,7 +652,6 @@ namespace System.Xml.XmlDiff
             elem.EndLinePosition = pInfo.LinePosition;
         }
 
-
         private void InsertChild(XmlDiffNode parent, XmlDiffNode newChild)
         {
             if (IgnoreChildOrder)
@@ -566,11 +669,21 @@ namespace System.Xml.XmlDiff
                 parent.InsertChildAfter(parent.LastChild, newChild);
         }
 
-        private void InsertTopLevelAttributeAsText(XmlDiffNode parent, XmlDiffCharacterData newChild)
+        private void InsertTopLevelAttributeAsText(
+            XmlDiffNode parent,
+            XmlDiffCharacterData newChild
+        )
         {
-            if (parent.LastChild != null && (parent.LastChild.NodeType == XmlDiffNodeType.Text || parent.LastChild.NodeType == XmlDiffNodeType.WS))
+            if (
+                parent.LastChild != null
+                && (
+                    parent.LastChild.NodeType == XmlDiffNodeType.Text
+                    || parent.LastChild.NodeType == XmlDiffNodeType.WS
+                )
+            )
             {
-                ((XmlDiffCharacterData)parent.LastChild).Value = ((XmlDiffCharacterData)parent.LastChild).Value + " " + newChild.Value;
+                ((XmlDiffCharacterData)parent.LastChild).Value =
+                    ((XmlDiffCharacterData)parent.LastChild).Value + " " + newChild.Value;
             }
             else
             {
@@ -612,6 +725,7 @@ namespace System.Xml.XmlDiff
                 child = child.NextSibling;
             }
         }
+
         public XmlDiffNavigator CreateNavigator()
         {
             return new XmlDiffNavigator(this);
@@ -639,8 +753,7 @@ namespace System.Xml.XmlDiff
                     if (_current == _last)
                         break;
                     _current = _next;
-                }
-                while (true);
+                } while (true);
                 //restore flag for ignoring child order
                 IgnoreChildOrder = temp;
             }
@@ -668,8 +781,7 @@ namespace System.Xml.XmlDiff
                     if (_current == _last)
                         break;
                     _current = _next;
-                }
-                while (true);
+                } while (true);
                 //restore flag for ignoring child order
                 IgnoreChildOrder = temp;
             }
@@ -687,6 +799,7 @@ namespace System.Xml.XmlDiff
             _document = doc;
             _currentNode = _document;
         }
+
         public XmlDiffNavigator Clone()
         {
             XmlDiffNavigator _clone = new XmlDiffNavigator(_document);
@@ -724,7 +837,10 @@ namespace System.Xml.XmlDiff
                         {
                             return NodePosition.Before;
                         }
-                        else if (targetNode.LineNumber == this.CurrentNode.LineNumber && targetNode.LinePosition > this.CurrentNode.LinePosition)
+                        else if (
+                            targetNode.LineNumber == this.CurrentNode.LineNumber
+                            && targetNode.LinePosition > this.CurrentNode.LinePosition
+                        )
                         {
                             return NodePosition.Before;
                         }
@@ -736,6 +852,7 @@ namespace System.Xml.XmlDiff
                 }
             }
         }
+
         public string GetAttribute(string localName, string namespaceURI)
         {
             if (_currentNode is XmlDiffElement)
@@ -775,7 +892,10 @@ namespace System.Xml.XmlDiff
         {
             if (_currentNode is XmlDiffElement)
             {
-                XmlDiffAttribute _attr = ((XmlDiffElement)_currentNode).GetAttribute(localName, namespaceURI);
+                XmlDiffAttribute _attr = ((XmlDiffElement)_currentNode).GetAttribute(
+                    localName,
+                    namespaceURI
+                );
                 if (_attr != null)
                 {
                     _currentNode = _attr;
@@ -784,6 +904,7 @@ namespace System.Xml.XmlDiff
             }
             return false;
         }
+
         public bool MoveToFirst()
         {
             if (!(_currentNode is XmlDiffAttribute))
@@ -804,6 +925,7 @@ namespace System.Xml.XmlDiff
             }
             return false;
         }
+
         public bool MoveToFirstAttribute()
         {
             if (_currentNode is XmlDiffElement)
@@ -824,25 +946,32 @@ namespace System.Xml.XmlDiff
             }
             return false;
         }
+
         public bool MoveToFirstChild()
         {
-            if ((_currentNode is XmlDiffDocument || _currentNode is XmlDiffElement) && _currentNode.FirstChild != null)
+            if (
+                (_currentNode is XmlDiffDocument || _currentNode is XmlDiffElement)
+                && _currentNode.FirstChild != null
+            )
             {
                 _currentNode = _currentNode.FirstChild;
                 return true;
             }
             return false;
         }
+
         public bool MoveToId(string id)
         {
             Debug.Assert(false, "MoveToId is NYI");
             return false;
         }
+
         public bool MoveToNamespace(string name)
         {
             Debug.Assert(false, "MoveToNamespace is NYI");
             return false;
         }
+
         public bool MoveToNext()
         {
             if (!(_currentNode is XmlDiffAttribute) && _currentNode._next != null)
@@ -852,6 +981,7 @@ namespace System.Xml.XmlDiff
             }
             return false;
         }
+
         public bool MoveToNextAttribute()
         {
             if (_currentNode is XmlDiffAttribute)
@@ -869,11 +999,12 @@ namespace System.Xml.XmlDiff
             }
             return false;
         }
+
         private bool IsNamespaceNode(XmlDiffAttribute attr)
         {
-            return attr.LocalName.ToLower() == "xmlns" ||
-                   attr.Prefix.ToLower() == "xmlns";
+            return attr.LocalName.ToLower() == "xmlns" || attr.Prefix.ToLower() == "xmlns";
         }
+
         public bool MoveToParent()
         {
             if (!(_currentNode is XmlDiffDocument))
@@ -883,6 +1014,7 @@ namespace System.Xml.XmlDiff
             }
             return false;
         }
+
         public bool MoveToPrevious()
         {
             if (_currentNode != _currentNode.ParentNode.FirstChild)
@@ -899,6 +1031,7 @@ namespace System.Xml.XmlDiff
             }
             return false;
         }
+
         public void MoveToRoot()
         {
             _currentNode = _document;
@@ -1016,37 +1149,31 @@ namespace System.Xml.XmlDiff
         {
             get
             {
-                return (_currentNode is XmlDiffElement && ((XmlDiffElement)_currentNode).FirstAttribute != null) ? true : false;
+                return (
+                    _currentNode is XmlDiffElement
+                    && ((XmlDiffElement)_currentNode).FirstAttribute != null
+                )
+                    ? true
+                    : false;
             }
         }
         public bool HasChildren
         {
-            get
-            {
-                return _currentNode._next != null ? true : false;
-            }
+            get { return _currentNode._next != null ? true : false; }
         }
         public bool IsEmptyElement
         {
-            get
-            {
-                return _currentNode is XmlDiffEmptyElement ? true : false;
-            }
+            get { return _currentNode is XmlDiffEmptyElement ? true : false; }
         }
         public XmlNameTable NameTable
         {
-            get
-            {
-                return _document.nameTable;
-            }
+            get { return _document.nameTable; }
         }
         public XmlDiffNode CurrentNode
         {
-            get
-            {
-                return _currentNode;
-            }
+            get { return _currentNode; }
         }
+
         public bool IsOnRoot()
         {
             return _currentNode == null ? true : false;
@@ -1061,7 +1188,8 @@ namespace System.Xml.XmlDiff
         internal XmlDiffNode _firstChild;
         internal XmlDiffNode _lastChild;
         internal XmlDiffNode _parent;
-        internal int _lineNumber, _linePosition;
+        internal int _lineNumber,
+            _linePosition;
         internal bool _bIgnoreValue;
         private PropertyCollection _extendedProperties;
 
@@ -1077,39 +1205,24 @@ namespace System.Xml.XmlDiff
 
         public XmlDiffNode FirstChild
         {
-            get
-            {
-                return this._firstChild;
-            }
+            get { return this._firstChild; }
         }
         public XmlDiffNode LastChild
         {
-            get
-            {
-                return this._lastChild;
-            }
+            get { return this._lastChild; }
         }
         public XmlDiffNode NextSibling
         {
-            get
-            {
-                return this._next;
-            }
+            get { return this._next; }
         }
         public XmlDiffNode ParentNode
         {
-            get
-            {
-                return this._parent;
-            }
+            get { return this._parent; }
         }
 
         public virtual bool IgnoreValue
         {
-            get
-            {
-                return _bIgnoreValue;
-            }
+            get { return _bIgnoreValue; }
             set
             {
                 _bIgnoreValue = value;
@@ -1121,7 +1234,6 @@ namespace System.Xml.XmlDiff
                 }
             }
         }
-
 
         public abstract XmlDiffNodeType NodeType { get; }
 
@@ -1170,6 +1282,7 @@ namespace System.Xml.XmlDiff
                 return _extendedProperties;
             }
         }
+
         public virtual void InsertChildAfter(XmlDiffNode child, XmlDiffNode newChild)
         {
             Debug.Assert(newChild != null);
@@ -1191,7 +1304,7 @@ namespace System.Xml.XmlDiff
 
         public virtual void DeleteChild(XmlDiffNode child)
         {
-            if (child == this.FirstChild)//delete head
+            if (child == this.FirstChild) //delete head
             {
                 _firstChild = this.FirstChild.NextSibling;
             }
@@ -1234,7 +1347,8 @@ namespace System.Xml.XmlDiff
         private XmlDiffAttribute _firstAttribute;
         private XmlDiffAttribute _lastAttribute;
         private int _attrC;
-        private int _endLineNumber, _endLinePosition;
+        private int _endLineNumber,
+            _endLinePosition;
 
         public XmlDiffElement(string localName, string prefix, string ns)
             : base()
@@ -1247,10 +1361,22 @@ namespace System.Xml.XmlDiff
             this._attrC = -1;
         }
 
-        public override XmlDiffNodeType NodeType { get { return XmlDiffNodeType.Element; } }
-        public string LocalName { get { return this._lName; } }
-        public string NamespaceURI { get { return this._ns; } }
-        public string Prefix { get { return this._prefix; } }
+        public override XmlDiffNodeType NodeType
+        {
+            get { return XmlDiffNodeType.Element; }
+        }
+        public string LocalName
+        {
+            get { return this._lName; }
+        }
+        public string NamespaceURI
+        {
+            get { return this._ns; }
+        }
+        public string Prefix
+        {
+            get { return this._prefix; }
+        }
 
         public string Name
         {
@@ -1265,18 +1391,13 @@ namespace System.Xml.XmlDiff
 
         public XmlDiffAttribute FirstAttribute
         {
-            get
-            {
-                return this._firstAttribute;
-            }
+            get { return this._firstAttribute; }
         }
         public XmlDiffAttribute LastAttribute
         {
-            get
-            {
-                return this._lastAttribute;
-            }
+            get { return this._lastAttribute; }
         }
+
         public string GetAttributeValue(string LocalName, string NamespaceUri)
         {
             if (_firstAttribute != null)
@@ -1289,8 +1410,7 @@ namespace System.Xml.XmlDiff
                         return _current.Value;
                     }
                     _current = (XmlDiffAttribute)_current._next;
-                }
-                while (_current != _lastAttribute);
+                } while (_current != _lastAttribute);
             }
             return "";
         }
@@ -1307,8 +1427,7 @@ namespace System.Xml.XmlDiff
                         return _current;
                     }
                     _current = (XmlDiffAttribute)_current._next;
-                }
-                while (_current != _lastAttribute);
+                } while (_current != _lastAttribute);
             }
             return null;
         }
@@ -1334,7 +1453,7 @@ namespace System.Xml.XmlDiff
 
         internal void DeleteAttribute(XmlDiffAttribute attr)
         {
-            if (attr == this.FirstAttribute)//delete head
+            if (attr == this.FirstAttribute) //delete head
             {
                 if (attr == this.LastAttribute) //tail being deleted
                 {
@@ -1439,7 +1558,11 @@ namespace System.Xml.XmlDiff
                     XmlDiffNode _current = _firstChild;
                     do
                     {
-                        if (_current is XmlDiffCharacterData && _current.NodeType != XmlDiffNodeType.Comment && _current.NodeType != XmlDiffNodeType.PI)
+                        if (
+                            _current is XmlDiffCharacterData
+                            && _current.NodeType != XmlDiffNodeType.Comment
+                            && _current.NodeType != XmlDiffNodeType.PI
+                        )
                         {
                             _bldr.Append(((XmlDiffCharacterData)_current).Value);
                         }
@@ -1448,8 +1571,7 @@ namespace System.Xml.XmlDiff
                             _bldr.Append(((XmlDiffElement)_current).Value);
                         }
                         _current = _current._next;
-                    }
-                    while (_current != null);
+                    } while (_current != null);
                     return _bldr.ToString();
                 }
                 return "";
@@ -1459,7 +1581,8 @@ namespace System.Xml.XmlDiff
 
     public class XmlDiffEmptyElement : XmlDiffElement
     {
-        public XmlDiffEmptyElement(string localName, string prefix, string ns) : base(localName, prefix, ns) { }
+        public XmlDiffEmptyElement(string localName, string prefix, string ns)
+            : base(localName, prefix, ns) { }
     }
 
     public class XmlDiffAttribute : XmlDiffNode
@@ -1490,9 +1613,18 @@ namespace System.Xml.XmlDiff
                 return this._value;
             }
         }
-        public string LocalName { get { return this._lName; } }
-        public string NamespaceURI { get { return this._ns; } }
-        public string Prefix { get { return this._prefix; } }
+        public string LocalName
+        {
+            get { return this._lName; }
+        }
+        public string NamespaceURI
+        {
+            get { return this._ns; }
+        }
+        public string Prefix
+        {
+            get { return this._prefix; }
+        }
 
         public string Name
         {
@@ -1504,7 +1636,10 @@ namespace System.Xml.XmlDiff
                     return this._lName;
             }
         }
-        public override XmlDiffNodeType NodeType { get { return XmlDiffNodeType.Attribute; } }
+        public override XmlDiffNodeType NodeType
+        {
+            get { return XmlDiffNodeType.Attribute; }
+        }
 
         public override void WriteTo(XmlWriter w)
         {
@@ -1522,13 +1657,21 @@ namespace System.Xml.XmlDiff
     public class XmlDiffEntityReference : XmlDiffNode
     {
         private string _name;
+
         public XmlDiffEntityReference(string name)
             : base()
         {
             this._name = name;
         }
-        public override XmlDiffNodeType NodeType { get { return XmlDiffNodeType.ER; } }
-        public string Name { get { return this._name; } }
+
+        public override XmlDiffNodeType NodeType
+        {
+            get { return XmlDiffNodeType.ER; }
+        }
+        public string Name
+        {
+            get { return this._name; }
+        }
 
         public override void WriteTo(XmlWriter w)
         {
@@ -1550,6 +1693,7 @@ namespace System.Xml.XmlDiff
     {
         private string _value;
         private XmlDiffNodeType _nodetype;
+
         public XmlDiffCharacterData(string value, XmlDiffNodeType nt, bool NormalizeNewline)
             : base()
         {
@@ -1572,12 +1716,12 @@ namespace System.Xml.XmlDiff
                 }
                 return this._value;
             }
-            set
-            {
-                _value = value;
-            }
+            set { _value = value; }
         }
-        public override XmlDiffNodeType NodeType { get { return _nodetype; } }
+        public override XmlDiffNodeType NodeType
+        {
+            get { return _nodetype; }
+        }
 
         public override void WriteTo(XmlWriter w)
         {
@@ -1605,17 +1749,23 @@ namespace System.Xml.XmlDiff
     public class XmlDiffProcessingInstruction : XmlDiffCharacterData
     {
         private string _name;
+
         public XmlDiffProcessingInstruction(string name, string value)
             : base(value, XmlDiffNodeType.PI, false)
         {
             this._name = name;
         }
-        public string Name { get { return this._name; } }
+
+        public string Name
+        {
+            get { return this._name; }
+        }
 
         public override void WriteTo(XmlWriter w)
         {
             w.WriteProcessingInstruction(this._name, Value);
         }
+
         public override void WriteContentTo(XmlWriter w) { }
     }
 }

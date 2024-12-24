@@ -19,22 +19,18 @@ namespace System.Activities
     {
         // define attached properties that will identify PropertyReferenceExtension-based
         // object properties
-        static AttachableMemberIdentifier propertyReferencePropertyID = new AttachableMemberIdentifier(typeof(ActivityBuilder), "PropertyReference");
-        static AttachableMemberIdentifier propertyReferencesPropertyID = new AttachableMemberIdentifier(typeof(ActivityBuilder), "PropertyReferences");
+        static AttachableMemberIdentifier propertyReferencePropertyID =
+            new AttachableMemberIdentifier(typeof(ActivityBuilder), "PropertyReference");
+        static AttachableMemberIdentifier propertyReferencesPropertyID =
+            new AttachableMemberIdentifier(typeof(ActivityBuilder), "PropertyReferences");
 
         KeyedCollection<string, DynamicActivityProperty> properties;
         Collection<Constraint> constraints;
         Collection<Attribute> attributes;
 
-        public ActivityBuilder()
-        {
-        }
+        public ActivityBuilder() { }
 
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
         [DependsOn("Name")]
         public Collection<Attribute> Attributes
@@ -63,7 +59,6 @@ namespace System.Activities
             }
         }
 
-
         [DependsOn("Properties")]
         [Browsable(false)]
         public Collection<Constraint> Constraints
@@ -81,20 +76,12 @@ namespace System.Activities
         [TypeConverter(typeof(ImplementationVersionConverter))]
         [DefaultValue(null)]
         [DependsOn("Name")]
-        public Version ImplementationVersion
-        {
-            get;
-            set;
-        }
+        public Version ImplementationVersion { get; set; }
 
         [DefaultValue(null)]
         [Browsable(false)]
         [DependsOn("Constraints")]
-        public Activity Implementation
-        {
-            get;
-            set;
-        }
+        public Activity Implementation { get; set; }
 
         // Back-compat workaround: PropertyReference shipped in 4.0. PropertyReferences is new in 4.5.
         //
@@ -139,7 +126,13 @@ namespace System.Activities
         internal static bool HasPropertyReferences(object target)
         {
             PropertyReferenceCollection propertyReferences;
-            if (AttachablePropertyServices.TryGetProperty(target, propertyReferencesPropertyID, out propertyReferences))
+            if (
+                AttachablePropertyServices.TryGetProperty(
+                    target,
+                    propertyReferencesPropertyID,
+                    out propertyReferences
+                )
+            )
             {
                 return propertyReferences.Count > 0;
             }
@@ -149,13 +142,22 @@ namespace System.Activities
         static PropertyReferenceCollection GetPropertyReferenceCollection(object target)
         {
             PropertyReferenceCollection propertyReferences;
-            if (!AttachablePropertyServices.TryGetProperty(target, propertyReferencesPropertyID, out propertyReferences))
+            if (
+                !AttachablePropertyServices.TryGetProperty(
+                    target,
+                    propertyReferencesPropertyID,
+                    out propertyReferences
+                )
+            )
             {
                 propertyReferences = new PropertyReferenceCollection(target);
-                AttachablePropertyServices.SetProperty(target, propertyReferencesPropertyID, propertyReferences);
+                AttachablePropertyServices.SetProperty(
+                    target,
+                    propertyReferencesPropertyID,
+                    propertyReferences
+                );
             }
             return propertyReferences;
-
         }
 
         Activity IDebuggableWorkflowTree.GetWorkflowRoot()
@@ -163,7 +165,10 @@ namespace System.Activities
             return this.Implementation;
         }
 
-        internal static KeyedCollection<string, DynamicActivityProperty> CreateActivityPropertyCollection()
+        internal static KeyedCollection<
+            string,
+            DynamicActivityProperty
+        > CreateActivityPropertyCollection()
         {
             return new ActivityPropertyCollection();
         }
@@ -194,10 +199,7 @@ namespace System.Activities
 
             public ActivityPropertyReference SingleItem
             {
-                get
-                {
-                    return this.singleItemIndex >= 0 ? this[this.singleItemIndex] : null;
-                }
+                get { return this.singleItemIndex >= 0 ? this[this.singleItemIndex] : null; }
                 set
                 {
                     if (this.singleItemIndex >= 0)
@@ -238,7 +240,10 @@ namespace System.Activities
                 }
                 else if (Count == 1)
                 {
-                    Fx.Assert(this.singleItemIndex < 0, "How did we have an index if we were empty?");
+                    Fx.Assert(
+                        this.singleItemIndex < 0,
+                        "How did we have an index if we were empty?"
+                    );
                     this.singleItemIndex = 0;
                     UpdateAttachedProperty();
                 }
@@ -274,11 +279,18 @@ namespace System.Activities
                 {
                     if (this.singleItemIndex >= 0)
                     {
-                        AttachablePropertyServices.SetProperty(target, propertyReferencePropertyID, this[this.singleItemIndex]);
+                        AttachablePropertyServices.SetProperty(
+                            target,
+                            propertyReferencePropertyID,
+                            this[this.singleItemIndex]
+                        );
                     }
                     else
                     {
-                        AttachablePropertyServices.RemoveProperty(target, propertyReferencePropertyID);
+                        AttachablePropertyServices.RemoveProperty(
+                            target,
+                            propertyReferencePropertyID
+                        );
                     }
                 }
             }
@@ -292,15 +304,9 @@ namespace System.Activities
         Collection<Constraint> constraints;
         Collection<Attribute> attributes;
 
-        public ActivityBuilder()
-        {
-        }
+        public ActivityBuilder() { }
 
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
         [DependsOn("Name")]
         public Collection<Attribute> Attributes
@@ -346,25 +352,16 @@ namespace System.Activities
         [TypeConverter(typeof(ImplementationVersionConverter))]
         [DefaultValue(null)]
         [DependsOn("Name")]
-        public Version ImplementationVersion
-        {
-            get;
-            set;
-        }
+        public Version ImplementationVersion { get; set; }
 
         [DefaultValue(null)]
         [Browsable(false)]
         [DependsOn("Constraints")]
-        public Activity Implementation
-        {
-            get;
-            set;
-        }
+        public Activity Implementation { get; set; }
 
         Activity IDebuggableWorkflowTree.GetWorkflowRoot()
         {
             return this.Implementation;
         }
     }
-
 }

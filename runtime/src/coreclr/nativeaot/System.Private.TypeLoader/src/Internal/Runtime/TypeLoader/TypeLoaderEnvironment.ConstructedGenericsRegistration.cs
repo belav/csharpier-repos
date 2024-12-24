@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-
 using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader
@@ -26,7 +25,9 @@ namespace Internal.Runtime.TypeLoader
         // To keep the synchronization simple, we execute all dynamic generic type registration/lookups under a global lock
         private Lock _dynamicGenericsLock = new Lock();
 
-        internal void RegisterDynamicGenericTypesAndMethods(DynamicGenericsRegistrationData registrationData)
+        internal void RegisterDynamicGenericTypesAndMethods(
+            DynamicGenericsRegistrationData registrationData
+        )
         {
             using (_dynamicGenericsLock.EnterScope())
             {
@@ -39,7 +40,9 @@ namespace Internal.Runtime.TypeLoader
                 {
                     if (registrationData.TypesToRegister != null)
                     {
-                        registeredTypes = new GenericTypeEntry[registrationData.TypesToRegisterCount];
+                        registeredTypes = new GenericTypeEntry[
+                            registrationData.TypesToRegisterCount
+                        ];
 
                         foreach (GenericTypeEntry typeEntry in registrationData.TypesToRegister)
                         {
@@ -50,11 +53,16 @@ namespace Internal.Runtime.TypeLoader
                             // We can save a bit of memory by avoiding the redundancy where possible. For now, we are keeping it simple.
 
                             // Register type -> components mapping first so that we can use it during rollback below
-                            GenericTypeEntry registeredTypeEntry = _dynamicGenericTypes.AddOrGetExisting(typeEntry);
-                            if (registeredTypeEntry != typeEntry && registeredTypeEntry._isRegisteredSuccessfully)
+                            GenericTypeEntry registeredTypeEntry =
+                                _dynamicGenericTypes.AddOrGetExisting(typeEntry);
+                            if (
+                                registeredTypeEntry != typeEntry
+                                && registeredTypeEntry._isRegisteredSuccessfully
+                            )
                                 throw new ArgumentException(SR.Argument_AddingDuplicate);
 
-                            registeredTypeEntry._instantiatedTypeHandle = typeEntry._instantiatedTypeHandle;
+                            registeredTypeEntry._instantiatedTypeHandle =
+                                typeEntry._instantiatedTypeHandle;
                             registeredTypeEntry._isRegisteredSuccessfully = true;
                         }
                     }
@@ -62,9 +70,13 @@ namespace Internal.Runtime.TypeLoader
 
                     if (registrationData.MethodsToRegister != null)
                     {
-                        registeredMethods = new GenericMethodEntry[registrationData.MethodsToRegisterCount];
+                        registeredMethods = new GenericMethodEntry[
+                            registrationData.MethodsToRegisterCount
+                        ];
 
-                        foreach (GenericMethodEntry methodEntry in registrationData.MethodsToRegister)
+                        foreach (
+                            GenericMethodEntry methodEntry in registrationData.MethodsToRegister
+                        )
                         {
                             Debug.Assert(methodEntry._methodDictionary != IntPtr.Zero);
 
@@ -72,12 +84,20 @@ namespace Internal.Runtime.TypeLoader
                             registeredMethods[registeredMethodsCount++] = methodEntry;
 
                             // Register method dictionary -> components mapping first so that we can use it during rollback below
-                            GenericMethodEntry registeredMethodComponentsEntry = _dynamicGenericMethodComponents.AddOrGetExisting(methodEntry);
-                            if (registeredMethodComponentsEntry != methodEntry && registeredMethodComponentsEntry._isRegisteredSuccessfully)
+                            GenericMethodEntry registeredMethodComponentsEntry =
+                                _dynamicGenericMethodComponents.AddOrGetExisting(methodEntry);
+                            if (
+                                registeredMethodComponentsEntry != methodEntry
+                                && registeredMethodComponentsEntry._isRegisteredSuccessfully
+                            )
                                 throw new ArgumentException(SR.Argument_AddingDuplicate);
 
-                            GenericMethodEntry registeredMethodEntry = _dynamicGenericMethods.AddOrGetExisting(methodEntry);
-                            if (registeredMethodEntry != methodEntry && registeredMethodEntry._isRegisteredSuccessfully)
+                            GenericMethodEntry registeredMethodEntry =
+                                _dynamicGenericMethods.AddOrGetExisting(methodEntry);
+                            if (
+                                registeredMethodEntry != methodEntry
+                                && registeredMethodEntry._isRegisteredSuccessfully
+                            )
                                 throw new ArgumentException(SR.Argument_AddingDuplicate);
 
                             Debug.Assert(registeredMethodComponentsEntry == registeredMethodEntry);
@@ -101,18 +121,23 @@ namespace Internal.Runtime.TypeLoader
                         {
                             var typeEntry = registeredTypes[i];
                             // There is no Remove feature in the LockFreeReaderHashtable...
-                            GenericTypeEntry failedEntry = _dynamicGenericTypes.GetValueIfExists(typeEntry);
+                            GenericTypeEntry failedEntry = _dynamicGenericTypes.GetValueIfExists(
+                                typeEntry
+                            );
                             if (failedEntry != null)
                                 failedEntry._isRegisteredSuccessfully = false;
                         }
                         for (int i = 0; i < registeredMethodsCount; i++)
                         {
                             // There is no Remove feature in the LockFreeReaderHashtable...
-                            GenericMethodEntry failedEntry = _dynamicGenericMethods.GetValueIfExists(registeredMethods[i]);
+                            GenericMethodEntry failedEntry =
+                                _dynamicGenericMethods.GetValueIfExists(registeredMethods[i]);
                             if (failedEntry != null)
                                 failedEntry._isRegisteredSuccessfully = false;
 
-                            failedEntry = _dynamicGenericMethodComponents.GetValueIfExists(registeredMethods[i]);
+                            failedEntry = _dynamicGenericMethodComponents.GetValueIfExists(
+                                registeredMethods[i]
+                            );
                             if (failedEntry != null)
                                 failedEntry._isRegisteredSuccessfully = false;
                         }
@@ -128,10 +153,17 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        public void RegisterConstructedLazyDictionaryForContext(IntPtr context, IntPtr signature, IntPtr dictionary)
+        public void RegisterConstructedLazyDictionaryForContext(
+            IntPtr context,
+            IntPtr signature,
+            IntPtr dictionary
+        )
         {
             Debug.Assert(_typeLoaderLock.IsHeldByCurrentThread);
-            _lazyGenericDictionaries.Add(new LazyDictionaryContext { _context = context, _signature = signature }, dictionary);
+            _lazyGenericDictionaries.Add(
+                new LazyDictionaryContext { _context = context, _signature = signature },
+                dictionary
+            );
         }
     }
 }

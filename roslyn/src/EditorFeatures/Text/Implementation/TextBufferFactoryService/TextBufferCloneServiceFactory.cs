@@ -22,22 +22,25 @@ namespace Microsoft.CodeAnalysis.Text.Implementation.TextBufferFactoryService
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public TextBufferCloneService(
             ITextBufferFactoryService3 textBufferFactoryService,
-            IContentTypeRegistryService contentTypeRegistryService)
+            IContentTypeRegistryService contentTypeRegistryService
+        )
         {
             _textBufferFactoryService = textBufferFactoryService;
 
-            _roslynContentType = contentTypeRegistryService.GetContentType(ContentTypeNames.RoslynContentType);
+            _roslynContentType = contentTypeRegistryService.GetContentType(
+                ContentTypeNames.RoslynContentType
+            );
             _unknownContentType = contentTypeRegistryService.UnknownContentType;
         }
 
-        public ITextBuffer CloneWithUnknownContentType(SnapshotSpan span)
-            => _textBufferFactoryService.CreateTextBuffer(span, _unknownContentType);
+        public ITextBuffer CloneWithUnknownContentType(SnapshotSpan span) =>
+            _textBufferFactoryService.CreateTextBuffer(span, _unknownContentType);
 
-        public ITextBuffer CloneWithUnknownContentType(ITextImage textImage)
-            => Clone(textImage, _unknownContentType);
+        public ITextBuffer CloneWithUnknownContentType(ITextImage textImage) =>
+            Clone(textImage, _unknownContentType);
 
-        public ITextBuffer CloneWithRoslynContentType(SourceText sourceText)
-            => Clone(sourceText, _roslynContentType);
+        public ITextBuffer CloneWithRoslynContentType(SourceText sourceText) =>
+            Clone(sourceText, _roslynContentType);
 
         public ITextBuffer Clone(SourceText sourceText, IContentType contentType)
         {
@@ -52,7 +55,7 @@ namespace Microsoft.CodeAnalysis.Text.Implementation.TextBufferFactoryService
             return _textBufferFactoryService.CreateTextBuffer(sourceText.ToString(), contentType);
         }
 
-        private ITextBuffer Clone(ITextImage textImage, IContentType contentType)
-            => _textBufferFactoryService.CreateTextBuffer(textImage, contentType);
+        private ITextBuffer Clone(ITextImage textImage, IContentType contentType) =>
+            _textBufferFactoryService.CreateTextBuffer(textImage, contentType);
     }
 }

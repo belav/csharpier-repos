@@ -20,35 +20,44 @@ namespace System.Web.Http.WebHost.Routing
                     { "/", "http://localhost/path", "~/path" },
                     { "/", "http://localhost/path.ext", "~/path.ext" },
                     { "/", "http://localhost/path.ext?query=value", "~/path.ext" },
-
                     { "/", "http://localhost/path/", "~/path" },
                     { "/", "http://localhost/path.ext/", "~/path.ext" },
                     { "/", "http://localhost/path.ext/?query=value", "~/path.ext" },
-
                     { "/path1", "http://localhost/path1/path2", "~/path2" },
                     { "/path1", "http://localhost/path1/path2.ext", "~/path2.ext" },
                     { "/path1", "http://localhost/path1/path2.ext?query=value", "~/path2.ext" },
-
                     { "/path1", "http://localhost/path1/path2/", "~/path2" },
                     { "/path1", "http://localhost/path1/path2.ext/", "~/path2.ext" },
                     { "/path1", "http://localhost/path1/path2.ext/?query=value", "~/path2.ext" },
-
                     { "/path1", "http://localhost/path1/path2/path3", "~/path2/path3" },
                     { "/path1", "http://localhost/path1/path2/path3.ext", "~/path2/path3.ext" },
-                    { "/path1", "http://localhost/path1/path2/path3.ext?query=value", "~/path2/path3.ext" },
-
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2/path3.ext?query=value",
+                        "~/path2/path3.ext"
+                    },
                     { "/path1", "http://localhost/path1/path2/path3/", "~/path2/path3" },
                     { "/path1", "http://localhost/path1/path2/path3.ext/", "~/path2/path3.ext" },
-                    { "/path1", "http://localhost/path1/path2/path3.ext/?query=value", "~/path2/path3.ext" },
-
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2/path3.ext/?query=value",
+                        "~/path2/path3.ext"
+                    },
                     { "/path1", "http://localhost/PATH1/path2/path3/", "~/path2/path3" },
                     { "/path1", "http://localhost/PATH1/PATH2/path3.ext/", "~/PATH2/path3.ext" },
-                    { "/path1", "http://localhost/PATH1/PATH2/PATH3.ext/?query=value", "~/PATH2/PATH3.ext" },
-
+                    {
+                        "/path1",
+                        "http://localhost/PATH1/PATH2/PATH3.ext/?query=value",
+                        "~/PATH2/PATH3.ext"
+                    },
                     // urls should be unencoded - /path1/path2 /path3.ext instead of /path1/path2%20/path3.ext
                     { "/path1", "http://localhost/PATH1/path2 /path3/", "~/path2 /path3" },
                     { "/path1", "http://localhost/PATH1/PATH2 /path3.ext/", "~/PATH2 /path3.ext" },
-                    { "/path1", "http://localhost/PATH1/PATH2 /PATH3.ext/?query=value", "~/PATH2 /PATH3.ext" },
+                    {
+                        "/path1",
+                        "http://localhost/PATH1/PATH2 /PATH3.ext/?query=value",
+                        "~/PATH2 /PATH3.ext"
+                    },
                 };
             }
         }
@@ -63,31 +72,57 @@ namespace System.Web.Http.WebHost.Routing
                     { "/", "http://localhost/path", "/path" },
                     { "/", "http://localhost/path.ext", "/path.ext" },
                     { "/", "http://localhost/path.ext?query=value", "/path.ext" },
-
                     { "/", "http://localhost/path/", "/path" },
                     { "/", "http://localhost/path.ext/", "/path.ext" },
                     { "/", "http://localhost/path.ext/?query=value", "/path.ext" },
-
                     { "/path1", "http://localhost/path1/path2", "/path1/path2" },
                     { "/path1", "http://localhost/path1/path2.ext", "/path1/path2.ext" },
-                    { "/path1", "http://localhost/path1/path2.ext?query=value", "/path1/path2.ext" },
-
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2.ext?query=value",
+                        "/path1/path2.ext"
+                    },
                     { "/path1", "http://localhost/path1/path2/", "/path1/path2" },
                     { "/path1", "http://localhost/path1/path2.ext/", "/path1/path2.ext" },
-                    { "/path1", "http://localhost/path1/path2.ext/?query=value", "/path1/path2.ext" },
-
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2.ext/?query=value",
+                        "/path1/path2.ext"
+                    },
                     { "/path1", "http://localhost/path1/path2/path3", "/path1/path2/path3" },
-                    { "/path1", "http://localhost/path1/path2/path3.ext", "/path1/path2/path3.ext" },
-                    { "/path1", "http://localhost/path1/path2/path3.ext?query=value", "/path1/path2/path3.ext" },
-
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2/path3.ext",
+                        "/path1/path2/path3.ext"
+                    },
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2/path3.ext?query=value",
+                        "/path1/path2/path3.ext"
+                    },
                     { "/path1", "http://localhost/path1/path2/path3/", "/path1/path2/path3" },
-                    { "/path1", "http://localhost/path1/path2/path3.ext/", "/path1/path2/path3.ext" },
-                    { "/path1", "http://localhost/path1/path2/path3.ext/?query=value", "/path1/path2/path3.ext" },
-
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2/path3.ext/",
+                        "/path1/path2/path3.ext"
+                    },
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2/path3.ext/?query=value",
+                        "/path1/path2/path3.ext"
+                    },
                     // urls should be unescaped - /path1/path2 /path3.ext instead of /path1/path2%20/path3.ext
                     { "/path1", "http://localhost/path1/path2 /path3/", "/path1/path2 /path3" },
-                    { "/path1", "http://localhost/path1/path2 /path3.ext/", "/path1/path2 /path3.ext" },
-                    { "/path1", "http://localhost/path1/path2 /path3.ext/?query=value", "/path1/path2 /path3.ext" },
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2 /path3.ext/",
+                        "/path1/path2 /path3.ext"
+                    },
+                    {
+                        "/path1",
+                        "http://localhost/path1/path2 /path3.ext/?query=value",
+                        "/path1/path2 /path3.ext"
+                    },
                 };
             }
         }
@@ -96,8 +131,14 @@ namespace System.Web.Http.WebHost.Routing
         public void Constructor_GuardClauses()
         {
             HttpRequestMessage request = new HttpRequestMessage();
-            Assert.ThrowsArgumentNull(() => new HttpRequestMessageWrapper(virtualPathRoot: null, httpRequest: request), "virtualPathRoot");
-            Assert.ThrowsArgumentNull(() => new HttpRequestMessageWrapper(String.Empty, httpRequest: null), "httpRequest");
+            Assert.ThrowsArgumentNull(
+                () => new HttpRequestMessageWrapper(virtualPathRoot: null, httpRequest: request),
+                "virtualPathRoot"
+            );
+            Assert.ThrowsArgumentNull(
+                () => new HttpRequestMessageWrapper(String.Empty, httpRequest: null),
+                "httpRequest"
+            );
         }
 
         [Theory]
@@ -109,7 +150,10 @@ namespace System.Web.Http.WebHost.Routing
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper(applicationPath, request);
+            HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper(
+                applicationPath,
+                request
+            );
 
             // Act
             string actualApplicationPath = wrapper.ApplicationPath;
@@ -120,14 +164,21 @@ namespace System.Web.Http.WebHost.Routing
 
         [Theory]
         [PropertyData("AppRelativeCurrentExecutionFilePathData")]
-        public void AppRelativeCurrentExecutionFilePath_DelegatesToHttpRequestMessage(string virtualPathRoot, string requestUri, string expectedPath)
+        public void AppRelativeCurrentExecutionFilePath_DelegatesToHttpRequestMessage(
+            string virtualPathRoot,
+            string requestUri,
+            string expectedPath
+        )
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri(requestUri),
             };
-            HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper(virtualPathRoot, request);
+            HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper(
+                virtualPathRoot,
+                request
+            );
 
             // Act
             string actualPath = wrapper.AppRelativeCurrentExecutionFilePath;
@@ -138,14 +189,21 @@ namespace System.Web.Http.WebHost.Routing
 
         [Theory]
         [PropertyData("FilePathData")]
-        public void CurrentExecutionFilePath_DelegatesToHttpRequestMessage(string virtualPathRoot, string requestUri, string expectedPath)
+        public void CurrentExecutionFilePath_DelegatesToHttpRequestMessage(
+            string virtualPathRoot,
+            string requestUri,
+            string expectedPath
+        )
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri(requestUri),
             };
-            HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper(virtualPathRoot, request);
+            HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper(
+                virtualPathRoot,
+                request
+            );
 
             // Act
             string actualPath = wrapper.CurrentExecutionFilePath;
@@ -156,14 +214,21 @@ namespace System.Web.Http.WebHost.Routing
 
         [Theory]
         [PropertyData("FilePathData")]
-        public void FilePath_DelegatesToHttpRequestMessage(string virtualPathRoot, string requestUri, string expectedPath)
+        public void FilePath_DelegatesToHttpRequestMessage(
+            string virtualPathRoot,
+            string requestUri,
+            string expectedPath
+        )
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri(requestUri),
             };
-            HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper(virtualPathRoot, request);
+            HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper(
+                virtualPathRoot,
+                request
+            );
 
             // Act
             string actualPath = wrapper.FilePath;
@@ -178,7 +243,7 @@ namespace System.Web.Http.WebHost.Routing
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Method = new HttpMethod("DELETE")
+                Method = new HttpMethod("DELETE"),
             };
             HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper("/", request);
 
@@ -195,7 +260,7 @@ namespace System.Web.Http.WebHost.Routing
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Method = new HttpMethod("DELETE")
+                Method = new HttpMethod("DELETE"),
             };
             HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper("/", request);
 
@@ -211,10 +276,7 @@ namespace System.Web.Http.WebHost.Routing
         {
             // Arrange
             Uri requestUri = new Uri("http://localhost/some/path?query=value");
-            HttpRequestMessage request = new HttpRequestMessage
-            {
-                RequestUri = requestUri
-            };
+            HttpRequestMessage request = new HttpRequestMessage { RequestUri = requestUri };
             HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper("/", request);
 
             // Act
@@ -229,10 +291,7 @@ namespace System.Web.Http.WebHost.Routing
         {
             // Arrange
             Uri requestUri = new Uri("http://localhost/some /path?query=value");
-            HttpRequestMessage request = new HttpRequestMessage
-            {
-                RequestUri = requestUri
-            };
+            HttpRequestMessage request = new HttpRequestMessage { RequestUri = requestUri };
             HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper("/", request);
 
             // Act
@@ -251,10 +310,7 @@ namespace System.Web.Http.WebHost.Routing
             // Arrange
             Uri reqUri = new Uri(requestUri);
             NameValueCollection expectedQueryString = reqUri.ParseQueryString();
-            HttpRequestMessage request = new HttpRequestMessage
-            {
-                RequestUri = reqUri
-            };
+            HttpRequestMessage request = new HttpRequestMessage { RequestUri = reqUri };
             HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper("/", request);
 
             // Act
@@ -269,10 +325,7 @@ namespace System.Web.Http.WebHost.Routing
         {
             // Arrange
             Uri requestUri = new Uri("http://localhost/some/path?query=value");
-            HttpRequestMessage request = new HttpRequestMessage
-            {
-                RequestUri = requestUri
-            };
+            HttpRequestMessage request = new HttpRequestMessage { RequestUri = requestUri };
             HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper("/", request);
 
             // Act
@@ -287,10 +340,7 @@ namespace System.Web.Http.WebHost.Routing
         {
             // Arrange
             Uri requestUri = new Uri("http://localhost/some /path?query=value");
-            HttpRequestMessage request = new HttpRequestMessage
-            {
-                RequestUri = requestUri
-            };
+            HttpRequestMessage request = new HttpRequestMessage { RequestUri = requestUri };
             HttpRequestMessageWrapper wrapper = new HttpRequestMessageWrapper("/", request);
 
             // Act

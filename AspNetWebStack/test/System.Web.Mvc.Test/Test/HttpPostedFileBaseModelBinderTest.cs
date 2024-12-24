@@ -16,10 +16,15 @@ namespace System.Web.Mvc.Test
             mockFile.Setup(f => f.ContentLength).Returns(0);
             mockFile.Setup(f => f.FileName).Returns(String.Empty);
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.Files["fileName"]).Returns(mockFile.Object);
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.Files["fileName"])
+                .Returns(mockFile.Object);
 
             HttpPostedFileBaseModelBinder binder = new HttpPostedFileBaseModelBinder();
-            ModelBindingContext bindingContext = new ModelBindingContext() { ModelName = "fileName" };
+            ModelBindingContext bindingContext = new ModelBindingContext()
+            {
+                ModelName = "fileName",
+            };
 
             // Act
             object result = binder.BindModel(mockControllerContext.Object, bindingContext);
@@ -33,10 +38,15 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(c => c.HttpContext.Request.Files["fileName"]).Returns((HttpPostedFileBase)null);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Request.Files["fileName"])
+                .Returns((HttpPostedFileBase)null);
 
             HttpPostedFileBaseModelBinder binder = new HttpPostedFileBaseModelBinder();
-            ModelBindingContext bindingContext = new ModelBindingContext() { ModelName = "fileName" };
+            ModelBindingContext bindingContext = new ModelBindingContext()
+            {
+                ModelName = "fileName",
+            };
 
             // Act
             object result = binder.BindModel(mockControllerContext.Object, bindingContext);
@@ -53,10 +63,15 @@ namespace System.Web.Mvc.Test
             mockFile.Setup(f => f.ContentLength).Returns(1234);
             mockFile.Setup(f => f.FileName).Returns("somefile");
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.Files["fileName"]).Returns(mockFile.Object);
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.Files["fileName"])
+                .Returns(mockFile.Object);
 
             HttpPostedFileBaseModelBinder binder = new HttpPostedFileBaseModelBinder();
-            ModelBindingContext bindingContext = new ModelBindingContext() { ModelName = "fileName" };
+            ModelBindingContext bindingContext = new ModelBindingContext()
+            {
+                ModelName = "fileName",
+            };
 
             // Act
             object result = binder.BindModel(mockControllerContext.Object, bindingContext);
@@ -75,7 +90,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { binder.BindModel(controllerContext, null); }, "bindingContext");
+                delegate
+                {
+                    binder.BindModel(controllerContext, null);
+                },
+                "bindingContext"
+            );
         }
 
         [Fact]
@@ -86,7 +106,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { binder.BindModel(null, null); }, "controllerContext");
+                delegate
+                {
+                    binder.BindModel(null, null);
+                },
+                "controllerContext"
+            );
         }
     }
 }

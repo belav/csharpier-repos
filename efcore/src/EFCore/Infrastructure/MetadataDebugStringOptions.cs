@@ -41,5 +41,5 @@ public enum MetadataDebugStringOptions
     /// <summary>
     ///     Default settings for single line debug string.
     /// </summary>
-    SingleLineDefault = SingleLine
+    SingleLineDefault = SingleLine,
 }

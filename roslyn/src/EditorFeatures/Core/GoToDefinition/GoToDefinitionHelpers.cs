@@ -19,12 +19,25 @@ internal static class GoToDefinitionHelpers
         IThreadingContext threadingContext,
         IStreamingFindUsagesPresenter streamingPresenter,
         CancellationToken cancellationToken,
-        bool thirdPartyNavigationAllowed = true)
+        bool thirdPartyNavigationAllowed = true
+    )
     {
         var location = await GetDefinitionLocationAsync(
-            symbol, solution, threadingContext, streamingPresenter, cancellationToken, thirdPartyNavigationAllowed).ConfigureAwait(false);
-        return await location.TryNavigateToAsync(
-            threadingContext, new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true), cancellationToken).ConfigureAwait(false);
+                symbol,
+                solution,
+                threadingContext,
+                streamingPresenter,
+                cancellationToken,
+                thirdPartyNavigationAllowed
+            )
+            .ConfigureAwait(false);
+        return await location
+            .TryNavigateToAsync(
+                threadingContext,
+                new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
     }
 
     public static async Task<INavigableLocation?> GetDefinitionLocationAsync(
@@ -33,15 +46,26 @@ internal static class GoToDefinitionHelpers
         IThreadingContext threadingContext,
         IStreamingFindUsagesPresenter streamingPresenter,
         CancellationToken cancellationToken,
-        bool thirdPartyNavigationAllowed = true)
+        bool thirdPartyNavigationAllowed = true
+    )
     {
-        var title = string.Format(EditorFeaturesResources._0_declarations,
-            FindUsagesHelpers.GetDisplayName(symbol));
+        var title = string.Format(
+            EditorFeaturesResources._0_declarations,
+            FindUsagesHelpers.GetDisplayName(symbol)
+        );
 
-        var definitions = await GoToDefinitionFeatureHelpers.GetDefinitionsAsync(
-            symbol, solution, thirdPartyNavigationAllowed, cancellationToken).ConfigureAwait(false);
+        var definitions = await GoToDefinitionFeatureHelpers
+            .GetDefinitionsAsync(symbol, solution, thirdPartyNavigationAllowed, cancellationToken)
+            .ConfigureAwait(false);
 
-        return await streamingPresenter.GetStreamingLocationAsync(
-            threadingContext, solution.Workspace, title, definitions, cancellationToken).ConfigureAwait(false);
+        return await streamingPresenter
+            .GetStreamingLocationAsync(
+                threadingContext,
+                solution.Workspace,
+                title,
+                definitions,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
     }
 }

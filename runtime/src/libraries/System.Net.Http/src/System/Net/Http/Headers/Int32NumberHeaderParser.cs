@@ -17,9 +17,7 @@ namespace System.Net.Http.Headers
         internal static readonly Int32NumberHeaderParser Parser = new Int32NumberHeaderParser();
 
         private Int32NumberHeaderParser()
-            : base(false)
-        {
-        }
+            : base(false) { }
 
         public override string ToString(object value)
         {
@@ -28,8 +26,12 @@ namespace System.Net.Http.Headers
             return ((int)value).ToString(NumberFormatInfo.InvariantInfo);
         }
 
-        protected override int GetParsedValueLength(string value, int startIndex, object? storeValue,
-            out object? parsedValue)
+        protected override int GetParsedValueLength(
+            string value,
+            int startIndex,
+            object? storeValue,
+            out object? parsedValue
+        )
         {
             parsedValue = null;
 

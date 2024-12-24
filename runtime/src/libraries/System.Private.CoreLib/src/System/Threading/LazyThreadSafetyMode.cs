@@ -38,6 +38,6 @@ namespace System.Threading
         /// handled carefully.  If valueFactory throws an exception when the<see cref="Lazy{T}"/> is initialized, the exception will be cached and returned on
         /// subsequent accesses to Value. Also, if valueFactory recursively accesses Value on this <see cref="Lazy{T}"/> instance, a  <see cref="InvalidOperationException"/> will be thrown.
         /// </summary>
-        ExecutionAndPublication
+        ExecutionAndPublication,
     }
 }

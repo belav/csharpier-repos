@@ -47,7 +47,7 @@ namespace Newtonsoft.Json.Serialization
             NamingStrategy = new CamelCaseNamingStrategy
             {
                 ProcessDictionaryKeys = true,
-                OverrideSpecifiedNames = true
+                OverrideSpecifiedNames = true,
             };
         }
 
@@ -74,9 +74,10 @@ namespace Newtonsoft.Json.Serialization
                 lock (TypeContractCacheLock)
                 {
                     cache = _contractCache;
-                    Dictionary<StructMultiKey<Type, Type>, JsonContract> updatedCache = (cache != null)
-                        ? new Dictionary<StructMultiKey<Type, Type>, JsonContract>(cache)
-                        : new Dictionary<StructMultiKey<Type, Type>, JsonContract>();
+                    Dictionary<StructMultiKey<Type, Type>, JsonContract> updatedCache =
+                        (cache != null)
+                            ? new Dictionary<StructMultiKey<Type, Type>, JsonContract>(cache)
+                            : new Dictionary<StructMultiKey<Type, Type>, JsonContract>();
                     updatedCache[key] = contract;
 
                     _contractCache = updatedCache;

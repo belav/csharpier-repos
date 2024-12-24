@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -34,10 +33,34 @@ namespace System.Net.Http.Tests
             CheckValidParsedValue(" \"tag\" ,  ", 0, new EntityTagHeaderValue("\"tag\""), 10, true);
             CheckValidParsedValue("!\"tag\"", 1, new EntityTagHeaderValue("\"tag\""), 6, false);
             CheckValidParsedValue("!\"tag\"", 1, new EntityTagHeaderValue("\"tag\""), 6, true);
-            CheckValidParsedValue("//\"tag\u4F1A\"", 2, new EntityTagHeaderValue("\"tag\u4F1A\""), 8, false);
-            CheckValidParsedValue("//\"tag\u4F1A\"", 2, new EntityTagHeaderValue("\"tag\u4F1A\""), 8, true);
-            CheckValidParsedValue("!W/\"tag\"", 1, new EntityTagHeaderValue("\"tag\"", true), 8, false);
-            CheckValidParsedValue("!W/\"tag\",", 1, new EntityTagHeaderValue("\"tag\"", true), 9, true);
+            CheckValidParsedValue(
+                "//\"tag\u4F1A\"",
+                2,
+                new EntityTagHeaderValue("\"tag\u4F1A\""),
+                8,
+                false
+            );
+            CheckValidParsedValue(
+                "//\"tag\u4F1A\"",
+                2,
+                new EntityTagHeaderValue("\"tag\u4F1A\""),
+                8,
+                true
+            );
+            CheckValidParsedValue(
+                "!W/\"tag\"",
+                1,
+                new EntityTagHeaderValue("\"tag\"", true),
+                8,
+                false
+            );
+            CheckValidParsedValue(
+                "!W/\"tag\",",
+                1,
+                new EntityTagHeaderValue("\"tag\"", true),
+                9,
+                true
+            );
 
             CheckValidParsedValue(null, 0, null, 0, true);
             CheckValidParsedValue(string.Empty, 0, null, 0, true);
@@ -64,8 +87,13 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, EntityTagHeaderValue expectedResult,
-            int expectedIndex, bool supportsMultipleValues)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            EntityTagHeaderValue expectedResult,
+            int expectedIndex,
+            bool supportsMultipleValues
+        )
         {
             HttpHeaderParser parser = null;
             if (supportsMultipleValues)
@@ -78,14 +106,23 @@ namespace System.Net.Http.Tests
             }
 
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false. Input: '{0}', AllowMultipleValues/Any: {1}", input,
-                supportsMultipleValues));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format(
+                    "TryParse returned false. Input: '{0}', AllowMultipleValues/Any: {1}",
+                    input,
+                    supportsMultipleValues
+                )
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(result, expectedResult);
         }
 
-        private void CheckInvalidParsedValue(string input, int startIndex, bool supportsMultipleValues)
+        private void CheckInvalidParsedValue(
+            string input,
+            int startIndex,
+            bool supportsMultipleValues
+        )
         {
             HttpHeaderParser parser = null;
             if (supportsMultipleValues)
@@ -99,9 +136,14 @@ namespace System.Net.Http.Tests
 
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true. Input: '{0}', AllowMultipleValues/Any: {1}", input,
-                supportsMultipleValues));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format(
+                    "TryParse returned true. Input: '{0}', AllowMultipleValues/Any: {1}",
+                    input,
+                    supportsMultipleValues
+                )
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

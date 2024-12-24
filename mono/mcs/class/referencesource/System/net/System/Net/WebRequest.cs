@@ -7,9 +7,11 @@
 #if MONO
 #undef FEATURE_PAL
 #endif
-namespace System.Net {
+namespace System.Net
+{
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -18,15 +20,15 @@ namespace System.Net {
     using System.IO;
     using System.Net.Cache;
     using System.Net.Configuration;
+    using System.Net.Security;
     using System.Reflection;
     using System.Runtime.Serialization;
+    using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Net.Security;
-    using System.ComponentModel;
-    using System.Security;
+
     //
     // WebRequest - the base class of all Web resource/protocol objects. Provides
     // common methods, data and proprties for making the top level request
@@ -50,18 +52,20 @@ namespace System.Net {
 #endif // FEATURE_PAL
         private static volatile ArrayList s_PrefixList;
         private static Object s_InternalSyncObject;
-        private static TimerThread.Queue s_DefaultTimerQueue = TimerThread.CreateQueue(DefaultTimeout);
+        private static TimerThread.Queue s_DefaultTimerQueue = TimerThread.CreateQueue(
+            DefaultTimeout
+        );
 
 #if !FEATURE_PAL
-        private  AuthenticationLevel m_AuthenticationLevel;
-        private  TokenImpersonationLevel m_ImpersonationLevel;
+        private AuthenticationLevel m_AuthenticationLevel;
+        private TokenImpersonationLevel m_ImpersonationLevel;
 #endif
 
-        private RequestCachePolicy      m_CachePolicy;
-        private RequestCacheProtocol    m_CacheProtocol;
-        private RequestCacheBinding     m_CacheBinding;
+        private RequestCachePolicy m_CachePolicy;
+        private RequestCacheProtocol m_CacheProtocol;
+        private RequestCacheBinding m_CacheBinding;
 
-#region designer support for System.Windows.dll
+        #region designer support for System.Windows.dll
         internal class DesignerWebRequestCreate : IWebRequestCreate
         {
             public WebRequest Create(Uri uri)
@@ -69,21 +73,35 @@ namespace System.Net {
                 return WebRequest.Create(uri);
             }
         }
+
         private static DesignerWebRequestCreate webRequestCreate = new DesignerWebRequestCreate();
-        //introduced for supporting design-time loading of System.Windows.dll
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual IWebRequestCreate CreatorInstance { get { return webRequestCreate; } }
 
         //introduced for supporting design-time loading of System.Windows.dll
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static void RegisterPortableWebRequestCreator(IWebRequestCreate creator) { }       
-#endregion        
+        public virtual IWebRequestCreate CreatorInstance
+        {
+            get { return webRequestCreate; }
+        }
 
-        private static Object InternalSyncObject {
-            get {
-                if (s_InternalSyncObject == null) {
+        //introduced for supporting design-time loading of System.Windows.dll
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static void RegisterPortableWebRequestCreator(IWebRequestCreate creator) { }
+        #endregion
+
+        private static Object InternalSyncObject
+        {
+            get
+            {
+                if (s_InternalSyncObject == null)
+                {
                     Object o = new Object();
                     Interlocked.CompareExchange(ref s_InternalSyncObject, o, null);
                 }
@@ -91,10 +109,9 @@ namespace System.Net {
             }
         }
 
-        internal static TimerThread.Queue DefaultTimerQueue {
-            get {
-                return s_DefaultTimerQueue;
-            }
+        internal static TimerThread.Queue DefaultTimerQueue
+        {
+            get { return s_DefaultTimerQueue; }
         }
 
         /*++
@@ -118,8 +135,10 @@ namespace System.Net {
                 Newly created WebRequest.
         --*/
 
-        private static WebRequest Create(Uri requestUri, bool useUriBase) {
-            if(Logging.On)Logging.Enter(Logging.Web, "WebRequest", "Create", requestUri.ToString());
+        private static WebRequest Create(Uri requestUri, bool useUriBase)
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Web, "WebRequest", "Create", requestUri.ToString());
 
             string LookupUri;
             WebRequestPrefixElement Current = null;
@@ -129,8 +148,8 @@ namespace System.Net {
             {
                 LookupUri = requestUri.AbsoluteUri;
             }
-            else {
-
+            else
+            {
                 //
                 // schemes are registered as <schemeName>":", so add the separator
                 // to the string returned from the Uri object
@@ -153,26 +172,31 @@ namespace System.Net {
             // as this Uri, we'll do a compare to see if they match. If they
             // do we'll break out of the loop and call the creator.
 
-            for (int i = 0; i < prefixList.Count; i++) {
+            for (int i = 0; i < prefixList.Count; i++)
+            {
                 Current = (WebRequestPrefixElement)prefixList[i];
 
                 //
                 // See if this prefix is short enough.
                 //
 
-                if (LookupLength >= Current.Prefix.Length) {
-
+                if (LookupLength >= Current.Prefix.Length)
+                {
                     //
                     // It is. See if these match.
                     //
 
-                    if (String.Compare(Current.Prefix,
-                                       0,
-                                       LookupUri,
-                                       0,
-                                       Current.Prefix.Length,
-                                       StringComparison.OrdinalIgnoreCase ) == 0) {
-
+                    if (
+                        String.Compare(
+                            Current.Prefix,
+                            0,
+                            LookupUri,
+                            0,
+                            Current.Prefix.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                    {
                         //
                         // These match. Remember that we found it and break
                         // out.
@@ -186,19 +210,21 @@ namespace System.Net {
 
             WebRequest webRequest = null;
 
-            if (Found) {
-
+            if (Found)
+            {
                 //
                 // We found a match, so just call the creator and return what it
                 // does.
                 //
 
                 webRequest = Current.Creator.Create(requestUri);
-                if(Logging.On)Logging.Exit(Logging.Web, "WebRequest", "Create", webRequest);
+                if (Logging.On)
+                    Logging.Exit(Logging.Web, "WebRequest", "Create", webRequest);
                 return webRequest;
             }
 
-            if(Logging.On)Logging.Exit(Logging.Web, "WebRequest", "Create", null);
+            if (Logging.On)
+                Logging.Exit(Logging.Web, "WebRequest", "Create", null);
 
             //
             // Otherwise no match, throw an exception.
@@ -231,11 +257,13 @@ namespace System.Net {
         ///       the specified Uri scheme.
         ///    </para>
         /// </devdoc>
-        public static WebRequest Create(string requestUriString) {
-            if (requestUriString == null) {
+        public static WebRequest Create(string requestUriString)
+        {
+            if (requestUriString == null)
+            {
                 throw new ArgumentNullException("requestUriString");
             }
-            // In .NET FX v4.0, custom IWebRequestCreate implementations can 
+            // In .NET FX v4.0, custom IWebRequestCreate implementations can
             // cause this to return null.  Consider tightening this in the future.
             //Contract.Ensures(Contract.Result<WebRequest>() != null);
 
@@ -263,11 +291,13 @@ namespace System.Net {
         ///       Creates a new <see cref='System.Net.WebRequest'/> instance for the specified Uri scheme.
         ///    </para>
         /// </devdoc>
-        public static WebRequest Create(Uri requestUri) {
-            if (requestUri == null) {
+        public static WebRequest Create(Uri requestUri)
+        {
+            if (requestUri == null)
+            {
                 throw new ArgumentNullException("requestUri");
             }
-            // In .NET FX v4.0, custom IWebRequestCreate implementations can 
+            // In .NET FX v4.0, custom IWebRequestCreate implementations can
             // cause this to return null.  Consider tightening this in the future.
             //Contract.Ensures(Contract.Result<WebRequest>() != null);
 
@@ -293,31 +323,41 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static WebRequest CreateDefault(Uri requestUri) {
-            if (requestUri == null) {
+        public static WebRequest CreateDefault(Uri requestUri)
+        {
+            if (requestUri == null)
+            {
                 throw new ArgumentNullException("requestUri");
             }
-            // In .NET FX v4.0, custom IWebRequestCreate implementations can 
+            // In .NET FX v4.0, custom IWebRequestCreate implementations can
             // cause this to return null.  Consider tightening this in the future.
             //Contract.Ensures(Contract.Result<WebRequest>() != null);
 
             return Create(requestUri, true);
         }
-        
+
         // For portability
-        public static HttpWebRequest CreateHttp(string requestUriString) {
-            if (requestUriString == null) {
+        public static HttpWebRequest CreateHttp(string requestUriString)
+        {
+            if (requestUriString == null)
+            {
                 throw new ArgumentNullException("requestUriString");
             }
             return CreateHttp(new Uri(requestUriString));
         }
 
         // For portability
-        public static HttpWebRequest CreateHttp(Uri requestUri) {
-            if (requestUri == null) {
+        public static HttpWebRequest CreateHttp(Uri requestUri)
+        {
+            if (requestUri == null)
+            {
                 throw new ArgumentNullException("requestUri");
             }
-            if ((requestUri.Scheme != Uri.UriSchemeHttp) && (requestUri.Scheme != Uri.UriSchemeHttps)) {
+            if (
+                (requestUri.Scheme != Uri.UriSchemeHttp)
+                && (requestUri.Scheme != Uri.UriSchemeHttps)
+            )
+            {
                 throw new NotSupportedException(SR.GetString(SR.net_unknown_prefix));
             }
             return (HttpWebRequest)CreateDefault(requestUri);
@@ -352,16 +392,18 @@ namespace System.Net {
         ///       for a specific Uniform Resource Identifier.
         ///    </para>
         /// </devdoc>
-        public static bool RegisterPrefix(string prefix, IWebRequestCreate creator) {
-
+        public static bool RegisterPrefix(string prefix, IWebRequestCreate creator)
+        {
             bool Error = false;
             int i;
             WebRequestPrefixElement Current;
 
-            if (prefix == null) {
+            if (prefix == null)
+            {
                 throw new ArgumentNullException("prefix");
             }
-            if (creator == null) {
+            if (creator == null)
+            {
                 throw new ArgumentNullException("creator");
             }
 
@@ -372,7 +414,8 @@ namespace System.Net {
             // Lock this object, then walk down PrefixList looking for a place to
             // to insert this prefix.
 
-            lock(InternalSyncObject) {
+            lock (InternalSyncObject)
+            {
                 //
                 // clone the object and update the clone thus
                 // allowing other threads to still read from it
@@ -380,7 +423,7 @@ namespace System.Net {
 
                 ArrayList prefixList = (ArrayList)PrefixList.Clone();
 
-                // As AbsoluteUri is used later for Create, account for formating changes 
+                // As AbsoluteUri is used later for Create, account for formating changes
                 // like Unicode escaping, default ports, etc.
                 Uri tempUri;
                 if (Uri.TryCreate(prefix, UriKind.Absolute, out tempUri))
@@ -389,10 +432,15 @@ namespace System.Net {
 
                     // Special case for when a partial host matching is requested, drop the added trailing slash
                     // IE: http://host could match host or host.domain
-                    if (!prefix.EndsWith("/", StringComparison.Ordinal) 
-                        && tempUri.GetComponents(UriComponents.PathAndQuery | UriComponents.Fragment, 
-                            UriFormat.UriEscaped)
-                            .Equals("/"))
+                    if (
+                        !prefix.EndsWith("/", StringComparison.Ordinal)
+                        && tempUri
+                            .GetComponents(
+                                UriComponents.PathAndQuery | UriComponents.Fragment,
+                                UriFormat.UriEscaped
+                            )
+                            .Equals("/")
+                    )
                         cookedUri = cookedUri.Substring(0, cookedUri.Length - 1);
 
                     prefix = cookedUri;
@@ -405,21 +453,31 @@ namespace System.Net {
                 // one, then we insert in front of it. Along the way we check
                 // equal length prefixes to make sure this isn't a dupe.
 
-                while (i < prefixList.Count) {
+                while (i < prefixList.Count)
+                {
                     Current = (WebRequestPrefixElement)prefixList[i];
 
                     // See if the new one is longer than the one we're looking at.
 
-                    if (prefix.Length > Current.Prefix.Length) {
+                    if (prefix.Length > Current.Prefix.Length)
+                    {
                         // It is. Break out of the loop here.
                         break;
                     }
 
                     // If these are of equal length, compare them.
 
-                    if (prefix.Length == Current.Prefix.Length) {
+                    if (prefix.Length == Current.Prefix.Length)
+                    {
                         // They're the same length.
-                        if (String.Compare(Current.Prefix, prefix, StringComparison.OrdinalIgnoreCase) == 0) {
+                        if (
+                            String.Compare(
+                                Current.Prefix,
+                                prefix,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                        {
                             // ...and the strings are identical. This is an error.
 
                             Error = true;
@@ -432,12 +490,11 @@ namespace System.Net {
                 // When we get here either i contains the index to insert at or
                 // we've had an error, in which case Error is true.
 
-                if (!Error) {
+                if (!Error)
+                {
                     // No error, so insert.
 
-                    prefixList.Insert(i,
-                                        new WebRequestPrefixElement(prefix, creator)
-                                       );
+                    prefixList.Insert(i, new WebRequestPrefixElement(prefix, creator));
 
                     //
                     // no error, assign the clone to the static object, other
@@ -516,23 +573,30 @@ namespace System.Net {
             Returns: true
 
         --*/
-        internal static ArrayList PrefixList {
-
-            get {
+        internal static ArrayList PrefixList
+        {
+            get
+            {
                 //
                 // GetConfig() might use us, so we have a circular dependency issue,
                 // that causes us to nest here, we grab the lock, only
                 // if we haven't initialized.
                 //
-                if (s_PrefixList == null) {
-
-                    lock (InternalSyncObject) {
-                        if (s_PrefixList == null) {
-                            GlobalLog.Print("WebRequest::Initialize(): calling ConfigurationManager.GetSection()");
+                if (s_PrefixList == null)
+                {
+                    lock (InternalSyncObject)
+                    {
+                        if (s_PrefixList == null)
+                        {
+                            GlobalLog.Print(
+                                "WebRequest::Initialize(): calling ConfigurationManager.GetSection()"
+                            );
 #if MONO
-                            s_PrefixList = PopulatePrefixList ();
+                            s_PrefixList = PopulatePrefixList();
 #else
-                            s_PrefixList = WebRequestModulesSectionInternal.GetSection().WebRequestModules;
+                            s_PrefixList = WebRequestModulesSectionInternal
+                                .GetSection()
+                                .WebRequestModules;
 #endif
                         }
                     }
@@ -540,34 +604,32 @@ namespace System.Net {
 
                 return s_PrefixList;
             }
-            set {
-                s_PrefixList = value;
-            }
+            set { s_PrefixList = value; }
         }
 
 #if MONO
-        static ArrayList PopulatePrefixList ()
+        static ArrayList PopulatePrefixList()
         {
             var res = new ArrayList();
 
 #if MOBILE || !CONFIGURATION_DEP
-            IWebRequestCreate http = new HttpRequestCreator ();
+            IWebRequestCreate http = new HttpRequestCreator();
             res.Add(new WebRequestPrefixElement("http", http));
             res.Add(new WebRequestPrefixElement("https", http));
-            res.Add(new WebRequestPrefixElement("file", new FileWebRequestCreator ()));
-            res.Add(new WebRequestPrefixElement("ftp", new FtpWebRequestCreator ()));
+            res.Add(new WebRequestPrefixElement("file", new FileWebRequestCreator()));
+            res.Add(new WebRequestPrefixElement("ftp", new FtpWebRequestCreator()));
 #else
-            object cfg = ConfigurationManager.GetSection ("system.net/webRequestModules");
+            object cfg = ConfigurationManager.GetSection("system.net/webRequestModules");
             WebRequestModulesSection s = cfg as WebRequestModulesSection;
-            if (s != null) {
+            if (s != null)
+            {
                 foreach (WebRequestModuleElement el in s.WebRequestModules)
-                    res.Add (new WebRequestPrefixElement(el.Prefix, el.Type));
+                    res.Add(new WebRequestPrefixElement(el.Prefix, el.Type));
             }
 #endif
             return res;
         }
 #endif
-
 
         // constructors
 
@@ -583,25 +645,37 @@ namespace System.Net {
 #if !FEATURE_PAL
             // Defautl values are set as per V1.0 behavior
             m_ImpersonationLevel = TokenImpersonationLevel.Delegation;
-            m_AuthenticationLevel= AuthenticationLevel.MutualAuthRequested;
+            m_AuthenticationLevel = AuthenticationLevel.MutualAuthRequested;
 #endif
         }
+
         //
         // ISerializable constructor
         //
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected WebRequest(SerializationInfo serializationInfo, StreamingContext streamingContext) {
-        }
+        protected WebRequest(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        { }
 
         //
         // ISerializable method
         //
         /// <internalonly/>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter, SerializationFormatter=true)]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             GetObjectData(serializationInfo, streamingContext);
         }
@@ -609,35 +683,38 @@ namespace System.Net {
         //
         // FxCop: Provide a way for inherited classes to access base.GetObjectData in case they also implement ISerializable.
         //
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter=true)]
-        protected virtual void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
-        }
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        protected virtual void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) { }
 
         // This is a shortcut that would set the default policy for HTTP/HTTPS.
         // The default policy is overridden by any prefix-registered policy.
         // Will demand permission for set{}
-        public static RequestCachePolicy DefaultCachePolicy {
-            get {
-                return RequestCacheManager.GetBinding(string.Empty).Policy;
-            }
-            set {
+        public static RequestCachePolicy DefaultCachePolicy
+        {
+            get { return RequestCacheManager.GetBinding(string.Empty).Policy; }
+            set
+            {
 #if MONO_FEATURE_CAS
                 // This is a replacement of RequestCachePermission demand since we are not including the latest in the product.
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
 
                 RequestCacheBinding binding = RequestCacheManager.GetBinding(string.Empty);
-                RequestCacheManager.SetBinding(string.Empty, new RequestCacheBinding(binding.Cache, binding.Validator, value));
+                RequestCacheManager.SetBinding(
+                    string.Empty,
+                    new RequestCacheBinding(binding.Cache, binding.Validator, value)
+                );
             }
         }
 
         //
         //
-        public virtual RequestCachePolicy CachePolicy {
-            get {
-                return m_CachePolicy;
-            }
+        public virtual RequestCachePolicy CachePolicy
+        {
+            get { return m_CachePolicy; }
             set
             {
                 // Delayed creation of CacheProtocol until caching is actually turned on.
@@ -645,22 +722,26 @@ namespace System.Net {
             }
         }
 
-
-        void InternalSetCachePolicy(RequestCachePolicy policy){
+        void InternalSetCachePolicy(RequestCachePolicy policy)
+        {
             // Delayed creation of CacheProtocol until caching is actually turned on.
-            if (m_CacheBinding != null &&
-                m_CacheBinding.Cache != null &&
-                m_CacheBinding.Validator != null &&
-                CacheProtocol == null &&
-                policy != null &&
-                policy.Level != RequestCacheLevel.BypassCache)
+            if (
+                m_CacheBinding != null
+                && m_CacheBinding.Cache != null
+                && m_CacheBinding.Validator != null
+                && CacheProtocol == null
+                && policy != null
+                && policy.Level != RequestCacheLevel.BypassCache
+            )
             {
-                CacheProtocol = new RequestCacheProtocol(m_CacheBinding.Cache, m_CacheBinding.Validator.CreateValidator());
+                CacheProtocol = new RequestCacheProtocol(
+                    m_CacheBinding.Cache,
+                    m_CacheBinding.Validator.CreateValidator()
+                );
             }
 
             m_CachePolicy = policy;
         }
-
 
         /// <devdoc>
         ///    <para>When overridden in a derived class, gets and
@@ -669,25 +750,20 @@ namespace System.Net {
         ///       protocol method used in this request. Default value should be
         ///       "GET".</para>
         /// </devdoc>
-        public virtual string Method {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual string Method
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
-
 
         /// <devdoc>
         /// <para>When overridden in a derived class, gets a <see cref='Uri'/>
         /// instance representing the resource associated with
         /// the request.</para>
         /// </devdoc>
-        public virtual Uri RequestUri {                               // read-only
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual Uri RequestUri
+        { // read-only
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         //
@@ -696,15 +772,11 @@ namespace System.Net {
         //
         /// <devdoc>
         /// </devdoc>
-        public virtual string ConnectionGroupName {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual string ConnectionGroupName
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
-
 
         /*++
 
@@ -725,16 +797,15 @@ namespace System.Net {
         ///       a collection of header name-value pairs associated with this
         ///       request.</para>
         /// </devdoc>
-        public virtual WebHeaderCollection Headers {
-            get {
+        public virtual WebHeaderCollection Headers
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<WebHeaderCollection>() != null);
                 throw ExceptionHelper.PropertyNotImplementedException;
             }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
-
 
         /// <devdoc>
         ///    <para>When
@@ -743,13 +814,10 @@ namespace System.Net {
         ///       the
         ///       content length of request data being sent.</para>
         /// </devdoc>
-        public virtual long ContentLength {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual long ContentLength
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         /// <devdoc>
@@ -759,64 +827,49 @@ namespace System.Net {
         ///       sets
         ///       the content type of the request data being sent.</para>
         /// </devdoc>
-        public virtual string ContentType {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual string ContentType
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         /// <devdoc>
         ///     <para>When overridden in a derived class, gets and sets the network
         ///       credentials used for authentication to this Uri.</para>
         /// </devdoc>
-        public virtual ICredentials Credentials {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual ICredentials Credentials
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         /// <devdoc>
         ///    <para>Sets Credentials to CredentialCache.DefaultCredentials</para>
         /// </devdoc>
-        public virtual bool UseDefaultCredentials  {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual bool UseDefaultCredentials
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         /// <devdoc>
         ///    <para>When overridden in a derived class,
         ///       gets and set proxy info. </para>
         /// </devdoc>
-        public virtual IWebProxy Proxy {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual IWebProxy Proxy
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         /// <devdoc>
         ///    <para>When overridden in a derived class,
         ///       enables or disables pre-authentication.</para>
         /// </devdoc>
-        public virtual bool PreAuthenticate {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual bool PreAuthenticate
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
 
         //
@@ -827,15 +880,11 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual int Timeout {
-            get {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
-            set {
-                throw ExceptionHelper.PropertyNotImplementedException;
-            }
+        public virtual int Timeout
+        {
+            get { throw ExceptionHelper.PropertyNotImplementedException; }
+            set { throw ExceptionHelper.PropertyNotImplementedException; }
         }
-
 
         /// <devdoc>
         ///    <para>When overridden in a derived class,
@@ -843,7 +892,8 @@ namespace System.Net {
         ///       to the resource identified by <see cref='WebRequest.RequestUri'/>
         ///       .</para>
         /// </devdoc>
-        public virtual Stream GetRequestStream() {
+        public virtual Stream GetRequestStream()
+        {
             throw ExceptionHelper.MethodNotImplementedException;
         }
 
@@ -852,7 +902,8 @@ namespace System.Net {
         ///       returns the response
         ///       to an Internet request.</para>
         /// </devdoc>
-        public virtual WebResponse GetResponse() {
+        public virtual WebResponse GetResponse()
+        {
             Contract.Ensures(Contract.Result<WebResponse>() != null);
 
             throw ExceptionHelper.MethodNotImplementedException;
@@ -861,16 +912,17 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>Asynchronous version of GetResponse.</para>
         /// </devdoc>
-        [HostProtection(ExternalThreading=true)]
-        public virtual IAsyncResult BeginGetResponse(AsyncCallback callback, object state) {
+        [HostProtection(ExternalThreading = true)]
+        public virtual IAsyncResult BeginGetResponse(AsyncCallback callback, object state)
+        {
             throw ExceptionHelper.MethodNotImplementedException;
         }
-
 
         /// <devdoc>
         ///    <para>Returns a WebResponse object.</para>
         /// </devdoc>
-        public virtual WebResponse EndGetResponse(IAsyncResult asyncResult) {
+        public virtual WebResponse EndGetResponse(IAsyncResult asyncResult)
+        {
             throw ExceptionHelper.MethodNotImplementedException;
         }
 
@@ -878,8 +930,9 @@ namespace System.Net {
         ///    <para>Asynchronous version of GetRequestStream
         ///       method.</para>
         /// </devdoc>
-        [HostProtection(ExternalThreading=true)]
-        public virtual IAsyncResult BeginGetRequestStream(AsyncCallback callback, Object state) {
+        [HostProtection(ExternalThreading = true)]
+        public virtual IAsyncResult BeginGetRequestStream(AsyncCallback callback, Object state)
+        {
             throw ExceptionHelper.MethodNotImplementedException;
         }
 
@@ -888,7 +941,8 @@ namespace System.Net {
         ///    identified by <see cref='System.Net.WebRequest.RequestUri'/>
         ///    .</para>
         /// </devdoc>
-        public virtual Stream EndGetRequestStream(IAsyncResult asyncResult) {
+        public virtual Stream EndGetRequestStream(IAsyncResult asyncResult)
+        {
             throw ExceptionHelper.MethodNotImplementedException;
         }
 
@@ -897,13 +951,21 @@ namespace System.Net {
         public virtual Task<Stream> GetRequestStreamAsync()
         {
             IWebProxy proxy = null;
-            try { proxy = Proxy; }
+            try
+            {
+                proxy = Proxy;
+            }
             catch (NotImplementedException) { }
 
             // Preserve context for authentication
-            if (ExecutionContext.IsFlowSuppressed() 
-                && (UseDefaultCredentials || Credentials != null
-                    || (proxy != null && proxy.Credentials != null)))
+            if (
+                ExecutionContext.IsFlowSuppressed()
+                && (
+                    UseDefaultCredentials
+                    || Credentials != null
+                    || (proxy != null && proxy.Credentials != null)
+                )
+            )
             {
                 WindowsIdentity currentUser = SafeCaptureIdenity();
 
@@ -916,16 +978,25 @@ namespace System.Net {
                     {
                         using (currentUser.Impersonate())
                         {
-                            return Task<Stream>.Factory.FromAsync(this.BeginGetRequestStream,
-                                this.EndGetRequestStream, null);
+                            return Task<Stream>.Factory.FromAsync(
+                                this.BeginGetRequestStream,
+                                this.EndGetRequestStream,
+                                null
+                            );
                         }
                     }
                 });
             }
             else
             {
-                return Task.Run(() => Task<Stream>.Factory.FromAsync(this.BeginGetRequestStream, 
-                    this.EndGetRequestStream, null));
+                return Task.Run(
+                    () =>
+                        Task<Stream>.Factory.FromAsync(
+                            this.BeginGetRequestStream,
+                            this.EndGetRequestStream,
+                            null
+                        )
+                );
             }
         }
 
@@ -934,13 +1005,21 @@ namespace System.Net {
         public virtual Task<WebResponse> GetResponseAsync()
         {
             IWebProxy proxy = null;
-            try { proxy = Proxy; }
+            try
+            {
+                proxy = Proxy;
+            }
             catch (NotImplementedException) { }
 
             // Preserve context for authentication
-            if (ExecutionContext.IsFlowSuppressed()
-                && (UseDefaultCredentials || Credentials != null
-                    || (proxy != null && proxy.Credentials != null)))
+            if (
+                ExecutionContext.IsFlowSuppressed()
+                && (
+                    UseDefaultCredentials
+                    || Credentials != null
+                    || (proxy != null && proxy.Credentials != null)
+                )
+            )
             {
                 WindowsIdentity currentUser = SafeCaptureIdenity();
 
@@ -953,33 +1032,46 @@ namespace System.Net {
                     {
                         using (currentUser.Impersonate())
                         {
-                            return Task<WebResponse>.Factory.FromAsync(this.BeginGetResponse, 
-                                this.EndGetResponse, null);
+                            return Task<WebResponse>.Factory.FromAsync(
+                                this.BeginGetResponse,
+                                this.EndGetResponse,
+                                null
+                            );
                         }
                     }
                 });
             }
             else
             {
-                return Task.Run(() => Task<WebResponse>.Factory.FromAsync(this.BeginGetResponse, 
-                    this.EndGetResponse, null));
+                return Task.Run(
+                    () =>
+                        Task<WebResponse>.Factory.FromAsync(
+                            this.BeginGetResponse,
+                            this.EndGetResponse,
+                            null
+                        )
+                );
             }
         }
 
         // Security: We need an assert for a call into WindowsIdentity.GetCurrent
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.ControlPrincipal)]
-        [SuppressMessage("Microsoft.Security", "CA2106:SecureAsserts", Justification = "Needed for identity flow.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2106:SecureAsserts",
+            Justification = "Needed for identity flow."
+        )]
         private WindowsIdentity SafeCaptureIdenity()
         {
             return WindowsIdentity.GetCurrent();
         }
 
-
         /// <summary>
         ///    <para>Aborts the Request</para>
         /// </summary>
-        public virtual void Abort() {
+        public virtual void Abort()
+        {
             throw ExceptionHelper.MethodNotImplementedException;
         }
 
@@ -988,27 +1080,18 @@ namespace System.Net {
         //
         internal RequestCacheProtocol CacheProtocol
         {
-            get
-            {
-                return m_CacheProtocol;
-            }
-            set
-            {
-                m_CacheProtocol = value;
-            }
+            get { return m_CacheProtocol; }
+            set { m_CacheProtocol = value; }
         }
 
 #if !FEATURE_PAL
         //
         //
         //
-        public AuthenticationLevel AuthenticationLevel {
-            get {
-                return m_AuthenticationLevel;
-            }
-            set {
-                m_AuthenticationLevel = value;
-            }
+        public AuthenticationLevel AuthenticationLevel
+        {
+            get { return m_AuthenticationLevel; }
+            set { m_AuthenticationLevel = value; }
         }
 
 #if !MONO
@@ -1037,13 +1120,10 @@ namespace System.Net {
         //
         //
         //
-        public TokenImpersonationLevel ImpersonationLevel {
-            get {
-                return m_ImpersonationLevel;
-            }
-            set {
-                m_ImpersonationLevel = value;
-            }
+        public TokenImpersonationLevel ImpersonationLevel
+        {
+            get { return m_ImpersonationLevel; }
+            set { m_ImpersonationLevel = value; }
         }
 #endif  // !FEATURE_PAL
 
@@ -1063,8 +1143,11 @@ namespace System.Net {
                     {
                         if (!s_DefaultWebProxyInitialized)
                         {
-                            GlobalLog.Print("WebRequest::get_InternalDefaultWebProxy(): Getting config.");
-                            DefaultProxySectionInternal section = DefaultProxySectionInternal.GetSection();
+                            GlobalLog.Print(
+                                "WebRequest::get_InternalDefaultWebProxy(): Getting config."
+                            );
+                            DefaultProxySectionInternal section =
+                                DefaultProxySectionInternal.GetSection();
                             if (section != null)
                             {
                                 s_DefaultWebProxy = section.WebProxy;
@@ -1075,7 +1158,6 @@ namespace System.Net {
                 }
                 return s_DefaultWebProxy;
             }
-
             set
             {
                 // Same lock as above.  Avoid hitting config if the proxy is set first.
@@ -1099,21 +1181,16 @@ namespace System.Net {
         //
         public static IWebProxy DefaultWebProxy
         {
-            get
-            {
+            get {
 #if MONO_FEATURE_CAS
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
-                return InternalDefaultWebProxy;
-            }
-
-            set
-            {
+                return InternalDefaultWebProxy; }
+            set {
 #if MONO_FEATURE_CAS
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
-                InternalDefaultWebProxy = value;
-            }
+                InternalDefaultWebProxy = value; }
         }
 
         //
@@ -1167,20 +1244,13 @@ namespace System.Net {
 
             public ICredentials Credentials
             {
-                get
-                {
-                    return webProxy.Credentials;
-                }
-
-                set
-                {
-                    webProxy.Credentials = value;
-                }
+                get { return webProxy.Credentials; }
+                set { webProxy.Credentials = value; }
             }
 
             public ProxyChain GetProxies(Uri destination)
             {
-                return ((IAutoWebProxy) webProxy).GetProxies(destination);
+                return ((IAutoWebProxy)webProxy).GetProxies(destination);
             }
         }
 
@@ -1189,16 +1259,12 @@ namespace System.Net {
         //
         internal class WebProxyWrapper : WebProxyWrapperOpaque
         {
-            internal WebProxyWrapper(WebProxy webProxy) :
-                base(webProxy)
-            { }
+            internal WebProxyWrapper(WebProxy webProxy)
+                : base(webProxy) { }
 
             internal WebProxy WebProxy
             {
-                get
-                {
-                    return webProxy;
-                }
+                get { return webProxy; }
             }
         }
 
@@ -1208,7 +1274,7 @@ namespace System.Net {
             m_CacheBinding = RequestCacheManager.GetBinding(uri.Scheme);
 
             // Note if the cache is disabled it will give back a bypass policy.
-            InternalSetCachePolicy( m_CacheBinding.Policy);
+            InternalSetCachePolicy(m_CacheBinding.Policy);
             if (m_CachePolicy == null)
             {
                 // If the protocol cache policy is not specifically configured, grab from the base class.
@@ -1219,7 +1285,12 @@ namespace System.Net {
 #if !MONO
         delegate void DelEtwFireBeginWRGet(object id, string uri, bool success, bool synchronous);
         delegate void DelEtwFireEndWRGet(object id, bool success, bool synchronous);
-        delegate void DelEtwFireEndWRespGet(object id, bool success, bool synchronous, int statusCode);
+        delegate void DelEtwFireEndWRespGet(
+            object id,
+            bool success,
+            bool synchronous,
+            int statusCode
+        );
         static DelEtwFireBeginWRGet s_EtwFireBeginGetResponse;
         static DelEtwFireEndWRespGet s_EtwFireEndGetResponse;
         static DelEtwFireBeginWRGet s_EtwFireBeginGetRequestStream;
@@ -1229,18 +1300,46 @@ namespace System.Net {
         private static void InitEtwMethods()
         {
             Type fest = typeof(FrameworkEventSource);
-            var beginParamTypes = new Type[] { typeof(object), typeof(string), typeof(bool), typeof(bool) };
-            var bindingFlags = BindingFlags.Instance|BindingFlags.NonPublic|BindingFlags.Public;
+            var beginParamTypes = new Type[]
+            {
+                typeof(object),
+                typeof(string),
+                typeof(bool),
+                typeof(bool),
+            };
+            var bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
             var mi1 = fest.GetMethod("BeginGetResponse", bindingFlags, null, beginParamTypes, null);
-            var mi2 = fest.GetMethod("EndGetResponse", bindingFlags, null, new Type[] { typeof(object), typeof(bool), typeof(bool), typeof(int) }, null);
-            var mi3 = fest.GetMethod("BeginGetRequestStream", bindingFlags, null, beginParamTypes, null);
-            var mi4 = fest.GetMethod("EndGetRequestStream", bindingFlags, null, new Type[] { typeof(object), typeof(bool), typeof(bool) }, null);
+            var mi2 = fest.GetMethod(
+                "EndGetResponse",
+                bindingFlags,
+                null,
+                new Type[] { typeof(object), typeof(bool), typeof(bool), typeof(int) },
+                null
+            );
+            var mi3 = fest.GetMethod(
+                "BeginGetRequestStream",
+                bindingFlags,
+                null,
+                beginParamTypes,
+                null
+            );
+            var mi4 = fest.GetMethod(
+                "EndGetRequestStream",
+                bindingFlags,
+                null,
+                new Type[] { typeof(object), typeof(bool), typeof(bool) },
+                null
+            );
             if (mi1 != null && mi2 != null && mi3 != null && mi4 != null)
             {
-                s_EtwFireBeginGetResponse = (DelEtwFireBeginWRGet) mi1.CreateDelegate(typeof(DelEtwFireBeginWRGet), FrameworkEventSource.Log);
-                s_EtwFireEndGetResponse = (DelEtwFireEndWRespGet)mi2.CreateDelegate(typeof(DelEtwFireEndWRespGet), FrameworkEventSource.Log);
-                s_EtwFireBeginGetRequestStream = (DelEtwFireBeginWRGet) mi3.CreateDelegate(typeof(DelEtwFireBeginWRGet), FrameworkEventSource.Log);
-                s_EtwFireEndGetRequestStream = (DelEtwFireEndWRGet) mi4.CreateDelegate(typeof(DelEtwFireEndWRGet), FrameworkEventSource.Log);
+                s_EtwFireBeginGetResponse = (DelEtwFireBeginWRGet)
+                    mi1.CreateDelegate(typeof(DelEtwFireBeginWRGet), FrameworkEventSource.Log);
+                s_EtwFireEndGetResponse = (DelEtwFireEndWRespGet)
+                    mi2.CreateDelegate(typeof(DelEtwFireEndWRespGet), FrameworkEventSource.Log);
+                s_EtwFireBeginGetRequestStream = (DelEtwFireBeginWRGet)
+                    mi3.CreateDelegate(typeof(DelEtwFireBeginWRGet), FrameworkEventSource.Log);
+                s_EtwFireEndGetRequestStream = (DelEtwFireEndWRGet)
+                    mi4.CreateDelegate(typeof(DelEtwFireEndWRGet), FrameworkEventSource.Log);
             }
             s_TriedGetEtwDelegates = true;
         }
@@ -1248,37 +1347,41 @@ namespace System.Net {
         internal void LogBeginGetResponse(bool success, bool synchronous)
         {
             string uri = this.RequestUri.OriginalString;
-            if (!s_TriedGetEtwDelegates) 
+            if (!s_TriedGetEtwDelegates)
                 InitEtwMethods();
             if (s_EtwFireBeginGetResponse != null)
             {
                 s_EtwFireBeginGetResponse(this, uri, success, synchronous);
             }
         }
+
         internal void LogEndGetResponse(bool success, bool synchronous, int statusCode)
         {
-            if (!s_TriedGetEtwDelegates) 
+            if (!s_TriedGetEtwDelegates)
                 InitEtwMethods();
-            if (s_EtwFireEndGetResponse != null) {
+            if (s_EtwFireEndGetResponse != null)
+            {
                 s_EtwFireEndGetResponse(this, success, synchronous, statusCode);
             }
         }
+
         internal void LogBeginGetRequestStream(bool success, bool synchronous)
         {
             string uri = this.RequestUri.OriginalString;
-            if (!s_TriedGetEtwDelegates) 
+            if (!s_TriedGetEtwDelegates)
                 InitEtwMethods();
             if (s_EtwFireBeginGetRequestStream != null)
             {
                 s_EtwFireBeginGetRequestStream(this, uri, success, synchronous);
             }
         }
+
         internal void LogEndGetRequestStream(bool success, bool synchronous)
         {
-            if (!s_TriedGetEtwDelegates) 
+            if (!s_TriedGetEtwDelegates)
                 InitEtwMethods();
-            if (s_EtwFireEndGetRequestStream != null) {
-
+            if (s_EtwFireEndGetRequestStream != null)
+            {
                 s_EtwFireEndGetRequestStream(this, success, synchronous);
             }
         }

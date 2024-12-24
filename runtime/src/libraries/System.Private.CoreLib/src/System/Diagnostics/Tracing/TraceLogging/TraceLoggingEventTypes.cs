@@ -42,14 +42,11 @@ namespace System.Diagnostics.Tracing
         /// <param name="types">
         /// The types of the fields in the event. This value must not be null.
         /// </param>
-        [RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
-        internal TraceLoggingEventTypes(
-            string name,
-            EventTags tags,
-            params Type[] types)
-            : this(tags, name, MakeArray(types))
-        {
-        }
+        [RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
+        internal TraceLoggingEventTypes(string name, EventTags tags, params Type[] types)
+            : this(tags, name, MakeArray(types)) { }
 
         /// <summary>
         /// Returns a new instance of TraceLoggingEventInfo corresponding to the name,
@@ -72,16 +69,18 @@ namespace System.Diagnostics.Tracing
         internal TraceLoggingEventTypes(
             string name,
             EventTags tags,
-            params TraceLoggingTypeInfo[] typeInfos)
-            : this(tags, name, MakeArray(typeInfos))
-        {
-        }
+            params TraceLoggingTypeInfo[] typeInfos
+        )
+            : this(tags, name, MakeArray(typeInfos)) { }
 
-        [RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
         internal TraceLoggingEventTypes(
             string name,
             EventTags tags,
-            Reflection.ParameterInfo[] paramInfos)
+            Reflection.ParameterInfo[] paramInfos
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
 
@@ -117,7 +116,8 @@ namespace System.Diagnostics.Tracing
         private TraceLoggingEventTypes(
             EventTags tags,
             string defaultName,
-            TraceLoggingTypeInfo[] typeInfos)
+            TraceLoggingTypeInfo[] typeInfos
+        )
         {
             ArgumentNullException.ThrowIfNull(defaultName);
 
@@ -167,10 +167,12 @@ namespace System.Diagnostics.Tracing
         internal EventTags Tags => this.tags;
 
         internal NameInfo GetNameInfo(string name, EventTags tags) =>
-            this.nameInfos.TryGet(new KeyValuePair<string, EventTags>(name, tags)) ??
-                this.nameInfos.GetOrAdd(new NameInfo(name, tags, this.typeMetadata.Length));
+            this.nameInfos.TryGet(new KeyValuePair<string, EventTags>(name, tags))
+            ?? this.nameInfos.GetOrAdd(new NameInfo(name, tags, this.typeMetadata.Length));
 
-        [RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
         private static TraceLoggingTypeInfo[] MakeArray(Reflection.ParameterInfo[] paramInfos)
         {
             ArgumentNullException.ThrowIfNull(paramInfos);
@@ -179,13 +181,18 @@ namespace System.Diagnostics.Tracing
             var result = new TraceLoggingTypeInfo[paramInfos.Length];
             for (int i = 0; i < paramInfos.Length; ++i)
             {
-                result[i] = TraceLoggingTypeInfo.GetInstance(paramInfos[i].ParameterType, recursionCheck);
+                result[i] = TraceLoggingTypeInfo.GetInstance(
+                    paramInfos[i].ParameterType,
+                    recursionCheck
+                );
             }
 
             return result;
         }
 
-        [RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
         private static TraceLoggingTypeInfo[] MakeArray(Type[] types)
         {
             ArgumentNullException.ThrowIfNull(types);
@@ -200,8 +207,7 @@ namespace System.Diagnostics.Tracing
             return result;
         }
 
-        private static TraceLoggingTypeInfo[] MakeArray(
-            TraceLoggingTypeInfo[] typeInfos)
+        private static TraceLoggingTypeInfo[] MakeArray(TraceLoggingTypeInfo[] typeInfos)
         {
             ArgumentNullException.ThrowIfNull(typeInfos);
 
@@ -209,8 +215,7 @@ namespace System.Diagnostics.Tracing
         }
 
 #if FEATURE_PERFTRACING
-        private static string[] MakeParamNameArray(
-            Reflection.ParameterInfo[] paramInfos)
+        private static string[] MakeParamNameArray(Reflection.ParameterInfo[] paramInfos)
         {
             string[] paramNames = new string[paramInfos.Length];
             for (int i = 0; i < paramNames.Length; i++)

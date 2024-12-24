@@ -1,4 +1,3 @@
-
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -9,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,15 +31,17 @@ using System;
 
 namespace System.Runtime.InteropServices
 {
-	[Obsolete]
-	[StructLayout (LayoutKind.Explicit, CharSet = CharSet.Unicode)]
-	public struct BINDPTR {
-		[FieldOffset (0)] 
-		public IntPtr lpfuncdesc;
-		[FieldOffset (0)]
-		public IntPtr lptcomp;
-		[FieldOffset (0)]
-		public IntPtr lpvardesc;
-	}
-}
+    [Obsolete]
+    [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
+    public struct BINDPTR
+    {
+        [FieldOffset(0)]
+        public IntPtr lpfuncdesc;
 
+        [FieldOffset(0)]
+        public IntPtr lptcomp;
+
+        [FieldOffset(0)]
+        public IntPtr lpvardesc;
+    }
+}

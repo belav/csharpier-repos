@@ -68,10 +68,14 @@ namespace System.Xml.Serialization
                 return;
             }
 
-            object[] typeForwardedFromAttribute = type.GetCustomAttributes(typeof(TypeForwardedFromAttribute), false);
+            object[] typeForwardedFromAttribute = type.GetCustomAttributes(
+                typeof(TypeForwardedFromAttribute),
+                false
+            );
             if (typeForwardedFromAttribute.Length > 0)
             {
-                TypeForwardedFromAttribute? originalAssemblyInfo = typeForwardedFromAttribute[0] as TypeForwardedFromAttribute;
+                TypeForwardedFromAttribute? originalAssemblyInfo =
+                    typeForwardedFromAttribute[0] as TypeForwardedFromAttribute;
                 Debug.Assert(originalAssemblyInfo != null);
                 Assembly.Load(new AssemblyName(originalAssemblyInfo.AssemblyFullName));
             }
@@ -84,9 +88,9 @@ namespace System.Xml.Serialization
 
         internal static string GetTempAssemblyName(AssemblyName parent, string? ns)
         {
-            return string.IsNullOrEmpty(ns) ?
-                $"{parent.Name}.XmlSerializers" :
-                $"{parent.Name}.XmlSerializers.{GetPersistentHashCode(ns)}";
+            return string.IsNullOrEmpty(ns)
+                ? $"{parent.Name}.XmlSerializers"
+                : $"{parent.Name}.XmlSerializers.{GetPersistentHashCode(ns)}";
         }
 
         private static uint GetPersistentHashCode(string value)

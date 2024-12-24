@@ -21,8 +21,8 @@ internal sealed class FindReferenceCache
 {
     private static readonly ConditionalWeakTable<SemanticModel, FindReferenceCache> s_cache = new();
 
-    public static FindReferenceCache GetCache(SemanticModel model)
-        => s_cache.GetValue(model, static model => new(model));
+    public static FindReferenceCache GetCache(SemanticModel model) =>
+        s_cache.GetValue(model, static model => new(model));
 
     private readonly SemanticModel _semanticModel;
 
@@ -35,21 +35,30 @@ internal sealed class FindReferenceCache
     private FindReferenceCache(SemanticModel semanticModel)
     {
         _semanticModel = semanticModel;
-        _identifierCache = new(comparer: semanticModel.Language switch
-        {
-            LanguageNames.VisualBasic => StringComparer.OrdinalIgnoreCase,
-            LanguageNames.CSharp => StringComparer.Ordinal,
-            _ => throw ExceptionUtilities.UnexpectedValue(semanticModel.Language)
-        });
+        _identifierCache = new(
+            comparer: semanticModel.Language switch
+            {
+                LanguageNames.VisualBasic => StringComparer.OrdinalIgnoreCase,
+                LanguageNames.CSharp => StringComparer.Ordinal,
+                _ => throw ExceptionUtilities.UnexpectedValue(semanticModel.Language),
+            }
+        );
     }
 
     public SymbolInfo GetSymbolInfo(SyntaxNode node, CancellationToken cancellationToken)
     {
-        return _symbolInfoCache.GetOrAdd(node, static (n, arg) => arg._semanticModel.GetSymbolInfo(n, arg.cancellationToken), (_semanticModel, cancellationToken));
+        return _symbolInfoCache.GetOrAdd(
+            node,
+            static (n, arg) => arg._semanticModel.GetSymbolInfo(n, arg.cancellationToken),
+            (_semanticModel, cancellationToken)
+        );
     }
 
     public IAliasSymbol? GetAliasInfo(
-        ISemanticFactsService semanticFacts, SyntaxToken token, CancellationToken cancellationToken)
+        ISemanticFactsService semanticFacts,
+        SyntaxToken token,
+        CancellationToken cancellationToken
+    )
     {
         if (_aliasNameSet == null)
         {
@@ -66,7 +75,8 @@ internal sealed class FindReferenceCache
     public async ValueTask<ImmutableArray<SyntaxToken>> FindMatchingIdentifierTokensAsync(
         Document document,
         string identifier,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         if (identifier == "")
         {
@@ -83,19 +93,29 @@ internal sealed class FindReferenceCache
 
         // It's very costly to walk an entire tree.  So if the tree is simple and doesn't contain
         // any unicode escapes in it, then we do simple string matching to find the tokens.
-        var info = await SyntaxTreeIndex.GetRequiredIndexAsync(document, cancellationToken).ConfigureAwait(false);
+        var info = await SyntaxTreeIndex
+            .GetRequiredIndexAsync(document, cancellationToken)
+            .ConfigureAwait(false);
 
         // If this document doesn't even contain this identifier (escaped or non-escaped) we don't have to search it at all.
         if (!info.ProbablyContainsIdentifier(identifier))
             return ImmutableArray<SyntaxToken>.Empty;
 
-        return await ComputeAndCacheTokensAsync(this, document, identifier, info, cancellationToken).ConfigureAwait(false);
+        return await ComputeAndCacheTokensAsync(this, document, identifier, info, cancellationToken)
+            .ConfigureAwait(false);
 
         static async ValueTask<ImmutableArray<SyntaxToken>> ComputeAndCacheTokensAsync(
-            FindReferenceCache cache, Document document, string identifier, SyntaxTreeIndex info, CancellationToken cancellationToken)
+            FindReferenceCache cache,
+            Document document,
+            string identifier,
+            SyntaxTreeIndex info,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await cache._semanticModel.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await cache
+                ._semanticModel.SyntaxTree.GetRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // If the identifier was escaped in the file then we'll have to do a more involved search that actually
             // walks the root and checks all identifier tokens.
@@ -104,21 +124,43 @@ internal sealed class FindReferenceCache
             if (info.ProbablyContainsEscapedIdentifier(identifier))
             {
                 return cache._identifierCache.GetOrAdd(
-                    identifier, _ => FindMatchingIdentifierTokensFromTree(syntaxFacts, identifier, root));
+                    identifier,
+                    _ => FindMatchingIdentifierTokensFromTree(syntaxFacts, identifier, root)
+                );
             }
             else
             {
-                var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                var text = await document
+                    .GetValueTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 return cache._identifierCache.GetOrAdd(
-                    identifier, _ => FindMatchingIdentifierTokensFromText(syntaxFacts, identifier, root, text, cancellationToken));
+                    identifier,
+                    _ =>
+                        FindMatchingIdentifierTokensFromText(
+                            syntaxFacts,
+                            identifier,
+                            root,
+                            text,
+                            cancellationToken
+                        )
+                );
             }
         }
 
-        static bool IsMatch(ISyntaxFactsService syntaxFacts, string identifier, SyntaxToken token)
-            => !token.IsMissing && syntaxFacts.IsIdentifier(token) && syntaxFacts.TextMatch(token.ValueText, identifier);
+        static bool IsMatch(
+            ISyntaxFactsService syntaxFacts,
+            string identifier,
+            SyntaxToken token
+        ) =>
+            !token.IsMissing
+            && syntaxFacts.IsIdentifier(token)
+            && syntaxFacts.TextMatch(token.ValueText, identifier);
 
         static ImmutableArray<SyntaxToken> FindMatchingIdentifierTokensFromTree(
-            ISyntaxFactsService syntaxFacts, string identifier, SyntaxNode root)
+            ISyntaxFactsService syntaxFacts,
+            string identifier,
+            SyntaxNode root
+        )
         {
             using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var result);
             using var obj = SharedPools.Default<Stack<SyntaxNodeOrToken>>().GetPooledObject();
@@ -156,18 +198,29 @@ internal sealed class FindReferenceCache
         }
 
         static ImmutableArray<SyntaxToken> FindMatchingIdentifierTokensFromText(
-            ISyntaxFactsService syntaxFacts, string identifier, SyntaxNode root, SourceText sourceText, CancellationToken cancellationToken)
+            ISyntaxFactsService syntaxFacts,
+            string identifier,
+            SyntaxNode root,
+            SourceText sourceText,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var result);
 
             var index = 0;
-            while ((index = sourceText.IndexOf(identifier, index, syntaxFacts.IsCaseSensitive)) >= 0)
+            while (
+                (index = sourceText.IndexOf(identifier, index, syntaxFacts.IsCaseSensitive)) >= 0
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var token = root.FindToken(index, findInsideTrivia: true);
                 var span = token.Span;
-                if (span.Start == index && span.Length == identifier.Length && IsMatch(syntaxFacts, identifier, token))
+                if (
+                    span.Start == index
+                    && span.Length == identifier.Length
+                    && IsMatch(syntaxFacts, identifier, token)
+                )
                     result.Add(token);
 
                 var nextIndex = index + identifier.Length;
@@ -180,28 +233,44 @@ internal sealed class FindReferenceCache
     }
 
     public IEnumerable<SyntaxToken> GetConstructorInitializerTokens(
-        ISyntaxFactsService syntaxFacts, SyntaxNode root, CancellationToken cancellationToken)
+        ISyntaxFactsService syntaxFacts,
+        SyntaxNode root,
+        CancellationToken cancellationToken
+    )
     {
         // this one will only get called when we know given document contains constructor initializer.
         // no reason to use text to check whether it exist first.
         if (_constructorInitializerCache.IsDefault)
         {
-            var initializers = GetConstructorInitializerTokensWorker(syntaxFacts, root, cancellationToken);
-            ImmutableInterlocked.InterlockedInitialize(ref _constructorInitializerCache, initializers);
+            var initializers = GetConstructorInitializerTokensWorker(
+                syntaxFacts,
+                root,
+                cancellationToken
+            );
+            ImmutableInterlocked.InterlockedInitialize(
+                ref _constructorInitializerCache,
+                initializers
+            );
         }
 
         return _constructorInitializerCache;
     }
 
     private static ImmutableArray<SyntaxToken> GetConstructorInitializerTokensWorker(
-        ISyntaxFactsService syntaxFacts, SyntaxNode root, CancellationToken cancellationToken)
+        ISyntaxFactsService syntaxFacts,
+        SyntaxNode root,
+        CancellationToken cancellationToken
+    )
     {
         using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var initializers);
         foreach (var constructor in syntaxFacts.GetConstructors(root, cancellationToken))
         {
             foreach (var token in constructor.DescendantTokens(descendIntoTrivia: false))
             {
-                if (syntaxFacts.IsThisConstructorInitializer(token) || syntaxFacts.IsBaseConstructorInitializer(token))
+                if (
+                    syntaxFacts.IsThisConstructorInitializer(token)
+                    || syntaxFacts.IsBaseConstructorInitializer(token)
+                )
                     initializers.Add(token);
             }
         }

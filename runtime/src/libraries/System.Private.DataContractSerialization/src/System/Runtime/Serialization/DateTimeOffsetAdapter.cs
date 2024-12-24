@@ -6,10 +6,12 @@ using System.Globalization;
 using System.Reflection;
 using System.Xml;
 
-
 namespace System.Runtime.Serialization
 {
-    [DataContract(Name = "DateTimeOffset", Namespace = "http://schemas.datacontract.org/2004/07/System")]
+    [DataContract(
+        Name = "DateTimeOffset",
+        Namespace = "http://schemas.datacontract.org/2004/07/System"
+    )]
     internal struct DateTimeOffsetAdapter
     {
         private DateTime _utcDateTime;
@@ -42,7 +44,10 @@ namespace System.Runtime.Serialization
                 switch (value.UtcDateTime.Kind)
                 {
                     case DateTimeKind.Unspecified:
-                        return new DateTimeOffset(value.UtcDateTime, new TimeSpan(0, value.OffsetMinutes, 0));
+                        return new DateTimeOffset(
+                            value.UtcDateTime,
+                            new TimeSpan(0, value.OffsetMinutes, 0)
+                        );
 
                     //DateTimeKind.Utc and DateTimeKind.Local
                     //Read in deserialized DateTime portion of the DateTimeOffsetAdapter and convert DateTimeKind to Unspecified.
@@ -55,7 +60,11 @@ namespace System.Runtime.Serialization
             }
             catch (ArgumentException exception)
             {
-                throw XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "DateTimeOffset", exception);
+                throw XmlExceptionHelper.CreateConversionException(
+                    value.ToString(CultureInfo.InvariantCulture),
+                    "DateTimeOffset",
+                    exception
+                );
             }
         }
 

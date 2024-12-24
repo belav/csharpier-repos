@@ -5,8 +5,17 @@ namespace ILCompiler.DependencyAnalysisFramework
 {
     public interface IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>
     {
-        void VisitEdge(DependencyNodeCore<DependencyContextType> nodeDepender, DependencyNodeCore<DependencyContextType> nodeDependedOn, string reason);
+        void VisitEdge(
+            DependencyNodeCore<DependencyContextType> nodeDepender,
+            DependencyNodeCore<DependencyContextType> nodeDependedOn,
+            string reason
+        );
         void VisitEdge(string root, DependencyNodeCore<DependencyContextType> dependedOn);
-        void VisitEdge(DependencyNodeCore<DependencyContextType> nodeDepender, DependencyNodeCore<DependencyContextType> nodeDependerOther, DependencyNodeCore<DependencyContextType> nodeDependedOn, string reason);
+        void VisitEdge(
+            DependencyNodeCore<DependencyContextType> nodeDepender,
+            DependencyNodeCore<DependencyContextType> nodeDependerOther,
+            DependencyNodeCore<DependencyContextType> nodeDependedOn,
+            string reason
+        );
     }
 }

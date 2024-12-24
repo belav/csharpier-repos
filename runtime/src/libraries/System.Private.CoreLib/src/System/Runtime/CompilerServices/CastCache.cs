@@ -12,7 +12,7 @@ namespace System.Runtime.CompilerServices
     {
         CannotCast = 0,
         CanCast = 1,
-        MaybeCast = 2
+        MaybeCast = 2,
     }
 
     internal unsafe struct CastCache
@@ -35,8 +35,12 @@ namespace System.Runtime.CompilerServices
 
         public CastCache(int initialCacheSize, int maxCacheSize)
         {
-            Debug.Assert(BitOperations.PopCount((uint)initialCacheSize) == 1 && initialCacheSize > 1);
-            Debug.Assert(BitOperations.PopCount((uint)maxCacheSize) == 1 && maxCacheSize >= initialCacheSize);
+            Debug.Assert(
+                BitOperations.PopCount((uint)initialCacheSize) == 1 && initialCacheSize > 1
+            );
+            Debug.Assert(
+                BitOperations.PopCount((uint)maxCacheSize) == 1 && maxCacheSize >= initialCacheSize
+            );
 
             _initialCacheSize = initialCacheSize;
             _maxCacheSize = maxCacheSize;
@@ -48,10 +52,10 @@ namespace System.Runtime.CompilerServices
 
             _table =
 #if !DEBUG
-            // Initialize to the sentinel in DEBUG as if just flushed, to ensure the sentinel can be handled in Set.
-            CreateCastCache(_initialCacheSize) ??
+                // Initialize to the sentinel in DEBUG as if just flushed, to ensure the sentinel can be handled in Set.
+                CreateCastCache(_initialCacheSize) ??
 #endif
-            s_sentinelTable!;
+                s_sentinelTable!;
             _lastFlushSize = _initialCacheSize;
         }
 
@@ -73,6 +77,7 @@ namespace System.Runtime.CompilerServices
             //
             internal uint _version;
             internal nuint _source;
+
             // pointers have unused lower bits due to alignment, we use one for the result
             internal nuint _targetAndResult;
 
@@ -106,7 +111,9 @@ namespace System.Runtime.CompilerServices
             // element 0 is used for embedded aux data
             //
             // AuxData: { hashShift, tableMask, victimCounter }
-            return ref Unsafe.As<byte, int>(ref Unsafe.AddByteOffset(ref table.GetRawData(), (nint)sizeof(nint)));
+            return ref Unsafe.As<byte, int>(
+                ref Unsafe.AddByteOffset(ref table.GetRawData(), (nint)sizeof(nint))
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -150,7 +157,7 @@ namespace System.Runtime.CompilerServices
             ref int tableData = ref TableData(table);
 
             int index = KeyToBucket(ref tableData, source, target);
-            for (int i = 0; i < BUCKET_SIZE;)
+            for (int i = 0; i < BUCKET_SIZE; )
             {
                 ref CastCacheEntry pEntry = ref Element(ref tableData, index);
 
@@ -223,9 +230,7 @@ namespace System.Runtime.CompilerServices
             {
                 table = new int[(size + 1) * sizeof(CastCacheEntry) / sizeof(int)];
             }
-            catch (OutOfMemoryException) when (!throwOnFail)
-            {
-            }
+            catch (OutOfMemoryException) when (!throwOnFail) { }
 
             if (table == null)
             {
@@ -234,9 +239,7 @@ namespace System.Runtime.CompilerServices
                 {
                     table = new int[(size + 1) * sizeof(CastCacheEntry) / sizeof(int)];
                 }
-                catch (OutOfMemoryException)
-                {
-                }
+                catch (OutOfMemoryException) { }
             }
 
             if (table == null)
@@ -277,7 +280,7 @@ namespace System.Runtime.CompilerServices
                 int index = bucket;
                 ref CastCacheEntry pEntry = ref Element(ref tableData, index);
 
-                for (int i = 0; i < BUCKET_SIZE;)
+                for (int i = 0; i < BUCKET_SIZE; )
                 {
                     // claim the entry if unused or is more distant than us from its origin.
                     // Note - someone familiar with Robin Hood hashing will notice that
@@ -306,8 +309,13 @@ namespace System.Runtime.CompilerServices
 
                     if (version == 0 || (version >> VERSION_NUM_SIZE) > i)
                     {
-                        uint newVersion = ((uint)i << VERSION_NUM_SIZE) + (version & VERSION_NUM_MASK) + 1;
-                        uint versionOrig = Interlocked.CompareExchange(ref pEntry._version, newVersion, version);
+                        uint newVersion =
+                            ((uint)i << VERSION_NUM_SIZE) + (version & VERSION_NUM_MASK) + 1;
+                        uint versionOrig = Interlocked.CompareExchange(
+                            ref pEntry._version,
+                            newVersion,
+                            version
+                        );
                         if (versionOrig == version)
                         {
                             pEntry.SetEntry(source, target, result);
@@ -352,7 +360,10 @@ namespace System.Runtime.CompilerServices
             uint victim = (victimDistance * victimDistance + victimDistance) / 2;
 
             {
-                ref CastCacheEntry pEntry = ref Element(ref tableData, (bucket + (int)victim) & TableMask(ref tableData));
+                ref CastCacheEntry pEntry = ref Element(
+                    ref tableData,
+                    (bucket + (int)victim) & TableMask(ref tableData)
+                );
 
                 uint version = pEntry._version;
 
@@ -369,8 +380,13 @@ namespace System.Runtime.CompilerServices
                     return;
                 }
 
-                uint newVersion = (victimDistance << VERSION_NUM_SIZE) + (version & VERSION_NUM_MASK) + 1;
-                uint versionOrig = Interlocked.CompareExchange(ref pEntry._version, newVersion, version);
+                uint newVersion =
+                    (victimDistance << VERSION_NUM_SIZE) + (version & VERSION_NUM_MASK) + 1;
+                uint versionOrig = Interlocked.CompareExchange(
+                    ref pEntry._version,
+                    newVersion,
+                    version
+                );
 
                 if (versionOrig == version)
                 {

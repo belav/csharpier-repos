@@ -21,16 +21,21 @@ namespace Microsoft.CodeAnalysis.Options;
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal sealed class GlobalOptionService(
     [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService,
-    [ImportMany] IEnumerable<Lazy<IOptionPersisterProvider>> optionPersisters) : IGlobalOptionService
+    [ImportMany] IEnumerable<Lazy<IOptionPersisterProvider>> optionPersisters
+) : IGlobalOptionService
 {
-    private readonly ImmutableArray<Lazy<IOptionPersisterProvider>> _optionPersisterProviders = optionPersisters.ToImmutableArray();
+    private readonly ImmutableArray<Lazy<IOptionPersisterProvider>> _optionPersisterProviders =
+        optionPersisters.ToImmutableArray();
 
     private readonly object _gate = new();
 
     #region Guarded by _gate
 
     private ImmutableArray<IOptionPersister> _lazyOptionPersisters;
-    private ImmutableDictionary<OptionKey2, object?> _currentValues = ImmutableDictionary.Create<OptionKey2, object?>();
+    private ImmutableDictionary<OptionKey2, object?> _currentValues = ImmutableDictionary.Create<
+        OptionKey2,
+        object?
+    >();
 
     #endregion
 
@@ -46,7 +51,12 @@ internal sealed class GlobalOptionService(
 
             ImmutableInterlocked.InterlockedInitialize(
                 ref _lazyOptionPersisters,
-                GetOptionPersistersSlow(workspaceThreadingService, _optionPersisterProviders, CancellationToken.None));
+                GetOptionPersistersSlow(
+                    workspaceThreadingService,
+                    _optionPersisterProviders,
+                    CancellationToken.None
+                )
+            );
         }
 
         return _lazyOptionPersisters;
@@ -55,29 +65,41 @@ internal sealed class GlobalOptionService(
         static ImmutableArray<IOptionPersister> GetOptionPersistersSlow(
             IWorkspaceThreadingService? workspaceThreadingService,
             ImmutableArray<Lazy<IOptionPersisterProvider>> persisterProviders,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (workspaceThreadingService is not null)
             {
-                return workspaceThreadingService.Run(() => GetOptionPersistersAsync(persisterProviders, cancellationToken));
+                return workspaceThreadingService.Run(
+                    () => GetOptionPersistersAsync(persisterProviders, cancellationToken)
+                );
             }
             else
             {
-                return GetOptionPersistersAsync(persisterProviders, cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+                return GetOptionPersistersAsync(persisterProviders, cancellationToken)
+                    .WaitAndGetResult_CanCallOnBackground(cancellationToken);
             }
         }
 
         static async Task<ImmutableArray<IOptionPersister>> GetOptionPersistersAsync(
             ImmutableArray<Lazy<IOptionPersisterProvider>> persisterProviders,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return await persisterProviders.SelectAsArrayAsync(
-                static (lazyProvider, cancellationToken) => lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            return await persisterProviders
+                .SelectAsArrayAsync(
+                    static (lazyProvider, cancellationToken) =>
+                        lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 
-    private static object? LoadOptionFromPersisterOrGetDefault(OptionKey2 optionKey, ImmutableArray<IOptionPersister> persisters)
+    private static object? LoadOptionFromPersisterOrGetDefault(
+        OptionKey2 optionKey,
+        ImmutableArray<IOptionPersister> persisters
+    )
     {
         foreach (var persister in persisters)
         {
@@ -98,11 +120,10 @@ internal sealed class GlobalOptionService(
         return true;
     }
 
-    public T GetOption<T>(Option2<T> option)
-        => GetOption<T>(new OptionKey2(option));
+    public T GetOption<T>(Option2<T> option) => GetOption<T>(new OptionKey2(option));
 
-    public T GetOption<T>(PerLanguageOption2<T> option, string language)
-        => GetOption<T>(new OptionKey2(option, language));
+    public T GetOption<T>(PerLanguageOption2<T> option, string language) =>
+        GetOption<T>(new OptionKey2(option, language));
 
     public T GetOption<T>(OptionKey2 optionKey)
     {
@@ -156,7 +177,11 @@ internal sealed class GlobalOptionService(
         return values.ToImmutableAndClear();
     }
 
-    private static object? GetOption_NoLock(ref ImmutableDictionary<OptionKey2, object?> currentValues, OptionKey2 optionKey, ImmutableArray<IOptionPersister> persisters)
+    private static object? GetOption_NoLock(
+        ref ImmutableDictionary<OptionKey2, object?> currentValues,
+        OptionKey2 optionKey,
+        ImmutableArray<IOptionPersister> persisters
+    )
     {
         // The option must be internally defined and it can't be a legacy option whose value is mapped to another option:
         Debug.Assert(optionKey.Option is IOption2 { Definition.StorageMapping: null });
@@ -173,17 +198,17 @@ internal sealed class GlobalOptionService(
         return value;
     }
 
-    public void SetGlobalOption<T>(Option2<T> option, T value)
-        => SetGlobalOption(new OptionKey2(option), value);
+    public void SetGlobalOption<T>(Option2<T> option, T value) =>
+        SetGlobalOption(new OptionKey2(option), value);
 
-    public void SetGlobalOption<T>(PerLanguageOption2<T> option, string language, T value)
-        => SetGlobalOption(new OptionKey2(option, language), value);
+    public void SetGlobalOption<T>(PerLanguageOption2<T> option, string language, T value) =>
+        SetGlobalOption(new OptionKey2(option, language), value);
 
-    public void SetGlobalOption(OptionKey2 optionKey, object? value)
-        => SetGlobalOptions(OneOrMany.Create(KeyValuePairUtil.Create(optionKey, value)));
+    public void SetGlobalOption(OptionKey2 optionKey, object? value) =>
+        SetGlobalOptions(OneOrMany.Create(KeyValuePairUtil.Create(optionKey, value)));
 
-    public bool SetGlobalOptions(ImmutableArray<KeyValuePair<OptionKey2, object?>> options)
-        => SetGlobalOptions(OneOrMany.Create(options));
+    public bool SetGlobalOptions(ImmutableArray<KeyValuePair<OptionKey2, object?>> options) =>
+        SetGlobalOptions(OneOrMany.Create(options));
 
     private bool SetGlobalOptions(OneOrMany<KeyValuePair<OptionKey2, object?>> options)
     {
@@ -222,7 +247,11 @@ internal sealed class GlobalOptionService(
         return true;
     }
 
-    private static void PersistOption(ImmutableArray<IOptionPersister> persisters, OptionKey2 optionKey, object? value)
+    private static void PersistOption(
+        ImmutableArray<IOptionPersister> persisters,
+        OptionKey2 optionKey,
+        object? value
+    )
     {
         foreach (var persister in persisters)
         {
@@ -249,7 +278,10 @@ internal sealed class GlobalOptionService(
             _currentValues = _currentValues.SetItem(optionKey, newValue);
         }
 
-        var changedOptions = new List<OptionChangedEventArgs> { new OptionChangedEventArgs(optionKey, newValue) };
+        var changedOptions = new List<OptionChangedEventArgs>
+        {
+            new OptionChangedEventArgs(optionKey, newValue),
+        };
         RaiseOptionChangedEvent(changedOptions);
         return true;
     }
@@ -259,7 +291,10 @@ internal sealed class GlobalOptionService(
         _optionChanged.AddHandler(target, handler);
     }
 
-    public void RemoveOptionChangedHandler(object target, EventHandler<OptionChangedEventArgs> handler)
+    public void RemoveOptionChangedHandler(
+        object target,
+        EventHandler<OptionChangedEventArgs> handler
+    )
     {
         _optionChanged.RemoveHandler(target, handler);
     }

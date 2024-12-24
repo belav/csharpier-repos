@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,75 +33,94 @@ using System.IO;
 using System.Reflection;
 using System.Web;
 using System.Web.UI;
-
-using MonoTests.SystemWeb.Framework;
 using MonoTests.stand_alone.WebHarness;
+using MonoTests.SystemWeb.Framework;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI
 {
-	[TestFixture]
-	public class ObjectStateFormatterTest
-	{
-		[TestFixtureSetUp]
-		public void SetUp ()
-		{
-			Type t = GetType ();
+    [TestFixture]
+    public class ObjectStateFormatterTest
+    {
+        [TestFixtureSetUp]
+        public void SetUp()
+        {
+            Type t = GetType();
 
-			WebTest.CopyResource (t, "StateFormatter_CorrectConverter.aspx", "StateFormatter_CorrectConverter.aspx");
-			WebTest.CopyResource (t, "StateFormatter_CollectionConverter.aspx", "StateFormatter_CollectionConverter.aspx");
-			WebTest.CopyResource (t, "StateFormatter_CollectionConverter.aspx.cs", "StateFormatter_CollectionConverter.aspx.cs");
-		}
+            WebTest.CopyResource(
+                t,
+                "StateFormatter_CorrectConverter.aspx",
+                "StateFormatter_CorrectConverter.aspx"
+            );
+            WebTest.CopyResource(
+                t,
+                "StateFormatter_CollectionConverter.aspx",
+                "StateFormatter_CollectionConverter.aspx"
+            );
+            WebTest.CopyResource(
+                t,
+                "StateFormatter_CollectionConverter.aspx.cs",
+                "StateFormatter_CollectionConverter.aspx.cs"
+            );
+        }
 
-		public static Assembly ResolveAssemblyHandler (object sender, ResolveEventArgs e)
-		{
-			if (e.Name != "System.Web_test")
-				return null;
+        public static Assembly ResolveAssemblyHandler(object sender, ResolveEventArgs e)
+        {
+            if (e.Name != "System.Web_test")
+                return null;
 
-			return Assembly.GetExecutingAssembly ();
-		}
-		
-		[Test (Description="Bug #545979")]
-		public void StateFormatter_CorrectConverter ()
-		{
-			// We test only if it doesn't throw exception on postback
-			try {
-				WebTest.Host.AppDomain.AssemblyResolve += new ResolveEventHandler (ResolveAssemblyHandler);
-				WebTest t = new WebTest ("StateFormatter_CorrectConverter.aspx");
-				t.Run ();
+            return Assembly.GetExecutingAssembly();
+        }
 
-				var fr = new FormRequest (t.Response, "Form1");
-				fr.Controls.Add ("Button1");
-				fr.Controls ["Button1"].Value = "Change";
-				t.Request = fr;
-				t.Run ();
+        [Test(Description = "Bug #545979")]
+        public void StateFormatter_CorrectConverter()
+        {
+            // We test only if it doesn't throw exception on postback
+            try
+            {
+                WebTest.Host.AppDomain.AssemblyResolve += new ResolveEventHandler(
+                    ResolveAssemblyHandler
+                );
+                WebTest t = new WebTest("StateFormatter_CorrectConverter.aspx");
+                t.Run();
 
-				fr = new FormRequest (t.Response, "Form1");
-				fr.Controls.Add ("Button2");
-				fr.Controls ["Button2"].Value = "Refresh";
-			} finally {
-				WebTest.Host.AppDomain.AssemblyResolve -= new ResolveEventHandler (ResolveAssemblyHandler);
-			}
-		}
+                var fr = new FormRequest(t.Response, "Form1");
+                fr.Controls.Add("Button1");
+                fr.Controls["Button1"].Value = "Change";
+                t.Request = fr;
+                t.Run();
 
-		[Test (Description="Bug #565547")]
-		public void StateFormatter_CollectionFormatter ()
-		{
-			WebTest t = new WebTest ("StateFormatter_CollectionConverter.aspx");
-			t.Run ();
+                fr = new FormRequest(t.Response, "Form1");
+                fr.Controls.Add("Button2");
+                fr.Controls["Button2"].Value = "Refresh";
+            }
+            finally
+            {
+                WebTest.Host.AppDomain.AssemblyResolve -= new ResolveEventHandler(
+                    ResolveAssemblyHandler
+                );
+            }
+        }
 
-			var fr = new FormRequest (t.Response, "form1");
-			fr.Controls.Add ("btnSearch");
-			fr.Controls.Add ("ddlDate");
-			fr.Controls.Add ("txtSearchValue");
+        [Test(Description = "Bug #565547")]
+        public void StateFormatter_CollectionFormatter()
+        {
+            WebTest t = new WebTest("StateFormatter_CollectionConverter.aspx");
+            t.Run();
 
-			fr.Controls ["btnSearch"].Value = "Search";
-			fr.Controls ["ddlDate"].Value = "2009";
+            var fr = new FormRequest(t.Response, "form1");
+            fr.Controls.Add("btnSearch");
+            fr.Controls.Add("ddlDate");
+            fr.Controls.Add("txtSearchValue");
 
-			t.Request = fr;
-			string pageHtml = t.Run ();
-			string renderedHtml = HtmlDiff.GetControlFromPageHtml (pageHtml);
-			string originalHtml = @"<div>
+            fr.Controls["btnSearch"].Value = "Search";
+            fr.Controls["ddlDate"].Value = "2009";
+
+            t.Request = fr;
+            string pageHtml = t.Run();
+            string renderedHtml = HtmlDiff.GetControlFromPageHtml(pageHtml);
+            string originalHtml =
+                @"<div>
 
 		<table id=""gvECCN"" cellspacing=""0"" rules=""all"" border=""1"" style=""border-collapse:collapse;"">
 				<tr>
@@ -113,8 +132,8 @@ namespace MonoTests.System.Web.UI
 			</table>
 		</div>";
 
-			HtmlDiff.AssertAreEqual (originalHtml, renderedHtml, "#A1");
-		}
+            HtmlDiff.AssertAreEqual(originalHtml, renderedHtml, "#A1");
+        }
 #if false
 		[Test]
 		public void SerializeOverloads ()
@@ -129,5 +148,5 @@ namespace MonoTests.System.Web.UI
 			Assert.AreEqual (s1, s2, "identical");
 		}
 #endif
-	}
+    }
 }

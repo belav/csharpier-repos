@@ -29,13 +29,9 @@ public class JsonConverterWriteTests
     [Fact]
     public void CustomizedName()
     {
-        var helloRequest = new HelloRequest
-        {
-            FieldName = "A field name"
-        };
+        var helloRequest = new HelloRequest { FieldName = "A field name" };
 
-        AssertWrittenJson(helloRequest,
-            new GrpcJsonSettings { IgnoreDefaultValues = true });
+        AssertWrittenJson(helloRequest, new GrpcJsonSettings { IgnoreDefaultValues = true });
     }
 
     [Fact]
@@ -43,7 +39,7 @@ public class JsonConverterWriteTests
     {
         var helloRequest = new HelloRequest
         {
-            Name = "This is a test 激光這兩個字是甚麼意思 string"
+            Name = "This is a test 激光這兩個字是甚麼意思 string",
         };
 
         AssertWrittenJson(helloRequest, compareRawStrings: true);
@@ -55,12 +51,7 @@ public class JsonConverterWriteTests
         var helloRequest = new HelloRequest
         {
             Name = "test",
-            RepeatedStrings =
-            {
-                "One",
-                "Two",
-                "Three"
-            }
+            RepeatedStrings = { "One", "Two", "Three" },
         };
 
         AssertWrittenJson(helloRequest);
@@ -69,14 +60,7 @@ public class JsonConverterWriteTests
     [Fact]
     public void RepeatedDoubleValues()
     {
-        var helloRequest = new HelloRequest
-        {
-            RepeatedDoubleValues =
-            {
-                1,
-                1.1
-            }
-        };
+        var helloRequest = new HelloRequest { RepeatedDoubleValues = { 1, 1.1 } };
 
         AssertWrittenJson(helloRequest);
     }
@@ -86,11 +70,7 @@ public class JsonConverterWriteTests
     {
         var helloRequest = new HelloRequest
         {
-            MapStrings =
-            {
-                ["name1"] = "value1",
-                ["name2"] = "value2"
-            }
+            MapStrings = { ["name1"] = "value1", ["name2"] = "value2" },
         };
 
         AssertWrittenJson(helloRequest);
@@ -101,11 +81,7 @@ public class JsonConverterWriteTests
     {
         var helloRequest = new HelloRequest
         {
-            MapKeybool =
-            {
-                [true] = "value1",
-                [false] = "value2"
-            }
+            MapKeybool = { [true] = "value1", [false] = "value2" },
         };
 
         AssertWrittenJson(helloRequest);
@@ -120,8 +96,8 @@ public class JsonConverterWriteTests
             {
                 [-1] = "value1",
                 [0] = "value2",
-                [0] = "value3"
-            }
+                [0] = "value3",
+            },
         };
 
         AssertWrittenJson(helloRequest);
@@ -135,8 +111,8 @@ public class JsonConverterWriteTests
             MapMessage =
             {
                 ["name1"] = new HelloRequest.Types.SubMessage { Subfield = "value1" },
-                ["name2"] = new HelloRequest.Types.SubMessage { Subfield = "value2" }
-            }
+                ["name2"] = new HelloRequest.Types.SubMessage { Subfield = "value2" },
+            },
         };
 
         AssertWrittenJson(helloRequest);
@@ -147,18 +123,13 @@ public class JsonConverterWriteTests
     {
         var wrappers = new HelloRequest.Types.DataTypes();
 
-        AssertWrittenJson(
-            wrappers,
-            new GrpcJsonSettings { WriteInt64sAsStrings = true });
+        AssertWrittenJson(wrappers, new GrpcJsonSettings { WriteInt64sAsStrings = true });
     }
 
     [Fact]
     public void NullableWrappers_NaN()
     {
-        var wrappers = new HelloRequest.Types.Wrappers
-        {
-            DoubleValue = double.NaN
-        };
+        var wrappers = new HelloRequest.Types.Wrappers { DoubleValue = double.NaN };
 
         AssertWrittenJson(wrappers);
     }
@@ -174,10 +145,7 @@ public class JsonConverterWriteTests
     [Fact]
     public void NullValue_NonDefaultValue()
     {
-        var m = new NullValueContainer
-        {
-            NullValue = (NullValue)1
-        };
+        var m = new NullValueContainer { NullValue = (NullValue)1 };
 
         AssertWrittenJson(m);
     }
@@ -195,7 +163,7 @@ public class JsonConverterWriteTests
             Int64Value = 2L,
             StringValue = "A string",
             Uint32Value = 3U,
-            Uint64Value = 4UL
+            Uint64Value = 4UL,
         };
 
         AssertWrittenJson(wrappers);
@@ -220,13 +188,20 @@ public class JsonConverterWriteTests
     [Theory]
     [InlineData(true, @"""1""")]
     [InlineData(false, @"1")]
-    public void NullableWrapper_Root_Int64_WriteAsStrings(bool writeInt64sAsStrings, string expectedJson)
+    public void NullableWrapper_Root_Int64_WriteAsStrings(
+        bool writeInt64sAsStrings,
+        string expectedJson
+    )
     {
         var v = new Int64Value { Value = 1 };
 
         var descriptorRegistry = CreateDescriptorRegistry(typeof(Int64Value));
         var settings = new GrpcJsonSettings { WriteInt64sAsStrings = writeInt64sAsStrings };
-        var jsonSerializerOptions = CreateSerializerOptions(settings, TypeRegistry.Empty, descriptorRegistry);
+        var jsonSerializerOptions = CreateSerializerOptions(
+            settings,
+            TypeRegistry.Empty,
+            descriptorRegistry
+        );
         var json = JsonSerializer.Serialize(v, jsonSerializerOptions);
 
         Assert.Equal(expectedJson, json);
@@ -235,13 +210,20 @@ public class JsonConverterWriteTests
     [Theory]
     [InlineData(true, @"""2""")]
     [InlineData(false, @"2")]
-    public void NullableWrapper_Root_UInt64_WriteAsStrings(bool writeInt64sAsStrings, string expectedJson)
+    public void NullableWrapper_Root_UInt64_WriteAsStrings(
+        bool writeInt64sAsStrings,
+        string expectedJson
+    )
     {
         var v = new UInt64Value { Value = 2 };
 
         var descriptorRegistry = CreateDescriptorRegistry(typeof(UInt64Value));
         var settings = new GrpcJsonSettings { WriteInt64sAsStrings = writeInt64sAsStrings };
-        var jsonSerializerOptions = CreateSerializerOptions(settings, TypeRegistry.Empty, descriptorRegistry);
+        var jsonSerializerOptions = CreateSerializerOptions(
+            settings,
+            TypeRegistry.Empty,
+            descriptorRegistry
+        );
         var json = JsonSerializer.Serialize(v, jsonSerializerOptions);
 
         Assert.Equal(expectedJson, json);
@@ -250,10 +232,7 @@ public class JsonConverterWriteTests
     [Fact]
     public void Any()
     {
-        var helloRequest = new HelloRequest
-        {
-            Name = "In any!"
-        };
+        var helloRequest = new HelloRequest { Name = "In any!" };
         var any = Google.Protobuf.WellKnownTypes.Any.Pack(helloRequest);
 
         AssertWrittenJson(any);
@@ -282,7 +261,9 @@ public class JsonConverterWriteTests
     {
         var helloRequest = new HelloRequest
         {
-            TimestampValue = Timestamp.FromDateTimeOffset(new DateTimeOffset(2020, 12, 1, 12, 30, 0, TimeSpan.FromHours(12)))
+            TimestampValue = Timestamp.FromDateTimeOffset(
+                new DateTimeOffset(2020, 12, 1, 12, 30, 0, TimeSpan.FromHours(12))
+            ),
         };
 
         AssertWrittenJson(helloRequest);
@@ -291,7 +272,9 @@ public class JsonConverterWriteTests
     [Fact]
     public void Timestamp_Root()
     {
-        var ts = Timestamp.FromDateTimeOffset(new DateTimeOffset(2020, 12, 1, 12, 30, 0, TimeSpan.FromHours(12)));
+        var ts = Timestamp.FromDateTimeOffset(
+            new DateTimeOffset(2020, 12, 1, 12, 30, 0, TimeSpan.FromHours(12))
+        );
 
         AssertWrittenJson(ts);
     }
@@ -301,7 +284,7 @@ public class JsonConverterWriteTests
     {
         var helloRequest = new HelloRequest
         {
-            DurationValue = Duration.FromTimeSpan(TimeSpan.FromHours(12))
+            DurationValue = Duration.FromTimeSpan(TimeSpan.FromHours(12)),
         };
 
         AssertWrittenJson(helloRequest);
@@ -320,16 +303,19 @@ public class JsonConverterWriteTests
     {
         var helloRequest = new HelloRequest
         {
-            ValueValue = Value.ForStruct(new Struct
-            {
-                Fields =
+            ValueValue = Value.ForStruct(
+                new Struct
                 {
-                    ["enabled"] = Value.ForBool(true),
-                    ["metadata"] = Value.ForList(
-                        Value.ForString("value1"),
-                        Value.ForString("value2"))
+                    Fields =
+                    {
+                        ["enabled"] = Value.ForBool(true),
+                        ["metadata"] = Value.ForList(
+                            Value.ForString("value1"),
+                            Value.ForString("value2")
+                        ),
+                    },
                 }
-            })
+            ),
         };
 
         AssertWrittenJson(helloRequest);
@@ -340,13 +326,7 @@ public class JsonConverterWriteTests
     {
         var helloRequest = new HelloRequest
         {
-            ValueValue = Value.ForStruct(new Struct
-            {
-                Fields =
-                {
-                    ["prop"] = Value.ForNull()
-                }
-            })
+            ValueValue = Value.ForStruct(new Struct { Fields = { ["prop"] = Value.ForNull() } }),
         };
 
         AssertWrittenJson(helloRequest);
@@ -355,16 +335,19 @@ public class JsonConverterWriteTests
     [Fact]
     public void Value_Root()
     {
-        var value = Value.ForStruct(new Struct
-        {
-            Fields =
+        var value = Value.ForStruct(
+            new Struct
             {
-                ["enabled"] = Value.ForBool(true),
-                ["metadata"] = Value.ForList(
-                    Value.ForString("value1"),
-                    Value.ForString("value2"))
+                Fields =
+                {
+                    ["enabled"] = Value.ForBool(true),
+                    ["metadata"] = Value.ForList(
+                        Value.ForString("value1"),
+                        Value.ForString("value2")
+                    ),
+                },
             }
-        });
+        );
 
         AssertWrittenJson(value);
     }
@@ -389,9 +372,10 @@ public class JsonConverterWriteTests
                     ["enabled"] = Value.ForBool(true),
                     ["metadata"] = Value.ForList(
                         Value.ForString("value1"),
-                        Value.ForString("value2"))
-                }
-            }
+                        Value.ForString("value2")
+                    ),
+                },
+            },
         };
 
         AssertWrittenJson(helloRequest);
@@ -405,10 +389,8 @@ public class JsonConverterWriteTests
             Fields =
             {
                 ["enabled"] = Value.ForBool(true),
-                ["metadata"] = Value.ForList(
-                    Value.ForString("value1"),
-                    Value.ForString("value2"))
-            }
+                ["metadata"] = Value.ForList(Value.ForString("value1"), Value.ForString("value2")),
+            },
         };
 
         AssertWrittenJson(value);
@@ -425,9 +407,9 @@ public class JsonConverterWriteTests
                 {
                     Value.ForBool(true),
                     Value.ForString("value1"),
-                    Value.ForString("value2")
-                }
-            }
+                    Value.ForString("value2"),
+                },
+            },
         };
 
         AssertWrittenJson(helloRequest);
@@ -438,12 +420,7 @@ public class JsonConverterWriteTests
     {
         var value = new ListValue
         {
-            Values =
-            {
-                Value.ForBool(true),
-                Value.ForString("value1"),
-                Value.ForString("value2")
-            }
+            Values = { Value.ForBool(true), Value.ForString("value1"), Value.ForString("value2") },
         };
 
         AssertWrittenJson(value);
@@ -475,10 +452,7 @@ public class JsonConverterWriteTests
     [InlineData((HelloRequest.Types.DataTypes.Types.NestedEnum)100)]
     public void Enum(HelloRequest.Types.DataTypes.Types.NestedEnum value)
     {
-        var dataTypes = new HelloRequest.Types.DataTypes
-        {
-            SingleEnum = value
-        };
+        var dataTypes = new HelloRequest.Types.DataTypes { SingleEnum = value };
 
         AssertWrittenJson(dataTypes);
     }
@@ -490,12 +464,12 @@ public class JsonConverterWriteTests
     [InlineData((HelloRequest.Types.DataTypes.Types.NestedEnum)100)]
     public void Enum_WriteNumber(HelloRequest.Types.DataTypes.Types.NestedEnum value)
     {
-        var dataTypes = new HelloRequest.Types.DataTypes
-        {
-            SingleEnum = value
-        };
+        var dataTypes = new HelloRequest.Types.DataTypes { SingleEnum = value };
 
-        AssertWrittenJson(dataTypes, new GrpcJsonSettings { WriteEnumsAsIntegers = true, IgnoreDefaultValues = true });
+        AssertWrittenJson(
+            dataTypes,
+            new GrpcJsonSettings { WriteEnumsAsIntegers = true, IgnoreDefaultValues = true }
+        );
     }
 
     [Fact]
@@ -511,24 +485,38 @@ public class JsonConverterWriteTests
     [Fact]
     public void JsonNamePriority()
     {
-        var m = new Issue047349Message { A = 10, B = 20, C = 30 };
+        var m = new Issue047349Message
+        {
+            A = 10,
+            B = 20,
+            C = 30,
+        };
         var json = AssertWrittenJson(m);
 
         Assert.Equal(@"{""b"":10,""a"":20,""d"":30}", json);
     }
 
-    private string AssertWrittenJson<TValue>(TValue value, GrpcJsonSettings? settings = null, bool? compareRawStrings = null) where TValue : IMessage
+    private string AssertWrittenJson<TValue>(
+        TValue value,
+        GrpcJsonSettings? settings = null,
+        bool? compareRawStrings = null
+    )
+        where TValue : IMessage
     {
         var typeRegistery = TypeRegistry.FromFiles(
             HelloRequest.Descriptor.File,
-            Timestamp.Descriptor.File);
+            Timestamp.Descriptor.File
+        );
 
         settings ??= new GrpcJsonSettings { WriteInt64sAsStrings = true };
 
         var formatterSettings = new JsonFormatter.Settings(
             formatDefaultValues: !settings.IgnoreDefaultValues,
-            typeRegistery);
-        formatterSettings = formatterSettings.WithFormatEnumsAsIntegers(settings.WriteEnumsAsIntegers);
+            typeRegistery
+        );
+        formatterSettings = formatterSettings.WithFormatEnumsAsIntegers(
+            settings.WriteEnumsAsIntegers
+        );
         var formatter = new JsonFormatter(formatterSettings);
 
         var jsonOld = formatter.Format(value);
@@ -537,7 +525,11 @@ public class JsonConverterWriteTests
         _output.WriteLine(jsonOld);
 
         var descriptorRegistry = CreateDescriptorRegistry(typeof(TValue));
-        var jsonSerializerOptions = CreateSerializerOptions(settings, typeRegistery, descriptorRegistry);
+        var jsonSerializerOptions = CreateSerializerOptions(
+            settings,
+            typeRegistery,
+            descriptorRegistry
+        );
         var jsonNew = JsonSerializer.Serialize(value, jsonSerializerOptions);
 
         _output.WriteLine("New:");
@@ -546,7 +538,10 @@ public class JsonConverterWriteTests
         using var doc1 = JsonDocument.Parse(jsonNew);
         using var doc2 = JsonDocument.Parse(jsonOld);
 
-        var comparer = new JsonElementComparer(maxHashDepth: -1, compareRawStrings: compareRawStrings ?? false);
+        var comparer = new JsonElementComparer(
+            maxHashDepth: -1,
+            compareRawStrings: compareRawStrings ?? false
+        );
         Assert.True(comparer.Equals(doc1.RootElement, doc2.RootElement));
 
         return jsonNew;
@@ -559,9 +554,17 @@ public class JsonConverterWriteTests
         return descriptorRegistry;
     }
 
-    internal static JsonSerializerOptions CreateSerializerOptions(GrpcJsonSettings? settings, TypeRegistry? typeRegistery, DescriptorRegistry descriptorRegistry)
+    internal static JsonSerializerOptions CreateSerializerOptions(
+        GrpcJsonSettings? settings,
+        TypeRegistry? typeRegistery,
+        DescriptorRegistry descriptorRegistry
+    )
     {
-        var context = new JsonContext(settings ?? new GrpcJsonSettings(), typeRegistery ?? TypeRegistry.Empty, descriptorRegistry);
+        var context = new JsonContext(
+            settings ?? new GrpcJsonSettings(),
+            typeRegistery ?? TypeRegistry.Empty,
+            descriptorRegistry
+        );
 
         return JsonConverterHelper.CreateSerializerOptions(context);
     }

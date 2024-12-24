@@ -25,27 +25,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProviderMef1("ReplCommandCompletionProvider", LanguageNames.CSharp)]
     [TextViewRole(PredefinedInteractiveTextViewRoles.InteractiveTextViewRole)]
     [Order(Before = PredefinedCompletionProviderNames.Keyword)]
-    internal sealed class CSharpInteractiveWindowCommandCompletionProvider : AbstractInteractiveWindowCommandCompletionProvider
+    internal sealed class CSharpInteractiveWindowCommandCompletionProvider
+        : AbstractInteractiveWindowCommandCompletionProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInteractiveWindowCommandCompletionProvider()
-        {
-        }
+        public CSharpInteractiveWindowCommandCompletionProvider() { }
 
-        internal override string Language
-            => LanguageNames.CSharp;
+        internal override string Language => LanguageNames.CSharp;
 
-        protected override string GetCompletionString(string commandName)
-            => commandName;
+        protected override string GetCompletionString(string commandName) => commandName;
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, CompletionOptions options)
-            => CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(text, characterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            CompletionOptions options
+        ) =>
+            CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(
+                text,
+                characterPosition,
+                options
+            );
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.SpaceTriggerCharacter;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.SpaceTriggerCharacter;
 
-        protected override bool ShouldDisplayCommandCompletions(SyntaxTree tree, int position, CancellationToken cancellationToken)
-            => tree.IsBeforeFirstToken(position, cancellationToken) &&
-               tree.IsPreProcessorKeywordContext(position, cancellationToken);
+        protected override bool ShouldDisplayCommandCompletions(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            tree.IsBeforeFirstToken(position, cancellationToken)
+            && tree.IsPreProcessorKeywordContext(position, cancellationToken);
     }
 }

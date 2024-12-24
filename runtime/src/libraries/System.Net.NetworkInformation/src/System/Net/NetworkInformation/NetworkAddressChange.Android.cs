@@ -28,8 +28,10 @@ namespace System.Net.NetworkInformation
                 {
                     lock (s_lockObj)
                     {
-                        if (s_addressChangedSubscribers.Count == 0 &&
-                            s_availabilityChangedSubscribers.Count == 0)
+                        if (
+                            s_addressChangedSubscribers.Count == 0
+                            && s_availabilityChangedSubscribers.Count == 0
+                        )
                         {
                             CreateAndStartLoop();
                         }
@@ -51,8 +53,11 @@ namespace System.Net.NetworkInformation
                         bool hadAddressChangedSubscribers = s_addressChangedSubscribers.Count != 0;
                         s_addressChangedSubscribers.Remove(value);
 
-                        if (hadAddressChangedSubscribers && s_addressChangedSubscribers.Count == 0 &&
-                            s_availabilityChangedSubscribers.Count == 0)
+                        if (
+                            hadAddressChangedSubscribers
+                            && s_addressChangedSubscribers.Count == 0
+                            && s_availabilityChangedSubscribers.Count == 0
+                        )
                         {
                             StopLoop();
                         }
@@ -71,8 +76,10 @@ namespace System.Net.NetworkInformation
                 {
                     lock (s_lockObj)
                     {
-                        if (s_addressChangedSubscribers.Count == 0 &&
-                            s_availabilityChangedSubscribers.Count == 0)
+                        if (
+                            s_addressChangedSubscribers.Count == 0
+                            && s_availabilityChangedSubscribers.Count == 0
+                        )
                         {
                             CreateAndStartLoop();
                         }
@@ -91,12 +98,16 @@ namespace System.Net.NetworkInformation
                 {
                     lock (s_lockObj)
                     {
-                        bool hadSubscribers = s_addressChangedSubscribers.Count != 0 ||
-                                              s_availabilityChangedSubscribers.Count != 0;
+                        bool hadSubscribers =
+                            s_addressChangedSubscribers.Count != 0
+                            || s_availabilityChangedSubscribers.Count != 0;
                         s_availabilityChangedSubscribers.Remove(value);
 
-                        if (hadSubscribers && s_addressChangedSubscribers.Count == 0 &&
-                            s_availabilityChangedSubscribers.Count == 0)
+                        if (
+                            hadSubscribers
+                            && s_addressChangedSubscribers.Count == 0
+                            && s_availabilityChangedSubscribers.Count == 0
+                        )
                         {
                             StopLoop();
                         }
@@ -126,22 +137,24 @@ namespace System.Net.NetworkInformation
             s_lastIpAddresses = null;
         }
 
-        private static async Task PeriodicallyCheckIfNetworkChanged(CancellationToken cancellationToken)
+        private static async Task PeriodicallyCheckIfNetworkChanged(
+            CancellationToken cancellationToken
+        )
         {
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
             var timer = new PeriodicTimer(s_timerInterval);
             try
             {
-                while (await timer.WaitForNextTickAsync(cancellationToken).ConfigureAwait(false) &&
-                       !cancellationToken.IsCancellationRequested)
+                while (
+                    await timer.WaitForNextTickAsync(cancellationToken).ConfigureAwait(false)
+                    && !cancellationToken.IsCancellationRequested
+                )
                 {
                     CheckIfNetworkChanged();
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
+            catch (OperationCanceledException) { }
             finally
             {
                 timer.Dispose();
@@ -151,7 +164,10 @@ namespace System.Net.NetworkInformation
         private static void CheckIfNetworkChanged()
         {
             var newAddresses = GetIPAddresses();
-            if (s_lastIpAddresses is IPAddress[] oldAddresses && NetworkChanged(oldAddresses, newAddresses))
+            if (
+                s_lastIpAddresses is IPAddress[] oldAddresses
+                && NetworkChanged(oldAddresses, newAddresses)
+            )
             {
                 OnNetworkChanged();
             }
@@ -196,25 +212,41 @@ namespace System.Net.NetworkInformation
 
         private static void OnNetworkChanged()
         {
-            Dictionary<NetworkAddressChangedEventHandler, ExecutionContext?>? addressChangedSubscribers = null;
-            Dictionary<NetworkAvailabilityChangedEventHandler, ExecutionContext?>? availabilityChangedSubscribers = null;
+            Dictionary<
+                NetworkAddressChangedEventHandler,
+                ExecutionContext?
+            >? addressChangedSubscribers = null;
+            Dictionary<
+                NetworkAvailabilityChangedEventHandler,
+                ExecutionContext?
+            >? availabilityChangedSubscribers = null;
 
             lock (s_lockObj)
             {
                 if (s_addressChangedSubscribers.Count > 0)
                 {
-                    addressChangedSubscribers = new Dictionary<NetworkAddressChangedEventHandler, ExecutionContext?>(s_addressChangedSubscribers);
+                    addressChangedSubscribers = new Dictionary<
+                        NetworkAddressChangedEventHandler,
+                        ExecutionContext?
+                    >(s_addressChangedSubscribers);
                 }
                 if (s_availabilityChangedSubscribers.Count > 0)
                 {
-                    availabilityChangedSubscribers = new Dictionary<NetworkAvailabilityChangedEventHandler, ExecutionContext?>(s_availabilityChangedSubscribers);
+                    availabilityChangedSubscribers = new Dictionary<
+                        NetworkAvailabilityChangedEventHandler,
+                        ExecutionContext?
+                    >(s_availabilityChangedSubscribers);
                 }
             }
 
             if (addressChangedSubscribers != null)
             {
-                foreach (KeyValuePair<NetworkAddressChangedEventHandler, ExecutionContext?>
-                    subscriber in addressChangedSubscribers)
+                foreach (
+                    KeyValuePair<
+                        NetworkAddressChangedEventHandler,
+                        ExecutionContext?
+                    > subscriber in addressChangedSubscribers
+                )
                 {
                     NetworkAddressChangedEventHandler handler = subscriber.Key;
                     ExecutionContext? ec = subscriber.Value;
@@ -233,10 +265,18 @@ namespace System.Net.NetworkInformation
             if (availabilityChangedSubscribers != null)
             {
                 bool isAvailable = NetworkInterface.GetIsNetworkAvailable();
-                NetworkAvailabilityEventArgs args = isAvailable ? s_availableEventArgs : s_notAvailableEventArgs;
-                ContextCallback callbackContext = isAvailable ? s_runHandlerAvailable : s_runHandlerNotAvailable;
-                foreach (KeyValuePair<NetworkAvailabilityChangedEventHandler, ExecutionContext?>
-                    subscriber in availabilityChangedSubscribers)
+                NetworkAvailabilityEventArgs args = isAvailable
+                    ? s_availableEventArgs
+                    : s_notAvailableEventArgs;
+                ContextCallback callbackContext = isAvailable
+                    ? s_runHandlerAvailable
+                    : s_runHandlerNotAvailable;
+                foreach (
+                    KeyValuePair<
+                        NetworkAvailabilityChangedEventHandler,
+                        ExecutionContext?
+                    > subscriber in availabilityChangedSubscribers
+                )
                 {
                     NetworkAvailabilityChangedEventHandler handler = subscriber.Key;
                     ExecutionContext? ec = subscriber.Value;

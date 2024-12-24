@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
     public class LineSeparatorTests
     {
         [Fact]
-        public async Task TestEmptyFile()
-            => await AssertTagsOnBracesOrSemicolonsAsync(contents: string.Empty);
+        public async Task TestEmptyFile() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(contents: string.Empty);
 
         [Fact]
         public async Task TestEmptyClass()
@@ -489,7 +489,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/1297")]
         public async Task ExpressionBodiedProperty()
         {
-            await AssertTagsOnBracesOrSemicolonsAsync("""
+            await AssertTagsOnBracesOrSemicolonsAsync(
+                """
                 class C
                 {
                     int Prop => 3;
@@ -498,13 +499,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
                     {
                     }
                 }
-                """, 0, 2);
+                """,
+                0,
+                2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/1297")]
         public async Task ExpressionBodiedIndexer()
         {
-            await AssertTagsOnBracesOrSemicolonsAsync("""
+            await AssertTagsOnBracesOrSemicolonsAsync(
+                """
                 class C
                 {
                     int this[int i] => 3;
@@ -513,7 +518,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
                     {
                     }
                 }
-                """, 0, 2);
+                """,
+                0,
+                2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/1297")]
@@ -521,7 +529,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         {
             // This is not valid code, and parses all wrong, but just in case a user writes it.  Note
             // the 3 is because there is a skipped } in the event declaration.
-            await AssertTagsOnBracesOrSemicolonsAsync("""
+            await AssertTagsOnBracesOrSemicolonsAsync(
+                """
                 class C
                 {
                     event EventHandler MyEvent => 3;
@@ -530,7 +539,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
                     {
                     }
                 }
-                """, 3);
+                """,
+                3
+            );
         }
 
         #region Negative (incomplete) tests
@@ -550,12 +561,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         }
 
         [Fact]
-        public async Task IncompleteMethod()
-            => await AssertTagsOnBracesOrSemicolonsAsync(@"void goo() {");
+        public async Task IncompleteMethod() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(@"void goo() {");
 
         [Fact]
-        public async Task IncompleteProperty()
-            => await AssertTagsOnBracesOrSemicolonsAsync(@"class C { int P { get; set; void");
+        public async Task IncompleteProperty() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(@"class C { int P { get; set; void");
 
         [Fact]
         public async Task IncompleteEvent()
@@ -575,34 +586,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task IncompleteOperator()
         {
             // top level operators not supported in script code
-            await AssertTagsOnBracesOrSemicolonsTokensAsync(@"C operator +(C lhs, C rhs) {", Array.Empty<int>(), Options.Regular);
+            await AssertTagsOnBracesOrSemicolonsTokensAsync(
+                @"C operator +(C lhs, C rhs) {",
+                Array.Empty<int>(),
+                Options.Regular
+            );
         }
 
         [Fact]
-        public async Task IncompleteConversionOperator()
-            => await AssertTagsOnBracesOrSemicolonsAsync(@"implicit operator C(int i) {");
+        public async Task IncompleteConversionOperator() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(@"implicit operator C(int i) {");
 
         [Fact]
-        public async Task IncompleteMember()
-            => await AssertTagsOnBracesOrSemicolonsAsync(@"class C { private !C(");
+        public async Task IncompleteMember() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(@"class C { private !C(");
 
         #endregion
 
-        private static async Task AssertTagsOnBracesOrSemicolonsAsync(string contents, params int[] tokenIndices)
+        private static async Task AssertTagsOnBracesOrSemicolonsAsync(
+            string contents,
+            params int[] tokenIndices
+        )
         {
             await AssertTagsOnBracesOrSemicolonsTokensAsync(contents, tokenIndices);
             await AssertTagsOnBracesOrSemicolonsTokensAsync(contents, tokenIndices, Options.Script);
         }
 
-        private static async Task AssertTagsOnBracesOrSemicolonsTokensAsync(string contents, int[] tokenIndices, CSharpParseOptions? options = null)
+        private static async Task AssertTagsOnBracesOrSemicolonsTokensAsync(
+            string contents,
+            int[] tokenIndices,
+            CSharpParseOptions? options = null
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(contents, options);
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
             var root = await document.GetRequiredSyntaxRootAsync(default);
 
-            var lineSeparatorService = Assert.IsType<CSharpLineSeparatorService>(workspace.Services.GetLanguageServices(LanguageNames.CSharp).GetRequiredService<ILineSeparatorService>());
-            var spans = await lineSeparatorService.GetLineSeparatorsAsync(document, root.FullSpan, CancellationToken.None);
-            var tokens = root.DescendantTokens().Where(t => t.Kind() is SyntaxKind.CloseBraceToken or SyntaxKind.SemicolonToken);
+            var lineSeparatorService = Assert.IsType<CSharpLineSeparatorService>(
+                workspace
+                    .Services.GetLanguageServices(LanguageNames.CSharp)
+                    .GetRequiredService<ILineSeparatorService>()
+            );
+            var spans = await lineSeparatorService.GetLineSeparatorsAsync(
+                document,
+                root.FullSpan,
+                CancellationToken.None
+            );
+            var tokens = root.DescendantTokens()
+                .Where(t => t.Kind() is SyntaxKind.CloseBraceToken or SyntaxKind.SemicolonToken);
 
             Assert.Equal(tokenIndices.Length, spans.Count());
 
@@ -613,10 +646,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
 
                 var expectedSpan = expectedToken.Span;
 
-                var message = string.Format("Expected to match curly {0} at span {1}.  Actual span {2}",
-                                            tokenIndices[i],
-                                            expectedSpan,
-                                            span);
+                var message = string.Format(
+                    "Expected to match curly {0} at span {1}.  Actual span {2}",
+                    tokenIndices[i],
+                    expectedSpan,
+                    span
+                );
                 Assert.True(expectedSpan == span, message);
                 ++i;
             }

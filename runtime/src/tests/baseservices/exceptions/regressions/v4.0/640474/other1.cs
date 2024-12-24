@@ -3,6 +3,7 @@
 
 using System;
 
-public class Other {
+public class Other
+{
     public static int field;
 }

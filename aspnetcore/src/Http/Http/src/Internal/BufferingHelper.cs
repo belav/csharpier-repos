@@ -10,22 +10,35 @@ internal static class BufferingHelper
 {
     internal const int DefaultBufferThreshold = 1024 * 30;
 
-    public static HttpRequest EnableRewind(this HttpRequest request, int bufferThreshold = DefaultBufferThreshold, long? bufferLimit = null)
+    public static HttpRequest EnableRewind(
+        this HttpRequest request,
+        int bufferThreshold = DefaultBufferThreshold,
+        long? bufferLimit = null
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
 
         var body = request.Body;
         if (!body.CanSeek)
         {
-            var fileStream = new FileBufferingReadStream(body, bufferThreshold, bufferLimit, AspNetCoreTempDirectory.TempDirectoryFactory);
+            var fileStream = new FileBufferingReadStream(
+                body,
+                bufferThreshold,
+                bufferLimit,
+                AspNetCoreTempDirectory.TempDirectoryFactory
+            );
             request.Body = fileStream;
             request.HttpContext.Response.RegisterForDispose(fileStream);
         }
         return request;
     }
 
-    public static MultipartSection EnableRewind(this MultipartSection section, Action<IDisposable> registerForDispose,
-        int bufferThreshold = DefaultBufferThreshold, long? bufferLimit = null)
+    public static MultipartSection EnableRewind(
+        this MultipartSection section,
+        Action<IDisposable> registerForDispose,
+        int bufferThreshold = DefaultBufferThreshold,
+        long? bufferLimit = null
+    )
     {
         ArgumentNullException.ThrowIfNull(section);
         ArgumentNullException.ThrowIfNull(registerForDispose);
@@ -33,7 +46,12 @@ internal static class BufferingHelper
         var body = section.Body;
         if (!body.CanSeek)
         {
-            var fileStream = new FileBufferingReadStream(body, bufferThreshold, bufferLimit, AspNetCoreTempDirectory.TempDirectoryFactory);
+            var fileStream = new FileBufferingReadStream(
+                body,
+                bufferThreshold,
+                bufferLimit,
+                AspNetCoreTempDirectory.TempDirectoryFactory
+            );
             section.Body = fileStream;
             registerForDispose(fileStream);
         }

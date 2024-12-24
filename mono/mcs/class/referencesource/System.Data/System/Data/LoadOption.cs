@@ -7,12 +7,12 @@
 // <owner current="false" primary="false">jasonzhu</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
-    public enum LoadOption {
-        OverwriteChanges      = 1,
-        PreserveChanges       = 2,
-        Upsert                = 3,
+namespace System.Data
+{
+    public enum LoadOption
+    {
+        OverwriteChanges = 1,
+        PreserveChanges = 2,
+        Upsert = 3,
     }
 }
-

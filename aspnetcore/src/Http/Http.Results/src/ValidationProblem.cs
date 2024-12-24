@@ -13,14 +13,23 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// An <see cref="IResult"/> that on execution will write Problem Details
 /// HTTP API responses based on https://tools.ietf.org/html/rfc7807
 /// </summary>
-public sealed class ValidationProblem : IResult, IEndpointMetadataProvider, IStatusCodeHttpResult, IContentTypeHttpResult, IValueHttpResult, IValueHttpResult<HttpValidationProblemDetails>
+public sealed class ValidationProblem
+    : IResult,
+        IEndpointMetadataProvider,
+        IStatusCodeHttpResult,
+        IContentTypeHttpResult,
+        IValueHttpResult,
+        IValueHttpResult<HttpValidationProblemDetails>
 {
     internal ValidationProblem(HttpValidationProblemDetails problemDetails)
     {
         ArgumentNullException.ThrowIfNull(problemDetails);
         if (problemDetails is { Status: not null and not StatusCodes.Status400BadRequest })
         {
-            throw new ArgumentException($"{nameof(ValidationProblem)} only supports a 400 Bad Request response status code.", nameof(problemDetails));
+            throw new ArgumentException(
+                $"{nameof(ValidationProblem)} only supports a 400 Bad Request response status code.",
+                nameof(problemDetails)
+            );
         }
 
         ProblemDetails = problemDetails;
@@ -34,7 +43,8 @@ public sealed class ValidationProblem : IResult, IEndpointMetadataProvider, ISta
 
     object? IValueHttpResult.Value => ProblemDetails;
 
-    HttpValidationProblemDetails? IValueHttpResult<HttpValidationProblemDetails>.Value => ProblemDetails;
+    HttpValidationProblemDetails? IValueHttpResult<HttpValidationProblemDetails>.Value =>
+        ProblemDetails;
 
     /// <summary>
     /// Gets the value for the <c>Content-Type</c> header: <c>application/problem+json</c>.
@@ -60,18 +70,28 @@ public sealed class ValidationProblem : IResult, IEndpointMetadataProvider, ISta
         httpContext.Response.StatusCode = StatusCode;
 
         return HttpResultsHelper.WriteResultAsJsonAsync(
-                httpContext,
-                logger,
-                value: ProblemDetails,
-                ContentType);
+            httpContext,
+            logger,
+            value: ProblemDetails,
+            ContentType
+        );
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status400BadRequest, typeof(HttpValidationProblemDetails), new[] { "application/problem+json" }));
+        builder.Metadata.Add(
+            new ProducesResponseTypeMetadata(
+                StatusCodes.Status400BadRequest,
+                typeof(HttpValidationProblemDetails),
+                new[] { "application/problem+json" }
+            )
+        );
     }
 }

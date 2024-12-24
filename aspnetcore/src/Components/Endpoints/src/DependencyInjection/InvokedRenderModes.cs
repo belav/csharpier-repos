@@ -17,6 +17,6 @@ internal sealed class InvokedRenderModes
         None,
         Server,
         WebAssembly,
-        ServerAndWebAssembly
+        ServerAndWebAssembly,
     }
 }

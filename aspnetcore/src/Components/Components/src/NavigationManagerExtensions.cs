@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Components;
 /// </summary>
 public static class NavigationManagerExtensions
 {
-    private const string EmptyQueryParameterNameExceptionMessage = "Cannot have empty query parameter names.";
+    private const string EmptyQueryParameterNameExceptionMessage =
+        "Cannot have empty query parameter names.";
 
     private delegate string? QueryParameterFormatter<TValue>(TValue value);
 
@@ -23,7 +24,10 @@ public static class NavigationManagerExtensions
     // to see if the parameter should be excluded from the querystring. Therefore, we will only
     // invoke these formatters for non-null values. We also get the underlying type of any Nullable
     // types before performing lookups in this dictionary.
-    private static readonly Dictionary<Type, QueryParameterFormatter<object>> _queryParameterFormatters = new()
+    private static readonly Dictionary<
+        Type,
+        QueryParameterFormatter<object>
+    > _queryParameterFormatters = new()
     {
         [typeof(string)] = value => Format((string)value)!,
         [typeof(bool)] = value => Format((bool)value),
@@ -38,68 +42,48 @@ public static class NavigationManagerExtensions
         [typeof(long)] = value => Format((long)value),
     };
 
-    private static string? Format(string? value)
-        => value;
+    private static string? Format(string? value) => value;
 
-    private static string Format(bool value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(bool value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(bool? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(bool? value) => value?.ToString(CultureInfo.InvariantCulture);
 
-    private static string Format(DateTime value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(DateTime value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(DateTime? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(DateTime? value) => value?.ToString(CultureInfo.InvariantCulture);
 
-    private static string Format(DateOnly value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(DateOnly value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(DateOnly? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(DateOnly? value) => value?.ToString(CultureInfo.InvariantCulture);
 
-    private static string Format(TimeOnly value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(TimeOnly value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(TimeOnly? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(TimeOnly? value) => value?.ToString(CultureInfo.InvariantCulture);
 
-    private static string Format(decimal value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(decimal value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(decimal? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(decimal? value) => value?.ToString(CultureInfo.InvariantCulture);
 
-    private static string Format(double value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(double value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(double? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(double? value) => value?.ToString(CultureInfo.InvariantCulture);
 
-    private static string Format(float value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(float value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(float? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(float? value) => value?.ToString(CultureInfo.InvariantCulture);
 
-    private static string Format(Guid value)
-        => value.ToString(null, CultureInfo.InvariantCulture);
+    private static string Format(Guid value) => value.ToString(null, CultureInfo.InvariantCulture);
 
-    private static string? Format(Guid? value)
-        => value?.ToString(null, CultureInfo.InvariantCulture);
+    private static string? Format(Guid? value) =>
+        value?.ToString(null, CultureInfo.InvariantCulture);
 
-    private static string Format(int value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(int value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(int? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(int? value) => value?.ToString(CultureInfo.InvariantCulture);
 
-    private static string Format(long value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    private static string Format(long value) => value.ToString(CultureInfo.InvariantCulture);
 
-    private static string? Format(long? value)
-        => value?.ToString(CultureInfo.InvariantCulture);
+    private static string? Format(long? value) => value?.ToString(CultureInfo.InvariantCulture);
 
     // Used for constructing a URI with a new querystring from an existing URI.
     private struct QueryStringBuilder
@@ -111,7 +95,10 @@ public static class NavigationManagerExtensions
 
         public string UriWithQueryString => _builder.ToString();
 
-        public QueryStringBuilder(ReadOnlySpan<char> uriWithoutQueryStringAndHash, int additionalCapacity = 0)
+        public QueryStringBuilder(
+            ReadOnlySpan<char> uriWithoutQueryStringAndHash,
+            int additionalCapacity = 0
+        )
         {
             _builder = new(uriWithoutQueryStringAndHash.Length + additionalCapacity);
             _builder.Append(uriWithoutQueryStringAndHash);
@@ -124,7 +111,9 @@ public static class NavigationManagerExtensions
         {
             if (_hasHash)
             {
-                throw new InvalidOperationException("Cannot append parameter after hash was added.");
+                throw new InvalidOperationException(
+                    "Cannot append parameter after hash was added."
+                );
             }
 
             if (!_hasNewParameters)
@@ -172,7 +161,11 @@ public static class NavigationManagerExtensions
             _formatter = default;
         }
 
-        public QueryParameterSource(string name, IEnumerable<TValue?> values, QueryParameterFormatter<TValue> formatter)
+        public QueryParameterSource(
+            string name,
+            IEnumerable<TValue?> values,
+            QueryParameterFormatter<TValue> formatter
+        )
             : this(name)
         {
             _enumerator = values.GetEnumerator();
@@ -275,8 +268,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, bool value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        bool value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -289,8 +285,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, bool? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        bool? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -299,8 +298,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, DateTime value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        DateTime value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -313,8 +315,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, DateTime? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        DateTime? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -323,8 +328,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, DateOnly value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        DateOnly value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -337,8 +345,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, DateOnly? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        DateOnly? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -347,8 +358,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, TimeOnly value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        TimeOnly value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -361,8 +375,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, TimeOnly? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        TimeOnly? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -371,8 +388,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, decimal value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        decimal value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -385,8 +405,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, decimal? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        decimal? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -395,8 +418,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, double value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        double value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -409,8 +435,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, double? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        double? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -419,8 +448,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, float value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        float value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -433,8 +465,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, float? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        float? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -443,8 +478,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, Guid value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        Guid value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -457,8 +495,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, Guid? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        Guid? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -467,8 +508,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, int value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        int value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -481,8 +525,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, int? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        int? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -491,8 +538,11 @@ public static class NavigationManagerExtensions
     /// <param name="navigationManager">The <see cref="NavigationManager"/>.</param>
     /// <param name="name">The name of the parameter to add or update.</param>
     /// <param name="value">The value of the parameter to add or update.</param>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, long value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        long value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -505,8 +555,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, long? value)
-        => GetUriWithQueryParameter(navigationManager, name, Format(value));
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        long? value
+    ) => GetUriWithQueryParameter(navigationManager, name, Format(value));
 
     /// <summary>
     /// Returns a URI that is constructed by updating <see cref="NavigationManager.Uri"/> with a single parameter
@@ -519,7 +572,11 @@ public static class NavigationManagerExtensions
     /// If <paramref name="value"/> is <c>null</c>, the parameter will be removed if it exists in the URI.
     /// Otherwise, it will be added or updated.
     /// </remarks>
-    public static string GetUriWithQueryParameter(this NavigationManager navigationManager, string name, string? value)
+    public static string GetUriWithQueryParameter(
+        this NavigationManager navigationManager,
+        string name,
+        string? value
+    )
     {
         ArgumentNullException.ThrowIfNull(navigationManager);
 
@@ -543,8 +600,8 @@ public static class NavigationManagerExtensions
     /// <param name="parameters">The values to add, update, or remove.</param>
     public static string GetUriWithQueryParameters(
         this NavigationManager navigationManager,
-        IReadOnlyDictionary<string, object?> parameters)
-        => GetUriWithQueryParameters(navigationManager, navigationManager.Uri, parameters);
+        IReadOnlyDictionary<string, object?> parameters
+    ) => GetUriWithQueryParameters(navigationManager, navigationManager.Uri, parameters);
 
     /// <summary>
     /// Returns a URI constructed from <paramref name="uri"/> except with multiple parameters
@@ -556,16 +613,20 @@ public static class NavigationManagerExtensions
     public static string GetUriWithQueryParameters(
         this NavigationManager navigationManager,
         string uri,
-        IReadOnlyDictionary<string, object?> parameters)
+        IReadOnlyDictionary<string, object?> parameters
+    )
     {
         ArgumentNullException.ThrowIfNull(navigationManager);
         ArgumentNullException.ThrowIfNull(uri);
 
-        if (!TryRebuildExistingQueryFromUri(
-            uri,
-            out var existingQueryStringEnumerable,
-            out var hash,
-            out var newQueryStringBuilder))
+        if (
+            !TryRebuildExistingQueryFromUri(
+                uri,
+                out var existingQueryStringEnumerable,
+                out var hash,
+                out var newQueryStringBuilder
+            )
+        )
         {
             // There was no existing query, so there is no need to allocate a new dictionary to cache
             // encoded parameter values and track which parameters have been added.
@@ -587,7 +648,10 @@ public static class NavigationManagerExtensions
             }
             else
             {
-                newQueryStringBuilder.AppendParameter(pair.EncodedName.Span, pair.EncodedValue.Span);
+                newQueryStringBuilder.AppendParameter(
+                    pair.EncodedName.Span,
+                    pair.EncodedValue.Span
+                );
             }
         }
 
@@ -610,11 +674,14 @@ public static class NavigationManagerExtensions
         var encodedName = Uri.EscapeDataString(name);
         var encodedValue = Uri.EscapeDataString(value);
 
-        if (!TryRebuildExistingQueryFromUri(
-            uri,
-            out var existingQueryStringEnumerable,
-            out var hash,
-            out var newQueryStringBuilder))
+        if (
+            !TryRebuildExistingQueryFromUri(
+                uri,
+                out var existingQueryStringEnumerable,
+                out var hash,
+                out var newQueryStringBuilder
+            )
+        )
         {
             // There was no existing query, so we can generate the new URI.
             newQueryStringBuilder.AppendParameter(encodedName, encodedValue);
@@ -632,7 +699,10 @@ public static class NavigationManagerExtensions
             }
             else
             {
-                newQueryStringBuilder.AppendParameter(pair.EncodedName.Span, pair.EncodedValue.Span);
+                newQueryStringBuilder.AppendParameter(
+                    pair.EncodedName.Span,
+                    pair.EncodedValue.Span
+                );
             }
         }
 
@@ -649,11 +719,14 @@ public static class NavigationManagerExtensions
 
     private static string GetUriWithRemovedQueryParameter(string uri, string name)
     {
-        if (!TryRebuildExistingQueryFromUri(
-            uri,
-            out var existingQueryStringEnumerable,
-            out var hash,
-            out var newQueryStringBuilder))
+        if (
+            !TryRebuildExistingQueryFromUri(
+                uri,
+                out var existingQueryStringEnumerable,
+                out var hash,
+                out var newQueryStringBuilder
+            )
+        )
         {
             // There was no existing query, so the URI remains unchanged.
             return uri;
@@ -666,7 +739,10 @@ public static class NavigationManagerExtensions
         {
             if (!pair.EncodedName.Span.Equals(encodedName, StringComparison.OrdinalIgnoreCase))
             {
-                newQueryStringBuilder.AppendParameter(pair.EncodedName.Span, pair.EncodedValue.Span);
+                newQueryStringBuilder.AppendParameter(
+                    pair.EncodedName.Span,
+                    pair.EncodedValue.Span
+                );
             }
         }
 
@@ -678,11 +754,15 @@ public static class NavigationManagerExtensions
     private static string GetUriWithAppendedQueryParameters(
         string uriWithoutQueryString,
         IReadOnlyDictionary<string, object?> parameters,
-        ReadOnlySpan<char> hash)
+        ReadOnlySpan<char> hash
+    )
     {
         var hashStartIndex = uriWithoutQueryString.IndexOf('#');
 
-        var uriWithoutQueryStringAndHash = hashStartIndex < 0 ? uriWithoutQueryString : uriWithoutQueryString.AsSpan(0, hashStartIndex);
+        var uriWithoutQueryStringAndHash =
+            hashStartIndex < 0
+                ? uriWithoutQueryString
+                : uriWithoutQueryString.AsSpan(0, hashStartIndex);
 
         var builder = new QueryStringBuilder(uriWithoutQueryStringAndHash);
 
@@ -700,10 +780,14 @@ public static class NavigationManagerExtensions
         return builder.UriWithQueryString;
     }
 
-    private static Dictionary<ReadOnlyMemory<char>, QueryParameterSource> CreateParameterSourceDictionary(
-        IReadOnlyDictionary<string, object?> parameters)
+    private static Dictionary<
+        ReadOnlyMemory<char>,
+        QueryParameterSource
+    > CreateParameterSourceDictionary(IReadOnlyDictionary<string, object?> parameters)
     {
-        var parameterSources = new Dictionary<ReadOnlyMemory<char>, QueryParameterSource>(QueryParameterNameComparer.Instance);
+        var parameterSources = new Dictionary<ReadOnlyMemory<char>, QueryParameterSource>(
+            QueryParameterNameComparer.Instance
+        );
 
         foreach (var (name, value) in parameters)
         {
@@ -714,14 +798,18 @@ public static class NavigationManagerExtensions
         return parameterSources;
     }
 
-    private static QueryParameterFormatter<object> GetFormatterFromParameterValueType(Type parameterValueType)
+    private static QueryParameterFormatter<object> GetFormatterFromParameterValueType(
+        Type parameterValueType
+    )
     {
-        var underlyingParameterValueType = Nullable.GetUnderlyingType(parameterValueType) ?? parameterValueType;
+        var underlyingParameterValueType =
+            Nullable.GetUnderlyingType(parameterValueType) ?? parameterValueType;
 
         if (!_queryParameterFormatters.TryGetValue(underlyingParameterValueType, out var formatter))
         {
             throw new InvalidOperationException(
-                $"Cannot format query parameters with values of type '{underlyingParameterValueType}'.");
+                $"Cannot format query parameters with values of type '{underlyingParameterValueType}'."
+            );
         }
 
         return formatter;
@@ -731,27 +819,28 @@ public static class NavigationManagerExtensions
         string uri,
         out QueryStringEnumerable existingQueryStringEnumerable,
         out ReadOnlySpan<char> hash,
-        out QueryStringBuilder newQueryStringBuilder)
+        out QueryStringBuilder newQueryStringBuilder
+    )
     {
         ReadOnlySpan<char> uriWithoutQueryStringAndHash;
 
         var hashStartIndex = uri.IndexOf('#');
         hash = hashStartIndex < 0 ? "" : uri.AsSpan(hashStartIndex);
 
-        var queryStartIndex = (hashStartIndex > 0 ? uri.AsSpan(0, hashStartIndex) : uri).IndexOf('?');
+        var queryStartIndex = (hashStartIndex > 0 ? uri.AsSpan(0, hashStartIndex) : uri).IndexOf(
+            '?'
+        );
 
         if (queryStartIndex < 0)
         {
-
             existingQueryStringEnumerable = default;
             uriWithoutQueryStringAndHash = hashStartIndex < 0 ? uri : uri.AsSpan(0, hashStartIndex);
             newQueryStringBuilder = new(uriWithoutQueryStringAndHash);
             return false;
         }
 
-        var queryLength = hashStartIndex < 0 ?
-            uri.Length - queryStartIndex :
-            hashStartIndex - queryStartIndex;
+        var queryLength =
+            hashStartIndex < 0 ? uri.Length - queryStartIndex : hashStartIndex - queryStartIndex;
 
         var query = uri.AsMemory(queryStartIndex, queryLength);
 

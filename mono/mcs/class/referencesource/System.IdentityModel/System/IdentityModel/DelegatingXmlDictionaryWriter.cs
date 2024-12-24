@@ -9,7 +9,7 @@ namespace System.IdentityModel
     using System.Xml;
 
     /// <summary>
-    /// Class wraps a given writer and delegates all XmlDictionaryWriter calls 
+    /// Class wraps a given writer and delegates all XmlDictionaryWriter calls
     /// to the inner wrapped writer.
     /// </summary>
     public class DelegatingXmlDictionaryWriter : XmlDictionaryWriter
@@ -22,9 +22,7 @@ namespace System.IdentityModel
         /// <summary>
         /// Initializes a new instance of <see cref="DelegatingXmlDictionaryWriter"/>
         /// </summary>
-        protected DelegatingXmlDictionaryWriter()
-        {
-        }
+        protected DelegatingXmlDictionaryWriter() { }
 
         /// <summary>
         /// Initializes the inner writer that this instance wraps.
@@ -55,10 +53,7 @@ namespace System.IdentityModel
         /// </summary>
         protected XmlDictionaryWriter InnerWriter
         {
-            get
-            {
-                return _innerWriter;
-            }
+            get { return _innerWriter; }
         }
 
         /// <summary>
@@ -396,7 +391,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Writes an xmlns namespace declaration. 
+        /// Writes an xmlns namespace declaration.
         /// </summary>
         /// <param name="prefix">The prefix of the namespace declaration.</param>
         /// <param name="namespaceUri">The namespace Uri itself.</param>
@@ -405,7 +400,12 @@ namespace System.IdentityModel
             _innerWriter.WriteXmlnsAttribute(prefix, namespaceUri);
             if (_tracingWriter != null)
             {
-                _tracingWriter.WriteAttributeString(prefix, String.Empty, namespaceUri, String.Empty);
+                _tracingWriter.WriteAttributeString(
+                    prefix,
+                    String.Empty,
+                    namespaceUri,
+                    String.Empty
+                );
             }
         }
 
@@ -425,27 +425,28 @@ namespace System.IdentityModel
         /// </summary>
         public override bool CanCanonicalize
         {
-            get
-            {
-                return _innerWriter.CanCanonicalize;
-            }
+            get { return _innerWriter.CanCanonicalize; }
         }
 
         /// <summary>
-        /// Indicates the start of Canonicalization. Any write operatation following this will canonicalize the data 
+        /// Indicates the start of Canonicalization. Any write operatation following this will canonicalize the data
         /// and will wirte it to the given stream.
         /// </summary>
         /// <param name="stream">Stream to which the canonical stream should be written.</param>
         /// <param name="includeComments">The value indicates if comments written should be canonicalized as well.</param>
-        /// <param name="inclusivePrefixes">Set of prefixes that needs to be included into the canonical stream. The prefixes are defined at 
+        /// <param name="inclusivePrefixes">Set of prefixes that needs to be included into the canonical stream. The prefixes are defined at
         /// the first element that is written to the canonical stream.</param>
-        public override void StartCanonicalization(Stream stream, bool includeComments, string[] inclusivePrefixes)
+        public override void StartCanonicalization(
+            Stream stream,
+            bool includeComments,
+            string[] inclusivePrefixes
+        )
         {
             _innerWriter.StartCanonicalization(stream, includeComments, inclusivePrefixes);
         }
 
         /// <summary>
-        /// Closes a previous Start canonicalization operation. The stream given to the StartCanonicalization is flushed 
+        /// Closes a previous Start canonicalization operation. The stream given to the StartCanonicalization is flushed
         /// and any data written after this call will not be written to the canonical stream.
         /// </summary>
         public override void EndCanonicalization()

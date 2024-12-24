@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.Diagnostics
 {
-
     // This type is the public entrypoint that allows external code to attach the debugger proxy
     // to a given websocket listener. Everything else in this package can be internal.
 
@@ -18,10 +17,20 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         internal MonoProxy MonoProxy { get; }
 
-        public DebuggerProxy(ILoggerFactory loggerFactory, int runtimeId = 0, string loggerId = "", ProxyOptions options = null)
+        public DebuggerProxy(
+            ILoggerFactory loggerFactory,
+            int runtimeId = 0,
+            string loggerId = "",
+            ProxyOptions options = null
+        )
         {
             string suffix = loggerId.Length > 0 ? $"-{loggerId}" : string.Empty;
-            MonoProxy = new MonoProxy(loggerFactory.CreateLogger($"DevToolsProxy{suffix}"), runtimeId, loggerId, options);
+            MonoProxy = new MonoProxy(
+                loggerFactory.CreateLogger($"DevToolsProxy{suffix}"),
+                runtimeId,
+                loggerId,
+                options
+            );
         }
 
         public Task Run(Uri browserUri, WebSocket ideSocket, CancellationTokenSource cts)

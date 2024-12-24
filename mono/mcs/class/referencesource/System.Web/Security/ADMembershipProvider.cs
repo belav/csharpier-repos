@@ -6,55 +6,54 @@
 
 namespace System.Web.Security
 {
-    using  System.Net;
-    using  System.Web;
-    using  System.Text;
-    using  System.Text.RegularExpressions;
-    using  System.Security;
-    using  System.Collections;
-    using  System.Globalization;
-    using  System.Configuration;
-    using  System.DirectoryServices;
-    using  System.DirectoryServices.ActiveDirectory;
-    using  System.DirectoryServices.Protocols;
-    using  System.Web.Hosting;
-    using  System.Security.Cryptography;
-    using  System.Web.Configuration;
-    using  System.Security.Permissions;
-    using  System.Collections.Specialized;
-    using  System.Runtime.InteropServices;
-    using  System.Security.Principal;
-    using  System.Web.DataAccess;
-    using  System.Web.Util;
-    using  System.Reflection;
-    using  System.Configuration.Provider;
-    using  System.Web.Management;
-    
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Configuration.Provider;
+    using System.DirectoryServices;
+    using System.DirectoryServices.ActiveDirectory;
+    using System.DirectoryServices.Protocols;
+    using System.Globalization;
+    using System.Net;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Cryptography;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Web;
+    using System.Web.Configuration;
+    using System.Web.DataAccess;
+    using System.Web.Hosting;
+    using System.Web.Management;
+    using System.Web.Util;
+
     public enum ActiveDirectoryConnectionProtection
     {
-        None		= 0,
-        Ssl			= 1,
-        SignAndSeal	= 2
+        None = 0,
+        Ssl = 1,
+        SignAndSeal = 2,
     }
 
     internal enum DirectoryType
     {
         AD = 0,
         ADAM = 1,
-        Unknown = 2
+        Unknown = 2,
     }
 
     internal enum CredentialsType
     {
         Windows = 0,
-        NonWindows = 1
+        NonWindows = 1,
     }
 
-    [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted=true)]
-    [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+    [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true)]
+    [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
     public class ActiveDirectoryMembershipProvider : MembershipProvider
     {
-
         //
         // keeps track of whether the provider has already been initialized
         //
@@ -64,7 +63,7 @@ namespace System.Web.Security
         // configuration parameters common to all membership providers
         //
 
-        private string  adConnectionString;
+        private string adConnectionString;
         private bool enablePasswordRetrieval = false;
         private bool enablePasswordReset;
         private bool enableSearchMethods;
@@ -77,7 +76,8 @@ namespace System.Web.Security
         private int minRequiredPasswordLength;
         private int minRequiredNonalphanumericCharacters;
         private string passwordStrengthRegularExpression;
-        private MembershipPasswordCompatibilityMode _LegacyPasswordCompatibilityMode = MembershipPasswordCompatibilityMode.Framework20;
+        private MembershipPasswordCompatibilityMode _LegacyPasswordCompatibilityMode =
+            MembershipPasswordCompatibilityMode.Framework20;
         private int? passwordStrengthRegexTimeout;
 
         //
@@ -94,7 +94,7 @@ namespace System.Web.Security
         private string attributeMapPasswordQuestion = null;
         private string attributeMapPasswordAnswer = null;
         private string attributeMapFailedPasswordAnswerCount = null;
-        private string attributeMapFailedPasswordAnswerTime= null;
+        private string attributeMapFailedPasswordAnswerTime = null;
         private string attributeMapFailedPasswordAnswerLockoutTime = null;
 
         //
@@ -111,9 +111,17 @@ namespace System.Web.Security
         //
         // user account flags
         //
-        private const int UF_ACCOUNT_DISABLED =0x2;
-        private const int UF_LOCKOUT=0x10;
-        private readonly DateTime DefaultLastLockoutDate = new DateTime(1754, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private const int UF_ACCOUNT_DISABLED = 0x2;
+        private const int UF_LOCKOUT = 0x10;
+        private readonly DateTime DefaultLastLockoutDate = new DateTime(
+            1754,
+            1,
+            1,
+            0,
+            0,
+            0,
+            DateTimeKind.Utc
+        );
         private const int AD_SALT_SIZE_IN_BYTES = 16;
 
         //
@@ -134,20 +142,24 @@ namespace System.Web.Security
         //
         // password size for autogenerating password
         //
-        private const int PASSWORD_SIZE      = 14;
+        private const int PASSWORD_SIZE = 14;
 
         public override string ApplicationName
         {
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return appName;
             }
             set
             {
-                throw new NotSupportedException(SR.GetString(SR.ADMembership_Setting_ApplicationName_not_supported));
+                throw new NotSupportedException(
+                    SR.GetString(SR.ADMembership_Setting_ApplicationName_not_supported)
+                );
             }
         }
 
@@ -156,7 +168,9 @@ namespace System.Web.Security
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return directoryInfo.ConnectionProtection;
             }
@@ -175,56 +189,66 @@ namespace System.Web.Security
             }
         }
 
-        public override bool  EnablePasswordRetrieval
+        public override bool EnablePasswordRetrieval
         {
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return enablePasswordRetrieval;
-             }
+            }
         }
 
-        public override bool  EnablePasswordReset
+        public override bool EnablePasswordReset
         {
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return enablePasswordReset;
             }
         }
 
-        public bool  EnableSearchMethods
+        public bool EnableSearchMethods
         {
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return enableSearchMethods;
             }
         }
 
-        public override bool  RequiresQuestionAndAnswer
+        public override bool RequiresQuestionAndAnswer
         {
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return requiresQuestionAndAnswer;
             }
         }
 
-        public override bool  RequiresUniqueEmail
+        public override bool RequiresUniqueEmail
         {
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return requiresUniqueEmail;
             }
@@ -235,7 +259,9 @@ namespace System.Web.Security
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return maxInvalidPasswordAttempts;
             }
@@ -246,7 +272,9 @@ namespace System.Web.Security
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return passwordAttemptWindow;
             }
@@ -257,7 +285,9 @@ namespace System.Web.Security
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return passwordAnswerAttemptLockoutDuration;
             }
@@ -268,7 +298,9 @@ namespace System.Web.Security
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return minRequiredPasswordLength;
             }
@@ -279,7 +311,9 @@ namespace System.Web.Security
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return minRequiredNonalphanumericCharacters;
             }
@@ -290,7 +324,9 @@ namespace System.Web.Security
             get
             {
                 if (!initialized)
-                    throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ADMembership_Provider_not_initialized)
+                    );
 
                 return passwordStrengthRegularExpression;
             }
@@ -302,13 +338,16 @@ namespace System.Web.Security
         //           Moreover, once we demand the permission, we should also assert it so that S.DS/S.DS.Protocols does not make the
         //           same demand (if we do not assert then in the case of S.DS/S.DS.Protocols making a full demand we would have two stack walks)
         //
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         public override void Initialize(string name, NameValueCollection config)
         {
             if (System.Web.Hosting.HostingEnvironment.IsHosted)
-                HttpRuntime.CheckAspNetHostingPermission (AspNetHostingPermissionLevel.Low, SR.Feature_not_supported_at_this_level);
+                HttpRuntime.CheckAspNetHostingPermission(
+                    AspNetHostingPermissionLevel.Low,
+                    SR.Feature_not_supported_at_this_level
+                );
 
             if (initialized)
                 return;
@@ -332,7 +371,7 @@ namespace System.Web.Security
             if (string.IsNullOrEmpty(appName))
                 appName = SecUtility.GetDefaultAppName();
 
-            if( appName.Length > 256 )
+            if (appName.Length > 256)
                 throw new ProviderException(SR.GetString(SR.Provider_application_name_too_long));
 
             string temp = config["connectionStringName"];
@@ -353,9 +392,13 @@ namespace System.Web.Security
                 connProtection = "Secure";
             else
             {
-                if ((String.Compare(connProtection, "Secure", StringComparison.Ordinal) != 0) &&
-                    (String.Compare(connProtection, "None", StringComparison.Ordinal) != 0))
-                    throw new ProviderException(SR.GetString(SR.ADMembership_InvalidConnectionProtection, connProtection));
+                if (
+                    (String.Compare(connProtection, "Secure", StringComparison.Ordinal) != 0)
+                    && (String.Compare(connProtection, "None", StringComparison.Ordinal) != 0)
+                )
+                    throw new ProviderException(
+                        SR.GetString(SR.ADMembership_InvalidConnectionProtection, connProtection)
+                    );
             }
 
             //
@@ -365,42 +408,83 @@ namespace System.Web.Security
             //
             string username = config["connectionUsername"];
             if (username != null && username.Length == 0)
-                throw new ProviderException(SR.GetString(SR.ADMembership_Connection_username_must_not_be_empty));
+                throw new ProviderException(
+                    SR.GetString(SR.ADMembership_Connection_username_must_not_be_empty)
+                );
 
             string password = config["connectionPassword"];
             if (password != null && password.Length == 0)
-                throw new ProviderException(SR.GetString(SR.ADMembership_Connection_password_must_not_be_empty));
+                throw new ProviderException(
+                    SR.GetString(SR.ADMembership_Connection_password_must_not_be_empty)
+                );
 
             if ((username != null && password == null) || (password != null && username == null))
-                throw new ProviderException(SR.GetString(SR.ADMembership_Username_and_password_reqd));
+                throw new ProviderException(
+                    SR.GetString(SR.ADMembership_Username_and_password_reqd)
+                );
 
             NetworkCredential credential = new NetworkCredential(username, password);
 
-            int clientSearchTimeout = SecUtility.GetIntValue(config, "clientSearchTimeout", -1, false, 0);
-            int serverSearchTimeout = SecUtility.GetIntValue(config, "serverSearchTimeout", -1, false, 0);
-            TimeUnit timeoutUnit = SecUtility.GetTimeoutUnit(config, "timeoutUnit", TimeUnit.Minutes);
-            passwordStrengthRegexTimeout = SecUtility.GetNullableIntValue(config, "passwordStrengthRegexTimeout");
+            int clientSearchTimeout = SecUtility.GetIntValue(
+                config,
+                "clientSearchTimeout",
+                -1,
+                false,
+                0
+            );
+            int serverSearchTimeout = SecUtility.GetIntValue(
+                config,
+                "serverSearchTimeout",
+                -1,
+                false,
+                0
+            );
+            TimeUnit timeoutUnit = SecUtility.GetTimeoutUnit(
+                config,
+                "timeoutUnit",
+                TimeUnit.Minutes
+            );
+            passwordStrengthRegexTimeout = SecUtility.GetNullableIntValue(
+                config,
+                "passwordStrengthRegexTimeout"
+            );
 
             enableSearchMethods = SecUtility.GetBooleanValue(config, "enableSearchMethods", false);
             requiresUniqueEmail = SecUtility.GetBooleanValue(config, "requiresUniqueEmail", false);
             enablePasswordReset = SecUtility.GetBooleanValue(config, "enablePasswordReset", false);
-            requiresQuestionAndAnswer = SecUtility.GetBooleanValue(config, "requiresQuestionAndAnswer", false);
-            minRequiredPasswordLength = SecUtility.GetIntValue( config, "minRequiredPasswordLength", 7, false, 128 );
-            minRequiredNonalphanumericCharacters = SecUtility.GetIntValue( config, "minRequiredNonalphanumericCharacters", 1, true, 128 );
-          
+            requiresQuestionAndAnswer = SecUtility.GetBooleanValue(
+                config,
+                "requiresQuestionAndAnswer",
+                false
+            );
+            minRequiredPasswordLength = SecUtility.GetIntValue(
+                config,
+                "minRequiredPasswordLength",
+                7,
+                false,
+                128
+            );
+            minRequiredNonalphanumericCharacters = SecUtility.GetIntValue(
+                config,
+                "minRequiredNonalphanumericCharacters",
+                1,
+                true,
+                128
+            );
+
             passwordStrengthRegularExpression = config["passwordStrengthRegularExpression"];
-            if( passwordStrengthRegularExpression != null )
+            if (passwordStrengthRegularExpression != null)
             {
                 passwordStrengthRegularExpression = passwordStrengthRegularExpression.Trim();
-                if( passwordStrengthRegularExpression.Length != 0 )
+                if (passwordStrengthRegularExpression.Length != 0)
                 {
                     try
                     {
-                        Regex regex = new Regex( passwordStrengthRegularExpression );
+                        Regex regex = new Regex(passwordStrengthRegularExpression);
                     }
-                    catch( ArgumentException e )
+                    catch (ArgumentException e)
                     {
-                        throw new ProviderException( e.Message, e );
+                        throw new ProviderException(e.Message, e);
                     }
                 }
             }
@@ -409,8 +493,11 @@ namespace System.Web.Security
                 passwordStrengthRegularExpression = string.Empty;
             }
             if (minRequiredNonalphanumericCharacters > minRequiredPasswordLength)
-                throw new HttpException(SR.GetString(SR.MinRequiredNonalphanumericCharacters_can_not_be_more_than_MinRequiredPasswordLength));
-
+                throw new HttpException(
+                    SR.GetString(
+                        SR.MinRequiredNonalphanumericCharacters_can_not_be_more_than_MinRequiredPasswordLength
+                    )
+                );
 
             using (new ApplicationImpersonationContext())
             {
@@ -419,7 +506,15 @@ namespace System.Web.Security
                 //  connectionprotection if necessary, make sure credentials are valid, container exists and the directory is
                 //  either AD or ADAM)
                 //
-                directoryInfo = new DirectoryInformation(adConnectionString, credential, connProtection, clientSearchTimeout, serverSearchTimeout, enablePasswordReset, timeoutUnit);
+                directoryInfo = new DirectoryInformation(
+                    adConnectionString,
+                    credential,
+                    connProtection,
+                    clientSearchTimeout,
+                    serverSearchTimeout,
+                    enablePasswordReset,
+                    timeoutUnit
+                );
 
                 //
                 // initialize the syntaxes table
@@ -456,7 +551,11 @@ namespace System.Web.Security
                 // get the username/email schema mappings
                 //
                 int maxLength;
-                string attrMapping = GetAttributeMapping(config, "attributeMapUsername", out maxLength);
+                string attrMapping = GetAttributeMapping(
+                    config,
+                    "attributeMapUsername",
+                    out maxLength
+                );
                 if (attrMapping != null)
                 {
                     attributeMapUsername = attrMapping;
@@ -500,39 +599,82 @@ namespace System.Web.Security
                     // AD membership provider does not support password reset without question and answer
                     //
                     if (!requiresQuestionAndAnswer)
-                        throw new ProviderException(SR.GetString(SR.ADMembership_PasswordReset_without_question_not_supported));
+                        throw new ProviderException(
+                            SR.GetString(
+                                SR.ADMembership_PasswordReset_without_question_not_supported
+                            )
+                        );
 
                     //
                     // Other password reset related attributes
                     //
-                    maxInvalidPasswordAttempts = SecUtility.GetIntValue(config, "maxInvalidPasswordAttempts", 5, false, 0);
-                    passwordAttemptWindow = SecUtility.GetIntValue(config, "passwordAttemptWindow", 10, false, 0);
-                    passwordAnswerAttemptLockoutDuration = SecUtility.GetIntValue(config, "passwordAnswerAttemptLockoutDuration", 30, false, 0);
+                    maxInvalidPasswordAttempts = SecUtility.GetIntValue(
+                        config,
+                        "maxInvalidPasswordAttempts",
+                        5,
+                        false,
+                        0
+                    );
+                    passwordAttemptWindow = SecUtility.GetIntValue(
+                        config,
+                        "passwordAttemptWindow",
+                        10,
+                        false,
+                        0
+                    );
+                    passwordAnswerAttemptLockoutDuration = SecUtility.GetIntValue(
+                        config,
+                        "passwordAnswerAttemptLockoutDuration",
+                        30,
+                        false,
+                        0
+                    );
 
                     //
                     // some more schema mappings that must be specified for Password Reset
                     //
-                    attributeMapFailedPasswordAnswerCount = GetAttributeMapping(config, "attributeMapFailedPasswordAnswerCount", out maxLength /* ignored */);
+                    attributeMapFailedPasswordAnswerCount = GetAttributeMapping(
+                        config,
+                        "attributeMapFailedPasswordAnswerCount",
+                        out maxLength /* ignored */
+                    );
                     if (attributeMapFailedPasswordAnswerCount != null)
                         attributesInUse.Add(attributeMapFailedPasswordAnswerCount, null);
 
-                    attributeMapFailedPasswordAnswerTime = GetAttributeMapping(config, "attributeMapFailedPasswordAnswerTime", out maxLength /* ignored */);
+                    attributeMapFailedPasswordAnswerTime = GetAttributeMapping(
+                        config,
+                        "attributeMapFailedPasswordAnswerTime",
+                        out maxLength /* ignored */
+                    );
                     if (attributeMapFailedPasswordAnswerTime != null)
                         attributesInUse.Add(attributeMapFailedPasswordAnswerTime, null);
 
-                    attributeMapFailedPasswordAnswerLockoutTime = GetAttributeMapping(config, "attributeMapFailedPasswordAnswerLockoutTime", out maxLength /* ignored */);
+                    attributeMapFailedPasswordAnswerLockoutTime = GetAttributeMapping(
+                        config,
+                        "attributeMapFailedPasswordAnswerLockoutTime",
+                        out maxLength /* ignored */
+                    );
                     if (attributeMapFailedPasswordAnswerLockoutTime != null)
                         attributesInUse.Add(attributeMapFailedPasswordAnswerLockoutTime, null);
 
-                    if (attributeMapFailedPasswordAnswerCount == null || attributeMapFailedPasswordAnswerTime == null ||
-                            attributeMapFailedPasswordAnswerLockoutTime == null)
-                        throw new ProviderException(SR.GetString(SR.ADMembership_BadPasswordAnswerMappings_not_specified));
+                    if (
+                        attributeMapFailedPasswordAnswerCount == null
+                        || attributeMapFailedPasswordAnswerTime == null
+                        || attributeMapFailedPasswordAnswerLockoutTime == null
+                    )
+                        throw new ProviderException(
+                            SR.GetString(SR.ADMembership_BadPasswordAnswerMappings_not_specified)
+                        );
                 }
 
                 //
                 // Password Q&A mappings
                 //
-                attributeMapPasswordQuestion = GetAttributeMapping(config, "attributeMapPasswordQuestion", out maxLength);
+                attributeMapPasswordQuestion = GetAttributeMapping(
+                    config,
+                    "attributeMapPasswordQuestion",
+                    out maxLength
+                );
                 if (attributeMapPasswordQuestion != null)
                 {
                     if (maxLength != -1 && maxLength < maxPasswordQuestionLength)
@@ -541,7 +683,11 @@ namespace System.Web.Security
                     attributesInUse.Add(attributeMapPasswordQuestion, null);
                 }
 
-                attributeMapPasswordAnswer = GetAttributeMapping(config, "attributeMapPasswordAnswer", out maxLength);
+                attributeMapPasswordAnswer = GetAttributeMapping(
+                    config,
+                    "attributeMapPasswordAnswer",
+                    out maxLength
+                );
                 if (attributeMapPasswordAnswer != null)
                 {
                     if (maxLength != -1 && maxLength < maxPasswordAnswerLength)
@@ -556,7 +702,11 @@ namespace System.Web.Security
                     // We also need to check that the password question and answer attributes are mapped
                     //
                     if (attributeMapPasswordQuestion == null || attributeMapPasswordAnswer == null)
-                        throw new ProviderException(SR.GetString(SR.ADMembership_PasswordQuestionAnswerMapping_not_specified));
+                        throw new ProviderException(
+                            SR.GetString(
+                                SR.ADMembership_PasswordQuestionAnswerMapping_not_specified
+                            )
+                        );
                 }
 
                 //
@@ -567,7 +717,10 @@ namespace System.Web.Security
                 if (directoryInfo.DirectoryType == DirectoryType.ADAM)
                     authTypeForValidation = AuthType.Basic;
                 else
-                    authTypeForValidation = directoryInfo.GetLdapAuthenticationTypes(directoryInfo.ConnectionProtection, CredentialsType.NonWindows);
+                    authTypeForValidation = directoryInfo.GetLdapAuthenticationTypes(
+                        directoryInfo.ConnectionProtection,
+                        CredentialsType.NonWindows
+                    );
 
                 if (directoryInfo.DirectoryType == DirectoryType.AD)
                 {
@@ -582,7 +735,6 @@ namespace System.Web.Security
                     // and if the username is mapped to samAccountName then we need to append the domain name in the username for reliable validation
                     //
                     directoryInfo.InitializeDomainAndForestName();
-
                 }
             }
 
@@ -593,7 +745,8 @@ namespace System.Web.Security
 
             temp = config["passwordCompatMode"];
             if (!string.IsNullOrEmpty(temp))
-                _LegacyPasswordCompatibilityMode = (MembershipPasswordCompatibilityMode) Enum.Parse(typeof(MembershipPasswordCompatibilityMode), temp);
+                _LegacyPasswordCompatibilityMode = (MembershipPasswordCompatibilityMode)
+                    Enum.Parse(typeof(MembershipPasswordCompatibilityMode), temp);
 
             config.Remove("name");
             config.Remove("applicationName");
@@ -628,40 +781,60 @@ namespace System.Web.Security
             {
                 string attribUnrecognized = config.GetKey(0);
                 if (!String.IsNullOrEmpty(attribUnrecognized))
-                    throw new ProviderException(SR.GetString(SR.Provider_unrecognized_attribute, attribUnrecognized));
+                    throw new ProviderException(
+                        SR.GetString(SR.Provider_unrecognized_attribute, attribUnrecognized)
+                    );
             }
 
             initialized = true;
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
-        public override MembershipUser CreateUser(string username,
-                                                        string password,
-                                                        string email,
-                                                        string passwordQuestion,
-                                                        string passwordAnswer,
-                                                        bool   isApproved,
-                                                        object providerUserKey,
-                                                        out    MembershipCreateStatus status)
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+        public override MembershipUser CreateUser(
+            string username,
+            string password,
+            string email,
+            string passwordQuestion,
+            string passwordAnswer,
+            bool isApproved,
+            object providerUserKey,
+            out MembershipCreateStatus status
+        )
         {
-            status = (MembershipCreateStatus) 0;
+            status = (MembershipCreateStatus)0;
             MembershipUser user = null;
 
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
             if (providerUserKey != null)
-                throw new NotSupportedException(SR.GetString(SR.ADMembership_Setting_UserId_not_supported));
+                throw new NotSupportedException(
+                    SR.GetString(SR.ADMembership_Setting_UserId_not_supported)
+                );
 
             if ((passwordQuestion != null) && (attributeMapPasswordQuestion == null))
-                throw new NotSupportedException(SR.GetString(SR.ADMembership_PasswordQ_not_supported));
+                throw new NotSupportedException(
+                    SR.GetString(SR.ADMembership_PasswordQ_not_supported)
+                );
 
             if ((passwordAnswer != null) && (attributeMapPasswordAnswer == null))
-                throw new NotSupportedException(SR.GetString(SR.ADMembership_PasswordA_not_supported));
+                throw new NotSupportedException(
+                    SR.GetString(SR.ADMembership_PasswordA_not_supported)
+                );
 
-            if(!SecUtility.ValidateParameter(ref username, true, true, true, maxUsernameLengthForCreation))
+            if (
+                !SecUtility.ValidateParameter(
+                    ref username,
+                    true,
+                    true,
+                    true,
+                    maxUsernameLengthForCreation
+                )
+            )
             {
                 status = MembershipCreateStatus.InvalidUserName;
                 return null;
@@ -676,26 +849,50 @@ namespace System.Web.Security
                 return null;
             }
 
-            if(!ValidatePassword(password, maxPasswordLength))
+            if (!ValidatePassword(password, maxPasswordLength))
             {
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
 
-            if(!SecUtility.ValidateParameter(ref email, RequiresUniqueEmail, true, false, maxEmailLength))
+            if (
+                !SecUtility.ValidateParameter(
+                    ref email,
+                    RequiresUniqueEmail,
+                    true,
+                    false,
+                    maxEmailLength
+                )
+            )
             {
                 status = MembershipCreateStatus.InvalidEmail;
                 return null;
             }
 
-            if(!SecUtility.ValidateParameter(ref passwordQuestion, RequiresQuestionAndAnswer, true, false, maxPasswordQuestionLength))
+            if (
+                !SecUtility.ValidateParameter(
+                    ref passwordQuestion,
+                    RequiresQuestionAndAnswer,
+                    true,
+                    false,
+                    maxPasswordQuestionLength
+                )
+            )
             {
                 status = MembershipCreateStatus.InvalidQuestion;
                 return null;
             }
 
             // validate the parameter before encoding the password answer
-            if(!SecUtility.ValidateParameter(ref passwordAnswer, RequiresQuestionAndAnswer, true, false, maxPasswordAnswerLength))
+            if (
+                !SecUtility.ValidateParameter(
+                    ref passwordAnswer,
+                    RequiresQuestionAndAnswer,
+                    true,
+                    false,
+                    maxPasswordAnswerLength
+                )
+            )
             {
                 status = MembershipCreateStatus.InvalidAnswer;
                 return null;
@@ -707,7 +904,10 @@ namespace System.Web.Security
                 encodedPasswordAnswer = Encrypt(passwordAnswer);
 
                 // check length of encoded password answer
-                if (maxPasswordAnswerLength > 0 && encodedPasswordAnswer.Length > maxPasswordAnswerLength)
+                if (
+                    maxPasswordAnswerLength > 0
+                    && encodedPasswordAnswer.Length > maxPasswordAnswerLength
+                )
                 {
                     status = MembershipCreateStatus.InvalidAnswer;
                     return null;
@@ -716,7 +916,7 @@ namespace System.Web.Security
             else
                 encodedPasswordAnswer = passwordAnswer;
 
-            if( password.Length < MinRequiredPasswordLength )
+            if (password.Length < MinRequiredPasswordLength)
             {
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
@@ -724,23 +924,30 @@ namespace System.Web.Security
 
             int count = 0;
 
-            for( int i = 0; i < password.Length; i++ )
+            for (int i = 0; i < password.Length; i++)
             {
-                if( !char.IsLetterOrDigit( password, i ) )
+                if (!char.IsLetterOrDigit(password, i))
                 {
                     count++;
                 }
             }
 
-            if( count < MinRequiredNonAlphanumericCharacters )
+            if (count < MinRequiredNonAlphanumericCharacters)
             {
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
 
-            if( PasswordStrengthRegularExpression.Length > 0 )
+            if (PasswordStrengthRegularExpression.Length > 0)
             {
-                if( !RegexUtil.IsMatch( password, PasswordStrengthRegularExpression, RegexOptions.None, passwordStrengthRegexTimeout ) )
+                if (
+                    !RegexUtil.IsMatch(
+                        password,
+                        PasswordStrengthRegularExpression,
+                        RegexOptions.None,
+                        passwordStrengthRegexTimeout
+                    )
+                )
                 {
                     status = MembershipCreateStatus.InvalidPassword;
                     return null;
@@ -750,7 +957,7 @@ namespace System.Web.Security
             ValidatePasswordEventArgs e = new ValidatePasswordEventArgs(username, password, true);
             OnValidatingPassword(e);
 
-            if(e.Cancel)
+            if (e.Cancel)
             {
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
@@ -761,7 +968,11 @@ namespace System.Web.Security
                 //
                 // Get the directory entry for the container and create a user object under it
                 //
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.CreationContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.CreationContainerDN,
+                    true /* revertImpersonation */
+                );
 
                 DirectoryEntry containerEntry = null;
                 DirectoryEntry userEntry = null;
@@ -775,7 +986,10 @@ namespace System.Web.Security
                     //
                     // we set the username as the cn
                     //
-                    userEntry = containerEntry.Children.Add(GetEscapedRdn("CN=" + username), "user");
+                    userEntry = containerEntry.Children.Add(
+                        GetEscapedRdn("CN=" + username),
+                        "user"
+                    );
 
                     //
                     // if we are talking to Active Directory
@@ -784,7 +998,7 @@ namespace System.Web.Security
                     //
                     if (directoryInfo.DirectoryType == DirectoryType.AD)
                     {
-                        string sAMAccountName= null;
+                        string sAMAccountName = null;
                         bool setSAMAccountName = false;
 
                         if (usernameIsSAMAccountName)
@@ -794,7 +1008,9 @@ namespace System.Web.Security
                         }
                         else
                         {
-                            int dcLevel = GetDomainControllerLevel(containerEntry.Options.GetCurrentServerName());
+                            int dcLevel = GetDomainControllerLevel(
+                                containerEntry.Options.GetCurrentServerName()
+                            );
 
                             if (dcLevel != 2)
                             {
@@ -814,7 +1030,10 @@ namespace System.Web.Security
                     //
                     if (usernameIsUPN)
                     {
-                        if (directoryInfo.DirectoryType == DirectoryType.AD && !IsUpnUnique(username))
+                        if (
+                            directoryInfo.DirectoryType == DirectoryType.AD
+                            && !IsUpnUnique(username)
+                        )
                         {
                             status = MembershipCreateStatus.DuplicateUserName;
                             return null;
@@ -828,7 +1047,15 @@ namespace System.Web.Security
                     //
                     if (email != null)
                     {
-                        if (RequiresUniqueEmail && !IsEmailUnique(containerEntry, username, email, false /* existing */))
+                        if (
+                            RequiresUniqueEmail
+                            && !IsEmailUnique(
+                                containerEntry,
+                                username,
+                                email,
+                                false /* existing */
+                            )
+                        )
                         {
                             status = MembershipCreateStatus.DuplicateEmail;
                             return null;
@@ -840,7 +1067,8 @@ namespace System.Web.Security
                         userEntry.Properties[attributeMapPasswordQuestion].Value = passwordQuestion;
 
                     if (passwordAnswer != null)
-                        userEntry.Properties[attributeMapPasswordAnswer].Value = encodedPasswordAnswer;
+                        userEntry.Properties[attributeMapPasswordAnswer].Value =
+                            encodedPasswordAnswer;
 
                     //
                     // commit the user object
@@ -851,19 +1079,26 @@ namespace System.Web.Security
                     }
                     catch (COMException e1)
                     {
-                        if ((e1.ErrorCode == unchecked((int) 0x80071392)) || (e1.ErrorCode == unchecked((int) 0x8007200d)))
+                        if (
+                            (e1.ErrorCode == unchecked((int)0x80071392))
+                            || (e1.ErrorCode == unchecked((int)0x8007200d))
+                        )
                         {
                             status = MembershipCreateStatus.DuplicateUserName;
                             return null;
                         }
-                        else if ((e1.ErrorCode == unchecked((int) 0x8007001f)) && (e1 is DirectoryServicesCOMException))
+                        else if (
+                            (e1.ErrorCode == unchecked((int)0x8007001f))
+                            && (e1 is DirectoryServicesCOMException)
+                        )
                         {
                             //
                             // this error corresponds to LDAP_OTHER
                             // if username was mapped to sAMAccountName and the name is too long
                             // then the extended error should be 1315 (ERROR_INVALID_ACCOUNT_NAME)
                             //
-                            DirectoryServicesCOMException dsce = e1 as DirectoryServicesCOMException;
+                            DirectoryServicesCOMException dsce =
+                                e1 as DirectoryServicesCOMException;
                             if (dsce.ExtendedError == 1315)
                             {
                                 status = MembershipCreateStatus.InvalidUserName;
@@ -886,19 +1121,23 @@ namespace System.Web.Security
                         //
                         // Set the password
                         //
-                        userEntry.Invoke("SetPassword", new object[]{ password });
+                        userEntry.Invoke("SetPassword", new object[] { password });
 
                         //
                         // if the user is approved then we need to enable the account (disabled dy default)
                         //
                         if (isApproved)
                         {
-                            if (directoryInfo.DirectoryType ==  DirectoryType.AD)
+                            if (directoryInfo.DirectoryType == DirectoryType.AD)
                             {
-                                const int UF_ACCOUNT_DISABLED =0x2;
+                                const int UF_ACCOUNT_DISABLED = 0x2;
                                 const int UF_PASSWD_NOTREQD = 0x20;
 
-                                int val = (int)PropertyManager.GetPropertyValue(userEntry, "userAccountControl");
+                                int val = (int)
+                                    PropertyManager.GetPropertyValue(
+                                        userEntry,
+                                        "userAccountControl"
+                                    );
                                 val &= ~(UF_ACCOUNT_DISABLED | UF_PASSWD_NOTREQD);
                                 userEntry.Properties["userAccountControl"].Value = val;
                             }
@@ -915,7 +1154,7 @@ namespace System.Web.Security
                             // For ADAM the user may be created as enabled in some cases
                             // so we need to explicitly disable it
                             //
-                            if (directoryInfo.DirectoryType ==  DirectoryType.ADAM)
+                            if (directoryInfo.DirectoryType == DirectoryType.ADAM)
                             {
                                 userEntry.Properties["msDS-UserAccountDisabled"].Value = true;
                                 userEntry.CommitChanges();
@@ -928,8 +1167,19 @@ namespace System.Web.Security
                         //
                         if (directoryInfo.DirectoryType == DirectoryType.ADAM)
                         {
-                            DirectoryEntry readersEntry = new DirectoryEntry(directoryInfo.GetADsPath("CN=Readers,CN=Roles," + directoryInfo.ADAMPartitionDN), directoryInfo.GetUsername(), directoryInfo.GetPassword(), directoryInfo.AuthenticationTypes);
-                            readersEntry.Properties["member"].Add(PropertyManager.GetPropertyValue(userEntry, "distinguishedName"));
+                            DirectoryEntry readersEntry = new DirectoryEntry(
+                                directoryInfo.GetADsPath(
+                                    "CN=Readers,CN=Roles," + directoryInfo.ADAMPartitionDN
+                                ),
+                                directoryInfo.GetUsername(),
+                                directoryInfo.GetPassword(),
+                                directoryInfo.AuthenticationTypes
+                            );
+                            readersEntry
+                                .Properties["member"]
+                                .Add(
+                                    PropertyManager.GetPropertyValue(userEntry, "distinguishedName")
+                                );
                             readersEntry.CommitChanges();
                         }
                     }
@@ -953,14 +1203,19 @@ namespace System.Web.Security
 
                         if (tie.InnerException is COMException)
                         {
-                            COMException ce = (COMException) tie.InnerException;
+                            COMException ce = (COMException)tie.InnerException;
                             int errorCode = ce.ErrorCode;
 
                             //
                             // if the exception is due to password not meeting complexity requirements, then return
                             // status as InvalidPassword
                             //
-                            if ((errorCode == unchecked((int) 0x800708c5)) || (errorCode == unchecked((int) 0x8007202f)) || (errorCode == unchecked((int) 0x8007052d)) || (errorCode == unchecked((int) 0x8007052f)))
+                            if (
+                                (errorCode == unchecked((int)0x800708c5))
+                                || (errorCode == unchecked((int)0x8007202f))
+                                || (errorCode == unchecked((int)0x8007052d))
+                                || (errorCode == unchecked((int)0x8007052f))
+                            )
                             {
                                 status = MembershipCreateStatus.InvalidPassword;
                                 return null;
@@ -969,8 +1224,15 @@ namespace System.Web.Security
                             // connection could not be setup for changing the password and ADSI is falling back to kerberos which does not work for ADAM
                             // so we will provide a clearer exception
                             //
-                            else if ((errorCode == unchecked((int) 0x8000500d) && (directoryInfo.DirectoryType == DirectoryType.ADAM)))
-                                throw new ProviderException(SR.GetString(SR.ADMembership_No_secure_conn_for_password));
+                            else if (
+                                (
+                                    errorCode == unchecked((int)0x8000500d)
+                                    && (directoryInfo.DirectoryType == DirectoryType.ADAM)
+                                )
+                            )
+                                throw new ProviderException(
+                                    SR.GetString(SR.ADMembership_No_secure_conn_for_password)
+                                );
                             else
                                 throw;
                         }
@@ -984,7 +1246,16 @@ namespace System.Web.Security
                     DirectoryEntry dummyEntry = null;
                     bool dummyFlag = false;
                     string dummyString;
-                    user = FindUser(userEntry, "(objectClass=*)", System.DirectoryServices.SearchScope.Base, false /*retrieveSAMAccountName */, out dummyEntry, out dummyFlag, out dummyString);
+                    user = FindUser(
+                        userEntry,
+                        "(objectClass=*)",
+                        System.DirectoryServices.SearchScope.Base,
+                        false /*retrieveSAMAccountName */
+                        ,
+                        out dummyEntry,
+                        out dummyFlag,
+                        out dummyString
+                    );
                 }
                 finally
                 {
@@ -1005,40 +1276,53 @@ namespace System.Web.Security
             return user;
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
-        public override bool ChangePasswordQuestionAndAnswer(string username,
-                                                        string password,
-                                                        string newPasswordQuestion,
-                                                        string newPasswordAnswer)
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+        public override bool ChangePasswordQuestionAndAnswer(
+            string username,
+            string password,
+            string newPasswordQuestion,
+            string newPasswordAnswer
+        )
         {
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
             //
             // if there are no mappings for password question and answer, we should throw a NotSupportedException
             //
             if ((newPasswordQuestion != null) && (attributeMapPasswordQuestion == null))
-                throw new NotSupportedException(SR.GetString(SR.ADMembership_PasswordQ_not_supported));
+                throw new NotSupportedException(
+                    SR.GetString(SR.ADMembership_PasswordQ_not_supported)
+                );
 
             if ((newPasswordAnswer != null) && (attributeMapPasswordAnswer == null))
-                throw new NotSupportedException(SR.GetString(SR.ADMembership_PasswordA_not_supported));
+                throw new NotSupportedException(
+                    SR.GetString(SR.ADMembership_PasswordA_not_supported)
+                );
 
-
-            CheckUserName( ref username, maxUsernameLength, "username" );
+            CheckUserName(ref username, maxUsernameLength, "username");
             CheckPassword(password, maxPasswordLength, "password");
 
             SecUtility.CheckParameter(
-                            ref newPasswordQuestion,
-                            RequiresQuestionAndAnswer,
-                            true,
-                            false,
-                            maxPasswordQuestionLength,
-                            "newPasswordQuestion" );
+                ref newPasswordQuestion,
+                RequiresQuestionAndAnswer,
+                true,
+                false,
+                maxPasswordQuestionLength,
+                "newPasswordQuestion"
+            );
 
             // validate the parameter before encoding the password answer
-            CheckPasswordAnswer(ref newPasswordAnswer, RequiresQuestionAndAnswer, maxPasswordAnswerLength, "newPasswordAnswer");
+            CheckPasswordAnswer(
+                ref newPasswordAnswer,
+                RequiresQuestionAndAnswer,
+                maxPasswordAnswerLength,
+                "newPasswordAnswer"
+            );
 
             string encodedPasswordAnswer;
             if (!string.IsNullOrEmpty(newPasswordAnswer))
@@ -1046,15 +1330,25 @@ namespace System.Web.Security
                 encodedPasswordAnswer = Encrypt(newPasswordAnswer);
 
                 // check length of encoded password answer
-                if (maxPasswordAnswerLength > 0 && encodedPasswordAnswer.Length > maxPasswordAnswerLength)
-                    throw new ArgumentException(SR.GetString(SR.ADMembership_Parameter_too_long, "newPasswordAnswer"), "newPasswordAnswer");
+                if (
+                    maxPasswordAnswerLength > 0
+                    && encodedPasswordAnswer.Length > maxPasswordAnswerLength
+                )
+                    throw new ArgumentException(
+                        SR.GetString(SR.ADMembership_Parameter_too_long, "newPasswordAnswer"),
+                        "newPasswordAnswer"
+                    );
             }
             else
                 encodedPasswordAnswer = newPasswordAnswer;
 
             try
             {
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
                 DirectoryEntry userEntry = null;
                 bool resetBadPasswordAnswerAttributes = false;
@@ -1071,15 +1365,39 @@ namespace System.Web.Security
                         //           while getting the user object and use that for authenticating the user.
                         //
                         MembershipUser user = null;
-                        if ((directoryInfo.DirectoryType == DirectoryType.AD) && (usernameIsUPN) && (username.IndexOf('@') == -1))
+                        if (
+                            (directoryInfo.DirectoryType == DirectoryType.AD)
+                            && (usernameIsUPN)
+                            && (username.IndexOf('@') == -1)
+                        )
                         {
                             string sAMAccountName = null;
-                            user = FindUserAndSAMAccountName(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out userEntry, out resetBadPasswordAnswerAttributes, out sAMAccountName);
-                            usernameForAuthentication = directoryInfo.DomainName + "\\" + sAMAccountName;
+                            user = FindUserAndSAMAccountName(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out userEntry,
+                                out resetBadPasswordAnswerAttributes,
+                                out sAMAccountName
+                            );
+                            usernameForAuthentication =
+                                directoryInfo.DomainName + "\\" + sAMAccountName;
                         }
                         else
                         {
-                            user = FindUser(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out userEntry, out resetBadPasswordAnswerAttributes);
+                            user = FindUser(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out userEntry,
+                                out resetBadPasswordAnswerAttributes
+                            );
                             usernameForAuthentication = username;
                         }
 
@@ -1094,22 +1412,41 @@ namespace System.Web.Security
                         //
                         if (user.IsLockedOut)
                             return false;
-
                     }
                     else
                     {
                         //
                         // get the user's directory entry
                         //
-                        if ((directoryInfo.DirectoryType == DirectoryType.AD) && (usernameIsUPN) && (username.IndexOf('@') == -1))
+                        if (
+                            (directoryInfo.DirectoryType == DirectoryType.AD)
+                            && (usernameIsUPN)
+                            && (username.IndexOf('@') == -1)
+                        )
                         {
                             string sAMAccountName = null;
-                            userEntry = FindUserEntryAndSAMAccountName(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out sAMAccountName);
-                            usernameForAuthentication = directoryInfo.DomainName + "\\" + sAMAccountName;
+                            userEntry = FindUserEntryAndSAMAccountName(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out sAMAccountName
+                            );
+                            usernameForAuthentication =
+                                directoryInfo.DomainName + "\\" + sAMAccountName;
                         }
                         else
                         {
-                            userEntry = FindUserEntry(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")");
+                            userEntry = FindUserEntry(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")"
+                            );
                             usernameForAuthentication = username;
                         }
 
@@ -1140,23 +1477,30 @@ namespace System.Web.Security
                     if (newPasswordQuestion == null)
                     {
                         // set it to null only if it already exists
-                        if ((attributeMapPasswordQuestion != null) && (userEntry.Properties.Contains(attributeMapPasswordQuestion)))
+                        if (
+                            (attributeMapPasswordQuestion != null)
+                            && (userEntry.Properties.Contains(attributeMapPasswordQuestion))
+                        )
                             userEntry.Properties[attributeMapPasswordQuestion].Clear();
                     }
                     else
-                        userEntry.Properties[attributeMapPasswordQuestion].Value = newPasswordQuestion;
+                        userEntry.Properties[attributeMapPasswordQuestion].Value =
+                            newPasswordQuestion;
 
                     if (newPasswordAnswer == null)
                     {
                         // set it to null only if it already exists
-                        if ((attributeMapPasswordAnswer != null) && (userEntry.Properties.Contains(attributeMapPasswordAnswer)))
+                        if (
+                            (attributeMapPasswordAnswer != null)
+                            && (userEntry.Properties.Contains(attributeMapPasswordAnswer))
+                        )
                             userEntry.Properties[attributeMapPasswordAnswer].Clear();
                     }
                     else
-                        userEntry.Properties[attributeMapPasswordAnswer].Value = encodedPasswordAnswer;
+                        userEntry.Properties[attributeMapPasswordAnswer].Value =
+                            encodedPasswordAnswer;
 
                     userEntry.CommitChanges();
-
                 }
                 finally
                 {
@@ -1184,72 +1528,101 @@ namespace System.Web.Security
             //
             // ADMembership Provider does not support password retrieval
             //
-            throw new NotSupportedException(SR.GetString(SR.ADMembership_PasswordRetrieval_not_supported_AD));
+            throw new NotSupportedException(
+                SR.GetString(SR.ADMembership_PasswordRetrieval_not_supported_AD)
+            );
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
-        public override bool ChangePassword(string username,
-                                                        string oldPassword,
-                                                        string newPassword)
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+        public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
-            CheckUserName(ref username, maxUsernameLength, "username" );
+            CheckUserName(ref username, maxUsernameLength, "username");
 
             CheckPassword(oldPassword, maxPasswordLength, "oldPassword");
 
             CheckPassword(newPassword, maxPasswordLength, "newPassword");
 
-            if( newPassword.Length < MinRequiredPasswordLength )
+            if (newPassword.Length < MinRequiredPasswordLength)
             {
-                throw new ArgumentException(SR.GetString(SR.Password_too_short,
-                              "newPassword",
-                              MinRequiredPasswordLength.ToString(CultureInfo.InvariantCulture)));
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Password_too_short,
+                        "newPassword",
+                        MinRequiredPasswordLength.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
             }
 
             int count = 0;
 
-            for( int i = 0; i < newPassword.Length; i++ )
+            for (int i = 0; i < newPassword.Length; i++)
             {
-                if( !char.IsLetterOrDigit( newPassword, i ) )
+                if (!char.IsLetterOrDigit(newPassword, i))
                 {
                     count++;
                 }
             }
 
-            if( count < MinRequiredNonAlphanumericCharacters )
+            if (count < MinRequiredNonAlphanumericCharacters)
             {
-                throw new ArgumentException(SR.GetString(SR.Password_need_more_non_alpha_numeric_chars,
-                              "newPassword",
-                              MinRequiredNonAlphanumericCharacters.ToString(CultureInfo.InvariantCulture)));
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Password_need_more_non_alpha_numeric_chars,
+                        "newPassword",
+                        MinRequiredNonAlphanumericCharacters.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
             }
 
-            if( PasswordStrengthRegularExpression.Length > 0 )
+            if (PasswordStrengthRegularExpression.Length > 0)
             {
-                if( !RegexUtil.IsMatch( newPassword, PasswordStrengthRegularExpression, RegexOptions.None, passwordStrengthRegexTimeout ) )
+                if (
+                    !RegexUtil.IsMatch(
+                        newPassword,
+                        PasswordStrengthRegularExpression,
+                        RegexOptions.None,
+                        passwordStrengthRegexTimeout
+                    )
+                )
                 {
-                    throw new ArgumentException(SR.GetString(SR.Password_does_not_match_regular_expression,
-                                                             "newPassword"));
+                    throw new ArgumentException(
+                        SR.GetString(SR.Password_does_not_match_regular_expression, "newPassword")
+                    );
                 }
             }
 
-            ValidatePasswordEventArgs e = new ValidatePasswordEventArgs( username, newPassword, false );
+            ValidatePasswordEventArgs e = new ValidatePasswordEventArgs(
+                username,
+                newPassword,
+                false
+            );
             OnValidatingPassword(e);
 
-            if(e.Cancel)
+            if (e.Cancel)
             {
-                if(e.FailureInformation != null)
+                if (e.FailureInformation != null)
                     throw e.FailureInformation;
                 else
-                    throw new ArgumentException(SR.GetString(SR.Membership_Custom_Password_Validation_Failure), "newPassword");
+                    throw new ArgumentException(
+                        SR.GetString(SR.Membership_Custom_Password_Validation_Failure),
+                        "newPassword"
+                    );
             }
 
             try
             {
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
                 DirectoryEntry userEntry = null;
                 bool resetBadPasswordAnswerAttributes = false;
@@ -1267,15 +1640,39 @@ namespace System.Web.Security
                         //           while getting the user object and use that for changing the password.
                         //
                         MembershipUser user = null;
-                        if ((directoryInfo.DirectoryType == DirectoryType.AD) && (usernameIsUPN) && (username.IndexOf('@') == -1))
+                        if (
+                            (directoryInfo.DirectoryType == DirectoryType.AD)
+                            && (usernameIsUPN)
+                            && (username.IndexOf('@') == -1)
+                        )
                         {
                             string sAMAccountName = null;
-                            user = FindUserAndSAMAccountName(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out userEntry, out resetBadPasswordAnswerAttributes, out sAMAccountName);
-                            usernameForAuthentication = directoryInfo.DomainName + "\\" + sAMAccountName;
+                            user = FindUserAndSAMAccountName(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out userEntry,
+                                out resetBadPasswordAnswerAttributes,
+                                out sAMAccountName
+                            );
+                            usernameForAuthentication =
+                                directoryInfo.DomainName + "\\" + sAMAccountName;
                         }
                         else
                         {
-                            user = FindUser(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out userEntry, out resetBadPasswordAnswerAttributes);
+                            user = FindUser(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out userEntry,
+                                out resetBadPasswordAnswerAttributes
+                            );
                             usernameForAuthentication = username;
                         }
 
@@ -1296,15 +1693,35 @@ namespace System.Web.Security
                         //
                         // get the user's directory entry (Also get sAMAccountName if needed)
                         //
-                        if ((directoryInfo.DirectoryType == DirectoryType.AD) && (usernameIsUPN) && (username.IndexOf('@') == -1))
+                        if (
+                            (directoryInfo.DirectoryType == DirectoryType.AD)
+                            && (usernameIsUPN)
+                            && (username.IndexOf('@') == -1)
+                        )
                         {
                             string sAMAccountName = null;
-                            userEntry = FindUserEntryAndSAMAccountName(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out sAMAccountName);
-                            usernameForAuthentication = directoryInfo.DomainName + "\\" + sAMAccountName;
+                            userEntry = FindUserEntryAndSAMAccountName(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out sAMAccountName
+                            );
+                            usernameForAuthentication =
+                                directoryInfo.DomainName + "\\" + sAMAccountName;
                         }
                         else
                         {
-                            userEntry = FindUserEntry(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")");
+                            userEntry = FindUserEntry(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")"
+                            );
                             usernameForAuthentication = username;
                         }
 
@@ -1318,9 +1735,17 @@ namespace System.Web.Security
                     //
                     // associate the user's context with the directory entry
                     //
-                    userEntry.Username = (usernameIsSAMAccountName) ? directoryInfo.DomainName + "\\" + usernameForAuthentication : usernameForAuthentication;
+                    userEntry.Username =
+                        (usernameIsSAMAccountName)
+                            ? directoryInfo.DomainName + "\\" + usernameForAuthentication
+                            : usernameForAuthentication;
                     userEntry.Password = oldPassword;
-                    userEntry.AuthenticationType = directoryInfo.GetAuthenticationTypes(directoryInfo.ConnectionProtection, (directoryInfo.DirectoryType == DirectoryType.AD) ? CredentialsType.Windows : CredentialsType.NonWindows);
+                    userEntry.AuthenticationType = directoryInfo.GetAuthenticationTypes(
+                        directoryInfo.ConnectionProtection,
+                        (directoryInfo.DirectoryType == DirectoryType.AD)
+                            ? CredentialsType.Windows
+                            : CredentialsType.NonWindows
+                    );
 
                     try
                     {
@@ -1329,11 +1754,14 @@ namespace System.Web.Security
                         //
                         // Change the password
                         //
-                        userEntry.Invoke("ChangePassword", new object[]{ oldPassword, newPassword });
+                        userEntry.Invoke(
+                            "ChangePassword",
+                            new object[] { oldPassword, newPassword }
+                        );
                     }
                     catch (COMException e2)
                     {
-                        if (e2.ErrorCode == unchecked((int) 0x8007052e))
+                        if (e2.ErrorCode == unchecked((int)0x8007052e))
                             return false;
                         else
                             throw;
@@ -1342,22 +1770,37 @@ namespace System.Web.Security
                     {
                         if (tie.InnerException is COMException)
                         {
-                            COMException ce = (COMException) tie.InnerException;
+                            COMException ce = (COMException)tie.InnerException;
                             int errorCode = ce.ErrorCode;
 
                             //
                             // if the exception is due to password not meeting complexity requirements, then return
                             // MembershipPasswordException
                             //
-                            if ((errorCode == unchecked((int) 0x800708c5)) || (errorCode == unchecked((int) 0x8007202f))  || (errorCode == unchecked((int) 0x8007052d)) || (errorCode == unchecked((int) 0x8007052f)))
-                                throw new MembershipPasswordException(SR.GetString(SR.Membership_InvalidPassword), ce);
+                            if (
+                                (errorCode == unchecked((int)0x800708c5))
+                                || (errorCode == unchecked((int)0x8007202f))
+                                || (errorCode == unchecked((int)0x8007052d))
+                                || (errorCode == unchecked((int)0x8007052f))
+                            )
+                                throw new MembershipPasswordException(
+                                    SR.GetString(SR.Membership_InvalidPassword),
+                                    ce
+                                );
                             //
                             // if the target is ADAM and the exception is due to property not found, this indicates that a secure
                             // connection could not be setup for changing the password and ADSI is falling back to kerberos which does not work for ADAM
                             // so we will provide a clearer exception
                             //
-                            else if ((errorCode == unchecked((int) 0x8000500d) && (directoryInfo.DirectoryType == DirectoryType.ADAM)))
-                                throw new ProviderException(SR.GetString(SR.ADMembership_No_secure_conn_for_password));
+                            else if (
+                                (
+                                    errorCode == unchecked((int)0x8000500d)
+                                    && (directoryInfo.DirectoryType == DirectoryType.ADAM)
+                                )
+                            )
+                                throw new ProviderException(
+                                    SR.GetString(SR.ADMembership_No_secure_conn_for_password)
+                                );
                             else
                                 throw;
                         }
@@ -1401,29 +1844,42 @@ namespace System.Web.Security
             return true;
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         public override string ResetPassword(string username, string passwordAnswer)
         {
             string newPassword = null;
 
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
             if (!EnablePasswordReset)
-                throw new NotSupportedException(SR.GetString(SR.Not_configured_to_support_password_resets));
+                throw new NotSupportedException(
+                    SR.GetString(SR.Not_configured_to_support_password_resets)
+                );
 
             CheckUserName(ref username, maxUsernameLength, "username");
 
-            CheckPasswordAnswer(ref passwordAnswer, RequiresQuestionAndAnswer, maxPasswordAnswerLength, "passwordAnswer");
+            CheckPasswordAnswer(
+                ref passwordAnswer,
+                RequiresQuestionAndAnswer,
+                maxPasswordAnswerLength,
+                "passwordAnswer"
+            );
 
             try
             {
                 //
                 // validate the password answer
                 //
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
                 DirectoryEntry userEntry = null;
                 bool resetBadPasswordAnswerAttributes = false;
@@ -1433,7 +1889,12 @@ namespace System.Web.Security
                     //
                     // get the user's directory entry
                     //
-                    MembershipUser user = FindUser(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out userEntry, out resetBadPasswordAnswerAttributes);
+                    MembershipUser user = FindUser(
+                        containerEntry,
+                        "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")",
+                        out userEntry,
+                        out resetBadPasswordAnswerAttributes
+                    );
 
                     //
                     // user does not exist, throw exception
@@ -1445,13 +1906,20 @@ namespace System.Web.Security
                     // if user is locked, throw an exception
                     //
                     if (user.IsLockedOut)
-                        throw new MembershipPasswordException(SR.GetString(SR.Membership_AccountLockOut));
+                        throw new MembershipPasswordException(
+                            SR.GetString(SR.Membership_AccountLockOut)
+                        );
 
-                    string storedPasswordAnswer = Decrypt((string) PropertyManager.GetPropertyValue(userEntry, attributeMapPasswordAnswer));
+                    string storedPasswordAnswer = Decrypt(
+                        (string)
+                            PropertyManager.GetPropertyValue(userEntry, attributeMapPasswordAnswer)
+                    );
                     if (!StringUtil.EqualsIgnoreCase(passwordAnswer, storedPasswordAnswer))
                     {
                         UpdateBadPasswordAnswerAttributes(userEntry);
-                        throw new MembershipPasswordException(SR.GetString(SR.Membership_WrongAnswer));
+                        throw new MembershipPasswordException(
+                            SR.GetString(SR.Membership_WrongAnswer)
+                        );
                     }
                     else
                     {
@@ -1466,40 +1934,60 @@ namespace System.Web.Security
                     //
                     newPassword = GeneratePassword();
 
-                    ValidatePasswordEventArgs e = new ValidatePasswordEventArgs( username, newPassword, false );
+                    ValidatePasswordEventArgs e = new ValidatePasswordEventArgs(
+                        username,
+                        newPassword,
+                        false
+                    );
                     OnValidatingPassword(e);
 
-                    if(e.Cancel)
+                    if (e.Cancel)
                     {
-                        if(e.FailureInformation != null)
+                        if (e.FailureInformation != null)
                             throw e.FailureInformation;
                         else
-                            throw new ProviderException(SR.GetString(SR.Membership_Custom_Password_Validation_Failure));
+                            throw new ProviderException(
+                                SR.GetString(SR.Membership_Custom_Password_Validation_Failure)
+                            );
                     }
 
-                    userEntry.Invoke("SetPassword", new object[]{ newPassword });
-
+                    userEntry.Invoke("SetPassword", new object[] { newPassword });
                 }
                 catch (TargetInvocationException tie)
                 {
                     if (tie.InnerException is COMException)
                     {
-                        COMException ce = (COMException) tie.InnerException;
+                        COMException ce = (COMException)tie.InnerException;
                         int errorCode = ce.ErrorCode;
 
                         //
                         // if the exception is due to password not meeting complexity requirements, then return
                         // ProviderException
                         //
-                        if ((errorCode == unchecked((int) 0x800708c5)) || (errorCode == unchecked((int) 0x8007202f))  || (errorCode == unchecked((int) 0x8007052d)) || (errorCode == unchecked((int) 0x8007052f)))
-                            throw new ProviderException(SR.GetString(SR.ADMembership_Generated_password_not_complex), ce);
+                        if (
+                            (errorCode == unchecked((int)0x800708c5))
+                            || (errorCode == unchecked((int)0x8007202f))
+                            || (errorCode == unchecked((int)0x8007052d))
+                            || (errorCode == unchecked((int)0x8007052f))
+                        )
+                            throw new ProviderException(
+                                SR.GetString(SR.ADMembership_Generated_password_not_complex),
+                                ce
+                            );
                         //
                         // if the target is ADAM and the exception is due to property not found, this indicates that a secure
                         // connection could not be setup for changing the password and ADSI is falling back to kerberos which does not work for ADAM
                         // so we will provide a clearer exception
                         //
-                        if ((errorCode == unchecked((int) 0x8000500d) && (directoryInfo.DirectoryType == DirectoryType.ADAM)))
-                            throw new ProviderException(SR.GetString(SR.ADMembership_No_secure_conn_for_password));
+                        if (
+                            (
+                                errorCode == unchecked((int)0x8000500d)
+                                && (directoryInfo.DirectoryType == DirectoryType.ADAM)
+                            )
+                        )
+                            throw new ProviderException(
+                                SR.GetString(SR.ADMembership_No_secure_conn_for_password)
+                            );
                         else
                             throw;
                     }
@@ -1527,19 +2015,25 @@ namespace System.Web.Security
             return newPassword;
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         public override bool UnlockUser(string username)
         {
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
-            CheckUserName( ref username, maxUsernameLength, "username" );
+            CheckUserName(ref username, maxUsernameLength, "username");
 
             try
             {
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
                 DirectoryEntry userEntry = null;
 
@@ -1548,7 +2042,10 @@ namespace System.Web.Security
                     //
                     // get the user's directory entry
                     //
-                    userEntry = FindUserEntry(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")");
+                    userEntry = FindUserEntry(
+                        containerEntry,
+                        "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")"
+                    );
 
                     //
                     // user does not exist, return false
@@ -1588,9 +2085,9 @@ namespace System.Web.Security
             return true;
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         public override void UpdateUser(MembershipUser user)
         {
             bool emailModified = true;
@@ -1598,11 +2095,13 @@ namespace System.Web.Security
             bool isApprovedModified = true;
 
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
-            if( user == null )
+            if (user == null)
             {
-                throw new ArgumentNullException("user" );
+                throw new ArgumentNullException("user");
             }
 
             ActiveDirectoryMembershipUser adUser = user as ActiveDirectoryMembershipUser;
@@ -1618,25 +2117,45 @@ namespace System.Web.Security
             }
 
             string temp = user.UserName;
-            CheckUserName( ref temp, maxUsernameLength, "UserName" );
+            CheckUserName(ref temp, maxUsernameLength, "UserName");
 
             string email = user.Email;
             if (emailModified)
-                SecUtility.CheckParameter( ref email, RequiresUniqueEmail, RequiresUniqueEmail, false, maxEmailLength, "Email");
+                SecUtility.CheckParameter(
+                    ref email,
+                    RequiresUniqueEmail,
+                    RequiresUniqueEmail,
+                    false,
+                    maxEmailLength,
+                    "Email"
+                );
 
             if (commentModified && user.Comment != null)
             {
                 if (user.Comment.Length == 0)
-                    throw new ArgumentException(SR.GetString(SR.Parameter_can_not_be_empty, "Comment"), "Comment");
+                    throw new ArgumentException(
+                        SR.GetString(SR.Parameter_can_not_be_empty, "Comment"),
+                        "Comment"
+                    );
 
                 if (maxCommentLength > 0 && user.Comment.Length > maxCommentLength)
-                    throw new ArgumentException(SR.GetString(SR.Parameter_too_long, "Comment", maxCommentLength.ToString(CultureInfo.InvariantCulture)), "Comment");
+                    throw new ArgumentException(
+                        SR.GetString(
+                            SR.Parameter_too_long,
+                            "Comment",
+                            maxCommentLength.ToString(CultureInfo.InvariantCulture)
+                        ),
+                        "Comment"
+                    );
             }
 
             try
             {
-
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
                 DirectoryEntry userEntry = null;
 
@@ -1645,7 +2164,14 @@ namespace System.Web.Security
                     //
                     // get the user's directory entry
                     //
-                    userEntry = FindUserEntry(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(user.UserName) + ")");
+                    userEntry = FindUserEntry(
+                        containerEntry,
+                        "("
+                            + attributeMapUsername
+                            + "="
+                            + GetEscapedFilterValue(user.UserName)
+                            + ")"
+                    );
 
                     if (userEntry == null)
                         throw new ProviderException(SR.GetString(SR.Membership_UserNotFound));
@@ -1668,8 +2194,18 @@ namespace System.Web.Security
                         }
                         else
                         {
-                            if (RequiresUniqueEmail && !IsEmailUnique(null, user.UserName, email, true /* existing */))
-                                throw new ProviderException(SR.GetString(SR.Membership_DuplicateEmail));
+                            if (
+                                RequiresUniqueEmail
+                                && !IsEmailUnique(
+                                    null,
+                                    user.UserName,
+                                    email,
+                                    true /* existing */
+                                )
+                            )
+                                throw new ProviderException(
+                                    SR.GetString(SR.Membership_DuplicateEmail)
+                                );
 
                             userEntry.Properties[attributeMapEmail].Value = email;
                         }
@@ -1703,9 +2239,10 @@ namespace System.Web.Security
                         if (directoryInfo.DirectoryType == DirectoryType.AD)
                         {
                             // userAccountControl attribute
-                            const int UF_ACCOUNT_DISABLED =0x2;
+                            const int UF_ACCOUNT_DISABLED = 0x2;
 
-                            int val = (int)PropertyManager.GetPropertyValue(userEntry, "userAccountControl");
+                            int val = (int)
+                                PropertyManager.GetPropertyValue(userEntry, "userAccountControl");
 
                             if (user.IsApproved)
                                 val &= ~UF_ACCOUNT_DISABLED;
@@ -1716,7 +2253,9 @@ namespace System.Web.Security
                         else
                         {
                             // different attribute for ADAM
-                            userEntry.Properties["msDS-UserAccountDisabled"].Value = !(user.IsApproved);
+                            userEntry.Properties["msDS-UserAccountDisabled"].Value = !(
+                                user.IsApproved
+                            );
                         }
                     }
 
@@ -1728,7 +2267,6 @@ namespace System.Web.Security
                         adUser.commentModified = false;
                         adUser.isApprovedModified = false;
                     }
-
                 }
                 finally
                 {
@@ -1748,31 +2286,43 @@ namespace System.Web.Security
             return;
         }
 
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         public override bool ValidateUser(string username, string password)
         {
-            if( ValidateUserCore(username, password))
+            if (ValidateUserCore(username, password))
             {
                 PerfCounters.IncrementCounter(AppPerfCounter.MEMBER_SUCCESS);
-                WebBaseEvent.RaiseSystemEvent(null, WebEventCodes.AuditMembershipAuthenticationSuccess, username);
+                WebBaseEvent.RaiseSystemEvent(
+                    null,
+                    WebEventCodes.AuditMembershipAuthenticationSuccess,
+                    username
+                );
                 return true;
-            } else {
+            }
+            else
+            {
                 PerfCounters.IncrementCounter(AppPerfCounter.MEMBER_FAIL);
-                WebBaseEvent.RaiseSystemEvent(null, WebEventCodes.AuditMembershipAuthenticationFailure, username);
+                WebBaseEvent.RaiseSystemEvent(
+                    null,
+                    WebEventCodes.AuditMembershipAuthenticationFailure,
+                    username
+                );
                 return false;
             }
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         private bool ValidateUserCore(string username, string password)
         {
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
-            if(!SecUtility.ValidateParameter(ref username, true, true, true, maxUsernameLength))
+            if (!SecUtility.ValidateParameter(ref username, true, true, true, maxUsernameLength))
             {
                 return false;
             }
@@ -1785,7 +2335,7 @@ namespace System.Web.Security
                 return false;
             }
 
-            if( !ValidatePassword(password, maxPasswordLength))
+            if (!ValidatePassword(password, maxPasswordLength))
             {
                 return false;
             }
@@ -1793,8 +2343,11 @@ namespace System.Web.Security
             bool result = false;
             try
             {
-
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
                 DirectoryEntry userEntry = null;
                 bool resetBadPasswordAnswerAttributes = false;
@@ -1811,15 +2364,39 @@ namespace System.Web.Security
                         //           while getting the user object and use that for authenticating the user.
                         //
                         MembershipUser user = null;
-                        if ((directoryInfo.DirectoryType == DirectoryType.AD) && (usernameIsUPN) && (username.IndexOf('@') == -1))
+                        if (
+                            (directoryInfo.DirectoryType == DirectoryType.AD)
+                            && (usernameIsUPN)
+                            && (username.IndexOf('@') == -1)
+                        )
                         {
                             string sAMAccountName = null;
-                            user = FindUserAndSAMAccountName(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out userEntry, out resetBadPasswordAnswerAttributes, out sAMAccountName);
-                            usernameForAuthentication = directoryInfo.DomainName + "\\" + sAMAccountName;
+                            user = FindUserAndSAMAccountName(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out userEntry,
+                                out resetBadPasswordAnswerAttributes,
+                                out sAMAccountName
+                            );
+                            usernameForAuthentication =
+                                directoryInfo.DomainName + "\\" + sAMAccountName;
                         }
                         else
                         {
-                            user = FindUser(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out userEntry, out resetBadPasswordAnswerAttributes);
+                            user = FindUser(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out userEntry,
+                                out resetBadPasswordAnswerAttributes
+                            );
                             usernameForAuthentication = username;
                         }
 
@@ -1840,15 +2417,35 @@ namespace System.Web.Security
                         //
                         // get the user's directory entry
                         //
-                        if ((directoryInfo.DirectoryType == DirectoryType.AD) && (usernameIsUPN) && (username.IndexOf('@') == -1))
+                        if (
+                            (directoryInfo.DirectoryType == DirectoryType.AD)
+                            && (usernameIsUPN)
+                            && (username.IndexOf('@') == -1)
+                        )
                         {
                             string sAMAccountName = null;
-                            userEntry = FindUserEntryAndSAMAccountName(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out sAMAccountName);
-                            usernameForAuthentication = directoryInfo.DomainName + "\\" + sAMAccountName;
+                            userEntry = FindUserEntryAndSAMAccountName(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")",
+                                out sAMAccountName
+                            );
+                            usernameForAuthentication =
+                                directoryInfo.DomainName + "\\" + sAMAccountName;
                         }
                         else
                         {
-                            userEntry = FindUserEntry(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")");
+                            userEntry = FindUserEntry(
+                                containerEntry,
+                                "("
+                                    + attributeMapUsername
+                                    + "="
+                                    + GetEscapedFilterValue(username)
+                                    + ")"
+                            );
                             usernameForAuthentication = username;
                         }
 
@@ -1868,7 +2465,6 @@ namespace System.Web.Security
                         //
                         ResetBadPasswordAnswerAttributes(userEntry);
                     }
-
                 }
                 finally
                 {
@@ -1886,33 +2482,40 @@ namespace System.Web.Security
             }
 
             return result;
-
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
             MembershipUser user = null;
 
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
-            if( providerUserKey == null )
+            if (providerUserKey == null)
             {
-                throw new ArgumentNullException( "providerUserKey" );
+                throw new ArgumentNullException("providerUserKey");
             }
 
-            if ( !( providerUserKey is SecurityIdentifier) )
+            if (!(providerUserKey is SecurityIdentifier))
             {
-                throw new ArgumentException( SR.GetString(SR.ADMembership_InvalidProviderUserKey) , "providerUserKey" );
+                throw new ArgumentException(
+                    SR.GetString(SR.ADMembership_InvalidProviderUserKey),
+                    "providerUserKey"
+                );
             }
 
             try
             {
-
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
 
                 try
@@ -1929,12 +2532,24 @@ namespace System.Web.Security
                     for (int i = 0; i < binaryLength; i++)
                     {
                         sidHexValueStr.Append("\\");
-                        sidHexValueStr.Append(sidBinaryForm[i].ToString("x2", NumberFormatInfo.InvariantInfo));
+                        sidHexValueStr.Append(
+                            sidBinaryForm[i].ToString("x2", NumberFormatInfo.InvariantInfo)
+                        );
                     }
 
                     DirectoryEntry dummyEntry;
                     bool resetBadPasswordAnswerAttributes = false;
-                    user = FindUser(containerEntry, "(" + attributeMapUsername + "=*)(objectSid=" + sidHexValueStr.ToString() + ")", out dummyEntry /* ignored */, out resetBadPasswordAnswerAttributes /* ignored */);
+                    user = FindUser(
+                        containerEntry,
+                        "("
+                            + attributeMapUsername
+                            + "=*)(objectSid="
+                            + sidHexValueStr.ToString()
+                            + ")",
+                        out dummyEntry /* ignored */
+                        ,
+                        out resetBadPasswordAnswerAttributes /* ignored */
+                    );
                 }
                 finally
                 {
@@ -1952,22 +2567,27 @@ namespace System.Web.Security
             return user;
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
             MembershipUser user = null;
 
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
-            CheckUserName(ref username, maxUsernameLength, "username" );
+            CheckUserName(ref username, maxUsernameLength, "username");
 
             try
             {
-
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
 
                 try
@@ -1977,7 +2597,13 @@ namespace System.Web.Security
                     //
                     DirectoryEntry dummyEntry;
                     bool resetBadPasswordAnswerAttributes = false;
-                    user = FindUser(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", out dummyEntry /*ignored */, out resetBadPasswordAnswerAttributes /* ignored */);
+                    user = FindUser(
+                        containerEntry,
+                        "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")",
+                        out dummyEntry /*ignored */
+                        ,
+                        out resetBadPasswordAnswerAttributes /* ignored */
+                    );
                 }
                 finally
                 {
@@ -1995,20 +2621,26 @@ namespace System.Web.Security
             return user;
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         public override string GetUserNameByEmail(string email)
         {
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
-            SecUtility.CheckParameter(ref email, false, true, false, maxEmailLength,  "email");
+            SecUtility.CheckParameter(ref email, false, true, false, maxEmailLength, "email");
 
             string username = null;
             try
             {
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
                 SearchResultCollection resCol = null;
 
@@ -2016,16 +2648,35 @@ namespace System.Web.Security
                 {
                     DirectorySearcher searcher = new DirectorySearcher(containerEntry);
                     if (email != null)
-                        searcher.Filter = "(&(objectCategory=person)(objectClass=user)(" + attributeMapUsername + "=*)(" + attributeMapEmail + "=" + GetEscapedFilterValue(email) +"))";
+                        searcher.Filter =
+                            "(&(objectCategory=person)(objectClass=user)("
+                            + attributeMapUsername
+                            + "=*)("
+                            + attributeMapEmail
+                            + "="
+                            + GetEscapedFilterValue(email)
+                            + "))";
                     else
-                        searcher.Filter = "(&(objectCategory=person)(objectClass=user)(" + attributeMapUsername + "=*)(!(" + attributeMapEmail + "=" +"*)))";
+                        searcher.Filter =
+                            "(&(objectCategory=person)(objectClass=user)("
+                            + attributeMapUsername
+                            + "=*)(!("
+                            + attributeMapEmail
+                            + "="
+                            + "*)))";
                     searcher.SearchScope = System.DirectoryServices.SearchScope.Subtree;
                     searcher.PropertiesToLoad.Add(attributeMapUsername);
 
                     if (directoryInfo.ClientSearchTimeout != -1)
-                        searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ClientSearchTimeout, directoryInfo.TimeoutUnit);
+                        searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(
+                            directoryInfo.ClientSearchTimeout,
+                            directoryInfo.TimeoutUnit
+                        );
                     if (directoryInfo.ServerSearchTimeout != -1)
-                        searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ServerSearchTimeout, directoryInfo.TimeoutUnit);
+                        searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(
+                            directoryInfo.ServerSearchTimeout,
+                            directoryInfo.TimeoutUnit
+                        );
 
                     resCol = searcher.FindAll();
                     bool userFound = false;
@@ -2034,7 +2685,11 @@ namespace System.Web.Security
                     {
                         if (!userFound)
                         {
-                            username = (string) PropertyManager.GetSearchResultPropertyValue(res, attributeMapUsername);
+                            username = (string)
+                                PropertyManager.GetSearchResultPropertyValue(
+                                    res,
+                                    attributeMapUsername
+                                );
                             userFound = true;
 
                             if (!RequiresUniqueEmail)
@@ -2045,7 +2700,9 @@ namespace System.Web.Security
                             if (RequiresUniqueEmail)
                             {
                                 // there is a duplicate entry, so we need to throw an ProviderException
-                                throw new ProviderException(SR.GetString(SR.Membership_more_than_one_user_with_email));
+                                throw new ProviderException(
+                                    SR.GetString(SR.Membership_more_than_one_user_with_email)
+                                );
                             }
                             else
                                 // we should never get here
@@ -2071,14 +2728,15 @@ namespace System.Web.Security
             return username;
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
             CheckUserName(ref username, maxUsernameLength, "username");
 
@@ -2087,7 +2745,11 @@ namespace System.Web.Security
                 //
                 // Get the Directory Entry for the container
                 //
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.CreationContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.CreationContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
                 // to avoid unnecessary searches (for better performance)
                 containerEntry.AuthenticationType |= AuthenticationTypes.FastBind;
@@ -2099,7 +2761,14 @@ namespace System.Web.Security
                     // Get the directory entry for the user
                     //
                     string dummyString;
-                    userEntry = FindUserEntry(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")", System.DirectoryServices.SearchScope.OneLevel, false /* retrieveSAMAccountName */, out dummyString);
+                    userEntry = FindUserEntry(
+                        containerEntry,
+                        "(" + attributeMapUsername + "=" + GetEscapedFilterValue(username) + ")",
+                        System.DirectoryServices.SearchScope.OneLevel,
+                        false /* retrieveSAMAccountName */
+                        ,
+                        out dummyString
+                    );
 
                     if (userEntry == null)
                         return false;
@@ -2108,11 +2777,10 @@ namespace System.Web.Security
                     // Remove the entry from the container
                     //
                     containerEntry.Children.Remove(userEntry);
-
                 }
                 catch (COMException e)
                 {
-                    if (e.ErrorCode == unchecked((int) 0x80072030))
+                    if (e.ErrorCode == unchecked((int)0x80072030))
                     {
                         //
                         // incase some one else deleted the object just before this
@@ -2143,22 +2811,27 @@ namespace System.Web.Security
         public virtual string GeneratePassword()
         {
             //
-            // 
+            //
 
 
 
 
             return Membership.GeneratePassword(
-                      MinRequiredPasswordLength < PASSWORD_SIZE ? PASSWORD_SIZE : MinRequiredPasswordLength,
-                      MinRequiredNonAlphanumericCharacters);
+                MinRequiredPasswordLength < PASSWORD_SIZE
+                    ? PASSWORD_SIZE
+                    : MinRequiredPasswordLength,
+                MinRequiredNonAlphanumericCharacters
+            );
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
-        public override MembershipUserCollection GetAllUsers(int pageIndex,
-                                                        int pageSize,
-                                                        out int totalRecords)
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+        public override MembershipUserCollection GetAllUsers(
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             return FindUsersByName("*", pageIndex, pageSize, out totalRecords);
         }
@@ -2168,44 +2841,76 @@ namespace System.Web.Security
             //
             // ADMembershipProvider does not support the notion of online users
             //
-            throw new NotSupportedException(SR.GetString(SR.ADMembership_OnlineUsers_not_supported));
+            throw new NotSupportedException(
+                SR.GetString(SR.ADMembership_OnlineUsers_not_supported)
+            );
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
-        public override MembershipUserCollection FindUsersByName(string usernameToMatch,
-                                                        int pageIndex,
-                                                        int pageSize,
-                                                        out int totalRecords)
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+        public override MembershipUserCollection FindUsersByName(
+            string usernameToMatch,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
             if (!EnableSearchMethods)
-                throw new NotSupportedException(SR.GetString(SR.ADMembership_Provider_SearchMethods_not_supported));
+                throw new NotSupportedException(
+                    SR.GetString(SR.ADMembership_Provider_SearchMethods_not_supported)
+                );
 
-            SecUtility.CheckParameter( ref usernameToMatch, true, true, true, maxUsernameLength, "usernameToMatch" );
+            SecUtility.CheckParameter(
+                ref usernameToMatch,
+                true,
+                true,
+                true,
+                maxUsernameLength,
+                "usernameToMatch"
+            );
 
-            if ( pageIndex < 0 )
+            if (pageIndex < 0)
                 throw new ArgumentException(SR.GetString(SR.PageIndex_bad), "pageIndex");
-            if ( pageSize < 1 )
+            if (pageSize < 1)
                 throw new ArgumentException(SR.GetString(SR.PageSize_bad), "pageSize");
 
             long upperBound = (long)pageIndex * pageSize + pageSize - 1;
-            if ( upperBound > Int32.MaxValue )
-                throw new ArgumentException(SR.GetString(SR.PageIndex_PageSize_bad), "pageIndex and pageSize");
+            if (upperBound > Int32.MaxValue)
+                throw new ArgumentException(
+                    SR.GetString(SR.PageIndex_PageSize_bad),
+                    "pageIndex and pageSize"
+                );
 
             try
             {
-
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
 
                 try
                 {
                     totalRecords = 0;
-                    return FindUsers(containerEntry, "(" + attributeMapUsername + "=" + GetEscapedFilterValue(usernameToMatch, false) + ")", attributeMapUsername, pageIndex, pageSize, out totalRecords);
+                    return FindUsers(
+                        containerEntry,
+                        "("
+                            + attributeMapUsername
+                            + "="
+                            + GetEscapedFilterValue(usernameToMatch, false)
+                            + ")",
+                        attributeMapUsername,
+                        pageIndex,
+                        pageSize,
+                        out totalRecords
+                    );
                 }
                 finally
                 {
@@ -2219,35 +2924,56 @@ namespace System.Web.Security
                 //
                 throw;
             }
-
         }
 
-        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted=true)]
-        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted=true)]
-        public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
+        [DirectoryServicesPermission(SecurityAction.Assert, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.Demand, Unrestricted = true)]
+        [DirectoryServicesPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
+        public override MembershipUserCollection FindUsersByEmail(
+            string emailToMatch,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             if (!initialized)
-                throw new InvalidOperationException(SR.GetString(SR.ADMembership_Provider_not_initialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ADMembership_Provider_not_initialized)
+                );
 
             if (!EnableSearchMethods)
-                throw new NotSupportedException(SR.GetString(SR.ADMembership_Provider_SearchMethods_not_supported));
+                throw new NotSupportedException(
+                    SR.GetString(SR.ADMembership_Provider_SearchMethods_not_supported)
+                );
 
-            SecUtility.CheckParameter(ref emailToMatch, false, true, false, maxEmailLength, "emailToMatch");
+            SecUtility.CheckParameter(
+                ref emailToMatch,
+                false,
+                true,
+                false,
+                maxEmailLength,
+                "emailToMatch"
+            );
 
-            if ( pageIndex < 0 )
+            if (pageIndex < 0)
                 throw new ArgumentException(SR.GetString(SR.PageIndex_bad), "pageIndex");
-            if ( pageSize < 1 )
+            if (pageSize < 1)
                 throw new ArgumentException(SR.GetString(SR.PageSize_bad), "pageSize");
 
             long upperBound = (long)pageIndex * pageSize + pageSize - 1;
-            if ( upperBound > Int32.MaxValue )
-                throw new ArgumentException(SR.GetString(SR.PageIndex_PageSize_bad), "pageIndex and pageSize");
+            if (upperBound > Int32.MaxValue)
+                throw new ArgumentException(
+                    SR.GetString(SR.PageIndex_PageSize_bad),
+                    "pageIndex and pageSize"
+                );
 
             try
             {
-
-                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(directoryInfo, directoryInfo.ContainerDN, true /* revertImpersonation */);
+                DirectoryEntryHolder connection = ActiveDirectoryConnectionHelper.GetDirectoryEntry(
+                    directoryInfo,
+                    directoryInfo.ContainerDN,
+                    true /* revertImpersonation */
+                );
                 DirectoryEntry containerEntry = connection.DirectoryEntry;
 
                 try
@@ -2255,10 +2981,25 @@ namespace System.Web.Security
                     totalRecords = 0;
                     string filter = null;
                     if (emailToMatch != null)
-                        filter = "(" + attributeMapUsername + "=*)(" + attributeMapEmail + "=" + GetEscapedFilterValue(emailToMatch, false) +")";
+                        filter =
+                            "("
+                            + attributeMapUsername
+                            + "=*)("
+                            + attributeMapEmail
+                            + "="
+                            + GetEscapedFilterValue(emailToMatch, false)
+                            + ")";
                     else
-                        filter = "(" + attributeMapUsername + "=*)(!(" + attributeMapEmail + "=" +"*))";
-                    return FindUsers(containerEntry, filter, attributeMapEmail, pageIndex, pageSize, out totalRecords);
+                        filter =
+                            "(" + attributeMapUsername + "=*)(!(" + attributeMapEmail + "=" + "*))";
+                    return FindUsers(
+                        containerEntry,
+                        filter,
+                        attributeMapEmail,
+                        pageIndex,
+                        pageSize,
+                        out totalRecords
+                    );
                 }
                 finally
                 {
@@ -2272,14 +3013,17 @@ namespace System.Web.Security
                 //
                 throw;
             }
-
         }
 
         private bool ValidateCredentials(string username, string password)
         {
             bool result = false;
-            NetworkCredential credentialForValidation = (usernameIsSAMAccountName) ? new NetworkCredential(username, password, directoryInfo.DomainName)
-                                                                                                                                    : DirectoryInformation.GetCredentialsWithDomain(new NetworkCredential(username, password));
+            NetworkCredential credentialForValidation =
+                (usernameIsSAMAccountName)
+                    ? new NetworkCredential(username, password, directoryInfo.DomainName)
+                    : DirectoryInformation.GetCredentialsWithDomain(
+                        new NetworkCredential(username, password)
+                    );
 
             //
             // NOTE: we do not need to revert context here since this method is always
@@ -2320,7 +3064,9 @@ namespace System.Web.Security
                 //
                 // create a new ldap connection
                 //
-                LdapConnection newConnection = directoryInfo.CreateNewLdapConnection(authTypeForValidation);
+                LdapConnection newConnection = directoryInfo.CreateNewLdapConnection(
+                    authTypeForValidation
+                );
 
                 try
                 {
@@ -2353,18 +3099,42 @@ namespace System.Web.Security
             return result;
         }
 
-        private DirectoryEntry FindUserEntryAndSAMAccountName(DirectoryEntry containerEntry, string filter, out string sAMAccountName)
+        private DirectoryEntry FindUserEntryAndSAMAccountName(
+            DirectoryEntry containerEntry,
+            string filter,
+            out string sAMAccountName
+        )
         {
-            return FindUserEntry(containerEntry, filter, System.DirectoryServices.SearchScope.Subtree, true /*retrieveSAMAccountName */, out sAMAccountName);
+            return FindUserEntry(
+                containerEntry,
+                filter,
+                System.DirectoryServices.SearchScope.Subtree,
+                true /*retrieveSAMAccountName */
+                ,
+                out sAMAccountName
+            );
         }
 
         private DirectoryEntry FindUserEntry(DirectoryEntry containerEntry, string filter)
         {
             string dummyString;
-            return FindUserEntry(containerEntry, filter, System.DirectoryServices.SearchScope.Subtree, false /*retrieveSAMAccountName */, out dummyString);
+            return FindUserEntry(
+                containerEntry,
+                filter,
+                System.DirectoryServices.SearchScope.Subtree,
+                false /*retrieveSAMAccountName */
+                ,
+                out dummyString
+            );
         }
 
-        private DirectoryEntry FindUserEntry(DirectoryEntry containerEntry, string filter, System.DirectoryServices.SearchScope searchScope, bool retrieveSAMAccountName, out string sAMAccountName)
+        private DirectoryEntry FindUserEntry(
+            DirectoryEntry containerEntry,
+            string filter,
+            System.DirectoryServices.SearchScope searchScope,
+            bool retrieveSAMAccountName,
+            out string sAMAccountName
+        )
         {
             Debug.Assert(containerEntry != null);
             DirectorySearcher searcher = new DirectorySearcher(containerEntry);
@@ -2373,9 +3143,15 @@ namespace System.Web.Security
             searcher.Filter = "(&(objectCategory=person)(objectClass=user)" + filter + ")";
 
             if (directoryInfo.ClientSearchTimeout != -1)
-                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ClientSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ClientSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
             if (directoryInfo.ServerSearchTimeout != -1)
-                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ServerSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ServerSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
 
             if (retrieveSAMAccountName)
                 searcher.PropertiesToLoad.Add("sAMAccountName");
@@ -2386,26 +3162,63 @@ namespace System.Web.Security
             if (res != null)
             {
                 if (retrieveSAMAccountName)
-                    sAMAccountName = (string) PropertyManager.GetSearchResultPropertyValue(res, "sAMAccountName");
+                    sAMAccountName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(res, "sAMAccountName");
                 return res.GetDirectoryEntry();
             }
             else
                 return null;
-
         }
 
-        private MembershipUser FindUserAndSAMAccountName(DirectoryEntry containerEntry, string filter, out DirectoryEntry userEntry, out bool resetBadPasswordAnswerAttributes, out string sAMAccountName)
+        private MembershipUser FindUserAndSAMAccountName(
+            DirectoryEntry containerEntry,
+            string filter,
+            out DirectoryEntry userEntry,
+            out bool resetBadPasswordAnswerAttributes,
+            out string sAMAccountName
+        )
         {
-            return FindUser(containerEntry, filter, System.DirectoryServices.SearchScope.Subtree, true /* retrieveSAMAccountName */, out userEntry, out resetBadPasswordAnswerAttributes, out sAMAccountName);
+            return FindUser(
+                containerEntry,
+                filter,
+                System.DirectoryServices.SearchScope.Subtree,
+                true /* retrieveSAMAccountName */
+                ,
+                out userEntry,
+                out resetBadPasswordAnswerAttributes,
+                out sAMAccountName
+            );
         }
 
-        private MembershipUser FindUser(DirectoryEntry containerEntry, string filter, out DirectoryEntry userEntry, out bool resetBadPasswordAnswerAttributes)
+        private MembershipUser FindUser(
+            DirectoryEntry containerEntry,
+            string filter,
+            out DirectoryEntry userEntry,
+            out bool resetBadPasswordAnswerAttributes
+        )
         {
             string dummyString;
-            return FindUser(containerEntry, filter, System.DirectoryServices.SearchScope.Subtree, false /* retrieveSAMAccountName */, out userEntry, out resetBadPasswordAnswerAttributes, out dummyString);
+            return FindUser(
+                containerEntry,
+                filter,
+                System.DirectoryServices.SearchScope.Subtree,
+                false /* retrieveSAMAccountName */
+                ,
+                out userEntry,
+                out resetBadPasswordAnswerAttributes,
+                out dummyString
+            );
         }
 
-        private MembershipUser FindUser(DirectoryEntry containerEntry, string filter, System.DirectoryServices.SearchScope searchScope,  bool retrieveSAMAccountName, out DirectoryEntry userEntry, out bool resetBadPasswordAnswerAttributes, out string sAMAccountName)
+        private MembershipUser FindUser(
+            DirectoryEntry containerEntry,
+            string filter,
+            System.DirectoryServices.SearchScope searchScope,
+            bool retrieveSAMAccountName,
+            out DirectoryEntry userEntry,
+            out bool resetBadPasswordAnswerAttributes,
+            out string sAMAccountName
+        )
         {
             Debug.Assert(containerEntry != null);
             MembershipUser user = null;
@@ -2415,9 +3228,15 @@ namespace System.Web.Security
             searcher.Filter = "(&(objectCategory=person)(objectClass=user)" + filter + ")";
 
             if (directoryInfo.ClientSearchTimeout != -1)
-                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ClientSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ClientSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
             if (directoryInfo.ServerSearchTimeout != -1)
-                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ServerSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ServerSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
 
             //
             // load all the attributes needed to create a MembershipUser object
@@ -2449,7 +3268,6 @@ namespace System.Web.Security
                 searcher.PropertiesToLoad.Add(attributeMapFailedPasswordAnswerLockoutTime);
             }
 
-
             SearchResult res = searcher.FindOne();
             resetBadPasswordAnswerAttributes = false;
             sAMAccountName = null;
@@ -2459,10 +3277,20 @@ namespace System.Web.Security
                 userEntry = res.GetDirectoryEntry();
 
                 if (retrieveSAMAccountName)
-                    sAMAccountName = (string) PropertyManager.GetSearchResultPropertyValue(res, "sAMAccountName");
+                    sAMAccountName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(res, "sAMAccountName");
 
-                if ((EnablePasswordReset) && res.Properties.Contains(attributeMapFailedPasswordAnswerCount))
-                    resetBadPasswordAnswerAttributes = ((int) PropertyManager.GetSearchResultPropertyValue(res, attributeMapFailedPasswordAnswerCount) > 0);
+                if (
+                    (EnablePasswordReset)
+                    && res.Properties.Contains(attributeMapFailedPasswordAnswerCount)
+                )
+                    resetBadPasswordAnswerAttributes = (
+                        (int)
+                            PropertyManager.GetSearchResultPropertyValue(
+                                res,
+                                attributeMapFailedPasswordAnswerCount
+                            ) > 0
+                    );
             }
             else
             {
@@ -2470,24 +3298,36 @@ namespace System.Web.Security
             }
 
             return user;
-
         }
 
-        private MembershipUserCollection FindUsers(DirectoryEntry containerEntry, string filter, string sortKey, int pageIndex, int pageSize, out int totalRecords)
+        private MembershipUserCollection FindUsers(
+            DirectoryEntry containerEntry,
+            string filter,
+            string sortKey,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             Debug.Assert(containerEntry != null);
             MembershipUserCollection col = new MembershipUserCollection();
             int lastOffset = (pageIndex + 1) * pageSize;
-            int startOffset = lastOffset -pageSize + 1;
+            int startOffset = lastOffset - pageSize + 1;
 
             DirectorySearcher searcher = new DirectorySearcher(containerEntry);
             searcher.SearchScope = System.DirectoryServices.SearchScope.Subtree;
             searcher.Filter = "(&(objectCategory=person)(objectClass=user)" + filter + ")";
 
             if (directoryInfo.ClientSearchTimeout != -1)
-                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ClientSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ClientSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
             if (directoryInfo.ServerSearchTimeout != -1)
-                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ServerSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ServerSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
 
             //
             // load all the attributes needed to create a MembershipUser object
@@ -2533,7 +3373,7 @@ namespace System.Web.Security
                 int count = 0;
                 totalRecords = 0;
 
-                foreach(SearchResult res in resCol)
+                foreach (SearchResult res in resCol)
                 {
                     count++;
 
@@ -2553,10 +3393,14 @@ namespace System.Web.Security
             }
 
             return col;
-
         }
 
-        private void CheckPasswordAnswer(ref string passwordAnswer, bool checkForNull, int maxSize,string paramName)
+        private void CheckPasswordAnswer(
+            ref string passwordAnswer,
+            bool checkForNull,
+            int maxSize,
+            string paramName
+        )
         {
             if (passwordAnswer == null)
             {
@@ -2568,10 +3412,16 @@ namespace System.Web.Security
             passwordAnswer = passwordAnswer.Trim();
 
             if (passwordAnswer.Length < 1)
-                throw new ArgumentException(SR.GetString(SR.Parameter_can_not_be_empty, paramName), paramName);
+                throw new ArgumentException(
+                    SR.GetString(SR.Parameter_can_not_be_empty, paramName),
+                    paramName
+                );
 
             if (maxSize > 0 && passwordAnswer.Length > maxSize)
-                throw new ArgumentException(SR.GetString(SR.ADMembership_Parameter_too_long, paramName), paramName);
+                throw new ArgumentException(
+                    SR.GetString(SR.ADMembership_Parameter_too_long, paramName),
+                    paramName
+                );
         }
 
         private bool ValidatePassword(string password, int maxSize)
@@ -2594,29 +3444,48 @@ namespace System.Web.Security
                 throw new ArgumentNullException(paramName);
 
             if (password.Trim().Length < 1)
-                throw new ArgumentException(SR.GetString(SR.Parameter_can_not_be_empty, paramName), paramName);
+                throw new ArgumentException(
+                    SR.GetString(SR.Parameter_can_not_be_empty, paramName),
+                    paramName
+                );
 
             if (maxSize > 0 && password.Length > maxSize)
-                throw new ArgumentException(SR.GetString(SR.Parameter_too_long, paramName, maxSize.ToString(CultureInfo.InvariantCulture)), paramName);
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Parameter_too_long,
+                        paramName,
+                        maxSize.ToString(CultureInfo.InvariantCulture)
+                    ),
+                    paramName
+                );
         }
 
         private void CheckUserName(ref string username, int maxSize, string paramName)
         {
-            SecUtility.CheckParameter( ref username, true, true, true, maxSize, paramName );
+            SecUtility.CheckParameter(ref username, true, true, true, maxSize, paramName);
 
             //
             // if username is mapped to UPN, it should not contain '\'
             //
             if (usernameIsUPN && (username.IndexOf('\\') != -1))
-                throw new ArgumentException(SR.GetString(SR.ADMembership_UPN_contains_backslash, paramName), paramName);
+                throw new ArgumentException(
+                    SR.GetString(SR.ADMembership_UPN_contains_backslash, paramName),
+                    paramName
+                );
         }
 
         private int GetDomainControllerLevel(string serverName)
         {
             int dcLevel = 0;
 
-            DirectoryEntry rootdse = new DirectoryEntry("LDAP://" + serverName + "/RootDSE", directoryInfo.GetUsername(), directoryInfo.GetPassword(), directoryInfo.AuthenticationTypes);
-            string dcLevelString = (string) rootdse.Properties["domainControllerFunctionality"].Value;
+            DirectoryEntry rootdse = new DirectoryEntry(
+                "LDAP://" + serverName + "/RootDSE",
+                directoryInfo.GetUsername(),
+                directoryInfo.GetPassword(),
+                directoryInfo.AuthenticationTypes
+            );
+            string dcLevelString = (string)
+                rootdse.Properties["domainControllerFunctionality"].Value;
             if (dcLevelString != null)
                 dcLevel = Int32.Parse(dcLevelString, NumberFormatInfo.InvariantInfo);
 
@@ -2625,7 +3494,6 @@ namespace System.Web.Security
 
         private void UpdateBadPasswordAnswerAttributes(DirectoryEntry userEntry)
         {
-
             //
             // get the password answer tracking related attributes to determine if we are still in an
             // active window for bad password answer attempts
@@ -2633,11 +3501,16 @@ namespace System.Web.Security
             int badPasswordAttemptCount = 0;
             bool inActiveWindow = false;
 
-
             DateTime currentTime = DateTime.UtcNow;
             if (userEntry.Properties.Contains(attributeMapFailedPasswordAnswerTime))
             {
-                DateTime lastBadPasswordAnswerTime = GetDateTimeFromLargeInteger((NativeComInterfaces.IAdsLargeInteger) PropertyManager.GetPropertyValue(userEntry, attributeMapFailedPasswordAnswerTime));
+                DateTime lastBadPasswordAnswerTime = GetDateTimeFromLargeInteger(
+                    (NativeComInterfaces.IAdsLargeInteger)
+                        PropertyManager.GetPropertyValue(
+                            userEntry,
+                            attributeMapFailedPasswordAnswerTime
+                        )
+                );
                 TimeSpan diffTime = currentTime.Subtract(lastBadPasswordAnswerTime);
                 inActiveWindow = (diffTime <= new TimeSpan(0, PasswordAttemptWindow, 0));
             }
@@ -2645,12 +3518,16 @@ namespace System.Web.Security
             // get the current bad password count
             int currentBadPasswordAttemptCount = 0;
             if (userEntry.Properties.Contains(attributeMapFailedPasswordAnswerCount))
-                currentBadPasswordAttemptCount = (int) PropertyManager.GetPropertyValue(userEntry, attributeMapFailedPasswordAnswerCount);
+                currentBadPasswordAttemptCount = (int)
+                    PropertyManager.GetPropertyValue(
+                        userEntry,
+                        attributeMapFailedPasswordAnswerCount
+                    );
 
             if (inActiveWindow && (currentBadPasswordAttemptCount > 0))
             {
                 // within an active window for bad password answer attempts (increment count, if greater than 0)
-                badPasswordAttemptCount =  currentBadPasswordAttemptCount + 1;
+                badPasswordAttemptCount = currentBadPasswordAttemptCount + 1;
             }
             else
             {
@@ -2659,20 +3536,22 @@ namespace System.Web.Security
             }
 
             // set the bad password attempt count and time
-            userEntry.Properties[attributeMapFailedPasswordAnswerCount].Value = badPasswordAttemptCount;
-            userEntry.Properties[attributeMapFailedPasswordAnswerTime].Value = GetLargeIntegerFromDateTime(currentTime);
+            userEntry.Properties[attributeMapFailedPasswordAnswerCount].Value =
+                badPasswordAttemptCount;
+            userEntry.Properties[attributeMapFailedPasswordAnswerTime].Value =
+                GetLargeIntegerFromDateTime(currentTime);
 
             if (badPasswordAttemptCount >= maxInvalidPasswordAttempts)
             {
                 //
                 // user needs to be locked out due to too many bad password answer attempts
                 //
-                userEntry.Properties[attributeMapFailedPasswordAnswerLockoutTime].Value = GetLargeIntegerFromDateTime(currentTime);
+                userEntry.Properties[attributeMapFailedPasswordAnswerLockoutTime].Value =
+                    GetLargeIntegerFromDateTime(currentTime);
             }
 
             userEntry.CommitChanges();
         }
-
 
         private void ResetBadPasswordAnswerAttributes(DirectoryEntry userEntry)
         {
@@ -2689,29 +3568,40 @@ namespace System.Web.Security
         private MembershipUser GetMembershipUserFromSearchResult(SearchResult res)
         {
             // username
-            string username = (string) PropertyManager.GetSearchResultPropertyValue(res, attributeMapUsername);
+            string username = (string)
+                PropertyManager.GetSearchResultPropertyValue(res, attributeMapUsername);
 
             // providerUserKey is the SID of the user
-            byte[] sidBinaryForm = (byte[]) PropertyManager.GetSearchResultPropertyValue(res, "objectSid");
+            byte[] sidBinaryForm = (byte[])
+                PropertyManager.GetSearchResultPropertyValue(res, "objectSid");
             object providerUserKey = new SecurityIdentifier(sidBinaryForm, 0);
 
             // email (optional)
-            string email = (res.Properties.Contains(attributeMapEmail)) ? (string) res.Properties[attributeMapEmail][0] : null;
+            string email =
+                (res.Properties.Contains(attributeMapEmail))
+                    ? (string)res.Properties[attributeMapEmail][0]
+                    : null;
 
             // passwordQuestion
             string passwordQuestion = null;
-            if ((attributeMapPasswordQuestion != null) && (res.Properties.Contains(attributeMapPasswordQuestion)))
-                passwordQuestion = (string) PropertyManager.GetSearchResultPropertyValue(res, attributeMapPasswordQuestion);
+            if (
+                (attributeMapPasswordQuestion != null)
+                && (res.Properties.Contains(attributeMapPasswordQuestion))
+            )
+                passwordQuestion = (string)
+                    PropertyManager.GetSearchResultPropertyValue(res, attributeMapPasswordQuestion);
 
             //comment (optional)
-            string comment = (res.Properties.Contains("comment")) ? (string) res.Properties["comment"][0] : null;
+            string comment =
+                (res.Properties.Contains("comment")) ? (string)res.Properties["comment"][0] : null;
 
             //isApproved and isLockedOut
             bool isApproved;
             bool isLockedOut = false;
             if (directoryInfo.DirectoryType == DirectoryType.AD)
             {
-                int val = (int) PropertyManager.GetSearchResultPropertyValue(res, "userAccountControl");
+                int val = (int)
+                    PropertyManager.GetSearchResultPropertyValue(res, "userAccountControl");
                 if ((val & UF_ACCOUNT_DISABLED) == 0)
                     isApproved = true;
                 else
@@ -2725,32 +3615,47 @@ namespace System.Web.Security
                 //
                 if (res.Properties.Contains("msDS-User-Account-Control-Computed"))
                 {
-                    int val2 = (int) PropertyManager.GetSearchResultPropertyValue(res, "msDS-User-Account-Control-Computed");
+                    int val2 = (int)
+                        PropertyManager.GetSearchResultPropertyValue(
+                            res,
+                            "msDS-User-Account-Control-Computed"
+                        );
                     if ((val2 & UF_LOCKOUT) != 0)
                         isLockedOut = true;
                 }
                 else if (res.Properties.Contains("lockoutTime"))
                 {
                     // NOTE: all date-time computation is done in UTC time though the values returned are in local time
-                    DateTime lockoutTime = DateTime.FromFileTimeUtc((Int64) PropertyManager.GetSearchResultPropertyValue(res, "lockoutTime"));
+                    DateTime lockoutTime = DateTime.FromFileTimeUtc(
+                        (Int64)PropertyManager.GetSearchResultPropertyValue(res, "lockoutTime")
+                    );
                     DateTime currentTime = DateTime.UtcNow;
                     TimeSpan diffTime = currentTime.Subtract(lockoutTime);
                     isLockedOut = (diffTime <= directoryInfo.ADLockoutDuration);
                 }
-
             }
             else
             {
                 isApproved = true; // if the msDS-UserAccountDisabled attribute if not present then the user is enabled
 
                 if (res.Properties.Contains("msDS-UserAccountDisabled"))
-                    isApproved = !((bool) PropertyManager.GetSearchResultPropertyValue(res, "msDS-UserAccountDisabled"));
+                    isApproved = !(
+                        (bool)
+                            PropertyManager.GetSearchResultPropertyValue(
+                                res,
+                                "msDS-UserAccountDisabled"
+                            )
+                    );
 
                 //
                 // ADAM schema contains the "msDS-User-Account-Control-Computed" attribute, therefore it is used to determine the
                 // lockout status of the user
                 //
-                int val2 = (int) PropertyManager.GetSearchResultPropertyValue(res, "msDS-User-Account-Control-Computed");
+                int val2 = (int)
+                    PropertyManager.GetSearchResultPropertyValue(
+                        res,
+                        "msDS-User-Account-Control-Computed"
+                    );
                 if ((val2 & UF_LOCKOUT) != 0)
                     isLockedOut = true;
             }
@@ -2758,18 +3663,31 @@ namespace System.Web.Security
             // lastLockoutDate (DateTime.FromFileTime cnoverts to Local time)
             DateTime lastLockoutDate = DefaultLastLockoutDate;
             if (isLockedOut)
-                lastLockoutDate = DateTime.FromFileTime((Int64) PropertyManager.GetSearchResultPropertyValue(res, "lockoutTime"));
+                lastLockoutDate = DateTime.FromFileTime(
+                    (Int64)PropertyManager.GetSearchResultPropertyValue(res, "lockoutTime")
+                );
 
             //
             // if password reset is enabled, we need to check if user is locked out due to bad password answer (and set/change the last lockout date)
             //
-            if ((EnablePasswordReset) && (res.Properties.Contains(attributeMapFailedPasswordAnswerLockoutTime)))
+            if (
+                (EnablePasswordReset)
+                && (res.Properties.Contains(attributeMapFailedPasswordAnswerLockoutTime))
+            )
             {
                 // NOTE: all date-time computation is done in UTC time though the values returned are in local time
-                DateTime badPasswordAnswerLockoutTime = DateTime.FromFileTimeUtc((Int64) PropertyManager.GetSearchResultPropertyValue(res, attributeMapFailedPasswordAnswerLockoutTime));
+                DateTime badPasswordAnswerLockoutTime = DateTime.FromFileTimeUtc(
+                    (Int64)
+                        PropertyManager.GetSearchResultPropertyValue(
+                            res,
+                            attributeMapFailedPasswordAnswerLockoutTime
+                        )
+                );
                 DateTime currentTime = DateTime.UtcNow;
                 TimeSpan diffTime = currentTime.Subtract(badPasswordAnswerLockoutTime);
-                bool isLockedOutByBadPasswordAnswer = (diffTime <= new TimeSpan(0, PasswordAnswerAttemptLockoutDuration, 0));
+                bool isLockedOutByBadPasswordAnswer = (
+                    diffTime <= new TimeSpan(0, PasswordAnswerAttemptLockoutDuration, 0)
+                );
 
                 if (isLockedOutByBadPasswordAnswer)
                 {
@@ -2779,8 +3697,25 @@ namespace System.Web.Security
                         // The account is locked both due to bad password and bad password answer, so we have two lockout dates
                         // Taking the later one.
                         //
-                        if (DateTime.Compare(badPasswordAnswerLockoutTime, DateTime.FromFileTimeUtc((Int64) PropertyManager.GetSearchResultPropertyValue(res, "lockoutTime"))) > 0)
-                            lastLockoutDate = DateTime.FromFileTime((Int64) PropertyManager.GetSearchResultPropertyValue(res, attributeMapFailedPasswordAnswerLockoutTime));
+                        if (
+                            DateTime.Compare(
+                                badPasswordAnswerLockoutTime,
+                                DateTime.FromFileTimeUtc(
+                                    (Int64)
+                                        PropertyManager.GetSearchResultPropertyValue(
+                                            res,
+                                            "lockoutTime"
+                                        )
+                                )
+                            ) > 0
+                        )
+                            lastLockoutDate = DateTime.FromFileTime(
+                                (Int64)
+                                    PropertyManager.GetSearchResultPropertyValue(
+                                        res,
+                                        attributeMapFailedPasswordAnswerLockoutTime
+                                    )
+                            );
                     }
                     else
                     {
@@ -2788,13 +3723,21 @@ namespace System.Web.Security
                         // Account is locked out only due to bad password answer
                         //
                         isLockedOut = true;
-                        lastLockoutDate = DateTime.FromFileTime((Int64) PropertyManager.GetSearchResultPropertyValue(res, attributeMapFailedPasswordAnswerLockoutTime));
+                        lastLockoutDate = DateTime.FromFileTime(
+                            (Int64)
+                                PropertyManager.GetSearchResultPropertyValue(
+                                    res,
+                                    attributeMapFailedPasswordAnswerLockoutTime
+                                )
+                        );
                     }
                 }
             }
 
             //createTimeStamp
-            DateTime whenCreated =  ((DateTime) PropertyManager.GetSearchResultPropertyValue(res, "whenCreated")).ToLocalTime();
+            DateTime whenCreated = (
+                (DateTime)PropertyManager.GetSearchResultPropertyValue(res, "whenCreated")
+            ).ToLocalTime();
 
             //lastLogon (not supported)
             DateTime lastLogon = DateTime.MinValue;
@@ -2803,14 +3746,33 @@ namespace System.Web.Security
             DateTime lastActivity = DateTime.MinValue;
 
             //lastpwdchange (DateTime.FromFileTime cnoverts to Local time)
-            DateTime lastPasswordChange = DateTime.FromFileTime((Int64) PropertyManager.GetSearchResultPropertyValue(res, "pwdLastSet"));
+            DateTime lastPasswordChange = DateTime.FromFileTime(
+                (Int64)PropertyManager.GetSearchResultPropertyValue(res, "pwdLastSet")
+            );
 
-            return new ActiveDirectoryMembershipUser(Name, username, sidBinaryForm, providerUserKey, email, passwordQuestion, comment, isApproved, isLockedOut, whenCreated, lastLogon, lastActivity, lastPasswordChange, lastLockoutDate, true /* valuesAreUpdated */);
+            return new ActiveDirectoryMembershipUser(
+                Name,
+                username,
+                sidBinaryForm,
+                providerUserKey,
+                email,
+                passwordQuestion,
+                comment,
+                isApproved,
+                isLockedOut,
+                whenCreated,
+                lastLogon,
+                lastActivity,
+                lastPasswordChange,
+                lastLockoutDate,
+                true /* valuesAreUpdated */
+            );
         }
 
         private string GetEscapedRdn(string rdn)
         {
-            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname) new NativeComInterfaces.Pathname();
+            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname)
+                new NativeComInterfaces.Pathname();
             return pathCracker.GetEscapedElement(0, rdn);
         }
 
@@ -2821,7 +3783,10 @@ namespace System.Web.Security
 
         internal string GetEscapedFilterValue(string filterValue)
         {
-            return GetEscapedFilterValue(filterValue, true /* escapeWildChar */);
+            return GetEscapedFilterValue(
+                filterValue,
+                true /* escapeWildChar */
+            );
         }
 
         internal string GetEscapedFilterValue(string filterValue, bool escapeWildChar)
@@ -2830,10 +3795,11 @@ namespace System.Web.Security
             char[] specialCharacters = new char[] { '(', ')', '*', '\\' };
             char[] specialCharactersWithoutWildChar = new char[] { '(', ')', '\\' };
 
-            index = escapeWildChar ? filterValue.IndexOfAny(specialCharacters) : filterValue.IndexOfAny(specialCharactersWithoutWildChar);
+            index = escapeWildChar
+                ? filterValue.IndexOfAny(specialCharacters)
+                : filterValue.IndexOfAny(specialCharactersWithoutWildChar);
             if (index != -1)
             {
-
                 //
                 // if it contains any of the special characters then we
                 // need to escape those
@@ -2842,44 +3808,62 @@ namespace System.Web.Security
                 StringBuilder str = new StringBuilder(2 * filterValue.Length);
                 str.Append(filterValue.Substring(0, index));
 
-                for (int i = index; i < filterValue.Length; i++) {
+                for (int i = index; i < filterValue.Length; i++)
+                {
+                    switch (filterValue[i])
+                    {
+                        case ('('):
+                        {
+                            str.Append("\\28");
+                            break;
+                        }
 
-                switch (filterValue[i]) {
-                    case ('(') : {
-                        str.Append("\\28");
-                        break;
-                    }
+                        case (')'):
+                        {
+                            str.Append("\\29");
+                            break;
+                        }
 
-                    case (')') : {
-                        str.Append("\\29");
-                        break;
-                    }
+                        case ('*'):
+                        {
+                            if (escapeWildChar)
+                                str.Append("\\2A");
+                            else
+                                str.Append("*");
+                            break;
+                        }
 
-                    case ('*') : {
-                        if (escapeWildChar)
-                            str.Append("\\2A");
-                        else
-                            str.Append("*");
-                        break;
-                    }
+                        case ('\\'):
+                        {
+                            // this may be the escaped version of '*', i.e. "\2A" or "\2a"
+                            if (
+                                (escapeWildChar)
+                                || (
+                                    !(
+                                        ((filterValue.Length - i) >= 3)
+                                        && (filterValue[i + 1] == '2')
+                                        && (
+                                            (filterValue[i + 2] == 'A')
+                                            || (filterValue[i + 2] == 'a')
+                                        )
+                                    )
+                                )
+                            )
+                                str.Append("\\5C");
+                            else
+                                str.Append("\\");
+                            break;
+                        }
 
-                    case ('\\') : {
-                        // this may be the escaped version of '*', i.e. "\2A" or "\2a"
-                        if ((escapeWildChar) || (!(((filterValue.Length - i) >= 3) && (filterValue[i + 1] == '2') && ((filterValue[i + 2] == 'A') || (filterValue[i + 2] == 'a')))))
-                            str.Append("\\5C");
-                        else
-                            str.Append("\\");
-                        break;
-                    }
-
-                    default : {
-                        str.Append(filterValue[i]);
-                        break;
+                        default:
+                        {
+                            str.Append(filterValue[i]);
+                            break;
+                        }
                     }
                 }
-            }
 
-            return str.ToString();
+                return str.ToString();
             }
             else
             {
@@ -2892,16 +3876,47 @@ namespace System.Web.Security
         }
 
         //
-        // 
+        //
 
 
 
         private string GenerateAccountName()
         {
-            char[] accountNameEncodingTable = new char[] {'0','1','2','3','4','5','6','7',
-                                                                                '8','9','A','B','C','D','E','F',
-                                                                                'G','H','I','J','K','L','M','N',
-                                                                                'O','P','Q','R','S','T','U','V' };
+            char[] accountNameEncodingTable = new char[]
+            {
+                '0',
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+                '8',
+                '9',
+                'A',
+                'B',
+                'C',
+                'D',
+                'E',
+                'F',
+                'G',
+                'H',
+                'I',
+                'J',
+                'K',
+                'L',
+                'M',
+                'N',
+                'O',
+                'P',
+                'Q',
+                'R',
+                'S',
+                'T',
+                'U',
+                'V',
+            };
             //
             // account name will be 20 characters long;
             //
@@ -2943,21 +3958,20 @@ namespace System.Web.Security
             //
             // The next 6 chars are the least 30 bits of random32a (base 32 encoded)
             //
-            for (int i=1;i<=6;i++)
+            for (int i = 1; i <= 6; i++)
             {
+                //
+                // Lookup the char corresponding to the last 5 bits of
+                // random32a
+                //
 
-                 //
-                 // Lookup the char corresponding to the last 5 bits of
-                 // random32a
-                 //
+                accountName[i] = accountNameEncodingTable[(random32a & 0x1F)];
 
-                 accountName[i] = accountNameEncodingTable[(random32a & 0x1F)];
+                //
+                // Shift random32a right by 5 places
+                //
 
-                 //
-                 // Shift random32a right by 5 places
-                 //
-
-                 random32a = random32a >> 5;
+                random32a = random32a >> 5;
             }
 
             //
@@ -2971,32 +3985,32 @@ namespace System.Web.Security
             // bits of random32b and random32c.
             //
 
-            for (int i=8;i<=13;i++)
+            for (int i = 8; i <= 13; i++)
             {
-                 //
-                 // Lookup the char corresponding to the last 5 bits
-                 //
+                //
+                // Lookup the char corresponding to the last 5 bits
+                //
 
-                 accountName[i] = accountNameEncodingTable[(random32b & 0x1F)];
+                accountName[i] = accountNameEncodingTable[(random32b & 0x1F)];
 
-                 //
-                 // Shift  right by 5 places
-                 //
-                 random32b = random32b >> 5;
+                //
+                // Shift  right by 5 places
+                //
+                random32b = random32b >> 5;
             }
 
-            for (int i=13;i<=19;i++)
+            for (int i = 13; i <= 19; i++)
             {
-                 //
-                 // Lookup the char corresponding to the last 5 bits
-                 //
+                //
+                // Lookup the char corresponding to the last 5 bits
+                //
 
-                 accountName[i] = accountNameEncodingTable[(random32c & 0x1F)];
+                accountName[i] = accountNameEncodingTable[(random32c & 0x1F)];
 
-                 //
-                 // Shift  right by 5 places
-                 //
-                 random32c = random32c >> 5;
+                //
+                // Shift  right by 5 places
+                //
+                random32c = random32c >> 5;
             }
 
             return new String(accountName);
@@ -3010,24 +4024,38 @@ namespace System.Web.Security
             //
             if (directoryInfo.DirectoryType == DirectoryType.ADAM)
             {
-
                 try
                 {
-                    if ((directoryInfo.ConnectionProtection == ActiveDirectoryConnectionProtection.Ssl) && (directoryInfo.PortSpecified))
+                    if (
+                        (
+                            directoryInfo.ConnectionProtection
+                            == ActiveDirectoryConnectionProtection.Ssl
+                        ) && (directoryInfo.PortSpecified)
+                    )
                     {
                         userEntry.Options.PasswordPort = directoryInfo.Port;
-                        userEntry.Options.PasswordEncoding = PasswordEncodingMethod.PasswordEncodingSsl;
+                        userEntry.Options.PasswordEncoding =
+                            PasswordEncodingMethod.PasswordEncodingSsl;
                     }
-                    else if ((directoryInfo.ConnectionProtection == ActiveDirectoryConnectionProtection.SignAndSeal) || (directoryInfo.ConnectionProtection == ActiveDirectoryConnectionProtection.None))
+                    else if (
+                        (
+                            directoryInfo.ConnectionProtection
+                            == ActiveDirectoryConnectionProtection.SignAndSeal
+                        )
+                        || (
+                            directoryInfo.ConnectionProtection
+                            == ActiveDirectoryConnectionProtection.None
+                        )
+                    )
                     {
                         userEntry.Options.PasswordPort = directoryInfo.Port;
-                        userEntry.Options.PasswordEncoding = PasswordEncodingMethod.PasswordEncodingClear;
+                        userEntry.Options.PasswordEncoding =
+                            PasswordEncodingMethod.PasswordEncodingClear;
                     }
                 }
                 catch (COMException e)
                 {
-
-                    if (e.ErrorCode == unchecked((int) 0x80005008))
+                    if (e.ErrorCode == unchecked((int)0x80005008))
                     {
                         //
                         // If ADSI returns E_ADS_BAD_PARAMETER, it means we are running
@@ -3035,35 +4063,56 @@ namespace System.Web.Security
                         // Since ADSI will set the password port to 636 and password method to Ssl, we can
                         // ignore this error only if that is what we are trying to set
                         //
-                        if (!((directoryInfo.Port == DirectoryInformation.SSL_PORT) &&
-                            (directoryInfo.ConnectionProtection == ActiveDirectoryConnectionProtection.Ssl)))
-                            throw new ProviderException(SR.GetString(SR.ADMembership_unable_to_set_password_port));
+                        if (
+                            !(
+                                (directoryInfo.Port == DirectoryInformation.SSL_PORT)
+                                && (
+                                    directoryInfo.ConnectionProtection
+                                    == ActiveDirectoryConnectionProtection.Ssl
+                                )
+                            )
+                        )
+                            throw new ProviderException(
+                                SR.GetString(SR.ADMembership_unable_to_set_password_port)
+                            );
                     }
                     else
                         throw;
-
                 }
             }
         }
 
         private bool IsUpnUnique(string username)
         {
-
             //
             // NOTE: we do not need to revert context here since this method is always
             //           called after reverting any impersonated context
             //
 
-            DirectoryEntry rootEntry = new DirectoryEntry("GC://" + directoryInfo.ForestName, directoryInfo.GetUsername(), directoryInfo.GetPassword(), directoryInfo.AuthenticationTypes);
+            DirectoryEntry rootEntry = new DirectoryEntry(
+                "GC://" + directoryInfo.ForestName,
+                directoryInfo.GetUsername(),
+                directoryInfo.GetPassword(),
+                directoryInfo.AuthenticationTypes
+            );
 
             DirectorySearcher searcher = new DirectorySearcher(rootEntry);
-            searcher.Filter = "(&(objectCategory=person)(objectClass=user)(userPrincipalName=" + GetEscapedFilterValue(username) + "))";
+            searcher.Filter =
+                "(&(objectCategory=person)(objectClass=user)(userPrincipalName="
+                + GetEscapedFilterValue(username)
+                + "))";
             searcher.SearchScope = System.DirectoryServices.SearchScope.Subtree;
 
             if (directoryInfo.ClientSearchTimeout != -1)
-                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ClientSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ClientSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
             if (directoryInfo.ServerSearchTimeout != -1)
-                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ServerSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ServerSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
 
             bool result;
             try
@@ -3076,10 +4125,14 @@ namespace System.Web.Security
             }
 
             return result;
-
         }
 
-        private bool IsEmailUnique(DirectoryEntry containerEntry, string username, string email, bool existing)
+        private bool IsEmailUnique(
+            DirectoryEntry containerEntry,
+            string username,
+            string email,
+            bool existing
+        )
         {
             bool disposeContainerEntry = false;
 
@@ -3089,21 +4142,48 @@ namespace System.Web.Security
                 // NOTE: we do not need to revert context here since this method is always
                 //           called after reverting any impersonated context
                 //
-                containerEntry = new DirectoryEntry(directoryInfo.GetADsPath(directoryInfo.ContainerDN), directoryInfo.GetUsername(), directoryInfo.GetPassword(), directoryInfo.AuthenticationTypes);
+                containerEntry = new DirectoryEntry(
+                    directoryInfo.GetADsPath(directoryInfo.ContainerDN),
+                    directoryInfo.GetUsername(),
+                    directoryInfo.GetPassword(),
+                    directoryInfo.AuthenticationTypes
+                );
                 disposeContainerEntry = true;
             }
 
             DirectorySearcher searcher = new DirectorySearcher(containerEntry);
             if (existing)
-                searcher.Filter = "(&(objectCategory=person)(objectClass=user)(" + attributeMapUsername + "=*)(" + attributeMapEmail + "=" + GetEscapedFilterValue(email) + ")(!(" + GetEscapedRdn("cn=" + GetEscapedFilterValue(username)) + ")))";
+                searcher.Filter =
+                    "(&(objectCategory=person)(objectClass=user)("
+                    + attributeMapUsername
+                    + "=*)("
+                    + attributeMapEmail
+                    + "="
+                    + GetEscapedFilterValue(email)
+                    + ")(!("
+                    + GetEscapedRdn("cn=" + GetEscapedFilterValue(username))
+                    + ")))";
             else
-                searcher.Filter = "(&(objectCategory=person)(objectClass=user)(" + attributeMapUsername + "=*)(" + attributeMapEmail + "=" + GetEscapedFilterValue(email) + "))";
+                searcher.Filter =
+                    "(&(objectCategory=person)(objectClass=user)("
+                    + attributeMapUsername
+                    + "=*)("
+                    + attributeMapEmail
+                    + "="
+                    + GetEscapedFilterValue(email)
+                    + "))";
             searcher.SearchScope = System.DirectoryServices.SearchScope.Subtree;
 
             if (directoryInfo.ClientSearchTimeout != -1)
-                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ClientSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ClientTimeout = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ClientSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
             if (directoryInfo.ServerSearchTimeout != -1)
-                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(directoryInfo.ServerSearchTimeout, directoryInfo.TimeoutUnit);
+                searcher.ServerPageTimeLimit = DateTimeUtil.GetTimeoutFromTimeUnit(
+                    directoryInfo.ServerSearchTimeout,
+                    directoryInfo.TimeoutUnit
+                );
 
             bool result;
             try
@@ -3127,21 +4207,30 @@ namespace System.Web.Security
             if (String.IsNullOrEmpty(connectionStringName))
                 return null;
 
-            RuntimeConfig config = (appLevel) ? RuntimeConfig.GetAppConfig() : RuntimeConfig.GetConfig();
-            ConnectionStringSettings connObj = config.ConnectionStrings.ConnectionStrings[connectionStringName];
+            RuntimeConfig config =
+                (appLevel) ? RuntimeConfig.GetAppConfig() : RuntimeConfig.GetConfig();
+            ConnectionStringSettings connObj = config.ConnectionStrings.ConnectionStrings[
+                connectionStringName
+            ];
 
             if (connObj == null)
             {
                 //
                 // No connection string by the specified name
                 //
-                throw new ProviderException(SR.GetString(SR.Connection_string_not_found, connectionStringName));
+                throw new ProviderException(
+                    SR.GetString(SR.Connection_string_not_found, connectionStringName)
+                );
             }
 
             return connObj.ConnectionString;
         }
 
-        private string GetAttributeMapping(NameValueCollection config, string valueName, out int maxLength)
+        private string GetAttributeMapping(
+            NameValueCollection config,
+            string valueName,
+            out int maxLength
+        )
         {
             string sValue = config[valueName];
             maxLength = -1;
@@ -3152,12 +4241,18 @@ namespace System.Web.Security
             sValue = sValue.Trim();
 
             if (sValue.Length == 0)
-                throw new ProviderException(SR.GetString(SR.ADMembership_Schema_mappings_must_not_be_empty, valueName));
+                throw new ProviderException(
+                    SR.GetString(SR.ADMembership_Schema_mappings_must_not_be_empty, valueName)
+                );
 
             return GetValidatedSchemaMapping(valueName, sValue, out maxLength);
         }
 
-        private string GetValidatedSchemaMapping(string valueName, string attributeName, out int maxLength)
+        private string GetValidatedSchemaMapping(
+            string valueName,
+            string attributeName,
+            out int maxLength
+        )
         {
             if (String.Compare(valueName, "attributeMapUsername", StringComparison.Ordinal) == 0)
             {
@@ -3167,9 +4262,13 @@ namespace System.Web.Security
                     // username can only be mapped to "sAMAccountName", "userPrincipalName"
                     //
 
-                    if ((!StringUtil.EqualsIgnoreCase(attributeName, "sAMAccountName"))
-                        && (!StringUtil.EqualsIgnoreCase(attributeName, "userPrincipalName")))
-                        throw new ProviderException(SR.GetString(SR.ADMembership_Username_mapping_invalid));
+                    if (
+                        (!StringUtil.EqualsIgnoreCase(attributeName, "sAMAccountName"))
+                        && (!StringUtil.EqualsIgnoreCase(attributeName, "userPrincipalName"))
+                    )
+                        throw new ProviderException(
+                            SR.GetString(SR.ADMembership_Username_mapping_invalid)
+                        );
                 }
                 else
                 {
@@ -3177,8 +4276,9 @@ namespace System.Web.Security
                     // for ADAM, username can only be mapped to "userPrincipalName"
                     //
                     if (!StringUtil.EqualsIgnoreCase(attributeName, "userPrincipalName"))
-                        throw new ProviderException(SR.GetString(SR.ADMembership_Username_mapping_invalid_ADAM));
-
+                        throw new ProviderException(
+                            SR.GetString(SR.ADMembership_Username_mapping_invalid_ADAM)
+                        );
                 }
             }
             else
@@ -3187,13 +4287,21 @@ namespace System.Web.Security
                 // ensure that we are not already using this attribute
                 //
                 if (attributesInUse.Contains(attributeName))
-                    throw new ProviderException(SR.GetString(SR.ADMembership_mapping_not_unique, valueName, attributeName));
+                    throw new ProviderException(
+                        SR.GetString(SR.ADMembership_mapping_not_unique, valueName, attributeName)
+                    );
 
                 //
                 // ensure that the attribute exists on the user object
                 //
                 if (!userObjectAttributes.Contains(attributeName))
-                    throw new ProviderException(SR.GetString(SR.ADMembership_MappedAttribute_does_not_exist_on_user, attributeName, valueName));
+                    throw new ProviderException(
+                        SR.GetString(
+                            SR.ADMembership_MappedAttribute_does_not_exist_on_user,
+                            attributeName,
+                            valueName
+                        )
+                    );
             }
 
             try
@@ -3201,18 +4309,29 @@ namespace System.Web.Security
                 //
                 // verify that this is an existing property and it's syntax is correct
                 //
-                DirectoryEntry propertyEntry = new DirectoryEntry(directoryInfo.GetADsPath("schema") + "/"  + attributeName, directoryInfo.GetUsername(), directoryInfo.GetPassword(), directoryInfo.AuthenticationTypes);
+                DirectoryEntry propertyEntry = new DirectoryEntry(
+                    directoryInfo.GetADsPath("schema") + "/" + attributeName,
+                    directoryInfo.GetUsername(),
+                    directoryInfo.GetPassword(),
+                    directoryInfo.AuthenticationTypes
+                );
 
                 //
                 // to get the syntax we need to invoke the "syntax" property
                 //
-                string syntax = (string) propertyEntry.InvokeGet("Syntax");
+                string syntax = (string)propertyEntry.InvokeGet("Syntax");
 
                 //
                 // check that the syntax is as per the syntaxes table
                 //
-                if (!StringUtil.EqualsIgnoreCase(syntax, (string) syntaxes[valueName]))
-                    throw new ProviderException(SR.GetString(SR.ADMembership_Wrong_syntax, valueName, (string) syntaxes[valueName]));
+                if (!StringUtil.EqualsIgnoreCase(syntax, (string)syntaxes[valueName]))
+                    throw new ProviderException(
+                        SR.GetString(
+                            SR.ADMembership_Wrong_syntax,
+                            valueName,
+                            (string)syntaxes[valueName]
+                        )
+                    );
 
                 //
                 // if the type is "DirectoryString", then set the maxLength value if any
@@ -3222,7 +4341,7 @@ namespace System.Web.Security
                 {
                     try
                     {
-                        maxLength = (int) propertyEntry.InvokeGet("MaxRange");
+                        maxLength = (int)propertyEntry.InvokeGet("MaxRange");
                     }
                     catch (TargetInvocationException e)
                     {
@@ -3230,7 +4349,15 @@ namespace System.Web.Security
                         // if the inner exception is a comexception with error code 0x8007500d, then the max range is not set
                         // so we ignore that exception
                         //
-                        if (!((e.InnerException is COMException) && (((COMException)e.InnerException).ErrorCode == unchecked((int) 0x8000500d))))
+                        if (
+                            !(
+                                (e.InnerException is COMException)
+                                && (
+                                    ((COMException)e.InnerException).ErrorCode
+                                    == unchecked((int)0x8000500d)
+                                )
+                            )
+                        )
                             throw;
                     }
                 }
@@ -3239,19 +4366,29 @@ namespace System.Web.Security
                 // unless this is the username (which we already know is mapped
                 // to a single valued attribute), the attribute should be single valued
                 //
-                if (String.Compare(valueName, "attributeMapUsername", StringComparison.Ordinal) != 0)
+                if (
+                    String.Compare(valueName, "attributeMapUsername", StringComparison.Ordinal) != 0
+                )
                 {
-                    bool isMultiValued = (bool) propertyEntry.InvokeGet("MultiValued");
+                    bool isMultiValued = (bool)propertyEntry.InvokeGet("MultiValued");
 
                     if (isMultiValued)
-                        throw new ProviderException(SR.GetString(SR.ADMembership_attribute_not_single_valued, valueName));
+                        throw new ProviderException(
+                            SR.GetString(SR.ADMembership_attribute_not_single_valued, valueName)
+                        );
                 }
-
             }
             catch (COMException e)
             {
-                if (e.ErrorCode == unchecked((int) 0x80005000))
-                    throw new ProviderException(SR.GetString(SR.ADMembership_MappedAttribute_does_not_exist, attributeName, valueName), e);
+                if (e.ErrorCode == unchecked((int)0x80005000))
+                    throw new ProviderException(
+                        SR.GetString(
+                            SR.ADMembership_MappedAttribute_does_not_exist,
+                            attributeName,
+                            valueName
+                        ),
+                        e
+                    );
                 else
                     throw;
             }
@@ -3265,11 +4402,16 @@ namespace System.Web.Security
         private int GetRangeUpperForSchemaAttribute(string attributeName)
         {
             int rangeUpper = -1;
-            DirectoryEntry propertyEntry = new DirectoryEntry(directoryInfo.GetADsPath("schema") + "/"  + attributeName, directoryInfo.GetUsername(), directoryInfo.GetPassword(), directoryInfo.AuthenticationTypes);
+            DirectoryEntry propertyEntry = new DirectoryEntry(
+                directoryInfo.GetADsPath("schema") + "/" + attributeName,
+                directoryInfo.GetUsername(),
+                directoryInfo.GetPassword(),
+                directoryInfo.AuthenticationTypes
+            );
 
             try
             {
-                rangeUpper = (int) propertyEntry.InvokeGet("MaxRange");
+                rangeUpper = (int)propertyEntry.InvokeGet("MaxRange");
             }
             catch (TargetInvocationException e)
             {
@@ -3277,7 +4419,14 @@ namespace System.Web.Security
                 // if the inner exception is a comexception with error code 0x8007500d, then the max range is not set
                 // so we ignore that exception
                 //
-                if (!((e.InnerException is COMException) && (((COMException)e.InnerException).ErrorCode == unchecked((int) 0x8000500d))))
+                if (
+                    !(
+                        (e.InnerException is COMException)
+                        && (
+                            ((COMException)e.InnerException).ErrorCode == unchecked((int)0x8000500d)
+                        )
+                    )
+                )
                     throw;
             }
 
@@ -3286,7 +4435,12 @@ namespace System.Web.Security
 
         private Hashtable GetUserObjectAttributes()
         {
-            DirectoryEntry de = new DirectoryEntry(directoryInfo.GetADsPath("schema") + "/user", directoryInfo.GetUsername(), directoryInfo.GetPassword(), directoryInfo.AuthenticationTypes);
+            DirectoryEntry de = new DirectoryEntry(
+                directoryInfo.GetADsPath("schema") + "/user",
+                directoryInfo.GetUsername(),
+                directoryInfo.GetPassword(),
+                directoryInfo.AuthenticationTypes
+            );
             object value = null;
             bool listEmpty = false;
             Hashtable attributes = new Hashtable(StringComparer.OrdinalIgnoreCase);
@@ -3297,7 +4451,7 @@ namespace System.Web.Security
             }
             catch (COMException e)
             {
-                if (e.ErrorCode == unchecked((int) 0x8000500D))
+                if (e.ErrorCode == unchecked((int)0x8000500D))
                 {
                     listEmpty = true;
                 }
@@ -3309,11 +4463,11 @@ namespace System.Web.Security
             {
                 if (value is ICollection)
                 {
-                    foreach (string attribute in (ICollection) value)
+                    foreach (string attribute in (ICollection)value)
                     {
                         if (!attributes.Contains(attribute))
                             attributes.Add(attribute, null);
-                     }
+                    }
                 }
                 else
                 {
@@ -3331,7 +4485,7 @@ namespace System.Web.Security
             }
             catch (COMException e)
             {
-                if (e.ErrorCode == unchecked((int) 0x8000500D))
+                if (e.ErrorCode == unchecked((int)0x8000500D))
                 {
                     listEmpty = true;
                 }
@@ -3343,11 +4497,11 @@ namespace System.Web.Security
             {
                 if (value is ICollection)
                 {
-                    foreach (string attribute in (ICollection) value)
+                    foreach (string attribute in (ICollection)value)
                     {
                         if (!attributes.Contains(attribute))
                             attributes.Add(attribute, null);
-                     }
+                    }
                 }
                 else
                 {
@@ -3358,24 +4512,26 @@ namespace System.Web.Security
             }
 
             return attributes;
-
         }
 
-        private DateTime GetDateTimeFromLargeInteger(NativeComInterfaces.IAdsLargeInteger largeIntValue)
+        private DateTime GetDateTimeFromLargeInteger(
+            NativeComInterfaces.IAdsLargeInteger largeIntValue
+        )
         {
             //
             // Convert large integer to int64 value
             //
-            Int64 int64Value = largeIntValue.HighPart * 0x100000000 + (uint) largeIntValue.LowPart;
+            Int64 int64Value = largeIntValue.HighPart * 0x100000000 + (uint)largeIntValue.LowPart;
 
             //
             // Return the DateTime in utc
             //
             return DateTime.FromFileTimeUtc(int64Value);
-
         }
 
-        private NativeComInterfaces.IAdsLargeInteger GetLargeIntegerFromDateTime(DateTime dateTimeValue)
+        private NativeComInterfaces.IAdsLargeInteger GetLargeIntegerFromDateTime(
+            DateTime dateTimeValue
+        )
         {
             //
             // Convert DateTime value to utc file time
@@ -3385,9 +4541,10 @@ namespace System.Web.Security
             //
             // convert to large integer
             //
-            NativeComInterfaces.IAdsLargeInteger largeIntValue = (NativeComInterfaces.IAdsLargeInteger) new NativeComInterfaces.LargeInteger();
-            largeIntValue.HighPart = (int) (int64Value >> 32);
-            largeIntValue.LowPart = (int) (int64Value & 0xFFFFFFFF);
+            NativeComInterfaces.IAdsLargeInteger largeIntValue =
+                (NativeComInterfaces.IAdsLargeInteger)new NativeComInterfaces.LargeInteger();
+            largeIntValue.HighPart = (int)(int64Value >> 32);
+            largeIntValue.LowPart = (int)(int64Value & 0xFFFFFFFF);
 
             return largeIntValue;
         }
@@ -3418,9 +4575,12 @@ namespace System.Web.Security
 
             byte[] bAll = DecryptPassword(bEncryptedData);
 
-            return Encoding.Unicode.GetString(bAll, AD_SALT_SIZE_IN_BYTES, bAll.Length - AD_SALT_SIZE_IN_BYTES);
+            return Encoding.Unicode.GetString(
+                bAll,
+                AD_SALT_SIZE_IN_BYTES,
+                bAll.Length - AD_SALT_SIZE_IN_BYTES
+            );
         }
-
     }
 
     internal sealed class DirectoryInformation
@@ -3432,7 +4592,8 @@ namespace System.Web.Security
         private int port = 389;
         private bool portSpecified = false;
         private DirectoryType directoryType = DirectoryType.Unknown;
-        private ActiveDirectoryConnectionProtection connectionProtection = ActiveDirectoryConnectionProtection.None;
+        private ActiveDirectoryConnectionProtection connectionProtection =
+            ActiveDirectoryConnectionProtection.None;
         private bool concurrentBindSupported = false;
         private int clientSearchTimeout = -1;
         private int serverSearchTimeout = -1;
@@ -3447,8 +4608,8 @@ namespace System.Web.Security
         private string domainName = null;
         private bool isServer = false;
 
-        private const string LDAP_CAP_ACTIVE_DIRECTORY_ADAM_OID ="1.2.840.113556.1.4.1851";
-        private const string LDAP_CAP_ACTIVE_DIRECTORY_OID ="1.2.840.113556.1.4.800";
+        private const string LDAP_CAP_ACTIVE_DIRECTORY_ADAM_OID = "1.2.840.113556.1.4.1851";
+        private const string LDAP_CAP_ACTIVE_DIRECTORY_OID = "1.2.840.113556.1.4.800";
         private const string LDAP_SERVER_FAST_BIND_OID = "1.2.840.113556.1.4.1781";
         internal const int SSL_PORT = 636;
         private const int GC_PORT = 3268;
@@ -3460,27 +4621,42 @@ namespace System.Web.Security
         // columns are indexed by type of credentials (see CredentialType enum)
         //
         AuthenticationTypes[,] authTypes = new AuthenticationTypes[,]
-                    {{AuthenticationTypes.None, AuthenticationTypes.None},
-                      {AuthenticationTypes.Secure | AuthenticationTypes.SecureSocketsLayer , AuthenticationTypes.SecureSocketsLayer },
-                      {AuthenticationTypes.Secure | AuthenticationTypes.Signing | AuthenticationTypes.Sealing, AuthenticationTypes.Secure | AuthenticationTypes.Signing | AuthenticationTypes.Sealing}};
+        {
+            { AuthenticationTypes.None, AuthenticationTypes.None },
+            {
+                AuthenticationTypes.Secure | AuthenticationTypes.SecureSocketsLayer,
+                AuthenticationTypes.SecureSocketsLayer,
+            },
+            {
+                AuthenticationTypes.Secure
+                    | AuthenticationTypes.Signing
+                    | AuthenticationTypes.Sealing,
+                AuthenticationTypes.Secure
+                    | AuthenticationTypes.Signing
+                    | AuthenticationTypes.Sealing,
+            },
+        };
 
         AuthType[,] ldapAuthTypes = new AuthType[,]
-                     {{AuthType.Negotiate, AuthType.Basic},
-                      {AuthType.Negotiate, AuthType.Basic},
-                      {AuthType.Negotiate, AuthType.Negotiate}};
-
-        internal DirectoryInformation(string adspath,
-                                                            NetworkCredential credentials,
-                                                            string connProtection,
-                                                            int clientSearchTimeout,
-                                                            int serverSearchTimeout,
-                                                            bool enablePasswordReset,
-                                                            TimeUnit timeUnit)
         {
+            { AuthType.Negotiate, AuthType.Basic },
+            { AuthType.Negotiate, AuthType.Basic },
+            { AuthType.Negotiate, AuthType.Negotiate },
+        };
 
-           //
-           // all parameters have already been validated at this point
-           //
+        internal DirectoryInformation(
+            string adspath,
+            NetworkCredential credentials,
+            string connProtection,
+            int clientSearchTimeout,
+            int serverSearchTimeout,
+            bool enablePasswordReset,
+            TimeUnit timeUnit
+        )
+        {
+            //
+            // all parameters have already been validated at this point
+            //
 
             this.adspath = adspath;
             this.credentials = credentials;
@@ -3500,14 +4676,16 @@ namespace System.Web.Security
             //
             // Parse out the server/domain information
             //
-            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname) new NativeComInterfaces.Pathname();
+            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname)
+                new NativeComInterfaces.Pathname();
 
-            try {
+            try
+            {
                 pathCracker.Set(adspath, NativeComInterfaces.ADS_SETTYPE_FULL);
             }
             catch (COMException e)
             {
-                if (e.ErrorCode == unchecked((int) 0x80005000))
+                if (e.ErrorCode == unchecked((int)0x80005000))
                     throw new ProviderException(SR.GetString(SR.ADMembership_invalid_path));
                 else
                     throw;
@@ -3520,14 +4698,18 @@ namespace System.Web.Security
             }
             catch (COMException e)
             {
-                if (e.ErrorCode == unchecked((int) 0x80005000))
-                    throw new ProviderException(SR.GetString(SR.ADMembership_ServerlessADsPath_not_supported));
+                if (e.ErrorCode == unchecked((int)0x80005000))
+                    throw new ProviderException(
+                        SR.GetString(SR.ADMembership_ServerlessADsPath_not_supported)
+                    );
                 else
                     throw;
             }
             Debug.Assert(serverName != null);
 
-            creationContainerDN = containerDN = pathCracker.Retrieve(NativeComInterfaces.ADS_FORMAT_X500_DN);
+            creationContainerDN = containerDN = pathCracker.Retrieve(
+                NativeComInterfaces.ADS_FORMAT_X500_DN
+            );
 
             //
             // Parse out the port number if specified
@@ -3559,13 +4741,23 @@ namespace System.Web.Security
                 // first try with simple bind
                 if (!IsDefaultCredential())
                 {
-
-                    authenticationType = GetAuthenticationTypes(ActiveDirectoryConnectionProtection.Ssl, CredentialsType.NonWindows);
-                    ldapAuthType = GetLdapAuthenticationTypes(ActiveDirectoryConnectionProtection.Ssl, CredentialsType.NonWindows);
+                    authenticationType = GetAuthenticationTypes(
+                        ActiveDirectoryConnectionProtection.Ssl,
+                        CredentialsType.NonWindows
+                    );
+                    ldapAuthType = GetLdapAuthenticationTypes(
+                        ActiveDirectoryConnectionProtection.Ssl,
+                        CredentialsType.NonWindows
+                    );
 
                     try
                     {
-                        rootdse = new DirectoryEntry(GetADsPath("rootdse"), GetUsername(), GetPassword(), authenticationType);
+                        rootdse = new DirectoryEntry(
+                            GetADsPath("rootdse"),
+                            GetUsername(),
+                            GetPassword(),
+                            authenticationType
+                        );
                         // this will force a bind
                         rootdse.RefreshCache();
                         this.connectionProtection = ActiveDirectoryConnectionProtection.Ssl;
@@ -3577,22 +4769,21 @@ namespace System.Web.Security
                     }
                     catch (COMException ce)
                     {
-
-                        if (ce.ErrorCode == unchecked((int) 0x8007052e))
+                        if (ce.ErrorCode == unchecked((int)0x8007052e))
                         {
                             //
                             // this could be an ADAM target with windows user (in that case simple bind will not work)
                             //
                             trySslWithSecureAuth = true;
                         }
-                        else if (ce.ErrorCode == unchecked((int) 0x8007203a))
+                        else if (ce.ErrorCode == unchecked((int)0x8007203a))
                         {
                             // server is not operational error, do nothing, we need to fall back to SignAndSeal
                             trySignAndSeal = true;
                         }
                         else
                             throw;
-                     }
+                    }
                 }
                 else
                 {
@@ -3602,13 +4793,23 @@ namespace System.Web.Security
 
                 if (trySslWithSecureAuth)
                 {
-
-                    authenticationType = GetAuthenticationTypes(ActiveDirectoryConnectionProtection.Ssl, CredentialsType.Windows);
-                    ldapAuthType = GetLdapAuthenticationTypes(ActiveDirectoryConnectionProtection.Ssl, CredentialsType.Windows);
+                    authenticationType = GetAuthenticationTypes(
+                        ActiveDirectoryConnectionProtection.Ssl,
+                        CredentialsType.Windows
+                    );
+                    ldapAuthType = GetLdapAuthenticationTypes(
+                        ActiveDirectoryConnectionProtection.Ssl,
+                        CredentialsType.Windows
+                    );
 
                     try
                     {
-                        rootdse = new DirectoryEntry(GetADsPath("rootdse"), GetUsername(), GetPassword(), authenticationType);
+                        rootdse = new DirectoryEntry(
+                            GetADsPath("rootdse"),
+                            GetUsername(),
+                            GetPassword(),
+                            authenticationType
+                        );
                         // this will force a bind
                         rootdse.RefreshCache();
                         this.connectionProtection = ActiveDirectoryConnectionProtection.Ssl;
@@ -3617,35 +4818,50 @@ namespace System.Web.Security
                             port = SSL_PORT;
                             portSpecified = true;
                         }
-
                     }
                     catch (COMException ce)
                     {
-                        if (ce.ErrorCode == unchecked((int) 0x8007203a))
+                        if (ce.ErrorCode == unchecked((int)0x8007203a))
                         {
                             // server is not operational error, do nothing, we need to fall back to SignAndSeal
                             trySignAndSeal = true;
                         }
                         else
                             throw;
-                     }
-
+                    }
                 }
 
                 if (trySignAndSeal)
                 {
-                    authenticationType = GetAuthenticationTypes(ActiveDirectoryConnectionProtection.SignAndSeal, CredentialsType.Windows);
-                    ldapAuthType = GetLdapAuthenticationTypes(ActiveDirectoryConnectionProtection.SignAndSeal, CredentialsType.Windows);
+                    authenticationType = GetAuthenticationTypes(
+                        ActiveDirectoryConnectionProtection.SignAndSeal,
+                        CredentialsType.Windows
+                    );
+                    ldapAuthType = GetLdapAuthenticationTypes(
+                        ActiveDirectoryConnectionProtection.SignAndSeal,
+                        CredentialsType.Windows
+                    );
 
                     try
                     {
-                        rootdse = new DirectoryEntry(GetADsPath("rootdse"), GetUsername(), GetPassword(), authenticationType);
+                        rootdse = new DirectoryEntry(
+                            GetADsPath("rootdse"),
+                            GetUsername(),
+                            GetPassword(),
+                            authenticationType
+                        );
                         rootdse.RefreshCache();
                         this.connectionProtection = ActiveDirectoryConnectionProtection.SignAndSeal;
                     }
                     catch (COMException e)
                     {
-                        throw new ProviderException(SR.GetString(SR.ADMembership_Secure_connection_not_established, e.Message), e);
+                        throw new ProviderException(
+                            SR.GetString(
+                                SR.ADMembership_Secure_connection_not_established,
+                                e.Message
+                            ),
+                            e
+                        );
                     }
                 }
             }
@@ -3661,14 +4877,26 @@ namespace System.Web.Security
                 // simple bind)
                 //
                 if (IsDefaultCredential())
-                    throw new NotSupportedException(SR.GetString(SR.ADMembership_Default_Creds_not_supported));
+                    throw new NotSupportedException(
+                        SR.GetString(SR.ADMembership_Default_Creds_not_supported)
+                    );
 
                 // simple bind
-                authenticationType = GetAuthenticationTypes(connectionProtection, CredentialsType.NonWindows);
-                ldapAuthType = GetLdapAuthenticationTypes(connectionProtection, CredentialsType.NonWindows);
+                authenticationType = GetAuthenticationTypes(
+                    connectionProtection,
+                    CredentialsType.NonWindows
+                );
+                ldapAuthType = GetLdapAuthenticationTypes(
+                    connectionProtection,
+                    CredentialsType.NonWindows
+                );
 
-                rootdse = new DirectoryEntry(GetADsPath("rootdse"), GetUsername(), GetPassword(), authenticationType);
-
+                rootdse = new DirectoryEntry(
+                    GetADsPath("rootdse"),
+                    GetUsername(),
+                    GetPassword(),
+                    authenticationType
+                );
             }
 
             //
@@ -3676,7 +4904,12 @@ namespace System.Web.Security
             // checking the supported capabilities
             //
             if (rootdse == null)
-                rootdse = new DirectoryEntry(GetADsPath("RootDSE"), GetUsername(), GetPassword(), authenticationType);
+                rootdse = new DirectoryEntry(
+                    GetADsPath("RootDSE"),
+                    GetUsername(),
+                    GetPassword(),
+                    authenticationType
+                );
             directoryType = GetDirectoryType();
 
             //
@@ -3684,8 +4917,13 @@ namespace System.Web.Security
             // as sign and seal, then we should throw an ProviderException. This is becuase validate user will always fail for ADAM
             // because ADAM does not support secure authentication for ADAM users.
             //
-            if ((directoryType == DirectoryType.ADAM) && (this.connectionProtection == ActiveDirectoryConnectionProtection.SignAndSeal))
-                throw new ProviderException(SR.GetString(SR.ADMembership_Ssl_connection_not_established));
+            if (
+                (directoryType == DirectoryType.ADAM)
+                && (this.connectionProtection == ActiveDirectoryConnectionProtection.SignAndSeal)
+            )
+                throw new ProviderException(
+                    SR.GetString(SR.ADMembership_Ssl_connection_not_established)
+                );
 
             //
             // for AD, we need to block the GC ports
@@ -3703,22 +4941,34 @@ namespace System.Web.Security
                 {
                     containerDN = (string)rootdse.Properties["defaultNamingContext"].Value;
                     if (containerDN == null)
-                        throw new ProviderException(SR.GetString(SR.ADMembership_DefContainer_not_specified));
+                        throw new ProviderException(
+                            SR.GetString(SR.ADMembership_DefContainer_not_specified)
+                        );
 
                     //
                     // we will create users in the default users container, check that it exists
                     //
-                    string wkUsersContainerPath = GetADsPath("<WKGUID=" + GUID_USERS_CONTAINER_W + "," + containerDN + ">");
-                    DirectoryEntry containerEntry = new DirectoryEntry(wkUsersContainerPath, GetUsername(), GetPassword(), authenticationType);
+                    string wkUsersContainerPath = GetADsPath(
+                        "<WKGUID=" + GUID_USERS_CONTAINER_W + "," + containerDN + ">"
+                    );
+                    DirectoryEntry containerEntry = new DirectoryEntry(
+                        wkUsersContainerPath,
+                        GetUsername(),
+                        GetPassword(),
+                        authenticationType
+                    );
 
                     try
                     {
-                        creationContainerDN = (string) PropertyManager.GetPropertyValue(containerEntry, "distinguishedName");
+                        creationContainerDN = (string)
+                            PropertyManager.GetPropertyValue(containerEntry, "distinguishedName");
                     }
                     catch (COMException ce)
                     {
-                        if (ce.ErrorCode == unchecked((int) 0x80072030))
-                            throw new ProviderException(SR.GetString(SR.ADMembership_DefContainer_does_not_exist));
+                        if (ce.ErrorCode == unchecked((int)0x80072030))
+                            throw new ProviderException(
+                                SR.GetString(SR.ADMembership_DefContainer_does_not_exist)
+                            );
                         else
                             throw;
                     }
@@ -3726,7 +4976,9 @@ namespace System.Web.Security
                 else
                 {
                     // container must be specified for ADAM
-                    throw new ProviderException(SR.GetString(SR.ADMembership_Container_must_be_specified));
+                    throw new ProviderException(
+                        SR.GetString(SR.ADMembership_Container_must_be_specified)
+                    );
                 }
             }
             else
@@ -3734,16 +4986,24 @@ namespace System.Web.Security
                 //
                 // Normalize the container name (incase it was specified as GUID or WKGUID)
                 //
-                DirectoryEntry containerEntry = new DirectoryEntry(GetADsPath(containerDN), GetUsername(), GetPassword(), authenticationType);
+                DirectoryEntry containerEntry = new DirectoryEntry(
+                    GetADsPath(containerDN),
+                    GetUsername(),
+                    GetPassword(),
+                    authenticationType
+                );
 
                 try
                 {
-                    creationContainerDN = containerDN = (string) PropertyManager.GetPropertyValue(containerEntry, "distinguishedName");
+                    creationContainerDN = containerDN = (string)
+                        PropertyManager.GetPropertyValue(containerEntry, "distinguishedName");
                 }
                 catch (COMException ce)
                 {
-                    if (ce.ErrorCode == unchecked((int) 0x80072030))
-                        throw new ProviderException(SR.GetString(SR.ADMembership_Container_does_not_exist));
+                    if (ce.ErrorCode == unchecked((int)0x80072030))
+                        throw new ProviderException(
+                            SR.GetString(SR.ADMembership_Container_does_not_exist)
+                        );
                     else
                         throw;
                 }
@@ -3755,15 +5015,25 @@ namespace System.Web.Security
             //            bypass the referral chasing which is automatic in S.DS)
             //
 
-            LdapConnection tempConnection = new LdapConnection(new LdapDirectoryIdentifier(serverName + ":" + port), GetCredentialsWithDomain(credentials), ldapAuthType);
+            LdapConnection tempConnection = new LdapConnection(
+                new LdapDirectoryIdentifier(serverName + ":" + port),
+                GetCredentialsWithDomain(credentials),
+                ldapAuthType
+            );
             tempConnection.SessionOptions.ProtocolVersion = 3;
 
             try
             {
-                tempConnection.SessionOptions.ReferralChasing = System.DirectoryServices.Protocols.ReferralChasingOptions.None;
-                SetSessionOptionsForSecureConnection(tempConnection, false /*useConcurrentBind */);
+                tempConnection.SessionOptions.ReferralChasing = System
+                    .DirectoryServices
+                    .Protocols
+                    .ReferralChasingOptions
+                    .None;
+                SetSessionOptionsForSecureConnection(
+                    tempConnection,
+                    false /*useConcurrentBind */
+                );
                 tempConnection.Bind();
-
 
                 SearchRequest request = new SearchRequest();
                 request.DistinguishedName = containerDN;
@@ -3778,18 +5048,26 @@ namespace System.Web.Security
                 SearchResponse response;
                 try
                 {
-                    response = (SearchResponse) tempConnection.SendRequest(request);
-                    if (response.ResultCode == ResultCode.Referral || response.ResultCode ==  ResultCode.NoSuchObject)
-                        throw new ProviderException(SR.GetString(SR.ADMembership_Container_does_not_exist));
+                    response = (SearchResponse)tempConnection.SendRequest(request);
+                    if (
+                        response.ResultCode == ResultCode.Referral
+                        || response.ResultCode == ResultCode.NoSuchObject
+                    )
+                        throw new ProviderException(
+                            SR.GetString(SR.ADMembership_Container_does_not_exist)
+                        );
                     else if (response.ResultCode != ResultCode.Success)
                         throw new ProviderException(response.ErrorMessage);
                 }
                 catch (DirectoryOperationException oe)
                 {
-                    SearchResponse errorResponse = (SearchResponse) oe.Response;
+                    SearchResponse errorResponse = (SearchResponse)oe.Response;
                     if (errorResponse.ResultCode == ResultCode.NoSuchObject)
-                        throw new ProviderException(SR.GetString(SR.ADMembership_Container_does_not_exist));
-                    else throw;
+                        throw new ProviderException(
+                            SR.GetString(SR.ADMembership_Container_does_not_exist)
+                        );
+                    else
+                        throw;
                 }
 
                 //
@@ -3797,16 +5075,20 @@ namespace System.Web.Security
                 //
                 DirectoryAttribute objectClass = response.Entries[0].Attributes["objectClass"];
                 if (!ContainerIsSuperiorOfUser(objectClass))
-                    throw new ProviderException(SR.GetString(SR.ADMembership_Container_not_superior));
+                    throw new ProviderException(
+                        SR.GetString(SR.ADMembership_Container_not_superior)
+                    );
 
                 //
                 // Determine whether concurrent bind is supported
                 //
-                if ((connectionProtection == ActiveDirectoryConnectionProtection.None) || (connectionProtection == ActiveDirectoryConnectionProtection.Ssl))
+                if (
+                    (connectionProtection == ActiveDirectoryConnectionProtection.None)
+                    || (connectionProtection == ActiveDirectoryConnectionProtection.Ssl)
+                )
                 {
                     this.concurrentBindSupported = IsConcurrentBindSupported(tempConnection);
                 }
-
             }
             finally
             {
@@ -3825,9 +5107,20 @@ namespace System.Web.Security
                 if (enablePasswordReset)
                 {
                     // for AD, get the lockout duration for user account auto unlock
-                    DirectoryEntry de = new DirectoryEntry(GetADsPath((string) PropertyManager.GetPropertyValue(rootdse, "defaultNamingContext")), GetUsername(), GetPassword(), AuthenticationTypes);
-                    NativeComInterfaces.IAdsLargeInteger largeIntValue = (NativeComInterfaces.IAdsLargeInteger) PropertyManager.GetPropertyValue(de, "lockoutDuration");
-                    Int64 int64Value = largeIntValue.HighPart * 0x100000000 + (uint) largeIntValue.LowPart;
+                    DirectoryEntry de = new DirectoryEntry(
+                        GetADsPath(
+                            (string)
+                                PropertyManager.GetPropertyValue(rootdse, "defaultNamingContext")
+                        ),
+                        GetUsername(),
+                        GetPassword(),
+                        AuthenticationTypes
+                    );
+                    NativeComInterfaces.IAdsLargeInteger largeIntValue =
+                        (NativeComInterfaces.IAdsLargeInteger)
+                            PropertyManager.GetPropertyValue(de, "lockoutDuration");
+                    Int64 int64Value =
+                        largeIntValue.HighPart * 0x100000000 + (uint)largeIntValue.LowPart;
 
                     // int64Value is the negative of the number of 100 nanoseconds interval that makes up the lockout duration
                     adLockoutDuration = new TimeSpan(-int64Value);
@@ -3914,7 +5207,12 @@ namespace System.Web.Security
         {
             if (!isServer)
             {
-                DirectoryContext context = new DirectoryContext(DirectoryContextType.Domain, serverName, GetUsername(), GetPassword());
+                DirectoryContext context = new DirectoryContext(
+                    DirectoryContextType.Domain,
+                    serverName,
+                    GetUsername(),
+                    GetPassword()
+                );
                 try
                 {
                     Domain domain = Domain.GetDomain(context);
@@ -3930,7 +5228,12 @@ namespace System.Web.Security
 
             if (isServer)
             {
-                DirectoryContext context = new DirectoryContext(DirectoryContextType.DirectoryServer, serverName, GetUsername(), GetPassword());
+                DirectoryContext context = new DirectoryContext(
+                    DirectoryContextType.DirectoryServer,
+                    serverName,
+                    GetUsername(),
+                    GetPassword()
+                );
                 try
                 {
                     Domain domain = Domain.GetDomain(context);
@@ -3940,7 +5243,9 @@ namespace System.Web.Security
                 catch (ActiveDirectoryObjectNotFoundException)
                 {
                     // we were unable to contact the domain or server
-                    throw new ProviderException(SR.GetString(SR.ADMembership_unable_to_contact_domain));
+                    throw new ProviderException(
+                        SR.GetString(SR.ADMembership_unable_to_contact_domain)
+                    );
                 }
             }
         }
@@ -3966,10 +5271,15 @@ namespace System.Web.Security
         {
             LdapConnection newConnection = null;
 
-            newConnection = new LdapConnection(new LdapDirectoryIdentifier(serverName + ":" + port));
+            newConnection = new LdapConnection(
+                new LdapDirectoryIdentifier(serverName + ":" + port)
+            );
             newConnection.AuthType = authType;
             newConnection.SessionOptions.ProtocolVersion = 3;
-            SetSessionOptionsForSecureConnection(newConnection, true /* useConcurrentBind */);
+            SetSessionOptionsForSecureConnection(
+                newConnection,
+                true /* useConcurrentBind */
+            );
 
             return newConnection;
         }
@@ -3997,19 +5307,22 @@ namespace System.Web.Security
             // DN of the object
             //
             Debug.Assert(dn != null);
-            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname) new NativeComInterfaces.Pathname();
+            NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname)
+                new NativeComInterfaces.Pathname();
             pathCracker.Set(dn, NativeComInterfaces.ADS_SETTYPE_DN);
             pathCracker.EscapedMode = NativeComInterfaces.ADS_ESCAPEDMODE_ON;
             path = path + "/" + pathCracker.Retrieve(NativeComInterfaces.ADS_FORMAT_X500_DN);
 
             return path;
-
         }
 
-        internal void SetSessionOptionsForSecureConnection(LdapConnection connection, bool useConcurrentBind)
+        internal void SetSessionOptionsForSecureConnection(
+            LdapConnection connection,
+            bool useConcurrentBind
+        )
         {
-
-            if (connectionProtection == ActiveDirectoryConnectionProtection.Ssl) {
+            if (connectionProtection == ActiveDirectoryConnectionProtection.Ssl)
+            {
                 connection.SessionOptions.SecureSocketLayer = true;
             }
             else if (connectionProtection == ActiveDirectoryConnectionProtection.SignAndSeal)
@@ -4041,8 +5354,8 @@ namespace System.Web.Security
             }
         }
 
-        [EnvironmentPermission(SecurityAction.Assert, Read="USERNAME")]
-        [SecurityPermission(SecurityAction.Assert, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [EnvironmentPermission(SecurityAction.Assert, Read = "USERNAME")]
+        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
         internal string GetUsername()
         {
             if (credentials == null)
@@ -4051,14 +5364,17 @@ namespace System.Web.Security
             if (credentials.UserName == null)
                 return null;
 
-            if (credentials.UserName.Length == 0 && (credentials.Password == null || credentials.Password.Length == 0))
+            if (
+                credentials.UserName.Length == 0
+                && (credentials.Password == null || credentials.Password.Length == 0)
+            )
                 return null;
 
             return this.credentials.UserName;
         }
 
-        [EnvironmentPermission(SecurityAction.Assert, Read="USERNAME")]
-        [SecurityPermission(SecurityAction.Assert, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [EnvironmentPermission(SecurityAction.Assert, Read = "USERNAME")]
+        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
         internal string GetPassword()
         {
             if (credentials == null)
@@ -4067,34 +5383,46 @@ namespace System.Web.Security
             if (credentials.Password == null)
                 return null;
 
-            if (credentials.Password.Length == 0 && (credentials.UserName == null || credentials.UserName.Length == 0))
+            if (
+                credentials.Password.Length == 0
+                && (credentials.UserName == null || credentials.UserName.Length == 0)
+            )
                 return null;
 
             return this.credentials.Password;
         }
 
-        internal AuthenticationTypes GetAuthenticationTypes(ActiveDirectoryConnectionProtection connectionProtection, CredentialsType type)
+        internal AuthenticationTypes GetAuthenticationTypes(
+            ActiveDirectoryConnectionProtection connectionProtection,
+            CredentialsType type
+        )
         {
-            return authTypes[(int) connectionProtection, (int) type];
+            return authTypes[(int)connectionProtection, (int)type];
         }
 
-        internal AuthType GetLdapAuthenticationTypes(ActiveDirectoryConnectionProtection connectionProtection, CredentialsType type)
+        internal AuthType GetLdapAuthenticationTypes(
+            ActiveDirectoryConnectionProtection connectionProtection,
+            CredentialsType type
+        )
         {
-            return ldapAuthTypes[(int) connectionProtection, (int) type];
+            return ldapAuthTypes[(int)connectionProtection, (int)type];
         }
 
-        [EnvironmentPermission(SecurityAction.Assert, Read="USERNAME")]
-        [SecurityPermission(SecurityAction.Assert, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [EnvironmentPermission(SecurityAction.Assert, Read = "USERNAME")]
+        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
         internal bool IsDefaultCredential()
         {
-            if ((credentials.UserName == null || credentials.UserName.Length == 0) && (credentials.Password == null || credentials.Password.Length == 0))
+            if (
+                (credentials.UserName == null || credentials.UserName.Length == 0)
+                && (credentials.Password == null || credentials.Password.Length == 0)
+            )
                 return true;
 
             return false;
         }
 
-        [EnvironmentPermission(SecurityAction.Assert, Read="USERNAME")]
-        [SecurityPermission(SecurityAction.Assert, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [EnvironmentPermission(SecurityAction.Assert, Read = "USERNAME")]
+        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
         internal static NetworkCredential GetCredentialsWithDomain(NetworkCredential credentials)
         {
             NetworkCredential credentialsWithDomain;
@@ -4143,11 +5471,16 @@ namespace System.Web.Security
             if (ServerSearchTimeout != -1)
                 request.TimeLimit = new TimeSpan(0, ServerSearchTimeout, 0);
 
-            SearchResponse response = (SearchResponse) ldapConnection.SendRequest(request);
+            SearchResponse response = (SearchResponse)ldapConnection.SendRequest(request);
             if (response.ResultCode != ResultCode.Success)
                 throw new ProviderException(response.ErrorMessage);
 
-            foreach (string supportedExtension in response.Entries[0].Attributes["supportedExtension"].GetValues(typeof(string)))
+            foreach (
+                string supportedExtension in response
+                    .Entries[0]
+                    .Attributes["supportedExtension"]
+                    .GetValues(typeof(string))
+            )
             {
                 if (StringUtil.EqualsIgnoreCase(supportedExtension, LDAP_SERVER_FAST_BIND_OID))
                 {
@@ -4170,7 +5503,7 @@ namespace System.Web.Security
             string partitionName = null;
             int startsAt = Int32.MaxValue;
 
-            foreach(string namingContext in rootdse.Properties["namingContexts"])
+            foreach (string namingContext in rootdse.Properties["namingContexts"])
             {
                 bool endsWith = containerDN.EndsWith(namingContext, StringComparison.Ordinal);
                 int lastIndexOf = containerDN.LastIndexOf(namingContext, StringComparison.Ordinal);
@@ -4199,7 +5532,12 @@ namespace System.Web.Security
             //
             // first get a list of all the classes from which the user class is derived
             //
-            DirectoryEntry de = new DirectoryEntry(GetADsPath("schema") + "/user", GetUsername(), GetPassword(), AuthenticationTypes);
+            DirectoryEntry de = new DirectoryEntry(
+                GetADsPath("schema") + "/user",
+                GetUsername(),
+                GetPassword(),
+                AuthenticationTypes
+            );
             ArrayList classesList = new ArrayList();
             bool derivedFromlistEmpty = false;
             object value = null;
@@ -4210,7 +5548,7 @@ namespace System.Web.Security
             }
             catch (COMException e)
             {
-                if (e.ErrorCode == unchecked((int) 0x8000500D))
+                if (e.ErrorCode == unchecked((int)0x8000500D))
                 {
                     derivedFromlistEmpty = true;
                 }
@@ -4222,12 +5560,12 @@ namespace System.Web.Security
             {
                 if (value is ICollection)
                 {
-                    classesList.AddRange((ICollection) value);
+                    classesList.AddRange((ICollection)value);
                 }
                 else
                 {
                     // single value
-                    classesList.Add((string) value);
+                    classesList.Add((string)value);
                 }
             }
 
@@ -4240,11 +5578,16 @@ namespace System.Web.Security
             //
             // Now search under the schema naming context for all these classes and get the "possSuperiors" and "systemPossSuperiors" attributes
             //
-            DirectoryEntry schemaNC = new DirectoryEntry(GetADsPath((string) rootdse.Properties["schemaNamingContext"].Value), GetUsername(), GetPassword(), AuthenticationTypes);
+            DirectoryEntry schemaNC = new DirectoryEntry(
+                GetADsPath((string)rootdse.Properties["schemaNamingContext"].Value),
+                GetUsername(),
+                GetPassword(),
+                AuthenticationTypes
+            );
             DirectorySearcher searcher = new DirectorySearcher(schemaNC);
 
             searcher.Filter = "(&(objectClass=classSchema)(|";
-            foreach(string supClass in classesList)
+            foreach (string supClass in classesList)
                 searcher.Filter += "(ldapDisplayName=" + supClass + ")";
             searcher.Filter += "))";
 
@@ -4290,12 +5633,19 @@ namespace System.Web.Security
 
             foreach (string supportedCapability in rootdse.Properties["supportedCapabilities"])
             {
-                if (StringUtil.EqualsIgnoreCase(supportedCapability, LDAP_CAP_ACTIVE_DIRECTORY_ADAM_OID))
+                if (
+                    StringUtil.EqualsIgnoreCase(
+                        supportedCapability,
+                        LDAP_CAP_ACTIVE_DIRECTORY_ADAM_OID
+                    )
+                )
                 {
                     directoryType = DirectoryType.ADAM;
                     break;
                 }
-                else if (StringUtil.EqualsIgnoreCase(supportedCapability, LDAP_CAP_ACTIVE_DIRECTORY_OID))
+                else if (
+                    StringUtil.EqualsIgnoreCase(supportedCapability, LDAP_CAP_ACTIVE_DIRECTORY_OID)
+                )
                 {
                     directoryType = DirectoryType.AD;
                     break;
@@ -4324,9 +5674,17 @@ namespace System.Web.Security
 
             int ERROR_NO_SUCH_DOMAIN = 1355;
 
-            int result = NativeMethods.DsGetDcName(null, name, IntPtr.Zero, null,  flags, out pDomainControllerInfo);
+            int result = NativeMethods.DsGetDcName(
+                null,
+                name,
+                IntPtr.Zero,
+                null,
+                flags,
+                out pDomainControllerInfo
+            );
 
-            try {
+            try
+            {
                 if (result == 0)
                 {
                     // success case
@@ -4348,7 +5706,8 @@ namespace System.Web.Security
             finally
             {
                 // free the buffer
-                if (pDomainControllerInfo != IntPtr.Zero) {
+                if (pDomainControllerInfo != IntPtr.Zero)
+                {
                     NativeMethods.NetApiBufferFree(pDomainControllerInfo);
                 }
             }
@@ -4363,14 +5722,24 @@ namespace System.Web.Security
             //
             // Get the netbios name from the "nETBIOSName" attribute on the crossRef object for this domain
             //
-            DirectoryEntry partitionsEntry = new DirectoryEntry(GetADsPath("CN=Partitions," + (string) PropertyManager.GetPropertyValue(rootdse, "configurationNamingContext")), GetUsername(), GetPassword());
+            DirectoryEntry partitionsEntry = new DirectoryEntry(
+                GetADsPath(
+                    "CN=Partitions,"
+                        + (string)
+                            PropertyManager.GetPropertyValue(rootdse, "configurationNamingContext")
+                ),
+                GetUsername(),
+                GetPassword()
+            );
             DirectorySearcher searcher = new DirectorySearcher(partitionsEntry);
             searcher.SearchScope = System.DirectoryServices.SearchScope.OneLevel;
 
             StringBuilder str = new StringBuilder(15);
             str.Append("(&(objectCategory=crossRef)(dnsRoot=");
             str.Append(dnsDomainName);
-            str.Append(")(systemFlags:1.2.840.113556.1.4.804:=1)(systemFlags:1.2.840.113556.1.4.804:=2))");
+            str.Append(
+                ")(systemFlags:1.2.840.113556.1.4.804:=1)(systemFlags:1.2.840.113556.1.4.804:=2))"
+            );
 
             searcher.Filter = str.ToString();
             searcher.PropertiesToLoad.Add("nETBIOSName");
@@ -4381,48 +5750,72 @@ namespace System.Web.Security
                 result = dnsDomainName;
             else
                 // return the netbios name
-                result = (string) PropertyManager.GetSearchResultPropertyValue(res, "nETBIOSName");
+                result = (string)PropertyManager.GetSearchResultPropertyValue(res, "nETBIOSName");
 
             return result;
         }
 
         private static string GetErrorMessage(int errorCode)
         {
-            uint temp = (uint) errorCode;
-            temp = ( (((temp) & 0x0000FFFF) | (7 << 16) | 0x80000000));
+            uint temp = (uint)errorCode;
+            temp = ((((temp) & 0x0000FFFF) | (7 << 16) | 0x80000000));
 
             string errorMsg = String.Empty;
             StringBuilder sb = new StringBuilder(256);
-            int result = NativeMethods.FormatMessageW(NativeMethods.FORMAT_MESSAGE_IGNORE_INSERTS |
-                                       NativeMethods.FORMAT_MESSAGE_FROM_SYSTEM |
-                                       NativeMethods.FORMAT_MESSAGE_ARGUMENT_ARRAY,
-                                       0, (int)temp, 0, sb, sb.Capacity + 1, 0);
-            if (result != 0) {
+            int result = NativeMethods.FormatMessageW(
+                NativeMethods.FORMAT_MESSAGE_IGNORE_INSERTS
+                    | NativeMethods.FORMAT_MESSAGE_FROM_SYSTEM
+                    | NativeMethods.FORMAT_MESSAGE_ARGUMENT_ARRAY,
+                0,
+                (int)temp,
+                0,
+                sb,
+                sb.Capacity + 1,
+                0
+            );
+            if (result != 0)
+            {
                 errorMsg = sb.ToString(0, result);
             }
-            else {
-                errorMsg = SR.GetString(SR.ADMembership_Unknown_Error, string.Format(CultureInfo.InvariantCulture, "{0}", errorCode));
+            else
+            {
+                errorMsg = SR.GetString(
+                    SR.ADMembership_Unknown_Error,
+                    string.Format(CultureInfo.InvariantCulture, "{0}", errorCode)
+                );
             }
 
             return errorMsg;
         }
-
     }
 
     internal static class PropertyManager
     {
         public static object GetPropertyValue(DirectoryEntry directoryEntry, string propertyName)
         {
-
-            Debug.Assert(directoryEntry != null, "PropertyManager::GetPropertyValue - directoryEntry is null");
-            Debug.Assert(propertyName != null, "PropertyManager::GetPropertyValue - propertyName is null");
+            Debug.Assert(
+                directoryEntry != null,
+                "PropertyManager::GetPropertyValue - directoryEntry is null"
+            );
+            Debug.Assert(
+                propertyName != null,
+                "PropertyManager::GetPropertyValue - propertyName is null"
+            );
 
             if (directoryEntry.Properties[propertyName].Count == 0)
             {
                 if (directoryEntry.Properties["distinguishedName"].Count != 0)
-                    throw new ProviderException(SR.GetString(SR.ADMembership_Property_not_found_on_object, propertyName, (string) directoryEntry.Properties["distinguishedName"].Value ));
+                    throw new ProviderException(
+                        SR.GetString(
+                            SR.ADMembership_Property_not_found_on_object,
+                            propertyName,
+                            (string)directoryEntry.Properties["distinguishedName"].Value
+                        )
+                    );
                 else
-                    throw new ProviderException(SR.GetString(SR.ADMembership_Property_not_found, propertyName));
+                    throw new ProviderException(
+                        SR.GetString(SR.ADMembership_Property_not_found, propertyName)
+                    );
             }
 
             return directoryEntry.Properties[propertyName].Value;
@@ -4430,47 +5823,55 @@ namespace System.Web.Security
 
         public static object GetSearchResultPropertyValue(SearchResult res, string propertyName)
         {
-
-            Debug.Assert(res != null, "PropertyManager::GetSearchResultPropertyValue - res is null");
-            Debug.Assert(propertyName != null, "PropertyManager::GetSearchResultPropertyValue - propertyName is null");
+            Debug.Assert(
+                res != null,
+                "PropertyManager::GetSearchResultPropertyValue - res is null"
+            );
+            Debug.Assert(
+                propertyName != null,
+                "PropertyManager::GetSearchResultPropertyValue - propertyName is null"
+            );
 
             ResultPropertyValueCollection propertyValues = null;
 
             propertyValues = res.Properties[propertyName];
             if ((propertyValues == null) || (propertyValues.Count < 1))
-                throw new ProviderException(SR.GetString(SR.ADMembership_Property_not_found,  propertyName));
+                throw new ProviderException(
+                    SR.GetString(SR.ADMembership_Property_not_found, propertyName)
+                );
 
             return propertyValues[0];
         }
     }
 
     /*typedef struct _DOMAIN_CONTROLLER_INFO {
-		LPTSTR DomainControllerName;
-		LPTSTR DomainControllerAddress;
-		ULONG DomainControllerAddressType;
-		GUID DomainGuid;
-		LPTSTR DomainName;
-		LPTSTR DnsForestName;
-		ULONG Flags;
-		LPTSTR DcSiteName;
-		LPTSTR ClientSiteName;
-	} DOMAIN_CONTROLLER_INFO, *PDOMAIN_CONTROLLER_INFO; */
-	[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
-	internal sealed class DomainControllerInfo {
-	#pragma warning disable 0649
-		public string DomainControllerName;
-		public string DomainControllerAddress;
-		public int DomainControllerAddressType;
-		public Guid DomainGuid;
-		public string DomainName;
-		public string DnsForestName;
-		public int Flags;
-		public string DcSiteName;
-		public string ClientSiteName;
-       #pragma warning restore 0649
+        LPTSTR DomainControllerName;
+        LPTSTR DomainControllerAddress;
+        ULONG DomainControllerAddressType;
+        GUID DomainGuid;
+        LPTSTR DomainName;
+        LPTSTR DnsForestName;
+        ULONG Flags;
+        LPTSTR DcSiteName;
+        LPTSTR ClientSiteName;
+    } DOMAIN_CONTROLLER_INFO, *PDOMAIN_CONTROLLER_INFO; */
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    internal sealed class DomainControllerInfo
+    {
+#pragma warning disable 0649
+        public string DomainControllerName;
+        public string DomainControllerAddress;
+        public int DomainControllerAddressType;
+        public Guid DomainGuid;
+        public string DomainName;
+        public string DnsForestName;
+        public int Flags;
+        public string DcSiteName;
+        public string ClientSiteName;
+#pragma warning restore 0649
 
-              public DomainControllerInfo() {}
-	}
+        public DomainControllerInfo() { }
+    }
 
     [SuppressUnmanagedCodeSecurityAttribute()]
     internal static class NativeMethods
@@ -4488,23 +5889,28 @@ namespace System.Web.Security
                         ULONG Flags,
                         PDOMAIN_CONTROLLER_INFO* DomainControllerInfo
                         );*/
-        [DllImport("Netapi32.dll", CallingConvention=CallingConvention.StdCall, EntryPoint="DsGetDcNameW", CharSet=CharSet.Unicode)]
+        [DllImport(
+            "Netapi32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            EntryPoint = "DsGetDcNameW",
+            CharSet = CharSet.Unicode
+        )]
         internal static extern int DsGetDcName(
             [In] string computerName,
             [In] string domainName,
             [In] IntPtr domainGuid,
             [In] string siteName,
             [In] uint flags,
-            [Out] out IntPtr domainControllerInfo);
+            [Out] out IntPtr domainControllerInfo
+        );
 
         /*NET_API_STATUS NetApiBufferFree(
                         LPVOID Buffer
                         );*/
         [DllImport("Netapi32.dll")]
-        internal static extern int NetApiBufferFree(
-            [In] IntPtr buffer);
+        internal static extern int NetApiBufferFree([In] IntPtr buffer);
 
-        [DllImport("kernel32.dll", CharSet=System.Runtime.InteropServices.CharSet.Unicode)]
+        [DllImport("kernel32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
         public static extern int FormatMessageW(
             [In] int dwFlags,
             [In] int lpSource,
@@ -4512,16 +5918,13 @@ namespace System.Web.Security
             [In] int dwLanguageId,
             [Out] StringBuilder lpBuffer,
             [In] int nSize,
-            [In] int arguments);
+            [In] int arguments
+        );
     }
 
-    [
-        ComVisible(false),
-        SuppressUnmanagedCodeSecurityAttribute()
-    ]
+    [ComVisible(false), SuppressUnmanagedCodeSecurityAttribute()]
     internal static class NativeComInterfaces
     {
-
         /*typedef enum {
            ADS_SETTYPE_FULL=1,
            ADS_SETTYPE_PROVIDER=2,
@@ -4562,24 +5965,28 @@ namespace System.Web.Security
         // Pathname as a co-class that implements the IAdsPathname interface
         //
         [ComImport, Guid("080d0d78-f421-11d0-a36e-00c04fb950dc")]
-        internal class Pathname
-        {
-        }
+        internal class Pathname { }
 
-
-        [ComImport, Guid("D592AED4-F420-11D0-A36E-00C04FB950DC"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("D592AED4-F420-11D0-A36E-00C04FB950DC"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         internal interface IAdsPathname
         {
-
             // HRESULT Set([in] BSTR bstrADsPath,  [in] long lnSetType);
             [SuppressUnmanagedCodeSecurityAttribute()]
-            int Set([In, MarshalAs(UnmanagedType.BStr)] string bstrADsPath, [In, MarshalAs(UnmanagedType.U4)] int lnSetType);
+            int Set(
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrADsPath,
+                [In, MarshalAs(UnmanagedType.U4)] int lnSetType
+            );
 
             // HRESULT SetDisplayType([in] long lnDisplayType);
             int SetDisplayType([In, MarshalAs(UnmanagedType.U4)] int lnDisplayType);
 
             // HRESULT Retrieve([in] long lnFormatType,  [out, retval] BSTR* pbstrADsPath);
-            [return: MarshalAs(UnmanagedType.BStr)][SuppressUnmanagedCodeSecurityAttribute()]
+            [return: MarshalAs(UnmanagedType.BStr)]
+            [SuppressUnmanagedCodeSecurityAttribute()]
             string Retrieve([In, MarshalAs(UnmanagedType.U4)] int lnFormatType);
 
             // HRESULT GetNumElements([out, retval] long* plnNumPathElements);
@@ -4601,43 +6008,49 @@ namespace System.Web.Security
             object CopyPath();
 
             // HRESULT GetEscapedElement([in] long lnReserved, [in] BSTR bstrInStr, [out, retval] BSTR*  pbstrOutStr );
-            [return: MarshalAs(UnmanagedType.BStr)][SuppressUnmanagedCodeSecurityAttribute()]
-            string GetEscapedElement([In, MarshalAs(UnmanagedType.U4)] int lnReserved, [In, MarshalAs(UnmanagedType.BStr)] string bstrInStr);
+            [return: MarshalAs(UnmanagedType.BStr)]
+            [SuppressUnmanagedCodeSecurityAttribute()]
+            string GetEscapedElement(
+                [In, MarshalAs(UnmanagedType.U4)] int lnReserved,
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrInStr
+            );
 
-            int EscapedMode {
+            int EscapedMode
+            {
                 get;
                 [SuppressUnmanagedCodeSecurityAttribute()]
                 set;
             }
-
         }
 
         //
         // LargeInteger as a co-class that implements the IAdsLargeInteger  interface
         //
         [ComImport, Guid("927971f5-0939-11d1-8be1-00c04fd8d503")]
-        internal class LargeInteger
-        {
-        }
+        internal class LargeInteger { }
 
-        [ComImport, Guid("9068270b-0939-11d1-8be1-00c04fd8d503"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("9068270b-0939-11d1-8be1-00c04fd8d503"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         internal interface IAdsLargeInteger
         {
-            long HighPart {
+            long HighPart
+            {
                 [SuppressUnmanagedCodeSecurityAttribute()]
                 get;
                 [SuppressUnmanagedCodeSecurityAttribute()]
                 set;
             }
 
-            long LowPart {
+            long LowPart
+            {
                 [SuppressUnmanagedCodeSecurityAttribute()]
                 get;
                 [SuppressUnmanagedCodeSecurityAttribute()]
                 set;
             }
         }
-
     }
-
 }

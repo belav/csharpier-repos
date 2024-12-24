@@ -27,7 +27,11 @@ public class VersionedJsonHubProtocol : IHubProtocol
     public TransferFormat TransferFormat => _innerProtocol.TransferFormat;
     public int MinorVersion => 0; // not used in this test class, just for interface conformance
 
-    public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, out HubMessage message)
+    public bool TryParseMessage(
+        ref ReadOnlySequence<byte> input,
+        IInvocationBinder binder,
+        out HubMessage message
+    )
     {
         var inputCopy = input;
         if (!TryParseMessage(ref input, out var payload))
@@ -51,7 +55,10 @@ public class VersionedJsonHubProtocol : IHubProtocol
         return result;
     }
 
-    public static bool TryParseMessage(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> payload)
+    public static bool TryParseMessage(
+        ref ReadOnlySequence<byte> buffer,
+        out ReadOnlySequence<byte> payload
+    )
     {
         var position = buffer.PositionOf((byte)0x1e);
         if (position == null)

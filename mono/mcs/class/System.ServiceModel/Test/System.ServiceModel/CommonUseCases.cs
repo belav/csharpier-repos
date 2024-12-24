@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,27 +33,27 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	// Use case with one endpoint configuration.
-	[ServiceContract]
-	public interface ICtorUseCase1
-	{
-		[OperationContract]
-		string Echo (string msg);
-	}
+    // Use case with one endpoint configuration.
+    [ServiceContract]
+    public interface ICtorUseCase1
+    {
+        [OperationContract]
+        string Echo(string msg);
+    }
 
-	// Use case with multiple endpoint configurations.
-	[ServiceContract(ConfigurationName = "CtorUseCase2")]
-	public interface ICtorUseCase2
-	{
-		[OperationContract]
-		string Echo (string msg);
-	}
+    // Use case with multiple endpoint configurations.
+    [ServiceContract(ConfigurationName = "CtorUseCase2")]
+    public interface ICtorUseCase2
+    {
+        [OperationContract]
+        string Echo(string msg);
+    }
 
-	// Use case without endpoint configuration.
-	[ServiceContract(ConfigurationName = "CtorUseCase3")]
-	public interface ICtorUseCase3
-	{
-		[OperationContract]
-		string Echo (string msg);
-	}
+    // Use case without endpoint configuration.
+    [ServiceContract(ConfigurationName = "CtorUseCase3")]
+    public interface ICtorUseCase3
+    {
+        [OperationContract]
+        string Echo(string msg);
+    }
 }

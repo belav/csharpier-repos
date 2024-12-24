@@ -44,7 +44,8 @@ namespace System.Linq.Parallel
     /// <typeparam name="TInput"></typeparam>
     /// <typeparam name="TIntermediate"></typeparam>
     /// <typeparam name="TOutput"></typeparam>
-    internal sealed class AssociativeAggregationOperator<TInput, TIntermediate, TOutput> : UnaryQueryOperator<TInput, TIntermediate>
+    internal sealed class AssociativeAggregationOperator<TInput, TIntermediate, TOutput>
+        : UnaryQueryOperator<TInput, TIntermediate>
     {
         private readonly TIntermediate _seed; // A seed used during aggregation.
         private readonly bool _seedIsSpecified; // Whether a seed was specified. If not, the first element will be used.
@@ -69,10 +70,17 @@ namespace System.Linq.Parallel
         //     This operator must be associative.
         //
 
-        internal AssociativeAggregationOperator(IEnumerable<TInput> child, TIntermediate seed, Func<TIntermediate>? seedFactory, bool seedIsSpecified,
-                                                Func<TIntermediate, TInput, TIntermediate> intermediateReduce,
-                                                Func<TIntermediate, TIntermediate, TIntermediate> finalReduce,
-                                                Func<TIntermediate, TOutput> resultSelector, bool throwIfEmpty, QueryAggregationOptions options)
+        internal AssociativeAggregationOperator(
+            IEnumerable<TInput> child,
+            TIntermediate seed,
+            Func<TIntermediate>? seedFactory,
+            bool seedIsSpecified,
+            Func<TIntermediate, TInput, TIntermediate> intermediateReduce,
+            Func<TIntermediate, TIntermediate, TIntermediate> finalReduce,
+            Func<TIntermediate, TOutput> resultSelector,
+            bool throwIfEmpty,
+            QueryAggregationOptions options
+        )
             : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
@@ -80,8 +88,15 @@ namespace System.Linq.Parallel
             Debug.Assert(finalReduce != null, "need a final reduce function");
             Debug.Assert(resultSelector != null, "need a result selector function");
             Debug.Assert(options.IsValidQueryAggregationOption(), "enum out of valid range");
-            Debug.Assert((options & QueryAggregationOptions.Associative) == QueryAggregationOptions.Associative, "expected an associative operator");
-            Debug.Assert(typeof(TIntermediate) == typeof(TInput) || seedIsSpecified, "seed must be specified if TIntermediate differs from TInput");
+            Debug.Assert(
+                (options & QueryAggregationOptions.Associative)
+                    == QueryAggregationOptions.Associative,
+                "expected an associative operator"
+            );
+            Debug.Assert(
+                typeof(TIntermediate) == typeof(TInput) || seedIsSpecified,
+                "seed must be specified if TIntermediate differs from TInput"
+            );
 
             _seed = seed;
             _seedFactory = seedFactory;
@@ -112,7 +127,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<TIntermediate> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<TIntermediate> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // We just reduce the elements in each output partition. If the operation is associative,
                 // this will yield the correct answer. If not, we should never be calling this routine.
@@ -171,7 +191,10 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<TIntermediate> Open(QuerySettings settings, bool preferStriping)
+        internal override QueryResults<TIntermediate> Open(
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             // We just open the child operator.
             QueryResults<TInput> childQueryResults = Child.Open(settings, preferStriping);
@@ -179,16 +202,26 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<TIntermediate> recipient,
-            bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<TIntermediate> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
-            PartitionedStream<TIntermediate, int> outputStream = new PartitionedStream<TIntermediate, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
+            PartitionedStream<TIntermediate, int> outputStream = new PartitionedStream<
+                TIntermediate,
+                int
+            >(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new AssociativeAggregationOperatorEnumerator<TKey>(inputStream[i], this, i, settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new AssociativeAggregationOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    this,
+                    i,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
@@ -198,13 +231,16 @@ namespace System.Linq.Parallel
         // Returns an enumerable that represents the query executing sequentially.
         //
 
-        [ExcludeFromCodeCoverage(Justification = "This method should never be called. Associative aggregation can always be parallelized")]
+        [ExcludeFromCodeCoverage(
+            Justification = "This method should never be called. Associative aggregation can always be parallelized"
+        )]
         internal override IEnumerable<TIntermediate> AsSequentialQuery(CancellationToken token)
         {
-            Debug.Fail("This method should never be called. Associative aggregation can always be parallelized.");
+            Debug.Fail(
+                "This method should never be called. Associative aggregation can always be parallelized."
+            );
             throw new NotSupportedException();
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
@@ -216,28 +252,34 @@ namespace System.Linq.Parallel
             get { return false; }
         }
 
-
         //---------------------------------------------------------------------------------------
         // This enumerator type encapsulates the intermediary aggregation over the underlying
         // (possibly partitioned) data source.
         //
 
-        private sealed class AssociativeAggregationOperatorEnumerator<TKey> : QueryOperatorEnumerator<TIntermediate, int>
+        private sealed class AssociativeAggregationOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TIntermediate, int>
         {
             private readonly QueryOperatorEnumerator<TInput, TKey> _source; // The source data.
-            private readonly AssociativeAggregationOperator<TInput, TIntermediate, TOutput> _reduceOperator; // The operator.
+            private readonly AssociativeAggregationOperator<
+                TInput,
+                TIntermediate,
+                TOutput
+            > _reduceOperator; // The operator.
             private readonly int _partitionIndex; // The index of this partition.
             private readonly CancellationToken _cancellationToken;
             private bool _accumulated; // Whether we've accumulated already. (false-sharing risk, but only written once)
-
 
             //---------------------------------------------------------------------------------------
             // Instantiates a new aggregation operator.
             //
 
-            internal AssociativeAggregationOperatorEnumerator(QueryOperatorEnumerator<TInput, TKey> source,
-                                                              AssociativeAggregationOperator<TInput, TIntermediate, TOutput> reduceOperator, int partitionIndex,
-                                                              CancellationToken cancellationToken)
+            internal AssociativeAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<TInput, TKey> source,
+                AssociativeAggregationOperator<TInput, TIntermediate, TOutput> reduceOperator,
+                int partitionIndex,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(reduceOperator != null);
@@ -256,10 +298,16 @@ namespace System.Linq.Parallel
             // the end, we will have our intermediate result, ready for final aggregation.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TIntermediate currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TIntermediate currentElement,
+                ref int currentKey
+            )
             {
                 Debug.Assert(_reduceOperator != null);
-                Debug.Assert(_reduceOperator._intermediateReduce != null, "expected a compiled operator");
+                Debug.Assert(
+                    _reduceOperator._intermediateReduce != null,
+                    "expected a compiled operator"
+                );
 
                 // Only produce a single element.  Return false if MoveNext() was already called before.
                 if (_accumulated)
@@ -275,9 +323,10 @@ namespace System.Linq.Parallel
                 if (_reduceOperator._seedIsSpecified)
                 {
                     // If the seed is specified, initialize accumulator to the seed value.
-                    accumulator = _reduceOperator._seedFactory == null
-                                      ? _reduceOperator._seed
-                                      : _reduceOperator._seedFactory();
+                    accumulator =
+                        _reduceOperator._seedFactory == null
+                            ? _reduceOperator._seed
+                            : _reduceOperator._seedFactory();
                 }
                 else
                 {
@@ -287,7 +336,8 @@ namespace System.Linq.Parallel
 
                     TInput acc = default(TInput)!;
                     TKey accKeyUnused = default(TKey)!;
-                    if (!_source.MoveNext(ref acc!, ref accKeyUnused)) return false;
+                    if (!_source.MoveNext(ref acc!, ref accKeyUnused))
+                        return false;
                     hadNext = true;
                     accumulator = (TIntermediate)((object?)acc!);
                 }

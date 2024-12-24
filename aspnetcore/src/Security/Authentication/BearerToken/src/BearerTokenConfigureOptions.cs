@@ -6,7 +6,8 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.BearerToken;
 
-internal sealed class BearerTokenConfigureOptions(IDataProtectionProvider dp) : IConfigureNamedOptions<BearerTokenOptions>
+internal sealed class BearerTokenConfigureOptions(IDataProtectionProvider dp)
+    : IConfigureNamedOptions<BearerTokenOptions>
 {
     private const string _primaryPurpose = "Microsoft.AspNetCore.Authentication.BearerToken";
 
@@ -17,8 +18,12 @@ internal sealed class BearerTokenConfigureOptions(IDataProtectionProvider dp) : 
             return;
         }
 
-        options.BearerTokenProtector = new TicketDataFormat(dp.CreateProtector(_primaryPurpose, schemeName, "BearerToken"));
-        options.RefreshTokenProtector = new TicketDataFormat(dp.CreateProtector(_primaryPurpose, schemeName, "RefreshToken"));
+        options.BearerTokenProtector = new TicketDataFormat(
+            dp.CreateProtector(_primaryPurpose, schemeName, "BearerToken")
+        );
+        options.RefreshTokenProtector = new TicketDataFormat(
+            dp.CreateProtector(_primaryPurpose, schemeName, "RefreshToken")
+        );
     }
 
     public void Configure(BearerTokenOptions options)

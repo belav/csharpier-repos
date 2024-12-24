@@ -4,7 +4,9 @@
 using System.Reflection.Metadata;
 using Microsoft.Extensions.Primitives;
 
-[assembly: MetadataUpdateHandler(typeof(Microsoft.AspNetCore.Components.Endpoints.HotReloadService))]
+[assembly: MetadataUpdateHandler(
+    typeof(Microsoft.AspNetCore.Components.Endpoints.HotReloadService)
+)]
 
 namespace Microsoft.AspNetCore.Components.Endpoints;
 

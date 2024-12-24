@@ -22,9 +22,7 @@ public sealed partial class FileContentHttpResult : IResult, IFileHttpResult, IC
     /// <param name="fileContents">The bytes that represent the file contents.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     internal FileContentHttpResult(ReadOnlyMemory<byte> fileContents, string? contentType)
-        : this(fileContents, contentType, fileDownloadName: null)
-    {
-    }
+        : this(fileContents, contentType, fileDownloadName: null) { }
 
     /// <summary>
     /// Creates a new <see cref="FileContentHttpResult"/> instance with
@@ -37,10 +35,9 @@ public sealed partial class FileContentHttpResult : IResult, IFileHttpResult, IC
     internal FileContentHttpResult(
         ReadOnlyMemory<byte> fileContents,
         string? contentType,
-        string? fileDownloadName)
-        : this(fileContents, contentType, fileDownloadName, enableRangeProcessing: false)
-    {
-    }
+        string? fileDownloadName
+    )
+        : this(fileContents, contentType, fileDownloadName, enableRangeProcessing: false) { }
 
     /// <summary>
     /// Creates a new <see cref="FileContentHttpResult"/> instance with the provided values.
@@ -57,7 +54,8 @@ public sealed partial class FileContentHttpResult : IResult, IFileHttpResult, IC
         string? fileDownloadName,
         bool enableRangeProcessing,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
+        EntityTagHeaderValue? entityTag = null
+    )
     {
         FileContents = fileContents;
         FileLength = fileContents.Length;
@@ -110,7 +108,9 @@ public sealed partial class FileContentHttpResult : IResult, IFileHttpResult, IC
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.FileContentResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.FileContentResult"
+        );
 
         var (range, rangeLength, completed) = HttpResultsHelper.WriteResultAsFileCore(
             httpContext,
@@ -120,10 +120,11 @@ public sealed partial class FileContentHttpResult : IResult, IFileHttpResult, IC
             ContentType,
             EnableRangeProcessing,
             LastModified,
-            EntityTag);
+            EntityTag
+        );
 
-        return completed ?
-            Task.CompletedTask :
-            FileResultHelper.WriteFileAsync(httpContext, FileContents, range, rangeLength);
+        return completed
+            ? Task.CompletedTask
+            : FileResultHelper.WriteFileAsync(httpContext, FileContents, range, rangeLength);
     }
 }

@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
@@ -23,8 +22,8 @@ namespace ILCompiler
             _methods = new List<EcmaMethod>();
         }
 
-        public void AddExportedMethods(IEnumerable<EcmaMethod> methods)
-            => _methods.AddRange(methods.Where(m => m.Module != _context.SystemModule));
+        public void AddExportedMethods(IEnumerable<EcmaMethod> methods) =>
+            _methods.AddRange(methods.Where(m => m.Module != _context.SystemModule));
 
         public void EmitExportedMethods()
         {
@@ -37,7 +36,7 @@ namespace ILCompiler
                     foreach (var method in _methods)
                         streamWriter.WriteLine($"   {method.GetUnmanagedCallersOnlyExportName()}");
                 }
-                else if(_context.Target.IsOSXLike)
+                else if (_context.Target.IsOSXLike)
                 {
                     foreach (var method in _methods)
                         streamWriter.WriteLine($"_{method.GetUnmanagedCallersOnlyExportName()}");
@@ -47,7 +46,9 @@ namespace ILCompiler
                     streamWriter.WriteLine("V1.0 {");
                     streamWriter.WriteLine("    global: _init; _fini;");
                     foreach (var method in _methods)
-                        streamWriter.WriteLine($"        {method.GetUnmanagedCallersOnlyExportName()};");
+                        streamWriter.WriteLine(
+                            $"        {method.GetUnmanagedCallersOnlyExportName()};"
+                        );
                     streamWriter.WriteLine("    local: *;");
                     streamWriter.WriteLine("};");
                 }

@@ -15,7 +15,11 @@ namespace System.Diagnostics
     {
         private const string SystemDiagnostics = "System.Diagnostics.";
 
-        internal static object GetRuntimeObject(string className, Type baseType, string initializeData)
+        internal static object GetRuntimeObject(
+            string className,
+            Type baseType,
+            string initializeData
+        )
         {
             object newObject = null;
             Type objectType = null;
@@ -38,12 +42,16 @@ namespace System.Diagnostics
 
                 if (objectType == null)
                 {
-                    throw new ConfigurationErrorsException(SR.Format(SR.Could_not_find_type, className));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Could_not_find_type, className)
+                    );
                 }
             }
 
             if (!baseType.IsAssignableFrom(objectType))
-                throw new ConfigurationErrorsException(SR.Format(SR.Incorrect_base_type, className, baseType.FullName));
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.Incorrect_base_type, className, baseType.FullName)
+                );
 
             Exception innerException = null;
             try
@@ -56,14 +64,18 @@ namespace System.Diagnostics
                     // Create an object with parameterless constructor.
                     ConstructorInfo ctorInfo = objectType.GetConstructor(Array.Empty<Type>());
                     if (ctorInfo == null)
-                        throw new ConfigurationErrorsException(SR.Format(SR.Could_not_get_constructor, className));
+                        throw new ConfigurationErrorsException(
+                            SR.Format(SR.Could_not_get_constructor, className)
+                        );
                     newObject = ctorInfo.Invoke(Array.Empty<object>());
                 }
                 else
                 {
                     // Create an object with a one-string constructor.
                     // First look for a string constructor.
-                    ConstructorInfo ctorInfo = objectType.GetConstructor(new Type[] { typeof(string) });
+                    ConstructorInfo ctorInfo = objectType.GetConstructor(
+                        new Type[] { typeof(string) }
+                    );
                     if (ctorInfo != null)
                     {
                         // Special case to enable specifying relative path to trace file from config for
@@ -71,7 +83,11 @@ namespace System.Diagnostics
                         // prefix from config file location.
                         if (IsOwnedTextWriterTL(objectType))
                         {
-                            if ((initializeData[0] != Path.DirectorySeparatorChar) && (initializeData[0] != Path.AltDirectorySeparatorChar) && !Path.IsPathRooted(initializeData))
+                            if (
+                                (initializeData[0] != Path.DirectorySeparatorChar)
+                                && (initializeData[0] != Path.AltDirectorySeparatorChar)
+                                && !Path.IsPathRooted(initializeData)
+                            )
                             {
                                 string filePath = DiagnosticsConfiguration.ConfigFilePath;
 
@@ -92,7 +108,9 @@ namespace System.Diagnostics
                         ConstructorInfo[] ctorInfos = objectType.GetConstructors();
                         if (ctorInfos == null)
                         {
-                            throw new ConfigurationErrorsException(SR.Format(SR.Could_not_get_constructor, className));
+                            throw new ConfigurationErrorsException(
+                                SR.Format(SR.Could_not_get_constructor, className)
+                            );
                         }
 
                         for (int i = 0; i < ctorInfos.Length; i++)
@@ -103,13 +121,20 @@ namespace System.Diagnostics
                                 Type paramtype = ctorparams[0].ParameterType;
                                 try
                                 {
-                                    object convertedInitializeData = ConvertToBaseTypeOrEnum(initializeData, paramtype);
-                                    newObject = ctorInfos[i].Invoke(new object[] { convertedInitializeData });
+                                    object convertedInitializeData = ConvertToBaseTypeOrEnum(
+                                        initializeData,
+                                        paramtype
+                                    );
+                                    newObject = ctorInfos[i]
+                                        .Invoke(new object[] { convertedInitializeData });
                                     break;
                                 }
                                 catch (TargetInvocationException tiexc)
                                 {
-                                    Debug.Assert(tiexc.InnerException != null, "ill-formed TargetInvocationException!");
+                                    Debug.Assert(
+                                        tiexc.InnerException != null,
+                                        "ill-formed TargetInvocationException!"
+                                    );
                                     innerException = tiexc.InnerException;
                                 }
                                 catch (Exception e)
@@ -132,10 +157,15 @@ namespace System.Diagnostics
             {
                 if (innerException != null)
                 {
-                    throw new ConfigurationErrorsException(SR.Format(SR.Could_not_create_type_instance, className), innerException);
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Could_not_create_type_instance, className),
+                        innerException
+                    );
                 }
 
-                throw new ConfigurationErrorsException(SR.Format(SR.Could_not_create_type_instance, className));
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.Could_not_create_type_instance, className)
+                );
             }
 
             return newObject;
@@ -182,22 +212,21 @@ namespace System.Diagnostics
         // Our own tracelisteners that needs extra config validation.
         internal static bool IsOwnedTL(Type type)
         {
-            return typeof(EventLogTraceListener) == type
-                    || IsOwnedTextWriterTL(type);
+            return typeof(EventLogTraceListener) == type || IsOwnedTextWriterTL(type);
         }
 
         internal static bool IsOwnedTextWriterTL(Type type)
         {
             return (typeof(XmlWriterTraceListener) == type)
-                    || (typeof(DelimitedListTraceListener) == type)
-                    || (typeof(TextWriterTraceListener) == type);
+                || (typeof(DelimitedListTraceListener) == type)
+                || (typeof(TextWriterTraceListener) == type);
         }
 
         private static object ConvertToBaseTypeOrEnum(string value, Type type)
         {
-            return type.IsEnum ?
-                Enum.Parse(type, value, false) :
-                Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
+            return type.IsEnum
+                ? Enum.Parse(type, value, false)
+                : Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
         }
 
         // Copy the StringDictionary to another StringDictionary.

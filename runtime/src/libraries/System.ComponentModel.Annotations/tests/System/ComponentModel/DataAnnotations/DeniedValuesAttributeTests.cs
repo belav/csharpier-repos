@@ -23,13 +23,20 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(denyAttr, 8);
             yield return new TestCase(denyAttr, 13);
 
-            denyAttr = new DeniedValuesAttribute(-1, false, 3.1, "str", null, new object(), new byte[] { 0xff });
+            denyAttr = new DeniedValuesAttribute(
+                -1,
+                false,
+                3.1,
+                "str",
+                null,
+                new object(),
+                new byte[] { 0xff }
+            );
             foreach (object? value in denyAttr.Values)
                 yield return new TestCase(denyAttr, value);
 
             foreach (object? value in denyAttr.Values)
                 yield return new TestCase(new DeniedValuesAttribute(value), value);
-
         }
 
         protected override IEnumerable<TestCase> ValidValues()
@@ -48,7 +55,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(denyAttr, "mango");
             yield return new TestCase(denyAttr, false);
 
-            denyAttr = new DeniedValuesAttribute(-1, false, 3.1, "str", null, new object(), new byte[] { 0xff });
+            denyAttr = new DeniedValuesAttribute(
+                -1,
+                false,
+                3.1,
+                "str",
+                null,
+                new object(),
+                new byte[] { 0xff }
+            );
             yield return new TestCase(denyAttr, 0);
             yield return new TestCase(denyAttr, true);
             yield return new TestCase(denyAttr, 3.11);

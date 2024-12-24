@@ -19,15 +19,29 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
     /// </summary>
     protected WebAssemblyJSRuntime()
     {
-        JsonSerializerOptions.Converters.Insert(0, new WebAssemblyJSObjectReferenceJsonConverter(this));
+        JsonSerializerOptions.Converters.Insert(
+            0,
+            new WebAssemblyJSObjectReferenceJsonConverter(this)
+        );
     }
 
     /// <inheritdoc />
-    protected override string InvokeJS(string identifier, [StringSyntax(StringSyntaxAttribute.Json)] string? argsJson, JSCallResultType resultType, long targetInstanceId)
+    protected override string InvokeJS(
+        string identifier,
+        [StringSyntax(StringSyntaxAttribute.Json)] string? argsJson,
+        JSCallResultType resultType,
+        long targetInstanceId
+    )
     {
         try
         {
-            return InternalCalls.InvokeJSJson(identifier, targetInstanceId, (int)resultType, argsJson ?? "[]", 0);
+            return InternalCalls.InvokeJSJson(
+                identifier,
+                targetInstanceId,
+                (int)resultType,
+                argsJson ?? "[]",
+                0
+            );
         }
         catch (Exception ex)
         {
@@ -36,19 +50,42 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
     }
 
     /// <inheritdoc />
-    protected override void BeginInvokeJS(long asyncHandle, string identifier, [StringSyntax(StringSyntaxAttribute.Json)] string? argsJson, JSCallResultType resultType, long targetInstanceId)
+    protected override void BeginInvokeJS(
+        long asyncHandle,
+        string identifier,
+        [StringSyntax(StringSyntaxAttribute.Json)] string? argsJson,
+        JSCallResultType resultType,
+        long targetInstanceId
+    )
     {
-        InternalCalls.InvokeJSJson(identifier, targetInstanceId, (int)resultType, argsJson ?? "[]", asyncHandle);
+        InternalCalls.InvokeJSJson(
+            identifier,
+            targetInstanceId,
+            (int)resultType,
+            argsJson ?? "[]",
+            asyncHandle
+        );
     }
 
     /// <inheritdoc />
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "TODO: This should be in the xml suppressions file, but can't be because https://github.com/mono/linker/issues/2006")]
-    protected override void EndInvokeDotNet(DotNetInvocationInfo callInfo, in DotNetInvocationResult dispatchResult)
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "TODO: This should be in the xml suppressions file, but can't be because https://github.com/mono/linker/issues/2006"
+    )]
+    protected override void EndInvokeDotNet(
+        DotNetInvocationInfo callInfo,
+        in DotNetInvocationResult dispatchResult
+    )
     {
         var resultJsonOrErrorMessage = dispatchResult.Success
             ? dispatchResult.ResultJson!
             : dispatchResult.Exception!.ToString();
-        InternalCalls.EndInvokeDotNetFromJS(callInfo.CallId, dispatchResult.Success, resultJsonOrErrorMessage);
+        InternalCalls.EndInvokeDotNetFromJS(
+            callInfo.CallId,
+            dispatchResult.Success,
+            resultJsonOrErrorMessage
+        );
     }
 
     /// <inheritdoc />
@@ -58,7 +95,13 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
     }
 
     [Obsolete("This method is obsolete. Use JSImportAttribute instead.")]
-    internal TResult InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2, long targetInstanceId)
+    internal TResult InvokeUnmarshalled<T0, T1, T2, TResult>(
+        string identifier,
+        T0 arg0,
+        T1 arg1,
+        T2 arg2,
+        long targetInstanceId
+    )
     {
         var resultType = JSCallResultTypeHelper.FromGeneric<TResult>();
 
@@ -75,17 +118,33 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
         {
             case JSCallResultType.Default:
             case JSCallResultType.JSVoidResult:
-                var result = InternalCalls.InvokeJS<T0, T1, T2, TResult>(out exception, ref callInfo, arg0, arg1, arg2);
-                return exception != null
-                    ? throw new JSException(exception)
-                    : result;
+                var result = InternalCalls.InvokeJS<T0, T1, T2, TResult>(
+                    out exception,
+                    ref callInfo,
+                    arg0,
+                    arg1,
+                    arg2
+                );
+                return exception != null ? throw new JSException(exception) : result;
             case JSCallResultType.JSObjectReference:
-                var id = InternalCalls.InvokeJS<T0, T1, T2, int>(out exception, ref callInfo, arg0, arg1, arg2);
+                var id = InternalCalls.InvokeJS<T0, T1, T2, int>(
+                    out exception,
+                    ref callInfo,
+                    arg0,
+                    arg1,
+                    arg2
+                );
                 return exception != null
                     ? throw new JSException(exception)
                     : (TResult)(object)new WebAssemblyJSObjectReference(this, id);
             case JSCallResultType.JSStreamReference:
-                var serializedStreamReference = InternalCalls.InvokeJS<T0, T1, T2, string>(out exception, ref callInfo, arg0, arg1, arg2);
+                var serializedStreamReference = InternalCalls.InvokeJS<T0, T1, T2, string>(
+                    out exception,
+                    ref callInfo,
+                    arg0,
+                    arg1,
+                    arg2
+                );
                 return exception != null
                     ? throw new JSException(exception)
                     : (TResult)(object)DeserializeJSStreamReference(serializedStreamReference);
@@ -94,13 +153,23 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
         }
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "IJSStreamReference is referenced in Microsoft.JSInterop.Infrastructure.JSStreamReferenceJsonConverter")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "IJSStreamReference is referenced in Microsoft.JSInterop.Infrastructure.JSStreamReferenceJsonConverter"
+    )]
     private IJSStreamReference DeserializeJSStreamReference(string serializedStreamReference)
     {
-        var jsStreamReference = JsonSerializer.Deserialize<IJSStreamReference>(serializedStreamReference, JsonSerializerOptions);
+        var jsStreamReference = JsonSerializer.Deserialize<IJSStreamReference>(
+            serializedStreamReference,
+            JsonSerializerOptions
+        );
         if (jsStreamReference is null)
         {
-            throw new ArgumentException($"Failed to parse as {nameof(IJSStreamReference)}.", nameof(serializedStreamReference));
+            throw new ArgumentException(
+                $"Failed to parse as {nameof(IJSStreamReference)}.",
+                nameof(serializedStreamReference)
+            );
         }
 
         return jsStreamReference;
@@ -108,21 +177,25 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
 
     /// <inheritdoc />
     [Obsolete("This method is obsolete. Use JSImportAttribute instead.")]
-    public TResult InvokeUnmarshalled<TResult>(string identifier)
-        => InvokeUnmarshalled<object?, object?, object?, TResult>(identifier, null, null, null, 0);
+    public TResult InvokeUnmarshalled<TResult>(string identifier) =>
+        InvokeUnmarshalled<object?, object?, object?, TResult>(identifier, null, null, null, 0);
 
     /// <inheritdoc />
     [Obsolete("This method is obsolete. Use JSImportAttribute instead.")]
-    public TResult InvokeUnmarshalled<T0, TResult>(string identifier, T0 arg0)
-        => InvokeUnmarshalled<T0, object?, object?, TResult>(identifier, arg0, null, null, 0);
+    public TResult InvokeUnmarshalled<T0, TResult>(string identifier, T0 arg0) =>
+        InvokeUnmarshalled<T0, object?, object?, TResult>(identifier, arg0, null, null, 0);
 
     /// <inheritdoc />
     [Obsolete("This method is obsolete. Use JSImportAttribute instead.")]
-    public TResult InvokeUnmarshalled<T0, T1, TResult>(string identifier, T0 arg0, T1 arg1)
-        => InvokeUnmarshalled<T0, T1, object?, TResult>(identifier, arg0, arg1, null, 0);
+    public TResult InvokeUnmarshalled<T0, T1, TResult>(string identifier, T0 arg0, T1 arg1) =>
+        InvokeUnmarshalled<T0, T1, object?, TResult>(identifier, arg0, arg1, null, 0);
 
     /// <inheritdoc />
     [Obsolete("This method is obsolete. Use JSImportAttribute instead.")]
-    public TResult InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2)
-        => InvokeUnmarshalled<T0, T1, T2, TResult>(identifier, arg0, arg1, arg2, 0);
+    public TResult InvokeUnmarshalled<T0, T1, T2, TResult>(
+        string identifier,
+        T0 arg0,
+        T1 arg1,
+        T2 arg2
+    ) => InvokeUnmarshalled<T0, T1, T2, TResult>(identifier, arg0, arg1, arg2, 0);
 }

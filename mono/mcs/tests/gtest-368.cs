@@ -1,15 +1,13 @@
-class C<T> 
+class C<T>
 {
-	class D {}
-	
-	C(D d) {}
-	public C() {}
-}
+    class D { }
 
+    C(D d) { }
+
+    public C() { }
+}
 
 class M
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

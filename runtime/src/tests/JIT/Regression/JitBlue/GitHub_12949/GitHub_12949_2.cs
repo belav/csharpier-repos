@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class X<K> 
+public class X<K>
 {
     public X(K k1)
     {

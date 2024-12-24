@@ -19,13 +19,10 @@ public class JsonPatchOperationsArrayProviderTests
         var provider = new JsonPatchOperationsArrayProvider(metadataProvider);
         var jsonPatchParameterDescription = new ApiParameterDescription
         {
-            Type = typeof(JsonPatchDocument)
+            Type = typeof(JsonPatchDocument),
         };
 
-        var stringParameterDescription = new ApiParameterDescription
-        {
-            Type = typeof(string),
-        };
+        var stringParameterDescription = new ApiParameterDescription { Type = typeof(string) };
 
         var apiDescription = new ApiDescription();
         apiDescription.ParameterDescriptions.Add(jsonPatchParameterDescription);
@@ -39,7 +36,8 @@ public class JsonPatchOperationsArrayProviderTests
         provider.OnProvidersExecuting(apiDescriptionProviderContext);
 
         // Assert
-        Assert.Collection(apiDescription.ParameterDescriptions,
+        Assert.Collection(
+            apiDescription.ParameterDescriptions,
             description =>
             {
                 Assert.Equal(typeof(Operation[]), description.Type);
@@ -48,6 +46,7 @@ public class JsonPatchOperationsArrayProviderTests
             description =>
             {
                 Assert.Equal(typeof(string), description.Type);
-            });
+            }
+        );
     }
 }

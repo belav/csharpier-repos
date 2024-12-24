@@ -59,10 +59,10 @@ internal class PageComponentBuilder : IEquatable<PageComponentBuilder?>
     /// <inheritdoc/>
     public bool Equals(PageComponentBuilder? other)
     {
-        return other is not null &&
-               AssemblyName == other.AssemblyName &&
-               RouteTemplates.SequenceEqual(other.RouteTemplates!, StringComparer.OrdinalIgnoreCase) &&
-               EqualityComparer<Type>.Default.Equals(PageType, other.PageType);
+        return other is not null
+            && AssemblyName == other.AssemblyName
+            && RouteTemplates.SequenceEqual(other.RouteTemplates!, StringComparer.OrdinalIgnoreCase)
+            && EqualityComparer<Type>.Default.Equals(PageType, other.PageType);
     }
 
     /// <inheritdoc/>

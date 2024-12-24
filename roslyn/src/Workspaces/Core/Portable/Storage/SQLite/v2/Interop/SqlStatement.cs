@@ -10,13 +10,13 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
 {
     /// <summary>
-    /// Represents a prepared sqlite statement.  <see cref="SqlStatement"/>s can be 
-    /// <see cref="Step"/>ed (i.e. executed).  Executing a statement can result in 
+    /// Represents a prepared sqlite statement.  <see cref="SqlStatement"/>s can be
+    /// <see cref="Step"/>ed (i.e. executed).  Executing a statement can result in
     /// either <see cref="Result.DONE"/> if the command completed and produced no
     /// value, or <see cref="Result.ROW"/> if it evaluated out to a sql row that can
     /// then be queried.
     /// <para>
-    /// If a statement is parameterized then parameters can be provided by the 
+    /// If a statement is parameterized then parameters can be provided by the
     /// BindXXX overloads.  Bind is 1-based (to match sqlite).</para>
     /// <para>
     /// When done executing a statement, the statement should be <see cref="Reset"/>.
@@ -27,16 +27,17 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
     /// Finalization/destruction of the underlying raw sqlite statement is handled
     /// by <see cref="SqlConnection.Close_OnlyForUseBySQLiteConnectionPool"/>.</para>
     /// </summary>
-    internal readonly struct SqlStatement(SqlConnection connection, SafeSqliteStatementHandle statement)
+    internal readonly struct SqlStatement(
+        SqlConnection connection,
+        SafeSqliteStatementHandle statement
+    )
     {
-        internal void Close_OnlyForUseBySqlConnection()
-            => statement.Dispose();
+        internal void Close_OnlyForUseBySqlConnection() => statement.Dispose();
 
-        public void ClearBindings()
-            => connection.ThrowIfNotOk(NativeMethods.sqlite3_clear_bindings(statement));
+        public void ClearBindings() =>
+            connection.ThrowIfNotOk(NativeMethods.sqlite3_clear_bindings(statement));
 
-        public void Reset()
-            => connection.ThrowIfNotOk(NativeMethods.sqlite3_reset(statement));
+        public void Reset() => connection.ThrowIfNotOk(NativeMethods.sqlite3_reset(statement));
 
         public Result Step(bool throwOnError = true)
         {
@@ -81,38 +82,55 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                 {
                     Span<byte> bytes = stackalloc byte[utf8ByteCount];
 #if NETCOREAPP
-                    Contract.ThrowIfFalse(Encoding.UTF8.GetBytes(value.AsSpan(), bytes) == utf8ByteCount);
+                    Contract.ThrowIfFalse(
+                        Encoding.UTF8.GetBytes(value.AsSpan(), bytes) == utf8ByteCount
+                    );
 #else
                     unsafe
                     {
                         fixed (char* charsPtr = value)
                         fixed (byte* bytesPtr = bytes)
                         {
-                            Contract.ThrowIfFalse(Encoding.UTF8.GetBytes(charsPtr, value.Length, bytesPtr, utf8ByteCount) == utf8ByteCount);
+                            Contract.ThrowIfFalse(
+                                Encoding.UTF8.GetBytes(
+                                    charsPtr,
+                                    value.Length,
+                                    bytesPtr,
+                                    utf8ByteCount
+                                ) == utf8ByteCount
+                            );
                         }
                     }
 #endif
-                    connection.ThrowIfNotOk(NativeMethods.sqlite3_bind_text(statement, parameterIndex, bytes));
+                    connection.ThrowIfNotOk(
+                        NativeMethods.sqlite3_bind_text(statement, parameterIndex, bytes)
+                    );
                     return;
                 }
             }
 
-            connection.ThrowIfNotOk(NativeMethods.sqlite3_bind_text(statement, parameterIndex, value));
+            connection.ThrowIfNotOk(
+                NativeMethods.sqlite3_bind_text(statement, parameterIndex, value)
+            );
         }
 
-        internal void BindInt64Parameter(int parameterIndex, long value)
-            => connection.ThrowIfNotOk(NativeMethods.sqlite3_bind_int64(statement, parameterIndex, value));
+        internal void BindInt64Parameter(int parameterIndex, long value) =>
+            connection.ThrowIfNotOk(
+                NativeMethods.sqlite3_bind_int64(statement, parameterIndex, value)
+            );
 
-        internal void BindBlobParameter(int parameterIndex, ReadOnlySpan<byte> bytes)
-            => connection.ThrowIfNotOk(NativeMethods.sqlite3_bind_blob(statement, parameterIndex, bytes));
+        internal void BindBlobParameter(int parameterIndex, ReadOnlySpan<byte> bytes) =>
+            connection.ThrowIfNotOk(
+                NativeMethods.sqlite3_bind_blob(statement, parameterIndex, bytes)
+            );
 
-        internal int GetInt32At(int columnIndex)
-            => NativeMethods.sqlite3_column_int(statement, columnIndex);
+        internal int GetInt32At(int columnIndex) =>
+            NativeMethods.sqlite3_column_int(statement, columnIndex);
 
-        internal long GetInt64At(int columnIndex)
-            => NativeMethods.sqlite3_column_int64(statement, columnIndex);
+        internal long GetInt64At(int columnIndex) =>
+            NativeMethods.sqlite3_column_int64(statement, columnIndex);
 
-        internal string GetStringAt(int columnIndex)
-            => NativeMethods.sqlite3_column_text(statement, columnIndex);
+        internal string GetStringAt(int columnIndex) =>
+            NativeMethods.sqlite3_column_text(statement, columnIndex);
     }
 }

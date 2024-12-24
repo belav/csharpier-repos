@@ -9,8 +9,8 @@ namespace System.ServiceModel.Description
     {
         public static bool IsDefined(UnknownExceptionAction action)
         {
-            return action == UnknownExceptionAction.AbortInstance ||
-                action == UnknownExceptionAction.TerminateInstance;
+            return action == UnknownExceptionAction.AbortInstance
+                || action == UnknownExceptionAction.TerminateInstance;
         }
     }
 }

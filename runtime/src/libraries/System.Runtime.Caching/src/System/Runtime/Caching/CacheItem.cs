@@ -18,12 +18,14 @@ namespace System.Runtime.Caching
             Key = key;
         }
 
-        public CacheItem(string key, object value) : this(key)
+        public CacheItem(string key, object value)
+            : this(key)
         {
             Value = value;
         }
 
-        public CacheItem(string key, object value, string regionName) : this(key, value)
+        public CacheItem(string key, object value, string regionName)
+            : this(key, value)
         {
             RegionName = regionName;
         }

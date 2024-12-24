@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,28 +33,32 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {
-	public class ContentDefinition
-	{
-		string id, content, html;
+    public class ContentDefinition
+    {
+        string id,
+            content,
+            html;
 
-		public ContentDefinition (string id, string content, string designTimeHtml)
-		{
-			this.id = id;
-			this.content = content;
-			this.html = designTimeHtml;
-		}
+        public ContentDefinition(string id, string content, string designTimeHtml)
+        {
+            this.id = id;
+            this.content = content;
+            this.html = designTimeHtml;
+        }
 
-		public string ContentPlaceHolderID {
-			get { return id; }
-		}
+        public string ContentPlaceHolderID
+        {
+            get { return id; }
+        }
 
-		public string DefaultContent {
-			get { return content; }
-		}
+        public string DefaultContent
+        {
+            get { return content; }
+        }
 
-		public string DefaultDesignTimeHtml {
-			get { return html; }
-		}
-	}
+        public string DefaultDesignTimeHtml
+        {
+            get { return html; }
+        }
+    }
 }
-

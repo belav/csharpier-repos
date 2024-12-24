@@ -29,9 +29,7 @@ public sealed class SqliteJsonDecimalReaderWriter : JsonValueReaderWriter<decima
     /// </summary>
     public static SqliteJsonDecimalReaderWriter Instance { get; } = new();
 
-    private SqliteJsonDecimalReaderWriter()
-    {
-    }
+    private SqliteJsonDecimalReaderWriter() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,8 +37,10 @@ public sealed class SqliteJsonDecimalReaderWriter : JsonValueReaderWriter<decima
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override decimal FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => decimal.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
+    public override decimal FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => decimal.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,6 +48,8 @@ public sealed class SqliteJsonDecimalReaderWriter : JsonValueReaderWriter<decima
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override void ToJsonTyped(Utf8JsonWriter writer, decimal value)
-        => writer.WriteStringValue(string.Format(CultureInfo.InvariantCulture, DecimalFormatConst, value));
+    public override void ToJsonTyped(Utf8JsonWriter writer, decimal value) =>
+        writer.WriteStringValue(
+            string.Format(CultureInfo.InvariantCulture, DecimalFormatConst, value)
+        );
 }

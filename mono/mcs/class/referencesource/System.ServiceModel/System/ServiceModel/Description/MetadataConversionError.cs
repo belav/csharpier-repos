@@ -12,7 +12,9 @@ namespace System.ServiceModel.Description
         string message;
         bool isWarning;
 
-        public MetadataConversionError(string message) : this(message, false) { }
+        public MetadataConversionError(string message)
+            : this(message, false) { }
+
         public MetadataConversionError(string message, bool isWarning)
         {
             if (message == null)
@@ -21,8 +23,15 @@ namespace System.ServiceModel.Description
             this.isWarning = isWarning;
         }
 
-        public string Message { get { return message; } }
-        public bool IsWarning { get { return isWarning; } }
+        public string Message
+        {
+            get { return message; }
+        }
+        public bool IsWarning
+        {
+            get { return isWarning; }
+        }
+
         public override bool Equals(object obj)
         {
             MetadataConversionError otherError = obj as MetadataConversionError;
@@ -36,5 +45,4 @@ namespace System.ServiceModel.Description
             return message.GetHashCode();
         }
     }
-
 }

@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Xunit;
 
 namespace System.Threading.Tasks.Tests.Status
 {
@@ -35,14 +35,14 @@ namespace System.Threading.Tasks.Tests.Status
         CancelScheduledTask,
         CancelCreatedTask,
         FailedTask,
-        FailedChildTask
+        FailedChildTask,
     }
 
     public enum MyTaskCreationOptions
     {
         None = TaskCreationOptions.None,
         RespectParentCancellation = -2,
-        AttachedToParent = TaskCreationOptions.AttachedToParent
+        AttachedToParent = TaskCreationOptions.AttachedToParent,
     }
 
     public class StatusTestException : Exception { }
@@ -121,20 +121,36 @@ namespace System.Threading.Tasks.Tests.Status
                     {
                         if (_testAction == TestAction.CancelScheduledTask)
                         {
-                            CancelWaitingToRunTaskScheduler scheduler = new CancelWaitingToRunTaskScheduler();
+                            CancelWaitingToRunTaskScheduler scheduler =
+                                new CancelWaitingToRunTaskScheduler();
                             CancellationTokenSource cts = new CancellationTokenSource();
                             scheduler.Cancellation = cts;
 
                             // Replace _task with a task that has a custom scheduler
-                            _task = Task.Factory.StartNew(() => { }, cts.Token, TaskCreationOptions.None, scheduler);
+                            _task = Task.Factory.StartNew(
+                                () => { },
+                                cts.Token,
+                                TaskCreationOptions.None,
+                                scheduler
+                            );
 
-                            try { _task.GetAwaiter().GetResult(); }
+                            try
+                            {
+                                _task.GetAwaiter().GetResult();
+                            }
                             catch (Exception ex)
                             {
                                 if (ex is OperationCanceledException)
-                                    Debug.WriteLine("OperationCanceledException Exception was thrown as expected");
+                                    Debug.WriteLine(
+                                        "OperationCanceledException Exception was thrown as expected"
+                                    );
                                 else
-                                    Assert.Fail(string.Format("Unexpected exception was thrown: \n{0}", ex.ToString()));
+                                    Assert.Fail(
+                                        string.Format(
+                                            "Unexpected exception was thrown: \n{0}",
+                                            ex.ToString()
+                                        )
+                                    );
                             }
                         }
                         else if (_testAction == TestAction.CancelCreatedTask)
@@ -158,14 +174,16 @@ namespace System.Threading.Tasks.Tests.Status
 
                         Task.Delay(1).Wait();
 
-                        if (_createChildTask &&
-                            _childTask != null &&
-                            _testAction != TestAction.CancelTask &&
-                            _testAction != TestAction.CancelTaskAndAcknowledge &&
-                            _testAction != TestAction.FailedTask &&
-                            _childCreationOptions == MyTaskCreationOptions.AttachedToParent &&
-                            _childTask.Status != TaskStatus.RanToCompletion &&
-                            _childTask.Status != TaskStatus.Faulted)
+                        if (
+                            _createChildTask
+                            && _childTask != null
+                            && _testAction != TestAction.CancelTask
+                            && _testAction != TestAction.CancelTaskAndAcknowledge
+                            && _testAction != TestAction.FailedTask
+                            && _childCreationOptions == MyTaskCreationOptions.AttachedToParent
+                            && _childTask.Status != TaskStatus.RanToCompletion
+                            && _childTask.Status != TaskStatus.Faulted
+                        )
                         {
                             //we may have reach this point too soon, let's keep spinning until the status changes.
                             while (_task.Status == TaskStatus.Running)
@@ -179,9 +197,17 @@ namespace System.Threading.Tasks.Tests.Status
                             // make the child task's status more recent, since the child task may complete during the status
                             // reads.
                             //
-                            if (_task.Status != TaskStatus.WaitingForChildrenToComplete && !_childTask.IsCompleted)
+                            if (
+                                _task.Status != TaskStatus.WaitingForChildrenToComplete
+                                && !_childTask.IsCompleted
+                            )
                             {
-                                Assert.Fail(string.Format("Expecting current Task status to be WaitingForChildren but getting {0}", _task.Status.ToString()));
+                                Assert.Fail(
+                                    string.Format(
+                                        "Expecting current Task status to be WaitingForChildren but getting {0}",
+                                        _task.Status.ToString()
+                                    )
+                                );
                             }
                         }
                         _task.Wait();
@@ -189,19 +215,33 @@ namespace System.Threading.Tasks.Tests.Status
                 }
                 catch (AggregateException exp)
                 {
-                    if ((_testAction == TestAction.CancelTaskAndAcknowledge || _testAction == TestAction.CancelScheduledTask || _testAction == TestAction.CancelCreatedTask) &&
-                        exp.Flatten().InnerException.GetType() == typeof(TaskCanceledException))
+                    if (
+                        (
+                            _testAction == TestAction.CancelTaskAndAcknowledge
+                            || _testAction == TestAction.CancelScheduledTask
+                            || _testAction == TestAction.CancelCreatedTask
+                        )
+                        && exp.Flatten().InnerException.GetType() == typeof(TaskCanceledException)
+                    )
                     {
                         Debug.WriteLine("TaskCanceledException Exception was thrown as expected");
                     }
-                    else if ((_testAction == TestAction.FailedTask || _testAction == TestAction.FailedChildTask) && _task.IsFaulted &&
-                        exp.Flatten().InnerException.GetType() == typeof(StatusTestException))
+                    else if (
+                        (
+                            _testAction == TestAction.FailedTask
+                            || _testAction == TestAction.FailedChildTask
+                        )
+                        && _task.IsFaulted
+                        && exp.Flatten().InnerException.GetType() == typeof(StatusTestException)
+                    )
                     {
                         Debug.WriteLine("StatusTestException Exception was thrown as expected");
                     }
                     else
                     {
-                        Assert.Fail(string.Format("Unexpected exception was thrown: \n{0}", exp.ToString()));
+                        Assert.Fail(
+                            string.Format("Unexpected exception was thrown: \n{0}", exp.ToString())
+                        );
                     }
                 }
 
@@ -211,31 +251,48 @@ namespace System.Threading.Tasks.Tests.Status
                     // Need to wait for Children task if it was created with Default option (Detached by default),
                     // or current task was either canceled or failed
                     //
-                    if (_createChildTask &&
-                        (_childCreationOptions == MyTaskCreationOptions.None ||
-                        _testAction == TestAction.CancelTask ||
-                        _testAction == TestAction.CancelTaskAndAcknowledge ||
-                        _testAction == TestAction.FailedTask))
+                    if (
+                        _createChildTask
+                        && (
+                            _childCreationOptions == MyTaskCreationOptions.None
+                            || _testAction == TestAction.CancelTask
+                            || _testAction == TestAction.CancelTaskAndAcknowledge
+                            || _testAction == TestAction.FailedTask
+                        )
+                    )
                     {
                         _childTask.Wait();
                     }
                 }
                 catch (AggregateException exp)
                 {
-                    if (((_testAction == TestAction.CancelTask || _testAction == TestAction.CancelTaskAndAcknowledge) &&
-                        _childCreationOptions == MyTaskCreationOptions.RespectParentCancellation) &&
-                        exp.Flatten().InnerException.GetType() == typeof(TaskCanceledException))
+                    if (
+                        (
+                            (
+                                _testAction == TestAction.CancelTask
+                                || _testAction == TestAction.CancelTaskAndAcknowledge
+                            )
+                            && _childCreationOptions
+                                == MyTaskCreationOptions.RespectParentCancellation
+                        )
+                        && exp.Flatten().InnerException.GetType() == typeof(TaskCanceledException)
+                    )
                     {
                         Debug.WriteLine("TaskCanceledException Exception was thrown as expected");
                     }
-                    else if (_testAction == TestAction.FailedChildTask && _childTask.IsFaulted &&
-                        exp.Flatten().InnerException.GetType() == typeof(StatusTestException))
+                    else if (
+                        _testAction == TestAction.FailedChildTask
+                        && _childTask.IsFaulted
+                        && exp.Flatten().InnerException.GetType() == typeof(StatusTestException)
+                    )
                     {
                         Debug.WriteLine("StatusTestException Exception was thrown as expected");
                     }
                     else
                     {
-                        Assert.Fail(string.Format("Unexpected exception was thrown: \n{0}", exp.ToString()));
+                        Assert.Fail(
+                            string.Format("Unexpected exception was thrown: \n{0}", exp.ToString())
+                        );
                     }
                 }
             }
@@ -245,15 +302,33 @@ namespace System.Threading.Tasks.Tests.Status
             //
             if (_finalTaskStatus != null && _finalTaskStatus.Value != _task.Status)
             {
-                Assert.Fail(string.Format("Expecting Task final Status to be {0}, while getting {1}", _finalTaskStatus.Value, _task.Status));
+                Assert.Fail(
+                    string.Format(
+                        "Expecting Task final Status to be {0}, while getting {1}",
+                        _finalTaskStatus.Value,
+                        _task.Status
+                    )
+                );
             }
             if (_finalChildTaskStatus != null && _finalChildTaskStatus.Value != _childTask.Status)
             {
-                Assert.Fail(string.Format("Expecting Child Task final Status to be {0}, while getting {1}", _finalChildTaskStatus.Value, _childTask.Status));
+                Assert.Fail(
+                    string.Format(
+                        "Expecting Child Task final Status to be {0}, while getting {1}",
+                        _finalChildTaskStatus.Value,
+                        _childTask.Status
+                    )
+                );
             }
             if (_finalPromiseStatus != null && _finalPromiseStatus.Value != _promise.Task.Status)
             {
-                Assert.Fail(string.Format("Expecting Promise Status to be {0}, while getting {1}", _finalPromiseStatus.Value, _promise.Task.Status));
+                Assert.Fail(
+                    string.Format(
+                        "Expecting Promise Status to be {0}, while getting {1}",
+                        _finalPromiseStatus.Value,
+                        _promise.Task.Status
+                    )
+                );
             }
 
             //
@@ -261,11 +336,23 @@ namespace System.Threading.Tasks.Tests.Status
             //
             if (_task != null && _task.Status == TaskStatus.Canceled && _task.IsCanceled != true)
             {
-                Assert.Fail(string.Format("Task final Status is Canceled, expecting IsCanceled property to be True as well"));
+                Assert.Fail(
+                    string.Format(
+                        "Task final Status is Canceled, expecting IsCanceled property to be True as well"
+                    )
+                );
             }
-            if (_childTask != null && _childTask.Status == TaskStatus.Canceled && _childTask.IsCanceled != true)
+            if (
+                _childTask != null
+                && _childTask.Status == TaskStatus.Canceled
+                && _childTask.IsCanceled != true
+            )
             {
-                Assert.Fail(string.Format("Child Task final Status is Canceled, expecting IsCanceled property to be True as well"));
+                Assert.Fail(
+                    string.Format(
+                        "Child Task final Status is Canceled, expecting IsCanceled property to be True as well"
+                    )
+                );
             }
 
             //
@@ -288,7 +375,12 @@ namespace System.Threading.Tasks.Tests.Status
                 }
                 else
                 {
-                    Assert.Fail(string.Format("Exception on promise has mismatched type, expecting StatusTestException, actual: {0}", exp.Flatten().InnerException.GetType()));
+                    Assert.Fail(
+                        string.Format(
+                            "Exception on promise has mismatched type, expecting StatusTestException, actual: {0}",
+                            exp.Flatten().InnerException.GetType()
+                        )
+                    );
                 }
             }
         }
@@ -316,12 +408,20 @@ namespace System.Threading.Tasks.Tests.Status
 
                     if (_childTask.Status != TaskStatus.Created)
                     {
-                        Assert.Fail(string.Format("Expecting Child Task status to be Created while getting {0}", _childTask.Status.ToString()));
+                        Assert.Fail(
+                            string.Format(
+                                "Expecting Child Task status to be Created while getting {0}",
+                                _childTask.Status.ToString()
+                            )
+                        );
                     }
 
                     _childTask.Start();
 
-                    if (_testAction != TestAction.CancelTask && _testAction != TestAction.CancelTaskAndAcknowledge)
+                    if (
+                        _testAction != TestAction.CancelTask
+                        && _testAction != TestAction.CancelTaskAndAcknowledge
+                    )
                     {
                         //
                         // if cancel action, release the child task after calling Cancel()
@@ -332,7 +432,12 @@ namespace System.Threading.Tasks.Tests.Status
 
                 if (_task.Status != TaskStatus.Running)
                 {
-                    Assert.Fail(string.Format("Expecting Current Task status to be Running while getting {0}", _task.Status.ToString()));
+                    Assert.Fail(
+                        string.Format(
+                            "Expecting Current Task status to be Running while getting {0}",
+                            _task.Status.ToString()
+                        )
+                    );
                 }
 
                 switch (_testAction)
@@ -368,7 +473,12 @@ namespace System.Threading.Tasks.Tests.Status
 
             if (_childTask.Status != TaskStatus.Running)
             {
-                Assert.Fail(string.Format("Expecting Child Task status to be Running while getting {0}", _childTask.Status.ToString()));
+                Assert.Fail(
+                    string.Format(
+                        "Expecting Child Task status to be Running while getting {0}",
+                        _childTask.Status.ToString()
+                    )
+                );
             }
             switch (_testAction)
             {
@@ -401,8 +511,15 @@ namespace System.Threading.Tasks.Tests.Status
             TryExecuteTask(task);
         }
 
-        protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) { return false; }
-        protected override IEnumerable<Task> GetScheduledTasks() { return null; }
+        protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
+        {
+            return false;
+        }
+
+        protected override IEnumerable<Task> GetScheduledTasks()
+        {
+            return null;
+        }
     }
 
     public sealed class TaskStatusTests
@@ -640,7 +757,10 @@ namespace System.Threading.Tasks.Tests.Status
             test.RealRun();
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(Status_IsProperties_Match_MemberData))]
         public void Status_IsProperties_Match(StrongBox<Task> taskBox)
         {
@@ -666,28 +786,40 @@ namespace System.Threading.Tasks.Tests.Status
             {
                 case TaskStatus.RanToCompletion:
                     Assert.True(task.IsCompleted, "Expected IsCompleted to be true");
-                    Assert.True(task.IsCompletedSuccessfully, "Expected IsCompletedSuccessfully to be true");
+                    Assert.True(
+                        task.IsCompletedSuccessfully,
+                        "Expected IsCompletedSuccessfully to be true"
+                    );
                     Assert.False(task.IsFaulted, "Expected IsFaulted to be false");
                     Assert.False(task.IsCanceled, "Expected IsCanceled to be false");
                     break;
 
                 case TaskStatus.Faulted:
                     Assert.True(task.IsCompleted, "Expected IsCompleted to be true");
-                    Assert.False(task.IsCompletedSuccessfully, "Expected IsCompletedSuccessfully to be false");
+                    Assert.False(
+                        task.IsCompletedSuccessfully,
+                        "Expected IsCompletedSuccessfully to be false"
+                    );
                     Assert.True(task.IsFaulted, "Expected IsFaulted to be true");
                     Assert.False(task.IsCanceled, "Expected IsCanceled to be false");
                     break;
 
                 case TaskStatus.Canceled:
                     Assert.True(task.IsCompleted, "Expected IsCompleted to be true");
-                    Assert.False(task.IsCompletedSuccessfully, "Expected IsCompletedSuccessfully to be false");
+                    Assert.False(
+                        task.IsCompletedSuccessfully,
+                        "Expected IsCompletedSuccessfully to be false"
+                    );
                     Assert.False(task.IsFaulted, "Expected IsFaulted to be false");
                     Assert.True(task.IsCanceled, "Expected IsCanceled to be true");
                     break;
 
                 default:
                     Assert.False(task.IsCompleted, "Expected IsCompleted to be false");
-                    Assert.False(task.IsCompletedSuccessfully, "Expected IsCompletedSuccessfully to be false");
+                    Assert.False(
+                        task.IsCompletedSuccessfully,
+                        "Expected IsCompletedSuccessfully to be false"
+                    );
                     Assert.False(task.IsFaulted, "Expected IsFaulted to be false");
                     Assert.False(task.IsCanceled, "Expected IsCanceled to be false");
                     break;

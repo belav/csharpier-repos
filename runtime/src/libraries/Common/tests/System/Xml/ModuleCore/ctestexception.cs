@@ -17,14 +17,15 @@ namespace OLEDB.Test.ModuleCore
     {
         //Constructor
         public CTestSkippedException(string message)
-            : this(message, false, true, null)
-        {
-        }
+            : this(message, false, true, null) { }
 
-        public CTestSkippedException(string message, object actual, object expected, Exception inner)
-            : base(CTestBase.TEST_SKIPPED, message, actual, expected, inner)
-        {
-        }
+        public CTestSkippedException(
+            string message,
+            object actual,
+            object expected,
+            Exception inner
+        )
+            : base(CTestBase.TEST_SKIPPED, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -35,14 +36,10 @@ namespace OLEDB.Test.ModuleCore
     {
         //Constructor
         public CTestFailedException(string message)
-            : this(message, false, true, null)
-        {
-        }
+            : this(message, false, true, null) { }
 
         public CTestFailedException(string message, object actual, object expected, Exception inner)
-            : base(CTestBase.TEST_FAIL, message, actual, expected, inner)
-        {
-        }
+            : base(CTestBase.TEST_FAIL, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -76,7 +73,13 @@ namespace OLEDB.Test.ModuleCore
             }
         }
 
-        public CTestException(int result, string message, object actual, object expected, Exception inner)
+        public CTestException(
+            int result,
+            string message,
+            object actual,
+            object expected,
+            Exception inner
+        )
             : base(message, inner)
         {
             if (message is null)

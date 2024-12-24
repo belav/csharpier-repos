@@ -15,9 +15,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var blocks = new[]
             {
                 new JoinBlock<int, string>(),
-                new JoinBlock<int, string>(new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1 }),
-                new JoinBlock<int, string>(new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1 }),
-                new JoinBlock<int, string>(new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1, CancellationToken = new CancellationToken(true), MaxNumberOfGroups = 1 })
+                new JoinBlock<int, string>(
+                    new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1 }
+                ),
+                new JoinBlock<int, string>(
+                    new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1 }
+                ),
+                new JoinBlock<int, string>(
+                    new GroupingDataflowBlockOptions
+                    {
+                        MaxMessagesPerTask = 1,
+                        CancellationToken = new CancellationToken(true),
+                        MaxNumberOfGroups = 1,
+                    }
+                ),
             };
             foreach (var block in blocks)
             {
@@ -32,9 +43,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var blocks = new[]
             {
                 new JoinBlock<int, string, double>(),
-                new JoinBlock<int, string, double>(new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1 }),
-                new JoinBlock<int, string, double>(new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1 }),
-                new JoinBlock<int, string, double>(new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1, CancellationToken = new CancellationToken(true), MaxNumberOfGroups = 1 })
+                new JoinBlock<int, string, double>(
+                    new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1 }
+                ),
+                new JoinBlock<int, string, double>(
+                    new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1 }
+                ),
+                new JoinBlock<int, string, double>(
+                    new GroupingDataflowBlockOptions
+                    {
+                        MaxMessagesPerTask = 1,
+                        CancellationToken = new CancellationToken(true),
+                        MaxNumberOfGroups = 1,
+                    }
+                ),
             };
             foreach (var block in blocks)
             {
@@ -46,14 +68,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestToString()
         {
-            DataflowTestHelpers.TestToString(
-                nameFormat => nameFormat != null ?
-                    new JoinBlock<int, string>(new GroupingDataflowBlockOptions() { NameFormat = nameFormat }) :
-                    new JoinBlock<int, string>());
-            DataflowTestHelpers.TestToString(
-                nameFormat => nameFormat != null ?
-                    new JoinBlock<int, string, double>(new GroupingDataflowBlockOptions() { NameFormat = nameFormat }) :
-                    new JoinBlock<int, string, double>());
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new JoinBlock<int, string>(
+                        new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new JoinBlock<int, string>()
+            );
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new JoinBlock<int, string, double>(
+                        new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new JoinBlock<int, string, double>()
+            );
         }
 
         [Fact]
@@ -61,14 +89,42 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new JoinBlock<int, int>(null));
             Assert.Throws<ArgumentNullException>(() => new JoinBlock<int, int, int>(null));
-            Assert.Throws<NotSupportedException>(() => { var ignored = new JoinBlock<int, int>().Target1.Completion; });
-            Assert.Throws<NotSupportedException>(() => { var ignored = new JoinBlock<int, int, int>().Target3.Completion; });
-            Assert.Throws<ArgumentNullException>(() => new JoinBlock<int, int>().Target1.Fault(null));
-            AssertExtensions.Throws<ArgumentException>("messageHeader", () => new JoinBlock<int, int>().Target1.OfferMessage(default(DataflowMessageHeader), 1, null, false));
-            AssertExtensions.Throws<ArgumentException>("consumeToAccept", () => new JoinBlock<int, int>().Target1.OfferMessage(new DataflowMessageHeader(1), 1, null, true));
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var ignored = new JoinBlock<int, int>().Target1.Completion;
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var ignored = new JoinBlock<int, int, int>().Target3.Completion;
+            });
+            Assert.Throws<ArgumentNullException>(
+                () => new JoinBlock<int, int>().Target1.Fault(null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "messageHeader",
+                () =>
+                    new JoinBlock<int, int>().Target1.OfferMessage(
+                        default(DataflowMessageHeader),
+                        1,
+                        null,
+                        false
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "consumeToAccept",
+                () =>
+                    new JoinBlock<int, int>().Target1.OfferMessage(
+                        new DataflowMessageHeader(1),
+                        1,
+                        null,
+                        true
+                    )
+            );
 
             DataflowTestHelpers.TestArgumentsExceptions<Tuple<int, int>>(new JoinBlock<int, int>());
-            DataflowTestHelpers.TestArgumentsExceptions<Tuple<int, int, int>>(new JoinBlock<int, int, int>());
+            DataflowTestHelpers.TestArgumentsExceptions<Tuple<int, int, int>>(
+                new JoinBlock<int, int, int>()
+            );
         }
 
         [Fact]
@@ -139,9 +195,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestSendAllThenReceive()
         {
             int iter = 2;
-            Task<bool> t1, t2, t3;
+            Task<bool> t1,
+                t2,
+                t3;
 
-            var block2 = new JoinBlock<int, int>(new GroupingDataflowBlockOptions { Greedy = false });
+            var block2 = new JoinBlock<int, int>(
+                new GroupingDataflowBlockOptions { Greedy = false }
+            );
             for (int i = 0; i < iter; i++)
             {
                 t1 = block2.Target1.SendAsync(i);
@@ -156,7 +216,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 Assert.Equal(expected: i + 1, actual: msg.Item2);
             }
 
-            var block3 = new JoinBlock<int, int, int>(new GroupingDataflowBlockOptions { Greedy = false });
+            var block3 = new JoinBlock<int, int, int>(
+                new GroupingDataflowBlockOptions { Greedy = false }
+            );
             for (int i = 0; i < iter; i++)
             {
                 t1 = block3.Target1.SendAsync(i);
@@ -199,9 +261,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            var b = new JoinBlock<int, int>(new GroupingDataflowBlockOptions {
-                CancellationToken = cts.Token, MaxNumberOfGroups = 1
-            });
+            var b = new JoinBlock<int, int>(
+                new GroupingDataflowBlockOptions
+                {
+                    CancellationToken = cts.Token,
+                    MaxNumberOfGroups = 1,
+                }
+            );
 
             Assert.NotNull(b.LinkTo(DataflowBlock.NullTarget<Tuple<int, int>>()));
             Assert.False(b.Target1.Post(42));
@@ -215,7 +281,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.False(t2.Result);
 
             Tuple<int, int> ignoredValue;
-            IList<Tuple<int, int>>  ignoredValues;
+            IList<Tuple<int, int>> ignoredValues;
             Assert.False(b.TryReceive(out ignoredValue));
             Assert.False(b.TryReceiveAll(out ignoredValues));
             Assert.Equal(expected: 0, actual: b.OutputCount);
@@ -231,11 +297,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            var b = new JoinBlock<int, int, int>(new GroupingDataflowBlockOptions
-            {
-                CancellationToken = cts.Token,
-                MaxNumberOfGroups = 1
-            });
+            var b = new JoinBlock<int, int, int>(
+                new GroupingDataflowBlockOptions
+                {
+                    CancellationToken = cts.Token,
+                    MaxNumberOfGroups = 1,
+                }
+            );
 
             Assert.NotNull(b.LinkTo(DataflowBlock.NullTarget<Tuple<int, int, int>>()));
             Assert.False(b.Target1.Post(42));
@@ -329,10 +397,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestCompletionTask()
         {
             await DataflowTestHelpers.TestCompletionTask(() => new JoinBlock<int, string>());
-            await DataflowTestHelpers.TestCompletionTask(() => new JoinBlock<int, string, double>());
+            await DataflowTestHelpers.TestCompletionTask(
+                () => new JoinBlock<int, string, double>()
+            );
 
-            await Assert.ThrowsAsync<NotSupportedException>(() => new JoinBlock<string, string>().Target1.Completion);
-            await Assert.ThrowsAsync<NotSupportedException>(() => new JoinBlock<string, string, double>().Target1.Completion);
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => new JoinBlock<string, string>().Target1.Completion
+            );
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => new JoinBlock<string, string, double>().Target1.Completion
+            );
         }
 
         [Fact]
@@ -352,21 +426,42 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestNonGreedyFailToConsumeReservedMessage()
         {
-            var sources = Enumerable.Range(0, 2).Select(i => new DelegatePropagator<int, int>
-            {
-                ReserveMessageDelegate = delegate { return true; },
-                ConsumeMessageDelegate = delegate(DataflowMessageHeader messageHeader, ITargetBlock<int> target, out bool messageConsumed) {
-                    messageConsumed = false; // fail consumption of a message already reserved
-                    Assert.Equal(expected: 0, actual: i); // shouldn't get to second source
-                    return 0;
-                }
-            }).ToArray();
+            var sources = Enumerable
+                .Range(0, 2)
+                .Select(i => new DelegatePropagator<int, int>
+                {
+                    ReserveMessageDelegate = delegate
+                    {
+                        return true;
+                    },
+                    ConsumeMessageDelegate = delegate(
+                        DataflowMessageHeader messageHeader,
+                        ITargetBlock<int> target,
+                        out bool messageConsumed
+                    )
+                    {
+                        messageConsumed = false; // fail consumption of a message already reserved
+                        Assert.Equal(expected: 0, actual: i); // shouldn't get to second source
+                        return 0;
+                    },
+                })
+                .ToArray();
 
             var options = new GroupingDataflowBlockOptions { Greedy = false };
             JoinBlock<int, int> join = new JoinBlock<int, int>(options);
 
-            join.Target1.OfferMessage(new DataflowMessageHeader(1), 0, sources[0], consumeToAccept: true); // call back ConsumeMassage
-            join.Target2.OfferMessage(new DataflowMessageHeader(1), 0, sources[1], consumeToAccept: true); // call back ConsumeMassage
+            join.Target1.OfferMessage(
+                new DataflowMessageHeader(1),
+                0,
+                sources[0],
+                consumeToAccept: true
+            ); // call back ConsumeMassage
+            join.Target2.OfferMessage(
+                new DataflowMessageHeader(1),
+                0,
+                sources[1],
+                consumeToAccept: true
+            ); // call back ConsumeMassage
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => join.Completion);
         }
@@ -374,7 +469,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestNonGreedyDropPostponedOnCompletion()
         {
-            var joinBlock = new JoinBlock<int, int>(new GroupingDataflowBlockOptions { Greedy = false });
+            var joinBlock = new JoinBlock<int, int>(
+                new GroupingDataflowBlockOptions { Greedy = false }
+            );
             var source = new BufferBlock<int>();
             source.Post(1);
             source.LinkTo(joinBlock.Target1);
@@ -385,14 +482,24 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestNonGreedyReleasingFailsAtCompletion()
         {
-            var joinBlock = new JoinBlock<int, int>(new GroupingDataflowBlockOptions { Greedy = false });
+            var joinBlock = new JoinBlock<int, int>(
+                new GroupingDataflowBlockOptions { Greedy = false }
+            );
             var source = new DelegatePropagator<int, int>
             {
                 ReserveMessageDelegate = (header, target) => true,
-                ReleaseMessageDelegate = delegate { throw new FormatException(); }
+                ReleaseMessageDelegate = delegate
+                {
+                    throw new FormatException();
+                },
             };
 
-            joinBlock.Target1.OfferMessage(new DataflowMessageHeader(1), 1, source, consumeToAccept: true);
+            joinBlock.Target1.OfferMessage(
+                new DataflowMessageHeader(1),
+                1,
+                source,
+                consumeToAccept: true
+            );
             joinBlock.Complete();
 
             await Assert.ThrowsAsync<FormatException>(() => joinBlock.Completion);
@@ -401,16 +508,28 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestNonGreedyConsumingFailsWhileJoining()
         {
-            var joinBlock = new JoinBlock<int, int>(new GroupingDataflowBlockOptions { Greedy = false });
+            var joinBlock = new JoinBlock<int, int>(
+                new GroupingDataflowBlockOptions { Greedy = false }
+            );
             var source1 = new DelegatePropagator<int, int>
             {
                 ReserveMessageDelegate = (header, target) => true,
-                ConsumeMessageDelegate = delegate(DataflowMessageHeader messageHeader, ITargetBlock<int> target, out bool messageConsumed) {
+                ConsumeMessageDelegate = delegate(
+                    DataflowMessageHeader messageHeader,
+                    ITargetBlock<int> target,
+                    out bool messageConsumed
+                )
+                {
                     throw new FormatException();
-                }
+                },
             };
 
-            joinBlock.Target1.OfferMessage(new DataflowMessageHeader(1), 1, source1, consumeToAccept: true);
+            joinBlock.Target1.OfferMessage(
+                new DataflowMessageHeader(1),
+                1,
+                source1,
+                consumeToAccept: true
+            );
 
             var source2 = new BufferBlock<int>();
             source2.Post(2);
@@ -422,10 +541,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestNonGreedyPostponedMessagesNotAvailable()
         {
-            var joinBlock = new JoinBlock<int, int>(new GroupingDataflowBlockOptions { Greedy = false });
+            var joinBlock = new JoinBlock<int, int>(
+                new GroupingDataflowBlockOptions { Greedy = false }
+            );
 
             var cts = new CancellationTokenSource();
-            Task<bool>[] sends = Enumerable.Range(0, 3).Select(i => joinBlock.Target1.SendAsync(i, cts.Token)).ToArray();
+            Task<bool>[] sends = Enumerable
+                .Range(0, 3)
+                .Select(i => joinBlock.Target1.SendAsync(i, cts.Token))
+                .ToArray();
 
             cts.Cancel();
             foreach (Task<bool> send in sends)
@@ -446,10 +570,21 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 2, 3 })
             foreach (bool greedy in DataflowTestHelpers.BooleanValues)
             {
-                var join = new JoinBlock<int, int>(new GroupingDataflowBlockOptions { MaxNumberOfGroups = 2, BoundedCapacity = 2 });
-                Task<bool>[] sends1 = Enumerable.Range(0, 10).Select(i => join.Target1.SendAsync(i)).ToArray();
-                Task<bool>[] sends2 = Enumerable.Range(0, 10).Select(i => join.Target2.SendAsync(i)).ToArray();
-                var ab = new ActionBlock<Tuple<int, int>>(i => { }, new ExecutionDataflowBlockOptions { BoundedCapacity = 1 });
+                var join = new JoinBlock<int, int>(
+                    new GroupingDataflowBlockOptions { MaxNumberOfGroups = 2, BoundedCapacity = 2 }
+                );
+                Task<bool>[] sends1 = Enumerable
+                    .Range(0, 10)
+                    .Select(i => join.Target1.SendAsync(i))
+                    .ToArray();
+                Task<bool>[] sends2 = Enumerable
+                    .Range(0, 10)
+                    .Select(i => join.Target2.SendAsync(i))
+                    .ToArray();
+                var ab = new ActionBlock<Tuple<int, int>>(
+                    i => { },
+                    new ExecutionDataflowBlockOptions { BoundedCapacity = 1 }
+                );
                 join.LinkTo(ab, new DataflowLinkOptions { PropagateCompletion = true });
                 await join.Completion;
                 await Task.WhenAll(sends1);
@@ -468,7 +603,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     Greedy = greedy,
                     BoundedCapacity = boundedCapacity,
-                    MaxMessagesPerTask = maxMessagesPerTask
+                    MaxMessagesPerTask = maxMessagesPerTask,
                 };
                 var linkOptions = new DataflowLinkOptions { PropagateCompletion = true };
 
@@ -482,13 +617,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
                 var join7 = new JoinBlock<
                     Tuple<Tuple<int, string>, Tuple<double, short>>,
-                    Tuple<Tuple<string, object>, Tuple<float, IntPtr>>>(gdbo);
+                    Tuple<Tuple<string, object>, Tuple<float, IntPtr>>
+                >(gdbo);
 
                 int count = 0;
-                var sink = new ActionBlock<Tuple<Tuple<Tuple<int, string>, Tuple<double, short>>,
-                    Tuple<Tuple<string, object>, Tuple<float, IntPtr>>>>(i => count++);
+                var sink = new ActionBlock<
+                    Tuple<
+                        Tuple<Tuple<int, string>, Tuple<double, short>>,
+                        Tuple<Tuple<string, object>, Tuple<float, IntPtr>>
+                    >
+                >(i => count++);
 
-                join1.LinkTo(new ActionBlock<Tuple<int,string>>(item => { }), t => false); // ensure don't propagate across false filtered link
+                join1.LinkTo(new ActionBlock<Tuple<int, string>>(item => { }), t => false); // ensure don't propagate across false filtered link
                 join1.LinkTo(join5.Target1, linkOptions, t => true); // ensure joins work through filters
                 join2.LinkTo(join5.Target2, linkOptions);
                 join3.LinkTo(join6.Target1, linkOptions, t => true);
@@ -519,6 +659,5 @@ namespace System.Threading.Tasks.Dataflow.Tests
             b.Complete();
             b.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true });
         }
-
     }
 }

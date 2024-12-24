@@ -41,14 +41,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         IsolationLevel isolationLevel,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogBeginningTransaction(diagnostics);
 
         LogTransactionStarting(diagnostics, isolationLevel, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionStarting(
                 diagnostics,
@@ -59,7 +66,8 @@ public static class RelationalLoggerExtensions
                 startTime,
                 definition,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -87,14 +95,21 @@ public static class RelationalLoggerExtensions
         IsolationLevel isolationLevel,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogBeginningTransaction(diagnostics);
 
         LogTransactionStarting(diagnostics, isolationLevel, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionStarting(
                 diagnostics,
@@ -105,11 +120,17 @@ public static class RelationalLoggerExtensions
                 startTime,
                 definition,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionStartingAsync(connection.DbConnection, eventData, default, cancellationToken);
+                return interceptor.TransactionStartingAsync(
+                    connection.DbConnection,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -125,7 +146,8 @@ public static class RelationalLoggerExtensions
         DateTimeOffset startTime,
         EventDefinition<string> definition,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionStartingEventData(
             definition,
@@ -135,9 +157,15 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
@@ -145,7 +173,8 @@ public static class RelationalLoggerExtensions
     private static void LogTransactionStarting(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
         IsolationLevel isolationLevel,
-        EventDefinition<string> definition)
+        EventDefinition<string> definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -157,8 +186,7 @@ public static class RelationalLoggerExtensions
     {
         var d = (EventDefinition<string>)definition;
         var p = (TransactionStartingEventData)payload;
-        return d.GenerateMessage(
-            p.IsolationLevel.ToString("G"));
+        return d.GenerateMessage(p.IsolationLevel.ToString("G"));
     }
 
     /// <summary>
@@ -177,14 +205,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        TimeSpan duration)
+        TimeSpan duration
+    )
     {
         var definition = RelationalResources.LogBeganTransaction(diagnostics);
 
         LogTransactionStarted(diagnostics, transaction, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionStarted(
                 diagnostics,
@@ -196,11 +231,16 @@ public static class RelationalLoggerExtensions
                 duration,
                 definition,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionStarted(connection.DbConnection, eventData, transaction);
+                return interceptor.TransactionStarted(
+                    connection.DbConnection,
+                    eventData,
+                    transaction
+                );
             }
         }
 
@@ -226,14 +266,21 @@ public static class RelationalLoggerExtensions
         Guid transactionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogBeganTransaction(diagnostics);
 
         LogTransactionStarted(diagnostics, transaction, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionStarted(
                 diagnostics,
@@ -245,11 +292,17 @@ public static class RelationalLoggerExtensions
                 duration,
                 definition,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionStartedAsync(connection.DbConnection, eventData, transaction, cancellationToken);
+                return interceptor.TransactionStartedAsync(
+                    connection.DbConnection,
+                    eventData,
+                    transaction,
+                    cancellationToken
+                );
             }
         }
 
@@ -266,7 +319,8 @@ public static class RelationalLoggerExtensions
         TimeSpan duration,
         EventDefinition<string> definition,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEndEventData(
             definition,
@@ -277,9 +331,15 @@ public static class RelationalLoggerExtensions
             connection.ConnectionId,
             async,
             startTime,
-            duration);
+            duration
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
@@ -287,7 +347,8 @@ public static class RelationalLoggerExtensions
     private static void LogTransactionStarted(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
         DbTransaction transaction,
-        EventDefinition<string> definition)
+        EventDefinition<string> definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -316,14 +377,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogUsingTransaction(diagnostics);
 
         LogTransactionUsed(diagnostics, transaction, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionUsed(
                 diagnostics,
@@ -334,7 +402,8 @@ public static class RelationalLoggerExtensions
                 startTime,
                 definition,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -362,14 +431,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogUsingTransaction(diagnostics);
 
         LogTransactionUsed(diagnostics, transaction, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionUsed(
                 diagnostics,
@@ -380,11 +456,17 @@ public static class RelationalLoggerExtensions
                 startTime,
                 definition,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionUsedAsync(connection.DbConnection, eventData, transaction, cancellationToken);
+                return interceptor.TransactionUsedAsync(
+                    connection.DbConnection,
+                    eventData,
+                    transaction,
+                    cancellationToken
+                );
             }
         }
 
@@ -400,7 +482,8 @@ public static class RelationalLoggerExtensions
         DateTimeOffset startTime,
         EventDefinition<string> definition,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -410,7 +493,8 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
         if (diagnosticSourceEnabled)
         {
@@ -428,7 +512,8 @@ public static class RelationalLoggerExtensions
     private static void LogTransactionUsed(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
         DbTransaction transaction,
-        EventDefinition<string> definition)
+        EventDefinition<string> definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -457,14 +542,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogCommittingTransaction(diagnostics);
 
         LogTransactionCommitting(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionCommitting(
                 diagnostics,
@@ -475,7 +567,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -503,14 +596,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogCommittingTransaction(diagnostics);
 
         LogTransactionCommitting(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionCommitting(
                 diagnostics,
@@ -521,11 +621,17 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionCommittingAsync(transaction, eventData, default, cancellationToken);
+                return interceptor.TransactionCommittingAsync(
+                    transaction,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -541,7 +647,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -551,16 +658,23 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogTransactionCommitting(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -583,14 +697,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        TimeSpan duration)
+        TimeSpan duration
+    )
     {
         var definition = RelationalResources.LogCommittedTransaction(diagnostics);
 
         LogTransactionCommitted(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionCommitted(
                 diagnostics,
@@ -602,7 +723,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             interceptor?.TransactionCommitted(transaction, eventData);
         }
@@ -627,14 +749,21 @@ public static class RelationalLoggerExtensions
         Guid transactionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogCommittedTransaction(diagnostics);
 
         LogTransactionCommitted(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionCommitted(
                 diagnostics,
@@ -646,11 +775,16 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionCommittedAsync(transaction, eventData, cancellationToken);
+                return interceptor.TransactionCommittedAsync(
+                    transaction,
+                    eventData,
+                    cancellationToken
+                );
             }
         }
 
@@ -667,7 +801,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEndEventData(
             definition,
@@ -678,16 +813,23 @@ public static class RelationalLoggerExtensions
             connection.ConnectionId,
             async,
             startTime,
-            duration);
+            duration
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogTransactionCommitted(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -710,14 +852,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        TimeSpan duration)
+        TimeSpan duration
+    )
     {
         var definition = RelationalResources.LogRolledBackTransaction(diagnostics);
 
         LogTransactionRolledBack(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionRolledBack(
                 diagnostics,
@@ -729,7 +878,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             interceptor?.TransactionRolledBack(transaction, eventData);
         }
@@ -754,14 +904,21 @@ public static class RelationalLoggerExtensions
         Guid transactionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogRolledBackTransaction(diagnostics);
 
         LogTransactionRolledBack(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionRolledBack(
                 diagnostics,
@@ -773,11 +930,16 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionRolledBackAsync(transaction, eventData, cancellationToken);
+                return interceptor.TransactionRolledBackAsync(
+                    transaction,
+                    eventData,
+                    cancellationToken
+                );
             }
         }
 
@@ -794,7 +956,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEndEventData(
             definition,
@@ -805,16 +968,23 @@ public static class RelationalLoggerExtensions
             connection.ConnectionId,
             async,
             startTime,
-            duration);
+            duration
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogTransactionRolledBack(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -836,14 +1006,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogRollingBackTransaction(diagnostics);
 
         LogTransactionRollingBack(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionRollingBack(
                 diagnostics,
@@ -854,7 +1031,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -882,14 +1060,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogRollingBackTransaction(diagnostics);
 
         LogTransactionRollingBack(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionRollingBack(
                 diagnostics,
@@ -900,11 +1085,17 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionRollingBackAsync(transaction, eventData, default, cancellationToken);
+                return interceptor.TransactionRollingBackAsync(
+                    transaction,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -920,7 +1111,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -930,16 +1122,23 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogTransactionRollingBack(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -961,14 +1160,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogCreatingTransactionSavepoint(diagnostics);
 
         LogCreatingTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastCreatingTransactionSavepoint(
                 diagnostics,
@@ -979,7 +1185,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -1007,14 +1214,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogCreatingTransactionSavepoint(diagnostics);
 
         LogCreatingTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastCreatingTransactionSavepoint(
                 diagnostics,
@@ -1025,11 +1239,17 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.CreatingSavepointAsync(transaction, eventData, default, cancellationToken);
+                return interceptor.CreatingSavepointAsync(
+                    transaction,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -1045,7 +1265,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -1055,16 +1276,23 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogCreatingTransactionSavepoint(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -1085,14 +1313,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogCreatedTransactionSavepoint(diagnostics);
 
         LogCreatedTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastCreatedTransactionSavepoint(
                 diagnostics,
@@ -1103,7 +1338,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             interceptor?.CreatedSavepoint(transaction, eventData);
         }
@@ -1126,14 +1362,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogCreatedTransactionSavepoint(diagnostics);
 
         LogCreatedTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastCreatedTransactionSavepoint(
                 diagnostics,
@@ -1144,7 +1387,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -1164,7 +1408,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -1174,16 +1419,23 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogCreatedTransactionSavepoint(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -1205,14 +1457,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogRollingBackToTransactionSavepoint(diagnostics);
 
         LogRollingBackToTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastRollingBackToTransactionSavepoint(
                 diagnostics,
@@ -1223,7 +1482,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -1251,14 +1511,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogRollingBackToTransactionSavepoint(diagnostics);
 
         LogRollingBackToTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastRollingBackToTransactionSavepoint(
                 diagnostics,
@@ -1269,11 +1536,17 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.RollingBackToSavepointAsync(transaction, eventData, default, cancellationToken);
+                return interceptor.RollingBackToSavepointAsync(
+                    transaction,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -1289,7 +1562,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -1299,16 +1573,23 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogRollingBackToTransactionSavepoint(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -1329,14 +1610,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogRolledBackToTransactionSavepoint(diagnostics);
 
         LogRolledBackToTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastRolledBackToTransactionSavepoint(
                 diagnostics,
@@ -1347,7 +1635,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             interceptor?.RolledBackToSavepoint(transaction, eventData);
         }
@@ -1370,14 +1659,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogRolledBackToTransactionSavepoint(diagnostics);
 
         LogCreatedTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastRolledBackToTransactionSavepoint(
                 diagnostics,
@@ -1388,11 +1684,16 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.RolledBackToSavepointAsync(transaction, eventData, cancellationToken);
+                return interceptor.RolledBackToSavepointAsync(
+                    transaction,
+                    eventData,
+                    cancellationToken
+                );
             }
         }
 
@@ -1408,7 +1709,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -1418,16 +1720,23 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogRolledBackToTransactionSavepoint(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -1449,14 +1758,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogReleasingTransactionSavepoint(diagnostics);
 
         LogReleasingTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastReleasingTransactionSavepoint(
                 diagnostics,
@@ -1467,7 +1783,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -1495,14 +1812,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogReleasingTransactionSavepoint(diagnostics);
 
         LogReleasingTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastReleasingTransactionSavepoint(
                 diagnostics,
@@ -1513,11 +1837,17 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.ReleasingSavepointAsync(transaction, eventData, default, cancellationToken);
+                return interceptor.ReleasingSavepointAsync(
+                    transaction,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -1533,7 +1863,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -1543,16 +1874,23 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogReleasingTransactionSavepoint(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -1573,14 +1911,21 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogReleasedTransactionSavepoint(diagnostics);
 
         LogReleasedTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastReleasedTransactionSavepoint(
                 diagnostics,
@@ -1591,7 +1936,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             interceptor?.ReleasedSavepoint(transaction, eventData);
         }
@@ -1614,14 +1960,21 @@ public static class RelationalLoggerExtensions
         DbTransaction transaction,
         Guid transactionId,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogReleasedTransactionSavepoint(diagnostics);
 
         LogReleasedTransactionSavepoint(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastReleasedTransactionSavepoint(
                 diagnostics,
@@ -1632,11 +1985,16 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.ReleasedSavepointAsync(transaction, eventData, cancellationToken);
+                return interceptor.ReleasedSavepointAsync(
+                    transaction,
+                    eventData,
+                    cancellationToken
+                );
             }
         }
 
@@ -1652,7 +2010,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionEventData(
             definition,
@@ -1662,16 +2021,23 @@ public static class RelationalLoggerExtensions
             transactionId,
             connection.ConnectionId,
             async,
-            startTime);
+            startTime
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogReleasedTransactionSavepoint(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -1692,7 +2058,8 @@ public static class RelationalLoggerExtensions
         IRelationalConnection connection,
         DbTransaction transaction,
         Guid transactionId,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogDisposingTransaction(diagnostics);
 
@@ -1701,7 +2068,13 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TransactionEventData(
                 definition,
@@ -1711,9 +2084,15 @@ public static class RelationalLoggerExtensions
                 transactionId,
                 connection.ConnectionId,
                 false,
-                startTime);
+                startTime
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -1724,31 +2103,54 @@ public static class RelationalLoggerExtensions
     /// <param name="entityType">The entity type.</param>
     public static void TriggerOnNonRootTphEntity(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IEntityType entityType)
+        IEntityType entityType
+    )
     {
         var definition = RelationalResources.LogTriggerOnNonRootTphEntity(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, entityType.DisplayName(), entityType.GetRootType().DisplayName());
+            definition.Log(
+                diagnostics,
+                entityType.DisplayName(),
+                entityType.GetRootType().DisplayName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EntityTypeEventData(
                 definition,
                 TriggerOnNonRootTphEntity,
-                entityType);
+                entityType
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string TriggerOnNonRootTphEntity(EventDefinitionBase definition, EventData payload)
+    private static string TriggerOnNonRootTphEntity(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var e = (EntityTypeEventData)payload;
-        return d.GenerateMessage(e.EntityType.DisplayName(), e.EntityType.GetRootType().DisplayName());
+        return d.GenerateMessage(
+            e.EntityType.DisplayName(),
+            e.EntityType.GetRootType().DisplayName()
+        );
     }
 
     /// <summary>
@@ -1770,14 +2172,21 @@ public static class RelationalLoggerExtensions
         string action,
         Exception exception,
         DateTimeOffset startTime,
-        TimeSpan duration)
+        TimeSpan duration
+    )
     {
         var definition = RelationalResources.LogTransactionError(diagnostics);
 
         LogTransactionError(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionError(
                 diagnostics,
@@ -1791,7 +2200,8 @@ public static class RelationalLoggerExtensions
                 definition,
                 false,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             interceptor?.TransactionFailed(transaction, eventData);
         }
@@ -1820,14 +2230,21 @@ public static class RelationalLoggerExtensions
         Exception exception,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogTransactionError(diagnostics);
 
         LogTransactionError(diagnostics, definition);
 
-        if (diagnostics.NeedsEventData<IDbTransactionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IDbTransactionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastTransactionError(
                 diagnostics,
@@ -1841,11 +2258,16 @@ public static class RelationalLoggerExtensions
                 definition,
                 true,
                 diagnosticSourceEnabled,
-                simpleLogEnabled);
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.TransactionFailedAsync(transaction, eventData, cancellationToken);
+                return interceptor.TransactionFailedAsync(
+                    transaction,
+                    eventData,
+                    cancellationToken
+                );
             }
         }
 
@@ -1864,7 +2286,8 @@ public static class RelationalLoggerExtensions
         EventDefinition definition,
         bool async,
         bool diagnosticSourceEnabled,
-        bool simpleLogEnabled)
+        bool simpleLogEnabled
+    )
     {
         var eventData = new TransactionErrorEventData(
             definition,
@@ -1877,16 +2300,23 @@ public static class RelationalLoggerExtensions
             action,
             exception,
             startTime,
-            duration);
+            duration
+        );
 
-        diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+        diagnostics.DispatchEventData(
+            definition,
+            eventData,
+            diagnosticSourceEnabled,
+            simpleLogEnabled
+        );
 
         return eventData;
     }
 
     private static void LogTransactionError(
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
-        EventDefinition definition)
+        EventDefinition definition
+    )
     {
         if (diagnostics.ShouldLog(definition))
         {
@@ -1903,7 +2333,8 @@ public static class RelationalLoggerExtensions
     public static void AmbientTransactionWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
         IRelationalConnection connection,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
     {
         var definition = RelationalResources.LogAmbientTransaction(diagnostics);
 
@@ -1912,7 +2343,13 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ConnectionEventData(
                 definition,
@@ -1921,9 +2358,15 @@ public static class RelationalLoggerExtensions
                 connection.Context,
                 connection.ConnectionId,
                 false,
-                startTime);
+                startTime
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -1936,7 +2379,8 @@ public static class RelationalLoggerExtensions
     public static void AmbientTransactionEnlisted(
         this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
         IRelationalConnection connection,
-        Transaction transaction)
+        Transaction transaction
+    )
     {
         var definition = RelationalResources.LogAmbientTransactionEnlisted(diagnostics);
 
@@ -1945,20 +2389,35 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, transaction.IsolationLevel.ToString("G"));
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TransactionEnlistedEventData(
                 definition,
                 AmbientTransactionEnlisted,
                 transaction,
                 connection.DbConnection,
-                connection.ConnectionId);
+                connection.ConnectionId
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string AmbientTransactionEnlisted(EventDefinitionBase definition, EventData payload)
+    private static string AmbientTransactionEnlisted(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (TransactionEnlistedEventData)payload;
@@ -1974,7 +2433,8 @@ public static class RelationalLoggerExtensions
     public static void ExplicitTransactionEnlisted(
         this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics,
         IRelationalConnection connection,
-        Transaction transaction)
+        Transaction transaction
+    )
     {
         var definition = RelationalResources.LogExplicitTransactionEnlisted(diagnostics);
 
@@ -1983,20 +2443,35 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, transaction.IsolationLevel.ToString("G"));
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TransactionEnlistedEventData(
                 definition,
                 ExplicitTransactionEnlisted,
                 transaction,
                 connection.DbConnection,
-                connection.ConnectionId);
+                connection.ConnectionId
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ExplicitTransactionEnlisted(EventDefinitionBase definition, EventData payload)
+    private static string ExplicitTransactionEnlisted(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (TransactionEnlistedEventData)payload;
@@ -2012,7 +2487,8 @@ public static class RelationalLoggerExtensions
     public static void MigrateUsingConnection(
         this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
         IMigrator migrator,
-        IRelationalConnection connection)
+        IRelationalConnection connection
+    )
     {
         var definition = RelationalResources.LogMigrating(diagnostics);
 
@@ -2023,16 +2499,28 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, dbConnection.Database, dbConnection.DataSource);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigratorConnectionEventData(
                 definition,
                 MigrateUsingConnection,
                 migrator,
                 connection.DbConnection,
-                connection.ConnectionId);
+                connection.ConnectionId
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2040,9 +2528,7 @@ public static class RelationalLoggerExtensions
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (MigratorConnectionEventData)payload;
-        return d.GenerateMessage(
-            p.Connection.Database,
-            p.Connection.DataSource);
+        return d.GenerateMessage(p.Connection.Database, p.Connection.DataSource);
     }
 
     /// <summary>
@@ -2054,7 +2540,8 @@ public static class RelationalLoggerExtensions
     public static void MigrationReverting(
         this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
         IMigrator migrator,
-        Migration migration)
+        Migration migration
+    )
     {
         var definition = RelationalResources.LogRevertingMigration(diagnostics);
 
@@ -2063,15 +2550,27 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, migration.GetId());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigrationEventData(
                 definition,
                 MigrationReverting,
                 migrator,
-                migration);
+                migration
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2091,7 +2590,8 @@ public static class RelationalLoggerExtensions
     public static void MigrationApplying(
         this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
         IMigrator migrator,
-        Migration migration)
+        Migration migration
+    )
     {
         var definition = RelationalResources.LogApplyingMigration(diagnostics);
 
@@ -2100,15 +2600,27 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, migration.GetId());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigrationEventData(
                 definition,
                 MigrationApplying,
                 migrator,
-                migration);
+                migration
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2134,7 +2646,8 @@ public static class RelationalLoggerExtensions
         Migration migration,
         string? fromMigration,
         string? toMigration,
-        bool idempotent)
+        bool idempotent
+    )
     {
         var definition = RelationalResources.LogGeneratingDown(diagnostics);
 
@@ -2143,7 +2656,13 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, migration.GetId());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigrationScriptingEventData(
                 definition,
@@ -2152,13 +2671,22 @@ public static class RelationalLoggerExtensions
                 migration,
                 fromMigration,
                 toMigration,
-                idempotent);
+                idempotent
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MigrationGeneratingDownScript(EventDefinitionBase definition, EventData payload)
+    private static string MigrationGeneratingDownScript(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (MigrationScriptingEventData)payload;
@@ -2180,7 +2708,8 @@ public static class RelationalLoggerExtensions
         Migration migration,
         string? fromMigration,
         string? toMigration,
-        bool idempotent)
+        bool idempotent
+    )
     {
         var definition = RelationalResources.LogGeneratingUp(diagnostics);
 
@@ -2189,7 +2718,13 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, migration.GetId());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigrationScriptingEventData(
                 definition,
@@ -2198,13 +2733,22 @@ public static class RelationalLoggerExtensions
                 migration,
                 fromMigration,
                 toMigration,
-                idempotent);
+                idempotent
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MigrationGeneratingUpScript(EventDefinitionBase definition, EventData payload)
+    private static string MigrationGeneratingUpScript(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (MigrationScriptingEventData)payload;
@@ -2218,7 +2762,8 @@ public static class RelationalLoggerExtensions
     /// <param name="migrator">The migrator.</param>
     public static void MigrationsNotApplied(
         this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
-        IMigrator migrator)
+        IMigrator migrator
+    )
     {
         var definition = RelationalResources.LogNoMigrationsApplied(diagnostics);
 
@@ -2227,14 +2772,26 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigratorEventData(
                 definition,
                 (d, _) => ((EventDefinition)d).GenerateMessage(),
-                migrator);
+                migrator
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2247,7 +2804,8 @@ public static class RelationalLoggerExtensions
     public static void MigrationsNotFound(
         this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
         IMigrator migrator,
-        IMigrationsAssembly migrationsAssembly)
+        IMigrationsAssembly migrationsAssembly
+    )
     {
         var definition = RelationalResources.LogNoMigrationsFound(diagnostics);
 
@@ -2256,15 +2814,27 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, migrationsAssembly.Assembly.GetName().Name!);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigrationAssemblyEventData(
                 definition,
                 MigrationsNotFound,
                 migrator,
-                migrationsAssembly);
+                migrationsAssembly
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2282,7 +2852,8 @@ public static class RelationalLoggerExtensions
     /// <param name="migrationType">Info for the migration type.</param>
     public static void MigrationAttributeMissingWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
-        TypeInfo migrationType)
+        TypeInfo migrationType
+    )
     {
         var definition = RelationalResources.LogMigrationAttributeMissingWarning(diagnostics);
 
@@ -2291,18 +2862,33 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, migrationType.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigrationTypeEventData(
                 definition,
                 MigrationAttributeMissingWarning,
-                migrationType);
+                migrationType
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MigrationAttributeMissingWarning(EventDefinitionBase definition, EventData payload)
+    private static string MigrationAttributeMissingWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (MigrationTypeEventData)payload;
@@ -2318,7 +2904,8 @@ public static class RelationalLoggerExtensions
     public static void QueryPossibleUnintendedUseOfEqualsWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         SqlExpression left,
-        SqlExpression right)
+        SqlExpression right
+    )
     {
         var definition = RelationalResources.LogPossibleUnintendedUseOfEquals(diagnostics);
 
@@ -2327,19 +2914,34 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, left.Print(), right.Print());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoSqlExpressionsEventData(
                 definition,
                 QueryPossibleUnintendedUseOfEqualsWarning,
                 left,
-                right);
+                right
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string QueryPossibleUnintendedUseOfEqualsWarning(EventDefinitionBase definition, EventData payload)
+    private static string QueryPossibleUnintendedUseOfEqualsWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (TwoSqlExpressionsEventData)payload;
@@ -2355,27 +2957,37 @@ public static class RelationalLoggerExtensions
     public static void ExecuteDeleteFailed(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         Type contextType,
-        Exception exception)
+        Exception exception
+    )
     {
         var definition = RelationalResources.LogExceptionDuringExecuteDelete(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                contextType, Environment.NewLine, exception,
-                exception);
+            definition.Log(diagnostics, contextType, Environment.NewLine, exception, exception);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new DbContextTypeErrorEventData(
                 definition,
                 ExecuteDeleteFailed,
                 contextType,
-                exception);
+                exception
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2395,27 +3007,37 @@ public static class RelationalLoggerExtensions
     public static void ExecuteUpdateFailed(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         Type contextType,
-        Exception exception)
+        Exception exception
+    )
     {
         var definition = RelationalResources.LogExceptionDuringExecuteUpdate(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                contextType, Environment.NewLine, exception,
-                exception);
+            definition.Log(diagnostics, contextType, Environment.NewLine, exception, exception);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new DbContextTypeErrorEventData(
                 definition,
                 ExecuteUpdateFailed,
                 contextType,
-                exception);
+                exception
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2435,27 +3057,37 @@ public static class RelationalLoggerExtensions
     public static void NonQueryOperationFailed(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         Type contextType,
-        Exception exception)
+        Exception exception
+    )
     {
         var definition = RelationalResources.LogExceptionDuringNonQueryOperation(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                contextType, Environment.NewLine, exception,
-                exception);
+            definition.Log(diagnostics, contextType, Environment.NewLine, exception, exception);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new DbContextTypeErrorEventData(
                 definition,
                 NonQueryOperationFailed,
                 contextType,
-                exception);
+                exception
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2471,7 +3103,8 @@ public static class RelationalLoggerExtensions
     /// </summary>
     /// <param name="diagnostics">The diagnostics logger to use.</param>
     public static void MultipleCollectionIncludeWarning(
-        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics)
+        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics
+    )
     {
         var definition = RelationalResources.LogMultipleCollectionIncludeWarning(diagnostics);
 
@@ -2480,13 +3113,25 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EventData(
                 definition,
-                (d, _) => ((EventDefinition)d).GenerateMessage());
+                (d, _) => ((EventDefinition)d).GenerateMessage()
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2497,7 +3142,8 @@ public static class RelationalLoggerExtensions
     /// <param name="property">The property.</param>
     public static void ModelValidationKeyDefaultValueWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IProperty property)
+        IProperty property
+    )
     {
         var definition = RelationalResources.LogKeyHasDefaultValue(diagnostics);
 
@@ -2506,24 +3152,37 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, property.Name, property.DeclaringType.DisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new PropertyEventData(
                 definition,
                 ModelValidationKeyDefaultValueWarning,
-                property);
+                property
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ModelValidationKeyDefaultValueWarning(EventDefinitionBase definition, EventData payload)
+    private static string ModelValidationKeyDefaultValueWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (PropertyEventData)payload;
-        return d.GenerateMessage(
-            p.Property.Name,
-            p.Property.DeclaringType.DisplayName());
+        return d.GenerateMessage(p.Property.Name, p.Property.DeclaringType.DisplayName());
     }
 
     /// <summary>
@@ -2533,7 +3192,8 @@ public static class RelationalLoggerExtensions
     /// <param name="property">The property.</param>
     public static void BoolWithDefaultWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IProperty property)
+        IProperty property
+    )
     {
         var definition = RelationalResources.LogBoolWithDefaultWarning(diagnostics);
 
@@ -2546,17 +3206,26 @@ public static class RelationalLoggerExtensions
                 property.Name,
                 property.DeclaringType.DisplayName(),
                 defaultValue == null ? "null" : defaultValue.ToString()!,
-                property.ClrType.ShortDisplayName());
+                property.ClrType.ShortDisplayName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new PropertyEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                BoolWithDefaultWarning,
-                property);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new PropertyEventData(definition, BoolWithDefaultWarning, property);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2570,7 +3239,8 @@ public static class RelationalLoggerExtensions
             p.Property.Name,
             p.Property.DeclaringType.DisplayName(),
             defaultValue == null ? "null" : defaultValue.ToString()!,
-            p.Property.ClrType.ShortDisplayName());
+            p.Property.ClrType.ShortDisplayName()
+        );
     }
 
     /// <summary>
@@ -2582,7 +3252,8 @@ public static class RelationalLoggerExtensions
     public static void BatchReadyForExecution(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         IEnumerable<IUpdateEntry> entries,
-        int commandCount)
+        int commandCount
+    )
     {
         var definition = RelationalResources.LogBatchReadyForExecution(diagnostics);
 
@@ -2591,15 +3262,27 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, commandCount);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new BatchEventData(
                 definition,
                 BatchReadyForExecution,
                 entries,
-                commandCount);
+                commandCount
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2621,7 +3304,8 @@ public static class RelationalLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         IEnumerable<IUpdateEntry> entries,
         int commandCount,
-        int minBatchSize)
+        int minBatchSize
+    )
     {
         var definition = RelationalResources.LogBatchSmallerThanMinBatchSize(diagnostics);
 
@@ -2630,20 +3314,35 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, commandCount, minBatchSize);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MinBatchSizeEventData(
                 definition,
                 BatchSmallerThanMinBatchSize,
                 entries,
                 commandCount,
-                minBatchSize);
+                minBatchSize
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string BatchSmallerThanMinBatchSize(EventDefinitionBase definition, EventData payload)
+    private static string BatchSmallerThanMinBatchSize(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<int, int>)definition;
         var p = (MinBatchSizeEventData)payload;
@@ -2659,35 +3358,49 @@ public static class RelationalLoggerExtensions
     public static void AllIndexPropertiesNotToMappedToAnyTable(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
         IEntityType entityType,
-        IIndex index)
+        IIndex index
+    )
     {
         if (index.Name == null)
         {
-            var definition = RelationalResources.LogUnnamedIndexAllPropertiesNotToMappedToAnyTable(diagnostics);
+            var definition = RelationalResources.LogUnnamedIndexAllPropertiesNotToMappedToAnyTable(
+                diagnostics
+            );
 
             if (diagnostics.ShouldLog(definition))
             {
-                definition.Log(
-                    diagnostics,
-                    entityType.DisplayName(),
-                    index.Properties.Format());
+                definition.Log(diagnostics, entityType.DisplayName(), index.Properties.Format());
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new IndexEventData(
                     definition,
                     UnnamedIndexAllPropertiesNotToMappedToAnyTable,
                     entityType,
                     null,
-                    index.Properties.Select(p => p.Name).ToList());
+                    index.Properties.Select(p => p.Name).ToList()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
         else
         {
-            var definition = RelationalResources.LogNamedIndexAllPropertiesNotToMappedToAnyTable(diagnostics);
+            var definition = RelationalResources.LogNamedIndexAllPropertiesNotToMappedToAnyTable(
+                diagnostics
+            );
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -2695,40 +3408,54 @@ public static class RelationalLoggerExtensions
                     diagnostics,
                     index.Name,
                     entityType.DisplayName(),
-                    index.Properties.Format());
+                    index.Properties.Format()
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new IndexEventData(
                     definition,
                     NamedIndexAllPropertiesNotToMappedToAnyTable,
                     entityType,
                     index.Name,
-                    index.Properties.Select(p => p.Name).ToList());
+                    index.Properties.Select(p => p.Name).ToList()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
     }
 
-    private static string UnnamedIndexAllPropertiesNotToMappedToAnyTable(EventDefinitionBase definition, EventData payload)
+    private static string UnnamedIndexAllPropertiesNotToMappedToAnyTable(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (IndexEventData)payload;
-        return d.GenerateMessage(
-            p.EntityType.DisplayName(),
-            p.PropertyNames.Format());
+        return d.GenerateMessage(p.EntityType.DisplayName(), p.PropertyNames.Format());
     }
 
-    private static string NamedIndexAllPropertiesNotToMappedToAnyTable(EventDefinitionBase definition, EventData payload)
+    private static string NamedIndexAllPropertiesNotToMappedToAnyTable(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string?, string, string>)definition;
         var p = (IndexEventData)payload;
-        return d.GenerateMessage(
-            p.Name,
-            p.EntityType.DisplayName(),
-            p.PropertyNames.Format());
+        return d.GenerateMessage(p.Name, p.EntityType.DisplayName(), p.PropertyNames.Format());
     }
 
     /// <summary>
@@ -2742,11 +3469,15 @@ public static class RelationalLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
         IEntityType entityType,
         IIndex index,
-        string unmappedPropertyName)
+        string unmappedPropertyName
+    )
     {
         if (index.Name == null)
         {
-            var definition = RelationalResources.LogUnnamedIndexPropertiesBothMappedAndNotMappedToTable(diagnostics);
+            var definition =
+                RelationalResources.LogUnnamedIndexPropertiesBothMappedAndNotMappedToTable(
+                    diagnostics
+                );
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -2754,10 +3485,17 @@ public static class RelationalLoggerExtensions
                     diagnostics,
                     entityType.DisplayName(),
                     index.Properties.Format(),
-                    unmappedPropertyName);
+                    unmappedPropertyName
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new IndexWithPropertyEventData(
                     definition,
@@ -2765,14 +3503,23 @@ public static class RelationalLoggerExtensions
                     entityType,
                     null,
                     index.Properties.Select(p => p.Name).ToList(),
-                    unmappedPropertyName);
+                    unmappedPropertyName
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
         else
         {
-            var definition = RelationalResources.LogNamedIndexPropertiesBothMappedAndNotMappedToTable(diagnostics);
+            var definition =
+                RelationalResources.LogNamedIndexPropertiesBothMappedAndNotMappedToTable(
+                    diagnostics
+                );
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -2781,10 +3528,17 @@ public static class RelationalLoggerExtensions
                     index.Name,
                     entityType.DisplayName(),
                     index.Properties.Format(),
-                    unmappedPropertyName);
+                    unmappedPropertyName
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new IndexWithPropertyEventData(
                     definition,
@@ -2792,24 +3546,37 @@ public static class RelationalLoggerExtensions
                     entityType,
                     index.Name,
                     index.Properties.Select(p => p.Name).ToList(),
-                    unmappedPropertyName);
+                    unmappedPropertyName
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
     }
 
-    private static string UnnamedIndexPropertiesBothMappedAndNotMappedToTable(EventDefinitionBase definition, EventData payload)
+    private static string UnnamedIndexPropertiesBothMappedAndNotMappedToTable(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string>)definition;
         var p = (IndexWithPropertyEventData)payload;
         return d.GenerateMessage(
             p.EntityType.DisplayName(),
             p.PropertyNames.Format(),
-            p.PropertyName);
+            p.PropertyName
+        );
     }
 
-    private static string NamedIndexPropertiesBothMappedAndNotMappedToTable(EventDefinitionBase definition, EventData payload)
+    private static string NamedIndexPropertiesBothMappedAndNotMappedToTable(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string?, string, string, string>)definition;
         var p = (IndexWithPropertyEventData)payload;
@@ -2817,7 +3584,8 @@ public static class RelationalLoggerExtensions
             p.Name,
             p.EntityType.DisplayName(),
             p.PropertyNames.Format(),
-            p.PropertyName);
+            p.PropertyName
+        );
     }
 
     /// <summary>
@@ -2837,11 +3605,15 @@ public static class RelationalLoggerExtensions
         string property1Name,
         List<(string Table, string? Schema)> tablesMappedToProperty1,
         string property2Name,
-        List<(string Table, string? Schema)> tablesMappedToProperty2)
+        List<(string Table, string? Schema)> tablesMappedToProperty2
+    )
     {
         if (index.Name == null)
         {
-            var definition = RelationalResources.LogUnnamedIndexPropertiesMappedToNonOverlappingTables(diagnostics);
+            var definition =
+                RelationalResources.LogUnnamedIndexPropertiesMappedToNonOverlappingTables(
+                    diagnostics
+                );
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -2852,10 +3624,17 @@ public static class RelationalLoggerExtensions
                     property1Name,
                     tablesMappedToProperty1.FormatTables(),
                     property2Name,
-                    tablesMappedToProperty2.FormatTables());
+                    tablesMappedToProperty2.FormatTables()
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new IndexWithPropertiesEventData(
                     definition,
@@ -2866,33 +3645,51 @@ public static class RelationalLoggerExtensions
                     property1Name,
                     tablesMappedToProperty1,
                     property2Name,
-                    tablesMappedToProperty2);
+                    tablesMappedToProperty2
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
         else
         {
-            var definition = RelationalResources.LogNamedIndexPropertiesMappedToNonOverlappingTables(diagnostics);
+            var definition =
+                RelationalResources.LogNamedIndexPropertiesMappedToNonOverlappingTables(
+                    diagnostics
+                );
 
             if (diagnostics.ShouldLog(definition))
             {
                 definition.Log(
                     diagnostics,
-                    l => l.Log(
-                        definition.Level,
-                        definition.EventId,
-                        definition.MessageFormat,
-                        index.Name,
-                        entityType.DisplayName(),
-                        index.Properties.Format(),
-                        property1Name,
-                        tablesMappedToProperty1.FormatTables(),
-                        property2Name,
-                        tablesMappedToProperty2.FormatTables()));
+                    l =>
+                        l.Log(
+                            definition.Level,
+                            definition.EventId,
+                            definition.MessageFormat,
+                            index.Name,
+                            entityType.DisplayName(),
+                            index.Properties.Format(),
+                            property1Name,
+                            tablesMappedToProperty1.FormatTables(),
+                            property2Name,
+                            tablesMappedToProperty2.FormatTables()
+                        )
+                );
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new IndexWithPropertiesEventData(
                     definition,
@@ -2903,14 +3700,23 @@ public static class RelationalLoggerExtensions
                     property1Name,
                     tablesMappedToProperty1,
                     property2Name,
-                    tablesMappedToProperty2);
+                    tablesMappedToProperty2
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
     }
 
-    private static string UnnamedIndexPropertiesMappedToNonOverlappingTables(EventDefinitionBase definition, EventData payload)
+    private static string UnnamedIndexPropertiesMappedToNonOverlappingTables(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string, string, string, string>)definition;
         var p = (IndexWithPropertiesEventData)payload;
@@ -2920,15 +3726,19 @@ public static class RelationalLoggerExtensions
             p.Property1Name,
             p.TablesMappedToProperty1.FormatTables(),
             p.Property2Name,
-            p.TablesMappedToProperty2.FormatTables());
+            p.TablesMappedToProperty2.FormatTables()
+        );
     }
 
-    private static string NamedIndexPropertiesMappedToNonOverlappingTables(EventDefinitionBase definition, EventData payload)
+    private static string NamedIndexPropertiesMappedToNonOverlappingTables(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (FallbackEventDefinition)definition;
         var p = (IndexWithPropertiesEventData)payload;
-        return d.GenerateMessage(
-            l => l.Log(
+        return d.GenerateMessage(l =>
+            l.Log(
                 d.Level,
                 d.EventId,
                 d.MessageFormat,
@@ -2938,7 +3748,9 @@ public static class RelationalLoggerExtensions
                 p.Property1Name,
                 p.TablesMappedToProperty1.FormatTables(),
                 p.Property2Name,
-                p.TablesMappedToProperty2.FormatTables()));
+                p.TablesMappedToProperty2.FormatTables()
+            )
+        );
     }
 
     /// <summary>
@@ -2948,7 +3760,8 @@ public static class RelationalLoggerExtensions
     /// <param name="key">The foreign key.</param>
     public static void KeyPropertiesNotMappedToTable(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IKey key)
+        IKey key
+    )
     {
         var definition = RelationalResources.LogKeyPropertiesNotMappedToTable(diagnostics);
 
@@ -2958,28 +3771,41 @@ public static class RelationalLoggerExtensions
                 diagnostics,
                 key.Properties.Format(),
                 key.DeclaringEntityType.DisplayName(),
-                key.DeclaringEntityType.GetSchemaQualifiedTableName()!);
+                key.DeclaringEntityType.GetSchemaQualifiedTableName()!
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new KeyEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                KeyPropertiesNotMappedToTable,
-                key);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new KeyEventData(definition, KeyPropertiesNotMappedToTable, key);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string KeyPropertiesNotMappedToTable(EventDefinitionBase definition, EventData payload)
+    private static string KeyPropertiesNotMappedToTable(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string>)definition;
         var p = (KeyEventData)payload;
         return d.GenerateMessage(
             p.Key.Properties.Format(),
             p.Key.DeclaringEntityType.DisplayName(),
-            p.Key.DeclaringEntityType.GetSchemaQualifiedTableName()!);
+            p.Key.DeclaringEntityType.GetSchemaQualifiedTableName()!
+        );
     }
 
     /// <summary>
@@ -2989,44 +3815,65 @@ public static class RelationalLoggerExtensions
     /// <param name="foreignKey">The foreign key.</param>
     public static void ForeignKeyPropertiesMappedToUnrelatedTables(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IForeignKey foreignKey)
+        IForeignKey foreignKey
+    )
     {
-        var definition = RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(diagnostics);
+        var definition = RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(
+            diagnostics
+        );
 
         if (diagnostics.ShouldLog(definition))
         {
             definition.Log(
                 diagnostics,
-                l => l.Log(
-                    definition.Level,
-                    definition.EventId,
-                    definition.MessageFormat,
-                    foreignKey.Properties.Format(),
-                    foreignKey.DeclaringEntityType.DisplayName(),
-                    foreignKey.PrincipalEntityType.DisplayName(),
-                    foreignKey.Properties.Format(),
-                    foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                    foreignKey.PrincipalKey.Properties.Format(),
-                    foreignKey.PrincipalEntityType.GetSchemaQualifiedTableName()));
+                l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        foreignKey.Properties.Format(),
+                        foreignKey.DeclaringEntityType.DisplayName(),
+                        foreignKey.PrincipalEntityType.DisplayName(),
+                        foreignKey.Properties.Format(),
+                        foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
+                        foreignKey.PrincipalKey.Properties.Format(),
+                        foreignKey.PrincipalEntityType.GetSchemaQualifiedTableName()
+                    )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ForeignKeyEventData(
                 definition,
                 ForeignKeyPropertiesMappedToUnrelatedTables,
-                foreignKey);
+                foreignKey
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ForeignKeyPropertiesMappedToUnrelatedTables(EventDefinitionBase definition, EventData payload)
+    private static string ForeignKeyPropertiesMappedToUnrelatedTables(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (FallbackEventDefinition)definition;
         var p = (ForeignKeyEventData)payload;
-        return d.GenerateMessage(
-            l => l.Log(
+        return d.GenerateMessage(l =>
+            l.Log(
                 d.Level,
                 d.EventId,
                 d.MessageFormat,
@@ -3036,7 +3883,9 @@ public static class RelationalLoggerExtensions
                 p.ForeignKey.Properties.Format(),
                 p.ForeignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
                 p.ForeignKey.PrincipalKey.Properties.Format(),
-                p.ForeignKey.PrincipalEntityType.GetSchemaQualifiedTableName()));
+                p.ForeignKey.PrincipalEntityType.GetSchemaQualifiedTableName()
+            )
+        );
     }
 
     /// <summary>
@@ -3046,7 +3895,8 @@ public static class RelationalLoggerExtensions
     /// <param name="foreignKey">The foreign key.</param>
     public static void ForeignKeyTpcPrincipalWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IForeignKey foreignKey)
+        IForeignKey foreignKey
+    )
     {
         var definition = RelationalResources.LogForeignKeyTpcPrincipal(diagnostics);
 
@@ -3054,27 +3904,38 @@ public static class RelationalLoggerExtensions
         {
             definition.Log(
                 diagnostics,
-                l => l.Log(
-                    definition.Level,
-                    definition.EventId,
-                    definition.MessageFormat,
-                    foreignKey.Properties.Format(),
-                    foreignKey.DeclaringEntityType.DisplayName(),
-                    foreignKey.PrincipalEntityType.DisplayName(),
-                    foreignKey.PrincipalEntityType.DisplayName(),
-                    foreignKey.PrincipalEntityType.GetSchemaQualifiedTableName()!,
-                    foreignKey.DeclaringEntityType.DisplayName(),
-                    foreignKey.PrincipalEntityType.DisplayName()));
+                l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        foreignKey.Properties.Format(),
+                        foreignKey.DeclaringEntityType.DisplayName(),
+                        foreignKey.PrincipalEntityType.DisplayName(),
+                        foreignKey.PrincipalEntityType.DisplayName(),
+                        foreignKey.PrincipalEntityType.GetSchemaQualifiedTableName()!,
+                        foreignKey.DeclaringEntityType.DisplayName(),
+                        foreignKey.PrincipalEntityType.DisplayName()
+                    )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new ForeignKeyEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                ForeignKeyTPCPrincipal,
-                foreignKey);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new ForeignKeyEventData(definition, ForeignKeyTPCPrincipal, foreignKey);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -3082,8 +3943,8 @@ public static class RelationalLoggerExtensions
     {
         var d = (FallbackEventDefinition)definition;
         var p = (ForeignKeyEventData)payload;
-        return d.GenerateMessage(
-            l => l.Log(
+        return d.GenerateMessage(l =>
+            l.Log(
                 d.Level,
                 d.EventId,
                 d.MessageFormat,
@@ -3093,7 +3954,9 @@ public static class RelationalLoggerExtensions
                 p.ForeignKey.PrincipalEntityType.GetSchemaQualifiedTableName()!,
                 p.ForeignKey.PrincipalEntityType.DisplayName(),
                 p.ForeignKey.DeclaringEntityType.DisplayName(),
-                p.ForeignKey.PrincipalEntityType.DisplayName()));
+                p.ForeignKey.PrincipalEntityType.DisplayName()
+            )
+        );
     }
 
     /// <summary>
@@ -3103,36 +3966,43 @@ public static class RelationalLoggerExtensions
     /// <param name="property">The entity type on which the index is defined.</param>
     public static void TpcStoreGeneratedIdentityWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IProperty property)
+        IProperty property
+    )
     {
         var definition = RelationalResources.LogTpcStoreGeneratedIdentity(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                property.DeclaringType.DisplayName(),
-                property.Name);
+            definition.Log(diagnostics, property.DeclaringType.DisplayName(), property.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new PropertyEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                TpcStoreGeneratedIdentity,
-                property);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new PropertyEventData(definition, TpcStoreGeneratedIdentity, property);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string TpcStoreGeneratedIdentity(EventDefinitionBase definition, EventData payload)
+    private static string TpcStoreGeneratedIdentity(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (PropertyEventData)payload;
-        return d.GenerateMessage(
-            p.Property.DeclaringType.DisplayName(),
-            p.Property.Name);
+        return d.GenerateMessage(p.Property.DeclaringType.DisplayName(), p.Property.Name);
     }
 
     /// <summary>
@@ -3142,27 +4012,45 @@ public static class RelationalLoggerExtensions
     /// <param name="entityType">The entity type.</param>
     public static void OptionalDependentWithoutIdentifyingPropertyWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IEntityType entityType)
+        IEntityType entityType
+    )
     {
-        var definition = RelationalResources.LogOptionalDependentWithoutIdentifyingProperty(diagnostics);
+        var definition = RelationalResources.LogOptionalDependentWithoutIdentifyingProperty(
+            diagnostics
+        );
 
         if (diagnostics.ShouldLog(definition))
         {
             definition.Log(diagnostics, entityType.DisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EntityTypeEventData(
                 definition,
                 OptionalDependentWithoutIdentifyingPropertyWarning,
-                entityType);
+                entityType
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string OptionalDependentWithoutIdentifyingPropertyWarning(EventDefinitionBase definition, EventData payload)
+    private static string OptionalDependentWithoutIdentifyingPropertyWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (EntityTypeEventData)payload;
@@ -3180,33 +4068,60 @@ public static class RelationalLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
         IEntityType entityType,
         IProperty concurrencyProperty,
-        string storedProcedureName)
+        string storedProcedureName
+    )
     {
-        var definition = RelationalResources.LogStoredProcedureConcurrencyTokenNotMapped(diagnostics);
+        var definition = RelationalResources.LogStoredProcedureConcurrencyTokenNotMapped(
+            diagnostics
+        );
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, entityType.DisplayName(), storedProcedureName, concurrencyProperty.Name);
+            definition.Log(
+                diagnostics,
+                entityType.DisplayName(),
+                storedProcedureName,
+                concurrencyProperty.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new StoredProcedurePropertyEventData(
                 definition,
                 StoredProcedureConcurrencyTokenNotMapped,
                 entityType,
                 concurrencyProperty,
-                storedProcedureName);
+                storedProcedureName
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string StoredProcedureConcurrencyTokenNotMapped(EventDefinitionBase definition, EventData payload)
+    private static string StoredProcedureConcurrencyTokenNotMapped(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string>)definition;
         var p = (StoredProcedurePropertyEventData)payload;
-        return d.GenerateMessage(p.EntityType.DisplayName(), p.StoredProcedureName, p.Property.Name);
+        return d.GenerateMessage(
+            p.EntityType.DisplayName(),
+            p.StoredProcedureName,
+            p.Property.Name
+        );
     }
 
     /// <summary>
@@ -3218,24 +4133,39 @@ public static class RelationalLoggerExtensions
     public static void BatchExecutorFailedToRollbackToSavepoint(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         Type contextType,
-        Exception exception)
+        Exception exception
+    )
     {
-        var definition = RelationalResources.LogBatchExecutorFailedToRollbackToSavepoint(diagnostics);
+        var definition = RelationalResources.LogBatchExecutorFailedToRollbackToSavepoint(
+            diagnostics
+        );
 
         if (diagnostics.ShouldLog(definition))
         {
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new DbContextTypeErrorEventData(
                 definition,
                 (d, _) => ((EventDefinition)d).GenerateMessage(),
                 contextType,
-                exception);
+                exception
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -3248,7 +4178,8 @@ public static class RelationalLoggerExtensions
     public static void BatchExecutorFailedToReleaseSavepoint(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         Type contextType,
-        Exception exception)
+        Exception exception
+    )
     {
         var definition = RelationalResources.LogBatchExecutorFailedToReleaseSavepoint(diagnostics);
 
@@ -3257,15 +4188,27 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new DbContextTypeErrorEventData(
                 definition,
                 (d, _) => ((EventDefinition)d).GenerateMessage(),
                 contextType,
-                exception);
+                exception
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -3276,7 +4219,8 @@ public static class RelationalLoggerExtensions
     /// <param name="entry">The entry.</param>
     public static void OptionalDependentWithAllNullPropertiesWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
-        IUpdateEntry entry)
+        IUpdateEntry entry
+    )
     {
         var definition = RelationalResources.LogOptionalDependentWithAllNullProperties(diagnostics);
 
@@ -3285,18 +4229,33 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics, entry.EntityType.DisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new UpdateEntryEventData(
                 definition,
                 OptionalDependentWithAllNullPropertiesWarning,
-                entry);
+                entry
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string OptionalDependentWithAllNullPropertiesWarning(EventDefinitionBase definition, EventData payload)
+    private static string OptionalDependentWithAllNullPropertiesWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (UpdateEntryEventData)payload;
@@ -3310,18 +4269,29 @@ public static class RelationalLoggerExtensions
     /// <param name="entry">The entry.</param>
     public static void OptionalDependentWithAllNullPropertiesWarningSensitive(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
-        IUpdateEntry entry)
+        IUpdateEntry entry
+    )
     {
-        var definition = RelationalResources.LogOptionalDependentWithAllNullPropertiesSensitive(diagnostics);
+        var definition = RelationalResources.LogOptionalDependentWithAllNullPropertiesSensitive(
+            diagnostics
+        );
 
         if (diagnostics.ShouldLog(definition))
         {
             definition.Log(
-                diagnostics, entry.EntityType.DisplayName(),
-                entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties));
+                diagnostics,
+                entry.EntityType.DisplayName(),
+                entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties)
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new UpdateEntryEventData(
                 definition,
@@ -3329,17 +4299,28 @@ public static class RelationalLoggerExtensions
                 entry
             );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string OptionalDependentWithAllNullPropertiesWarningSensitive(EventDefinitionBase definition, EventData payload)
+    private static string OptionalDependentWithAllNullPropertiesWarningSensitive(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (UpdateEntryEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.EntityType.DisplayName(),
-            p.EntityEntry.BuildCurrentValuesString(p.EntityEntry.EntityType.FindPrimaryKey()!.Properties));
+            p.EntityEntry.BuildCurrentValuesString(
+                p.EntityEntry.EntityType.FindPrimaryKey()!.Properties
+            )
+        );
     }
 
     /// <summary>
@@ -3351,24 +4332,41 @@ public static class RelationalLoggerExtensions
     public static void DuplicateColumnOrders(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
         StoreObjectIdentifier storeObject,
-        IReadOnlyList<string> columns)
+        IReadOnlyList<string> columns
+    )
     {
         var definition = RelationalResources.LogDuplicateColumnOrders(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, storeObject.DisplayName(), string.Join(", ", columns.Select(c => "'" + c + "'")));
+            definition.Log(
+                diagnostics,
+                storeObject.DisplayName(),
+                string.Join(", ", columns.Select(c => "'" + c + "'"))
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ColumnsEventData(
                 definition,
                 DuplicateColumnOrders,
                 storeObject,
-                columns);
+                columns
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -3377,7 +4375,10 @@ public static class RelationalLoggerExtensions
         var d = (EventDefinition<string, string>)definition;
         var p = (ColumnsEventData)payload;
 
-        return d.GenerateMessage(p.StoreObject.DisplayName(), string.Join(", ", p.Columns.Select(c => "'" + c + "'")));
+        return d.GenerateMessage(
+            p.StoreObject.DisplayName(),
+            string.Join(", ", p.Columns.Select(c => "'" + c + "'"))
+        );
     }
 
     /// <summary>
@@ -3388,38 +4389,63 @@ public static class RelationalLoggerExtensions
     /// </summary>
     public static void ColumnOrderIgnoredWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
-        ColumnOperation operation)
+        ColumnOperation operation
+    )
     {
         var definition = RelationalResources.LogColumnOrderIgnoredWarning(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, (operation.Table, operation.Schema).FormatTable(), operation.Name);
+            definition.Log(
+                diagnostics,
+                (operation.Table, operation.Schema).FormatTable(),
+                operation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new MigrationColumnOperationEventData(
                 definition,
                 ColumnOrderIgnoredWarning,
-                operation);
+                operation
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ColumnOrderIgnoredWarning(EventDefinitionBase definition, EventData payload)
+    private static string ColumnOrderIgnoredWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (MigrationColumnOperationEventData)payload;
-        return d.GenerateMessage((p.ColumnOperation.Table, p.ColumnOperation.Schema).FormatTable(), p.ColumnOperation.Name);
+        return d.GenerateMessage(
+            (p.ColumnOperation.Table, p.ColumnOperation.Schema).FormatTable(),
+            p.ColumnOperation.Name
+        );
     }
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.UnexpectedTrailingResultSetWhenSaving" /> event.
     /// </summary>
     /// <param name="diagnostics">The diagnostics logger to use.</param>
-    public static void UnexpectedTrailingResultSetWhenSaving(this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics)
+    public static void UnexpectedTrailingResultSetWhenSaving(
+        this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics
+    )
     {
         var definition = RelationalResources.LogUnexpectedTrailingResultSetWhenSaving(diagnostics);
 
@@ -3428,7 +4454,13 @@ public static class RelationalLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EventData(
                 definition,
@@ -3436,9 +4468,15 @@ public static class RelationalLoggerExtensions
                 {
                     var d = (EventDefinition)definition;
                     return d.GenerateMessage();
-                });
+                }
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 }

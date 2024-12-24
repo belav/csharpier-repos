@@ -1,6 +1,9 @@
-﻿namespace System.Web.Mvc.Async {
+﻿namespace System.Web.Mvc.Async
+{
     using System;
 
-    internal delegate ActionDescriptor ActionDescriptorCreator(string actionName, ControllerDescriptor controllerDescriptor);
-
+    internal delegate ActionDescriptor ActionDescriptorCreator(
+        string actionName,
+        ControllerDescriptor controllerDescriptor
+    );
 }

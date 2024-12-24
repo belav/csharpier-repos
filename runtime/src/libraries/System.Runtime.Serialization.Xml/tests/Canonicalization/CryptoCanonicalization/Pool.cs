@@ -3,7 +3,8 @@
 
 namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 {
-    internal class Pool<T> where T : class
+    internal class Pool<T>
+        where T : class
     {
         private T[] _items;
         private int _count;

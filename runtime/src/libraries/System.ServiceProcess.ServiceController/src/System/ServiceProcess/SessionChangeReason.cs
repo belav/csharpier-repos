@@ -51,6 +51,6 @@ namespace System.ServiceProcess
         ///<summary>
         /// A session has changed its remote controlled status.
         ///</summary>
-        SessionRemoteControl = Interop.Advapi32.SessionStateChange.WTS_SESSION_REMOTE_CONTROL
+        SessionRemoteControl = Interop.Advapi32.SessionStateChange.WTS_SESSION_REMOTE_CONTROL,
     }
 }

@@ -25,9 +25,7 @@ namespace System.ServiceModel.Activation
 
         static bool? isApplicationDomainHosted;
 
-        protected AspNetEnvironment()
-        {
-        }
+        protected AspNetEnvironment() { }
 
         public static AspNetEnvironment Current
         {
@@ -58,18 +56,12 @@ namespace System.ServiceModel.Activation
 
         public static bool Enabled
         {
-            get
-            {
-                return isEnabled;
-            }
+            get { return isEnabled; }
         }
 
         public bool RequiresImpersonation
         {
-            get
-            {
-                return AspNetCompatibilityEnabled;
-            }
+            get { return AspNetCompatibilityEnabled; }
         }
 
         public virtual bool AspNetCompatibilityEnabled
@@ -83,10 +75,7 @@ namespace System.ServiceModel.Activation
 
         public virtual string ConfigurationPath
         {
-            get
-            {
-                return AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
-            }
+            get { return AppDomain.CurrentDomain.SetupInformation.ConfigurationFile; }
         }
 
         // these ideally would be replaced with public APIs
@@ -119,30 +108,24 @@ namespace System.ServiceModel.Activation
 
         public virtual bool UsingIntegratedPipeline
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public virtual string WebSocketVersion
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         // Indicates if the WebSocket module is loaded. When IIS hosted, it throws an exception when called before we determined if the module is loaded or not.
         public bool IsWebSocketModuleLoaded
         {
-            get
-            {
-                return this.WebSocketVersion != null;
-            }
+            get { return this.WebSocketVersion != null; }
         }
 
-        public virtual void AddHostingBehavior(ServiceHostBase serviceHost, ServiceDescription description)
+        public virtual void AddHostingBehavior(
+            ServiceHostBase serviceHost,
+            ServiceDescription description
+        )
         {
             // subclass will add HostedBindingBehavior
         }
@@ -155,19 +138,20 @@ namespace System.ServiceModel.Activation
 
         public virtual List<Uri> GetBaseAddresses(Uri addressTemplate)
         {
-            // subclass will provide multiple base address support 
+            // subclass will provide multiple base address support
             return null;
         }
 
         // check if ((System.Web.Configuration.WebContext)configHostingContext).ApplicationLevel == WebApplicationLevel.AboveApplication
         public virtual bool IsWebConfigAboveApplication(object configHostingContext)
         {
-            // there are currently only two known implementations of HostingContext, so we are 
+            // there are currently only two known implementations of HostingContext, so we are
             // pretty much guaranteed to be hosted in ASP.Net here. However, it may not be
             // through our BuildProvider, so we still need to do some work in the base class.
             // The HostedAspNetEnvironment subclass can perform more efficiently using reflection
             return SystemWebHelper.IsWebConfigAboveApplication(configHostingContext);
         }
+
         public virtual void EnsureCompatibilityRequirements(ServiceDescription description)
         {
             // subclass will ensure AspNetCompatibilityRequirementsAttribute is in the behaviors collection
@@ -186,21 +170,27 @@ namespace System.ServiceModel.Activation
             return string.Empty;
         }
 
-        public virtual void EnsureAllReferencedAssemblyLoaded()
-        {
-        }
+        public virtual void EnsureAllReferencedAssemblyLoaded() { }
 
         public virtual BaseUriWithWildcard GetBaseUri(string transportScheme, Uri listenUri)
         {
             return null;
         }
 
-        public virtual void ValidateHttpSettings(string virtualPath, bool isMetadataListener, bool usingDefaultSpnList, ref AuthenticationSchemes supportedSchemes, ref ExtendedProtectionPolicy extendedProtectionPolicy, ref string realm)
-        {
-        }
+        public virtual void ValidateHttpSettings(
+            string virtualPath,
+            bool isMetadataListener,
+            bool usingDefaultSpnList,
+            ref AuthenticationSchemes supportedSchemes,
+            ref ExtendedProtectionPolicy extendedProtectionPolicy,
+            ref string realm
+        ) { }
 
         // returns whether or not the caller should use the hosted client certificate mapping
-        public virtual bool ValidateHttpsSettings(string virtualPath, ref bool requireClientCertificate)
+        public virtual bool ValidateHttpsSettings(
+            string virtualPath,
+            ref bool requireClientCertificate
+        )
         {
             return false;
         }
@@ -210,12 +200,18 @@ namespace System.ServiceModel.Activation
             // subclass will throw as appropriate for compat mode
         }
 
-        public virtual void ValidateCompatibilityRequirements(AspNetCompatibilityRequirementsMode compatibilityMode)
+        public virtual void ValidateCompatibilityRequirements(
+            AspNetCompatibilityRequirementsMode compatibilityMode
+        )
         {
             // validate that hosting settings are compatible with the requested requirements
             if (compatibilityMode == AspNetCompatibilityRequirementsMode.Required)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.Hosting_CompatibilityServiceNotHosted)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.Hosting_CompatibilityServiceNotHosted)
+                    )
+                );
             }
         }
 
@@ -225,7 +221,10 @@ namespace System.ServiceModel.Activation
             return null;
         }
 
-        public virtual IAspNetMessageProperty GetHostingProperty(Message message, bool removeFromMessage)
+        public virtual IAspNetMessageProperty GetHostingProperty(
+            Message message,
+            bool removeFromMessage
+        )
         {
             // subclass will return the hosting property from the message
             // and remove it from the message's properties.
@@ -234,22 +233,30 @@ namespace System.ServiceModel.Activation
 
         public virtual void PrepareMessageForDispatch(Message message)
         {
-            // subclass will wrap ReceiveContext for Busy Count 
+            // subclass will wrap ReceiveContext for Busy Count
         }
 
-        public virtual void ApplyHostedContext(TransportChannelListener listener, BindingContext context)
+        public virtual void ApplyHostedContext(
+            TransportChannelListener listener,
+            BindingContext context
+        )
         {
             // subclass will push hosted information to the transport listeners
         }
 
-        internal virtual void AddMetadataBindingParameters(Uri listenUri, KeyedByTypeCollection<IServiceBehavior> serviceBehaviors, BindingParameterCollection bindingParameters)
+        internal virtual void AddMetadataBindingParameters(
+            Uri listenUri,
+            KeyedByTypeCollection<IServiceBehavior> serviceBehaviors,
+            BindingParameterCollection bindingParameters
+        )
         {
             bindingParameters.Add(new ServiceMetadataExtension.MetadataBindingParameter());
         }
 
         internal virtual bool IsMetadataListener(BindingParameterCollection bindingParameters)
         {
-            return bindingParameters.Find<ServiceMetadataExtension.MetadataBindingParameter>() != null;
+            return bindingParameters.Find<ServiceMetadataExtension.MetadataBindingParameter>()
+                != null;
         }
 
         public virtual void IncrementBusyCount()
@@ -261,24 +268,27 @@ namespace System.ServiceModel.Activation
         {
             // subclass will decrement HostingEnvironment.BusyCount
         }
+
         public virtual bool TraceIncrementBusyCountIsEnabled()
         {
             // subclass will return true if tracing for IncrementBusyCount is enabled.
             //kept as a separate check from TraceIncrementBusyCount to avoid creating source string if Tracing is not enabled.
             return false;
         }
+
         public virtual bool TraceDecrementBusyCountIsEnabled()
         {
             // subclass will return true if tracing for DecrementBusyCount is enabled.
             //kept as a separate check from TraceDecrementBusyCount to avoid creating source string if Tracing is not enabled.
             return false;
         }
+
         public virtual void TraceIncrementBusyCount(string data)
         {
             //callers are expected to check if TraceIncrementBusyCountIsEnabled() is true
             //before calling this method
 
-            // subclass will emit trace for IncrementBusyCount 
+            // subclass will emit trace for IncrementBusyCount
             // data is emitted in the Trace as the source of the call to Increment.
         }
 
@@ -287,9 +297,10 @@ namespace System.ServiceModel.Activation
             //callers are expected to check if TraceDecrementBusyCountIsEnabled() is true
             //before calling this method
 
-            // subclass will emit trace for DecrementBusyCount 
+            // subclass will emit trace for DecrementBusyCount
             // data is emitted in the Trace as the source of the call to Decrement.
         }
+
         public virtual object GetConfigurationSection(string sectionPath)
         {
             // subclass will interact with web.config system
@@ -297,7 +308,9 @@ namespace System.ServiceModel.Activation
         }
 
         // Be sure to update UnsafeGetSection if you modify this method
-        [Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method UnsafeGetSectionFromConfigurationManager which elevates.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses SecurityCritical method UnsafeGetSectionFromConfigurationManager which elevates."
+        )]
         [SecurityCritical]
         public virtual object UnsafeGetConfigurationSection(string sectionPath)
         {
@@ -320,8 +333,10 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Asserts ConfigurationPermission in order to fetch config from ConfigurationManager,"
-        + "caller must guard return value.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts ConfigurationPermission in order to fetch config from ConfigurationManager,"
+                + "caller must guard return value."
+        )]
         [SecurityCritical]
         [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
         static object UnsafeGetSectionFromConfigurationManager(string sectionPath)
@@ -345,7 +360,8 @@ namespace System.ServiceModel.Activation
                         bool isApplicationDomainHosted = false;
                         if (AspNetEnvironment.Enabled)
                         {
-                            isApplicationDomainHosted = AspNetEnvironment.IsSystemWebAssemblyLoaded();
+                            isApplicationDomainHosted =
+                                AspNetEnvironment.IsSystemWebAssemblyLoaded();
                         }
                         AspNetEnvironment.isApplicationDomainHosted = isApplicationDomainHosted;
                     }

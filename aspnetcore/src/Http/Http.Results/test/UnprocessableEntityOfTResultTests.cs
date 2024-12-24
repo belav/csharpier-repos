@@ -45,10 +45,7 @@ public class UnprocessableEntityOfTResultTests
     {
         // Arrange
         var result = new UnprocessableEntity<string>("Hello");
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -66,10 +63,7 @@ public class UnprocessableEntityOfTResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream },
         };
 
         // Act
@@ -83,16 +77,28 @@ public class UnprocessableEntityOfTResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        UnprocessableEntity<Todo> MyApi() { throw new NotImplementedException(); }
+        UnprocessableEntity<Todo> MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
 
         // Act
         PopulateMetadata<UnprocessableEntity<Todo>>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata.OfType<ProducesResponseTypeMetadata>().Last();
-        Assert.Equal(StatusCodes.Status422UnprocessableEntity, producesResponseTypeMetadata.StatusCode);
+        var producesResponseTypeMetadata = builder
+            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Last();
+        Assert.Equal(
+            StatusCodes.Status422UnprocessableEntity,
+            producesResponseTypeMetadata.StatusCode
+        );
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);
         Assert.Single(producesResponseTypeMetadata.ContentTypes, "application/json");
     }
@@ -105,22 +111,47 @@ public class UnprocessableEntityOfTResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<UnprocessableEntity<object>>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<UnprocessableEntity<object>>(((Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull).GetMethodInfo(), null));
+        Assert.Throws<ArgumentNullException>(
+            "method",
+            () =>
+                PopulateMetadata<UnprocessableEntity<object>>(
+                    null,
+                    new RouteEndpointBuilder(
+                        requestDelegate: null,
+                        RoutePatternFactory.Parse("/"),
+                        order: 0
+                    )
+                )
+        );
+        Assert.Throws<ArgumentNullException>(
+            "builder",
+            () =>
+                PopulateMetadata<UnprocessableEntity<object>>(
+                    (
+                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                    ).GetMethodInfo(),
+                    null
+                )
+        );
     }
 
     [Fact]
     public void UnprocessableEntityObjectResult_Implements_IStatusCodeHttpResult_Correctly()
     {
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(new UnprocessableEntity<object>(null));
+        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(
+            new UnprocessableEntity<object>(null)
+        );
         Assert.Equal(StatusCodes.Status422UnprocessableEntity, result.StatusCode);
     }
 
@@ -131,7 +162,9 @@ public class UnprocessableEntityOfTResultTests
         var value = "Foo";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IValueHttpResult>(new UnprocessableEntity<string>(value));
+        var result = Assert.IsAssignableFrom<IValueHttpResult>(
+            new UnprocessableEntity<string>(value)
+        );
         Assert.IsType<string>(result.Value);
         Assert.Equal(value, result.Value);
     }
@@ -143,7 +176,9 @@ public class UnprocessableEntityOfTResultTests
         var value = "Foo";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IValueHttpResult<string>>(new UnprocessableEntity<string>(value));
+        var result = Assert.IsAssignableFrom<IValueHttpResult<string>>(
+            new UnprocessableEntity<string>(value)
+        );
         Assert.IsType<string>(result.Value);
         Assert.Equal(value, result.Value);
     }

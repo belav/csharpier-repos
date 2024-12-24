@@ -20,7 +20,8 @@ public class MiddlewareTests
             {
                 flag = true;
                 return Task.CompletedTask;
-            });
+            }
+        );
 
         await middleware.Invoke(new DefaultHttpContext());
         Assert.True(flag);
@@ -37,7 +38,8 @@ public class MiddlewareTests
             {
                 onRejectedInvoked = true;
                 return Task.CompletedTask;
-            });
+            }
+        );
 
         var context = new DefaultHttpContext();
         await middleware.Invoke(context).DefaultTimeout();
@@ -54,7 +56,8 @@ public class MiddlewareTests
             {
                 // throttle should bounce the request; it should never get here
                 throw new DivideByZeroException();
-            });
+            }
+        );
 
         await middleware.Invoke(new DefaultHttpContext()).DefaultTimeout();
     }
@@ -85,7 +88,8 @@ public class MiddlewareTests
             onTryEnter: async (_) =>
             {
                 return await blocker.Task;
-            });
+            }
+        );
         var middleware = TestUtils.CreateTestMiddleware(testQueue);
 
         Assert.Equal(0, testQueue.QueuedRequests);
@@ -105,18 +109,25 @@ public class MiddlewareTests
         var flag = false;
 
         var testQueue = new TestQueue(
-                onTryEnter: (_) => true,
-                onExit: () => { flag = true; });
+            onTryEnter: (_) => true,
+            onExit: () =>
+            {
+                flag = true;
+            }
+        );
 
         var middleware = TestUtils.CreateTestMiddleware(
             queue: testQueue,
             next: httpContext =>
             {
                 throw new DivideByZeroException();
-            });
+            }
+        );
 
         Assert.Equal(0, testQueue.QueuedRequests);
-        await Assert.ThrowsAsync<DivideByZeroException>(() => middleware.Invoke(new DefaultHttpContext())).DefaultTimeout();
+        await Assert
+            .ThrowsAsync<DivideByZeroException>(() => middleware.Invoke(new DefaultHttpContext()))
+            .DefaultTimeout();
 
         Assert.Equal(0, testQueue.QueuedRequests);
         Assert.True(flag);
@@ -141,7 +152,11 @@ public class MiddlewareTests
                     return true;
                 }
             },
-            onExit: () => { concurrent--; });
+            onExit: () =>
+            {
+                concurrent--;
+            }
+        );
 
         var middleware = TestUtils.CreateTestMiddleware(
             queue: testQueue,
@@ -152,7 +167,8 @@ public class MiddlewareTests
             next: httpContext =>
             {
                 return tcs.Task;
-            });
+            }
+        );
 
         // the first request enters the server, and is blocked by the tcs
         var firstRequest = middleware.Invoke(new DefaultHttpContext());
@@ -161,7 +177,9 @@ public class MiddlewareTests
 
         // the second request is rejected with a 503 error. During the rejection, an error occurs
         var context = new DefaultHttpContext();
-        await Assert.ThrowsAsync<DivideByZeroException>(() => middleware.Invoke(context)).DefaultTimeout();
+        await Assert
+            .ThrowsAsync<DivideByZeroException>(() => middleware.Invoke(context))
+            .DefaultTimeout();
         Assert.Equal(StatusCodes.Status503ServiceUnavailable, context.Response.StatusCode);
         Assert.Equal(1, concurrent);
         Assert.Equal(0, testQueue.QueuedRequests);
@@ -190,7 +208,8 @@ public class MiddlewareTests
             {
                 await Task.CompletedTask;
                 flag = true;
-            });
+            }
+        );
 
         await middleware.Invoke(new DefaultHttpContext());
 
@@ -200,6 +219,7 @@ public class MiddlewareTests
     private class TestQueueForValueTask : IQueuePolicy
     {
         public TestValueResult Source;
+
         public TestQueueForValueTask()
         {
             Source = new TestValueResult();
@@ -229,7 +249,12 @@ public class MiddlewareTests
             return ValueTaskSourceStatus.Succeeded;
         }
 
-        public void OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags)
+        public void OnCompleted(
+            Action<object> continuation,
+            object state,
+            short token,
+            ValueTaskSourceOnCompletedFlags flags
+        )
         {
             throw new NotImplementedException();
         }

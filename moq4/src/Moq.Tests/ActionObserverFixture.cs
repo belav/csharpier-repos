@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq.Expressions;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -19,25 +18,19 @@ namespace Moq.Tests
             [Fact]
             public void Void_method_call()
             {
-                AssertReconstructable(
-                    x => x.Void(),
-                    x => x.Void());
+                AssertReconstructable(x => x.Void(), x => x.Void());
             }
 
             [Fact]
             public void Void_method_call_with_arg()
             {
-                AssertReconstructable(
-                    x => x.VoidWithInt(42),
-                    x => x.VoidWithInt(42));
+                AssertReconstructable(x => x.VoidWithInt(42), x => x.VoidWithInt(42));
             }
 
             [Fact]
             public void Void_method_call_with_coerced_arg()
             {
-                AssertReconstructable(
-                    x => x.VoidWithLong(42),
-                    x => x.VoidWithLong(42));
+                AssertReconstructable(x => x.VoidWithLong(42), x => x.VoidWithLong(42));
             }
 
             [Fact]
@@ -45,32 +38,27 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     "x => x.VoidWithNullableInt(42)",
-                     x => x.VoidWithNullableInt(42));
+                    x => x.VoidWithNullableInt(42)
+                );
             }
 
             [Fact]
             public void Void_method_call_with_cast_arg()
             {
-                AssertReconstructable(
-                    x => x.VoidWithInt((int)42L),
-                    x => x.VoidWithInt((int)42L));
+                AssertReconstructable(x => x.VoidWithInt((int)42L), x => x.VoidWithInt((int)42L));
             }
 
             [Fact]
             public void Void_method_call_with_arg_evaluated()
             {
                 int arg = 42;
-                AssertReconstructable(
-                    x => x.VoidWithInt(42),
-                    x => x.VoidWithInt(arg));
+                AssertReconstructable(x => x.VoidWithInt(42), x => x.VoidWithInt(arg));
             }
 
             [Fact]
             public void Void_method_call_on_sub_object()
             {
-                AssertReconstructable(
-                    x => x.GetY().Z.Void(),
-                    x => x.GetY().Z.Void());
+                AssertReconstructable(x => x.GetY().Z.Void(), x => x.GetY().Z.Void());
             }
 
             [Fact]
@@ -78,7 +66,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     x => x.GetY(1).Z.VoidWithIntInt(2, 3),
-                    x => x.GetY(1).Z.VoidWithIntInt(2, 3));
+                    x => x.GetY(1).Z.VoidWithIntInt(2, 3)
+                );
             }
 
             [Fact]
@@ -86,7 +75,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     x => x.VoidWithInt(It.IsAny<int>()),
-                    x => x.VoidWithInt(It.IsAny<int>()));
+                    x => x.VoidWithInt(It.IsAny<int>())
+                );
             }
 
             [Fact]
@@ -94,7 +84,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     x => x.VoidWithObject(It.IsAny<int>()),
-                    x => x.VoidWithObject(It.IsAny<int>()));
+                    x => x.VoidWithObject(It.IsAny<int>())
+                );
             }
 
             [Fact]
@@ -102,7 +93,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     x => x.GetY(It.IsAny<int>()).Z.VoidWithIntInt(0, 0),
-                    x => x.GetY(It.IsAny<int>()).Z.VoidWithIntInt(0, 0));
+                    x => x.GetY(It.IsAny<int>()).Z.VoidWithIntInt(0, 0)
+                );
             }
 
             [Fact]
@@ -110,7 +102,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     x => x.GetY(0).Z.VoidWithIntInt(1, It.IsAny<int>()),
-                    x => x.GetY(0).Z.VoidWithIntInt(1, It.IsAny<int>()));
+                    x => x.GetY(0).Z.VoidWithIntInt(1, It.IsAny<int>())
+                );
             }
 
             [Fact]
@@ -118,7 +111,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     x => x.GetY(0).Z.VoidWithIntInt(It.IsAny<int>(), 2),
-                    x => x.GetY(0).Z.VoidWithIntInt(It.IsAny<int>(), 2));
+                    x => x.GetY(0).Z.VoidWithIntInt(It.IsAny<int>(), 2)
+                );
             }
 
             [Fact]
@@ -126,7 +120,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     "x => x.GetY(It.Is<int>(i => i % 2 == 0)).Z.VoidWithIntInt(It.IsAny<int>(), 2)",
-                     x => x.GetY(It.Is<int>(i => i % 2 == 0)).Z.VoidWithIntInt(It.IsAny<int>(), 2));
+                    x => x.GetY(It.Is<int>(i => i % 2 == 0)).Z.VoidWithIntInt(It.IsAny<int>(), 2)
+                );
             }
 
             [Fact]
@@ -137,7 +132,8 @@ namespace Moq.Tests
 
                 AssertReconstructable(
                     x => x.VoidWithIntString(0, It.IsAny<string>()),
-                    x => x.VoidWithIntString(0, It.IsAny<string>()));
+                    x => x.VoidWithIntString(0, It.IsAny<string>())
+                );
             }
 
             [Fact]
@@ -145,7 +141,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     "x => x.GetY().Z.Property = \"value\"",
-                     x => x.GetY().Z.Property = "value");
+                    x => x.GetY().Z.Property = "value"
+                );
             }
 
             [Fact]
@@ -154,7 +151,8 @@ namespace Moq.Tests
                 var arg = "value";
                 AssertReconstructable(
                     "x => x.GetY().Z.Property = \"value\"",
-                     x => x.GetY().Z.Property = arg);
+                    x => x.GetY().Z.Property = arg
+                );
             }
 
             [Fact]
@@ -162,15 +160,14 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     "x => x.GetY().Z.Property = It.IsAny<string>()",
-                     x => x.GetY().Z.Property = It.IsAny<string>());
+                    x => x.GetY().Z.Property = It.IsAny<string>()
+                );
             }
 
             [Fact]
             public void Indexer_assignment_with_arg()
             {
-                AssertReconstructable(
-                    "x => x[1] = null",
-                     x => x[1] = null);
+                AssertReconstructable("x => x[1] = null", x => x[1] = null);
             }
 
             [Fact]
@@ -178,7 +175,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     "x => x[It.IsAny<int>()] = null",
-                     x => x[It.IsAny<int>()] = null);
+                    x => x[It.IsAny<int>()] = null
+                );
             }
 
             [Fact]
@@ -186,7 +184,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     "x => x[1, It.IsAny<int>()] = 0",
-                     x => x[1, It.IsAny<int>()] = 0);
+                    x => x[1, It.IsAny<int>()] = 0
+                );
             }
 
             [Fact]
@@ -194,7 +193,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     "x => x[1] = It.IsAny<ActionObserverFixture.Reconstructibility.IY>()",
-                     x => x[1] = It.IsAny<ActionObserverFixture.Reconstructibility.IY>());
+                    x => x[1] = It.IsAny<ActionObserverFixture.Reconstructibility.IY>()
+                );
             }
 
             [Fact]
@@ -202,7 +202,11 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     "x => x[It.Is<int>(i => i == 0), It.Is<int>(i => i == 2)] = It.Is<int>(i => i == 3)",
-                     x => x[It.Is<int>(i => i == 0), It.Is<int>(i => i == 2)] = It.Is<int>(i => i == 3));
+                    x =>
+                        x[It.Is<int>(i => i == 0), It.Is<int>(i => i == 2)] = It.Is<int>(i =>
+                            i == 3
+                        )
+                );
             }
 
             [Fact]
@@ -211,28 +215,29 @@ namespace Moq.Tests
                 ushort arg = 123;
                 AssertReconstructable(
                     "x => x.VoidWithShort(123)",
-                     x => x.VoidWithShort((short)arg));
-                AssertReconstructable(
-                    "x => x.VoidWithInt(123)",
-                     x => x.VoidWithInt(arg));
-                AssertReconstructable(
-                    "x => x.VoidWithLong(123)",
-                     x => x.VoidWithLong(arg));
+                    x => x.VoidWithShort((short)arg)
+                );
+                AssertReconstructable("x => x.VoidWithInt(123)", x => x.VoidWithInt(arg));
+                AssertReconstructable("x => x.VoidWithLong(123)", x => x.VoidWithLong(arg));
 
                 long longArg = 654L;
                 AssertReconstructable(
                     "x => x.VoidWithShort(654)",
-                     x => x.VoidWithShort((short)longArg));
+                    x => x.VoidWithShort((short)longArg)
+                );
 
                 AssertReconstructable(
                     "x => x.VoidWithObject(ActionObserverFixture.Reconstructibility.Color.Green)",
-                     x => x.VoidWithObject(Color.Green));
+                    x => x.VoidWithObject(Color.Green)
+                );
                 AssertReconstructable(
                     "x => x.VoidWithEnum(ActionObserverFixture.Reconstructibility.Color.Green)",
-                     x => x.VoidWithEnum(Color.Green));
+                    x => x.VoidWithEnum(Color.Green)
+                );
                 AssertReconstructable(
                     "x => x.VoidWithNullableEnum(ActionObserverFixture.Reconstructibility.Color.Green)",
-                     x => x.VoidWithNullableEnum(Color.Green));
+                    x => x.VoidWithNullableEnum(Color.Green)
+                );
             }
 
             [Fact]
@@ -240,7 +245,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     x => x.VoidWithInt((int)It.IsAny<Color>()),
-                    x => x.VoidWithInt((int)It.IsAny<Color>()));
+                    x => x.VoidWithInt((int)It.IsAny<Color>())
+                );
             }
 
             [Fact]
@@ -248,7 +254,8 @@ namespace Moq.Tests
             {
                 AssertReconstructable(
                     x => x.VoidWithInt(It.IsAny<short>()),
-                    x => x.VoidWithInt(It.IsAny<short>()));
+                    x => x.VoidWithInt(It.IsAny<short>())
+                );
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
@@ -347,7 +354,9 @@ namespace Moq.Tests
 
             void AssertFailsAfter<TRoot>(string expectedPartial, Action<TRoot> action)
             {
-                var error = Assert.Throws<ArgumentException>(() => ActionObserver.Instance.ReconstructExpression(action));
+                var error = Assert.Throws<ArgumentException>(
+                    () => ActionObserver.Instance.ReconstructExpression(action)
+                );
                 Assert.Contains($": {expectedPartial}", error.Message);
             }
 
@@ -360,6 +369,7 @@ namespace Moq.Tests
             public class X
             {
                 public IY NonVirtualProperty { get; set; }
+
                 public void NonVirtual() { }
             }
 
@@ -384,7 +394,8 @@ namespace Moq.Tests
 
                 AssertIncorrectlyReconstructsAs(
                     x => x.Method(It.IsAny<int>(), 0),
-                    x => x.Method(0, It.IsAny<int>()));
+                    x => x.Method(0, It.IsAny<int>())
+                );
             }
 
             [Fact]
@@ -393,7 +404,8 @@ namespace Moq.Tests
                 // Same as above, since LHS and RHS are actually both part of a single parameter list of a method call `get_Item(...lhs, rhs).
                 AssertIncorrectlyReconstructsAs(
                     "x => x[It.IsAny<int>()] = 0",
-                     x => x[0] = It.IsAny<int>());
+                    x => x[0] = It.IsAny<int>()
+                );
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:

@@ -8,38 +8,96 @@ using Xunit;
 public struct VT
 {
     public bool[,] bool2darr;
-    public bool[, ,] bool3darr;
+    public bool[,,] bool3darr;
 }
 
 public class CL
 {
-    public bool[,] bool2darr = { { false, true }, { false, false } };
-    public bool[, ,] bool3darr = { { { false, false } }, { { false, true } }, { { false, false } } };
+    public bool[,] bool2darr =
+    {
+        { false, true },
+        { false, false },
+    };
+    public bool[,,] bool3darr =
+    {
+        {
+            { false, false },
+        },
+        {
+            { false, true },
+        },
+        {
+            { false, false },
+        },
+    };
 }
 
 public class Bool2D3DArrTest
 {
-
-    static bool[,] bool2darr = { { false, true }, { false, false } };
-    static bool[, ,] bool3darr = { { { false, false } }, { { false, true } }, { { false, false } } };
+    static bool[,] bool2darr =
+    {
+        { false, true },
+        { false, false },
+    };
+    static bool[,,] bool3darr =
+    {
+        {
+            { false, false },
+        },
+        {
+            { false, true },
+        },
+        {
+            { false, false },
+        },
+    };
 
     static bool[][,] ja1 = new bool[2][,];
-    static bool[][, ,] ja2 = new bool[2][, ,];
+    static bool[][,,] ja2 = new bool[2][,,];
 
     [Fact]
     public static int TestEntryPoint()
     {
-
         bool pass = true;
 
         VT vt1;
-        vt1.bool2darr = new bool[,] { { false, true }, { false, false } };
-        vt1.bool3darr = new bool[,,] { { { false, false } }, { { false, true } }, { { false, false } } };
+        vt1.bool2darr = new bool[,]
+        {
+            { false, true },
+            { false, false },
+        };
+        vt1.bool3darr = new bool[,,]
+        {
+            {
+                { false, false },
+            },
+            {
+                { false, true },
+            },
+            {
+                { false, false },
+            },
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new bool[,] { { false, true }, { false, false } };
-        ja2[1] = new bool[,,] { { { false, false } }, { { false, true } }, { { false, false } } };
+        ja1[0] = new bool[,]
+        {
+            { false, true },
+            { false, false },
+        };
+        ja2[1] = new bool[,,]
+        {
+            {
+                { false, false },
+            },
+            {
+                { false, true },
+            },
+            {
+                { false, false },
+            },
+        };
 
         bool result = true;
 
@@ -785,8 +843,5 @@ public class Bool2D3DArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<StateMachineStateDebugInfo> stateMachineStateDebugInfoBuilder,
             VariableSlotAllocator? slotAllocatorOpt,
             TypeCompilationState compilationState,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(body != null);
             Debug.Assert(method != null);
@@ -59,8 +60,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.synthesizedLocalOrdinals = new SynthesizedLocalOrdinalsDispenser();
             this.diagnostics = diagnostics;
 
-            this.F = new SyntheticBoundNodeFactory(method, body.Syntax, compilationState, diagnostics);
-            Debug.Assert(TypeSymbol.Equals(F.CurrentType, method.ContainingType, TypeCompareKind.ConsiderEverything2));
+            this.F = new SyntheticBoundNodeFactory(
+                method,
+                body.Syntax,
+                compilationState,
+                diagnostics
+            );
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    F.CurrentType,
+                    method.ContainingType,
+                    TypeCompareKind.ConsiderEverything2
+                )
+            );
             Debug.Assert(F.Syntax == body.Syntax);
         }
 
@@ -78,12 +90,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Initialize the state machine class.
         /// </summary>
-        protected abstract void InitializeStateMachine(ArrayBuilder<BoundStatement> bodyBuilder, NamedTypeSymbol frameType, LocalSymbol stateMachineLocal);
+        protected abstract void InitializeStateMachine(
+            ArrayBuilder<BoundStatement> bodyBuilder,
+            NamedTypeSymbol frameType,
+            LocalSymbol stateMachineLocal
+        );
 
         /// <summary>
         /// Generate implementation-specific state machine initialization for the kickoff method body.
         /// </summary>
-        protected abstract BoundStatement GenerateStateMachineCreation(LocalSymbol stateMachineVariable, NamedTypeSymbol frameType, IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies);
+        protected abstract BoundStatement GenerateStateMachineCreation(
+            LocalSymbol stateMachineVariable,
+            NamedTypeSymbol frameType,
+            IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies
+        );
 
         /// <summary>
         /// Generate implementation-specific state machine member method implementations.
@@ -105,7 +125,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // if it is an enumerable or async-enumerable, and either Environment.CurrentManagedThreadId or Thread.ManagedThreadId are available
                 // add a field: int initialThreadId
-                initialThreadIdField = F.StateMachineField(F.SpecialType(SpecialType.System_Int32), GeneratedNames.MakeIteratorCurrentThreadIdFieldName());
+                initialThreadIdField = F.StateMachineField(
+                    F.SpecialType(SpecialType.System_Int32),
+                    GeneratedNames.MakeIteratorCurrentThreadIdFieldName()
+                );
             }
 
             // fields for the initial values of all the parameters of the method
@@ -115,15 +138,28 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // fields for the captured variables of the method
-            var variablesToHoist = IteratorAndAsyncCaptureWalker.Analyze(F.Compilation, method, body, diagnostics.DiagnosticBag);
+            var variablesToHoist = IteratorAndAsyncCaptureWalker.Analyze(
+                F.Compilation,
+                method,
+                body,
+                diagnostics.DiagnosticBag
+            );
 
             if (diagnostics.HasAnyErrors())
             {
                 // Avoid triggering assertions in further lowering.
-                return new BoundBadStatement(F.Syntax, ImmutableArray<BoundNode>.Empty, hasErrors: true);
+                return new BoundBadStatement(
+                    F.Syntax,
+                    ImmutableArray<BoundNode>.Empty,
+                    hasErrors: true
+                );
             }
 
-            CreateNonReusableLocalProxies(variablesToHoist, out this.nonReusableLocalProxies, out this.nextFreeHoistedLocalSlot);
+            CreateNonReusableLocalProxies(
+                variablesToHoist,
+                out this.nonReusableLocalProxies,
+                out this.nextFreeHoistedLocalSlot
+            );
 
             this.hoistedVariables = variablesToHoist;
 
@@ -136,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void CreateNonReusableLocalProxies(
             IEnumerable<Symbol> variablesToHoist,
             out IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies,
-            out int nextFreeHoistedLocalSlot)
+            out int nextFreeHoistedLocalSlot
+        )
         {
             var proxiesBuilder = new Dictionary<Symbol, CapturedSymbolReplacement>();
 
@@ -144,11 +181,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isDebugBuild = F.Compilation.Options.OptimizationLevel == OptimizationLevel.Debug;
             bool mapToPreviousFields = isDebugBuild && slotAllocatorOpt != null;
 
-            nextFreeHoistedLocalSlot = mapToPreviousFields ? slotAllocatorOpt.PreviousHoistedLocalSlotCount : 0;
+            nextFreeHoistedLocalSlot = mapToPreviousFields
+                ? slotAllocatorOpt.PreviousHoistedLocalSlotCount
+                : 0;
 
             foreach (var variable in variablesToHoist)
             {
-                Debug.Assert(variable.Kind == SymbolKind.Local || variable.Kind == SymbolKind.Parameter);
+                Debug.Assert(
+                    variable.Kind == SymbolKind.Local || variable.Kind == SymbolKind.Parameter
+                );
 
                 if (variable.Kind == SymbolKind.Local)
                 {
@@ -169,8 +210,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (local.RefKind != RefKind.None)
                     {
                         // we'll create proxies for these variables later:
-                        Debug.Assert(synthesizedKind == SynthesizedLocalKind.Spill ||
-                                     (synthesizedKind == SynthesizedLocalKind.ForEachArray && local.Type.HasInlineArrayAttribute(out _) && local.Type.TryGetInlineArrayElementField() is object));
+                        Debug.Assert(
+                            synthesizedKind == SynthesizedLocalKind.Spill
+                                || (
+                                    synthesizedKind == SynthesizedLocalKind.ForEachArray
+                                    && local.Type.HasInlineArrayAttribute(out _)
+                                    && local.Type.TryGetInlineArrayElementField() is object
+                                )
+                        );
                         continue;
                     }
 
@@ -192,19 +239,33 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // EnC: When emitting the baseline (gen 0) the id is stored in a custom debug information attached to the kickoff method.
                             //      When emitting a delta the id is only used to map to the existing field in the previous generation.
                             SyntaxNode declaratorSyntax = local.GetDeclaratorSyntax();
-                            int syntaxOffset = method.CalculateLocalSyntaxOffset(LambdaUtilities.GetDeclaratorPosition(declaratorSyntax), declaratorSyntax.SyntaxTree);
-                            int ordinal = synthesizedLocalOrdinals.AssignLocalOrdinal(synthesizedKind, syntaxOffset);
+                            int syntaxOffset = method.CalculateLocalSyntaxOffset(
+                                LambdaUtilities.GetDeclaratorPosition(declaratorSyntax),
+                                declaratorSyntax.SyntaxTree
+                            );
+                            int ordinal = synthesizedLocalOrdinals.AssignLocalOrdinal(
+                                synthesizedKind,
+                                syntaxOffset
+                            );
                             id = new LocalDebugId(syntaxOffset, ordinal);
 
                             // map local id to the previous id, if available:
                             int previousSlotIndex;
-                            if (mapToPreviousFields && slotAllocatorOpt.TryGetPreviousHoistedLocalSlotIndex(
-                                declaratorSyntax,
-                                F.ModuleBuilderOpt.Translate(fieldType, declaratorSyntax, diagnostics.DiagnosticBag),
-                                synthesizedKind,
-                                id,
-                                diagnostics.DiagnosticBag,
-                                out previousSlotIndex))
+                            if (
+                                mapToPreviousFields
+                                && slotAllocatorOpt.TryGetPreviousHoistedLocalSlotIndex(
+                                    declaratorSyntax,
+                                    F.ModuleBuilderOpt.Translate(
+                                        fieldType,
+                                        declaratorSyntax,
+                                        diagnostics.DiagnosticBag
+                                    ),
+                                    synthesizedKind,
+                                    id,
+                                    diagnostics.DiagnosticBag,
+                                    out previousSlotIndex
+                                )
+                            )
                             {
                                 slotIndex = previousSlotIndex;
                             }
@@ -219,13 +280,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                             slotIndex = nextFreeHoistedLocalSlot++;
                         }
 
-                        string fieldName = GeneratedNames.MakeHoistedLocalFieldName(synthesizedKind, slotIndex, local.Name);
-                        field = F.StateMachineField(fieldType, fieldName, new LocalSlotDebugInfo(synthesizedKind, id), slotIndex);
+                        string fieldName = GeneratedNames.MakeHoistedLocalFieldName(
+                            synthesizedKind,
+                            slotIndex,
+                            local.Name
+                        );
+                        field = F.StateMachineField(
+                            fieldType,
+                            fieldName,
+                            new LocalSlotDebugInfo(synthesizedKind, id),
+                            slotIndex
+                        );
                     }
 
                     if (field != null)
                     {
-                        proxiesBuilder.Add(local, new CapturedToStateMachineFieldReplacement(field, isReusable: false));
+                        proxiesBuilder.Add(
+                            local,
+                            new CapturedToStateMachineFieldReplacement(field, isReusable: false)
+                        );
                     }
                 }
                 else
@@ -234,28 +307,68 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (parameter.IsThis)
                     {
                         var containingType = method.ContainingType;
-                        var proxyField = F.StateMachineField(containingType, GeneratedNames.ThisProxyFieldName(), isPublic: true, isThis: true);
-                        proxiesBuilder.Add(parameter, new CapturedToStateMachineFieldReplacement(proxyField, isReusable: false));
+                        var proxyField = F.StateMachineField(
+                            containingType,
+                            GeneratedNames.ThisProxyFieldName(),
+                            isPublic: true,
+                            isThis: true
+                        );
+                        proxiesBuilder.Add(
+                            parameter,
+                            new CapturedToStateMachineFieldReplacement(
+                                proxyField,
+                                isReusable: false
+                            )
+                        );
 
                         if (PreserveInitialParameterValuesAndThreadId)
                         {
-                            var initialThis = containingType.IsStructType() ?
-                                F.StateMachineField(containingType, GeneratedNames.StateMachineThisParameterProxyName(), isPublic: true, isThis: true) : proxyField;
+                            var initialThis = containingType.IsStructType()
+                                ? F.StateMachineField(
+                                    containingType,
+                                    GeneratedNames.StateMachineThisParameterProxyName(),
+                                    isPublic: true,
+                                    isThis: true
+                                )
+                                : proxyField;
 
-                            initialParameters.Add(parameter, new CapturedToStateMachineFieldReplacement(initialThis, isReusable: false));
+                            initialParameters.Add(
+                                parameter,
+                                new CapturedToStateMachineFieldReplacement(
+                                    initialThis,
+                                    isReusable: false
+                                )
+                            );
                         }
                     }
                     else
                     {
                         // The field needs to be public iff it is initialized directly from the kickoff method
                         // (i.e. not for IEnumerable which loads the values from parameter proxies).
-                        var proxyField = F.StateMachineField(typeMap.SubstituteType(parameter.Type).Type, parameter.Name, isPublic: !PreserveInitialParameterValuesAndThreadId);
-                        proxiesBuilder.Add(parameter, new CapturedToStateMachineFieldReplacement(proxyField, isReusable: false));
+                        var proxyField = F.StateMachineField(
+                            typeMap.SubstituteType(parameter.Type).Type,
+                            parameter.Name,
+                            isPublic: !PreserveInitialParameterValuesAndThreadId
+                        );
+                        proxiesBuilder.Add(
+                            parameter,
+                            new CapturedToStateMachineFieldReplacement(
+                                proxyField,
+                                isReusable: false
+                            )
+                        );
 
                         if (PreserveInitialParameterValuesAndThreadId)
                         {
-                            var field = F.StateMachineField(typeMap.SubstituteType(parameter.Type).Type, GeneratedNames.StateMachineParameterProxyFieldName(parameter.Name), isPublic: true);
-                            initialParameters.Add(parameter, new CapturedToStateMachineFieldReplacement(field, isReusable: false));
+                            var field = F.StateMachineField(
+                                typeMap.SubstituteType(parameter.Type).Type,
+                                GeneratedNames.StateMachineParameterProxyFieldName(parameter.Name),
+                                isPublic: true
+                            );
+                            initialParameters.Add(
+                                parameter,
+                                new CapturedToStateMachineFieldReplacement(field, isReusable: false)
+                            );
                         }
                     }
                 }
@@ -272,7 +385,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // do not preallocate proxy fields for user defined locals in release
             // otherwise we will be allocating fields for all locals even when fields can be reused
             // see https://github.com/dotnet/roslyn/issues/15290
-            if (optimizationLevel == OptimizationLevel.Release && synthesizedKind == SynthesizedLocalKind.UserDefined)
+            if (
+                optimizationLevel == OptimizationLevel.Release
+                && synthesizedKind == SynthesizedLocalKind.UserDefined
+            )
             {
                 return false;
             }
@@ -285,21 +401,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             F.CurrentFunction = method;
             var bodyBuilder = ArrayBuilder<BoundStatement>.GetInstance();
 
-            var frameType = method.IsGenericMethod ? stateMachineType.Construct(method.TypeArgumentsWithAnnotations, unbound: false) : stateMachineType;
+            var frameType = method.IsGenericMethod
+                ? stateMachineType.Construct(method.TypeArgumentsWithAnnotations, unbound: false)
+                : stateMachineType;
             LocalSymbol stateMachineVariable = F.SynthesizedLocal(frameType, null);
             InitializeStateMachine(bodyBuilder, frameType, stateMachineVariable);
 
             // plus code to initialize all of the parameter proxies result.proxy
-            var proxies = PreserveInitialParameterValuesAndThreadId ? initialParameters : nonReusableLocalProxies;
+            var proxies = PreserveInitialParameterValuesAndThreadId
+                ? initialParameters
+                : nonReusableLocalProxies;
 
             bodyBuilder.Add(GenerateStateMachineCreation(stateMachineVariable, frameType, proxies));
 
             return F.Block(
                 ImmutableArray.Create(stateMachineVariable),
-                bodyBuilder.ToImmutableAndFree());
+                bodyBuilder.ToImmutableAndFree()
+            );
         }
 
-        protected BoundStatement GenerateParameterStorage(LocalSymbol stateMachineVariable, IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies)
+        protected BoundStatement GenerateParameterStorage(
+            LocalSymbol stateMachineVariable,
+            IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies
+        )
         {
             var bodyBuilder = ArrayBuilder<BoundStatement>.GetInstance();
 
@@ -311,7 +435,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CapturedSymbolReplacement proxy;
                 if (proxies.TryGetValue(method.ThisParameter, out proxy))
                 {
-                    bodyBuilder.Add(F.Assignment(proxy.Replacement(F.Syntax, frameType1 => F.Local(stateMachineVariable)), F.This()));
+                    bodyBuilder.Add(
+                        F.Assignment(
+                            proxy.Replacement(
+                                F.Syntax,
+                                frameType1 => F.Local(stateMachineVariable)
+                            ),
+                            F.This()
+                        )
+                    );
                 }
             }
 
@@ -320,8 +452,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CapturedSymbolReplacement proxy;
                 if (proxies.TryGetValue(parameter, out proxy))
                 {
-                    bodyBuilder.Add(F.Assignment(proxy.Replacement(F.Syntax, frameType1 => F.Local(stateMachineVariable)),
-                                                 F.Parameter(parameter)));
+                    bodyBuilder.Add(
+                        F.Assignment(
+                            proxy.Replacement(
+                                F.Syntax,
+                                frameType1 => F.Local(stateMachineVariable)
+                            ),
+                            F.Parameter(parameter)
+                        )
+                    );
                 }
             }
 
@@ -332,9 +471,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected SynthesizedImplementationMethod OpenMethodImplementation(
             MethodSymbol methodToImplement,
             string methodName = null,
-            bool hasMethodBodyDependency = false)
+            bool hasMethodBodyDependency = false
+        )
         {
-            var result = new SynthesizedStateMachineDebuggerHiddenMethod(methodName, methodToImplement, (StateMachineTypeSymbol)F.CurrentType, null, hasMethodBodyDependency);
+            var result = new SynthesizedStateMachineDebuggerHiddenMethod(
+                methodName,
+                methodToImplement,
+                (StateMachineTypeSymbol)F.CurrentType,
+                null,
+                hasMethodBodyDependency
+            );
             F.ModuleBuilderOpt.AddSynthesizedDefinition(F.CurrentType, result.GetCciAdapter());
             F.CurrentFunction = result;
             return result;
@@ -342,7 +488,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected MethodSymbol OpenPropertyImplementation(MethodSymbol getterToImplement)
         {
-            var prop = new SynthesizedStateMachineProperty(getterToImplement, (StateMachineTypeSymbol)F.CurrentType);
+            var prop = new SynthesizedStateMachineProperty(
+                getterToImplement,
+                (StateMachineTypeSymbol)F.CurrentType
+            );
             F.ModuleBuilderOpt.AddSynthesizedDefinition(F.CurrentType, prop.GetCciAdapter());
 
             var getter = prop.GetMethod;
@@ -352,9 +501,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             return getter;
         }
 
-        protected SynthesizedImplementationMethod OpenMoveNextMethodImplementation(MethodSymbol methodToImplement)
+        protected SynthesizedImplementationMethod OpenMoveNextMethodImplementation(
+            MethodSymbol methodToImplement
+        )
         {
-            var result = new SynthesizedStateMachineMoveNextMethod(methodToImplement, (StateMachineTypeSymbol)F.CurrentType);
+            var result = new SynthesizedStateMachineMoveNextMethod(
+                methodToImplement,
+                (StateMachineTypeSymbol)F.CurrentType
+            );
             F.ModuleBuilderOpt.AddSynthesizedDefinition(F.CurrentType, result.GetCciAdapter());
             F.CurrentFunction = result;
             return result;
@@ -370,23 +524,35 @@ namespace Microsoft.CodeAnalysis.CSharp
             // .NET Core has removed the Thread class. We can get the managed thread id by making a call to
             // Environment.CurrentManagedThreadId. If that method is not present (pre 4.5) fall back to the old behavior.
 
-            var currentManagedThreadIdProperty = (PropertySymbol)F.WellKnownMember(WellKnownMember.System_Environment__CurrentManagedThreadId, isOptional: true);
+            var currentManagedThreadIdProperty = (PropertySymbol)
+                F.WellKnownMember(
+                    WellKnownMember.System_Environment__CurrentManagedThreadId,
+                    isOptional: true
+                );
             if ((object)currentManagedThreadIdProperty != null)
             {
-                MethodSymbol currentManagedThreadIdMethod = currentManagedThreadIdProperty.GetMethod;
+                MethodSymbol currentManagedThreadIdMethod =
+                    currentManagedThreadIdProperty.GetMethod;
                 if ((object)currentManagedThreadIdMethod != null)
                 {
                     return F.Call(null, currentManagedThreadIdMethod);
                 }
             }
 
-            return F.Property(F.Property(WellKnownMember.System_Threading_Thread__CurrentThread), WellKnownMember.System_Threading_Thread__ManagedThreadId);
+            return F.Property(
+                F.Property(WellKnownMember.System_Threading_Thread__CurrentThread),
+                WellKnownMember.System_Threading_Thread__ManagedThreadId
+            );
         }
 
         /// <summary>
         /// Generate the GetEnumerator() method for iterators and GetAsyncEnumerator() for async-iterators.
         /// </summary>
-        protected SynthesizedImplementationMethod GenerateIteratorGetEnumerator(MethodSymbol getEnumeratorMethod, ref BoundExpression managedThreadId, StateMachineState initialState)
+        protected SynthesizedImplementationMethod GenerateIteratorGetEnumerator(
+            MethodSymbol getEnumeratorMethod,
+            ref BoundExpression managedThreadId,
+            StateMachineState initialState
+        )
         {
             // Produces:
             //    {StateMachineType} result;
@@ -407,13 +573,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Only on its parameters and staticness.
             var getEnumerator = OpenMethodImplementation(
                 getEnumeratorMethod,
-                hasMethodBodyDependency: false);
+                hasMethodBodyDependency: false
+            );
 
             var bodyBuilder = ArrayBuilder<BoundStatement>.GetInstance();
             // {StateMachineType} result;
             var resultVariable = F.SynthesizedLocal(stateMachineType, null);
             // result = new {StateMachineType}({initialState})
-            BoundStatement makeIterator = F.Assignment(F.Local(resultVariable), F.New(stateMachineType.Constructor, F.Literal(initialState)));
+            BoundStatement makeIterator = F.Assignment(
+                F.Local(resultVariable),
+                F.New(stateMachineType.Constructor, F.Literal(initialState))
+            );
 
             var thisInitialized = F.GenerateLabel("thisInitialized");
 
@@ -426,23 +596,30 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 thenBuilder.Add(
                     // result = this;
-                    F.Assignment(F.Local(resultVariable), F.This()));
+                    F.Assignment(F.Local(resultVariable), F.This())
+                );
 
                 if (method.IsStatic || method.ThisParameter.Type.IsReferenceType)
                 {
                     // if this is a reference type, no need to copy it since it is not assignable
                     thenBuilder.Add(
                         // goto thisInitialized;
-                        F.Goto(thisInitialized));
+                        F.Goto(thisInitialized)
+                    );
                 }
 
                 makeIterator = F.If(
                     // if (this.state == -2 && this.initialThreadId == Thread.CurrentThread.ManagedThreadId)
                     condition: F.LogicalAnd(
-                        F.IntEqual(F.Field(F.This(), stateField), F.Literal(StateMachineState.FinishedState)),
-                        F.IntEqual(F.Field(F.This(), initialThreadIdField), managedThreadId)),
+                        F.IntEqual(
+                            F.Field(F.This(), stateField),
+                            F.Literal(StateMachineState.FinishedState)
+                        ),
+                        F.IntEqual(F.Field(F.This(), initialThreadIdField), managedThreadId)
+                    ),
                     thenClause: F.Block(thenBuilder.ToImmutableAndFree()),
-                    elseClauseOpt: makeIterator);
+                    elseClauseOpt: makeIterator
+                );
             }
 
             bodyBuilder.Add(makeIterator);
@@ -458,8 +635,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     bodyBuilder.Add(
                         F.Assignment(
-                            proxy.Replacement(F.Syntax, stateMachineType => F.Local(resultVariable)),
-                            copySrc[method.ThisParameter].Replacement(F.Syntax, stateMachineType => F.This())));
+                            proxy.Replacement(
+                                F.Syntax,
+                                stateMachineType => F.Local(resultVariable)
+                            ),
+                            copySrc[method.ThisParameter]
+                                .Replacement(F.Syntax, stateMachineType => F.This())
+                        )
+                    );
                 }
             }
 
@@ -471,31 +654,51 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (copyDest.TryGetValue(parameter, out proxy))
                 {
                     // result.parameter
-                    BoundExpression resultParameter = proxy.Replacement(F.Syntax, stateMachineType => F.Local(resultVariable));
+                    BoundExpression resultParameter = proxy.Replacement(
+                        F.Syntax,
+                        stateMachineType => F.Local(resultVariable)
+                    );
                     // this.parameterProxy
-                    BoundExpression parameterProxy = copySrc[parameter].Replacement(F.Syntax, stateMachineType => F.This());
-                    BoundStatement copy = InitializeParameterField(getEnumeratorMethod, parameter, resultParameter, parameterProxy);
+                    BoundExpression parameterProxy = copySrc[parameter]
+                        .Replacement(F.Syntax, stateMachineType => F.This());
+                    BoundStatement copy = InitializeParameterField(
+                        getEnumeratorMethod,
+                        parameter,
+                        resultParameter,
+                        parameterProxy
+                    );
 
                     bodyBuilder.Add(copy);
                 }
             }
 
             bodyBuilder.Add(F.Return(F.Local(resultVariable)));
-            F.CloseMethod(F.Block(ImmutableArray.Create(resultVariable), bodyBuilder.ToImmutableAndFree()));
+            F.CloseMethod(
+                F.Block(ImmutableArray.Create(resultVariable), bodyBuilder.ToImmutableAndFree())
+            );
             return getEnumerator;
         }
 
         /// <summary>
         /// Generate logic to reset the current instance (rather than creating a new instance)
         /// </summary>
-        protected virtual void GenerateResetInstance(ArrayBuilder<BoundStatement> builder, StateMachineState initialState)
+        protected virtual void GenerateResetInstance(
+            ArrayBuilder<BoundStatement> builder,
+            StateMachineState initialState
+        )
         {
             builder.Add(
                 // this.state = {initialState};
-                F.Assignment(F.Field(F.This(), stateField), F.Literal(initialState)));
+                F.Assignment(F.Field(F.This(), stateField), F.Literal(initialState))
+            );
         }
 
-        protected virtual BoundStatement InitializeParameterField(MethodSymbol getEnumeratorMethod, ParameterSymbol parameter, BoundExpression resultParameter, BoundExpression parameterProxy)
+        protected virtual BoundStatement InitializeParameterField(
+            MethodSymbol getEnumeratorMethod,
+            ParameterSymbol parameter,
+            BoundExpression resultParameter,
+            BoundExpression parameterProxy
+        )
         {
             Debug.Assert(!method.IsIterator || !method.IsAsync); // an override handles async-iterators
 
@@ -508,8 +711,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         protected bool CanGetThreadId()
         {
-            return (object)F.WellKnownMember(WellKnownMember.System_Threading_Thread__ManagedThreadId, isOptional: true) != null ||
-                (object)F.WellKnownMember(WellKnownMember.System_Environment__CurrentManagedThreadId, isOptional: true) != null;
+            return (object)
+                    F.WellKnownMember(
+                        WellKnownMember.System_Threading_Thread__ManagedThreadId,
+                        isOptional: true
+                    ) != null
+                || (object)
+                    F.WellKnownMember(
+                        WellKnownMember.System_Environment__CurrentManagedThreadId,
+                        isOptional: true
+                    ) != null;
         }
     }
 }

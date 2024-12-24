@@ -4,26 +4,24 @@
 //
 // Presharp uses the c# pragma mechanism to supress its warnings.
 // These are not recognised by the base compiler so we need to explictly
-// disable the following warnings. See http://winweb/cse/Tools/PREsharp/userguide/default.asp 
-// for details. 
+// disable the following warnings. See http://winweb/cse/Tools/PREsharp/userguide/default.asp
+// for details.
 //
 #pragma warning disable 1634, 1691      // unknown message, unknown pragma
 
 namespace System.IdentityModel.Selectors
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Threading;
-    using System.Security;
-    using System.Runtime.ConstrainedExecution;
     using System.Runtime.CompilerServices;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
-
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Threading;
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:
@@ -39,11 +37,19 @@ namespace System.IdentityModel.Selectors
         //  Creates a new CryptoHandle. ParamType has information as to what
         //  nativeParameters has to be marshaled into.
         //
-        protected CryptoHandle(InternalRefCountedHandle nativeHandle, DateTime expiration, IntPtr nativeParameters, Type paramType)
+        protected CryptoHandle(
+            InternalRefCountedHandle nativeHandle,
+            DateTime expiration,
+            IntPtr nativeParameters,
+            Type paramType
+        )
         {
             m_internalHandle = nativeHandle;
 
-            m_internalHandle.Initialize(expiration, Marshal.PtrToStructure(nativeParameters, paramType));
+            m_internalHandle.Initialize(
+                expiration,
+                Marshal.PtrToStructure(nativeParameters, paramType)
+            );
         }
 
         //
@@ -65,8 +71,6 @@ namespace System.IdentityModel.Selectors
                 return m_internalHandle;
             }
         }
-
-
 
         public DateTime Expiration
         {
@@ -96,7 +100,6 @@ namespace System.IdentityModel.Selectors
             return OnDuplicate();
         }
 
-
         //
         // Summary:
         //  Allows subclasses to create a duplicate of their particular class.
@@ -107,7 +110,9 @@ namespace System.IdentityModel.Selectors
         {
             if (m_isDisposed)
             {
-                throw IDT.ThrowHelperError(new ObjectDisposedException(SR.GetString(SR.ClientCryptoSessionDisposed)));
+                throw IDT.ThrowHelperError(
+                    new ObjectDisposedException(SR.GetString(SR.ClientCryptoSessionDisposed))
+                );
             }
         }
 
@@ -136,32 +141,51 @@ namespace System.IdentityModel.Selectors
             try
             {
                 nativeHandle.DangerousAddRef(ref mustRelease);
-                RpcInfoCardCryptoHandle hCrypto =
-                    (RpcInfoCardCryptoHandle)Marshal.PtrToStructure(nativeHandle.DangerousGetHandle(),
-                                                                     typeof(RpcInfoCardCryptoHandle));
+                RpcInfoCardCryptoHandle hCrypto = (RpcInfoCardCryptoHandle)
+                    Marshal.PtrToStructure(
+                        nativeHandle.DangerousGetHandle(),
+                        typeof(RpcInfoCardCryptoHandle)
+                    );
                 DateTime expiration = DateTime.FromFileTimeUtc(hCrypto.expiration);
 
                 switch (hCrypto.type)
                 {
                     case RpcInfoCardCryptoHandle.HandleType.Asymmetric:
-                        handle = new AsymmetricCryptoHandle(nativeHandle, expiration, hCrypto.cryptoParameters);
+                        handle = new AsymmetricCryptoHandle(
+                            nativeHandle,
+                            expiration,
+                            hCrypto.cryptoParameters
+                        );
                         break;
                     case RpcInfoCardCryptoHandle.HandleType.Symmetric:
-                        handle = new SymmetricCryptoHandle(nativeHandle, expiration, hCrypto.cryptoParameters);
+                        handle = new SymmetricCryptoHandle(
+                            nativeHandle,
+                            expiration,
+                            hCrypto.cryptoParameters
+                        );
                         break;
                     case RpcInfoCardCryptoHandle.HandleType.Transform:
-                        handle = new TransformCryptoHandle(nativeHandle, expiration, hCrypto.cryptoParameters);
+                        handle = new TransformCryptoHandle(
+                            nativeHandle,
+                            expiration,
+                            hCrypto.cryptoParameters
+                        );
                         break;
                     case RpcInfoCardCryptoHandle.HandleType.Hash:
-                        handle = new HashCryptoHandle(nativeHandle, expiration, hCrypto.cryptoParameters);
+                        handle = new HashCryptoHandle(
+                            nativeHandle,
+                            expiration,
+                            hCrypto.cryptoParameters
+                        );
                         break;
                     default:
                         IDT.DebugAssert(false, "Invalid crypto operation type");
-                        throw IDT.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.GeneralExceptionMessage)));
+                        throw IDT.ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.GeneralExceptionMessage))
+                        );
                 }
 
                 return handle;
-
             }
             finally
             {
@@ -171,14 +195,12 @@ namespace System.IdentityModel.Selectors
                 }
             }
         }
-
-
     }
 
     //
     // Summary:
     //  This class manages the lifetime of a native crypto handle through ref counts.  Any number of CryptoHandles
-    //  may refer to a single InternalRefCountedHandle, but once they are all disposed this object will dispose 
+    //  may refer to a single InternalRefCountedHandle, but once they are all disposed this object will dispose
     //  itself as well.
     //
     internal class InternalRefCountedHandle : SafeHandle
@@ -187,12 +209,14 @@ namespace System.IdentityModel.Selectors
         DateTime m_expiration;
         object m_parameters = null;
 
-        [DllImport("infocardapi.dll",
-                    EntryPoint = "CloseCryptoHandle",
-                    CharSet = CharSet.Unicode,
-                    CallingConvention = CallingConvention.StdCall,
-                    ExactSpelling = true,
-                    SetLastError = true)]
+        [DllImport(
+            "infocardapi.dll",
+            EntryPoint = "CloseCryptoHandle",
+            CharSet = CharSet.Unicode,
+            CallingConvention = CallingConvention.StdCall,
+            ExactSpelling = true,
+            SetLastError = true
+        )]
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         private static extern bool CloseCryptoHandle([In] IntPtr hKey);
@@ -201,7 +225,6 @@ namespace System.IdentityModel.Selectors
             : base(IntPtr.Zero, true)
         {
             m_refcount = 1;
-
         }
 
         public void Initialize(DateTime expiration, object parameters)
@@ -209,7 +232,6 @@ namespace System.IdentityModel.Selectors
             m_expiration = expiration;
             m_parameters = parameters;
         }
-
 
         //
         // Summary:
@@ -260,20 +282,16 @@ namespace System.IdentityModel.Selectors
                 throw IDT.ThrowHelperError(new ObjectDisposedException("InternalRefCountedHandle"));
             }
         }
+
         public override bool IsInvalid
         {
-            get
-            {
-                return (IntPtr.Zero == base.handle);
-            }
+            get { return (IntPtr.Zero == base.handle); }
         }
-
 
         protected override bool ReleaseHandle()
         {
 #pragma warning suppress 56523
             return CloseCryptoHandle(base.handle);
         }
-
     }
 }

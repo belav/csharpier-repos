@@ -8,21 +8,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase<FormatterWebSite.StartupWithJsonFormatter>
+public class SystemTextJsonOutputFormatterTest
+    : JsonOutputFormatterTestBase<FormatterWebSite.StartupWithJsonFormatter>
 {
-    public SystemTextJsonOutputFormatterTest(MvcTestFixture<FormatterWebSite.StartupWithJsonFormatter> fixture)
-        : base(fixture)
-    {
-    }
+    public SystemTextJsonOutputFormatterTest(
+        MvcTestFixture<FormatterWebSite.StartupWithJsonFormatter> fixture
+    )
+        : base(fixture) { }
 
     [Fact]
-    public override Task SerializableErrorIsReturnedInExpectedFormat() => base.SerializableErrorIsReturnedInExpectedFormat();
+    public override Task SerializableErrorIsReturnedInExpectedFormat() =>
+        base.SerializableErrorIsReturnedInExpectedFormat();
 
     [Fact]
     public override async Task Formatting_StringValueWithUnicodeContent()
     {
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithUnicodeResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithUnicodeResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -35,13 +39,18 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase<For
         // Arrange
         static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddControllers()
+            serviceCollection
+                .AddControllers()
                 .AddJsonOptions(o => o.JsonSerializerOptions.Encoder = JavaScriptEncoder.Default);
         }
-        var client = Factory.WithWebHostBuilder(c => c.ConfigureServices(ConfigureServices)).CreateClient();
+        var client = Factory
+            .WithWebHostBuilder(c => c.ConfigureServices(ConfigureServices))
+            .CreateClient();
 
         // Act
-        var response = await client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithNonAsciiContent)}");
+        var response = await client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithNonAsciiContent)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -61,10 +70,13 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase<For
     public async Task Formatting_PolymorphicModel_WithJsonPolymorphism()
     {
         // Arrange
-        var expected = "{\"$type\":\"DerivedModel\",\"address\":\"Some address\",\"id\":10,\"name\":\"test\",\"streetName\":null}";
+        var expected =
+            "{\"$type\":\"DerivedModel\",\"address\":\"Some address\",\"id\":10,\"name\":\"test\",\"streetName\":null}";
 
         // Act
-        var response = await Client.GetAsync($"/SystemTextJsonOutputFormatter/{nameof(SystemTextJsonOutputFormatterController.PolymorphicResult)}");
+        var response = await Client.GetAsync(
+            $"/SystemTextJsonOutputFormatter/{nameof(SystemTextJsonOutputFormatterController.PolymorphicResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);

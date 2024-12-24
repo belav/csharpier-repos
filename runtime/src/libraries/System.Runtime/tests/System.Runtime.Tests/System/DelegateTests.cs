@@ -61,10 +61,22 @@ namespace System.Tests
         }
 
         public class A { }
-        public class B : A { }
-        public delegate A DynamicInvokeDelegate(A nonRefParam1, B nonRefParam2, ref A refParam, out B outParam);
 
-        public static A DynamicInvokeTestFunction(A nonRefParam1, B nonRefParam2, ref A refParam, out B outParam)
+        public class B : A { }
+
+        public delegate A DynamicInvokeDelegate(
+            A nonRefParam1,
+            B nonRefParam2,
+            ref A refParam,
+            out B outParam
+        );
+
+        public static A DynamicInvokeTestFunction(
+            A nonRefParam1,
+            B nonRefParam2,
+            ref A refParam,
+            out B outParam
+        )
         {
             outParam = (B)refParam;
             refParam = nonRefParam2;
@@ -106,19 +118,38 @@ namespace System.Tests
         [Fact]
         public static void DynamicInvoke_MissingTypeForCustomConstantAttribute_Succeeds()
         {
-            Assert.Equal("SomeValue", (string)(new ObjectDelegateWithStringCustomConstantAttribute(ObjectMethod).DynamicInvoke(Type.Missing)));
+            Assert.Equal(
+                "SomeValue",
+                (string)(
+                    new ObjectDelegateWithStringCustomConstantAttribute(ObjectMethod).DynamicInvoke(
+                        Type.Missing
+                    )
+                )
+            );
         }
 
         [Fact]
         public static void DynamicInvoke_MissingTypeForCustomConstantAttributeWithDefault_Succeeds()
         {
-            Assert.Equal("DefaultValue", new StringDelegateWithStringCustomConstantAttributeWithDefault(StringMethod).DynamicInvoke(Type.Missing));
+            Assert.Equal(
+                "DefaultValue",
+                new StringDelegateWithStringCustomConstantAttributeWithDefault(
+                    StringMethod
+                ).DynamicInvoke(Type.Missing)
+            );
         }
 
         [Fact]
         public static void DynamicInvoke_MissingTypeForTwoCustomConstantAttributes_Succeeds()
         {
-            Assert.Equal("SomeValue", (string)(new ObjectDelegateWithTwoCustomConstantAttributes(ObjectMethod).DynamicInvoke(Type.Missing)));
+            Assert.Equal(
+                "SomeValue",
+                (string)(
+                    new ObjectDelegateWithTwoCustomConstantAttributes(ObjectMethod).DynamicInvoke(
+                        Type.Missing
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -133,7 +164,10 @@ namespace System.Tests
         public static void DynamicInvoke_MissingTypeForNonDefaultParameter_ThrowsArgumentException()
         {
             Delegate d = new IntIntDelegate(IntIntMethod);
-            AssertExtensions.Throws<ArgumentException>("parameters", () => d.DynamicInvoke(7, Type.Missing));
+            AssertExtensions.Throws<ArgumentException>(
+                "parameters",
+                () => d.DynamicInvoke(7, Type.Missing)
+            );
         }
 
         [Theory]
@@ -169,7 +203,10 @@ namespace System.Tests
         [InlineData(7, (short)7)] // short -> int
         [InlineData(7, IntEnum.Seven)] // Enum (int) -> int
         [InlineData(7, ShortEnum.Seven)] // Enum (short) -> int
-        public static void DynamicInvoke_ValuePreservingPrimitiveWidening_Succeeds(object o1, object o2)
+        public static void DynamicInvoke_ValuePreservingPrimitiveWidening_Succeeds(
+            object o1,
+            object o2
+        )
         {
             Delegate d = new IntIntDelegate(IntIntMethod);
             d.DynamicInvoke(o1, o2);
@@ -178,7 +215,10 @@ namespace System.Tests
         [Theory]
         [InlineData(IntEnum.Seven, 7)]
         [InlineData(IntEnum.Seven, (short)7)]
-        public static void DynamicInvoke_ValuePreservingWideningToEnum_Succeeds(object o1, object o2)
+        public static void DynamicInvoke_ValuePreservingWideningToEnum_Succeeds(
+            object o1,
+            object o2
+        )
         {
             Delegate d = new EnumEnumDelegate(EnumEnumMethod);
             d.DynamicInvoke(o1, o2);
@@ -218,11 +258,18 @@ namespace System.Tests
         public static void DynamicInvoke_DefaultParameter_AllPrimitiveParametersWithMissingValues()
         {
             object[] parameters = new object[13];
-            for (int i = 0; i < parameters.Length; i++) { parameters[i] = Type.Missing; }
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                parameters[i] = Type.Missing;
+            }
 
             Assert.Equal(
                 "True, test, c, 2, -1, -3, 4, -5, 6, -7, 8, 9.1, 11.12",
-                (string)(new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(parameters));
+                (string)
+                    (new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
+                        parameters
+                    )
+            );
         }
 
         [Fact]
@@ -230,24 +277,26 @@ namespace System.Tests
         {
             Assert.Equal(
                 "False, value, d, 102, -101, -103, 104, -105, 106, -107, 108, 109.1, 111.12",
-                (string)(new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
-                    new object[13]
-                    {
-                        false,
-                        "value",
-                        'd',
-                        (byte)102,
-                        (sbyte)-101,
-                        (short)-103,
-                        (ushort)104,
-                        (int)-105,
-                        (uint)106,
-                        (long)-107,
-                        (ulong)108,
-                        (float)109.1,
-                        (double)111.12
-                    }
-                    ));
+                (string)
+                    (new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
+                        new object[13]
+                        {
+                            false,
+                            "value",
+                            'd',
+                            (byte)102,
+                            (sbyte)-101,
+                            (short)-103,
+                            (ushort)104,
+                            (int)-105,
+                            (uint)106,
+                            (long)-107,
+                            (ulong)108,
+                            (float)109.1,
+                            (double)111.12,
+                        }
+                    )
+            );
         }
 
         [Fact]
@@ -255,32 +304,38 @@ namespace System.Tests
         {
             Assert.Equal(
                 "False, test, d, 2, -101, -3, 104, -5, 106, -7, 108, 9.1, 111.12",
-                (string)(new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
-                    new object[13]
-                    {
-                        false,
-                        Type.Missing,
-                        'd',
-                        Type.Missing,
-                        (sbyte)-101,
-                        Type.Missing,
-                        (ushort)104,
-                        Type.Missing,
-                        (uint)106,
-                        Type.Missing,
-                        (ulong)108,
-                        Type.Missing,
-                        (double)111.12
-                    }
-                    ));
+                (string)
+                    (new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
+                        new object[13]
+                        {
+                            false,
+                            Type.Missing,
+                            'd',
+                            Type.Missing,
+                            (sbyte)-101,
+                            Type.Missing,
+                            (ushort)104,
+                            Type.Missing,
+                            (uint)106,
+                            Type.Missing,
+                            (ulong)108,
+                            Type.Missing,
+                            (double)111.12,
+                        }
+                    )
+            );
         }
 
         [Fact]
         public static void DynamicInvoke_DefaultParameter_StringParameterWithMissingValue()
         {
-            Assert.Equal
-                ("test",
-                (string)(new StringWithDefaultValue(StringMethod)).DynamicInvoke(new object[] { Type.Missing }));
+            Assert.Equal(
+                "test",
+                (string)
+                    (new StringWithDefaultValue(StringMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -288,13 +343,21 @@ namespace System.Tests
         {
             Assert.Equal(
                 "value",
-                (string)(new StringWithDefaultValue(StringMethod)).DynamicInvoke(new object[] { "value" }));
+                (string)
+                    (new StringWithDefaultValue(StringMethod)).DynamicInvoke(
+                        new object[] { "value" }
+                    )
+            );
         }
 
         [Fact]
         public static void DynamicInvoke_DefaultParameter_ReferenceTypeParameterWithMissingValue()
         {
-            Assert.Null((new ReferenceWithDefaultValue(ReferenceMethod)).DynamicInvoke(new object[] { Type.Missing }));
+            Assert.Null(
+                (new ReferenceWithDefaultValue(ReferenceMethod)).DynamicInvoke(
+                    new object[] { Type.Missing }
+                )
+            );
         }
 
         [Fact]
@@ -303,7 +366,10 @@ namespace System.Tests
             CustomReferenceType referenceInstance = new CustomReferenceType();
             Assert.Same(
                 referenceInstance,
-                (new ReferenceWithDefaultValue(ReferenceMethod)).DynamicInvoke(new object[] { referenceInstance }));
+                (new ReferenceWithDefaultValue(ReferenceMethod)).DynamicInvoke(
+                    new object[] { referenceInstance }
+                )
+            );
         }
 
         [Fact]
@@ -311,7 +377,13 @@ namespace System.Tests
         {
             Assert.Equal(
                 0,
-                ((CustomValueType)(new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(new object[] { Type.Missing })).Id);
+                (
+                    (CustomValueType)
+                        (new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(
+                            new object[] { Type.Missing }
+                        )
+                ).Id
+            );
         }
 
         [Fact]
@@ -319,7 +391,13 @@ namespace System.Tests
         {
             Assert.Equal(
                 1,
-                ((CustomValueType)(new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(new object[] { new CustomValueType { Id = 1 } })).Id);
+                (
+                    (CustomValueType)
+                        (new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(
+                            new object[] { new CustomValueType { Id = 1 } }
+                        )
+                ).Id
+            );
         }
 
         [Fact]
@@ -327,7 +405,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new DateTime(42),
-                (DateTime)(new DateTimeWithDefaultValueAttribute(DateTimeMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (DateTime)
+                    (new DateTimeWithDefaultValueAttribute(DateTimeMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -335,7 +417,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new DateTime(42),
-                (DateTime)(new DateTimeDelegateWithDateTimeAndCustomConstantAttribute(DateTimeMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (DateTime)
+                    (
+                        new DateTimeDelegateWithDateTimeAndCustomConstantAttribute(DateTimeMethod)
+                    ).DynamicInvoke(new object[] { Type.Missing })
+            );
         }
 
         [Fact]
@@ -343,7 +429,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new DateTime(43),
-                (DateTime)(new DateTimeDelegateWithCustomConstantAndDateTimeAttribute(DateTimeMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (DateTime)
+                    (
+                        new DateTimeDelegateWithCustomConstantAndDateTimeAttribute(DateTimeMethod)
+                    ).DynamicInvoke(new object[] { Type.Missing })
+            );
         }
 
         [Fact]
@@ -351,7 +441,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new DateTime(43),
-                (DateTime)(new DateTimeDelegateWithCustomConstantAttribute(DateTimeMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (DateTime)
+                    (new DateTimeDelegateWithCustomConstantAttribute(DateTimeMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -359,7 +453,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new DateTime(43),
-                (DateTime)(new DateTimeWithDefaultValueAttribute(DateTimeMethod)).DynamicInvoke(new object[] { new DateTime(43) }));
+                (DateTime)
+                    (new DateTimeWithDefaultValueAttribute(DateTimeMethod)).DynamicInvoke(
+                        new object[] { new DateTime(43) }
+                    )
+            );
         }
 
         [Fact]
@@ -367,7 +465,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new decimal(4, 3, 2, true, 1),
-                (decimal)(new DecimalWithDefaultValueAttribute(DecimalMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (decimal)
+                    (new DecimalWithDefaultValueAttribute(DecimalMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -375,7 +477,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new decimal(12, 13, 14, true, 1),
-                (decimal)(new DecimalDelegateWithDecimalAndCustomConstantAttribute(DecimalMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (decimal)
+                    (
+                        new DecimalDelegateWithDecimalAndCustomConstantAttribute(DecimalMethod)
+                    ).DynamicInvoke(new object[] { Type.Missing })
+            );
         }
 
         [Fact]
@@ -383,7 +489,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new decimal(12, 13, 14, true, 1),
-                (decimal)(new DecimalDelegateWithCustomConstantAndDecimalAttribute(DecimalMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (decimal)
+                    (
+                        new DecimalDelegateWithCustomConstantAndDecimalAttribute(DecimalMethod)
+                    ).DynamicInvoke(new object[] { Type.Missing })
+            );
         }
 
         [Fact]
@@ -391,7 +501,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new decimal(12, 13, 14, true, 1),
-                (decimal)(new DecimalDelegateWithCustomConstantAttribute(DecimalMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (decimal)
+                    (new DecimalDelegateWithCustomConstantAttribute(DecimalMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -399,7 +513,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 new decimal(12, 13, 14, true, 1),
-                (decimal)(new DecimalWithDefaultValueAttribute(DecimalMethod)).DynamicInvoke(new object[] { new decimal(12, 13, 14, true, 1) }));
+                (decimal)
+                    (new DecimalWithDefaultValueAttribute(DecimalMethod)).DynamicInvoke(
+                        new object[] { new decimal(12, 13, 14, true, 1) }
+                    )
+            );
         }
 
         [Fact]
@@ -407,7 +525,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 3.14m,
-                (decimal)(new DecimalWithDefaultValue(DecimalMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (decimal)
+                    (new DecimalWithDefaultValue(DecimalMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -415,13 +537,22 @@ namespace System.Tests
         {
             Assert.Equal(
                 103.14m,
-                (decimal)(new DecimalWithDefaultValue(DecimalMethod)).DynamicInvoke(new object[] { 103.14m }));
+                (decimal)
+                    (new DecimalWithDefaultValue(DecimalMethod)).DynamicInvoke(
+                        new object[] { 103.14m }
+                    )
+            );
         }
 
         [Fact]
         public static void DynamicInvoke_DefaultParameter_NullableIntWithMissingValue()
         {
-            Assert.Null((int?)(new NullableIntWithDefaultValue(NullableIntMethod)).DynamicInvoke(new object[] { Type.Missing }));
+            Assert.Null(
+                (int?)
+                    (new NullableIntWithDefaultValue(NullableIntMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -429,7 +560,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 (int?)42,
-                (int?)(new NullableIntWithDefaultValue(NullableIntMethod)).DynamicInvoke(new object[] { (int?)42 }));
+                (int?)
+                    (new NullableIntWithDefaultValue(NullableIntMethod)).DynamicInvoke(
+                        new object[] { (int?)42 }
+                    )
+            );
         }
 
         [Fact]
@@ -437,7 +572,11 @@ namespace System.Tests
         {
             Assert.Equal(
                 IntEnum.Seven,
-                (IntEnum)(new EnumWithDefaultValue(EnumMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (IntEnum)
+                    (new EnumWithDefaultValue(EnumMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -445,7 +584,8 @@ namespace System.Tests
         {
             Assert.Equal(
                 "value",
-                (new OptionalObjectParameter(ObjectMethod)).DynamicInvoke(new object[] { "value" }));
+                (new OptionalObjectParameter(ObjectMethod)).DynamicInvoke(new object[] { "value" })
+            );
         }
 
         [Fact]
@@ -454,14 +594,23 @@ namespace System.Tests
         {
             Assert.Equal(
                 Type.Missing,
-                (new OptionalObjectParameter(ObjectMethod)).DynamicInvoke(new object[] { Type.Missing }));
+                (new OptionalObjectParameter(ObjectMethod)).DynamicInvoke(
+                    new object[] { Type.Missing }
+                )
+            );
         }
 
         [Fact]
         [ActiveIssue("https://github.com/mono/mono/issues/15148", TestRuntimes.Mono)]
         public static void DynamicInvoke_OptionalParameterUnassingableFromMissing_WithMissingValue()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => (new OptionalStringParameter(StringMethod)).DynamicInvoke(new object[] { Type.Missing }));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    (new OptionalStringParameter(StringMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
+            );
         }
 
         [Fact]
@@ -469,7 +618,8 @@ namespace System.Tests
         {
             Assert.Equal(
                 "value",
-               (new StringParameter(StringMethod)).DynamicInvoke(new string[] { "value" }));
+                (new StringParameter(StringMethod)).DynamicInvoke(new string[] { "value" })
+            );
         }
 
         [Fact]
@@ -478,7 +628,10 @@ namespace System.Tests
         {
             Assert.Same(
                 Missing.Value,
-                (new OptionalObjectParameter(ObjectMethod)).DynamicInvoke(new Missing[] { Missing.Value }));
+                (new OptionalObjectParameter(ObjectMethod)).DynamicInvoke(
+                    new Missing[] { Missing.Value }
+                )
+            );
         }
 
         private static void IntIntMethod(int expected, int actual)
@@ -489,7 +642,9 @@ namespace System.Tests
         [Fact]
         public static void SameMethodObtainedViaDelegateAndReflectionAreSameForClass()
         {
-            var m1 = ((MethodCallExpression)((Expression<Action>)(() => new Class().M())).Body).Method;
+            var m1 = (
+                (MethodCallExpression)((Expression<Action>)(() => new Class().M())).Body
+            ).Method;
             var m2 = new Action(new Class().M).Method;
             Assert.True(m1.Equals(m2));
         }
@@ -497,7 +652,9 @@ namespace System.Tests
         [Fact]
         public static void SameMethodObtainedViaDelegateAndReflectionAreSameForStruct()
         {
-            var m1 = ((MethodCallExpression)((Expression<Action>)(() => new Struct().M())).Body).Method;
+            var m1 = (
+                (MethodCallExpression)((Expression<Action>)(() => new Struct().M())).Body
+            ).Method;
             var m2 = new Action(new Struct().M).Method;
             Assert.True(m1.Equals(m2));
         }
@@ -505,7 +662,10 @@ namespace System.Tests
         [Fact]
         public static void SameGenericMethodObtainedViaDelegateAndReflectionAreSameForClass()
         {
-            var m1 = ((MethodCallExpression)((Expression<Action>)(() => new ClassG().M<string, object>())).Body).Method;
+            var m1 = (
+                (MethodCallExpression)
+                    ((Expression<Action>)(() => new ClassG().M<string, object>())).Body
+            ).Method;
             var m2 = new Action(new ClassG().M<string, object>).Method;
             Assert.True(m1.Equals(m2));
             Assert.Equal(m1.GetHashCode(), m2.GetHashCode());
@@ -515,20 +675,35 @@ namespace System.Tests
         [Fact]
         public static void SameGenericMethodObtainedViaDelegateAndReflectionAreSameForStruct()
         {
-            var m1 = ((MethodCallExpression)((Expression<Action>)(() => new StructG().M<string, object>())).Body).Method;
+            var m1 = (
+                (MethodCallExpression)
+                    ((Expression<Action>)(() => new StructG().M<string, object>())).Body
+            ).Method;
             var m2 = new Action(new StructG().M<string, object>).Method;
             Assert.True(m1.Equals(m2));
             Assert.Equal(m1.GetHashCode(), m2.GetHashCode());
             Assert.Equal(m1.MethodHandle.Value, m2.MethodHandle.Value);
         }
 
-        class Class { internal void M() { } }
+        class Class
+        {
+            internal void M() { }
+        }
 
-        struct Struct { internal void M() { } }
+        struct Struct
+        {
+            internal void M() { }
+        }
 
-        class ClassG { internal void M<Key, Value>() { } }
+        class ClassG
+        {
+            internal void M<Key, Value>() { }
+        }
 
-        struct StructG { internal void M<Key, Value>() { } }
+        struct StructG
+        {
+            internal void M<Key, Value>() { }
+        }
 
         private delegate void IntIntDelegate(int expected, int actual);
         private delegate void IntIntDelegateWithDefault(int expected, int actual = 7);
@@ -605,7 +780,8 @@ namespace System.Tests
             long int64 = -7,
             ulong uint64 = 8,
             float single = (float)9.1,
-            double dbl = 11.12);
+            double dbl = 11.12
+        );
 
         private static string AllPrimitivesMethod(
             bool boolean,
@@ -620,13 +796,17 @@ namespace System.Tests
             long int64,
             ulong uint64,
             float single,
-            double dbl)
+            double dbl
+        )
         {
-            return FormattableString.Invariant($"{boolean}, {str}, {character}, {unsignedbyte}, {signedbyte}, {int16}, {uint16}, {int32}, {uint32}, {int64}, {uint64}, {single}, {dbl}");
+            return FormattableString.Invariant(
+                $"{boolean}, {str}, {character}, {unsignedbyte}, {signedbyte}, {int16}, {uint16}, {int32}, {uint32}, {int64}, {uint64}, {single}, {dbl}"
+            );
         }
 
         private delegate string StringParameter(string parameter);
         private delegate string StringWithDefaultValue(string parameter = "test");
+
         private static string StringMethod(string parameter)
         {
             return parameter;
@@ -634,46 +814,64 @@ namespace System.Tests
 
         private class CustomReferenceType { };
 
-        private delegate CustomReferenceType ReferenceWithDefaultValue(CustomReferenceType parameter = null);
+        private delegate CustomReferenceType ReferenceWithDefaultValue(
+            CustomReferenceType parameter = null
+        );
+
         private static CustomReferenceType ReferenceMethod(CustomReferenceType parameter)
         {
             return parameter;
         }
 
-        private struct CustomValueType { public int Id; };
+        private struct CustomValueType
+        {
+            public int Id;
+        };
 
-        private delegate CustomValueType ValueTypeWithDefaultValue(CustomValueType parameter = default(CustomValueType));
+        private delegate CustomValueType ValueTypeWithDefaultValue(
+            CustomValueType parameter = default(CustomValueType)
+        );
+
         private static CustomValueType ValueTypeMethod(CustomValueType parameter)
         {
             return parameter;
         }
 
-        private delegate DateTime DateTimeWithDefaultValueAttribute([DateTimeConstant(42)] DateTime parameter);
+        private delegate DateTime DateTimeWithDefaultValueAttribute(
+            [DateTimeConstant(42)] DateTime parameter
+        );
+
         private static DateTime DateTimeMethod(DateTime parameter)
         {
             return parameter;
         }
 
-        private delegate decimal DecimalWithDefaultValueAttribute([DecimalConstant(1, 1, 2, 3, 4)] decimal parameter);
+        private delegate decimal DecimalWithDefaultValueAttribute(
+            [DecimalConstant(1, 1, 2, 3, 4)] decimal parameter
+        );
         private delegate decimal DecimalWithDefaultValue(decimal parameter = 3.14m);
+
         private static decimal DecimalMethod(decimal parameter)
         {
             return parameter;
         }
 
         private delegate int? NullableIntWithDefaultValue(int? parameter = null);
+
         private static int? NullableIntMethod(int? parameter)
         {
             return parameter;
         }
 
         private delegate IntEnum EnumWithDefaultValue(IntEnum parameter = IntEnum.Seven);
+
         private static IntEnum EnumMethod(IntEnum parameter = IntEnum.Seven)
         {
             return parameter;
         }
 
         private delegate object OptionalObjectParameter([Optional] object parameter);
+
         private static object ObjectMethod(object parameter)
         {
             return parameter;
@@ -701,15 +899,33 @@ namespace System.Tests
             public override object Value => new decimal(12, 13, 14, true, 1);
         }
 
-        private delegate object ObjectDelegateWithStringCustomConstantAttribute([StringCustomConstant] object o);
-        private delegate object ObjectDelegateWithTwoCustomConstantAttributes([StringCustomConstant][AnotherStringCustomConstant] object o);
-        private delegate DateTime DateTimeDelegateWithDateTimeAndCustomConstantAttribute([DateTimeConstant(42)][AnotherDateTimeCustomConstant] DateTime parameter);
-        private delegate DateTime DateTimeDelegateWithCustomConstantAndDateTimeAttribute([AnotherDateTimeCustomConstant][DateTimeConstant(42)] DateTime parameter);
-        private delegate DateTime DateTimeDelegateWithCustomConstantAttribute([AnotherDateTimeCustomConstant] DateTime parameter);
-        private delegate decimal DecimalDelegateWithDecimalAndCustomConstantAttribute([DecimalConstant(1, 1, 2, 3, 4)][AnotherDecimalCustomConstant] decimal parameter);
-        private delegate decimal DecimalDelegateWithCustomConstantAndDecimalAttribute([AnotherDecimalCustomConstant][DecimalConstant(1, 1, 2, 3, 4)] decimal parameter);
-        private delegate decimal DecimalDelegateWithCustomConstantAttribute([AnotherDecimalCustomConstant] decimal parameter);
-        private delegate string StringDelegateWithStringCustomConstantAttributeWithDefault([StringCustomConstant] string o = "DefaultValue");
+        private delegate object ObjectDelegateWithStringCustomConstantAttribute(
+            [StringCustomConstant] object o
+        );
+        private delegate object ObjectDelegateWithTwoCustomConstantAttributes(
+            [StringCustomConstant] [AnotherStringCustomConstant] object o
+        );
+        private delegate DateTime DateTimeDelegateWithDateTimeAndCustomConstantAttribute(
+            [DateTimeConstant(42)] [AnotherDateTimeCustomConstant] DateTime parameter
+        );
+        private delegate DateTime DateTimeDelegateWithCustomConstantAndDateTimeAttribute(
+            [AnotherDateTimeCustomConstant] [DateTimeConstant(42)] DateTime parameter
+        );
+        private delegate DateTime DateTimeDelegateWithCustomConstantAttribute(
+            [AnotherDateTimeCustomConstant] DateTime parameter
+        );
+        private delegate decimal DecimalDelegateWithDecimalAndCustomConstantAttribute(
+            [DecimalConstant(1, 1, 2, 3, 4)] [AnotherDecimalCustomConstant] decimal parameter
+        );
+        private delegate decimal DecimalDelegateWithCustomConstantAndDecimalAttribute(
+            [AnotherDecimalCustomConstant] [DecimalConstant(1, 1, 2, 3, 4)] decimal parameter
+        );
+        private delegate decimal DecimalDelegateWithCustomConstantAttribute(
+            [AnotherDecimalCustomConstant] decimal parameter
+        );
+        private delegate string StringDelegateWithStringCustomConstantAttributeWithDefault(
+            [StringCustomConstant] string o = "DefaultValue"
+        );
     }
 
     public static class CreateDelegateTests
@@ -730,7 +946,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate1_Method_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("method", () => Delegate.CreateDelegate(typeof(D), (MethodInfo)null));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "method",
+                () => Delegate.CreateDelegate(typeof(D), (MethodInfo)null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -739,7 +958,10 @@ namespace System.Tests
         public static void CreateDelegate1_Type_Null()
         {
             MethodInfo mi = typeof(C).GetMethod("S");
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("type", () => Delegate.CreateDelegate((Type)null, mi));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Delegate.CreateDelegate((Type)null, mi)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -769,7 +991,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate2_Method_ArgumentsMismatch()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "StartExecute"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "StartExecute")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -778,7 +1003,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate2_Method_CaseMismatch()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "ExecutE"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "ExecutE")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -787,7 +1015,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate2_Method_DoesNotExist()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "DoesNotExist"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "DoesNotExist")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -797,7 +1028,10 @@ namespace System.Tests
         public static void CreateDelegate2_Method_Null()
         {
             C c = new C();
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("method", () => Delegate.CreateDelegate(typeof(D), c, (string)null));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "method",
+                () => Delegate.CreateDelegate(typeof(D), c, (string)null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -805,7 +1039,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate2_Method_ReturnTypeMismatch()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "DoExecute"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "DoExecute")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -814,7 +1051,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate2_Method_Static()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "Run"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "Run")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -823,7 +1063,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate2_Target_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("target", () => Delegate.CreateDelegate(typeof(D), null, "N"));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => Delegate.CreateDelegate(typeof(D), null, "N")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -831,17 +1074,24 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate2_Target_GenericTypeParameter()
         {
-
-            Type theT = typeof(DummyGenericClassForDelegateTests<>).GetTypeInfo().GenericTypeParameters[0];
+            Type theT = typeof(DummyGenericClassForDelegateTests<>)
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Type delegateType = typeof(Func<object, object, bool>);
-            AssertExtensions.Throws<ArgumentException>("target", () => Delegate.CreateDelegate(delegateType, theT, "ReferenceEquals"));
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Delegate.CreateDelegate(delegateType, theT, "ReferenceEquals")
+            );
         }
 
         [Fact]
         public static void CreateDelegate2_Type_Null()
         {
             C c = new C();
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("type", () => Delegate.CreateDelegate((Type)null, c, "N"));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Delegate.CreateDelegate((Type)null, c, "N")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -870,7 +1120,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate3_Method_ArgumentsMismatch()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), typeof(B), "StartRun"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), typeof(B), "StartRun")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -879,7 +1132,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate3_Method_CaseMismatch()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), typeof(B), "RuN"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), typeof(B), "RuN")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -888,7 +1144,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate3_Method_DoesNotExist()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), typeof(B), "DoesNotExist"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), typeof(B), "DoesNotExist")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -897,7 +1156,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate3_Method_Instance()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), typeof(B), "Execute"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), typeof(B), "Execute")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -906,7 +1168,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate3_Method_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("method", () => Delegate.CreateDelegate(typeof(D), typeof(C), (string)null));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "method",
+                () => Delegate.CreateDelegate(typeof(D), typeof(C), (string)null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -914,7 +1179,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate3_Method_ReturnTypeMismatch()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), typeof(B), "DoRun"));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), typeof(B), "DoRun")
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -923,7 +1191,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate3_Target_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("target", () => Delegate.CreateDelegate(typeof(D), (Type)null, "S"));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => Delegate.CreateDelegate(typeof(D), (Type)null, "S")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -931,7 +1202,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate3_Type_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("type", () => Delegate.CreateDelegate((Type)null, typeof(C), "S"));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Delegate.CreateDelegate((Type)null, typeof(C), "S")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -984,7 +1258,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate4_Method_ArgumentsMismatch()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "StartExecute", false));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "StartExecute", false)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -994,7 +1271,10 @@ namespace System.Tests
         public static void CreateDelegate4_Method_CaseMismatch()
         {
             // instance method, case mismatch, do not ignore case
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "ExecutE", false));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "ExecutE", false)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1003,7 +1283,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate4_Method_DoesNotExist()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "DoesNotExist", false));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "DoesNotExist", false)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1012,7 +1295,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate4_Method_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("method", () => Delegate.CreateDelegate(typeof(D), new C(), (string)null, true));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "method",
+                () => Delegate.CreateDelegate(typeof(D), new C(), (string)null, true)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -1020,7 +1306,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate4_Method_ReturnTypeMismatch()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "DoExecute", false));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "DoExecute", false)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1029,7 +1318,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate4_Method_Static()
         {
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "Run", true));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "Run", true)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1038,7 +1330,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate4_Target_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("target", () => Delegate.CreateDelegate(typeof(D), null, "N", true));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => Delegate.CreateDelegate(typeof(D), null, "N", true)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -1047,7 +1342,10 @@ namespace System.Tests
         public static void CreateDelegate4_Type_Null()
         {
             C c = new C();
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("type", () => Delegate.CreateDelegate((Type)null, c, "N", true));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Delegate.CreateDelegate((Type)null, c, "N", true)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -1058,74 +1356,62 @@ namespace System.Tests
             E e;
 
             // do not ignore case, do not throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "Execute", false, false);
+            e = (E)Delegate.CreateDelegate(typeof(E), new B(), "Execute", false, false);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // do not ignore case, throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "Execute", false, true);
+            e = (E)Delegate.CreateDelegate(typeof(E), new B(), "Execute", false, true);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // ignore case, do not throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "Execute", true, false);
+            e = (E)Delegate.CreateDelegate(typeof(E), new B(), "Execute", true, false);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // ignore case, throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "Execute", true, true);
+            e = (E)Delegate.CreateDelegate(typeof(E), new B(), "Execute", true, true);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // do not ignore case, do not throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new C(),
-                "Execute", false, false);
+            e = (E)Delegate.CreateDelegate(typeof(E), new C(), "Execute", false, false);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // do not ignore case, throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new C(),
-                "Execute", false, true);
+            e = (E)Delegate.CreateDelegate(typeof(E), new C(), "Execute", false, true);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // ignore case, do not throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new C(),
-                "Execute", true, false);
+            e = (E)Delegate.CreateDelegate(typeof(E), new C(), "Execute", true, false);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // ignore case, throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new C(),
-                "Execute", true, true);
+            e = (E)Delegate.CreateDelegate(typeof(E), new C(), "Execute", true, true);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // do not ignore case, do not throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new C(),
-                "DoExecute", false, false);
+            e = (E)Delegate.CreateDelegate(typeof(E), new C(), "DoExecute", false, false);
             Assert.NotNull(e);
             Assert.Equal(102, e(new C()));
 
             // do not ignore case, throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new C(),
-                "DoExecute", false, true);
+            e = (E)Delegate.CreateDelegate(typeof(E), new C(), "DoExecute", false, true);
             Assert.NotNull(e);
             Assert.Equal(102, e(new C()));
 
             // ignore case, do not throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new C(),
-                "DoExecute", true, false);
+            e = (E)Delegate.CreateDelegate(typeof(E), new C(), "DoExecute", true, false);
             Assert.NotNull(e);
             Assert.Equal(102, e(new C()));
 
             // ignore case, throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new C(),
-                "DoExecute", true, true);
+            e = (E)Delegate.CreateDelegate(typeof(E), new C(), "DoExecute", true, true);
             Assert.NotNull(e);
             Assert.Equal(102, e(new C()));
         }
@@ -1134,14 +1420,16 @@ namespace System.Tests
         public static void CreateDelegate9_Method_ArgumentsMismatch()
         {
             // throw bind failure
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "StartExecute", false, true));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "StartExecute", false, true)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
             // do not throw on bind failure
-            E e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "StartExecute", false, false);
+            E e = (E)Delegate.CreateDelegate(typeof(E), new B(), "StartExecute", false, false);
             Assert.Null(e);
         }
 
@@ -1151,25 +1439,25 @@ namespace System.Tests
             E e;
 
             // do not ignore case, throw bind failure
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "ExecutE", false, true));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "ExecutE", false, true)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
             // do not ignore case, do not throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "ExecutE", false, false);
+            e = (E)Delegate.CreateDelegate(typeof(E), new B(), "ExecutE", false, false);
             Assert.Null(e);
 
             // ignore case, throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "ExecutE", true, true);
+            e = (E)Delegate.CreateDelegate(typeof(E), new B(), "ExecutE", true, true);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
 
             // ignore case, do not throw bind failure
-            e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "ExecutE", true, false);
+            e = (E)Delegate.CreateDelegate(typeof(E), new B(), "ExecutE", true, false);
             Assert.NotNull(e);
             Assert.Equal(4, e(new C()));
         }
@@ -1178,21 +1466,26 @@ namespace System.Tests
         public static void CreateDelegate9_Method_DoesNotExist()
         {
             // throw bind failure
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "DoesNotExist", false, true));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "DoesNotExist", false, true)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
             // do not throw on bind failure
-            E e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "DoesNotExist", false, false);
+            E e = (E)Delegate.CreateDelegate(typeof(E), new B(), "DoesNotExist", false, false);
             Assert.Null(e);
         }
 
         [Fact]
         public static void CreateDelegate9_Method_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("method", () => Delegate.CreateDelegate(typeof(E), new B(), (string)null, false, false));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "method",
+                () => Delegate.CreateDelegate(typeof(E), new B(), (string)null, false, false)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -1201,14 +1494,16 @@ namespace System.Tests
         public static void CreateDelegate9_Method_ReturnTypeMismatch()
         {
             // throw bind failure
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "DoExecute", false, true));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "DoExecute", false, true)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
             // do not throw on bind failure
-            E e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "DoExecute", false, false);
+            E e = (E)Delegate.CreateDelegate(typeof(E), new B(), "DoExecute", false, false);
             Assert.Null(e);
         }
 
@@ -1216,21 +1511,26 @@ namespace System.Tests
         public static void CreateDelegate9_Method_Static()
         {
             // throw bind failure
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(null, () => Delegate.CreateDelegate(typeof(E), new B(), "Run", true, true));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Delegate.CreateDelegate(typeof(E), new B(), "Run", true, true)
+            );
             // Error binding to target method
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
             // do not throw on bind failure
-            E e = (E)Delegate.CreateDelegate(typeof(E), new B(),
-                "Run", true, false);
+            E e = (E)Delegate.CreateDelegate(typeof(E), new B(), "Run", true, false);
             Assert.Null(e);
         }
 
         [Fact]
         public static void CreateDelegate9_Target_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("target", () => Delegate.CreateDelegate(typeof(E), (object)null, "Execute", true, false));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => Delegate.CreateDelegate(typeof(E), (object)null, "Execute", true, false)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -1238,7 +1538,10 @@ namespace System.Tests
         [Fact]
         public static void CreateDelegate9_Type_Null()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("type", () => Delegate.CreateDelegate((Type)null, new B(), "Execute", true, false));
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Delegate.CreateDelegate((Type)null, new B(), "Execute", true, false)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -1248,8 +1551,8 @@ namespace System.Tests
         {
             int? num = 123;
             MethodInfo mi = typeof(int?).GetMethod("ToString");
-            NullableIntToString toString = (NullableIntToString)Delegate.CreateDelegate(
-                typeof(NullableIntToString), mi);
+            NullableIntToString toString = (NullableIntToString)
+                Delegate.CreateDelegate(typeof(NullableIntToString), mi);
             string s = toString(ref num);
             Assert.Equal(num.ToString(), s);
         }
@@ -1260,7 +1563,8 @@ namespace System.Tests
             int? num = 123;
             MethodInfo mi = typeof(int?).GetMethod("ToString");
             AssertExtensions.Throws<ArgumentException>(
-                () => Delegate.CreateDelegate(typeof(NullableIntToString), num, mi));
+                () => Delegate.CreateDelegate(typeof(NullableIntToString), num, mi)
+            );
         }
         #endregion Tests
 
@@ -1280,9 +1584,7 @@ namespace System.Tests
                 return 5;
             }
 
-            public static void DoRun(C x)
-            {
-            }
+            public static void DoRun(C x) { }
 
             public static int StartRun(C x, B b)
             {
@@ -1294,9 +1596,7 @@ namespace System.Tests
                 return 4;
             }
 
-            public static void DoExecute(C c)
-            {
-            }
+            public static void DoExecute(C c) { }
 
             public int StartExecute(C c, B b)
             {
@@ -1326,39 +1626,27 @@ namespace System.Tests
                 return s + "2";
             }
 
-            static void Run(C x)
-            {
-            }
+            static void Run(C x) { }
 
             public static new int DoRun(C x)
             {
                 return 107;
             }
 
-            void Execute(C c)
-            {
-            }
+            void Execute(C c) { }
 
             public new int DoExecute(C c)
             {
                 return 102;
             }
 
-            public static void M()
-            {
-            }
+            public static void M() { }
 
-            public static void N(C c)
-            {
-            }
+            public static void N(C c) { }
 
-            public static void S(C c)
-            {
-            }
+            public static void S(C c) { }
 
-            private void PrivateInstance()
-            {
-            }
+            private void PrivateInstance() { }
         }
 
         public interface Iface

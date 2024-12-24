@@ -5,20 +5,22 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class TPCRelationshipsQueryRelationalFixture : InheritanceRelationshipsQueryRelationalFixture
+public abstract class TPCRelationshipsQueryRelationalFixture
+    : InheritanceRelationshipsQueryRelationalFixture
 {
-    protected override string StoreName
-        => "TPCRelationships";
+    protected override string StoreName => "TPCRelationships";
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-            w => w.Log(RelationalEventId.ForeignKeyTpcPrincipalWarning));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(w => w.Log(RelationalEventId.ForeignKeyTpcPrincipalWarning));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
         base.OnModelCreating(modelBuilder, context);
 
-        modelBuilder.Entity<BaseInheritanceRelationshipEntity>().UseTpcMappingStrategy()
+        modelBuilder
+            .Entity<BaseInheritanceRelationshipEntity>()
+            .UseTpcMappingStrategy()
             // Table-sharing is not supported in TPC mapping
             .OwnsMany(e => e.OwnedCollectionOnBase, e => e.ToTable("OwnedCollections"))
             .OwnsOne(e => e.OwnedReferenceOnBase, e => e.ToTable("OwnedReferences"));

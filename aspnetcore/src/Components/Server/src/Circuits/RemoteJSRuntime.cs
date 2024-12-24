@@ -18,7 +18,8 @@ internal partial class RemoteJSRuntime : JSRuntime
     private readonly CircuitOptions _options;
     private readonly ILogger<RemoteJSRuntime> _logger;
     private CircuitClientProxy _clientProxy;
-    private readonly ConcurrentDictionary<long, DotNetStreamReference> _pendingDotNetToJSStreams = new();
+    private readonly ConcurrentDictionary<long, DotNetStreamReference> _pendingDotNetToJSStreams =
+        new();
     private bool _permanentlyDisconnected;
     private readonly long _maximumIncomingBytes;
     private int _byteArraysToBeRevivedTotalBytes;
@@ -38,14 +39,18 @@ internal partial class RemoteJSRuntime : JSRuntime
     public RemoteJSRuntime(
         IOptions<CircuitOptions> circuitOptions,
         IOptions<HubOptions<ComponentHub>> componentHubOptions,
-        ILogger<RemoteJSRuntime> logger)
+        ILogger<RemoteJSRuntime> logger
+    )
     {
         _options = circuitOptions.Value;
-        _maximumIncomingBytes = componentHubOptions.Value.MaximumReceiveMessageSize ?? long.MaxValue;
+        _maximumIncomingBytes =
+            componentHubOptions.Value.MaximumReceiveMessageSize ?? long.MaxValue;
         _logger = logger;
         DefaultAsyncTimeout = _options.JSInteropDefaultCallTimeout;
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions.Converters.Add(new ElementReferenceJsonConverter(ElementReferenceContext));
+        JsonSerializerOptions.Converters.Add(
+            new ElementReferenceJsonConverter(ElementReferenceContext)
+        );
     }
 
     public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;
@@ -60,7 +65,10 @@ internal partial class RemoteJSRuntime : JSRuntime
         UnhandledException?.Invoke(this, ex);
     }
 
-    protected override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
+    protected override void EndInvokeDotNet(
+        DotNetInvocationInfo invocationInfo,
+        in DotNetInvocationResult invocationResult
+    )
     {
         if (!invocationResult.Success)
         {
@@ -73,27 +81,33 @@ internal partial class RemoteJSRuntime : JSRuntime
             }
             else
             {
-                errorMessage = $"There was an exception invoking '{invocationInfo.MethodIdentifier}'";
+                errorMessage =
+                    $"There was an exception invoking '{invocationInfo.MethodIdentifier}'";
                 if (invocationInfo.AssemblyName != null)
                 {
                     errorMessage += $" on assembly '{invocationInfo.AssemblyName}'";
                 }
 
-                errorMessage += $". For more details turn on detailed exceptions in '{nameof(CircuitOptions)}.{nameof(CircuitOptions.DetailedErrors)}'";
+                errorMessage +=
+                    $". For more details turn on detailed exceptions in '{nameof(CircuitOptions)}.{nameof(CircuitOptions.DetailedErrors)}'";
             }
 
-            _clientProxy.SendAsync("JS.EndInvokeDotNet",
+            _clientProxy.SendAsync(
+                "JS.EndInvokeDotNet",
                 invocationInfo.CallId,
-                /* success */ false,
-                errorMessage);
+                /* success */false,
+                errorMessage
+            );
         }
         else
         {
             Log.InvokeDotNetMethodSuccess(_logger, invocationInfo);
-            _clientProxy.SendAsync("JS.EndInvokeDotNet",
+            _clientProxy.SendAsync(
+                "JS.EndInvokeDotNet",
                 invocationInfo.CallId,
-                /* success */ true,
-                invocationResult.ResultJson);
+                /* success */true,
+                invocationResult.ResultJson
+            );
         }
     }
 
@@ -102,28 +116,43 @@ internal partial class RemoteJSRuntime : JSRuntime
         _clientProxy.SendAsync("JS.ReceiveByteArray", id, data);
     }
 
-    protected override void BeginInvokeJS(long asyncHandle, string identifier, string argsJson, JSCallResultType resultType, long targetInstanceId)
+    protected override void BeginInvokeJS(
+        long asyncHandle,
+        string identifier,
+        string argsJson,
+        JSCallResultType resultType,
+        long targetInstanceId
+    )
     {
         if (_clientProxy is null)
         {
             if (_permanentlyDisconnected)
             {
                 throw new JSDisconnectedException(
-               "JavaScript interop calls cannot be issued at this time. This is because the circuit has disconnected " +
-               "and is being disposed.");
+                    "JavaScript interop calls cannot be issued at this time. This is because the circuit has disconnected "
+                        + "and is being disposed."
+                );
             }
             else
             {
                 throw new InvalidOperationException(
-                    "JavaScript interop calls cannot be issued at this time. This is because the component is being " +
-                    "statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed " +
-                    "during the OnAfterRenderAsync lifecycle method.");
+                    "JavaScript interop calls cannot be issued at this time. This is because the component is being "
+                        + "statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed "
+                        + "during the OnAfterRenderAsync lifecycle method."
+                );
             }
         }
 
         Log.BeginInvokeJS(_logger, asyncHandle, identifier);
 
-        _clientProxy.SendAsync("JS.BeginInvokeJS", asyncHandle, identifier, argsJson, (int)resultType, targetInstanceId);
+        _clientProxy.SendAsync(
+            "JS.BeginInvokeJS",
+            asyncHandle,
+            identifier,
+            argsJson,
+            (int)resultType,
+            targetInstanceId
+        );
     }
 
     protected override void ReceiveByteArray(int id, byte[] data)
@@ -136,7 +165,10 @@ internal partial class RemoteJSRuntime : JSRuntime
 
         if (_maximumIncomingBytes - data.Length < _byteArraysToBeRevivedTotalBytes)
         {
-            throw new ArgumentOutOfRangeException(nameof(data), "Exceeded the maximum byte array transfer limit for a call.");
+            throw new ArgumentOutOfRangeException(
+                nameof(data),
+                "Exceeded the maximum byte array transfer limit for a call."
+            );
         }
 
         // We also store the total number of bytes seen so far to compare against
@@ -148,7 +180,10 @@ internal partial class RemoteJSRuntime : JSRuntime
         base.ReceiveByteArray(id, data);
     }
 
-    protected override async Task TransmitStreamAsync(long streamId, DotNetStreamReference dotNetStreamReference)
+    protected override async Task TransmitStreamAsync(
+        long streamId,
+        DotNetStreamReference dotNetStreamReference
+    )
     {
         if (!_pendingDotNetToJSStreams.TryAdd(streamId, dotNetStreamReference))
         {
@@ -162,7 +197,10 @@ internal partial class RemoteJSRuntime : JSRuntime
         cancellationToken.Register(() =>
         {
             // If by now the stream hasn't been claimed for sending, stop tracking it
-            if (_pendingDotNetToJSStreams.TryRemove(streamId, out var timedOutStream) && !timedOutStream.LeaveOpen)
+            if (
+                _pendingDotNetToJSStreams.TryRemove(streamId, out var timedOutStream)
+                && !timedOutStream.LeaveOpen
+            )
             {
                 timedOutStream.Stream.Dispose();
             }
@@ -171,7 +209,10 @@ internal partial class RemoteJSRuntime : JSRuntime
         await _clientProxy.SendAsync("JS.BeginTransmitStream", streamId);
     }
 
-    public bool TryClaimPendingStreamForSending(long streamId, out DotNetStreamReference pendingStream)
+    public bool TryClaimPendingStreamForSending(
+        long streamId,
+        out DotNetStreamReference pendingStream
+    )
     {
         if (_pendingDotNetToJSStreams.TryRemove(streamId, out pendingStream))
         {
@@ -188,47 +229,138 @@ internal partial class RemoteJSRuntime : JSRuntime
         _clientProxy = null;
     }
 
-    protected override async Task<Stream> ReadJSDataAsStreamAsync(IJSStreamReference jsStreamReference, long totalLength, CancellationToken cancellationToken = default)
-        => await RemoteJSDataStream.CreateRemoteJSDataStreamAsync(this, jsStreamReference, totalLength, _maximumIncomingBytes, _options.JSInteropDefaultCallTimeout, cancellationToken);
+    protected override async Task<Stream> ReadJSDataAsStreamAsync(
+        IJSStreamReference jsStreamReference,
+        long totalLength,
+        CancellationToken cancellationToken = default
+    ) =>
+        await RemoteJSDataStream.CreateRemoteJSDataStreamAsync(
+            this,
+            jsStreamReference,
+            totalLength,
+            _maximumIncomingBytes,
+            _options.JSInteropDefaultCallTimeout,
+            cancellationToken
+        );
 
     public static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Begin invoke JS interop '{AsyncHandle}': '{FunctionIdentifier}'", EventName = "BeginInvokeJS")]
-        internal static partial void BeginInvokeJS(ILogger logger, long asyncHandle, string functionIdentifier);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Begin invoke JS interop '{AsyncHandle}': '{FunctionIdentifier}'",
+            EventName = "BeginInvokeJS"
+        )]
+        internal static partial void BeginInvokeJS(
+            ILogger logger,
+            long asyncHandle,
+            string functionIdentifier
+        );
 
-        [LoggerMessage(2, LogLevel.Debug, "There was an error invoking the static method '[{AssemblyName}]::{MethodIdentifier}' with callback id '{CallbackId}'.", EventName = "InvokeStaticDotNetMethodException")]
-        private static partial void InvokeStaticDotNetMethodException(ILogger logger, string assemblyName, string methodIdentifier, string? callbackId, Exception exception);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "There was an error invoking the static method '[{AssemblyName}]::{MethodIdentifier}' with callback id '{CallbackId}'.",
+            EventName = "InvokeStaticDotNetMethodException"
+        )]
+        private static partial void InvokeStaticDotNetMethodException(
+            ILogger logger,
+            string assemblyName,
+            string methodIdentifier,
+            string? callbackId,
+            Exception exception
+        );
 
-        [LoggerMessage(4, LogLevel.Debug, "There was an error invoking the instance method '{MethodIdentifier}' on reference '{DotNetObjectReference}' with callback id '{CallbackId}'.", EventName = "InvokeInstanceDotNetMethodException")]
-        private static partial void InvokeInstanceDotNetMethodException(ILogger logger, string methodIdentifier, long dotNetObjectReference, string? callbackId, Exception exception);
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "There was an error invoking the instance method '{MethodIdentifier}' on reference '{DotNetObjectReference}' with callback id '{CallbackId}'.",
+            EventName = "InvokeInstanceDotNetMethodException"
+        )]
+        private static partial void InvokeInstanceDotNetMethodException(
+            ILogger logger,
+            string methodIdentifier,
+            long dotNetObjectReference,
+            string? callbackId,
+            Exception exception
+        );
 
-        [LoggerMessage(3, LogLevel.Debug, "Invocation of '[{AssemblyName}]::{MethodIdentifier}' with callback id '{CallbackId}' completed successfully.", EventName = "InvokeStaticDotNetMethodSuccess")]
-        private static partial void InvokeStaticDotNetMethodSuccess(ILogger<RemoteJSRuntime> logger, string assemblyName, string methodIdentifier, string? callbackId);
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "Invocation of '[{AssemblyName}]::{MethodIdentifier}' with callback id '{CallbackId}' completed successfully.",
+            EventName = "InvokeStaticDotNetMethodSuccess"
+        )]
+        private static partial void InvokeStaticDotNetMethodSuccess(
+            ILogger<RemoteJSRuntime> logger,
+            string assemblyName,
+            string methodIdentifier,
+            string? callbackId
+        );
 
-        [LoggerMessage(5, LogLevel.Debug, "Invocation of '{MethodIdentifier}' on reference '{DotNetObjectReference}' with callback id '{CallbackId}' completed successfully.", EventName = "InvokeInstanceDotNetMethodSuccess")]
-        private static partial void InvokeInstanceDotNetMethodSuccess(ILogger<RemoteJSRuntime> logger, string methodIdentifier, long dotNetObjectReference, string? callbackId);
+        [LoggerMessage(
+            5,
+            LogLevel.Debug,
+            "Invocation of '{MethodIdentifier}' on reference '{DotNetObjectReference}' with callback id '{CallbackId}' completed successfully.",
+            EventName = "InvokeInstanceDotNetMethodSuccess"
+        )]
+        private static partial void InvokeInstanceDotNetMethodSuccess(
+            ILogger<RemoteJSRuntime> logger,
+            string methodIdentifier,
+            long dotNetObjectReference,
+            string? callbackId
+        );
 
-        internal static void InvokeDotNetMethodException(ILogger logger, in DotNetInvocationInfo invocationInfo, Exception exception)
+        internal static void InvokeDotNetMethodException(
+            ILogger logger,
+            in DotNetInvocationInfo invocationInfo,
+            Exception exception
+        )
         {
             if (invocationInfo.AssemblyName != null)
             {
-                InvokeStaticDotNetMethodException(logger, invocationInfo.AssemblyName, invocationInfo.MethodIdentifier, invocationInfo.CallId, exception);
+                InvokeStaticDotNetMethodException(
+                    logger,
+                    invocationInfo.AssemblyName,
+                    invocationInfo.MethodIdentifier,
+                    invocationInfo.CallId,
+                    exception
+                );
             }
             else
             {
-                InvokeInstanceDotNetMethodException(logger, invocationInfo.MethodIdentifier, invocationInfo.DotNetObjectId, invocationInfo.CallId, exception);
+                InvokeInstanceDotNetMethodException(
+                    logger,
+                    invocationInfo.MethodIdentifier,
+                    invocationInfo.DotNetObjectId,
+                    invocationInfo.CallId,
+                    exception
+                );
             }
         }
 
-        internal static void InvokeDotNetMethodSuccess(ILogger<RemoteJSRuntime> logger, in DotNetInvocationInfo invocationInfo)
+        internal static void InvokeDotNetMethodSuccess(
+            ILogger<RemoteJSRuntime> logger,
+            in DotNetInvocationInfo invocationInfo
+        )
         {
             if (invocationInfo.AssemblyName != null)
             {
-                InvokeStaticDotNetMethodSuccess(logger, invocationInfo.AssemblyName, invocationInfo.MethodIdentifier, invocationInfo.CallId);
+                InvokeStaticDotNetMethodSuccess(
+                    logger,
+                    invocationInfo.AssemblyName,
+                    invocationInfo.MethodIdentifier,
+                    invocationInfo.CallId
+                );
             }
             else
             {
-                InvokeInstanceDotNetMethodSuccess(logger, invocationInfo.MethodIdentifier, invocationInfo.DotNetObjectId, invocationInfo.CallId);
+                InvokeInstanceDotNetMethodSuccess(
+                    logger,
+                    invocationInfo.MethodIdentifier,
+                    invocationInfo.DotNetObjectId,
+                    invocationInfo.CallId
+                );
             }
         }
     }

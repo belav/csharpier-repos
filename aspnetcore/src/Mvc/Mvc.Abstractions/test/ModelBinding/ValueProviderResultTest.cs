@@ -90,7 +90,7 @@ public class ValueProviderResultTest
         var result = new ValueProviderResult("Hi There");
 
         // Act & Assert
-        Assert.Equal<string>(new string[] { "Hi There", }, result);
+        Assert.Equal<string>(new string[] { "Hi There" }, result);
     }
 
     [Fact]
@@ -108,63 +108,51 @@ public class ValueProviderResultTest
         get
         {
             return new TheoryData<ValueProviderResult, ValueProviderResult, bool>()
+            {
+                { new ValueProviderResult("Hi"), new ValueProviderResult("Hi"), true },
                 {
-                    {
-                        new ValueProviderResult("Hi"),
-                        new ValueProviderResult("Hi"),
-                        true
-                    },
-                    {
-                        new ValueProviderResult("Hi"),
-                        new ValueProviderResult(new string[] { "Hi"}),
-                        true
-                    },
-                    {
-                        new ValueProviderResult(new string[] { "Hi"}),
-                        new ValueProviderResult("Hi"),
-                        true
-                    },
-                    {
-                        new ValueProviderResult(new string[] { "Hi"}),
-                        new ValueProviderResult(new string[] { "Hi"}),
-                        true
-                    },
-                    {
-                        new ValueProviderResult(new string[] { "Hi", "There"}),
-                        new ValueProviderResult(new string[] { "Hi", "There"}),
-                        true
-                    },
-                    {
-                        new ValueProviderResult("Hi,There"),
-                        new ValueProviderResult(new string[] { "Hi", "There"}),
-                        false
-                    },
-                    {
-                        new ValueProviderResult(new string[] { "Hi", string.Empty }),
-                        new ValueProviderResult(new string[] { "Hi", "There"}),
-                        false
-                    },
-                    {
-                        new ValueProviderResult(new string[] { "Hi", "There" }),
-                        new ValueProviderResult(new string[] { "Hi", "ThEre"}),
-                        false
-                    },
-                    {
-                        new ValueProviderResult(new string[] { "Hi", }),
-                        new ValueProviderResult(new string[] { "Hi", string.Empty }),
-                        false
-                    },
-                    {
-                        new ValueProviderResult(),
-                        new ValueProviderResult((string)null),
-                        true
-                    },
-                    {
-                        new ValueProviderResult(),
-                        new ValueProviderResult("hi"),
-                        false
-                    },
-                };
+                    new ValueProviderResult("Hi"),
+                    new ValueProviderResult(new string[] { "Hi" }),
+                    true
+                },
+                {
+                    new ValueProviderResult(new string[] { "Hi" }),
+                    new ValueProviderResult("Hi"),
+                    true
+                },
+                {
+                    new ValueProviderResult(new string[] { "Hi" }),
+                    new ValueProviderResult(new string[] { "Hi" }),
+                    true
+                },
+                {
+                    new ValueProviderResult(new string[] { "Hi", "There" }),
+                    new ValueProviderResult(new string[] { "Hi", "There" }),
+                    true
+                },
+                {
+                    new ValueProviderResult("Hi,There"),
+                    new ValueProviderResult(new string[] { "Hi", "There" }),
+                    false
+                },
+                {
+                    new ValueProviderResult(new string[] { "Hi", string.Empty }),
+                    new ValueProviderResult(new string[] { "Hi", "There" }),
+                    false
+                },
+                {
+                    new ValueProviderResult(new string[] { "Hi", "There" }),
+                    new ValueProviderResult(new string[] { "Hi", "ThEre" }),
+                    false
+                },
+                {
+                    new ValueProviderResult(new string[] { "Hi" }),
+                    new ValueProviderResult(new string[] { "Hi", string.Empty }),
+                    false
+                },
+                { new ValueProviderResult(), new ValueProviderResult((string)null), true },
+                { new ValueProviderResult(), new ValueProviderResult("hi"), false },
+            };
         }
     }
 

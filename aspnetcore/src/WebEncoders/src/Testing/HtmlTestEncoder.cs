@@ -85,7 +85,8 @@ public sealed class HtmlTestEncoder : HtmlEncoder
         int unicodeScalar,
         char* buffer,
         int bufferLength,
-        out int numberOfCharactersWritten)
+        out int numberOfCharactersWritten
+    )
     {
         if (buffer == null)
         {

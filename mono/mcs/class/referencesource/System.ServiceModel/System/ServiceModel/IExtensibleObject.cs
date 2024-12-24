@@ -8,7 +8,7 @@ namespace System.ServiceModel
     using System.Collections.Generic;
 
     public interface IExtensibleObject<T>
-    where T : IExtensibleObject<T>
+        where T : IExtensibleObject<T>
     {
         IExtensionCollection<T> Extensions { get; }
     }

@@ -21,5 +21,5 @@ public enum Http503VerbosityLevel : long
     /// <summary>
     /// The HTTP Server API sends a 503 response with a detailed reason phrase.
     /// </summary>
-    Full = 2
+    Full = 2,
 }

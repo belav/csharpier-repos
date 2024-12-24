@@ -45,9 +45,14 @@ namespace System.ComponentModel.DataAnnotations
         ///     When the <see cref="ValidationContext.MemberName" /> of <paramref name="validationContext" /> is not a valid
         ///     property.
         /// </exception>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
-        public static bool TryValidateProperty(object? value, ValidationContext validationContext,
-            ICollection<ValidationResult>? validationResults)
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
+        public static bool TryValidateProperty(
+            object? value,
+            ValidationContext validationContext,
+            ICollection<ValidationResult>? validationResults
+        )
         {
             // Throw if value cannot be assigned to this property.  That is not a validation exception.
             var propertyType = _store.GetPropertyType(validationContext);
@@ -59,7 +64,14 @@ namespace System.ComponentModel.DataAnnotations
 
             var attributes = _store.GetPropertyValidationAttributes(validationContext);
 
-            foreach (var err in GetValidationErrors(value, validationContext, attributes, breakOnFirstError))
+            foreach (
+                var err in GetValidationErrors(
+                    value,
+                    validationContext,
+                    attributes,
+                    breakOnFirstError
+                )
+            )
             {
                 result = false;
 
@@ -93,8 +105,16 @@ namespace System.ComponentModel.DataAnnotations
         /// </exception>
         [RequiresUnreferencedCode(ValidationContext.InstanceTypeNotStaticallyDiscovered)]
         public static bool TryValidateObject(
-            object instance, ValidationContext validationContext, ICollection<ValidationResult>? validationResults) =>
-            TryValidateObject(instance, validationContext, validationResults, validateAllProperties: false);
+            object instance,
+            ValidationContext validationContext,
+            ICollection<ValidationResult>? validationResults
+        ) =>
+            TryValidateObject(
+                instance,
+                validationContext,
+                validationResults,
+                validateAllProperties: false
+            );
 
         /// <summary>
         ///     Tests whether the given object instance is valid.
@@ -130,20 +150,34 @@ namespace System.ComponentModel.DataAnnotations
         ///     <see cref="ValidationContext.ObjectInstance" />on <paramref name="validationContext" />.
         /// </exception>
         [RequiresUnreferencedCode(ValidationContext.InstanceTypeNotStaticallyDiscovered)]
-        public static bool TryValidateObject(object instance, ValidationContext validationContext,
-            ICollection<ValidationResult>? validationResults, bool validateAllProperties)
+        public static bool TryValidateObject(
+            object instance,
+            ValidationContext validationContext,
+            ICollection<ValidationResult>? validationResults,
+            bool validateAllProperties
+        )
         {
             ArgumentNullException.ThrowIfNull(instance);
 
             if (validationContext != null && instance != validationContext.ObjectInstance)
             {
-                throw new ArgumentException(SR.Validator_InstanceMustMatchValidationContextInstance, nameof(instance));
+                throw new ArgumentException(
+                    SR.Validator_InstanceMustMatchValidationContextInstance,
+                    nameof(instance)
+                );
             }
 
             var result = true;
             var breakOnFirstError = (validationResults == null);
 
-            foreach (ValidationError err in GetObjectValidationErrors(instance, validationContext!, validateAllProperties, breakOnFirstError))
+            foreach (
+                ValidationError err in GetObjectValidationErrors(
+                    instance,
+                    validationContext!,
+                    validateAllProperties,
+                    breakOnFirstError
+                )
+            )
             {
                 result = false;
 
@@ -182,8 +216,12 @@ namespace System.ComponentModel.DataAnnotations
         ///     <paramref name="value" /> against.
         /// </param>
         /// <returns><c>true</c> if the object is valid, <c>false</c> if any validation errors are encountered.</returns>
-        public static bool TryValidateValue(object? value, ValidationContext validationContext,
-            ICollection<ValidationResult>? validationResults, IEnumerable<ValidationAttribute> validationAttributes)
+        public static bool TryValidateValue(
+            object? value,
+            ValidationContext validationContext,
+            ICollection<ValidationResult>? validationResults,
+            IEnumerable<ValidationAttribute> validationAttributes
+        )
         {
             ArgumentNullException.ThrowIfNull(validationAttributes);
 
@@ -191,8 +229,13 @@ namespace System.ComponentModel.DataAnnotations
             var breakOnFirstError = validationResults == null;
 
             foreach (
-                var err in
-                    GetValidationErrors(value, validationContext, validationAttributes, breakOnFirstError))
+                var err in GetValidationErrors(
+                    value,
+                    validationContext,
+                    validationAttributes,
+                    breakOnFirstError
+                )
+            )
             {
                 result = false;
 
@@ -212,7 +255,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </param>
         /// <exception cref="ArgumentNullException">When <paramref name="validationContext" /> is null.</exception>
         /// <exception cref="ValidationException">When <paramref name="value" /> is invalid for this property.</exception>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         public static void ValidateProperty(object? value, ValidationContext validationContext)
         {
             // Throw if value cannot be assigned to this property.  That is not a validation exception.
@@ -221,7 +266,12 @@ namespace System.ComponentModel.DataAnnotations
 
             var attributes = _store.GetPropertyValidationAttributes(validationContext);
 
-            List<ValidationError> errors = GetValidationErrors(value, validationContext, attributes, false);
+            List<ValidationError> errors = GetValidationErrors(
+                value,
+                validationContext,
+                attributes,
+                false
+            );
             if (errors.Count > 0)
             {
                 errors[0].ThrowValidationException();
@@ -249,7 +299,11 @@ namespace System.ComponentModel.DataAnnotations
         [RequiresUnreferencedCode(ValidationContext.InstanceTypeNotStaticallyDiscovered)]
         public static void ValidateObject(object instance, ValidationContext validationContext)
         {
-            ValidateObject(instance, validationContext, false /*validateAllProperties*/);
+            ValidateObject(
+                instance,
+                validationContext,
+                false /*validateAllProperties*/
+            );
         }
 
         /// <summary>
@@ -273,18 +327,29 @@ namespace System.ComponentModel.DataAnnotations
         /// </exception>
         /// <exception cref="ValidationException">When <paramref name="instance" /> is found to be invalid.</exception>
         [RequiresUnreferencedCode(ValidationContext.InstanceTypeNotStaticallyDiscovered)]
-        public static void ValidateObject(object instance, ValidationContext validationContext,
-            bool validateAllProperties)
+        public static void ValidateObject(
+            object instance,
+            ValidationContext validationContext,
+            bool validateAllProperties
+        )
         {
             ArgumentNullException.ThrowIfNull(instance);
             ArgumentNullException.ThrowIfNull(validationContext);
 
             if (instance != validationContext.ObjectInstance)
             {
-                throw new ArgumentException(SR.Validator_InstanceMustMatchValidationContextInstance, nameof(instance));
+                throw new ArgumentException(
+                    SR.Validator_InstanceMustMatchValidationContextInstance,
+                    nameof(instance)
+                );
             }
 
-            List<ValidationError> errors = GetObjectValidationErrors(instance, validationContext, validateAllProperties, false);
+            List<ValidationError> errors = GetObjectValidationErrors(
+                instance,
+                validationContext,
+                validateAllProperties,
+                false
+            );
             if (errors.Count > 0)
             {
                 errors[0].ThrowValidationException();
@@ -308,13 +373,21 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="validationAttributes">The list of <see cref="ValidationAttribute" />s to validate against this instance.</param>
         /// <exception cref="ArgumentNullException">When <paramref name="validationContext" /> is null.</exception>
         /// <exception cref="ValidationException">When <paramref name="value" /> is found to be invalid.</exception>
-        public static void ValidateValue(object? value, ValidationContext validationContext,
-            IEnumerable<ValidationAttribute> validationAttributes)
+        public static void ValidateValue(
+            object? value,
+            ValidationContext validationContext,
+            IEnumerable<ValidationAttribute> validationAttributes
+        )
         {
             ArgumentNullException.ThrowIfNull(validationContext);
             ArgumentNullException.ThrowIfNull(validationAttributes);
 
-            List<ValidationError> errors = GetValidationErrors(value, validationContext, validationAttributes, false);
+            List<ValidationError> errors = GetValidationErrors(
+                value,
+                validationContext,
+                validationAttributes,
+                false
+            );
             if (errors.Count > 0)
             {
                 errors[0].ThrowValidationException();
@@ -333,12 +406,19 @@ namespace System.ComponentModel.DataAnnotations
         /// <returns>A new <see cref="ValidationContext" /> for the <paramref name="instance" /> provided.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="validationContext" /> is null.</exception>
         [RequiresUnreferencedCode(ValidationContext.InstanceTypeNotStaticallyDiscovered)]
-        private static ValidationContext CreateValidationContext(object instance, ValidationContext validationContext)
+        private static ValidationContext CreateValidationContext(
+            object instance,
+            ValidationContext validationContext
+        )
         {
             Debug.Assert(validationContext != null);
 
             // Create a new context using the existing ValidationContext that acts as an IServiceProvider and contains our existing items.
-            var context = new ValidationContext(instance, validationContext, validationContext.Items);
+            var context = new ValidationContext(
+                instance,
+                validationContext,
+                validationContext.Items
+            );
             return context;
         }
 
@@ -357,9 +437,11 @@ namespace System.ComponentModel.DataAnnotations
             if (value == null)
             {
                 // Null can be assigned only to reference types or Nullable or Nullable<>
-                return !destinationType.IsValueType ||
-                       (destinationType.IsGenericType &&
-                        destinationType.GetGenericTypeDefinition() == typeof(Nullable<>));
+                return !destinationType.IsValueType
+                    || (
+                        destinationType.IsGenericType
+                        && destinationType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                    );
             }
 
             // Not null -- be sure it can be cast to the right type
@@ -373,12 +455,18 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="propertyType">The type of the property.</param>
         /// <param name="value">The value.  Null is permitted only if the property will accept it.</param>
         /// <exception cref="ArgumentException"> is thrown if <paramref name="value" /> is the wrong type for this property.</exception>
-        private static void EnsureValidPropertyType(string propertyName, Type propertyType, object? value)
+        private static void EnsureValidPropertyType(
+            string propertyName,
+            Type propertyType,
+            object? value
+        )
         {
             if (!CanBeAssigned(propertyType, value))
             {
-                throw new ArgumentException(SR.Format(SR.Validator_Property_Value_Wrong_Type, propertyName, propertyType),
-                                            nameof(value));
+                throw new ArgumentException(
+                    SR.Format(SR.Validator_Property_Value_Wrong_Type, propertyName, propertyType),
+                    nameof(value)
+                );
             }
         }
 
@@ -400,15 +488,24 @@ namespace System.ComponentModel.DataAnnotations
         ///     <see cref="ValidationContext.ObjectInstance" /> on <paramref name="validationContext" />.
         /// </exception>
         [RequiresUnreferencedCode(ValidationContext.InstanceTypeNotStaticallyDiscovered)]
-        private static List<ValidationError> GetObjectValidationErrors(object instance,
-            ValidationContext validationContext, bool validateAllProperties, bool breakOnFirstError)
+        private static List<ValidationError> GetObjectValidationErrors(
+            object instance,
+            ValidationContext validationContext,
+            bool validateAllProperties,
+            bool breakOnFirstError
+        )
         {
             ArgumentNullException.ThrowIfNull(validationContext);
 
             Debug.Assert(instance != null);
 
             // Step 1: Validate the object properties' validation attributes
-            List<ValidationError> errors = GetObjectPropertyValidationErrors(instance, validationContext, validateAllProperties, breakOnFirstError);
+            List<ValidationError> errors = GetObjectPropertyValidationErrors(
+                instance,
+                validationContext,
+                validateAllProperties,
+                breakOnFirstError
+            );
 
             // We only proceed to Step 2 if there are no errors
             if (errors.Count > 0)
@@ -418,7 +515,9 @@ namespace System.ComponentModel.DataAnnotations
 
             // Step 2: Validate the object's validation attributes
             var attributes = _store.GetTypeValidationAttributes(validationContext);
-            errors.AddRange(GetValidationErrors(instance, validationContext, attributes, breakOnFirstError));
+            errors.AddRange(
+                GetValidationErrors(instance, validationContext, attributes, breakOnFirstError)
+            );
 
             // We only proceed to Step 3 if there are no errors
             if (errors.Count > 0)
@@ -458,8 +557,12 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="breakOnFirstError">Whether to break on the first error or validate everything.</param>
         /// <returns>A list of <see cref="ValidationError" /> instances.</returns>
         [RequiresUnreferencedCode(ValidationContext.InstanceTypeNotStaticallyDiscovered)]
-        private static List<ValidationError> GetObjectPropertyValidationErrors(object instance,
-            ValidationContext validationContext, bool validateAllProperties, bool breakOnFirstError)
+        private static List<ValidationError> GetObjectPropertyValidationErrors(
+            object instance,
+            ValidationContext validationContext,
+            bool validateAllProperties,
+            bool breakOnFirstError
+        )
         {
             var properties = GetPropertyValues(instance, validationContext);
             var errors = new List<ValidationError>();
@@ -472,7 +575,14 @@ namespace System.ComponentModel.DataAnnotations
                 if (validateAllProperties)
                 {
                     // validate all validation attributes on this property
-                    errors.AddRange(GetValidationErrors(property.Value, property.Key, attributes, breakOnFirstError));
+                    errors.AddRange(
+                        GetValidationErrors(
+                            property.Value,
+                            property.Key,
+                            attributes,
+                            breakOnFirstError
+                        )
+                    );
                 }
                 else
                 {
@@ -483,10 +593,15 @@ namespace System.ComponentModel.DataAnnotations
                         {
                             // Note: we let the [Required] attribute do its own null testing,
                             // since the user may have subclassed it and have a deeper meaning to what 'required' means
-                            var validationResult = reqAttr.GetValidationResult(property.Value, property.Key);
+                            var validationResult = reqAttr.GetValidationResult(
+                                property.Value,
+                                property.Key
+                            );
                             if (validationResult != ValidationResult.Success)
                             {
-                                errors.Add(new ValidationError(reqAttr, property.Value, validationResult!));
+                                errors.Add(
+                                    new ValidationError(reqAttr, property.Value, validationResult!)
+                                );
                             }
                             break;
                         }
@@ -513,8 +628,10 @@ namespace System.ComponentModel.DataAnnotations
         /// </returns>
         /// <remarks>Ignores indexed properties.</remarks>
         [RequiresUnreferencedCode(ValidationContext.InstanceTypeNotStaticallyDiscovered)]
-        private static List<KeyValuePair<ValidationContext, object?>> GetPropertyValues(object instance,
-            ValidationContext validationContext)
+        private static List<KeyValuePair<ValidationContext, object?>> GetPropertyValues(
+            object instance,
+            ValidationContext validationContext
+        )
         {
             var properties = TypeDescriptor.GetProperties(instance.GetType());
             var items = new List<KeyValuePair<ValidationContext, object?>>(properties.Count);
@@ -526,13 +643,17 @@ namespace System.ComponentModel.DataAnnotations
 
                 if (_store.GetPropertyValidationAttributes(context).Any())
                 {
-                    items.Add(new KeyValuePair<ValidationContext, object?>(context, property.GetValue(instance)));
+                    items.Add(
+                        new KeyValuePair<ValidationContext, object?>(
+                            context,
+                            property.GetValue(instance)
+                        )
+                    );
                 }
             }
 
             return items;
         }
-
 
         /// <summary>
         ///     Internal iterator to enumerate all validation errors for an value.
@@ -550,8 +671,12 @@ namespace System.ComponentModel.DataAnnotations
         /// </param>
         /// <returns>The collection of validation errors.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="validationContext" /> is null.</exception>
-        private static List<ValidationError> GetValidationErrors(object? value,
-            ValidationContext validationContext, IEnumerable<ValidationAttribute> attributes, bool breakOnFirstError)
+        private static List<ValidationError> GetValidationErrors(
+            object? value,
+            ValidationContext validationContext,
+            IEnumerable<ValidationAttribute> attributes,
+            bool breakOnFirstError
+        )
         {
             ArgumentNullException.ThrowIfNull(validationContext);
 
@@ -607,8 +732,12 @@ namespace System.ComponentModel.DataAnnotations
         /// </param>
         /// <returns><c>true</c> if the value is valid.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="validationContext" /> is null.</exception>
-        private static bool TryValidate(object? value, ValidationContext validationContext, ValidationAttribute attribute,
-            [NotNullWhen(false)] out ValidationError? validationError)
+        private static bool TryValidate(
+            object? value,
+            ValidationContext validationContext,
+            ValidationAttribute attribute,
+            [NotNullWhen(false)] out ValidationError? validationError
+        )
         {
             Debug.Assert(validationContext != null);
 
@@ -632,8 +761,11 @@ namespace System.ComponentModel.DataAnnotations
             private readonly object? _value;
             private readonly ValidationAttribute? _validationAttribute;
 
-            internal ValidationError(ValidationAttribute? validationAttribute, object? value,
-                ValidationResult validationResult)
+            internal ValidationError(
+                ValidationAttribute? validationAttribute,
+                object? value,
+                ValidationResult validationResult
+            )
             {
                 _validationAttribute = validationAttribute;
                 ValidationResult = validationResult;
@@ -642,7 +774,8 @@ namespace System.ComponentModel.DataAnnotations
 
             internal ValidationResult ValidationResult { get; }
 
-            internal void ThrowValidationException() => throw new ValidationException(ValidationResult, _validationAttribute, _value);
+            internal void ThrowValidationException() =>
+                throw new ValidationException(ValidationResult, _validationAttribute, _value);
         }
     }
 }

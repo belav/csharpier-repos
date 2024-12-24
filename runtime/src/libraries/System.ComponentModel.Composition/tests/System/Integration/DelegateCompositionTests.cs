@@ -31,9 +31,7 @@ namespace Tests.Integration
 
             [Export("ActionWith8Arguments")]
             [Export("ActionWith8Arguments", typeof(Delegate))]
-            public void Action(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8)
-            {
-            }
+            public void Action(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8) { }
 
             [Export("FunctionWith8Arguments")]
             [Export("FunctionWith8Arguments", typeof(Delegate))]
@@ -52,8 +50,7 @@ namespace Tests.Integration
         [Fact]
         public void Export_SimpleCustomDelegate_ShouldWork()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(MethodExporter));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(MethodExporter));
 
             var contractName = AttributedModelServices.GetContractName(typeof(SimpleDelegate));
 
@@ -71,8 +68,7 @@ namespace Tests.Integration
         [Fact]
         public void Export_CustomDelegateWithOutRefParams_ShouldWork()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(MethodExporter));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(MethodExporter));
 
             var export1 = container.GetExportedValue<DoWorkDelegate>();
 
@@ -86,8 +82,7 @@ namespace Tests.Integration
         [Fact]
         public void Export_FunctionWith8Arguments_ShouldWorkFine()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(MethodExporter));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(MethodExporter));
 
             Assert.NotNull(container.GetExportedValue<Delegate>("FunctionWith8Arguments"));
         }
@@ -95,8 +90,7 @@ namespace Tests.Integration
         [Fact]
         public void Export_ActionWith8Arguments_ShouldWorkFine()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(MethodExporter));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(MethodExporter));
 
             Assert.NotNull(container.GetExportedValue<Delegate>("ActionWith8Arguments"));
         }
@@ -104,14 +98,16 @@ namespace Tests.Integration
         [Fact]
         public void Export_FunctionWithDefaultValue_ShouldWorkFine()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(MethodExporter));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(MethodExporter));
 
-            var export = container.GetExportedValue<Func<int, string, int>>("FunctionWithDefaultValue");
+            var export = container.GetExportedValue<Func<int, string, int>>(
+                "FunctionWithDefaultValue"
+            );
             Assert.Equal(3, export(3, "a"));
 
             // Even though the string argument is optional it still cannot be cast to Func<int, int>.
-            var export2 = (ExportedDelegate)container.GetExportedValue<object>("FunctionWithDefaultValue");
+            var export2 = (ExportedDelegate)
+                container.GetExportedValue<object>("FunctionWithDefaultValue");
             var export3 = export2.CreateDelegate(typeof(Func<int, int>));
 
             Assert.Null(export3);
@@ -150,10 +146,7 @@ namespace Tests.Integration
             [Export("CustomExportedDelegate", typeof(DelegateTwoArgs))]
             public ExportedDelegate MyExportedDelegate
             {
-                get
-                {
-                    return new CustomExportedDelegate(DoWork);
-                }
+                get { return new CustomExportedDelegate(DoWork); }
             }
 
             public int DoWork(int i, int j)
@@ -170,7 +163,6 @@ namespace Tests.Integration
 
             [Import("CustomExportedDelegate")]
             public DelegateTwoArgs DelegateTwoArgs { get; set; }
-
         }
 
         [Fact]
@@ -178,7 +170,8 @@ namespace Tests.Integration
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(ExportCustomExportedDelegates),
-                typeof(ImportCustomExportedDelegates));
+                typeof(ImportCustomExportedDelegates)
+            );
 
             var importer = container.GetExportedValue<ImportCustomExportedDelegates>();
 
@@ -202,7 +195,8 @@ namespace Tests.Integration
         public void MethodWithOutParam_ShouldWorkWithRefParam()
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(RefOutMethodExporter));
+                typeof(RefOutMethodExporter)
+            );
 
             int i = 0;
 

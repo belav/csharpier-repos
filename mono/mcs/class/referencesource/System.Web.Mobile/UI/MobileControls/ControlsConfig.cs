@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="ControlsConfig.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 
 using System;
-using System.Xml;
-using System.Diagnostics;
+using System.Collections.Specialized;
 using System.Configuration;
+using System.Diagnostics;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Configuration;
-using System.Collections.Specialized;
-using System.Security.Permissions;
+using System.Xml;
 
 namespace System.Web.UI.MobileControls
 {
@@ -22,7 +22,9 @@ namespace System.Web.UI.MobileControls
     // of device configurations, that can be used to decide what set of
     // adapters to use for a given device.
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class ControlsConfig
     {
         private readonly ControlsConfig _parent;
@@ -30,7 +32,7 @@ namespace System.Web.UI.MobileControls
         private readonly StringDictionary _settings = new StringDictionary();
         private readonly ListDictionary _deviceConfigs = new ListDictionary();
 
-        [ConfigurationPermission(SecurityAction.Assert, Unrestricted=true)]
+        [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
         internal static ControlsConfig GetFromContext(HttpContext context)
         {
             // VSWhidbey 372365: Use MobileControlsSection if it is being returned
@@ -49,7 +51,8 @@ namespace System.Web.UI.MobileControls
         }
 
         // Return false if a device of the same name has already been added.
-        internal /*public*/ bool AddDeviceConfig(String configName, IndividualDeviceConfig deviceConfig)
+        internal /*public*/
+        bool AddDeviceConfig(String configName, IndividualDeviceConfig deviceConfig)
         {
             // Note that GetDeviceConfig also walks the parents configs
             if (GetDeviceConfig(configName) != null)
@@ -63,11 +66,12 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        internal /*public*/ IndividualDeviceConfig GetDeviceConfig(HttpContext context)
+        internal /*public*/
+        IndividualDeviceConfig GetDeviceConfig(HttpContext context)
         {
             IndividualDeviceConfig deviceConfig = null;
 
-            #if DEBUG
+#if DEBUG
             if (context.Session != null)
             {
                 String var = "AdapterOverride";
@@ -78,8 +82,10 @@ namespace System.Web.UI.MobileControls
                     saveInSession = false;
                     adapterOverride = (String)context.Request.QueryString[var];
                 }
-                if (adapterOverride != null && 
-                    (deviceConfig = GetDeviceConfig(adapterOverride)) != null)
+                if (
+                    adapterOverride != null
+                    && (deviceConfig = GetDeviceConfig(adapterOverride)) != null
+                )
                 {
                     if (saveInSession)
                     {
@@ -88,9 +94,9 @@ namespace System.Web.UI.MobileControls
                     return deviceConfig;
                 }
             }
-            #endif
+#endif
 
-            foreach (IndividualDeviceConfig candidate in _deviceConfigs.Values) 
+            foreach (IndividualDeviceConfig candidate in _deviceConfigs.Values)
             {
                 if (candidate.DeviceQualifies(context))
                 {
@@ -101,25 +107,30 @@ namespace System.Web.UI.MobileControls
 
             if (deviceConfig == null && _parent != null)
             {
-                deviceConfig = _parent.GetDeviceConfig (context);
+                deviceConfig = _parent.GetDeviceConfig(context);
             }
 
             if (deviceConfig == null)
             {
                 throw new Exception(
-                    SR.GetString(SR.ControlsConfig_NoDeviceConfigRegistered,
-                                 context.Request.UserAgent));
+                    SR.GetString(
+                        SR.ControlsConfig_NoDeviceConfigRegistered,
+                        context.Request.UserAgent
+                    )
+                );
             }
 
             return deviceConfig;
         }
 
-        internal /*public*/ IndividualDeviceConfig GetDeviceConfig(String configName)
+        internal /*public*/
+        IndividualDeviceConfig GetDeviceConfig(String configName)
         {
-            IndividualDeviceConfig deviceConfig = (IndividualDeviceConfig)_deviceConfigs[configName];
+            IndividualDeviceConfig deviceConfig = (IndividualDeviceConfig)
+                _deviceConfigs[configName];
             if (deviceConfig == null && _parent != null)
             {
-                deviceConfig = _parent.GetDeviceConfig (configName);
+                deviceConfig = _parent.GetDeviceConfig(configName);
             }
             return deviceConfig;
         }
@@ -139,7 +150,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        internal /*public*/ String this[String key]
+        internal /*public*/
+        String this[String key]
         {
             get
             {
@@ -150,20 +162,17 @@ namespace System.Web.UI.MobileControls
                 }
                 return s;
             }
-
-            set
-            {
-                _settings[key] = value;
-            }
+            set { _settings[key] = value; }
         }
 
-        internal /*public*/ int SessionStateHistorySize
+        internal /*public*/
+        int SessionStateHistorySize
         {
             get
             {
                 String sizeString = this["sessionStateHistorySize"];
                 int size = Constants.DefaultSessionsStateHistorySize;
-                
+
                 if (sizeString != null)
                 {
                     // Enclose in case a numerical value wasn't provided.  In
@@ -172,29 +181,30 @@ namespace System.Web.UI.MobileControls
                     {
                         size = Int32.Parse(sizeString, CultureInfo.InvariantCulture);
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
 
                 return size;
             }
         }
 
-        internal /*public*/ Type CookielessDataDictionaryType
+        internal /*public*/
+        Type CookielessDataDictionaryType
         {
             get
             {
                 Type cookielessDataType = null;
                 String typeString = this["cookielessDataDictionaryType"];
-                if (!String.IsNullOrEmpty(typeString)) {
+                if (!String.IsNullOrEmpty(typeString))
+                {
                     cookielessDataType = Type.GetType(typeString);
                 }
                 return cookielessDataType;
             }
         }
 
-        internal /*public*/ bool AllowCustomAttributes
+        internal /*public*/
+        bool AllowCustomAttributes
         {
             get
             {

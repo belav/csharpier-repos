@@ -4,14 +4,14 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.Configuration;
     using System.Globalization;
     using System.Runtime.CompilerServices;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
 
     internal static class WebConfigurationStrings
     {

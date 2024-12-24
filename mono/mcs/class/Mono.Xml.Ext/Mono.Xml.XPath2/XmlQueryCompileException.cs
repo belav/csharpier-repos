@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,37 +36,31 @@ using System.Runtime.Serialization;
 
 namespace System.Xml.Query
 {
-	[Serializable]
-	public class XmlQueryCompileException : XmlQueryException
-	{
-		#region Constructors
+    [Serializable]
+    public class XmlQueryCompileException : XmlQueryException
+    {
+        #region Constructors
 
-		protected XmlQueryCompileException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected XmlQueryCompileException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		public XmlQueryCompileException ()
-			: base ("An XML Query Compile Exception has occurred.")
-		{
-		}
+        public XmlQueryCompileException()
+            : base("An XML Query Compile Exception has occurred.") { }
 
-		public XmlQueryCompileException (string res)
-			: this (res, null, null, null)
-		{
-		}
+        public XmlQueryCompileException(string res)
+            : this(res, null, null, null) { }
 
-		public XmlQueryCompileException (string resource, Exception exception)
-			: this (resource, null, null, exception)
-		{
-		}
+        public XmlQueryCompileException(string resource, Exception exception)
+            : this(resource, null, null, exception) { }
 
-		internal XmlQueryCompileException (string message, IXmlLineInfo li, string sourceUri, Exception innerException)
-			: base (message, li, sourceUri, innerException)
-		{
-		}
+        internal XmlQueryCompileException(
+            string message,
+            IXmlLineInfo li,
+            string sourceUri,
+            Exception innerException
+        )
+            : base(message, li, sourceUri, innerException) { }
 
-		#endregion // Constructors
-	}
+        #endregion // Constructors
+    }
 }
-

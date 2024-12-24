@@ -18,7 +18,9 @@ namespace System.Threading.Tests
             IntPtr eventHandle = e.SafeWaitHandle.DangerousGetHandle();
             var handles = new IntPtr[] { eventHandle, eventHandle };
             Assert.Equal(WaitHandle.WaitTimeout, tsc.Wait(handles, false, 0));
-            Assert.Throws<DuplicateWaitObjectException>(() => Task.Run(() => tsc.Wait(handles, true, 0)).GetAwaiter().GetResult()); // ensure Wait runs on MTA thread
+            Assert.Throws<DuplicateWaitObjectException>(
+                () => Task.Run(() => tsc.Wait(handles, true, 0)).GetAwaiter().GetResult()
+            ); // ensure Wait runs on MTA thread
 
             var e2 = new ManualResetEvent(false);
             handles = new IntPtr[] { eventHandle, e2.SafeWaitHandle.DangerousGetHandle() };
@@ -37,7 +39,9 @@ namespace System.Threading.Tests
         [Fact]
         public static void WaitTest_ChangedInDotNetCore()
         {
-            Assert.Throws<ArgumentNullException>(() => TestSynchronizationContext.WaitHelper(null, false, 0));
+            Assert.Throws<ArgumentNullException>(
+                () => TestSynchronizationContext.WaitHelper(null, false, 0)
+            );
         }
 
         [Fact]
@@ -76,37 +80,44 @@ namespace System.Threading.Tests
                 var lockObj = new object();
                 var lockAcquiredFromBackground = new AutoResetEvent(false);
                 Action waitForThread;
-                Thread t =
-                    ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+                Thread t = ThreadTestHelpers.CreateGuardedThread(
+                    out waitForThread,
+                    () =>
                     {
                         lock (lockObj)
                         {
                             lockAcquiredFromBackground.Set();
                             e.CheckedWait();
                         }
-                    });
+                    }
+                );
                 t.IsBackground = true;
                 t.Start();
                 lockAcquiredFromBackground.CheckedWait();
-                Assert.True(Monitor.TryEnter(lockObj, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+                Assert.True(
+                    Monitor.TryEnter(lockObj, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                );
                 Monitor.Exit(lockObj);
                 waitForThread();
 
                 e.Reset();
                 var m = new Mutex();
-                t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
-                {
-                    m.CheckedWait();
-                    try
+                t = ThreadTestHelpers.CreateGuardedThread(
+                    out waitForThread,
+                    () =>
                     {
-                        lockAcquiredFromBackground.Set();
-                        e.CheckedWait();
+                        m.CheckedWait();
+                        try
+                        {
+                            lockAcquiredFromBackground.Set();
+                            e.CheckedWait();
+                        }
+                        finally
+                        {
+                            m.ReleaseMutex();
+                        }
                     }
-                    finally
-                    {
-                        m.ReleaseMutex();
-                    }
-                });
+                );
                 t.IsBackground = true;
                 t.Start();
                 lockAcquiredFromBackground.CheckedWait();
@@ -134,7 +145,11 @@ namespace System.Threading.Tests
                 return base.Wait(waitHandles, waitAll, millisecondsTimeout);
             }
 
-            public static new int WaitHelper(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
+            public static new int WaitHelper(
+                IntPtr[] waitHandles,
+                bool waitAll,
+                int millisecondsTimeout
+            )
             {
                 return SynchronizationContext.WaitHelper(waitHandles, waitAll, millisecondsTimeout);
             }

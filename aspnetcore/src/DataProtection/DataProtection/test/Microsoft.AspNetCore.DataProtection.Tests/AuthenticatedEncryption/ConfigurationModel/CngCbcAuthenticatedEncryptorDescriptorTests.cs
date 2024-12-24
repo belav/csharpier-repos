@@ -12,21 +12,28 @@ public class CngCbcAuthenticatedEncryptorDescriptorTests
     {
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
-        var descriptor = new CngCbcAuthenticatedEncryptorDescriptor(new CngCbcAuthenticatedEncryptorConfiguration()
-        {
-            EncryptionAlgorithm = "enc-alg",
-            EncryptionAlgorithmKeySize = 2048,
-            EncryptionAlgorithmProvider = "enc-alg-prov",
-            HashAlgorithm = "hash-alg",
-            HashAlgorithmProvider = "hash-alg-prov"
-        }, masterKey.ToSecret());
+        var descriptor = new CngCbcAuthenticatedEncryptorDescriptor(
+            new CngCbcAuthenticatedEncryptorConfiguration()
+            {
+                EncryptionAlgorithm = "enc-alg",
+                EncryptionAlgorithmKeySize = 2048,
+                EncryptionAlgorithmProvider = "enc-alg-prov",
+                HashAlgorithm = "hash-alg",
+                HashAlgorithmProvider = "hash-alg-prov",
+            },
+            masterKey.ToSecret()
+        );
 
         // Act
         var retVal = descriptor.ExportToXml();
 
         // Assert
-        Assert.Equal(typeof(CngCbcAuthenticatedEncryptorDescriptorDeserializer), retVal.DeserializerType);
-        var expectedXml = $@"
+        Assert.Equal(
+            typeof(CngCbcAuthenticatedEncryptorDescriptorDeserializer),
+            retVal.DeserializerType
+        );
+        var expectedXml =
+            $@"
                 <descriptor>
                   <encryption algorithm='enc-alg' keyLength='2048' provider='enc-alg-prov' />
                   <hash algorithm='hash-alg' provider='hash-alg-prov' />
@@ -42,19 +49,26 @@ public class CngCbcAuthenticatedEncryptorDescriptorTests
     {
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
-        var descriptor = new CngCbcAuthenticatedEncryptorDescriptor(new CngCbcAuthenticatedEncryptorConfiguration()
-        {
-            EncryptionAlgorithm = "enc-alg",
-            EncryptionAlgorithmKeySize = 2048,
-            HashAlgorithm = "hash-alg"
-        }, masterKey.ToSecret());
+        var descriptor = new CngCbcAuthenticatedEncryptorDescriptor(
+            new CngCbcAuthenticatedEncryptorConfiguration()
+            {
+                EncryptionAlgorithm = "enc-alg",
+                EncryptionAlgorithmKeySize = 2048,
+                HashAlgorithm = "hash-alg",
+            },
+            masterKey.ToSecret()
+        );
 
         // Act
         var retVal = descriptor.ExportToXml();
 
         // Assert
-        Assert.Equal(typeof(CngCbcAuthenticatedEncryptorDescriptorDeserializer), retVal.DeserializerType);
-        var expectedXml = $@"
+        Assert.Equal(
+            typeof(CngCbcAuthenticatedEncryptorDescriptorDeserializer),
+            retVal.DeserializerType
+        );
+        var expectedXml =
+            $@"
                 <descriptor>
                   <encryption algorithm='enc-alg' keyLength='2048' />
                   <hash algorithm='hash-alg' />

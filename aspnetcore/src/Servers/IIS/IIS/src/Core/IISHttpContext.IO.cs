@@ -18,7 +18,10 @@ internal partial class IISHttpContext
     /// <param name="memory"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal async ValueTask<int> ReadAsync(Memory<byte> memory, CancellationToken cancellationToken)
+    internal async ValueTask<int> ReadAsync(
+        Memory<byte> memory,
+        CancellationToken cancellationToken
+    )
     {
         if (!HasStartedConsumingRequestBody)
         {
@@ -66,7 +69,10 @@ internal partial class IISHttpContext
     /// <param name="memory"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal Task WriteAsync(ReadOnlyMemory<byte> memory, CancellationToken cancellationToken = default(CancellationToken))
+    internal Task WriteAsync(
+        ReadOnlyMemory<byte> memory,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         async Task WriteFirstAsync()
         {
@@ -74,7 +80,9 @@ internal partial class IISHttpContext
             await _bodyOutput.WriteAsync(memory, cancellationToken);
         }
 
-        return !HasResponseStarted ? WriteFirstAsync() : _bodyOutput.WriteAsync(memory, cancellationToken);
+        return !HasResponseStarted
+            ? WriteFirstAsync()
+            : _bodyOutput.WriteAsync(memory, cancellationToken);
     }
 
     /// <summary>
@@ -259,7 +267,8 @@ internal partial class IISHttpContext
 
     private void CancelRequestAbortedToken()
     {
-        ThreadPool.UnsafeQueueUserWorkItem(ctx =>
+        ThreadPool.UnsafeQueueUserWorkItem(
+            ctx =>
             {
                 try
                 {
@@ -280,9 +289,17 @@ internal partial class IISHttpContext
                 }
                 catch (Exception ex)
                 {
-                    Log.ApplicationError(_logger, ((IHttpConnectionFeature)this).ConnectionId, TraceIdentifier!, ex); // TODO: Can TraceIdentifier be null?
+                    Log.ApplicationError(
+                        _logger,
+                        ((IHttpConnectionFeature)this).ConnectionId,
+                        TraceIdentifier!,
+                        ex
+                    ); // TODO: Can TraceIdentifier be null?
                 }
-            }, this, preferLocal: false);
+            },
+            this,
+            preferLocal: false
+        );
     }
 
     public void Abort(Exception reason)

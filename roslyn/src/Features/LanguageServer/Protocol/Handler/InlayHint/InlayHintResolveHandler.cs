@@ -19,7 +19,8 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
 {
     [Method(Methods.InlayHintResolveName)]
-    internal sealed class InlayHintResolveHandler : ILspServiceDocumentRequestHandler<LSP.InlayHint, LSP.InlayHint>
+    internal sealed class InlayHintResolveHandler
+        : ILspServiceDocumentRequestHandler<LSP.InlayHint, LSP.InlayHint>
     {
         private readonly InlayHintCache _inlayHintCache;
 
@@ -32,33 +33,50 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
 
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(LSP.InlayHint request)
-            => GetInlayHintResolveData(request).TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(LSP.InlayHint request) =>
+            GetInlayHintResolveData(request).TextDocument;
 
-        public async Task<LSP.InlayHint> HandleRequestAsync(LSP.InlayHint request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.InlayHint> HandleRequestAsync(
+            LSP.InlayHint request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.GetRequiredDocument();
             var resolveData = GetInlayHintResolveData(request);
             var (cacheEntry, inlineHintToResolve) = GetCacheEntry(resolveData);
 
-            var currentSyntaxVersion = await document.GetSyntaxVersionAsync(cancellationToken).ConfigureAwait(false);
+            var currentSyntaxVersion = await document
+                .GetSyntaxVersionAsync(cancellationToken)
+                .ConfigureAwait(false);
             var cachedSyntaxVersion = cacheEntry.SyntaxVersion;
 
             if (currentSyntaxVersion != cachedSyntaxVersion)
             {
-                throw new LocalRpcException($"Cached resolve version {cachedSyntaxVersion} does not match current version {currentSyntaxVersion}")
+                throw new LocalRpcException(
+                    $"Cached resolve version {cachedSyntaxVersion} does not match current version {currentSyntaxVersion}"
+                )
                 {
-                    ErrorCode = LspErrorCodes.ContentModified
+                    ErrorCode = LspErrorCodes.ContentModified,
                 };
             }
 
-            var taggedText = await inlineHintToResolve.GetDescriptionAsync(document, cancellationToken).ConfigureAwait(false);
+            var taggedText = await inlineHintToResolve
+                .GetDescriptionAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
-            request.ToolTip = ProtocolConversions.GetDocumentationMarkupContent(taggedText, document, true);
+            request.ToolTip = ProtocolConversions.GetDocumentationMarkupContent(
+                taggedText,
+                document,
+                true
+            );
             return request;
         }
 
-        private (InlayHintCache.InlayHintCacheEntry CacheEntry, InlineHint InlineHintToResolve) GetCacheEntry(InlayHintResolveData resolveData)
+        private (
+            InlayHintCache.InlayHintCacheEntry CacheEntry,
+            InlineHint InlineHintToResolve
+        ) GetCacheEntry(InlayHintResolveData resolveData)
         {
             var cacheEntry = _inlayHintCache.GetCachedEntry(resolveData.ResultId);
             Contract.ThrowIfNull(cacheEntry, "Missing cache entry for inlay hint resolve request");

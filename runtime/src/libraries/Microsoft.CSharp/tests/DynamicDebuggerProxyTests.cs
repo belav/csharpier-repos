@@ -21,18 +21,25 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             var obj = new DynamicTestObject(new Dictionary<string, object>());
             var debugView = CreateDebugView(obj);
 
-            var exceptionType = GetType("DynamicMetaObjectProviderDebugView+DynamicDebugViewEmptyException");
+            var exceptionType = GetType(
+                "DynamicMetaObjectProviderDebugView+DynamicDebugViewEmptyException"
+            );
             var exception = Assert.Throws(exceptionType, () => GetItems(debugView));
 
             // Get resource string.
-            var itemValue = (string)exceptionType.GetMethod("get_Empty", BindingFlags.Public | BindingFlags.Instance).Invoke(exception, new object[0]);
+            var itemValue = (string)
+                exceptionType
+                    .GetMethod("get_Empty", BindingFlags.Public | BindingFlags.Instance)
+                    .Invoke(exception, new object[0]);
             Assert.NotNull(itemValue);
         }
 
         [Fact]
         public void Items()
         {
-            var obj = new DynamicTestObject(new Dictionary<string, object>() { { "F", 1 }, { "G", "" } });
+            var obj = new DynamicTestObject(
+                new Dictionary<string, object>() { { "F", 1 }, { "G", "" } }
+            );
             var debugView = CreateDebugView(obj);
             var items = GetItems(debugView);
             Assert.Equal(2, items.Length);
@@ -55,7 +62,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // ignoreException: false
             var exceptionType = GetType("DynamicBindingFailedException");
-            Assert.Throws(exceptionType, () => GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false)));
+            Assert.Throws(
+                exceptionType,
+                () => GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false))
+            );
         }
 
         [Fact]
@@ -68,12 +78,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.NotNull(message);
 
             // ignoreException: false
-            Assert.Throws<MissingMemberException>(() => GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false)));
+            Assert.Throws<MissingMemberException>(
+                () => GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false))
+            );
         }
 
         private static Type GetType(string typeName)
         {
-            return typeof(Binder).Assembly.GetType("Microsoft.CSharp.RuntimeBinder." + typeName, throwOnError: true);
+            return typeof(Binder).Assembly.GetType(
+                "Microsoft.CSharp.RuntimeBinder." + typeName,
+                throwOnError: true
+            );
         }
 
         private static object CreateDebugView(object arg)
@@ -83,14 +98,24 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private static object[] GetItems(object debugView)
         {
-            var method = _debugViewType.GetMethod("get_Items", BindingFlags.NonPublic | BindingFlags.Instance);
+            var method = _debugViewType.GetMethod(
+                "get_Items",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             return (object[])InvokeAndUnwrapException(method, debugView, new object[0]);
         }
 
         private static object TryGetMemberValueImpl(object obj, string name, bool ignoreException)
         {
-            var method = _debugViewType.GetMethod("TryGetMemberValue", BindingFlags.NonPublic | BindingFlags.Static);
-            return InvokeAndUnwrapException(method, null, new object[] { obj, name, ignoreException });
+            var method = _debugViewType.GetMethod(
+                "TryGetMemberValue",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
+            return InvokeAndUnwrapException(
+                method,
+                null,
+                new object[] { obj, name, ignoreException }
+            );
         }
 
         private static object InvokeAndUnwrapException(MethodInfo method, object obj, object[] args)
@@ -110,7 +135,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             private readonly Dictionary<string, object> _members;
             private readonly bool _throwIfMissing;
 
-            internal DynamicTestObject(Dictionary<string, object> members, bool throwIfMissing = false)
+            internal DynamicTestObject(
+                Dictionary<string, object> members,
+                bool throwIfMissing = false
+            )
             {
                 _members = members;
                 _throwIfMissing = throwIfMissing;

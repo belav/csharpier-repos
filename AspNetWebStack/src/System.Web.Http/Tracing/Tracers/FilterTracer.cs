@@ -36,7 +36,10 @@ namespace System.Web.Http.Tracing.Tracers
             get { return InnerFilter.AllowMultiple; }
         }
 
-        public static IEnumerable<IFilter> CreateFilterTracers(IFilter filter, ITraceWriter traceWriter)
+        public static IEnumerable<IFilter> CreateFilterTracers(
+            IFilter filter,
+            ITraceWriter traceWriter
+        )
         {
             List<IFilter> filters = new List<IFilter>();
             bool addedActionAttributeTracer = false;
@@ -50,17 +53,25 @@ namespace System.Web.Http.Tracing.Tracers
                 addedActionAttributeTracer = true;
             }
 
-            AuthorizationFilterAttribute authorizationFilterAttribute = filter as AuthorizationFilterAttribute;
+            AuthorizationFilterAttribute authorizationFilterAttribute =
+                filter as AuthorizationFilterAttribute;
             if (authorizationFilterAttribute != null)
             {
-                filters.Add(new AuthorizationFilterAttributeTracer(authorizationFilterAttribute, traceWriter));
+                filters.Add(
+                    new AuthorizationFilterAttributeTracer(
+                        authorizationFilterAttribute,
+                        traceWriter
+                    )
+                );
                 addedAuthorizationAttributeTracer = true;
             }
 
             ExceptionFilterAttribute exceptionFilterAttribute = filter as ExceptionFilterAttribute;
             if (exceptionFilterAttribute != null)
             {
-                filters.Add(new ExceptionFilterAttributeTracer(exceptionFilterAttribute, traceWriter));
+                filters.Add(
+                    new ExceptionFilterAttributeTracer(exceptionFilterAttribute, traceWriter)
+                );
                 addedExceptionAttributeTracer = true;
             }
 
@@ -101,11 +112,14 @@ namespace System.Web.Http.Tracing.Tracers
             {
                 filters.Add(new FilterTracer(filter, traceWriter));
             }
-            
+
             return filters;
         }
 
-        public static IEnumerable<FilterInfo> CreateFilterTracers(FilterInfo filter, ITraceWriter traceWriter)
+        public static IEnumerable<FilterInfo> CreateFilterTracers(
+            FilterInfo filter,
+            ITraceWriter traceWriter
+        )
         {
             IFilter filterInstance = filter.Instance;
             IEnumerable<IFilter> filterTracers = CreateFilterTracers(filterInstance, traceWriter);
@@ -120,10 +134,10 @@ namespace System.Web.Http.Tracing.Tracers
 
         public static bool IsFilterTracer(IFilter filter)
         {
-            return filter is FilterTracer ||
-                   filter is ActionFilterAttributeTracer ||
-                   filter is AuthorizationFilterAttributeTracer ||
-                   filter is ExceptionFilterAttributeTracer;
+            return filter is FilterTracer
+                || filter is ActionFilterAttributeTracer
+                || filter is AuthorizationFilterAttributeTracer
+                || filter is ExceptionFilterAttributeTracer;
         }
     }
 }

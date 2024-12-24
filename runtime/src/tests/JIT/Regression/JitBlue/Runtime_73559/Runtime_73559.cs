@@ -30,6 +30,7 @@ public unsafe class Runtime_73559
 
     private struct S8
     {
-        public int A, B;
+        public int A,
+            B;
     }
 }
