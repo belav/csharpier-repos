@@ -71,7 +71,11 @@ internal sealed partial class HttpSysListener : IDisposable
         {
             _serverSession = new ServerSession();
 
-            _requestQueue = new RequestQueue(options.RequestQueueName, options.RequestQueueMode, Logger);
+            _requestQueue = new RequestQueue(
+                options.RequestQueueName,
+                options.RequestQueueMode,
+                Logger
+            );
 
             _urlGroup = new UrlGroup(_serverSession, _requestQueue, Logger);
 
@@ -142,7 +146,10 @@ internal sealed partial class HttpSysListener : IDisposable
                 }
 
                 // Always configure the UrlGroup if the intent was to create, only configure the queue if we actually created it
-                if (Options.RequestQueueMode == RequestQueueMode.Create || Options.RequestQueueMode == RequestQueueMode.CreateOrAttach)
+                if (
+                    Options.RequestQueueMode == RequestQueueMode.Create
+                    || Options.RequestQueueMode == RequestQueueMode.CreateOrAttach
+                )
                 {
                     Options.Apply(UrlGroup, _requestQueue.Created ? RequestQueue : null);
 
@@ -189,14 +196,16 @@ internal sealed partial class HttpSysListener : IDisposable
                 Log.ListenerStopping(Logger);
 
                 // If this instance registered URL prefixes then remove them before shutting down.
-                if (Options.RequestQueueMode == RequestQueueMode.Create || Options.RequestQueueMode == RequestQueueMode.CreateOrAttach)
+                if (
+                    Options.RequestQueueMode == RequestQueueMode.Create
+                    || Options.RequestQueueMode == RequestQueueMode.CreateOrAttach
+                )
                 {
                     Options.UrlPrefixes.UnregisterAllPrefixes();
                     UrlGroup.DetachFromQueue();
                 }
 
                 _state = State.Stopped;
-
             }
         }
         catch (Exception exception)
@@ -260,7 +269,10 @@ internal sealed partial class HttpSysListener : IDisposable
         _urlGroup.Dispose();
 
         Debug.Assert(_serverSession != null, "ServerSessionHandle is null in CloseV2Config");
-        Debug.Assert(!_serverSession.Id.IsInvalid, "ServerSessionHandle is invalid in CloseV2Config");
+        Debug.Assert(
+            !_serverSession.Id.IsInvalid,
+            "ServerSessionHandle is invalid in CloseV2Config"
+        );
 
         _serverSession.Dispose();
     }
@@ -283,14 +295,21 @@ internal sealed partial class HttpSysListener : IDisposable
             // Block potential DOS attacks
             if (requestMemory.UnknownHeaderCount > UnknownHeaderLimit)
             {
-                SendError(requestMemory.RequestId, StatusCodes.Status400BadRequest, authChallenges: null);
+                SendError(
+                    requestMemory.RequestId,
+                    StatusCodes.Status400BadRequest,
+                    authChallenges: null
+                );
                 return false;
             }
 
             if (!Options.Authentication.AllowAnonymous && !requestMemory.CheckAuthenticated())
             {
-                SendError(requestMemory.RequestId, StatusCodes.Status401Unauthorized,
-                    AuthenticationManager.GenerateChallenges(Options.Authentication.Schemes));
+                SendError(
+                    requestMemory.RequestId,
+                    StatusCodes.Status401Unauthorized,
+                    AuthenticationManager.GenerateChallenges(Options.Authentication.Schemes)
+                );
                 return false;
             }
         }
@@ -303,14 +322,14 @@ internal sealed partial class HttpSysListener : IDisposable
         return true;
     }
 
-    internal unsafe void SendError(ulong requestId, int httpStatusCode, IList<string>? authChallenges = null)
+    internal unsafe void SendError(
+        ulong requestId,
+        int httpStatusCode,
+        IList<string>? authChallenges = null
+    )
     {
         var httpResponse = new HTTP_RESPONSE_V2();
-        httpResponse.Base.Version = new()
-        {
-            MajorVersion = 1,
-            MinorVersion = 1
-        };
+        httpResponse.Base.Version = new() { MajorVersion = 1, MinorVersion = 1 };
 
         using UnmanagedBufferAllocator allocator = new();
 
@@ -323,9 +342,10 @@ internal sealed partial class HttpSysListener : IDisposable
             var knownHeaderInfo = allocator.AllocAsPointer<HTTP_RESPONSE_INFO>(1);
             httpResponse.pResponseInfo = knownHeaderInfo;
 
-            knownHeaderInfo[httpResponse.ResponseInfoCount].Type = HTTP_RESPONSE_INFO_TYPE.HttpResponseInfoTypeMultipleKnownHeaders;
-            knownHeaderInfo[httpResponse.ResponseInfoCount].Length =
-                (uint)sizeof(HTTP_MULTIPLE_KNOWN_HEADERS);
+            knownHeaderInfo[httpResponse.ResponseInfoCount].Type =
+                HTTP_RESPONSE_INFO_TYPE.HttpResponseInfoTypeMultipleKnownHeaders;
+            knownHeaderInfo[httpResponse.ResponseInfoCount].Length = (uint)
+                sizeof(HTTP_MULTIPLE_KNOWN_HEADERS);
 
             var header = allocator.AllocAsPointer<HTTP_MULTIPLE_KNOWN_HEADERS>(1);
 
@@ -333,15 +353,23 @@ internal sealed partial class HttpSysListener : IDisposable
             header->Flags = PInvoke.HTTP_RESPONSE_INFO_FLAGS_PRESERVE_ORDER; // The docs say this is for www-auth only.
             header->KnownHeaderCount = 0;
 
-            var nativeHeaderValues = allocator.AllocAsPointer<HTTP_KNOWN_HEADER>(authChallenges.Count);
+            var nativeHeaderValues = allocator.AllocAsPointer<HTTP_KNOWN_HEADER>(
+                authChallenges.Count
+            );
             header->KnownHeaders = nativeHeaderValues;
 
-            for (var headerValueIndex = 0; headerValueIndex < authChallenges.Count; headerValueIndex++)
+            for (
+                var headerValueIndex = 0;
+                headerValueIndex < authChallenges.Count;
+                headerValueIndex++
+            )
             {
                 // Add Value
                 var headerValue = authChallenges[headerValueIndex];
                 bytes = allocator.GetHeaderEncodedBytes(headerValue, out bytesLength);
-                nativeHeaderValues[header->KnownHeaderCount].RawValueLength = checked((ushort)bytesLength);
+                nativeHeaderValues[header->KnownHeaderCount].RawValueLength = checked(
+                    (ushort)bytesLength
+                );
                 nativeHeaderValues[header->KnownHeaderCount].pRawValue = (PCSTR)bytes;
                 header->KnownHeaderCount++;
             }
@@ -378,7 +406,8 @@ internal sealed partial class HttpSysListener : IDisposable
             null,
             &dataWritten,
             null,
-            null);
+            null
+        );
         if (statusCode != ErrorCodes.ERROR_SUCCESS)
         {
             // if we fail to send a 401 something's seriously wrong, abort the request

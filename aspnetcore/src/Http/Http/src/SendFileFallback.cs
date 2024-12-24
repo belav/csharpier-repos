@@ -20,15 +20,20 @@ public static class SendFileFallback
     /// <param name="count">The number of bytes to send, or null to send the remainder of the file.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to abort the transmission.</param>
     /// <returns></returns>
-    public static async Task SendFileAsync(Stream destination, string filePath, long offset, long? count, CancellationToken cancellationToken)
+    public static async Task SendFileAsync(
+        Stream destination,
+        string filePath,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken
+    )
     {
         var fileInfo = new FileInfo(filePath);
         if (offset < 0 || offset > fileInfo.Length)
         {
             throw new ArgumentOutOfRangeException(nameof(offset), offset, string.Empty);
         }
-        if (count.HasValue &&
-            (count.Value < 0 || count.Value > fileInfo.Length - offset))
+        if (count.HasValue && (count.Value < 0 || count.Value > fileInfo.Length - offset))
         {
             throw new ArgumentOutOfRangeException(nameof(count), count, string.Empty);
         }
@@ -43,12 +48,19 @@ public static class SendFileFallback
             FileAccess.Read,
             FileShare.ReadWrite,
             bufferSize: bufferSize,
-            options: FileOptions.Asynchronous | FileOptions.SequentialScan);
+            options: FileOptions.Asynchronous | FileOptions.SequentialScan
+        );
 
         using (fileStream)
         {
             fileStream.Seek(offset, SeekOrigin.Begin);
-            await StreamCopyOperationInternal.CopyToAsync(fileStream, destination, count, bufferSize, cancellationToken);
+            await StreamCopyOperationInternal.CopyToAsync(
+                fileStream,
+                destination,
+                count,
+                bufferSize,
+                cancellationToken
+            );
         }
     }
 }

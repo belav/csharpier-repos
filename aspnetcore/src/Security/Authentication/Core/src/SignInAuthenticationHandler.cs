@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Adds support for SignInAsync
 /// </summary>
-public abstract class SignInAuthenticationHandler<TOptions> : SignOutAuthenticationHandler<TOptions>, IAuthenticationSignInHandler
+public abstract class SignInAuthenticationHandler<TOptions>
+    : SignOutAuthenticationHandler<TOptions>,
+        IAuthenticationSignInHandler
     where TOptions : AuthenticationSchemeOptions, new()
 {
     /// <summary>
@@ -22,8 +24,13 @@ public abstract class SignInAuthenticationHandler<TOptions> : SignOutAuthenticat
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
     /// <param name="clock">The <see cref="ISystemClock"/>.</param>
     [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public SignInAuthenticationHandler(IOptionsMonitor<TOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
-    { }
+    public SignInAuthenticationHandler(
+        IOptionsMonitor<TOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInAuthenticationHandler{TOptions}"/>.
@@ -31,8 +38,12 @@ public abstract class SignInAuthenticationHandler<TOptions> : SignOutAuthenticat
     /// <param name="options">The monitor for the options instance.</param>
     /// <param name="logger">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
-    public SignInAuthenticationHandler(IOptionsMonitor<TOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options, logger, encoder)
-    { }
+    public SignInAuthenticationHandler(
+        IOptionsMonitor<TOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     /// <inheritdoc/>
     public virtual Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties)
@@ -49,5 +60,8 @@ public abstract class SignInAuthenticationHandler<TOptions> : SignOutAuthenticat
     /// <param name="user"></param>
     /// <param name="properties"></param>
     /// <returns>A Task.</returns>
-    protected abstract Task HandleSignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties);
+    protected abstract Task HandleSignInAsync(
+        ClaimsPrincipal user,
+        AuthenticationProperties? properties
+    );
 }

@@ -8,9 +8,13 @@ using Xunit;
 public class Program
 {
     public static IRuntime s_rt;
-    public static bool[,] s_32 = new bool[,] { { false } };
+    public static bool[,] s_32 = new bool[,]
+    {
+        { false },
+    };
     public static sbyte[] s_53 = new sbyte[] { 0 };
     public static ushort s_62;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -39,7 +43,12 @@ public class Program
                 s_53[0] += 1;
             }
 
-            bool[][] var18 = new bool[][] { new bool[] { true }, new bool[] { true }, new bool[] { true } };
+            bool[][] var18 = new bool[][]
+            {
+                new bool[] { true },
+                new bool[] { true },
+                new bool[] { true },
+            };
         }
 
         return arg0;
@@ -53,7 +62,5 @@ public interface IRuntime
 
 public class Runtime : IRuntime
 {
-    public void WriteLine<T>(T value)
-    {
-    }
+    public void WriteLine<T>(T value) { }
 }

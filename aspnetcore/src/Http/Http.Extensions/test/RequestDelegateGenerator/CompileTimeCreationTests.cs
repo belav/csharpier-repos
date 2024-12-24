@@ -3,8 +3,8 @@
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Text;
-using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Http.RequestDelegateGenerator;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +19,11 @@ public partial class CompileTimeCreationTests : RequestDelegateCreationTests
     [Fact]
     public async Task MapGet_WithRequestDelegate_DoesNotGenerateSources()
     {
-        var (generatorRunResult, compilation) = await RunGeneratorAsync("""
+        var (generatorRunResult, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/hello", (HttpContext context) => Task.CompletedTask);
-""");
+"""
+        );
         var results = Assert.IsType<GeneratorRunResult>(generatorRunResult);
         Assert.Empty(GetStaticEndpoints(results, GeneratorSteps.EndpointModelStep));
 
@@ -35,13 +37,16 @@ app.MapGet("/hello", (HttpContext context) => Task.CompletedTask);
     [Fact]
     public async Task MapAction_ExplicitRouteParamWithInvalidName_SimpleReturn()
     {
-        var source = $$"""app.MapGet("/{routeValue}", ([FromRoute(Name = "invalidName" )] string parameterName) => parameterName);""";
+        var source =
+            $$"""app.MapGet("/{routeValue}", ([FromRoute(Name = "invalidName" )] string parameterName) => parameterName);""";
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => endpoint.RequestDelegate(httpContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => endpoint.RequestDelegate(httpContext)
+        );
         Assert.Equal("'invalidName' is not a route parameter.", exception.Message);
     }
 
@@ -49,21 +54,35 @@ app.MapGet("/hello", (HttpContext context) => Task.CompletedTask);
     public async Task SupportsSameInterceptorsFromDifferentFiles()
     {
         var project = CreateProject();
-        var source = GetMapActionString("""app.MapGet("/", (string name) => "Hello {name}!");app.MapGet("/bye", (string name) => "Bye {name}!");""");
-        var otherSource = GetMapActionString("""app.MapGet("/", (string name) => "Hello {name}!");""", "OtherTestMapActions");
-        project = project.AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8)).Project;
-        project = project.AddDocument("OtherTestMapActions.cs", SourceText.From(otherSource, Encoding.UTF8)).Project;
+        var source = GetMapActionString(
+            """app.MapGet("/", (string name) => "Hello {name}!");app.MapGet("/bye", (string name) => "Bye {name}!");"""
+        );
+        var otherSource = GetMapActionString(
+            """app.MapGet("/", (string name) => "Hello {name}!");""",
+            "OtherTestMapActions"
+        );
+        project = project
+            .AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8))
+            .Project;
+        project = project
+            .AddDocument("OtherTestMapActions.cs", SourceText.From(otherSource, Encoding.UTF8))
+            .Project;
         var compilation = await project.GetCompilationAsync();
 
         var generator = new RequestDelegateGenerator.RequestDelegateGenerator().AsSourceGenerator();
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generators: new[]
-            {
-                generator
-            },
-            driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true),
-            parseOptions: ParseOptions);
-        driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation,
-            out var _);
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new[] { generator },
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            ),
+            parseOptions: ParseOptions
+        );
+        driver = driver.RunGeneratorsAndUpdateCompilation(
+            compilation,
+            out var updatedCompilation,
+            out var _
+        );
 
         var diagnostics = updatedCompilation.GetDiagnostics();
         Assert.Empty(diagnostics.Where(d => d.Severity >= DiagnosticSeverity.Warning));
@@ -76,20 +95,32 @@ app.MapGet("/hello", (HttpContext context) => Task.CompletedTask);
     {
         var project = CreateProject();
         var source = GetMapActionString("""app.MapGet("/", (string name) => "Hello {name}!");""");
-        var otherSource = GetMapActionString("""app.MapGet("/", (int age) => "Hello {age}!");""", "OtherTestMapActions");
-        project = project.AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8)).Project;
-        project = project.AddDocument("OtherTestMapActions.cs", SourceText.From(otherSource, Encoding.UTF8)).Project;
+        var otherSource = GetMapActionString(
+            """app.MapGet("/", (int age) => "Hello {age}!");""",
+            "OtherTestMapActions"
+        );
+        project = project
+            .AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8))
+            .Project;
+        project = project
+            .AddDocument("OtherTestMapActions.cs", SourceText.From(otherSource, Encoding.UTF8))
+            .Project;
         var compilation = await project.GetCompilationAsync();
 
         var generator = new RequestDelegateGenerator.RequestDelegateGenerator().AsSourceGenerator();
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generators: new[]
-            {
-                generator
-            },
-            driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true),
-            parseOptions: ParseOptions);
-        driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation,
-            out var _);
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new[] { generator },
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            ),
+            parseOptions: ParseOptions
+        );
+        driver = driver.RunGeneratorsAndUpdateCompilation(
+            compilation,
+            out var updatedCompilation,
+            out var _
+        );
 
         var diagnostics = updatedCompilation.GetDiagnostics();
         Assert.Empty(diagnostics.Where(d => d.Severity >= DiagnosticSeverity.Warning));
@@ -153,25 +184,44 @@ EndpointRouteBuilderExtensions
     {
         var currentDirectory = Directory.GetCurrentDirectory();
         var mappedDirectory = Path.Combine(currentDirectory, "path", "mapped");
-        var project = CreateProject(modifyCompilationOptions:
-            (options) =>
+        var project = CreateProject(
+            modifyCompilationOptions: (options) =>
             {
                 return options.WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, currentDirectory, ImmutableArray.Create(new KeyValuePair<string, string>(currentDirectory, mappedDirectory))));
-            });
+                    new SourceFileResolver(
+                        ImmutableArray<string>.Empty,
+                        currentDirectory,
+                        ImmutableArray.Create(
+                            new KeyValuePair<string, string>(currentDirectory, mappedDirectory)
+                        )
+                    )
+                );
+            }
+        );
         var source = GetMapActionString("""app.MapGet("/", () => "Hello world!");""");
-        project = project.AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8), filePath: Path.Combine(currentDirectory, "TestMapActions.cs")).Project;
+        project = project
+            .AddDocument(
+                "TestMapActions.cs",
+                SourceText.From(source, Encoding.UTF8),
+                filePath: Path.Combine(currentDirectory, "TestMapActions.cs")
+            )
+            .Project;
         var compilation = await project.GetCompilationAsync();
 
         var generator = new RequestDelegateGenerator.RequestDelegateGenerator().AsSourceGenerator();
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generators: new[]
-            {
-                generator
-            },
-            driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true),
-            parseOptions: ParseOptions);
-        driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation,
-            out var diags);
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new[] { generator },
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            ),
+            parseOptions: ParseOptions
+        );
+        driver = driver.RunGeneratorsAndUpdateCompilation(
+            compilation,
+            out var updatedCompilation,
+            out var diags
+        );
 
         var diagnostics = updatedCompilation.GetDiagnostics();
         Assert.Empty(diagnostics.Where(d => d.Severity >= DiagnosticSeverity.Warning));
@@ -227,28 +277,38 @@ public static class RouteBuilderExtensions
 file class Wrapper<T> { }
 """;
         var project = CreateProject();
-        project = project.AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8)).Project;
+        project = project
+            .AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8))
+            .Project;
         var compilation = await project.GetCompilationAsync();
 
         var generator = new RequestDelegateGenerator.RequestDelegateGenerator().AsSourceGenerator();
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generators: new[]
-            {
-                generator
-            },
-            driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true),
-            parseOptions: ParseOptions);
-        driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation,
-            out var diagnostics);
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new[] { generator },
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            ),
+            parseOptions: ParseOptions
+        );
+        driver = driver.RunGeneratorsAndUpdateCompilation(
+            compilation,
+            out var updatedCompilation,
+            out var diagnostics
+        );
         var generatorRunResult = driver.GetRunResult();
 
         // Emits diagnostic but generates no source
         var result = Assert.IsType<GeneratorRunResult>(Assert.Single(generatorRunResult.Results));
         Assert.Empty(result.GeneratedSources);
-        Assert.All(result.Diagnostics, diagnostic =>
-        {
-            Assert.Equal(DiagnosticDescriptors.TypeParametersNotSupported.Id, diagnostic.Id);
-            Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
-        });
+        Assert.All(
+            result.Diagnostics,
+            diagnostic =>
+            {
+                Assert.Equal(DiagnosticDescriptors.TypeParametersNotSupported.Id, diagnostic.Id);
+                Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
+            }
+        );
     }
 
     [Theory]
@@ -281,28 +341,38 @@ public static class RouteBuilderExtensions
 public class Wrapper<T> { }
 """;
         var project = CreateProject();
-        project = project.AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8)).Project;
+        project = project
+            .AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8))
+            .Project;
         var compilation = await project.GetCompilationAsync();
 
         var generator = new RequestDelegateGenerator.RequestDelegateGenerator().AsSourceGenerator();
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generators: new[]
-            {
-                generator
-            },
-            driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true),
-            parseOptions: ParseOptions);
-        driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation,
-            out var diagnostics);
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new[] { generator },
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            ),
+            parseOptions: ParseOptions
+        );
+        driver = driver.RunGeneratorsAndUpdateCompilation(
+            compilation,
+            out var updatedCompilation,
+            out var diagnostics
+        );
         var generatorRunResult = driver.GetRunResult();
 
         // Emits diagnostic but generates no source
         var result = Assert.IsType<GeneratorRunResult>(Assert.Single(generatorRunResult.Results));
         Assert.Empty(result.GeneratedSources);
-        Assert.All(result.Diagnostics, diagnostic =>
-        {
-            Assert.Equal(DiagnosticDescriptors.InaccessibleTypesNotSupported.Id, diagnostic.Id);
-            Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
-        });
+        Assert.All(
+            result.Diagnostics,
+            diagnostic =>
+            {
+                Assert.Equal(DiagnosticDescriptors.InaccessibleTypesNotSupported.Id, diagnostic.Id);
+                Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
+            }
+        );
     }
 
     [Fact]
@@ -328,30 +398,43 @@ public static class TestMapActions
 public class Wrapper<T> { }
 """;
         var project = CreateProject();
-        project = project.AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8)).Project;
+        project = project
+            .AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8))
+            .Project;
         var compilation = await project.GetCompilationAsync();
 
         var generator = new RequestDelegateGenerator.RequestDelegateGenerator().AsSourceGenerator();
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generators: new[]
-            {
-                generator
-            },
-            driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true),
-            parseOptions: ParseOptions);
-        driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation,
-            out var diagnostics);
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new[] { generator },
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            ),
+            parseOptions: ParseOptions
+        );
+        driver = driver.RunGeneratorsAndUpdateCompilation(
+            compilation,
+            out var updatedCompilation,
+            out var diagnostics
+        );
         var generatorRunResult = driver.GetRunResult();
 
         // Emits diagnostic and generates source for all endpoints
         var result = Assert.IsType<GeneratorRunResult>(Assert.Single(generatorRunResult.Results));
-        Assert.All(result.Diagnostics, diagnostic =>
-        {
-            Assert.Equal(DiagnosticDescriptors.InaccessibleTypesNotSupported.Id, diagnostic.Id);
-            Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
-        });
+        Assert.All(
+            result.Diagnostics,
+            diagnostic =>
+            {
+                Assert.Equal(DiagnosticDescriptors.InaccessibleTypesNotSupported.Id, diagnostic.Id);
+                Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
+            }
+        );
 
         // All endpoints can be invoked
-        var endpoints = GetEndpointsFromCompilation(updatedCompilation, skipGeneratedCodeCheck: true);
+        var endpoints = GetEndpointsFromCompilation(
+            updatedCompilation,
+            skipGeneratedCodeCheck: true
+        );
         foreach (var endpoint in endpoints)
         {
             var httpContext = CreateHttpContext();
@@ -384,7 +467,10 @@ app.MapGet("/null-struct-with-filter", (BindableStructWithNullReturn param) => "
             Assert.Equal(400, httpContext.Response.StatusCode);
         }
 
-        Assert.All(TestSink.Writes, context => Assert.Equal("RequiredParameterNotProvided", context.EventId.Name));
+        Assert.All(
+            TestSink.Writes,
+            context => Assert.Equal("RequiredParameterNotProvided", context.EventId.Name)
+        );
         await VerifyAgainstBaselineUsingFile(compilation);
     }
 
@@ -421,10 +507,17 @@ app.MapGet("/", () => "Hello world!");
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.ConfigureHttpJsonOptions(o => o.SerializerOptions.TypeInfoResolver = null);
+            serviceCollection.ConfigureHttpJsonOptions(o =>
+                o.SerializerOptions.TypeInfoResolver = null
+            );
         });
-        var exception = Assert.Throws<InvalidOperationException>(() => GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider));
-        Assert.Equal("JsonSerializerOptions instance must specify a TypeInfoResolver setting before being marked as read-only.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider)
+        );
+        Assert.Equal(
+            "JsonSerializerOptions instance must specify a TypeInfoResolver setting before being marked as read-only.",
+            exception.Message
+        );
     }
 
     public static IEnumerable<object[]> NullResult
@@ -433,18 +526,41 @@ app.MapGet("/", () => "Hello world!");
         {
             return new List<object[]>
             {
-                new object[] { "IResult? () => null", "The IResult returned by the Delegate must not be null." },
-                new object[] { "Task<IResult?>? () => null", "The Task returned by the Delegate must not be null." },
-                new object[] { "Task<bool?>? () => null", "The Task returned by the Delegate must not be null." },
-                new object[] { "Task<IResult?> () => Task.FromResult<IResult?>(null)", "The IResult returned by the Delegate must not be null." },
-                new object[] { "ValueTask<IResult?> () => ValueTask.FromResult<IResult?>(null)", "The IResult returned by the Delegate must not be null." },
+                new object[]
+                {
+                    "IResult? () => null",
+                    "The IResult returned by the Delegate must not be null.",
+                },
+                new object[]
+                {
+                    "Task<IResult?>? () => null",
+                    "The Task returned by the Delegate must not be null.",
+                },
+                new object[]
+                {
+                    "Task<bool?>? () => null",
+                    "The Task returned by the Delegate must not be null.",
+                },
+                new object[]
+                {
+                    "Task<IResult?> () => Task.FromResult<IResult?>(null)",
+                    "The IResult returned by the Delegate must not be null.",
+                },
+                new object[]
+                {
+                    "ValueTask<IResult?> () => ValueTask.FromResult<IResult?>(null)",
+                    "The IResult returned by the Delegate must not be null.",
+                },
             };
         }
     }
 
     [Theory]
     [MemberData(nameof(NullResult))]
-    public async Task RequestDelegateThrowsInvalidOperationExceptionOnNullDelegate(string innerSource, string message)
+    public async Task RequestDelegateThrowsInvalidOperationExceptionOnNullDelegate(
+        string innerSource,
+        string message
+    )
     {
         var source = $"""
 app.MapGet("/", {innerSource});
@@ -453,7 +569,9 @@ app.MapGet("/", {innerSource});
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await endpoint.RequestDelegate(httpContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Equal(message, exception.Message);
     }
@@ -463,7 +581,9 @@ app.MapGet("/", {innerSource});
     [InlineData("[FromRoute]")]
     [InlineData("[FromQuery]")]
     [InlineData("[FromHeader]")]
-    public async Task SupportsHandlersWithSameSignatureButDifferentParameterNames(string sourceAttribute)
+    public async Task SupportsHandlersWithSameSignatureButDifferentParameterNames(
+        string sourceAttribute
+    )
     {
         // Arrange
         var source = $$"""
@@ -505,7 +625,9 @@ app.MapGet("/camera/archive/{cameraId}/chunk/{chunkName}", ({{sourceAttribute}}s
             switch (sourceAttribute)
             {
                 case "[FromQuery]":
-                    httpContext.Request.QueryString = httpContext.Request.QueryString.Add(QueryString.Create(value, value));
+                    httpContext.Request.QueryString = httpContext.Request.QueryString.Add(
+                        QueryString.Create(value, value)
+                    );
                     break;
                 case "[FromHeader]":
                     httpContext.Request.Headers[value] = value;
@@ -546,7 +668,10 @@ app.MapPost("/todo1", (Todo todo1) => todo1.Id.ToString());
         Assert.NotNull(log1);
         Assert.Equal(LogLevel.Debug, log1.LogLevel);
         Assert.Equal(new EventId(5, "ImplicitBodyNotProvided"), log1.EventId);
-        Assert.Equal(@"Implicit body inferred for parameter ""todo"" but no body was provided. Did you mean to use a Service instead?", log1.Message);
+        Assert.Equal(
+            @"Implicit body inferred for parameter ""todo"" but no body was provided. Did you mean to use a Service instead?",
+            log1.Message
+        );
 
         // Assert - 2
         Assert.Equal(400, httpContext2.Response.StatusCode);
@@ -554,24 +679,40 @@ app.MapPost("/todo1", (Todo todo1) => todo1.Id.ToString());
         Assert.NotNull(log2);
         Assert.Equal(LogLevel.Debug, log2.LogLevel);
         Assert.Equal(new EventId(5, "ImplicitBodyNotProvided"), log2.EventId);
-        Assert.Equal(@"Implicit body inferred for parameter ""todo1"" but no body was provided. Did you mean to use a Service instead?", log2.Message);
+        Assert.Equal(
+            @"Implicit body inferred for parameter ""todo1"" but no body was provided. Did you mean to use a Service instead?",
+            log2.Message
+        );
     }
 
     [Theory]
-    [InlineData("""app.MapGet("/", () => Microsoft.FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return("Hello"));""")]
-    [InlineData("""app.MapGet("/", () => Microsoft.FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(new Todo { Name = "Hello" }));""")]
-    [InlineData("""app.MapGet("/", () => Microsoft.FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(TypedResults.Ok(new Todo { Name = "Hello" })));""")]
-    [InlineData("""app.MapGet("/", () => Microsoft.FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(default(Microsoft.FSharp.Core.Unit)!));""")]
-    public async Task MapAction_NoParam_FSharpAsyncReturn_NotCoercedToTaskAtCompileTime(string source)
+    [InlineData(
+        """app.MapGet("/", () => Microsoft.FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return("Hello"));"""
+    )]
+    [InlineData(
+        """app.MapGet("/", () => Microsoft.FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(new Todo { Name = "Hello" }));"""
+    )]
+    [InlineData(
+        """app.MapGet("/", () => Microsoft.FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(TypedResults.Ok(new Todo { Name = "Hello" })));"""
+    )]
+    [InlineData(
+        """app.MapGet("/", () => Microsoft.FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(default(Microsoft.FSharp.Core.Unit)!));"""
+    )]
+    public async Task MapAction_NoParam_FSharpAsyncReturn_NotCoercedToTaskAtCompileTime(
+        string source
+    )
     {
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            Assert.False(endpointModel.Response.IsAwaitable);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                Assert.False(endpointModel.Response.IsAwaitable);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -579,18 +720,27 @@ app.MapPost("/todo1", (Todo todo1) => todo1.Id.ToString());
     }
 
     [Theory]
-    [InlineData("""app.MapGet("/", () => Task.FromResult(default(Microsoft.FSharp.Core.Unit)!));""")]
-    [InlineData("""app.MapGet("/", () => ValueTask.FromResult(default(Microsoft.FSharp.Core.Unit)!));""")]
-    public async Task MapAction_NoParam_TaskLikeOfUnitReturn_NotConvertedToVoidReturningAtCompileTime(string source)
+    [InlineData(
+        """app.MapGet("/", () => Task.FromResult(default(Microsoft.FSharp.Core.Unit)!));"""
+    )]
+    [InlineData(
+        """app.MapGet("/", () => ValueTask.FromResult(default(Microsoft.FSharp.Core.Unit)!));"""
+    )]
+    public async Task MapAction_NoParam_TaskLikeOfUnitReturn_NotConvertedToVoidReturningAtCompileTime(
+        string source
+    )
     {
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            Assert.True(endpointModel.Response.IsAwaitable);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                Assert.True(endpointModel.Response.IsAwaitable);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -649,18 +799,25 @@ namespace Microsoft.AspNetCore.Builder
 }
 """;
         var project = CreateProject();
-        project = project.AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8)).Project;
+        project = project
+            .AddDocument("TestMapActions.cs", SourceText.From(source, Encoding.UTF8))
+            .Project;
         var compilation = await project.GetCompilationAsync();
 
         var generator = new RequestDelegateGenerator.RequestDelegateGenerator().AsSourceGenerator();
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generators: new[]
-            {
-                generator
-            },
-            driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true),
-            parseOptions: ParseOptions);
-        driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation,
-            out var diagnostics);
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new[] { generator },
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            ),
+            parseOptions: ParseOptions
+        );
+        driver = driver.RunGeneratorsAndUpdateCompilation(
+            compilation,
+            out var updatedCompilation,
+            out var diagnostics
+        );
         var generatorRunResult = driver.GetRunResult();
 
         // Emits diagnostic and generates source for all endpoints

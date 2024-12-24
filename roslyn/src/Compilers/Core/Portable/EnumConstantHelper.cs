@@ -8,7 +8,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal enum EnumOverflowKind { NoOverflow, OverflowReport, OverflowIgnore }
+    internal enum EnumOverflowKind
+    {
+        NoOverflow,
+        OverflowReport,
+        OverflowIgnore,
+    }
 
     internal static class EnumConstantHelper
     {
@@ -17,7 +22,11 @@ namespace Microsoft.CodeAnalysis
         /// and offset by the given non-negative amount. Return ConstantValue.Bad
         /// if the generated constant would be outside the valid range of the type.
         /// </summary>
-        internal static EnumOverflowKind OffsetValue(ConstantValue constantValue, uint offset, out ConstantValue offsetValue)
+        internal static EnumOverflowKind OffsetValue(
+            ConstantValue constantValue,
+            uint offset,
+            out ConstantValue offsetValue
+        )
         {
             Debug.Assert(!constantValue.IsBad);
             Debug.Assert(offset > 0);
@@ -128,9 +137,13 @@ namespace Microsoft.CodeAnalysis
 
         private static EnumOverflowKind CheckOverflow(ulong maxOffset, uint offset)
         {
-            return (offset <= maxOffset) ?
-                EnumOverflowKind.NoOverflow :
-                (((offset - 1) == maxOffset) ? EnumOverflowKind.OverflowReport : EnumOverflowKind.OverflowIgnore);
+            return (offset <= maxOffset)
+                ? EnumOverflowKind.NoOverflow
+                : (
+                    ((offset - 1) == maxOffset)
+                        ? EnumOverflowKind.OverflowReport
+                        : EnumOverflowKind.OverflowIgnore
+                );
         }
     }
 }

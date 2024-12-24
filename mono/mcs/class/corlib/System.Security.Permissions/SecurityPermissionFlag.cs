@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,50 +32,60 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
 #if MOBILE && !MONOTOUCH
-	[Obsolete ("CAS support is not available with Silverlight applications.")]
+    [Obsolete("CAS support is not available with Silverlight applications.")]
 #endif
-	[ComVisible (true)]
-	[Flags]
-	[Serializable]
-	public enum SecurityPermissionFlag {
+    [ComVisible(true)]
+    [Flags]
+    [Serializable]
+    public enum SecurityPermissionFlag
+    {
+        NoFlags = 0x00000000,
 
-		NoFlags = 0x00000000,
+        Assertion = 0x00000001,
 
-		Assertion = 0x00000001,
+        UnmanagedCode = 0x00000002,
 
-		UnmanagedCode = 0x00000002,
+        SkipVerification = 0x00000004,
 
-		SkipVerification = 0x00000004,
+        Execution = 0x00000008,
 
-		Execution = 0x00000008,
+        ControlThread = 0x00000010,
 
-		ControlThread = 0x00000010,
+        ControlEvidence = 0x00000020,
 
-		ControlEvidence = 0x00000020,
+        ControlPolicy = 0x00000040,
 
-		ControlPolicy = 0x00000040,
+        SerializationFormatter = 0x00000080,
 
-		SerializationFormatter = 0x00000080,
+        ControlDomainPolicy = 0x00000100,
 
-		ControlDomainPolicy = 0x00000100,
+        ControlPrincipal = 0x00000200,
 
-		ControlPrincipal = 0x00000200,
+        ControlAppDomain = 0x00000400,
 
-		ControlAppDomain = 0x00000400,
+        RemotingConfiguration = 0x00000800,
 
-		RemotingConfiguration = 0x00000800,
+        Infrastructure = 0x00001000,
 
-		Infrastructure = 0x00001000,
+        BindingRedirects = 0x00002000,
 
-		BindingRedirects = 0x00002000,
-
-		AllFlags = Assertion | UnmanagedCode | SkipVerification | Execution | ControlThread
-			| ControlAppDomain | ControlDomainPolicy | ControlEvidence | ControlPolicy
-			| ControlPrincipal | Infrastructure | RemotingConfiguration | SerializationFormatter
-			| BindingRedirects
-	} // SecurityPermissionFlag
-
+        AllFlags =
+            Assertion
+            | UnmanagedCode
+            | SkipVerification
+            | Execution
+            | ControlThread
+            | ControlAppDomain
+            | ControlDomainPolicy
+            | ControlEvidence
+            | ControlPolicy
+            | ControlPrincipal
+            | Infrastructure
+            | RemotingConfiguration
+            | SerializationFormatter
+            | BindingRedirects,
+    } // SecurityPermissionFlag
 } // System.Security.Permissions

@@ -14,16 +14,16 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Initialization
             new AppDomainSetup
             {
                 ApplicationBase = AppDomain.CurrentDomain.BaseDirectory,
-                ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile
-            });
+                ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile,
+            }
+        );
 
         ~ColdStartSandbox()
         {
             Dispose(false);
         }
 
-        public T CreateInstance<T>(params object[] args)
-            => (T)CreateInstance(typeof(T), args);
+        public T CreateInstance<T>(params object[] args) => (T)CreateInstance(typeof(T), args);
 
         private object CreateInstance(Type type, params object[] args)
         {
@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Initialization
                 binder: null,
                 args: args,
                 culture: null,
-                activationAttributes: null);
+                activationAttributes: null
+            );
         }
 
         public void Dispose()

@@ -5,20 +5,25 @@ namespace System.ServiceModel.Dispatcher
 {
     using System;
     using System.Collections.Generic;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
     using System.Threading;
 
     class BufferedReceiveBinder : IChannelBinder
     {
         static Action<object> tryReceive = new Action<object>(BufferedReceiveBinder.TryReceive);
-        static AsyncCallback tryReceiveCallback = Fx.ThunkCallback(new AsyncCallback(TryReceiveCallback));
+        static AsyncCallback tryReceiveCallback = Fx.ThunkCallback(
+            new AsyncCallback(TryReceiveCallback)
+        );
 
         IChannelBinder channelBinder;
         InputQueue<RequestContextWrapper> inputQueue;
 
-        [Fx.Tag.SynchronizationObject(Blocking = true, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = true,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         int pendingOperationSemaphore;
 
         public BufferedReceiveBinder(IChannelBinder channelBinder)
@@ -95,7 +100,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (Interlocked.CompareExchange(ref this.pendingOperationSemaphore, 1, 0) == 0)
             {
-                IAsyncResult result = this.channelBinder.BeginTryReceive(timeout, tryReceiveCallback, this);
+                IAsyncResult result = this.channelBinder.BeginTryReceive(
+                    timeout,
+                    tryReceiveCallback,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     HandleEndTryReceive(result);
@@ -131,7 +140,12 @@ namespace System.ServiceModel.Dispatcher
             this.channelBinder.Send(message, timeout);
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channelBinder.BeginSend(message, timeout, callback, state);
         }
@@ -146,7 +160,12 @@ namespace System.ServiceModel.Dispatcher
             return this.channelBinder.Request(message, timeout);
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channelBinder.BeginRequest(message, timeout, callback, state);
         }
@@ -161,7 +180,11 @@ namespace System.ServiceModel.Dispatcher
             return this.channelBinder.WaitForMessage(timeout);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channelBinder.BeginWaitForMessage(timeout, callback, state);
         }
@@ -191,7 +214,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (binder.channelBinder.TryReceive(TimeSpan.MaxValue, out requestContext))
                 {
-                    requiresDispatch = binder.inputQueue.EnqueueWithoutDispatch(new RequestContextWrapper(requestContext), null);
+                    requiresDispatch = binder.inputQueue.EnqueueWithoutDispatch(
+                        new RequestContextWrapper(requestContext),
+                        null
+                    );
                 }
             }
             catch (Exception exception)
@@ -233,7 +259,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (binder.channelBinder.EndTryReceive(result, out requestContext))
                 {
-                    requiresDispatch = binder.inputQueue.EnqueueWithoutDispatch(new RequestContextWrapper(requestContext), null);
+                    requiresDispatch = binder.inputQueue.EnqueueWithoutDispatch(
+                        new RequestContextWrapper(requestContext),
+                        null
+                    );
                 }
             }
             catch (Exception exception)
@@ -265,11 +294,7 @@ namespace System.ServiceModel.Dispatcher
                 this.RequestContext = requestContext;
             }
 
-            public RequestContext RequestContext
-            {
-                get;
-                private set;
-            }
+            public RequestContext RequestContext { get; private set; }
         }
     }
 }

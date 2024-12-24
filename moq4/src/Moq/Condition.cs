@@ -5,7 +5,6 @@ using System;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class Condition
@@ -27,7 +26,6 @@ namespace Moq
         sealed class Condition
     */
     sealed class Condition
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private Func<bool> condition;

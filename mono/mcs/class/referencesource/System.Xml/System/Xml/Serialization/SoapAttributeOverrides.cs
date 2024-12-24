@@ -2,29 +2,32 @@
 // <copyright file="SoapAttributeOverrides.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
-    using System.Reflection;
-    using System.Collections;
-    using System.IO;
-    using System.Xml.Schema;
+namespace System.Xml.Serialization
+{
     using System;
+    using System.Collections;
     using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
+    using System.Xml.Schema;
 
     /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class SoapAttributeOverrides {
+    public class SoapAttributeOverrides
+    {
         Hashtable types = new Hashtable();
 
         /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Add(Type type, SoapAttributes attributes) {
+        public void Add(Type type, SoapAttributes attributes)
+        {
             Add(type, string.Empty, attributes);
         }
 
@@ -32,14 +35,19 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Add(Type type, string member, SoapAttributes attributes) {
+        public void Add(Type type, string member, SoapAttributes attributes)
+        {
             Hashtable members = (Hashtable)types[type];
-            if (members == null) {
+            if (members == null)
+            {
                 members = new Hashtable();
                 types.Add(type, members);
             }
-            else if (members[member] != null) {
-                throw new InvalidOperationException(Res.GetString(Res.XmlMultipleAttributeOverrides, type.FullName, member));
+            else if (members[member] != null)
+            {
+                throw new InvalidOperationException(
+                    Res.GetString(Res.XmlMultipleAttributeOverrides, type.FullName, member)
+                );
             }
             members.Add(member, attributes);
         }
@@ -48,23 +56,24 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapAttributes this[Type type] {
-            get {
-                return this[type, string.Empty];
-            }
+        public SoapAttributes this[Type type]
+        {
+            get { return this[type, string.Empty]; }
         }
 
         /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides.this1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapAttributes this[Type type, string member] {
-            get {
+        public SoapAttributes this[Type type, string member]
+        {
+            get
+            {
                 Hashtable members = (Hashtable)types[type];
-                if (members == null) return null;
+                if (members == null)
+                    return null;
                 return (SoapAttributes)members[member];
             }
         }
     }
 }
-

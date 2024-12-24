@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.Components.Endpoints.Tests;
 
-internal class TestRenderModeAttribute<T> : RenderModeAttribute where T: IComponentRenderMode, new()
+internal class TestRenderModeAttribute<T> : RenderModeAttribute
+    where T : IComponentRenderMode, new()
 {
     public override IComponentRenderMode Mode { get; } = new T();
 }

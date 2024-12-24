@@ -10,7 +10,12 @@ namespace Microsoft.Extensions.Hosting.Internal
 {
     internal static class HostingLoggerExtensions
     {
-        public static void ApplicationError(this ILogger logger, EventId eventId, string? message, Exception? exception)
+        public static void ApplicationError(
+            this ILogger logger,
+            EventId eventId,
+            string? message,
+            Exception? exception
+        )
         {
             if (exception is ReflectionTypeLoadException reflectionTypeLoadException)
             {
@@ -23,19 +28,14 @@ namespace Microsoft.Extensions.Hosting.Internal
                 }
             }
 
-            logger.LogCritical(
-                eventId: eventId,
-                message: message,
-                exception: exception);
+            logger.LogCritical(eventId: eventId, message: message, exception: exception);
         }
 
         public static void Starting(this ILogger logger)
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
-                logger.LogDebug(
-                   eventId: LoggerEventIds.Starting,
-                   message: "Hosting starting");
+                logger.LogDebug(eventId: LoggerEventIds.Starting, message: "Hosting starting");
             }
         }
 
@@ -43,9 +43,7 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
-                logger.LogDebug(
-                    eventId: LoggerEventIds.Started,
-                    message: "Hosting started");
+                logger.LogDebug(eventId: LoggerEventIds.Started, message: "Hosting started");
             }
         }
 
@@ -53,9 +51,7 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
-                logger.LogDebug(
-                    eventId: LoggerEventIds.Stopping,
-                    message: "Hosting stopping");
+                logger.LogDebug(eventId: LoggerEventIds.Stopping, message: "Hosting stopping");
             }
         }
 
@@ -63,9 +59,7 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
-                logger.LogDebug(
-                    eventId: LoggerEventIds.Stopped,
-                    message: "Hosting stopped");
+                logger.LogDebug(eventId: LoggerEventIds.Stopped, message: "Hosting stopped");
             }
         }
 
@@ -76,7 +70,8 @@ namespace Microsoft.Extensions.Hosting.Internal
                 logger.LogDebug(
                     eventId: LoggerEventIds.StoppedWithException,
                     exception: ex,
-                    message: "Hosting shutdown exception");
+                    message: "Hosting shutdown exception"
+                );
             }
         }
 
@@ -87,7 +82,8 @@ namespace Microsoft.Extensions.Hosting.Internal
                 logger.LogError(
                     eventId: LoggerEventIds.BackgroundServiceFaulted,
                     exception: ex,
-                    message: "BackgroundService failed");
+                    message: "BackgroundService failed"
+                );
             }
         }
 
@@ -98,7 +94,8 @@ namespace Microsoft.Extensions.Hosting.Internal
                 logger.LogCritical(
                     eventId: LoggerEventIds.BackgroundServiceStoppingHost,
                     exception: ex,
-                    message: SR.BackgroundServiceExceptionStoppedHost);
+                    message: SR.BackgroundServiceExceptionStoppedHost
+                );
             }
         }
 
@@ -107,9 +104,10 @@ namespace Microsoft.Extensions.Hosting.Internal
             if (logger.IsEnabled(LogLevel.Error))
             {
                 logger.LogError(
-                   eventId: LoggerEventIds.HostedServiceStartupFaulted,
-                   exception: ex,
-                   message: "Hosting failed to start");
+                    eventId: LoggerEventIds.HostedServiceStartupFaulted,
+                    exception: ex,
+                    message: "Hosting failed to start"
+                );
             }
         }
     }

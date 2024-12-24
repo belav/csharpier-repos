@@ -111,8 +111,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void Dispatch_NotSupported()
         {
-           DispatchWrapper wrapper = new(new IDispatchComObject());
-           Assert.Throws<ArgumentException>("T", () => ComVariant.Create(wrapper));
+            DispatchWrapper wrapper = new(new IDispatchComObject());
+            Assert.Throws<ArgumentException>("T", () => ComVariant.Create(wrapper));
         }
 #endif
 
@@ -147,7 +147,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void VTVariantNotSupported()
         {
-            Assert.Throws<ArgumentException>("vt", () => ComVariant.CreateRaw(VarEnum.VT_VARIANT, 1));
+            Assert.Throws<ArgumentException>(
+                "vt",
+                () => ComVariant.CreateRaw(VarEnum.VT_VARIANT, 1)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -160,13 +163,9 @@ namespace System.Runtime.InteropServices.Tests
         [ComImport]
         [Guid("9FBB5303-ED8B-448D-8174-571D03E1D947")]
         [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        public interface IUnknownInterface
-        {
-        }
+        public interface IUnknownInterface { }
 
-        private sealed class TestObject : IUnknownInterface
-        {
-        }
+        private sealed class TestObject : IUnknownInterface { }
 
         [Fact]
         public void Decimal()
@@ -271,7 +270,10 @@ namespace System.Runtime.InteropServices.Tests
         public void LPStr_Raw()
         {
             string str = "Foo";
-            using ComVariant variant = ComVariant.CreateRaw(VarEnum.VT_LPSTR, Marshal.StringToCoTaskMemAnsi(str));
+            using ComVariant variant = ComVariant.CreateRaw(
+                VarEnum.VT_LPSTR,
+                Marshal.StringToCoTaskMemAnsi(str)
+            );
             Assert.Equal(VarEnum.VT_LPSTR, variant.VarType);
             Assert.Throws<InvalidOperationException>(variant.As<string>);
             Assert.Equal(str, Marshal.PtrToStringAnsi(variant.GetRawDataRef<IntPtr>()));
@@ -281,7 +283,10 @@ namespace System.Runtime.InteropServices.Tests
         public void LPWStr_Raw()
         {
             string str = "Foo";
-            using ComVariant variant = ComVariant.CreateRaw(VarEnum.VT_LPWSTR, Marshal.StringToCoTaskMemUni(str));
+            using ComVariant variant = ComVariant.CreateRaw(
+                VarEnum.VT_LPWSTR,
+                Marshal.StringToCoTaskMemUni(str)
+            );
             Assert.Equal(VarEnum.VT_LPWSTR, variant.VarType);
             Assert.Throws<InvalidOperationException>(variant.As<string>);
             Assert.Equal(str, Marshal.PtrToStringUni(variant.GetRawDataRef<IntPtr>()));
@@ -418,8 +423,15 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Vector_Raw()
         {
-            Vector vector = new Vector { Length = 3, Data = Marshal.AllocCoTaskMem(sizeof(int) * 3) };
-            using ComVariant variant = ComVariant.CreateRaw(VarEnum.VT_VECTOR | VarEnum.VT_I4, vector);
+            Vector vector = new Vector
+            {
+                Length = 3,
+                Data = Marshal.AllocCoTaskMem(sizeof(int) * 3),
+            };
+            using ComVariant variant = ComVariant.CreateRaw(
+                VarEnum.VT_VECTOR | VarEnum.VT_I4,
+                vector
+            );
             Assert.Equal(VarEnum.VT_VECTOR | VarEnum.VT_I4, variant.VarType);
             Assert.Throws<ArgumentException>("T", () => variant.As<Vector>());
             Assert.Equal(vector, variant.GetRawDataRef<Vector>());
@@ -440,7 +452,9 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(~TestPlatforms.Windows)]
         public void Array_Raw_NonWindows()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => ComVariant.CreateRaw(VarEnum.VT_ARRAY | VarEnum.VT_I4, 0));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => ComVariant.CreateRaw(VarEnum.VT_ARRAY | VarEnum.VT_I4, 0)
+            );
         }
 
         [Fact]
@@ -448,7 +462,10 @@ namespace System.Runtime.InteropServices.Tests
         {
             // byref VARIANTs don't own the memory they point to.
             IntPtr byref = Marshal.AllocCoTaskMem(4);
-            using ComVariant variant = ComVariant.CreateRaw(VarEnum.VT_BYREF | VarEnum.VT_I4, byref);
+            using ComVariant variant = ComVariant.CreateRaw(
+                VarEnum.VT_BYREF | VarEnum.VT_I4,
+                byref
+            );
             Assert.Equal(VarEnum.VT_BYREF | VarEnum.VT_I4, variant.VarType);
             Assert.Equal(byref, variant.GetRawDataRef<IntPtr>());
             Marshal.FreeCoTaskMem(byref);

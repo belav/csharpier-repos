@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.IO.Compression;
 using System.IO;
-using Xunit;
+using System.IO.Compression;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
@@ -26,12 +26,19 @@ namespace System.Formats.Tar.Tests
                 {
                     Mode = FileMode.CreateNew,
                     Access = FileAccess.Write,
-                    Options = FileOptions.Asynchronous
+                    Options = FileOptions.Asynchronous,
                 };
 
-                await using (FileStream streamToCompress = new FileStream(archivePath, createOptions))
+                await using (
+                    FileStream streamToCompress = new FileStream(archivePath, createOptions)
+                )
                 {
-                    await using (GZipStream compressorStream = new GZipStream(streamToCompress, CompressionMode.Compress))
+                    await using (
+                        GZipStream compressorStream = new GZipStream(
+                            streamToCompress,
+                            CompressionMode.Compress
+                        )
+                    )
                     {
                         await using (TarWriter writer = new TarWriter(compressorStream))
                         {
@@ -49,12 +56,17 @@ namespace System.Formats.Tar.Tests
                 {
                     Mode = FileMode.Open,
                     Access = FileAccess.Read,
-                    Options = FileOptions.Asynchronous
+                    Options = FileOptions.Asynchronous,
                 };
 
                 await using (FileStream streamToDecompress = File.Open(archivePath, readOptions))
                 {
-                    await using (GZipStream decompressorStream = new GZipStream(streamToDecompress, CompressionMode.Decompress))
+                    await using (
+                        GZipStream decompressorStream = new GZipStream(
+                            streamToDecompress,
+                            CompressionMode.Decompress
+                        )
+                    )
                     {
                         await using (TarReader reader = new TarReader(decompressorStream))
                         {
@@ -73,7 +85,6 @@ namespace System.Formats.Tar.Tests
         {
             using (TempDirectory root = new TempDirectory())
             {
-
                 string archivePath = Path.Join(root.Path, "compressed.tar.gz");
 
                 string sourceDirectory = Path.Join(root.Path, "source");
@@ -90,14 +101,23 @@ namespace System.Formats.Tar.Tests
                 {
                     Mode = FileMode.CreateNew,
                     Access = FileAccess.Write,
-                    Options = FileOptions.Asynchronous
+                    Options = FileOptions.Asynchronous,
                 };
 
                 await using (FileStream streamToCompress = File.Open(archivePath, createOptions))
                 {
-                    await using (GZipStream compressorStream = new GZipStream(streamToCompress, CompressionMode.Compress))
+                    await using (
+                        GZipStream compressorStream = new GZipStream(
+                            streamToCompress,
+                            CompressionMode.Compress
+                        )
+                    )
                     {
-                        await TarFile.CreateFromDirectoryAsync(sourceDirectory, compressorStream, includeBaseDirectory: false);
+                        await TarFile.CreateFromDirectoryAsync(
+                            sourceDirectory,
+                            compressorStream,
+                            includeBaseDirectory: false
+                        );
                     }
                 }
 
@@ -109,14 +129,23 @@ namespace System.Formats.Tar.Tests
                 {
                     Mode = FileMode.Open,
                     Access = FileAccess.Read,
-                    Options = FileOptions.Asynchronous
+                    Options = FileOptions.Asynchronous,
                 };
 
                 await using (FileStream streamToDecompress = File.Open(archivePath, readOptions))
                 {
-                    await using (GZipStream decompressorStream = new GZipStream(streamToDecompress, CompressionMode.Decompress))
+                    await using (
+                        GZipStream decompressorStream = new GZipStream(
+                            streamToDecompress,
+                            CompressionMode.Decompress
+                        )
+                    )
                     {
-                        await TarFile.ExtractToDirectoryAsync(decompressorStream, destinationDirectory, overwriteFiles: true);
+                        await TarFile.ExtractToDirectoryAsync(
+                            decompressorStream,
+                            destinationDirectory,
+                            overwriteFiles: true
+                        );
                         Assert.True(File.Exists(filePath));
                     }
                 }

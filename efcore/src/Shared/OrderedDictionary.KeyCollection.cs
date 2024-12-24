@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             /// <param name="index">The zero-based index of the key to get.</param>
             /// <returns>The key at the specified index.</returns>
             /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> is less than 0.-or-<paramref name="index" /> is equal to or greater than <see cref="OrderedDictionary{TKey, TValue}.KeyCollection.Count" />.</exception>
-            public TKey this[int index] => ((IList<KeyValuePair<TKey, TValue>>)_orderedDictionary)[index].Key;
+            public TKey this[int index] =>
+                ((IList<KeyValuePair<TKey, TValue>>)_orderedDictionary)[index].Key;
 
             TKey IList<TKey>.this[int index]
             {
@@ -118,9 +119,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 /// <summary>
                 /// Releases all resources used by the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection.Enumerator" />.
                 /// </summary>
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
 
                 /// <summary>
                 /// Advances the enumerator to the next element of the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection" />.

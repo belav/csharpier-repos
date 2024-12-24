@@ -25,7 +25,10 @@ namespace System.Web.Http
 
             // Assert
             Assert.Same(response, exception.Response);
-            Assert.Equal("Processing of the HTTP request resulted in an exception. Please see the HTTP response returned by the 'Response' property of this exception for details.", exception.Message);
+            Assert.Equal(
+                "Processing of the HTTP request resulted in an exception. Please see the HTTP response returned by the 'Response' property of this exception for details.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -37,7 +40,10 @@ namespace System.Web.Http
 
             // Assert
             Assert.Equal(HttpStatusCode.BadGateway, exception.Response.StatusCode);
-            Assert.Equal("Processing of the HTTP request resulted in an exception. Please see the HTTP response returned by the 'Response' property of this exception for details.", exception.Message);
+            Assert.Equal(
+                "Processing of the HTTP request resulted in an exception. Please see the HTTP response returned by the 'Response' property of this exception for details.",
+                exception.Message
+            );
         }
     }
 }

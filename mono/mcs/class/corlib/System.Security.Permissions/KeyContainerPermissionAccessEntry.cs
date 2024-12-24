@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,117 +30,134 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class KeyContainerPermissionAccessEntry
+    {
+        private KeyContainerPermissionFlags _flags;
+        private string _containerName;
+        private int _spec;
+        private string _store;
+        private string _providerName;
+        private int _type;
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class KeyContainerPermissionAccessEntry {
+        public KeyContainerPermissionAccessEntry(
+            CspParameters parameters,
+            KeyContainerPermissionFlags flags
+        )
+        {
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
 
-		private KeyContainerPermissionFlags _flags;
-		private string _containerName;
-		private int _spec;
-		private string _store;
-		private string _providerName;
-		private int _type;
+            ProviderName = parameters.ProviderName;
+            ProviderType = parameters.ProviderType;
+            KeyContainerName = parameters.KeyContainerName;
+            KeySpec = parameters.KeyNumber;
+            Flags = flags;
+        }
 
+        public KeyContainerPermissionAccessEntry(
+            string keyContainerName,
+            KeyContainerPermissionFlags flags
+        )
+        {
+            KeyContainerName = keyContainerName;
+            Flags = flags;
+        }
 
-		public KeyContainerPermissionAccessEntry (CspParameters parameters, KeyContainerPermissionFlags flags)
-		{
-			if (parameters == null)
-				throw new ArgumentNullException ("parameters");
+        public KeyContainerPermissionAccessEntry(
+            string keyStore,
+            string providerName,
+            int providerType,
+            string keyContainerName,
+            int keySpec,
+            KeyContainerPermissionFlags flags
+        )
+        {
+            KeyStore = keyStore;
+            ProviderName = providerName;
+            ProviderType = providerType;
+            KeyContainerName = keyContainerName;
+            KeySpec = keySpec;
+            Flags = flags;
+        }
 
-			ProviderName = parameters.ProviderName;
-			ProviderType = parameters.ProviderType;
-			KeyContainerName = parameters.KeyContainerName;
-			KeySpec = parameters.KeyNumber;
-			Flags = flags;
-		}
+        public KeyContainerPermissionFlags Flags
+        {
+            get { return _flags; }
+            set
+            {
+                if ((value & KeyContainerPermissionFlags.AllFlags) != 0)
+                {
+                    string msg = String.Format(Locale.GetText("Invalid enum {0}"), value);
+                    throw new ArgumentException(msg, "KeyContainerPermissionFlags");
+                }
+                _flags = value;
+            }
+        }
 
-		public KeyContainerPermissionAccessEntry (string keyContainerName, KeyContainerPermissionFlags flags)
-		{
-			KeyContainerName = keyContainerName;
-			Flags = flags;
-		}
+        public string KeyContainerName
+        {
+            get { return _containerName; }
+            set { _containerName = value; }
+        }
 
-		public KeyContainerPermissionAccessEntry (string keyStore, string providerName, int providerType, 
-			string keyContainerName, int keySpec, KeyContainerPermissionFlags flags)
-		{
-			KeyStore = keyStore;
-			ProviderName = providerName;
-			ProviderType = providerType;
-			KeyContainerName = keyContainerName;
-			KeySpec = keySpec;
-			Flags = flags;
-		}
+        public int KeySpec
+        {
+            get { return _spec; }
+            set { _spec = value; }
+        }
 
+        public string KeyStore
+        {
+            get { return _store; }
+            set { _store = value; }
+        }
 
-		public KeyContainerPermissionFlags Flags {
-			get { return _flags; }
-			set {
-				if ((value & KeyContainerPermissionFlags.AllFlags) != 0) {
-					string msg = String.Format (Locale.GetText ("Invalid enum {0}"), value);
-					throw new ArgumentException (msg, "KeyContainerPermissionFlags");
-				}
-				_flags = value;
-			}
-		}
+        public string ProviderName
+        {
+            get { return _providerName; }
+            set { _providerName = value; }
+        }
 
-		public string KeyContainerName {
-			get { return _containerName; }
-			set { _containerName = value; }
-		}
+        public int ProviderType
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
 
-		public int KeySpec {
-			get { return _spec; }
-			set { _spec = value; }
-		}
+        public override bool Equals(object o)
+        {
+            if (o == null)
+                return false;
+            KeyContainerPermissionAccessEntry kcpae = (o as KeyContainerPermissionAccessEntry);
+            if (kcpae == null)
+                return false;
+            if (_flags != kcpae._flags)
+                return false;
+            if (_containerName != kcpae._containerName)
+                return false;
+            if (_store != kcpae._store)
+                return false;
+            if (_providerName != kcpae._providerName)
+                return false;
+            if (_type != kcpae._type)
+                return false;
+            return true;
+        }
 
-		public string KeyStore {
-			get { return _store; }
-			set { _store = value; }
-		}
-
-		public string ProviderName {
-			get { return _providerName; }
-			set { _providerName = value; }
-		}
-
-		public int ProviderType {
-			get { return _type; }
-			set { _type = value; }
-		}
-
-
-		public override bool Equals (object o)
-		{
-			if (o == null)
-				return false;
-			KeyContainerPermissionAccessEntry kcpae = (o as KeyContainerPermissionAccessEntry);
-			if (kcpae == null)
-				return false;
-			if (_flags != kcpae._flags)
-				return false;
-			if (_containerName != kcpae._containerName)
-				return false;
-			if (_store != kcpae._store)
-				return false;
-			if (_providerName != kcpae._providerName)
-				return false;
-			if (_type != kcpae._type)
-				return false;
-			return true;
-		}
-
-		public override int GetHashCode ()
-		{
-			int result = _type ^ _spec ^ (int) _flags;
-			if (_containerName != null)
-				result ^= _containerName.GetHashCode ();
-			if (_store != null)
-				result ^= _store.GetHashCode ();
-			if (_providerName != null)
-				result ^= _providerName.GetHashCode ();
-			return result;
-		}
-	}
+        public override int GetHashCode()
+        {
+            int result = _type ^ _spec ^ (int)_flags;
+            if (_containerName != null)
+                result ^= _containerName.GetHashCode();
+            if (_store != null)
+                result ^= _store.GetHashCode();
+            if (_providerName != null)
+                result ^= _providerName.GetHashCode();
+            return result;
+        }
+    }
 }

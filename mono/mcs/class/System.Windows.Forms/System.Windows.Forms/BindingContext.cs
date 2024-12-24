@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,234 +24,263 @@
 //	Jackson Harper	jackson@ximian.com
 
 
-using System.Data;
 using System.Collections;
-using System.Globalization;
 using System.ComponentModel;
+using System.Data;
+using System.Globalization;
 
+namespace System.Windows.Forms
+{
+    [DefaultEvent("CollectionChanged")]
+    public class BindingContext : ICollection, IEnumerable
+    {
+        private Hashtable managers;
+        private EventHandler onCollectionChangedHandler;
 
-namespace System.Windows.Forms {
+        private class HashKey
+        {
+            public object source;
+            public string member;
 
-	[DefaultEvent("CollectionChanged")]
-	public class BindingContext : ICollection, IEnumerable {
+            public HashKey(object source, string member)
+            {
+                this.source = source;
+                this.member = member;
+            }
 
-		private Hashtable managers;
-		private EventHandler onCollectionChangedHandler;
+            public override int GetHashCode()
+            {
+                return source.GetHashCode() ^ member.GetHashCode();
+            }
 
-		private class HashKey {
-			public object source;
-			public string member;
+            public override bool Equals(object o)
+            {
+                HashKey hk = o as HashKey;
+                if (hk == null)
+                    return false;
+                return hk.source == source && hk.member == member;
+            }
+        }
 
-			public HashKey (object source, string member)
-			{
-				this.source = source;
-				this.member = member;
-			}
+        public BindingContext()
+        {
+            managers = new Hashtable();
+            onCollectionChangedHandler = null;
+        }
 
-			public override int GetHashCode ()
-			{
-				return source.GetHashCode() ^ member.GetHashCode ();
-			}
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
-			public override bool Equals (object o)
-			{
-				HashKey hk = o as HashKey;
-				if (hk == null)
-					return false;
-				return hk.source == source && hk.member == member;
-			}
-		}
+        public BindingManagerBase this[object dataSource]
+        {
+            get { return this[dataSource, String.Empty]; }
+        }
 
-		public BindingContext () 
-		{
-			managers = new Hashtable ();
-			onCollectionChangedHandler = null;
-		}
+        public BindingManagerBase this[object dataSource, string dataMember]
+        {
+            get
+            {
+                if (dataSource == null)
+                    throw new ArgumentNullException("dataSource");
+                if (dataMember == null)
+                    dataMember = String.Empty;
 
-		public bool IsReadOnly {
-			get { return false; }
-		}
+                ICurrencyManagerProvider cm_provider = dataSource as ICurrencyManagerProvider;
+                if (cm_provider != null)
+                {
+                    if (dataMember.Length == 0)
+                        return cm_provider.CurrencyManager;
 
-		public BindingManagerBase this [object dataSource] {
-			get { return this [dataSource, String.Empty]; }
-		}
+                    return cm_provider.GetRelatedCurrencyManager(dataMember);
+                }
 
-		public BindingManagerBase this [object dataSource, string dataMember] {
-			get {
-				if (dataSource == null)
-					throw new ArgumentNullException ("dataSource");
-				if (dataMember == null)
-					dataMember = String.Empty;
+                HashKey key = new HashKey(dataSource, dataMember);
+                BindingManagerBase res = managers[key] as BindingManagerBase;
 
-				ICurrencyManagerProvider cm_provider = dataSource as ICurrencyManagerProvider;
-				if (cm_provider != null) {
-					if (dataMember.Length == 0)
-						return cm_provider.CurrencyManager;
+                if (res != null)
+                    return res;
 
-					return cm_provider.GetRelatedCurrencyManager (dataMember);
-				}
+                res = CreateBindingManager(dataSource, dataMember);
+                if (res == null)
+                    return null;
+                managers[key] = res;
+                return res;
+            }
+        }
 
-				HashKey key = new HashKey (dataSource, dataMember);
-				BindingManagerBase res = managers [key] as BindingManagerBase;
+        private BindingManagerBase CreateBindingManager(object data_source, string data_member)
+        {
+            if (data_member == "")
+            {
+                if (IsListType(data_source.GetType()))
+                    return new CurrencyManager(data_source);
+                else
+                    return new PropertyManager(data_source);
+            }
+            else
+            {
+                BindingMemberInfo info = new BindingMemberInfo(data_member);
 
-				if (res != null)
-					return res;
+                BindingManagerBase parent_manager = this[data_source, info.BindingPath];
 
-				res = CreateBindingManager (dataSource, dataMember);
-				if (res == null)
-					return null;
-				managers [key] = res;
-				return res;
-			}
-		}
+                PropertyDescriptor pd =
+                    parent_manager == null
+                        ? null
+                        : parent_manager.GetItemProperties().Find(info.BindingField, true);
 
-		private BindingManagerBase CreateBindingManager (object data_source, string data_member)
-		{
-			if (data_member == "") {
-				if (IsListType (data_source.GetType ()))
-					return new CurrencyManager (data_source);
-				else
-					return new PropertyManager (data_source);
-			}
-			else {
-				BindingMemberInfo info = new BindingMemberInfo (data_member);
+                if (pd == null)
+                    throw new ArgumentException(
+                        String.Format(
+                            "Cannot create a child list for field {0}.",
+                            info.BindingField
+                        )
+                    );
 
-				BindingManagerBase parent_manager = this[data_source, info.BindingPath];
+                if (IsListType(pd.PropertyType))
+                    return new RelatedCurrencyManager(parent_manager, pd);
+                else
+                    return new RelatedPropertyManager(parent_manager, info.BindingField);
+            }
+        }
 
-				PropertyDescriptor pd = parent_manager == null ? null : parent_manager.GetItemProperties ().Find (info.BindingField, true);
+        bool IsListType(Type t)
+        {
+            return (typeof(IList).IsAssignableFrom(t) || typeof(IListSource).IsAssignableFrom(t));
+        }
 
-				if (pd == null)
-					throw new ArgumentException (String.Format ("Cannot create a child list for field {0}.", info.BindingField));
+        #region Public Instance Methods
+        public bool Contains(object dataSource)
+        {
+            return Contains(dataSource, String.Empty);
+        }
 
-				if (IsListType (pd.PropertyType))
-					return new RelatedCurrencyManager (parent_manager, pd);
-				else
-					return new RelatedPropertyManager (parent_manager, info.BindingField);
-			}
-		}
+        public bool Contains(object dataSource, string dataMember)
+        {
+            if (dataSource == null)
+                throw new ArgumentNullException("dataSource");
+            if (dataMember == null)
+                dataMember = String.Empty;
 
-		bool IsListType (Type t)
-		{
-			return (typeof (IList).IsAssignableFrom (t)
-				|| typeof (IListSource).IsAssignableFrom (t));
-		}
+            HashKey key = new HashKey(dataSource, dataMember);
+            return managers[key] != null;
+        }
+        #endregion	// Public Instance Methods
 
-		#region Public Instance Methods
-		public bool Contains(object dataSource)
-		{
-			return Contains (dataSource, String.Empty);
-		}
+        #region Protected Instance Methods
 
-		public bool Contains (object dataSource, string dataMember)
-		{
-			if (dataSource == null)
-				throw new ArgumentNullException ("dataSource");
-			if (dataMember == null)
-				dataMember = String.Empty;
+        protected internal void Add(object dataSource, BindingManagerBase listManager)
+        {
+            AddCore(dataSource, listManager);
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Add, dataSource)
+            );
+        }
 
-			HashKey key = new HashKey (dataSource, dataMember);
-			return managers [key] != null;
-		}
-		#endregion	// Public Instance Methods
+        protected virtual void AddCore(object dataSource, BindingManagerBase listManager)
+        {
+            if (dataSource == null)
+                throw new ArgumentNullException("dataSource");
+            if (listManager == null)
+                throw new ArgumentNullException("listManager");
 
-		#region Protected Instance Methods
+            HashKey key = new HashKey(dataSource, String.Empty);
+            managers[key] = listManager;
+        }
 
-		protected internal void Add (object dataSource, BindingManagerBase listManager)
-		{
-			AddCore (dataSource, listManager);
-			OnCollectionChanged (new CollectionChangeEventArgs (CollectionChangeAction.Add, dataSource));
-		}
+        protected internal void Clear()
+        {
+            ClearCore();
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, null)
+            );
+        }
 
-		protected virtual void AddCore (object dataSource, BindingManagerBase listManager)
-		{
-			if (dataSource == null)
-				throw new ArgumentNullException ("dataSource");
-			if (listManager == null)
-				throw new ArgumentNullException ("listManager");
+        protected virtual void ClearCore()
+        {
+            managers.Clear();
+        }
 
-			HashKey key = new HashKey (dataSource, String.Empty);
-			managers [key] = listManager;
-		}
+        protected virtual void OnCollectionChanged(CollectionChangeEventArgs ccevent)
+        {
+            if (onCollectionChangedHandler != null)
+            {
+                onCollectionChangedHandler(this, ccevent);
+            }
+        }
 
-		protected internal void Clear ()
-		{
-			ClearCore();
-			OnCollectionChanged (new CollectionChangeEventArgs (CollectionChangeAction.Refresh, null));
-		}
+        protected internal void Remove(object dataSource)
+        {
+            if (dataSource == null)
+                throw new ArgumentNullException("dataSource");
 
-		protected virtual void ClearCore ()
-		{
-			managers.Clear ();
-		}
+            RemoveCore(dataSource);
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Remove, dataSource)
+            );
+        }
 
-		protected virtual void OnCollectionChanged (CollectionChangeEventArgs ccevent)
-		{
-			if (onCollectionChangedHandler != null) {
-				onCollectionChangedHandler (this, ccevent);
-			}
-		}
+        protected virtual void RemoveCore(object dataSource)
+        {
+            HashKey[] keys = new HashKey[managers.Keys.Count];
+            managers.Keys.CopyTo(keys, 0);
 
-		protected internal void Remove (object dataSource)
-		{
-			if (dataSource == null)
-				throw new ArgumentNullException ("dataSource");
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i].source == dataSource)
+                    managers.Remove(keys[i]);
+            }
+        }
 
-			RemoveCore (dataSource);
-			OnCollectionChanged (new CollectionChangeEventArgs (CollectionChangeAction.Remove, dataSource));
-		}
+        [MonoTODO("Stub, does nothing")]
+        public static void UpdateBinding(BindingContext newBindingContext, Binding binding) { }
 
-		protected virtual void RemoveCore (object dataSource)
-		{
-			HashKey[] keys = new HashKey [managers.Keys.Count];
-			managers.Keys.CopyTo (keys, 0);
+        #endregion	// Protected Instance Methods
 
-			for (int i = 0; i < keys.Length; i ++) {
-				if (keys[i].source == dataSource)
-					managers.Remove (keys[i]);
-			}
-		}
+        #region Events
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public event CollectionChangeEventHandler CollectionChanged
+        {
+            add { throw new NotImplementedException(); }
+            remove
+            { /* nothing to do here.. */
+            }
+        }
+        #endregion	// Events
 
-		[MonoTODO ("Stub, does nothing")]
-		public static void UpdateBinding (BindingContext newBindingContext, Binding binding)
-		{
-		}
+        #region ICollection Interfaces
+        void ICollection.CopyTo(Array ar, int index)
+        {
+            managers.CopyTo(ar, index);
+        }
 
-		#endregion	// Protected Instance Methods
+        int ICollection.Count
+        {
+            get { return managers.Count; }
+        }
 
-		#region Events
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public event CollectionChangeEventHandler CollectionChanged {
-			add { throw new NotImplementedException (); }
-			remove { /* nothing to do here.. */ }
-		}
-		#endregion	// Events
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
+        }
 
-		#region ICollection Interfaces
-		void ICollection.CopyTo (Array ar, int index)
-		{
-			managers.CopyTo (ar, index);
-		}
+        object ICollection.SyncRoot
+        {
+            get { return null; }
+        }
 
-		int ICollection.Count {
-			get { return managers.Count; }
-		}
+        #endregion	// ICollection Interfaces
 
-		bool ICollection.IsSynchronized {
-			get { return false; }
-		}
-
-		object ICollection.SyncRoot {
-			get { return null; }
-		}
-
-		#endregion	// ICollection Interfaces
-
-		#region IEnumerable Interfaces
-		[MonoInternalNote ("our enumerator is slightly different.  in MS's implementation the Values are WeakReferences to the managers.")]
-		IEnumerator IEnumerable.GetEnumerator() {
-			return managers.GetEnumerator ();
-		}
-		#endregion	// IEnumerable Interfaces
-	}
+        #region IEnumerable Interfaces
+        [MonoInternalNote(
+            "our enumerator is slightly different.  in MS's implementation the Values are WeakReferences to the managers."
+        )]
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return managers.GetEnumerator();
+        }
+        #endregion	// IEnumerable Interfaces
+    }
 }

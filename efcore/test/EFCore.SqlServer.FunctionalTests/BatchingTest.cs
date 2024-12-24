@@ -64,7 +64,8 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
 
                 context.SaveChanges();
             },
-            context => AssertDatabaseState(context, clientOrder, expectedBlogs));
+            context => AssertDatabaseState(context, clientOrder, expectedBlogs)
+        );
     }
 
     [ConditionalFact]
@@ -84,7 +85,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner1,
-                    Order = 1
+                    Order = 1,
                 };
 
                 context.Set<Blog>().Add(blog1);
@@ -99,7 +100,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner1,
-                    Order = 1
+                    Order = 1,
                 };
 
                 context.Set<Blog>().Add(blog2);
@@ -109,7 +110,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner2,
-                    Order = 2
+                    Order = 2,
                 };
 
                 context.Set<Blog>().Add(blog3);
@@ -117,7 +118,8 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
 
                 context.SaveChanges();
             },
-            context => AssertDatabaseState(context, true, expectedBlogs));
+            context => AssertDatabaseState(context, true, expectedBlogs)
+        );
     }
 
     [ConditionalTheory]
@@ -148,14 +150,21 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
             },
             context =>
             {
-                var posts = context.Set<Post>().Where(p => p.BlogId == blogId).OrderBy(p => p.Order);
+                var posts = context
+                    .Set<Post>()
+                    .Where(p => p.BlogId == blogId)
+                    .OrderBy(p => p.Order);
                 var lastId = 0;
                 foreach (var post in posts)
                 {
-                    Assert.True(post.PostId > lastId, $"Last ID: {lastId}, current ID: {post.PostId}");
+                    Assert.True(
+                        post.PostId > lastId,
+                        $"Last ID: {lastId}, current ID: {post.PostId}"
+                    );
                     lastId = post.PostId;
                 }
-            });
+            }
+        );
     }
 
     [ConditionalFact]
@@ -175,29 +184,33 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner1,
-                    Order = 1
-                });
+                    Order = 1,
+                }
+            );
             blogs.Add(
                 new Blog
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner2,
-                    Order = 2
-                });
+                    Order = 2,
+                }
+            );
             blogs.Add(
                 new Blog
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner1,
-                    Order = 3
-                });
+                    Order = 3,
+                }
+            );
             blogs.Add(
                 new Blog
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner2,
-                    Order = 4
-                });
+                    Order = 4,
+                }
+            );
 
             context.AddRange(blogs);
 
@@ -207,10 +220,12 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
         for (var i = 0; i < 10; i++)
         {
             Parallel.ForEach(
-                blogs, blog =>
+                blogs,
+                blog =>
                 {
                     RemoveAndAddPosts(blog);
-                });
+                }
+            );
         }
 
         void RemoveAndAddPosts(Blog blog)
@@ -233,7 +248,11 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
     [ConditionalFact]
     public void Deadlock_on_deletes_with_dependents_is_handled_correctly()
     {
-        var owners = new[] { new Owner { Name = "0" }, new Owner { Name = "1" } };
+        var owners = new[]
+        {
+            new Owner { Name = "0" },
+            new Owner { Name = "1" },
+        };
         using (var context = CreateContext())
         {
             context.Owners.AddRange(owners);
@@ -245,7 +264,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner,
-                    Order = h
+                    Order = h,
                 };
 
                 for (var i = 0; i <= 40; i++)
@@ -260,14 +279,17 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
         }
 
         Parallel.ForEach(
-            owners, owner =>
+            owners,
+            owner =>
             {
-                using var context = (BloggingContext)Fixture.CreateContext(useConnectionString: true);
+                using var context = (BloggingContext)
+                    Fixture.CreateContext(useConnectionString: true);
 
                 context.RemoveRange(context.Blogs.Where(b => b.OwnerId == owner.Id));
 
                 context.SaveChanges();
-            });
+            }
+        );
 
         using (var context = CreateContext())
         {
@@ -278,18 +300,23 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
     }
 
     [ConditionalFact]
-    public void Inserts_when_database_type_is_different()
-        => ExecuteWithStrategyInTransaction(
+    public void Inserts_when_database_type_is_different() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var owner1 = new Owner { Id = "0", Name = "Zero" };
-                var owner2 = new Owner { Id = "A", Name = string.Join("", Enumerable.Repeat('A', 900)) };
+                var owner2 = new Owner
+                {
+                    Id = "A",
+                    Name = string.Join("", Enumerable.Repeat('A', 900)),
+                };
                 context.Owners.Add(owner1);
                 context.Owners.Add(owner2);
 
                 context.SaveChanges();
             },
-            context => Assert.Equal(2, context.Owners.Count()));
+            context => Assert.Equal(2, context.Owners.Count())
+        );
 
     [ConditionalTheory]
     [InlineData(3)]
@@ -319,14 +346,26 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
 
                 Assert.Contains(
                     minBatchSize == 3
-                        ? RelationalResources.LogBatchReadyForExecution(new TestLogger<SqlServerLoggingDefinitions>())
+                        ? RelationalResources
+                            .LogBatchReadyForExecution(
+                                new TestLogger<SqlServerLoggingDefinitions>()
+                            )
                             .GenerateMessage(3)
-                        : RelationalResources.LogBatchSmallerThanMinBatchSize(new TestLogger<SqlServerLoggingDefinitions>())
+                        : RelationalResources
+                            .LogBatchSmallerThanMinBatchSize(
+                                new TestLogger<SqlServerLoggingDefinitions>()
+                            )
                             .GenerateMessage(3, 4),
-                    Fixture.TestSqlLoggerFactory.Log.Select(l => l.Message));
+                    Fixture.TestSqlLoggerFactory.Log.Select(l => l.Message)
+                );
 
-                Assert.Equal(minBatchSize <= 3 ? 1 : 3, Fixture.TestSqlLoggerFactory.SqlStatements.Count);
-            }, context => AssertDatabaseState(context, false, expectedBlogs));
+                Assert.Equal(
+                    minBatchSize <= 3 ? 1 : 3,
+                    Fixture.TestSqlLoggerFactory.SqlStatements.Count
+                );
+            },
+            context => AssertDatabaseState(context, false, expectedBlogs)
+        );
     }
 
     private void AssertDatabaseState(DbContext context, bool clientOrder, List<Blog> expectedBlogs)
@@ -350,43 +389,43 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
         }
     }
 
-    private BloggingContext CreateContext()
-        => (BloggingContext)Fixture.CreateContext();
+    private BloggingContext CreateContext() => (BloggingContext)Fixture.CreateContext();
 
     private void ExecuteWithStrategyInTransaction(
         Action<BloggingContext> testOperation,
-        Action<BloggingContext> nestedTestOperation)
-        => TestHelpers.ExecuteWithStrategyInTransaction(
-            CreateContext, UseTransaction, testOperation, nestedTestOperation);
+        Action<BloggingContext> nestedTestOperation
+    ) =>
+        TestHelpers.ExecuteWithStrategyInTransaction(
+            CreateContext,
+            UseTransaction,
+            testOperation,
+            nestedTestOperation
+        );
 
-    protected void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction) =>
+        facade.UseTransaction(transaction.GetDbTransaction());
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     private class BloggingContext : PoolableDbContext
     {
         public BloggingContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Owner>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedOnAdd();
-                    b.Property(e => e.Version).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
-                    b.Property(e => e.Name).HasColumnType("nvarchar(450)");
-                });
-            modelBuilder.Entity<Blog>(
-                b =>
-                {
-                    b.Property(e => e.Id).HasDefaultValueSql("NEWID()");
-                    b.Property(e => e.Version).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
-                });
+            modelBuilder.Entity<Owner>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedOnAdd();
+                b.Property(e => e.Version).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+                b.Property(e => e.Name).HasColumnType("nvarchar(450)");
+            });
+            modelBuilder.Entity<Blog>(b =>
+            {
+                b.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+                b.Property(e => e.Version).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+            });
         }
 
         // ReSharper disable once UnusedMember.Local
@@ -429,19 +468,16 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
 
     public class BatchingTestFixture : SharedStoreFixtureBase<PoolableDbContext>
     {
-        protected override string StoreName
-            => "BatchingTest";
+        protected override string StoreName => "BatchingTest";
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override Type ContextType { get; } = typeof(BloggingContext);
 
-        protected override bool ShouldLogCategory(string logCategory)
-            => logCategory == DbLoggerCategory.Update.Name;
+        protected override bool ShouldLogCategory(string logCategory) =>
+            logCategory == DbLoggerCategory.Update.Name;
 
         protected override void Seed(PoolableDbContext context)
         {
@@ -449,39 +485,52 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
             context.Database.ExecuteSqlRaw(
                 @"
 ALTER TABLE dbo.Owners
-    ALTER COLUMN Name nvarchar(MAX);");
+    ALTER COLUMN Name nvarchar(MAX);"
+            );
         }
 
         public DbContext CreateContext(
             int? minBatchSize = null,
             int? maxBatchSize = null,
             bool useConnectionString = false,
-            bool disableConnectionResiliency = false)
+            bool disableConnectionResiliency = false
+        )
         {
             var options = CreateOptions();
             var optionsBuilder = new DbContextOptionsBuilder(options);
             if (useConnectionString)
             {
-                RelationalOptionsExtension extension = options.FindExtension<SqlServerOptionsExtension>()
+                RelationalOptionsExtension extension =
+                    options.FindExtension<SqlServerOptionsExtension>()
                     ?? new SqlServerOptionsExtension();
 
-                extension = extension.WithConnection(null).WithConnectionString(((SqlServerTestStore)TestStore).ConnectionString);
-                ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+                extension = extension
+                    .WithConnection(null)
+                    .WithConnectionString(((SqlServerTestStore)TestStore).ConnectionString);
+                ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                    extension
+                );
             }
 
             if (minBatchSize.HasValue)
             {
-                new SqlServerDbContextOptionsBuilder(optionsBuilder).MinBatchSize(minBatchSize.Value);
+                new SqlServerDbContextOptionsBuilder(optionsBuilder).MinBatchSize(
+                    minBatchSize.Value
+                );
             }
 
             if (maxBatchSize.HasValue)
             {
-                new SqlServerDbContextOptionsBuilder(optionsBuilder).MinBatchSize(maxBatchSize.Value);
+                new SqlServerDbContextOptionsBuilder(optionsBuilder).MinBatchSize(
+                    maxBatchSize.Value
+                );
             }
 
             if (disableConnectionResiliency)
             {
-                new SqlServerDbContextOptionsBuilder(optionsBuilder).ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+                new SqlServerDbContextOptionsBuilder(optionsBuilder).ExecutionStrategy(
+                    d => new SqlServerExecutionStrategy(d)
+                );
             }
 
             return new BloggingContext(optionsBuilder.Options);

@@ -12,8 +12,12 @@ namespace System.ServiceModel.Discovery
         EndpointDiscoveryMetadata endpointDiscoveryMetadata;
         DiscoveryMessageSequence messageSequence;
 
-        internal FindProgressChangedEventArgs(int progressPercentage, object userState,
-            EndpointDiscoveryMetadata endpointDiscoveryMetadata, DiscoveryMessageSequence messageSequence)
+        internal FindProgressChangedEventArgs(
+            int progressPercentage,
+            object userState,
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            DiscoveryMessageSequence messageSequence
+        )
             : base(progressPercentage, userState)
         {
             this.endpointDiscoveryMetadata = endpointDiscoveryMetadata;
@@ -22,18 +26,12 @@ namespace System.ServiceModel.Discovery
 
         public EndpointDiscoveryMetadata EndpointDiscoveryMetadata
         {
-            get
-            {
-                return this.endpointDiscoveryMetadata;
-            }
+            get { return this.endpointDiscoveryMetadata; }
         }
 
         public DiscoveryMessageSequence MessageSequence
         {
-            get
-            {
-                return this.messageSequence;
-            }
+            get { return this.messageSequence; }
         }
     }
 }

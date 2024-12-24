@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,36 +28,75 @@ using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
-	[ServiceContract (Name = "TargetService", Namespace = MessageContractsCD1.NS, CallbackContract = typeof (IDiscoveryTargetCallbackContractCD1))]
-	internal interface IDiscoveryTargetContractCD1
-	{
-		[OperationContract (Name = "ProbeCD1", Action = MessageContractsCD1.ProbeAction, AsyncPattern = true, IsOneWay = true)]
-		IAsyncResult BeginFind (MessageContractsCD1.FindRequest message, AsyncCallback callback, object state);
+    [ServiceContract(
+        Name = "TargetService",
+        Namespace = MessageContractsCD1.NS,
+        CallbackContract = typeof(IDiscoveryTargetCallbackContractCD1)
+    )]
+    internal interface IDiscoveryTargetContractCD1
+    {
+        [OperationContract(
+            Name = "ProbeCD1",
+            Action = MessageContractsCD1.ProbeAction,
+            AsyncPattern = true,
+            IsOneWay = true
+        )]
+        IAsyncResult BeginFind(
+            MessageContractsCD1.FindRequest message,
+            AsyncCallback callback,
+            object state
+        );
 
-		void EndFind (IAsyncResult result);
+        void EndFind(IAsyncResult result);
 
-		[OperationContract (Name = "ResolveCD1", Action = MessageContractsCD1.ResolveAction, AsyncPattern = true, IsOneWay = true)]
-		IAsyncResult BeginResolve (MessageContractsCD1.ResolveRequest message, AsyncCallback callback, object state);
+        [OperationContract(
+            Name = "ResolveCD1",
+            Action = MessageContractsCD1.ResolveAction,
+            AsyncPattern = true,
+            IsOneWay = true
+        )]
+        IAsyncResult BeginResolve(
+            MessageContractsCD1.ResolveRequest message,
+            AsyncCallback callback,
+            object state
+        );
 
-		void EndResolve (IAsyncResult result);
+        void EndResolve(IAsyncResult result);
 
-		[OperationContract (Name = "HelloCD1", Action = MessageContractsCD1.HelloAction, IsOneWay = true, AsyncPattern = true)]
-		IAsyncResult BeginOnlineAnnouncement (MessageContractsCD1.OnlineAnnouncement message, AsyncCallback callback, object state);
+        [OperationContract(
+            Name = "HelloCD1",
+            Action = MessageContractsCD1.HelloAction,
+            IsOneWay = true,
+            AsyncPattern = true
+        )]
+        IAsyncResult BeginOnlineAnnouncement(
+            MessageContractsCD1.OnlineAnnouncement message,
+            AsyncCallback callback,
+            object state
+        );
 
-		void EndOnlineAnnouncement (IAsyncResult result);
-	}
+        void EndOnlineAnnouncement(IAsyncResult result);
+    }
 
-	internal interface IDiscoveryTargetCallbackContractCD1
-	{
-		[OperationContract (Name = "ProbeMatchesCD1", Action = MessageContractsCD1.ProbeMatchAction, IsOneWay = true)]
-		void ReplyFind (MessageContractsCD1.FindResponse message);
+    internal interface IDiscoveryTargetCallbackContractCD1
+    {
+        [OperationContract(
+            Name = "ProbeMatchesCD1",
+            Action = MessageContractsCD1.ProbeMatchAction,
+            IsOneWay = true
+        )]
+        void ReplyFind(MessageContractsCD1.FindResponse message);
 
-		[OperationContract (Name = "ResolveMatchesCD1", Action = MessageContractsCD1.ResolveMatchAction, IsOneWay = true)]
-		void ReplyResolve (MessageContractsCD1.ResolveResponse message);
-	}
+        [OperationContract(
+            Name = "ResolveMatchesCD1",
+            Action = MessageContractsCD1.ResolveMatchAction,
+            IsOneWay = true
+        )]
+        void ReplyResolve(MessageContractsCD1.ResolveResponse message);
+    }
 }

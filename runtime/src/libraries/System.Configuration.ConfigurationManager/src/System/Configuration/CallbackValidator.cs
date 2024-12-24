@@ -8,9 +8,11 @@ namespace System.Configuration
         private readonly ValidatorCallback _callback;
         private readonly Type _type;
 
-        public CallbackValidator(Type type, ValidatorCallback callback) : this(callback)
+        public CallbackValidator(Type type, ValidatorCallback callback)
+            : this(callback)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
             _type = type;
         }
 

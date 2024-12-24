@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodePrimitiveExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a primitive value.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodePrimitiveExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodePrimitiveExpression : CodeExpression
+    {
         private object value;
 
         /// <devdoc>
@@ -32,8 +29,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodePrimitiveExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodePrimitiveExpression() {
-        }
+        public CodePrimitiveExpression() { }
 
         /// <devdoc>
         ///    <para>
@@ -41,7 +37,8 @@ namespace System.CodeDom {
         ///       object.
         ///    </para>
         /// </devdoc>
-        public CodePrimitiveExpression(object value) {
+        public CodePrimitiveExpression(object value)
+        {
             Value = value;
         }
 
@@ -50,13 +47,10 @@ namespace System.CodeDom {
         ///       Gets or sets the object to represent.
         ///    </para>
         /// </devdoc>
-        public object Value {
-            get {
-                return value;
-            }
-            set {
-                this.value = value;
-            }
+        public object Value
+        {
+            get { return value; }
+            set { this.value = value; }
         }
     }
 }

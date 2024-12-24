@@ -15,7 +15,8 @@ public partial class DisallowNonParsableComplexTypesOnParametersTest
     public async Task Route_Parameter_withoutComplexTypes_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
 webApp.MapGet(""/{name}"", (string name) => {});
@@ -195,7 +196,9 @@ public class Customer
 }
 """;
 
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable)
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable
+        )
             .WithArguments("customer", "Customer")
             .WithLocation(0);
 
@@ -218,7 +221,9 @@ public class Customer
 }
 """;
 
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable)
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable
+        )
             .WithArguments("customer", "Customer")
             .WithLocation(0);
 
@@ -308,7 +313,9 @@ public class Customer
 }
 """;
 
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable)
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable
+        )
             .WithArguments("customer", "Customer")
             .WithLocation(0);
 
@@ -444,7 +451,9 @@ public class Customer : IBindableFromHttpContext<Customer>
 }
 """;
 
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable)
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable
+        )
             .WithArguments("customer", "Customer")
             .WithLocation(0);
 
@@ -475,7 +484,9 @@ public class Customer : IBindableFromHttpContext<Customer>
 }
 """;
 
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable)
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.RouteParameterComplexTypeIsNotParsable
+        )
             .WithArguments("customer", "Customer")
             .WithLocation(0);
 
@@ -740,4 +751,3 @@ public class CommercialCustomer : ICustomer
         await VerifyCS.VerifyAnalyzerAsync(source);
     }
 }
-

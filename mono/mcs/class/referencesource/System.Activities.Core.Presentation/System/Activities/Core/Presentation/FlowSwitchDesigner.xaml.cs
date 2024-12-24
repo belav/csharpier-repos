@@ -27,14 +27,25 @@ namespace System.Activities.Core.Presentation
     partial class FlowSwitchDesigner
     {
         public static readonly DependencyProperty ExpressionButtonVisibilityProperty =
-            DependencyProperty.Register("ExpressionButtonVisibility", typeof(Visibility), typeof(FlowSwitchDesigner));
+            DependencyProperty.Register(
+                "ExpressionButtonVisibility",
+                typeof(Visibility),
+                typeof(FlowSwitchDesigner)
+            );
 
         public static readonly DependencyProperty ExpressionButtonColorProperty =
-            DependencyProperty.Register("ExpressionButtonColor", typeof(Brush), typeof(FlowSwitchDesigner));
+            DependencyProperty.Register(
+                "ExpressionButtonColor",
+                typeof(Brush),
+                typeof(FlowSwitchDesigner)
+            );
 
-        static readonly DependencyProperty ShowAllConditionsProperty =
-            DependencyProperty.Register("ShowAllConditions", typeof(bool), typeof(FlowSwitchDesigner),
-            new UIPropertyMetadata(new PropertyChangedCallback(OnShowAllConditionsChanged)));
+        static readonly DependencyProperty ShowAllConditionsProperty = DependencyProperty.Register(
+            "ShowAllConditions",
+            typeof(bool),
+            typeof(FlowSwitchDesigner),
+            new UIPropertyMetadata(new PropertyChangedCallback(OnShowAllConditionsChanged))
+        );
 
         bool isPinned;
         bool expressionShown = false;
@@ -49,11 +60,18 @@ namespace System.Activities.Core.Presentation
                 //UnRegistering because of 137896: Inside tab control multiple Loaded events happen without an Unloaded event.
                 this.ModelItem.PropertyChanged -= OnModelItemPropertyChanged;
                 this.ModelItem.PropertyChanged += OnModelItemPropertyChanged;
-                OnModelItemPropertyChanged(this.ModelItem, new PropertyChangedEventArgs("Expression"));
+                OnModelItemPropertyChanged(
+                    this.ModelItem,
+                    new PropertyChangedEventArgs("Expression")
+                );
 
                 SetupBinding();
 
-                if (this.Context.Services.GetService<DesignerConfigurationService>().TargetFrameworkName.IsLessThan45())
+                if (
+                    this
+                        .Context.Services.GetService<DesignerConfigurationService>()
+                        .TargetFrameworkName.IsLessThan45()
+                )
                 {
                     this.displayNameTextBox.IsReadOnly = true;
                 }
@@ -80,17 +98,28 @@ namespace System.Activities.Core.Presentation
         private void InitializeAnnotation()
         {
             this.annotationManager = new AnnotationManager(this);
-            this.annotationManager.AnnotationVisualProvider = new FlowSwitchDesignerAnnotationVisualProvider(this);
+            this.annotationManager.AnnotationVisualProvider =
+                new FlowSwitchDesignerAnnotationVisualProvider(this);
         }
 
         void SetupBinding()
         {
             Binding showAllConditionsBinding = new Binding();
-            showAllConditionsBinding.RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(FlowchartDesigner), 1);
-            showAllConditionsBinding.Path = new PropertyPath(FlowchartDesigner.ShowAllConditionsProperty);
+            showAllConditionsBinding.RelativeSource = new RelativeSource(
+                RelativeSourceMode.FindAncestor,
+                typeof(FlowchartDesigner),
+                1
+            );
+            showAllConditionsBinding.Path = new PropertyPath(
+                FlowchartDesigner.ShowAllConditionsProperty
+            );
             showAllConditionsBinding.Mode = BindingMode.OneWay;
 
-            BindingOperations.SetBinding(this, FlowSwitchDesigner.ShowAllConditionsProperty, showAllConditionsBinding);
+            BindingOperations.SetBinding(
+                this,
+                FlowSwitchDesigner.ShowAllConditionsProperty,
+                showAllConditionsBinding
+            );
         }
 
         public Visibility ExpressionButtonVisibility
@@ -116,31 +145,57 @@ namespace System.Activities.Core.Presentation
 
             builder.AddCustomAttributes(type, new DesignerAttribute(typeof(FlowSwitchDesigner)));
             builder.AddCustomAttributes(type, type.GetProperty("Default"), BrowsableAttribute.No);
-            builder.AddCustomAttributes(type, new ActivityDesignerOptionsAttribute
-            {
-                AllowDrillIn = false,
-                OutlineViewIconProvider = (modelItem) =>
+            builder.AddCustomAttributes(
+                type,
+                new ActivityDesignerOptionsAttribute
                 {
-                    if (modelItem != null)
+                    AllowDrillIn = false,
+                    OutlineViewIconProvider = (modelItem) =>
                     {
-                        ResourceDictionary icons = EditorResources.GetIcons();
-                        if (icons.Contains("FlowSwitchIcon") && icons["FlowSwitchIcon"] is DrawingBrush)
+                        if (modelItem != null)
                         {
-                            return (DrawingBrush)icons["FlowSwitchIcon"];
+                            ResourceDictionary icons = EditorResources.GetIcons();
+                            if (
+                                icons.Contains("FlowSwitchIcon")
+                                && icons["FlowSwitchIcon"] is DrawingBrush
+                            )
+                            {
+                                return (DrawingBrush)icons["FlowSwitchIcon"];
+                            }
                         }
-                    }
 
-                    return null;
+                        return null;
+                    },
                 }
-            });
+            );
             builder.AddCustomAttributes(type, new FeatureAttribute(typeof(FlowSwitchLabelFeature)));
-            builder.AddCustomAttributes(type, new FeatureAttribute(typeof(FlowSwitchDefaultLinkFeature)));
+            builder.AddCustomAttributes(
+                type,
+                new FeatureAttribute(typeof(FlowSwitchDefaultLinkFeature))
+            );
 
-            builder.AddCustomAttributes(type, type.GetProperty("Cases"), new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false, ChildNodePrefix = "Case : " });
-            builder.AddCustomAttributes(type, type.GetProperty("Expression"), new HidePropertyInOutlineViewAttribute());
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Cases"),
+                new ShowPropertyInOutlineViewAttribute()
+                {
+                    CurrentPropertyVisible = false,
+                    ChildNodePrefix = "Case : ",
+                }
+            );
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Expression"),
+                new HidePropertyInOutlineViewAttribute()
+            );
 
             Type flowSwitchLinkType = typeof(FlowSwitchCaseLink<>);
-            builder.AddCustomAttributes(flowSwitchLinkType, "Case", PropertyValueEditor.CreateEditorAttribute(typeof(FlowSwitchLinkCasePropertyEditor)), new EditorReuseAttribute(false));
+            builder.AddCustomAttributes(
+                flowSwitchLinkType,
+                "Case",
+                PropertyValueEditor.CreateEditorAttribute(typeof(FlowSwitchLinkCasePropertyEditor)),
+                new EditorReuseAttribute(false)
+            );
         }
 
         protected override AutomationPeer OnCreateAutomationPeer()
@@ -163,33 +218,59 @@ namespace System.Activities.Core.Presentation
             {
                 // To fix 218600 without losing PropertyGrid focus (Bug 210326), the only workaround is to
                 // update the connector label manually, because FlowSwitchLink.ModelItem["DefaultCaseDisplayName"]
-                // is a FakeModelPropertyImpl, and would not generate a Undo unit 
+                // is a FakeModelPropertyImpl, and would not generate a Undo unit
                 // (FakeModelNotifyPropertyChange.GetInverse() returns null).
-                // However, there is a known issue with PropertyGrid bound to a fake ModelItem.  The workaround is 
+                // However, there is a known issue with PropertyGrid bound to a fake ModelItem.  The workaround is
                 // to shift the focus to the FlowchartDesigner IF the keyboard focus is on the connector when the user
                 // calls Undo/Redo, to avoid the problem of PropertyGrid not refreshable.
-                FlowchartDesigner flowchartDesigner = VisualTreeUtils.FindVisualAncestor<FlowchartDesigner>(this);
-                Fx.Assert(null != flowchartDesigner, "flowchart designer cannot be null because FlowswitchDesigner must exist within the same visual tree ofthe parent Flowchart.");
+                FlowchartDesigner flowchartDesigner =
+                    VisualTreeUtils.FindVisualAncestor<FlowchartDesigner>(this);
+                Fx.Assert(
+                    null != flowchartDesigner,
+                    "flowchart designer cannot be null because FlowswitchDesigner must exist within the same visual tree ofthe parent Flowchart."
+                );
 
-                if (null != flowchartDesigner &&
-                    null != this.ModelItem.Properties["Default"].Value &&
-                    this.Context.Services.GetService<UndoEngine>().IsUndoRedoInProgress)
+                if (
+                    null != flowchartDesigner
+                    && null != this.ModelItem.Properties["Default"].Value
+                    && this.Context.Services.GetService<UndoEngine>().IsUndoRedoInProgress
+                )
                 {
                     // the designer is available
-                    Connector connector = flowchartDesigner.GetLinkOnCanvas(this.ModelItem, this.ModelItem.Properties["Default"].Value, "Default");
+                    Connector connector = flowchartDesigner.GetLinkOnCanvas(
+                        this.ModelItem,
+                        this.ModelItem.Properties["Default"].Value,
+                        "Default"
+                    );
                     Fx.Assert(null != connector, "Connector should not be null.");
                     ModelItem linkModelItem = FlowchartDesigner.GetLinkModelItem(connector);
-                    Fx.Assert(linkModelItem is FakeModelItemImpl, "ModelItem of FlowSwitch link is fake.");
-                    IFlowSwitchDefaultLink link = (IFlowSwitchDefaultLink)linkModelItem.GetCurrentValue();
-                    string defaultDisplayName =
-                        (string)this.ModelItem.Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName].Value.GetCurrentValue();
+                    Fx.Assert(
+                        linkModelItem is FakeModelItemImpl,
+                        "ModelItem of FlowSwitch link is fake."
+                    );
+                    IFlowSwitchDefaultLink link = (IFlowSwitchDefaultLink)
+                        linkModelItem.GetCurrentValue();
+                    string defaultDisplayName = (string)
+                        this
+                            .ModelItem.Properties[
+                                FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                            ]
+                            .Value.GetCurrentValue();
 
                     if (link.DefaultCaseDisplayName != defaultDisplayName)
                     {
                         // the purpose of re-setting the link value during Undo/Redo is to update the FlowSwitch label
-                        using (ModelEditingScope scope = this.ModelItem.BeginEdit(SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc))
+                        using (
+                            ModelEditingScope scope = this.ModelItem.BeginEdit(
+                                SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc
+                            )
+                        )
                         {
-                            linkModelItem.Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName].SetValue(defaultDisplayName);
+                            linkModelItem
+                                .Properties[
+                                    FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                                ]
+                                .SetValue(defaultDisplayName);
                             link.DefaultCaseDisplayName = defaultDisplayName;
                             scope.Complete();
                         }
@@ -199,7 +280,7 @@ namespace System.Activities.Core.Presentation
                             // cause the connector to lose focus, because the PropertyGrid would not have focus.
                             // this scenario only happens if the user explicitly selects the FlowSwitch link after
                             // editing the DefaultDisplayName.  This behavior is only a workaround due to the fact
-                            // that PropertyGrid does not receive update from change in a FakeModelPropertyImpl 
+                            // that PropertyGrid does not receive update from change in a FakeModelPropertyImpl
                             // (i.e. FlowSwitchLink).
                             Keyboard.ClearFocus();
                             Selection.SelectOnly(this.Context, this.ModelItem);
@@ -212,23 +293,31 @@ namespace System.Activities.Core.Presentation
 
         void Update()
         {
-            Activity expressionActivity = this.ModelItem.Properties["Expression"].ComputedValue as Activity;
-            string expressionString = ExpressionHelper.GetExpressionString(expressionActivity, this.ModelItem);
+            Activity expressionActivity =
+                this.ModelItem.Properties["Expression"].ComputedValue as Activity;
+            string expressionString = ExpressionHelper.GetExpressionString(
+                expressionActivity,
+                this.ModelItem
+            );
             bool expressionSpecified = !string.IsNullOrEmpty(expressionString);
             if (!expressionSpecified)
             {
                 this.isPinned = false;
             }
 
-            this.ExpressionButtonVisibility = expressionSpecified ? Visibility.Visible : Visibility.Collapsed;
+            this.ExpressionButtonVisibility = expressionSpecified
+                ? Visibility.Visible
+                : Visibility.Collapsed;
 
             if (this.isPinned)
             {
-                this.ExpressionButtonColor = WorkflowDesignerColors.FlowchartExpressionButtonPressedBrush;
+                this.ExpressionButtonColor =
+                    WorkflowDesignerColors.FlowchartExpressionButtonPressedBrush;
             }
             else if (this.IsMouseOver)
             {
-                this.ExpressionButtonColor = WorkflowDesignerColors.FlowchartExpressionButtonMouseOverBrush;
+                this.ExpressionButtonColor =
+                    WorkflowDesignerColors.FlowchartExpressionButtonMouseOverBrush;
             }
             else
             {
@@ -257,7 +346,10 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        static void OnShowAllConditionsChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        static void OnShowAllConditionsChanged(
+            DependencyObject obj,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             if (e.NewValue != DependencyProperty.UnsetValue)
             {
@@ -293,7 +385,9 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.indicator == null)
                 {
-                    this.indicator = new UIElementToAnnotationIndicatorAdapter(this.designer.defaultAnnotationIndicator);
+                    this.indicator = new UIElementToAnnotationIndicatorAdapter(
+                        this.designer.defaultAnnotationIndicator
+                    );
                 }
 
                 return this.indicator;

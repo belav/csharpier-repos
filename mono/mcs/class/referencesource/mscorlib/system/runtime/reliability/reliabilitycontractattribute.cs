@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>clrosdev</OWNER>
@@ -10,18 +10,19 @@
 ** Class:  ReliabilityContractAttribute
 **
 **
-** Purpose: Defines a publically documentable contract for 
+** Purpose: Defines a publically documentable contract for
 ** reliability between a method and its callers, expressing
-** what state will remain consistent in the presence of 
+** what state will remain consistent in the presence of
 ** failures (ie async exceptions like thread abort) and whether
 ** the method needs to be called from within a CER.
 **
 **
 ===========================================================*/
 
-namespace System.Runtime.ConstrainedExecution {
-    using System.Runtime.InteropServices;
+namespace System.Runtime.ConstrainedExecution
+{
     using System;
+    using System.Runtime.InteropServices;
 
     // **************************************************************************************************************************
     //
@@ -33,21 +34,30 @@ namespace System.Runtime.ConstrainedExecution {
     [Serializable]
     public enum Consistency : int
     {
-        MayCorruptProcess   = 0,
+        MayCorruptProcess = 0,
         MayCorruptAppDomain = 1,
-        MayCorruptInstance  = 2,
+        MayCorruptInstance = 2,
         WillNotCorruptState = 3,
     }
 
     [Serializable]
     public enum Cer : int
     {
-        None                = 0,
-        MayFail             = 1,  // Might fail, but the method will say it failed
-        Success             = 2,
+        None = 0,
+        MayFail = 1, // Might fail, but the method will say it failed
+        Success = 2,
     }
 
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Interface /* | AttributeTargets.Delegate*/, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Interface /* | AttributeTargets.Delegate*/
+        ,
+        Inherited = false
+    )]
     public sealed class ReliabilityContractAttribute : Attribute
     {
         private Consistency _consistency;
@@ -59,11 +69,13 @@ namespace System.Runtime.ConstrainedExecution {
             _cer = cer;
         }
 
-        public Consistency ConsistencyGuarantee {
+        public Consistency ConsistencyGuarantee
+        {
             get { return _consistency; }
         }
 
-        public Cer Cer {
+        public Cer Cer
+        {
             get { return _cer; }
         }
     }

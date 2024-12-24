@@ -17,16 +17,17 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols;
 
 internal partial class NavigableSymbolService
 {
-    private sealed class NavigableSymbolSource(
-        NavigableSymbolService service,
-        ITextView textView) : INavigableSymbolSource
+    private sealed class NavigableSymbolSource(NavigableSymbolService service, ITextView textView)
+        : INavigableSymbolSource
     {
         private bool _disposed;
 
-        public void Dispose()
-            => _disposed = true;
+        public void Dispose() => _disposed = true;
 
-        public async Task<INavigableSymbol?> GetNavigableSymbolAsync(SnapshotSpan triggerSpan, CancellationToken cancellationToken)
+        public async Task<INavigableSymbol?> GetNavigableSymbolAsync(
+            SnapshotSpan triggerSpan,
+            CancellationToken cancellationToken
+        )
         {
             if (_disposed)
                 return null;
@@ -37,23 +38,27 @@ internal partial class NavigableSymbolService
             if (document == null)
                 return null;
 
-            var definitionLocationService = document.GetLanguageService<IDefinitionLocationService>();
+            var definitionLocationService =
+                document.GetLanguageService<IDefinitionLocationService>();
             if (definitionLocationService == null)
                 return null;
 
-            var definitionLocation = await definitionLocationService.GetDefinitionLocationAsync(
-                document, position, cancellationToken).ConfigureAwait(false);
+            var definitionLocation = await definitionLocationService
+                .GetDefinitionLocationAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (definitionLocation == null)
                 return null;
 
-            var indicatorFactory = document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory =
+                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
 
             return new NavigableSymbol(
                 service,
                 textView,
                 definitionLocation.Location,
                 snapshot.GetSpan(definitionLocation.Span.SourceSpan.ToSpan()),
-                indicatorFactory);
+                indicatorFactory
+            );
         }
     }
 }

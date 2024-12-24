@@ -81,7 +81,10 @@ namespace System.Collections.Tests
         public static void Ctor_Int_NegativeLength_ThrowsArgumentOutOfRangeException()
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => new BitArray(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => new BitArray(-1, false));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () => new BitArray(-1, false)
+            );
         }
 
         public static IEnumerable<object[]> Ctor_BoolArray_TestData()
@@ -89,11 +92,26 @@ namespace System.Collections.Tests
             Random rnd = new Random(0);
 
             yield return new object[] { new bool[0] };
-            foreach (int size in new[] { 1, BitsPerByte, BitsPerByte * 2, BitsPerInt32, BitsPerInt32 * 2, BitsPerInt32 * 4, BitsPerInt32 * 8, BitsPerInt32 * 16})
+            foreach (
+                int size in new[]
+                {
+                    1,
+                    BitsPerByte,
+                    BitsPerByte * 2,
+                    BitsPerInt32,
+                    BitsPerInt32 * 2,
+                    BitsPerInt32 * 4,
+                    BitsPerInt32 * 8,
+                    BitsPerInt32 * 16,
+                }
+            )
             {
                 yield return new object[] { Enumerable.Repeat(true, size).ToArray() };
                 yield return new object[] { Enumerable.Repeat(false, size).ToArray() };
-                yield return new object[] { Enumerable.Range(0, size).Select(x => x % 2 == 0).ToArray() };
+                yield return new object[]
+                {
+                    Enumerable.Range(0, size).Select(x => x % 2 == 0).ToArray(),
+                };
 
                 bool[] random = new bool[size];
                 for (int i = 0; i < random.Length; i++)
@@ -124,7 +142,10 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_NullBoolArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("values", () => new BitArray((bool[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "values",
+                () => new BitArray((bool[])null)
+            );
         }
 
         public static IEnumerable<object[]> Ctor_BitArray_TestData()
@@ -133,25 +154,78 @@ namespace System.Collections.Tests
             yield return new object[] { "byte[](empty)", new BitArray(new byte[0]) };
             yield return new object[] { "int[](empty)", new BitArray(new int[0]) };
 
-            foreach (int size in new[] { 1, BitsPerByte, BitsPerByte * 2, BitsPerInt32, BitsPerInt32 * 2 })
+            foreach (
+                int size in new[]
+                {
+                    1,
+                    BitsPerByte,
+                    BitsPerByte * 2,
+                    BitsPerInt32,
+                    BitsPerInt32 * 2,
+                }
+            )
             {
                 yield return new object[] { "length", new BitArray(size) };
                 yield return new object[] { "length|default(true)", new BitArray(size, true) };
                 yield return new object[] { "length|default(false)", new BitArray(size, false) };
-                yield return new object[] { "bool[](all)", new BitArray(Enumerable.Repeat(true, size).ToArray()) };
-                yield return new object[] { "bool[](none)", new BitArray(Enumerable.Repeat(false, size).ToArray()) };
-                yield return new object[] { "bool[](alternating)", new BitArray(Enumerable.Range(0, size).Select(x => x % 2 == 0).ToArray()) };
+                yield return new object[]
+                {
+                    "bool[](all)",
+                    new BitArray(Enumerable.Repeat(true, size).ToArray()),
+                };
+                yield return new object[]
+                {
+                    "bool[](none)",
+                    new BitArray(Enumerable.Repeat(false, size).ToArray()),
+                };
+                yield return new object[]
+                {
+                    "bool[](alternating)",
+                    new BitArray(Enumerable.Range(0, size).Select(x => x % 2 == 0).ToArray()),
+                };
                 if (size >= BitsPerByte)
                 {
-                    yield return new object[] { "byte[](all)", new BitArray(Enumerable.Repeat((byte)0xff, size / BitsPerByte).ToArray()) };
-                    yield return new object[] { "byte[](none)", new BitArray(Enumerable.Repeat((byte)0x00, size / BitsPerByte).ToArray()) };
-                    yield return new object[] { "byte[](alternating)", new BitArray(Enumerable.Repeat((byte)0xaa, size / BitsPerByte).ToArray()) };
+                    yield return new object[]
+                    {
+                        "byte[](all)",
+                        new BitArray(Enumerable.Repeat((byte)0xff, size / BitsPerByte).ToArray()),
+                    };
+                    yield return new object[]
+                    {
+                        "byte[](none)",
+                        new BitArray(Enumerable.Repeat((byte)0x00, size / BitsPerByte).ToArray()),
+                    };
+                    yield return new object[]
+                    {
+                        "byte[](alternating)",
+                        new BitArray(Enumerable.Repeat((byte)0xaa, size / BitsPerByte).ToArray()),
+                    };
                 }
                 if (size >= BitsPerInt32)
                 {
-                    yield return new object[] { "int[](all)", new BitArray(Enumerable.Repeat(unchecked((int)0xffffffff), size / BitsPerInt32).ToArray()) };
-                    yield return new object[] { "int[](none)", new BitArray(Enumerable.Repeat(0x00000000, size / BitsPerInt32).ToArray()) };
-                    yield return new object[] { "int[](alternating)", new BitArray(Enumerable.Repeat(unchecked((int)0xaaaaaaaa), size / BitsPerInt32).ToArray()) };
+                    yield return new object[]
+                    {
+                        "int[](all)",
+                        new BitArray(
+                            Enumerable
+                                .Repeat(unchecked((int)0xffffffff), size / BitsPerInt32)
+                                .ToArray()
+                        ),
+                    };
+                    yield return new object[]
+                    {
+                        "int[](none)",
+                        new BitArray(Enumerable.Repeat(0x00000000, size / BitsPerInt32).ToArray()),
+                    };
+                    yield return new object[]
+                    {
+                        "int[](alternating)",
+                        new BitArray(
+                            Enumerable
+                                .Repeat(unchecked((int)0xaaaaaaaa), size / BitsPerInt32)
+                                .ToArray()
+                        ),
+                    };
                 }
             }
         }
@@ -177,7 +251,10 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_NullBitArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("bits", () => new BitArray((BitArray)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "bits",
+                () => new BitArray((BitArray)null)
+            );
         }
 
         public static IEnumerable<object[]> Ctor_IntArray_TestData()
@@ -185,9 +262,21 @@ namespace System.Collections.Tests
             yield return new object[] { new int[0], new bool[0] };
             foreach (int size in new[] { 1, 10 })
             {
-                yield return new object[] { Enumerable.Repeat(unchecked((int)0xffffffff), size).ToArray(), Enumerable.Repeat(true, size * BitsPerInt32).ToArray() };
-                yield return new object[] { Enumerable.Repeat(0x00000000, size).ToArray(), Enumerable.Repeat(false, size * BitsPerInt32).ToArray() };
-                yield return new object[] { Enumerable.Repeat(unchecked((int)0xaaaaaaaa), size).ToArray(), Enumerable.Range(0, size * BitsPerInt32).Select(i => i % 2 == 1).ToArray() };
+                yield return new object[]
+                {
+                    Enumerable.Repeat(unchecked((int)0xffffffff), size).ToArray(),
+                    Enumerable.Repeat(true, size * BitsPerInt32).ToArray(),
+                };
+                yield return new object[]
+                {
+                    Enumerable.Repeat(0x00000000, size).ToArray(),
+                    Enumerable.Repeat(false, size * BitsPerInt32).ToArray(),
+                };
+                yield return new object[]
+                {
+                    Enumerable.Repeat(unchecked((int)0xaaaaaaaa), size).ToArray(),
+                    Enumerable.Range(0, size * BitsPerInt32).Select(i => i % 2 == 1).ToArray(),
+                };
             }
         }
 
@@ -210,23 +299,50 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_NullIntArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("values", () => new BitArray((int[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "values",
+                () => new BitArray((int[])null)
+            );
         }
 
         [Fact]
         public static void Ctor_LargeIntArrayOverflowingBitArray_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("values", () => new BitArray(new int[int.MaxValue / BitsPerInt32 + 1 ]));
+            AssertExtensions.Throws<ArgumentException>(
+                "values",
+                () => new BitArray(new int[int.MaxValue / BitsPerInt32 + 1])
+            );
         }
 
         public static IEnumerable<object[]> Ctor_ByteArray_TestData()
         {
             yield return new object[] { new byte[0], new bool[0] };
-            foreach (int size in new[] { 1, 2, 3, BitsPerInt32 / BitsPerByte, 2 * BitsPerInt32 / BitsPerByte })
+            foreach (
+                int size in new[]
+                {
+                    1,
+                    2,
+                    3,
+                    BitsPerInt32 / BitsPerByte,
+                    2 * BitsPerInt32 / BitsPerByte,
+                }
+            )
             {
-                yield return new object[] { Enumerable.Repeat((byte)0xff, size).ToArray(), Enumerable.Repeat(true, size * BitsPerByte).ToArray() };
-                yield return new object[] { Enumerable.Repeat((byte)0x00, size).ToArray(), Enumerable.Repeat(false, size * BitsPerByte).ToArray() };
-                yield return new object[] { Enumerable.Repeat((byte)0xaa, size).ToArray(), Enumerable.Range(0, size * BitsPerByte).Select(i => i % 2 == 1).ToArray() };
+                yield return new object[]
+                {
+                    Enumerable.Repeat((byte)0xff, size).ToArray(),
+                    Enumerable.Repeat(true, size * BitsPerByte).ToArray(),
+                };
+                yield return new object[]
+                {
+                    Enumerable.Repeat((byte)0x00, size).ToArray(),
+                    Enumerable.Repeat(false, size * BitsPerByte).ToArray(),
+                };
+                yield return new object[]
+                {
+                    Enumerable.Repeat((byte)0xaa, size).ToArray(),
+                    Enumerable.Range(0, size * BitsPerByte).Select(i => i % 2 == 1).ToArray(),
+                };
             }
         }
 
@@ -249,13 +365,19 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_NullByteArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("bytes", () => new BitArray((byte[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "bytes",
+                () => new BitArray((byte[])null)
+            );
         }
 
         [Fact]
         public static void Ctor_LargeByteArrayOverflowingBitArray_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("bytes", () => new BitArray(new byte[int.MaxValue / BitsPerByte + 1 ]));
+            AssertExtensions.Throws<ArgumentException>(
+                "bytes",
+                () => new BitArray(new byte[int.MaxValue / BitsPerByte + 1])
+            );
         }
 
         [Fact]

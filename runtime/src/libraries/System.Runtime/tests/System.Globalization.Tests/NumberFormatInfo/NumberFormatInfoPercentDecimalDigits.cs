@@ -16,7 +16,11 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(PercentDecimalDigits_TestData))]
-        public void PercentDecimalDigits_Get_ReturnsExpected(NumberFormatInfo format, int expectedNls, int expectedIcu)
+        public void PercentDecimalDigits_Get_ReturnsExpected(
+            NumberFormatInfo format,
+            int expectedNls,
+            int expectedIcu
+        )
         {
             int expected = PlatformDetection.IsNlsGlobalization ? expectedNls : expectedIcu;
             Assert.Equal(expected, format.PercentDecimalDigits);
@@ -39,14 +43,19 @@ namespace System.Globalization.Tests
         public void PercentDecimalDigits_SetInvalid_ThrowsArgumentOutOfRangeException(int value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", "PercentDecimalDigits", () => format.PercentDecimalDigits = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                "PercentDecimalDigits",
+                () => format.PercentDecimalDigits = value
+            );
         }
-
 
         [Fact]
         public void PercentDecimalDigits_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.PercentDecimalDigits = 1);
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.PercentDecimalDigits = 1
+            );
         }
     }
 }

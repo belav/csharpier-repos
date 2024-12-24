@@ -11,16 +11,17 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public abstract partial class StandardBindingElement : ServiceModelConfigurationElement, IBindingConfigurationElement, IConfigurationContextProviderInternal
+    public abstract partial class StandardBindingElement
+        : ServiceModelConfigurationElement,
+            IBindingConfigurationElement,
+            IConfigurationContextProviderInternal
     {
         [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
 
         protected StandardBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         protected StandardBindingElement(string name)
         {
@@ -30,12 +31,12 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        protected abstract Type BindingElementType
-        {
-            get;
-        }
+        protected abstract Type BindingElementType { get; }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string Name
         {
@@ -50,7 +51,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.CloseTimeout, DefaultValue = ServiceDefaults.CloseTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.CloseTimeout,
+            DefaultValue = ServiceDefaults.CloseTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan CloseTimeout
@@ -59,7 +63,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.CloseTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.OpenTimeout, DefaultValue = ServiceDefaults.OpenTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.OpenTimeout,
+            DefaultValue = ServiceDefaults.OpenTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan OpenTimeout
@@ -68,7 +75,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.OpenTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReceiveTimeout, DefaultValue = ServiceDefaults.ReceiveTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReceiveTimeout,
+            DefaultValue = ServiceDefaults.ReceiveTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan ReceiveTimeout
@@ -77,7 +87,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ReceiveTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SendTimeout, DefaultValue = ServiceDefaults.SendTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SendTimeout,
+            DefaultValue = ServiceDefaults.SendTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan SendTimeout
@@ -94,9 +107,15 @@ namespace System.ServiceModel.Configuration
             }
             if (binding.GetType() != this.BindingElementType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigInvalidTypeForBinding,
-                    (this.BindingElementType == null) ? string.Empty : this.BindingElementType.AssemblyQualifiedName,
-                    binding.GetType().AssemblyQualifiedName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.ConfigInvalidTypeForBinding,
+                        (this.BindingElementType == null)
+                            ? string.Empty
+                            : this.BindingElementType.AssemblyQualifiedName,
+                        binding.GetType().AssemblyQualifiedName
+                    )
+                );
             }
 
             // The properties binding.Name and this.Name are actually two different things:
@@ -113,7 +132,7 @@ namespace System.ServiceModel.Configuration
             this.OnApplyConfiguration(binding);
         }
 
-        protected virtual internal void InitializeFrom(Binding binding)
+        protected internal virtual void InitializeFrom(Binding binding)
         {
             if (null == binding)
             {
@@ -121,9 +140,15 @@ namespace System.ServiceModel.Configuration
             }
             if (binding.GetType() != this.BindingElementType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigInvalidTypeForBinding,
-                    (this.BindingElementType == null) ? string.Empty : this.BindingElementType.AssemblyQualifiedName,
-                    binding.GetType().AssemblyQualifiedName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.ConfigInvalidTypeForBinding,
+                        (this.BindingElementType == null)
+                            ? string.Empty
+                            : this.BindingElementType.AssemblyQualifiedName,
+                        binding.GetType().AssemblyQualifiedName
+                    )
+                );
             }
 
             // The properties binding.Name and this.Name are actually two different things:
@@ -132,13 +157,23 @@ namespace System.ServiceModel.Configuration
             //     - this.Name is a token used as a key in the binding collection to identify
             //       a specific bucket of configuration settings.
             // Thus, the Name property is skipped here.
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.CloseTimeout, binding.CloseTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.OpenTimeout, binding.OpenTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReceiveTimeout, binding.ReceiveTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SendTimeout, binding.SendTimeout);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.CloseTimeout,
+                binding.CloseTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.OpenTimeout,
+                binding.OpenTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ReceiveTimeout,
+                binding.ReceiveTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.SendTimeout,
+                binding.SendTimeout
+            );
         }
-
-
 
         protected abstract void OnApplyConfiguration(Binding binding);
 
@@ -156,8 +191,10 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
-            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses critical field contextHelper.",
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition."
+        )]
         [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {

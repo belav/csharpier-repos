@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging.Testing;
 using Moq;
 using Xunit;
@@ -30,7 +30,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var mockBodyControl = new Mock<IHttpBodyControlFeature>();
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(true);
             var reader = new HttpRequestPipeReader();
@@ -60,7 +64,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -88,7 +96,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -115,14 +127,20 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
             input.Add("Hello");
             var readResult = await reader.ReadAsync();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await reader.ReadAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await reader.ReadAsync()
+            );
 
             await body.StopAsync();
         }
@@ -136,7 +154,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -157,7 +179,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
 
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
@@ -183,7 +209,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var mockBodyControl = new Mock<IHttpBodyControlFeature>();
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(true);
             var reader = new HttpRequestPipeReader();
@@ -212,7 +242,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var mockBodyControl = new Mock<IHttpBodyControlFeature>();
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(true);
             var reader = new HttpRequestPipeReader();
@@ -237,7 +271,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var mockBodyControl = new Mock<IHttpBodyControlFeature>();
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(true);
             var reader = new HttpRequestPipeReader();
@@ -265,7 +303,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var mockBodyControl = new Mock<IHttpBodyControlFeature>();
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(true);
             var reader = new HttpRequestPipeReader();
@@ -306,7 +348,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -333,7 +379,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -367,7 +417,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -375,8 +429,9 @@ public class MessageBodyTests : LoggedTest
             input.Add("80000000\r\n");
 
             var buffer = new byte[1024];
-            var ex = await Assert.ThrowsAsync<IOException>(async () =>
-                await stream.ReadAsync(buffer, 0, buffer.Length));
+            var ex = await Assert.ThrowsAsync<IOException>(
+                async () => await stream.ReadAsync(buffer, 0, buffer.Length)
+            );
             Assert.IsType<OverflowException>(ex.InnerException);
             Assert.Equal(CoreStrings.BadRequest_BadChunkSizeData, ex.Message);
 
@@ -389,7 +444,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -398,9 +457,11 @@ public class MessageBodyTests : LoggedTest
 
             var buffer = new byte[1024];
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
+                async () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    await stream.ReadAsync(buffer, 0, buffer.Length));
+                    await stream.ReadAsync(buffer, 0, buffer.Length)
+            );
 
             Assert.Equal(CoreStrings.BadRequest_BadChunkSizeData, ex.Message);
 
@@ -416,7 +477,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders { HeaderConnection = "upgrade" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders { HeaderConnection = "upgrade" },
+                input.Http1Connection
+            );
             var mockBodyControl = new Mock<IHttpBodyControlFeature>();
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(true);
             var reader = new HttpRequestPipeReader();
@@ -445,7 +510,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders { HeaderConnection = "upgrade" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders { HeaderConnection = "upgrade" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -472,7 +541,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders(), input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders(),
+                input.Http1Connection
+            );
             var mockBodyControl = new Mock<IHttpBodyControlFeature>();
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(true);
             var reader = new HttpRequestPipeReader();
@@ -496,7 +569,11 @@ public class MessageBodyTests : LoggedTest
         var httpVersion = (HttpVersion)intHttpVersion;
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(httpVersion, new HttpRequestHeaders(), input.Http1Connection);
+            var body = Http1MessageBody.For(
+                httpVersion,
+                new HttpRequestHeaders(),
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -515,7 +592,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http10, new HttpRequestHeaders { HeaderContentLength = "8197" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http10,
+                new HttpRequestHeaders { HeaderContentLength = "8197" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -533,7 +614,10 @@ public class MessageBodyTests : LoggedTest
             await stream.CopyToAsync(ms);
             var requestArray = ms.ToArray();
             Assert.Equal(8197, requestArray.Length);
-            AssertASCII(largeInput + "Hello", new ArraySegment<byte>(requestArray, 0, requestArray.Length));
+            AssertASCII(
+                largeInput + "Hello",
+                new ArraySegment<byte>(requestArray, 0, requestArray.Length)
+            );
 
             await body.StopAsync();
         }
@@ -545,12 +629,21 @@ public class MessageBodyTests : LoggedTest
         using (var input = new TestInput())
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex = Assert.Throws<BadHttpRequestException>(() =>
+            var ex = Assert.Throws<BadHttpRequestException>(
+                () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked, not-chunked" }, input.Http1Connection));
+                    Http1MessageBody.For(
+                        HttpVersion.Http11,
+                        new HttpRequestHeaders { HeaderTransferEncoding = "chunked, not-chunked" },
+                        input.Http1Connection
+                    )
+            );
 
             Assert.Equal(StatusCodes.Status400BadRequest, ex.StatusCode);
-            Assert.Equal(CoreStrings.FormatBadRequest_FinalTransferCodingNotChunked("chunked, not-chunked"), ex.Message);
+            Assert.Equal(
+                CoreStrings.FormatBadRequest_FinalTransferCodingNotChunked("chunked, not-chunked"),
+                ex.Message
+            );
         }
     }
 
@@ -563,7 +656,11 @@ public class MessageBodyTests : LoggedTest
         using (var input = new TestInput())
         {
             input.Http1Connection.Method = method;
-            var result = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders(), input.Http1Connection);
+            var result = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders(),
+                input.Http1Connection
+            );
 
             Assert.Same(MessageBody.ZeroContentLengthKeepAlive, result);
         }
@@ -579,12 +676,23 @@ public class MessageBodyTests : LoggedTest
         {
             input.Http1Connection.Method = method;
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex = Assert.Throws<BadHttpRequestException>(() =>
+            var ex = Assert.Throws<BadHttpRequestException>(
+                () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    Http1MessageBody.For(HttpVersion.Http10, new HttpRequestHeaders(), input.Http1Connection));
+                    Http1MessageBody.For(
+                        HttpVersion.Http10,
+                        new HttpRequestHeaders(),
+                        input.Http1Connection
+                    )
+            );
 
             Assert.Equal(StatusCodes.Status400BadRequest, ex.StatusCode);
-            Assert.Equal(CoreStrings.FormatBadRequest_LengthRequiredHttp10(((IHttpRequestFeature)input.Http1Connection).Method), ex.Message);
+            Assert.Equal(
+                CoreStrings.FormatBadRequest_LengthRequiredHttp10(
+                    ((IHttpRequestFeature)input.Http1Connection).Method
+                ),
+                ex.Message
+            );
         }
     }
 
@@ -593,7 +701,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http10, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http10,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -616,7 +728,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http10, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http10,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
 
             input.Add("Hello");
 
@@ -633,7 +749,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http10, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http10,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
 
             input.Add("Hello");
 
@@ -655,7 +775,11 @@ public class MessageBodyTests : LoggedTest
         using (var input = new TestInput())
         {
             // note the http1connection request body pipe reader should be the same.
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderConnection = headerConnection }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderConnection = headerConnection },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -682,7 +806,11 @@ public class MessageBodyTests : LoggedTest
         var headerConnection = "Upgrade, Keep-Alive";
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderConnection = headerConnection, ContentLength = 0 }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderConnection = headerConnection, ContentLength = 0 },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -704,7 +832,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "2" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "2" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -732,7 +864,11 @@ public class MessageBodyTests : LoggedTest
 
             input.Http1ConnectionContext.TimeoutControl = mockTimeoutControl.Object;
 
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
 
             // Add some input and read it to start PumpAsync
             input.Add("a");
@@ -744,7 +880,9 @@ public class MessageBodyTests : LoggedTest
             input.Http1Connection.SendTimeoutResponse();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            var exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () => await body.ReadAsync());
+            var exception = await Assert.ThrowsAsync<BadHttpRequestException>(
+                async () => await body.ReadAsync()
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
             Assert.Equal(StatusCodes.Status408RequestTimeout, exception.StatusCode);
 
@@ -757,9 +895,18 @@ public class MessageBodyTests : LoggedTest
     {
         var mockTimeoutControl = new Mock<ITimeoutControl>();
 
-        using (var input = new TestInput(log: new KestrelTrace(LoggerFactory), timeoutControl: mockTimeoutControl.Object))
+        using (
+            var input = new TestInput(
+                log: new KestrelTrace(LoggerFactory),
+                timeoutControl: mockTimeoutControl.Object
+            )
+        )
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
 
             // Add some input and read it to start PumpAsync
             input.Add("a");
@@ -775,10 +922,13 @@ public class MessageBodyTests : LoggedTest
             await body.ConsumeAsync();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            Assert.Contains(TestSink.Writes,
-                m => m.EventId.Name == "ConnectionBadRequest" &&
-                    m.Exception is BadHttpRequestException ex &&
-                    ex.Reason == RequestRejectionReason.RequestBodyTimeout);
+            Assert.Contains(
+                TestSink.Writes,
+                m =>
+                    m.EventId.Name == "ConnectionBadRequest"
+                    && m.Exception is BadHttpRequestException ex
+                    && ex.Reason == RequestRejectionReason.RequestBodyTimeout
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             await body.StopAsync();
@@ -794,7 +944,11 @@ public class MessageBodyTests : LoggedTest
 
             input.Http1ConnectionContext.TimeoutControl = mockTimeoutControl.Object;
 
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -808,7 +962,9 @@ public class MessageBodyTests : LoggedTest
             using (var ms = new MemoryStream())
             {
 #pragma warning disable CS0618 // Type or member is obsolete
-                var exception = await Assert.ThrowsAsync<BadHttpRequestException>(() => stream.CopyToAsync(ms));
+                var exception = await Assert.ThrowsAsync<BadHttpRequestException>(
+                    () => stream.CopyToAsync(ms)
+                );
 #pragma warning restore CS0618 // Type or member is obsolete
                 Assert.Equal(StatusCodes.Status408RequestTimeout, exception.StatusCode);
             }
@@ -825,7 +981,11 @@ public class MessageBodyTests : LoggedTest
             input.Http1Connection.ConnectionIdFeature = "ConnectionId";
             input.Http1Connection.TraceIdentifier = "RequestId";
 
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "2" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "2" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -834,9 +994,14 @@ public class MessageBodyTests : LoggedTest
             input.Add("a");
             Assert.Equal(1, await stream.ReadAsync(new byte[1], 0, 1));
 
-            Assert.Contains(TestSink.Writes,
-                m => m.EventId.Name == "RequestBodyStart" &&
-                    m.Message.Contains(@"Connection id ""ConnectionId"", Request id ""RequestId"": started reading request body."));
+            Assert.Contains(
+                TestSink.Writes,
+                m =>
+                    m.EventId.Name == "RequestBodyStart"
+                    && m.Message.Contains(
+                        @"Connection id ""ConnectionId"", Request id ""RequestId"": started reading request body."
+                    )
+            );
 
             input.Fin();
 
@@ -862,7 +1027,11 @@ public class MessageBodyTests : LoggedTest
             input.Http1Connection.ConnectionIdFeature = "ConnectionId";
             input.Http1Connection.TraceIdentifier = "RequestId";
 
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "2" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "2" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), reader);
             reader.StartAcceptingReads(body);
@@ -887,7 +1056,11 @@ public class MessageBodyTests : LoggedTest
             var mockTimeoutControl = new Mock<ITimeoutControl>();
             input.Http1ConnectionContext.TimeoutControl = mockTimeoutControl.Object;
 
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "12" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "12" },
+                input.Http1Connection
+            );
 
             // Add some input and read it to start PumpAsync
             var readTask1 = body.ReadAsync();
@@ -903,8 +1076,14 @@ public class MessageBodyTests : LoggedTest
             body.AdvanceTo(readResult.Buffer.End);
 
             // Due to the limits set on HttpProtocol.RequestBodyPipe, backpressure should be triggered on every write to that pipe.
-            mockTimeoutControl.Verify(timeoutControl => timeoutControl.StopTimingRead(), Times.Exactly(2));
-            mockTimeoutControl.Verify(timeoutControl => timeoutControl.StartTimingRead(), Times.Exactly(2));
+            mockTimeoutControl.Verify(
+                timeoutControl => timeoutControl.StopTimingRead(),
+                Times.Exactly(2)
+            );
+            mockTimeoutControl.Verify(
+                timeoutControl => timeoutControl.StartTimingRead(),
+                Times.Exactly(2)
+            );
         }
     }
 
@@ -923,7 +1102,11 @@ public class MessageBodyTests : LoggedTest
 
             input.Http1ConnectionContext.TimeoutControl = mockTimeoutControl.Object;
 
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
 
             Assert.False(startRequestBodyCalled);
 
@@ -948,7 +1131,11 @@ public class MessageBodyTests : LoggedTest
             var mockTimeoutControl = new Mock<ITimeoutControl>();
             input.Http1ConnectionContext.TimeoutControl = mockTimeoutControl.Object;
 
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderConnection = "upgrade" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderConnection = "upgrade" },
+                input.Http1Connection
+            );
 
             // Add some input and read it to start PumpAsync
             input.Add("a");
@@ -962,14 +1149,26 @@ public class MessageBodyTests : LoggedTest
 
             Assert.True((await body.ReadAsync()).IsCompleted);
 
-            mockTimeoutControl.Verify(timeoutControl => timeoutControl.StartRequestBody(minReadRate), Times.Never);
-            mockTimeoutControl.Verify(timeoutControl => timeoutControl.StopRequestBody(), Times.Never);
+            mockTimeoutControl.Verify(
+                timeoutControl => timeoutControl.StartRequestBody(minReadRate),
+                Times.Never
+            );
+            mockTimeoutControl.Verify(
+                timeoutControl => timeoutControl.StopRequestBody(),
+                Times.Never
+            );
 
             // Due to the limits set on HttpProtocol.RequestBodyPipe, backpressure should be triggered on every
             // write to that pipe. Verify that read timing pause and resume are not called on upgrade
             // requests.
-            mockTimeoutControl.Verify(timeoutControl => timeoutControl.StopTimingRead(), Times.Never);
-            mockTimeoutControl.Verify(timeoutControl => timeoutControl.StartTimingRead(), Times.Never);
+            mockTimeoutControl.Verify(
+                timeoutControl => timeoutControl.StopTimingRead(),
+                Times.Never
+            );
+            mockTimeoutControl.Verify(
+                timeoutControl => timeoutControl.StartTimingRead(),
+                Times.Never
+            );
 
             await body.StopAsync();
         }
@@ -980,7 +1179,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1001,7 +1204,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1022,7 +1229,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderConnection = "upgrade" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderConnection = "upgrade" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1043,7 +1254,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders(), input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders(),
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1066,7 +1281,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1085,7 +1304,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1112,7 +1335,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderConnection = "upgrade" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderConnection = "upgrade" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1138,7 +1365,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders(), input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders(),
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1161,7 +1392,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1185,7 +1420,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1211,17 +1450,29 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
             input.Application.Output.Complete();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex0 = Assert.Throws<BadHttpRequestException>(() => reader.TryRead(out var readResult));
-            var ex1 = Assert.Throws<BadHttpRequestException>(() => reader.TryRead(out var readResult));
-            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(() => reader.ReadAsync().AsTask());
-            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(() => reader.ReadAsync().AsTask());
+            var ex0 = Assert.Throws<BadHttpRequestException>(
+                () => reader.TryRead(out var readResult)
+            );
+            var ex1 = Assert.Throws<BadHttpRequestException>(
+                () => reader.TryRead(out var readResult)
+            );
+            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                () => reader.ReadAsync().AsTask()
+            );
+            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                () => reader.ReadAsync().AsTask()
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             Assert.Equal(RequestRejectionReason.UnexpectedEndOfRequestContent, ex0.Reason);
@@ -1238,7 +1489,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderContentLength = "5" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderContentLength = "5" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1251,10 +1506,18 @@ public class MessageBodyTests : LoggedTest
             input.Application.Output.Complete();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex0 = Assert.Throws<BadHttpRequestException>(() => reader.TryRead(out var readResult));
-            var ex1 = Assert.Throws<BadHttpRequestException>(() => reader.TryRead(out var readResult));
-            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(() => reader.ReadAsync().AsTask());
-            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(() => reader.ReadAsync().AsTask());
+            var ex0 = Assert.Throws<BadHttpRequestException>(
+                () => reader.TryRead(out var readResult)
+            );
+            var ex1 = Assert.Throws<BadHttpRequestException>(
+                () => reader.TryRead(out var readResult)
+            );
+            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                () => reader.ReadAsync().AsTask()
+            );
+            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                () => reader.ReadAsync().AsTask()
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             Assert.Equal(RequestRejectionReason.UnexpectedEndOfRequestContent, ex0.Reason);
@@ -1271,17 +1534,29 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
             input.Application.Output.Complete();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex0 = Assert.Throws<BadHttpRequestException>(() => reader.TryRead(out var readResult));
-            var ex1 = Assert.Throws<BadHttpRequestException>(() => reader.TryRead(out var readResult));
-            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(() => reader.ReadAsync().AsTask());
-            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(() => reader.ReadAsync().AsTask());
+            var ex0 = Assert.Throws<BadHttpRequestException>(
+                () => reader.TryRead(out var readResult)
+            );
+            var ex1 = Assert.Throws<BadHttpRequestException>(
+                () => reader.TryRead(out var readResult)
+            );
+            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                () => reader.ReadAsync().AsTask()
+            );
+            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(
+                () => reader.ReadAsync().AsTask()
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             Assert.Equal(RequestRejectionReason.UnexpectedEndOfRequestContent, ex0.Reason);
@@ -1298,7 +1573,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1322,7 +1601,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderTransferEncoding = "chunked" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderTransferEncoding = "chunked" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1348,7 +1631,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders { HeaderConnection = "upgrade" }, input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders { HeaderConnection = "upgrade" },
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1374,7 +1661,11 @@ public class MessageBodyTests : LoggedTest
     {
         using (var input = new TestInput())
         {
-            var body = Http1MessageBody.For(HttpVersion.Http11, new HttpRequestHeaders(), input.Http1Connection);
+            var body = Http1MessageBody.For(
+                HttpVersion.Http11,
+                new HttpRequestHeaders(),
+                input.Http1Connection
+            );
             var reader = new HttpRequestPipeReader();
             reader.StartAcceptingReads(body);
 
@@ -1447,7 +1738,12 @@ public class MessageBodyTests : LoggedTest
             throw new NotImplementedException();
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             throw new XunitException();
         }
@@ -1486,7 +1782,12 @@ public class MessageBodyTests : LoggedTest
             throw new NotImplementedException();
         }
 
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             await Task.Delay(1);
             throw new XunitException();

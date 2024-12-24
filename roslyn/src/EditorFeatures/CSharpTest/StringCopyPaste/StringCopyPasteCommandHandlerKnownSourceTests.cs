@@ -13,17 +13,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
         : StringCopyPasteCommandHandlerTests
     {
         protected static void TestCopyPaste(
-            string copyFileMarkup, string pasteFileMarkup, string expectedMarkup, string afterUndo, bool mockCopyPasteService = true)
+            string copyFileMarkup,
+            string pasteFileMarkup,
+            string expectedMarkup,
+            string afterUndo,
+            bool mockCopyPasteService = true
+        )
         {
             using var state = StringCopyPasteTestState.CreateTestState(
-                copyFileMarkup, pasteFileMarkup, mockCopyPasteService);
+                copyFileMarkup,
+                pasteFileMarkup,
+                mockCopyPasteService
+            );
 
-            state.TestCopyPaste(expectedMarkup, pasteText: null, pasteTextIsKnown: false, afterUndo);
+            state.TestCopyPaste(
+                expectedMarkup,
+                pasteText: null,
+                pasteTextIsKnown: false,
+                afterUndo
+            );
         }
 
-        protected static void TestPasteKnownSource(string pasteText, string markup, string expectedMarkup, string afterUndo)
+        protected static void TestPasteKnownSource(
+            string pasteText,
+            string markup,
+            string expectedMarkup,
+            string afterUndo
+        )
         {
-            using var state = StringCopyPasteTestState.CreateTestState(copyFileMarkup: null, pasteFileMarkup: markup, mockCopyPasteService: true);
+            using var state = StringCopyPasteTestState.CreateTestState(
+                copyFileMarkup: null,
+                pasteFileMarkup: markup,
+                mockCopyPasteService: true
+            );
 
             state.TestCopyPaste(expectedMarkup, pasteText, pasteTextIsKnown: true, afterUndo);
         }
@@ -43,13 +65,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """
                 Debug.Assert(adjustment != 0, $"Indentation with no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
                 Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
-                
+
                 """,
                 """
                 Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
 
                 """,
-                mockCopyPasteService: false);
+                mockCopyPasteService: false
+            );
         }
     }
 }

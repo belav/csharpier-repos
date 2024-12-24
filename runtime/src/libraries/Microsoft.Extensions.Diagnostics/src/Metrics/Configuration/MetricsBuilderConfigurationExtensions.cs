@@ -22,7 +22,10 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         /// <param name="builder">The <see cref="IMetricsBuilder"/>.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/> section to load.</param>
         /// <returns>The original <see cref="IMetricsBuilder"/> for chaining.</returns>
-        public static IMetricsBuilder AddConfiguration(this IMetricsBuilder builder, IConfiguration configuration)
+        public static IMetricsBuilder AddConfiguration(
+            this IMetricsBuilder builder,
+            IConfiguration configuration
+        )
         {
             if (builder is null)
             {
@@ -34,8 +37,12 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            builder.Services.AddSingleton<IConfigureOptions<MetricsOptions>>(new MetricsConfigureOptions(configuration));
-            builder.Services.AddSingleton<IOptionsChangeTokenSource<MetricsOptions>>(new ConfigurationChangeTokenSource<MetricsOptions>(configuration));
+            builder.Services.AddSingleton<IConfigureOptions<MetricsOptions>>(
+                new MetricsConfigureOptions(configuration)
+            );
+            builder.Services.AddSingleton<IOptionsChangeTokenSource<MetricsOptions>>(
+                new ConfigurationChangeTokenSource<MetricsOptions>(configuration)
+            );
             builder.Services.AddSingleton(new MetricsConfiguration(configuration));
             return builder;
         }

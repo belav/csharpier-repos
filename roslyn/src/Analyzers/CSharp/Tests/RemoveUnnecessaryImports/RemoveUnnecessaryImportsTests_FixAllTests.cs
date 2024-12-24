@@ -15,15 +15,19 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImports
 {
-    public class RemoveUnnecessaryImportsTests_FixAllTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class RemoveUnnecessaryImportsTests_FixAllTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnnecessaryImportsTests_FixAllTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnnecessaryImportsDiagnosticAnalyzer(), new CSharpRemoveUnnecessaryImportsCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnnecessaryImportsDiagnosticAnalyzer(),
+                new CSharpRemoveUnnecessaryImportsCodeFixProvider()
+            );
 
         #region "Fix all occurrences tests"
 
@@ -32,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -67,7 +72,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -109,7 +115,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInProject()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -144,7 +151,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -185,7 +193,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInProjectSkipsGeneratedCode()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -220,7 +229,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -262,7 +272,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -297,7 +308,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -337,7 +349,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInContainingMember_NotApplicable()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -380,7 +393,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInContainingType_NotApplicable()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>

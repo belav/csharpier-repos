@@ -8,11 +8,11 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Common;
 using System.Data.EntityClient;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {
@@ -27,7 +27,11 @@ namespace System.Data.Entity.Design.SsdlGenerator
         private EntityConnection _connection;
         private object[] _currentRow;
 
-        public static FunctionDetailsReader Create(EntityConnection connection, IEnumerable<EntityStoreSchemaFilterEntry> filters, Version storeSchemaModelVersion)
+        public static FunctionDetailsReader Create(
+            EntityConnection connection,
+            IEnumerable<EntityStoreSchemaFilterEntry> filters,
+            Version storeSchemaModelVersion
+        )
         {
             Debug.Assert(connection != null, "the parameter connection is null");
             Debug.Assert(connection.State == ConnectionState.Open, "the connection is not Open");
@@ -42,17 +46,21 @@ namespace System.Data.Entity.Design.SsdlGenerator
             }
         }
 
-        protected void InitializeReader(EntityConnection connection, IEnumerable<EntityStoreSchemaFilterEntry> filters)
+        protected void InitializeReader(
+            EntityConnection connection,
+            IEnumerable<EntityStoreSchemaFilterEntry> filters
+        )
         {
             _connection = connection;
 
             _command = EntityStoreSchemaGeneratorDatabaseSchemaLoader.CreateFilteredCommand(
-                        _connection,
-                        FunctionDetailSql,
-                        FunctionOrderByClause,
-                        EntityStoreSchemaFilterObjectTypes.Function,
-                        new List<EntityStoreSchemaFilterEntry>(filters),
-                        new string[] { FunctionDetailAlias });
+                _connection,
+                FunctionDetailSql,
+                FunctionOrderByClause,
+                EntityStoreSchemaFilterObjectTypes.Function,
+                new List<EntityStoreSchemaFilterEntry>(filters),
+                new string[] { FunctionDetailAlias }
+            );
             _reader = _command.ExecuteReader(CommandBehavior.SequentialAccess);
         }
 
@@ -146,7 +154,12 @@ namespace System.Data.Entity.Design.SsdlGenerator
         internal EntityStoreSchemaGenerator.DbObjectKey CreateDbObjectKey()
         {
             Debug.Assert(_currentRow != null, "don't call this method when you not reading");
-            return new EntityStoreSchemaGenerator.DbObjectKey(this.Catalog, this.Schema, this.ProcedureName, EntityStoreSchemaGenerator.DbObjectType.Function);
+            return new EntityStoreSchemaGenerator.DbObjectKey(
+                this.Catalog,
+                this.Schema,
+                this.ProcedureName,
+                EntityStoreSchemaGenerator.DbObjectType.Function
+            );
         }
 
         protected static T ConvertDBNull<T>(object value)
@@ -160,7 +173,8 @@ namespace System.Data.Entity.Design.SsdlGenerator
 
         private static readonly string FunctionDetailAlias = "sp";
         protected abstract string FunctionDetailSql { get; }
-        private static readonly string FunctionOrderByClause = @" 
+        private static readonly string FunctionOrderByClause =
+            @" 
             ORDER BY
                 sp.SchemaName
             ,   sp.Name
@@ -174,7 +188,10 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 _currentRow = memento.Values;
             }
 
-            public FunctionDetailsReaderV1(EntityConnection connection, IEnumerable<EntityStoreSchemaFilterEntry> filters)
+            public FunctionDetailsReaderV1(
+                EntityConnection connection,
+                IEnumerable<EntityStoreSchemaFilterEntry> filters
+            )
             {
                 InitializeReader(connection, filters);
             }
@@ -205,9 +222,15 @@ namespace System.Data.Entity.Design.SsdlGenerator
             const int PARAM_TYPE_INDEX = 8;
             const int PARAM_DIRECTION_INDEX = 9;
 
-            internal override int ColumnCount { get { return 10; } }
+            internal override int ColumnCount
+            {
+                get { return 10; }
+            }
 
-            public override string Catalog { get { return null; } }
+            public override string Catalog
+            {
+                get { return null; }
+            }
 
             public override string Schema
             {
@@ -244,7 +267,10 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 get { return ConvertDBNull<bool>(_currentRow[PROC_ISNILADIC_INDEX]); }
             }
 
-            public override bool IsTvf { get { return false; } }
+            public override bool IsTvf
+            {
+                get { return false; }
+            }
 
             public override string ParameterName
             {
@@ -340,7 +366,10 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 _currentRow = memento.Values;
             }
 
-            public FunctionDetailsReaderV3(EntityConnection connection, IEnumerable<EntityStoreSchemaFilterEntry> filters)
+            public FunctionDetailsReaderV3(
+                EntityConnection connection,
+                IEnumerable<EntityStoreSchemaFilterEntry> filters
+            )
             {
                 InitializeReader(connection, filters);
             }
@@ -373,7 +402,10 @@ namespace System.Data.Entity.Design.SsdlGenerator
             const int PARAM_TYPE_INDEX = 10;
             const int PARAM_DIRECTION_INDEX = 11;
 
-            internal override int ColumnCount { get { return 12; } }
+            internal override int ColumnCount
+            {
+                get { return 12; }
+            }
 
             public override string Catalog
             {

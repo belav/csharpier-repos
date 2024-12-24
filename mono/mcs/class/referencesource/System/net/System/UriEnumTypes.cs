@@ -17,12 +17,12 @@ Revision History:
 --*/
 namespace System
 {
-
     // Used to control whether absolu
-    public enum UriKind {
-        RelativeOrAbsolute  = 0,
-        Absolute            = 1,
-        Relative            = 2
+    public enum UriKind
+    {
+        RelativeOrAbsolute = 0,
+        Absolute = 1,
+        Relative = 2,
     }
 
     [Flags]
@@ -30,15 +30,15 @@ namespace System
     {
         // Generic parts.
         // ATTN: The values must stay in sync with Uri.Flags.xxxNotCanonical
-        Scheme      = 0x1,
-        UserInfo    = 0x2,
-        Host        = 0x4,
-        Port        = 0x8,
-        Path        = 0x10,
-        Query       = 0x20,
-        Fragment    = 0x40,
+        Scheme = 0x1,
+        UserInfo = 0x2,
+        Host = 0x4,
+        Port = 0x8,
+        Path = 0x10,
+        Query = 0x20,
+        Fragment = 0x40,
 
-        StrongPort  = 0x80,
+        StrongPort = 0x80,
         NormalizedHost = 0x100,
 
         // This will also return respective delimiters for scheme, userinfo or port
@@ -51,33 +51,37 @@ namespace System
 
         // Shortcuts for general cases
         AbsoluteUri = Scheme | UserInfo | Host | Port | Path | Query | Fragment,
-        HostAndPort = Host | StrongPort,                //includes port even if default
+        HostAndPort = Host | StrongPort, //includes port even if default
         StrongAuthority = UserInfo | Host | StrongPort, //includes port even if default
         SchemeAndServer = Scheme | Host | Port,
         HttpRequestUrl = Scheme | Host | Port | Path | Query,
         PathAndQuery = Path | Query,
     }
+
     public enum UriFormat
     {
         UriEscaped = 1,
-        Unescaped = 2,      // Completely unescaped.
-        SafeUnescaped = 3   // Canonical unescaped.  Allows same uri to be reconstructed from the output.
+        Unescaped = 2, // Completely unescaped.
+        SafeUnescaped =
+            3 // Canonical unescaped.  Allows same uri to be reconstructed from the output.
+        ,
         // If the unescaped sequence results in a new escaped sequence, it will revert to the original sequence.
 
         // This value is reserved for the default ToString() format that is historically none of the above.
         // If VsWhidbey#353711 gets approved the usage has to be replaced with UriFormat.SafeUnescape
-        // V1ToStringUnescape = 0x7FFF  
+        // V1ToStringUnescape = 0x7FFF
     }
 
     // This is used to control when host names are converted to idn names and
     // vice versa
     public enum UriIdnScope
     {
-        None,                   // Never use Idn
-        AllExceptIntranet,      // Use Idn in Internet and not intranet
-        All                     // Internet and intranet
+        None, // Never use Idn
+        AllExceptIntranet, // Use Idn in Internet and not intranet
+        All // Internet and intranet
+        ,
     }
-    
+
     internal enum ParsingError
     {
         // looks good
@@ -103,18 +107,18 @@ namespace System
         BadAuthorityTerminator = 11,
 
         // The user requested only a relative Uri, but an absolute Uri was parsed.
-        CannotCreateRelative = 12
+        CannotCreateRelative = 12,
     }
 
     [Flags]
     internal enum UnescapeMode
     {
-        CopyOnly = 0x0,                          // used for V1.0 ToString() compatibility mode only
-        Escape = 0x1,                            // Only used by ImplicitFile, the string is already fully unescaped
-        Unescape = 0x2,                          // Only used as V1.0 UserEscaped compatibility mode
-        EscapeUnescape = Unescape | Escape,      // does both escaping control+reserved and unescaping of safe characters
-        V1ToStringFlag = 0x4,                    // Only used as V1.0 ToString() compatibility mode, assumes DontEscape level also
-        UnescapeAll = 0x8,                       // just unescape everything, leave bad escaped sequences as is
+        CopyOnly = 0x0, // used for V1.0 ToString() compatibility mode only
+        Escape = 0x1, // Only used by ImplicitFile, the string is already fully unescaped
+        Unescape = 0x2, // Only used as V1.0 UserEscaped compatibility mode
+        EscapeUnescape = Unescape | Escape, // does both escaping control+reserved and unescaping of safe characters
+        V1ToStringFlag = 0x4, // Only used as V1.0 ToString() compatibility mode, assumes DontEscape level also
+        UnescapeAll = 0x8, // just unescape everything, leave bad escaped sequences as is
         UnescapeAllOrThrow = 0x10 | UnescapeAll, // just unescape everything plus throw on bad escaped sequences
     }
 }

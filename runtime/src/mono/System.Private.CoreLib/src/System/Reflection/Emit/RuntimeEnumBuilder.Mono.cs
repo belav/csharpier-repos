@@ -49,19 +49,41 @@ namespace System.Reflection.Emit
         private FieldBuilder _underlyingField;
         private Type _underlyingType;
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2064:UnrecognizedReflectionPattern",
-            Justification = "Reflection.Emit is not subject to trimming")]
-        internal RuntimeEnumBuilder(RuntimeModuleBuilder mb, string name, TypeAttributes visibility, Type underlyingType)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2064:UnrecognizedReflectionPattern",
+            Justification = "Reflection.Emit is not subject to trimming"
+        )]
+        internal RuntimeEnumBuilder(
+            RuntimeModuleBuilder mb,
+            string name,
+            TypeAttributes visibility,
+            Type underlyingType
+        )
         {
             if ((visibility & ~TypeAttributes.VisibilityMask) != 0)
                 throw new ArgumentException(SR.Argument_ShouldOnlySetVisibilityFlags, nameof(name));
-            if ((visibility & TypeAttributes.VisibilityMask) >= TypeAttributes.NestedPublic && (visibility & TypeAttributes.VisibilityMask) <= TypeAttributes.NestedFamORAssem)
+            if (
+                (visibility & TypeAttributes.VisibilityMask) >= TypeAttributes.NestedPublic
+                && (visibility & TypeAttributes.VisibilityMask) <= TypeAttributes.NestedFamORAssem
+            )
                 throw new ArgumentException();
-            _tb = new RuntimeTypeBuilder(mb, name, (visibility | TypeAttributes.Sealed),
-                typeof(Enum), null, PackingSize.Unspecified, 0, null);
+            _tb = new RuntimeTypeBuilder(
+                mb,
+                name,
+                (visibility | TypeAttributes.Sealed),
+                typeof(Enum),
+                null,
+                PackingSize.Unspecified,
+                0,
+                null
+            );
             _underlyingType = underlyingType;
-            _underlyingField = _tb.DefineField("value__", underlyingType,
-                FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName);
+            _underlyingField = _tb.DefineField(
+                "value__",
+                underlyingType,
+                FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName
+            );
             setup_enum_type(_tb);
         }
 
@@ -82,114 +104,72 @@ namespace System.Reflection.Emit
 
         public override Assembly Assembly
         {
-            get
-            {
-                return _tb.Assembly;
-            }
+            get { return _tb.Assembly; }
         }
 
         public override string? AssemblyQualifiedName
         {
-            get
-            {
-                return _tb.AssemblyQualifiedName;
-            }
+            get { return _tb.AssemblyQualifiedName; }
         }
 
         public override Type? BaseType
         {
-            get
-            {
-                return _tb.BaseType;
-            }
+            get { return _tb.BaseType; }
         }
 
         public override Type? DeclaringType
         {
-            get
-            {
-                return _tb.DeclaringType;
-            }
+            get { return _tb.DeclaringType; }
         }
 
         public override string? FullName
         {
-            get
-            {
-                return _tb.FullName;
-            }
+            get { return _tb.FullName; }
         }
 
         public override Guid GUID
         {
-            get
-            {
-                return _tb.GUID;
-            }
+            get { return _tb.GUID; }
         }
 
         public override Module Module
         {
-            get
-            {
-                return _tb.Module;
-            }
+            get { return _tb.Module; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _tb.Name;
-            }
+            get { return _tb.Name; }
         }
 
         public override string? Namespace
         {
-            get
-            {
-                return _tb.Namespace;
-            }
+            get { return _tb.Namespace; }
         }
 
         public override Type? ReflectedType
         {
-            get
-            {
-                return _tb.ReflectedType;
-            }
+            get { return _tb.ReflectedType; }
         }
 
         public override RuntimeTypeHandle TypeHandle
         {
-            get
-            {
-                return _tb.TypeHandle;
-            }
+            get { return _tb.TypeHandle; }
         }
 
         internal int TypeToken
         {
-            get
-            {
-                return _tb.MetadataToken;
-            }
+            get { return _tb.MetadataToken; }
         }
 
         protected override FieldBuilder UnderlyingFieldCore
         {
-            get
-            {
-                return _underlyingField;
-            }
+            get { return _underlyingField; }
         }
 
         public override Type UnderlyingSystemType
         {
-            get
-            {
-                return _underlyingType;
-            }
+            get { return _underlyingType; }
         }
 
         [return: DynamicallyAccessedMembersAttribute(DynamicallyAccessedMemberTypes.All)]
@@ -203,19 +183,24 @@ namespace System.Reflection.Emit
             return _underlyingType;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2110:ReflectionToDynamicallyAccessedMembers",
-            Justification = "For instance members with MethodImplOptions.InternalCall, the linker preserves all fields of the declaring type. " +
-            "The _tb field has DynamicallyAccessedMembersAttribute requirements, but the field access is safe because " +
-            "Reflection.Emit is not subject to trimming.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2110:ReflectionToDynamicallyAccessedMembers",
+            Justification = "For instance members with MethodImplOptions.InternalCall, the linker preserves all fields of the declaring type. "
+                + "The _tb field has DynamicallyAccessedMembersAttribute requirements, but the field access is safe because "
+                + "Reflection.Emit is not subject to trimming."
+        )]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void setup_enum_type(Type t);
 
         protected override FieldBuilder DefineLiteralCore(string literalName, object? literalValue)
         {
             Type fieldType = this;
-            FieldBuilder fieldBuilder = _tb.DefineField(literalName,
-                fieldType, (FieldAttributes.Literal |
-                (FieldAttributes.Static | FieldAttributes.Public)));
+            FieldBuilder fieldBuilder = _tb.DefineField(
+                literalName,
+                fieldType,
+                (FieldAttributes.Literal | (FieldAttributes.Static | FieldAttributes.Public))
+            );
             fieldBuilder.SetConstant(literalValue);
             return fieldBuilder;
         }
@@ -225,15 +210,25 @@ namespace System.Reflection.Emit
             return _tb.attrs;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         protected override ConstructorInfo? GetConstructorImpl(
-            BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention,
-            Type[] types, ParameterModifier[]? modifiers)
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[]? modifiers
+        )
         {
             return _tb.GetConstructor(bindingAttr, binder, callConvention, types, modifiers);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
             return _tb.GetConstructors(bindingAttr);
@@ -257,7 +252,10 @@ namespace System.Reflection.Emit
             return _tb.GetElementType();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo? GetEvent(string name, BindingFlags bindingAttr)
         {
             return _tb.GetEvent(name, bindingAttr);
@@ -269,19 +267,28 @@ namespace System.Reflection.Emit
             return _tb.GetEvents();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo[] GetEvents(BindingFlags bindingAttr)
         {
             return _tb.GetEvents(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo? GetField(string name, BindingFlags bindingAttr)
         {
             return _tb.GetField(name, bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo[] GetFields(BindingFlags bindingAttr)
         {
             return _tb.GetFields(bindingAttr);
@@ -294,7 +301,13 @@ namespace System.Reflection.Emit
             return _tb.GetInterface(name, ignoreCase);
         }
 
-        public override InterfaceMapping GetInterfaceMap([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type interfaceType)
+        public override InterfaceMapping GetInterfaceMap(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type interfaceType
+        )
         {
             return _tb.GetInterfaceMap(interfaceType);
         }
@@ -306,7 +319,11 @@ namespace System.Reflection.Emit
         }
 
         [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             return _tb.GetMember(name, type, bindingAttr);
         }
@@ -317,50 +334,75 @@ namespace System.Reflection.Emit
             return _tb.GetMembers(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
         protected override MethodInfo? GetMethodImpl(
-            string name, BindingFlags bindingAttr, Binder? binder,
-            CallingConventions callConvention, Type[]? types,
-            ParameterModifier[]? modifiers)
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             if (types == null)
             {
                 return _tb.GetMethod(name, bindingAttr);
             }
 
-            return _tb.GetMethod(name, bindingAttr, binder,
-                callConvention, types, modifiers);
+            return _tb.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
             return _tb.GetMethods(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type? GetNestedType(string name, BindingFlags bindingAttr)
         {
             return _tb.GetNestedType(name, bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type[] GetNestedTypes(BindingFlags bindingAttr)
         {
             return _tb.GetNestedTypes(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
         {
             return _tb.GetProperties(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         protected override PropertyInfo? GetPropertyImpl(
-            string name, BindingFlags bindingAttr, Binder? binder,
-            Type? returnType, Type[]? types,
-            ParameterModifier[]? modifiers)
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            Type? returnType,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
@@ -372,13 +414,26 @@ namespace System.Reflection.Emit
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         public override object? InvokeMember(
-            string name, BindingFlags invokeAttr, Binder? binder,
-            object? target, object?[]? args,
-            ParameterModifier[]? modifiers, CultureInfo? culture,
-            string[]? namedParameters)
+            string name,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object? target,
+            object?[]? args,
+            ParameterModifier[]? modifiers,
+            CultureInfo? culture,
+            string[]? namedParameters
+        )
         {
-            return _tb.InvokeMember(name, invokeAttr, binder, target,
-                args, modifiers, culture, namedParameters);
+            return _tb.InvokeMember(
+                name,
+                invokeAttr,
+                binder,
+                target,
+                args,
+                modifiers,
+                culture,
+                namedParameters
+            );
         }
 
         protected override bool IsArrayImpl()
@@ -413,10 +468,7 @@ namespace System.Reflection.Emit
 
         public override bool IsSZArray
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -424,17 +476,17 @@ namespace System.Reflection.Emit
             return _tb.IsDefined(attributeType, inherit);
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             _tb.SetCustomAttribute(con, binaryAttribute);
         }
 
         internal override bool IsUserType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsConstructedGenericType
@@ -444,7 +496,8 @@ namespace System.Reflection.Emit
 
         public override bool IsAssignableFrom([NotNullWhen(true)] TypeInfo? typeInfo)
         {
-            if (typeInfo == null) return false;
+            if (typeInfo == null)
+                return false;
             return IsAssignableFrom(typeInfo.AsType());
         }
 

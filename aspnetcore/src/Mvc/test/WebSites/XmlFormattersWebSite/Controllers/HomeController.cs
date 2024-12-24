@@ -14,10 +14,7 @@ public class HomeController : Controller
     {
         if (!ModelState.IsValid)
         {
-            return new ObjectResult(GetModelStateErrorMessages(ModelState))
-            {
-                StatusCode = 400
-            };
+            return new ObjectResult(GetModelStateErrorMessages(ModelState)) { StatusCode = 400 };
         }
 
         return Content(dummyObject.SampleInt.ToString(CultureInfo.InvariantCulture));
@@ -37,7 +34,11 @@ public class HomeController : Controller
                 allErrorMessages.Add(
                     string.Join(
                         ",",
-                        errors.Select(modelError => $"ErrorMessage:{modelError.ErrorMessage};Exception:{modelError.Exception}")));
+                        errors.Select(modelError =>
+                            $"ErrorMessage:{modelError.ErrorMessage};Exception:{modelError.Exception}"
+                        )
+                    )
+                );
             }
         }
 

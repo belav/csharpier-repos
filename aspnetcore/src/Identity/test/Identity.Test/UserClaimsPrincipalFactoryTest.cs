@@ -15,13 +15,26 @@ public class UserClaimsPrincipalFactoryTest
         var userManager = MockHelpers.MockUserManager<PocoUser>().Object;
         var roleManager = MockHelpers.MockRoleManager<PocoRole>().Object;
         var options = new Mock<IOptions<IdentityOptions>>();
-        Assert.Throws<ArgumentException>("optionsAccessor",
-            () => new UserClaimsPrincipalFactory<PocoUser, PocoRole>(userManager, roleManager, options.Object));
+        Assert.Throws<ArgumentException>(
+            "optionsAccessor",
+            () =>
+                new UserClaimsPrincipalFactory<PocoUser, PocoRole>(
+                    userManager,
+                    roleManager,
+                    options.Object
+                )
+        );
         var identityOptions = new IdentityOptions();
         options.Setup(a => a.Value).Returns(identityOptions);
-        var factory = new UserClaimsPrincipalFactory<PocoUser, PocoRole>(userManager, roleManager, options.Object);
-        await Assert.ThrowsAsync<ArgumentNullException>("user",
-            async () => await factory.CreateAsync(null));
+        var factory = new UserClaimsPrincipalFactory<PocoUser, PocoRole>(
+            userManager,
+            roleManager,
+            options.Object
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "user",
+            async () => await factory.CreateAsync(null)
+        );
     }
 
     [Theory]
@@ -37,7 +50,12 @@ public class UserClaimsPrincipalFactoryTest
     [InlineData(true, true, false, true)]
     [InlineData(true, false, true, true)]
     [InlineData(true, true, true, true)]
-    public async Task EnsureClaimsIdentityHasExpectedClaims(bool supportRoles, bool supportClaims, bool supportRoleClaims, bool supportsUserEmail)
+    public async Task EnsureClaimsIdentityHasExpectedClaims(
+        bool supportRoles,
+        bool supportClaims,
+        bool supportRoleClaims,
+        bool supportsUserEmail
+    )
     {
         // Setup
         var userManager = MockHelpers.MockUserManager<PocoUser>();
@@ -67,8 +85,16 @@ public class UserClaimsPrincipalFactoryTest
 
         var admin = new PocoRole() { Name = "Admin" };
         var local = new PocoRole() { Name = "Local" };
-        var adminClaims = new[] { new Claim("AdminClaim1", "Value1"), new Claim("AdminClaim2", "Value2") };
-        var localClaims = new[] { new Claim("LocalClaim1", "Value1"), new Claim("LocalClaim2", "Value2") };
+        var adminClaims = new[]
+        {
+            new Claim("AdminClaim1", "Value1"),
+            new Claim("AdminClaim2", "Value2"),
+        };
+        var localClaims = new[]
+        {
+            new Claim("LocalClaim1", "Value1"),
+            new Claim("LocalClaim2", "Value2"),
+        };
         if (supportRoleClaims)
         {
             roleManager.Setup(m => m.FindByNameAsync("Admin")).ReturnsAsync(admin);
@@ -80,7 +106,11 @@ public class UserClaimsPrincipalFactoryTest
         var options = new Mock<IOptions<IdentityOptions>>();
         var identityOptions = new IdentityOptions();
         options.Setup(a => a.Value).Returns(identityOptions);
-        var factory = new UserClaimsPrincipalFactory<PocoUser, PocoRole>(userManager.Object, roleManager.Object, options.Object);
+        var factory = new UserClaimsPrincipalFactory<PocoUser, PocoRole>(
+            userManager.Object,
+            roleManager.Object,
+            options.Object
+        );
 
         // Act
         var principal = await factory.CreateAsync(user);
@@ -94,22 +124,50 @@ public class UserClaimsPrincipalFactoryTest
         var claims = identity.Claims.ToList();
         Assert.NotNull(claims);
         Assert.Contains(
-            claims, c => c.Type == manager.Options.ClaimsIdentity.UserNameClaimType && c.Value == user.UserName);
-        Assert.Contains(claims, c => c.Type == manager.Options.ClaimsIdentity.UserIdClaimType && c.Value == user.Id);
-        Assert.Equal(supportsUserEmail, claims.Any(c => c.Type == manager.Options.ClaimsIdentity.EmailClaimType && c.Value == user.Email));
-        Assert.Equal(supportRoles, claims.Any(c => c.Type == manager.Options.ClaimsIdentity.RoleClaimType && c.Value == "Admin"));
-        Assert.Equal(supportRoles, claims.Any(c => c.Type == manager.Options.ClaimsIdentity.RoleClaimType && c.Value == "Local"));
+            claims,
+            c =>
+                c.Type == manager.Options.ClaimsIdentity.UserNameClaimType
+                && c.Value == user.UserName
+        );
+        Assert.Contains(
+            claims,
+            c => c.Type == manager.Options.ClaimsIdentity.UserIdClaimType && c.Value == user.Id
+        );
+        Assert.Equal(
+            supportsUserEmail,
+            claims.Any(c =>
+                c.Type == manager.Options.ClaimsIdentity.EmailClaimType && c.Value == user.Email
+            )
+        );
+        Assert.Equal(
+            supportRoles,
+            claims.Any(c =>
+                c.Type == manager.Options.ClaimsIdentity.RoleClaimType && c.Value == "Admin"
+            )
+        );
+        Assert.Equal(
+            supportRoles,
+            claims.Any(c =>
+                c.Type == manager.Options.ClaimsIdentity.RoleClaimType && c.Value == "Local"
+            )
+        );
         foreach (var cl in userClaims)
         {
             Assert.Equal(supportClaims, claims.Any(c => c.Type == cl.Type && c.Value == cl.Value));
         }
         foreach (var cl in adminClaims)
         {
-            Assert.Equal(supportRoleClaims, claims.Any(c => c.Type == cl.Type && c.Value == cl.Value));
+            Assert.Equal(
+                supportRoleClaims,
+                claims.Any(c => c.Type == cl.Type && c.Value == cl.Value)
+            );
         }
         foreach (var cl in localClaims)
         {
-            Assert.Equal(supportRoleClaims, claims.Any(c => c.Type == cl.Type && c.Value == cl.Value));
+            Assert.Equal(
+                supportRoleClaims,
+                claims.Any(c => c.Type == cl.Type && c.Value == cl.Value)
+            );
         }
         userManager.VerifyAll();
         roleManager.VerifyAll();

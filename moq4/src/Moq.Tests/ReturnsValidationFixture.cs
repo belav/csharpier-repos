@@ -2,15 +2,12 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Moq.Language.Flow;
-
 using Xunit;
 
 namespace Moq.Tests
 {
     public class ReturnsValidationFixture
-
     /* Unmerged change from project 'Moq.Tests(net6.0)'
     Before:
             private Mock<IType> mock;
@@ -90,7 +87,11 @@ namespace Moq.Tests
         [Fact]
         public void Returns_does_not_accept_delegate_with_wrong_parameter_count()
         {
-            Func<object, object, object, IType> delegateWithWrongParameterCount = (arg1, arg2, arg3) => default(IType);
+            Func<object, object, object, IType> delegateWithWrongParameterCount = (
+                arg1,
+                arg2,
+                arg3
+            ) => default(IType);
 
             var ex = Record.Exception(() =>
             {
@@ -103,7 +104,8 @@ namespace Moq.Tests
         [Fact]
         public void Returns_accepts_delegate_with_wrong_parameter_types_but_setup_invocation_will_fail()
         {
-            Func<string, string, IType> delegateWithWrongParameterType = (arg1, arg2) => default(IType);
+            Func<string, string, IType> delegateWithWrongParameterType = (arg1, arg2) =>
+                default(IType);
             this.setup.Returns(delegateWithWrongParameterType);
 
             var ex = Record.Exception(() =>
@@ -131,7 +133,8 @@ namespace Moq.Tests
         [Fact]
         public void Returns_accepts_delegate_with_wrong_parameter_types_and_setup_invocation_will_succeed_if_args_convertible()
         {
-            Func<string, string, IType> delegateWithWrongParameterType = (arg1, arg2) => default(IType);
+            Func<string, string, IType> delegateWithWrongParameterType = (arg1, arg2) =>
+                default(IType);
             this.setup.Returns(delegateWithWrongParameterType);
 
             var ex = Record.Exception(() =>
@@ -145,7 +148,8 @@ namespace Moq.Tests
         [Fact]
         public void Returns_accepts_parameterless_extension_method_for_method_without_parameters()
         {
-            Func<IType> delegateWithoutParameters = new ReturnsValidationFixture().ExtensionMethodNoArgs;
+            Func<IType> delegateWithoutParameters =
+                new ReturnsValidationFixture().ExtensionMethodNoArgs;
             this.setupNoArgs.Returns(delegateWithoutParameters);
 
             var ex = Record.Exception(() =>
@@ -159,7 +163,8 @@ namespace Moq.Tests
         [Fact]
         public void Returns_accepts_parameterless_extension_method_even_for_method_having_parameters()
         {
-            Func<IType> delegateWithoutParameters = new ReturnsValidationFixture().ExtensionMethodNoArgs;
+            Func<IType> delegateWithoutParameters =
+                new ReturnsValidationFixture().ExtensionMethodNoArgs;
             this.setup.Returns(delegateWithoutParameters);
 
             var ex = Record.Exception(() =>
@@ -173,7 +178,8 @@ namespace Moq.Tests
         [Fact]
         public void Returns_does_not_accept_extension_method_with_wrong_parameter_count()
         {
-            Func<object, object, IType> delegateWithWrongParameterCount = new ReturnsValidationFixture().ExtensionMethod;
+            Func<object, object, IType> delegateWithWrongParameterCount =
+                new ReturnsValidationFixture().ExtensionMethod;
 
             var ex = Record.Exception(() =>
             {
@@ -186,7 +192,8 @@ namespace Moq.Tests
         [Fact]
         public void Returns_accepts_extension_method_with_correct_parameter_count()
         {
-            Func<object, object, IType> delegateWithCorrectParameterCount = new ReturnsValidationFixture().ExtensionMethod;
+            Func<object, object, IType> delegateWithCorrectParameterCount =
+                new ReturnsValidationFixture().ExtensionMethod;
             this.setup.Returns(delegateWithCorrectParameterCount);
 
             var ex = Record.Exception(() =>
@@ -207,12 +214,18 @@ namespace Moq.Tests
 
     static class ReturnsValidationFixtureExtensions
     {
-        internal static ReturnsValidationFixture.IType ExtensionMethod(this ReturnsValidationFixture fixture, object arg1, object arg2)
+        internal static ReturnsValidationFixture.IType ExtensionMethod(
+            this ReturnsValidationFixture fixture,
+            object arg1,
+            object arg2
+        )
         {
             return default(ReturnsValidationFixture.IType);
         }
 
-        internal static ReturnsValidationFixture.IType ExtensionMethodNoArgs(this ReturnsValidationFixture fixture)
+        internal static ReturnsValidationFixture.IType ExtensionMethodNoArgs(
+            this ReturnsValidationFixture fixture
+        )
         {
             return default(ReturnsValidationFixture.IType);
         }

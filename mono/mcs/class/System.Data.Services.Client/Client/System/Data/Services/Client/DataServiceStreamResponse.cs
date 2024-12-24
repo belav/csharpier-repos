@@ -1,12 +1,12 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -15,7 +15,7 @@ namespace System.Data.Services.Client
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-#if !ASTORIA_LIGHT    
+#if !ASTORIA_LIGHT
     using System.Net;
 #else
     using System.Data.Services.Http;
@@ -29,13 +29,16 @@ namespace System.Data.Services.Client
 
         internal DataServiceStreamResponse(HttpWebResponse response)
         {
-            Debug.Assert(response != null, "Can't create a stream response object from a null response.");
+            Debug.Assert(
+                response != null,
+                "Can't create a stream response object from a null response."
+            );
             this.response = response;
         }
 
         public string ContentType
         {
-            get 
+            get
             {
                 this.CheckDisposed();
                 return this.response.Headers[XmlConstants.HttpContentType];
@@ -44,7 +47,7 @@ namespace System.Data.Services.Client
 
         public string ContentDisposition
         {
-            get 
+            get
             {
                 this.CheckDisposed();
                 return this.response.Headers[XmlConstants.HttpContentDisposition];
@@ -53,7 +56,7 @@ namespace System.Data.Services.Client
 
         public Dictionary<string, string> Headers
         {
-            get 
+            get
             {
                 this.CheckDisposed();
                 if (this.headers == null)

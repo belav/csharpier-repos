@@ -98,15 +98,24 @@ public class CreatedOfTResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        Created<Todo> MyApi() { throw new NotImplementedException(); }
+        Created<Todo> MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
 
         // Act
         PopulateMetadata<Created<Todo>>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = builder
+            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status201Created, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);
         Assert.Single(producesResponseTypeMetadata.ContentTypes, "application/json");
@@ -120,15 +129,38 @@ public class CreatedOfTResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<Created<object>>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<Created<object>>(((Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull).GetMethodInfo(), null));
+        Assert.Throws<ArgumentNullException>(
+            "method",
+            () =>
+                PopulateMetadata<Created<object>>(
+                    null,
+                    new RouteEndpointBuilder(
+                        requestDelegate: null,
+                        RoutePatternFactory.Parse("/"),
+                        order: 0
+                    )
+                )
+        );
+        Assert.Throws<ArgumentNullException>(
+            "builder",
+            () =>
+                PopulateMetadata<Created<object>>(
+                    (
+                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                    ).GetMethodInfo(),
+                    null
+                )
+        );
     }
 
     [Fact]
@@ -138,7 +170,9 @@ public class CreatedOfTResultTests
         var location = "/test/";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(new Created<string>(location, null));
+        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(
+            new Created<string>(location, null)
+        );
         Assert.Equal(StatusCodes.Status201Created, result.StatusCode);
     }
 
@@ -150,7 +184,9 @@ public class CreatedOfTResultTests
         var value = "Foo";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IValueHttpResult>(new Created<string>(location, value));
+        var result = Assert.IsAssignableFrom<IValueHttpResult>(
+            new Created<string>(location, value)
+        );
         Assert.IsType<string>(result.Value);
         Assert.Equal(value, result.Value);
     }
@@ -163,7 +199,9 @@ public class CreatedOfTResultTests
         var value = "Foo";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IValueHttpResult<string>>(new Created<string>(location, value));
+        var result = Assert.IsAssignableFrom<IValueHttpResult<string>>(
+            new Created<string>(location, value)
+        );
         Assert.IsType<string>(result.Value);
         Assert.Equal(value, result.Value);
     }

@@ -9,7 +9,8 @@
 /******************************************************************/
 
 
-namespace DoubLink {
+namespace DoubLink
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -17,41 +18,40 @@ namespace DoubLink {
     {
         internal DoubLink[] Mv_Doub;
 
-        public static int Main(System.String [] Args)
+        public static int Main(System.String[] Args)
         {
             int iRep = 0;
             int iObj = 0;
 
             Console.WriteLine("Test should return with ExitCode 100 ...");
-            switch( Args.Length )
+            switch (Args.Length)
             {
                 case 1:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 5;
                     }
-                break;
+                    break;
 
                 case 2:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 5;
                     }
-                    if (!Int32.TryParse( Args[1], out iObj ))
+                    if (!Int32.TryParse(Args[1], out iObj))
                     {
                         iObj = 30;
                     }
-                break;
+                    break;
 
                 default:
                     iRep = 5;
                     iObj = 30;
-                break;
-
+                    break;
             }
 
             DLBigLeak Mv_Leak = new DLBigLeak();
-            if(Mv_Leak.runTest(iRep, iObj ))
+            if (Mv_Leak.runTest(iRep, iObj))
             {
                 Console.WriteLine("Test Passed");
                 return 100;
@@ -59,9 +59,7 @@ namespace DoubLink {
 
             Console.WriteLine("Test Failed");
             return 1;
-
         }
-
 
         public bool runTest(int iRep, int iObj)
         {
@@ -75,9 +73,8 @@ namespace DoubLink {
 
             Console.Write(DLinkNode.FinalCount);
             Console.WriteLine(" DLinkNodes finalized");
-            return (DLinkNode.FinalCount==iRep*iObj*10);
+            return (DLinkNode.FinalCount == iRep * iObj * 10);
         }
-
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         // Do not inline the method that creates GC objects, because it could
@@ -93,30 +90,23 @@ namespace DoubLink {
             }
         }
 
-
         public void SetLink(int iRep, int iObj)
         {
-
-            for(int i=0; i<iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 Mv_Doub[0] = new DoubLink(iObj, true);
                 GC.Collect();
             }
-
         }
-
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void MakeLeak(int iRep)
         {
-
-            for(int i=0; i<iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 Mv_Doub[i] = null;
             }
-
         }
-
     }
 
     public class DoubLink
@@ -124,13 +114,10 @@ namespace DoubLink {
         internal DLinkNode[] Mv_DLink;
 
         public DoubLink(int Num)
-            : this(Num, false)
-        {
-        }
+            : this(Num, false) { }
 
         public DoubLink(int Num, bool large)
         {
-
             Mv_DLink = new DLinkNode[Num];
 
             if (Num == 0)
@@ -151,36 +138,27 @@ namespace DoubLink {
             // all elements in between
             for (int i = 1; i < Num - 1; i++)
             {
-                Mv_DLink[i] = new DLinkNode((large ? 250 : i + 1), Mv_DLink[i - 1], Mv_DLink[i + 1]);
+                Mv_DLink[i] = new DLinkNode(
+                    (large ? 250 : i + 1),
+                    Mv_DLink[i - 1],
+                    Mv_DLink[i + 1]
+                );
             }
 
             // last element
             Mv_DLink[Num - 1] = new DLinkNode((large ? 250 : Num), Mv_DLink[Num - 2], Mv_DLink[0]);
         }
 
-
         public int NodeNum
         {
-            get
-            {
-                return Mv_DLink.Length;
-            }
+            get { return Mv_DLink.Length; }
         }
-
 
         public DLinkNode this[int index]
         {
-            get
-            {
-                return Mv_DLink[index];
-            }
-
-            set
-            {
-                Mv_DLink[index] = value;
-            }
+            get { return Mv_DLink[index]; }
+            set { Mv_DLink[index] = value; }
         }
-
     }
 
     public class DLinkNode

@@ -65,10 +65,13 @@ public class PartialViewResult : ActionResult, IStatusCodeActionResult
         var executor = services.GetService<IActionResultExecutor<PartialViewResult>>();
         if (executor == null)
         {
-            throw new InvalidOperationException(Mvc.Core.Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                "AddControllersWithViews()",
-                "ConfigureServices(...)"));
+            throw new InvalidOperationException(
+                Mvc.Core.Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    "AddControllersWithViews()",
+                    "ConfigureServices(...)"
+                )
+            );
         }
 
         return executor.ExecuteAsync(context, this);

@@ -18,12 +18,13 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                CookieName = "cookie-name"
+                CookieName = "cookie-name",
             };
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
                 config: config,
-                serializer: null);
+                serializer: null
+            );
 
             // Act
             AntiForgeryToken token = tokenStore.GetCookieToken(mockHttpContext.Object);
@@ -37,19 +38,19 @@ namespace System.Web.Helpers.AntiXsrf.Test
         {
             // Arrange
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
-            mockHttpContext.Setup(o => o.Request.Cookies).Returns(new HttpCookieCollection()
-            {
-                new HttpCookie("cookie-name", "")
-            });
+            mockHttpContext
+                .Setup(o => o.Request.Cookies)
+                .Returns(new HttpCookieCollection() { new HttpCookie("cookie-name", "") });
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                CookieName = "cookie-name"
+                CookieName = "cookie-name",
             };
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
                 config: config,
-                serializer: null);
+                serializer: null
+            );
 
             // Act
             AntiForgeryToken token = tokenStore.GetCookieToken(mockHttpContext.Object);
@@ -63,26 +64,33 @@ namespace System.Web.Helpers.AntiXsrf.Test
         {
             // Arrange
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
-            mockHttpContext.Setup(o => o.Request.Cookies).Returns(new HttpCookieCollection()
-            {
-                new HttpCookie("cookie-name", "invalid-value")
-            });
+            mockHttpContext
+                .Setup(o => o.Request.Cookies)
+                .Returns(
+                    new HttpCookieCollection() { new HttpCookie("cookie-name", "invalid-value") }
+                );
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                CookieName = "cookie-name"
+                CookieName = "cookie-name",
             };
 
-            HttpAntiForgeryException expectedException = new HttpAntiForgeryException("some exception");
-            Mock<MockableAntiForgeryTokenSerializer> mockSerializer = new Mock<MockableAntiForgeryTokenSerializer>();
+            HttpAntiForgeryException expectedException = new HttpAntiForgeryException(
+                "some exception"
+            );
+            Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
+                new Mock<MockableAntiForgeryTokenSerializer>();
             mockSerializer.Setup(o => o.Deserialize("invalid-value")).Throws(expectedException);
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
                 config: config,
-                serializer: mockSerializer.Object);
+                serializer: mockSerializer.Object
+            );
 
             // Act & assert
-            var ex = Assert.Throws<HttpAntiForgeryException>(() => tokenStore.GetCookieToken(mockHttpContext.Object));
+            var ex = Assert.Throws<HttpAntiForgeryException>(
+                () => tokenStore.GetCookieToken(mockHttpContext.Object)
+            );
             Assert.Equal(expectedException, ex);
         }
 
@@ -93,22 +101,25 @@ namespace System.Web.Helpers.AntiXsrf.Test
             AntiForgeryToken expectedToken = new AntiForgeryToken();
 
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
-            mockHttpContext.Setup(o => o.Request.Cookies).Returns(new HttpCookieCollection()
-            {
-                new HttpCookie("cookie-name", "valid-value")
-            });
+            mockHttpContext
+                .Setup(o => o.Request.Cookies)
+                .Returns(
+                    new HttpCookieCollection() { new HttpCookie("cookie-name", "valid-value") }
+                );
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                CookieName = "cookie-name"
+                CookieName = "cookie-name",
             };
 
-            Mock<MockableAntiForgeryTokenSerializer> mockSerializer = new Mock<MockableAntiForgeryTokenSerializer>();
+            Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
+                new Mock<MockableAntiForgeryTokenSerializer>();
             mockSerializer.Setup(o => o.Deserialize("valid-value")).Returns((object)expectedToken);
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
                 config: config,
-                serializer: mockSerializer.Object);
+                serializer: mockSerializer.Object
+            );
 
             // Act
             AntiForgeryToken retVal = tokenStore.GetCookieToken(mockHttpContext.Object);
@@ -126,12 +137,13 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
                 config: config,
-                serializer: null);
+                serializer: null
+            );
 
             // Act
             AntiForgeryToken token = tokenStore.GetFormToken(mockHttpContext.Object);
@@ -145,23 +157,31 @@ namespace System.Web.Helpers.AntiXsrf.Test
         {
             // Arrange
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
-            mockHttpContext.Setup(o => o.Request.Form.Get("form-field-name")).Returns("invalid-value");
+            mockHttpContext
+                .Setup(o => o.Request.Form.Get("form-field-name"))
+                .Returns("invalid-value");
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
-            HttpAntiForgeryException expectedException = new HttpAntiForgeryException("some exception");
-            Mock<MockableAntiForgeryTokenSerializer> mockSerializer = new Mock<MockableAntiForgeryTokenSerializer>();
+            HttpAntiForgeryException expectedException = new HttpAntiForgeryException(
+                "some exception"
+            );
+            Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
+                new Mock<MockableAntiForgeryTokenSerializer>();
             mockSerializer.Setup(o => o.Deserialize("invalid-value")).Throws(expectedException);
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
                 config: config,
-                serializer: mockSerializer.Object);
+                serializer: mockSerializer.Object
+            );
 
             // Act & assert
-            var ex = Assert.Throws<HttpAntiForgeryException>(() => tokenStore.GetFormToken(mockHttpContext.Object));
+            var ex = Assert.Throws<HttpAntiForgeryException>(
+                () => tokenStore.GetFormToken(mockHttpContext.Object)
+            );
             Assert.Same(expectedException, ex);
         }
 
@@ -172,19 +192,23 @@ namespace System.Web.Helpers.AntiXsrf.Test
             AntiForgeryToken expectedToken = new AntiForgeryToken();
 
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
-            mockHttpContext.Setup(o => o.Request.Form.Get("form-field-name")).Returns("valid-value");
+            mockHttpContext
+                .Setup(o => o.Request.Form.Get("form-field-name"))
+                .Returns("valid-value");
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
-            Mock<MockableAntiForgeryTokenSerializer> mockSerializer = new Mock<MockableAntiForgeryTokenSerializer>();
+            Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
+                new Mock<MockableAntiForgeryTokenSerializer>();
             mockSerializer.Setup(o => o.Deserialize("valid-value")).Returns((object)expectedToken);
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
                 config: config,
-                serializer: mockSerializer.Object);
+                serializer: mockSerializer.Object
+            );
 
             // Act
             AntiForgeryToken retVal = tokenStore.GetFormToken(mockHttpContext.Object);
@@ -201,23 +225,26 @@ namespace System.Web.Helpers.AntiXsrf.Test
             // Arrange
             AntiForgeryToken token = new AntiForgeryToken();
             HttpCookieCollection cookies = new HttpCookieCollection();
-            bool defaultCookieSecureValue = expectedCookieSecureFlag ?? new HttpCookie("name", "value").Secure; // pulled from config; set by ctor
+            bool defaultCookieSecureValue =
+                expectedCookieSecureFlag ?? new HttpCookie("name", "value").Secure; // pulled from config; set by ctor
 
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(o => o.Response.Cookies).Returns(cookies);
 
-            Mock<MockableAntiForgeryTokenSerializer> mockSerializer = new Mock<MockableAntiForgeryTokenSerializer>();
+            Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
+                new Mock<MockableAntiForgeryTokenSerializer>();
             mockSerializer.Setup(o => o.Serialize(token)).Returns("serialized-value");
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
                 CookieName = "cookie-name",
-                RequireSSL = requireSsl
+                RequireSSL = requireSsl,
             };
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
                 config: config,
-                serializer: mockSerializer.Object);
+                serializer: mockSerializer.Object
+            );
 
             // Act
             tokenStore.SaveCookieToken(mockHttpContext.Object, token);

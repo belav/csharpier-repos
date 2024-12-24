@@ -12,7 +12,8 @@ public class SkipCollectionEntryTest
 
         Assert.Equal(
             new List<string> { "Id", "Cherries" },
-            context.Attach(new Chunky()).Members.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Chunky()).Members.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -22,7 +23,8 @@ public class SkipCollectionEntryTest
 
         Assert.Equal(
             new List<string> { "Cherries" },
-            context.Attach(new Chunky()).Navigations.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Chunky()).Navigations.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -32,7 +34,8 @@ public class SkipCollectionEntryTest
 
         Assert.Equal(
             new List<string> { "Cherries" },
-            context.Attach(new Chunky()).Collections.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Chunky()).Collections.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalTheory]
@@ -111,7 +114,10 @@ public class SkipCollectionEntryTest
         Assert.Same(cherry, chunky.Cherries.Single());
         Assert.Same(chunky, collection.CurrentValue.Cast<Chunky>().Single());
         Assert.Same(cherry, inverseCollection.CurrentValue.Cast<Cherry>().Single());
-        Assert.Same(collection.FindEntry(chunky).GetInfrastructure(), context.Entry(chunky).GetInfrastructure());
+        Assert.Same(
+            collection.FindEntry(chunky).GetInfrastructure(),
+            context.Entry(chunky).GetInfrastructure()
+        );
 
         collection.CurrentValue = null;
 
@@ -144,7 +150,10 @@ public class SkipCollectionEntryTest
         Assert.Same(cherry, chunky.Cherries.Single());
         Assert.Same(chunky, collection.CurrentValue.Single());
         Assert.Same(cherry, inverseCollection.CurrentValue.Single());
-        Assert.Same(collection.FindEntry(chunky).GetInfrastructure(), context.Entry(chunky).GetInfrastructure());
+        Assert.Same(
+            collection.FindEntry(chunky).GetInfrastructure(),
+            context.Entry(chunky).GetInfrastructure()
+        );
 
         collection.CurrentValue = null;
 
@@ -296,7 +305,10 @@ public class SkipCollectionEntryTest
     [InlineData(true, CascadeTiming.OnSaveChanges)]
     [InlineData(false, CascadeTiming.Never)]
     [InlineData(true, CascadeTiming.Never)]
-    public void IsModified_tracks_detects_deletion_of_related_entity(bool useExplicitPk, CascadeTiming cascadeTiming)
+    public void IsModified_tracks_detects_deletion_of_related_entity(
+        bool useExplicitPk,
+        CascadeTiming cascadeTiming
+    )
     {
         using var context = useExplicitPk ? new ExplicitFreezerContext() : new FreezerContext();
 
@@ -444,8 +456,12 @@ public class SkipCollectionEntryTest
         var relatedToChunky1 = context.Entry(chunky1).Collection(e => e.Cherries);
         var relatedToChunky2 = context.Entry(chunky2).Collection(e => e.Cherries);
 
-        var joinEntity = context.ChangeTracker.Entries<Dictionary<string, object>>()
-            .Single(e => e.Property<int>("CherryId").CurrentValue == 1 && e.Property<int>("ChunkyId").CurrentValue == 2)
+        var joinEntity = context
+            .ChangeTracker.Entries<Dictionary<string, object>>()
+            .Single(e =>
+                e.Property<int>("CherryId").CurrentValue == 1
+                && e.Property<int>("ChunkyId").CurrentValue == 2
+            )
             .Entity;
 
         joinEntity["CherryId"] = 2;
@@ -522,8 +538,12 @@ public class SkipCollectionEntryTest
         var relatedToChunky1 = context.Entry(chunky1).Collection(e => e.Cherries);
         var relatedToChunky2 = context.Entry(chunky2).Collection(e => e.Cherries);
 
-        var joinEntity = context.ChangeTracker.Entries<Dictionary<string, object>>()
-            .Single(e => e.Property<int>("CherryId").CurrentValue == 1 && e.Property<int>("ChunkyId").CurrentValue == 2)
+        var joinEntity = context
+            .ChangeTracker.Entries<Dictionary<string, object>>()
+            .Single(e =>
+                e.Property<int>("CherryId").CurrentValue == 1
+                && e.Property<int>("ChunkyId").CurrentValue == 2
+            )
             .Entity;
 
         joinEntity["CherryId"] = 2;
@@ -547,7 +567,13 @@ public class SkipCollectionEntryTest
         }
     }
 
-    private static void AttachGraph(FreezerContext context, Cherry cherry1, Cherry cherry2, Chunky chunky1, Chunky chunky2)
+    private static void AttachGraph(
+        FreezerContext context,
+        Cherry cherry1,
+        Cherry cherry2,
+        Chunky chunky1,
+        Chunky chunky2
+    )
     {
         cherry1.Chunkies = new List<Chunky> { chunky1, chunky2 };
         cherry2.Chunkies = new List<Chunky>();
@@ -577,8 +603,8 @@ public class SkipCollectionEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 
@@ -587,18 +613,21 @@ public class SkipCollectionEntryTest
 
     private class ExplicitFreezerContext : FreezerContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(ExplicitFreezerContext));
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder
-                .Entity<Cherry>().HasMany(e => e.Chunkies).WithMany(e => e.Cherries)
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder
+                .Entity<Cherry>()
+                .HasMany(e => e.Chunkies)
+                .WithMany(e => e.Cherries)
                 .UsingEntity<Dictionary<string, object>>(
                     "CherryChunky",
                     b => b.HasOne<Chunky>().WithMany().HasForeignKey("ChunkyId"),
-                    b => b.HasOne<Cherry>().WithMany().HasForeignKey("CherryId"))
+                    b => b.HasOne<Cherry>().WithMany().HasForeignKey("CherryId")
+                )
                 .IndexerProperty<int>("Id");
     }
 }

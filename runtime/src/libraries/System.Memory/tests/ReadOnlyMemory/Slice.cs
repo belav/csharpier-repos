@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Buffers;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Xunit;
 
 namespace System.MemoryTests
 {
@@ -16,13 +16,23 @@ namespace System.MemoryTests
             int[] a = { 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
             ReadOnlyMemory<int> memory = new ReadOnlyMemory<int>(a).Slice(6);
             Assert.Equal(4, memory.Length);
-            Assert.True(Unsafe.AreSame(ref a[6], ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span))));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[6],
+                    ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span))
+                )
+            );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
             ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(6);
 
             Assert.Equal(4, memoryFromManager.Length);
-            Assert.True(Unsafe.AreSame(ref a[6], ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span))));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[6],
+                    ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span))
+                )
+            );
         }
 
         [Fact]
@@ -31,13 +41,31 @@ namespace System.MemoryTests
             int[] a = { 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
             ReadOnlyMemory<int> memory = new ReadOnlyMemory<int>(a).Slice(a.Length);
             Assert.Equal(0, memory.Length);
-            Assert.True(Unsafe.AreSame(ref a[a.Length - 1], ref Unsafe.Subtract(ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span)), 1)));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[a.Length - 1],
+                    ref Unsafe.Subtract(
+                        ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span)),
+                        1
+                    )
+                )
+            );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
-            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(a.Length);
+            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(
+                a.Length
+            );
 
             Assert.Equal(0, memoryFromManager.Length);
-            Assert.True(Unsafe.AreSame(ref a[a.Length - 1], ref Unsafe.Subtract(ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span)), 1)));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[a.Length - 1],
+                    ref Unsafe.Subtract(
+                        ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span)),
+                        1
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -46,13 +74,26 @@ namespace System.MemoryTests
             int[] a = { 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
             ReadOnlyMemory<int> memory = new ReadOnlyMemory<int>(a).Slice(3, 5);
             Assert.Equal(5, memory.Length);
-            Assert.True(Unsafe.AreSame(ref a[3], ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span))));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[3],
+                    ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span))
+                )
+            );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
-            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(3, 5);
+            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(
+                3,
+                5
+            );
 
             Assert.Equal(5, memoryFromManager.Length);
-            Assert.True(Unsafe.AreSame(ref a[3], ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span))));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[3],
+                    ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span))
+                )
+            );
         }
 
         [Fact]
@@ -61,13 +102,26 @@ namespace System.MemoryTests
             int[] a = { 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
             ReadOnlyMemory<int> memory = new ReadOnlyMemory<int>(a).Slice(4, 6);
             Assert.Equal(6, memory.Length);
-            Assert.True(Unsafe.AreSame(ref a[4], ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span))));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[4],
+                    ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span))
+                )
+            );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
-            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(4, 6);
+            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(
+                4,
+                6
+            );
 
             Assert.Equal(6, memoryFromManager.Length);
-            Assert.True(Unsafe.AreSame(ref a[4], ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span))));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[4],
+                    ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span))
+                )
+            );
         }
 
         [Fact]
@@ -76,13 +130,32 @@ namespace System.MemoryTests
             int[] a = { 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
             ReadOnlyMemory<int> memory = new ReadOnlyMemory<int>(a).Slice(a.Length, 0);
             Assert.Equal(0, memory.Length);
-            Assert.True(Unsafe.AreSame(ref a[a.Length - 1], ref Unsafe.Subtract(ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span)), 1)));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[a.Length - 1],
+                    ref Unsafe.Subtract(
+                        ref Unsafe.AsRef(in MemoryMarshal.GetReference(memory.Span)),
+                        1
+                    )
+                )
+            );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
-            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(a.Length, 0);
+            ReadOnlyMemory<int> memoryFromManager = ((ReadOnlyMemory<int>)manager.Memory).Slice(
+                a.Length,
+                0
+            );
 
             Assert.Equal(0, memoryFromManager.Length);
-            Assert.True(Unsafe.AreSame(ref a[a.Length - 1], ref Unsafe.Subtract(ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span)), 1)));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref a[a.Length - 1],
+                    ref Unsafe.Subtract(
+                        ref Unsafe.AsRef(in MemoryMarshal.GetReference(memoryFromManager.Span)),
+                        1
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -90,12 +163,24 @@ namespace System.MemoryTests
         {
             int[] a = { 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 };
             Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlyMemory<int>(a).Slice(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlyMemory<int>(a).Slice(a.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlyMemory<int>(a).Slice(-1, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlyMemory<int>(a).Slice(0, a.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlyMemory<int>(a).Slice(2, a.Length + 1 - 2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlyMemory<int>(a).Slice(a.Length + 1, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlyMemory<int>(a).Slice(a.Length, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlyMemory<int>(a).Slice(a.Length + 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlyMemory<int>(a).Slice(-1, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlyMemory<int>(a).Slice(0, a.Length + 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlyMemory<int>(a).Slice(2, a.Length + 1 - 2)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlyMemory<int>(a).Slice(a.Length + 1, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ReadOnlyMemory<int>(a).Slice(a.Length, 1)
+            );
 
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
             ReadOnlyMemory<int> memory = manager.Memory;

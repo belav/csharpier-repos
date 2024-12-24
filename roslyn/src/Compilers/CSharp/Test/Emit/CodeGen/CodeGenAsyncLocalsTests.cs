@@ -18,32 +18,55 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public class CodeGenAsyncLocalsTests : EmitMetadataTestBase
     {
-        private static readonly MetadataReference[] s_asyncRefs = new[] { MscorlibRef_v4_0_30316_17626, SystemRef_v4_0_30319_17929, SystemCoreRef_v4_0_30319_17929 };
-
-        public CodeGenAsyncLocalsTests()
+        private static readonly MetadataReference[] s_asyncRefs = new[]
         {
-        }
+            MscorlibRef_v4_0_30316_17626,
+            SystemRef_v4_0_30319_17929,
+            SystemCoreRef_v4_0_30319_17929,
+        };
 
-        private CompilationVerifier CompileAndVerify(string source, string expectedOutput = null, IEnumerable<MetadataReference> references = null, CSharpCompilationOptions options = null, Verification verify = default)
+        public CodeGenAsyncLocalsTests() { }
+
+        private CompilationVerifier CompileAndVerify(
+            string source,
+            string expectedOutput = null,
+            IEnumerable<MetadataReference> references = null,
+            CSharpCompilationOptions options = null,
+            Verification verify = default
+        )
         {
             references = (references != null) ? references.Concat(s_asyncRefs) : s_asyncRefs;
-            return base.CompileAndVerify(source, targetFramework: TargetFramework.Empty, expectedOutput: expectedOutput, references: references, options: options, verify: verify);
+            return base.CompileAndVerify(
+                source,
+                targetFramework: TargetFramework.Empty,
+                expectedOutput: expectedOutput,
+                references: references,
+                options: options,
+                verify: verify
+            );
         }
 
         private string GetFieldLoadsAndStores(CompilationVerifier c, string qualifiedMethodName)
         {
-            var actualLines = c.VisualizeIL(qualifiedMethodName).Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            var actualLines = c.VisualizeIL(qualifiedMethodName)
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-            return string.Join(Environment.NewLine,
-                from pair in actualLines.Zip(actualLines.Skip(1), (line1, line2) => new { line1, line2 })
+            return string.Join(
+                Environment.NewLine,
+                from pair in actualLines.Zip(
+                    actualLines.Skip(1),
+                    (line1, line2) => new { line1, line2 }
+                )
                 where pair.line2.Contains("ldfld") || pair.line2.Contains("stfld")
-                select pair.line1.Trim() + Environment.NewLine + pair.line2.Trim());
+                select pair.line1.Trim() + Environment.NewLine + pair.line2.Trim()
+            );
         }
 
         [Fact]
         public void AsyncWithLocals()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -71,7 +94,8 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -81,7 +105,8 @@ class Test
         [WorkItem(13867, "https://github.com/dotnet/roslyn/issues/13867")]
         public void AsyncWithLotsLocals()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -143,7 +168,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 a
 ";
             CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: expected);
@@ -153,7 +179,8 @@ a
         [Fact]
         public void AsyncWithParam()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -175,7 +202,8 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -184,7 +212,8 @@ class Test
         [Fact]
         public void AsyncWithParamsAndLocals_Unhoisted()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -209,7 +238,8 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 21
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -218,7 +248,8 @@ class Test
         [Fact]
         public void HoistedParameters()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -233,38 +264,41 @@ class C
         y = 1;
     }
 }";
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>t__builder",
-                    "x",
-                    "z",
-                    "y",
-                    "<>u__1",
-                }, module.GetFieldNames("C.<M>d__1"));
-            });
+                    AssertEx.Equal(
+                        new[] { "<>1__state", "<>t__builder", "x", "z", "y", "<>u__1" },
+                        module.GetFieldNames("C.<M>d__1")
+                    );
+                }
+            );
 
-            CompileAndVerify(source, options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>t__builder",
-                    "x",
-                    "y",
-                    "z",
-                    "<>u__1",
-                }, module.GetFieldNames("C.<M>d__1"));
-            });
+                    AssertEx.Equal(
+                        new[] { "<>1__state", "<>t__builder", "x", "y", "z", "<>u__1" },
+                        module.GetFieldNames("C.<M>d__1")
+                    );
+                }
+            );
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void SynthesizedVariables1()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -285,56 +319,74 @@ class C
         lock (this) { }
     }
 }";
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>t__builder",
-                    "disposable",
-                    "<>4__this",
-                    "<>7__wrap1",
-                    "<>7__wrap2",
-                    "<>7__wrap3",
-                    "<>u__1",
-                    "<>7__wrap4",
-                    "<>7__wrap5",
-                    "<>7__wrap6",
-                }, module.GetFieldNames("C.<M>d__3"));
-            });
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>t__builder",
+                            "disposable",
+                            "<>4__this",
+                            "<>7__wrap1",
+                            "<>7__wrap2",
+                            "<>7__wrap3",
+                            "<>u__1",
+                            "<>7__wrap4",
+                            "<>7__wrap5",
+                            "<>7__wrap6",
+                        },
+                        module.GetFieldNames("C.<M>d__3")
+                    );
+                }
+            );
 
-            var vd = CompileAndVerify(source, options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            var vd = CompileAndVerify(
+                source,
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>t__builder",
-                    "disposable",
-                    "<>4__this",
-                    "<>s__1",
-                    "<>s__2",
-                    "<item>5__3",
-                    "<>s__4",
-                    "<>s__5",
-                    "<>s__6",
-                    "<item>5__7",
-                    "<>s__8",
-                    "<>s__9",
-                    "<>s__10",
-                    "<>s__11",
-                    "<>s__12",
-                    "<>s__13",
-                    "<>s__14",
-                    "<>s__15",
-                    "<>s__16",
-                    "<>s__17",
-                    "<>s__18",
-                    "<>s__19",
-                    "<>u__1",
-                }, module.GetFieldNames("C.<M>d__3"));
-            });
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>t__builder",
+                            "disposable",
+                            "<>4__this",
+                            "<>s__1",
+                            "<>s__2",
+                            "<item>5__3",
+                            "<>s__4",
+                            "<>s__5",
+                            "<>s__6",
+                            "<item>5__7",
+                            "<>s__8",
+                            "<>s__9",
+                            "<>s__10",
+                            "<>s__11",
+                            "<>s__12",
+                            "<>s__13",
+                            "<>s__14",
+                            "<>s__15",
+                            "<>s__16",
+                            "<>s__17",
+                            "<>s__18",
+                            "<>s__19",
+                            "<>u__1",
+                        },
+                        module.GetFieldNames("C.<M>d__3")
+                    );
+                }
+            );
 
-            vd.VerifyPdb("C.M", @"
+            vd.VerifyPdb(
+                "C.M",
+                @"
 <symbols>
   <methods>
     <method containingType=""C"" name=""M"" parameterNames=""disposable"">
@@ -373,13 +425,16 @@ class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeDocuments);
+",
+                options: PdbValidationOptions.ExcludeDocuments
+            );
         }
 
         [Fact]
         public void CaptureThis()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading;
 using System.Threading.Tasks;
 using System;
@@ -407,7 +462,8 @@ class Driver
         Console.WriteLine(task.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -416,7 +472,8 @@ class Driver
         [Fact]
         public void CaptureThis2()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -446,7 +503,8 @@ class Driver
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -455,7 +513,8 @@ class Driver
         [Fact]
         public void AsyncWithDynamic()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -473,7 +532,8 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expectedOutput: expected, references: new[] { CSharpRef });
@@ -482,7 +542,8 @@ class Test
         [Fact]
         public void AsyncWithThisRef()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -506,12 +567,15 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             var verifier = CompileAndVerify(source, expectedOutput: expected);
 
-            verifier.VerifyIL("C.<F>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            verifier.VerifyIL(
+                "C.<F>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      191 (0xbf)
   .maxstack  3
@@ -598,13 +662,15 @@ class Test
   IL_00b9:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_00be:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void AsyncWithThisRef01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -636,12 +702,15 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             var verifier = CompileAndVerify(source, expectedOutput: expected);
 
-            verifier.VerifyIL("C.<F>d__2.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            verifier.VerifyIL(
+                "C.<F>d__2.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      612 (0x264)
   .maxstack  3
@@ -885,13 +954,15 @@ class Test
   IL_025e:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_0263:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void AsyncWithBaseRef()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -918,7 +989,8 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -927,7 +999,8 @@ class Test
         [Fact]
         public void ReuseFields_SpillTemps()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 class Test
@@ -958,20 +1031,52 @@ class Test
         Run();
     }
 }";
-            var reference = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef_v4_0_30319_17929 }).EmitToImageReference();
-            var comp = CreateCompilationWithMscorlib45("", new[] { reference }, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal));
+            var reference = CreateCompilationWithMscorlib45(
+                    source,
+                    references: new MetadataReference[] { SystemRef_v4_0_30319_17929 }
+                )
+                .EmitToImageReference();
+            var comp = CreateCompilationWithMscorlib45(
+                "",
+                new[] { reference },
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
+            );
             var testClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
-            var stateMachineClass = (NamedTypeSymbol)testClass.GetMembers().Single(s => s.Name.StartsWith("<Run>", StringComparison.Ordinal));
-            IEnumerable<IGrouping<TypeSymbol, FieldSymbol>> spillFieldsByType = stateMachineClass.GetMembers().Where(m => m.Kind == SymbolKind.Field && m.Name.StartsWith("<>7__wrap", StringComparison.Ordinal)).Cast<FieldSymbol>().GroupBy(x => x.Type);
+            var stateMachineClass = (NamedTypeSymbol)
+                testClass
+                    .GetMembers()
+                    .Single(s => s.Name.StartsWith("<Run>", StringComparison.Ordinal));
+            IEnumerable<IGrouping<TypeSymbol, FieldSymbol>> spillFieldsByType = stateMachineClass
+                .GetMembers()
+                .Where(m =>
+                    m.Kind == SymbolKind.Field
+                    && m.Name.StartsWith("<>7__wrap", StringComparison.Ordinal)
+                )
+                .Cast<FieldSymbol>()
+                .GroupBy(x => x.Type);
 
             Assert.Equal(1, spillFieldsByType.Count());
-            Assert.Equal(1, spillFieldsByType.Single(x => TypeSymbol.Equals(x.Key, comp.GetSpecialType(SpecialType.System_Int32), TypeCompareKind.ConsiderEverything2)).Count());
+            Assert.Equal(
+                1,
+                spillFieldsByType
+                    .Single(x =>
+                        TypeSymbol.Equals(
+                            x.Key,
+                            comp.GetSpecialType(SpecialType.System_Int32),
+                            TypeCompareKind.ConsiderEverything2
+                        )
+                    )
+                    .Count()
+            );
         }
 
         [Fact]
         public void ReuseFields_Generic()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -991,10 +1096,14 @@ class Test<U>
 }";
             var c = CompileAndVerify(source, expectedOutput: null, options: TestOptions.ReleaseDll);
 
-            var actual = GetFieldLoadsAndStores(c, "Test<U>.<M>d__2<S, T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext");
+            var actual = GetFieldLoadsAndStores(
+                c,
+                "Test<U>.<M>d__2<S, T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext"
+            );
 
             // make sure we are reusing synthesized iterator locals and that the locals are nulled:
-            AssertEx.AssertEqualToleratingWhitespaceDifferences(@"
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                @"
 IL_0000:  ldarg.0
 IL_0001:  ldfld      ""int Test<U>.<M>d__2<S, T>.<>1__state""
 IL_0027:  callvirt   ""System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()""
@@ -1125,13 +1234,16 @@ IL_0398:  ldc.i4.s   -2
 IL_039a:  stfld      ""int Test<U>.<M>d__2<S, T>.<>1__state""
 IL_039f:  ldarg.0
 IL_03a0:  ldflda     ""System.Runtime.CompilerServices.AsyncVoidMethodBuilder Test<U>.<M>d__2<S, T>.<>t__builder""
-", actual);
+",
+                actual
+            );
         }
 
         [Fact]
         public void ReuseFields_Dynamic()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -1149,10 +1261,14 @@ class Test
 }";
             var c = CompileAndVerify(source, expectedOutput: null, options: TestOptions.ReleaseDll);
 
-            var actual = GetFieldLoadsAndStores(c, "Test.<M>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext");
+            var actual = GetFieldLoadsAndStores(
+                c,
+                "Test.<M>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext"
+            );
 
             // make sure we are reusing synthesized iterator locals and that the locals are nulled:
-            AssertEx.AssertEqualToleratingWhitespaceDifferences(@"
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                @"
 IL_0000:  ldarg.0
 IL_0001:  ldfld      ""int Test.<M>d__3.<>1__state""
 IL_0017:  callvirt   ""System.Collections.Generic.IEnumerator<dynamic> System.Collections.Generic.IEnumerable<dynamic>.GetEnumerator()""
@@ -1211,13 +1327,16 @@ IL_0181:  ldc.i4.s   -2
 IL_0183:  stfld      ""int Test.<M>d__3.<>1__state""
 IL_0188:  ldarg.0
 IL_0189:  ldflda     ""System.Runtime.CompilerServices.AsyncVoidMethodBuilder Test.<M>d__3.<>t__builder""
-", actual);
+",
+                actual
+            );
         }
 
         [Fact]
         public void ManySynthesizedNames()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1244,30 +1363,41 @@ public class C
         var b8 = await Task.FromResult(default(Tuple<long, long, long>));
     }
 }";
-            CompileAndVerify(source, targetFramework: TargetFramework.Empty, references: s_asyncRefs, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                targetFramework: TargetFramework.Empty,
+                references: s_asyncRefs,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>t__builder",
-                    "<>u__1",
-                    "<>u__2",
-                    "<>u__3",
-                    "<>u__4",
-                    "<>u__5",
-                    "<>u__6",
-                    "<>u__7",
-                    "<>u__8",
-                    "<>u__9",
-                    "<>u__10",
-                    "<>u__11",
-                    "<>u__12",
-                    "<>u__13",
-                    "<>u__14",
-                    "<>u__15",
-                    "<>u__16",
-                }, module.GetFieldNames("C.<F>d__0"));
-            });
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>t__builder",
+                            "<>u__1",
+                            "<>u__2",
+                            "<>u__3",
+                            "<>u__4",
+                            "<>u__5",
+                            "<>u__6",
+                            "<>u__7",
+                            "<>u__8",
+                            "<>u__9",
+                            "<>u__10",
+                            "<>u__11",
+                            "<>u__12",
+                            "<>u__13",
+                            "<>u__14",
+                            "<>u__15",
+                            "<>u__16",
+                        },
+                        module.GetFieldNames("C.<F>d__0")
+                    );
+                }
+            );
         }
 
         [WorkItem(9775, "https://github.com/dotnet/roslyn/issues/9775")]
@@ -1275,7 +1405,7 @@ public class C
         public void Fixed_Debug()
         {
             var text =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 class C
 {
@@ -1298,9 +1428,15 @@ class C
         Console.Write(i);
     }
 }";
-            var verifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"1", verify: Verification.Fails);
-            verifier.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"1",
+                verify: Verification.Fails
+            );
+            verifier.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      198 (0xc6)
   .maxstack  3
@@ -1402,10 +1538,17 @@ class C
   IL_00bf:  ldloc.1
   IL_00c0:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_00c5:  ret
-}");
-            verifier = CompileAndVerify(text, options: TestOptions.UnsafeDebugExe, expectedOutput: @"1", verify: Verification.Fails);
-            verifier.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"
+}"
+            );
+            verifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: @"1",
+                verify: Verification.Fails
+            );
+            verifier.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      227 (0xe3)
   .maxstack  3
@@ -1523,7 +1666,8 @@ class C
   IL_00dc:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_00e1:  nop
   IL_00e2:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(15290, "https://github.com/dotnet/roslyn/issues/15290")]
@@ -1531,7 +1675,7 @@ class C
         public void ReuseLocals()
         {
             var text =
-@"
+                @"
 
 using System;
 using System.Threading.Tasks;
@@ -1555,12 +1699,17 @@ class Test
         }
     }
 }";
-            var verifier = CompileAndVerify(text, options: TestOptions.ReleaseExe, expectedOutput: @"2");
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.ReleaseExe,
+                expectedOutput: @"2"
+            );
 
-            // NOTE: only one hoisted int local:  
+            // NOTE: only one hoisted int local:
             //       int Test.<MainAsync>d__1.<a>5__2
-            verifier.VerifyIL("Test.<MainAsync>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"
+            verifier.VerifyIL(
+                "Test.<MainAsync>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      292 (0x124)
   .maxstack  3
@@ -1686,15 +1835,17 @@ class Test
   IL_0119:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Test.<MainAsync>d__1.<>t__builder""
   IL_011e:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0123:  ret
-}");
+}"
+            );
 
             verifier = CompileAndVerify(text, options: TestOptions.DebugExe, expectedOutput: @"2");
 
-            // NOTE: two separate hoisted int locals: 
-            //       int Test.<MainAsync>d__1.<a>5__1  and  
+            // NOTE: two separate hoisted int locals:
+            //       int Test.<MainAsync>d__1.<a>5__1  and
             //       int Test.<MainAsync>d__1.<b>5__2
-            verifier.VerifyIL("Test.<MainAsync>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"
+            verifier.VerifyIL(
+                "Test.<MainAsync>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      331 (0x14b)
   .maxstack  3
@@ -1848,7 +1999,8 @@ class Test
   IL_0144:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0149:  nop
   IL_014a:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(15290, "https://github.com/dotnet/roslyn/issues/15290")]
@@ -1856,7 +2008,7 @@ class Test
         public void ReuseLocalsSynthetic()
         {
             var text =
-@"
+                @"
 
 using System;
 using System.Threading.Tasks;
@@ -1880,12 +2032,17 @@ class Test
         }
     }
 }";
-            var verifier = CompileAndVerify(text, options: TestOptions.ReleaseExe, expectedOutput: @"2");
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.ReleaseExe,
+                expectedOutput: @"2"
+            );
 
-            // NOTE: only one hoisted int local:  
+            // NOTE: only one hoisted int local:
             //       int Test.<MainAsync>d__1.<a>5__2
-            verifier.VerifyIL("Test.<MainAsync>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"
+            verifier.VerifyIL(
+                "Test.<MainAsync>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      292 (0x124)
   .maxstack  3
@@ -2011,15 +2168,17 @@ class Test
   IL_0119:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Test.<MainAsync>d__1.<>t__builder""
   IL_011e:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0123:  ret
-}");
+}"
+            );
 
             verifier = CompileAndVerify(text, options: TestOptions.DebugExe, expectedOutput: @"2");
 
-            // NOTE: two separate hoisted int locals: 
-            //       int Test.<MainAsync>d__1.<a>5__1  and  
+            // NOTE: two separate hoisted int locals:
+            //       int Test.<MainAsync>d__1.<a>5__1  and
             //       int Test.<MainAsync>d__1.<b>5__2
-            verifier.VerifyIL("Test.<MainAsync>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
-@"
+            verifier.VerifyIL(
+                "Test.<MainAsync>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      331 (0x14b)
   .maxstack  3
@@ -2173,7 +2332,8 @@ class Test
   IL_0144:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0149:  nop
   IL_014a:  ret
-}");
+}"
+            );
         }
     }
 }

@@ -10,9 +10,7 @@ namespace Microsoft.AspNetCore.OutputCaching;
 /// </summary>
 public sealed class OutputCacheContext
 {
-    public OutputCacheContext()
-    {
-    }
+    public OutputCacheContext() { }
 
     /// <summary>
     /// Determines whether the output caching logic should be configured for the incoming HTTP request.

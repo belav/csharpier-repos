@@ -14,38 +14,55 @@ namespace System.Drawing
 {
     public class ColorConverter : TypeConverter
     {
-        private static readonly Lazy<StandardValuesCollection> s_valuesLazy = new Lazy<StandardValuesCollection>(() =>
-        {
-            // We must take the value from each hashtable and combine them.
-            var set = new HashSet<Color>(ColorTable.Colors.Values);
-            return new StandardValuesCollection(set.OrderBy(c => c, new ColorComparer()).ToList());
-        });
+        private static readonly Lazy<StandardValuesCollection> s_valuesLazy =
+            new Lazy<StandardValuesCollection>(() =>
+            {
+                // We must take the value from each hashtable and combine them.
+                var set = new HashSet<Color>(ColorTable.Colors.Values);
+                return new StandardValuesCollection(
+                    set.OrderBy(c => c, new ColorComparer()).ToList()
+                );
+            });
 
-        public ColorConverter()
-        {
-        }
+        public ColorConverter() { }
 
         public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         {
             return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
 
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
-            return destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string strValue)
             {
-                return ColorConverterCommon.ConvertFromString(strValue, culture ?? CultureInfo.CurrentCulture);
+                return ColorConverterCommon.ConvertFromString(
+                    strValue,
+                    culture ?? CultureInfo.CurrentCulture
+                );
             }
 
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
@@ -104,11 +121,16 @@ namespace System.Drawing
                     }
                     else if (ColorTable.IsKnownNamedColor(c.Name))
                     {
-                        member = typeof(Color).GetProperty(c.Name) ?? typeof(SystemColors).GetProperty(c.Name);
+                        member =
+                            typeof(Color).GetProperty(c.Name)
+                            ?? typeof(SystemColors).GetProperty(c.Name);
                     }
                     else if (c.A != 255)
                     {
-                        member = typeof(Color).GetMethod("FromArgb", new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) });
+                        member = typeof(Color).GetMethod(
+                            "FromArgb",
+                            new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+                        );
                         args = new object[] { c.A, c.R, c.G, c.B };
                     }
                     else if (c.IsNamedColor)
@@ -118,11 +140,17 @@ namespace System.Drawing
                     }
                     else
                     {
-                        member = typeof(Color).GetMethod("FromArgb", new Type[] { typeof(int), typeof(int), typeof(int) });
+                        member = typeof(Color).GetMethod(
+                            "FromArgb",
+                            new Type[] { typeof(int), typeof(int), typeof(int) }
+                        );
                         args = new object[] { c.R, c.G, c.B };
                     }
 
-                    Debug.Assert(member != null, "Could not convert color to member. Did someone change method name / signature and not update ColorConverter?");
+                    Debug.Assert(
+                        member != null,
+                        "Could not convert color to member. Did someone change method name / signature and not update ColorConverter?"
+                    );
                     if (member != null)
                     {
                         return new InstanceDescriptor(member, args);
@@ -146,7 +174,8 @@ namespace System.Drawing
 
         private sealed class ColorComparer : IComparer<Color>
         {
-            public int Compare(Color left, Color right) => string.CompareOrdinal(left.Name, right.Name);
+            public int Compare(Color left, Color right) =>
+                string.CompareOrdinal(left.Name, right.Name);
         }
     }
 }

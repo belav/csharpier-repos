@@ -73,7 +73,9 @@ namespace System.Text.Json
 
         private void WriteCommentMinimized(ReadOnlySpan<char> value)
         {
-            Debug.Assert(value.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - 4);
+            Debug.Assert(
+                value.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - 4
+            );
 
             // All ASCII, /*...*/ => escapedValue.Length + 4
             // Optionally, up to 3x growth when transcoding
@@ -89,7 +91,11 @@ namespace System.Text.Json
             output[BytesPending++] = JsonConstants.Slash;
             output[BytesPending++] = JsonConstants.Asterisk;
 
-            OperationStatus status = JsonWriterHelper.ToUtf8(value, output.Slice(BytesPending), out int written);
+            OperationStatus status = JsonWriterHelper.ToUtf8(
+                value,
+                output.Slice(BytesPending),
+                out int written
+            );
             Debug.Assert(status != OperationStatus.DestinationTooSmall);
             if (status == OperationStatus.InvalidData)
             {
@@ -107,11 +113,21 @@ namespace System.Text.Json
             int indent = Indentation;
             Debug.Assert(indent <= 2 * _options.MaxDepth);
 
-            Debug.Assert(value.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - indent - 4 - s_newLineLength);
+            Debug.Assert(
+                value.Length
+                    < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding)
+                        - indent
+                        - 4
+                        - s_newLineLength
+            );
 
             // All ASCII, /*...*/ => escapedValue.Length + 4
             // Optionally, 1-2 bytes for new line, and up to 3x growth when transcoding
-            int maxRequired = indent + (value.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + 4 + s_newLineLength;
+            int maxRequired =
+                indent
+                + (value.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
+                + 4
+                + s_newLineLength;
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -130,7 +146,11 @@ namespace System.Text.Json
             output[BytesPending++] = JsonConstants.Slash;
             output[BytesPending++] = JsonConstants.Asterisk;
 
-            OperationStatus status = JsonWriterHelper.ToUtf8(value, output.Slice(BytesPending), out int written);
+            OperationStatus status = JsonWriterHelper.ToUtf8(
+                value,
+                output.Slice(BytesPending),
+                out int written
+            );
             Debug.Assert(status != OperationStatus.DestinationTooSmall);
             if (status == OperationStatus.InvalidData)
             {

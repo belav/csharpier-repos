@@ -16,12 +16,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     [DataSource(VisualStudioTaskListTable.IdentifierString)]
     [Name("Task List Table Control Event Processor")]
     [Order(Before = "default")]
-    internal sealed class TaskListTableControlEventProcessorProvider : AbstractTableControlEventProcessorProvider<TaskListTableItem>
+    internal sealed class TaskListTableControlEventProcessorProvider
+        : AbstractTableControlEventProcessorProvider<TaskListTableItem>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TaskListTableControlEventProcessorProvider()
-        {
-        }
+        public TaskListTableControlEventProcessorProvider() { }
     }
 }

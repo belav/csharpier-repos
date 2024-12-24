@@ -25,36 +25,44 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Microsoft.Build.Construction;
 using System;
+using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Evaluation
 {
-	[System.Runtime.InteropServices.StructLayout (System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct ResolvedImport
-	{
-		internal ResolvedImport (ProjectImportElement import, ProjectRootElement root, bool isImported)
-		{
-			this.import = import;
-			this.root = root;
-			this.imported = isImported;
-		}
+    [System.Runtime.InteropServices.StructLayout(
+        System.Runtime.InteropServices.LayoutKind.Sequential
+    )]
+    public struct ResolvedImport
+    {
+        internal ResolvedImport(
+            ProjectImportElement import,
+            ProjectRootElement root,
+            bool isImported
+        )
+        {
+            this.import = import;
+            this.root = root;
+            this.imported = isImported;
+        }
 
-		readonly ProjectImportElement import;
-		readonly ProjectRootElement root;
-		readonly bool imported;
+        readonly ProjectImportElement import;
+        readonly ProjectRootElement root;
+        readonly bool imported;
 
-		public ProjectImportElement ImportingElement {
-			get { return import; }
-		}
+        public ProjectImportElement ImportingElement
+        {
+            get { return import; }
+        }
 
-		public ProjectRootElement ImportedProject {
-			get { return root; }
-		}
-		
-		public bool IsImported {
-			get { return imported; }
-		}
-	}
+        public ProjectRootElement ImportedProject
+        {
+            get { return root; }
+        }
+
+        public bool IsImported
+        {
+            get { return imported; }
+        }
+    }
 }
-

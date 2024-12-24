@@ -47,15 +47,24 @@ internal static class X509CertificateHelpers
                 // so we have to parse through and only use the dNSNames
                 // <identifier><delimter><value><separator(s)>
 
-                string[] rawDnsEntries =
-                    asnString.Split(new string[1] { X509SubjectAlternativeNameConstants.Separator }, StringSplitOptions.RemoveEmptyEntries);
+                string[] rawDnsEntries = asnString.Split(
+                    new string[1] { X509SubjectAlternativeNameConstants.Separator },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
 
                 List<string> dnsEntries = new List<string>();
 
                 for (var i = 0; i < rawDnsEntries.Length; i++)
                 {
-                    string[] keyval = rawDnsEntries[i].Split(X509SubjectAlternativeNameConstants.Delimiter);
-                    if (string.Equals(keyval[0], X509SubjectAlternativeNameConstants.Identifier, StringComparison.Ordinal))
+                    string[] keyval = rawDnsEntries[i]
+                        .Split(X509SubjectAlternativeNameConstants.Delimiter);
+                    if (
+                        string.Equals(
+                            keyval[0],
+                            X509SubjectAlternativeNameConstants.Identifier,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         dnsEntries.Add(keyval[1]);
                     }
@@ -110,15 +119,18 @@ internal static class X509CertificateHelpers
         {
             if (!s_successfullyInitialized)
             {
-                throw new FormatException(string.Format(
-                    CultureInfo.InvariantCulture,
-                    "There was an error detecting the identifier, delimiter, and separator for X509CertificateClaims on this platform.{0}" +
-                    "Detected values were: Identifier: '{1}'; Delimiter:'{2}'; Separator:'{3}'",
-                    Environment.NewLine,
-                    s_identifier,
-                    s_delimiter,
-                    s_separator
-                ), s_initializationException);
+                throw new FormatException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "There was an error detecting the identifier, delimiter, and separator for X509CertificateClaims on this platform.{0}"
+                            + "Detected values were: Identifier: '{1}'; Delimiter:'{2}'; Separator:'{3}'",
+                        Environment.NewLine,
+                        s_identifier,
+                        s_delimiter,
+                        s_separator
+                    ),
+                    s_initializationException
+                );
             }
         }
 
@@ -126,10 +138,47 @@ internal static class X509CertificateHelpers
         static X509SubjectAlternativeNameConstants()
         {
             // Extracted a well-known X509Extension
-            byte[] x509ExtensionBytes = new byte[] {
-                    48, 36, 130, 21, 110, 111, 116, 45, 114, 101, 97, 108, 45, 115, 117, 98, 106, 101, 99,
-                    116, 45, 110, 97, 109, 101, 130, 11, 101, 120, 97, 109, 112, 108, 101, 46, 99, 111, 109
-                };
+            byte[] x509ExtensionBytes = new byte[]
+            {
+                48,
+                36,
+                130,
+                21,
+                110,
+                111,
+                116,
+                45,
+                114,
+                101,
+                97,
+                108,
+                45,
+                115,
+                117,
+                98,
+                106,
+                101,
+                99,
+                116,
+                45,
+                110,
+                97,
+                109,
+                101,
+                130,
+                11,
+                101,
+                120,
+                97,
+                109,
+                112,
+                108,
+                101,
+                46,
+                99,
+                111,
+                109,
+            };
             const string subjectName1 = "not-real-subject-name";
 
             try
@@ -144,7 +193,9 @@ internal static class X509CertificateHelpers
                 // Linux:   x509ExtensionFormattedString is: "DNS:not-real-subject-name, DNS:example.com"
                 // Parse: <identifier><delimter><value><separator(s)>
 
-                int delimiterIndex = x509ExtensionFormattedString.IndexOf(subjectName1, StringComparison.Ordinal) - 1;
+                int delimiterIndex =
+                    x509ExtensionFormattedString.IndexOf(subjectName1, StringComparison.Ordinal)
+                    - 1;
                 s_delimiter = x509ExtensionFormattedString[delimiterIndex];
 
                 // Make an assumption that all characters from the the start of string to the delimiter
@@ -165,7 +216,10 @@ internal static class X509CertificateHelpers
                     separatorLength++;
                 }
 
-                s_separator = x509ExtensionFormattedString.Substring(separatorFirstChar, separatorLength);
+                s_separator = x509ExtensionFormattedString.Substring(
+                    separatorFirstChar,
+                    separatorLength
+                );
 
                 s_successfullyInitialized = true;
             }

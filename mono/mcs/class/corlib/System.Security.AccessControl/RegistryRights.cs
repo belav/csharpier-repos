@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,23 +26,24 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Security.AccessControl {
-
-	[Flags]
-	public enum RegistryRights {
-		QueryValues		= 0x00001,
-		SetValue		= 0x00002,
-		CreateSubKey		= 0x00004,
-		EnumerateSubKeys	= 0x00008,
-		Notify			= 0x00010,
-		CreateLink		= 0x00020,
-		Delete			= 0x10000,
-		ReadPermissions		= 0x20000,
-		WriteKey		= 0x20006,
-		ReadKey			= 0x20019,
-		ExecuteKey		= 0x20019,
-		ChangePermissions	= 0x40000,
-		TakeOwnership		= 0x80000,
-		FullControl		= 0xF003F,
-	}
+namespace System.Security.AccessControl
+{
+    [Flags]
+    public enum RegistryRights
+    {
+        QueryValues = 0x00001,
+        SetValue = 0x00002,
+        CreateSubKey = 0x00004,
+        EnumerateSubKeys = 0x00008,
+        Notify = 0x00010,
+        CreateLink = 0x00020,
+        Delete = 0x10000,
+        ReadPermissions = 0x20000,
+        WriteKey = 0x20006,
+        ReadKey = 0x20019,
+        ExecuteKey = 0x20019,
+        ChangePermissions = 0x40000,
+        TakeOwnership = 0x80000,
+        FullControl = 0xF003F,
+    }
 }

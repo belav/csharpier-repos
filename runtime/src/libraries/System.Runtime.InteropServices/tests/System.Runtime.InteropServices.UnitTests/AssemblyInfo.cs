@@ -3,4 +3,9 @@
 
 using Xunit;
 
-[assembly: ActiveIssue("https://github.com/dotnet/runtime/issues/34748", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+[assembly: ActiveIssue(
+    "https://github.com/dotnet/runtime/issues/34748",
+    TestPlatforms.Windows,
+    TargetFrameworkMonikers.Netcoreapp,
+    TestRuntimes.Mono
+)]

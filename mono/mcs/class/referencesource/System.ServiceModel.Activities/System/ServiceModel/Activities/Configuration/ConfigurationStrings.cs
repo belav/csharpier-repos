@@ -9,12 +9,22 @@ namespace System.ServiceModel.Activities.Configuration
     {
         static string GetSectionPath(string sectionName)
         {
-            return string.Format(CultureInfo.InvariantCulture, @"{0}/{1}", ConfigurationStrings.SectionGroupName, sectionName);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                @"{0}/{1}",
+                ConfigurationStrings.SectionGroupName,
+                sectionName
+            );
         }
 
-        static internal string WorkflowHostingOptionsSectionPath
+        internal static string WorkflowHostingOptionsSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.WorkflowHostingOptionsSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.WorkflowHostingOptionsSectionName
+                );
+            }
         }
 
         public const string AllowUnsafeCaching = "allowUnsafeCaching";
@@ -23,6 +33,7 @@ namespace System.ServiceModel.Activities.Configuration
         public const string IdleTimeout = "idleTimeout";
         public const string LeaseTimeout = "leaseTimeout";
         public const string MaxItemsInCache = "maxItemsInCache";
+
         // Default Values
         public const string TimeSpanZero = "00:00:00";
 

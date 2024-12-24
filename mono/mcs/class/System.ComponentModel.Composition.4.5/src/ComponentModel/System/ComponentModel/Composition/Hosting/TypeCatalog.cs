@@ -31,14 +31,16 @@ namespace System.ComponentModel.Composition.Hosting
         private volatile List<ComposablePartDefinition> _parts;
         private volatile bool _isDisposed = false;
         private readonly ICompositionElement _definitionOrigin;
-        private readonly Lazy<IDictionary<string, List<ComposablePartDefinition>>> _contractPartIndex;
+        private readonly Lazy<
+            IDictionary<string, List<ComposablePartDefinition>>
+        > _contractPartIndex;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TypeCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="TypeCatalog"/> class
         ///     with the specified types.
         /// </summary>
         /// <param name="types">
-        ///     An <see cref="Array"/> of attributed <see cref="Type"/> objects to add to the 
+        ///     An <see cref="Array"/> of attributed <see cref="Type"/> objects to add to the
         ///     <see cref="TypeCatalog"/>.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -51,16 +53,15 @@ namespace System.ComponentModel.Composition.Hosting
         ///     </para>
         ///     <paramref name="types"/> contains an element that was loaded in the Reflection-only context.
         /// </exception>
-        public TypeCatalog(params Type[] types) : this((IEnumerable<Type>)types)
-        {
-        }
+        public TypeCatalog(params Type[] types)
+            : this((IEnumerable<Type>)types) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="TypeCatalog"/> class
         ///     with the specified types.
         /// </summary>
         /// <param name="types">
-        ///     An <see cref="IEnumerable{T}"/> of attributed <see cref="Type"/> objects to add 
+        ///     An <see cref="IEnumerable{T}"/> of attributed <see cref="Type"/> objects to add
         ///     to the <see cref="TypeCatalog"/>.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -80,7 +81,10 @@ namespace System.ComponentModel.Composition.Hosting
             InitializeTypeCatalog(types);
 
             this._definitionOrigin = this;
-            this._contractPartIndex = new Lazy<IDictionary<string, List<ComposablePartDefinition>>>(this.CreateIndex, true);
+            this._contractPartIndex = new Lazy<IDictionary<string, List<ComposablePartDefinition>>>(
+                this.CreateIndex,
+                true
+            );
         }
 
         /// <summary>
@@ -88,7 +92,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     with the specified types.
         /// </summary>
         /// <param name="types">
-        ///     An <see cref="IEnumerable{T}"/> of attributed <see cref="Type"/> objects to add 
+        ///     An <see cref="IEnumerable{T}"/> of attributed <see cref="Type"/> objects to add
         ///     to the <see cref="TypeCatalog"/>.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -108,7 +112,10 @@ namespace System.ComponentModel.Composition.Hosting
             InitializeTypeCatalog(types);
 
             this._definitionOrigin = definitionOrigin;
-            this._contractPartIndex = new Lazy<IDictionary<string, List<ComposablePartDefinition>>>(this.CreateIndex, true);
+            this._contractPartIndex = new Lazy<IDictionary<string, List<ComposablePartDefinition>>>(
+                this.CreateIndex,
+                true
+            );
         }
 
 #if FEATURE_REFLECTIONCONTEXT
@@ -117,14 +124,14 @@ namespace System.ComponentModel.Composition.Hosting
         ///     with the specified types.
         /// </summary>
         /// <param name="types">
-        ///     An <see cref="IEnumerable{T}"/> of attributed <see cref="Type"/> objects to add 
+        ///     An <see cref="IEnumerable{T}"/> of attributed <see cref="Type"/> objects to add
         ///     to the <see cref="TypeCatalog"/>.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="types"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="reflectionContext">
-        ///     The <see cref="ReflectionContext"/> a context used by the catalog when 
+        ///     The <see cref="ReflectionContext"/> a context used by the catalog when
         ///     interpreting the types to inject attributes into the type definition.
         /// </param>
         /// <exception cref="ArgumentException">
@@ -138,7 +145,10 @@ namespace System.ComponentModel.Composition.Hosting
             InitializeTypeCatalog(types, reflectionContext);
 
             this._definitionOrigin = this;
-            this._contractPartIndex = new Lazy<IDictionary<string, List<ComposablePartDefinition>>>(this.CreateIndex, true);
+            this._contractPartIndex = new Lazy<IDictionary<string, List<ComposablePartDefinition>>>(
+                this.CreateIndex,
+                true
+            );
         }
 
         /// <summary>
@@ -146,11 +156,11 @@ namespace System.ComponentModel.Composition.Hosting
         ///     with the specified types.
         /// </summary>
         /// <param name="types">
-        ///     An <see cref="IEnumerable{T}"/> of attributed <see cref="Type"/> objects to add 
+        ///     An <see cref="IEnumerable{T}"/> of attributed <see cref="Type"/> objects to add
         ///     to the <see cref="TypeCatalog"/>.
         /// </param>
         /// <param name="reflectionContext">
-        ///     The <see cref="ReflectionContext"/> a context used by the catalog when 
+        ///     The <see cref="ReflectionContext"/> a context used by the catalog when
         ///     interpreting the types to inject attributes into the type definition.
         /// </param>
         /// <param name="definitionOrigin">
@@ -162,7 +172,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ArgumentException">
         ///     <paramref name="types"/> contains an element that is <see langword="null"/>.
         /// </exception>
-        public TypeCatalog(IEnumerable<Type> types, ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
+        public TypeCatalog(
+            IEnumerable<Type> types,
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNull(types, "types");
             Requires.NotNull(reflectionContext, "reflectionContext");
@@ -171,13 +185,19 @@ namespace System.ComponentModel.Composition.Hosting
             InitializeTypeCatalog(types, reflectionContext);
 
             this._definitionOrigin = definitionOrigin;
-            this._contractPartIndex = new Lazy<IDictionary<string, List<ComposablePartDefinition>>>(this.CreateIndex, true);
+            this._contractPartIndex = new Lazy<IDictionary<string, List<ComposablePartDefinition>>>(
+                this.CreateIndex,
+                true
+            );
         }
 
-        private void InitializeTypeCatalog(IEnumerable<Type> types, ReflectionContext reflectionContext)
+        private void InitializeTypeCatalog(
+            IEnumerable<Type> types,
+            ReflectionContext reflectionContext
+        )
         {
             var typesList = new List<Type>();
-            foreach(var type in types)
+            foreach (var type in types)
             {
                 if (type == null)
                 {
@@ -186,21 +206,35 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (type.Assembly.ReflectionOnly)
                 {
-                    throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Strings.Argument_ElementReflectionOnlyType, "types"), "types");
+                    throw new ArgumentException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            Strings.Argument_ElementReflectionOnlyType,
+                            "types"
+                        ),
+                        "types"
+                    );
                 }
 
                 var typeInfo = type.GetTypeInfo();
-                var lclType = (reflectionContext != null) ? reflectionContext.MapType(typeInfo) : typeInfo;
-                
+                var lclType =
+                    (reflectionContext != null) ? reflectionContext.MapType(typeInfo) : typeInfo;
+
                 // It is valid for the reflectionContext to delete types by mapping them to null
-                if(lclType != null)
+                if (lclType != null)
                 {
                     // The final mapped type may be activated so we check to see if it is in a reflect only assembly
                     if (lclType.Assembly.ReflectionOnly)
                     {
-                        throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Strings.Argument_ReflectionContextReturnsReflectionOnlyType, "reflectionContext"), "reflectionContext");
+                        throw new ArgumentException(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                Strings.Argument_ReflectionContextReturnsReflectionOnlyType,
+                                "reflectionContext"
+                            ),
+                            "reflectionContext"
+                        );
                     }
-
 
                     typesList.Add(lclType);
                 }
@@ -211,7 +245,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         private void InitializeTypeCatalog(IEnumerable<Type> types)
         {
-            foreach(var type in types)
+            foreach (var type in types)
             {
                 if (type == null)
                 {
@@ -220,13 +254,19 @@ namespace System.ComponentModel.Composition.Hosting
 #if FEATURE_REFLECTIONONLY
                 else if (type.Assembly.ReflectionOnly)
                 {
-                    throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Strings.Argument_ElementReflectionOnlyType, "types"), "types");
+                    throw new ArgumentException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            Strings.Argument_ElementReflectionOnlyType,
+                            "types"
+                        ),
+                        "types"
+                    );
                 }
 #endif //FEATURE_REFLECTIONONLY
             }
             this._types = types.ToArray();
         }
-
 
         public override IEnumerator<ComposablePartDefinition> GetEnumerator()
         {
@@ -273,7 +313,11 @@ namespace System.ComponentModel.Composition.Hosting
                             var collection = new List<ComposablePartDefinition>();
                             foreach (Type type in this._types)
                             {
-                                var definition = AttributedModelDiscovery.CreatePartDefinitionIfDiscoverable(type, _definitionOrigin);
+                                var definition =
+                                    AttributedModelDiscovery.CreatePartDefinitionIfDiscoverable(
+                                        type,
+                                        _definitionOrigin
+                                    );
                                 if (definition != null)
                                 {
                                     collection.Add(definition);
@@ -291,7 +335,9 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        internal override IEnumerable<ComposablePartDefinition> GetCandidateParts(ImportDefinition definition)
+        internal override IEnumerable<ComposablePartDefinition> GetCandidateParts(
+            ImportDefinition definition
+        )
         {
             Assumes.NotNull(definition);
 
@@ -301,10 +347,14 @@ namespace System.ComponentModel.Composition.Hosting
                 return this.PartsInternal;
             }
 
-            string genericContractName = definition.Metadata.GetValue<string>(CompositionConstants.GenericContractMetadataName);
+            string genericContractName = definition.Metadata.GetValue<string>(
+                CompositionConstants.GenericContractMetadataName
+            );
 
             List<ComposablePartDefinition> nonGenericMatches = this.GetCandidateParts(contractName);
-            List<ComposablePartDefinition> genericMatches = this.GetCandidateParts(genericContractName);
+            List<ComposablePartDefinition> genericMatches = this.GetCandidateParts(
+                genericContractName
+            );
 
             return nonGenericMatches.ConcatAllowingNull(genericMatches);
         }
@@ -323,11 +373,18 @@ namespace System.ComponentModel.Composition.Hosting
 
         private IDictionary<string, List<ComposablePartDefinition>> CreateIndex()
         {
-            Dictionary<string, List<ComposablePartDefinition>> index = new Dictionary<string, List<ComposablePartDefinition>>(StringComparers.ContractName);
+            Dictionary<string, List<ComposablePartDefinition>> index = new Dictionary<
+                string,
+                List<ComposablePartDefinition>
+            >(StringComparers.ContractName);
 
             foreach (var part in this.PartsInternal)
             {
-                foreach (string contractName in part.ExportDefinitions.Select(export => export.ContractName).Distinct())
+                foreach (
+                    string contractName in part
+                        .ExportDefinitions.Select(export => export.ContractName)
+                        .Distinct()
+                )
                 {
                     List<ComposablePartDefinition> contractParts = null;
                     if (!index.TryGetValue(contractName, out contractParts))
@@ -364,10 +421,12 @@ namespace System.ComponentModel.Composition.Hosting
 
         private string GetDisplayName()
         {
-            return String.Format(CultureInfo.CurrentCulture,
-                                Strings.TypeCatalog_DisplayNameFormat,
-                                this.GetType().Name,
-                                this.GetTypesDisplay());
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                Strings.TypeCatalog_DisplayNameFormat,
+                this.GetType().Name,
+                this.GetTypesDisplay()
+            );
         }
 
         private string GetTypesDisplay()
@@ -380,7 +439,11 @@ namespace System.ComponentModel.Composition.Hosting
 
             const int displayCount = 2;
             StringBuilder builder = new StringBuilder();
-            foreach (ReflectionComposablePartDefinition definition in this.PartsInternal.Take(displayCount))
+            foreach (
+                ReflectionComposablePartDefinition definition in this.PartsInternal.Take(
+                    displayCount
+                )
+            )
             {
                 if (builder.Length > 0)
                 {
@@ -392,7 +455,7 @@ namespace System.ComponentModel.Composition.Hosting
             }
 
             if (count > displayCount)
-            {   // Add an elipse to indicate that there 
+            { // Add an elipse to indicate that there
                 // are more types than actually listed
                 builder.Append(CultureInfo.CurrentCulture.TextInfo.ListSeparator);
                 builder.Append(" ...");
@@ -403,7 +466,11 @@ namespace System.ComponentModel.Composition.Hosting
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfDisposed()
         {
             if (this._isDisposed)

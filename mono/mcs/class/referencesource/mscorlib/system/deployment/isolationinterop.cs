@@ -3,18 +3,20 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security;
-
-using CMS=System.Deployment.Internal.Isolation.Manifest;
+using CMS = System.Deployment.Internal.Isolation.Manifest;
 
 namespace System.Deployment.Internal.Isolation
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct BLOB : IDisposable
     {
-        [MarshalAs(UnmanagedType.U4)] public uint Size;
-        [MarshalAs(UnmanagedType.SysInt)] public IntPtr BlobData;
+        [MarshalAs(UnmanagedType.U4)]
+        public uint Size;
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr BlobData;
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         public void Dispose()
         {
             if (BlobData != IntPtr.Zero)
@@ -28,17 +30,22 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct IDENTITY_ATTRIBUTE
     {
-        [MarshalAs(UnmanagedType.LPWStr)] public string Namespace;
-        [MarshalAs(UnmanagedType.LPWStr)] public string Name;
-        [MarshalAs(UnmanagedType.LPWStr)] public string Value;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Namespace;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Name;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Value;
     }
 
     [Flags]
     internal enum STORE_ASSEMBLY_STATUS_FLAGS
     {
-        STORE_ASSEMBLY_STATUS_MANIFEST_ONLY     = 0x00000001,
-        STORE_ASSEMBLY_STATUS_PAYLOAD_RESIDENT  = 0x00000002,
-        STORE_ASSEMBLY_STATUS_PARTIAL_INSTALL   = 0x00000004,
+        STORE_ASSEMBLY_STATUS_MANIFEST_ONLY = 0x00000001,
+        STORE_ASSEMBLY_STATUS_PAYLOAD_RESIDENT = 0x00000002,
+        STORE_ASSEMBLY_STATUS_PARTIAL_INSTALL = 0x00000004,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -46,7 +53,9 @@ namespace System.Deployment.Internal.Isolation
     {
         public uint Status;
         public IDefinitionIdentity DefinitionIdentity;
-        [MarshalAs(UnmanagedType.LPWStr)] public string ManifestPath;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string ManifestPath;
         public ulong AssemblySize;
         public ulong ChangeId;
     }
@@ -62,7 +71,9 @@ namespace System.Deployment.Internal.Isolation
     {
         public uint Size;
         public uint Flags;
-        [MarshalAs(UnmanagedType.LPWStr)] public string FileName;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string FileName;
         public uint FileStatusFlags;
     }
 
@@ -75,14 +86,17 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct STORE_CATEGORY_SUBCATEGORY
     {
-        [MarshalAs(UnmanagedType.LPWStr)] public string Subcategory;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Subcategory;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct STORE_CATEGORY_INSTANCE
     {
         public IDefinitionAppId DefinitionAppId_Application;
-        [MarshalAs(UnmanagedType.LPWStr)] public string XMLSnippet;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string XMLSnippet;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -94,14 +108,17 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct CATEGORY_SUBCATEGORY
     {
-        [MarshalAs(UnmanagedType.LPWStr)] public string Subcategory;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Subcategory;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct CATEGORY_INSTANCE
     {
         public IDefinitionAppId DefinitionAppId_Application;
-        [MarshalAs(UnmanagedType.LPWStr)] public string XMLSnippet;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string XMLSnippet;
     }
 
     [ComImport]
@@ -113,12 +130,15 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] StoreApplicationReference[] rgelt
-            /*[Out, Optional] out uint Fetched*/
-            );
+        /*[Out, Optional] out uint Fetched*/
+        );
+
         [SecurityCritical]
         void Skip([In] uint celt);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE Clone();
     }
@@ -132,12 +152,14 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] IDefinitionAppId[] AppIds
-            );
+        );
 
         [SecurityCritical]
         void Skip([In] uint celt);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumSTORE_DEPLOYMENT_METADATA Clone();
     };
@@ -160,17 +182,26 @@ namespace System.Deployment.Internal.Isolation
             return _current;
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public IDefinitionAppId Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public IDefinitionAppId Current
+        {
+            get { return GetCurrent(); }
+        }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         [SecuritySafeCritical]
         public bool MoveNext()
         {
             IDefinitionAppId[] next = new IDefinitionAppId[1];
             UInt32 fetched;
-            fetched=_enum.Next(1, next);
+            fetched = _enum.Next(1, next);
             if (fetched == 1)
                 _current = next[0];
             return (_fValid = (fetched == 1));
@@ -193,12 +224,14 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] StoreOperationMetadataProperty[] AppIds
-            );
+        );
 
         [SecurityCritical]
         void Skip([In] uint celt);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY Clone();
     };
@@ -209,7 +242,9 @@ namespace System.Deployment.Internal.Isolation
         bool _fValid = false;
         StoreOperationMetadataProperty _current;
 
-        public StoreDeploymentMetadataPropertyEnumeration(IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY pI)
+        public StoreDeploymentMetadataPropertyEnumeration(
+            IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY pI
+        )
         {
             _enum = pI;
         }
@@ -221,17 +256,26 @@ namespace System.Deployment.Internal.Isolation
             return _current;
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public StoreOperationMetadataProperty Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public StoreOperationMetadataProperty Current
+        {
+            get { return GetCurrent(); }
+        }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         [SecuritySafeCritical]
         public bool MoveNext()
         {
             StoreOperationMetadataProperty[] next = new StoreOperationMetadataProperty[1];
             UInt32 fetched;
-            fetched=_enum.Next(1, next);
+            fetched = _enum.Next(1, next);
             if (fetched == 1)
                 _current = next[0];
             return (_fValid = (fetched == 1));
@@ -257,12 +301,15 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] UInt32 celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] STORE_ASSEMBLY[] rgelt
-            /*[Out, Optional] UInt32 *pceltFetched*/
-            );
+        /*[Out, Optional] UInt32 *pceltFetched*/
+        );
+
         [SecurityCritical]
         void Skip([In] UInt32 celt);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumSTORE_ASSEMBLY Clone();
     };
@@ -285,17 +332,26 @@ namespace System.Deployment.Internal.Isolation
             return _current;
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public STORE_ASSEMBLY Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public STORE_ASSEMBLY Current
+        {
+            get { return GetCurrent(); }
+        }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         [SecuritySafeCritical]
         public bool MoveNext()
         {
             STORE_ASSEMBLY[] next = new STORE_ASSEMBLY[1];
             UInt32 fetched;
-            fetched=_enum.Next(1, next);
+            fetched = _enum.Next(1, next);
             if (fetched == 1)
                 _current = next[0];
             return (_fValid = (fetched == 1));
@@ -309,7 +365,6 @@ namespace System.Deployment.Internal.Isolation
         }
     }
 
-
     //
     // Enumerating the files in an assembly
     //
@@ -322,12 +377,15 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] UInt32 celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] STORE_ASSEMBLY_FILE[] rgelt
-            /*[Out, Optional] UInt32 *pceltFetched*/
-            );
+        /*[Out, Optional] UInt32 *pceltFetched*/
+        );
+
         [SecurityCritical]
         void Skip([In] UInt32 celt);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumSTORE_ASSEMBLY_FILE Clone();
     };
@@ -343,7 +401,10 @@ namespace System.Deployment.Internal.Isolation
             _enum = pI;
         }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         private STORE_ASSEMBLY_FILE GetCurrent()
         {
@@ -352,15 +413,21 @@ namespace System.Deployment.Internal.Isolation
             return _current;
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public STORE_ASSEMBLY_FILE Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public STORE_ASSEMBLY_FILE Current
+        {
+            get { return GetCurrent(); }
+        }
 
         [SecuritySafeCritical]
         public bool MoveNext()
         {
             STORE_ASSEMBLY_FILE[] next = new STORE_ASSEMBLY_FILE[1];
             UInt32 fetched;
-            fetched=_enum.Next(1, next);
+            fetched = _enum.Next(1, next);
             if (fetched == 1)
                 _current = next[0];
             return (_fValid = (fetched == 1));
@@ -374,7 +441,6 @@ namespace System.Deployment.Internal.Isolation
         }
     }
 
-
     //
     // Managed and unmanaged store enumeration
     //
@@ -387,13 +453,15 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] STORE_CATEGORY[] rgElements
-            /*[Out] out uint Fetched*/
-            );
+        /*[Out] out uint Fetched*/
+        );
 
         [SecurityCritical]
         void Skip([In] uint ulElements);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumSTORE_CATEGORY Clone();
     }
@@ -409,7 +477,10 @@ namespace System.Deployment.Internal.Isolation
             _enum = pI;
         }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         private STORE_CATEGORY GetCurrent()
         {
@@ -418,15 +489,21 @@ namespace System.Deployment.Internal.Isolation
             return _current;
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public STORE_CATEGORY Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public STORE_CATEGORY Current
+        {
+            get { return GetCurrent(); }
+        }
 
         [SecuritySafeCritical]
         public bool MoveNext()
         {
             STORE_CATEGORY[] next = new STORE_CATEGORY[1];
             UInt32 fetched;
-            fetched=_enum.Next(1, next);
+            fetched = _enum.Next(1, next);
             if (fetched == 1)
                 _current = next[0];
             return (_fValid = (fetched == 1));
@@ -452,12 +529,15 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] STORE_CATEGORY_SUBCATEGORY[] rgElements
-            /*[Out] out uint Fetched*/
-            );
+        /*[Out] out uint Fetched*/
+        );
+
         [SecurityCritical]
         void Skip([In] uint ulElements);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumSTORE_CATEGORY_SUBCATEGORY Clone();
     }
@@ -473,7 +553,10 @@ namespace System.Deployment.Internal.Isolation
             _enum = pI;
         }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         private STORE_CATEGORY_SUBCATEGORY GetCurrent()
         {
@@ -482,15 +565,21 @@ namespace System.Deployment.Internal.Isolation
             return _current;
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public STORE_CATEGORY_SUBCATEGORY Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public STORE_CATEGORY_SUBCATEGORY Current
+        {
+            get { return GetCurrent(); }
+        }
 
         [SecuritySafeCritical]
         public bool MoveNext()
         {
             STORE_CATEGORY_SUBCATEGORY[] next = new STORE_CATEGORY_SUBCATEGORY[1];
             UInt32 fetched;
-            fetched=_enum.Next(1, next);
+            fetched = _enum.Next(1, next);
             if (fetched == 1)
                 _current = next[0];
             return (_fValid = (fetched == 1));
@@ -516,12 +605,15 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint ulElements,
             [Out, MarshalAs(UnmanagedType.LPArray)] STORE_CATEGORY_INSTANCE[] rgInstances
-            /*[Out] out uint Fetched*/
-            );
+        /*[Out] out uint Fetched*/
+        );
+
         [SecurityCritical]
         void Skip([In] uint ulElements);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumSTORE_CATEGORY_INSTANCE Clone();
     }
@@ -537,7 +629,10 @@ namespace System.Deployment.Internal.Isolation
             _enum = pI;
         }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         private STORE_CATEGORY_INSTANCE GetCurrent()
         {
@@ -546,15 +641,21 @@ namespace System.Deployment.Internal.Isolation
             return _current;
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public STORE_CATEGORY_INSTANCE Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public STORE_CATEGORY_INSTANCE Current
+        {
+            get { return GetCurrent(); }
+        }
 
         [SecuritySafeCritical]
         public bool MoveNext()
         {
             STORE_CATEGORY_INSTANCE[] next = new STORE_CATEGORY_INSTANCE[1];
             UInt32 fetched;
-            fetched=_enum.Next(1, next);
+            fetched = _enum.Next(1, next);
             if (fetched == 1)
                 _current = next[0];
             return (_fValid = (fetched == 1));
@@ -581,14 +682,35 @@ namespace System.Deployment.Internal.Isolation
             _id = i;
         }
 
-        string GetAttribute(string ns, string n) { return _id.GetAttribute(ns, n); }
-        string GetAttribute(string n) { return _id.GetAttribute(null, n); }
+        string GetAttribute(string ns, string n)
+        {
+            return _id.GetAttribute(ns, n);
+        }
 
-        void SetAttribute(string ns, string n, string v) { _id.SetAttribute(ns, n, v); }
-        void SetAttribute(string n, string v) { SetAttribute(null, n, v); }
+        string GetAttribute(string n)
+        {
+            return _id.GetAttribute(null, n);
+        }
 
-        void DeleteAttribute(string ns, string n) { SetAttribute(ns, n, null); }
-        void DeleteAttribute(string n) { SetAttribute(null, n, null); }
+        void SetAttribute(string ns, string n, string v)
+        {
+            _id.SetAttribute(ns, n, v);
+        }
+
+        void SetAttribute(string n, string v)
+        {
+            SetAttribute(null, n, v);
+        }
+
+        void DeleteAttribute(string ns, string n)
+        {
+            SetAttribute(ns, n, null);
+        }
+
+        void DeleteAttribute(string n)
+        {
+            SetAttribute(null, n, null);
+        }
     }
 #endif // !ISOLATION_IN_MSCORLIB
 
@@ -598,24 +720,29 @@ namespace System.Deployment.Internal.Isolation
     interface IReferenceIdentity
     {
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
+        [return: MarshalAs(UnmanagedType.LPWStr)]
         string GetAttribute(
             [In, MarshalAs(UnmanagedType.LPWStr)] string Namespace,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Name
-            );
+        );
+
         [SecurityCritical]
         void SetAttribute(
             [In, MarshalAs(UnmanagedType.LPWStr)] string Namespace,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Name,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Value
-            );
+        );
+
         [SecurityCritical]
         IEnumIDENTITY_ATTRIBUTE EnumAttributes();
+
         [SecurityCritical]
         IReferenceIdentity Clone(
-            [In] IntPtr /*SIZE_T*/ cDeltas,
+            [In]
+                IntPtr /*SIZE_T*/
+            cDeltas,
             [In, MarshalAs(UnmanagedType.LPArray)] IDENTITY_ATTRIBUTE[] Deltas
-            );
+        );
     }
 
     [ComImport]
@@ -624,23 +751,29 @@ namespace System.Deployment.Internal.Isolation
     interface IDefinitionIdentity
     {
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
+        [return: MarshalAs(UnmanagedType.LPWStr)]
         string GetAttribute(
             [In, MarshalAs(UnmanagedType.LPWStr)] string Namespace,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Name
-            );
+        );
+
         [SecurityCritical]
         void SetAttribute(
             [In, MarshalAs(UnmanagedType.LPWStr)] string Namespace,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Name,
-            [In, MarshalAs(UnmanagedType.LPWStr)] string Value);
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Value
+        );
+
         [SecurityCritical]
         IEnumIDENTITY_ATTRIBUTE EnumAttributes();
+
         [SecurityCritical]
         IDefinitionIdentity Clone(
-            [In] IntPtr /*SIZE_T*/ cDeltas,
+            [In]
+                IntPtr /*SIZE_T*/
+            cDeltas,
             [In, MarshalAs(UnmanagedType.LPArray)] IDENTITY_ATTRIBUTE[] Deltas
-            );
+        );
     }
 
 #if !ISOLATION_IN_MSCORLIB
@@ -656,14 +789,35 @@ namespace System.Deployment.Internal.Isolation
             _id = i;
         }
 
-        string GetAttribute(string ns, string n) { return _id.GetAttribute(ns, n); }
-        string GetAttribute(string n) { return _id.GetAttribute(null, n); }
+        string GetAttribute(string ns, string n)
+        {
+            return _id.GetAttribute(ns, n);
+        }
 
-        void SetAttribute(string ns, string n, string v) { _id.SetAttribute(ns, n, v); }
-        void SetAttribute(string n, string v) { SetAttribute(null, n, v); }
+        string GetAttribute(string n)
+        {
+            return _id.GetAttribute(null, n);
+        }
 
-        void DeleteAttribute(string ns, string n) { SetAttribute(ns, n, null); }
-        void DeleteAttribute(string n) { SetAttribute(null, n, null); }
+        void SetAttribute(string ns, string n, string v)
+        {
+            _id.SetAttribute(ns, n, v);
+        }
+
+        void SetAttribute(string n, string v)
+        {
+            SetAttribute(null, n, v);
+        }
+
+        void DeleteAttribute(string ns, string n)
+        {
+            SetAttribute(ns, n, null);
+        }
+
+        void DeleteAttribute(string n)
+        {
+            SetAttribute(null, n, null);
+        }
     }
 #endif // !ISOLATION_IN_MSCORLIB
 
@@ -676,18 +830,22 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] IDENTITY_ATTRIBUTE[] rgAttributes
-            /*[Out, Optional] out uint Written*/);
+        /*[Out, Optional] out uint Written*/);
 
         [SecurityCritical]
         IntPtr CurrentIntoBuffer(
-            [In] IntPtr /*SIZE_T*/ Available,
+            [In]
+                IntPtr /*SIZE_T*/
+            Available,
             [Out, MarshalAs(UnmanagedType.LPArray)] byte[] Data
-            /*[out] SIZE_T *pcbUsed*/);
+        /*[out] SIZE_T *pcbUsed*/);
 
         [SecurityCritical]
         void Skip([In] uint celt);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumIDENTITY_ATTRIBUTE Clone();
     }
@@ -701,11 +859,14 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity[] DefinitionIdentity
-            /*[Out] out uint Written*/);
+        /*[Out] out uint Written*/);
+
         [SecurityCritical]
         void Skip([In] uint celt);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumDefinitionIdentity Clone();
     }
@@ -725,16 +886,26 @@ namespace System.Deployment.Internal.Isolation
             _enum = e;
         }
 
-        private DefinitionIdentity GetCurrent() {
+        private DefinitionIdentity GetCurrent()
+        {
             if (_current == null)
                 throw new InvalidOperationException();
             return new DefinitionIdentity(_current);
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public DefinitionIdentity Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public DefinitionIdentity Current
+        {
+            get { return GetCurrent(); }
+        }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         public bool MoveNext()
         {
@@ -767,11 +938,14 @@ namespace System.Deployment.Internal.Isolation
         uint Next(
             [In] uint celt,
             [Out, MarshalAs(UnmanagedType.LPArray)] IReferenceIdentity[] ReferenceIdentity
-            /*[Out] out uint Written*/);
+        /*[Out] out uint Written*/);
+
         [SecurityCritical]
         void Skip(uint celt);
+
         [SecurityCritical]
         void Reset();
+
         [SecurityCritical]
         IEnumReferenceIdentity Clone();
     }
@@ -788,16 +962,26 @@ namespace System.Deployment.Internal.Isolation
             _enum = e;
         }
 
-        private ReferenceIdentity GetCurrent() {
+        private ReferenceIdentity GetCurrent()
+        {
             if (_current == null)
                 throw new InvalidOperationException();
             return new ReferenceIdentity(_current);
         }
 
-        object IEnumerator.Current { get { return GetCurrent(); } }
-        public ReferenceIdentity Current { get { return GetCurrent(); } }
+        object IEnumerator.Current
+        {
+            get { return GetCurrent(); }
+        }
+        public ReferenceIdentity Current
+        {
+            get { return GetCurrent(); }
+        }
 
-        public IEnumerator GetEnumerator() { return this; }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
 
         public bool MoveNext()
         {
@@ -827,18 +1011,27 @@ namespace System.Deployment.Internal.Isolation
     interface IDefinitionAppId
     {
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)] string get_SubscriptionId();
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string get_SubscriptionId();
         void put_SubscriptionId([In, MarshalAs(UnmanagedType.LPWStr)] string Subscription);
+
         [SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
-        [return:MarshalAs(UnmanagedType.LPWStr)] string get_Codebase();
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string get_Codebase();
+
         [SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         void put_Codebase([In, MarshalAs(UnmanagedType.LPWStr)] string CodeBase);
+
         [SecurityCritical]
         IEnumDefinitionIdentity EnumAppPath();
+
         [SecurityCritical]
-        void SetAppPath([In] uint cIDefinitionIdentity, [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity[] DefinitionIdentity);
+        void SetAppPath(
+            [In] uint cIDefinitionIdentity,
+            [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity[] DefinitionIdentity
+        );
     }
 
 #if !ISOLATION_IN_MSCORLIB
@@ -883,13 +1076,18 @@ namespace System.Deployment.Internal.Isolation
     interface IReferenceAppId
     {
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)] string get_SubscriptionId();
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string get_SubscriptionId();
         void put_SubscriptionId([In, MarshalAs(UnmanagedType.LPWStr)] string Subscription);
+
         [SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
-        [return:MarshalAs(UnmanagedType.LPWStr)] string get_Codebase();
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string get_Codebase();
+
         [ResourceExposure(ResourceScope.Machine)]
         void put_Codebase([In, MarshalAs(UnmanagedType.LPWStr)] string CodeBase);
+
         [SecurityCritical]
         IEnumReferenceIdentity EnumAppPath();
     }
@@ -949,106 +1147,108 @@ namespace System.Deployment.Internal.Isolation
         IDefinitionIdentity TextToDefinition(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Identity
-            );
+        );
+
         [SecurityCritical]
         IReferenceIdentity TextToReference(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Identity
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
-        string DefinitionToText(
-            [In] UInt32 Flags,
-            [In] IDefinitionIdentity DefinitionIdentity
-            );
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string DefinitionToText([In] UInt32 Flags, [In] IDefinitionIdentity DefinitionIdentity);
+
         [SecurityCritical]
         UInt32 DefinitionToTextBuffer(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity DefinitionIdentity,
             [In] UInt32 BufferSize,
             [Out, MarshalAs(UnmanagedType.LPArray)] char[] Buffer
-            /*out UInt32 cchBufferRequired*/
-            );
+        /*out UInt32 cchBufferRequired*/
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
-        string ReferenceToText(
-            [In] UInt32 Flags,
-            [In] IReferenceIdentity ReferenceIdentity
-            );
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string ReferenceToText([In] UInt32 Flags, [In] IReferenceIdentity ReferenceIdentity);
+
         [SecurityCritical]
         UInt32 ReferenceToTextBuffer(
             [In] UInt32 Flags,
             [In] IReferenceIdentity ReferenceIdentity,
             [In] UInt32 BufferSize,
             [Out, MarshalAs(UnmanagedType.LPArray)] char[] Buffer
-            /*out UInt32 cchBufferRequired*/
-            );
+        /*out UInt32 cchBufferRequired*/
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool AreDefinitionsEqual(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity Definition1,
             [In] IDefinitionIdentity Definition2
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool AreReferencesEqual(
             [In] UInt32 Flags,
             [In] IReferenceIdentity Reference1,
             [In] IReferenceIdentity Reference2
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool AreTextualDefinitionsEqual(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string IdentityLeft,
             [In, MarshalAs(UnmanagedType.LPWStr)] string IdentityRight
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool AreTextualReferencesEqual(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string IdentityLeft,
             [In, MarshalAs(UnmanagedType.LPWStr)] string IdentityRight
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool DoesDefinitionMatchReference(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity DefinitionIdentity,
             [In] IReferenceIdentity ReferenceIdentity
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool DoesTextualDefinitionMatchTextualReference(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Definition,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Reference
-            );
+        );
+
         [SecurityCritical]
-        UInt64 HashReference(
-            [In] UInt32 Flags,
-            [In] IReferenceIdentity ReferenceIdentity
-            );
+        UInt64 HashReference([In] UInt32 Flags, [In] IReferenceIdentity ReferenceIdentity);
+
         [SecurityCritical]
-        UInt64 HashDefinition(
-            [In] UInt32 Flags,
-            [In] IDefinitionIdentity DefinitionIdentity
-            );
+        UInt64 HashDefinition([In] UInt32 Flags, [In] IDefinitionIdentity DefinitionIdentity);
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
+        [return: MarshalAs(UnmanagedType.LPWStr)]
         string GenerateDefinitionKey(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity DefinitionIdentity
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
-        string GenerateReferenceKey(
-            [In] UInt32 Flags,
-            [In] IReferenceIdentity ReferenceIdentity
-            );
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string GenerateReferenceKey([In] UInt32 Flags, [In] IReferenceIdentity ReferenceIdentity);
+
         [SecurityCritical]
         IDefinitionIdentity CreateDefinition();
+
         [SecurityCritical]
         IReferenceIdentity CreateReference();
     }
@@ -1074,90 +1274,87 @@ namespace System.Deployment.Internal.Isolation
         IDefinitionAppId TextToDefinition(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Identity
-            );
+        );
+
         [SecurityCritical]
         IReferenceAppId TextToReference(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Identity
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
-        string DefinitionToText(
-            [In] UInt32 Flags,
-            [In] IDefinitionAppId DefinitionAppId
-            );
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string DefinitionToText([In] UInt32 Flags, [In] IDefinitionAppId DefinitionAppId);
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
-        string ReferenceToText(
-            [In] UInt32 Flags,
-            [In] IReferenceAppId ReferenceAppId
-            );
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string ReferenceToText([In] UInt32 Flags, [In] IReferenceAppId ReferenceAppId);
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool AreDefinitionsEqual(
             [In] UInt32 Flags,
             [In] IDefinitionAppId Definition1,
             [In] IDefinitionAppId Definition2
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool AreReferencesEqual(
             [In] UInt32 Flags,
             [In] IReferenceAppId Reference1,
             [In] IReferenceAppId Reference2
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool AreTextualDefinitionsEqual(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string AppIdLeft,
             [In, MarshalAs(UnmanagedType.LPWStr)] string AppIdRight
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool AreTextualReferencesEqual(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string AppIdLeft,
             [In, MarshalAs(UnmanagedType.LPWStr)] string AppIdRight
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool DoesDefinitionMatchReference(
             [In] UInt32 Flags,
             [In] IDefinitionAppId DefinitionIdentity,
             [In] IReferenceAppId ReferenceIdentity
-            );
+        );
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         bool DoesTextualDefinitionMatchTextualReference(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Definition,
             [In, MarshalAs(UnmanagedType.LPWStr)] string Reference
-            );
+        );
+
         [SecurityCritical]
-        UInt64 HashReference(
-            [In] UInt32 Flags,
-            [In] IReferenceAppId ReferenceIdentity
-            );
+        UInt64 HashReference([In] UInt32 Flags, [In] IReferenceAppId ReferenceIdentity);
+
         [SecurityCritical]
-        UInt64 HashDefinition(
-            [In] UInt32 Flags,
-            [In] IDefinitionAppId DefinitionIdentity
-            );
+        UInt64 HashDefinition([In] UInt32 Flags, [In] IDefinitionAppId DefinitionIdentity);
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
-        string GenerateDefinitionKey(
-            [In] UInt32 Flags,
-            [In] IDefinitionAppId DefinitionIdentity
-            );
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string GenerateDefinitionKey([In] UInt32 Flags, [In] IDefinitionAppId DefinitionIdentity);
+
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
-        string GenerateReferenceKey(
-            [In] UInt32 Flags,
-            [In] IReferenceAppId ReferenceIdentity
-            );
+        [return: MarshalAs(UnmanagedType.LPWStr)]
+        string GenerateReferenceKey([In] UInt32 Flags, [In] IReferenceAppId ReferenceIdentity);
+
         [SecurityCritical]
         IDefinitionAppId CreateDefinition();
+
         [SecurityCritical]
         IReferenceAppId CreateReference();
     }
@@ -1171,8 +1368,8 @@ namespace System.Deployment.Internal.Isolation
     [Flags]
     internal enum ISTORE_ENUM_ASSEMBLIES_FLAGS
     {
-        ISTORE_ENUM_ASSEMBLIES_FLAG_LIMIT_TO_VISIBLE_ONLY   = 0x00000001,
-        ISTORE_ENUM_ASSEMBLIES_FLAG_MATCH_SERVICING         = 0x00000002,
+        ISTORE_ENUM_ASSEMBLIES_FLAG_LIMIT_TO_VISIBLE_ONLY = 0x00000001,
+        ISTORE_ENUM_ASSEMBLIES_FLAG_MATCH_SERVICING = 0x00000002,
         ISTORE_ENUM_ASSEMBLIES_FLAG_FORCE_LIBRARY_SEMANTICS = 0x00000004,
     }
 
@@ -1180,7 +1377,7 @@ namespace System.Deployment.Internal.Isolation
     internal enum ISTORE_ENUM_FILES_FLAGS
     {
         ISTORE_ENUM_FILES_FLAG_INCLUDE_INSTALLED_FILES = 0x00000001,
-        ISTORE_ENUM_FILES_FLAG_INCLUDE_MISSING_FILES   = 0x00000002,
+        ISTORE_ENUM_FILES_FLAG_INCLUDE_MISSING_FILES = 0x00000002,
     }
 
     //
@@ -1189,16 +1386,25 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationStageComponent
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionAppId Application;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionIdentity Component;
-        [MarshalAs(UnmanagedType.LPWStr)] public string ManifestPath;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionAppId Application;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionIdentity Component;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string ManifestPath;
 
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public enum Disposition
@@ -1206,17 +1412,19 @@ namespace System.Deployment.Internal.Isolation
             Failed = 0,
             Installed = 1,
             Refreshed = 2,
-            AlreadyInstalled = 3
+            AlreadyInstalled = 3,
         }
 
         public void Destroy() { }
 
         public StoreOperationStageComponent(IDefinitionAppId app, string Manifest)
-            : this(app, null, Manifest)
-        {
-        }
+            : this(app, null, Manifest) { }
 
-        public StoreOperationStageComponent(IDefinitionAppId app, IDefinitionIdentity comp, string Manifest)
+        public StoreOperationStageComponent(
+            IDefinitionAppId app,
+            IDefinitionIdentity comp,
+            string Manifest
+        )
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationStageComponent));
             Flags = OpFlags.Nothing;
@@ -1224,23 +1432,33 @@ namespace System.Deployment.Internal.Isolation
             Component = comp;
             ManifestPath = Manifest;
         }
-
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationStageComponentFile
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionAppId Application;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionIdentity Component;
-        [MarshalAs(UnmanagedType.LPWStr)] public string ComponentRelativePath;
-        [MarshalAs(UnmanagedType.LPWStr)] public string SourceFilePath;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionAppId Application;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionIdentity Component;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string ComponentRelativePath;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string SourceFilePath;
 
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public enum Disposition
@@ -1248,15 +1466,22 @@ namespace System.Deployment.Internal.Isolation
             Failed = 0,
             Installed = 1,
             Refreshed = 2,
-            AlreadyInstalled = 3
+            AlreadyInstalled = 3,
         }
 
-        public StoreOperationStageComponentFile(IDefinitionAppId App, string CompRelPath, string SrcFile)
-            : this(App, null, CompRelPath, SrcFile)
-        {
-        }
+        public StoreOperationStageComponentFile(
+            IDefinitionAppId App,
+            string CompRelPath,
+            string SrcFile
+        )
+            : this(App, null, CompRelPath, SrcFile) { }
 
-        public StoreOperationStageComponentFile(IDefinitionAppId App, IDefinitionIdentity Component, string CompRelPath, string SrcFile)
+        public StoreOperationStageComponentFile(
+            IDefinitionAppId App,
+            IDefinitionIdentity Component,
+            string CompRelPath,
+            string SrcFile
+        )
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationStageComponentFile));
             Flags = OpFlags.Nothing;
@@ -1267,24 +1492,28 @@ namespace System.Deployment.Internal.Isolation
         }
 
         public void Destroy() { }
-
-
     }
-
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreApplicationReference
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public RefFlags Flags;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public RefFlags Flags;
         public System.Guid GuidScheme;
-        [MarshalAs(UnmanagedType.LPWStr)] public string Identifier;
-        [MarshalAs(UnmanagedType.LPWStr)] public string NonCanonicalData;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Identifier;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string NonCanonicalData;
 
         [Flags]
         public enum RefFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public StoreApplicationReference(System.Guid RefScheme, string Id, string NcData)
@@ -1296,7 +1525,7 @@ namespace System.Deployment.Internal.Isolation
             NonCanonicalData = NcData;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public IntPtr ToIntPtr()
         {
             IntPtr Reference = Marshal.AllocCoTaskMem(Marshal.SizeOf(this));
@@ -1304,7 +1533,7 @@ namespace System.Deployment.Internal.Isolation
             return Reference;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public static void Destroy(IntPtr ip)
         {
             if (ip != IntPtr.Zero)
@@ -1315,30 +1544,36 @@ namespace System.Deployment.Internal.Isolation
         }
     }
 
-
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationPinDeployment
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionAppId Application;
-        [MarshalAs(UnmanagedType.I8)] public Int64 ExpirationTime;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionAppId Application;
+
+        [MarshalAs(UnmanagedType.I8)]
+        public Int64 ExpirationTime;
         public IntPtr Reference;
 
         [Flags]
         public enum OpFlags
         {
             Nothing = 0,
-            NeverExpires = 0x1
+            NeverExpires = 0x1,
         }
 
         public enum Disposition
         {
             Failed = 0,
-            Pinned = 1
+            Pinned = 1,
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public StoreOperationPinDeployment(IDefinitionAppId AppId, StoreApplicationReference Ref)
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationPinDeployment));
@@ -1349,14 +1584,18 @@ namespace System.Deployment.Internal.Isolation
             ExpirationTime = 0;
         }
 
-        public StoreOperationPinDeployment(IDefinitionAppId AppId, System.DateTime Expiry, StoreApplicationReference Ref)
+        public StoreOperationPinDeployment(
+            IDefinitionAppId AppId,
+            System.DateTime Expiry,
+            StoreApplicationReference Ref
+        )
             : this(AppId, Ref)
         {
             Flags |= OpFlags.NeverExpires;
-            // 
+            //
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void Destroy()
         {
             StoreApplicationReference.Destroy(Reference);
@@ -1366,26 +1605,33 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationUnpinDeployment
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionAppId Application;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionAppId Application;
         public IntPtr Reference;
 
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public enum Disposition
         {
             Failed = 0,
-            Unpinned = 1
+            Unpinned = 1,
         }
 
-
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public StoreOperationUnpinDeployment(IDefinitionAppId app, StoreApplicationReference reference)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public StoreOperationUnpinDeployment(
+            IDefinitionAppId app,
+            StoreApplicationReference reference
+        )
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationUnpinDeployment));
             Flags = OpFlags.Nothing;
@@ -1393,7 +1639,7 @@ namespace System.Deployment.Internal.Isolation
             Reference = reference.ToIntPtr();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void Destroy()
         {
             StoreApplicationReference.Destroy(Reference);
@@ -1403,16 +1649,21 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationInstallDeployment
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionAppId Application;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionAppId Application;
         public IntPtr Reference;
 
         [Flags]
         public enum OpFlags
         {
             Nothing = 0,
-            UninstallOthers = 0x1
+            UninstallOthers = 0x1,
         }
 
         public enum Disposition
@@ -1422,14 +1673,18 @@ namespace System.Deployment.Internal.Isolation
             Installed = 2,
         }
 
+        public StoreOperationInstallDeployment(
+            IDefinitionAppId App,
+            StoreApplicationReference reference
+        )
+            : this(App, true, reference) { }
 
-        public StoreOperationInstallDeployment(IDefinitionAppId App, StoreApplicationReference reference) :
-            this(App, true, reference)
-        {
-        }
-
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public StoreOperationInstallDeployment(IDefinitionAppId App, bool UninstallOthers, StoreApplicationReference reference)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public StoreOperationInstallDeployment(
+            IDefinitionAppId App,
+            bool UninstallOthers,
+            StoreApplicationReference reference
+        )
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationInstallDeployment));
             Flags = OpFlags.Nothing;
@@ -1443,7 +1698,7 @@ namespace System.Deployment.Internal.Isolation
             Reference = reference.ToIntPtr();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void Destroy()
         {
             StoreApplicationReference.Destroy(Reference);
@@ -1453,27 +1708,34 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationUninstallDeployment
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionAppId Application;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionAppId Application;
         public IntPtr Reference;
 
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public enum Disposition
         {
             Failed = 0,
             DidNotExist = 1,
-            Uninstalled = 2
+            Uninstalled = 2,
         }
 
-
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public StoreOperationUninstallDeployment(IDefinitionAppId appid, StoreApplicationReference AppRef)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public StoreOperationUninstallDeployment(
+            IDefinitionAppId appid,
+            StoreApplicationReference AppRef
+        )
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationUninstallDeployment));
             Flags = OpFlags.Nothing;
@@ -1481,7 +1743,7 @@ namespace System.Deployment.Internal.Isolation
             Reference = AppRef.ToIntPtr();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void Destroy()
         {
             StoreApplicationReference.Destroy(Reference);
@@ -1492,14 +1754,18 @@ namespace System.Deployment.Internal.Isolation
     internal struct StoreOperationMetadataProperty
     {
         public System.Guid GuidPropertySet;
-        [MarshalAs(UnmanagedType.LPWStr)] public string Name;
-        [MarshalAs(UnmanagedType.SysUInt)] public IntPtr ValueSize;
-        [MarshalAs(UnmanagedType.LPWStr)] public string Value;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Name;
+
+        [MarshalAs(UnmanagedType.SysUInt)]
+        public IntPtr ValueSize;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string Value;
 
         public StoreOperationMetadataProperty(System.Guid PropertySet, string Name)
-            : this(PropertySet, Name, null)
-        {
-        }
+            : this(PropertySet, Name, null) { }
 
         public StoreOperationMetadataProperty(System.Guid PropertySet, string Name, string Value)
         {
@@ -1513,14 +1779,31 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationSetDeploymentMetadata
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.Interface)] public IDefinitionAppId Deployment;
-        [MarshalAs(UnmanagedType.SysInt)] public IntPtr InstallerReference;
-        [MarshalAs(UnmanagedType.SysInt)] public IntPtr /*SIZE_T*/ cPropertiesToTest;
-        [MarshalAs(UnmanagedType.SysInt)] public IntPtr PropertiesToTest;
-        [MarshalAs(UnmanagedType.SysInt)] public IntPtr /*SIZE_T*/ cPropertiesToSet;
-        [MarshalAs(UnmanagedType.SysInt)] public IntPtr PropertiesToSet;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.Interface)]
+        public IDefinitionAppId Deployment;
+
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr InstallerReference;
+
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr /*SIZE_T*/
+        cPropertiesToTest;
+
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr PropertiesToTest;
+
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr /*SIZE_T*/
+        cPropertiesToSet;
+
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr PropertiesToSet;
 
         [Flags]
         public enum OpFlags
@@ -1531,16 +1814,23 @@ namespace System.Deployment.Internal.Isolation
         public enum Disposition
         {
             Failed = 0,
-            Set = 2
+            Set = 2,
         }
 
-        public StoreOperationSetDeploymentMetadata(IDefinitionAppId Deployment, StoreApplicationReference Reference, StoreOperationMetadataProperty[] SetProperties)
-            : this(Deployment, Reference, SetProperties, null)
-        {
-        }
+        public StoreOperationSetDeploymentMetadata(
+            IDefinitionAppId Deployment,
+            StoreApplicationReference Reference,
+            StoreOperationMetadataProperty[] SetProperties
+        )
+            : this(Deployment, Reference, SetProperties, null) { }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public StoreOperationSetDeploymentMetadata(IDefinitionAppId Deployment, StoreApplicationReference Reference, StoreOperationMetadataProperty[] SetProperties, StoreOperationMetadataProperty[] TestProperties)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public StoreOperationSetDeploymentMetadata(
+            IDefinitionAppId Deployment,
+            StoreApplicationReference Reference,
+            StoreOperationMetadataProperty[] SetProperties,
+            StoreOperationMetadataProperty[] TestProperties
+        )
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationSetDeploymentMetadata));
             Flags = OpFlags.Nothing;
@@ -1571,7 +1861,7 @@ namespace System.Deployment.Internal.Isolation
             InstallerReference = Reference.ToIntPtr();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void Destroy()
         {
             if (PropertiesToSet != IntPtr.Zero)
@@ -1595,7 +1885,7 @@ namespace System.Deployment.Internal.Isolation
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static void DestroyProperties(IntPtr rgItems, ulong iItems)
         {
             if (rgItems != IntPtr.Zero)
@@ -1607,14 +1897,15 @@ namespace System.Deployment.Internal.Isolation
                 {
                     Marshal.DestroyStructure(
                         new IntPtr((long)((i * iSlotSize) + (ulong)rgItems.ToInt64())),
-                        typeof(StoreOperationMetadataProperty));
+                        typeof(StoreOperationMetadataProperty)
+                    );
                 }
 
                 Marshal.FreeCoTaskMem(rgItems);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static IntPtr MarshalProperties(StoreOperationMetadataProperty[] Props)
         {
             if ((Props == null) || (Props.Length == 0))
@@ -1628,7 +1919,8 @@ namespace System.Deployment.Internal.Isolation
                 Marshal.StructureToPtr(
                     Props[i],
                     new IntPtr((i * iSlotSize) + retval.ToInt64()),
-                    false);
+                    false
+                );
             }
 
             return retval;
@@ -1638,18 +1930,25 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationSetCanonicalizationContext
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.LPWStr)] public string BaseAddressFilePath;
-        [MarshalAs(UnmanagedType.LPWStr)] public string ExportsFilePath;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string BaseAddressFilePath;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string ExportsFilePath;
 
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public StoreOperationSetCanonicalizationContext(string Bases, string Exports)
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationSetCanonicalizationContext));
@@ -1658,19 +1957,26 @@ namespace System.Deployment.Internal.Isolation
             this.ExportsFilePath = Exports;
         }
 
-        public void Destroy()
-        {
-        }
+        public void Destroy() { }
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreOperationScavenge
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-        [MarshalAs(UnmanagedType.U4)] public OpFlags Flags;
-        [MarshalAs(UnmanagedType.U8)] public UInt64 SizeReclaimationLimit;
-        [MarshalAs(UnmanagedType.U8)] public UInt64 RuntimeLimit;
-        [MarshalAs(UnmanagedType.U4)] public UInt32 ComponentCountLimit;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Size;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public OpFlags Flags;
+
+        [MarshalAs(UnmanagedType.U8)]
+        public UInt64 SizeReclaimationLimit;
+
+        [MarshalAs(UnmanagedType.U8)]
+        public UInt64 RuntimeLimit;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 ComponentCountLimit;
 
         [Flags]
         public enum OpFlags
@@ -1679,10 +1985,15 @@ namespace System.Deployment.Internal.Isolation
             Light = 1,
             LimitSize = 2,
             LimitTime = 4,
-            LimitCount = 8
+            LimitCount = 8,
         }
 
-        public StoreOperationScavenge(bool Light, ulong SizeLimit, ulong RunLimit, uint ComponentLimit)
+        public StoreOperationScavenge(
+            bool Light,
+            ulong SizeLimit,
+            ulong RunLimit,
+            uint ComponentLimit
+        )
         {
             Size = (UInt32)Marshal.SizeOf(typeof(StoreOperationScavenge));
             Flags = OpFlags.Nothing;
@@ -1703,13 +2014,10 @@ namespace System.Deployment.Internal.Isolation
                 this.Flags |= OpFlags.LimitCount;
         }
 
-        public StoreOperationScavenge(bool Light) : this(Light, 0, 0, 0)
-        {
-        }
+        public StoreOperationScavenge(bool Light)
+            : this(Light, 0, 0, 0) { }
 
-        public void Destroy()
-        {
-        }
+        public void Destroy() { }
     }
 
     internal enum StoreTransactionOperationType
@@ -1723,9 +2031,8 @@ namespace System.Deployment.Internal.Isolation
         InstallDeployment = 24,
         UninstallDeployment = 25,
         SetDeploymentMetadata = 26,
-        Scavenge = 27
+        Scavenge = 27,
     }
-
 
     //
     // The transaction operation contains an operation key and
@@ -1734,7 +2041,8 @@ namespace System.Deployment.Internal.Isolation
     [StructLayout(LayoutKind.Sequential)]
     internal struct StoreTransactionOperation
     {
-        [MarshalAs(UnmanagedType.U4)] public StoreTransactionOperationType Operation;
+        [MarshalAs(UnmanagedType.U4)]
+        public StoreTransactionOperationType Operation;
         public StoreTransactionData Data;
     }
 
@@ -1751,7 +2059,10 @@ namespace System.Deployment.Internal.Isolation
     {
         private IStore _pStore = null;
 
-        public IStore InternalStore { get { return _pStore; } }
+        public IStore InternalStore
+        {
+            get { return _pStore; }
+        }
 
         public Store(IStore pStore)
         {
@@ -1776,7 +2087,11 @@ namespace System.Deployment.Internal.Isolation
         }
 
 #if !ISOLATION_IN_MSCORLIB
-        public void Transact(StoreTransactionOperation[] operations, uint[] rgDispositions, int[] rgResults)
+        public void Transact(
+            StoreTransactionOperation[] operations,
+            uint[] rgDispositions,
+            int[] rgResults
+        )
         {
             if ((operations == null) || (operations.Length == 0))
                 throw new ArgumentException("operations");
@@ -1791,16 +2106,17 @@ namespace System.Deployment.Internal.Isolation
             IReferenceIdentity ReferenceIdentity,
             uint cDeploymentsToIgnore,
             IDefinitionIdentity[] DefinitionIdentity_DeploymentsToIgnore
-            )
+        )
         {
             object o;
             System.Guid g = IsolationInterop.IID_IDefinitionIdentity;
-            o=_pStore.BindReferenceToAssembly(
+            o = _pStore.BindReferenceToAssembly(
                 Flags,
                 ReferenceIdentity,
                 cDeploymentsToIgnore,
                 DefinitionIdentity_DeploymentsToIgnore,
-                ref g);
+                ref g
+            );
             return (IDefinitionIdentity)o;
         }
 
@@ -1814,10 +2130,10 @@ namespace System.Deployment.Internal.Isolation
             ref UInt32 Delimiter,
             ref UInt64 SizeSharedWithExternalDeployment,
             ref UInt64 SizeConsumedByInputDeploymentArray
-            )
+        )
         {
             IntPtr DelimIntPtr = IntPtr.Zero;
-            
+
             _pStore.CalculateDelimiterOfDeploymentsBasedOnQuota(
                 dwFlags,
                 new IntPtr((Int64)cDeployments),
@@ -1826,8 +2142,9 @@ namespace System.Deployment.Internal.Isolation
                 ulonglongQuota,
                 ref DelimIntPtr,
                 ref SizeSharedWithExternalDeployment,
-                ref SizeConsumedByInputDeploymentArray);
-                
+                ref SizeConsumedByInputDeploymentArray
+            );
+
             Delimiter = (UInt32)DelimIntPtr.ToInt64();
 
             return;
@@ -1839,31 +2156,26 @@ namespace System.Deployment.Internal.Isolation
             IReferenceIdentity ReferenceIdentity,
             uint cDeploymentsToIgnore,
             IDefinitionIdentity[] DefinitionIdentity_DeploymentsToIgnore
-            )
+        )
         {
             object o;
             System.Guid g = IsolationInterop.IID_ICMS;
-            o=_pStore.BindReferenceToAssembly(
+            o = _pStore.BindReferenceToAssembly(
                 Flags,
                 ReferenceIdentity,
                 cDeploymentsToIgnore,
                 DefinitionIdentity_DeploymentsToIgnore,
-                ref g);
+                ref g
+            );
             return (CMS.ICMS)o;
         }
 
         [SecuritySafeCritical]
-        public CMS.ICMS GetAssemblyManifest(
-            UInt32 Flags,
-            IDefinitionIdentity DefinitionIdentity
-            )
+        public CMS.ICMS GetAssemblyManifest(UInt32 Flags, IDefinitionIdentity DefinitionIdentity)
         {
             object o;
             System.Guid g = IsolationInterop.IID_ICMS;
-            o=_pStore.GetAssemblyInformation(
-                Flags,
-                DefinitionIdentity,
-                ref g);
+            o = _pStore.GetAssemblyInformation(Flags, DefinitionIdentity, ref g);
             return (CMS.ICMS)o;
         }
 
@@ -1875,14 +2187,11 @@ namespace System.Deployment.Internal.Isolation
         public IDefinitionIdentity GetAssemblyIdentity(
             UInt32 Flags,
             IDefinitionIdentity DefinitionIdentity
-            )
+        )
         {
             object o;
             System.Guid g = IsolationInterop.IID_IDefinitionIdentity;
-            o=_pStore.GetAssemblyInformation(
-                Flags,
-                DefinitionIdentity,
-                ref g);
+            o = _pStore.GetAssemblyInformation(Flags, DefinitionIdentity, ref g);
             return (IDefinitionIdentity)o;
         }
 
@@ -1892,7 +2201,7 @@ namespace System.Deployment.Internal.Isolation
             Nothing = 0,
             VisibleOnly = 0x1,
             MatchServicing = 0x2,
-            ForceLibrarySemantics = 0x4
+            ForceLibrarySemantics = 0x4,
         }
 
         public StoreAssemblyEnumeration EnumAssemblies(EnumAssembliesFlags Flags)
@@ -1901,12 +2210,15 @@ namespace System.Deployment.Internal.Isolation
         }
 
         [SecuritySafeCritical]
-        public StoreAssemblyEnumeration EnumAssemblies(EnumAssembliesFlags Flags, IReferenceIdentity refToMatch)
+        public StoreAssemblyEnumeration EnumAssemblies(
+            EnumAssembliesFlags Flags,
+            IReferenceIdentity refToMatch
+        )
         {
             System.Guid g = IsolationInterop.GetGuidOfType(typeof(IEnumSTORE_ASSEMBLY));
             object o;
 
-            o=_pStore.EnumAssemblies((UInt32)Flags, refToMatch, ref g);
+            o = _pStore.EnumAssemblies((UInt32)Flags, refToMatch, ref g);
             return new StoreAssemblyEnumeration((IEnumSTORE_ASSEMBLY)o);
         }
 
@@ -1915,15 +2227,18 @@ namespace System.Deployment.Internal.Isolation
         {
             Nothing = 0,
             IncludeInstalled = 0x1,
-            IncludeMissing = 0x2
+            IncludeMissing = 0x2,
         }
 
         [SecuritySafeCritical]
-        public StoreAssemblyFileEnumeration EnumFiles(EnumAssemblyFilesFlags Flags, IDefinitionIdentity Assembly)
+        public StoreAssemblyFileEnumeration EnumFiles(
+            EnumAssemblyFilesFlags Flags,
+            IDefinitionIdentity Assembly
+        )
         {
             System.Guid g = IsolationInterop.GetGuidOfType(typeof(IEnumSTORE_ASSEMBLY_FILE));
             object o;
-            o=_pStore.EnumFiles((UInt32)Flags, Assembly, ref g);
+            o = _pStore.EnumFiles((UInt32)Flags, Assembly, ref g);
             return new StoreAssemblyFileEnumeration((IEnumSTORE_ASSEMBLY_FILE)o);
         }
 
@@ -1932,42 +2247,45 @@ namespace System.Deployment.Internal.Isolation
         {
             Nothing = 0,
             IncludeInstalled = 0x1,
-            IncludeMissing = 0x2
+            IncludeMissing = 0x2,
         }
 
         [SecuritySafeCritical]
         public StoreAssemblyFileEnumeration EnumPrivateFiles(
-                EnumApplicationPrivateFiles Flags,
-                IDefinitionAppId Application,
-                IDefinitionIdentity Assembly)
+            EnumApplicationPrivateFiles Flags,
+            IDefinitionAppId Application,
+            IDefinitionIdentity Assembly
+        )
         {
             System.Guid g = IsolationInterop.GetGuidOfType(typeof(IEnumSTORE_ASSEMBLY_FILE));
             object o;
-            o=_pStore.EnumPrivateFiles((UInt32)Flags, Application, Assembly, ref g);
+            o = _pStore.EnumPrivateFiles((UInt32)Flags, Application, Assembly, ref g);
             return new StoreAssemblyFileEnumeration((IEnumSTORE_ASSEMBLY_FILE)o);
         }
 
         [Flags]
         public enum EnumAssemblyInstallReferenceFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         [SecuritySafeCritical]
         public IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE EnumInstallationReferences(
-                EnumAssemblyInstallReferenceFlags Flags,
-                IDefinitionIdentity Assembly
-                )
+            EnumAssemblyInstallReferenceFlags Flags,
+            IDefinitionIdentity Assembly
+        )
         {
-            System.Guid g = IsolationInterop.GetGuidOfType(typeof(IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE));
+            System.Guid g = IsolationInterop.GetGuidOfType(
+                typeof(IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE)
+            );
             object o;
-            o=_pStore.EnumInstallationReferences((UInt32)Flags, Assembly, ref g);
+            o = _pStore.EnumInstallationReferences((UInt32)Flags, Assembly, ref g);
             return (IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE)o;
         }
 
         public interface IPathLock : IDisposable
         {
-            string Path { get ; }
+            string Path { get; }
         }
 
         private class AssemblyPathLock : IPathLock
@@ -1996,15 +2314,19 @@ namespace System.Deployment.Internal.Isolation
                 }
             }
 
-            ~AssemblyPathLock() { Dispose(false); }
-            void IDisposable.Dispose() { Dispose(true); }
+            ~AssemblyPathLock()
+            {
+                Dispose(false);
+            }
+
+            void IDisposable.Dispose()
+            {
+                Dispose(true);
+            }
 
             public string Path
             {
-                get
-                {
-                    return _path;
-                }
+                get { return _path; }
             }
         }
 
@@ -2013,7 +2335,7 @@ namespace System.Deployment.Internal.Isolation
         {
             string thePath;
             IntPtr theCookie;
-            thePath=_pStore.LockAssemblyPath(0, asm, out theCookie);
+            thePath = _pStore.LockAssemblyPath(0, asm, out theCookie);
             return new AssemblyPathLock(_pStore, theCookie, thePath);
         }
 
@@ -2043,15 +2365,19 @@ namespace System.Deployment.Internal.Isolation
                 }
             }
 
-            ~ApplicationPathLock() { Dispose(false); }
-            void IDisposable.Dispose() { Dispose(true); }
+            ~ApplicationPathLock()
+            {
+                Dispose(false);
+            }
+
+            void IDisposable.Dispose()
+            {
+                Dispose(true);
+            }
 
             public string Path
             {
-                get
-                {
-                    return _path;
-                }
+                get { return _path; }
             }
         }
 
@@ -2068,74 +2394,88 @@ namespace System.Deployment.Internal.Isolation
         public UInt64 QueryChangeID(IDefinitionIdentity asm)
         {
             UInt64 ChangeId;
-            ChangeId=_pStore.QueryChangeID(asm);
+            ChangeId = _pStore.QueryChangeID(asm);
             return ChangeId;
         }
 
         [Flags]
         public enum EnumCategoriesFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         [SecuritySafeCritical]
-        public StoreCategoryEnumeration EnumCategories(EnumCategoriesFlags Flags, IReferenceIdentity CategoryMatch)
+        public StoreCategoryEnumeration EnumCategories(
+            EnumCategoriesFlags Flags,
+            IReferenceIdentity CategoryMatch
+        )
         {
             System.Guid g = IsolationInterop.GetGuidOfType(typeof(IEnumSTORE_CATEGORY));
             object o;
-            o=_pStore.EnumCategories((UInt32)Flags, CategoryMatch, ref g);
+            o = _pStore.EnumCategories((UInt32)Flags, CategoryMatch, ref g);
             return new StoreCategoryEnumeration((IEnumSTORE_CATEGORY)o);
         }
 
         [Flags]
         public enum EnumSubcategoriesFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
-        public StoreSubcategoryEnumeration EnumSubcategories(EnumSubcategoriesFlags Flags, IDefinitionIdentity CategoryMatch)
+        public StoreSubcategoryEnumeration EnumSubcategories(
+            EnumSubcategoriesFlags Flags,
+            IDefinitionIdentity CategoryMatch
+        )
         {
             return this.EnumSubcategories(Flags, CategoryMatch, null);
         }
 
         [SecuritySafeCritical]
-        public StoreSubcategoryEnumeration  EnumSubcategories(EnumSubcategoriesFlags Flags, IDefinitionIdentity Category, string SearchPattern)
+        public StoreSubcategoryEnumeration EnumSubcategories(
+            EnumSubcategoriesFlags Flags,
+            IDefinitionIdentity Category,
+            string SearchPattern
+        )
         {
             System.Guid g = IsolationInterop.GetGuidOfType(typeof(IEnumSTORE_CATEGORY_SUBCATEGORY));
             object o;
-            o=_pStore.EnumSubcategories((UInt32)Flags, Category, SearchPattern, ref g);
+            o = _pStore.EnumSubcategories((UInt32)Flags, Category, SearchPattern, ref g);
             return new StoreSubcategoryEnumeration((IEnumSTORE_CATEGORY_SUBCATEGORY)o);
         }
 
         [Flags]
         public enum EnumCategoryInstancesFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         [SecuritySafeCritical]
-        public StoreCategoryInstanceEnumeration EnumCategoryInstances(EnumCategoryInstancesFlags Flags, IDefinitionIdentity Category, string SubCat)
+        public StoreCategoryInstanceEnumeration EnumCategoryInstances(
+            EnumCategoryInstancesFlags Flags,
+            IDefinitionIdentity Category,
+            string SubCat
+        )
         {
             System.Guid g = IsolationInterop.GetGuidOfType(typeof(IEnumSTORE_CATEGORY_INSTANCE));
             object o;
-            o=_pStore.EnumCategoryInstances((UInt32)Flags, Category, SubCat, ref g);
+            o = _pStore.EnumCategoryInstances((UInt32)Flags, Category, SubCat, ref g);
             return new StoreCategoryInstanceEnumeration((IEnumSTORE_CATEGORY_INSTANCE)o);
         }
 
         [Flags]
         public enum GetPackagePropertyFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public byte[] GetDeploymentProperty(
-                GetPackagePropertyFlags Flags,
-                IDefinitionAppId Deployment,
-                StoreApplicationReference Reference,
-                Guid PropertySet,
-                string PropertyName
-                )
+            GetPackagePropertyFlags Flags,
+            IDefinitionAppId Deployment,
+            StoreApplicationReference Reference,
+            Guid PropertySet,
+            string PropertyName
+        )
         {
             BLOB b = new BLOB();
             byte[] retval = null;
@@ -2148,7 +2488,8 @@ namespace System.Deployment.Internal.Isolation
                     ref Reference,
                     ref PropertySet,
                     PropertyName,
-                    out b);
+                    out b
+                );
 
                 retval = new byte[b.Size];
                 Marshal.Copy(b.BlobData, retval, 0, (int)b.Size);
@@ -2167,16 +2508,21 @@ namespace System.Deployment.Internal.Isolation
             string InstallerName,
             string InstallerMetadata,
             IReferenceAppId DeploymentFilter
-            )
+        )
         {
             object o = null;
-            StoreApplicationReference AppReference = new StoreApplicationReference(InstallerId, InstallerName, InstallerMetadata);
+            StoreApplicationReference AppReference = new StoreApplicationReference(
+                InstallerId,
+                InstallerName,
+                InstallerMetadata
+            );
 
             o = _pStore.EnumInstallerDeploymentMetadata(
                 0,
                 ref AppReference,
                 DeploymentFilter,
-                ref IsolationInterop.IID_IEnumSTORE_DEPLOYMENT_METADATA);
+                ref IsolationInterop.IID_IEnumSTORE_DEPLOYMENT_METADATA
+            );
 
             return new StoreDeploymentMetadataEnumeration((IEnumSTORE_DEPLOYMENT_METADATA)o);
         }
@@ -2187,39 +2533,57 @@ namespace System.Deployment.Internal.Isolation
             string InstallerName,
             string InstallerMetadata,
             IDefinitionAppId Deployment
-            )
+        )
         {
             object o = null;
-            StoreApplicationReference AppReference = new StoreApplicationReference(InstallerId, InstallerName, InstallerMetadata);
+            StoreApplicationReference AppReference = new StoreApplicationReference(
+                InstallerId,
+                InstallerName,
+                InstallerMetadata
+            );
 
             o = _pStore.EnumInstallerDeploymentMetadataProperties(
                 0,
                 ref AppReference,
                 Deployment,
-                ref IsolationInterop.IID_IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY);
+                ref IsolationInterop.IID_IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY
+            );
 
-            return new StoreDeploymentMetadataPropertyEnumeration((IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY)o);
+            return new StoreDeploymentMetadataPropertyEnumeration(
+                (IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY)o
+            );
         }
-
     }
 
     [StructLayout(LayoutKind.Sequential)]
     struct IStore_BindingResult_BoundVersion
     {
-        [MarshalAs(UnmanagedType.U2)] public UInt16 Revision;
-        [MarshalAs(UnmanagedType.U2)] public UInt16 Build;
-        [MarshalAs(UnmanagedType.U2)] public UInt16 Minor;
-        [MarshalAs(UnmanagedType.U2)] public UInt16 Major;
+        [MarshalAs(UnmanagedType.U2)]
+        public UInt16 Revision;
+
+        [MarshalAs(UnmanagedType.U2)]
+        public UInt16 Build;
+
+        [MarshalAs(UnmanagedType.U2)]
+        public UInt16 Minor;
+
+        [MarshalAs(UnmanagedType.U2)]
+        public UInt16 Major;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     struct IStore_BindingResult
     {
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Flags;
-        [MarshalAs(UnmanagedType.U4)] public UInt32 Disposition;
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Flags;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 Disposition;
         public IStore_BindingResult_BoundVersion Component;
         public Guid CacheCoherencyGuid;
-        [MarshalAs(UnmanagedType.SysInt)] public IntPtr Reserved;
+
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr Reserved;
     }
 
     [ComImport]
@@ -2228,118 +2592,125 @@ namespace System.Deployment.Internal.Isolation
     internal interface IStore
     {
         [SecurityCritical]
-        void Transact([In] IntPtr /*SIZE_T*/ cOperation,
+        void Transact(
+            [In]
+                IntPtr /*SIZE_T*/
+            cOperation,
             [In, MarshalAs(UnmanagedType.LPArray)] StoreTransactionOperation[] rgOperations,
             [Out, MarshalAs(UnmanagedType.LPArray)] uint[] rgDispositions,
-            [Out, MarshalAs(UnmanagedType.LPArray)] int[] /*HRESULT*/ rgResults
-            );
+            [Out, MarshalAs(UnmanagedType.LPArray)]
+                int[] /*HRESULT*/
+            rgResults
+        );
 
         [SecurityCritical]
-        [return :MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object BindReferenceToAssembly(
             [In] UInt32 Flags,
             [In] IReferenceIdentity ReferenceIdentity,
             [In] uint cDeploymentsToIgnore,
-            [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity[] DefinitionIdentity_DeploymentsToIgnore,
+            [In, MarshalAs(UnmanagedType.LPArray)]
+                IDefinitionIdentity[] DefinitionIdentity_DeploymentsToIgnore,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
         void CalculateDelimiterOfDeploymentsBasedOnQuota(
             [In] UInt32 dwFlags,
-            [In] IntPtr /*SIZE_T*/ cDeployments,
-            [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionAppId[] rgpIDefinitionAppId_Deployments,
+            [In]
+                IntPtr /*SIZE_T*/
+            cDeployments,
+            [In, MarshalAs(UnmanagedType.LPArray)]
+                IDefinitionAppId[] rgpIDefinitionAppId_Deployments,
             [In] ref StoreApplicationReference InstallerReference,
             [In] UInt64 ulonglongQuota,
-            [Out, In] ref IntPtr /*SIZE_T*/ Delimiter,
+            [Out, In]
+                ref IntPtr /*SIZE_T*/
+            Delimiter,
             [Out, In] ref UInt64 SizeSharedWithExternalDeployment,
             [Out, In] ref UInt64 SizeConsumedByInputDeploymentArray
-            );
+        );
 
         [SecurityCritical]
         IntPtr BindDefinitions(
             [In] UInt32 Flags,
             [In, MarshalAs(UnmanagedType.SysInt)] IntPtr Count,
-            [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity [] DefsToBind,
+            [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity[] DefsToBind,
             [In] UInt32 DeploymentsToIgnore,
-            [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity [] DefsToIgnore
-            );
+            [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity[] DefsToIgnore
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object GetAssemblyInformation(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity DefinitionIdentity,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumAssemblies(
             [In] UInt32 Flags,
             [In] IReferenceIdentity ReferenceIdentity_ToMatch,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumFiles(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity DefinitionIdentity,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumInstallationReferences(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity DefinitionIdentity,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
+        [return: MarshalAs(UnmanagedType.LPWStr)]
         string LockAssemblyPath(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity DefinitionIdentity,
             [Out] out IntPtr Cookie
-            );
+        );
 
         [SecurityCritical]
-        void ReleaseAssemblyPath(
-            [In] IntPtr Cookie
-            );
+        void ReleaseAssemblyPath([In] IntPtr Cookie);
 
         [SecurityCritical]
-        UInt64 QueryChangeID(
-            [In] IDefinitionIdentity DefinitionIdentity
-            );
+        UInt64 QueryChangeID([In] IDefinitionIdentity DefinitionIdentity);
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumCategories(
             [In] UInt32 Flags,
             [In] IReferenceIdentity ReferenceIdentity_ToMatch,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumSubcategories(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity CategoryId,
             [In, MarshalAs(UnmanagedType.LPWStr)] string SubcategoryPathPattern,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumCategoryInstances(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity CategoryId,
             [In, MarshalAs(UnmanagedType.LPWStr)] string SubcategoryPath,
             [In] ref Guid riid
-            );
+        );
 
         // ISSUE - AMD64: Had to change to this because somehow returning BLOB
         // in the following crashes on amd64. Need to resolve the issue.
@@ -2351,48 +2722,45 @@ namespace System.Deployment.Internal.Isolation
             [In] ref Guid PropertySet,
             [In, MarshalAs(UnmanagedType.LPWStr)] string pcwszPropertyName,
             out BLOB blob
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.LPWStr)]
+        [return: MarshalAs(UnmanagedType.LPWStr)]
         string LockApplicationPath(
             [In] UInt32 Flags,
             [In] IDefinitionAppId ApId,
             [Out] out IntPtr Cookie
-            );
+        );
 
         [SecurityCritical]
-        void ReleaseApplicationPath(
-            [In] IntPtr Cookie
-            );
+        void ReleaseApplicationPath([In] IntPtr Cookie);
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumPrivateFiles(
             [In] UInt32 Flags,
             [In] IDefinitionAppId Application,
             [In] IDefinitionIdentity DefinitionIdentity,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumInstallerDeploymentMetadata(
             [In] UInt32 Flags,
             [In] ref StoreApplicationReference Reference,
             [In] IReferenceAppId Filter,
             [In] ref Guid riid
-            );
+        );
 
         [SecurityCritical]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         object EnumInstallerDeploymentMetadataProperties(
             [In] UInt32 Flags,
             [In] ref StoreApplicationReference Reference,
             [In] IDefinitionAppId Filter,
             [In] ref Guid riid
-            );
-
+        );
     }
 
     internal class StoreTransaction : IDisposable
@@ -2400,15 +2768,50 @@ namespace System.Deployment.Internal.Isolation
         private System.Collections.ArrayList _list = new System.Collections.ArrayList();
         private StoreTransactionOperation[] _storeOps = null;
 
-        public void Add(StoreOperationInstallDeployment o) { _list.Add(o); }
-        public void Add(StoreOperationPinDeployment o) { _list.Add(o); }
-        public void Add(StoreOperationSetCanonicalizationContext o) { _list.Add(o); }
-        public void Add(StoreOperationSetDeploymentMetadata o) { _list.Add(o); }
-        public void Add(StoreOperationStageComponent o) { _list.Add(o); }
-        public void Add(StoreOperationStageComponentFile o) { _list.Add(o); }
-        public void Add(StoreOperationUninstallDeployment o) { _list.Add(o); }
-        public void Add(StoreOperationUnpinDeployment o) { _list.Add(o); }
-        public void Add(StoreOperationScavenge o) { _list.Add(o); }
+        public void Add(StoreOperationInstallDeployment o)
+        {
+            _list.Add(o);
+        }
+
+        public void Add(StoreOperationPinDeployment o)
+        {
+            _list.Add(o);
+        }
+
+        public void Add(StoreOperationSetCanonicalizationContext o)
+        {
+            _list.Add(o);
+        }
+
+        public void Add(StoreOperationSetDeploymentMetadata o)
+        {
+            _list.Add(o);
+        }
+
+        public void Add(StoreOperationStageComponent o)
+        {
+            _list.Add(o);
+        }
+
+        public void Add(StoreOperationStageComponentFile o)
+        {
+            _list.Add(o);
+        }
+
+        public void Add(StoreOperationUninstallDeployment o)
+        {
+            _list.Add(o);
+        }
+
+        public void Add(StoreOperationUnpinDeployment o)
+        {
+            _list.Add(o);
+        }
+
+        public void Add(StoreOperationScavenge o)
+        {
+            _list.Add(o);
+        }
 
         ~StoreTransaction()
         {
@@ -2420,7 +2823,7 @@ namespace System.Deployment.Internal.Isolation
             Dispose(true);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         private void Dispose(bool fDisposing)
         {
             if (fDisposing)
@@ -2447,33 +2850,60 @@ namespace System.Deployment.Internal.Isolation
                         //
                         switch (op.Operation)
                         {
-                        case StoreTransactionOperationType.StageComponent:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationStageComponent));
-                            break;
-                        case StoreTransactionOperationType.StageComponentFile:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationStageComponentFile));
-                            break;
-                        case StoreTransactionOperationType.PinDeployment:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationPinDeployment));
-                            break;
-                        case StoreTransactionOperationType.UninstallDeployment:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationUninstallDeployment));
-                            break;
-                        case StoreTransactionOperationType.UnpinDeployment:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationUnpinDeployment));
-                            break;
-                        case StoreTransactionOperationType.InstallDeployment:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationInstallDeployment));
-                            break;
-                        case StoreTransactionOperationType.SetCanonicalizationContext:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationSetCanonicalizationContext));
-                            break;
-                        case StoreTransactionOperationType.SetDeploymentMetadata:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationSetDeploymentMetadata));
-                            break;
-                        case StoreTransactionOperationType.Scavenge:
-                            Marshal.DestroyStructure(op.Data.DataPtr, typeof(StoreOperationScavenge));
-                            break;
+                            case StoreTransactionOperationType.StageComponent:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationStageComponent)
+                                );
+                                break;
+                            case StoreTransactionOperationType.StageComponentFile:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationStageComponentFile)
+                                );
+                                break;
+                            case StoreTransactionOperationType.PinDeployment:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationPinDeployment)
+                                );
+                                break;
+                            case StoreTransactionOperationType.UninstallDeployment:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationUninstallDeployment)
+                                );
+                                break;
+                            case StoreTransactionOperationType.UnpinDeployment:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationUnpinDeployment)
+                                );
+                                break;
+                            case StoreTransactionOperationType.InstallDeployment:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationInstallDeployment)
+                                );
+                                break;
+                            case StoreTransactionOperationType.SetCanonicalizationContext:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationSetCanonicalizationContext)
+                                );
+                                break;
+                            case StoreTransactionOperationType.SetDeploymentMetadata:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationSetDeploymentMetadata)
+                                );
+                                break;
+                            case StoreTransactionOperationType.Scavenge:
+                                Marshal.DestroyStructure(
+                                    op.Data.DataPtr,
+                                    typeof(StoreOperationScavenge)
+                                );
+                                break;
                         }
 
                         //
@@ -2483,7 +2913,6 @@ namespace System.Deployment.Internal.Isolation
                     }
                 }
             }
-
         }
 
         public StoreTransactionOperation[] Operations
@@ -2500,7 +2929,7 @@ namespace System.Deployment.Internal.Isolation
         // For each transaction that was lobbed in here, go and allocate/blit the transaction into
         // an unmanaged object.
         //
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         private StoreTransactionOperation[] GenerateStoreOpsList()
         {
             StoreTransactionOperation[] txnList = new StoreTransactionOperation[_list.Count];
@@ -2512,7 +2941,6 @@ namespace System.Deployment.Internal.Isolation
 
                 txnList[i].Data.DataPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(o));
                 Marshal.StructureToPtr(o, txnList[i].Data.DataPtr, false);
-
 
                 if (t == typeof(StoreOperationSetCanonicalizationContext))
                 {
@@ -2573,11 +3001,9 @@ namespace System.Deployment.Internal.Isolation
             [In] Int32 hr,
             [In, MarshalAs(UnmanagedType.LPWStr)] string ErrorStatusHostFile,
             [In] UInt32 ParameterCount,
-            [In, MarshalAs(UnmanagedType.LPArray)] string[] Parameters);
+            [In, MarshalAs(UnmanagedType.LPArray)] string[] Parameters
+        );
     };
-
-
-
 
     //
     // Global isolation interop state.
@@ -2600,7 +3026,6 @@ namespace System.Deployment.Internal.Isolation
 #else //FEATURE_MAIN_CLR_MODULE_USES_CORE_NAME
         public const String IsolationDllName = "clr.dll";
 #endif //FEATURE_MAIN_CLR_MODULE_USES_CORE_NAME
-
 
 #elif ISOLATION_IN_ISOWIN32
         public const String IsolationDllName = "isowin32.dll";
@@ -2626,7 +3051,9 @@ namespace System.Deployment.Internal.Isolation
                     lock (_synchObject)
                     {
                         if (_userStore == null)
-                            _userStore = new Store(GetUserStore(0, IntPtr.Zero, ref IID_IStore) as IStore);
+                            _userStore = new Store(
+                                GetUserStore(0, IntPtr.Zero, ref IID_IStore) as IStore
+                            );
                     }
                 }
 
@@ -2635,7 +3062,7 @@ namespace System.Deployment.Internal.Isolation
         }
 #endif // !ISOLATION_IN_MSCORLIB
 
-        // Create a new user store object. 
+        // Create a new user store object.
         // Call into GetUserStore to get a new IStore handle.
         [SecuritySafeCritical]
         public static Store GetUserStore()
@@ -2700,13 +3127,26 @@ namespace System.Deployment.Internal.Isolation
         [StructLayout(LayoutKind.Sequential)]
         internal struct CreateActContextParameters
         {
-            [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-            [MarshalAs(UnmanagedType.U4)] public UInt32 Flags;
-            [MarshalAs(UnmanagedType.SysInt)] public IntPtr CustomStoreList;
-            [MarshalAs(UnmanagedType.SysInt)] public IntPtr CultureFallbackList;
-            [MarshalAs(UnmanagedType.SysInt)] public IntPtr ProcessorArchitectureList;
-            [MarshalAs(UnmanagedType.SysInt)] public IntPtr Source;
-            [MarshalAs(UnmanagedType.U2)] public UInt16 ProcArch;
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 Size;
+
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 Flags;
+
+            [MarshalAs(UnmanagedType.SysInt)]
+            public IntPtr CustomStoreList;
+
+            [MarshalAs(UnmanagedType.SysInt)]
+            public IntPtr CultureFallbackList;
+
+            [MarshalAs(UnmanagedType.SysInt)]
+            public IntPtr ProcessorArchitectureList;
+
+            [MarshalAs(UnmanagedType.SysInt)]
+            public IntPtr Source;
+
+            [MarshalAs(UnmanagedType.U2)]
+            public UInt16 ProcArch;
 
             [Flags]
             public enum CreateFlags
@@ -2717,27 +3157,33 @@ namespace System.Deployment.Internal.Isolation
                 ProcessorFallbackListValid = 4,
                 ProcessorValid = 8,
                 SourceValid = 16,
-                IgnoreVisibility = 32
+                IgnoreVisibility = 32,
             }
         }
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct CreateActContextParametersSource
         {
-            [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-            [MarshalAs(UnmanagedType.U4)] public UInt32 Flags;
-            [MarshalAs(UnmanagedType.U4)] public UInt32 SourceType;
-            [MarshalAs(UnmanagedType.SysInt)] public IntPtr Data;
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 Size;
+
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 Flags;
+
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 SourceType;
+
+            [MarshalAs(UnmanagedType.SysInt)]
+            public IntPtr Data;
 
             [Flags]
             public enum SourceFlags
             {
                 Definition = 1,
-                Reference = 2
+                Reference = 2,
             }
 
-
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public IntPtr ToIntPtr()
             {
                 IntPtr p = Marshal.AllocCoTaskMem(Marshal.SizeOf(this));
@@ -2745,7 +3191,7 @@ namespace System.Deployment.Internal.Isolation
                 return p;
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public static void Destroy(IntPtr p)
             {
                 Marshal.DestroyStructure(p, typeof(CreateActContextParametersSource));
@@ -2753,12 +3199,15 @@ namespace System.Deployment.Internal.Isolation
             }
         }
 
-        #if !ISOLATION_IN_MSCORLIB
+#if !ISOLATION_IN_MSCORLIB
         [StructLayout(LayoutKind.Sequential)]
         internal struct CreateActContextParametersSourceReferenceAppid
         {
-            [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-            [MarshalAs(UnmanagedType.U4)] public UInt32 Flags;
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 Size;
+
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 Flags;
             public IReferenceAppId AppId;
 
             public IntPtr ToIntPtr()
@@ -2774,16 +3223,19 @@ namespace System.Deployment.Internal.Isolation
                 Marshal.FreeCoTaskMem(p);
             }
         }
-        #endif // !ISOLATION_IN_MSCORLIB
+#endif // !ISOLATION_IN_MSCORLIB
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct CreateActContextParametersSourceDefinitionAppid
         {
-            [MarshalAs(UnmanagedType.U4)] public UInt32 Size;
-            [MarshalAs(UnmanagedType.U4)] public UInt32 Flags;
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 Size;
+
+            [MarshalAs(UnmanagedType.U4)]
+            public UInt32 Flags;
             public IDefinitionAppId AppId;
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public IntPtr ToIntPtr()
             {
                 IntPtr p = Marshal.AllocCoTaskMem(Marshal.SizeOf(this));
@@ -2791,15 +3243,18 @@ namespace System.Deployment.Internal.Isolation
                 return p;
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public static void Destroy(IntPtr p)
             {
-                Marshal.DestroyStructure(p, typeof(CreateActContextParametersSourceDefinitionAppid));
+                Marshal.DestroyStructure(
+                    p,
+                    typeof(CreateActContextParametersSourceDefinitionAppid)
+                );
                 Marshal.FreeCoTaskMem(p);
             }
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal static IActContext CreateActContext(IDefinitionAppId AppId)
         {
             CreateActContextParameters Parameters;
@@ -2819,7 +3274,8 @@ namespace System.Deployment.Internal.Isolation
             SourceInfo.SourceType = (UInt32)CreateActContextParametersSource.SourceFlags.Definition;
             SourceInfo.Data = IntPtr.Zero;
 
-            DefAppIdSource.Size = (UInt32)Marshal.SizeOf(typeof(CreateActContextParametersSourceDefinitionAppid));
+            DefAppIdSource.Size = (UInt32)
+                Marshal.SizeOf(typeof(CreateActContextParametersSourceDefinitionAppid));
             DefAppIdSource.Flags = 0;
             DefAppIdSource.AppId = AppId;
 
@@ -2849,7 +3305,7 @@ namespace System.Deployment.Internal.Isolation
             }
         }
 
-        #if !ISOLATION_IN_MSCORLIB
+#if !ISOLATION_IN_MSCORLIB
         internal static IActContext CreateActContext(IReferenceAppId AppId)
         {
             CreateActContextParameters Parameters;
@@ -2869,7 +3325,8 @@ namespace System.Deployment.Internal.Isolation
             SourceInfo.SourceType = (UInt32)CreateActContextParametersSource.SourceFlags.Reference;
             SourceInfo.Data = IntPtr.Zero;
 
-            RefAppIdSource.Size = (UInt32)Marshal.SizeOf(typeof(CreateActContextParametersSourceReferenceAppid));
+            RefAppIdSource.Size = (UInt32)
+                Marshal.SizeOf(typeof(CreateActContextParametersSourceReferenceAppid));
             RefAppIdSource.Flags = 0;
             RefAppIdSource.AppId = AppId;
 
@@ -2898,11 +3355,11 @@ namespace System.Deployment.Internal.Isolation
                 }
             }
         }
-        #endif // !ISOLATION_IN_MSCORLIB
+#endif // !ISOLATION_IN_MSCORLIB
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(IsolationDllName, PreserveSig = false)]
-        [return:MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         internal static extern object CreateActContext(ref CreateActContextParameters Params);
 
         // Guids.
@@ -2911,15 +3368,24 @@ namespace System.Deployment.Internal.Isolation
         public static Guid IID_IDefinitionIdentity = GetGuidOfType(typeof(IDefinitionIdentity));
         public static Guid IID_IManifestInformation = GetGuidOfType(typeof(IManifestInformation));
         public static Guid IID_IEnumSTORE_ASSEMBLY = GetGuidOfType(typeof(IEnumSTORE_ASSEMBLY));
-        public static Guid IID_IEnumSTORE_ASSEMBLY_FILE = GetGuidOfType(typeof(IEnumSTORE_ASSEMBLY_FILE));
+        public static Guid IID_IEnumSTORE_ASSEMBLY_FILE = GetGuidOfType(
+            typeof(IEnumSTORE_ASSEMBLY_FILE)
+        );
         public static Guid IID_IEnumSTORE_CATEGORY = GetGuidOfType(typeof(IEnumSTORE_CATEGORY));
-        public static Guid IID_IEnumSTORE_CATEGORY_INSTANCE = GetGuidOfType(typeof(IEnumSTORE_CATEGORY_INSTANCE));
-        public static Guid IID_IEnumSTORE_DEPLOYMENT_METADATA = GetGuidOfType(typeof(IEnumSTORE_DEPLOYMENT_METADATA));
-        public static Guid IID_IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY = GetGuidOfType(typeof(IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY));
+        public static Guid IID_IEnumSTORE_CATEGORY_INSTANCE = GetGuidOfType(
+            typeof(IEnumSTORE_CATEGORY_INSTANCE)
+        );
+        public static Guid IID_IEnumSTORE_DEPLOYMENT_METADATA = GetGuidOfType(
+            typeof(IEnumSTORE_DEPLOYMENT_METADATA)
+        );
+        public static Guid IID_IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY = GetGuidOfType(
+            typeof(IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY)
+        );
         public static Guid IID_IStore = GetGuidOfType(typeof(IStore));
 
-        public static Guid GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING =
-            new Guid("2ec93463-b0c3-45e1-8364-327e96aea856");
+        public static Guid GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING = new Guid(
+            "2ec93463-b0c3-45e1-8364-327e96aea856"
+        );
 
         public static Guid SXS_INSTALL_REFERENCE_SCHEME_SXS_STRONGNAME_SIGNED_PRIVATE_ASSEMBLY =
             new Guid("3ab20ac0-67e8-4512-8385-a487e35df3da");
@@ -2928,59 +3394,69 @@ namespace System.Deployment.Internal.Isolation
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(IsolationDllName, PreserveSig = false)]
-        [return :MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         internal static extern object CreateCMSFromXml(
             [In] byte[] buffer,
             [In] UInt32 bufferSize,
             [In] IManifestParseErrorCallback Callback,
-            [In] ref Guid riid);
+            [In] ref Guid riid
+        );
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(IsolationDllName, PreserveSig = false)]
-        [return :MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         internal static extern object ParseManifest(
             [In, MarshalAs(UnmanagedType.LPWStr)] string pszManifestPath,
             [In] IManifestParseErrorCallback pIManifestParseErrorCallback,
-            [In] ref Guid riid);//            string pszManifestPath, IManifestParseErrorCallback pIManifestParseErrorCallback, ref Guid riid);
+            [In] ref Guid riid
+        ); //            string pszManifestPath, IManifestParseErrorCallback pIManifestParseErrorCallback, ref Guid riid);
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(IsolationDllName, PreserveSig = false)]
-        [return :MarshalAs(UnmanagedType.IUnknown)]
-        private static extern object GetUserStore([In] UInt32 Flags, [In] IntPtr hToken, [In] ref Guid riid);
+        [return: MarshalAs(UnmanagedType.IUnknown)]
+        private static extern object GetUserStore(
+            [In] UInt32 Flags,
+            [In] IntPtr hToken,
+            [In] ref Guid riid
+        );
 
 #if !ISOLATION_IN_MSCORLIB
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(IsolationDllName, PreserveSig = false)]
-        [return :MarshalAs(UnmanagedType.IUnknown)]
+        [return: MarshalAs(UnmanagedType.IUnknown)]
         private static extern object GetSystemStore([In] UInt32 Flags, [In] ref Guid riid);
 #endif // !ISOLATION_IN_MSCORLIB
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(IsolationDllName, PreserveSig = false)]
-        [return :MarshalAs(UnmanagedType.Interface)]
+        [return: MarshalAs(UnmanagedType.Interface)]
         private static extern IIdentityAuthority GetIdentityAuthority();
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(IsolationDllName, PreserveSig = false)]
-        [return :MarshalAs(UnmanagedType.Interface)]
+        [return: MarshalAs(UnmanagedType.Interface)]
         private static extern IAppIdAuthority GetAppIdAuthority();
 
 #if !ISOLATION_IN_MSCORLIB
         [ResourceExposure(ResourceScope.None)]
         [DllImport(IsolationDllName, PreserveSig = false)]
-        [return :MarshalAs(UnmanagedType.IUnknown)]
-        internal static extern object GetUserStateManager([In] UInt32 Flags, [In] IntPtr hToken, [In] ref Guid riid);
+        [return: MarshalAs(UnmanagedType.IUnknown)]
+        internal static extern object GetUserStateManager(
+            [In] UInt32 Flags,
+            [In] IntPtr hToken,
+            [In] ref Guid riid
+        );
 #endif // !ISOLATION_IN_MSCORLIB
 
         internal static Guid GetGuidOfType(Type type)
         {
-            GuidAttribute guidAttr = (GuidAttribute)Attribute.GetCustomAttribute(
-                type, typeof(GuidAttribute), false);
+            GuidAttribute guidAttr = (GuidAttribute)
+                Attribute.GetCustomAttribute(type, typeof(GuidAttribute), false);
             return new Guid(guidAttr.Value);
         }
     }
@@ -3041,7 +3517,12 @@ namespace System.Deployment.Internal.Isolation
         internal CMS.ICMS GetComponentManifest(DefinitionIdentity component)
         {
             object o;
-            _appcontext.GetComponentManifest(0, component._id, ref IsolationInterop.IID_ICMS, out o);
+            _appcontext.GetComponentManifest(
+                0,
+                component._id,
+                ref IsolationInterop.IID_ICMS,
+                out o
+            );
             return o as CMS.ICMS;
         }
 
@@ -3049,7 +3530,12 @@ namespace System.Deployment.Internal.Isolation
         {
             object o;
             string s;
-            _appcontext.GetComponentManifest(0, component._id, ref IsolationInterop.IID_IManifestInformation, out o);
+            _appcontext.GetComponentManifest(
+                0,
+                component._id,
+                ref IsolationInterop.IID_IManifestInformation,
+                out o
+            );
             ((IManifestInformation)o).get_FullPath(out s);
             return s;
         }
@@ -3087,7 +3573,7 @@ namespace System.Deployment.Internal.Isolation
         {
             Undefined = 0,
             Starting = 1,
-            Running = 2
+            Running = 2,
         }
 
         public enum ApplicationStateDisposition
@@ -3111,7 +3597,12 @@ namespace System.Deployment.Internal.Isolation
             get
             {
                 string s;
-                _appcontext.GetApplicationStateFilesystemLocation(0, UIntPtr.Zero, IntPtr.Zero, out s);
+                _appcontext.GetApplicationStateFilesystemLocation(
+                    0,
+                    UIntPtr.Zero,
+                    IntPtr.Zero,
+                    out s
+                );
                 return s;
             }
         }
@@ -3124,9 +3615,7 @@ namespace System.Deployment.Internal.Isolation
     internal interface IManifestInformation
     {
         [SecurityCritical]
-        void get_FullPath(
-            [Out, MarshalAs(UnmanagedType.LPWStr)] out string FullPath
-            );
+        void get_FullPath([Out, MarshalAs(UnmanagedType.LPWStr)] out string FullPath);
     }
 
     [ComImport]
@@ -3136,9 +3625,7 @@ namespace System.Deployment.Internal.Isolation
     {
         // Returns IDefinitionAppId
         [SecurityCritical]
-        void GetAppId(
-            [Out, MarshalAs(UnmanagedType.Interface)] out object AppId
-            );
+        void GetAppId([Out, MarshalAs(UnmanagedType.Interface)] out object AppId);
 
         // Returns IEnumCATEGORY
         [SecurityCritical]
@@ -3147,7 +3634,7 @@ namespace System.Deployment.Internal.Isolation
             [In] IReferenceIdentity CategoryToMatch,
             [In] ref Guid riid,
             [Out, MarshalAs(UnmanagedType.Interface)] out object EnumOut
-            );
+        );
 
         // Returns IEnumCATEGORY_SUBCATEGORY
         [SecurityCritical]
@@ -3157,7 +3644,7 @@ namespace System.Deployment.Internal.Isolation
             [In, MarshalAs(UnmanagedType.LPWStr)] string SubcategoryPattern,
             [In] ref Guid riid,
             [Out, MarshalAs(UnmanagedType.Interface)] out object EnumOut
-            );
+        );
 
         // Returns IEnumCATEGORY_INSTANCE
         [SecurityCritical]
@@ -3167,7 +3654,7 @@ namespace System.Deployment.Internal.Isolation
             [In, MarshalAs(UnmanagedType.LPWStr)] string Subcategory,
             [In] ref Guid riid,
             [Out, MarshalAs(UnmanagedType.Interface)] out object EnumOut
-            );
+        );
 
         [SecurityCritical]
         void ReplaceStringMacros(
@@ -3175,7 +3662,7 @@ namespace System.Deployment.Internal.Isolation
             [In, MarshalAs(UnmanagedType.LPWStr)] string Culture,
             [In, MarshalAs(UnmanagedType.LPWStr)] string ReplacementPattern,
             [Out, MarshalAs(UnmanagedType.LPWStr)] out string Replaced
-            );
+        );
 
         [SecurityCritical]
         void GetComponentStringTableStrings(
@@ -3185,7 +3672,7 @@ namespace System.Deployment.Internal.Isolation
             [Out, MarshalAs(UnmanagedType.LPArray)] string[] SourceStrings,
             [Out, MarshalAs(UnmanagedType.LPArray)] out string[] DestinationStrings,
             [In, MarshalAs(UnmanagedType.SysUInt)] IntPtr CultureFallbacks
-            );
+        );
 
         [SecurityCritical]
         void GetApplicationProperties(
@@ -3194,13 +3681,13 @@ namespace System.Deployment.Internal.Isolation
             [In, MarshalAs(UnmanagedType.LPArray)] string[] PropertyNames,
             [Out, MarshalAs(UnmanagedType.LPArray)] out string[] PropertyValues,
             [Out, MarshalAs(UnmanagedType.LPArray)] out UIntPtr[] ComponentIndicies
-            );
+        );
 
         [SecurityCritical]
         void ApplicationBasePath(
             [In] UInt32 Flags,
             [Out, MarshalAs(UnmanagedType.LPWStr)] out string ApplicationPath
-            );
+        );
 
         // Returns either IDefinitionIdentity or ICMS
         [SecurityCritical]
@@ -3209,14 +3696,14 @@ namespace System.Deployment.Internal.Isolation
             [In] IDefinitionIdentity ComponentId,
             [In] ref Guid riid,
             [Out, MarshalAs(UnmanagedType.Interface)] out object ManifestInteface
-            );
+        );
 
         [SecurityCritical]
         void GetComponentPayloadPath(
             [In] UInt32 Flags,
             [In] IDefinitionIdentity ComponentId,
             [Out, MarshalAs(UnmanagedType.LPWStr)] out string PayloadPath
-            );
+        );
 
         // Returns an IDefinitionIdentity
         [SecurityCritical]
@@ -3224,7 +3711,7 @@ namespace System.Deployment.Internal.Isolation
             [In] UInt32 dwFlags,
             [In] IReferenceIdentity Reference,
             [Out, MarshalAs(UnmanagedType.Interface)] out object MatchedDefinition
-            );
+        );
 
         // Returns an IActContext
         [SecurityCritical]
@@ -3232,14 +3719,14 @@ namespace System.Deployment.Internal.Isolation
             [In] UInt32 dwFlags,
             [In] ref CATEGORY_INSTANCE CategoryInstance,
             [Out, MarshalAs(UnmanagedType.Interface)] out object ppCreatedAppContext
-            );
+        );
 
         // Returns an IEnumDefinitionIdentity
         [SecurityCritical]
         void EnumComponents(
             [In] UInt32 dwFlags,
             [Out, MarshalAs(UnmanagedType.Interface)] out object ppIdentityEnum
-            );
+        );
 
         // Inputs is a pointer to an IAPP_CONTEXT_PREPARE_FOR_EXECUTION_INPUTS
         // structure, which for now should/can be NULL - pass IntPtr.Zero. Outputs
@@ -3249,14 +3736,14 @@ namespace System.Deployment.Internal.Isolation
         void PrepareForExecution(
             [In, MarshalAs(UnmanagedType.SysInt)] IntPtr Inputs,
             [In, MarshalAs(UnmanagedType.SysInt)] IntPtr Outputs
-            );
+        );
 
         [SecurityCritical]
         void SetApplicationRunningState(
             [In] UInt32 dwFlags,
             [In] UInt32 ulState,
             [Out] out UInt32 ulDisposition
-            );
+        );
 
         // For now, the coordinate list (should be a pointer to a STATE_COORDINATE_LIST
         // should be null.
@@ -3266,7 +3753,7 @@ namespace System.Deployment.Internal.Isolation
             [In] UIntPtr Component,
             [In, MarshalAs(UnmanagedType.SysInt)] IntPtr pCoordinateList,
             [Out, MarshalAs(UnmanagedType.LPWStr)] out string ppszPath
-            );
+        );
 
         [SecurityCritical]
         void FindComponentsByDefinition(
@@ -3275,7 +3762,7 @@ namespace System.Deployment.Internal.Isolation
             [In, MarshalAs(UnmanagedType.LPArray)] IDefinitionIdentity[] Components,
             [Out, MarshalAs(UnmanagedType.LPArray)] UIntPtr[] Indicies,
             [Out, MarshalAs(UnmanagedType.LPArray)] UInt32[] Dispositions
-            );
+        );
 
         [SecurityCritical]
         void FindComponentsByReference(
@@ -3284,14 +3771,14 @@ namespace System.Deployment.Internal.Isolation
             [In, MarshalAs(UnmanagedType.LPArray)] IReferenceIdentity[] References,
             [Out, MarshalAs(UnmanagedType.LPArray)] UIntPtr[] Indicies,
             [Out, MarshalAs(UnmanagedType.LPArray)] UInt32[] Dispositions
-            );
+        );
     }
 
     enum StateManager_RunningState
     {
         Undefined = 0,
         Starting = 1,
-        Running = 2
+        Running = 2,
     };
 
     [ComImport]
@@ -3300,10 +3787,7 @@ namespace System.Deployment.Internal.Isolation
     interface IStateManager
     {
         [SecurityCritical]
-        void PrepareApplicationState(
-            [In] UIntPtr Inputs,
-            ref UIntPtr Outputs
-            );
+        void PrepareApplicationState([In] UIntPtr Inputs, ref UIntPtr Outputs);
 
         [SecurityCritical]
         void SetApplicationRunningState(
@@ -3311,7 +3795,7 @@ namespace System.Deployment.Internal.Isolation
             [In] IActContext Context,
             [In] UInt32 RunningState,
             [Out] out UInt32 Disposition
-            );
+        );
 
         [SecurityCritical]
         void GetApplicationStateFilesystemLocation(
@@ -3320,13 +3804,9 @@ namespace System.Deployment.Internal.Isolation
             [In] IDefinitionIdentity ComponentIdentity,
             [In] UIntPtr Coordinates,
             [Out, MarshalAs(UnmanagedType.LPWStr)] out string Path
-            );
+        );
 
         [SecurityCritical]
-        void Scavenge(
-            [In] UInt32 Flags,
-            [Out] out UInt32 Disposition
-            );
+        void Scavenge([In] UInt32 Flags, [Out] out UInt32 Disposition);
     };
 }
-

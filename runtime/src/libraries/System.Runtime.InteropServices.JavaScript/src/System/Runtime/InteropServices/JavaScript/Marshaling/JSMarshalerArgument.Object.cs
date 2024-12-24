@@ -66,7 +66,7 @@ namespace System.Runtime.InteropServices.JavaScript
             }
             else if (slot.Type == MarshalerType.Array)
             {
-                if(slot.ElementType == MarshalerType.Byte)
+                if (slot.ElementType == MarshalerType.Byte)
                 {
                     ToManaged(out byte[]? val);
                     value = val;
@@ -88,15 +88,24 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 else
                 {
-                    throw new NotSupportedException(SR.Format(SR.ToManagedNotImplemented, slot.ElementType+ "[]"));
+                    throw new NotSupportedException(
+                        SR.Format(SR.ToManagedNotImplemented, slot.ElementType + "[]")
+                    );
                 }
             }
-            else if (slot.Type == MarshalerType.Task || slot.Type == MarshalerType.TaskResolved || slot.Type == MarshalerType.TaskRejected)
+            else if (
+                slot.Type == MarshalerType.Task
+                || slot.Type == MarshalerType.TaskResolved
+                || slot.Type == MarshalerType.TaskRejected
+            )
             {
-                ToManaged(out Task<object?>? val, static (ref JSMarshalerArgument arg, out object? value) =>
-                {
-                    arg.ToManaged(out value);
-                });
+                ToManaged(
+                    out Task<object?>? val,
+                    static (ref JSMarshalerArgument arg, out object? value) =>
+                    {
+                        arg.ToManaged(out value);
+                    }
+                );
                 value = val;
             }
             else
@@ -125,7 +134,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 if (typeof(long) == type)
                 {
                     // we do it because not all Int64 could fit into Int52 of the JS Number
-                    throw new NotSupportedException(SR.Format(SR.ToJSNotImplemented, type.FullName));
+                    throw new NotSupportedException(
+                        SR.Format(SR.ToJSNotImplemented, type.FullName)
+                    );
                 }
                 else if (typeof(int) == type)
                 {
@@ -169,7 +180,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 else
                 {
-                    throw new NotSupportedException(SR.Format(SR.ToJSNotImplemented, type.FullName));
+                    throw new NotSupportedException(
+                        SR.Format(SR.ToJSNotImplemented, type.FullName)
+                    );
                 }
             }
             else if (typeof(string) == type)
@@ -192,7 +205,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 if (typeof(long) == ut)
                 {
                     // we do it because not all Int64 could fit into Int52 of the JS Number
-                    throw new NotSupportedException(SR.Format(SR.ToJSNotImplemented, type.FullName));
+                    throw new NotSupportedException(
+                        SR.Format(SR.ToJSNotImplemented, type.FullName)
+                    );
                 }
                 else if (typeof(int) == ut)
                 {
@@ -246,7 +261,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 else
                 {
-                    throw new NotSupportedException(SR.Format(SR.ToJSNotImplemented, type.FullName));
+                    throw new NotSupportedException(
+                        SR.Format(SR.ToJSNotImplemented, type.FullName)
+                    );
                 }
             }
             else if (typeof(JSObject).IsAssignableFrom(type))
@@ -259,14 +276,17 @@ namespace System.Runtime.InteropServices.JavaScript
                 Exception? val = value as Exception;
                 ToJS(val);
             }
-            else if (typeof(Task<object>)==type)
+            else if (typeof(Task<object>) == type)
             {
                 Task<object>? val = value as Task<object>;
-                ToJS<object>(val, (ref JSMarshalerArgument arg, object value) =>
-                {
-                    object? valueRef= value;
-                    arg.ToJS(valueRef);
-                });
+                ToJS<object>(
+                    val,
+                    (ref JSMarshalerArgument arg, object value) =>
+                    {
+                        object? valueRef = value;
+                        arg.ToJS(valueRef);
+                    }
+                );
             }
             else if (typeof(Task).IsAssignableFrom(type))
             {
@@ -306,7 +326,10 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 throw new NotSupportedException(SR.Format(SR.ToJSNotImplemented, type.FullName));
             }
-            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ArraySegment<>))
+            else if (
+                type.IsGenericType
+                && type.GetGenericTypeDefinition() == typeof(ArraySegment<>)
+            )
             {
                 throw new NotSupportedException(SR.Format(SR.ToJSNotImplemented, type.FullName));
             }

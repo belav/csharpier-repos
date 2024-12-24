@@ -3,46 +3,79 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.Script.Services {
+
+namespace System.Web.Script.Services
+{
     using System;
     using System.IO;
     using System.Reflection;
-    using System.Web;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
+    using System.Web;
 
-    internal class WebServiceClientProxyGenerator : ClientProxyGenerator {
+    internal class WebServiceClientProxyGenerator : ClientProxyGenerator
+    {
         private string _path;
 
         // Called by ScriptManager to generate the proxy inline
-        internal static string GetInlineClientProxyScript(string path, HttpContext context, bool debug) {
-            WebServiceData webServiceData = WebServiceData.GetWebServiceData(context, path, true, false, true);
-            WebServiceClientProxyGenerator proxyGenerator = new WebServiceClientProxyGenerator(path, debug);
+        internal static string GetInlineClientProxyScript(
+            string path,
+            HttpContext context,
+            bool debug
+        )
+        {
+            WebServiceData webServiceData = WebServiceData.GetWebServiceData(
+                context,
+                path,
+                true,
+                false,
+                true
+            );
+            WebServiceClientProxyGenerator proxyGenerator = new WebServiceClientProxyGenerator(
+                path,
+                debug
+            );
             return proxyGenerator.GetClientProxyScript(webServiceData);
         }
 
-        private static DateTime GetAssemblyModifiedTime(Assembly assembly) {
+        private static DateTime GetAssemblyModifiedTime(Assembly assembly)
+        {
             AssemblyName assemblyName = assembly.GetName();
             DateTime writeTime = File.GetLastWriteTime(new Uri(assemblyName.CodeBase).LocalPath);
             // DevDiv 52056: include writeTime.Second in the date, otherwise if you modify it within the same minute it we'd still respond with http status 304 not modified
-            return new DateTime(writeTime.Year, writeTime.Month, writeTime.Day, writeTime.Hour, writeTime.Minute, writeTime.Second);
+            return new DateTime(
+                writeTime.Year,
+                writeTime.Month,
+                writeTime.Day,
+                writeTime.Hour,
+                writeTime.Minute,
+                writeTime.Second
+            );
         }
 
         // This is called thru the RestClientProxyHandler
         [SecuritySafeCritical]
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
-        internal static string GetClientProxyScript(HttpContext context) {
-            WebServiceData webServiceData = WebServiceData.GetWebServiceData(context, context.Request.FilePath);
-            DateTime lastModifiedDate = GetAssemblyModifiedTime(webServiceData.TypeData.Type.Assembly);
+        internal static string GetClientProxyScript(HttpContext context)
+        {
+            WebServiceData webServiceData = WebServiceData.GetWebServiceData(
+                context,
+                context.Request.FilePath
+            );
+            DateTime lastModifiedDate = GetAssemblyModifiedTime(
+                webServiceData.TypeData.Type.Assembly
+            );
 
             // If the browser sent this header, we can check if we need to resend
             string modifiedSince = context.Request.Headers["If-Modified-Since"];
-            if (modifiedSince != null) {
+            if (modifiedSince != null)
+            {
                 DateTime header;
-                if (DateTime.TryParse(modifiedSince, out header)) {
+                if (DateTime.TryParse(modifiedSince, out header))
+                {
                     // We are done if the assembly hasn't been modified
-                    if (header >= lastModifiedDate) {
+                    if (header >= lastModifiedDate)
+                    {
                         context.Response.StatusCode = 304;
                         return null;
                     }
@@ -50,9 +83,11 @@ namespace System.Web.Script.Services {
             }
             bool debug = RestHandlerFactory.IsClientProxyDebugRequest(context.Request.PathInfo);
             // Only cache for release proxy script (/js)
-            if (!debug) {
+            if (!debug)
+            {
                 // Only cache if we get a reasonable last modified date
-                if (lastModifiedDate.ToUniversalTime() < DateTime.UtcNow) {
+                if (lastModifiedDate.ToUniversalTime() < DateTime.UtcNow)
+                {
                     // Cache the resource so we don't keep processing the same requests
                     HttpCachePolicy cachePolicy = context.Response.Cache;
                     cachePolicy.SetCacheability(HttpCacheability.Public);
@@ -64,17 +99,22 @@ namespace System.Web.Script.Services {
                 }
             }
 
-            WebServiceClientProxyGenerator proxyGenerator = new WebServiceClientProxyGenerator(context.Request.FilePath, debug);
+            WebServiceClientProxyGenerator proxyGenerator = new WebServiceClientProxyGenerator(
+                context.Request.FilePath,
+                debug
+            );
             return proxyGenerator.GetClientProxyScript(webServiceData);
         }
 
-        internal WebServiceClientProxyGenerator(string path, bool debug) {
+        internal WebServiceClientProxyGenerator(string path, bool debug)
+        {
             // internal because ExtensionsTest needs this path to bypass httpcontext
             _path = path;
             _debugMode = debug;
         }
 
-        protected override string GetProxyPath() {
+        protected override string GetProxyPath()
+        {
             return _path;
         }
     }

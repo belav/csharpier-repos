@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,118 +29,119 @@
 
 
 using System;
-using System.Text;
-using System.Configuration;
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration;
+using System.Text;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class LocalFileSettingsProviderTest
+    {
+        [Test]
+        public void Properties()
+        {
+            LocalFileSettingsProvider prov = new LocalFileSettingsProvider();
 
-	[TestFixture]
-	public class LocalFileSettingsProviderTest
-	{
-		[Test]
-		public void Properties ()
-		{
-			LocalFileSettingsProvider prov = new LocalFileSettingsProvider ();
+            // defaults, uninitialized
+            Assert.IsNull(prov.Name, "A1");
+            Assert.AreEqual("", prov.ApplicationName, "A2");
 
-			// defaults, uninitialized
-			Assert.IsNull (prov.Name, "A1");
-			Assert.AreEqual ("", prov.ApplicationName, "A2");
+            prov.ApplicationName = "foo";
+            Assert.AreEqual("foo", prov.ApplicationName, "A3");
 
-			prov.ApplicationName = "foo";
-			Assert.AreEqual ("foo", prov.ApplicationName, "A3");
+            prov.ApplicationName = null;
+            Assert.IsNull(prov.ApplicationName, "A4");
+        }
 
-			prov.ApplicationName = null;
-			Assert.IsNull (prov.ApplicationName, "A4");
-		}
+        [Test]
+        public void Initialized()
+        {
+            LocalFileSettingsProvider prov = new LocalFileSettingsProvider();
 
-		[Test]
-		public void Initialized ()
-		{
-			LocalFileSettingsProvider prov = new LocalFileSettingsProvider ();
+            prov.Initialize(null, null);
 
-			prov.Initialize (null, null);
+            // defaults, uninitialized
+            Assert.AreEqual("LocalFileSettingsProvider", prov.Name, "A1");
+            Assert.AreEqual("", prov.ApplicationName, "A2");
 
-			// defaults, uninitialized
-			Assert.AreEqual ("LocalFileSettingsProvider", prov.Name, "A1");
-			Assert.AreEqual ("", prov.ApplicationName, "A2");
+            prov = new LocalFileSettingsProvider();
+            NameValueCollection nv = new NameValueCollection();
+            nv.Add("applicationName", "appName");
 
-			prov = new LocalFileSettingsProvider ();
-			NameValueCollection nv = new NameValueCollection ();
-			nv.Add ("applicationName", "appName");
+            prov.Initialize("hi", nv);
+            // As these lines below shows, Initialize() behavior is unpredictable. Here I just comment out them and fix run-test-ondotnet tests.
+            //Assert.AreEqual ("hi", prov.Name, "A3");
+            //Assert.AreEqual ("hi", prov.Description, "A3.5");
+            //Assert.AreEqual ("", prov.ApplicationName, "A4");
+        }
 
-			prov.Initialize ("hi", nv);
-			// As these lines below shows, Initialize() behavior is unpredictable. Here I just comment out them and fix run-test-ondotnet tests.
-			//Assert.AreEqual ("hi", prov.Name, "A3");
-			//Assert.AreEqual ("hi", prov.Description, "A3.5");
-			//Assert.AreEqual ("", prov.ApplicationName, "A4");
-		}
+        [Test]
+        public void GetUserScopedPropertyValues()
+        {
+            SettingsAttributeDictionary dict = new SettingsAttributeDictionary();
+            UserScopedSettingAttribute attr = new UserScopedSettingAttribute();
+            dict.Add(attr.GetType(), attr);
 
+            LocalFileSettingsProvider prov = new LocalFileSettingsProvider();
+            SettingsContext ctx = new SettingsContext();
+            SettingsProperty p = new SettingsProperty(
+                "property",
+                typeof(int),
+                prov,
+                false,
+                10,
+                SettingsSerializeAs.Binary,
+                dict,
+                false,
+                false
+            );
+            SettingsPropertyCollection col = new SettingsPropertyCollection();
+            SettingsPropertyValueCollection vals;
 
-		[Test]
-		public void GetUserScopedPropertyValues ()
-		{
-			SettingsAttributeDictionary dict = new SettingsAttributeDictionary ();
-			UserScopedSettingAttribute attr = new UserScopedSettingAttribute ();
-			dict.Add (attr.GetType(), attr);
+            col.Add(p);
 
-			LocalFileSettingsProvider prov = new LocalFileSettingsProvider ();
-			SettingsContext ctx = new SettingsContext ();
-			SettingsProperty p = new SettingsProperty ("property",
-								   typeof (int),
-								   prov,
-								   false,
-								   10,
-								   SettingsSerializeAs.Binary,
-								   dict,
-								   false,
-								   false);
-			SettingsPropertyCollection col = new SettingsPropertyCollection ();
-			SettingsPropertyValueCollection vals;
+            prov.Initialize(null, null);
 
-			col.Add (p);
+            vals = prov.GetPropertyValues(ctx, col);
+            Assert.IsNotNull(vals, "A1");
+            Assert.AreEqual(1, vals.Count, "A2");
+        }
 
-			prov.Initialize (null, null);
+        [Test]
+        public void GetApplicationScopedPropertyValues()
+        {
+            SettingsAttributeDictionary dict = new SettingsAttributeDictionary();
+            ApplicationScopedSettingAttribute attr = new ApplicationScopedSettingAttribute();
+            dict.Add(attr.GetType(), attr);
 
-			vals = prov.GetPropertyValues (ctx, col);
-			Assert.IsNotNull (vals, "A1");
-			Assert.AreEqual (1, vals.Count, "A2");
-		}
+            LocalFileSettingsProvider prov = new LocalFileSettingsProvider();
+            SettingsContext ctx = new SettingsContext();
+            SettingsProperty p = new SettingsProperty(
+                "property",
+                typeof(int),
+                prov,
+                false,
+                10,
+                SettingsSerializeAs.Binary,
+                dict,
+                false,
+                false
+            );
+            SettingsPropertyCollection col = new SettingsPropertyCollection();
+            SettingsPropertyValueCollection vals;
 
-		[Test]
-		public void GetApplicationScopedPropertyValues ()
-		{
-			SettingsAttributeDictionary dict = new SettingsAttributeDictionary ();
-			ApplicationScopedSettingAttribute attr = new ApplicationScopedSettingAttribute ();
-			dict.Add (attr.GetType(), attr);
+            col.Add(p);
 
-			LocalFileSettingsProvider prov = new LocalFileSettingsProvider ();
-			SettingsContext ctx = new SettingsContext ();
-			SettingsProperty p = new SettingsProperty ("property",
-								   typeof (int),
-								   prov,
-								   false,
-								   10,
-								   SettingsSerializeAs.Binary,
-								   dict,
-								   false,
-								   false);
-			SettingsPropertyCollection col = new SettingsPropertyCollection ();
-			SettingsPropertyValueCollection vals;
+            prov.Initialize(null, null);
 
-			col.Add (p);
+            vals = prov.GetPropertyValues(ctx, col);
 
-			prov.Initialize (null, null);
-
-			vals = prov.GetPropertyValues (ctx, col);
-
-			Assert.IsNotNull (vals, "A1");
-			Assert.AreEqual (1, vals.Count, "A2");
-		}
-	}
-
+            Assert.IsNotNull(vals, "A1");
+            Assert.AreEqual(1, vals.Count, "A2");
+        }
+    }
 }
-

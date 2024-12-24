@@ -20,13 +20,25 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  ",
             // So true
         };
-        private static readonly Rope[] longRopes = longStrings.Select(s => Rope.ForString(s)).ToArray();
+        private static readonly Rope[] longRopes = longStrings
+            .Select(s => Rope.ForString(s))
+            .ToArray();
 
         private static readonly string[] shortStrings = new[]
         {
-            "abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx", "yz01", "2345", "6789"
+            "abcd",
+            "efgh",
+            "ijkl",
+            "mnop",
+            "qrst",
+            "uvwx",
+            "yz01",
+            "2345",
+            "6789",
         };
-        private static readonly Rope[] shortRopes = shortStrings.Select(s => Rope.ForString(s)).ToArray();
+        private static readonly Rope[] shortRopes = shortStrings
+            .Select(s => Rope.ForString(s))
+            .ToArray();
 
         private static readonly Rope[] someRopes = shortRopes.Concat(longRopes).ToArray();
         private static readonly string[] someStrings = shortStrings.Concat(longStrings).ToArray();
@@ -89,7 +101,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ForNullString()
         {
-            Assert.Throws<ArgumentNullException>(() => { Rope.ForString(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Rope.ForString(null);
+            });
         }
 
         [Fact]
@@ -97,8 +112,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             foreach (var r in someRopes)
             {
-                Assert.Throws<ArgumentNullException>(() => { Rope.Concat(r, null); });
-                Assert.Throws<ArgumentNullException>(() => { Rope.Concat(null, r); });
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Rope.Concat(r, null);
+                });
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Rope.Concat(null, r);
+                });
             }
         }
 

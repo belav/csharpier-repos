@@ -162,8 +162,14 @@ app.MapGet("/", TestAction);
                 new object[] { "DateOnly?", "default", default(DateOnly?), false },
                 new object[] { "bool", "default", default(bool), true },
                 new object[] { "bool", "false", false, true },
-                new object[] { "bool", "true", true, true},
-                new object[] { "System.Threading.CancellationToken", "default", default(CancellationToken), false },
+                new object[] { "bool", "true", true, true },
+                new object[]
+                {
+                    "System.Threading.CancellationToken",
+                    "default",
+                    default(CancellationToken),
+                    false,
+                },
                 new object[] { "Todo?", "default", default(Todo), false },
                 new object[] { "char", "\'a\'", 'a', true },
                 new object[] { "int", "default", 0, true },
@@ -190,26 +196,31 @@ app.MapGet("/", TestAction);
                 new object[] { "float", "float.MinValue", float.MinValue, true },
                 new object[] { "float", "float.Pi", float.Pi, true },
                 new object[] { "float", "float.Tau", float.Tau, true },
-                new object[] {"decimal", "decimal.MaxValue", decimal.MaxValue, true },
-                new object[] {"decimal", "decimal.MinusOne", decimal.MinusOne, true },
-                new object[] {"decimal", "decimal.MinValue", decimal.MinValue, true },
-                new object[] {"decimal", "decimal.One", decimal.One, true },
-                new object[] {"decimal", "decimal.Zero", decimal.Zero, true },
-                new object[] {"long", "long.MaxValue", long.MaxValue, true },
-                new object[] {"long", "long.MinValue", long.MinValue, true },
-                new object[] {"short", "short.MaxValue", short.MaxValue, true },
-                new object[] {"short", "short.MinValue", short.MinValue, true },
-                new object[] {"ulong", "ulong.MaxValue", ulong.MaxValue, true },
-                new object[] {"ulong", "ulong.MinValue", ulong.MinValue, true },
-                new object[] {"ushort", "ushort.MaxValue", ushort.MaxValue, true },
-                new object[] {"ushort", "ushort.MinValue", ushort.MinValue, true },
+                new object[] { "decimal", "decimal.MaxValue", decimal.MaxValue, true },
+                new object[] { "decimal", "decimal.MinusOne", decimal.MinusOne, true },
+                new object[] { "decimal", "decimal.MinValue", decimal.MinValue, true },
+                new object[] { "decimal", "decimal.One", decimal.One, true },
+                new object[] { "decimal", "decimal.Zero", decimal.Zero, true },
+                new object[] { "long", "long.MaxValue", long.MaxValue, true },
+                new object[] { "long", "long.MinValue", long.MinValue, true },
+                new object[] { "short", "short.MaxValue", short.MaxValue, true },
+                new object[] { "short", "short.MinValue", short.MinValue, true },
+                new object[] { "ulong", "ulong.MaxValue", ulong.MaxValue, true },
+                new object[] { "ulong", "ulong.MinValue", ulong.MinValue, true },
+                new object[] { "ushort", "ushort.MaxValue", ushort.MaxValue, true },
+                new object[] { "ushort", "ushort.MinValue", ushort.MinValue, true },
             };
         }
     }
 
     [Theory]
     [MemberData(nameof(DefaultValues))]
-    public async Task RequestDelegatePopulatesParametersWithDefaultValues(string type, string defaultValue, object expectedValue, bool declareConst)
+    public async Task RequestDelegatePopulatesParametersWithDefaultValues(
+        string type,
+        string defaultValue,
+        object expectedValue,
+        bool declareConst
+    )
     {
         var source = string.Empty;
         if (declareConst)
@@ -260,17 +271,17 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegatePopulatesDecimalWithDefaultValuesAndCultureSet()
     {
         var source = $$"""
-  const decimal defaultConst = 3.15m;
-  static void TestAction(
-      HttpContext context,
-      decimal parameterWithDefault = 2.15m,
-      decimal parameterWithConst = defaultConst)
-  {
-      context.Items.Add("parameterWithDefault", parameterWithDefault);
-      context.Items.Add("parameterWithConst", parameterWithConst);
-  }
-  app.MapPost("/", TestAction);
-  """;
+            const decimal defaultConst = 3.15m;
+            static void TestAction(
+                HttpContext context,
+                decimal parameterWithDefault = 2.15m,
+                decimal parameterWithConst = defaultConst)
+            {
+                context.Items.Add("parameterWithDefault", parameterWithDefault);
+                context.Items.Add("parameterWithConst", parameterWithConst);
+            }
+            app.MapPost("/", TestAction);
+            """;
 
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);

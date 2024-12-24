@@ -20,22 +20,26 @@ internal class LoggingCircuitHandler : CircuitHandler
         _circuitOpened = LoggerMessage.Define<string>(
             logLevel: LogLevel.Information,
             1,
-            formatString: "Circuit opened for {circuitId}.");
+            formatString: "Circuit opened for {circuitId}."
+        );
 
         _connectionUp = LoggerMessage.Define<string>(
             logLevel: LogLevel.Information,
             2,
-            formatString: "Connection up for {circuitId}.");
+            formatString: "Connection up for {circuitId}."
+        );
 
         _connectionDown = LoggerMessage.Define<string>(
             logLevel: LogLevel.Information,
             3,
-            formatString: "Connection down for {circuitId}.");
+            formatString: "Connection down for {circuitId}."
+        );
 
         _circuitClosed = LoggerMessage.Define<string>(
             logLevel: LogLevel.Information,
             3,
-            formatString: "Circuit closed for {circuitId}.");
+            formatString: "Circuit closed for {circuitId}."
+        );
     }
 
     public override Task OnCircuitOpenedAsync(Circuit circuit, CancellationToken cts)

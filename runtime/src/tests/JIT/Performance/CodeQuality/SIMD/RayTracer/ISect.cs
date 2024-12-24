@@ -8,8 +8,17 @@ internal class ISect
     public Ray Ray;
     public double Dist;
 
-    public ISect(SceneObject thing, Ray ray, double dist) { Thing = thing; Ray = ray; Dist = dist; }
+    public ISect(SceneObject thing, Ray ray, double dist)
+    {
+        Thing = thing;
+        Ray = ray;
+        Dist = dist;
+    }
 
-    public static bool IsNull(ISect sect) { return sect == null; }
-    public readonly static ISect Null = null;
+    public static bool IsNull(ISect sect)
+    {
+        return sect == null;
+    }
+
+    public static readonly ISect Null = null;
 }

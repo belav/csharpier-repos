@@ -13,8 +13,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Operation is not supported when dynamic code generation is not available."
         /// </summary>
-        internal static string LiftingInExpressionRequiresDynamicCode(Type type)
-                => SR.Format(SR.LiftingInExpressionRequiresDynamicCode, type.FullName);
+        internal static string LiftingInExpressionRequiresDynamicCode(Type type) =>
+            SR.Format(SR.LiftingInExpressionRequiresDynamicCode, type.FullName);
 
         /// <summary>
         /// A string like "reducible nodes must override Expression.Reduce()"
@@ -94,17 +94,20 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Static field requires null instance, non-static field requires non-null instance."
         /// </summary>
-        internal static string OnlyStaticFieldsHaveNullInstance => SR.OnlyStaticFieldsHaveNullInstance;
+        internal static string OnlyStaticFieldsHaveNullInstance =>
+            SR.OnlyStaticFieldsHaveNullInstance;
 
         /// <summary>
         /// A string like "Static property requires null instance, non-static property requires non-null instance."
         /// </summary>
-        internal static string OnlyStaticPropertiesHaveNullInstance => SR.OnlyStaticPropertiesHaveNullInstance;
+        internal static string OnlyStaticPropertiesHaveNullInstance =>
+            SR.OnlyStaticPropertiesHaveNullInstance;
 
         /// <summary>
         /// A string like "Static method requires null instance, non-static method requires non-null instance."
         /// </summary>
-        internal static string OnlyStaticMethodsHaveNullInstance => SR.OnlyStaticMethodsHaveNullInstance;
+        internal static string OnlyStaticMethodsHaveNullInstance =>
+            SR.OnlyStaticMethodsHaveNullInstance;
 
         /// <summary>
         /// A string like "Property cannot have a void type."
@@ -149,7 +152,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Label type must be System.Void if an expression is not supplied"
         /// </summary>
-        internal static string LabelMustBeVoidOrHaveExpression => SR.LabelMustBeVoidOrHaveExpression;
+        internal static string LabelMustBeVoidOrHaveExpression =>
+            SR.LabelMustBeVoidOrHaveExpression;
 
         /// <summary>
         /// A string like "Type must be System.Void for this label argument"
@@ -164,12 +168,14 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Collection was modified; enumeration operation may not execute."
         /// </summary>
-        internal static string CollectionModifiedWhileEnumerating => SR.CollectionModifiedWhileEnumerating;
+        internal static string CollectionModifiedWhileEnumerating =>
+            SR.CollectionModifiedWhileEnumerating;
 
         /// <summary>
         /// A string like "Variable '{0}' uses unsupported type '{1}'. Reference types are not supported for variables."
         /// </summary>
-        internal static string VariableMustNotBeByRef(object? p0, object? p1) => SR.Format(SR.VariableMustNotBeByRef, p0, p1);
+        internal static string VariableMustNotBeByRef(object? p0, object? p1) =>
+            SR.Format(SR.VariableMustNotBeByRef, p0, p1);
 
         /// <summary>
         /// A string like "Collection is read-only."
@@ -179,17 +185,20 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "More than one key matching '{0}' was found in the ExpandoObject."
         /// </summary>
-        internal static string AmbiguousMatchInExpandoObject(object? p0) => SR.Format(SR.AmbiguousMatchInExpandoObject, p0);
+        internal static string AmbiguousMatchInExpandoObject(object? p0) =>
+            SR.Format(SR.AmbiguousMatchInExpandoObject, p0);
 
         /// <summary>
         /// A string like "An element with the same key '{0}' already exists in the ExpandoObject."
         /// </summary>
-        internal static string SameKeyExistsInExpando(object? p0) => SR.Format(SR.SameKeyExistsInExpando, p0);
+        internal static string SameKeyExistsInExpando(object? p0) =>
+            SR.Format(SR.SameKeyExistsInExpando, p0);
 
         /// <summary>
         /// A string like "The specified key '{0}' does not exist in the ExpandoObject."
         /// </summary>
-        internal static string KeyDoesNotExistInExpando(object? p0) => SR.Format(SR.KeyDoesNotExistInExpando, p0);
+        internal static string KeyDoesNotExistInExpando(object? p0) =>
+            SR.Format(SR.KeyDoesNotExistInExpando, p0);
 
         /// <summary>
         /// A string like "Argument count must be greater than number of named arguments."
@@ -199,27 +208,42 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "An IDynamicMetaObjectProvider {0} created an invalid DynamicMetaObject instance."
         /// </summary>
-        internal static string InvalidMetaObjectCreated(object? p0) => SR.Format(SR.InvalidMetaObjectCreated, p0);
+        internal static string InvalidMetaObjectCreated(object? p0) =>
+            SR.Format(SR.InvalidMetaObjectCreated, p0);
 
         /// <summary>
         /// A string like "The result type '{0}' of the binder '{1}' is not compatible with the result type '{2}' expected by the call site."
         /// </summary>
-        internal static string BinderNotCompatibleWithCallSite(object? p0, object? p1, object? p2) => SR.Format(SR.BinderNotCompatibleWithCallSite, p0, p1, p2);
+        internal static string BinderNotCompatibleWithCallSite(
+            object? p0,
+            object? p1,
+            object? p2
+        ) => SR.Format(SR.BinderNotCompatibleWithCallSite, p0, p1, p2);
 
         /// <summary>
         /// A string like "The result of the dynamic binding produced by the object with type '{0}' for the binder '{1}' needs at least one restriction."
         /// </summary>
-        internal static string DynamicBindingNeedsRestrictions(object? p0, object? p1) => SR.Format(SR.DynamicBindingNeedsRestrictions, p0, p1);
+        internal static string DynamicBindingNeedsRestrictions(object? p0, object? p1) =>
+            SR.Format(SR.DynamicBindingNeedsRestrictions, p0, p1);
 
         /// <summary>
         /// A string like "The result type '{0}' of the dynamic binding produced by the object with type '{1}' for the binder '{2}' is not compatible with the result type '{3}' expected by the call site."
         /// </summary>
-        internal static string DynamicObjectResultNotAssignable(object? p0, object? p1, object? p2, object? p3) => SR.Format(SR.DynamicObjectResultNotAssignable, p0, p1, p2, p3);
+        internal static string DynamicObjectResultNotAssignable(
+            object? p0,
+            object? p1,
+            object? p2,
+            object? p3
+        ) => SR.Format(SR.DynamicObjectResultNotAssignable, p0, p1, p2, p3);
 
         /// <summary>
         /// A string like "The result type '{0}' of the dynamic binding produced by binder '{1}' is not compatible with the result type '{2}' expected by the call site."
         /// </summary>
-        internal static string DynamicBinderResultNotAssignable(object? p0, object? p1, object? p2) => SR.Format(SR.DynamicBinderResultNotAssignable, p0, p1, p2);
+        internal static string DynamicBinderResultNotAssignable(
+            object? p0,
+            object? p1,
+            object? p2
+        ) => SR.Format(SR.DynamicBinderResultNotAssignable, p0, p1, p2);
 
         /// <summary>
         /// A string like "Bind cannot return null."
@@ -239,7 +263,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Type parameter is {0}. Expected a delegate."
         /// </summary>
-        internal static string TypeParameterIsNotDelegate(object? p0) => SR.Format(SR.TypeParameterIsNotDelegate, p0);
+        internal static string TypeParameterIsNotDelegate(object? p0) =>
+            SR.Format(SR.TypeParameterIsNotDelegate, p0);
 
         /// <summary>
         /// A string like "No or Invalid rule produced"
@@ -249,7 +274,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Type must be derived from System.Delegate"
         /// </summary>
-        internal static string TypeMustBeDerivedFromSystemDelegate => SR.TypeMustBeDerivedFromSystemDelegate;
+        internal static string TypeMustBeDerivedFromSystemDelegate =>
+            SR.TypeMustBeDerivedFromSystemDelegate;
 
         /// <summary>
         /// A string like "First argument of delegate must be CallSite"
@@ -274,57 +300,70 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Body of catch must have the same type as body of try."
         /// </summary>
-        internal static string BodyOfCatchMustHaveSameTypeAsBodyOfTry => SR.BodyOfCatchMustHaveSameTypeAsBodyOfTry;
+        internal static string BodyOfCatchMustHaveSameTypeAsBodyOfTry =>
+            SR.BodyOfCatchMustHaveSameTypeAsBodyOfTry;
 
         /// <summary>
         /// A string like "Extension node must override the property {0}."
         /// </summary>
-        internal static string ExtensionNodeMustOverrideProperty(object? p0) => SR.Format(SR.ExtensionNodeMustOverrideProperty, p0);
+        internal static string ExtensionNodeMustOverrideProperty(object? p0) =>
+            SR.Format(SR.ExtensionNodeMustOverrideProperty, p0);
 
         /// <summary>
         /// A string like "User-defined operator method '{0}' must be static."
         /// </summary>
-        internal static string UserDefinedOperatorMustBeStatic(object? p0) => SR.Format(SR.UserDefinedOperatorMustBeStatic, p0);
+        internal static string UserDefinedOperatorMustBeStatic(object? p0) =>
+            SR.Format(SR.UserDefinedOperatorMustBeStatic, p0);
 
         /// <summary>
         /// A string like "User-defined operator method '{0}' must not be void."
         /// </summary>
-        internal static string UserDefinedOperatorMustNotBeVoid(object? p0) => SR.Format(SR.UserDefinedOperatorMustNotBeVoid, p0);
+        internal static string UserDefinedOperatorMustNotBeVoid(object? p0) =>
+            SR.Format(SR.UserDefinedOperatorMustNotBeVoid, p0);
 
         /// <summary>
         /// A string like "No coercion operator is defined between types '{0}' and '{1}'."
         /// </summary>
-        internal static string CoercionOperatorNotDefined(object? p0, object? p1) => SR.Format(SR.CoercionOperatorNotDefined, p0, p1);
+        internal static string CoercionOperatorNotDefined(object? p0, object? p1) =>
+            SR.Format(SR.CoercionOperatorNotDefined, p0, p1);
 
         /// <summary>
         /// A string like "The unary operator {0} is not defined for the type '{1}'."
         /// </summary>
-        internal static string UnaryOperatorNotDefined(object? p0, object? p1) => SR.Format(SR.UnaryOperatorNotDefined, p0, p1);
+        internal static string UnaryOperatorNotDefined(object? p0, object? p1) =>
+            SR.Format(SR.UnaryOperatorNotDefined, p0, p1);
 
         /// <summary>
         /// A string like "The binary operator {0} is not defined for the types '{1}' and '{2}'."
         /// </summary>
-        internal static string BinaryOperatorNotDefined(object? p0, object? p1, object? p2) => SR.Format(SR.BinaryOperatorNotDefined, p0, p1, p2);
+        internal static string BinaryOperatorNotDefined(object? p0, object? p1, object? p2) =>
+            SR.Format(SR.BinaryOperatorNotDefined, p0, p1, p2);
 
         /// <summary>
         /// A string like "Reference equality is not defined for the types '{0}' and '{1}'."
         /// </summary>
-        internal static string ReferenceEqualityNotDefined(object? p0, object? p1) => SR.Format(SR.ReferenceEqualityNotDefined, p0, p1);
+        internal static string ReferenceEqualityNotDefined(object? p0, object? p1) =>
+            SR.Format(SR.ReferenceEqualityNotDefined, p0, p1);
 
         /// <summary>
         /// A string like "The operands for operator '{0}' do not match the parameters of method '{1}'."
         /// </summary>
-        internal static string OperandTypesDoNotMatchParameters(object? p0, object? p1) => SR.Format(SR.OperandTypesDoNotMatchParameters, p0, p1);
+        internal static string OperandTypesDoNotMatchParameters(object? p0, object? p1) =>
+            SR.Format(SR.OperandTypesDoNotMatchParameters, p0, p1);
 
         /// <summary>
         /// A string like "The return type of overload method for operator '{0}' does not match the parameter type of conversion method '{1}'."
         /// </summary>
-        internal static string OverloadOperatorTypeDoesNotMatchConversionType(object? p0, object? p1) => SR.Format(SR.OverloadOperatorTypeDoesNotMatchConversionType, p0, p1);
+        internal static string OverloadOperatorTypeDoesNotMatchConversionType(
+            object? p0,
+            object? p1
+        ) => SR.Format(SR.OverloadOperatorTypeDoesNotMatchConversionType, p0, p1);
 
         /// <summary>
         /// A string like "Conversion is not supported for arithmetic types without operator overloading."
         /// </summary>
-        internal static string ConversionIsNotSupportedForArithmeticTypes => SR.ConversionIsNotSupportedForArithmeticTypes;
+        internal static string ConversionIsNotSupportedForArithmeticTypes =>
+            SR.ConversionIsNotSupportedForArithmeticTypes;
 
         /// <summary>
         /// A string like "Argument must be array"
@@ -339,17 +378,20 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "The user-defined equality method '{0}' must return a boolean value."
         /// </summary>
-        internal static string EqualityMustReturnBoolean(object? p0) => SR.Format(SR.EqualityMustReturnBoolean, p0);
+        internal static string EqualityMustReturnBoolean(object? p0) =>
+            SR.Format(SR.EqualityMustReturnBoolean, p0);
 
         /// <summary>
         /// A string like "Argument must be either a FieldInfo or PropertyInfo"
         /// </summary>
-        internal static string ArgumentMustBeFieldInfoOrPropertyInfo => SR.ArgumentMustBeFieldInfoOrPropertyInfo;
+        internal static string ArgumentMustBeFieldInfoOrPropertyInfo =>
+            SR.ArgumentMustBeFieldInfoOrPropertyInfo;
 
         /// <summary>
         /// A string like "Argument must be either a FieldInfo, PropertyInfo or MethodInfo"
         /// </summary>
-        internal static string ArgumentMustBeFieldInfoOrPropertyInfoOrMethod => SR.ArgumentMustBeFieldInfoOrPropertyInfoOrMethod;
+        internal static string ArgumentMustBeFieldInfoOrPropertyInfoOrMethod =>
+            SR.ArgumentMustBeFieldInfoOrPropertyInfoOrMethod;
 
         /// <summary>
         /// A string like "Argument must be an instance member"
@@ -369,7 +411,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Argument must be single-dimensional, zero-based array type"
         /// </summary>
-        internal static string ArgumentMustBeSingleDimensionalArrayType => SR.ArgumentMustBeSingleDimensionalArrayType;
+        internal static string ArgumentMustBeSingleDimensionalArrayType =>
+            SR.ArgumentMustBeSingleDimensionalArrayType;
 
         /// <summary>
         /// A string like "Argument types do not match"
@@ -379,17 +422,20 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Cannot auto initialize elements of value type through property '{0}', use assignment instead"
         /// </summary>
-        internal static string CannotAutoInitializeValueTypeElementThroughProperty(object? p0) => SR.Format(SR.CannotAutoInitializeValueTypeElementThroughProperty, p0);
+        internal static string CannotAutoInitializeValueTypeElementThroughProperty(object? p0) =>
+            SR.Format(SR.CannotAutoInitializeValueTypeElementThroughProperty, p0);
 
         /// <summary>
         /// A string like "Cannot auto initialize members of value type through property '{0}', use assignment instead"
         /// </summary>
-        internal static string CannotAutoInitializeValueTypeMemberThroughProperty(object? p0) => SR.Format(SR.CannotAutoInitializeValueTypeMemberThroughProperty, p0);
+        internal static string CannotAutoInitializeValueTypeMemberThroughProperty(object? p0) =>
+            SR.Format(SR.CannotAutoInitializeValueTypeMemberThroughProperty, p0);
 
         /// <summary>
         /// A string like "The type used in TypeAs Expression must be of reference or nullable type, {0} is neither"
         /// </summary>
-        internal static string IncorrectTypeForTypeAs(object? p0) => SR.Format(SR.IncorrectTypeForTypeAs, p0);
+        internal static string IncorrectTypeForTypeAs(object? p0) =>
+            SR.Format(SR.IncorrectTypeForTypeAs, p0);
 
         /// <summary>
         /// A string like "Coalesce used with type that cannot be null"
@@ -399,52 +445,62 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "An expression of type '{0}' cannot be used to initialize an array of type '{1}'"
         /// </summary>
-        internal static string ExpressionTypeCannotInitializeArrayType(object? p0, object? p1) => SR.Format(SR.ExpressionTypeCannotInitializeArrayType, p0, p1);
+        internal static string ExpressionTypeCannotInitializeArrayType(object? p0, object? p1) =>
+            SR.Format(SR.ExpressionTypeCannotInitializeArrayType, p0, p1);
 
         /// <summary>
         /// A string like " Argument type '{0}' does not match the corresponding member type '{1}'"
         /// </summary>
-        internal static string ArgumentTypeDoesNotMatchMember(object? p0, object? p1) => SR.Format(SR.ArgumentTypeDoesNotMatchMember, p0, p1);
+        internal static string ArgumentTypeDoesNotMatchMember(object? p0, object? p1) =>
+            SR.Format(SR.ArgumentTypeDoesNotMatchMember, p0, p1);
 
         /// <summary>
         /// A string like " The member '{0}' is not declared on type '{1}' being created"
         /// </summary>
-        internal static string ArgumentMemberNotDeclOnType(object? p0, object? p1) => SR.Format(SR.ArgumentMemberNotDeclOnType, p0, p1);
+        internal static string ArgumentMemberNotDeclOnType(object? p0, object? p1) =>
+            SR.Format(SR.ArgumentMemberNotDeclOnType, p0, p1);
 
         /// <summary>
         /// A string like "Expression of type '{0}' cannot be used for return type '{1}'"
         /// </summary>
-        internal static string ExpressionTypeDoesNotMatchReturn(object? p0, object? p1) => SR.Format(SR.ExpressionTypeDoesNotMatchReturn, p0, p1);
+        internal static string ExpressionTypeDoesNotMatchReturn(object? p0, object? p1) =>
+            SR.Format(SR.ExpressionTypeDoesNotMatchReturn, p0, p1);
 
         /// <summary>
         /// A string like "Expression of type '{0}' cannot be used for assignment to type '{1}'"
         /// </summary>
-        internal static string ExpressionTypeDoesNotMatchAssignment(object? p0, object? p1) => SR.Format(SR.ExpressionTypeDoesNotMatchAssignment, p0, p1);
+        internal static string ExpressionTypeDoesNotMatchAssignment(object? p0, object? p1) =>
+            SR.Format(SR.ExpressionTypeDoesNotMatchAssignment, p0, p1);
 
         /// <summary>
         /// A string like "Expression of type '{0}' cannot be used for label of type '{1}'"
         /// </summary>
-        internal static string ExpressionTypeDoesNotMatchLabel(object? p0, object? p1) => SR.Format(SR.ExpressionTypeDoesNotMatchLabel, p0, p1);
+        internal static string ExpressionTypeDoesNotMatchLabel(object? p0, object? p1) =>
+            SR.Format(SR.ExpressionTypeDoesNotMatchLabel, p0, p1);
 
         /// <summary>
         /// A string like "Expression of type '{0}' cannot be invoked"
         /// </summary>
-        internal static string ExpressionTypeNotInvocable(object? p0) => SR.Format(SR.ExpressionTypeNotInvocable, p0);
+        internal static string ExpressionTypeNotInvocable(object? p0) =>
+            SR.Format(SR.ExpressionTypeNotInvocable, p0);
 
         /// <summary>
         /// A string like "Field '{0}' is not defined for type '{1}'"
         /// </summary>
-        internal static string FieldNotDefinedForType(object? p0, object? p1) => SR.Format(SR.FieldNotDefinedForType, p0, p1);
+        internal static string FieldNotDefinedForType(object? p0, object? p1) =>
+            SR.Format(SR.FieldNotDefinedForType, p0, p1);
 
         /// <summary>
         /// A string like "Instance field '{0}' is not defined for type '{1}'"
         /// </summary>
-        internal static string InstanceFieldNotDefinedForType(object? p0, object? p1) => SR.Format(SR.InstanceFieldNotDefinedForType, p0, p1);
+        internal static string InstanceFieldNotDefinedForType(object? p0, object? p1) =>
+            SR.Format(SR.InstanceFieldNotDefinedForType, p0, p1);
 
         /// <summary>
         /// A string like "Field '{0}.{1}' is not defined for type '{2}'"
         /// </summary>
-        internal static string FieldInfoNotDefinedForType(object? p0, object? p1, object? p2) => SR.Format(SR.FieldInfoNotDefinedForType, p0, p1, p2);
+        internal static string FieldInfoNotDefinedForType(object? p0, object? p1, object? p2) =>
+            SR.Format(SR.FieldInfoNotDefinedForType, p0, p1, p2);
 
         /// <summary>
         /// A string like "Incorrect number of indexes"
@@ -454,32 +510,38 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Incorrect number of parameters supplied for lambda declaration"
         /// </summary>
-        internal static string IncorrectNumberOfLambdaDeclarationParameters => SR.IncorrectNumberOfLambdaDeclarationParameters;
+        internal static string IncorrectNumberOfLambdaDeclarationParameters =>
+            SR.IncorrectNumberOfLambdaDeclarationParameters;
 
         /// <summary>
         /// A string like " Incorrect number of members for constructor"
         /// </summary>
-        internal static string IncorrectNumberOfMembersForGivenConstructor => SR.IncorrectNumberOfMembersForGivenConstructor;
+        internal static string IncorrectNumberOfMembersForGivenConstructor =>
+            SR.IncorrectNumberOfMembersForGivenConstructor;
 
         /// <summary>
         /// A string like "Incorrect number of arguments for the given members "
         /// </summary>
-        internal static string IncorrectNumberOfArgumentsForMembers => SR.IncorrectNumberOfArgumentsForMembers;
+        internal static string IncorrectNumberOfArgumentsForMembers =>
+            SR.IncorrectNumberOfArgumentsForMembers;
 
         /// <summary>
         /// A string like "Lambda type parameter must be derived from System.MulticastDelegate"
         /// </summary>
-        internal static string LambdaTypeMustBeDerivedFromSystemDelegate => SR.LambdaTypeMustBeDerivedFromSystemDelegate;
+        internal static string LambdaTypeMustBeDerivedFromSystemDelegate =>
+            SR.LambdaTypeMustBeDerivedFromSystemDelegate;
 
         /// <summary>
         /// A string like "Member '{0}' not field or property"
         /// </summary>
-        internal static string MemberNotFieldOrProperty(object? p0) => SR.Format(SR.MemberNotFieldOrProperty, p0);
+        internal static string MemberNotFieldOrProperty(object? p0) =>
+            SR.Format(SR.MemberNotFieldOrProperty, p0);
 
         /// <summary>
         /// A string like "Method {0} contains generic parameters"
         /// </summary>
-        internal static string MethodContainsGenericParameters(object? p0) => SR.Format(SR.MethodContainsGenericParameters, p0);
+        internal static string MethodContainsGenericParameters(object? p0) =>
+            SR.Format(SR.MethodContainsGenericParameters, p0);
 
         /// <summary>
         /// A string like "Method {0} is a generic method definition"
@@ -489,67 +551,85 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "The method '{0}.{1}' is not a property accessor"
         /// </summary>
-        internal static string MethodNotPropertyAccessor(object? p0, object? p1) => SR.Format(SR.MethodNotPropertyAccessor, p0, p1);
+        internal static string MethodNotPropertyAccessor(object? p0, object? p1) =>
+            SR.Format(SR.MethodNotPropertyAccessor, p0, p1);
 
         /// <summary>
         /// A string like "The property '{0}' has no 'get' accessor"
         /// </summary>
-        internal static string PropertyDoesNotHaveGetter(object? p0) => SR.Format(SR.PropertyDoesNotHaveGetter, p0);
+        internal static string PropertyDoesNotHaveGetter(object? p0) =>
+            SR.Format(SR.PropertyDoesNotHaveGetter, p0);
 
         /// <summary>
         /// A string like "The property '{0}' has no 'set' accessor"
         /// </summary>
-        internal static string PropertyDoesNotHaveSetter(object? p0) => SR.Format(SR.PropertyDoesNotHaveSetter, p0);
+        internal static string PropertyDoesNotHaveSetter(object? p0) =>
+            SR.Format(SR.PropertyDoesNotHaveSetter, p0);
 
         /// <summary>
         /// A string like "The property '{0}' has no 'get' or 'set' accessors"
         /// </summary>
-        internal static string PropertyDoesNotHaveAccessor(object? p0) => SR.Format(SR.PropertyDoesNotHaveAccessor, p0);
+        internal static string PropertyDoesNotHaveAccessor(object? p0) =>
+            SR.Format(SR.PropertyDoesNotHaveAccessor, p0);
 
         /// <summary>
         /// A string like "'{0}' is not a member of type '{1}'"
         /// </summary>
-        internal static string NotAMemberOfType(object? p0, object? p1) => SR.Format(SR.NotAMemberOfType, p0, p1);
+        internal static string NotAMemberOfType(object? p0, object? p1) =>
+            SR.Format(SR.NotAMemberOfType, p0, p1);
 
         /// <summary>
         /// A string like "'{0}' is not a member of any type"
         /// </summary>
-        internal static string NotAMemberOfAnyType(object? p0) => SR.Format(SR.NotAMemberOfAnyType, p0);
+        internal static string NotAMemberOfAnyType(object? p0) =>
+            SR.Format(SR.NotAMemberOfAnyType, p0);
 
         /// <summary>
         /// A string like "ParameterExpression of type '{0}' cannot be used for delegate parameter of type '{1}'"
         /// </summary>
-        internal static string ParameterExpressionNotValidAsDelegate(object? p0, object? p1) => SR.Format(SR.ParameterExpressionNotValidAsDelegate, p0, p1);
+        internal static string ParameterExpressionNotValidAsDelegate(object? p0, object? p1) =>
+            SR.Format(SR.ParameterExpressionNotValidAsDelegate, p0, p1);
 
         /// <summary>
         /// A string like "Property '{0}' is not defined for type '{1}'"
         /// </summary>
-        internal static string PropertyNotDefinedForType(object? p0, object? p1) => SR.Format(SR.PropertyNotDefinedForType, p0, p1);
+        internal static string PropertyNotDefinedForType(object? p0, object? p1) =>
+            SR.Format(SR.PropertyNotDefinedForType, p0, p1);
 
         /// <summary>
         /// A string like "Instance property '{0}' is not defined for type '{1}'"
         /// </summary>
-        internal static string InstancePropertyNotDefinedForType(object? p0, object? p1) => SR.Format(SR.InstancePropertyNotDefinedForType, p0, p1);
+        internal static string InstancePropertyNotDefinedForType(object? p0, object? p1) =>
+            SR.Format(SR.InstancePropertyNotDefinedForType, p0, p1);
 
         /// <summary>
         /// A string like "Instance property '{0}' that takes no argument is not defined for type '{1}'"
         /// </summary>
-        internal static string InstancePropertyWithoutParameterNotDefinedForType(object? p0, object? p1) => SR.Format(SR.InstancePropertyWithoutParameterNotDefinedForType, p0, p1);
+        internal static string InstancePropertyWithoutParameterNotDefinedForType(
+            object? p0,
+            object? p1
+        ) => SR.Format(SR.InstancePropertyWithoutParameterNotDefinedForType, p0, p1);
 
         /// <summary>
         /// A string like "Instance property '{0}{1}' is not defined for type '{2}'"
         /// </summary>
-        internal static string InstancePropertyWithSpecifiedParametersNotDefinedForType(object? p0, object? p1, object? p2) => SR.Format(SR.InstancePropertyWithSpecifiedParametersNotDefinedForType, p0, p1, p2);
+        internal static string InstancePropertyWithSpecifiedParametersNotDefinedForType(
+            object? p0,
+            object? p1,
+            object? p2
+        ) => SR.Format(SR.InstancePropertyWithSpecifiedParametersNotDefinedForType, p0, p1, p2);
 
         /// <summary>
         /// A string like "Method '{0}' declared on type '{1}' cannot be called with instance of type '{2}'"
         /// </summary>
-        internal static string InstanceAndMethodTypeMismatch(object? p0, object? p1, object? p2) => SR.Format(SR.InstanceAndMethodTypeMismatch, p0, p1, p2);
+        internal static string InstanceAndMethodTypeMismatch(object? p0, object? p1, object? p2) =>
+            SR.Format(SR.InstanceAndMethodTypeMismatch, p0, p1, p2);
 
         /// <summary>
         /// A string like "Type '{0}' does not have a default constructor"
         /// </summary>
-        internal static string TypeMissingDefaultConstructor(object? p0) => SR.Format(SR.TypeMissingDefaultConstructor, p0);
+        internal static string TypeMissingDefaultConstructor(object? p0) =>
+            SR.Format(SR.TypeMissingDefaultConstructor, p0);
 
         /// <summary>
         /// A string like "Element initializer method must be named 'Add'"
@@ -559,12 +639,14 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Parameter '{0}' of element initializer method '{1}' must not be a pass by reference parameter"
         /// </summary>
-        internal static string ElementInitializerMethodNoRefOutParam(object? p0, object? p1) => SR.Format(SR.ElementInitializerMethodNoRefOutParam, p0, p1);
+        internal static string ElementInitializerMethodNoRefOutParam(object? p0, object? p1) =>
+            SR.Format(SR.ElementInitializerMethodNoRefOutParam, p0, p1);
 
         /// <summary>
         /// A string like "Element initializer method must have at least 1 parameter"
         /// </summary>
-        internal static string ElementInitializerMethodWithZeroArgs => SR.ElementInitializerMethodWithZeroArgs;
+        internal static string ElementInitializerMethodWithZeroArgs =>
+            SR.ElementInitializerMethodWithZeroArgs;
 
         /// <summary>
         /// A string like "Element initializer method must be an instance method"
@@ -574,7 +656,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Type '{0}' is not IEnumerable"
         /// </summary>
-        internal static string TypeNotIEnumerable(object? p0) => SR.Format(SR.TypeNotIEnumerable, p0);
+        internal static string TypeNotIEnumerable(object? p0) =>
+            SR.Format(SR.TypeNotIEnumerable, p0);
 
         /// <summary>
         /// A string like "Unhandled binary: {0}"
@@ -589,7 +672,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Unhandled Binding Type: {0}"
         /// </summary>
-        internal static string UnhandledBindingType(object? p0) => SR.Format(SR.UnhandledBindingType, p0);
+        internal static string UnhandledBindingType(object? p0) =>
+            SR.Format(SR.UnhandledBindingType, p0);
 
         /// <summary>
         /// A string like "Unhandled unary: {0}"
@@ -604,47 +688,56 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "The user-defined operator method '{1}' for operator '{0}' must have identical parameter and return types."
         /// </summary>
-        internal static string UserDefinedOpMustHaveConsistentTypes(object? p0, object? p1) => SR.Format(SR.UserDefinedOpMustHaveConsistentTypes, p0, p1);
+        internal static string UserDefinedOpMustHaveConsistentTypes(object? p0, object? p1) =>
+            SR.Format(SR.UserDefinedOpMustHaveConsistentTypes, p0, p1);
 
         /// <summary>
         /// A string like "The user-defined operator method '{1}' for operator '{0}' must return the same type as its parameter or a derived type."
         /// </summary>
-        internal static string UserDefinedOpMustHaveValidReturnType(object? p0, object? p1) => SR.Format(SR.UserDefinedOpMustHaveValidReturnType, p0, p1);
+        internal static string UserDefinedOpMustHaveValidReturnType(object? p0, object? p1) =>
+            SR.Format(SR.UserDefinedOpMustHaveValidReturnType, p0, p1);
 
         /// <summary>
         /// A string like "The user-defined operator method '{1}' for operator '{0}' must have associated boolean True and False operators."
         /// </summary>
-        internal static string LogicalOperatorMustHaveBooleanOperators(object? p0, object? p1) => SR.Format(SR.LogicalOperatorMustHaveBooleanOperators, p0, p1);
+        internal static string LogicalOperatorMustHaveBooleanOperators(object? p0, object? p1) =>
+            SR.Format(SR.LogicalOperatorMustHaveBooleanOperators, p0, p1);
 
         /// <summary>
         /// A string like "No method '{0}' on type '{1}' is compatible with the supplied arguments."
         /// </summary>
-        internal static string MethodWithArgsDoesNotExistOnType(object? p0, object? p1) => SR.Format(SR.MethodWithArgsDoesNotExistOnType, p0, p1);
+        internal static string MethodWithArgsDoesNotExistOnType(object? p0, object? p1) =>
+            SR.Format(SR.MethodWithArgsDoesNotExistOnType, p0, p1);
 
         /// <summary>
         /// A string like "No generic method '{0}' on type '{1}' is compatible with the supplied type arguments and arguments. No type arguments should be provided if the method is non-generic. "
         /// </summary>
-        internal static string GenericMethodWithArgsDoesNotExistOnType(object? p0, object? p1) => SR.Format(SR.GenericMethodWithArgsDoesNotExistOnType, p0, p1);
+        internal static string GenericMethodWithArgsDoesNotExistOnType(object? p0, object? p1) =>
+            SR.Format(SR.GenericMethodWithArgsDoesNotExistOnType, p0, p1);
 
         /// <summary>
         /// A string like "More than one method '{0}' on type '{1}' is compatible with the supplied arguments."
         /// </summary>
-        internal static string MethodWithMoreThanOneMatch(object? p0, object? p1) => SR.Format(SR.MethodWithMoreThanOneMatch, p0, p1);
+        internal static string MethodWithMoreThanOneMatch(object? p0, object? p1) =>
+            SR.Format(SR.MethodWithMoreThanOneMatch, p0, p1);
 
         /// <summary>
         /// A string like "More than one property '{0}' on type '{1}' is compatible with the supplied arguments."
         /// </summary>
-        internal static string PropertyWithMoreThanOneMatch(object? p0, object? p1) => SR.Format(SR.PropertyWithMoreThanOneMatch, p0, p1);
+        internal static string PropertyWithMoreThanOneMatch(object? p0, object? p1) =>
+            SR.Format(SR.PropertyWithMoreThanOneMatch, p0, p1);
 
         /// <summary>
         /// A string like "An incorrect number of type arguments were specified for the declaration of a Func type."
         /// </summary>
-        internal static string IncorrectNumberOfTypeArgsForFunc => SR.IncorrectNumberOfTypeArgsForFunc;
+        internal static string IncorrectNumberOfTypeArgsForFunc =>
+            SR.IncorrectNumberOfTypeArgsForFunc;
 
         /// <summary>
         /// A string like "An incorrect number of type arguments were specified for the declaration of an Action type."
         /// </summary>
-        internal static string IncorrectNumberOfTypeArgsForAction => SR.IncorrectNumberOfTypeArgsForAction;
+        internal static string IncorrectNumberOfTypeArgsForAction =>
+            SR.IncorrectNumberOfTypeArgsForAction;
 
         /// <summary>
         /// A string like "Argument type cannot be System.Void."
@@ -654,12 +747,14 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Cannot redefine label '{0}' in an inner block."
         /// </summary>
-        internal static string LabelTargetAlreadyDefined(object? p0) => SR.Format(SR.LabelTargetAlreadyDefined, p0);
+        internal static string LabelTargetAlreadyDefined(object? p0) =>
+            SR.Format(SR.LabelTargetAlreadyDefined, p0);
 
         /// <summary>
         /// A string like "Cannot jump to undefined label '{0}'."
         /// </summary>
-        internal static string LabelTargetUndefined(object? p0) => SR.Format(SR.LabelTargetUndefined, p0);
+        internal static string LabelTargetUndefined(object? p0) =>
+            SR.Format(SR.LabelTargetUndefined, p0);
 
         /// <summary>
         /// A string like "Control cannot leave a finally block."
@@ -689,13 +784,15 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Cannot jump to non-local label '{0}' with a value. Only jumps to labels defined in outer blocks can pass values."
         /// </summary>
-        internal static string NonLocalJumpWithValue(object? p0) => SR.Format(SR.NonLocalJumpWithValue, p0);
+        internal static string NonLocalJumpWithValue(object? p0) =>
+            SR.Format(SR.NonLocalJumpWithValue, p0);
 
 #if FEATURE_COMPILE_TO_METHODBUILDER
         /// <summary>
         /// A string like "CompileToMethod cannot compile constant '{0}' because it is a non-trivial value, such as a live object. Instead, create an expression tree that can construct this value."
         /// </summary>
-        internal static string CannotCompileConstant(object? p0) => SR.Format(SR.CannotCompileConstant, p0);
+        internal static string CannotCompileConstant(object? p0) =>
+            SR.Format(SR.CannotCompileConstant, p0);
 
         /// <summary>
         /// A string like "Dynamic expressions are not supported by CompileToMethod. Instead, create an expression tree that uses System.Runtime.CompilerServices.CallSite."
@@ -705,7 +802,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "MethodBuilder does not have a valid TypeBuilder"
         /// </summary>
-        internal static string MethodBuilderDoesNotHaveTypeBuilder => SR.MethodBuilderDoesNotHaveTypeBuilder;
+        internal static string MethodBuilderDoesNotHaveTypeBuilder =>
+            SR.MethodBuilderDoesNotHaveTypeBuilder;
 #endif
 
         /// <summary>
@@ -716,17 +814,20 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "variable '{0}' of type '{1}' referenced from scope '{2}', but it is not defined"
         /// </summary>
-        internal static string UndefinedVariable(object? p0, object? p1, object? p2) => SR.Format(SR.UndefinedVariable, p0, p1, p2);
+        internal static string UndefinedVariable(object? p0, object? p1, object? p2) =>
+            SR.Format(SR.UndefinedVariable, p0, p1, p2);
 
         /// <summary>
         /// A string like "Cannot close over byref parameter '{0}' referenced in lambda '{1}'"
         /// </summary>
-        internal static string CannotCloseOverByRef(object? p0, object? p1) => SR.Format(SR.CannotCloseOverByRef, p0, p1);
+        internal static string CannotCloseOverByRef(object? p0, object? p1) =>
+            SR.Format(SR.CannotCloseOverByRef, p0, p1);
 
         /// <summary>
         /// A string like "Unexpected VarArgs call to method '{0}'"
         /// </summary>
-        internal static string UnexpectedVarArgsCall(object? p0) => SR.Format(SR.UnexpectedVarArgsCall, p0);
+        internal static string UnexpectedVarArgsCall(object? p0) =>
+            SR.Format(SR.UnexpectedVarArgsCall, p0);
 
         /// <summary>
         /// A string like "Rethrow statement is valid only inside a Catch block."
@@ -741,43 +842,55 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "When called from '{0}', rewriting a node of type '{1}' must return a non-null value of the same type. Alternatively, override '{2}' and change it to not visit children of this type."
         /// </summary>
-        internal static string MustRewriteToSameNode(object? p0, object? p1, object? p2) => SR.Format(SR.MustRewriteToSameNode, p0, p1, p2);
+        internal static string MustRewriteToSameNode(object? p0, object? p1, object? p2) =>
+            SR.Format(SR.MustRewriteToSameNode, p0, p1, p2);
 
         /// <summary>
         /// A string like "Rewriting child expression from type '{0}' to type '{1}' is not allowed, because it would change the meaning of the operation. If this is intentional, override '{2}' and change it to allow this rewrite."
         /// </summary>
-        internal static string MustRewriteChildToSameType(object? p0, object? p1, object? p2) => SR.Format(SR.MustRewriteChildToSameType, p0, p1, p2);
+        internal static string MustRewriteChildToSameType(object? p0, object? p1, object? p2) =>
+            SR.Format(SR.MustRewriteChildToSameType, p0, p1, p2);
 
         /// <summary>
         /// A string like "Rewritten expression calls operator method '{0}', but the original node had no operator method. If this is intentional, override '{1}' and change it to allow this rewrite."
         /// </summary>
-        internal static string MustRewriteWithoutMethod(object? p0, object? p1) => SR.Format(SR.MustRewriteWithoutMethod, p0, p1);
+        internal static string MustRewriteWithoutMethod(object? p0, object? p1) =>
+            SR.Format(SR.MustRewriteWithoutMethod, p0, p1);
 
         /// <summary>
         /// A string like "TryExpression is not supported as an argument to method '{0}' because it has an argument with by-ref type. Construct the tree so the TryExpression is not nested inside of this expression."
         /// </summary>
-        internal static string TryNotSupportedForMethodsWithRefArgs(object? p0) => SR.Format(SR.TryNotSupportedForMethodsWithRefArgs, p0);
+        internal static string TryNotSupportedForMethodsWithRefArgs(object? p0) =>
+            SR.Format(SR.TryNotSupportedForMethodsWithRefArgs, p0);
 
         /// <summary>
         /// A string like "TryExpression is not supported as a child expression when accessing a member on type '{0}' because it is a value type. Construct the tree so the TryExpression is not nested inside of this expression."
         /// </summary>
-        internal static string TryNotSupportedForValueTypeInstances(object? p0) => SR.Format(SR.TryNotSupportedForValueTypeInstances, p0);
+        internal static string TryNotSupportedForValueTypeInstances(object? p0) =>
+            SR.Format(SR.TryNotSupportedForValueTypeInstances, p0);
 
         /// <summary>
         /// A string like "Test value of type '{0}' cannot be used for the comparison method parameter of type '{1}'"
         /// </summary>
-        internal static string TestValueTypeDoesNotMatchComparisonMethodParameter(object? p0, object? p1) => SR.Format(SR.TestValueTypeDoesNotMatchComparisonMethodParameter, p0, p1);
+        internal static string TestValueTypeDoesNotMatchComparisonMethodParameter(
+            object? p0,
+            object? p1
+        ) => SR.Format(SR.TestValueTypeDoesNotMatchComparisonMethodParameter, p0, p1);
 
         /// <summary>
         /// A string like "Switch value of type '{0}' cannot be used for the comparison method parameter of type '{1}'"
         /// </summary>
-        internal static string SwitchValueTypeDoesNotMatchComparisonMethodParameter(object? p0, object? p1) => SR.Format(SR.SwitchValueTypeDoesNotMatchComparisonMethodParameter, p0, p1);
+        internal static string SwitchValueTypeDoesNotMatchComparisonMethodParameter(
+            object? p0,
+            object? p1
+        ) => SR.Format(SR.SwitchValueTypeDoesNotMatchComparisonMethodParameter, p0, p1);
 
 #if FEATURE_COMPILE_TO_METHODBUILDER && FEATURE_PDB_GENERATOR
         /// <summary>
         /// A string like "DebugInfoGenerator created by CreatePdbGenerator can only be used with LambdaExpression.CompileToMethod."
         /// </summary>
-        internal static string PdbGeneratorNeedsExpressionCompiler => SR.PdbGeneratorNeedsExpressionCompiler;
+        internal static string PdbGeneratorNeedsExpressionCompiler =>
+            SR.PdbGeneratorNeedsExpressionCompiler;
 #endif
 
         /// <summary>
@@ -798,7 +911,10 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Expression of type '{0}' cannot be used for constructor parameter of type '{1}'"
         /// </summary>
-        internal static string ExpressionTypeDoesNotMatchConstructorParameter(object? p0, object? p1) => SR.Format(SR.ExpressionTypeDoesNotMatchConstructorParameter, p0, p1);
+        internal static string ExpressionTypeDoesNotMatchConstructorParameter(
+            object? p0,
+            object? p1
+        ) => SR.Format(SR.ExpressionTypeDoesNotMatchConstructorParameter, p0, p1);
 
         /// <summary>
         /// A string like "Enumeration has either not started or has alreExpressionTypeDoesNotMatchConstructorParameterady finished."
@@ -808,12 +924,14 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "Type {0} contains generic parameters"
         /// </summary>
-        internal static string TypeContainsGenericParameters(object? p0) => SR.Format(SR.TypeContainsGenericParameters, p0);
+        internal static string TypeContainsGenericParameters(object? p0) =>
+            SR.Format(SR.TypeContainsGenericParameters, p0);
 
         /// <summary>
         /// A string like "Type {0} is a generic type definition"
         /// </summary>
         internal static string TypeIsGeneric(object? p0) => SR.Format(SR.TypeIsGeneric, p0);
+
         /// <summary>
         /// A string like "Invalid argument value"
         /// </summary>
@@ -832,31 +950,40 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A string like "The value '{0}' is not of type '{1}' and cannot be used in this collection."
         /// </summary>
-        internal static string InvalidObjectType(object? p0, object? p1) => SR.Format(SR.InvalidObjectType, p0, p1);
+        internal static string InvalidObjectType(object? p0, object? p1) =>
+            SR.Format(SR.InvalidObjectType, p0, p1);
 
         /// <summary>
         /// A string like "Expression of type '{0}' cannot be used for parameter of type '{1}' of method '{2}'"
         /// </summary>
-        internal static string ExpressionTypeDoesNotMatchMethodParameter(object? p0, object? p1, object? p2) => SR.Format(SR.ExpressionTypeDoesNotMatchMethodParameter, p0, p1, p2);
+        internal static string ExpressionTypeDoesNotMatchMethodParameter(
+            object? p0,
+            object? p1,
+            object? p2
+        ) => SR.Format(SR.ExpressionTypeDoesNotMatchMethodParameter, p0, p1, p2);
 
         /// <summary>
         /// A string like "Expression of type '{0}' cannot be used for parameter of type '{1}'"
         /// </summary>
-        internal static string ExpressionTypeDoesNotMatchParameter(object? p0, object? p1) => SR.Format(SR.ExpressionTypeDoesNotMatchParameter, p0, p1);
+        internal static string ExpressionTypeDoesNotMatchParameter(object? p0, object? p1) =>
+            SR.Format(SR.ExpressionTypeDoesNotMatchParameter, p0, p1);
 
         /// <summary>
         /// A string like "Incorrect number of arguments supplied for call to method '{0}'"
         /// </summary>
-        internal static string IncorrectNumberOfMethodCallArguments(object? p0) => SR.Format(SR.IncorrectNumberOfMethodCallArguments, p0);
+        internal static string IncorrectNumberOfMethodCallArguments(object? p0) =>
+            SR.Format(SR.IncorrectNumberOfMethodCallArguments, p0);
 
         /// <summary>
         /// A string like "Incorrect number of arguments supplied for lambda invocation"
         /// </summary>
-        internal static string IncorrectNumberOfLambdaArguments => SR.IncorrectNumberOfLambdaArguments;
+        internal static string IncorrectNumberOfLambdaArguments =>
+            SR.IncorrectNumberOfLambdaArguments;
 
         /// <summary>
         /// A string like "Incorrect number of arguments for constructor"
         /// </summary>
-        internal static string IncorrectNumberOfConstructorArguments => SR.IncorrectNumberOfConstructorArguments;
+        internal static string IncorrectNumberOfConstructorArguments =>
+            SR.IncorrectNumberOfConstructorArguments;
     }
 }

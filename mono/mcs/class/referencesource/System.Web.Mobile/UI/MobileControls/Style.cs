@@ -1,29 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="Style.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Diagnostics;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-
 using WebCtrlStyle = System.Web.UI.WebControls.Style;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile Style class.
      * This class can be used to define external styles that can be referenced by other controls.
@@ -33,42 +31,62 @@ namespace System.Web.UI.MobileControls
         ControlBuilderAttribute(typeof(MobileControlBuilder)),
         TypeConverterAttribute(typeof(ExpandableObjectConverter))
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class Style : IParserAccessor, ITemplateable, IStateManager, ICloneable
     {
         //  registers styles and retrieves keys used for storing properties in internal hashtable
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.AlignmentKey"]/*' />
-        public static readonly Object
-            AlignmentKey = RegisterStyle("Alignment", typeof(Alignment)    , System.Web.UI.MobileControls.Alignment.NotSet, true),
-            WrappingKey  = RegisterStyle("Wrapping" , typeof(Wrapping)     , System.Web.UI.MobileControls.Wrapping.NotSet , true),
-            BoldKey      = RegisterStyle("Bold",      typeof(BooleanOption), BooleanOption.NotSet, true),
-            ItalicKey    = RegisterStyle("Italic",    typeof(BooleanOption), BooleanOption.NotSet, true),
-            FontSizeKey  = RegisterStyle("FontSize" , typeof(FontSize)     , System.Web.UI.MobileControls.FontSize.NotSet , true),
-            FontNameKey  = RegisterStyle("FontName" , typeof(String)       , String.Empty    , true),
-            ForeColorKey = RegisterStyle("ForeColor", typeof(Color)        , Color.Empty     , true),
-            BackColorKey = RegisterStyle("BackColor", typeof(Color)        , Color.Empty     , false);
+        public static readonly Object AlignmentKey = RegisterStyle(
+                "Alignment",
+                typeof(Alignment),
+                System.Web.UI.MobileControls.Alignment.NotSet,
+                true
+            ),
+            WrappingKey = RegisterStyle(
+                "Wrapping",
+                typeof(Wrapping),
+                System.Web.UI.MobileControls.Wrapping.NotSet,
+                true
+            ),
+            BoldKey = RegisterStyle("Bold", typeof(BooleanOption), BooleanOption.NotSet, true),
+            ItalicKey = RegisterStyle("Italic", typeof(BooleanOption), BooleanOption.NotSet, true),
+            FontSizeKey = RegisterStyle(
+                "FontSize",
+                typeof(FontSize),
+                System.Web.UI.MobileControls.FontSize.NotSet,
+                true
+            ),
+            FontNameKey = RegisterStyle("FontName", typeof(String), String.Empty, true),
+            ForeColorKey = RegisterStyle("ForeColor", typeof(Color), Color.Empty, true),
+            BackColorKey = RegisterStyle("BackColor", typeof(Color), Color.Empty, false);
 
-        private bool _marked = false;       //  used by IStateManager
-        private MobileControl _control;     //  containing control
-        private Style _referredStyle;       //  referred style
-        private bool _checkedStyleReference;//  referred style is valid.
-        private StateBag _state;            //  name => object pairs
+        private bool _marked = false; //  used by IStateManager
+        private MobileControl _control; //  containing control
+        private Style _referredStyle; //  referred style
+        private bool _checkedStyleReference; //  referred style is valid.
+        private StateBag _state; //  name => object pairs
         private DeviceSpecific _deviceSpecific;
         private FontInfo _font;
         private Style _cachedParentStyle;
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.Style"]/*' />
-        public Style()
-        {
-        }
+        public Style() { }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.Clone"]/*' />
         public object Clone()
         {
             Style clone = new Style();
-            foreach(String key in State.Keys)
+            foreach (String key in State.Keys)
             {
                 clone.State[key] = State[key];
             }
@@ -92,31 +110,31 @@ namespace System.Web.UI.MobileControls
                     control.Font.Size = FontUnit.Medium;
                     break;
             }
-            control.Font.Bold   = ((BooleanOption)this[BoldKey, true]) == BooleanOption.True;
+            control.Font.Bold = ((BooleanOption)this[BoldKey, true]) == BooleanOption.True;
             control.Font.Italic = ((BooleanOption)this[ItalicKey, true]) == BooleanOption.True;
-            control.ForeColor   = (Color)this[ForeColorKey, true];
-            control.BackColor   = (Color)this[BackColorKey, true];
+            control.ForeColor = (Color)this[ForeColorKey, true];
+            control.BackColor = (Color)this[BackColorKey, true];
         }
 
         internal void ApplyTo(WebCtrlStyle style)
         {
-            style.Font.Bold     = ((BooleanOption)this[BoldKey, true]) == BooleanOption.True;
-            style.Font.Italic   = ((BooleanOption)this[ItalicKey, true]) == BooleanOption.True;
-            style.Font.Name     = (String)this[FontNameKey, true];
-            style.ForeColor     = (Color)this[ForeColorKey, true];
-            style.BackColor     = (Color)this[BackColorKey, true];
+            style.Font.Bold = ((BooleanOption)this[BoldKey, true]) == BooleanOption.True;
+            style.Font.Italic = ((BooleanOption)this[ItalicKey, true]) == BooleanOption.True;
+            style.Font.Name = (String)this[FontNameKey, true];
+            style.ForeColor = (Color)this[ForeColorKey, true];
+            style.BackColor = (Color)this[BackColorKey, true];
 
             switch ((FontSize)this[FontSizeKey, true])
             {
-                case FontSize.Large :
+                case FontSize.Large:
                     style.Font.Size = FontUnit.Larger;
                     break;
 
-                case FontSize.Small :
+                case FontSize.Small:
                     style.Font.Size = FontUnit.Smaller;
                     break;
 
-                default :
+                default:
                     break;
             }
         }
@@ -143,10 +161,7 @@ namespace System.Web.UI.MobileControls
         /// <internalonly/>
         protected bool IsTrackingViewState
         {
-            get
-            {
-                return _marked;
-            }
+            get { return _marked; }
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.IStateManager.TrackViewState"]/*' />
@@ -175,7 +190,7 @@ namespace System.Web.UI.MobileControls
             {
                 // mark _referredStyle as dirty to force reload from viewstate.
                 Refresh();
-                
+
                 ((IStateManager)State).LoadViewState(state);
             }
         }
@@ -184,12 +199,12 @@ namespace System.Web.UI.MobileControls
         {
             // VSWHIDBEY 236464. The bag needs to be set dirty not individual items.
             State.SetDirty(true);
-/*            
-            foreach (StateItem item in State.Values)
-            {
-                item.IsDirty = true;
-            }
-*/
+            /*
+                        foreach (StateItem item in State.Values)
+                        {
+                            item.IsDirty = true;
+                        }
+            */
         }
 
         internal void Refresh()
@@ -199,16 +214,10 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.Control"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MobileControl Control
         {
-            get
-            {
-                return _control;
-            }
+            get { return _control; }
         }
 
         internal void SetControl(MobileControl control)
@@ -231,10 +240,7 @@ namespace System.Web.UI.MobileControls
                 String name = (String)State["Name"];
                 return name != null ? name : String.Empty;
             }
-            set
-            {
-                State["Name"] = value;
-            }
+            set { State["Name"] = value; }
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.StyleReference"]/*' />
@@ -244,25 +250,21 @@ namespace System.Web.UI.MobileControls
             MobileCategory(SR.Category_Appearance),
             MobileSysDescription(SR.Style_Reference),
             NotifyParentProperty(true),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.StyleReferenceConverter)),
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.StyleReferenceConverter)
+            ),
         ]
         public virtual String StyleReference
         {
-            get
-            {
-                return (String)State["StyleReference"];
-            }
+            get { return (String)State["StyleReference"]; }
             set
             {
                 State["StyleReference"] = value;
-                Refresh();      // mark referred style as dirty
+                Refresh(); // mark referred style as dirty
             }
         }
 
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal Style ReferredStyle
         {
             get
@@ -281,10 +283,16 @@ namespace System.Web.UI.MobileControls
                     return null;
                 }
 
-                Debug.Assert(_referredStyle == null ||
-                             String.Equals(reference, _referredStyle.Name, StringComparison.OrdinalIgnoreCase), 
-                             "Inconsistency in style names - _referredStyle must be dirty.");
-                
+                Debug.Assert(
+                    _referredStyle == null
+                        || String.Equals(
+                            reference,
+                            _referredStyle.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        ),
+                    "Inconsistency in style names - _referredStyle must be dirty."
+                );
+
                 if (_referredStyle == null)
                 {
                     // Look in the stylesheet in the nearest templated control
@@ -305,7 +313,7 @@ namespace System.Web.UI.MobileControls
                         {
                             stylesheet = mobileUserControl.StyleSheet;
 
-                            // If stylesheet is in mobileUserControl at designtime, 
+                            // If stylesheet is in mobileUserControl at designtime,
                             // simply use the one in MobilePage
                             if (_control.MobilePage.DesignMode)
                             {
@@ -321,7 +329,7 @@ namespace System.Web.UI.MobileControls
                     if (stylesheet != null)
                     {
                         // when page does not contain StyleSheet
-                        // controls, Default stylesheet will search twice. 
+                        // controls, Default stylesheet will search twice.
                         _referredStyle = stylesheet[reference];
                     }
 
@@ -334,21 +342,20 @@ namespace System.Web.UI.MobileControls
                         if (_referredStyle == null && !_control.MobilePage.DesignMode)
                         {
                             String exceptionResource;
-                            if (nearestTemplatedControl is UserControl &&
-                                !(nearestTemplatedControl is MobileUserControl))
+                            if (
+                                nearestTemplatedControl is UserControl
+                                && !(nearestTemplatedControl is MobileUserControl)
+                            )
                             {
                                 // Throw a specific error message in this case
-                                exceptionResource =
-                                    SR.Style_StyleNotFoundOnGenericUserControl;
+                                exceptionResource = SR.Style_StyleNotFoundOnGenericUserControl;
                             }
                             else
                             {
-                                exceptionResource =
-                                    SR.Style_StyleNotFound;
+                                exceptionResource = SR.Style_StyleNotFound;
                             }
-                                
-                            throw new Exception(SR.GetString(exceptionResource,
-                                                             reference)); 
+
+                            throw new Exception(SR.GetString(exceptionResource, reference));
                         }
                     }
                 }
@@ -361,10 +368,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.this"]/*' />
         public Object this[Object key]
         {
-            get
-            {
-                return GetValue((Property)key, false, true, null);
-            }
+            get { return GetValue((Property)key, false, true, null); }
             set
             {
                 Property property = (Property)key;
@@ -376,13 +380,15 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.this1"]/*' />
         public Object this[Object key, bool inherit]
         {
-            get
-            {
-                return GetValue((Property)key, inherit, true, null);
-            }
+            get { return GetValue((Property)key, inherit, true, null); }
         }
 
-        private Object GetValue(Property property, bool inherit, bool returnDefault, Hashtable stylesEncountered)
+        private Object GetValue(
+            Property property,
+            bool inherit,
+            bool returnDefault,
+            Hashtable stylesEncountered
+        )
         {
             //  try to retrieve from internal value
             Object value = State[property.Name];
@@ -397,7 +403,7 @@ namespace System.Web.UI.MobileControls
                     {
                         if (stylesEncountered == null)
                         {
-                            stylesEncountered = new Hashtable(); 
+                            stylesEncountered = new Hashtable();
                         }
 
                         if (stylesEncountered.ContainsKey(style))
@@ -408,7 +414,9 @@ namespace System.Web.UI.MobileControls
                             }
                             else
                             {
-                                throw new Exception(SR.GetString(SR.Style_CircularReference, this.Name));
+                                throw new Exception(
+                                    SR.GetString(SR.Style_CircularReference, this.Name)
+                                );
                             }
                         }
                         stylesEncountered[style] = true;
@@ -431,21 +439,23 @@ namespace System.Web.UI.MobileControls
                             }
                             // DeviceSpecific is treated as control at design time, however, we need to get
                             // the styles from devicespecific's parent.
-                            else if (_control.MobilePage != null &&
-                                _control.MobilePage.DesignMode && 
-                                _control.Parent is DeviceSpecific &&
-                                _control.Parent.Parent is MobileControl)
+                            else if (
+                                _control.MobilePage != null
+                                && _control.MobilePage.DesignMode
+                                && _control.Parent is DeviceSpecific
+                                && _control.Parent.Parent is MobileControl
+                            )
                             {
                                 parentStyle = ((MobileControl)_control.Parent.Parent).Style;
                             }
-                            else if(!(_control is Form))
+                            else if (!(_control is Form))
                             {
                                 Control _tempControl = _control.Parent;
-                                while(!(_tempControl is MobileControl) && (_tempControl != null))
+                                while (!(_tempControl is MobileControl) && (_tempControl != null))
                                 {
                                     _tempControl = _tempControl.Parent;
                                 }
-                                if(_tempControl != null)
+                                if (_tempControl != null)
                                 {
                                     parentStyle = ((MobileControl)_tempControl).Style;
                                 }
@@ -504,7 +514,7 @@ namespace System.Web.UI.MobileControls
         // FontSize and FontName internal
         // we still need these methods on style due to their inheritance and
         // persistence behavior, they're referenced from FontInfo.cs.
-        // 
+        //
 
 
         [
@@ -513,62 +523,29 @@ namespace System.Web.UI.MobileControls
         ]
         internal String FontName
         {
-            get
-            {
-                return (String)this[FontNameKey];
-            }
-            set
-            {
-                this[FontNameKey] = value;
-            }
+            get { return (String)this[FontNameKey]; }
+            set { this[FontNameKey] = value; }
         }
 
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal BooleanOption Bold
         {
-            get
-            {
-                return (BooleanOption)this[BoldKey];
-            }
-            set
-            {
-                this[BoldKey] = value;
-            }
+            get { return (BooleanOption)this[BoldKey]; }
+            set { this[BoldKey] = value; }
         }
 
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal BooleanOption Italic
         {
-            get
-            {
-                return (BooleanOption)this[ItalicKey];
-            }
-            set
-            {
-                this[ItalicKey] = value;
-            }
+            get { return (BooleanOption)this[ItalicKey]; }
+            set { this[ItalicKey] = value; }
         }
 
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal FontSize FontSize
         {
-            get
-            {
-                return (FontSize)this[FontSizeKey];
-            }
-            set
-            {
-                this[FontSizeKey] = value;
-            }
+            get { return (FontSize)this[FontSizeKey]; }
+            set { this[FontSizeKey] = value; }
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.Alignment"]/*' />
@@ -581,14 +558,8 @@ namespace System.Web.UI.MobileControls
         ]
         public Alignment Alignment
         {
-            get
-            {
-                return (Alignment)this[AlignmentKey];
-            }
-            set
-            {
-                this[AlignmentKey] = value;
-            }
+            get { return (Alignment)this[AlignmentKey]; }
+            set { this[AlignmentKey] = value; }
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.Wrapping"]/*' />
@@ -601,14 +572,8 @@ namespace System.Web.UI.MobileControls
         ]
         public Wrapping Wrapping
         {
-            get
-            {
-                return (Wrapping)this[WrappingKey];
-            }
-            set
-            {
-                this[WrappingKey] = value;
-            }
+            get { return (Wrapping)this[WrappingKey]; }
+            set { this[WrappingKey] = value; }
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.ForeColor"]/*' />
@@ -622,14 +587,8 @@ namespace System.Web.UI.MobileControls
         ]
         public Color ForeColor
         {
-            get
-            {
-                return (Color)this[ForeColorKey];
-            }
-            set
-            {
-                this[ForeColorKey] = value;
-            }
+            get { return (Color)this[ForeColorKey]; }
+            set { this[ForeColorKey] = value; }
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.BackColor"]/*' />
@@ -643,14 +602,8 @@ namespace System.Web.UI.MobileControls
         ]
         public Color BackColor
         {
-            get
-            {
-                return (Color)this[BackColorKey];
-            }
-            set
-            {
-                this[BackColorKey] = value;
-            }
+            get { return (Color)this[BackColorKey]; }
+            set { this[BackColorKey] = value; }
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -666,8 +619,7 @@ namespace System.Web.UI.MobileControls
             {
                 if (DeviceSpecific != null)
                 {
-                    throw new Exception(
-                        SR.GetString(SR.MobileControl_NoMultipleDeviceSpecifics));
+                    throw new Exception(SR.GetString(SR.MobileControl_NoMultipleDeviceSpecifics));
                 }
                 DeviceSpecific = (DeviceSpecific)o;
 
@@ -675,22 +627,16 @@ namespace System.Web.UI.MobileControls
                 // method is called, that Control has not yet been
                 // set.  Thus, we set the DeviceSpecific's parent
                 // control when the Control itself is set.  If Control
-                // != null here, then we won't get that opportunity. 
+                // != null here, then we won't get that opportunity.
                 Debug.Assert(Control == null);
             }
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.IsTemplated"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsTemplated
         {
-            get
-            {
-                return IsTemplatedInternal(null);
-            }
+            get { return IsTemplatedInternal(null); }
         }
 
         internal bool IsTemplatedInternal(Hashtable stylesEncountered)
@@ -708,7 +654,7 @@ namespace System.Web.UI.MobileControls
 
             if (stylesEncountered == null)
             {
-                stylesEncountered = new Hashtable(); 
+                stylesEncountered = new Hashtable();
             }
             if (stylesEncountered.ContainsKey(referredStyle))
             {
@@ -737,7 +683,7 @@ namespace System.Web.UI.MobileControls
             ITemplate t = null;
             if (_deviceSpecific != null)
             {
-                t = (ITemplate)_deviceSpecific.GetTemplate (templateName);
+                t = (ITemplate)_deviceSpecific.GetTemplate(templateName);
             }
 
             Style referredStyle = ReferredStyle;
@@ -746,7 +692,7 @@ namespace System.Web.UI.MobileControls
                 // Check for cyclical style references.
                 if (stylesEncountered == null)
                 {
-                    stylesEncountered = new Hashtable ();
+                    stylesEncountered = new Hashtable();
                 }
                 if (stylesEncountered.ContainsKey(referredStyle))
                 {
@@ -761,7 +707,7 @@ namespace System.Web.UI.MobileControls
                 }
 
                 // No cycle detected.
-                stylesEncountered[referredStyle] = true;                
+                stylesEncountered[referredStyle] = true;
                 t = referredStyle.GetTemplateInternal(templateName, stylesEncountered);
             }
 
@@ -770,16 +716,10 @@ namespace System.Web.UI.MobileControls
 
         // Design-time only property
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.DeviceSpecific"]/*' />
-        [
-            Browsable(false),
-            PersistenceMode(PersistenceMode.InnerProperty)
-        ]
+        [Browsable(false), PersistenceMode(PersistenceMode.InnerProperty)]
         public DeviceSpecific DeviceSpecific
         {
-            get
-            {
-                return _deviceSpecific;
-            }
+            get { return _deviceSpecific; }
             set
             {
                 _deviceSpecific = value;
@@ -792,7 +732,12 @@ namespace System.Web.UI.MobileControls
 
         //  registers a new type of style and returns the KEY for accessing it
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.RegisterStyle"]/*' />
-        public static Object RegisterStyle(String name, Type type, Object defaultValue, bool inherit)
+        public static Object RegisterStyle(
+            String name,
+            Type type,
+            Object defaultValue,
+            bool inherit
+        )
         {
             return new Property(name, type, defaultValue, inherit);
         }
@@ -800,9 +745,9 @@ namespace System.Web.UI.MobileControls
         class Property
         {
             public String Name;
-            public Type   Type;
+            public Type Type;
             public Object DefaultValue;
-            public bool   Inherit;        // can be inherited from parent?
+            public bool Inherit; // can be inherited from parent?
 
             public Property(String name, Type type, Object defaultValue, bool inherit)
             {
@@ -815,30 +760,33 @@ namespace System.Web.UI.MobileControls
 
         #region Implementation of IStateManager
         /// <internalonly/>
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return IsTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
         }
 
         /// <internalonly/>
-        void IStateManager.LoadViewState(object state) {
+        void IStateManager.LoadViewState(object state)
+        {
             LoadViewState(state);
         }
 
         /// <internalonly/>
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             TrackViewState();
         }
 
         /// <internalonly/>
-        object IStateManager.SaveViewState() {
+        object IStateManager.SaveViewState()
+        {
             return SaveViewState();
         }
         #endregion
 
         #region IParserAccessor implementation
-        void IParserAccessor.AddParsedSubObject(Object o) {
+        void IParserAccessor.AddParsedSubObject(Object o)
+        {
             AddParsedSubObject(o);
         }
         #endregion

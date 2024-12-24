@@ -9,6 +9,6 @@ namespace System.DirectoryServices.AccountManagement
     internal enum CredentialTypes
     {
         Password = 1,
-        Certificate = 2
+        Certificate = 2,
     }
 }

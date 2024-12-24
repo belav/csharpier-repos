@@ -21,17 +21,34 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_CodeMethodReferenceExpression_ParamsCodeExpression_TestData()
         {
             yield return new object[] { null, new CodeExpression[0] };
-            yield return new object[] { new CodeMethodReferenceExpression(), new CodeExpression[0] };
-            yield return new object[] { new CodeMethodReferenceExpression(new CodePrimitiveExpression("Value"), "Length"), new CodeExpression[] { new CodePrimitiveExpression("Value") } };
+            yield return new object[]
+            {
+                new CodeMethodReferenceExpression(),
+                new CodeExpression[0],
+            };
+            yield return new object[]
+            {
+                new CodeMethodReferenceExpression(new CodePrimitiveExpression("Value"), "Length"),
+                new CodeExpression[] { new CodePrimitiveExpression("Value") },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeMethodReferenceExpression_ParamsCodeExpression_TestData))]
-        public void Ctor_Method_Parameters(CodeMethodReferenceExpression method, CodeExpression[] parameters)
+        public void Ctor_Method_Parameters(
+            CodeMethodReferenceExpression method,
+            CodeExpression[] parameters
+        )
         {
             var methodInvoke = new CodeMethodInvokeExpression(method, parameters);
-            Assert.Equal((method ?? new CodeMethodReferenceExpression()).TargetObject, methodInvoke.Method.TargetObject);
-            Assert.Equal((method ?? new CodeMethodReferenceExpression()).MethodName, methodInvoke.Method.MethodName);
+            Assert.Equal(
+                (method ?? new CodeMethodReferenceExpression()).TargetObject,
+                methodInvoke.Method.TargetObject
+            );
+            Assert.Equal(
+                (method ?? new CodeMethodReferenceExpression()).MethodName,
+                methodInvoke.Method.MethodName
+            );
             Assert.Equal(parameters, methodInvoke.Parameters.Cast<CodeExpression>());
         }
 
@@ -39,12 +56,21 @@ namespace System.CodeDom.Tests
         {
             yield return new object[] { null, null, new CodeExpression[0] };
             yield return new object[] { new CodeExpression(), "", new CodeExpression[0] };
-            yield return new object[] { new CodePrimitiveExpression("Value"), "Length", new CodeExpression[] { new CodePrimitiveExpression("Value") } };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value"),
+                "Length",
+                new CodeExpression[] { new CodePrimitiveExpression("Value") },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeExpression_String_ParamsCodeExpression_TestData))]
-        public void Ctor_TargetObject_MethodName_Parameters(CodeExpression targetObject, string methodName, CodeExpression[] parameters)
+        public void Ctor_TargetObject_MethodName_Parameters(
+            CodeExpression targetObject,
+            string methodName,
+            CodeExpression[] parameters
+        )
         {
             var methodInvoke = new CodeMethodInvokeExpression(targetObject, methodName, parameters);
             Assert.Equal(targetObject, methodInvoke.Method.TargetObject);
@@ -55,21 +81,31 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullParameters_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(), null)
+            );
         }
 
         [Fact]
         public void Ctor_NullObjectInParameters_ThrowsArgumentNullException()
         {
             CodeExpression[] parameters = new CodeExpression[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(), parameters));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                    new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(), parameters)
+            );
         }
 
         public static IEnumerable<object[]> CodeMethodReferenceExpression_TestData()
         {
             yield return new object[] { null };
             yield return new object[] { new CodeMethodReferenceExpression() };
-            yield return new object[] { new CodeMethodReferenceExpression(new CodePrimitiveExpression("Value"), "Length") };
+            yield return new object[]
+            {
+                new CodeMethodReferenceExpression(new CodePrimitiveExpression("Value"), "Length"),
+            };
         }
 
         [Theory]
@@ -89,11 +125,17 @@ namespace System.CodeDom.Tests
 
             CodeExpression expression1 = new CodePrimitiveExpression("Value1");
             methodInvoke.Parameters.Add(expression1);
-            Assert.Equal(new CodeExpression[] { expression1 }, methodInvoke.Parameters.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1 },
+                methodInvoke.Parameters.Cast<CodeExpression>()
+            );
 
             CodeExpression expression2 = new CodePrimitiveExpression("Value2");
             methodInvoke.Parameters.Add(expression2);
-            Assert.Equal(new CodeExpression[] { expression1, expression2 }, methodInvoke.Parameters.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1, expression2 },
+                methodInvoke.Parameters.Cast<CodeExpression>()
+            );
         }
     }
 }

@@ -18,9 +18,7 @@ namespace System.Data
         internal abstract Type ElementType { get; }
         internal abstract DataTable? Table { get; }
 
-        internal EnumerableRowCollection()
-        {
-        }
+        internal EnumerableRowCollection() { }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -44,34 +42,28 @@ namespace System.Data
 
         internal override Type ElementType
         {
-            get
-            {
-                return typeof(TRow);
-            }
-
+            get { return typeof(TRow); }
         }
 
         internal IEnumerable<TRow> EnumerableRows
         {
-            get
-            {
-                return _enumerableRows;
-            }
+            get { return _enumerableRows; }
         }
 
         internal override DataTable? Table
         {
-            get
-            {
-                return _table;
-            }
+            get { return _table; }
         }
 
         /// <summary>
         /// This constructor is used when Select operator is called with output Type other than input row Type.
         /// Basically fail on GetLDV(), but other LINQ operators must work.
         /// </summary>
-        internal EnumerableRowCollection(IEnumerable<TRow> enumerableRows, bool isDataViewable, DataTable? table)
+        internal EnumerableRowCollection(
+            IEnumerable<TRow> enumerableRows,
+            bool isDataViewable,
+            DataTable? table
+        )
         {
             Debug.Assert(!isDataViewable || table != null, "isDataViewable bug table is null");
 
@@ -99,7 +91,11 @@ namespace System.Data
         /// Copy Constructor that sets the input IEnumerable as enumerableRows
         /// Used to maintain IEnumerable that has linq operators executed in the same order as the user
         /// </summary>
-        internal EnumerableRowCollection(EnumerableRowCollection<TRow>? source, IEnumerable<TRow> enumerableRows, Func<TRow, TRow>? selector)
+        internal EnumerableRowCollection(
+            EnumerableRowCollection<TRow>? source,
+            IEnumerable<TRow> enumerableRows,
+            Func<TRow, TRow>? selector
+        )
         {
             Debug.Assert(null != enumerableRows, "null enumerableRows");
 
@@ -159,50 +155,47 @@ namespace System.Data
                 // Hook up all individual predicates into one predicate
                 // This lambda is a conjunction of multiple predicates set by the user
                 // Note: This is a Short-Circuit Conjunction
-                finalPredicate =
-                    (DataRow row) =>
+                finalPredicate = (DataRow row) =>
+                {
+                    if (!object.ReferenceEquals(row, _selector((TRow)(object)row)))
                     {
-                        if (!object.ReferenceEquals(row, _selector((TRow)(object)row)))
-                        {
-                            throw DataSetUtil.NotSupported(SR.ToLDVUnsupported);
-                        }
+                        throw DataSetUtil.NotSupported(SR.ToLDVUnsupported);
+                    }
 
-                        foreach (Func<TRow, bool> pred in _listOfPredicates)
+                    foreach (Func<TRow, bool> pred in _listOfPredicates)
+                    {
+                        if (!pred((TRow)(object)row))
                         {
-                            if (!pred((TRow)(object)row))
-                            {
-                                return false;
-                            }
+                            return false;
                         }
-                        return true;
-                    };
+                    }
+                    return true;
+                };
             }
             else if (null != _selector)
             {
-                finalPredicate =
-                    (DataRow row) =>
+                finalPredicate = (DataRow row) =>
+                {
+                    if (!object.ReferenceEquals(row, _selector((TRow)(object)row)))
                     {
-                        if (!object.ReferenceEquals(row, _selector((TRow)(object)row)))
-                        {
-                            throw DataSetUtil.NotSupported(SR.ToLDVUnsupported);
-                        }
-                        return true;
-                    };
+                        throw DataSetUtil.NotSupported(SR.ToLDVUnsupported);
+                    }
+                    return true;
+                };
             }
             else if (0 < _listOfPredicates.Count)
             {
-                finalPredicate =
-                    (DataRow row) =>
+                finalPredicate = (DataRow row) =>
+                {
+                    foreach (Func<TRow, bool> pred in _listOfPredicates)
                     {
-                        foreach (Func<TRow, bool> pred in _listOfPredicates)
+                        if (!pred((TRow)(object)row))
                         {
-                            if (!pred((TRow)(object)row))
-                            {
-                                return false;
-                            }
+                            return false;
                         }
-                        return true;
-                    };
+                    }
+                    return true;
+                };
             }
             #endregion BuildSinglePredicate
 
@@ -224,43 +217,50 @@ namespace System.Data
                 // is outside of the constructor.
 
                 view = new LinqDataView(
-                               _table,
-                               row => finalPredicate(row),          // System.Predicate
-                               (DataRow a, DataRow b) =>            // Comparison for DV for Index creation
-                                   _sortExpression.Compare(
-                                       _sortExpression.Select((TRow)(object)a),
-                                       _sortExpression.Select((TRow)(object)b)),
-                               (object key, DataRow row) =>         // Comparison_K_T for DV's Find()
-                                   _sortExpression.Compare(
-                                       (List<object>)key,
-                                       _sortExpression.Select((TRow)(object)row)),
-                                _sortExpression.CloneCast<DataRow>());
+                    _table,
+                    row => finalPredicate(row), // System.Predicate
+                    (DataRow a, DataRow b) => // Comparison for DV for Index creation
+                        _sortExpression.Compare(
+                            _sortExpression.Select((TRow)(object)a),
+                            _sortExpression.Select((TRow)(object)b)
+                        ),
+                    (object key, DataRow row) => // Comparison_K_T for DV's Find()
+                        _sortExpression.Compare(
+                            (List<object>)key,
+                            _sortExpression.Select((TRow)(object)row)
+                        ),
+                    _sortExpression.CloneCast<DataRow>()
+                );
             }
             else if (null != finalPredicate)
             {
                 // Only Filtering
                 view = new LinqDataView(
-                                    _table,
-                                    row => finalPredicate(row),     // System.Predicate
-                                    null,
-                                    null,
-                                    _sortExpression.CloneCast<DataRow>());
+                    _table,
+                    row => finalPredicate(row), // System.Predicate
+                    null,
+                    null,
+                    _sortExpression.CloneCast<DataRow>()
+                );
             }
             else if (0 < _sortExpression.Count)
             {
                 // Only Sorting
                 view = new LinqDataView(
-                            _table,
-                            null,
-                            (DataRow a, DataRow b) =>
-                                _sortExpression.Compare(
-                                    _sortExpression.Select((TRow)(object)a),
-                                    _sortExpression.Select((TRow)(object)b)),
-                            (object key, DataRow row) =>
-                                _sortExpression.Compare(
-                                    (List<object>)key,
-                                    _sortExpression.Select((TRow)(object)row)),
-                            _sortExpression.CloneCast<DataRow>());
+                    _table,
+                    null,
+                    (DataRow a, DataRow b) =>
+                        _sortExpression.Compare(
+                            _sortExpression.Select((TRow)(object)a),
+                            _sortExpression.Select((TRow)(object)b)
+                        ),
+                    (object key, DataRow row) =>
+                        _sortExpression.Compare(
+                            (List<object>)key,
+                            _sortExpression.Select((TRow)(object)row)
+                        ),
+                    _sortExpression.CloneCast<DataRow>()
+                );
             }
             else
             {
@@ -284,7 +284,11 @@ namespace System.Data
         /// <summary>
         /// Adds a sort expression when Keyselector is provided but not Comparer
         /// </summary>
-        internal void AddSortExpression<TKey>(Func<TRow, TKey> keySelector, bool isDescending, bool isOrderBy)
+        internal void AddSortExpression<TKey>(
+            Func<TRow, TKey> keySelector,
+            bool isDescending,
+            bool isOrderBy
+        )
         {
             AddSortExpression<TKey>(keySelector, Comparer<TKey>.Default, isDescending, isOrderBy);
         }
@@ -292,21 +296,27 @@ namespace System.Data
         /// <summary>
         /// Adds a sort expression when Keyselector and Comparer are provided.
         /// </summary>
-        internal void AddSortExpression<TKey>(Func<TRow, TKey> keySelector, IComparer<TKey> comparer, bool isDescending, bool isOrderBy)
+        internal void AddSortExpression<TKey>(
+            Func<TRow, TKey> keySelector,
+            IComparer<TKey> comparer,
+            bool isDescending,
+            bool isOrderBy
+        )
         {
             DataSetUtil.CheckArgumentNull(keySelector, nameof(keySelector));
             DataSetUtil.CheckArgumentNull(comparer, nameof(comparer));
 
             _sortExpression.Add(
-                    delegate (TRow input)
-                    {
-                        return keySelector(input)!;
-                    },
-                    delegate (object val1, object val2)
-                    {
-                        return (isDescending ? -1 : 1) * comparer.Compare((TKey)val1, (TKey)val2);
-                    },
-                      isOrderBy);
+                delegate(TRow input)
+                {
+                    return keySelector(input)!;
+                },
+                delegate(object val1, object val2)
+                {
+                    return (isDescending ? -1 : 1) * comparer.Compare((TKey)val1, (TKey)val2);
+                },
+                isOrderBy
+            );
         }
     }
 }

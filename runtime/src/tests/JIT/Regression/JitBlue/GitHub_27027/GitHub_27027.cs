@@ -21,7 +21,8 @@ public class Test_GitHub_27027
         // Test that the correct exception is thrown from Run.
         // The bug was that the exceptions were reordered and DivideByZeroException
         // was thrown instead of NullReferenceException.
-        try {
+        try
+        {
             Run(null, 0);
         }
         catch (System.NullReferenceException)
@@ -31,11 +32,11 @@ public class Test_GitHub_27027
 
         return -1;
     }
- 
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int Run(Test_GitHub_27027 test, int j)
     {
-        int k = test.s.i + 1/j;
+        int k = test.s.i + 1 / j;
         return k;
     }
 }

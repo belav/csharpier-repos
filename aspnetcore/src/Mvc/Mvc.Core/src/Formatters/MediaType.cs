@@ -24,18 +24,14 @@ public readonly struct MediaType
     /// </summary>
     /// <param name="mediaType">The <see cref="string"/> with the media type.</param>
     public MediaType(string mediaType)
-        : this(mediaType, 0, mediaType.Length)
-    {
-    }
+        : this(mediaType, 0, mediaType.Length) { }
 
     /// <summary>
     /// Initializes a <see cref="MediaType"/> instance.
     /// </summary>
     /// <param name="mediaType">The <see cref="StringSegment"/> with the media type.</param>
     public MediaType(StringSegment mediaType)
-        : this(mediaType.Buffer ?? string.Empty, mediaType.Offset, mediaType.Length)
-    {
-    }
+        : this(mediaType.Buffer ?? string.Empty, mediaType.Offset, mediaType.Length) { }
 
     /// <summary>
     /// Initializes a <see cref="MediaTypeParameterParser"/> instance.
@@ -61,7 +57,9 @@ public readonly struct MediaType
 
             if (offset > mediaType.Length - length)
             {
-                throw new ArgumentException(Resources.FormatArgument_InvalidOffsetLength(nameof(offset), nameof(length)));
+                throw new ArgumentException(
+                    Resources.FormatArgument_InvalidOffsetLength(nameof(offset), nameof(length))
+                );
             }
         }
 
@@ -128,7 +126,8 @@ public readonly struct MediaType
     /// <example>
     /// For the media type <c>"application/vnd.example+json"</c>, this property is <c>false</c>.
     /// </example>
-    public bool MatchesAllSubTypesWithoutSuffix => _mediaTypeHeaderValue.MatchesAllSubTypesWithoutSuffix;
+    public bool MatchesAllSubTypesWithoutSuffix =>
+        _mediaTypeHeaderValue.MatchesAllSubTypesWithoutSuffix;
 
     /// <summary>
     /// Gets the <see cref="System.Text.Encoding"/> of the <see cref="MediaType"/> if it has one.
@@ -156,8 +155,8 @@ public readonly struct MediaType
     /// <returns>
     /// <c>true</c> if this <see cref="MediaType"/> is a subset of <paramref name="set"/>; otherwise <c>false</c>.
     /// </returns>
-    public bool IsSubsetOf(MediaType set)
-        => _mediaTypeHeaderValue.IsSubsetOf(set._mediaTypeHeaderValue);
+    public bool IsSubsetOf(MediaType set) =>
+        _mediaTypeHeaderValue.IsSubsetOf(set._mediaTypeHeaderValue);
 
     /// <summary>
     /// Gets the parameter <paramref name="parameterName"/> of the media type.
@@ -167,8 +166,8 @@ public readonly struct MediaType
     /// The <see cref="StringSegment"/>for the given <paramref name="parameterName"/> if found; otherwise
     /// <c>null</c>.
     /// </returns>
-    public StringSegment GetParameter(string parameterName)
-        => _mediaTypeHeaderValue.GetParameter(parameterName);
+    public StringSegment GetParameter(string parameterName) =>
+        _mediaTypeHeaderValue.GetParameter(parameterName);
 
     /// <summary>
     /// Gets the parameter <paramref name="parameterName"/> of the media type.
@@ -178,8 +177,8 @@ public readonly struct MediaType
     /// The <see cref="StringSegment"/>for the given <paramref name="parameterName"/> if found; otherwise
     /// <c>null</c>.
     /// </returns>
-    public StringSegment GetParameter(StringSegment parameterName)
-        => _mediaTypeHeaderValue.GetParameter(parameterName);
+    public StringSegment GetParameter(StringSegment parameterName) =>
+        _mediaTypeHeaderValue.GetParameter(parameterName);
 
     /// <summary>
     /// Replaces the encoding of the given <paramref name="mediaType"/> with the provided
@@ -207,7 +206,9 @@ public readonly struct MediaType
         var parsedMediaType = new MediaType(mediaType);
         var charset = parsedMediaType.GetParameter("charset");
 
-        if (charset.HasValue && charset.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase))
+        if (
+            charset.HasValue && charset.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase)
+        )
         {
             return mediaType.Value ?? string.Empty;
         }
@@ -222,7 +223,12 @@ public readonly struct MediaType
         var restLength = mediaType.Length - restOffset;
         var finalLength = charsetOffset + encoding.WebName.Length + restLength;
 
-        var builder = new StringBuilder(mediaType.Buffer, mediaType.Offset, charsetOffset, finalLength);
+        var builder = new StringBuilder(
+            mediaType.Buffer,
+            mediaType.Offset,
+            charsetOffset,
+            finalLength
+        );
         builder.Append(encoding.WebName);
         builder.Append(mediaType.Buffer, restOffset, restLength);
 
@@ -257,14 +263,19 @@ public readonly struct MediaType
     /// <param name="mediaType">The media type to parse.</param>
     /// <param name="start">The position at which the parsing starts.</param>
     /// <returns>The parsed media type with its associated quality.</returns>
-    public static MediaTypeSegmentWithQuality CreateMediaTypeSegmentWithQuality(string mediaType, int start)
+    public static MediaTypeSegmentWithQuality CreateMediaTypeSegmentWithQuality(
+        string mediaType,
+        int start
+    )
     {
         var parsedMediaType = new ReadOnlyMediaTypeHeaderValue(mediaType, start, length: null);
 
         // Short-circuit use of the MediaTypeParameterParser if constructor detected an invalid type or subtype.
         // Parser would set ParsingFailed==true in this case. But, we handle invalid parameters as a separate case.
-        if (parsedMediaType.Type.Equals(default(StringSegment)) ||
-            parsedMediaType.SubType.Equals(default(StringSegment)))
+        if (
+            parsedMediaType.Type.Equals(default(StringSegment))
+            || parsedMediaType.SubType.Equals(default(StringSegment))
+        )
         {
             return default(MediaTypeSegmentWithQuality);
         }
@@ -278,8 +289,10 @@ public readonly struct MediaType
             {
                 // If media type contains two `q` values i.e. it's invalid in an uncommon way, pick last value.
                 quality = double.Parse(
-                    parameter.Value.AsSpan(), NumberStyles.AllowDecimalPoint,
-                    NumberFormatInfo.InvariantInfo);
+                    parameter.Value.AsSpan(),
+                    NumberStyles.AllowDecimalPoint,
+                    NumberFormatInfo.InvariantInfo
+                );
             }
         }
 
@@ -292,7 +305,8 @@ public readonly struct MediaType
 
         return new MediaTypeSegmentWithQuality(
             new StringSegment(mediaType, start, parser.CurrentOffset - start),
-            quality);
+            quality
+        );
     }
 
     private static string CreateMediaTypeWithEncoding(StringSegment mediaType, Encoding encoding)
@@ -338,7 +352,11 @@ public readonly struct MediaType
             return true;
         }
 
-        private static int GetParameterLength(string input, int startIndex, out MediaTypeParameter parsedValue)
+        private static int GetParameterLength(
+            string input,
+            int startIndex,
+            out MediaTypeParameter parsedValue
+        )
         {
             if (OffsetIsOutOfRange(startIndex, input.Length) || input[startIndex] != ';')
             {
@@ -350,7 +368,11 @@ public readonly struct MediaType
 
             var current = startIndex + nameLength;
 
-            if (nameLength == 0 || OffsetIsOutOfRange(current, input.Length) || input[current] != '=')
+            if (
+                nameLength == 0
+                || OffsetIsOutOfRange(current, input.Length)
+                || input[current] != '='
+            )
             {
                 if (current == input.Length && name.Equals("*", StringComparison.OrdinalIgnoreCase))
                 {
@@ -461,7 +483,8 @@ public readonly struct MediaType
 
         public bool Equals(MediaTypeParameter other)
         {
-            return HasName(other.Name) && Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase);
+            return HasName(other.Name)
+                && Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase);
         }
 
         public override string ToString() => $"{Name}={Value}";

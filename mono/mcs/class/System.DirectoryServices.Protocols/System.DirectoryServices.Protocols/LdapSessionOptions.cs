@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,56 +32,57 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class LdapSessionOptions
-	{
-		internal LdapSessionOptions ()
-		{
-		}
+    public class LdapSessionOptions
+    {
+        internal LdapSessionOptions() { }
 
-		public bool AutoReconnect { get; set; }
-		public string DomainName { get; set; }
-		public string HostName { get; set; }
-		[MonoTODO]
-		public bool HostReachable { get; private set; }
-		public LocatorFlags LocatorFlag { get; set; }
-		public TimeSpan PingKeepAliveTimeout { get; set; }
-		public int PingLimit { get; set; }
-		public TimeSpan PingWaitTimeout { get; set; }
-		public int ProtocolVersion { get; set; }
-		public QueryClientCertificateCallback QueryClientCertificate { get; set; }
-		public ReferralCallback ReferralCallback { get; set; }
-		public ReferralChasingOptions ReferralChasing { get; set; }
-		public int ReferralHopLimit { get; set; }
-		public bool RootDseCache { get; set; }
-		public string SaslMethod { get; set; }
-		public bool Sealing { get; set; }
-		public bool SecureSocketLayer { get; set; }
-		[MonoTODO]
-		public object SecurityContext { get; private set;}
-		public TimeSpan SendTimeout { get; set; }
-		public bool Signing { get; set; }
-		[MonoTODO]
-		public SecurityPackageContextConnectionInformation SslInformation { get; private set; }
-		public int SspiFlag { get; set; }
-		public bool TcpKeepAlive { get; set; }
-		public VerifyServerCertificateCallback VerifyServerCertificate { get; set; }
+        public bool AutoReconnect { get; set; }
+        public string DomainName { get; set; }
+        public string HostName { get; set; }
 
-		[MonoTODO]
-		public void FastConcurrentBind ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool HostReachable { get; private set; }
+        public LocatorFlags LocatorFlag { get; set; }
+        public TimeSpan PingKeepAliveTimeout { get; set; }
+        public int PingLimit { get; set; }
+        public TimeSpan PingWaitTimeout { get; set; }
+        public int ProtocolVersion { get; set; }
+        public QueryClientCertificateCallback QueryClientCertificate { get; set; }
+        public ReferralCallback ReferralCallback { get; set; }
+        public ReferralChasingOptions ReferralChasing { get; set; }
+        public int ReferralHopLimit { get; set; }
+        public bool RootDseCache { get; set; }
+        public string SaslMethod { get; set; }
+        public bool Sealing { get; set; }
+        public bool SecureSocketLayer { get; set; }
 
-		[MonoTODO]
-		public void StartTransportLayerSecurity (DirectoryControlCollection controls)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public object SecurityContext { get; private set; }
+        public TimeSpan SendTimeout { get; set; }
+        public bool Signing { get; set; }
 
-		[MonoTODO]
-		public void StopTransportLayerSecurity ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public SecurityPackageContextConnectionInformation SslInformation { get; private set; }
+        public int SspiFlag { get; set; }
+        public bool TcpKeepAlive { get; set; }
+        public VerifyServerCertificateCallback VerifyServerCertificate { get; set; }
+
+        [MonoTODO]
+        public void FastConcurrentBind()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void StartTransportLayerSecurity(DirectoryControlCollection controls)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void StopTransportLayerSecurity()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

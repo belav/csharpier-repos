@@ -30,118 +30,120 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	public class EntityTagHeaderValue : ICloneable
-	{
-		static readonly EntityTagHeaderValue any = new EntityTagHeaderValue () { Tag = "*" };
+    public class EntityTagHeaderValue : ICloneable
+    {
+        static readonly EntityTagHeaderValue any = new EntityTagHeaderValue() { Tag = "*" };
 
-		public EntityTagHeaderValue (string tag)
-		{
-			Parser.Token.CheckQuotedString (tag);
-			Tag = tag;
-		}
+        public EntityTagHeaderValue(string tag)
+        {
+            Parser.Token.CheckQuotedString(tag);
+            Tag = tag;
+        }
 
-		public EntityTagHeaderValue (string tag, bool isWeak)
-			: this (tag)
-		{
-			IsWeak = isWeak;
-		}
+        public EntityTagHeaderValue(string tag, bool isWeak)
+            : this(tag)
+        {
+            IsWeak = isWeak;
+        }
 
-		internal EntityTagHeaderValue ()
-		{
-		}
+        internal EntityTagHeaderValue() { }
 
-		public static EntityTagHeaderValue Any {
-			get {
-				return any;
-			}
-		}
+        public static EntityTagHeaderValue Any
+        {
+            get { return any; }
+        }
 
-		public bool IsWeak { get; internal set; }
-		public string Tag { get; internal set; }
+        public bool IsWeak { get; internal set; }
+        public string Tag { get; internal set; }
 
-		object ICloneable.Clone ()
-		{
-			return MemberwiseClone ();
-		}
+        object ICloneable.Clone()
+        {
+            return MemberwiseClone();
+        }
 
-		public override bool Equals (object obj)
-		{
-			var source = obj as EntityTagHeaderValue;
-			return source != null && source.Tag == Tag &&
-				string.Equals (source.Tag, Tag, StringComparison.Ordinal);
-		}
+        public override bool Equals(object obj)
+        {
+            var source = obj as EntityTagHeaderValue;
+            return source != null
+                && source.Tag == Tag
+                && string.Equals(source.Tag, Tag, StringComparison.Ordinal);
+        }
 
-		public override int GetHashCode ()
-		{
-			return IsWeak.GetHashCode () ^ Tag.GetHashCode ();
-		}
+        public override int GetHashCode()
+        {
+            return IsWeak.GetHashCode() ^ Tag.GetHashCode();
+        }
 
-		public static EntityTagHeaderValue Parse (string input)
-		{
-			EntityTagHeaderValue value;
-			if (TryParse (input, out value))
-				return value;
+        public static EntityTagHeaderValue Parse(string input)
+        {
+            EntityTagHeaderValue value;
+            if (TryParse(input, out value))
+                return value;
 
-			throw new FormatException (input);
-		}
+            throw new FormatException(input);
+        }
 
-		public static bool TryParse (string input, out EntityTagHeaderValue parsedValue)
-		{
-			var lexer = new Lexer (input);
-			Token token;
-			if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
-				return true;
+        public static bool TryParse(string input, out EntityTagHeaderValue parsedValue)
+        {
+            var lexer = new Lexer(input);
+            Token token;
+            if (TryParseElement(lexer, out parsedValue, out token) && token == Token.Type.End)
+                return true;
 
-			parsedValue = null;
-			return false;
-		}
+            parsedValue = null;
+            return false;
+        }
 
-		static bool TryParseElement (Lexer lexer, out EntityTagHeaderValue parsedValue, out Token t)
-		{
-			parsedValue = null;
+        static bool TryParseElement(Lexer lexer, out EntityTagHeaderValue parsedValue, out Token t)
+        {
+            parsedValue = null;
 
-			t = lexer.Scan ();
-			bool is_weak = false;
+            t = lexer.Scan();
+            bool is_weak = false;
 
-			if (t == Token.Type.Token) {
-				var s = lexer.GetStringValue (t);
-				if (s == "*") {
-					parsedValue = any;
+            if (t == Token.Type.Token)
+            {
+                var s = lexer.GetStringValue(t);
+                if (s == "*")
+                {
+                    parsedValue = any;
 
-					t = lexer.Scan ();
-					return true;
-				}
+                    t = lexer.Scan();
+                    return true;
+                }
 
-				if (s != "W" || lexer.PeekChar () != '/')
-					return false;
+                if (s != "W" || lexer.PeekChar() != '/')
+                    return false;
 
-				is_weak = true;
-				lexer.EatChar ();
-				t = lexer.Scan ();
-			}
+                is_weak = true;
+                lexer.EatChar();
+                t = lexer.Scan();
+            }
 
-			if (t != Token.Type.QuotedString)
-				return false;
+            if (t != Token.Type.QuotedString)
+                return false;
 
-			parsedValue = new EntityTagHeaderValue ();
-			parsedValue.Tag = lexer.GetStringValue (t);
-			parsedValue.IsWeak = is_weak;
+            parsedValue = new EntityTagHeaderValue();
+            parsedValue.Tag = lexer.GetStringValue(t);
+            parsedValue.IsWeak = is_weak;
 
-			t = lexer.Scan ();
+            t = lexer.Scan();
 
-			return true;
-		}
+            return true;
+        }
 
-		internal static bool TryParse (string input, int minimalCount, out List<EntityTagHeaderValue> result)
-		{
-			return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
-		}
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<EntityTagHeaderValue> result
+        )
+        {
+            return CollectionParser.TryParse(input, minimalCount, TryParseElement, out result);
+        }
 
-		public override string ToString ()
-		{
-			return IsWeak ?
-				"W/" + Tag :
-				Tag;
-		}
-	}
+        public override string ToString()
+        {
+            return IsWeak ? "W/" + Tag : Tag;
+        }
+    }
 }

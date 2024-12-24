@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure;
 public class CorsMiddleware
 {
     // Property key is used by other systems, e.g. MVC, to check if CORS middleware has run
-    private const string CorsMiddlewareWithEndpointInvokedKey = "__CorsMiddlewareWithEndpointInvoked";
+    private const string CorsMiddlewareWithEndpointInvokedKey =
+        "__CorsMiddlewareWithEndpointInvoked";
     private static readonly object CorsMiddlewareWithEndpointInvokedValue = new object();
 
     private readonly Func<object, Task> OnResponseStartingDelegate = OnResponseStarting;
@@ -29,10 +30,9 @@ public class CorsMiddleware
     public CorsMiddleware(
         RequestDelegate next,
         ICorsService corsService,
-        ILoggerFactory loggerFactory)
-        : this(next, corsService, loggerFactory, policyName: null)
-    {
-    }
+        ILoggerFactory loggerFactory
+    )
+        : this(next, corsService, loggerFactory, policyName: null) { }
 
     /// <summary>
     /// Instantiates a new <see cref="CorsMiddleware"/>.
@@ -45,7 +45,8 @@ public class CorsMiddleware
         RequestDelegate next,
         ICorsService corsService,
         ILoggerFactory loggerFactory,
-        string? policyName)
+        string? policyName
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(corsService);
@@ -68,7 +69,8 @@ public class CorsMiddleware
         RequestDelegate next,
         ICorsService corsService,
         CorsPolicy policy,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(corsService);
@@ -101,7 +103,8 @@ public class CorsMiddleware
         {
             // EndpointRoutingMiddleware uses this flag to check if the CORS middleware processed CORS metadata on the endpoint.
             // The CORS middleware can only make this claim if it observes an actual endpoint.
-            context.Items[CorsMiddlewareWithEndpointInvokedKey] = CorsMiddlewareWithEndpointInvokedValue;
+            context.Items[CorsMiddlewareWithEndpointInvokedKey] =
+                CorsMiddlewareWithEndpointInvokedValue;
         }
 
         if (!context.Request.Headers.ContainsKey(CorsConstants.Origin))
@@ -117,7 +120,9 @@ public class CorsMiddleware
         {
             var isOptionsRequest = HttpMethods.IsOptions(context.Request.Method);
 
-            var isCorsPreflightRequest = isOptionsRequest && context.Request.Headers.ContainsKey(CorsConstants.AccessControlRequestMethod);
+            var isCorsPreflightRequest =
+                isOptionsRequest
+                && context.Request.Headers.ContainsKey(CorsConstants.AccessControlRequestMethod);
 
             if (isCorsPreflightRequest)
             {
@@ -136,8 +141,10 @@ public class CorsMiddleware
             policyName = null;
             corsPolicy = corsPolicyMetadata.Policy;
         }
-        else if (corsMetadata is IEnableCorsAttribute enableCorsAttribute &&
-            enableCorsAttribute.PolicyName != null)
+        else if (
+            corsMetadata is IEnableCorsAttribute enableCorsAttribute
+            && enableCorsAttribute.PolicyName != null
+        )
         {
             // If a policy name has been provided on the endpoint metadata then prioritizing it above the static middleware policy
             policyName = enableCorsAttribute.PolicyName;
@@ -185,7 +192,10 @@ public class CorsMiddleware
         }
         else
         {
-            context.Response.OnStarting(OnResponseStartingDelegate, Tuple.Create(this, context, corsResult));
+            context.Response.OnStarting(
+                OnResponseStartingDelegate,
+                Tuple.Create(this, context, corsResult)
+            );
             return _next(context);
         }
     }

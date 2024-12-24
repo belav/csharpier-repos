@@ -18,12 +18,15 @@ public class ChangePassword : DefaultUIPage
 
     public async Task<ChangePassword> ChangePasswordAsync(string oldPassword, string newPassword)
     {
-        await Client.SendAsync(_changePasswordForm, new Dictionary<string, string>
-        {
-            ["Input_OldPassword"] = oldPassword,
-            ["Input_NewPassword"] = newPassword,
-            ["Input_ConfirmPassword"] = newPassword
-        });
+        await Client.SendAsync(
+            _changePasswordForm,
+            new Dictionary<string, string>
+            {
+                ["Input_OldPassword"] = oldPassword,
+                ["Input_NewPassword"] = newPassword,
+                ["Input_ConfirmPassword"] = newPassword,
+            }
+        );
 
         return this;
     }

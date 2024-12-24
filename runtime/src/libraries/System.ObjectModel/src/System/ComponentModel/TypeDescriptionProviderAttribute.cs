@@ -11,7 +11,12 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates a new TypeDescriptionProviderAttribute object.
         /// </summary>
-        public TypeDescriptionProviderAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string typeName)
+        public TypeDescriptionProviderAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string typeName
+        )
         {
             ArgumentNullException.ThrowIfNull(typeName);
 
@@ -21,7 +26,12 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates a new TypeDescriptionProviderAttribute object.
         /// </summary>
-        public TypeDescriptionProviderAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type)
+        public TypeDescriptionProviderAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 

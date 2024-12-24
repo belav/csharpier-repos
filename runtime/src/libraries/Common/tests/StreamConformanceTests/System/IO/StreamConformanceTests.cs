@@ -22,44 +22,59 @@ namespace System.IO.Tests
     {
         /// <summary>Gets the name of the byte[] argument to Read/Write methods.</summary>
         protected virtual string ReadWriteBufferName => "buffer";
+
         /// <summary>Gets the name of the int offset argument to Read/Write methods.</summary>
         protected virtual string ReadWriteOffsetName => "offset";
+
         /// <summary>Gets the name of the int count argument to Read/Write methods.</summary>
         protected virtual string ReadWriteCountName => "count";
+
         /// <summary>Gets the name of the IAsyncResult argument to EndRead/Write methods.</summary>
         protected virtual string ReadWriteAsyncResultName => "asyncResult";
+
         /// <summary>Gets the name of the Stream destination argument to CopyTo{Async}.</summary>
         protected virtual string CopyToStreamName => "destination";
+
         /// <summary>Gets the name of the int bufferSize argument to CopyTo{Async}.</summary>
         protected virtual string CopyToBufferSizeName => "bufferSize";
 
         /// <summary>Gets the type of exception thrown when an invalid IAsyncResult is passed to an EndRead/Write method.</summary>
         protected virtual Type InvalidIAsyncResultExceptionType => typeof(ArgumentException);
+
         /// <summary>Gets the type of exception thrown when a read or write operation is unsupported.</summary>
         protected virtual Type UnsupportedReadWriteExceptionType => typeof(NotSupportedException);
+
         /// <summary>Gets the type of exception thrown when a CopyTo{Async} operation is unsupported.</summary>
         protected virtual Type UnsupportedCopyExceptionType => typeof(NotSupportedException);
+
         /// <summary>Gets the type of exception thrown when setting a Read/WriteTimeout is unsupported.</summary>
         protected virtual Type UnsupportedTimeoutExceptionType => typeof(InvalidOperationException);
+
         /// <summary>
         /// Gets the type of exception thrown when an operation is invoked concurrently erroneously, or null if no exception
         /// is thrown (either because it's fully supported or not supported and non-deterministic).
         /// </summary>
-        protected virtual Type UnsupportedConcurrentExceptionType => typeof(InvalidOperationException);
+        protected virtual Type UnsupportedConcurrentExceptionType =>
+            typeof(InvalidOperationException);
 
         /// <summary>Gets whether the stream is expected to be seekable.</summary>
         protected virtual bool CanSeek => false;
+
         /// <summary>Gets whether the stream is expected to support timeouts.</summary>
         protected virtual bool CanTimeout => false;
+
         /// <summary>Gets whether it's expected for the Position property to be usable even if CanSeek is false.</summary>
         protected virtual bool CanGetPositionWhenCanSeekIsFalse => false;
+
         /// <summary>Gets whether read/write operations fully support cancellation.</summary>
         protected virtual bool FullyCancelableOperations => true;
+
         /// <summary>Gets whether a read operation will always try to fill the full buffer provided.</summary>
         protected virtual bool ReadsReadUntilSizeOrEof => true;
 
         /// <summary>Gets whether the stream's CanRead/Write/etc properties are expected to return false once the stream is disposed.</summary>
         protected virtual bool CansReturnFalseAfterDispose => true;
+
         /// <summary>Gets whether the Stream may be used for additional operations after a read is canceled.</summary>
         protected virtual bool UsableAfterCanceledReads => true;
         protected virtual bool CanSetLength => CanSeek;
@@ -70,18 +85,24 @@ namespace System.IO.Tests
         {
             /// <summary>ReadByte / WriteByte</summary>
             SyncByte,
+
             /// <summary>Read(Span{byte}) / Write(ReadOnlySpan{byte})</summary>
             SyncSpan,
+
             /// <summary>Read(byte[], int, int) / Write(byte[], int, int)</summary>
             SyncArray,
+
             /// <summary>ReadAsync(byte[], int, int) / WriteAsync(byte[], int, int)</summary>
             AsyncArray,
+
             /// <summary>ReadAsync(Memory{byte}) / WriteAsync(ReadOnlyMemory{byte})</summary>
             AsyncMemory,
+
             /// <summary>EndRead(BeginRead(..., null, null)) / EndWrite(BeginWrite(..., null, null))</summary>
             SyncAPM,
+
             /// <summary>Task.Factory.FromAsync(s.BeginRead, s.EndRead, ...) / Task.Factory.FromAsync(s.BeginWrite, s.EndWrite, ...)</summary>
-            AsyncAPM
+            AsyncAPM,
         }
 
         public static IEnumerable<object[]> AllReadWriteModes() =>
@@ -97,10 +118,13 @@ namespace System.IO.Tests
         {
             /// <summary>Stream.Position = pos;</summary>
             Position,
+
             /// <summary>Stream.Seek(pos, SeekOrigin.Begin)</summary>
             SeekFromBeginning,
+
             /// <summary>Stream.Seek(pos - stream.Position, SeekOrigin.Current)</summary>
             SeekFromCurrent,
+
             /// <summary>Stream.Seek(pos - stream.Length, SeekOrigin.End)</summary>
             SeekFromEnd,
         }
@@ -109,7 +133,14 @@ namespace System.IO.Tests
             from mode in Enum.GetValues<SeekMode>()
             select new object[] { mode };
 
-        public static async Task<int> ReadAsync(ReadWriteMode mode, Stream stream, byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)
+        public static async Task<int> ReadAsync(
+            ReadWriteMode mode,
+            Stream stream,
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken = default
+        )
         {
             if (mode == ReadWriteMode.SyncByte)
             {
@@ -130,15 +161,39 @@ namespace System.IO.Tests
             {
                 ReadWriteMode.SyncArray => stream.Read(buffer, offset, count),
                 ReadWriteMode.SyncSpan => stream.Read(buffer.AsSpan(offset, count)),
-                ReadWriteMode.AsyncArray => await stream.ReadAsync(buffer, offset, count, cancellationToken),
-                ReadWriteMode.AsyncMemory => await stream.ReadAsync(buffer.AsMemory(offset, count), cancellationToken),
-                ReadWriteMode.SyncAPM => stream.EndRead(stream.BeginRead(buffer, offset, count, null, null)),
-                ReadWriteMode.AsyncAPM => await Task.Factory.FromAsync(stream.BeginRead, stream.EndRead, buffer, offset, count, null),
+                ReadWriteMode.AsyncArray => await stream.ReadAsync(
+                    buffer,
+                    offset,
+                    count,
+                    cancellationToken
+                ),
+                ReadWriteMode.AsyncMemory => await stream.ReadAsync(
+                    buffer.AsMemory(offset, count),
+                    cancellationToken
+                ),
+                ReadWriteMode.SyncAPM => stream.EndRead(
+                    stream.BeginRead(buffer, offset, count, null, null)
+                ),
+                ReadWriteMode.AsyncAPM => await Task.Factory.FromAsync(
+                    stream.BeginRead,
+                    stream.EndRead,
+                    buffer,
+                    offset,
+                    count,
+                    null
+                ),
                 _ => throw new Exception($"Unknown mode: {mode}"),
             };
         }
 
-        protected async Task<int> ReadAllAsync(ReadWriteMode mode, Stream stream, byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)
+        protected async Task<int> ReadAllAsync(
+            ReadWriteMode mode,
+            Stream stream,
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken = default
+        )
         {
             int bytesRead = 0;
             if (ReadsReadUntilSizeOrEof && mode != ReadWriteMode.SyncByte)
@@ -149,7 +204,13 @@ namespace System.IO.Tests
             {
                 while (bytesRead < buffer.Length)
                 {
-                    int n = await ReadAsync(mode, stream, buffer, offset + bytesRead, count - bytesRead);
+                    int n = await ReadAsync(
+                        mode,
+                        stream,
+                        buffer,
+                        offset + bytesRead,
+                        count - bytesRead
+                    );
                     if (n == 0)
                     {
                         break;
@@ -162,7 +223,14 @@ namespace System.IO.Tests
             return bytesRead;
         }
 
-        protected async Task WriteAsync(ReadWriteMode mode, Stream stream, byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)
+        protected async Task WriteAsync(
+            ReadWriteMode mode,
+            Stream stream,
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken = default
+        )
         {
             switch (mode)
             {
@@ -194,7 +262,14 @@ namespace System.IO.Tests
                     break;
 
                 case ReadWriteMode.AsyncAPM:
-                    await Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite, buffer, offset, count, null);
+                    await Task.Factory.FromAsync(
+                        stream.BeginWrite,
+                        stream.EndWrite,
+                        buffer,
+                        offset,
+                        count,
+                        null
+                    );
                     break;
 
                 default:
@@ -202,7 +277,11 @@ namespace System.IO.Tests
             }
         }
 
-        protected async Task FlushAsync(ReadWriteMode mode, Stream stream, CancellationToken cancellationToken = default)
+        protected async Task FlushAsync(
+            ReadWriteMode mode,
+            Stream stream,
+            CancellationToken cancellationToken = default
+        )
         {
             switch (mode)
             {
@@ -263,78 +342,328 @@ namespace System.IO.Tests
                 // Null arguments
                 foreach ((int offset, int count) in new[] { (0, 0), (1, 2) }) // validate 0, 0 isn't special-cased to be allowed with a null buffer
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteBufferName, () => { stream.Read(null!, offset, count); });
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteBufferName, () => { stream.ReadAsync(null!, offset, count); });
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteBufferName, () => { stream.ReadAsync(null!, offset, count, default); });
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteBufferName, () => { stream.EndRead(stream.BeginRead(null!, offset, count, iar => { }, new object())); });
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteAsyncResultName, () => { stream.EndRead(null!); });
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteBufferName,
+                        () =>
+                        {
+                            stream.Read(null!, offset, count);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteBufferName,
+                        () =>
+                        {
+                            stream.ReadAsync(null!, offset, count);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteBufferName,
+                        () =>
+                        {
+                            stream.ReadAsync(null!, offset, count, default);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteBufferName,
+                        () =>
+                        {
+                            stream.EndRead(
+                                stream.BeginRead(null!, offset, count, iar => { }, new object())
+                            );
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteAsyncResultName,
+                        () =>
+                        {
+                            stream.EndRead(null!);
+                        }
+                    );
                 }
 
                 // Invalid offset
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteOffsetName, () => { stream.Read(oneByteBuffer, -1, 0); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteOffsetName, () => { stream.ReadAsync(oneByteBuffer, -1, 0); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteOffsetName, () => { stream.ReadAsync(oneByteBuffer, -1, 0, default); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteOffsetName, () => { stream.EndRead(stream.BeginRead(oneByteBuffer, -1, 0, iar => { }, new object())); });
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    ReadWriteOffsetName,
+                    () =>
+                    {
+                        stream.Read(oneByteBuffer, -1, 0);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    ReadWriteOffsetName,
+                    () =>
+                    {
+                        stream.ReadAsync(oneByteBuffer, -1, 0);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    ReadWriteOffsetName,
+                    () =>
+                    {
+                        stream.ReadAsync(oneByteBuffer, -1, 0, default);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    ReadWriteOffsetName,
+                    () =>
+                    {
+                        stream.EndRead(
+                            stream.BeginRead(oneByteBuffer, -1, 0, iar => { }, new object())
+                        );
+                    }
+                );
 
                 // Invalid count
                 foreach (int count in new[] { -1, 2 })
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.Read(oneByteBuffer, 0, count); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.ReadAsync(oneByteBuffer, 0, count); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.ReadAsync(oneByteBuffer, 0, count, default); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.EndRead(stream.BeginRead(oneByteBuffer, 0, count, iar => { }, new object())); });
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.Read(oneByteBuffer, 0, count);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.ReadAsync(oneByteBuffer, 0, count);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.ReadAsync(oneByteBuffer, 0, count, default);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.EndRead(
+                                stream.BeginRead(oneByteBuffer, 0, count, iar => { }, new object())
+                            );
+                        }
+                    );
                 }
 
                 // Invalid offset + count
-                foreach ((int invalidOffset, int invalidCount) in new[] { (1, 1), (2, 0), (int.MaxValue, int.MaxValue) })
+                foreach (
+                    (int invalidOffset, int invalidCount) in new[]
+                    {
+                        (1, 1),
+                        (2, 0),
+                        (int.MaxValue, int.MaxValue),
+                    }
+                )
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.Read(oneByteBuffer, invalidOffset, invalidCount); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.ReadAsync(oneByteBuffer, invalidOffset, invalidCount); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.ReadAsync(oneByteBuffer, invalidOffset, invalidCount, default); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.EndRead(stream.BeginRead(oneByteBuffer, invalidOffset, invalidCount, iar => { }, new object())); });
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.Read(oneByteBuffer, invalidOffset, invalidCount);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.ReadAsync(oneByteBuffer, invalidOffset, invalidCount);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.ReadAsync(oneByteBuffer, invalidOffset, invalidCount, default);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.EndRead(
+                                stream.BeginRead(
+                                    oneByteBuffer,
+                                    invalidOffset,
+                                    invalidCount,
+                                    iar => { },
+                                    new object()
+                                )
+                            );
+                        }
+                    );
                 }
 
                 // Unknown arguments
-                Assert.Throws(InvalidIAsyncResultExceptionType, () => stream.EndRead(new NotImplementedIAsyncResult()));
+                Assert.Throws(
+                    InvalidIAsyncResultExceptionType,
+                    () => stream.EndRead(new NotImplementedIAsyncResult())
+                );
 
                 // Invalid destination stream
-                AssertExtensions.Throws<ArgumentNullException>(CopyToStreamName, () => { stream.CopyTo(null!); });
-                AssertExtensions.Throws<ArgumentNullException>(CopyToStreamName, () => { stream.CopyTo(null!, 1); });
-                AssertExtensions.Throws<ArgumentNullException>(CopyToStreamName, () => { stream.CopyToAsync(null!, default(CancellationToken)); });
-                AssertExtensions.Throws<ArgumentNullException>(CopyToStreamName, () => { stream.CopyToAsync(null!, 1); });
-                AssertExtensions.Throws<ArgumentNullException>(CopyToStreamName, () => { stream.CopyToAsync(null!, 1, default(CancellationToken)); });
+                AssertExtensions.Throws<ArgumentNullException>(
+                    CopyToStreamName,
+                    () =>
+                    {
+                        stream.CopyTo(null!);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    CopyToStreamName,
+                    () =>
+                    {
+                        stream.CopyTo(null!, 1);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    CopyToStreamName,
+                    () =>
+                    {
+                        stream.CopyToAsync(null!, default(CancellationToken));
+                    }
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    CopyToStreamName,
+                    () =>
+                    {
+                        stream.CopyToAsync(null!, 1);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    CopyToStreamName,
+                    () =>
+                    {
+                        stream.CopyToAsync(null!, 1, default(CancellationToken));
+                    }
+                );
 
                 // Invalid buffer size
                 var validDestinationStream = new MemoryStream();
                 foreach (int invalidBufferSize in new[] { 0, -1 })
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(CopyToBufferSizeName, () => { stream.CopyTo(validDestinationStream, invalidBufferSize); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(CopyToBufferSizeName, () => { stream.CopyToAsync(validDestinationStream, invalidBufferSize); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(CopyToBufferSizeName, () => { stream.CopyToAsync(validDestinationStream, invalidBufferSize, default(CancellationToken)); });
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        CopyToBufferSizeName,
+                        () =>
+                        {
+                            stream.CopyTo(validDestinationStream, invalidBufferSize);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        CopyToBufferSizeName,
+                        () =>
+                        {
+                            stream.CopyToAsync(validDestinationStream, invalidBufferSize);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        CopyToBufferSizeName,
+                        () =>
+                        {
+                            stream.CopyToAsync(
+                                validDestinationStream,
+                                invalidBufferSize,
+                                default(CancellationToken)
+                            );
+                        }
+                    );
                 }
 
                 // Unwriteable destination stream
                 var unwriteableDestination = new MemoryStream(new byte[1], writable: false);
-                Assert.Throws(UnsupportedCopyExceptionType, () => { stream.CopyTo(unwriteableDestination); });
-                Assert.Throws(UnsupportedCopyExceptionType, () => { stream.CopyToAsync(unwriteableDestination); });
+                Assert.Throws(
+                    UnsupportedCopyExceptionType,
+                    () =>
+                    {
+                        stream.CopyTo(unwriteableDestination);
+                    }
+                );
+                Assert.Throws(
+                    UnsupportedCopyExceptionType,
+                    () =>
+                    {
+                        stream.CopyToAsync(unwriteableDestination);
+                    }
+                );
 
                 // Disposed destination stream
                 var disposedDestination = new MemoryStream(new byte[1]);
                 disposedDestination.Dispose();
-                Assert.Throws<ObjectDisposedException>(() => { stream.CopyTo(disposedDestination); });
-                Assert.Throws<ObjectDisposedException>(() => { stream.CopyToAsync(disposedDestination); });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    stream.CopyTo(disposedDestination);
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    stream.CopyToAsync(disposedDestination);
+                });
             }
             else
             {
-                Assert.Throws(UnsupportedReadWriteExceptionType, () => { stream.ReadByte(); });
-                Assert.Throws(UnsupportedReadWriteExceptionType, () => { stream.Read(new Span<byte>(new byte[1])); });
-                Assert.Throws(UnsupportedReadWriteExceptionType, () => { stream.Read(new byte[1], 0, 1); });
-                await Assert.ThrowsAsync(UnsupportedReadWriteExceptionType, () => stream.ReadAsync(new byte[1], 0, 1));
-                await Assert.ThrowsAsync(UnsupportedReadWriteExceptionType, async () => await stream.ReadAsync(new Memory<byte>(new byte[1])));
-                await Assert.ThrowsAsync(UnsupportedReadWriteExceptionType, () => Task.Factory.FromAsync(stream.BeginRead, stream.EndRead, new byte[1], 0, 1, null));
-                Assert.True(Record.Exception(() => stream.EndRead(new NotImplementedIAsyncResult())) is Exception e && (e.GetType() == UnsupportedReadWriteExceptionType || e.GetType() == InvalidIAsyncResultExceptionType));
-                Assert.Throws(UnsupportedCopyExceptionType, () => { stream.CopyTo(new MemoryStream()); });
-                Assert.Throws(UnsupportedCopyExceptionType, () => { stream.CopyToAsync(new MemoryStream()); });
+                Assert.Throws(
+                    UnsupportedReadWriteExceptionType,
+                    () =>
+                    {
+                        stream.ReadByte();
+                    }
+                );
+                Assert.Throws(
+                    UnsupportedReadWriteExceptionType,
+                    () =>
+                    {
+                        stream.Read(new Span<byte>(new byte[1]));
+                    }
+                );
+                Assert.Throws(
+                    UnsupportedReadWriteExceptionType,
+                    () =>
+                    {
+                        stream.Read(new byte[1], 0, 1);
+                    }
+                );
+                await Assert.ThrowsAsync(
+                    UnsupportedReadWriteExceptionType,
+                    () => stream.ReadAsync(new byte[1], 0, 1)
+                );
+                await Assert.ThrowsAsync(
+                    UnsupportedReadWriteExceptionType,
+                    async () => await stream.ReadAsync(new Memory<byte>(new byte[1]))
+                );
+                await Assert.ThrowsAsync(
+                    UnsupportedReadWriteExceptionType,
+                    () =>
+                        Task.Factory.FromAsync(
+                            stream.BeginRead,
+                            stream.EndRead,
+                            new byte[1],
+                            0,
+                            1,
+                            null
+                        )
+                );
+                Assert.True(
+                    Record.Exception(() => stream.EndRead(new NotImplementedIAsyncResult()))
+                        is Exception e
+                        && (
+                            e.GetType() == UnsupportedReadWriteExceptionType
+                            || e.GetType() == InvalidIAsyncResultExceptionType
+                        )
+                );
+                Assert.Throws(
+                    UnsupportedCopyExceptionType,
+                    () =>
+                    {
+                        stream.CopyTo(new MemoryStream());
+                    }
+                );
+                Assert.Throws(
+                    UnsupportedCopyExceptionType,
+                    () =>
+                    {
+                        stream.CopyToAsync(new MemoryStream());
+                    }
+                );
             }
 
             if (stream.CanWrite)
@@ -342,68 +671,251 @@ namespace System.IO.Tests
                 // Null arguments
                 foreach ((int offset, int count) in new[] { (0, 0), (1, 2) }) // validate 0, 0 isn't special-cased to be allowed with a null buffer
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteBufferName, () => { stream.Write(null!, offset, count); });
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteBufferName, () => { stream.WriteAsync(null!, offset, count); });
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteBufferName, () => { stream.WriteAsync(null!, offset, count, default); });
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteBufferName, () => { stream.EndWrite(stream.BeginWrite(null!, offset, count, iar => { }, new object())); });
-                    AssertExtensions.Throws<ArgumentNullException>(ReadWriteAsyncResultName, () => { stream.EndWrite(null!); });
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteBufferName,
+                        () =>
+                        {
+                            stream.Write(null!, offset, count);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteBufferName,
+                        () =>
+                        {
+                            stream.WriteAsync(null!, offset, count);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteBufferName,
+                        () =>
+                        {
+                            stream.WriteAsync(null!, offset, count, default);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteBufferName,
+                        () =>
+                        {
+                            stream.EndWrite(
+                                stream.BeginWrite(null!, offset, count, iar => { }, new object())
+                            );
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        ReadWriteAsyncResultName,
+                        () =>
+                        {
+                            stream.EndWrite(null!);
+                        }
+                    );
                 }
 
                 // Invalid offset
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteOffsetName, () => { stream.Write(oneByteBuffer, -1, 0); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteOffsetName, () => { stream.WriteAsync(oneByteBuffer, -1, 0); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteOffsetName, () => { stream.WriteAsync(oneByteBuffer, -1, 0, default); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteOffsetName, () => { stream.EndWrite(stream.BeginWrite(oneByteBuffer, -1, 0, iar => { }, new object())); });
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    ReadWriteOffsetName,
+                    () =>
+                    {
+                        stream.Write(oneByteBuffer, -1, 0);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    ReadWriteOffsetName,
+                    () =>
+                    {
+                        stream.WriteAsync(oneByteBuffer, -1, 0);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    ReadWriteOffsetName,
+                    () =>
+                    {
+                        stream.WriteAsync(oneByteBuffer, -1, 0, default);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    ReadWriteOffsetName,
+                    () =>
+                    {
+                        stream.EndWrite(
+                            stream.BeginWrite(oneByteBuffer, -1, 0, iar => { }, new object())
+                        );
+                    }
+                );
 
                 // Invalid count
                 foreach (int count in new[] { -1, 2 })
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.Write(oneByteBuffer, 0, count); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.WriteAsync(oneByteBuffer, 0, count); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.WriteAsync(oneByteBuffer, 0, count, default); });
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(ReadWriteCountName, () => { stream.EndWrite(stream.BeginWrite(oneByteBuffer, 0, count, iar => { }, new object())); });
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.Write(oneByteBuffer, 0, count);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.WriteAsync(oneByteBuffer, 0, count);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.WriteAsync(oneByteBuffer, 0, count, default);
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        ReadWriteCountName,
+                        () =>
+                        {
+                            stream.EndWrite(
+                                stream.BeginWrite(oneByteBuffer, 0, count, iar => { }, new object())
+                            );
+                        }
+                    );
                 }
 
                 // Invalid offset + count
-                foreach ((int invalidOffset, int invalidCount) in new[] { (1, 1), (2, 0), (int.MaxValue, int.MaxValue) })
+                foreach (
+                    (int invalidOffset, int invalidCount) in new[]
+                    {
+                        (1, 1),
+                        (2, 0),
+                        (int.MaxValue, int.MaxValue),
+                    }
+                )
                 {
-                    Assert.ThrowsAny<ArgumentException>(() => { stream.Write(oneByteBuffer, invalidOffset, invalidCount); });
-                    Assert.ThrowsAny<ArgumentException>(() => { stream.WriteAsync(oneByteBuffer, invalidOffset, invalidCount); });
-                    Assert.ThrowsAny<ArgumentException>(() => { stream.WriteAsync(oneByteBuffer, invalidOffset, invalidCount, default); });
-                    Assert.ThrowsAny<ArgumentException>(() => { stream.EndWrite(stream.BeginWrite(oneByteBuffer, invalidOffset, invalidCount, iar => { }, new object())); });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.Write(oneByteBuffer, invalidOffset, invalidCount);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.WriteAsync(oneByteBuffer, invalidOffset, invalidCount);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.WriteAsync(oneByteBuffer, invalidOffset, invalidCount, default);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.EndWrite(
+                            stream.BeginWrite(
+                                oneByteBuffer,
+                                invalidOffset,
+                                invalidCount,
+                                iar => { },
+                                new object()
+                            )
+                        );
+                    });
                 }
 
                 // Unknown arguments
-                Assert.Throws(InvalidIAsyncResultExceptionType, () => stream.EndWrite(new NotImplementedIAsyncResult()));
+                Assert.Throws(
+                    InvalidIAsyncResultExceptionType,
+                    () => stream.EndWrite(new NotImplementedIAsyncResult())
+                );
             }
             else
             {
-                Assert.Throws(UnsupportedReadWriteExceptionType, () => { stream.WriteByte(1); });
-                Assert.Throws(UnsupportedReadWriteExceptionType, () => { stream.Write(new Span<byte>(new byte[1])); });
-                Assert.Throws(UnsupportedReadWriteExceptionType, () => { stream.Write(new byte[1], 0, 1); });
-                await Assert.ThrowsAsync(UnsupportedReadWriteExceptionType, () => stream.WriteAsync(new byte[1], 0, 1));
-                await Assert.ThrowsAsync(UnsupportedReadWriteExceptionType, async () => await stream.WriteAsync(new Memory<byte>(new byte[1])));
-                await Assert.ThrowsAsync(UnsupportedReadWriteExceptionType, () => Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite, new byte[1], 0, 1, null));
-                Assert.True(Record.Exception(() => stream.EndWrite(new NotImplementedIAsyncResult())) is Exception e && (e.GetType() == UnsupportedReadWriteExceptionType || e.GetType() == InvalidIAsyncResultExceptionType));
+                Assert.Throws(
+                    UnsupportedReadWriteExceptionType,
+                    () =>
+                    {
+                        stream.WriteByte(1);
+                    }
+                );
+                Assert.Throws(
+                    UnsupportedReadWriteExceptionType,
+                    () =>
+                    {
+                        stream.Write(new Span<byte>(new byte[1]));
+                    }
+                );
+                Assert.Throws(
+                    UnsupportedReadWriteExceptionType,
+                    () =>
+                    {
+                        stream.Write(new byte[1], 0, 1);
+                    }
+                );
+                await Assert.ThrowsAsync(
+                    UnsupportedReadWriteExceptionType,
+                    () => stream.WriteAsync(new byte[1], 0, 1)
+                );
+                await Assert.ThrowsAsync(
+                    UnsupportedReadWriteExceptionType,
+                    async () => await stream.WriteAsync(new Memory<byte>(new byte[1]))
+                );
+                await Assert.ThrowsAsync(
+                    UnsupportedReadWriteExceptionType,
+                    () =>
+                        Task.Factory.FromAsync(
+                            stream.BeginWrite,
+                            stream.EndWrite,
+                            new byte[1],
+                            0,
+                            1,
+                            null
+                        )
+                );
+                Assert.True(
+                    Record.Exception(() => stream.EndWrite(new NotImplementedIAsyncResult()))
+                        is Exception e
+                        && (
+                            e.GetType() == UnsupportedReadWriteExceptionType
+                            || e.GetType() == InvalidIAsyncResultExceptionType
+                        )
+                );
             }
 
             Assert.Equal(CanSeek, stream.CanSeek);
             if (stream.CanSeek)
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => { stream.Position = -1; });
-                Assert.Throws<IOException>(() => { stream.Seek(-1, SeekOrigin.Begin); });
-                Assert.Throws<IOException>(() => { stream.Seek(-stream.Position - 1, SeekOrigin.Current); });
-                Assert.Throws<IOException>(() => { stream.Seek(-stream.Length - 1, SeekOrigin.End); });
-                Assert.ThrowsAny<ArgumentException>(() => { stream.Seek(0, (SeekOrigin)(-1)); });
-                Assert.ThrowsAny<ArgumentException>(() => { stream.Seek(0, (SeekOrigin)3); });
-                Assert.ThrowsAny<ArgumentException>(() => { stream.Seek(0, ~SeekOrigin.Begin); });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    stream.Position = -1;
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    stream.Seek(-1, SeekOrigin.Begin);
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    stream.Seek(-stream.Position - 1, SeekOrigin.Current);
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    stream.Seek(-stream.Length - 1, SeekOrigin.End);
+                });
+                Assert.ThrowsAny<ArgumentException>(() =>
+                {
+                    stream.Seek(0, (SeekOrigin)(-1));
+                });
+                Assert.ThrowsAny<ArgumentException>(() =>
+                {
+                    stream.Seek(0, (SeekOrigin)3);
+                });
+                Assert.ThrowsAny<ArgumentException>(() =>
+                {
+                    stream.Seek(0, ~SeekOrigin.Begin);
+                });
                 if (CanSetLength)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() => { stream.SetLength(-1); });
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    {
+                        stream.SetLength(-1);
+                    });
                 }
                 else
                 {
-                    Assert.Throws<NotSupportedException>(() => { stream.SetLength(0); });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        stream.SetLength(0);
+                    });
                 }
             }
             else
@@ -413,9 +925,18 @@ namespace System.IO.Tests
                 {
                     Assert.Throws<NotSupportedException>(() => stream.Position);
                 }
-                Assert.Throws<NotSupportedException>(() => { stream.Position = 0; });
-                Assert.Throws<NotSupportedException>(() => { stream.SetLength(1); });
-                Assert.Throws<NotSupportedException>(() => { stream.Seek(0, SeekOrigin.Begin); });
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    stream.Position = 0;
+                });
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    stream.SetLength(1);
+                });
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                });
             }
 
             Assert.Equal(CanTimeout, stream.CanTimeout);
@@ -443,24 +964,55 @@ namespace System.IO.Tests
             stream.DisposeAsync().AsTask().GetAwaiter().GetResult();
             stream.Close();
 
-            AssertDisposed(() => { stream.ReadByte(); });
-            AssertDisposed(() => { stream.Read(new Span<byte>(new byte[1])); });
-            AssertDisposed(() => { stream.Read(new byte[1], 0, 1); });
+            AssertDisposed(() =>
+            {
+                stream.ReadByte();
+            });
+            AssertDisposed(() =>
+            {
+                stream.Read(new Span<byte>(new byte[1]));
+            });
+            AssertDisposed(() =>
+            {
+                stream.Read(new byte[1], 0, 1);
+            });
             await AssertDisposedAsync(async () => await stream.ReadAsync(new byte[1], 0, 1));
-            await AssertDisposedAsync(async () => await stream.ReadAsync(new Memory<byte>(new byte[1])));
-            AssertDisposed(() => { stream.EndRead(stream.BeginRead(new byte[1], 0, 1, null, null)); });
+            await AssertDisposedAsync(
+                async () => await stream.ReadAsync(new Memory<byte>(new byte[1]))
+            );
+            AssertDisposed(() =>
+            {
+                stream.EndRead(stream.BeginRead(new byte[1], 0, 1, null, null));
+            });
 
-            AssertDisposed(() => { stream.WriteByte(1); });
-            AssertDisposed(() => { stream.Write(new Span<byte>(new byte[1])); });
-            AssertDisposed(() => { stream.Write(new byte[1], 0, 1); });
+            AssertDisposed(() =>
+            {
+                stream.WriteByte(1);
+            });
+            AssertDisposed(() =>
+            {
+                stream.Write(new Span<byte>(new byte[1]));
+            });
+            AssertDisposed(() =>
+            {
+                stream.Write(new byte[1], 0, 1);
+            });
             await AssertDisposedAsync(async () => await stream.WriteAsync(new byte[1], 0, 1));
-            await AssertDisposedAsync(async () => await stream.WriteAsync(new Memory<byte>(new byte[1])));
-            AssertDisposed(() => { stream.EndWrite(stream.BeginWrite(new byte[1], 0, 1, null, null)); });
+            await AssertDisposedAsync(
+                async () => await stream.WriteAsync(new Memory<byte>(new byte[1]))
+            );
+            AssertDisposed(() =>
+            {
+                stream.EndWrite(stream.BeginWrite(new byte[1], 0, 1, null, null));
+            });
 
             AssertDisposed(() => stream.Flush(), successAllowed: true);
             await AssertDisposedAsync(() => stream.FlushAsync(), successAllowed: true);
 
-            AssertDisposed(() => { stream.CopyTo(new MemoryStream()); });
+            AssertDisposed(() =>
+            {
+                stream.CopyTo(new MemoryStream());
+            });
             await AssertDisposedAsync(async () => await stream.CopyToAsync(new MemoryStream()));
 
             AssertDisposed(() => _ = stream.Length);
@@ -474,48 +1026,80 @@ namespace System.IO.Tests
             AssertDisposed(() => _ = stream.WriteTimeout);
             AssertDisposed(() => stream.WriteTimeout = 1);
 
-            void AssertDisposed(Action action, bool successAllowed = false) => ValidateDisposedException(Record.Exception(action), successAllowed);
+            void AssertDisposed(Action action, bool successAllowed = false) =>
+                ValidateDisposedException(Record.Exception(action), successAllowed);
 
-            async Task AssertDisposedAsync(Func<Task> func, bool successAllowed = false) => ValidateDisposedException(await Record.ExceptionAsync(func).ConfigureAwait(false), successAllowed);
+            async Task AssertDisposedAsync(Func<Task> func, bool successAllowed = false) =>
+                ValidateDisposedException(
+                    await Record.ExceptionAsync(func).ConfigureAwait(false),
+                    successAllowed
+                );
 
             void ValidateDisposedException(Exception e, bool successAllowed = false)
             {
                 // Behavior when disposed is inconsistent, and isn't specified by the Stream contract: types aren't supposed to be used
                 // after they're disposed.  So, at least until we decide to be more strict, these tests are very liberal in what they except.
                 Assert.True(
-                    (e is null && successAllowed) ||
-                    e is ObjectDisposedException ||
-                    e is NotSupportedException ||
-                    e is InvalidOperationException,
-                    $"Unexpected: {e?.GetType().ToString() ?? "(null)"}");
+                    (e is null && successAllowed)
+                        || e is ObjectDisposedException
+                        || e is NotSupportedException
+                        || e is InvalidOperationException,
+                    $"Unexpected: {e?.GetType().ToString() ?? "(null)"}"
+                );
             }
         }
 
-        protected async Task ValidatePrecanceledOperations_ThrowsCancellationException(Stream stream)
+        protected async Task ValidatePrecanceledOperations_ThrowsCancellationException(
+            Stream stream
+        )
         {
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
             if (stream.CanRead)
             {
-                await AssertExtensions.CanceledAsync(cts.Token, stream.ReadAsync(new byte[1], 0, 1, cts.Token));
-                await AssertExtensions.CanceledAsync(cts.Token, async () => { await stream.ReadAsync(new Memory<byte>(new byte[1]), cts.Token); });
+                await AssertExtensions.CanceledAsync(
+                    cts.Token,
+                    stream.ReadAsync(new byte[1], 0, 1, cts.Token)
+                );
+                await AssertExtensions.CanceledAsync(
+                    cts.Token,
+                    async () =>
+                    {
+                        await stream.ReadAsync(new Memory<byte>(new byte[1]), cts.Token);
+                    }
+                );
             }
 
             if (stream.CanWrite)
             {
-                await AssertExtensions.CanceledAsync(cts.Token, stream.WriteAsync(new byte[1], 0, 1, cts.Token));
-                await AssertExtensions.CanceledAsync(cts.Token, async () => { await stream.WriteAsync(new ReadOnlyMemory<byte>(new byte[1]), cts.Token); });
+                await AssertExtensions.CanceledAsync(
+                    cts.Token,
+                    stream.WriteAsync(new byte[1], 0, 1, cts.Token)
+                );
+                await AssertExtensions.CanceledAsync(
+                    cts.Token,
+                    async () =>
+                    {
+                        await stream.WriteAsync(new ReadOnlyMemory<byte>(new byte[1]), cts.Token);
+                    }
+                );
             }
 
             Exception e = await Record.ExceptionAsync(() => stream.FlushAsync(cts.Token));
             if (e != null)
             {
-                Assert.Equal(cts.Token, Assert.IsAssignableFrom<OperationCanceledException>(e).CancellationToken);
+                Assert.Equal(
+                    cts.Token,
+                    Assert.IsAssignableFrom<OperationCanceledException>(e).CancellationToken
+                );
             }
         }
 
-        protected async Task ValidateCancelableReadAsyncTask_AfterInvocation_ThrowsCancellationException(Stream stream, int cancellationDelay)
+        protected async Task ValidateCancelableReadAsyncTask_AfterInvocation_ThrowsCancellationException(
+            Stream stream,
+            int cancellationDelay
+        )
         {
             if (!stream.CanRead || !FullyCancelableOperations)
             {
@@ -530,7 +1114,10 @@ namespace System.IO.Tests
             await AssertExtensions.CanceledAsync(cts.Token, t);
         }
 
-        protected async Task ValidateCancelableReadAsyncValueTask_AfterInvocation_ThrowsCancellationException(Stream stream, int cancellationDelay)
+        protected async Task ValidateCancelableReadAsyncValueTask_AfterInvocation_ThrowsCancellationException(
+            Stream stream,
+            int cancellationDelay
+        )
         {
             if (!stream.CanRead || !FullyCancelableOperations)
             {
@@ -577,25 +1164,32 @@ namespace System.IO.Tests
         {
             public override void Post(SendOrPostCallback d, object? state)
             {
-                ThreadPool.QueueUserWorkItem(delegate
-                {
-                    SetSynchronizationContext(this);
-                    try
+                ThreadPool.QueueUserWorkItem(
+                    delegate
                     {
-                        d(state);
-                    }
-                    finally
-                    {
-                        SetSynchronizationContext(null);
-                    }
-                }, null);
+                        SetSynchronizationContext(this);
+                        try
+                        {
+                            d(state);
+                        }
+                        finally
+                        {
+                            SetSynchronizationContext(null);
+                        }
+                    },
+                    null
+                );
             }
         }
 
         protected sealed class CustomTaskScheduler : TaskScheduler
         {
-            protected override void QueueTask(Task task) => ThreadPool.QueueUserWorkItem(_ => TryExecuteTask(task));
-            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) => false;
+            protected override void QueueTask(Task task) =>
+                ThreadPool.QueueUserWorkItem(_ => TryExecuteTask(task));
+
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
+                false;
+
             protected override IEnumerable<Task> GetScheduledTasks() => new Task[0];
         }
 
@@ -608,7 +1202,10 @@ namespace System.IO.Tests
 
             public NativeMemoryManager(int length) => _ptr = Marshal.AllocHGlobal(_length = length);
 
-            ~NativeMemoryManager() => Assert.Fail($"{nameof(NativeMemoryManager)} being finalized. Created at {_ctorStack}");
+            ~NativeMemoryManager() =>
+                Assert.Fail(
+                    $"{nameof(NativeMemoryManager)} being finalized. Created at {_ctorStack}"
+                );
 
             public override Memory<byte> Memory => CreateMemory(_length);
 
@@ -637,6 +1234,7 @@ namespace System.IO.Tests
         protected virtual bool NopFlushCompletesSynchronously => true;
 
         protected abstract Task<Stream?> CreateReadOnlyStreamCore(byte[]? initialData);
+
         protected async Task<Stream?> CreateReadOnlyStream(byte[]? initialData = null)
         {
             Stream? stream = await CreateReadOnlyStreamCore(initialData);
@@ -654,6 +1252,7 @@ namespace System.IO.Tests
         }
 
         protected abstract Task<Stream?> CreateWriteOnlyStreamCore(byte[]? initialData);
+
         protected async Task<Stream?> CreateWriteOnlyStream(byte[]? initialData = null)
         {
             Stream? stream = await CreateWriteOnlyStreamCore(initialData);
@@ -671,6 +1270,7 @@ namespace System.IO.Tests
         }
 
         protected abstract Task<Stream?> CreateReadWriteStreamCore(byte[]? initialData);
+
         protected async Task<Stream?> CreateReadWriteStream(byte[]? initialData = null)
         {
             Stream? stream = await CreateReadWriteStreamCore(initialData);
@@ -810,7 +1410,24 @@ namespace System.IO.Tests
                 return;
             }
 
-            await WriteAsync(mode, stream, new[] { (byte)'a', (byte)'b', (byte)'h', (byte)'e', (byte)'l', (byte)'l', (byte)'o', (byte)'c', (byte)'d' }, 2, 5);
+            await WriteAsync(
+                mode,
+                stream,
+                new[]
+                {
+                    (byte)'a',
+                    (byte)'b',
+                    (byte)'h',
+                    (byte)'e',
+                    (byte)'l',
+                    (byte)'l',
+                    (byte)'o',
+                    (byte)'c',
+                    (byte)'d',
+                },
+                2,
+                5
+            );
             stream.Position = 0;
 
             using StreamReader reader = new StreamReader(stream);
@@ -839,7 +1456,10 @@ namespace System.IO.Tests
         [Theory]
         [MemberData(nameof(AllReadWriteModesAndValue), 1)]
         [MemberData(nameof(AllReadWriteModesAndValue), 256)]
-        public virtual async Task Read_PopulatedWithInitialData_KnownSize_Success(ReadWriteMode mode, int size)
+        public virtual async Task Read_PopulatedWithInitialData_KnownSize_Success(
+            ReadWriteMode mode,
+            int size
+        )
         {
             byte[] expected = RandomNumberGenerator.GetBytes(size);
 
@@ -870,7 +1490,10 @@ namespace System.IO.Tests
         [Theory]
         [MemberData(nameof(AllReadWriteModesAndValue), 1)]
         [MemberData(nameof(AllReadWriteModesAndValue), 4097)]
-        public virtual async Task Read_PopulatedWithInitialData_ToEof_Success(ReadWriteMode mode, int size)
+        public virtual async Task Read_PopulatedWithInitialData_ToEof_Success(
+            ReadWriteMode mode,
+            int size
+        )
         {
             byte[] expected = RandomNumberGenerator.GetBytes(size);
 
@@ -902,7 +1525,9 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(AllReadWriteModes))]
-        public virtual async Task Read_PartiallySatisfied_RemainderOfBufferUntouched(ReadWriteMode mode)
+        public virtual async Task Read_PartiallySatisfied_RemainderOfBufferUntouched(
+            ReadWriteMode mode
+        )
         {
             byte[] expected = RandomNumberGenerator.GetBytes(20);
 
@@ -946,12 +1571,16 @@ namespace System.IO.Tests
             using MemoryManager<byte> memoryManager = new NativeMemoryManager(1024);
             Assert.Equal(1024, memoryManager.Memory.Length);
 
-            int bytesRead = useAsync ?
-                await stream.ReadAsync(memoryManager.Memory) :
-                stream.Read(memoryManager.Memory.Span);
+            int bytesRead = useAsync
+                ? await stream.ReadAsync(memoryManager.Memory)
+                : stream.Read(memoryManager.Memory.Span);
             Assert.InRange(bytesRead, 1, memoryManager.Memory.Length);
 
-            Assert.True(expected.AsSpan(0, bytesRead).SequenceEqual(memoryManager.Memory.Span.Slice(0, bytesRead)));
+            Assert.True(
+                expected
+                    .AsSpan(0, bytesRead)
+                    .SequenceEqual(memoryManager.Memory.Span.Slice(0, bytesRead))
+            );
         }
 
         [Theory]
@@ -981,14 +1610,20 @@ namespace System.IO.Tests
 
             stream.Position = 0;
             byte[] actual = (byte[])expected.Clone();
-            Assert.Equal(actual.Length, await ReadAllAsync(ReadWriteMode.AsyncMemory, stream, actual, 0, actual.Length));
+            Assert.Equal(
+                actual.Length,
+                await ReadAllAsync(ReadWriteMode.AsyncMemory, stream, actual, 0, actual.Length)
+            );
             AssertExtensions.SequenceEqual(expected, actual);
         }
 
         [Theory]
         [MemberData(nameof(CopyTo_CopiesAllDataFromRightPosition_Success_MemberData))]
         public virtual async Task CopyTo_CopiesAllDataFromRightPosition_Success(
-            bool useAsync, byte[] expected, int position)
+            bool useAsync,
+            byte[] expected,
+            int position
+        )
         {
             using Stream? stream = await CreateReadOnlyStream(expected);
             if (stream is null)
@@ -1024,7 +1659,10 @@ namespace System.IO.Tests
                 Assert.Equal(expected.Length, stream.Position);
             }
 
-            AssertExtensions.SequenceEqual(expected.AsSpan(position).ToArray(), destination.ToArray());
+            AssertExtensions.SequenceEqual(
+                expected.AsSpan(position).ToArray(),
+                destination.ToArray()
+            );
         }
 
         public static IEnumerable<object[]> CopyTo_CopiesAllDataFromRightPosition_Success_MemberData()
@@ -1174,7 +1812,9 @@ namespace System.IO.Tests
 
             Assert.True(stream.FlushAsync().IsCompletedSuccessfully);
             Assert.True(stream.FlushAsync(CancellationToken.None).IsCompletedSuccessfully);
-            Assert.True(stream.FlushAsync(new CancellationTokenSource().Token).IsCompletedSuccessfully);
+            Assert.True(
+                stream.FlushAsync(new CancellationTokenSource().Token).IsCompletedSuccessfully
+            );
         }
 
         [Fact]
@@ -1239,12 +1879,18 @@ namespace System.IO.Tests
 
                 // Jump to a random position, seeking either from one of the possible origins
                 SeekOrigin origin = (SeekOrigin)rand.Next(3);
-                long pos = stream.Seek(origin switch
-                {
-                    SeekOrigin.Begin => rand.Next(0, (int)stream.Length - bytesToRead),
-                    SeekOrigin.Current => rand.Next(-(int)stream.Position + bytesToRead, (int)stream.Length - (int)stream.Position - bytesToRead),
-                    _ => -rand.Next(bytesToRead, (int)stream.Length),
-                }, origin);
+                long pos = stream.Seek(
+                    origin switch
+                    {
+                        SeekOrigin.Begin => rand.Next(0, (int)stream.Length - bytesToRead),
+                        SeekOrigin.Current => rand.Next(
+                            -(int)stream.Position + bytesToRead,
+                            (int)stream.Length - (int)stream.Position - bytesToRead
+                        ),
+                        _ => -rand.Next(bytesToRead, (int)stream.Length),
+                    },
+                    origin
+                );
                 Assert.InRange(pos, 0, stream.Length - bytesToRead);
 
                 // Read the requested number of bytes, and verify each is correct
@@ -1503,7 +2149,10 @@ namespace System.IO.Tests
             }
             catch (Exception e)
             {
-                Assert.True(e is IOException || e is ArgumentOutOfRangeException, $"Unexpected exception {e}");
+                Assert.True(
+                    e is IOException || e is ArgumentOutOfRangeException,
+                    $"Unexpected exception {e}"
+                );
                 return;
             }
 
@@ -1561,20 +2210,26 @@ namespace System.IO.Tests
     {
         /// <summary>Gets whether ValueTasks returned from Read/WriteAsync methods are expected to be consumable only once.</summary>
         protected virtual bool ReadWriteValueTasksProtectSingleConsumption => false;
+
         /// <summary>Gets whether writes on a connected stream are expected to fail immediately after a reader is disposed.</summary>
         protected virtual bool BrokenPipePropagatedImmediately => false;
+
         /// <summary>Gets the amount of data a writer is able to buffer before blocking subsequent writes, or -1 if there's no such limit known.</summary>
         protected virtual int BufferedSize => -1;
+
         /// <summary>
         /// Gets whether the stream requires Flush{Async} to be called in order to send written data to the underlying destination.
         /// </summary>
         protected virtual bool FlushRequiredToWriteData => true;
+
         /// <summary>
         /// Gets whether the stream guarantees that all data written to it will be flushed as part of Flush{Async}.
         /// </summary>
         protected virtual bool FlushGuaranteesAllDataWritten => true;
+
         /// <summary>Gets whether reads for a count of 0 bytes block if no bytes are available to read.</summary>
         protected virtual bool BlocksOnZeroByteReads => false;
+
         /// <summary>
         /// Gets whether an otherwise bidirectional stream does not support reading/writing concurrently, e.g. due to a semaphore in the base implementation.
         /// </summary>
@@ -1585,7 +2240,9 @@ namespace System.IO.Tests
         protected (Stream writeable, Stream readable) GetReadWritePair(StreamPair streams) =>
             GetReadWritePairs(streams).First();
 
-        protected IEnumerable<(Stream writeable, Stream readable)> GetReadWritePairs(StreamPair streams)
+        protected IEnumerable<(Stream writeable, Stream readable)> GetReadWritePairs(
+            StreamPair streams
+        )
         {
             var pairs = new List<(Stream, Stream)>(2);
 
@@ -1606,12 +2263,20 @@ namespace System.IO.Tests
         }
 
         protected static bool Bidirectional(StreamPair streams) =>
-            streams.Stream1.CanRead && streams.Stream1.CanWrite &&
-            streams.Stream2.CanRead && streams.Stream2.CanWrite;
+            streams.Stream1.CanRead
+            && streams.Stream1.CanWrite
+            && streams.Stream2.CanRead
+            && streams.Stream2.CanWrite;
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ArgumentValidation_ThrowsExpectedException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -1623,8 +2288,14 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Disposed_ThrowsObjectDisposedException()
         {
             StreamPair streams = await CreateConnectedStreamsAsync();
@@ -1637,8 +2308,14 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ReadWriteAsync_PrecanceledOperations_ThrowsCancellationException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -1652,32 +2329,60 @@ namespace System.IO.Tests
         [Theory]
         [InlineData(0)]
         [InlineData(100)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
-        public virtual async Task ReadAsync_CancelPendingTask_ThrowsCancellationException(int cancellationDelay)
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
+        public virtual async Task ReadAsync_CancelPendingTask_ThrowsCancellationException(
+            int cancellationDelay
+        )
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
 
-            await ValidateCancelableReadAsyncTask_AfterInvocation_ThrowsCancellationException(readable, cancellationDelay);
+            await ValidateCancelableReadAsyncTask_AfterInvocation_ThrowsCancellationException(
+                readable,
+                cancellationDelay
+            );
         }
 
         [Theory]
         [InlineData(0)]
         [InlineData(100)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
-        public virtual async Task ReadAsync_CancelPendingValueTask_ThrowsCancellationException(int cancellationDelay)
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
+        public virtual async Task ReadAsync_CancelPendingValueTask_ThrowsCancellationException(
+            int cancellationDelay
+        )
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
 
-            await ValidateCancelableReadAsyncValueTask_AfterInvocation_ThrowsCancellationException(readable, cancellationDelay);
+            await ValidateCancelableReadAsyncValueTask_AfterInvocation_ThrowsCancellationException(
+                readable,
+                cancellationDelay
+            );
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ReadWriteByte_Success()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -1745,16 +2450,35 @@ namespace System.IO.Tests
         [OuterLoop]
         [Theory]
         [MemberData(nameof(ReadWrite_Success_Large_MemberData))]
-        public virtual async Task ReadWrite_Success_Large(ReadWriteMode mode, int writeSize, bool startWithFlush) =>
-            await ReadWrite_Success(mode, writeSize, startWithFlush);
+        public virtual async Task ReadWrite_Success_Large(
+            ReadWriteMode mode,
+            int writeSize,
+            bool startWithFlush
+        ) => await ReadWrite_Success(mode, writeSize, startWithFlush);
 
         [Theory]
         [MemberData(nameof(ReadWrite_Success_MemberData))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
-        public virtual async Task ReadWrite_Success(ReadWriteMode mode, int writeSize, bool startWithFlush)
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
+        public virtual async Task ReadWrite_Success(
+            ReadWriteMode mode,
+            int writeSize,
+            bool startWithFlush
+        )
         {
-            foreach (CancellationToken nonCanceledToken in new[] { CancellationToken.None, new CancellationTokenSource().Token })
+            foreach (
+                CancellationToken nonCanceledToken in new[]
+                {
+                    CancellationToken.None,
+                    new CancellationTokenSource().Token,
+                }
+            )
             {
                 using StreamPair streams = await CreateConnectedStreamsAsync();
 
@@ -1770,7 +2494,14 @@ namespace System.IO.Tests
 
                     Task writes = Task.Run(async () =>
                     {
-                        await WriteAsync(mode, writeable, writerBytes, 0, writerBytes.Length, nonCanceledToken);
+                        await WriteAsync(
+                            mode,
+                            writeable,
+                            writerBytes,
+                            0,
+                            writerBytes.Length,
+                            nonCanceledToken
+                        );
 
                         if (FlushRequiredToWriteData)
                         {
@@ -1788,7 +2519,14 @@ namespace System.IO.Tests
                     int n = 0;
                     while (n < readerBytes.Length)
                     {
-                        int r = await ReadAsync(mode, readable, readerBytes, n, readerBytes.Length - n).WaitAsync(TimeSpan.FromSeconds(30));
+                        int r = await ReadAsync(
+                                mode,
+                                readable,
+                                readerBytes,
+                                n,
+                                readerBytes.Length - n
+                            )
+                            .WaitAsync(TimeSpan.FromSeconds(30));
                         Assert.InRange(r, 1, readerBytes.Length - n);
                         n += r;
                     }
@@ -1808,16 +2546,30 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(ReadWrite_Modes))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
-        public virtual async Task ReadWrite_MessagesSmallerThanReadBuffer_Success(ReadWriteMode mode)
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
+        public virtual async Task ReadWrite_MessagesSmallerThanReadBuffer_Success(
+            ReadWriteMode mode
+        )
         {
             if (!FlushGuaranteesAllDataWritten)
             {
                 return;
             }
 
-            foreach (CancellationToken nonCanceledToken in new[] { CancellationToken.None, new CancellationTokenSource().Token })
+            foreach (
+                CancellationToken nonCanceledToken in new[]
+                {
+                    CancellationToken.None,
+                    new CancellationTokenSource().Token,
+                }
+            )
             {
                 using StreamPair streams = await CreateConnectedStreamsAsync();
 
@@ -1831,7 +2583,14 @@ namespace System.IO.Tests
                     {
                         Task writes = Task.Run(async () =>
                         {
-                            await WriteAsync(mode, writeable, writerBytes, 0, writerBytes.Length, nonCanceledToken);
+                            await WriteAsync(
+                                mode,
+                                writeable,
+                                writerBytes,
+                                0,
+                                writerBytes.Length,
+                                nonCanceledToken
+                            );
                             if (FlushRequiredToWriteData)
                             {
                                 await writeable.FlushAsync();
@@ -1841,13 +2600,22 @@ namespace System.IO.Tests
                         int n = 0;
                         while (n < writerBytes.Length)
                         {
-                            int r = await ReadAsync(mode, readable, readerBytes, n, readerBytes.Length - n);
+                            int r = await ReadAsync(
+                                mode,
+                                readable,
+                                readerBytes,
+                                n,
+                                readerBytes.Length - n
+                            );
                             Assert.InRange(r, 1, writerBytes.Length - n);
                             n += r;
                         }
 
                         Assert.Equal(writerBytes.Length, n);
-                        AssertExtensions.SequenceEqual(writerBytes, readerBytes.AsSpan(0, writerBytes.Length));
+                        AssertExtensions.SequenceEqual(
+                            writerBytes,
+                            readerBytes.AsSpan(0, writerBytes.Length)
+                        );
 
                         await writes;
                     }
@@ -1858,8 +2626,14 @@ namespace System.IO.Tests
         [Theory]
         [MemberData(nameof(AllReadWriteModesAndValue), false)]
         [MemberData(nameof(AllReadWriteModesAndValue), true)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Read_Eof_Returns0(ReadWriteMode mode, bool dataAvailableFirst)
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -1898,8 +2672,14 @@ namespace System.IO.Tests
         [InlineData(ReadWriteMode.SyncArray)]
         [InlineData(ReadWriteMode.AsyncArray)]
         [InlineData(ReadWriteMode.AsyncAPM)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Read_DataStoredAtDesiredOffset(ReadWriteMode mode)
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -1915,7 +2695,10 @@ namespace System.IO.Tests
                 writeable.Dispose();
             });
 
-            Assert.Equal(1, await ReadAsync(mode, readable, buffer, offset, buffer.Length - offset));
+            Assert.Equal(
+                1,
+                await ReadAsync(mode, readable, buffer, offset, buffer.Length - offset)
+            );
 
             await write;
 
@@ -1929,15 +2712,33 @@ namespace System.IO.Tests
         [InlineData(ReadWriteMode.SyncArray)]
         [InlineData(ReadWriteMode.AsyncArray)]
         [InlineData(ReadWriteMode.AsyncAPM)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Write_DataReadFromDesiredOffset(ReadWriteMode mode)
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
 
-            byte[] buffer = new[] { (byte)'\0', (byte)'\0', (byte)'h', (byte)'e', (byte)'l', (byte)'l', (byte)'o', (byte)'\0', (byte)'\0' };
-            const int Offset = 2, Count = 5;
+            byte[] buffer = new[]
+            {
+                (byte)'\0',
+                (byte)'\0',
+                (byte)'h',
+                (byte)'e',
+                (byte)'l',
+                (byte)'l',
+                (byte)'o',
+                (byte)'\0',
+                (byte)'\0',
+            };
+            const int Offset = 2,
+                Count = 5;
 
             Task write = Task.Run(async () =>
             {
@@ -1969,9 +2770,23 @@ namespace System.IO.Tests
             Assert.Throws<IOException>(() => writeable.Write(buffer));
             Assert.Throws<IOException>(() => writeable.Write(buffer, 0, buffer.Length));
             await Assert.ThrowsAsync<IOException>(() => writeable.WriteAsync(buffer).AsTask());
-            await Assert.ThrowsAsync<IOException>(() => writeable.WriteAsync(buffer, 0, buffer.Length));
-            Assert.Throws<IOException>(() => writeable.EndWrite(writeable.BeginWrite(buffer, 0, buffer.Length, null, null)));
-            await Assert.ThrowsAsync<IOException>(() => Task.Factory.FromAsync(writeable.BeginWrite, writeable.EndWrite, buffer, 0, buffer.Length, null));
+            await Assert.ThrowsAsync<IOException>(
+                () => writeable.WriteAsync(buffer, 0, buffer.Length)
+            );
+            Assert.Throws<IOException>(
+                () => writeable.EndWrite(writeable.BeginWrite(buffer, 0, buffer.Length, null, null))
+            );
+            await Assert.ThrowsAsync<IOException>(
+                () =>
+                    Task.Factory.FromAsync(
+                        writeable.BeginWrite,
+                        writeable.EndWrite,
+                        buffer,
+                        0,
+                        buffer.Length,
+                        null
+                    )
+            );
             Assert.Throws<IOException>(() => writeable.Flush());
         }
 
@@ -1999,7 +2814,9 @@ namespace System.IO.Tests
 
                 await Assert.ThrowsAsync<InvalidOperationException>(async () => await r);
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().IsCompleted);
-                Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().OnCompleted(() => { }));
+                Assert.Throws<InvalidOperationException>(
+                    () => r.GetAwaiter().OnCompleted(() => { })
+                );
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().GetResult());
             }
         }
@@ -2018,7 +2835,9 @@ namespace System.IO.Tests
                 var b = new byte[1];
                 ValueTask<int> r = readable.ReadAsync(b);
                 r.GetAwaiter().OnCompleted(() => { });
-                Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().OnCompleted(() => { }));
+                Assert.Throws<InvalidOperationException>(
+                    () => r.GetAwaiter().OnCompleted(() => { })
+                );
             }
         }
 
@@ -2029,11 +2848,23 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(ReadAsync_ContinuesOnCurrentContextIfDesired_MemberData))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
-        public virtual async Task ReadAsync_ContinuesOnCurrentSynchronizationContextIfDesired(bool flowExecutionContext, bool? continueOnCapturedContext)
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
+        public virtual async Task ReadAsync_ContinuesOnCurrentSynchronizationContextIfDesired(
+            bool flowExecutionContext,
+            bool? continueOnCapturedContext
+        )
         {
-            using StreamPair streams = await CreateConnectedStreamsAsync().ConfigureAwait(ConfigureAwaitOptions.ForceYielding /* escape xunit sync ctx */);
+            using StreamPair streams = await CreateConnectedStreamsAsync()
+                .ConfigureAwait(
+                    ConfigureAwaitOptions.ForceYielding /* escape xunit sync ctx */
+                );
             foreach ((Stream writeable, Stream readable) in GetReadWritePairs(streams))
             {
                 Assert.Null(SynchronizationContext.Current);
@@ -2044,7 +2875,8 @@ namespace System.IO.Tests
                 bool executionContextWasFlowed = false;
                 Action continuation = () =>
                 {
-                    schedulerWasFlowed = SynchronizationContext.Current is CustomSynchronizationContext;
+                    schedulerWasFlowed =
+                        SynchronizationContext.Current is CustomSynchronizationContext;
                     executionContextWasFlowed = 42 == asyncLocal.Value;
                     continuationRan.SetResult(true);
                 };
@@ -2052,7 +2884,9 @@ namespace System.IO.Tests
                 var readBuffer = new byte[1];
                 ValueTask<int> readValueTask = readable.ReadAsync(new byte[1]);
 
-                SynchronizationContext.SetSynchronizationContext(new CustomSynchronizationContext());
+                SynchronizationContext.SetSynchronizationContext(
+                    new CustomSynchronizationContext()
+                );
                 asyncLocal.Value = 42;
                 switch (continueOnCapturedContext)
                 {
@@ -2069,11 +2903,17 @@ namespace System.IO.Tests
                     default:
                         if (flowExecutionContext)
                         {
-                            readValueTask.ConfigureAwait(continueOnCapturedContext.Value).GetAwaiter().OnCompleted(continuation);
+                            readValueTask
+                                .ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .OnCompleted(continuation);
                         }
                         else
                         {
-                            readValueTask.ConfigureAwait(continueOnCapturedContext.Value).GetAwaiter().UnsafeOnCompleted(continuation);
+                            readValueTask
+                                .ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .UnsafeOnCompleted(continuation);
                         }
                         break;
                 }
@@ -2111,11 +2951,23 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(ReadAsync_ContinuesOnCurrentContextIfDesired_MemberData))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
-        public virtual async Task ReadAsync_ContinuesOnCurrentTaskSchedulerIfDesired(bool flowExecutionContext, bool? continueOnCapturedContext)
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
+        public virtual async Task ReadAsync_ContinuesOnCurrentTaskSchedulerIfDesired(
+            bool flowExecutionContext,
+            bool? continueOnCapturedContext
+        )
         {
-            using StreamPair streams = await CreateConnectedStreamsAsync().ConfigureAwait(ConfigureAwaitOptions.ForceYielding /* escape xunit sync ctx */);
+            using StreamPair streams = await CreateConnectedStreamsAsync()
+                .ConfigureAwait(
+                    ConfigureAwaitOptions.ForceYielding /* escape xunit sync ctx */
+                );
             foreach ((Stream writeable, Stream readable) in GetReadWritePairs(streams))
             {
                 Assert.Null(SynchronizationContext.Current);
@@ -2134,35 +2986,46 @@ namespace System.IO.Tests
                 var readBuffer = new byte[1];
                 ValueTask<int> readValueTask = readable.ReadAsync(new byte[1]);
 
-                await Task.Factory.StartNew(() =>
-                {
-                    Assert.IsType<CustomTaskScheduler>(TaskScheduler.Current);
-                    asyncLocal.Value = 42;
-                    switch (continueOnCapturedContext)
+                await Task.Factory.StartNew(
+                    () =>
                     {
-                        case null:
-                            if (flowExecutionContext)
-                            {
-                                readValueTask.GetAwaiter().OnCompleted(continuation);
-                            }
-                            else
-                            {
-                                readValueTask.GetAwaiter().UnsafeOnCompleted(continuation);
-                            }
-                            break;
-                        default:
-                            if (flowExecutionContext)
-                            {
-                                readValueTask.ConfigureAwait(continueOnCapturedContext.Value).GetAwaiter().OnCompleted(continuation);
-                            }
-                            else
-                            {
-                                readValueTask.ConfigureAwait(continueOnCapturedContext.Value).GetAwaiter().UnsafeOnCompleted(continuation);
-                            }
-                            break;
-                    }
-                    asyncLocal.Value = 0;
-                }, CancellationToken.None, TaskCreationOptions.None, new CustomTaskScheduler());
+                        Assert.IsType<CustomTaskScheduler>(TaskScheduler.Current);
+                        asyncLocal.Value = 42;
+                        switch (continueOnCapturedContext)
+                        {
+                            case null:
+                                if (flowExecutionContext)
+                                {
+                                    readValueTask.GetAwaiter().OnCompleted(continuation);
+                                }
+                                else
+                                {
+                                    readValueTask.GetAwaiter().UnsafeOnCompleted(continuation);
+                                }
+                                break;
+                            default:
+                                if (flowExecutionContext)
+                                {
+                                    readValueTask
+                                        .ConfigureAwait(continueOnCapturedContext.Value)
+                                        .GetAwaiter()
+                                        .OnCompleted(continuation);
+                                }
+                                else
+                                {
+                                    readValueTask
+                                        .ConfigureAwait(continueOnCapturedContext.Value)
+                                        .GetAwaiter()
+                                        .UnsafeOnCompleted(continuation);
+                                }
+                                break;
+                        }
+                        asyncLocal.Value = 0;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    new CustomTaskScheduler()
+                );
 
                 Assert.False(readValueTask.IsCompleted);
                 Assert.False(readValueTask.IsCompletedSuccessfully);
@@ -2200,8 +3063,14 @@ namespace System.IO.Tests
         [InlineData(ReadWriteMode.AsyncMemory)]
         [InlineData(ReadWriteMode.SyncAPM)]
         [InlineData(ReadWriteMode.AsyncAPM)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ZeroByteRead_BlocksUntilDataAvailableOrNops(ReadWriteMode mode)
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -2209,7 +3078,9 @@ namespace System.IO.Tests
             {
                 for (int iter = 0; iter < 2; iter++)
                 {
-                    Task<int> zeroByteRead = Task.Run(() => ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0));
+                    Task<int> zeroByteRead = Task.Run(
+                        () => ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0)
+                    );
 
                     if (BlocksOnZeroByteReads)
                     {
@@ -2268,11 +3139,23 @@ namespace System.IO.Tests
         [InlineData(ReadWriteMode.AsyncMemory)]
         [InlineData(ReadWriteMode.SyncAPM)]
         [InlineData(ReadWriteMode.AsyncAPM)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ZeroByteWrite_OtherDataReceivedSuccessfully(ReadWriteMode mode)
         {
-            byte[][] buffers = new[] { Array.Empty<byte>(), "hello"u8.ToArray(), Array.Empty<byte>(), "world"u8.ToArray() };
+            byte[][] buffers = new[]
+            {
+                Array.Empty<byte>(),
+                "hello"u8.ToArray(),
+                Array.Empty<byte>(),
+                "world"u8.ToArray(),
+            };
 
             using StreamPair streams = await CreateConnectedStreamsAsync();
             foreach ((Stream writeable, Stream readable) in GetReadWritePairs(streams))
@@ -2287,18 +3170,23 @@ namespace System.IO.Tests
 
                 if (FlushRequiredToWriteData)
                 {
-                    writes = writes.ContinueWith(t =>
-                    {
-                        t.GetAwaiter().GetResult();
-                        if (FlushGuaranteesAllDataWritten)
+                    writes = writes.ContinueWith(
+                        t =>
                         {
-                            writeable.Flush();
-                        }
-                        else
-                        {
-                            writeable.Dispose();
-                        }
-                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+                            t.GetAwaiter().GetResult();
+                            if (FlushGuaranteesAllDataWritten)
+                            {
+                                writeable.Flush();
+                            }
+                            else
+                            {
+                                writeable.Dispose();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
                 }
 
                 var readBytes = new byte[buffers.Sum(b => b.Length)];
@@ -2323,15 +3211,23 @@ namespace System.IO.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ReadWrite_CustomMemoryManager_Success(bool useAsync)
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
             foreach ((Stream writeable, Stream readable) in GetReadWritePairs(streams))
             {
                 using MemoryManager<byte> writeBuffer = new NativeMemoryManager(1024);
-                using MemoryManager<byte> readBuffer = new NativeMemoryManager(writeBuffer.Memory.Length);
+                using MemoryManager<byte> readBuffer = new NativeMemoryManager(
+                    writeBuffer.Memory.Length
+                );
 
                 Assert.Equal(1024, writeBuffer.Memory.Length);
                 Assert.Equal(writeBuffer.Memory.Length, readBuffer.Memory.Length);
@@ -2339,23 +3235,28 @@ namespace System.IO.Tests
                 Random.Shared.NextBytes(writeBuffer.Memory.Span);
                 readBuffer.Memory.Span.Clear();
 
-                Task write = useAsync ?
-                    writeable.WriteAsync(writeBuffer.Memory).AsTask() :
-                    Task.Run(() => writeable.Write(writeBuffer.Memory.Span));
+                Task write = useAsync
+                    ? writeable.WriteAsync(writeBuffer.Memory).AsTask()
+                    : Task.Run(() => writeable.Write(writeBuffer.Memory.Span));
                 if (FlushRequiredToWriteData)
                 {
-                    write = write.ContinueWith(t =>
-                    {
-                        t.GetAwaiter().GetResult();
-                        if (FlushGuaranteesAllDataWritten)
+                    write = write.ContinueWith(
+                        t =>
                         {
-                            writeable.Flush();
-                        }
-                        else
-                        {
-                            writeable.Dispose();
-                        }
-                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+                            t.GetAwaiter().GetResult();
+                            if (FlushGuaranteesAllDataWritten)
+                            {
+                                writeable.Flush();
+                            }
+                            else
+                            {
+                                writeable.Dispose();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
                 }
 
                 try
@@ -2363,9 +3264,9 @@ namespace System.IO.Tests
                     int bytesRead = 0;
                     while (bytesRead < readBuffer.Memory.Length)
                     {
-                        int n = useAsync ?
-                            await readable.ReadAsync(readBuffer.Memory.Slice(bytesRead)) :
-                            readable.Read(readBuffer.Memory.Span.Slice(bytesRead));
+                        int n = useAsync
+                            ? await readable.ReadAsync(readBuffer.Memory.Slice(bytesRead))
+                            : readable.Read(readBuffer.Memory.Span.Slice(bytesRead));
                         if (n == 0)
                         {
                             break;
@@ -2389,8 +3290,14 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ConcurrentBidirectionalReadsWrites_Success()
         {
             if (!SupportsConcurrentBidirectionalUse)
@@ -2399,7 +3306,8 @@ namespace System.IO.Tests
             }
 
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            Stream client = streams.Stream1, server = streams.Stream2;
+            Stream client = streams.Stream1,
+                server = streams.Stream2;
             if (!(client.CanRead && client.CanWrite && server.CanRead && server.CanWrite))
             {
                 return;
@@ -2417,20 +3325,30 @@ namespace System.IO.Tests
                         client.WriteAsync(sendBuffer, 0, sendBuffer.Length),
                         Task.Run(async () =>
                         {
-                            int received = 0, bytesRead = 0;
-                            while (received < readBuffer.Length && (bytesRead = await server.ReadAsync(readBuffer.AsMemory(received))) > 0)
+                            int received = 0,
+                                bytesRead = 0;
+                            while (
+                                received < readBuffer.Length
+                                && (
+                                    bytesRead = await server.ReadAsync(
+                                        readBuffer.AsMemory(received)
+                                    )
+                                ) > 0
+                            )
                             {
                                 received += bytesRead;
                             }
                             Assert.InRange(bytesRead, 1, int.MaxValue);
                             Assert.Equal(Text, Encoding.UTF8.GetString(readBuffer));
-                        }));
+                        })
+                    );
                 }
             };
 
             await WhenAllOrAnyFailed(
                 Task.Run(() => work(client, server)),
-                Task.Run(() => work(server, client)));
+                Task.Run(() => work(server, client))
+            );
         }
 
         public static IEnumerable<object[]> CopyToAsync_AllDataCopied_MemberData() =>
@@ -2447,8 +3365,14 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(CopyToAsync_AllDataCopied_MemberData))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task CopyToAsync_AllDataCopied(int byteCount, bool useAsync)
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -2477,19 +3401,37 @@ namespace System.IO.Tests
 
         [OuterLoop("May take several seconds")]
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Parallel_ReadWriteMultipleStreamsConcurrently()
         {
-            await Task.WhenAll(Enumerable.Range(0, 20).Select(_ => Task.Run(async () =>
-            {
-                await CopyToAsync_AllDataCopied(byteCount: 10 * 1024, useAsync: true);
-            })));
+            await Task.WhenAll(
+                Enumerable
+                    .Range(0, 20)
+                    .Select(_ =>
+                        Task.Run(async () =>
+                        {
+                            await CopyToAsync_AllDataCopied(byteCount: 10 * 1024, useAsync: true);
+                        })
+                    )
+            );
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Timeout_Roundtrips()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -2524,8 +3466,14 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ReadTimeout_Expires_Throws()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -2558,8 +3506,17 @@ namespace System.IO.Tests
 
                 cts = new CancellationTokenSource();
                 cts.Cancel();
-                await AssertExtensions.CanceledAsync(cts.Token, readable.ReadAsync(new byte[1], 0, 1, cts.Token));
-                await AssertExtensions.CanceledAsync(cts.Token, async () => { await readable.ReadAsync(new Memory<byte>(new byte[1]), cts.Token); });
+                await AssertExtensions.CanceledAsync(
+                    cts.Token,
+                    readable.ReadAsync(new byte[1], 0, 1, cts.Token)
+                );
+                await AssertExtensions.CanceledAsync(
+                    cts.Token,
+                    async () =>
+                    {
+                        await readable.ReadAsync(new Memory<byte>(new byte[1]), cts.Token);
+                    }
+                );
 
                 cts = new CancellationTokenSource();
                 Task<int> t = readable.ReadAsync(new byte[1], 0, 1, cts.Token);
@@ -2633,15 +3590,39 @@ namespace System.IO.Tests
             Assert.Throws<IOException>(() => writeable.WriteByte(1));
             Assert.Throws<IOException>(() => writeable.Write(new byte[1], 0, 1));
             Assert.Throws<IOException>(() => writeable.Write(new byte[1]));
-            Assert.Throws<IOException>(() => writeable.EndWrite(writeable.BeginWrite(new byte[1], 0, 1, null, null)));
-            await Assert.ThrowsAsync<IOException>(async () => { await writeable.WriteAsync(new byte[1], 0, 1); });
-            await Assert.ThrowsAsync<IOException>(async () => { await writeable.WriteAsync(new byte[1]); });
-            await Assert.ThrowsAsync<IOException>(async () => { await Task.Factory.FromAsync(writeable.BeginWrite, writeable.EndWrite, new byte[1], 0, 1, null); });
+            Assert.Throws<IOException>(
+                () => writeable.EndWrite(writeable.BeginWrite(new byte[1], 0, 1, null, null))
+            );
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                await writeable.WriteAsync(new byte[1], 0, 1);
+            });
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                await writeable.WriteAsync(new byte[1]);
+            });
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                await Task.Factory.FromAsync(
+                    writeable.BeginWrite,
+                    writeable.EndWrite,
+                    new byte[1],
+                    0,
+                    1,
+                    null
+                );
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task ReadAsync_DuringReadAsync_ThrowsIfUnsupported()
         {
             if (UnsupportedConcurrentExceptionType is null)
@@ -2653,7 +3634,10 @@ namespace System.IO.Tests
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
 
             ValueTask<int> read = readable.ReadAsync(new byte[1]);
-            await Assert.ThrowsAsync(UnsupportedConcurrentExceptionType, async () => await readable.ReadAsync(new byte[1]));
+            await Assert.ThrowsAsync(
+                UnsupportedConcurrentExceptionType,
+                async () => await readable.ReadAsync(new byte[1])
+            );
 
             writeable.WriteByte(1);
             writeable.Dispose();
@@ -2662,8 +3646,14 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Flush_ValidOnWriteableStreamWithNoData_Success()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -2678,8 +3668,14 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Flush_ValidOnReadableStream_Success()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
@@ -2697,8 +3693,14 @@ namespace System.IO.Tests
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(2)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
         public virtual async Task Dispose_ClosesStream(int disposeMode)
         {
             if (!CansReturnFalseAfterDispose)
@@ -2712,9 +3714,15 @@ namespace System.IO.Tests
             {
                 switch (disposeMode)
                 {
-                    case 0: stream.Close(); break;
-                    case 1: stream.Dispose(); break;
-                    case 2: await stream.DisposeAsync(); break;
+                    case 0:
+                        stream.Close();
+                        break;
+                    case 1:
+                        stream.Dispose();
+                        break;
+                    case 2:
+                        await stream.DisposeAsync();
+                        break;
                 }
 
                 Assert.False(stream.CanRead);
@@ -2726,9 +3734,13 @@ namespace System.IO.Tests
     /// <summary>Base class for a connected stream that wraps another.</summary>
     public abstract class WrappingConnectedStreamConformanceTests : ConnectedStreamConformanceTests
     {
-        protected abstract Task<StreamPair> CreateWrappedConnectedStreamsAsync(StreamPair wrapped, bool leaveOpen = false);
+        protected abstract Task<StreamPair> CreateWrappedConnectedStreamsAsync(
+            StreamPair wrapped,
+            bool leaveOpen = false
+        );
         protected virtual bool WrappedUsableAfterClose => true;
         protected virtual bool SupportsLeaveOpen => true;
+
         /// <summary>
         /// Indicates whether the stream will issue a zero byte read on the underlying stream when a user performs
         /// a zero byte read and no data is currently available to return to the user.
@@ -2751,9 +3763,13 @@ namespace System.IO.Tests
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
 
             var tracker = new CallTrackingStream(writeable);
-            using StreamPair wrapper = await CreateWrappedConnectedStreamsAsync((tracker, readable));
+            using StreamPair wrapper = await CreateWrappedConnectedStreamsAsync(
+                (tracker, readable)
+            );
 
-            int orig = tracker.TimesCalled(nameof(tracker.Flush)) + tracker.TimesCalled(nameof(tracker.FlushAsync));
+            int orig =
+                tracker.TimesCalled(nameof(tracker.Flush))
+                + tracker.TimesCalled(nameof(tracker.FlushAsync));
 
             tracker.WriteByte(1);
 
@@ -2766,7 +3782,12 @@ namespace System.IO.Tests
                 wrapper.Stream1.Flush();
             }
 
-            Assert.InRange(tracker.TimesCalled(nameof(tracker.Flush)) + tracker.TimesCalled(nameof(tracker.FlushAsync)), orig + 1, int.MaxValue);
+            Assert.InRange(
+                tracker.TimesCalled(nameof(tracker.Flush))
+                    + tracker.TimesCalled(nameof(tracker.FlushAsync)),
+                orig + 1,
+                int.MaxValue
+            );
         }
 
         [Theory]
@@ -2813,7 +3834,10 @@ namespace System.IO.Tests
 
             using StreamPair streams = ConnectedStreams.CreateBidirectional();
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
-            using StreamPair wrapper = await CreateWrappedConnectedStreamsAsync((writeable, readable), leaveOpen);
+            using StreamPair wrapper = await CreateWrappedConnectedStreamsAsync(
+                (writeable, readable),
+                leaveOpen
+            );
             (Stream writeableWrapper, Stream readableWrapper) = GetReadWritePair(wrapper);
 
             if (useAsync)
@@ -2829,7 +3853,8 @@ namespace System.IO.Tests
             {
                 await WhenAllOrAnyFailed(
                     writeable.WriteAsync(new byte[] { 42 }, 0, 1),
-                    Task.Run(() => readable.ReadByte()));
+                    Task.Run(() => readable.ReadByte())
+                );
             }
             else
             {
@@ -2847,7 +3872,12 @@ namespace System.IO.Tests
 
             using StreamPair streams = ConnectedStreams.CreateBidirectional();
 
-            using (StreamPair wrapper = await CreateWrappedConnectedStreamsAsync(streams, leaveOpen: true))
+            using (
+                StreamPair wrapper = await CreateWrappedConnectedStreamsAsync(
+                    streams,
+                    leaveOpen: true
+                )
+            )
             {
                 foreach ((Stream writeable, Stream readable) in GetReadWritePairs(wrapper))
                 {
@@ -2886,7 +3916,8 @@ namespace System.IO.Tests
                                     writeable.Flush();
                                 }
                             }),
-                            Task.Run(() => Assert.Equal(i, readable.ReadByte())));
+                            Task.Run(() => Assert.Equal(i, readable.ReadByte()))
+                        );
                     }
                 }
             }
@@ -2909,7 +3940,8 @@ namespace System.IO.Tests
                             Assert.Equal(i, readable.ReadByte());
                         }
                         Assert.Equal(-1, readable.ReadByte());
-                    }));
+                    })
+                );
             }
         }
 
@@ -2920,7 +3952,9 @@ namespace System.IO.Tests
         [InlineData(ReadWriteMode.AsyncMemory)]
         [InlineData(ReadWriteMode.SyncAPM)]
         [InlineData(ReadWriteMode.AsyncAPM)]
-        public virtual async Task ZeroByteRead_PerformsZeroByteReadOnUnderlyingStreamWhenDataNeeded(ReadWriteMode mode)
+        public virtual async Task ZeroByteRead_PerformsZeroByteReadOnUnderlyingStreamWhenDataNeeded(
+            ReadWriteMode mode
+        )
         {
             if (!ZeroByteReadPerformsZeroByteReadOnUnderlyingStream)
             {
@@ -2937,7 +3971,9 @@ namespace System.IO.Tests
             (Stream innerWriteable, Stream innerReadable) = GetReadWritePair(innerStreams);
 
             var tracker = new ZeroByteReadTrackingStream(innerReadable, ExtraZeroByteReadsAllowed);
-            using StreamPair streams = await CreateWrappedConnectedStreamsAsync((innerWriteable, tracker));
+            using StreamPair streams = await CreateWrappedConnectedStreamsAsync(
+                (innerWriteable, tracker)
+            );
 
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
 
@@ -2947,7 +3983,9 @@ namespace System.IO.Tests
                 var signalTask = tracker.WaitForZeroByteReadAsync();
 
                 // Issue zero byte read against wrapper stream.
-                Task<int> zeroByteRead = Task.Run(() => ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0));
+                Task<int> zeroByteRead = Task.Run(
+                    () => ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0)
+                );
 
                 // The tracker stream will signal us when the zero byte read actually happens.
                 await signalTask;
@@ -2993,7 +4031,11 @@ namespace System.IO.Tests
             private TaskCompletionSource? _signal;
             private bool _extraZeroByteReadsAllowed;
 
-            public ZeroByteReadTrackingStream(Stream innerStream, bool extraZeroByteReadsAllowed = false) : base(innerStream)
+            public ZeroByteReadTrackingStream(
+                Stream innerStream,
+                bool extraZeroByteReadsAllowed = false
+            )
+                : base(innerStream)
             {
                 _extraZeroByteReadsAllowed = extraZeroByteReadsAllowed;
             }
@@ -3005,7 +4047,9 @@ namespace System.IO.Tests
                     throw new Exception("Already registered to wait");
                 }
 
-                _signal = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                _signal = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 return _signal.Task;
             }
 
@@ -3024,7 +4068,13 @@ namespace System.IO.Tests
                 }
             }
 
-            public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+            public override IAsyncResult BeginRead(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            )
             {
                 CheckForZeroByteRead(count);
                 return base.BeginRead(buffer, offset, count, callback, state);
@@ -3042,13 +4092,21 @@ namespace System.IO.Tests
                 return base.Read(buffer);
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 CheckForZeroByteRead(count);
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
             }
 
-            public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+            public override ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 CheckForZeroByteRead(buffer.Length);
                 return base.ReadAsync(buffer, cancellationToken);
@@ -3059,7 +4117,8 @@ namespace System.IO.Tests
     /// <summary>Provides a disposable, enumerable tuple of two streams.</summary>
     public class StreamPair : IDisposable, IEnumerable<Stream>
     {
-        public readonly Stream Stream1, Stream2;
+        public readonly Stream Stream1,
+            Stream2;
 
         public StreamPair(Stream stream1, Stream stream2)
         {
@@ -3073,8 +4132,11 @@ namespace System.IO.Tests
             Stream2 = streams.Item2;
         }
 
-        public static implicit operator StreamPair((Stream, Stream) streams) => new StreamPair(streams);
-        public static implicit operator (Stream, Stream)(StreamPair streams) => (streams.Stream1, streams.Stream2);
+        public static implicit operator StreamPair((Stream, Stream) streams) =>
+            new StreamPair(streams);
+
+        public static implicit operator (Stream, Stream)(StreamPair streams) =>
+            (streams.Stream1, streams.Stream2);
 
         public virtual void Dispose()
         {

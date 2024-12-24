@@ -18,45 +18,58 @@ public class StartupResourcesInClassLibrary
     public void Configure(
         IApplicationBuilder app,
         ILoggerFactory loggerFactory,
-        IStringLocalizerFactory stringLocalizerFactory)
+        IStringLocalizerFactory stringLocalizerFactory
+    )
     {
         var supportedCultures = new List<CultureInfo>()
-            {
-                new CultureInfo("en-US"),
-                new CultureInfo("fr-FR")
-            };
-
-        app.UseRequestLocalization(new RequestLocalizationOptions
         {
-            DefaultRequestCulture = new RequestCulture("en-US"),
-            SupportedCultures = supportedCultures,
-            SupportedUICultures = supportedCultures
-        });
+            new CultureInfo("en-US"),
+            new CultureInfo("fr-FR"),
+        };
 
-        var noAttributeStringLocalizer = stringLocalizerFactory.Create(typeof(ResourcesClassLibraryNoAttribute.Model));
-        var withAttributeStringLocalizer = stringLocalizerFactory.Create(typeof(Alternate.Namespace.Model));
+        app.UseRequestLocalization(
+            new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures,
+            }
+        );
 
-        var noAttributeAssembly = typeof(ResourcesClassLibraryNoAttribute.Model).GetTypeInfo().Assembly;
+        var noAttributeStringLocalizer = stringLocalizerFactory.Create(
+            typeof(ResourcesClassLibraryNoAttribute.Model)
+        );
+        var withAttributeStringLocalizer = stringLocalizerFactory.Create(
+            typeof(Alternate.Namespace.Model)
+        );
+
+        var noAttributeAssembly = typeof(ResourcesClassLibraryNoAttribute.Model)
+            .GetTypeInfo()
+            .Assembly;
         var noAttributeName = new AssemblyName(noAttributeAssembly.FullName).Name;
         var noAttributeNameStringLocalizer = stringLocalizerFactory.Create(
             nameof(ResourcesClassLibraryNoAttribute.Model),
-            noAttributeName);
+            noAttributeName
+        );
 
         var withAttributeAssembly = typeof(Alternate.Namespace.Model).GetTypeInfo().Assembly;
         var withAttributeName = new AssemblyName(withAttributeAssembly.FullName).Name;
         var withAttributeNameStringLocalizer = stringLocalizerFactory.Create(
             nameof(Alternate.Namespace.Model),
-            withAttributeName);
+            withAttributeName
+        );
 
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync(noAttributeNameStringLocalizer["Hello"]);
-            await context.Response.WriteAsync(" ");
-            await context.Response.WriteAsync(noAttributeStringLocalizer["Hello"]);
-            await context.Response.WriteAsync(" ");
-            await context.Response.WriteAsync(withAttributeNameStringLocalizer["Hello"]);
-            await context.Response.WriteAsync(" ");
-            await context.Response.WriteAsync(withAttributeStringLocalizer["Hello"]);
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync(noAttributeNameStringLocalizer["Hello"]);
+                await context.Response.WriteAsync(" ");
+                await context.Response.WriteAsync(noAttributeStringLocalizer["Hello"]);
+                await context.Response.WriteAsync(" ");
+                await context.Response.WriteAsync(withAttributeNameStringLocalizer["Hello"]);
+                await context.Response.WriteAsync(" ");
+                await context.Response.WriteAsync(withAttributeStringLocalizer["Hello"]);
+            }
+        );
     }
 }

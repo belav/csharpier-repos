@@ -28,137 +28,136 @@
 //
 
 using System;
-using System.Data;
 using System.Collections;
+using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class Repeater_ctor_
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.Repeater Repeater1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class Repeater_ctor_ : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.Repeater Repeater1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		#region "Template Classes"
-		public class t_DBLitTemplate : ITemplate
-		{
-			public void InstantiateIn(Control container)
-			{
-				Literal l = new Literal();
-				l.Text = "<div>";
-				l.DataBinding += new EventHandler(this.BindData);
-				container.Controls.Add(l);
-			}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			public void BindData(object sender, EventArgs e)
-			{
-				Literal lc = (Literal)sender;
-				RepeaterItem container;
-				container = (RepeaterItem)lc.NamingContainer;
-				lc.Text = container.DataItem + "</div>";
-			}
+        #region "Template Classes"
+        public class t_DBLitTemplate : ITemplate
+        {
+            public void InstantiateIn(Control container)
+            {
+                Literal l = new Literal();
+                l.Text = "<div>";
+                l.DataBinding += new EventHandler(this.BindData);
+                container.Controls.Add(l);
+            }
 
-		}
-		public class t_EmptyLitTemplate : ITemplate
-		{
-			public void InstantiateIn(Control container)
-			{
-				Literal l = new Literal();
-				l.Text = "";
-				container.Controls.Add(l);
-			}
+            public void BindData(object sender, EventArgs e)
+            {
+                Literal lc = (Literal)sender;
+                RepeaterItem container;
+                container = (RepeaterItem)lc.NamingContainer;
+                lc.Text = container.DataItem + "</div>";
+            }
+        }
 
-		}
-		public class t_PlainTextLitTemplate : ITemplate
-		{
-			public void InstantiateIn(Control container)
-			{
-				Literal l = new Literal();
-				l.Text = "Plain text template create at run time";
-				container.Controls.Add(l);
-			}
+        public class t_EmptyLitTemplate : ITemplate
+        {
+            public void InstantiateIn(Control container)
+            {
+                Literal l = new Literal();
+                l.Text = "";
+                container.Controls.Add(l);
+            }
+        }
 
-		}
-		public class t_HtmlLitTemplate : ITemplate
-		{
-			public void InstantiateIn(Control container)
-			{
-				Literal l = new Literal();
-				l.Text = "<div><b><i>Html template created at run time</i></b></div>";
-				container.Controls.Add(l);
-			}
+        public class t_PlainTextLitTemplate : ITemplate
+        {
+            public void InstantiateIn(Control container)
+            {
+                Literal l = new Literal();
+                l.Text = "Plain text template create at run time";
+                container.Controls.Add(l);
+            }
+        }
 
-		}
-		public class t_ControlLitTemplate : ITemplate
-		{
-			public void InstantiateIn(Control container)
-			{
-				HtmlInputButton l = new HtmlInputButton();
-				l.Value = "Control template";
-				container.Controls.Add(l);
-			}
+        public class t_HtmlLitTemplate : ITemplate
+        {
+            public void InstantiateIn(Control container)
+            {
+                Literal l = new Literal();
+                l.Text = "<div><b><i>Html template created at run time</i></b></div>";
+                container.Controls.Add(l);
+            }
+        }
 
-		}
-		#endregion
+        public class t_ControlLitTemplate : ITemplate
+        {
+            public void InstantiateIn(Control container)
+            {
+                HtmlInputButton l = new HtmlInputButton();
+                l.Value = "Control template";
+                container.Controls.Add(l);
+            }
+        }
+        #endregion
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				Repeater1.DataSource = GHTTests.GHDataSources.DSArray();
-				Repeater1.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                Repeater1.DataSource = GHTTests.GHDataSources.DSArray();
+                Repeater1.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTSubTestBegin("Code base constructor 1");
-			try 
-			{
-				System.Web.UI.WebControls.Repeater Repeater2 = new System.Web.UI.WebControls.Repeater();
-				GHTActiveSubTest.Controls.Add(Repeater2);
-				Repeater2.DataSource = GHTTests.GHDataSources.DSArrayList();
-				Repeater2.ItemTemplate = new t_DBLitTemplate();
-				Repeater2.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            GHTSubTestBegin("Code base constructor 1");
+            try
+            {
+                System.Web.UI.WebControls.Repeater Repeater2 =
+                    new System.Web.UI.WebControls.Repeater();
+                GHTActiveSubTest.Controls.Add(Repeater2);
+                Repeater2.DataSource = GHTTests.GHDataSources.DSArrayList();
+                Repeater2.ItemTemplate = new t_DBLitTemplate();
+                Repeater2.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			GHTTestEnd();
-		}
-	}
+            GHTTestEnd();
+        }
+    }
 }

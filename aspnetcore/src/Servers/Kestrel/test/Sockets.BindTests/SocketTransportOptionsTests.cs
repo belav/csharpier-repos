@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 using Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
@@ -21,7 +21,9 @@ namespace Sockets.BindTests;
 
 public class SocketTransportOptionsTests : LoggedTestBase
 {
-    private async Task VerifySocketTransportCallsCreateBoundListenSocketAsync(EndPoint endpointToTest)
+    private async Task VerifySocketTransportCallsCreateBoundListenSocketAsync(
+        EndPoint endpointToTest
+    )
     {
         var wasCalled = false;
 
@@ -40,7 +42,10 @@ public class SocketTransportOptionsTests : LoggedTestBase
         );
 
         await host.StartAsync();
-        Assert.True(wasCalled, $"Expected {nameof(SocketTransportOptions.CreateBoundListenSocket)} to be called.");
+        Assert.True(
+            wasCalled,
+            $"Expected {nameof(SocketTransportOptions.CreateBoundListenSocket)} to be called."
+        );
         await host.StopAsync();
     }
 
@@ -91,7 +96,7 @@ public class SocketTransportOptionsTests : LoggedTestBase
         {
             yield return new object[]
             {
-                    new UnixDomainSocketEndPoint($"/tmp/{DateTime.UtcNow:yyyyMMddTHHmmss.fff}.sock")
+                new UnixDomainSocketEndPoint($"/tmp/{DateTime.UtcNow:yyyyMMddTHHmmss.fff}.sock"),
             };
         }
 
@@ -103,24 +108,28 @@ public class SocketTransportOptionsTests : LoggedTestBase
         // file handle
         // slightly messy but allows us to create a FileHandleEndPoint
         // from the underlying OS handle used by the socket
-        var fileHandleSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        var fileHandleSocket = new Socket(
+            AddressFamily.InterNetwork,
+            SocketType.Stream,
+            ProtocolType.Tcp
+        );
         fileHandleSocket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
         return fileHandleSocket;
     }
 
-    private IHost CreateWebHost(EndPoint endpoint, Action<SocketTransportOptions> configureSocketOptions) =>
-        TransportSelector.GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSockets(configureSocketOptions)
-                        .UseKestrel(options => options.Listen(endpoint))
-                        .Configure(
-                            app => app.Run(ctx => ctx.Response.WriteAsync("Hello World"))
-                        );
-                }
-            )
+    private IHost CreateWebHost(
+        EndPoint endpoint,
+        Action<SocketTransportOptions> configureSocketOptions
+    ) =>
+        TransportSelector
+            .GetHostBuilder()
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseSockets(configureSocketOptions)
+                    .UseKestrel(options => options.Listen(endpoint))
+                    .Configure(app => app.Run(ctx => ctx.Response.WriteAsync("Hello World")));
+            })
             .ConfigureServices(AddTestLogging)
             .Build();
 }

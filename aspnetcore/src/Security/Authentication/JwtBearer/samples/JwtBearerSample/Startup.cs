@@ -25,7 +25,8 @@ public class Startup
     // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(o =>
             {
                 // You also need to update /wwwroot/app/scripts/app.js
@@ -45,52 +46,63 @@ public class Startup
         app.UseAuthentication();
 
         // [Authorize] would usually handle this
-        app.Use(async (context, next) =>
-        {
-            // Use this if there are multiple authentication schemes
-            var authResult = await context.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
-            if (authResult.Succeeded && authResult.Principal.Identity.IsAuthenticated)
+        app.Use(
+            async (context, next) =>
             {
-                await next(context);
-            }
-            else if (authResult.Failure != null)
-            {
-                // Rethrow, let the exception page handle it.
-                ExceptionDispatchInfo.Capture(authResult.Failure).Throw();
-            }
-            else
-            {
-                await context.ChallengeAsync();
-            }
-        });
-
-        // MVC would usually handle this:
-        app.Map("/api/TodoList", todoApp =>
-        {
-            todoApp.Run(async context =>
-            {
-                var response = context.Response;
-                if (HttpMethods.IsPost(context.Request.Method))
+                // Use this if there are multiple authentication schemes
+                var authResult = await context.AuthenticateAsync(
+                    JwtBearerDefaults.AuthenticationScheme
+                );
+                if (authResult.Succeeded && authResult.Principal.Identity.IsAuthenticated)
                 {
-                    var reader = new StreamReader(context.Request.Body);
-                    var body = await reader.ReadToEndAsync();
-                    using (var json = JsonDocument.Parse(body))
-                    {
-                        var obj = json.RootElement;
-                        var todo = new Todo() { Description = obj.GetProperty("Description").GetString(), Owner = context.User.Identity.Name };
-                        Todos.Add(todo);
-                    }
+                    await next(context);
+                }
+                else if (authResult.Failure != null)
+                {
+                    // Rethrow, let the exception page handle it.
+                    ExceptionDispatchInfo.Capture(authResult.Failure).Throw();
                 }
                 else
                 {
-                    response.ContentType = "application/json";
-                    response.Headers.CacheControl = "no-cache";
-                    await response.StartAsync();
-                    Serialize(Todos, response.BodyWriter);
-                    await response.BodyWriter.FlushAsync();
+                    await context.ChallengeAsync();
                 }
-            });
-        });
+            }
+        );
+
+        // MVC would usually handle this:
+        app.Map(
+            "/api/TodoList",
+            todoApp =>
+            {
+                todoApp.Run(async context =>
+                {
+                    var response = context.Response;
+                    if (HttpMethods.IsPost(context.Request.Method))
+                    {
+                        var reader = new StreamReader(context.Request.Body);
+                        var body = await reader.ReadToEndAsync();
+                        using (var json = JsonDocument.Parse(body))
+                        {
+                            var obj = json.RootElement;
+                            var todo = new Todo()
+                            {
+                                Description = obj.GetProperty("Description").GetString(),
+                                Owner = context.User.Identity.Name,
+                            };
+                            Todos.Add(todo);
+                        }
+                    }
+                    else
+                    {
+                        response.ContentType = "application/json";
+                        response.Headers.CacheControl = "no-cache";
+                        await response.StartAsync();
+                        Serialize(Todos, response.BodyWriter);
+                        await response.BodyWriter.FlushAsync();
+                    }
+                });
+            }
+        );
     }
 
     private void Serialize(IList<Todo> todos, IBufferWriter<byte> output)

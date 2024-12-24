@@ -20,17 +20,15 @@ public class DbFunctionTest
 
     protected class MyNonDbContext
     {
-        public int NonStatic()
-            => throw new Exception();
+        public int NonStatic() => throw new Exception();
 
-        public static int DuplicateNameTest()
-            => throw new Exception();
+        public static int DuplicateNameTest() => throw new Exception();
     }
 
     protected class MyBaseContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseFakeRelational();
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseFakeRelational();
 
         public static readonly string[] FunctionNames =
         {
@@ -43,70 +41,53 @@ public class DbFunctionTest
             nameof(InstanceProtectedBase),
             nameof(InstancePrivateBase),
             nameof(InstanceInternalBase),
-            nameof(InstanceProtectedInternalBase)
+            nameof(InstanceProtectedInternalBase),
         };
 
-        public static void Foo()
-        {
-        }
+        public static void Foo() { }
 
-        public static void Skip2()
-        {
-        }
+        public static void Skip2() { }
 
-        private static void Skip()
-        {
-        }
+        private static void Skip() { }
 
         [DbFunction]
-        public static int StaticPublicBase()
-            => throw new Exception();
+        public static int StaticPublicBase() => throw new Exception();
 
         [DbFunction]
-        protected static int StaticProtectedBase()
-            => throw new Exception();
+        protected static int StaticProtectedBase() => throw new Exception();
 
         [DbFunction]
-        private static int StaticPrivateBase()
-            => throw new Exception();
+        private static int StaticPrivateBase() => throw new Exception();
 
         [DbFunction]
-        internal static int StaticInternalBase()
-            => throw new Exception();
+        internal static int StaticInternalBase() => throw new Exception();
 
         [DbFunction]
-        protected internal static int StaticProtectedInternalBase()
-            => throw new Exception();
+        protected internal static int StaticProtectedInternalBase() => throw new Exception();
 
         [DbFunction]
-        public int InstancePublicBase()
-            => throw new Exception();
+        public int InstancePublicBase() => throw new Exception();
 
         [DbFunction]
-        protected int InstanceProtectedBase()
-            => throw new Exception();
+        protected int InstanceProtectedBase() => throw new Exception();
 
         [DbFunction]
-        private int InstancePrivateBase()
-            => throw new Exception();
+        private int InstancePrivateBase() => throw new Exception();
 
         [DbFunction]
-        internal int InstanceInternalBase()
-            => throw new Exception();
+        internal int InstanceInternalBase() => throw new Exception();
 
         [DbFunction]
-        protected internal int InstanceProtectedInternalBase()
-            => throw new Exception();
+        protected internal int InstanceProtectedInternalBase() => throw new Exception();
 
         [DbFunction]
-        public virtual int VirtualBase()
-            => throw new Exception();
+        public virtual int VirtualBase() => throw new Exception();
     }
 
     protected class MyDerivedContext : MyBaseContext
     {
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Foo>().HasNoKey();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Foo>().HasNoKey();
 
         public static new readonly string[] FunctionNames =
         {
@@ -119,144 +100,123 @@ public class DbFunctionTest
             nameof(InstanceProtectedDerived),
             nameof(InstancePrivateDerived),
             nameof(InstanceInternalDerived),
-            nameof(InstanceProtectedInternalDerived)
+            nameof(InstanceProtectedInternalDerived),
         };
 
-        public static void Bar()
-        {
-        }
+        public static void Bar() { }
 
-        public static void Skip3()
-        {
-        }
+        public static void Skip3() { }
 
-        private static void Skip4()
-        {
-        }
+        private static void Skip4() { }
 
-        public static int DuplicateNameTest()
-            => throw new Exception();
+        public static int DuplicateNameTest() => throw new Exception();
 
         [DbFunction]
-        public static int StaticPublicDerived()
-            => throw new Exception();
+        public static int StaticPublicDerived() => throw new Exception();
 
         [DbFunction]
-        protected static int StaticProtectedDerived()
-            => throw new Exception();
+        protected static int StaticProtectedDerived() => throw new Exception();
 
         [DbFunction]
-        private static int StaticPrivateDerived()
-            => throw new Exception();
+        private static int StaticPrivateDerived() => throw new Exception();
 
         [DbFunction]
-        internal static int StaticInternalDerived()
-            => throw new Exception();
+        internal static int StaticInternalDerived() => throw new Exception();
 
         [DbFunction]
-        protected internal static int StaticProtectedInternalDerived()
-            => throw new Exception();
+        protected internal static int StaticProtectedInternalDerived() => throw new Exception();
 
         [DbFunction]
-        public int InstancePublicDerived()
-            => throw new Exception();
+        public int InstancePublicDerived() => throw new Exception();
 
         [DbFunction]
-        protected int InstanceProtectedDerived()
-            => throw new Exception();
+        protected int InstanceProtectedDerived() => throw new Exception();
 
         [DbFunction]
-        private int InstancePrivateDerived()
-            => throw new Exception();
+        private int InstancePrivateDerived() => throw new Exception();
 
         [DbFunction]
-        internal int InstanceInternalDerived()
-            => throw new Exception();
+        internal int InstanceInternalDerived() => throw new Exception();
 
         [DbFunction]
-        protected internal int InstanceProtectedInternalDerived()
-            => throw new Exception();
+        protected internal int InstanceProtectedInternalDerived() => throw new Exception();
 
         [DbFunction]
-        public override int VirtualBase()
-            => throw new Exception();
+        public override int VirtualBase() => throw new Exception();
 
         [DbFunction]
-        public IQueryable<Foo> QueryableNoParams()
-            => throw new Exception();
+        public IQueryable<Foo> QueryableNoParams() => throw new Exception();
 
         [DbFunction]
-        public IQueryable<Foo> QueryableSingleParam(int i)
-            => throw new Exception();
+        public IQueryable<Foo> QueryableSingleParam(int i) => throw new Exception();
 
-        public IQueryable<Foo> QueryableSingleParam(Expression<Func<int>> i)
-            => throw new Exception();
+        public IQueryable<Foo> QueryableSingleParam(Expression<Func<int>> i) =>
+            throw new Exception();
 
         [DbFunction]
-        public IQueryable<Foo> QueryableMultiParam(int i, double j)
-            => throw new Exception();
+        public IQueryable<Foo> QueryableMultiParam(int i, double j) => throw new Exception();
 
-        public IQueryable<Foo> QueryableMultiParam(Expression<Func<int>> i, double j)
-            => throw new Exception();
+        public IQueryable<Foo> QueryableMultiParam(Expression<Func<int>> i, double j) =>
+            throw new Exception();
 
-        public IQueryable<Foo> QueryableMultiParam(Expression<Func<int>> i, Expression<Func<double>> j)
-            => throw new Exception();
+        public IQueryable<Foo> QueryableMultiParam(
+            Expression<Func<int>> i,
+            Expression<Func<double>> j
+        ) => throw new Exception();
     }
 
     private static readonly MethodInfo MethodAmi = typeof(TestMethods).GetRuntimeMethod(
-        nameof(TestMethods.MethodA), new[] { typeof(string), typeof(int) });
+        nameof(TestMethods.MethodA),
+        new[] { typeof(string), typeof(int) }
+    );
 
     private static readonly MethodInfo MethodBmi = typeof(TestMethods).GetRuntimeMethod(
-        nameof(TestMethods.MethodB), new[] { typeof(string), typeof(int) });
+        nameof(TestMethods.MethodB),
+        new[] { typeof(string), typeof(int) }
+    );
 
     private static readonly MethodInfo MethodImi = typeof(TestMethods).GetRuntimeMethod(
-        nameof(TestMethods.MethodI), new Type[] { });
+        nameof(TestMethods.MethodI),
+        new Type[] { }
+    );
 
-    private static readonly MethodInfo MethodHmi = typeof(TestMethods).GetTypeInfo().GetDeclaredMethod(nameof(TestMethods.MethodH));
+    private static readonly MethodInfo MethodHmi = typeof(TestMethods)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(TestMethods.MethodH));
 
-    private static readonly MethodInfo MethodJmi = typeof(TestMethods).GetTypeInfo().GetDeclaredMethod(nameof(TestMethods.MethodJ));
+    private static readonly MethodInfo MethodJmi = typeof(TestMethods)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(TestMethods.MethodJ));
 
     private class TestMethods
     {
-        public static int Foo
-            => 1;
+        public static int Foo => 1;
 
-        public static int MethodA(string a, int b)
-            => throw new NotImplementedException();
+        public static int MethodA(string a, int b) => throw new NotImplementedException();
 
         [DbFunction("MethodFoo", "bar")]
-        public static int MethodB(string c, int d)
-            => throw new NotImplementedException();
+        public static int MethodB(string c, int d) => throw new NotImplementedException();
 
-        public static void MethodC()
-        {
-        }
+        public static void MethodC() { }
 
-        public static TestMethods MethodD()
-            => throw new NotImplementedException();
+        public static TestMethods MethodD() => throw new NotImplementedException();
 
-        public static int MethodF(MyBaseContext context)
-            => throw new NotImplementedException();
+        public static int MethodF(MyBaseContext context) => throw new NotImplementedException();
 
-        public static int MethodH<T>(T a, string b)
-            => throw new Exception();
+        public static int MethodH<T>(T a, string b) => throw new Exception();
 
-        public static int MethodI()
-            => throw new Exception();
+        public static int MethodI() => throw new Exception();
 
-        public static IQueryable<TestMethods> MethodJ()
-            => throw new Exception();
+        public static IQueryable<TestMethods> MethodJ() => throw new Exception();
 
-        public static IQueryable<TestMethods> MethodK(int id)
-            => throw new Exception();
+        public static IQueryable<TestMethods> MethodK(int id) => throw new Exception();
     }
 
     private static class OuterA
     {
         public static class Inner
         {
-            public static decimal? Min(decimal? a, decimal? b)
-                => throw new Exception();
+            public static decimal? Min(decimal? a, decimal? b) => throw new Exception();
         }
     }
 
@@ -264,8 +224,7 @@ public class DbFunctionTest
     {
         public static class Inner
         {
-            public static decimal? Min(decimal? a, decimal? b)
-                => throw new Exception();
+            public static decimal? Min(decimal? a, decimal? b) => throw new Exception();
         }
     }
 
@@ -274,13 +233,15 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var dup1methodInfo
-            = typeof(MyDerivedContext)
-                .GetRuntimeMethod(nameof(MyDerivedContext.DuplicateNameTest), Array.Empty<Type>());
+        var dup1methodInfo = typeof(MyDerivedContext).GetRuntimeMethod(
+            nameof(MyDerivedContext.DuplicateNameTest),
+            Array.Empty<Type>()
+        );
 
-        var dup2methodInfo
-            = typeof(MyNonDbContext)
-                .GetRuntimeMethod(nameof(MyNonDbContext.DuplicateNameTest), Array.Empty<Type>());
+        var dup2methodInfo = typeof(MyNonDbContext).GetRuntimeMethod(
+            nameof(MyNonDbContext.DuplicateNameTest),
+            Array.Empty<Type>()
+        );
 
         var dbFunc1 = modelBuilder.HasDbFunction(dup1methodInfo).HasName("Dup1").Metadata;
         var dbFunc2 = modelBuilder.HasDbFunction(dup2methodInfo).HasName("Dup2").Metadata;
@@ -301,7 +262,14 @@ public class DbFunctionTest
             Assert.NotNull(
                 model.FindDbFunction(
                     typeof(MyBaseContext).GetMethod(
-                        function, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance)));
+                        function,
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Static
+                            | BindingFlags.Instance
+                    )
+                )
+            );
         }
 
         foreach (var function in MyDerivedContext.FunctionNames)
@@ -309,7 +277,14 @@ public class DbFunctionTest
             Assert.NotNull(
                 model.FindDbFunction(
                     typeof(MyDerivedContext).GetMethod(
-                        function, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance)));
+                        function,
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Static
+                            | BindingFlags.Instance
+                    )
+                )
+            );
         }
     }
 
@@ -318,9 +293,10 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var methodInfo
-            = typeof(MyDerivedContext)
-                .GetRuntimeMethod(nameof(MyDerivedContext.InstancePublicBase), Array.Empty<Type>());
+        var methodInfo = typeof(MyDerivedContext).GetRuntimeMethod(
+            nameof(MyDerivedContext.InstancePublicBase),
+            Array.Empty<Type>()
+        );
 
         var dbFunc = modelBuilder.HasDbFunction(methodInfo).Metadata;
 
@@ -336,13 +312,18 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var methodInfo
-            = typeof(MyNonDbContext)
-                .GetRuntimeMethod(nameof(MyNonDbContext.NonStatic), Array.Empty<Type>());
+        var methodInfo = typeof(MyNonDbContext).GetRuntimeMethod(
+            nameof(MyNonDbContext.NonStatic),
+            Array.Empty<Type>()
+        );
 
         Assert.Equal(
-            RelationalStrings.DbFunctionInvalidInstanceType(methodInfo.DisplayName(), typeof(MyNonDbContext).ShortDisplayName()),
-            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(methodInfo)).Message);
+            RelationalStrings.DbFunctionInvalidInstanceType(
+                methodInfo.DisplayName(),
+                typeof(MyNonDbContext).ShortDisplayName()
+            ),
+            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(methodInfo)).Message
+        );
     }
 
     [ConditionalFact]
@@ -350,11 +331,18 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var methodInfo = typeof(TestMethods).GetRuntimeMethod(nameof(TestMethods.MethodC), Array.Empty<Type>());
+        var methodInfo = typeof(TestMethods).GetRuntimeMethod(
+            nameof(TestMethods.MethodC),
+            Array.Empty<Type>()
+        );
 
         Assert.Equal(
-            RelationalStrings.DbFunctionInvalidReturnType(nameof(TestMethods.MethodC), typeof(void).ShortDisplayName()),
-            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(methodInfo)).Message);
+            RelationalStrings.DbFunctionInvalidReturnType(
+                nameof(TestMethods.MethodC),
+                typeof(void).ShortDisplayName()
+            ),
+            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(methodInfo)).Message
+        );
     }
 
     [ConditionalFact]
@@ -396,7 +384,8 @@ public class DbFunctionTest
 
         Assert.Equal(
             RelationalStrings.DbFunctionExpressionIsNotMethodCall(expression),
-            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(expression)).Message);
+            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(expression)).Message
+        );
     }
 
     [ConditionalFact]
@@ -408,7 +397,8 @@ public class DbFunctionTest
 
         Assert.Equal(
             RelationalStrings.DbFunctionExpressionIsNotMethodCall(expression),
-            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(expression)).Message);
+            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(expression)).Message
+        );
     }
 
     [ConditionalFact]
@@ -416,9 +406,7 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var dbFuncBuilder = modelBuilder.HasDbFunction(MethodAmi)
-            .HasName("foo")
-            .HasSchema("bar");
+        var dbFuncBuilder = modelBuilder.HasDbFunction(MethodAmi).HasName("foo").HasSchema("bar");
 
         var dbFunc = dbFuncBuilder.Metadata;
 
@@ -434,7 +422,10 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        modelBuilder.HasDbFunction(MethodAmi, funcBuilder => funcBuilder.HasName("foo").HasSchema("bar"));
+        modelBuilder.HasDbFunction(
+            MethodAmi,
+            funcBuilder => funcBuilder.HasName("foo").HasSchema("bar")
+        );
 
         var dbFunc = modelBuilder.HasDbFunction(MethodAmi).Metadata;
 
@@ -465,9 +456,7 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var dbFuncBuilder = modelBuilder.HasDbFunction(MethodBmi)
-            .HasName(null)
-            .HasSchema(null);
+        var dbFuncBuilder = modelBuilder.HasDbFunction(MethodBmi).HasName(null).HasSchema(null);
 
         var dbFunc = dbFuncBuilder.Metadata;
 
@@ -489,7 +478,10 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        modelBuilder.HasDbFunction(MethodBmi, funcBuilder => funcBuilder.HasName(null).HasSchema(null));
+        modelBuilder.HasDbFunction(
+            MethodBmi,
+            funcBuilder => funcBuilder.HasName(null).HasSchema(null)
+        );
 
         var dbFuncBuilder = modelBuilder.HasDbFunction(MethodBmi);
         var dbFunc = dbFuncBuilder.Metadata;
@@ -586,7 +578,8 @@ public class DbFunctionTest
 
         Assert.Equal(
             RelationalStrings.DbFunctionGenericMethodNotSupported(MethodHmi.DisplayName()),
-            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(MethodHmi)).Message);
+            Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(MethodHmi)).Message
+        );
     }
 
     [ConditionalFact]
@@ -633,7 +626,11 @@ public class DbFunctionTest
         var expectedMessage = AbstractionsStrings.ArgumentIsEmpty("name");
 
         Assert.Equal(
-            expectedMessage, Assert.Throws<ArgumentException>(() => modelBuilder.HasDbFunction(MethodAmi).HasName("")).Message);
+            expectedMessage,
+            Assert
+                .Throws<ArgumentException>(() => modelBuilder.HasDbFunction(MethodAmi).HasName(""))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -654,9 +651,10 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var queryableNoParams
-            = typeof(MyDerivedContext)
-                .GetRuntimeMethod(nameof(MyDerivedContext.QueryableNoParams), Array.Empty<Type>());
+        var queryableNoParams = typeof(MyDerivedContext).GetRuntimeMethod(
+            nameof(MyDerivedContext.QueryableNoParams),
+            Array.Empty<Type>()
+        );
 
         var functionName = modelBuilder.HasDbFunction(queryableNoParams).Metadata.ModelName;
 
@@ -677,13 +675,21 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var queryableNoParams
-            = typeof(MyDerivedContext)
-                .GetRuntimeMethod(nameof(MyDerivedContext.QueryableNoParams), Array.Empty<Type>());
+        var queryableNoParams = typeof(MyDerivedContext).GetRuntimeMethod(
+            nameof(MyDerivedContext.QueryableNoParams),
+            Array.Empty<Type>()
+        );
 
         Assert.Equal(
-            RelationalStrings.NonScalarFunctionCannotBeNullable(nameof(MyDerivedContext.QueryableNoParams)),
-            Assert.Throws<InvalidOperationException>(() => modelBuilder.HasDbFunction(queryableNoParams).IsNullable()).Message);
+            RelationalStrings.NonScalarFunctionCannotBeNullable(
+                nameof(MyDerivedContext.QueryableNoParams)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => modelBuilder.HasDbFunction(queryableNoParams).IsNullable()
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -691,15 +697,23 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        var queryableSingleParam = typeof(MyDerivedContext)
-            .GetRuntimeMethod(nameof(MyDerivedContext.QueryableSingleParam), new[] { typeof(int) });
+        var queryableSingleParam = typeof(MyDerivedContext).GetRuntimeMethod(
+            nameof(MyDerivedContext.QueryableSingleParam),
+            new[] { typeof(int) }
+        );
 
         var function = modelBuilder.HasDbFunction(queryableSingleParam);
         var parameter = function.HasParameter("i");
 
         Assert.Equal(
-            RelationalStrings.NonScalarFunctionParameterCannotPropagatesNullability("i", nameof(MyDerivedContext.QueryableSingleParam)),
-            Assert.Throws<InvalidOperationException>(() => parameter.PropagatesNullability()).Message);
+            RelationalStrings.NonScalarFunctionParameterCannotPropagatesNullability(
+                "i",
+                nameof(MyDerivedContext.QueryableSingleParam)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => parameter.PropagatesNullability())
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -710,8 +724,12 @@ public class DbFunctionTest
         var dbFuncBuilder = modelBuilder.HasDbFunction(MethodBmi);
 
         Assert.Equal(
-            RelationalStrings.DbFunctionInvalidParameterName(dbFuncBuilder.Metadata.MethodInfo.DisplayName(), "q"),
-            Assert.Throws<ArgumentException>(() => dbFuncBuilder.HasParameter("q")).Message);
+            RelationalStrings.DbFunctionInvalidParameterName(
+                dbFuncBuilder.Metadata.MethodInfo.DisplayName(),
+                "q"
+            ),
+            Assert.Throws<ArgumentException>(() => dbFuncBuilder.HasParameter("q")).Message
+        );
     }
 
     [ConditionalFact]
@@ -805,41 +823,72 @@ public class DbFunctionTest
         var dbFunctionBuilder = modelBuilder.HasDbFunction(methodInfo);
 
         Assert.False(
-            dbFunctionBuilder.GetInfrastructure()
-                .CanSetTranslation(args => new SqlFragmentExpression("Empty"), fromDataAnnotation: true));
+            dbFunctionBuilder
+                .GetInfrastructure()
+                .CanSetTranslation(
+                    args => new SqlFragmentExpression("Empty"),
+                    fromDataAnnotation: true
+                )
+        );
         Assert.Null(dbFunctionBuilder.Metadata.Translation);
 
-        dbFunctionBuilder.GetInfrastructure().HasTranslation(args => new SqlFragmentExpression("Empty"));
+        dbFunctionBuilder
+            .GetInfrastructure()
+            .HasTranslation(args => new SqlFragmentExpression("Empty"));
         Assert.Null(dbFunctionBuilder.Metadata.Translation);
 
-        dbFunctionBuilder.GetInfrastructure()
+        dbFunctionBuilder
+            .GetInfrastructure()
             .HasTranslation(args => new SqlFragmentExpression("Empty"), fromDataAnnotation: true);
         Assert.Null(dbFunctionBuilder.Metadata.Translation);
 
         Assert.Equal(
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
-            Assert.Throws<InvalidOperationException>(
-                () => dbFunctionBuilder.HasTranslation(args => new SqlFragmentExpression("Empty"))).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        dbFunctionBuilder.HasTranslation(args => new SqlFragmentExpression("Empty"))
+                )
+                .Message
+        );
 
         var dbFunction = dbFunctionBuilder.Metadata;
 
         Assert.Equal(
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
-            Assert.Throws<InvalidOperationException>(
-                () => ((IConventionDbFunction)dbFunction).SetTranslation(args => new SqlFragmentExpression("Empty"))).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        ((IConventionDbFunction)dbFunction).SetTranslation(
+                            args => new SqlFragmentExpression("Empty")
+                        )
+                )
+                .Message
+        );
 
         Assert.Equal(
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
-            Assert.Throws<InvalidOperationException>(
-                () => ((IConventionDbFunction)dbFunction)
-                    .SetTranslation(args => new SqlFragmentExpression("Empty"), fromDataAnnotation: true)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        ((IConventionDbFunction)dbFunction).SetTranslation(
+                            args => new SqlFragmentExpression("Empty"),
+                            fromDataAnnotation: true
+                        )
+                )
+                .Message
+        );
 
         Assert.Equal(
             RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
-            Assert.Throws<InvalidOperationException>(
-                () => dbFunction.Translation = args => new SqlFragmentExpression("Empty")).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => dbFunction.Translation = args => new SqlFragmentExpression("Empty")
+                )
+                .Message
+        );
     }
 
-    private TestHelpers.TestModelBuilder GetModelBuilder()
-        => FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
+    private TestHelpers.TestModelBuilder GetModelBuilder() =>
+        FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
 }

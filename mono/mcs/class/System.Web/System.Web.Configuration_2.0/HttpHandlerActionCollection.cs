@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,81 +34,90 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	[ConfigurationCollection (typeof (HttpHandlerAction), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMapAlternate)]
-	public sealed class HttpHandlerActionCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection(
+        typeof(HttpHandlerAction),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMapAlternate
+    )]
+    public sealed class HttpHandlerActionCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-		static HttpHandlerActionCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static HttpHandlerActionCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-		public HttpHandlerActionCollection ()
-		{
-		}
-			
-		public void Add (HttpHandlerAction httpHandlerAction)
-		{
-			HttpApplication.ClearHandlerCache ();
-			BaseAdd (httpHandlerAction);
-		}
+        public HttpHandlerActionCollection() { }
 
-		public void Clear ()
-		{
-			HttpApplication.ClearHandlerCache ();
-			BaseClear ();
-		}
+        public void Add(HttpHandlerAction httpHandlerAction)
+        {
+            HttpApplication.ClearHandlerCache();
+            BaseAdd(httpHandlerAction);
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new HttpHandlerAction ();
-		}
+        public void Clear()
+        {
+            HttpApplication.ClearHandlerCache();
+            BaseClear();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((HttpHandlerAction)element).Path + "-" + ((HttpHandlerAction)element).Verb;
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new HttpHandlerAction();
+        }
 
-		public int IndexOf (HttpHandlerAction action)
-		{
-			return BaseIndexOf (action);
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((HttpHandlerAction)element).Path + "-" + ((HttpHandlerAction)element).Verb;
+        }
 
-		public void Remove (string verb, string path)
-		{
-			HttpApplication.ClearHandlerCache ();
-			BaseRemove (path + "-" + verb);
-		}
+        public int IndexOf(HttpHandlerAction action)
+        {
+            return BaseIndexOf(action);
+        }
 
-		public void Remove (HttpHandlerAction action)
-		{
-			HttpApplication.ClearHandlerCache ();
-			BaseRemove (action.Path + "-" + action.Verb);
-		}
+        public void Remove(string verb, string path)
+        {
+            HttpApplication.ClearHandlerCache();
+            BaseRemove(path + "-" + verb);
+        }
 
-		public void RemoveAt (int index)
-		{
-			HttpApplication.ClearHandlerCache ();
-			BaseRemoveAt (index);
-		}
+        public void Remove(HttpHandlerAction action)
+        {
+            HttpApplication.ClearHandlerCache();
+            BaseRemove(action.Path + "-" + action.Verb);
+        }
 
-		public override ConfigurationElementCollectionType CollectionType {
-			get { return ConfigurationElementCollectionType.AddRemoveClearMapAlternate; }
-		}
+        public void RemoveAt(int index)
+        {
+            HttpApplication.ClearHandlerCache();
+            BaseRemoveAt(index);
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        public override ConfigurationElementCollectionType CollectionType
+        {
+            get { return ConfigurationElementCollectionType.AddRemoveClearMapAlternate; }
+        }
 
-		public HttpHandlerAction this[int index] {
-			get { return (HttpHandlerAction)BaseGet (index); }
-			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-		}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
-	}
+        public HttpHandlerAction this[int index]
+        {
+            get { return (HttpHandlerAction)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
+
+        protected override bool ThrowOnDuplicate
+        {
+            get { return false; }
+        }
+    }
 }
-

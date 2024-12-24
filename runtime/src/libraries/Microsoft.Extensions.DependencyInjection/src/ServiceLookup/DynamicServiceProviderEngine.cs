@@ -13,12 +13,15 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private readonly ServiceProvider _serviceProvider;
 
         [RequiresDynamicCode("Creates DynamicMethods")]
-        public DynamicServiceProviderEngine(ServiceProvider serviceProvider) : base(serviceProvider)
+        public DynamicServiceProviderEngine(ServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public override Func<ServiceProviderEngineScope, object?> RealizeService(ServiceCallSite callSite)
+        public override Func<ServiceProviderEngineScope, object?> RealizeService(
+            ServiceCallSite callSite
+        )
         {
             int callCount = 0;
             return scope =>
@@ -31,20 +34,30 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 {
                     // Don't capture the ExecutionContext when forking to build the compiled version of the
                     // resolve function
-                    _ = ThreadPool.UnsafeQueueUserWorkItem(_ =>
-                    {
-                        try
+                    _ = ThreadPool.UnsafeQueueUserWorkItem(
+                        _ =>
                         {
-                            _serviceProvider.ReplaceServiceAccessor(callSite, base.RealizeService(callSite));
-                        }
-                        catch (Exception ex)
-                        {
-                            DependencyInjectionEventSource.Log.ServiceRealizationFailed(ex, _serviceProvider.GetHashCode());
+                            try
+                            {
+                                _serviceProvider.ReplaceServiceAccessor(
+                                    callSite,
+                                    base.RealizeService(callSite)
+                                );
+                            }
+                            catch (Exception ex)
+                            {
+                                DependencyInjectionEventSource.Log.ServiceRealizationFailed(
+                                    ex,
+                                    _serviceProvider.GetHashCode()
+                                );
 
-                            Debug.Fail($"We should never get exceptions from the background compilation.{Environment.NewLine}{ex}");
-                        }
-                    },
-                    null);
+                                Debug.Fail(
+                                    $"We should never get exceptions from the background compilation.{Environment.NewLine}{ex}"
+                                );
+                            }
+                        },
+                        null
+                    );
                 }
 
                 return result;

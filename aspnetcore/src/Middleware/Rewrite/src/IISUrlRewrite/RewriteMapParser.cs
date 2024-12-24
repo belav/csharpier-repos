@@ -24,7 +24,9 @@ internal static class RewriteMapParser
             var map = new IISRewriteMap(mapElement.Attribute(RewriteTags.Name)?.Value!);
             foreach (var addElement in mapElement.Elements(RewriteTags.Add))
             {
-                map[addElement.Attribute(RewriteTags.Key)!.Value.ToLowerInvariant()] = addElement.Attribute(RewriteTags.Value)!.Value;
+                map[addElement.Attribute(RewriteTags.Key)!.Value.ToLowerInvariant()] = addElement
+                    .Attribute(RewriteTags.Value)!
+                    .Value;
             }
             rewriteMaps.Add(map);
         }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,41 +29,38 @@
 
 using System.ComponentModel;
 
-namespace System.Web.UI 
+namespace System.Web.UI
 {
-	[AttributeUsage (AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public sealed class UrlPropertyAttribute : Attribute 
-	{
-		string filter;
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public sealed class UrlPropertyAttribute : Attribute
+    {
+        string filter;
 
-		public UrlPropertyAttribute () 
-			: this ("*.*")
-		{
-		}
+        public UrlPropertyAttribute()
+            : this("*.*") { }
 
-		public UrlPropertyAttribute (string filter) 
-		{
-			this.filter = filter;
-		}
+        public UrlPropertyAttribute(string filter)
+        {
+            this.filter = filter;
+        }
 
+        public string Filter
+        {
+            get { return filter; }
+        }
 
-		public string Filter { 
-			get { return filter; } 
-		}
+        public override bool Equals(object obj)
+        {
+            UrlPropertyAttribute upa = (obj as UrlPropertyAttribute);
+            if (upa == null)
+                return false;
 
-		public override bool Equals (object obj)
-		{
-			UrlPropertyAttribute upa = (obj as UrlPropertyAttribute);
-			if (upa == null)
-				return false;
+            return (filter.Equals(upa.Filter));
+        }
 
-			return (filter.Equals (upa.Filter));
-		}
-
-		public override int GetHashCode ()
-		{
-			return this.filter.GetHashCode ();
-		}
-	}
+        public override int GetHashCode()
+        {
+            return this.filter.GetHashCode();
+        }
+    }
 }
-

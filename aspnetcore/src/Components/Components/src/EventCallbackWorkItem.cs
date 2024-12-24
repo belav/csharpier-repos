@@ -58,19 +58,19 @@ public readonly struct EventCallbackWorkItem
                 return funcEventArgs.Invoke(arg);
 
             default:
+            {
+                try
                 {
-                    try
-                    {
-                        return @delegate.DynamicInvoke(arg) as Task ?? Task.CompletedTask;
-                    }
-                    catch (TargetInvocationException e)
-                    {
-                        // Since we fell into the DynamicInvoke case, any exception will be wrapped
-                        // in a TIE. We can expect this to be thrown synchronously, so it's low overhead
-                        // to unwrap it.
-                        return Task.FromException(e.InnerException!);
-                    }
+                    return @delegate.DynamicInvoke(arg) as Task ?? Task.CompletedTask;
                 }
+                catch (TargetInvocationException e)
+                {
+                    // Since we fell into the DynamicInvoke case, any exception will be wrapped
+                    // in a TIE. We can expect this to be thrown synchronously, so it's low overhead
+                    // to unwrap it.
+                    return Task.FromException(e.InnerException!);
+                }
+            }
         }
     }
 }

@@ -9,11 +9,13 @@ using System.Linq;
 namespace System.Collections.Frozen
 {
     /// <summary>Provides a frozen set to use when the item is a value type, the default comparer is used, and the item count is small.</summary>
-    internal sealed class SmallValueTypeDefaultComparerFrozenSet<T> : FrozenSetInternalBase<T, SmallValueTypeDefaultComparerFrozenSet<T>.GSW>
+    internal sealed class SmallValueTypeDefaultComparerFrozenSet<T>
+        : FrozenSetInternalBase<T, SmallValueTypeDefaultComparerFrozenSet<T>.GSW>
     {
         private readonly T[] _items;
 
-        internal SmallValueTypeDefaultComparerFrozenSet(HashSet<T> source) : base(EqualityComparer<T>.Default)
+        internal SmallValueTypeDefaultComparerFrozenSet(HashSet<T> source)
+            : base(EqualityComparer<T>.Default)
         {
             Debug.Assert(default(T) is not null);
             Debug.Assert(typeof(T).IsValueType);
@@ -25,7 +27,9 @@ namespace System.Collections.Frozen
         }
 
         private protected override T[] ItemsCore => _items;
+
         private protected override Enumerator GetEnumeratorCore() => new Enumerator(_items);
+
         private protected override int CountCore => _items.Length;
 
         private protected override int FindItemIndex(T item)
@@ -45,11 +49,15 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private SmallValueTypeDefaultComparerFrozenSet<T> _set;
-            public void Store(FrozenSet<T> set) => _set = (SmallValueTypeDefaultComparerFrozenSet<T>)set;
+
+            public void Store(FrozenSet<T> set) =>
+                _set = (SmallValueTypeDefaultComparerFrozenSet<T>)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<T> Comparer => _set.Comparer;
+
             public int FindItemIndex(T item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -24,7 +24,6 @@ namespace System.Linq.Parallel
     /// </summary>
     internal class EnumerableWrapperWeakToStrong : IEnumerable<object>
     {
-
         private readonly IEnumerable m_wrappedEnumerable; // The wrapped enumerable object.
 
         //-----------------------------------------------------------------------------------
@@ -53,7 +52,6 @@ namespace System.Linq.Parallel
 
         class WrapperEnumeratorWeakToStrong : IEnumerator<object>
         {
-
             private IEnumerator m_wrappedEnumerator; // The weakly typed enumerator we've wrapped.
 
             //-----------------------------------------------------------------------------------
@@ -99,8 +97,6 @@ namespace System.Linq.Parallel
             {
                 m_wrappedEnumerator.Reset();
             }
-
         }
-
     }
 }

@@ -17,10 +17,7 @@ public class MapWhenOptions
     /// </summary>
     public Func<HttpContext, bool>? Predicate
     {
-        get
-        {
-            return _predicate;
-        }
+        get { return _predicate; }
         set
         {
             ArgumentNullException.ThrowIfNull(value);

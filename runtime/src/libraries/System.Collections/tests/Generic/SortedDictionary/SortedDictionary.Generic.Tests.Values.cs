@@ -15,7 +15,9 @@ namespace System.Collections.Tests
         protected override bool DuplicateValuesAllowed => true;
         protected override bool IsReadOnly => true;
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
 
         protected override ICollection<string> GenericICollectionFactory()
         {
@@ -43,7 +45,9 @@ namespace System.Collections.Tests
         [Fact]
         public void SortedDictionary_Generic_ValueCollection_Constructor_NullDictionary()
         {
-            Assert.Throws<ArgumentNullException>(() => new SortedDictionary<string, string>.ValueCollection(null));
+            Assert.Throws<ArgumentNullException>(
+                () => new SortedDictionary<string, string>.ValueCollection(null)
+            );
         }
 
         [Theory]
@@ -65,7 +69,11 @@ namespace System.Collections.Tests
         protected override bool IsReadOnly => true;
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
+
         protected override bool SupportsSerialization => false;
 
         protected override ICollection NonGenericICollectionFactory()
@@ -107,7 +115,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void SortedDictionary_Generic_ValueCollection_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(int count)
+        public void SortedDictionary_Generic_ValueCollection_CopyTo_ExactlyEnoughSpaceInTypeCorrectArray(
+            int count
+        )
         {
             ICollection collection = NonGenericICollectionFactory(count);
             string[] array = new string[count];

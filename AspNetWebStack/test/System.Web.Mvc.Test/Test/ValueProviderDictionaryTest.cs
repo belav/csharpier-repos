@@ -42,7 +42,10 @@ namespace System.Web.Mvc.Test
         public void DictionaryInterface()
         {
             // Arrange
-            DictionaryHelper<string, ValueProviderResult> helper = new DictionaryHelper<string, ValueProviderResult>()
+            DictionaryHelper<string, ValueProviderResult> helper = new DictionaryHelper<
+                string,
+                ValueProviderResult
+            >()
             {
                 Creator = () => new ValueProviderDictionary(null),
                 Comparer = StringComparer.OrdinalIgnoreCase,
@@ -53,9 +56,9 @@ namespace System.Web.Mvc.Test
                     new ValueProviderResult(null, null, null),
                     new ValueProviderResult(null, null, null),
                     new ValueProviderResult(null, null, null),
-                    new ValueProviderResult(null, null, null)
+                    new ValueProviderResult(null, null, null),
                 },
-                ThrowOnKeyNotFound = false
+                ThrowOnKeyNotFound = false,
             };
 
             // Act & assert
@@ -176,12 +179,14 @@ namespace System.Web.Mvc.Test
                 { "bar", "barInQueryString" },
                 { "baz", "bazFromQueryString" },
                 { null, "nullValue" },
-                { "", "emptyStringValue" }
+                { "", "emptyStringValue" },
             };
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(c => c.HttpContext.Request.Form).Returns(form);
-            mockControllerContext.Setup(c => c.HttpContext.Request.QueryString).Returns(queryString);
+            mockControllerContext
+                .Setup(c => c.HttpContext.Request.QueryString)
+                .Returns(queryString);
             mockControllerContext.Setup(c => c.RouteData).Returns(rd);
             return mockControllerContext.Object;
         }

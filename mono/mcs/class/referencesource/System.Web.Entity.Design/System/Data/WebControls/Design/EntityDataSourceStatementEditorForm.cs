@@ -10,11 +10,11 @@
 // Where properties and parameters
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Web.UI.Design.WebControls.Util;
 using System.Drawing;
 using System.Globalization;
 using System.Reflection;
 using System.Web.UI.Design.WebControls;
+using System.Web.UI.Design.WebControls.Util;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
@@ -37,12 +37,20 @@ namespace System.Web.UI.Design.WebControls
         private string _cachedStatementText;
         private readonly string _helpTopic;
 
-        public EntityDataSourceStatementEditorForm(System.Web.UI.Control entityDataSource, IServiceProvider serviceProvider,
-            bool hasAutoGen, bool isAutoGen, string propertyName, string statementLabelText, string statementAccessibleName,
-            string helpTopic, string statement, ParameterCollection parameters)
+        public EntityDataSourceStatementEditorForm(
+            System.Web.UI.Control entityDataSource,
+            IServiceProvider serviceProvider,
+            bool hasAutoGen,
+            bool isAutoGen,
+            string propertyName,
+            string statementLabelText,
+            string statementAccessibleName,
+            string helpTopic,
+            string statement,
+            ParameterCollection parameters
+        )
             : base(serviceProvider)
         {
-
             _entityDataSource = entityDataSource;
             InitializeComponent();
             InitializeUI(propertyName, statementLabelText, statementAccessibleName);
@@ -76,34 +84,22 @@ namespace System.Web.UI.Design.WebControls
 
         public bool AutoGen
         {
-            get
-            {
-                return _autoGenerateCheckBox.Checked;
-            }
+            get { return _autoGenerateCheckBox.Checked; }
         }
 
         protected override string HelpTopic
         {
-            get
-            {
-                return _helpTopic;
-            }
+            get { return _helpTopic; }
         }
 
         public ParameterCollection Parameters
         {
-            get
-            {
-                return _parameters;
-            }
+            get { return _parameters; }
         }
 
         public string Statement
         {
-            get
-            {
-                return _statementTextBox.Text;
-            }
+            get { return _statementTextBox.Text; }
         }
 
         private void HideCheckBox()
@@ -134,13 +130,15 @@ namespace System.Web.UI.Design.WebControls
         private void InitializeAnchors()
         {
             _checkBoxPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-            _autoGenerateCheckBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+            _autoGenerateCheckBox.Anchor =
+                AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
             _statementPanel.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             _statementLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             _statementTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-            
-            _parameterEditorUserControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+
+            _parameterEditorUserControl.Anchor =
+                AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
             _okButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             _cancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -158,72 +156,128 @@ namespace System.Web.UI.Design.WebControls
             this._statementLabel = new System.Windows.Forms.Label();
             this._statementTextBox = new System.Windows.Forms.TextBox();
             this._autoGenerateCheckBox = new System.Windows.Forms.CheckBox();
-            this._parameterEditorUserControl = (ParameterEditorUserControl)Activator.CreateInstance(typeof(ParameterEditorUserControl), BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { ServiceProvider, _entityDataSource }, null);
+            this._parameterEditorUserControl = (ParameterEditorUserControl)
+                Activator.CreateInstance(
+                    typeof(ParameterEditorUserControl),
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    new object[] { ServiceProvider, _entityDataSource },
+                    null
+                );
             this._checkBoxPanel = new System.Windows.Forms.Panel();
             this._statementPanel = new System.Windows.Forms.Panel();
             this._checkBoxPanel.SuspendLayout();
             this._statementPanel.SuspendLayout();
             this.SuspendLayout();
             this.InitializeSizes();
-            // 
+            //
             // _okButton
-            // 
-            this._okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this._okButton.Name = "_okButton";            
+            //
+            this._okButton.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        System.Windows.Forms.AnchorStyles.Bottom
+                        | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
+            this._okButton.Name = "_okButton";
             this._okButton.Click += new System.EventHandler(this.OnOkButtonClick);
-            // 
+            //
             // _cancelButton
-            // 
-            this._cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._cancelButton.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        System.Windows.Forms.AnchorStyles.Bottom
+                        | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this._cancelButton.Name = "_cancelButton";            
+            this._cancelButton.Name = "_cancelButton";
             this._cancelButton.Click += new System.EventHandler(this.OnCancelButtonClick);
-            // 
+            //
             // _commandLabel
-            // 
-            this._statementLabel.Name = "_commandLabel";            
-            // 
+            //
+            this._statementLabel.Name = "_commandLabel";
+            //
             // _statementTextBox
-            // 
+            //
             this._statementTextBox.AcceptsReturn = true;
-            this._statementTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this._statementTextBox.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        (
+                            System.Windows.Forms.AnchorStyles.Top
+                            | System.Windows.Forms.AnchorStyles.Left
+                        ) | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._statementTextBox.Multiline = true;
             this._statementTextBox.Name = "_statementTextBox";
-            this._statementTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;            
-            // 
+            this._statementTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            //
             // _autoGenerateCheckBox
-            // 
+            //
             this._autoGenerateCheckBox.CheckAlign = ContentAlignment.TopLeft;
             this._autoGenerateCheckBox.TextAlign = ContentAlignment.TopLeft;
             this._autoGenerateCheckBox.Name = "_autoGenerateCheckBox";
             this._autoGenerateCheckBox.UseVisualStyleBackColor = true;
-            this._autoGenerateCheckBox.CheckedChanged += new EventHandler(OnAutoGenerateCheckBoxCheckedChanged);
-            // 
+            this._autoGenerateCheckBox.CheckedChanged += new EventHandler(
+                OnAutoGenerateCheckBoxCheckedChanged
+            );
+            //
             // _checkBoxPanel
-            // 
-            this._checkBoxPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._checkBoxPanel.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        (
+                            System.Windows.Forms.AnchorStyles.Top
+                            | System.Windows.Forms.AnchorStyles.Left
+                        ) | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._checkBoxPanel.Controls.Add(this._autoGenerateCheckBox);
-            this._checkBoxPanel.Name = "_radioPanel";            
-            // 
+            this._checkBoxPanel.Name = "_radioPanel";
+            //
             // _statementPanel
-            // 
-            this._statementPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._statementPanel.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        (
+                            System.Windows.Forms.AnchorStyles.Top
+                            | System.Windows.Forms.AnchorStyles.Left
+                        ) | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._statementPanel.Controls.Add(this._statementLabel);
             this._statementPanel.Controls.Add(this._statementTextBox);
-            this._statementPanel.Name = "_statementPanel";            
-            // 
+            this._statementPanel.Name = "_statementPanel";
+            //
             // _parameterEditorUserControl
-            // 
-            this._parameterEditorUserControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this._parameterEditorUserControl.Name = "_parameterEditorUserControl";            
-            // 
+            //
+            this._parameterEditorUserControl.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        (
+                            (
+                                System.Windows.Forms.AnchorStyles.Top
+                                | System.Windows.Forms.AnchorStyles.Bottom
+                            ) | System.Windows.Forms.AnchorStyles.Left
+                        ) | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
+            this._parameterEditorUserControl.Name = "_parameterEditorUserControl";
+            //
             // EntityDataSourceStatementEditorForm
-            // 
+            //
             this.AcceptButton = this._okButton;
             this.CancelButton = this._cancelButton;
             this.Controls.Add(this._statementPanel);
@@ -321,12 +375,14 @@ namespace System.Web.UI.Design.WebControls
             if (String.Equals(propertyName, "Where", StringComparison.OrdinalIgnoreCase))
             {
                 _autoGenerateCheckBox.Text = Strings.ExpressionEditor_AutoGenerateWhereCheckBox;
-                _autoGenerateCheckBox.AccessibleName = Strings.ExpressionEditor_AutoGenerateWhereCheckBoxAccessibleName;
+                _autoGenerateCheckBox.AccessibleName =
+                    Strings.ExpressionEditor_AutoGenerateWhereCheckBoxAccessibleName;
             }
             else if (String.Equals(propertyName, "OrderBy", StringComparison.OrdinalIgnoreCase))
             {
                 _autoGenerateCheckBox.Text = Strings.ExpressionEditor_AutoGenerateOrderByCheckBox;
-                _autoGenerateCheckBox.AccessibleName = Strings.ExpressionEditor_AutoGenerateOrderByCheckBoxAccessibleName;
+                _autoGenerateCheckBox.AccessibleName =
+                    Strings.ExpressionEditor_AutoGenerateOrderByCheckBoxAccessibleName;
             }
         }
 
@@ -364,4 +420,3 @@ namespace System.Web.UI.Design.WebControls
         }
     }
 }
-

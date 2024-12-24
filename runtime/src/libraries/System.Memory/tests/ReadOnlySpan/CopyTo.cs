@@ -81,7 +81,7 @@ namespace System.SpanTests
             bool success = srcSpan.TryCopyTo(dst);
             Assert.False(success);
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // TryCopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // TryCopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -91,9 +91,12 @@ namespace System.SpanTests
             int[] dst = { 99, 100 };
 
             ReadOnlySpan<int> srcSpan = new ReadOnlySpan<int>(src);
-            TestHelpers.AssertThrows<ArgumentException, int>(srcSpan, (_srcSpan) => _srcSpan.CopyTo(dst));
+            TestHelpers.AssertThrows<ArgumentException, int>(
+                srcSpan,
+                (_srcSpan) => _srcSpan.CopyTo(dst)
+            );
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // CopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // CopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -151,13 +154,22 @@ namespace System.SpanTests
             {
                 try
                 {
-                    allocatedFirst = AllocationHelper.TryAllocNative((IntPtr)bufferSize, out memBlockFirst);
-                    allocatedSecond = AllocationHelper.TryAllocNative((IntPtr)bufferSize, out memBlockSecond);
+                    allocatedFirst = AllocationHelper.TryAllocNative(
+                        (IntPtr)bufferSize,
+                        out memBlockFirst
+                    );
+                    allocatedSecond = AllocationHelper.TryAllocNative(
+                        (IntPtr)bufferSize,
+                        out memBlockSecond
+                    );
 
                     if (allocatedFirst && allocatedSecond)
                     {
                         ref Guid memoryFirst = ref Unsafe.AsRef<Guid>(memBlockFirst.ToPointer());
-                        var spanFirst = new ReadOnlySpan<Guid>(memBlockFirst.ToPointer(), GuidCount);
+                        var spanFirst = new ReadOnlySpan<Guid>(
+                            memBlockFirst.ToPointer(),
+                            GuidCount
+                        );
 
                         ref Guid memorySecond = ref Unsafe.AsRef<Guid>(memBlockSecond.ToPointer());
                         var spanSecond = new Span<Guid>(memBlockSecond.ToPointer(), GuidCount);

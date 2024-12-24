@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
 #if STATIC
 using MetaType = IKVM.Reflection.Type;
 using IKVM.Reflection;
@@ -28,125 +27,160 @@ using System.Reflection.Emit;
 
 namespace Mono.CSharp
 {
-	public class FieldDeclarator
-	{
-		public FieldDeclarator (SimpleMemberName name, Expression initializer)
-		{
-			this.Name = name;
-			this.Initializer = initializer;
-		}
+    public class FieldDeclarator
+    {
+        public FieldDeclarator(SimpleMemberName name, Expression initializer)
+        {
+            this.Name = name;
+            this.Initializer = initializer;
+        }
 
-		#region Properties
+        #region Properties
 
-		public SimpleMemberName Name { get; private set; }
-		public Expression Initializer { get; private set; }
+        public SimpleMemberName Name { get; private set; }
+        public Expression Initializer { get; private set; }
 
-		#endregion
+        #endregion
 
-		public virtual FullNamedExpression GetFieldTypeExpression (FieldBase field)
-		{
-			return new TypeExpression (field.MemberType, Name.Location); 
-		}
-	}
+        public virtual FullNamedExpression GetFieldTypeExpression(FieldBase field)
+        {
+            return new TypeExpression(field.MemberType, Name.Location);
+        }
+    }
 
-	//
-	// Abstract class for all fields
-	//
-	abstract public class FieldBase : MemberBase
-	{
-		protected FieldBuilder FieldBuilder;
-		protected FieldSpec spec;
-		public Status status;
-		protected Expression initializer;
-		protected List<FieldDeclarator> declarators;
+    //
+    // Abstract class for all fields
+    //
+    abstract public class FieldBase : MemberBase
+    {
+        protected FieldBuilder FieldBuilder;
+        protected FieldSpec spec;
+        public Status status;
+        protected Expression initializer;
+        protected List<FieldDeclarator> declarators;
 
-		[Flags]
-		public enum Status : byte {
-			HAS_OFFSET = 4		// Used by FieldMember.
-		}
+        [Flags]
+        public enum Status : byte
+        {
+            HAS_OFFSET =
+                4 // Used by FieldMember.
+            ,
+        }
 
-		static readonly string[] attribute_targets = new string [] { "field" };
+        static readonly string[] attribute_targets = new string[] { "field" };
 
-		protected FieldBase (TypeDefinition parent, FullNamedExpression type, Modifiers mod, Modifiers allowed_mod, MemberName name, Attributes attrs)
-			: base (parent, type, mod, allowed_mod | Modifiers.ABSTRACT, Modifiers.PRIVATE, name, attrs)
-		{
-			if ((mod & Modifiers.ABSTRACT) != 0)
-				Report.Error (681, Location, "The modifier 'abstract' is not valid on fields. Try using a property instead");
-		}
+        protected FieldBase(
+            TypeDefinition parent,
+            FullNamedExpression type,
+            Modifiers mod,
+            Modifiers allowed_mod,
+            MemberName name,
+            Attributes attrs
+        )
+            : base(
+                parent,
+                type,
+                mod,
+                allowed_mod | Modifiers.ABSTRACT,
+                Modifiers.PRIVATE,
+                name,
+                attrs
+            )
+        {
+            if ((mod & Modifiers.ABSTRACT) != 0)
+                Report.Error(
+                    681,
+                    Location,
+                    "The modifier 'abstract' is not valid on fields. Try using a property instead"
+                );
+        }
 
-		#region Properties
+        #region Properties
 
-		public override AttributeTargets AttributeTargets {
-			get {
-				return AttributeTargets.Field;
-			}
-		}
+        public override AttributeTargets AttributeTargets
+        {
+            get { return AttributeTargets.Field; }
+        }
 
-		public List<FieldDeclarator> Declarators {
-			get {
-				return this.declarators;
-			}
-		}
+        public List<FieldDeclarator> Declarators
+        {
+            get { return this.declarators; }
+        }
 
-		public Expression Initializer {
-			get {
-				return initializer;
-			}
-			set {
-				this.initializer = value;
-			}
-		}
+        public Expression Initializer
+        {
+            get { return initializer; }
+            set { this.initializer = value; }
+        }
 
-		public string Name {
-			get {
-				return MemberName.Name;
-			}
-		}
+        public string Name
+        {
+            get { return MemberName.Name; }
+        }
 
-		public FieldSpec Spec {
-			get {
-				return spec;
-			}
-		}
+        public FieldSpec Spec
+        {
+            get { return spec; }
+        }
 
-		public override string[] ValidAttributeTargets  {
-			get {
-				return attribute_targets;
-			}
-		}
+        public override string[] ValidAttributeTargets
+        {
+            get { return attribute_targets; }
+        }
 
-		#endregion
+        #endregion
 
-		public void AddDeclarator (FieldDeclarator declarator)
-		{
-			if (declarators == null)
-				declarators = new List<FieldDeclarator> (2);
+        public void AddDeclarator(FieldDeclarator declarator)
+        {
+            if (declarators == null)
+                declarators = new List<FieldDeclarator>(2);
 
-			declarators.Add (declarator);
+            declarators.Add(declarator);
 
-			Parent.AddNameToContainer (this, declarator.Name.Value);
-		}
+            Parent.AddNameToContainer(this, declarator.Name.Value);
+        }
 
-		public override void ApplyAttributeBuilder (Attribute a, MethodSpec ctor, byte[] cdata, PredefinedAttributes pa)
-		{
-			if (a.Type == pa.FieldOffset) {
-				status |= Status.HAS_OFFSET;
+        public override void ApplyAttributeBuilder(
+            Attribute a,
+            MethodSpec ctor,
+            byte[] cdata,
+            PredefinedAttributes pa
+        )
+        {
+            if (a.Type == pa.FieldOffset)
+            {
+                status |= Status.HAS_OFFSET;
 
-				if (!Parent.PartialContainer.HasExplicitLayout) {
-					Report.Error (636, Location, "The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)");
-					return;
-				}
+                if (!Parent.PartialContainer.HasExplicitLayout)
+                {
+                    Report.Error(
+                        636,
+                        Location,
+                        "The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)"
+                    );
+                    return;
+                }
 
-				if ((ModFlags & Modifiers.STATIC) != 0 || this is Const) {
-					Report.Error (637, Location, "The FieldOffset attribute is not allowed on static or const fields");
-					return;
-				}
-			}
+                if ((ModFlags & Modifiers.STATIC) != 0 || this is Const)
+                {
+                    Report.Error(
+                        637,
+                        Location,
+                        "The FieldOffset attribute is not allowed on static or const fields"
+                    );
+                    return;
+                }
+            }
 
-			if (a.Type == pa.FixedBuffer) {
-				Report.Error (1716, Location, "Do not use 'System.Runtime.CompilerServices.FixedBuffer' attribute. Use the 'fixed' field modifier instead");
-				return;
-			}
+            if (a.Type == pa.FixedBuffer)
+            {
+                Report.Error(
+                    1716,
+                    Location,
+                    "Do not use 'System.Runtime.CompilerServices.FixedBuffer' attribute. Use the 'fixed' field modifier instead"
+                );
+                return;
+            }
 
 #if false
 			if (a.Type == pa.MarshalAs) {
@@ -157,625 +191,849 @@ namespace Mono.CSharp
 				return;
 			}
 #endif
-			if ((a.HasSecurityAttribute)) {
-				a.Error_InvalidSecurityParent ();
-				return;
-			}
+            if ((a.HasSecurityAttribute))
+            {
+                a.Error_InvalidSecurityParent();
+                return;
+            }
 
-			if (a.Type == pa.Dynamic) {
-				a.Error_MisusedDynamicAttribute ();
-				return;
-			}
+            if (a.Type == pa.Dynamic)
+            {
+                a.Error_MisusedDynamicAttribute();
+                return;
+            }
 
-			FieldBuilder.SetCustomAttribute ((ConstructorInfo) ctor.GetMetaInfo (), cdata);
-		}
+            FieldBuilder.SetCustomAttribute((ConstructorInfo)ctor.GetMetaInfo(), cdata);
+        }
 
-		public void SetCustomAttribute (MethodSpec ctor, byte[] data)
-		{
-			FieldBuilder.SetCustomAttribute ((ConstructorInfo) ctor.GetMetaInfo (), data);
-		}
+        public void SetCustomAttribute(MethodSpec ctor, byte[] data)
+        {
+            FieldBuilder.SetCustomAttribute((ConstructorInfo)ctor.GetMetaInfo(), data);
+        }
 
- 		protected override bool CheckBase ()
-		{
- 			if (!base.CheckBase ())
- 				return false;
+        protected override bool CheckBase()
+        {
+            if (!base.CheckBase())
+                return false;
 
-			MemberSpec candidate;
-			bool overrides = false;
-			var conflict_symbol = MemberCache.FindBaseMember (this, out candidate, ref overrides);
-			if (conflict_symbol == null)
-				conflict_symbol = candidate;
+            MemberSpec candidate;
+            bool overrides = false;
+            var conflict_symbol = MemberCache.FindBaseMember(this, out candidate, ref overrides);
+            if (conflict_symbol == null)
+                conflict_symbol = candidate;
 
- 			if (conflict_symbol == null) {
- 				if ((ModFlags & Modifiers.NEW) != 0) {
- 					Report.Warning (109, 4, Location, "The member `{0}' does not hide an inherited member. The new keyword is not required",
-						GetSignatureForError ());
- 				}
- 			} else {
-				if ((ModFlags & (Modifiers.NEW | Modifiers.OVERRIDE | Modifiers.BACKING_FIELD)) == 0) {
-					Report.SymbolRelatedToPreviousError (conflict_symbol);
-					Report.Warning (108, 2, Location, "`{0}' hides inherited member `{1}'. Use the new keyword if hiding was intended",
-						GetSignatureForError (), conflict_symbol.GetSignatureForError ());
-				}
+            if (conflict_symbol == null)
+            {
+                if ((ModFlags & Modifiers.NEW) != 0)
+                {
+                    Report.Warning(
+                        109,
+                        4,
+                        Location,
+                        "The member `{0}' does not hide an inherited member. The new keyword is not required",
+                        GetSignatureForError()
+                    );
+                }
+            }
+            else
+            {
+                if (
+                    (ModFlags & (Modifiers.NEW | Modifiers.OVERRIDE | Modifiers.BACKING_FIELD)) == 0
+                )
+                {
+                    Report.SymbolRelatedToPreviousError(conflict_symbol);
+                    Report.Warning(
+                        108,
+                        2,
+                        Location,
+                        "`{0}' hides inherited member `{1}'. Use the new keyword if hiding was intended",
+                        GetSignatureForError(),
+                        conflict_symbol.GetSignatureForError()
+                    );
+                }
 
-				if (conflict_symbol.IsAbstract) {
-					Report.SymbolRelatedToPreviousError (conflict_symbol);
-					Report.Error (533, Location, "`{0}' hides inherited abstract member `{1}'",
-						GetSignatureForError (), conflict_symbol.GetSignatureForError ());
-				}
-			}
- 
- 			return true;
- 		}
+                if (conflict_symbol.IsAbstract)
+                {
+                    Report.SymbolRelatedToPreviousError(conflict_symbol);
+                    Report.Error(
+                        533,
+                        Location,
+                        "`{0}' hides inherited abstract member `{1}'",
+                        GetSignatureForError(),
+                        conflict_symbol.GetSignatureForError()
+                    );
+                }
+            }
 
-		public virtual Constant ConvertInitializer (ResolveContext rc, Constant expr)
-		{
-			return expr.ConvertImplicitly (MemberType);
-		}
+            return true;
+        }
 
-		protected override void DoMemberTypeDependentChecks ()
-		{
-			base.DoMemberTypeDependentChecks ();
+        public virtual Constant ConvertInitializer(ResolveContext rc, Constant expr)
+        {
+            return expr.ConvertImplicitly(MemberType);
+        }
 
-			if (MemberType.IsGenericParameter)
-				return;
+        protected override void DoMemberTypeDependentChecks()
+        {
+            base.DoMemberTypeDependentChecks();
 
-			if (MemberType.IsStatic)
-				Error_VariableOfStaticClass (Location, GetSignatureForError (), MemberType, Report);
+            if (MemberType.IsGenericParameter)
+                return;
 
-			if (!IsCompilerGenerated)
-				CheckBase ();
+            if (MemberType.IsStatic)
+                Error_VariableOfStaticClass(Location, GetSignatureForError(), MemberType, Report);
 
-			IsTypePermitted ();
-		}
+            if (!IsCompilerGenerated)
+                CheckBase();
 
-		//
-		//   Represents header string for documentation comment.
-		//
-		public override string DocCommentHeader {
-			get { return "F:"; }
-		}
+            IsTypePermitted();
+        }
 
-		public override void Emit ()
-		{
-			if (member_type.BuiltinType == BuiltinTypeSpec.Type.Dynamic) {
-				Module.PredefinedAttributes.Dynamic.EmitAttribute (FieldBuilder);
-			} else if (!Parent.IsCompilerGenerated && member_type.HasDynamicElement) {
-				Module.PredefinedAttributes.Dynamic.EmitAttribute (FieldBuilder, member_type, Location);
-			}
+        //
+        //   Represents header string for documentation comment.
+        //
+        public override string DocCommentHeader
+        {
+            get { return "F:"; }
+        }
 
-			if (member_type.HasNamedTupleElement) {
-				Module.PredefinedAttributes.TupleElementNames.EmitAttribute (FieldBuilder, member_type, Location);
-			}
+        public override void Emit()
+        {
+            if (member_type.BuiltinType == BuiltinTypeSpec.Type.Dynamic)
+            {
+                Module.PredefinedAttributes.Dynamic.EmitAttribute(FieldBuilder);
+            }
+            else if (!Parent.IsCompilerGenerated && member_type.HasDynamicElement)
+            {
+                Module.PredefinedAttributes.Dynamic.EmitAttribute(
+                    FieldBuilder,
+                    member_type,
+                    Location
+                );
+            }
 
-			if ((ModFlags & Modifiers.COMPILER_GENERATED) != 0 && !Parent.IsCompilerGenerated)
-				Module.PredefinedAttributes.CompilerGenerated.EmitAttribute (FieldBuilder);
-			if ((ModFlags & Modifiers.DEBUGGER_HIDDEN) != 0)
-				Module.PredefinedAttributes.DebuggerBrowsable.EmitAttribute (FieldBuilder, System.Diagnostics.DebuggerBrowsableState.Never);
+            if (member_type.HasNamedTupleElement)
+            {
+                Module.PredefinedAttributes.TupleElementNames.EmitAttribute(
+                    FieldBuilder,
+                    member_type,
+                    Location
+                );
+            }
 
-			if (OptAttributes != null) {
-				OptAttributes.Emit ();
-			}
+            if ((ModFlags & Modifiers.COMPILER_GENERATED) != 0 && !Parent.IsCompilerGenerated)
+                Module.PredefinedAttributes.CompilerGenerated.EmitAttribute(FieldBuilder);
+            if ((ModFlags & Modifiers.DEBUGGER_HIDDEN) != 0)
+                Module.PredefinedAttributes.DebuggerBrowsable.EmitAttribute(
+                    FieldBuilder,
+                    System.Diagnostics.DebuggerBrowsableState.Never
+                );
 
-			if (((status & Status.HAS_OFFSET) == 0) && (ModFlags & (Modifiers.STATIC | Modifiers.BACKING_FIELD)) == 0 && Parent.PartialContainer.HasExplicitLayout) {
-				Report.Error (625, Location, "`{0}': Instance field types marked with StructLayout(LayoutKind.Explicit) must have a FieldOffset attribute", GetSignatureForError ());
-			}
+            if (OptAttributes != null)
+            {
+                OptAttributes.Emit();
+            }
 
-			if (!IsCompilerGenerated)
-				ConstraintChecker.Check (this, member_type, type_expr.Location);
+            if (
+                ((status & Status.HAS_OFFSET) == 0)
+                && (ModFlags & (Modifiers.STATIC | Modifiers.BACKING_FIELD)) == 0
+                && Parent.PartialContainer.HasExplicitLayout
+            )
+            {
+                Report.Error(
+                    625,
+                    Location,
+                    "`{0}': Instance field types marked with StructLayout(LayoutKind.Explicit) must have a FieldOffset attribute",
+                    GetSignatureForError()
+                );
+            }
 
-			base.Emit ();
-		}
+            if (!IsCompilerGenerated)
+                ConstraintChecker.Check(this, member_type, type_expr.Location);
 
-		public static void Error_VariableOfStaticClass (Location loc, string variable_name, TypeSpec static_class, Report Report)
-		{
-			Report.SymbolRelatedToPreviousError (static_class);
-			Report.Error (723, loc, "`{0}': cannot declare variables of static types",
-				variable_name);
-		}
+            base.Emit();
+        }
 
-		protected override bool VerifyClsCompliance ()
-		{
-			if (!base.VerifyClsCompliance ())
-				return false;
+        public static void Error_VariableOfStaticClass(
+            Location loc,
+            string variable_name,
+            TypeSpec static_class,
+            Report Report
+        )
+        {
+            Report.SymbolRelatedToPreviousError(static_class);
+            Report.Error(
+                723,
+                loc,
+                "`{0}': cannot declare variables of static types",
+                variable_name
+            );
+        }
 
-			if (!MemberType.IsCLSCompliant () || this is FixedField) {
-				Report.Warning (3003, 1, Location, "Type of `{0}' is not CLS-compliant",
-					GetSignatureForError ());
-			}
-			return true;
-		}
-	}
+        protected override bool VerifyClsCompliance()
+        {
+            if (!base.VerifyClsCompliance())
+                return false;
 
-	//
-	// Field specification
-	//
-	public class FieldSpec : MemberSpec, IInterfaceMemberSpec
-	{
-		FieldInfo metaInfo;
-		TypeSpec memberType;
+            if (!MemberType.IsCLSCompliant() || this is FixedField)
+            {
+                Report.Warning(
+                    3003,
+                    1,
+                    Location,
+                    "Type of `{0}' is not CLS-compliant",
+                    GetSignatureForError()
+                );
+            }
+            return true;
+        }
+    }
 
-		public FieldSpec (TypeSpec declaringType, IMemberDefinition definition, TypeSpec memberType, FieldInfo info, Modifiers modifiers)
-			: base (MemberKind.Field, declaringType, definition, modifiers)
-		{
-			this.metaInfo = info;
-			this.memberType = memberType;
-		}
+    //
+    // Field specification
+    //
+    public class FieldSpec : MemberSpec, IInterfaceMemberSpec
+    {
+        FieldInfo metaInfo;
+        TypeSpec memberType;
 
-		#region Properties
+        public FieldSpec(
+            TypeSpec declaringType,
+            IMemberDefinition definition,
+            TypeSpec memberType,
+            FieldInfo info,
+            Modifiers modifiers
+        )
+            : base(MemberKind.Field, declaringType, definition, modifiers)
+        {
+            this.metaInfo = info;
+            this.memberType = memberType;
+        }
 
-		public bool IsReadOnly {
-			get {
-				return (Modifiers & Modifiers.READONLY) != 0;
-			}
-		}
+        #region Properties
 
-		public TypeSpec MemberType {
-			get {
-				return memberType;
-			}
-		}
+        public bool IsReadOnly
+        {
+            get { return (Modifiers & Modifiers.READONLY) != 0; }
+        }
 
-		#endregion
+        public TypeSpec MemberType
+        {
+            get { return memberType; }
+        }
 
-		public FieldInfo GetMetaInfo ()
-		{
-			if ((state & StateFlags.PendingMetaInflate) != 0) {
-				var decl_meta = DeclaringType.GetMetaInfo ();
-				if (DeclaringType.IsTypeBuilder) {
-					metaInfo = TypeBuilder.GetField (decl_meta, metaInfo);
-				} else {
-					var orig_token = metaInfo.MetadataToken;
-					metaInfo = decl_meta.GetField (Name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
-					if (metaInfo.MetadataToken != orig_token)
-						throw new NotImplementedException ("Resolved to wrong meta token");
+        #endregion
 
-					// What a stupid API, does not work because field handle is imported
-					// metaInfo = FieldInfo.GetFieldFromHandle (metaInfo.FieldHandle, DeclaringType.MetaInfo.TypeHandle);
-				}
+        public FieldInfo GetMetaInfo()
+        {
+            if ((state & StateFlags.PendingMetaInflate) != 0)
+            {
+                var decl_meta = DeclaringType.GetMetaInfo();
+                if (DeclaringType.IsTypeBuilder)
+                {
+                    metaInfo = TypeBuilder.GetField(decl_meta, metaInfo);
+                }
+                else
+                {
+                    var orig_token = metaInfo.MetadataToken;
+                    metaInfo = decl_meta.GetField(
+                        Name,
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                    );
+                    if (metaInfo.MetadataToken != orig_token)
+                        throw new NotImplementedException("Resolved to wrong meta token");
 
-				state &= ~StateFlags.PendingMetaInflate;
-			}
+                    // What a stupid API, does not work because field handle is imported
+                    // metaInfo = FieldInfo.GetFieldFromHandle (metaInfo.FieldHandle, DeclaringType.MetaInfo.TypeHandle);
+                }
 
-			return metaInfo;
-		}
+                state &= ~StateFlags.PendingMetaInflate;
+            }
 
-		public override MemberSpec InflateMember (TypeParameterInflator inflator)
-		{
-			var fs = (FieldSpec) base.InflateMember (inflator);
-			fs.memberType = inflator.Inflate (memberType);
-			return fs;
-		}
+            return metaInfo;
+        }
 
-		public FieldSpec Mutate (TypeParameterMutator mutator)
-		{
-			var decl = DeclaringType;
-			if (DeclaringType.IsGenericOrParentIsGeneric)
-				decl = mutator.Mutate (decl);
+        public override MemberSpec InflateMember(TypeParameterInflator inflator)
+        {
+            var fs = (FieldSpec)base.InflateMember(inflator);
+            fs.memberType = inflator.Inflate(memberType);
+            return fs;
+        }
 
-			if (decl == DeclaringType)
-				return this;
+        public FieldSpec Mutate(TypeParameterMutator mutator)
+        {
+            var decl = DeclaringType;
+            if (DeclaringType.IsGenericOrParentIsGeneric)
+                decl = mutator.Mutate(decl);
 
-			var fs = (FieldSpec) MemberwiseClone ();
-			fs.declaringType = decl;
-			fs.state |= StateFlags.PendingMetaInflate;
+            if (decl == DeclaringType)
+                return this;
 
-			// Gets back FieldInfo in case of metaInfo was inflated
-			fs.metaInfo = MemberCache.GetMember (TypeParameterMutator.GetMemberDeclaringType (DeclaringType), this).metaInfo;
-			return fs;
-		}
+            var fs = (FieldSpec)MemberwiseClone();
+            fs.declaringType = decl;
+            fs.state |= StateFlags.PendingMetaInflate;
 
-		public override List<MissingTypeSpecReference> ResolveMissingDependencies (MemberSpec caller)
-		{
-			return memberType.ResolveMissingDependencies (this);
-		}
-	}
+            // Gets back FieldInfo in case of metaInfo was inflated
+            fs.metaInfo = MemberCache
+                .GetMember(TypeParameterMutator.GetMemberDeclaringType(DeclaringType), this)
+                .metaInfo;
+            return fs;
+        }
 
-	/// <summary>
-	/// Fixed buffer implementation
-	/// </summary>
-	public class FixedField : FieldBase
-	{
-		public const string FixedElementName = "FixedElementField";
-		static int GlobalCounter;
+        public override List<MissingTypeSpecReference> ResolveMissingDependencies(MemberSpec caller)
+        {
+            return memberType.ResolveMissingDependencies(this);
+        }
+    }
 
-		TypeBuilder fixed_buffer_type;
+    /// <summary>
+    /// Fixed buffer implementation
+    /// </summary>
+    public class FixedField : FieldBase
+    {
+        public const string FixedElementName = "FixedElementField";
+        static int GlobalCounter;
 
-		const Modifiers AllowedModifiers =
-			Modifiers.NEW |
-			Modifiers.PUBLIC |
-			Modifiers.PROTECTED |
-			Modifiers.INTERNAL |
-			Modifiers.PRIVATE |
-			Modifiers.UNSAFE;
+        TypeBuilder fixed_buffer_type;
 
-		public FixedField (TypeDefinition parent, FullNamedExpression type, Modifiers mod, MemberName name, Attributes attrs)
-			: base (parent, type, mod, AllowedModifiers, name, attrs)
-		{
-		}
+        const Modifiers AllowedModifiers =
+            Modifiers.NEW
+            | Modifiers.PUBLIC
+            | Modifiers.PROTECTED
+            | Modifiers.INTERNAL
+            | Modifiers.PRIVATE
+            | Modifiers.UNSAFE;
 
-		#region Properties
+        public FixedField(
+            TypeDefinition parent,
+            FullNamedExpression type,
+            Modifiers mod,
+            MemberName name,
+            Attributes attrs
+        )
+            : base(parent, type, mod, AllowedModifiers, name, attrs) { }
 
-		//
-		// Explicit struct layout set by parent
-		//
-		public CharSet? CharSetValue {
-			get; set;
-		}		
+        #region Properties
 
-		#endregion
+        //
+        // Explicit struct layout set by parent
+        //
+        public CharSet? CharSetValue { get; set; }
 
-		public override Constant ConvertInitializer (ResolveContext rc, Constant expr)
-		{
-			return expr.ImplicitConversionRequired (rc, rc.BuiltinTypes.Int);
-		}
+        #endregion
 
-		public override bool Define ()
-		{
-			if (!base.Define ())
-				return false;
+        public override Constant ConvertInitializer(ResolveContext rc, Constant expr)
+        {
+            return expr.ImplicitConversionRequired(rc, rc.BuiltinTypes.Int);
+        }
 
-			if (!BuiltinTypeSpec.IsPrimitiveType (MemberType)) {
-				Report.Error (1663, Location,
-					"`{0}': Fixed size buffers type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double",
-					GetSignatureForError ());
-			} else if (declarators != null) {
-				foreach (var d in declarators) {
-					var f = new FixedField (Parent, d.GetFieldTypeExpression (this), ModFlags, new MemberName (d.Name.Value, d.Name.Location), OptAttributes);
-					f.initializer = d.Initializer;
-					((ConstInitializer) f.initializer).Name = d.Name.Value;
-					f.Define ();
-					Parent.PartialContainer.Members.Add (f);
-				}
-			}
-			
-			// Create nested fixed buffer container
-			string name = String.Format ("<{0}>__FixedBuffer{1}", TypeDefinition.FilterNestedName (Name), GlobalCounter++);
-			fixed_buffer_type = Parent.TypeBuilder.DefineNestedType (name,
-				TypeAttributes.NestedPublic | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit,
-				Compiler.BuiltinTypes.ValueType.GetMetaInfo ());
+        public override bool Define()
+        {
+            if (!base.Define())
+                return false;
 
-			var ffield = fixed_buffer_type.DefineField (FixedElementName, MemberType.GetMetaInfo (), FieldAttributes.Public);
-			
-			FieldBuilder = Parent.TypeBuilder.DefineField (Name, fixed_buffer_type, ModifiersExtensions.FieldAttr (ModFlags));
+            if (!BuiltinTypeSpec.IsPrimitiveType(MemberType))
+            {
+                Report.Error(
+                    1663,
+                    Location,
+                    "`{0}': Fixed size buffers type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double",
+                    GetSignatureForError()
+                );
+            }
+            else if (declarators != null)
+            {
+                foreach (var d in declarators)
+                {
+                    var f = new FixedField(
+                        Parent,
+                        d.GetFieldTypeExpression(this),
+                        ModFlags,
+                        new MemberName(d.Name.Value, d.Name.Location),
+                        OptAttributes
+                    );
+                    f.initializer = d.Initializer;
+                    ((ConstInitializer)f.initializer).Name = d.Name.Value;
+                    f.Define();
+                    Parent.PartialContainer.Members.Add(f);
+                }
+            }
 
-			var element_spec = new FieldSpec (null, this, MemberType, ffield, ModFlags);
-			spec = new FixedFieldSpec (Module, Parent.Definition, this, FieldBuilder, element_spec, ModFlags);
+            // Create nested fixed buffer container
+            string name = String.Format(
+                "<{0}>__FixedBuffer{1}",
+                TypeDefinition.FilterNestedName(Name),
+                GlobalCounter++
+            );
+            fixed_buffer_type = Parent.TypeBuilder.DefineNestedType(
+                name,
+                TypeAttributes.NestedPublic
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.BeforeFieldInit,
+                Compiler.BuiltinTypes.ValueType.GetMetaInfo()
+            );
 
-			Parent.MemberCache.AddMember (spec);
-			return true;
-		}
+            var ffield = fixed_buffer_type.DefineField(
+                FixedElementName,
+                MemberType.GetMetaInfo(),
+                FieldAttributes.Public
+            );
 
-		protected override void DoMemberTypeIndependentChecks ()
-		{
-			base.DoMemberTypeIndependentChecks ();
+            FieldBuilder = Parent.TypeBuilder.DefineField(
+                Name,
+                fixed_buffer_type,
+                ModifiersExtensions.FieldAttr(ModFlags)
+            );
 
-			if (!IsUnsafe)
-				Expression.UnsafeError (Report, Location);
+            var element_spec = new FieldSpec(null, this, MemberType, ffield, ModFlags);
+            spec = new FixedFieldSpec(
+                Module,
+                Parent.Definition,
+                this,
+                FieldBuilder,
+                element_spec,
+                ModFlags
+            );
 
-			if (Parent.PartialContainer.Kind != MemberKind.Struct) {
-				Report.Error (1642, Location, "`{0}': Fixed size buffer fields may only be members of structs",
-					GetSignatureForError ());
-			}
-		}
+            Parent.MemberCache.AddMember(spec);
+            return true;
+        }
 
-		public override void Emit()
-		{
-			ResolveContext rc = new ResolveContext (this);
-			IntConstant buffer_size_const = initializer.Resolve (rc) as IntConstant;
-			if (buffer_size_const == null)
-				return;
+        protected override void DoMemberTypeIndependentChecks()
+        {
+            base.DoMemberTypeIndependentChecks();
 
-			int buffer_size = buffer_size_const.Value;
+            if (!IsUnsafe)
+                Expression.UnsafeError(Report, Location);
 
-			if (buffer_size <= 0) {
-				Report.Error (1665, Location, "`{0}': Fixed size buffers must have a length greater than zero", GetSignatureForError ());
-				return;
-			}
+            if (Parent.PartialContainer.Kind != MemberKind.Struct)
+            {
+                Report.Error(
+                    1642,
+                    Location,
+                    "`{0}': Fixed size buffer fields may only be members of structs",
+                    GetSignatureForError()
+                );
+            }
+        }
 
-			EmitFieldSize (buffer_size);
+        public override void Emit()
+        {
+            ResolveContext rc = new ResolveContext(this);
+            IntConstant buffer_size_const = initializer.Resolve(rc) as IntConstant;
+            if (buffer_size_const == null)
+                return;
+
+            int buffer_size = buffer_size_const.Value;
+
+            if (buffer_size <= 0)
+            {
+                Report.Error(
+                    1665,
+                    Location,
+                    "`{0}': Fixed size buffers must have a length greater than zero",
+                    GetSignatureForError()
+                );
+                return;
+            }
+
+            EmitFieldSize(buffer_size);
 
 #if STATIC
-			if (Module.HasDefaultCharSet)
-				fixed_buffer_type.__SetAttributes (fixed_buffer_type.Attributes | Module.DefaultCharSetType);
+            if (Module.HasDefaultCharSet)
+                fixed_buffer_type.__SetAttributes(
+                    fixed_buffer_type.Attributes | Module.DefaultCharSetType
+                );
 #endif
 
-			Module.PredefinedAttributes.UnsafeValueType.EmitAttribute (fixed_buffer_type);
-			Module.PredefinedAttributes.CompilerGenerated.EmitAttribute (fixed_buffer_type);
-			fixed_buffer_type.CreateType ();
+            Module.PredefinedAttributes.UnsafeValueType.EmitAttribute(fixed_buffer_type);
+            Module.PredefinedAttributes.CompilerGenerated.EmitAttribute(fixed_buffer_type);
+            fixed_buffer_type.CreateType();
 
-			base.Emit ();
-		}
+            base.Emit();
+        }
 
-		void EmitFieldSize (int buffer_size)
-		{
-			int type_size = BuiltinTypeSpec.GetSize (MemberType);
+        void EmitFieldSize(int buffer_size)
+        {
+            int type_size = BuiltinTypeSpec.GetSize(MemberType);
 
-			if (buffer_size > int.MaxValue / type_size) {
-				Report.Error (1664, Location, "Fixed size buffer `{0}' of length `{1}' and type `{2}' exceeded 2^31 limit",
-					GetSignatureForError (), buffer_size.ToString (), MemberType.GetSignatureForError ());
-				return;
-			}
+            if (buffer_size > int.MaxValue / type_size)
+            {
+                Report.Error(
+                    1664,
+                    Location,
+                    "Fixed size buffer `{0}' of length `{1}' and type `{2}' exceeded 2^31 limit",
+                    GetSignatureForError(),
+                    buffer_size.ToString(),
+                    MemberType.GetSignatureForError()
+                );
+                return;
+            }
 
-			AttributeEncoder encoder;
-			MethodSpec ctor;
+            AttributeEncoder encoder;
+            MethodSpec ctor;
 
-			var char_set = CharSetValue ?? Module.DefaultCharSet ?? 0;
+            var char_set = CharSetValue ?? Module.DefaultCharSet ?? 0;
 #if STATIC
-			//
-			// Set struct layout without resolving StructLayoutAttribute which is not always available
-			//
+            //
+            // Set struct layout without resolving StructLayoutAttribute which is not always available
+            //
 
-			TypeAttributes attribs = TypeAttributes.SequentialLayout;
-			switch (char_set) {
-			case CharSet.None:
-			case CharSet.Ansi:
-				attribs |= TypeAttributes.AnsiClass;
-				break;
-			case CharSet.Auto:
-				attribs |= TypeAttributes.AutoClass;
-				break;
-			case CharSet.Unicode:
-				attribs |= TypeAttributes.UnicodeClass;
-				break;
-			}
+            TypeAttributes attribs = TypeAttributes.SequentialLayout;
+            switch (char_set)
+            {
+                case CharSet.None:
+                case CharSet.Ansi:
+                    attribs |= TypeAttributes.AnsiClass;
+                    break;
+                case CharSet.Auto:
+                    attribs |= TypeAttributes.AutoClass;
+                    break;
+                case CharSet.Unicode:
+                    attribs |= TypeAttributes.UnicodeClass;
+                    break;
+            }
 
-			fixed_buffer_type.__SetAttributes (fixed_buffer_type.Attributes | attribs);
-			fixed_buffer_type.__SetLayout (0, buffer_size * type_size);
+            fixed_buffer_type.__SetAttributes(fixed_buffer_type.Attributes | attribs);
+            fixed_buffer_type.__SetLayout(0, buffer_size * type_size);
 #else
-			ctor = Module.PredefinedMembers.StructLayoutAttributeCtor.Resolve (Location);
-			if (ctor == null)
-				return;
+            ctor = Module.PredefinedMembers.StructLayoutAttributeCtor.Resolve(Location);
+            if (ctor == null)
+                return;
 
-			var field_size = Module.PredefinedMembers.StructLayoutSize.Resolve (Location);
-			var field_charset = Module.PredefinedMembers.StructLayoutCharSet.Resolve (Location);
-			if (field_size == null || field_charset == null)
-				return;
+            var field_size = Module.PredefinedMembers.StructLayoutSize.Resolve(Location);
+            var field_charset = Module.PredefinedMembers.StructLayoutCharSet.Resolve(Location);
+            if (field_size == null || field_charset == null)
+                return;
 
-			encoder = new AttributeEncoder ();
-			encoder.Encode ((short)LayoutKind.Sequential);
-			encoder.EncodeNamedArguments (
-				new [] { field_size, field_charset },
-				new Constant [] { 
-					new IntConstant (Compiler.BuiltinTypes, buffer_size * type_size, Location),
-					new IntConstant (Compiler.BuiltinTypes, (int) char_set, Location)
-				}
-			);
+            encoder = new AttributeEncoder();
+            encoder.Encode((short)LayoutKind.Sequential);
+            encoder.EncodeNamedArguments(
+                new[] { field_size, field_charset },
+                new Constant[]
+                {
+                    new IntConstant(Compiler.BuiltinTypes, buffer_size * type_size, Location),
+                    new IntConstant(Compiler.BuiltinTypes, (int)char_set, Location),
+                }
+            );
 
-			fixed_buffer_type.SetCustomAttribute ((ConstructorInfo) ctor.GetMetaInfo (), encoder.ToArray (out _));
+            fixed_buffer_type.SetCustomAttribute(
+                (ConstructorInfo)ctor.GetMetaInfo(),
+                encoder.ToArray(out _)
+            );
 #endif
-			//
-			// Don't emit FixedBufferAttribute attribute for private types
-			//
-			if ((ModFlags & Modifiers.PRIVATE) != 0)
-				return;
+            //
+            // Don't emit FixedBufferAttribute attribute for private types
+            //
+            if ((ModFlags & Modifiers.PRIVATE) != 0)
+                return;
 
-			ctor = Module.PredefinedMembers.FixedBufferAttributeCtor.Resolve (Location);
-			if (ctor == null)
-				return;
+            ctor = Module.PredefinedMembers.FixedBufferAttributeCtor.Resolve(Location);
+            if (ctor == null)
+                return;
 
-			encoder = new AttributeEncoder ();
-			encoder.EncodeTypeName (MemberType);
-			encoder.Encode (buffer_size);
-			encoder.EncodeEmptyNamedArguments ();
+            encoder = new AttributeEncoder();
+            encoder.EncodeTypeName(MemberType);
+            encoder.Encode(buffer_size);
+            encoder.EncodeEmptyNamedArguments();
 
-			FieldBuilder.SetCustomAttribute ((ConstructorInfo) ctor.GetMetaInfo (), encoder.ToArray (out var references));
-			Module.AddAssemblyReferences (references);
-		}
-	}
+            FieldBuilder.SetCustomAttribute(
+                (ConstructorInfo)ctor.GetMetaInfo(),
+                encoder.ToArray(out var references)
+            );
+            Module.AddAssemblyReferences(references);
+        }
+    }
 
-	class FixedFieldSpec : FieldSpec
-	{
-		readonly FieldSpec element;
+    class FixedFieldSpec : FieldSpec
+    {
+        readonly FieldSpec element;
 
-		public FixedFieldSpec (ModuleContainer module, TypeSpec declaringType, IMemberDefinition definition, FieldInfo info, FieldSpec element, Modifiers modifiers)
-			: base (declaringType, definition, PointerContainer.MakeType (module, element.MemberType), info, modifiers)
-		{
-			this.element = element;
+        public FixedFieldSpec(
+            ModuleContainer module,
+            TypeSpec declaringType,
+            IMemberDefinition definition,
+            FieldInfo info,
+            FieldSpec element,
+            Modifiers modifiers
+        )
+            : base(
+                declaringType,
+                definition,
+                PointerContainer.MakeType(module, element.MemberType),
+                info,
+                modifiers
+            )
+        {
+            this.element = element;
 
-			// It's never CLS-Compliant
-			state &= ~StateFlags.CLSCompliant_Undetected;
-		}
+            // It's never CLS-Compliant
+            state &= ~StateFlags.CLSCompliant_Undetected;
+        }
 
-		public FieldSpec Element {
-			get {
-				return element;
-			}
-		}
-		
-		public TypeSpec ElementType {
-			get {
-				return element.MemberType;
-			}
-		}
-	}
+        public FieldSpec Element
+        {
+            get { return element; }
+        }
 
-	//
-	// The Field class is used to represents class/struct fields during parsing.
-	//
-	public class Field : FieldBase {
-		// <summary>
-		//   Modifiers allowed in a class declaration
-		// </summary>
-		const Modifiers AllowedModifiers =
-			Modifiers.NEW |
-			Modifiers.PUBLIC |
-			Modifiers.PROTECTED |
-			Modifiers.INTERNAL |
-			Modifiers.PRIVATE |
-			Modifiers.STATIC |
-			Modifiers.VOLATILE |
-			Modifiers.UNSAFE |
-			Modifiers.READONLY;
+        public TypeSpec ElementType
+        {
+            get { return element.MemberType; }
+        }
+    }
 
-		public Field (TypeDefinition parent, FullNamedExpression type, Modifiers mod, MemberName name, Attributes attrs)
-			: base (parent, type, mod, AllowedModifiers, name, attrs)
-		{
-		}
+    //
+    // The Field class is used to represents class/struct fields during parsing.
+    //
+    public class Field : FieldBase
+    {
+        // <summary>
+        //   Modifiers allowed in a class declaration
+        // </summary>
+        const Modifiers AllowedModifiers =
+            Modifiers.NEW
+            | Modifiers.PUBLIC
+            | Modifiers.PROTECTED
+            | Modifiers.INTERNAL
+            | Modifiers.PRIVATE
+            | Modifiers.STATIC
+            | Modifiers.VOLATILE
+            | Modifiers.UNSAFE
+            | Modifiers.READONLY;
 
-		bool CanBeVolatile ()
-		{
-			switch (MemberType.BuiltinType) {
-			case BuiltinTypeSpec.Type.Bool:
-			case BuiltinTypeSpec.Type.Char:
-			case BuiltinTypeSpec.Type.SByte:
-			case BuiltinTypeSpec.Type.Byte:
-			case BuiltinTypeSpec.Type.Short:
-			case BuiltinTypeSpec.Type.UShort:
-			case BuiltinTypeSpec.Type.Int:
-			case BuiltinTypeSpec.Type.UInt:
-			case BuiltinTypeSpec.Type.Float:
-			case BuiltinTypeSpec.Type.UIntPtr:
-			case BuiltinTypeSpec.Type.IntPtr:
-				return true;
-			}
+        public Field(
+            TypeDefinition parent,
+            FullNamedExpression type,
+            Modifiers mod,
+            MemberName name,
+            Attributes attrs
+        )
+            : base(parent, type, mod, AllowedModifiers, name, attrs) { }
 
-			if (TypeSpec.IsReferenceType (MemberType))
-				return true;
+        bool CanBeVolatile()
+        {
+            switch (MemberType.BuiltinType)
+            {
+                case BuiltinTypeSpec.Type.Bool:
+                case BuiltinTypeSpec.Type.Char:
+                case BuiltinTypeSpec.Type.SByte:
+                case BuiltinTypeSpec.Type.Byte:
+                case BuiltinTypeSpec.Type.Short:
+                case BuiltinTypeSpec.Type.UShort:
+                case BuiltinTypeSpec.Type.Int:
+                case BuiltinTypeSpec.Type.UInt:
+                case BuiltinTypeSpec.Type.Float:
+                case BuiltinTypeSpec.Type.UIntPtr:
+                case BuiltinTypeSpec.Type.IntPtr:
+                    return true;
+            }
 
-			if (MemberType.IsPointer)
-				return true;
+            if (TypeSpec.IsReferenceType(MemberType))
+                return true;
 
-			if (MemberType.IsEnum) {
-				switch (EnumSpec.GetUnderlyingType (MemberType).BuiltinType) {
-				case BuiltinTypeSpec.Type.SByte:
-				case BuiltinTypeSpec.Type.Byte:
-				case BuiltinTypeSpec.Type.Short:
-				case BuiltinTypeSpec.Type.UShort:
-				case BuiltinTypeSpec.Type.Int:
-				case BuiltinTypeSpec.Type.UInt:
-					return true;
-				default:
-					return false;
-				}
-			}
+            if (MemberType.IsPointer)
+                return true;
 
-			return false;
-		}
+            if (MemberType.IsEnum)
+            {
+                switch (EnumSpec.GetUnderlyingType(MemberType).BuiltinType)
+                {
+                    case BuiltinTypeSpec.Type.SByte:
+                    case BuiltinTypeSpec.Type.Byte:
+                    case BuiltinTypeSpec.Type.Short:
+                    case BuiltinTypeSpec.Type.UShort:
+                    case BuiltinTypeSpec.Type.Int:
+                    case BuiltinTypeSpec.Type.UInt:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
 
-		public override void Accept (StructuralVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-		
-		public override bool Define ()
-		{
-			if (!base.Define ())
-				return false;
+            return false;
+        }
 
-			MetaType[] required_modifier = null;
-			if ((ModFlags & Modifiers.VOLATILE) != 0) {
-				var mod = Module.PredefinedTypes.IsVolatile.Resolve ();
-				if (mod != null)
-					required_modifier = new MetaType[] { mod.GetMetaInfo () };
-			}
+        public override void Accept(StructuralVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
 
-			FieldBuilder = Parent.TypeBuilder.DefineField (
-				Name, member_type.GetMetaInfo (), required_modifier, null, ModifiersExtensions.FieldAttr (ModFlags));
+        public override bool Define()
+        {
+            if (!base.Define())
+                return false;
 
-			spec = new FieldSpec (Parent.Definition, this, MemberType, FieldBuilder, ModFlags);
+            MetaType[] required_modifier = null;
+            if ((ModFlags & Modifiers.VOLATILE) != 0)
+            {
+                var mod = Module.PredefinedTypes.IsVolatile.Resolve();
+                if (mod != null)
+                    required_modifier = new MetaType[] { mod.GetMetaInfo() };
+            }
 
-			//
-			// Don't cache inaccessible fields except for struct where we
-			// need them for definitive assignment checks
-			//
-			if ((ModFlags & Modifiers.BACKING_FIELD) == 0 || Parent.Kind == MemberKind.Struct) {
-				Parent.MemberCache.AddMember (spec);
-			}
+            FieldBuilder = Parent.TypeBuilder.DefineField(
+                Name,
+                member_type.GetMetaInfo(),
+                required_modifier,
+                null,
+                ModifiersExtensions.FieldAttr(ModFlags)
+            );
 
-			if (initializer != null) {
-				Parent.RegisterFieldForInitialization (this, new FieldInitializer (this, initializer, TypeExpression.Location));
-			}
+            spec = new FieldSpec(Parent.Definition, this, MemberType, FieldBuilder, ModFlags);
 
-			if (declarators != null) {
-				foreach (var d in declarators) {
-					var f = new Field (Parent, d.GetFieldTypeExpression (this), ModFlags, new MemberName (d.Name.Value, d.Name.Location), OptAttributes);
-					if (d.Initializer != null)
-						f.initializer = d.Initializer;
+            //
+            // Don't cache inaccessible fields except for struct where we
+            // need them for definitive assignment checks
+            //
+            if ((ModFlags & Modifiers.BACKING_FIELD) == 0 || Parent.Kind == MemberKind.Struct)
+            {
+                Parent.MemberCache.AddMember(spec);
+            }
 
-					f.Define ();
-					Parent.PartialContainer.Members.Add (f);
-				}
-			}
+            if (initializer != null)
+            {
+                Parent.RegisterFieldForInitialization(
+                    this,
+                    new FieldInitializer(this, initializer, TypeExpression.Location)
+                );
+            }
 
-			return true;
-		}
+            if (declarators != null)
+            {
+                foreach (var d in declarators)
+                {
+                    var f = new Field(
+                        Parent,
+                        d.GetFieldTypeExpression(this),
+                        ModFlags,
+                        new MemberName(d.Name.Value, d.Name.Location),
+                        OptAttributes
+                    );
+                    if (d.Initializer != null)
+                        f.initializer = d.Initializer;
 
-		protected override void DoMemberTypeIndependentChecks ()
-		{
-			if ((Parent.PartialContainer.ModFlags & Modifiers.READONLY) != 0 && (ModFlags & (Modifiers.READONLY | Modifiers.STATIC)) == 0) {
-				Report.Error (8340, Location, "`{0}': Instance fields in readonly structs must be readonly",
-					GetSignatureForError ());
-			}
+                    f.Define();
+                    Parent.PartialContainer.Members.Add(f);
+                }
+            }
 
-			base.DoMemberTypeIndependentChecks ();
-		}
+            return true;
+        }
 
-		protected override void DoMemberTypeDependentChecks ()
-		{
-			if ((ModFlags & Modifiers.BACKING_FIELD) != 0)
-				return;
+        protected override void DoMemberTypeIndependentChecks()
+        {
+            if (
+                (Parent.PartialContainer.ModFlags & Modifiers.READONLY) != 0
+                && (ModFlags & (Modifiers.READONLY | Modifiers.STATIC)) == 0
+            )
+            {
+                Report.Error(
+                    8340,
+                    Location,
+                    "`{0}': Instance fields in readonly structs must be readonly",
+                    GetSignatureForError()
+                );
+            }
 
-			base.DoMemberTypeDependentChecks ();
+            base.DoMemberTypeIndependentChecks();
+        }
 
-			if ((ModFlags & Modifiers.VOLATILE) != 0) {
-				if (!CanBeVolatile ()) {
-					Report.Error (677, Location, "`{0}': A volatile field cannot be of the type `{1}'",
-						GetSignatureForError (), MemberType.GetSignatureForError ());
-				}
+        protected override void DoMemberTypeDependentChecks()
+        {
+            if ((ModFlags & Modifiers.BACKING_FIELD) != 0)
+                return;
 
-				if ((ModFlags & Modifiers.READONLY) != 0) {
-					Report.Error (678, Location, "`{0}': A field cannot be both volatile and readonly",
-						GetSignatureForError ());
-				}
-			}
-		}
+            base.DoMemberTypeDependentChecks();
 
-		protected override bool VerifyClsCompliance ()
-		{
-			if (!base.VerifyClsCompliance ())
-				return false;
+            if ((ModFlags & Modifiers.VOLATILE) != 0)
+            {
+                if (!CanBeVolatile())
+                {
+                    Report.Error(
+                        677,
+                        Location,
+                        "`{0}': A volatile field cannot be of the type `{1}'",
+                        GetSignatureForError(),
+                        MemberType.GetSignatureForError()
+                    );
+                }
 
-			if ((ModFlags & Modifiers.VOLATILE) != 0) {
-				Report.Warning (3026, 1, Location, "CLS-compliant field `{0}' cannot be volatile", GetSignatureForError ());
-			}
+                if ((ModFlags & Modifiers.READONLY) != 0)
+                {
+                    Report.Error(
+                        678,
+                        Location,
+                        "`{0}': A field cannot be both volatile and readonly",
+                        GetSignatureForError()
+                    );
+                }
+            }
+        }
 
-			return true;
-		}
-	}
+        protected override bool VerifyClsCompliance()
+        {
+            if (!base.VerifyClsCompliance())
+                return false;
 
-	class PrimaryConstructorField : Field
-	{
-		//
-		// Proxy resolved parameter type expression to avoid type double resolve
-		// and problems with correct resolve context on partial classes
-		//
-		sealed class TypeExpressionFromParameter : TypeExpr
-		{
-			Parameter parameter;
+            if ((ModFlags & Modifiers.VOLATILE) != 0)
+            {
+                Report.Warning(
+                    3026,
+                    1,
+                    Location,
+                    "CLS-compliant field `{0}' cannot be volatile",
+                    GetSignatureForError()
+                );
+            }
 
-			public TypeExpressionFromParameter (Parameter parameter)
-			{
-				this.parameter = parameter;
-				eclass = ExprClass.Type;
-				loc = parameter.Location;
-			}
+            return true;
+        }
+    }
 
-			public override TypeSpec ResolveAsType (IMemberContext mc, bool allowUnboundTypeArguments)
-			{
-				return parameter.Type;
-			}
-		}
+    class PrimaryConstructorField : Field
+    {
+        //
+        // Proxy resolved parameter type expression to avoid type double resolve
+        // and problems with correct resolve context on partial classes
+        //
+        sealed class TypeExpressionFromParameter : TypeExpr
+        {
+            Parameter parameter;
 
-		public PrimaryConstructorField (TypeDefinition parent, Parameter parameter)
-			: base (parent, new TypeExpressionFromParameter (parameter), Modifiers.PRIVATE, new MemberName (parameter.Name, parameter.Location), null)
-		{
-			caching_flags |= Flags.IsUsed | Flags.IsAssigned;
-		}
+            public TypeExpressionFromParameter(Parameter parameter)
+            {
+                this.parameter = parameter;
+                eclass = ExprClass.Type;
+                loc = parameter.Location;
+            }
 
-		public override string GetSignatureForError ()
-		{
-			return MemberName.Name;
-		}
-	}
+            public override TypeSpec ResolveAsType(
+                IMemberContext mc,
+                bool allowUnboundTypeArguments
+            )
+            {
+                return parameter.Type;
+            }
+        }
+
+        public PrimaryConstructorField(TypeDefinition parent, Parameter parameter)
+            : base(
+                parent,
+                new TypeExpressionFromParameter(parameter),
+                Modifiers.PRIVATE,
+                new MemberName(parameter.Name, parameter.Location),
+                null
+            )
+        {
+            caching_flags |= Flags.IsUsed | Flags.IsAssigned;
+        }
+
+        public override string GetSignatureForError()
+        {
+            return MemberName.Name;
+        }
+    }
 }

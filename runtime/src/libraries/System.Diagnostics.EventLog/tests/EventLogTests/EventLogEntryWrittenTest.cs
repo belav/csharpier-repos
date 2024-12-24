@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {
@@ -25,13 +25,17 @@ namespace System.Diagnostics.Tests
                 using (EventLog eventLog = new EventLog())
                 {
                     eventLog.Source = source;
-                    eventLog.EntryWritten += new EntryWrittenEventHandler((object sourceObject, EntryWrittenEventArgs e) =>
-                    {
-                        eventCounter += 1;
-                        signal.Set();
-                    });
+                    eventLog.EntryWritten += new EntryWrittenEventHandler(
+                        (object sourceObject, EntryWrittenEventArgs e) =>
+                        {
+                            eventCounter += 1;
+                            signal.Set();
+                        }
+                    );
                     Helpers.Retry(() => eventLog.EnableRaisingEvents = waitOnEvent);
-                    Helpers.Retry(() => eventLog.WriteEntry(message, EventLogEntryType.Information));
+                    Helpers.Retry(
+                        () => eventLog.WriteEntry(message, EventLogEntryType.Information)
+                    );
                     if (waitOnEvent)
                     {
                         if (!signal.WaitOne(6000))

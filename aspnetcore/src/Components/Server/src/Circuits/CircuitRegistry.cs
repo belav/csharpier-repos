@@ -46,17 +46,17 @@ internal partial class CircuitRegistry
     public CircuitRegistry(
         IOptions<CircuitOptions> options,
         ILogger<CircuitRegistry> logger,
-        CircuitIdFactory CircuitHostFactory)
+        CircuitIdFactory CircuitHostFactory
+    )
     {
         _options = options.Value;
         _logger = logger;
         _circuitIdFactory = CircuitHostFactory;
         ConnectedCircuits = new ConcurrentDictionary<CircuitId, CircuitHost>();
 
-        DisconnectedCircuits = new MemoryCache(new MemoryCacheOptions
-        {
-            SizeLimit = _options.DisconnectedCircuitMaxRetained,
-        });
+        DisconnectedCircuits = new MemoryCache(
+            new MemoryCacheOptions { SizeLimit = _options.DisconnectedCircuitMaxRetained }
+        );
 
         _postEvictionCallback = new PostEvictionCallbackRegistration
         {
@@ -76,7 +76,9 @@ internal partial class CircuitRegistry
         if (!ConnectedCircuits.TryAdd(circuitHost.CircuitId, circuitHost))
         {
             // This will likely never happen, except perhaps in unit tests, since CircuitIds are unique.
-            throw new ArgumentException($"Circuit with identity {circuitHost.CircuitId} is already registered.");
+            throw new ArgumentException(
+                $"Circuit with identity {circuitHost.CircuitId} is already registered."
+            );
         }
 
         // Register for unhandled exceptions from the circuit. The registry is responsible for tearing
@@ -93,7 +95,9 @@ internal partial class CircuitRegistry
         {
             if (DisconnectCore(circuitHost, connectionId))
             {
-                circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(() => circuitHost.OnConnectionDownAsync(default));
+                circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(
+                    () => circuitHost.OnConnectionDownAsync(default)
+                );
             }
             else
             {
@@ -121,7 +125,11 @@ internal partial class CircuitRegistry
 
         if (!string.Equals(circuitHost.Client.ConnectionId, connectionId, StringComparison.Ordinal))
         {
-            Log.CircuitConnectedToDifferentConnection(_logger, circuitId, circuitHost.Client.ConnectionId);
+            Log.CircuitConnectedToDifferentConnection(
+                _logger,
+                circuitId,
+                circuitHost.Client.ConnectionId
+            );
 
             // The circuit is associated with a different connection. One way this could happen is when
             // the client reconnects with a new connection before the OnDisconnect for the older
@@ -130,7 +138,10 @@ internal partial class CircuitRegistry
         }
 
         var result = ConnectedCircuits.TryRemove(circuitId, out circuitHost);
-        Debug.Assert(result, "This operation operates inside of a lock. We expect the previously inspected value to be still here.");
+        Debug.Assert(
+            result,
+            "This operation operates inside of a lock. We expect the previously inspected value to be still here."
+        );
 
         circuitHost.Client.SetDisconnected();
         RegisterDisconnectedCircuit(circuitHost);
@@ -142,15 +153,14 @@ internal partial class CircuitRegistry
 
     public void RegisterDisconnectedCircuit(CircuitHost circuitHost)
     {
-        var cancellationTokenSource = new CancellationTokenSource(_options.DisconnectedCircuitRetentionPeriod);
+        var cancellationTokenSource = new CancellationTokenSource(
+            _options.DisconnectedCircuitRetentionPeriod
+        );
         var entryOptions = new MemoryCacheEntryOptions
         {
             Size = 1,
             PostEvictionCallbacks = { _postEvictionCallback },
-            ExpirationTokens =
-                {
-                    new CancellationChangeToken(cancellationTokenSource.Token),
-                },
+            ExpirationTokens = { new CancellationChangeToken(cancellationTokenSource.Token) },
         };
 
         var entry = new DisconnectedCircuitEntry(circuitHost, cancellationTokenSource);
@@ -166,7 +176,12 @@ internal partial class CircuitRegistry
     // 1. If the circuit is not found return null
     // 2. If the circuit is found, but fails to connect, we need to dispose it here and return null
     // 3. If everything goes well, return the circuit.
-    public virtual async Task<CircuitHost> ConnectAsync(CircuitId circuitId, IClientProxy clientProxy, string connectionId, CancellationToken cancellationToken)
+    public virtual async Task<CircuitHost> ConnectAsync(
+        CircuitId circuitId,
+        IClientProxy clientProxy,
+        string connectionId,
+        CancellationToken cancellationToken
+    )
     {
         Log.CircuitConnectStarted(_logger, circuitId);
 
@@ -225,7 +240,11 @@ internal partial class CircuitRegistry
         }
     }
 
-    protected virtual (CircuitHost circuitHost, bool previouslyConnected) ConnectCore(CircuitId circuitId, IClientProxy clientProxy, string connectionId)
+    protected virtual (CircuitHost circuitHost, bool previouslyConnected) ConnectCore(
+        CircuitId circuitId,
+        IClientProxy clientProxy,
+        string connectionId
+    )
     {
         if (ConnectedCircuits.TryGetValue(circuitId, out var connectedCircuitHost))
         {
@@ -237,9 +256,18 @@ internal partial class CircuitRegistry
             return (connectedCircuitHost, true);
         }
 
-        if (DisconnectedCircuits.TryGetValue(circuitId.Secret, out DisconnectedCircuitEntry disconnectedEntry))
+        if (
+            DisconnectedCircuits.TryGetValue(
+                circuitId.Secret,
+                out DisconnectedCircuitEntry disconnectedEntry
+            )
+        )
         {
-            Log.ConnectingToDisconnectedCircuit(_logger, disconnectedEntry.CircuitHost.CircuitId, connectionId);
+            Log.ConnectingToDisconnectedCircuit(
+                _logger,
+                disconnectedEntry.CircuitHost.CircuitId,
+                connectionId
+            );
 
             // The host was in disconnected state. Transfer it to ConnectedCircuits so that it's no longer considered disconnected.
             // First discard the CancellationTokenSource so that the cache entry does not expire.
@@ -255,7 +283,12 @@ internal partial class CircuitRegistry
         return default;
     }
 
-    protected virtual void OnEntryEvicted(object key, object value, EvictionReason reason, object state)
+    protected virtual void OnEntryEvicted(
+        object key,
+        object value,
+        EvictionReason reason,
+        object state
+    )
     {
         switch (reason)
         {
@@ -312,7 +345,10 @@ internal partial class CircuitRegistry
         DisconnectedCircuitEntry entry = default;
         lock (CircuitRegistryLock)
         {
-            if (ConnectedCircuits.TryGetValue(circuitId, out circuitHost) || DisconnectedCircuits.TryGetValue(circuitId.Secret, out entry))
+            if (
+                ConnectedCircuits.TryGetValue(circuitId, out circuitHost)
+                || DisconnectedCircuits.TryGetValue(circuitId.Secret, out entry)
+            )
             {
                 circuitHost ??= entry.CircuitHost;
                 DisconnectedCircuits.Remove(circuitId.Secret);
@@ -351,7 +387,10 @@ internal partial class CircuitRegistry
 
     private readonly struct DisconnectedCircuitEntry
     {
-        public DisconnectedCircuitEntry(CircuitHost circuitHost, CancellationTokenSource tokenSource)
+        public DisconnectedCircuitEntry(
+            CircuitHost circuitHost,
+            CancellationTokenSource tokenSource
+        )
         {
             CircuitHost = circuitHost;
             TokenSource = tokenSource;
@@ -363,55 +402,171 @@ internal partial class CircuitRegistry
 
     private static partial class Log
     {
-        [LoggerMessage(100, LogLevel.Error, "Unhandled exception disposing circuit host: {Message}", EventName = "ExceptionDisposingCircuit")]
-        private static partial void UnhandledExceptionDisposingCircuitHost(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            100,
+            LogLevel.Error,
+            "Unhandled exception disposing circuit host: {Message}",
+            EventName = "ExceptionDisposingCircuit"
+        )]
+        private static partial void UnhandledExceptionDisposingCircuitHost(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
 
-        public static void UnhandledExceptionDisposingCircuitHost(ILogger logger, Exception exception)
-            => UnhandledExceptionDisposingCircuitHost(logger, exception.Message, exception);
+        public static void UnhandledExceptionDisposingCircuitHost(
+            ILogger logger,
+            Exception exception
+        ) => UnhandledExceptionDisposingCircuitHost(logger, exception.Message, exception);
 
-        [LoggerMessage(101, LogLevel.Debug, "Exception thrown when disposing token source: {Message}", EventName = "ExceptionDisposingTokenSource")]
-        private static partial void ExceptionDisposingTokenSource(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            101,
+            LogLevel.Debug,
+            "Exception thrown when disposing token source: {Message}",
+            EventName = "ExceptionDisposingTokenSource"
+        )]
+        private static partial void ExceptionDisposingTokenSource(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
 
-        public static void ExceptionDisposingTokenSource(ILogger logger, Exception exception)
-            => ExceptionDisposingTokenSource(logger, exception.Message, exception);
+        public static void ExceptionDisposingTokenSource(ILogger logger, Exception exception) =>
+            ExceptionDisposingTokenSource(logger, exception.Message, exception);
 
-        [LoggerMessage(102, LogLevel.Debug, "Attempting to reconnect to Circuit with secret {CircuitHost}.", EventName = "AttemptingToReconnect")]
+        [LoggerMessage(
+            102,
+            LogLevel.Debug,
+            "Attempting to reconnect to Circuit with secret {CircuitHost}.",
+            EventName = "AttemptingToReconnect"
+        )]
         public static partial void CircuitConnectStarted(ILogger logger, CircuitId circuitHost);
 
-        [LoggerMessage(104, LogLevel.Debug, "Failed to find a matching circuit for circuit secret {CircuitHost}.", EventName = "FailedToFindCircuit")]
+        [LoggerMessage(
+            104,
+            LogLevel.Debug,
+            "Failed to find a matching circuit for circuit secret {CircuitHost}.",
+            EventName = "FailedToFindCircuit"
+        )]
         public static partial void FailedToFindCircuit(ILogger logger, CircuitId circuitHost);
 
-        [LoggerMessage(105, LogLevel.Debug, "Transferring active circuit {CircuitId} to connection {ConnectionId}.", EventName = "ConnectingToActiveCircuit")]
-        public static partial void ConnectingToActiveCircuit(ILogger logger, CircuitId circuitId, string connectionId);
+        [LoggerMessage(
+            105,
+            LogLevel.Debug,
+            "Transferring active circuit {CircuitId} to connection {ConnectionId}.",
+            EventName = "ConnectingToActiveCircuit"
+        )]
+        public static partial void ConnectingToActiveCircuit(
+            ILogger logger,
+            CircuitId circuitId,
+            string connectionId
+        );
 
-        [LoggerMessage(106, LogLevel.Debug, "Transferring disconnected circuit {CircuitId} to connection {ConnectionId}.", EventName = "ConnectingToDisconnectedCircuit")]
-        public static partial void ConnectingToDisconnectedCircuit(ILogger logger, CircuitId circuitId, string connectionId);
+        [LoggerMessage(
+            106,
+            LogLevel.Debug,
+            "Transferring disconnected circuit {CircuitId} to connection {ConnectionId}.",
+            EventName = "ConnectingToDisconnectedCircuit"
+        )]
+        public static partial void ConnectingToDisconnectedCircuit(
+            ILogger logger,
+            CircuitId circuitId,
+            string connectionId
+        );
 
-        [LoggerMessage(107, LogLevel.Debug, "Failed to reconnect to a circuit with id {CircuitId}.", EventName = "FailedToReconnectToCircuit")]
-        public static partial void FailedToReconnectToCircuit(ILogger logger, CircuitId circuitId, Exception exception = null);
+        [LoggerMessage(
+            107,
+            LogLevel.Debug,
+            "Failed to reconnect to a circuit with id {CircuitId}.",
+            EventName = "FailedToReconnectToCircuit"
+        )]
+        public static partial void FailedToReconnectToCircuit(
+            ILogger logger,
+            CircuitId circuitId,
+            Exception exception = null
+        );
 
-        [LoggerMessage(108, LogLevel.Debug, "Attempting to disconnect circuit with id {CircuitId} from connection {ConnectionId}.", EventName = "CircuitDisconnectStarted")]
-        public static partial void CircuitDisconnectStarted(ILogger logger, CircuitId circuitId, string connectionId);
+        [LoggerMessage(
+            108,
+            LogLevel.Debug,
+            "Attempting to disconnect circuit with id {CircuitId} from connection {ConnectionId}.",
+            EventName = "CircuitDisconnectStarted"
+        )]
+        public static partial void CircuitDisconnectStarted(
+            ILogger logger,
+            CircuitId circuitId,
+            string connectionId
+        );
 
-        [LoggerMessage(109, LogLevel.Debug, "Failed to disconnect circuit with id {CircuitId}. The circuit is not active.", EventName = "CircuitNotActive")]
+        [LoggerMessage(
+            109,
+            LogLevel.Debug,
+            "Failed to disconnect circuit with id {CircuitId}. The circuit is not active.",
+            EventName = "CircuitNotActive"
+        )]
         public static partial void CircuitNotActive(ILogger logger, CircuitId circuitId);
 
-        [LoggerMessage(110, LogLevel.Debug, "Failed to disconnect circuit with id {CircuitId}. The circuit is connected to {ConnectionId}.", EventName = "CircuitConnectedToDifferentConnection")]
-        public static partial void CircuitConnectedToDifferentConnection(ILogger logger, CircuitId circuitId, string connectionId);
+        [LoggerMessage(
+            110,
+            LogLevel.Debug,
+            "Failed to disconnect circuit with id {CircuitId}. The circuit is connected to {ConnectionId}.",
+            EventName = "CircuitConnectedToDifferentConnection"
+        )]
+        public static partial void CircuitConnectedToDifferentConnection(
+            ILogger logger,
+            CircuitId circuitId,
+            string connectionId
+        );
 
-        [LoggerMessage(111, LogLevel.Debug, "Circuit with id {CircuitId} is disconnected.", EventName = "CircuitMarkedDisconnected")]
+        [LoggerMessage(
+            111,
+            LogLevel.Debug,
+            "Circuit with id {CircuitId} is disconnected.",
+            EventName = "CircuitMarkedDisconnected"
+        )]
         public static partial void CircuitMarkedDisconnected(ILogger logger, CircuitId circuitId);
 
-        [LoggerMessage(112, LogLevel.Debug, "Circuit with id {CircuitId} evicted due to {EvictionReason}.", EventName = "CircuitEvicted")]
-        public static partial void CircuitEvicted(ILogger logger, CircuitId circuitId, EvictionReason evictionReason);
+        [LoggerMessage(
+            112,
+            LogLevel.Debug,
+            "Circuit with id {CircuitId} evicted due to {EvictionReason}.",
+            EventName = "CircuitEvicted"
+        )]
+        public static partial void CircuitEvicted(
+            ILogger logger,
+            CircuitId circuitId,
+            EvictionReason evictionReason
+        );
 
-        [LoggerMessage(113, LogLevel.Debug, "Circuit with id {CircuitId} has been removed from the registry for permanent disconnection.", EventName = "CircuitDisconnectedPermanently")]
-        public static partial void CircuitDisconnectedPermanently(ILogger logger, CircuitId circuitId);
+        [LoggerMessage(
+            113,
+            LogLevel.Debug,
+            "Circuit with id {CircuitId} has been removed from the registry for permanent disconnection.",
+            EventName = "CircuitDisconnectedPermanently"
+        )]
+        public static partial void CircuitDisconnectedPermanently(
+            ILogger logger,
+            CircuitId circuitId
+        );
 
-        [LoggerMessage(114, LogLevel.Error, "Exception handler for {CircuitId} failed.", EventName = "CircuitExceptionHandlerFailed")]
-        public static partial void CircuitExceptionHandlerFailed(ILogger logger, CircuitId circuitId, Exception exception);
+        [LoggerMessage(
+            114,
+            LogLevel.Error,
+            "Exception handler for {CircuitId} failed.",
+            EventName = "CircuitExceptionHandlerFailed"
+        )]
+        public static partial void CircuitExceptionHandlerFailed(
+            ILogger logger,
+            CircuitId circuitId,
+            Exception exception
+        );
 
-        [LoggerMessage(115, LogLevel.Debug, "Reconnect to circuit with id {CircuitId} succeeded.", EventName = "ReconnectionSucceeded")]
+        [LoggerMessage(
+            115,
+            LogLevel.Debug,
+            "Reconnect to circuit with id {CircuitId} succeeded.",
+            EventName = "ReconnectionSucceeded"
+        )]
         public static partial void ReconnectionSucceeded(ILogger logger, CircuitId circuitId);
     }
 }

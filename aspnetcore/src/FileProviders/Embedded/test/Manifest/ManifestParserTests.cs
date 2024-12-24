@@ -13,8 +13,8 @@ public class ManifestParserTests
     {
         // Arrange
         var assembly = new TestAssembly(
-            TestEntry.Directory("unused",
-                TestEntry.File("sample.txt")));
+            TestEntry.Directory("unused", TestEntry.File("sample.txt"))
+        );
 
         // Act
         var manifest = ManifestParser.Parse(assembly);
@@ -28,9 +28,9 @@ public class ManifestParserTests
     {
         // Arrange
         var assembly = new TestAssembly(
-            TestEntry.Directory("unused",
-                TestEntry.File("sample.txt")),
-            manifestName: "Manifest.xml");
+            TestEntry.Directory("unused", TestEntry.File("sample.txt")),
+            manifestName: "Manifest.xml"
+        );
 
         // Act
         var manifest = ManifestParser.Parse(assembly, "Manifest.xml");
@@ -44,9 +44,12 @@ public class ManifestParserTests
     {
         // Arrange
         var assembly = new TestAssembly(
-            TestEntry.Directory("unused",
+            TestEntry.Directory(
+                "unused",
                 TestEntry.File("sample.txt"),
-                TestEntry.File("SAMPLE.TXT")));
+                TestEntry.File("SAMPLE.TXT")
+            )
+        );
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => ManifestParser.Parse(assembly));
@@ -66,25 +69,21 @@ public class ManifestParserTests
     public static TheoryData<string> MalformedManifests =>
         new TheoryData<string>
         {
-                "<Manifest></Manifest>",
-                "<Manifest><ManifestVersion></ManifestVersion></Manifest>",
-                "<Manifest><ManifestVersion /></Manifest>",
-                "<Manifest><ManifestVersion><Version>2.0</Version></ManifestVersion></Manifest>",
-                "<Manifest><ManifestVersion>2.0</ManifestVersion></Manifest>",
-                @"<Manifest><ManifestVersion>1.0</ManifestVersion>
+            "<Manifest></Manifest>",
+            "<Manifest><ManifestVersion></ManifestVersion></Manifest>",
+            "<Manifest><ManifestVersion /></Manifest>",
+            "<Manifest><ManifestVersion><Version>2.0</Version></ManifestVersion></Manifest>",
+            "<Manifest><ManifestVersion>2.0</ManifestVersion></Manifest>",
+            @"<Manifest><ManifestVersion>1.0</ManifestVersion>
 <FileSystem><File><ResourcePath>path</ResourcePath></File></FileSystem></Manifest>",
-
-                @"<Manifest><ManifestVersion>1.0</ManifestVersion>
+            @"<Manifest><ManifestVersion>1.0</ManifestVersion>
 <FileSystem><File Name=""sample.txt""><ResourcePath></ResourcePath></File></FileSystem></Manifest>",
-
-                @"<Manifest><ManifestVersion>1.0</ManifestVersion>
+            @"<Manifest><ManifestVersion>1.0</ManifestVersion>
 <FileSystem><File Name=""sample.txt"">sample.txt</File></FileSystem></Manifest>",
-
-                @"<Manifest><ManifestVersion>1.0</ManifestVersion>
+            @"<Manifest><ManifestVersion>1.0</ManifestVersion>
 <FileSystem><Directory></Directory></FileSystem></Manifest>",
-
-                @"<Manifest><ManifestVersion>1.0</ManifestVersion>
-<FileSystem><Directory Name=""wwwroot""><Unknown /></Directory></FileSystem></Manifest>"
+            @"<Manifest><ManifestVersion>1.0</ManifestVersion>
+<FileSystem><Directory Name=""wwwroot""><Unknown /></Directory></FileSystem></Manifest>",
         };
 
     [Theory]
@@ -104,12 +103,11 @@ public class ManifestParserTests
     public static TheoryData<string> ManifestsWithAdditionalData =>
         new TheoryData<string>
         {
-                @"<Manifest><ManifestVersion>1.0</ManifestVersion>
+            @"<Manifest><ManifestVersion>1.0</ManifestVersion>
 <FileSystem><Directory Name=""wwwroot"" AdditionalAttribute=""value""></Directory></FileSystem></Manifest>",
-
-                @"<Manifest><ManifestVersion>1.0</ManifestVersion>
+            @"<Manifest><ManifestVersion>1.0</ManifestVersion>
 <FileSystem><Directory Name=""wwwroot"" AdditionalAttribute=""value"">
 <File Name=""sample.txt"" AdditionalValue=""value""><ResourcePath something=""abc"">path</ResourcePath><hash>1234</hash></File>
-</Directory></FileSystem></Manifest>"
+</Directory></FileSystem></Manifest>",
         };
 }

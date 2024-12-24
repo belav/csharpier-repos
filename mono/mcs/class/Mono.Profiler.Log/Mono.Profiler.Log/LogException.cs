@@ -4,13 +4,11 @@
 
 using System;
 
-namespace Mono.Profiler.Log {
-
-	public sealed class LogException : Exception {
-
-		public LogException (string message)
-			: base (message)
-		{
-		}
-	}
+namespace Mono.Profiler.Log
+{
+    public sealed class LogException : Exception
+    {
+        public LogException(string message)
+            : base(message) { }
+    }
 }

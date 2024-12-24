@@ -76,32 +76,47 @@
 
     ******************************************************************************/
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Util;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
-    public sealed class AuthenticationSection : ConfigurationSection {
+    public sealed class AuthenticationSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propForms =
-            new ConfigurationProperty("forms", typeof(FormsAuthenticationConfiguration), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propForms = new ConfigurationProperty(
+            "forms",
+            typeof(FormsAuthenticationConfiguration),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 #pragma warning disable 618
         // Dev10 570002: This property is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.
-        private static readonly ConfigurationProperty _propPassport =
-            new ConfigurationProperty("passport", typeof(PassportAuthentication), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propPassport = new ConfigurationProperty(
+            "passport",
+            typeof(PassportAuthentication),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 #pragma warning restore 618
-        private static readonly ConfigurationProperty _propMode =
-            new ConfigurationProperty("mode", typeof(AuthenticationMode), AuthenticationMode.Windows, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propMode = new ConfigurationProperty(
+            "mode",
+            typeof(AuthenticationMode),
+            AuthenticationMode.Windows,
+            ConfigurationPropertyOptions.None
+        );
 
-        static AuthenticationSection() {
+        static AuthenticationSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propForms);
@@ -112,26 +127,27 @@ namespace System.Web.Configuration {
         private bool authenticationModeCached = false;
         private AuthenticationMode authenticationModeCache;
 
-        public AuthenticationSection() {
-        }
+        public AuthenticationSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("forms")]
-        public FormsAuthenticationConfiguration Forms {
-            get {
-                return (FormsAuthenticationConfiguration)base[_propForms];
-            }
+        public FormsAuthenticationConfiguration Forms
+        {
+            get { return (FormsAuthenticationConfiguration)base[_propForms]; }
         }
 
         [ConfigurationProperty("passport")]
-        [Obsolete("This property is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.")]
-        public PassportAuthentication Passport {
-            get {
+        [Obsolete(
+            "This property is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID."
+        )]
+        public PassportAuthentication Passport
+        {
+            get
+            {
 #pragma warning disable 618
                 return (PassportAuthentication)base[_propPassport];
 #pragma warning restore 618
@@ -139,30 +155,37 @@ namespace System.Web.Configuration {
         }
 
         [ConfigurationProperty("mode", DefaultValue = AuthenticationMode.Windows)]
-        public AuthenticationMode Mode {
-            get {
-                if (authenticationModeCached == false) {
+        public AuthenticationMode Mode
+        {
+            get
+            {
+                if (authenticationModeCached == false)
+                {
                     authenticationModeCache = (AuthenticationMode)base[_propMode];
                     authenticationModeCached = true;
                 }
                 return authenticationModeCache;
             }
-            set {
+            set
+            {
                 base[_propMode] = value;
                 authenticationModeCache = value;
             }
         }
 
-        protected override void Reset(ConfigurationElement parentElement) {
+        protected override void Reset(ConfigurationElement parentElement)
+        {
             base.Reset(parentElement);
             authenticationModeCached = false;
         }
 
         // this should only happen at runtime since the design time machine does not
         // need Passport installed to configure the server.
-        internal void ValidateAuthenticationMode() {
+        internal void ValidateAuthenticationMode()
+        {
 #pragma warning disable 618
-            if (Mode == AuthenticationMode.Passport && UnsafeNativeMethods.PassportVersion() < 0) {
+            if (Mode == AuthenticationMode.Passport && UnsafeNativeMethods.PassportVersion() < 0)
+            {
 #pragma warning restore 618
                 throw new ConfigurationErrorsException(SR.GetString(SR.Passport_not_installed));
             }

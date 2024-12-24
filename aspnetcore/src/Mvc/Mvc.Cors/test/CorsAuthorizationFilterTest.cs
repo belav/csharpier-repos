@@ -20,7 +20,9 @@ public class CorsAuthorizationFilterTest
     [InlineData("options")]
     [InlineData("Options")]
     [InlineData("OPTIONS")]
-    public async Task CaseInsensitive_PreFlightRequest_SuccessfulMatch_WritesHeaders(string preflightRequestMethod)
+    public async Task CaseInsensitive_PreFlightRequest_SuccessfulMatch_WritesHeaders(
+        string preflightRequestMethod
+    )
     {
         // Arrange
         var mockEngine = GetPassingEngine(supportsCredentials: true);
@@ -29,7 +31,8 @@ public class CorsAuthorizationFilterTest
         var authorizationContext = GetAuthorizationContext(
             new[] { new FilterDescriptor(filter, FilterScope.Action) },
             GetRequestHeaders(true),
-            isPreflight: true);
+            isPreflight: true
+        );
         authorizationContext.HttpContext.Request.Method = preflightRequestMethod;
 
         // Act
@@ -39,12 +42,18 @@ public class CorsAuthorizationFilterTest
         // Assert
         var response = authorizationContext.HttpContext.Response;
         Assert.Equal(204, response.StatusCode);
-        Assert.Equal("http://example.com", response.Headers[CorsConstants.AccessControlAllowOrigin]);
+        Assert.Equal(
+            "http://example.com",
+            response.Headers[CorsConstants.AccessControlAllowOrigin]
+        );
         Assert.Equal("header1,header2", response.Headers[CorsConstants.AccessControlAllowHeaders]);
 
         // Notice: GET header gets filtered because it is a simple header.
         Assert.Equal("PUT", response.Headers[CorsConstants.AccessControlAllowMethods]);
-        Assert.Equal("exposed1,exposed2", response.Headers[CorsConstants.AccessControlExposeHeaders]);
+        Assert.Equal(
+            "exposed1,exposed2",
+            response.Headers[CorsConstants.AccessControlExposeHeaders]
+        );
         Assert.Equal("123", response.Headers[CorsConstants.AccessControlMaxAge]);
         Assert.Equal("true", response.Headers[CorsConstants.AccessControlAllowCredentials]);
     }
@@ -59,7 +68,8 @@ public class CorsAuthorizationFilterTest
         var authorizationContext = GetAuthorizationContext(
             new[] { new FilterDescriptor(filter, FilterScope.Action) },
             GetRequestHeaders(),
-            isPreflight: true);
+            isPreflight: true
+        );
 
         // Act
         await filter.OnAuthorizationAsync(authorizationContext);
@@ -80,7 +90,8 @@ public class CorsAuthorizationFilterTest
         var authorizationContext = GetAuthorizationContext(
             new[] { new FilterDescriptor(filter, FilterScope.Action) },
             GetRequestHeaders(true),
-            isPreflight: true);
+            isPreflight: true
+        );
 
         // Act
         await filter.OnAuthorizationAsync(authorizationContext);
@@ -89,8 +100,14 @@ public class CorsAuthorizationFilterTest
         // Assert
         var response = authorizationContext.HttpContext.Response;
         Assert.Equal(204, response.StatusCode);
-        Assert.Equal("http://example.com", response.Headers[CorsConstants.AccessControlAllowOrigin]);
-        Assert.Equal("exposed1,exposed2", response.Headers[CorsConstants.AccessControlExposeHeaders]);
+        Assert.Equal(
+            "http://example.com",
+            response.Headers[CorsConstants.AccessControlAllowOrigin]
+        );
+        Assert.Equal(
+            "exposed1,exposed2",
+            response.Headers[CorsConstants.AccessControlExposeHeaders]
+        );
     }
 
     [Fact]
@@ -103,7 +120,8 @@ public class CorsAuthorizationFilterTest
         var authorizationContext = GetAuthorizationContext(
             new[] { new FilterDescriptor(filter, FilterScope.Action) },
             GetRequestHeaders(),
-            isPreflight: false);
+            isPreflight: false
+        );
 
         // Act
         await filter.OnAuthorizationAsync(authorizationContext);
@@ -120,24 +138,38 @@ public class CorsAuthorizationFilterTest
             .Setup(o => o.GetPolicyAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
             .Returns(Task.FromResult(new CorsPolicy()));
 
-        return new CorsAuthorizationFilter(corsService, policyProvider.Object, Mock.Of<ILoggerFactory>())
+        return new CorsAuthorizationFilter(
+            corsService,
+            policyProvider.Object,
+            Mock.Of<ILoggerFactory>()
+        )
         {
-            PolicyName = string.Empty
+            PolicyName = string.Empty,
         };
     }
 
     private AuthorizationFilterContext GetAuthorizationContext(
         FilterDescriptor[] filterDescriptors,
         RequestHeaders headers = null,
-        bool isPreflight = false)
+        bool isPreflight = false
+    )
     {
         // HttpContext
         var httpContext = new DefaultHttpContext();
         if (headers != null)
         {
-            httpContext.Request.Headers.Add(CorsConstants.AccessControlRequestHeaders, headers.Headers.Split(','));
-            httpContext.Request.Headers.Add(CorsConstants.AccessControlRequestMethod, new[] { headers.Method });
-            httpContext.Request.Headers.Add(CorsConstants.AccessControlExposeHeaders, headers.ExposedHeaders.Split(','));
+            httpContext.Request.Headers.Add(
+                CorsConstants.AccessControlRequestHeaders,
+                headers.Headers.Split(',')
+            );
+            httpContext.Request.Headers.Add(
+                CorsConstants.AccessControlRequestMethod,
+                new[] { headers.Method }
+            );
+            httpContext.Request.Headers.Add(
+                CorsConstants.AccessControlExposeHeaders,
+                headers.ExposedHeaders.Split(',')
+            );
             httpContext.Request.Headers.Add(CorsConstants.Origin, new[] { headers.Origin });
         }
 
@@ -152,7 +184,8 @@ public class CorsAuthorizationFilterTest
         var actionContext = new ActionContext(
             httpContext: httpContext,
             routeData: new RouteData(),
-            actionDescriptor: new ActionDescriptor() { FilterDescriptors = filterDescriptors });
+            actionDescriptor: new ActionDescriptor() { FilterDescriptors = filterDescriptors }
+        );
 
         var authorizationContext = new AuthorizationFilterContext(
             actionContext,
@@ -182,7 +215,8 @@ public class CorsAuthorizationFilterTest
             new List<string> { "PUT" },
             new List<string> { "exposed1", "exposed2" },
             123,
-            supportsCredentials);
+            supportsCredentials
+        );
 
         mockEngine
             .Setup(o => o.EvaluatePolicy(It.IsAny<HttpContext>(), It.IsAny<CorsPolicy>()))
@@ -190,21 +224,34 @@ public class CorsAuthorizationFilterTest
 
         mockEngine
             .Setup(o => o.ApplyResult(It.IsAny<CorsResult>(), It.IsAny<HttpResponse>()))
-            .Callback<CorsResult, HttpResponse>((result1, response1) =>
-            {
-                var headers = response1.Headers;
-                headers[CorsConstants.AccessControlMaxAge] =
-                    result1.PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture);
-                headers[CorsConstants.AccessControlAllowOrigin] = result1.AllowedOrigin;
-                if (result1.SupportsCredentials)
+            .Callback<CorsResult, HttpResponse>(
+                (result1, response1) =>
                 {
-                    headers.Add(CorsConstants.AccessControlAllowCredentials, new[] { "true" });
-                }
+                    var headers = response1.Headers;
+                    headers[CorsConstants.AccessControlMaxAge] =
+                        result1.PreflightMaxAge.Value.TotalSeconds.ToString(
+                            CultureInfo.InvariantCulture
+                        );
+                    headers[CorsConstants.AccessControlAllowOrigin] = result1.AllowedOrigin;
+                    if (result1.SupportsCredentials)
+                    {
+                        headers.Add(CorsConstants.AccessControlAllowCredentials, new[] { "true" });
+                    }
 
-                headers.Add(CorsConstants.AccessControlAllowHeaders, result1.AllowedHeaders.ToArray());
-                headers.Add(CorsConstants.AccessControlAllowMethods, result1.AllowedMethods.ToArray());
-                headers.Add(CorsConstants.AccessControlExposeHeaders, result1.AllowedExposedHeaders.ToArray());
-            });
+                    headers.Add(
+                        CorsConstants.AccessControlAllowHeaders,
+                        result1.AllowedHeaders.ToArray()
+                    );
+                    headers.Add(
+                        CorsConstants.AccessControlAllowMethods,
+                        result1.AllowedMethods.ToArray()
+                    );
+                    headers.Add(
+                        CorsConstants.AccessControlExposeHeaders,
+                        result1.AllowedExposedHeaders.ToArray()
+                    );
+                }
+            );
 
         return mockEngine.Object;
     }
@@ -226,7 +273,8 @@ public class CorsAuthorizationFilterTest
         IList<string> methods = null,
         IList<string> exposedHeaders = null,
         long? preFlightMaxAge = null,
-        bool? supportsCredentials = null)
+        bool? supportsCredentials = null
+    )
     {
         var result = new CorsResult();
 

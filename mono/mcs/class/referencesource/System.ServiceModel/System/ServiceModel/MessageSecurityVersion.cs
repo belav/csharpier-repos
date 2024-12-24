@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
-    using System.ServiceModel.Security;
     using System.IdentityModel.Selectors;
+    using System.ServiceModel.Security;
 
     public abstract class MessageSecurityVersion
     {
@@ -76,43 +76,33 @@ namespace System.ServiceModel
 
         public SecurityVersion SecurityVersion
         {
-            get
-            {
-                return MessageSecurityTokenVersion.SecurityVersion;
-            }
+            get { return MessageSecurityTokenVersion.SecurityVersion; }
         }
 
         public TrustVersion TrustVersion
         {
-            get
-            {
-                return MessageSecurityTokenVersion.TrustVersion;
-            }
+            get { return MessageSecurityTokenVersion.TrustVersion; }
         }
 
         public SecureConversationVersion SecureConversationVersion
         {
-            get
-            {
-                return MessageSecurityTokenVersion.SecureConversationVersion;
-            }
+            get { return MessageSecurityTokenVersion.SecureConversationVersion; }
         }
 
         public SecurityTokenVersion SecurityTokenVersion
         {
-            get
-            {
-                return MessageSecurityTokenVersion;
-            }
+            get { return MessageSecurityTokenVersion; }
         }
 
         public abstract SecurityPolicyVersion SecurityPolicyVersion { get; }
         public abstract BasicSecurityProfileVersion BasicSecurityProfileVersion { get; }
         internal abstract MessageSecurityTokenVersion MessageSecurityTokenVersion { get; }
 
-        class WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11MessageSecurityVersion : MessageSecurityVersion
+        class WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11MessageSecurityVersion
+            : MessageSecurityVersion
         {
-            static MessageSecurityVersion instance = new WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11MessageSecurityVersion();
+            static MessageSecurityVersion instance =
+                new WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11MessageSecurityVersion();
 
             public static MessageSecurityVersion Instance
             {
@@ -126,7 +116,10 @@ namespace System.ServiceModel
 
             internal override MessageSecurityTokenVersion MessageSecurityTokenVersion
             {
-                get { return MessageSecurityTokenVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005; }
+                get
+                {
+                    return MessageSecurityTokenVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005;
+                }
             }
 
             public override SecurityPolicyVersion SecurityPolicyVersion
@@ -140,9 +133,11 @@ namespace System.ServiceModel
             }
         }
 
-        class WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion : MessageSecurityVersion
+        class WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion
+            : MessageSecurityVersion
         {
-            static MessageSecurityVersion instance = new WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion();
+            static MessageSecurityVersion instance =
+                new WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion();
 
             public static MessageSecurityVersion Instance
             {
@@ -156,7 +151,10 @@ namespace System.ServiceModel
 
             internal override MessageSecurityTokenVersion MessageSecurityTokenVersion
             {
-                get { return MessageSecurityTokenVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005BasicSecurityProfile10; }
+                get
+                {
+                    return MessageSecurityTokenVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005BasicSecurityProfile10;
+                }
             }
 
             public override SecurityPolicyVersion SecurityPolicyVersion
@@ -170,9 +168,11 @@ namespace System.ServiceModel
             }
         }
 
-        class WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion : MessageSecurityVersion
+        class WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion
+            : MessageSecurityVersion
         {
-            static MessageSecurityVersion instance = new WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion();
+            static MessageSecurityVersion instance =
+                new WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10MessageSecurityVersion();
 
             public static MessageSecurityVersion Instance
             {
@@ -191,7 +191,10 @@ namespace System.ServiceModel
 
             internal override MessageSecurityTokenVersion MessageSecurityTokenVersion
             {
-                get { return MessageSecurityTokenVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005BasicSecurityProfile10; }
+                get
+                {
+                    return MessageSecurityTokenVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005BasicSecurityProfile10;
+                }
             }
 
             public override string ToString()
@@ -200,9 +203,11 @@ namespace System.ServiceModel
             }
         }
 
-        class WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion : MessageSecurityVersion
+        class WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion
+            : MessageSecurityVersion
         {
-            static MessageSecurityVersion instance = new WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion();
+            static MessageSecurityVersion instance =
+                new WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion();
 
             public static MessageSecurityVersion Instance
             {
@@ -221,7 +226,10 @@ namespace System.ServiceModel
 
             internal override MessageSecurityTokenVersion MessageSecurityTokenVersion
             {
-                get { return MessageSecurityTokenVersion.WSSecurity10WSTrust13WSSecureConversation13BasicSecurityProfile10; }
+                get
+                {
+                    return MessageSecurityTokenVersion.WSSecurity10WSTrust13WSSecureConversation13BasicSecurityProfile10;
+                }
             }
 
             public override string ToString()
@@ -230,9 +238,11 @@ namespace System.ServiceModel
             }
         }
 
-        class WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12MessageSecurityVersion : MessageSecurityVersion
+        class WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12MessageSecurityVersion
+            : MessageSecurityVersion
         {
-            static MessageSecurityVersion instance = new WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12MessageSecurityVersion();
+            static MessageSecurityVersion instance =
+                new WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12MessageSecurityVersion();
 
             public static MessageSecurityVersion Instance
             {
@@ -251,7 +261,10 @@ namespace System.ServiceModel
 
             internal override MessageSecurityTokenVersion MessageSecurityTokenVersion
             {
-                get { return MessageSecurityTokenVersion.WSSecurity11WSTrust13WSSecureConversation13; }
+                get
+                {
+                    return MessageSecurityTokenVersion.WSSecurity11WSTrust13WSSecureConversation13;
+                }
             }
 
             public override string ToString()
@@ -260,9 +273,11 @@ namespace System.ServiceModel
             }
         }
 
-        class WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion : MessageSecurityVersion
+        class WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion
+            : MessageSecurityVersion
         {
-            static MessageSecurityVersion instance = new WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion();
+            static MessageSecurityVersion instance =
+                new WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10MessageSecurityVersion();
 
             public static MessageSecurityVersion Instance
             {
@@ -281,7 +296,10 @@ namespace System.ServiceModel
 
             internal override MessageSecurityTokenVersion MessageSecurityTokenVersion
             {
-                get { return MessageSecurityTokenVersion.WSSecurity11WSTrust13WSSecureConversation13BasicSecurityProfile10; }
+                get
+                {
+                    return MessageSecurityTokenVersion.WSSecurity11WSTrust13WSSecureConversation13BasicSecurityProfile10;
+                }
             }
 
             public override string ToString()

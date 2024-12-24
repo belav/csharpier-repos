@@ -9,12 +9,13 @@ namespace Microsoft.CodeAnalysis.QuickInfo;
 [DataContract]
 internal readonly record struct QuickInfoOptions
 {
-    [DataMember] public bool ShowRemarksInQuickInfo { get; init; } = true;
-    [DataMember] public bool IncludeNavigationHintsInQuickInfo { get; init; } = true;
+    [DataMember]
+    public bool ShowRemarksInQuickInfo { get; init; } = true;
 
-    public QuickInfoOptions()
-    {
-    }
+    [DataMember]
+    public bool IncludeNavigationHintsInQuickInfo { get; init; } = true;
+
+    public QuickInfoOptions() { }
 
     public static readonly QuickInfoOptions Default = new();
 }

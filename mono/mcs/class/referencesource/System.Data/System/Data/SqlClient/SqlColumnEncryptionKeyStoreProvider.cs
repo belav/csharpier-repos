@@ -24,7 +24,11 @@ namespace System.Data.SqlClient
         /// <param name="encryptionAlgorithm">Asymmetric Key Encryption Algorithm</param>
         /// <param name="encryptedColumnEncryptionKey">Encrypted Column Encryption Key</param>
         /// <returns>Plain text column encryption key</returns>
-        public abstract byte[] DecryptColumnEncryptionKey(string masterKeyPath, string encryptionAlgorithm, byte[] encryptedColumnEncryptionKey);
+        public abstract byte[] DecryptColumnEncryptionKey(
+            string masterKeyPath,
+            string encryptionAlgorithm,
+            byte[] encryptedColumnEncryptionKey
+        );
 
         /// <summary>
         /// This function must be implemented by the corresponding Key Store providers. This function should use an asymmetric key identified by a key path
@@ -34,6 +38,10 @@ namespace System.Data.SqlClient
         /// <param name="encryptionAlgorithm">Asymmetric Key Encryption Algorithm</param>
         /// <param name="columnEncryptionKey">Plain text column encryption key to be encrypted</param>
         /// <returns>Encrypted column encryption key</returns>
-        public abstract byte[] EncryptColumnEncryptionKey(string masterKeyPath, string encryptionAlgorithm, byte[] columnEncryptionKey);
+        public abstract byte[] EncryptColumnEncryptionKey(
+            string masterKeyPath,
+            string encryptionAlgorithm,
+            byte[] columnEncryptionKey
+        );
     }
 }

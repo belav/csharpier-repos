@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename.HighlightTag
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RenameConflictTagDefinition()
         {
-            this.Border = new Pen(Brushes.Red, thickness: StrokeThickness) { DashStyle = new DashStyle(StrokeDashArray, 0) };
+            this.Border = new Pen(Brushes.Red, thickness: StrokeThickness)
+            {
+                DashStyle = new DashStyle(StrokeDashArray, 0),
+            };
             this.DisplayName = EditorFeaturesResources.Inline_Rename_Conflict;
             this.ZOrder = 10;
         }

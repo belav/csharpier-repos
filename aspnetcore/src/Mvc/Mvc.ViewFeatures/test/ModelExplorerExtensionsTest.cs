@@ -12,31 +12,16 @@ public class ModelExplorerExtensionsTest
         get
         {
             return new TheoryData<object, Type, string>
+            {
                 {
-                    {
-                        new ComplexClass()
-                        {
-                            Prop1 = new Class1 { Prop1 = "Hello" }
-                        },
-                        typeof(ComplexClass),
-                        "Class1"
-                    },
-                    {
-                        new Class1(),
-                        typeof(Class1),
-                        "Class1"
-                    },
-                    {
-                        new ClassWithNoProperties(),
-                        typeof(ClassWithNoProperties),
-                        string.Empty
-                    },
-                    {
-                        null,
-                        typeof(object),
-                        null
-                    },
-                };
+                    new ComplexClass() { Prop1 = new Class1 { Prop1 = "Hello" } },
+                    typeof(ComplexClass),
+                    "Class1"
+                },
+                { new Class1(), typeof(Class1), "Class1" },
+                { new ClassWithNoProperties(), typeof(ClassWithNoProperties), string.Empty },
+                { null, typeof(object), null },
+            };
         }
     }
 
@@ -45,7 +30,8 @@ public class ModelExplorerExtensionsTest
     public void GetSimpleDisplayText_WithoutSimpleDisplayProperty(
         object model,
         Type modelType,
-        string expectedResult)
+        string expectedResult
+    )
     {
         // Arrange
         var provider = new EmptyModelMetadataProvider();

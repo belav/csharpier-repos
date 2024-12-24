@@ -9,5 +9,11 @@ internal abstract class FormDataConverter<T> : FormDataConverter
 {
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
-    internal abstract bool TryRead(ref FormDataReader context, Type type, FormDataMapperOptions options, out T? result, out bool found);
+    internal abstract bool TryRead(
+        ref FormDataReader context,
+        Type type,
+        FormDataMapperOptions options,
+        out T? result,
+        out bool found
+    );
 }

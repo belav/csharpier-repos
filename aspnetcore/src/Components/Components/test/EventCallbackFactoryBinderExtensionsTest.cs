@@ -20,7 +20,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var binder = EventCallback.Factory.CreateBinder(component, setter, value);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "not-an-integer!", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "not-an-integer!" });
 
         Assert.Equal(17, value); // Setter not called
         Assert.Equal(1, component.Count);
@@ -37,7 +37,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var binder = EventCallback.Factory.CreateBinder(component, setter, value);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = string.Empty, });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = string.Empty });
 
         Assert.Equal(0, value); // Calls setter to apply default value for this type
         Assert.Equal(1, component.Count);
@@ -48,14 +48,17 @@ public class EventCallbackFactoryBinderExtensionsTest
     {
         // Arrange
         var component = new EventCountingComponent();
-        Action<int> setter = (_) => { throw new InvalidTimeZoneException(); };
+        Action<int> setter = (_) =>
+        {
+            throw new InvalidTimeZoneException();
+        };
 
         var binder = EventCallback.Factory.CreateBinder(component, setter, 17);
 
         // Act
         await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
         {
-            return binder.InvokeAsync(new ChangeEventArgs() { Value = "18", });
+            return binder.InvokeAsync(new ChangeEventArgs() { Value = "18" });
         });
 
         Assert.Equal(1, component.Count);
@@ -72,7 +75,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var binder = EventCallback.Factory.CreateBinder(component, setter, value);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "not-an-integer!", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "not-an-integer!" });
 
         Assert.Equal(17, value); // Setter not called
         Assert.Equal(1, component.Count);
@@ -89,7 +92,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var binder = EventCallback.Factory.CreateBinder(component, setter, value);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "" });
 
         Assert.Null(value); // Setter called
         Assert.Equal(1, component.Count);
@@ -108,7 +111,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = "bye";
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue, });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -127,7 +130,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = true;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = true, });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = true });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -146,7 +149,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (bool?)true;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = true, });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = true });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -165,7 +168,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = 42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -184,7 +187,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (int?)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -203,7 +206,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (long)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -222,7 +225,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (long?)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -241,7 +244,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (float)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -260,7 +263,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (float?)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -279,7 +282,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (double)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -298,7 +301,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (double?)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -317,7 +320,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (decimal)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -336,7 +339,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = (decimal?)42;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -355,7 +358,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = AttributeTargets.Class;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(), });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString() });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -374,7 +377,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = AttributeTargets.Class;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(), });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString() });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -393,7 +396,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture) }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -412,7 +417,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture) }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -432,7 +439,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs()
+            {
+                Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+            }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -452,7 +464,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs()
+            {
+                Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+            }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -471,7 +488,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture) }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -490,7 +509,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.CurrentCulture) }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -510,7 +531,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs()
+            {
+                Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+            }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -530,7 +556,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = new DateTime(2018, 3, 4);
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+        await binder.InvokeAsync(
+            new ChangeEventArgs()
+            {
+                Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+            }
+        );
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -550,7 +581,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = Guid.NewGuid();
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(), });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString() });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -570,7 +601,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = Guid.NewGuid();
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(), });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString() });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -580,16 +611,19 @@ public class EventCallbackFactoryBinderExtensionsTest
     public async Task CreateBinder_CustomTypeConverter()
     {
         // Arrange
-        var value = new SecretMessage() { Message = "A message", };
+        var value = new SecretMessage() { Message = "A message" };
         var component = new EventCountingComponent();
         Action<SecretMessage> setter = (_) => value = _;
 
         var binder = EventCallback.Factory.CreateBinder(component, setter, value);
 
-        var expectedValue = new SecretMessage() { Message = "TypeConverter may be old, but it still works!", };
+        var expectedValue = new SecretMessage()
+        {
+            Message = "TypeConverter may be old, but it still works!",
+        };
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(), });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString() });
 
         Assert.Equal(expectedValue.Message, value.Message);
         Assert.Equal(1, component.Count);
@@ -602,12 +636,15 @@ public class EventCallbackFactoryBinderExtensionsTest
         var component = new EventCountingComponent();
         Action<ClassWithoutTypeConverter> setter = (_) => value = _;
 
-        var ex = Assert.Throws<InvalidOperationException>(() => EventCallback.Factory.CreateBinder(component, setter, value));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => EventCallback.Factory.CreateBinder(component, setter, value)
+        );
 
         Assert.Equal(
-            $"The type '{typeof(ClassWithoutTypeConverter).FullName}' does not have an associated TypeConverter that supports conversion from a string. " +
-            $"Apply 'TypeConverterAttribute' to the type to register a converter.",
-            ex.Message);
+            $"The type '{typeof(ClassWithoutTypeConverter).FullName}' does not have an associated TypeConverter that supports conversion from a string. "
+                + $"Apply 'TypeConverterAttribute' to the type to register a converter.",
+            ex.Message
+        );
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/30312")]
@@ -624,7 +661,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         var expectedValue = 42_000;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42 000,00", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42 000,00" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -638,12 +675,17 @@ public class EventCallbackFactoryBinderExtensionsTest
         var component = new EventCountingComponent();
         Action<int> setter = (_) => value = _;
 
-        var binder = EventCallback.Factory.CreateBinder(component, setter, value, CultureInfo.InvariantCulture);
+        var binder = EventCallback.Factory.CreateBinder(
+            component,
+            setter,
+            value,
+            CultureInfo.InvariantCulture
+        );
 
         var expectedValue = 42_000;
 
         // Act
-        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42,000.00", });
+        await binder.InvokeAsync(new ChangeEventArgs() { Value = "42,000.00" });
 
         Assert.Equal(expectedValue, value);
         Assert.Equal(1, component.Count);
@@ -670,9 +712,7 @@ public class EventCallbackFactoryBinderExtensionsTest
         }
     }
 
-    private class ClassWithoutTypeConverter
-    {
-    }
+    private class ClassWithoutTypeConverter { }
 
     [TypeConverter(typeof(SecretMessageTypeConverter))]
     private class SecretMessage
@@ -696,11 +736,16 @@ public class EventCallbackFactoryBinderExtensionsTest
 
             return false;
         }
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value is string message)
             {
-                return new SecretMessage() { Message = message, };
+                return new SecretMessage() { Message = message };
             }
 
             return null;

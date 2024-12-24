@@ -10,7 +10,9 @@ namespace System
     /// The exception that is thrown when an attempt is made to access an element of an array or collection with an index that is outside its bounds.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class IndexOutOfRangeException : SystemException
     {
         public IndexOutOfRangeException()
@@ -31,9 +33,12 @@ namespace System
             HResult = HResults.COR_E_INDEXOUTOFRANGE;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        private IndexOutOfRangeException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        private IndexOutOfRangeException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

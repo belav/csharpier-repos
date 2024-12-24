@@ -11,7 +11,6 @@ namespace Microsoft.CodeAnalysis.Debugging
         public readonly TextSpan Span = span;
         public readonly string Text = text;
 
-        public bool IsDefault
-            => Span.Length == 0 && Span.Start == 0 && Text == null;
+        public bool IsDefault => Span.Length == 0 && Span.Start == 0 && Text == null;
     }
 }

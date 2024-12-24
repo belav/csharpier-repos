@@ -13,9 +13,37 @@ namespace System.IO.Tests
 {
     public class StringWriterTests
     {
-        static int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue, short.MinValue };
-        static int[] iArrLargeValues = new int[] { int.MaxValue, int.MaxValue - 1, int.MaxValue / 2, int.MaxValue / 10, int.MaxValue / 100 };
-        static int[] iArrValidValues = new int[] { 10000, 100000, int.MaxValue / 2000, int.MaxValue / 5000, short.MaxValue };
+        static int[] iArrInvalidValues = new int[]
+        {
+            -1,
+            -2,
+            -100,
+            -1000,
+            -10000,
+            -100000,
+            -1000000,
+            -10000000,
+            -100000000,
+            -1000000000,
+            int.MinValue,
+            short.MinValue,
+        };
+        static int[] iArrLargeValues = new int[]
+        {
+            int.MaxValue,
+            int.MaxValue - 1,
+            int.MaxValue / 2,
+            int.MaxValue / 10,
+            int.MaxValue / 100,
+        };
+        static int[] iArrValidValues = new int[]
+        {
+            10000,
+            100000,
+            int.MaxValue / 2000,
+            int.MaxValue / 5000,
+            short.MaxValue,
+        };
 
         private static StringBuilder getSb()
         {
@@ -105,7 +133,10 @@ namespace System.IO.Tests
             for (int i = 0; i < iArrLargeValues.Length; i++)
             {
                 StringWriter sw = new StringWriter();
-                AssertExtensions.Throws<ArgumentException>(null, () => sw.Write(chArr, iArrLargeValues[i], chArr.Length));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => sw.Write(chArr, iArrLargeValues[i], chArr.Length)
+                );
             }
         }
 
@@ -116,7 +147,10 @@ namespace System.IO.Tests
             for (int i = 0; i < iArrLargeValues.Length; i++)
             {
                 StringWriter sw = new StringWriter();
-                AssertExtensions.Throws<ArgumentException>(null, () => sw.Write(chArr, 0, iArrLargeValues[i]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => sw.Write(chArr, 0, iArrLargeValues[i])
+                );
             }
         }
 
@@ -229,9 +263,18 @@ namespace System.IO.Tests
 
         private static void ValidateDisposedExceptions(StringWriter sw)
         {
-            Assert.Throws<ObjectDisposedException>(() => { sw.Write('a'); });
-            Assert.Throws<ObjectDisposedException>(() => { sw.Write(new char[10], 0, 1); });
-            Assert.Throws<ObjectDisposedException>(() => { sw.Write("abc"); });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sw.Write('a');
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sw.Write(new char[10], 0, 1);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sw.Write("abc");
+            });
         }
 
         [Fact]
@@ -259,7 +302,10 @@ namespace System.IO.Tests
             cts.Cancel();
             Task t = sw.FlushAsync(cts.Token);
             Assert.Equal(TaskStatus.Canceled, t.Status);
-            Assert.Equal(cts.Token, (await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t)).CancellationToken);
+            Assert.Equal(
+                cts.Token,
+                (await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t)).CancellationToken
+            );
 
             await sw.FlushAsync(new CancellationTokenSource().Token);
 
@@ -295,9 +341,7 @@ namespace System.IO.Tests
             await sw.WriteLineAsync(new char[] { 'e', 'l', 'l', 'o' });
             await sw.WriteLineAsync("World!");
 
-            Assert.Equal(
-                string.Format("H{0}ello{0}World!{0}", Environment.NewLine),
-                sw.ToString());
+            Assert.Equal(string.Format("H{0}ello{0}World!{0}", Environment.NewLine), sw.ToString());
         }
 
         [Fact]
@@ -325,7 +369,10 @@ namespace System.IO.Tests
                 sw.Write((uint)uint.MaxValue);
                 sw.Write((ulong)ulong.MaxValue);
 
-                Assert.Equal("Truea1234.013452342.0123456-92233720368547758081234.5429496729518446744073709551615", sw.ToString());
+                Assert.Equal(
+                    "Truea1234.013452342.0123456-92233720368547758081234.5429496729518446744073709551615",
+                    sw.ToString()
+                );
             }
         }
 
@@ -352,8 +399,12 @@ namespace System.IO.Tests
                 sw.WriteLine((ulong.MaxValue));
 
                 Assert.Equal(
-                    string.Format("False{0}B{0}987{0}875634{0}1.23457{0}45634563{0}18446744073709551615{0}", Environment.NewLine),
-                    sw.ToString());
+                    string.Format(
+                        "False{0}B{0}987{0}875634{0}1.23457{0}45634563{0}18446744073709551615{0}",
+                        Environment.NewLine
+                    ),
+                    sw.ToString()
+                );
             }
         }
 
@@ -409,7 +460,10 @@ namespace System.IO.Tests
             await sw.WriteAsync((ReadOnlyMemory<char>)new char[] { 'g', 'h', 'i' });
             await sw.WriteLineAsync((ReadOnlyMemory<char>)new char[] { 'j' });
 
-            Assert.Equal("abcde" + Environment.NewLine + "fghij" + Environment.NewLine, sw.ToString());
+            Assert.Equal(
+                "abcde" + Environment.NewLine + "fghij" + Environment.NewLine,
+                sw.ToString()
+            );
         }
 
         [Fact]
@@ -417,8 +471,12 @@ namespace System.IO.Tests
         {
             var writer = new StringWriter();
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => writer.WriteAsync(Memory<char>.Empty, new CancellationToken(true)));
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => writer.WriteLineAsync(Memory<char>.Empty, new CancellationToken(true)));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () => writer.WriteAsync(Memory<char>.Empty, new CancellationToken(true))
+            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () => writer.WriteLineAsync(Memory<char>.Empty, new CancellationToken(true))
+            );
         }
 
         [Fact]

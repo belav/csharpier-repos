@@ -6,32 +6,34 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.Data.Common.Utils
 {
-    internal class DisposableCollectionWrapper<T> : IDisposable, IEnumerable<T> where T : IDisposable
+    internal class DisposableCollectionWrapper<T> : IDisposable, IEnumerable<T>
+        where T : IDisposable
     {
         IEnumerable<T> _enumerable;
+
         internal DisposableCollectionWrapper(IEnumerable<T> enumerable)
         {
             Debug.Assert(enumerable != null, "don't pass in a null enumerable");
             _enumerable = enumerable;
         }
 
-        public void  Dispose()
+        public void Dispose()
         {
             // Technically, calling GC.SuppressFinalize is not required because the class does not
             // have a finalizer, but it does no harm, protects against the case where a finalizer is added
             // in the future, and prevents an FxCop warning.
             GC.SuppressFinalize(this);
-            if(_enumerable != null)
+            if (_enumerable != null)
             {
-                foreach(T item in _enumerable)
+                foreach (T item in _enumerable)
                 {
-                    if(item != null)
+                    if (item != null)
                     {
                         item.Dispose();
                     }

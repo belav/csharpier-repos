@@ -17,9 +17,7 @@ public class HttpHeadAttribute : HttpMethodAttribute
     /// Creates a new <see cref="HttpHeadAttribute"/>.
     /// </summary>
     public HttpHeadAttribute()
-        : base(_supportedMethods)
-    {
-    }
+        : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpHeadAttribute"/> with the given route template.

@@ -8,7 +8,6 @@
 
 namespace System.Data.Common
 {
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -36,15 +35,8 @@ namespace System.Data.Common
 
         internal virtual string ConnectionString
         {
-            get
-            {
-                return _connectionString;
-            }
-
-            set
-            {
-                _connectionString = value;
-            }
+            get { return _connectionString; }
+            set { _connectionString = value; }
         }
 
         public override bool Equals(object obj)

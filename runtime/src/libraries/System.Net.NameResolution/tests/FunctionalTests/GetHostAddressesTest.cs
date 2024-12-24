@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.NameResolution.Tests
@@ -14,12 +13,16 @@ namespace System.Net.NameResolution.Tests
     public class GetHostAddressesTest
     {
         [Fact]
-        public Task Dns_GetHostAddressesAsync_HostString_Ok() => TestGetHostAddressesAsync(() => Dns.GetHostAddressesAsync(TestSettings.LocalHost));
+        public Task Dns_GetHostAddressesAsync_HostString_Ok() =>
+            TestGetHostAddressesAsync(() => Dns.GetHostAddressesAsync(TestSettings.LocalHost));
 
         [Fact]
-        public Task Dns_GetHostAddressesAsync_IPString_Ok() => TestGetHostAddressesAsync(() => Dns.GetHostAddressesAsync(TestSettings.LocalIPString));
+        public Task Dns_GetHostAddressesAsync_IPString_Ok() =>
+            TestGetHostAddressesAsync(() => Dns.GetHostAddressesAsync(TestSettings.LocalIPString));
 
-        private static async Task TestGetHostAddressesAsync(Func<Task<IPAddress[]>> getHostAddressesFunc)
+        private static async Task TestGetHostAddressesAsync(
+            Func<Task<IPAddress[]>> getHostAddressesFunc
+        )
         {
             Task<IPAddress[]> hostEntryTask1 = getHostAddressesFunc();
             Task<IPAddress[]> hostEntryTask2 = getHostAddressesFunc();
@@ -50,7 +53,8 @@ namespace System.Net.NameResolution.Tests
             string longHostNameWithDot = longHostName + ".";
 
             SocketException ex = await Assert.ThrowsAnyAsync<SocketException>(
-                () => Dns.GetHostAddressesAsync(longHostNameWithDot));
+                () => Dns.GetHostAddressesAsync(longHostNameWithDot)
+            );
 
             Assert.Equal(SocketError.HostNotFound, ex.SocketErrorCode);
         }
@@ -60,7 +64,9 @@ namespace System.Net.NameResolution.Tests
         {
             int maxHostName = 255;
             string longHostName = new string('a', maxHostName);
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => Dns.GetHostAddressesAsync(longHostName));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                () => Dns.GetHostAddressesAsync(longHostName)
+            );
         }
 
         [Fact]
@@ -89,7 +95,11 @@ namespace System.Net.NameResolution.Tests
         [Fact]
         public void DnsBeginGetHostAddresses_MachineName_MatchesGetHostAddresses()
         {
-            IAsyncResult asyncObject = Dns.BeginGetHostAddresses(TestSettings.LocalHost, null, null);
+            IAsyncResult asyncObject = Dns.BeginGetHostAddresses(
+                TestSettings.LocalHost,
+                null,
+                null
+            );
             IPAddress[] results = Dns.EndGetHostAddresses(asyncObject);
             IPAddress[] addresses = Dns.GetHostAddresses(TestSettings.LocalHost);
             Assert.Equal(addresses, results);
@@ -113,23 +123,28 @@ namespace System.Net.NameResolution.Tests
 
         [Theory]
         [MemberData(nameof(IPAndIncorrectFamily_Data))]
-        public async Task DnsGetHostAddresses_IPStringAndIncorrectFamily_ReturnsNoIPs(bool useAsync, IPAddress address, AddressFamily family)
+        public async Task DnsGetHostAddresses_IPStringAndIncorrectFamily_ReturnsNoIPs(
+            bool useAsync,
+            IPAddress address,
+            AddressFamily family
+        )
         {
-            IPAddress[] addresses =
-                useAsync ? await Dns.GetHostAddressesAsync(address.ToString(), family) :
-                Dns.GetHostAddresses(address.ToString(), family);
+            IPAddress[] addresses = useAsync
+                ? await Dns.GetHostAddressesAsync(address.ToString(), family)
+                : Dns.GetHostAddresses(address.ToString(), family);
 
             Assert.Empty(addresses);
         }
 
-        public static TheoryData<bool, IPAddress, AddressFamily> IPAndIncorrectFamily_Data => new TheoryData<bool, IPAddress, AddressFamily>
-        {
-            // useAsync, IP, family
-            { false, IPAddress.Loopback, AddressFamily.InterNetworkV6 },
-            { false, IPAddress.IPv6Loopback, AddressFamily.InterNetwork },
-            { true, IPAddress.Loopback, AddressFamily.InterNetworkV6 },
-            { true, IPAddress.IPv6Loopback, AddressFamily.InterNetwork }
-        };
+        public static TheoryData<bool, IPAddress, AddressFamily> IPAndIncorrectFamily_Data =>
+            new TheoryData<bool, IPAddress, AddressFamily>
+            {
+                // useAsync, IP, family
+                { false, IPAddress.Loopback, AddressFamily.InterNetworkV6 },
+                { false, IPAddress.IPv6Loopback, AddressFamily.InterNetwork },
+                { true, IPAddress.Loopback, AddressFamily.InterNetworkV6 },
+                { true, IPAddress.IPv6Loopback, AddressFamily.InterNetwork },
+            };
 
         [Fact]
         public void DnsGetHostAddresses_LocalHost_ReturnsSameAsGetHostEntry()
@@ -143,11 +158,15 @@ namespace System.Net.NameResolution.Tests
         [OuterLoop]
         [Theory]
         [MemberData(nameof(AddressFamilySpecificTestData))]
-        public async Task DnsGetHostAddresses_LocalHost_AddressFamilySpecific(bool useAsync, string host, AddressFamily addressFamily)
+        public async Task DnsGetHostAddresses_LocalHost_AddressFamilySpecific(
+            bool useAsync,
+            string host,
+            AddressFamily addressFamily
+        )
         {
-            IPAddress[] addresses =
-                useAsync ? await Dns.GetHostAddressesAsync(host, addressFamily) :
-                Dns.GetHostAddresses(host, addressFamily);
+            IPAddress[] addresses = useAsync
+                ? await Dns.GetHostAddressesAsync(host, addressFamily)
+                : Dns.GetHostAddresses(host, addressFamily);
 
             Assert.All(addresses, address => Assert.Equal(addressFamily, address.AddressFamily));
         }
@@ -159,7 +178,7 @@ namespace System.Net.NameResolution.Tests
                 { false, TestSettings.IPv4Host, AddressFamily.InterNetwork },
                 { false, TestSettings.IPv6Host, AddressFamily.InterNetworkV6 },
                 { true, TestSettings.IPv4Host, AddressFamily.InterNetwork },
-                { true, TestSettings.IPv6Host, AddressFamily.InterNetworkV6 }
+                { true, TestSettings.IPv6Host, AddressFamily.InterNetworkV6 },
             };
 
         [Fact]
@@ -168,7 +187,10 @@ namespace System.Net.NameResolution.Tests
             using var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            OperationCanceledException oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => Dns.GetHostAddressesAsync(TestSettings.LocalHost, cts.Token));
+            OperationCanceledException oce =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    () => Dns.GetHostAddressesAsync(TestSettings.LocalHost, cts.Token)
+                );
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
     }
@@ -181,7 +203,10 @@ namespace System.Net.NameResolution.Tests
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/78909")]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/33378", TestPlatforms.AnyUnix)] // Cancellation of an outstanding getaddrinfo is not supported on *nix.
-        [SkipOnCoreClr("JitStress interferes with cancellation timing", RuntimeTestModes.JitStress | RuntimeTestModes.JitStressRegs)]
+        [SkipOnCoreClr(
+            "JitStress interferes with cancellation timing",
+            RuntimeTestModes.JitStress | RuntimeTestModes.JitStressRegs
+        )]
         public async Task DnsGetHostAddresses_PostCancelledToken_Throws()
         {
             using var cts = new CancellationTokenSource();
@@ -192,7 +217,8 @@ namespace System.Net.NameResolution.Tests
             // It's a race between the DNS server getting back to us and the cancellation processing.
             cts.Cancel();
 
-            OperationCanceledException oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => task);
+            OperationCanceledException oce =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() => task);
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -213,7 +239,10 @@ namespace System.Net.NameResolution.Tests
                 await Task.WhenAll(resolveTasks);
             }
 
-            static async Task ResolveOneAsync(string address, CancellationTokenSource cancellationTokenSource)
+            static async Task ResolveOneAsync(
+                string address,
+                CancellationTokenSource cancellationTokenSource
+            )
             {
                 try
                 {

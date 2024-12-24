@@ -195,7 +195,7 @@ namespace HtmlAgilityPack
             /// </summary>
             public MixedCodeDocumentFragment Current
             {
-                get { return (MixedCodeDocumentFragment) (_items[_index]); }
+                get { return (MixedCodeDocumentFragment)(_items[_index]); }
             }
 
             #endregion

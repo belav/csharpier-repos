@@ -16,7 +16,10 @@ namespace Microsoft.VisualStudio.Debugger
 
     public static class DkmComponentManager
     {
-        public static bool ReportCurrentNonFatalException(Exception currentException, string implementationName)
+        public static bool ReportCurrentNonFatalException(
+            Exception currentException,
+            string implementationName
+        )
         {
             return true;
         }
@@ -25,7 +28,7 @@ namespace Microsoft.VisualStudio.Debugger
     public enum DkmDataCreationDisposition
     {
         CreateNew,
-        CreateAlways
+        CreateAlways,
     }
 }
 
@@ -40,8 +43,16 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         Internal,
     }
 
-    public enum DkmEvaluationResultStorageType { None = 0 }
-    public enum DkmEvaluationResultTypeModifierFlags { None = 0 }
+    public enum DkmEvaluationResultStorageType
+    {
+        None = 0,
+    }
+
+    public enum DkmEvaluationResultTypeModifierFlags
+    {
+        None = 0,
+    }
+
     public class DkmDataAddress { }
 }
 

@@ -13,7 +13,11 @@ public class LivenessProbeStartup
         // Registers required services for health checks
         services
             .AddHealthChecks()
-            .AddCheck<SlowDependencyHealthCheck>("Slow", failureStatus: null, tags: new[] { "ready", });
+            .AddCheck<SlowDependencyHealthCheck>(
+                "Slow",
+                failureStatus: null,
+                tags: new[] { "ready" }
+            );
     }
 
     public void Configure(IApplicationBuilder app)
@@ -24,7 +28,7 @@ public class LivenessProbeStartup
         //
         // Using a separate liveness and readiness check is useful in an environment like Kubernetes
         // when an application needs to do significant work before accepting requests. Using separate
-        // checks allows the orchestrator to distinguish whether the application is functioning but 
+        // checks allows the orchestrator to distinguish whether the application is functioning but
         // not yet ready or if the application has failed to start.
         //
         // For instance the liveness check will do a quick set of checks to determine if the process
@@ -38,27 +42,34 @@ public class LivenessProbeStartup
         //
         // In this example, the liveness check will us an 'identity' check that always returns healthy.
         //
-        // In this example, the readiness check will run all registered checks, include a check with a 
+        // In this example, the readiness check will run all registered checks, include a check with a
         // long initialization time (15 seconds).
 
         // The readiness check uses all registered checks with the 'ready' tag.
-        app.UseHealthChecks("/health/ready", new HealthCheckOptions()
-        {
-            Predicate = (check) => check.Tags.Contains("ready"),
-        });
+        app.UseHealthChecks(
+            "/health/ready",
+            new HealthCheckOptions() { Predicate = (check) => check.Tags.Contains("ready") }
+        );
 
         // The liveness filters out all checks and just returns success
-        app.UseHealthChecks("/health/live", new HealthCheckOptions()
-        {
-            // Exclude all checks, just return a 200.
-            Predicate = (check) => false,
-        });
+        app.UseHealthChecks(
+            "/health/live",
+            new HealthCheckOptions()
+            {
+                // Exclude all checks, just return a 200.
+                Predicate = (check) => false,
+            }
+        );
 
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Go to /health/ready to see the readiness status");
-            await context.Response.WriteAsync(Environment.NewLine);
-            await context.Response.WriteAsync("Go to /health/live to see the liveness status");
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync(
+                    "Go to /health/ready to see the readiness status"
+                );
+                await context.Response.WriteAsync(Environment.NewLine);
+                await context.Response.WriteAsync("Go to /health/live to see the liveness status");
+            }
+        );
     }
 }

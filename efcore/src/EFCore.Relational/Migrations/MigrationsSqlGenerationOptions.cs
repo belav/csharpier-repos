@@ -30,5 +30,5 @@ public enum MigrationsSqlGenerationOptions
     /// <summary>
     ///     Generate SQL for a script without transaction statements.
     /// </summary>
-    NoTransactions = 1 << 2
+    NoTransactions = 1 << 2,
 }

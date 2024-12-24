@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class DefaultExpressionCompiler : ExpressionCompiler
@@ -29,8 +28,8 @@ namespace Moq
     */
     sealed class DefaultExpressionCompiler : ExpressionCompiler
     {
-        new public static readonly DefaultExpressionCompiler Instance = new DefaultExpressionCompiler();
-
+        public static new readonly DefaultExpressionCompiler Instance =
+            new DefaultExpressionCompiler();
 
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
@@ -52,9 +51,7 @@ namespace Moq
         After:
                 DefaultExpressionCompiler()
         */
-        DefaultExpressionCompiler()
-        {
-        }
+        DefaultExpressionCompiler() { }
 
         public override Delegate Compile(LambdaExpression expression)
         {

@@ -10,20 +10,31 @@ namespace System.Net.Quic.Tests
 {
     public class MsQuicPlatformDetectionTests : QuicTestBase
     {
-        public MsQuicPlatformDetectionTests(ITestOutputHelper output) : base(output) { }
+        public MsQuicPlatformDetectionTests(ITestOutputHelper output)
+            : base(output) { }
 
         public static bool IsQuicUnsupported => !IsSupported;
 
         [ConditionalFact(nameof(IsQuicUnsupported))]
         public async Task UnsupportedPlatforms_ThrowsPlatformNotSupportedException()
         {
-            PlatformNotSupportedException listenerEx = await Assert.ThrowsAsync<PlatformNotSupportedException>(async () => await CreateQuicListener());
-            PlatformNotSupportedException connectionEx = await Assert.ThrowsAsync<PlatformNotSupportedException>(async () => await CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, 0)));
+            PlatformNotSupportedException listenerEx =
+                await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                    async () => await CreateQuicListener()
+                );
+            PlatformNotSupportedException connectionEx =
+                await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                    async () => await CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, 0))
+                );
             Assert.Equal(listenerEx.Message, connectionEx.Message);
             _output.WriteLine(listenerEx.Message);
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/73290", typeof(PlatformDetection), nameof(PlatformDetection.IsSingleFile))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/73290",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSingleFile)
+        )]
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.SupportsTls13))]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void SupportedWindowsPlatforms_IsSupportedIsTrue()
@@ -56,9 +67,25 @@ namespace System.Net.Quic.Tests
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/82154", typeof(PlatformDetection), nameof(PlatformDetection.IsRaspbian10), nameof(PlatformDetection.IsArmv6Process), nameof(PlatformDetection.IsInContainer))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/82154", typeof(PlatformDetection), nameof(PlatformDetection.IsUbuntu2004), nameof(PlatformDetection.IsPpc64leProcess))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/82154", typeof(PlatformDetection), nameof(PlatformDetection.IsUbuntu2004), nameof(PlatformDetection.IsS390xProcess))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/82154",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsRaspbian10),
+            nameof(PlatformDetection.IsArmv6Process),
+            nameof(PlatformDetection.IsInContainer)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/82154",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsUbuntu2004),
+            nameof(PlatformDetection.IsPpc64leProcess)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/82154",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsUbuntu2004),
+            nameof(PlatformDetection.IsS390xProcess)
+        )]
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsInHelix))]
         [PlatformSpecific(TestPlatforms.Linux)]
         public void SupportedLinuxPlatforms_IsSupportedIsTrue()

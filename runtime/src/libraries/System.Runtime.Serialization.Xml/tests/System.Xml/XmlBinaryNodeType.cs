@@ -195,6 +195,6 @@ namespace System.Xml
         UnicodeChars32TextWithEndElement = 187,
         QNameDictionaryText = 188,
         MaxText = 189,
-        QNameDictionaryTextWithEndElement = 189
+        QNameDictionaryTextWithEndElement = 189,
     }
 }

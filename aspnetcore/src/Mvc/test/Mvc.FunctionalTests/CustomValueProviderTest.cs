@@ -9,14 +9,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class CustomValueProviderTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithCustomValueProvider>>
+public class CustomValueProviderTest
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithCustomValueProvider>>
 {
     private IServiceCollection _serviceCollection;
 
-    public CustomValueProviderTest(MvcTestFixture<BasicWebSite.StartupWithCustomValueProvider> fixture)
+    public CustomValueProviderTest(
+        MvcTestFixture<BasicWebSite.StartupWithCustomValueProvider> fixture
+    )
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b => b.UseStartup<BasicWebSite.StartupWithCustomValueProvider>());
-        factory = factory.WithWebHostBuilder(b => b.ConfigureTestServices(serviceCollection => _serviceCollection = serviceCollection));
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(b =>
+                b.UseStartup<BasicWebSite.StartupWithCustomValueProvider>()
+            );
+        factory = factory.WithWebHostBuilder(b =>
+            b.ConfigureTestServices(serviceCollection => _serviceCollection = serviceCollection)
+        );
 
         Client = factory.CreateDefaultClient();
     }
@@ -37,7 +46,10 @@ public class CustomValueProviderTest : IClassFixture<MvcTestFixture<BasicWebSite
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("text/plain", response.Content.Headers.ContentType.MediaType);
-        Assert.Equal("BasicWebSite.Controllers.CustomValueProviderController.CustomValueProviderDisplayName (BasicWebSite)", content);
+        Assert.Equal(
+            "BasicWebSite.Controllers.CustomValueProviderController.CustomValueProviderDisplayName (BasicWebSite)",
+            content
+        );
     }
 
     [Fact]

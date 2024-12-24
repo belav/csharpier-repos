@@ -15,7 +15,12 @@ namespace System.ComponentModel
 
         public AttributeListTest()
         {
-            _testAttributes = new Attribute[] { new TestAttribute(), new DerivedAttribute(), new DerivedDerivedAttribute() };
+            _testAttributes = new Attribute[]
+            {
+                new TestAttribute(),
+                new DerivedAttribute(),
+                new DerivedDerivedAttribute(),
+            };
             _collection = new AttributeCollection(_testAttributes);
             _list = new AttributeList(_collection);
         }
@@ -82,7 +87,9 @@ namespace System.ComponentModel
         public void AttributeListRemoveAtThrows()
         {
             Assert.Throws<NotSupportedException>(() => _list.RemoveAt(0));
-            Assert.Throws<NotSupportedException>(() => ((ICollection<Attribute>)_list).Remove(_list[0]));
+            Assert.Throws<NotSupportedException>(
+                () => ((ICollection<Attribute>)_list).Remove(_list[0])
+            );
         }
 
         [Fact]
@@ -111,7 +118,7 @@ namespace System.ComponentModel
             public TestAttribute() { }
         }
 
-        private class DerivedAttribute: TestAttribute
+        private class DerivedAttribute : TestAttribute
         {
             public DerivedAttribute() { }
         }

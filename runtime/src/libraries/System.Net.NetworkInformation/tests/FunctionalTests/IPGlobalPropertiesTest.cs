@@ -56,7 +56,12 @@ namespace System.Net.NetworkInformation.Tests
                 Assert.NotNull(gp.GetTcpIPv6Statistics());
                 Assert.NotNull(gp.GetUdpIPv6Statistics());
 
-                if (!OperatingSystem.IsMacOS() && !OperatingSystem.IsIOS() && !OperatingSystem.IsTvOS() && !OperatingSystem.IsFreeBSD())
+                if (
+                    !OperatingSystem.IsMacOS()
+                    && !OperatingSystem.IsIOS()
+                    && !OperatingSystem.IsTvOS()
+                    && !OperatingSystem.IsFreeBSD()
+                )
                 {
                     // OSX and FreeBSD do not provide IPv6  stats.
                     Assert.NotNull(gp.GetIPv6GlobalStatistics());
@@ -91,10 +96,11 @@ namespace System.Net.NetworkInformation.Tests
         public void IPGlobalProperties_IPv4_IPv6_NoErrors_Android(int ipVersion)
         {
             IPGlobalProperties gp = IPGlobalProperties.GetIPGlobalProperties();
-            IPGlobalStatistics statistics = ipVersion switch {
+            IPGlobalStatistics statistics = ipVersion switch
+            {
                 4 => gp.GetIPv4GlobalStatistics(),
                 6 => gp.GetIPv6GlobalStatistics(),
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(),
             };
 
             _log.WriteLine($"- IPv{ipVersion} statistics: -");
@@ -107,11 +113,15 @@ namespace System.Net.NetworkInformation.Tests
             Assert.Throws<PlatformNotSupportedException>(() => statistics.DefaultTtl);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.ForwardingEnabled);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketRequests);
-            Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketRoutingDiscards);
+            Assert.Throws<PlatformNotSupportedException>(
+                () => statistics.OutputPacketRoutingDiscards
+            );
             Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketsDiscarded);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketsWithNoRoute);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketFragmentFailures);
-            Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassembliesRequired);
+            Assert.Throws<PlatformNotSupportedException>(
+                () => statistics.PacketReassembliesRequired
+            );
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassemblyFailures);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassemblyTimeout);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketsFragmented);
@@ -120,9 +130,15 @@ namespace System.Net.NetworkInformation.Tests
             Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsDelivered);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsDiscarded);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsForwarded);
-            Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsWithAddressErrors);
-            Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsWithHeadersErrors);
-            Assert.Throws<PlatformNotSupportedException>(() => statistics.ReceivedPacketsWithUnknownProtocol);
+            Assert.Throws<PlatformNotSupportedException>(
+                () => statistics.ReceivedPacketsWithAddressErrors
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => statistics.ReceivedPacketsWithHeadersErrors
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => statistics.ReceivedPacketsWithUnknownProtocol
+            );
             Assert.Throws<PlatformNotSupportedException>(() => statistics.NumberOfRoutes);
         }
 
@@ -131,13 +147,17 @@ namespace System.Net.NetworkInformation.Tests
         [SkipOnPlatform(TestPlatforms.Android, "Unsupported on Android")]
         public void IPGlobalProperties_TcpListeners_Succeed(IPAddress address)
         {
-            using (var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
+            )
             {
                 server.Bind(new IPEndPoint(address, 0));
                 server.Listen(1);
                 _log.WriteLine($"listening on {server.LocalEndPoint}");
 
-                IPEndPoint[] tcpListeners = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpListeners();
+                IPEndPoint[] tcpListeners = IPGlobalProperties
+                    .GetIPGlobalProperties()
+                    .GetActiveTcpListeners();
                 Assert.Contains(server.LocalEndPoint, tcpListeners);
             }
         }
@@ -147,12 +167,16 @@ namespace System.Net.NetworkInformation.Tests
         [SkipOnPlatform(TestPlatforms.Android, "Unsupported on Android")]
         public void IPGlobalProperties_UdpListeners_Succeed(IPAddress address)
         {
-            using (var server = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp))
+            using (
+                var server = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp)
+            )
             {
                 server.Bind(new IPEndPoint(address, 0));
                 _log.WriteLine($"listening on {server.LocalEndPoint}");
 
-                IPEndPoint[] udpListeners = IPGlobalProperties.GetIPGlobalProperties().GetActiveUdpListeners();
+                IPEndPoint[] udpListeners = IPGlobalProperties
+                    .GetIPGlobalProperties()
+                    .GetActiveUdpListeners();
                 Assert.Contains(server.LocalEndPoint, udpListeners);
             }
         }
@@ -162,22 +186,33 @@ namespace System.Net.NetworkInformation.Tests
         [MemberData(nameof(Loopbacks))]
         public async Task IPGlobalProperties_TcpActiveConnections_Succeed(IPAddress address)
         {
-            using (var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
+            )
+            using (
+                var client = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
+            )
             {
                 server.Bind(new IPEndPoint(address, 0));
                 server.Listen(1);
                 _log.WriteLine($"listening on {server.LocalEndPoint}");
 
                 await client.ConnectAsync(server.LocalEndPoint);
-                _log.WriteLine($"Looking for connection {client.LocalEndPoint} <-> {client.RemoteEndPoint}");
+                _log.WriteLine(
+                    $"Looking for connection {client.LocalEndPoint} <-> {client.RemoteEndPoint}"
+                );
 
-                TcpConnectionInformation[] tcpCconnections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+                TcpConnectionInformation[] tcpCconnections = IPGlobalProperties
+                    .GetIPGlobalProperties()
+                    .GetActiveTcpConnections();
                 bool found = false;
                 foreach (TcpConnectionInformation ti in tcpCconnections)
                 {
-                    if (ti.LocalEndPoint.Equals(client.LocalEndPoint) && ti.RemoteEndPoint.Equals(client.RemoteEndPoint) &&
-                       (ti.State == TcpState.Established))
+                    if (
+                        ti.LocalEndPoint.Equals(client.LocalEndPoint)
+                        && ti.RemoteEndPoint.Equals(client.RemoteEndPoint)
+                        && (ti.State == TcpState.Established)
+                    )
                     {
                         found = true;
                         break;
@@ -192,7 +227,9 @@ namespace System.Net.NetworkInformation.Tests
         [SkipOnPlatform(TestPlatforms.Android, "Unsupported on Android")]
         public void IPGlobalProperties_TcpActiveConnections_NotListening()
         {
-            TcpConnectionInformation[] tcpCconnections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+            TcpConnectionInformation[] tcpCconnections = IPGlobalProperties
+                .GetIPGlobalProperties()
+                .GetActiveTcpConnections();
             foreach (TcpConnectionInformation ti in tcpCconnections)
             {
                 Assert.NotEqual(TcpState.Listen, ti.State);
@@ -205,7 +242,13 @@ namespace System.Net.NetworkInformation.Tests
             IPGlobalProperties props = IPGlobalProperties.GetIPGlobalProperties();
             Assert.NotEmpty(props.GetUnicastAddresses());
             Assert.NotEmpty(await props.GetUnicastAddressesAsync());
-            Assert.NotEmpty(await Task.Factory.FromAsync(props.BeginGetUnicastAddresses, props.EndGetUnicastAddresses, null));
+            Assert.NotEmpty(
+                await Task.Factory.FromAsync(
+                    props.BeginGetUnicastAddresses,
+                    props.EndGetUnicastAddresses,
+                    null
+                )
+            );
         }
     }
 }

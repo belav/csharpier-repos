@@ -13,29 +13,57 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideConvertBinder : ConvertBinder
         {
-            public MinimumOverrideConvertBinder(Type type, bool @explicit) : base(type, @explicit)
-            {
-            }
+            public MinimumOverrideConvertBinder(Type type, bool @explicit)
+                : base(type, @explicit) { }
 
             public override DynamicMetaObject FallbackConvert(
-                DynamicMetaObject target, DynamicMetaObject errorSuggestion)
+                DynamicMetaObject target,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
         }
 
-        private static readonly int[] SomeInt32 = {0, 1, 2, -1, int.MinValue, int.MaxValue, int.MaxValue - 1};
+        private static readonly int[] SomeInt32 =
+        {
+            0,
+            1,
+            2,
+            -1,
+            int.MinValue,
+            int.MaxValue,
+            int.MaxValue - 1,
+        };
 
-        private static readonly long[] SomeInt64 = {0L, 1L, 2L, -1L, long.MinValue, long.MaxValue, long.MaxValue - 1};
+        private static readonly long[] SomeInt64 =
+        {
+            0L,
+            1L,
+            2L,
+            -1L,
+            long.MinValue,
+            long.MaxValue,
+            long.MaxValue - 1,
+        };
 
-        private static Type[] SomeTypes = { typeof(ConvertBinderTests), typeof(ConvertBinder), typeof(string), typeof(int), typeof(void) };
+        private static Type[] SomeTypes =
+        {
+            typeof(ConvertBinderTests),
+            typeof(ConvertBinder),
+            typeof(string),
+            typeof(int),
+            typeof(void),
+        };
 
-        public static IEnumerable<object[]> Int32Args() => SomeInt32.Select(i => new object[] {i});
+        public static IEnumerable<object[]> Int32Args() =>
+            SomeInt32.Select(i => new object[] { i });
 
-        public static IEnumerable<object[]> Int64Arges() => SomeInt64.Select(i => new object[] {i});
+        public static IEnumerable<object[]> Int64Arges() =>
+            SomeInt64.Select(i => new object[] { i });
 
         public static IEnumerable<object[]> TypesAndBools() =>
-            SomeTypes.SelectMany(t => new[] {false, true}, (t, b) => new object[] {t, b});
+            SomeTypes.SelectMany(t => new[] { false, true }, (t, b) => new object[] { t, b });
 
         [Theory, MemberData(nameof(Int32Args))]
         public void ConvertImplicit(int x)
@@ -77,8 +105,14 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NullType()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new MinimumOverrideConvertBinder(null, true));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new MinimumOverrideConvertBinder(null, false));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new MinimumOverrideConvertBinder(null, true)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new MinimumOverrideConvertBinder(null, false)
+            );
         }
 
         [Theory, MemberData(nameof(TypesAndBools))]
@@ -100,10 +134,19 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ArgumentPassed()
         {
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            var arg = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            var arg = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
             var binder = new MinimumOverrideConvertBinder(typeof(int), false);
-            AssertExtensions.Throws<ArgumentException>("args", () => binder.Bind(target, new[] { arg }));
+            AssertExtensions.Throws<ArgumentException>(
+                "args",
+                () => binder.Bind(target, new[] { arg })
+            );
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,66 +27,91 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
-
 using Mono.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography.Pkcs {
+namespace MonoTests.System.Security.Cryptography.Pkcs
+{
+    [TestFixture]
+    public class Pkcs9ContentTypeTest
+    {
+        [Test]
+        public void Constructor_Empty()
+        {
+            Pkcs9ContentType ct = new Pkcs9ContentType();
+            Assert.AreEqual("1.2.840.113549.1.9.3", ct.Oid.Value, "Oid.Value");
+            Assert.AreEqual("Content Type", ct.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.IsNull(ct.RawData, "RawData");
+            Assert.IsNull(ct.ContentType, "ContentType");
+            Assert.AreEqual(String.Empty, ct.Format(true), "Format(true)");
+            Assert.AreEqual(String.Empty, ct.Format(false), "Format(false)");
+        }
 
-	[TestFixture]
-	public class Pkcs9ContentTypeTest {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CopyFrom_Null()
+        {
+            new Pkcs9ContentType().CopyFrom(null);
+        }
 
-		[Test]
-		public void Constructor_Empty ()
-		{
-			Pkcs9ContentType ct = new Pkcs9ContentType ();
-			Assert.AreEqual ("1.2.840.113549.1.9.3", ct.Oid.Value, "Oid.Value");
-			Assert.AreEqual ("Content Type", ct.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.IsNull (ct.RawData, "RawData");
-			Assert.IsNull (ct.ContentType, "ContentType");
-			Assert.AreEqual (String.Empty, ct.Format (true), "Format(true)");
-			Assert.AreEqual (String.Empty, ct.Format (false), "Format(false)");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CopyFrom()
+        {
+            /* byte[] data = ASN1Convert.FromOid ("1.2.840.113549.1.7.1").GetBytes (); */
+            byte[] data = { 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x07, 0x01 };
+            AsnEncodedData aed = new AsnEncodedData(data);
+            Pkcs9ContentType ct = new Pkcs9ContentType();
+            ct.CopyFrom(aed);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CopyFrom_Null ()
-		{
-			new Pkcs9ContentType ().CopyFrom (null);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CopyFrom ()
-		{
-			/* byte[] data = ASN1Convert.FromOid ("1.2.840.113549.1.7.1").GetBytes (); */
-			byte[] data = { 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x07, 0x01 };
-			AsnEncodedData aed = new AsnEncodedData (data);
-			Pkcs9ContentType ct = new Pkcs9ContentType ();
-			ct.CopyFrom (aed);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CopyFrom_BadData ()
-		{
-			/* Note: this is the full structure (but only the OID part is required)
-			ASN1 set = new ASN1 (0x30);
-			set.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.1"));
-			ASN1 p9 = new ASN1 (0x30);
-			p9.Add (ASN1Convert.FromOid ("1.2.840.113549.1.9.3"));
-			p9.Add (set);
-			byte[] data = p9.GetBytes ();*/
-			byte[] data = { 0x30, 0x18, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x09, 0x03, 0x30, 0x0B, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x07, 0x01 };
-			AsnEncodedData aed = new AsnEncodedData (data);
-			Pkcs9ContentType ct = new Pkcs9ContentType ();
-			ct.CopyFrom (aed);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CopyFrom_BadData()
+        {
+            /* Note: this is the full structure (but only the OID part is required)
+            ASN1 set = new ASN1 (0x30);
+            set.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.1"));
+            ASN1 p9 = new ASN1 (0x30);
+            p9.Add (ASN1Convert.FromOid ("1.2.840.113549.1.9.3"));
+            p9.Add (set);
+            byte[] data = p9.GetBytes ();*/
+            byte[] data =
+            {
+                0x30,
+                0x18,
+                0x06,
+                0x09,
+                0x2A,
+                0x86,
+                0x48,
+                0x86,
+                0xF7,
+                0x0D,
+                0x01,
+                0x09,
+                0x03,
+                0x30,
+                0x0B,
+                0x06,
+                0x09,
+                0x2A,
+                0x86,
+                0x48,
+                0x86,
+                0xF7,
+                0x0D,
+                0x01,
+                0x07,
+                0x01,
+            };
+            AsnEncodedData aed = new AsnEncodedData(data);
+            Pkcs9ContentType ct = new Pkcs9ContentType();
+            ct.CopyFrom(aed);
+        }
+    }
 }
-

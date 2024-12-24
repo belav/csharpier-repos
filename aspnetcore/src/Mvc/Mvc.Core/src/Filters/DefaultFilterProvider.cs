@@ -28,9 +28,7 @@ internal sealed class DefaultFilterProvider : IFilterProvider
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(FilterProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(FilterProviderContext context) { }
 
     public static void ProvideFilter(FilterProviderContext context, FilterItem filterItem)
     {
@@ -54,9 +52,12 @@ internal sealed class DefaultFilterProvider : IFilterProvider
 
             if (filterItem.Filter == null)
             {
-                throw new InvalidOperationException(Resources.FormatTypeMethodMustReturnNotNullValue(
-                    "CreateInstance",
-                    typeof(IFilterFactory).Name));
+                throw new InvalidOperationException(
+                    Resources.FormatTypeMethodMustReturnNotNullValue(
+                        "CreateInstance",
+                        typeof(IFilterFactory).Name
+                    )
+                );
             }
 
             ApplyFilterToContainer(filterItem.Filter, filterFactory);

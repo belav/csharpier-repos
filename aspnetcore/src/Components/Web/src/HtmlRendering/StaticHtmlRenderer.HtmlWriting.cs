@@ -11,15 +11,32 @@ namespace Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure;
 
 public partial class StaticHtmlRenderer
 {
-    private static readonly HashSet<string> SelfClosingElements = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    private static readonly HashSet<string> SelfClosingElements = new HashSet<string>(
+        StringComparer.OrdinalIgnoreCase
+    )
     {
-        "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
     };
 
-    private static readonly CascadingParameterInfo _findFormMappingContext = new CascadingParameterInfo(
-        new CascadingParameterAttribute(),
-        string.Empty,
-        typeof(FormMappingContext));
+    private static readonly CascadingParameterInfo _findFormMappingContext =
+        new CascadingParameterInfo(
+            new CascadingParameterAttribute(),
+            string.Empty,
+            typeof(FormMappingContext)
+        );
 
     private static readonly TextEncoder _javaScriptEncoder = JavaScriptEncoder.Default;
     private TextEncoder _htmlEncoder = HtmlEncoder.Default;
@@ -45,12 +62,21 @@ public partial class StaticHtmlRenderer
     /// </summary>
     /// <param name="output">The output destination.</param>
     /// <param name="componentFrame">The <see cref="RenderTreeFrame"/> representing the component to be rendered.</param>
-    protected virtual void RenderChildComponent(TextWriter output, ref RenderTreeFrame componentFrame)
+    protected virtual void RenderChildComponent(
+        TextWriter output,
+        ref RenderTreeFrame componentFrame
+    )
     {
         WriteComponentHtml(componentFrame.ComponentId, output);
     }
 
-    private int RenderFrames(int componentId, TextWriter output, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+    private int RenderFrames(
+        int componentId,
+        TextWriter output,
+        ArrayRange<RenderTreeFrame> frames,
+        int position,
+        int maxElements
+    )
     {
         var nextPosition = position;
         var endPosition = position + maxElements;
@@ -71,7 +97,8 @@ public partial class StaticHtmlRenderer
         int componentId,
         TextWriter output,
         ArrayRange<RenderTreeFrame> frames,
-        int position)
+        int position
+    )
     {
         ref var frame = ref frames.Array[position];
         switch (frame.FrameType)
@@ -79,7 +106,9 @@ public partial class StaticHtmlRenderer
             case RenderTreeFrameType.Element:
                 return RenderElement(componentId, output, frames, position);
             case RenderTreeFrameType.Attribute:
-                throw new InvalidOperationException($"Attributes should only be encountered within {nameof(RenderElement)}");
+                throw new InvalidOperationException(
+                    $"Attributes should only be encountered within {nameof(RenderElement)}"
+                );
             case RenderTreeFrameType.Text:
                 _htmlEncoder.Encode(output, frame.TextContent);
                 return ++position;
@@ -89,7 +118,13 @@ public partial class StaticHtmlRenderer
             case RenderTreeFrameType.Component:
                 return RenderChildComponent(output, frames, position);
             case RenderTreeFrameType.Region:
-                return RenderFrames(componentId, output, frames, position + 1, frame.RegionSubtreeLength - 1);
+                return RenderFrames(
+                    componentId,
+                    output,
+                    frames,
+                    position + 1,
+                    frame.RegionSubtreeLength - 1
+                );
             case RenderTreeFrameType.ElementReferenceCapture:
             case RenderTreeFrameType.ComponentReferenceCapture:
                 return ++position;
@@ -97,27 +132,52 @@ public partial class StaticHtmlRenderer
                 RenderHiddenFieldForNamedSubmitEvent(componentId, output, frames, position);
                 return ++position;
             default:
-                throw new InvalidOperationException($"Invalid element frame type '{frame.FrameType}'.");
+                throw new InvalidOperationException(
+                    $"Invalid element frame type '{frame.FrameType}'."
+                );
         }
     }
 
-    private int RenderElement(int componentId, TextWriter output, ArrayRange<RenderTreeFrame> frames, int position)
+    private int RenderElement(
+        int componentId,
+        TextWriter output,
+        ArrayRange<RenderTreeFrame> frames,
+        int position
+    )
     {
         ref var frame = ref frames.Array[position];
         output.Write('<');
         output.Write(frame.ElementName);
         int afterElement;
-        var isTextArea = string.Equals(frame.ElementName, "textarea", StringComparison.OrdinalIgnoreCase);
+        var isTextArea = string.Equals(
+            frame.ElementName,
+            "textarea",
+            StringComparison.OrdinalIgnoreCase
+        );
         var isForm = string.Equals(frame.ElementName, "form", StringComparison.OrdinalIgnoreCase);
         // We don't want to include value attribute of textarea element.
-        var afterAttributes = RenderAttributes(output, frames, position + 1, frame.ElementSubtreeLength - 1, !isTextArea, isForm: isForm, out var capturedValueAttribute);
+        var afterAttributes = RenderAttributes(
+            output,
+            frames,
+            position + 1,
+            frame.ElementSubtreeLength - 1,
+            !isTextArea,
+            isForm: isForm,
+            out var capturedValueAttribute
+        );
 
         // When we see an <option> as a descendant of a <select>, and the option's "value" attribute matches the
         // "value" attribute on the <select>, then we auto-add the "selected" attribute to that option. This is
         // a way of converting Blazor's select binding feature to regular static HTML.
-        if (_closestSelectValueAsString != null
+        if (
+            _closestSelectValueAsString != null
             && string.Equals(frame.ElementName, "option", StringComparison.OrdinalIgnoreCase)
-            && string.Equals(capturedValueAttribute, _closestSelectValueAsString, StringComparison.Ordinal))
+            && string.Equals(
+                capturedValueAttribute,
+                _closestSelectValueAsString,
+                StringComparison.Ordinal
+            )
+        )
         {
             output.Write(" selected");
         }
@@ -127,7 +187,11 @@ public partial class StaticHtmlRenderer
         {
             output.Write('>');
 
-            var isSelect = string.Equals(frame.ElementName, "select", StringComparison.OrdinalIgnoreCase);
+            var isSelect = string.Equals(
+                frame.ElementName,
+                "select",
+                StringComparison.OrdinalIgnoreCase
+            );
             if (isSelect)
             {
                 _closestSelectValueAsString = capturedValueAttribute;
@@ -140,13 +204,27 @@ public partial class StaticHtmlRenderer
                 _htmlEncoder.Encode(output, capturedValueAttribute);
                 afterElement = position + frame.ElementSubtreeLength; // Skip descendants
             }
-            else if (string.Equals(frame.ElementNameField, "script", StringComparison.OrdinalIgnoreCase))
+            else if (
+                string.Equals(frame.ElementNameField, "script", StringComparison.OrdinalIgnoreCase)
+            )
             {
-                afterElement = RenderScriptElementChildren(componentId, output, frames, afterAttributes, remainingElements);
+                afterElement = RenderScriptElementChildren(
+                    componentId,
+                    output,
+                    frames,
+                    afterAttributes,
+                    remainingElements
+                );
             }
             else
             {
-                afterElement = RenderChildren(componentId, output, frames, afterAttributes, remainingElements);
+                afterElement = RenderChildren(
+                    componentId,
+                    output,
+                    frames,
+                    afterAttributes,
+                    remainingElements
+                );
             }
 
             if (isSelect)
@@ -179,7 +257,13 @@ public partial class StaticHtmlRenderer
         }
     }
 
-    private int RenderScriptElementChildren(int componentId, TextWriter output, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+    private int RenderScriptElementChildren(
+        int componentId,
+        TextWriter output,
+        ArrayRange<RenderTreeFrame> frames,
+        int position,
+        int maxElements
+    )
     {
         // Inside a <script> context, AddContent calls should result in the text being
         // JavaScript encoded rather than HTML encoded. It's not that we recommend inserting
@@ -198,18 +282,41 @@ public partial class StaticHtmlRenderer
         }
     }
 
-    private void RenderHiddenFieldForNamedSubmitEvent(int componentId, TextWriter output, ArrayRange<RenderTreeFrame> frames, int namedEventFramePosition)
+    private void RenderHiddenFieldForNamedSubmitEvent(
+        int componentId,
+        TextWriter output,
+        ArrayRange<RenderTreeFrame> frames,
+        int namedEventFramePosition
+    )
     {
         // Strictly speaking we could just emit the hidden input unconditionally, but since we currently
         // only intend to support this for "form submit" events, validate that's the case
         ref var namedEventFrame = ref frames.Array[namedEventFramePosition];
-        if (string.Equals(namedEventFrame.NamedEventType, "onsubmit", StringComparison.Ordinal)
-            && TryFindEnclosingElementFrame(frames, namedEventFramePosition, out var enclosingElementFrameIndex))
+        if (
+            string.Equals(namedEventFrame.NamedEventType, "onsubmit", StringComparison.Ordinal)
+            && TryFindEnclosingElementFrame(
+                frames,
+                namedEventFramePosition,
+                out var enclosingElementFrameIndex
+            )
+        )
         {
             ref var enclosingElementFrame = ref frames.Array[enclosingElementFrameIndex];
-            if (string.Equals(enclosingElementFrame.ElementName, "form", StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    enclosingElementFrame.ElementName,
+                    "form",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                if (TryCreateScopeQualifiedEventName(componentId, namedEventFrame.NamedEventAssignedName, out var combinedFormName))
+                if (
+                    TryCreateScopeQualifiedEventName(
+                        componentId,
+                        namedEventFrame.NamedEventAssignedName,
+                        out var combinedFormName
+                    )
+                )
                 {
                     output.Write("<input type=\"hidden\" name=\"_handler\" value=\"");
                     _htmlEncoder.Encode(output, combinedFormName);
@@ -227,7 +334,11 @@ public partial class StaticHtmlRenderer
     /// <param name="assignedEventName">The name assigned to the named event.</param>
     /// <param name="scopeQualifiedEventName">The scope-qualified event name.</param>
     /// <returns>A flag to indicate whether a value could be produced.</returns>
-    protected bool TryCreateScopeQualifiedEventName(int componentId, string assignedEventName, [NotNullWhen(true)] out string? scopeQualifiedEventName)
+    protected bool TryCreateScopeQualifiedEventName(
+        int componentId,
+        string assignedEventName,
+        [NotNullWhen(true)] out string? scopeQualifiedEventName
+    )
     {
         if (FindFormMappingContext(componentId) is { } mappingContext)
         {
@@ -250,12 +361,17 @@ public partial class StaticHtmlRenderer
         var supplier = CascadingParameterState.GetMatchingCascadingValueSupplier(
             in _findFormMappingContext,
             componentState.Renderer,
-            componentState);
+            componentState
+        );
 
         return (FormMappingContext?)supplier?.GetCurrentValue(_findFormMappingContext);
     }
 
-    private static bool TryFindEnclosingElementFrame(ArrayRange<RenderTreeFrame> frames, int frameIndex, out int result)
+    private static bool TryFindEnclosingElementFrame(
+        ArrayRange<RenderTreeFrame> frames,
+        int frameIndex,
+        out int result
+    )
     {
         while (--frameIndex >= 0)
         {
@@ -277,7 +393,8 @@ public partial class StaticHtmlRenderer
         int maxElements,
         bool includeValueAttribute,
         bool isForm,
-        out string? capturedValueAttribute)
+        out string? capturedValueAttribute
+    )
     {
         capturedValueAttribute = null;
 
@@ -314,8 +431,11 @@ public partial class StaticHtmlRenderer
                 }
             }
 
-            if (isForm && frame.AttributeName.Equals("action", StringComparison.OrdinalIgnoreCase) &&
-                !string.IsNullOrEmpty(frame.AttributeValue as string))
+            if (
+                isForm
+                && frame.AttributeName.Equals("action", StringComparison.OrdinalIgnoreCase)
+                && !string.IsNullOrEmpty(frame.AttributeValue as string)
+            )
             {
                 hasExplicitActionValue = true;
             }
@@ -343,7 +463,11 @@ public partial class StaticHtmlRenderer
 
         return position + maxElements;
 
-        void EmitFormActionIfNotExplicit(TextWriter output, bool isForm, bool hasExplicitActionValue)
+        void EmitFormActionIfNotExplicit(
+            TextWriter output,
+            bool isForm,
+            bool hasExplicitActionValue
+        )
         {
             if (isForm && _navigationManager != null && !hasExplicitActionValue)
             {
@@ -374,7 +498,13 @@ public partial class StaticHtmlRenderer
         return new Uri(navigationManager.Uri, UriKind.Absolute).PathAndQuery;
     }
 
-    private int RenderChildren(int componentId, TextWriter output, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+    private int RenderChildren(
+        int componentId,
+        TextWriter output,
+        ArrayRange<RenderTreeFrame> frames,
+        int position,
+        int maxElements
+    )
     {
         if (maxElements == 0)
         {
@@ -384,7 +514,11 @@ public partial class StaticHtmlRenderer
         return RenderFrames(componentId, output, frames, position, maxElements);
     }
 
-    private int RenderChildComponent(TextWriter output, ArrayRange<RenderTreeFrame> frames, int position)
+    private int RenderChildComponent(
+        TextWriter output,
+        ArrayRange<RenderTreeFrame> frames,
+        int position
+    )
     {
         ref var frame = ref frames.Array[position];
 

@@ -24,11 +24,11 @@
 #endregion
 
 #pragma warning disable 618
-using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json.Schema;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 {
@@ -37,10 +37,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
         public void Example()
         {
             #region Usage
-            JsonSchema schema = new JsonSchema
-            {
-                Type = JsonSchemaType.Object
-            };
+            JsonSchema schema = new JsonSchema { Type = JsonSchemaType.Object };
 
             // serialize JsonSchema to a string and then write string to a file
             File.WriteAllText(@"c:\schema.json", schema.ToString());

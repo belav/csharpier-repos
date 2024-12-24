@@ -16,4 +16,3 @@ public interface IRule
     /// <param name="context"></param>
     void ApplyRule(RewriteContext context);
 }
-

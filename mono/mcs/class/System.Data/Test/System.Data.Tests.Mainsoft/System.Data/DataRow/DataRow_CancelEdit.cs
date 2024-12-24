@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,76 +26,80 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
-
 using System;
 using System.Data;
-
 using GHTUtils;
 using GHTUtils.Base;
+using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-[TestFixture] public class DataRow_CancelEdit : GHTBase
-{
-	[Test] public void Main()
-	{
-		DataRow_CancelEdit tc = new DataRow_CancelEdit();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataRow_CancelEdit");
-			tc.run();
-		}
-		catch(Exception ex)
-		{
-			exp = ex;
-		}
-		finally
-		{
-			tc.EndTest(exp);
-		}
-	}
+    [TestFixture]
+    public class DataRow_CancelEdit : GHTBase
+    {
+        [Test]
+        public void Main()
+        {
+            DataRow_CancelEdit tc = new DataRow_CancelEdit();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("DataRow_CancelEdit");
+                tc.run();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-	//Activate This Construntor to log All To Standard output
-	//public TestClass():base(true){}
+        //Activate This Construntor to log All To Standard output
+        //public TestClass():base(true){}
 
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-	public void run()
-	{
-		Exception exp = null;
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-		DataTable myTable = new DataTable("myTable"); 
-		DataColumn dc = new DataColumn("Id",typeof(int));
-		dc.Unique=true;
-		myTable.Columns.Add(dc);
-		myTable.Rows.Add(new object[] {1});
-		myTable.Rows.Add(new object[] {2});
-		myTable.Rows.Add(new object[] {3});
-			
-		DataRow myRow = myTable.Rows[0];
-		myRow.BeginEdit();
-		myRow[0] = 7;
-		myRow.CancelEdit();
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-		try
-		{
-			BeginCase("DataRow CancelEdit");
-			Compare( (int)myRow[0] == 1,true );
-		}
-		catch(Exception ex)	{exp = ex;}
-		finally	{EndCase(exp); exp = null;}
-		
-	}
-}
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+        public void run()
+        {
+            Exception exp = null;
+
+            DataTable myTable = new DataTable("myTable");
+            DataColumn dc = new DataColumn("Id", typeof(int));
+            dc.Unique = true;
+            myTable.Columns.Add(dc);
+            myTable.Rows.Add(new object[] { 1 });
+            myTable.Rows.Add(new object[] { 2 });
+            myTable.Rows.Add(new object[] { 3 });
+
+            DataRow myRow = myTable.Rows[0];
+            myRow.BeginEdit();
+            myRow[0] = 7;
+            myRow.CancelEdit();
+
+            try
+            {
+                BeginCase("DataRow CancelEdit");
+                Compare((int)myRow[0] == 1, true);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
+        }
+    }
 }

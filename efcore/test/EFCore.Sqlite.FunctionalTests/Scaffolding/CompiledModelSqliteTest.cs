@@ -8,44 +8,46 @@
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Sqlite.Design.Internal;
-using NetTopologySuite.Geometries;
 using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
 public class CompiledModelSqliteTest : CompiledModelRelationalTestBase
 {
     [SpatialiteRequired]
-    public override void BigModel()
-        => base.BigModel();
+    public override void BigModel() => base.BigModel();
 
     [SpatialiteRequired]
-    public override void BigModel_with_JSON_columns()
-        => base.BigModel_with_JSON_columns();
+    public override void BigModel_with_JSON_columns() => base.BigModel_with_JSON_columns();
 
     protected override void BuildBigModel(ModelBuilder modelBuilder, bool jsonColumns)
     {
         base.BuildBigModel(modelBuilder, jsonColumns);
 
-        modelBuilder.Entity<Data>(
-            eb =>
-            {
-                eb.Property<int>("Id");
-                eb.HasKey("Id");
+        modelBuilder.Entity<Data>(eb =>
+        {
+            eb.Property<int>("Id");
+            eb.HasKey("Id");
 
-                eb.Property<Point>("Point")
-                    .HasSrid(1101);
-            });
+            eb.Property<Point>("Point").HasSrid(1101);
+        });
 
-        modelBuilder.Entity<PrincipalBase>(
-            eb =>
-            {
-                eb.Property<Point>("Point")
-                    .HasColumnType("geometry")
-                    .HasDefaultValue(
-                        NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0).CreatePoint(new CoordinateZM(0, 0, 0, 0)))
-                    .HasConversion<CastingConverter<Point, Point>, CustomValueComparer<Point>, CustomValueComparer<Point>>();
-            });
+        modelBuilder.Entity<PrincipalBase>(eb =>
+        {
+            eb.Property<Point>("Point")
+                .HasColumnType("geometry")
+                .HasDefaultValue(
+                    NtsGeometryServices
+                        .Instance.CreateGeometryFactory(srid: 0)
+                        .CreatePoint(new CoordinateZM(0, 0, 0, 0))
+                )
+                .HasConversion<
+                    CastingConverter<Point, Point>,
+                    CustomValueComparer<Point>,
+                    CustomValueComparer<Point>
+                >();
+        });
     }
 
     protected override void AssertBigModel(IModel model, bool jsonColumns)
@@ -87,23 +89,16 @@ public class CompiledModelSqliteTest : CompiledModelRelationalTestBase
         Assert.IsType<CustomValueComparer<Point>>(pointProperty.GetKeyValueComparer());
         Assert.IsType<CustomValueComparer<Point>>(pointProperty.GetProviderValueComparer());
         Assert.Null(pointProperty[CoreAnnotationNames.PropertyAccessMode]);
-
     }
 
     //Sprocs not supported
-    public override void ComplexTypes()
-    {
-    }
+    public override void ComplexTypes() { }
 
     //Not supported
-    public override void Sequences()
-    {
-    }
+    public override void Sequences() { }
 
     //Sprocs not supported
-    public override void Tpc()
-    {
-    }
+    public override void Tpc() { }
 
     protected override TestHelpers TestHelpers => SqliteTestHelpers.Instance;
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
@@ -111,21 +106,27 @@ public class CompiledModelSqliteTest : CompiledModelRelationalTestBase
     protected override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
     {
         builder = base.AddOptions(builder)
-            .ConfigureWarnings(w => w
-                .Ignore(SqliteEventId.SchemaConfiguredWarning)
-                .Ignore(SqliteEventId.CompositeKeyWithValueGeneration));
+            .ConfigureWarnings(w =>
+                w.Ignore(SqliteEventId.SchemaConfiguredWarning)
+                    .Ignore(SqliteEventId.CompositeKeyWithValueGeneration)
+            );
         new SqliteDbContextOptionsBuilder(builder).UseNetTopologySuite();
         return builder;
     }
 
-    protected override void AddDesignTimeServices(IServiceCollection services)
-        => new SqliteNetTopologySuiteDesignTimeServices().ConfigureDesignTimeServices(services);
+    protected override void AddDesignTimeServices(IServiceCollection services) =>
+        new SqliteNetTopologySuiteDesignTimeServices().ConfigureDesignTimeServices(services);
 
-    protected override BuildSource AddReferences(BuildSource build, [CallerFilePath] string filePath = "")
+    protected override BuildSource AddReferences(
+        BuildSource build,
+        [CallerFilePath] string filePath = ""
+    )
     {
         base.AddReferences(build);
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Sqlite"));
-        build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite"));
+        build.References.Add(
+            BuildReference.ByName("Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite")
+        );
         build.References.Add(BuildReference.ByName("NetTopologySuite"));
         return build;
     }

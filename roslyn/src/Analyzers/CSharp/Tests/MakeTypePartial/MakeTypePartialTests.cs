@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpMakeTypePartialCodeFixProvider>;
+        CSharpMakeTypePartialCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypePartial)]
     public sealed class MakeTypePartialTests
@@ -39,7 +40,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                     partial {{declarationType}} Declaration
                     {
                     }
-                
+
                     {{declarationType}} {|CS0260:Declaration|}
                     {
                     }
@@ -48,12 +49,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                     partial {{declarationType}} Declaration
                     {
                     }
-                
+
                     partial {{declarationType}} Declaration
                     {
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -65,27 +66,27 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
             {
                 TestCode = $$"""
                     namespace TestNamespace;
-                
+
                     partial {{declarationType}} Declaration
                     {
                     }
-                
+
                     {{declarationType}} {|CS0260:Declaration|}
                     {
                     }
                     """,
                 FixedCode = $$"""
                     namespace TestNamespace;
-                
+
                     partial {{declarationType}} Declaration
                     {
                     }
-                
+
                     partial {{declarationType}} Declaration
                     {
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -101,7 +102,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         partial {{declarationType}} Declaration
                         {
                         }
-                
+
                         {{declarationType}} {|CS0260:Declaration|}
                         {
                         }
@@ -113,13 +114,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         partial {{declarationType}} Declaration
                         {
                         }
-                
+
                         partial {{declarationType}} Declaration
                         {
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -136,7 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         {
                         }
                     }
-                
+
                     namespace TestNamespace
                     {
                         {{declarationType}} {|CS0260:Declaration|}
@@ -151,7 +152,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         {
                         }
                     }
-                
+
                     namespace TestNamespace
                     {
                         partial {{declarationType}} Declaration
@@ -159,7 +160,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -187,15 +188,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { document1, document2 }
-                },
-                FixedState =
-                {
-                    Sources = { document1, fixedDocument2 }
-                },
-                LanguageVersion = LanguageVersion.CSharp10
+                TestState = { Sources = { document1, document2 } },
+                FixedState = { Sources = { document1, fixedDocument2 } },
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -209,7 +204,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                     public partial {{declarationType}} Declaration
                     {
                     }
-                
+
                     public {{declarationType}} {|CS0260:Declaration|}
                     {
                     }
@@ -218,12 +213,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                     public partial {{declarationType}} Declaration
                     {
                     }
-                
+
                     public partial {{declarationType}} Declaration
                     {
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -239,7 +234,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         public partial {{declarationType}} Declaration
                         {
                         }
-                
+
                         public {{declarationType}} {|CS0260:Declaration|}
                         {
                         }
@@ -251,13 +246,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         public partial {{declarationType}} Declaration
                         {
                         }
-                
+
                         public partial {{declarationType}} Declaration
                         {
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -277,7 +272,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         public partial {{declarationType}} Declaration
                         {
                         }
-                
+
                         public {{declarationType}} {|CS0260:Declaration|}
                         {
                         }
@@ -293,13 +288,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                         public partial {{declarationType}} Declaration
                         {
                         }
-                
+
                         public partial {{declarationType}} Declaration
                         {
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
 
@@ -311,11 +306,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                 partial {{declarationType}} Test
                 {
                 }
-                
+
                 {{declarationType}} {|CS0260:Test|}
                 {
                 }
-                
+
                 {{declarationType}} {|CS0260:Test|}
                 {
                 }
@@ -324,11 +319,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                 partial {{declarationType}} Test
                 {
                 }
-                
+
                 partial {{declarationType}} Test
                 {
                 }
-                
+
                 partial {{declarationType}} Test
                 {
                 }
@@ -340,7 +335,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp10,
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                DiagnosticSelector = d => d[0]
+                DiagnosticSelector = d => d[0],
             }.RunAsync();
 
             await new VerifyCS.Test
@@ -349,7 +344,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp10,
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
-                DiagnosticSelector = d => d[1]
+                DiagnosticSelector = d => d[1],
             }.RunAsync();
         }
 
@@ -364,7 +359,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
                     {
                     }
                 }
-                
+
                 namespace TestNamespace2
                 {
                     {{declarationType}} Declaration
@@ -377,7 +372,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
             {
                 TestCode = markup,
                 FixedCode = markup,
-                LanguageVersion = LanguageVersion.CSharp10
+                LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
     }

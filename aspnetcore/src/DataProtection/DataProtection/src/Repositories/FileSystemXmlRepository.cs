@@ -57,7 +57,8 @@ public class FileSystemXmlRepository : IXmlRepository
     /// This property can return null if no suitable default key storage directory can
     /// be found, such as the case when the user profile is unavailable.
     /// </remarks>
-    public static DirectoryInfo? DefaultKeyStorageDirectory => DefaultKeyStorageDirectories.Instance.GetKeyStorageDirectory();
+    public static DirectoryInfo? DefaultKeyStorageDirectory =>
+        DefaultKeyStorageDirectories.Instance.GetKeyStorageDirectory();
 
     /// <summary>
     /// The directory into which key material will be written.
@@ -81,7 +82,12 @@ public class FileSystemXmlRepository : IXmlRepository
         // set of elements. If a file contains well-formed XML but its contents are meaningless, we
         // won't fail that operation here. The caller is responsible for failing as appropriate given
         // that scenario.
-        foreach (var fileSystemInfo in Directory.EnumerateFileSystemInfos("*.xml", SearchOption.TopDirectoryOnly))
+        foreach (
+            var fileSystemInfo in Directory.EnumerateFileSystemInfos(
+                "*.xml",
+                SearchOption.TopDirectoryOnly
+            )
+        )
         {
             yield return ReadElementFromFile(fileSystemInfo.FullName);
         }
@@ -90,12 +96,16 @@ public class FileSystemXmlRepository : IXmlRepository
     private static bool IsSafeFilename(string filename)
     {
         // Must be non-empty and contain only a-zA-Z0-9, hyphen, and underscore.
-        return (!String.IsNullOrEmpty(filename) && filename.All(c =>
-            c == '-'
-            || c == '_'
-            || ('0' <= c && c <= '9')
-            || ('A' <= c && c <= 'Z')
-            || ('a' <= c && c <= 'z')));
+        return (
+            !String.IsNullOrEmpty(filename)
+            && filename.All(c =>
+                c == '-'
+                || c == '_'
+                || ('0' <= c && c <= '9')
+                || ('A' <= c && c <= 'Z')
+                || ('a' <= c && c <= 'z')
+            )
+        );
     }
 
     private XElement ReadElementFromFile(string fullPath)

@@ -8,10 +8,12 @@ namespace System.Web.Mvc
     public class DataAnnotationsModelValidator<TAttribute> : DataAnnotationsModelValidator
         where TAttribute : ValidationAttribute
     {
-        public DataAnnotationsModelValidator(ModelMetadata metadata, ControllerContext context, TAttribute attribute)
-            : base(metadata, context, attribute)
-        {
-        }
+        public DataAnnotationsModelValidator(
+            ModelMetadata metadata,
+            ControllerContext context,
+            TAttribute attribute
+        )
+            : base(metadata, context, attribute) { }
 
         protected new TAttribute Attribute
         {

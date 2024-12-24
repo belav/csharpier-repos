@@ -13,23 +13,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal enum ConvKind
     {
-        Identity = 1,  // Identity conversion
-        Implicit = 2,  // Implicit conversion
-        Explicit = 3,  // Explicit conversion
-        Unknown = 4,  // Unknown so call canConvert
-        None = 5,  // None
+        Identity = 1, // Identity conversion
+        Implicit = 2, // Implicit conversion
+        Explicit = 3, // Explicit conversion
+        Unknown = 4, // Unknown so call canConvert
+        None = 5, // None
     }
 
     // Flags for bindImplicitConversion/bindExplicitConversion
     [Flags]
     internal enum CONVERTTYPE
     {
-        NOUDC = 0x01,  // Do not consider user defined conversions.
-        STANDARD = 0x02,  // standard only, but never pass it in, used only to check...
-        ISEXPLICIT = 0x04,  // implicit conversion is really explicit
-        CHECKOVERFLOW = 0x08,  // check overflow (like in a checked context).
-        FORCECAST = 0x10,  // Do not optimize out the cast
-        STANDARDANDNOUDC = 0x03,  // pass this in if you mean standard conversions only
+        NOUDC = 0x01, // Do not consider user defined conversions.
+        STANDARD = 0x02, // standard only, but never pass it in, used only to check...
+        ISEXPLICIT = 0x04, // implicit conversion is really explicit
+        CHECKOVERFLOW = 0x08, // check overflow (like in a checked context).
+        FORCECAST = 0x10, // Do not optimize out the cast
+        STANDARDANDNOUDC = 0x03, // pass this in if you mean standard conversions only
     };
 
     internal enum BetterType
@@ -48,14 +48,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType pDestinationType,
             bool needsExprDest,
             out Expr ppDestinationExpr,
-            CONVERTTYPE flags);
+            CONVERTTYPE flags
+        );
 
         private static void RoundToFloat(double d, out float f)
         {
             f = (float)d;
         }
-        private static long I64(long x) { return x; }
-        private static long I64(ulong x) { return (long)x; }
+
+        private static long I64(long x)
+        {
+            return x;
+        }
+
+        private static long I64(ulong x)
+        {
+            return (long)x;
+        }
 
         // 13.1.2 Implicit numeric conversions
         //
@@ -98,10 +107,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // * From decimal to sbyte, byte, short, ushort, int, uint, long, ulong, char, float, or double.
 
 
-        private const byte ID = (byte)ConvKind.Identity;  // 0x01
+        private const byte ID = (byte)ConvKind.Identity; // 0x01
         private const byte IMP = (byte)ConvKind.Implicit; // 0x02
         private const byte EXP = (byte)ConvKind.Explicit; // 0x03
-        private const byte NO = (byte)ConvKind.None;      // 0x05
+        private const byte NO = (byte)ConvKind.None; // 0x05
         private const byte CONV_KIND_MASK = 0x0F;
         private const byte UDC = 0x40;
         private const byte XUD = EXP | UDC;
@@ -111,19 +120,214 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             // to:                   BYTE I2   I4   I8   FLT  DBL  DEC  CHAR BOOL SBYTE U2   U4   U8
             /* from */
-             new byte[] /* BYTE */ { ID,  IMP, IMP, IMP, IMP, IMP, IUD, EXP, NO,  EXP,  IMP, IMP, IMP },
-             new byte[] /*   I2 */ { EXP, ID,  IMP, IMP, IMP, IMP, IUD, EXP, NO,  EXP,  EXP, EXP, EXP },
-             new byte[] /*   I4 */ { EXP, EXP, ID,  IMP, IMP, IMP, IUD, EXP, NO,  EXP,  EXP, EXP, EXP },
-             new byte[] /*   I8 */ { EXP, EXP, EXP, ID,  IMP, IMP, IUD, EXP, NO,  EXP,  EXP, EXP, EXP },
-             new byte[] /*  FLT */ { EXP, EXP, EXP, EXP, ID,  IMP, XUD, EXP, NO,  EXP,  EXP, EXP, EXP },
-             new byte[] /*  DBL */ { EXP, EXP, EXP, EXP, EXP, ID,  XUD, EXP, NO,  EXP,  EXP, EXP, EXP },
-             new byte[] /*  DEC */ { XUD, XUD, XUD, XUD, XUD, XUD, ID,  XUD, NO,  XUD,  XUD, XUD, XUD },
-             new byte[] /* CHAR */ { EXP, EXP, IMP, IMP, IMP, IMP, IUD, ID,  NO,  EXP,  IMP, IMP, IMP },
-             new byte[] /* BOOL */ { NO,  NO,  NO,  NO,  NO,  NO,  NO,  NO,  ID,  NO,   NO,  NO,  NO  },
-             new byte[] /*SBYTE */ { EXP, IMP, IMP, IMP, IMP, IMP, IUD, EXP, NO,  ID,   EXP, EXP, EXP },
-             new byte[] /*   U2 */ { EXP, EXP, IMP, IMP, IMP, IMP, IUD, EXP, NO,  EXP,  ID,  IMP, IMP },
-             new byte[] /*   U4 */ { EXP, EXP, EXP, IMP, IMP, IMP, IUD, EXP, NO,  EXP,  EXP, ID,  IMP },
-             new byte[] /*   U8 */ { EXP, EXP, EXP, EXP, IMP, IMP, IUD, EXP, NO,  EXP,  EXP, EXP, ID  },
+            new byte[] /* BYTE */
+            {
+                ID,
+                IMP,
+                IMP,
+                IMP,
+                IMP,
+                IMP,
+                IUD,
+                EXP,
+                NO,
+                EXP,
+                IMP,
+                IMP,
+                IMP,
+            },
+            new byte[] /*   I2 */
+            {
+                EXP,
+                ID,
+                IMP,
+                IMP,
+                IMP,
+                IMP,
+                IUD,
+                EXP,
+                NO,
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+            },
+            new byte[] /*   I4 */
+            {
+                EXP,
+                EXP,
+                ID,
+                IMP,
+                IMP,
+                IMP,
+                IUD,
+                EXP,
+                NO,
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+            },
+            new byte[] /*   I8 */
+            {
+                EXP,
+                EXP,
+                EXP,
+                ID,
+                IMP,
+                IMP,
+                IUD,
+                EXP,
+                NO,
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+            },
+            new byte[] /*  FLT */
+            {
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+                ID,
+                IMP,
+                XUD,
+                EXP,
+                NO,
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+            },
+            new byte[] /*  DBL */
+            {
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+                ID,
+                XUD,
+                EXP,
+                NO,
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+            },
+            new byte[] /*  DEC */
+            {
+                XUD,
+                XUD,
+                XUD,
+                XUD,
+                XUD,
+                XUD,
+                ID,
+                XUD,
+                NO,
+                XUD,
+                XUD,
+                XUD,
+                XUD,
+            },
+            new byte[] /* CHAR */
+            {
+                EXP,
+                EXP,
+                IMP,
+                IMP,
+                IMP,
+                IMP,
+                IUD,
+                ID,
+                NO,
+                EXP,
+                IMP,
+                IMP,
+                IMP,
+            },
+            new byte[] /* BOOL */
+            {
+                NO,
+                NO,
+                NO,
+                NO,
+                NO,
+                NO,
+                NO,
+                NO,
+                ID,
+                NO,
+                NO,
+                NO,
+                NO,
+            },
+            new byte[] /*SBYTE */
+            {
+                EXP,
+                IMP,
+                IMP,
+                IMP,
+                IMP,
+                IMP,
+                IUD,
+                EXP,
+                NO,
+                ID,
+                EXP,
+                EXP,
+                EXP,
+            },
+            new byte[] /*   U2 */
+            {
+                EXP,
+                EXP,
+                IMP,
+                IMP,
+                IMP,
+                IMP,
+                IUD,
+                EXP,
+                NO,
+                EXP,
+                ID,
+                IMP,
+                IMP,
+            },
+            new byte[] /*   U4 */
+            {
+                EXP,
+                EXP,
+                EXP,
+                IMP,
+                IMP,
+                IMP,
+                IUD,
+                EXP,
+                NO,
+                EXP,
+                EXP,
+                ID,
+                IMP,
+            },
+            new byte[] /*   U8 */
+            {
+                EXP,
+                EXP,
+                EXP,
+                EXP,
+                IMP,
+                IMP,
+                IUD,
+                EXP,
+                NO,
+                EXP,
+                EXP,
+                EXP,
+                ID,
+            },
         };
 
         private const int NUM_SIMPLE_TYPES = (int)PredefinedType.PT_ULONG + 1;
@@ -135,7 +339,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 return (ConvKind)(s_simpleTypeConversions[(int)ptSrc][(int)ptDst] & CONV_KIND_MASK);
             }
-            if (ptSrc == ptDst || ptDst == PredefinedType.PT_OBJECT && ptSrc < PredefinedType.PT_COUNT)
+            if (
+                ptSrc == ptDst
+                || ptDst == PredefinedType.PT_OBJECT && ptSrc < PredefinedType.PT_COUNT
+            )
             {
                 return ConvKind.Implicit;
             }
@@ -186,26 +393,313 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private const byte right = (byte)BetterType.Right;
         private const byte neither = (byte)BetterType.Neither;
 
-
         private static readonly byte[][] s_simpleTypeBetter =
         {
             //                        BYTE     SHORT    INT      LONG     FLOAT    DOUBLE   DECIMAL  CHAR     BOOL     SBYTE    USHORT   UINT     ULONG    IPTR     UIPTR    OBJECT
-            new byte[] /* BYTE   */ { same,    left,    left,    left,    left,    left,    left,    neither, neither, right,   left,    left,    left,    neither, neither, left },
-            new byte[] /* SHORT  */ { right,   same,    left,    left,    left,    left,    left,    neither, neither, right,   left,    left,    left,    neither, neither, left },
-            new byte[] /* INT    */ { right,   right,   same,    left,    left,    left,    left,    right,   neither, right,   right,   left,    left,    neither, neither, left },
-            new byte[] /* LONG   */ { right,   right,   right,   same,    left,    left,    left,    right,   neither, right,   right,   right,   left,    neither, neither, left },
-            new byte[] /* FLOAT  */ { right,   right,   right,   right,   same,    left,    neither, right,   neither, right,   right,   right,   right,   neither, neither, left },
-            new byte[] /* DOUBLE */ { right,   right,   right,   right,   right,   same,    neither, right,   neither, right,   right,   right,   right,   neither, neither, left },
-            new byte[] /* DECIMAL*/ { right,   right,   right,   right,   neither, neither, same,    right,   neither, right,   right,   right,   right,   neither, neither, left },
-            new byte[] /* CHAR   */ { neither, neither, left,    left,    left,    left,    left,    same,    neither, neither, left,    left,    left,    neither, neither, left },
-            new byte[] /* BOOL   */ { neither, neither, neither, neither, neither, neither, neither, neither, same,    neither, neither, neither, neither, neither, neither, left },
-            new byte[] /* SBYTE  */ { left,    left,    left,    left,    left,    left,    left,    neither, neither, same,    left,    left,    left,    neither, neither, left },
-            new byte[] /* USHORT */ { right,   right,   left,    left,    left,    left,    left,    right,   neither, right,   same,    left,    left,    neither, neither, left },
-            new byte[] /* UINT   */ { right,   right,   right,   left,    left,    left,    left,    right,   neither, right,   right,   same,    left,    neither, neither, left },
-            new byte[] /* ULONG  */ { right,   right,   right,   right,   left,    left,    left,    right,   neither, right,   right,   right,   same,    neither, neither, left },
-            new byte[] /* IPTR   */ { neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, same,    neither, left },
-            new byte[] /* UIPTR  */ { neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, neither, same,    left },
-            new byte[] /* OBJECT */ { right,   right,   right,   right,   right,   right,   right,   right,   right,   right,   right,   right,   right,   right,   right,   same }
+            new byte[] /* BYTE   */
+            {
+                same,
+                left,
+                left,
+                left,
+                left,
+                left,
+                left,
+                neither,
+                neither,
+                right,
+                left,
+                left,
+                left,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* SHORT  */
+            {
+                right,
+                same,
+                left,
+                left,
+                left,
+                left,
+                left,
+                neither,
+                neither,
+                right,
+                left,
+                left,
+                left,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* INT    */
+            {
+                right,
+                right,
+                same,
+                left,
+                left,
+                left,
+                left,
+                right,
+                neither,
+                right,
+                right,
+                left,
+                left,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* LONG   */
+            {
+                right,
+                right,
+                right,
+                same,
+                left,
+                left,
+                left,
+                right,
+                neither,
+                right,
+                right,
+                right,
+                left,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* FLOAT  */
+            {
+                right,
+                right,
+                right,
+                right,
+                same,
+                left,
+                neither,
+                right,
+                neither,
+                right,
+                right,
+                right,
+                right,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* DOUBLE */
+            {
+                right,
+                right,
+                right,
+                right,
+                right,
+                same,
+                neither,
+                right,
+                neither,
+                right,
+                right,
+                right,
+                right,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* DECIMAL*/
+            {
+                right,
+                right,
+                right,
+                right,
+                neither,
+                neither,
+                same,
+                right,
+                neither,
+                right,
+                right,
+                right,
+                right,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* CHAR   */
+            {
+                neither,
+                neither,
+                left,
+                left,
+                left,
+                left,
+                left,
+                same,
+                neither,
+                neither,
+                left,
+                left,
+                left,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* BOOL   */
+            {
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                same,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* SBYTE  */
+            {
+                left,
+                left,
+                left,
+                left,
+                left,
+                left,
+                left,
+                neither,
+                neither,
+                same,
+                left,
+                left,
+                left,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* USHORT */
+            {
+                right,
+                right,
+                left,
+                left,
+                left,
+                left,
+                left,
+                right,
+                neither,
+                right,
+                same,
+                left,
+                left,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* UINT   */
+            {
+                right,
+                right,
+                right,
+                left,
+                left,
+                left,
+                left,
+                right,
+                neither,
+                right,
+                right,
+                same,
+                left,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* ULONG  */
+            {
+                right,
+                right,
+                right,
+                right,
+                left,
+                left,
+                left,
+                right,
+                neither,
+                right,
+                right,
+                right,
+                same,
+                neither,
+                neither,
+                left,
+            },
+            new byte[] /* IPTR   */
+            {
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                same,
+                neither,
+                left,
+            },
+            new byte[] /* UIPTR  */
+            {
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                neither,
+                same,
+                left,
+            },
+            new byte[] /* OBJECT */
+            {
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                right,
+                same,
+            },
         };
 #if DEBUG
         private static volatile bool s_fCheckedBetter;
@@ -222,16 +716,40 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 Debug.Assert(s_simpleTypeBetter[i][i] == same);
                 for (int j = 0; j < i; j++)
                 {
-                    Debug.Assert(s_simpleTypeBetter[i][j] != same && s_simpleTypeBetter[j][i] != same);
                     Debug.Assert(
-                        (s_simpleTypeBetter[i][j] == left && s_simpleTypeBetter[j][i] == right) ||
-                        (s_simpleTypeBetter[i][j] == right && s_simpleTypeBetter[j][i] == left) ||
-                        (s_simpleTypeBetter[i][j] == neither && s_simpleTypeBetter[j][i] == neither));
+                        s_simpleTypeBetter[i][j] != same && s_simpleTypeBetter[j][i] != same
+                    );
                     Debug.Assert(
-                        GetPredefindType((PredefinedType)i) == null ||
-                        GetPredefindType((PredefinedType)j) == null ||
-                        (!canConvert(GetPredefindType((PredefinedType)i), GetPredefindType((PredefinedType)j), CONVERTTYPE.NOUDC) || s_simpleTypeBetter[i][j] == left) &&
-                        (!canConvert(GetPredefindType((PredefinedType)j), GetPredefindType((PredefinedType)i), CONVERTTYPE.NOUDC) || s_simpleTypeBetter[j][i] == left));
+                        (s_simpleTypeBetter[i][j] == left && s_simpleTypeBetter[j][i] == right)
+                            || (
+                                s_simpleTypeBetter[i][j] == right
+                                && s_simpleTypeBetter[j][i] == left
+                            )
+                            || (
+                                s_simpleTypeBetter[i][j] == neither
+                                && s_simpleTypeBetter[j][i] == neither
+                            )
+                    );
+                    Debug.Assert(
+                        GetPredefindType((PredefinedType)i) == null
+                            || GetPredefindType((PredefinedType)j) == null
+                            || (
+                                !canConvert(
+                                    GetPredefindType((PredefinedType)i),
+                                    GetPredefindType((PredefinedType)j),
+                                    CONVERTTYPE.NOUDC
+                                )
+                                || s_simpleTypeBetter[i][j] == left
+                            )
+                                && (
+                                    !canConvert(
+                                        GetPredefindType((PredefinedType)j),
+                                        GetPredefindType((PredefinedType)i),
+                                        CONVERTTYPE.NOUDC
+                                    )
+                                    || s_simpleTypeBetter[j][i] == left
+                                )
+                    );
                 }
             }
             s_fCheckedBetter = true;
@@ -257,7 +775,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             (possibly via a user defined conversion, method group conversion, etc).
         ***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private BetterType WhichTypeIsBetter(PredefinedType pt1, PredefinedType pt2, CType typeGiven)
+        private BetterType WhichTypeIsBetter(
+            PredefinedType pt1,
+            PredefinedType pt2,
+            CType typeGiven
+        )
         {
             if (pt1 == pt2)
             {
@@ -285,7 +807,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
             return WhichTypeIsBetter(GetPredefindType(pt1), GetPredefindType(pt2), typeGiven);
         }
-
 
         /***************************************************************************************************
             Determined which conversion is better relative to a given type. It is assumed that the given type
@@ -316,9 +837,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 return f12 ? BetterType.Left : BetterType.Right;
             }
 
-            if (!(type1 is NullableType nub1) || !(type2 is NullableType nub2) ||
-                !nub1.UnderlyingType.IsPredefined ||
-                !nub2.UnderlyingType.IsPredefined)
+            if (
+                !(type1 is NullableType nub1)
+                || !(type2 is NullableType nub2)
+                || !nub1.UnderlyingType.IsPredefined
+                || !nub2.UnderlyingType.IsPredefined
+            )
             {
                 return BetterType.Neither;
             }
@@ -336,7 +860,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         // returns true if an implicit conversion exists from source type to dest type. flags is an optional parameter.
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool canConvert(CType src, CType dest, CONVERTTYPE flags) => BindImplicitConversion(null, src, dest, flags);
+        private bool canConvert(CType src, CType dest, CONVERTTYPE flags) =>
+            BindImplicitConversion(null, src, dest, flags);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public bool canConvert(CType src, CType dest) => canConvert(src, dest, 0);
@@ -352,7 +877,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // performs an implicit conversion if it's possible. otherwise displays an error. flags is an optional parameter.
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private Expr mustConvertCore(Expr expr, CType destExpr) => mustConvertCore(expr, destExpr, 0);
+        private Expr mustConvertCore(Expr expr, CType destExpr) =>
+            mustConvertCore(expr, destExpr, 0);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private Expr mustConvertCore(Expr expr, CType dest, CONVERTTYPE flags)
@@ -374,11 +900,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             FUNDTYPE ftSrc = expr.Type.FundamentalType;
             FUNDTYPE ftDest = dest.FundamentalType;
 
-            if (expr is ExprConstant constant &&
-                expr.Type.IsSimpleType && dest.IsSimpleType)
+            if (expr is ExprConstant constant && expr.Type.IsSimpleType && dest.IsSimpleType)
             {
-                if ((ftSrc == FUNDTYPE.FT_I4 && (ftDest <= FUNDTYPE.FT_LASTNONLONG || ftDest == FUNDTYPE.FT_U8)) ||
-                    (ftSrc == FUNDTYPE.FT_I8 && ftDest == FUNDTYPE.FT_U8))
+                if (
+                    (
+                        ftSrc == FUNDTYPE.FT_I4
+                        && (ftDest <= FUNDTYPE.FT_LASTNONLONG || ftDest == FUNDTYPE.FT_U8)
+                    ) || (ftSrc == FUNDTYPE.FT_I8 && ftDest == FUNDTYPE.FT_U8)
+                )
                 {
                     // Failed because value was out of range. Report nifty error message.
                     string value = constant.Int64Value.ToString(CultureInfo.InvariantCulture);
@@ -393,7 +922,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // canCast => can't convert, but explicit exists and can be specified by the user (no anonymous types).
             // !canCast => Generic "can't convert" error.
-            throw ErrorHandling.Error(canCast(expr.Type, dest, flags) ? ErrorCode.ERR_NoImplicitConvCast : ErrorCode.ERR_NoImplicitConv, new ErrArg(expr.Type, ErrArgFlags.Unique), new ErrArg(dest, ErrArgFlags.Unique));
+            throw ErrorHandling.Error(
+                canCast(expr.Type, dest, flags)
+                    ? ErrorCode.ERR_NoImplicitConvCast
+                    : ErrorCode.ERR_NoImplicitConv,
+                new ErrArg(expr.Type, ErrArgFlags.Unique),
+                new ErrArg(dest, ErrArgFlags.Unique)
+            );
         }
 
         // performs an implicit conversion if its possible. otherwise returns null. flags is an optional parameter.
@@ -426,7 +961,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public Expr mustConvert(Expr expr, CType dest) => mustConvert(expr, dest, (CONVERTTYPE)0);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private Expr mustConvert(Expr expr, CType dest, CONVERTTYPE flags) => mustConvertCore(expr, dest, flags);
+        private Expr mustConvert(Expr expr, CType dest, CONVERTTYPE flags) =>
+            mustConvertCore(expr, dest, flags);
 
         //        public bool canCast(Expr expr, CType dest)
         //        {
@@ -452,7 +988,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // For certain situations, try to give a better error.
             Expr exprConst = expr.GetConst();
-            bool simpleConstToSimpleDestination = exprConst != null && expr.Type.IsSimpleOrEnum && dest.IsSimpleOrEnum;
+            bool simpleConstToSimpleDestination =
+                exprConst != null && expr.Type.IsSimpleOrEnum && dest.IsSimpleOrEnum;
 
             if (simpleConstToSimpleDestination)
             {
@@ -464,13 +1001,24 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     // Decimal is a SimpleType represented in a FT_STRUCT
                     throw ErrorHandling.Error(
                         ErrorCode.ERR_ConstOutOfRange,
-                        ((ExprConstant)exprConst).Val.DecimalVal.ToString(CultureInfo.InvariantCulture), dest);
+                        ((ExprConstant)exprConst).Val.DecimalVal.ToString(
+                            CultureInfo.InvariantCulture
+                        ),
+                        dest
+                    );
                 }
 
                 if (Context.Checked)
                 {
                     // check if we failed because we are in checked mode...
-                    if (!CanExplicitConversionBeBoundInUncheckedContext(expr, expr.Type, dest, flags | CONVERTTYPE.NOUDC))
+                    if (
+                        !CanExplicitConversionBeBoundInUncheckedContext(
+                            expr,
+                            expr.Type,
+                            dest,
+                            flags | CONVERTTYPE.NOUDC
+                        )
+                    )
                     {
                         throw CantConvert(expr, dest);
                     }
@@ -483,19 +1031,28 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         case FUNDTYPE.FT_U2:
                         case FUNDTYPE.FT_U4:
                         case FUNDTYPE.FT_U8:
-                            value = ((ulong)((ExprConstant)exprConst).Int64Value).ToString(CultureInfo.InvariantCulture);
+                            value = ((ulong)((ExprConstant)exprConst).Int64Value).ToString(
+                                CultureInfo.InvariantCulture
+                            );
                             break;
 
                         case FUNDTYPE.FT_I1:
                         case FUNDTYPE.FT_I2:
                         case FUNDTYPE.FT_I4:
                         case FUNDTYPE.FT_I8:
-                            value = ((ExprConstant)exprConst).Int64Value.ToString(CultureInfo.InvariantCulture);
+                            value = ((ExprConstant)exprConst).Int64Value.ToString(
+                                CultureInfo.InvariantCulture
+                            );
                             break;
 
                         default:
-                            Debug.Assert(exprType <= FUNDTYPE.FT_LASTNUMERIC, "Error in constant conversion logic!");
-                            value = ((ExprConstant)exprConst).Val.DoubleVal.ToString(CultureInfo.InvariantCulture);
+                            Debug.Assert(
+                                exprType <= FUNDTYPE.FT_LASTNUMERIC,
+                                "Error in constant conversion logic!"
+                            );
+                            value = ((ExprConstant)exprConst).Val.DoubleVal.ToString(
+                                CultureInfo.InvariantCulture
+                            );
                             break;
                     }
 
@@ -515,14 +1072,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             // Generic "can't convert" error.
             Debug.Assert(expr.Type != null);
-            return ErrorHandling.Error(ErrorCode.ERR_NoExplicitConv, new ErrArg(expr.Type, ErrArgFlags.Unique), new ErrArg(dest, ErrArgFlags.Unique));
+            return ErrorHandling.Error(
+                ErrorCode.ERR_NoExplicitConv,
+                new ErrArg(expr.Type, ErrArgFlags.Unique),
+                new ErrArg(dest, ErrArgFlags.Unique)
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public Expr mustCast(Expr expr, CType dest) => mustCast(expr, dest, 0);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr mustCast(Expr expr, CType dest, CONVERTTYPE flags) => mustCastCore(expr, dest, flags);
+        public Expr mustCast(Expr expr, CType dest, CONVERTTYPE flags) =>
+            mustCastCore(expr, dest, flags);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private Expr MustCastInUncheckedContext(Expr expr, CType dest, CONVERTTYPE flags) =>
@@ -530,55 +1092,134 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         // returns true if an explicit conversion exists from source type to dest type. flags is an optional parameter.
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool canCast(CType src, CType dest, CONVERTTYPE flags) => BindExplicitConversion(null, src, dest, flags);
+        private bool canCast(CType src, CType dest, CONVERTTYPE flags) =>
+            BindExplicitConversion(null, src, dest, flags);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool BindImplicitConversion(Expr pSourceExpr, CType pSourceType, CType destinationType, CONVERTTYPE flags)
+        private bool BindImplicitConversion(
+            Expr pSourceExpr,
+            CType pSourceType,
+            CType destinationType,
+            CONVERTTYPE flags
+        )
         {
-            ImplicitConversion binder = new ImplicitConversion(this, pSourceExpr, pSourceType, destinationType, false, flags);
+            ImplicitConversion binder = new ImplicitConversion(
+                this,
+                pSourceExpr,
+                pSourceType,
+                destinationType,
+                false,
+                flags
+            );
             return binder.Bind();
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool BindImplicitConversion(Expr pSourceExpr, CType pSourceType, CType destinationType, out Expr ppDestinationExpr, CONVERTTYPE flags)
+        private bool BindImplicitConversion(
+            Expr pSourceExpr,
+            CType pSourceType,
+            CType destinationType,
+            out Expr ppDestinationExpr,
+            CONVERTTYPE flags
+        )
         {
-            ImplicitConversion binder = new ImplicitConversion(this, pSourceExpr, pSourceType, destinationType, true, flags);
+            ImplicitConversion binder = new ImplicitConversion(
+                this,
+                pSourceExpr,
+                pSourceType,
+                destinationType,
+                true,
+                flags
+            );
             bool result = binder.Bind();
             ppDestinationExpr = binder.ExprDest;
             return result;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool BindImplicitConversion(Expr pSourceExpr, CType pSourceType, CType destinationType, bool needsExprDest, out Expr ppDestinationExpr, CONVERTTYPE flags)
+        private bool BindImplicitConversion(
+            Expr pSourceExpr,
+            CType pSourceType,
+            CType destinationType,
+            bool needsExprDest,
+            out Expr ppDestinationExpr,
+            CONVERTTYPE flags
+        )
         {
-            ImplicitConversion binder = new ImplicitConversion(this, pSourceExpr, pSourceType, destinationType, needsExprDest, flags);
+            ImplicitConversion binder = new ImplicitConversion(
+                this,
+                pSourceExpr,
+                pSourceType,
+                destinationType,
+                needsExprDest,
+                flags
+            );
             bool result = binder.Bind();
             ppDestinationExpr = needsExprDest ? binder.ExprDest : null;
             return result;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool BindExplicitConversion(Expr pSourceExpr, CType pSourceType, CType destinationType, bool needsExprDest, out Expr ppDestinationExpr, CONVERTTYPE flags)
+        private bool BindExplicitConversion(
+            Expr pSourceExpr,
+            CType pSourceType,
+            CType destinationType,
+            bool needsExprDest,
+            out Expr ppDestinationExpr,
+            CONVERTTYPE flags
+        )
         {
-            ExplicitConversion binder = new ExplicitConversion(this, pSourceExpr, pSourceType, destinationType, needsExprDest, flags);
+            ExplicitConversion binder = new ExplicitConversion(
+                this,
+                pSourceExpr,
+                pSourceType,
+                destinationType,
+                needsExprDest,
+                flags
+            );
             bool result = binder.Bind();
             ppDestinationExpr = needsExprDest ? binder.ExprDest : null;
             return result;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool BindExplicitConversion(Expr pSourceExpr, CType pSourceType, CType destinationType, out Expr ppDestinationExpr, CONVERTTYPE flags)
+        private bool BindExplicitConversion(
+            Expr pSourceExpr,
+            CType pSourceType,
+            CType destinationType,
+            out Expr ppDestinationExpr,
+            CONVERTTYPE flags
+        )
         {
-            ExplicitConversion binder = new ExplicitConversion(this, pSourceExpr, pSourceType, destinationType, true, flags);
+            ExplicitConversion binder = new ExplicitConversion(
+                this,
+                pSourceExpr,
+                pSourceType,
+                destinationType,
+                true,
+                flags
+            );
             bool result = binder.Bind();
             ppDestinationExpr = binder.ExprDest;
             return result;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool BindExplicitConversion(Expr pSourceExpr, CType pSourceType, CType destinationType, CONVERTTYPE flags)
+        private bool BindExplicitConversion(
+            Expr pSourceExpr,
+            CType pSourceType,
+            CType destinationType,
+            CONVERTTYPE flags
+        )
         {
-            ExplicitConversion binder = new ExplicitConversion(this, pSourceExpr, pSourceType, destinationType, false, flags);
+            ExplicitConversion binder = new ExplicitConversion(
+                this,
+                pSourceExpr,
+                pSourceType,
+                destinationType,
+                false,
+                flags
+            );
             return binder.Bind();
         }
 
@@ -623,13 +1264,25 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
               forms have identical signatures).
         ***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool bindUserDefinedConversion(Expr exprSrc, CType typeSrc, CType typeDst, bool needExprDest, out Expr pexprDst, bool fImplicitOnly)
+        private bool bindUserDefinedConversion(
+            Expr exprSrc,
+            CType typeSrc,
+            CType typeDst,
+            bool needExprDest,
+            out Expr pexprDst,
+            bool fImplicitOnly
+        )
         {
             pexprDst = null;
             Debug.Assert(exprSrc == null || exprSrc.Type == typeSrc);
 
             // If either type is an interface we should never employ a UD conversion.
-            if (typeSrc == null || typeDst == null || typeSrc.IsInterfaceType || typeDst.IsInterfaceType)
+            if (
+                typeSrc == null
+                || typeDst == null
+                || typeSrc.IsInterfaceType
+                || typeDst.IsInterfaceType
+            )
             {
                 return false;
             }
@@ -658,7 +1311,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (typeSrcBase is AggregateType atSrcBase && atSrcBase.OwningAggregate.HasConversion())
             {
                 rgats[cats++] = atSrcBase;
-                fIntPtrOverride2 = atSrcBase.IsPredefType(PredefinedType.PT_INTPTR) || atSrcBase.IsPredefType(PredefinedType.PT_UINTPTR);
+                fIntPtrOverride2 =
+                    atSrcBase.IsPredefType(PredefinedType.PT_INTPTR)
+                    || atSrcBase.IsPredefType(PredefinedType.PT_UINTPTR);
             }
 
             // Get the list of operators from the destination.
@@ -669,7 +1324,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     rgats[cats++] = atDstBase;
                 }
 
-                if (fIntPtrOverride2 && !typeDstBase.IsPredefType(PredefinedType.PT_LONG) && !typeDstBase.IsPredefType(PredefinedType.PT_ULONG))
+                if (
+                    fIntPtrOverride2
+                    && !typeDstBase.IsPredefType(PredefinedType.PT_LONG)
+                    && !typeDstBase.IsPredefType(PredefinedType.PT_ULONG)
+                )
                 {
                     fIntPtrOverride2 = false;
                 }
@@ -697,18 +1356,30 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // In the first pass if we find types that are non-comparable, keep one of the types and keep going.
             for (int iats = 0; iats < cats; iats++)
             {
-                for (AggregateType atsCur = rgats[iats]; atsCur != null && atsCur.OwningAggregate.HasConversion(); atsCur = atsCur.BaseClass)
+                for (
+                    AggregateType atsCur = rgats[iats];
+                    atsCur != null && atsCur.OwningAggregate.HasConversion();
+                    atsCur = atsCur.BaseClass
+                )
                 {
                     AggregateSymbol aggCur = atsCur.OwningAggregate;
 
                     // We need to replicate behavior that allows non-standard conversions with these guys.
                     PredefinedType aggPredefType = aggCur.GetPredefType();
-                    bool fIntPtrStandard = (aggCur.IsPredefined() &&
-                            (aggPredefType == PredefinedType.PT_INTPTR ||
-                             aggPredefType == PredefinedType.PT_UINTPTR ||
-                             aggPredefType == PredefinedType.PT_DECIMAL));
+                    bool fIntPtrStandard = (
+                        aggCur.IsPredefined()
+                        && (
+                            aggPredefType == PredefinedType.PT_INTPTR
+                            || aggPredefType == PredefinedType.PT_UINTPTR
+                            || aggPredefType == PredefinedType.PT_DECIMAL
+                        )
+                    );
 
-                    for (MethodSymbol convCur = aggCur.GetFirstUDConversion(); convCur != null; convCur = convCur.ConvNext())
+                    for (
+                        MethodSymbol convCur = aggCur.GetFirstUDConversion();
+                        convCur != null;
+                        convCur = convCur.ConvNext()
+                    )
                     {
                         if (convCur.Params.Count != 1)
                         {
@@ -731,7 +1402,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                         // If fImplicitOrExactSrc is set then it must be the case that either the conversion
                         // is implicit or the from-type must be the src type (modulo nullables).
-                        if (fImplicitOrExactSrc && !fNeedImplicit && typeFrom.StripNubs() != typeSrcBase)
+                        if (
+                            fImplicitOrExactSrc
+                            && !fNeedImplicit
+                            && typeFrom.StripNubs() != typeSrcBase
+                        )
                         {
                             if (!convCur.isImplicit())
                                 continue;
@@ -742,8 +1417,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             FUNDTYPE ftFrom;
                             FUNDTYPE ftTo;
 
-                            if ((ftTo = typeTo.FundamentalType) <= FUNDTYPE.FT_LASTNUMERIC && ftTo > FUNDTYPE.FT_NONE &&
-                                (ftFrom = typeFrom.FundamentalType) <= FUNDTYPE.FT_LASTNUMERIC && ftFrom > FUNDTYPE.FT_NONE)
+                            if (
+                                (ftTo = typeTo.FundamentalType) <= FUNDTYPE.FT_LASTNUMERIC
+                                && ftTo > FUNDTYPE.FT_NONE
+                                && (ftFrom = typeFrom.FundamentalType) <= FUNDTYPE.FT_LASTNUMERIC
+                                && ftFrom > FUNDTYPE.FT_NONE
+                            )
                             {
                                 continue;
                             }
@@ -751,31 +1430,70 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                         // Ignore the IntPtr/UIntPtr -> int/uint conversion in favor of
                         // the IntPtr/UIntPtr -> long/ulong conversion.
-                        if (fIntPtrOverride2 && (typeTo.IsPredefType(PredefinedType.PT_INT) || typeTo.IsPredefType(PredefinedType.PT_UINT)))
+                        if (
+                            fIntPtrOverride2
+                            && (
+                                typeTo.IsPredefType(PredefinedType.PT_INT)
+                                || typeTo.IsPredefType(PredefinedType.PT_UINT)
+                            )
+                        )
                             continue;
 
                         // Lift the conversion if needed.
-                        if (fLiftSrc && (fDstHasNull || !fNeedImplicit) && typeFrom.IsNonNullableValueType)
+                        if (
+                            fLiftSrc
+                            && (fDstHasNull || !fNeedImplicit)
+                            && typeFrom.IsNonNullableValueType
+                        )
                             typeFrom = TypeManager.GetNullable(typeFrom);
                         if (fLiftDst && typeTo.IsNonNullableValueType)
                             typeTo = TypeManager.GetNullable(typeTo);
 
                         // Check for applicability.
-                        bool fFromImplicit = exprSrc != null ? canConvert(exprSrc, typeFrom, CONVERTTYPE.STANDARDANDNOUDC) : canConvert(typeSrc, typeFrom, CONVERTTYPE.STANDARDANDNOUDC);
-                        if (!fFromImplicit && (fNeedImplicit ||
-                                               !canConvert(typeFrom, typeSrc, CONVERTTYPE.STANDARDANDNOUDC) &&
-                                               // We allow IntPtr and UIntPtr to use non-standard explicit casts as long as they don't involve pointer types.
-                                               // This is because the framework uses it and RTM allowed it.
-                                               (!fIntPtrStandard || typeSrc is PointerType || typeFrom is PointerType || !canCast(typeSrc, typeFrom, CONVERTTYPE.NOUDC))))
+                        bool fFromImplicit =
+                            exprSrc != null
+                                ? canConvert(exprSrc, typeFrom, CONVERTTYPE.STANDARDANDNOUDC)
+                                : canConvert(typeSrc, typeFrom, CONVERTTYPE.STANDARDANDNOUDC);
+                        if (
+                            !fFromImplicit
+                            && (
+                                fNeedImplicit
+                                || !canConvert(typeFrom, typeSrc, CONVERTTYPE.STANDARDANDNOUDC)
+                                    &&
+                                    // We allow IntPtr and UIntPtr to use non-standard explicit casts as long as they don't involve pointer types.
+                                    // This is because the framework uses it and RTM allowed it.
+                                    (
+                                        !fIntPtrStandard
+                                        || typeSrc is PointerType
+                                        || typeFrom is PointerType
+                                        || !canCast(typeSrc, typeFrom, CONVERTTYPE.NOUDC)
+                                    )
+                            )
+                        )
                         {
                             continue;
                         }
-                        bool fToImplicit = canConvert(typeTo, typeDst, CONVERTTYPE.STANDARDANDNOUDC);
-                        if (!fToImplicit && (fNeedImplicit ||
-                                             !canConvert(typeDst, typeTo, CONVERTTYPE.STANDARDANDNOUDC) &&
-                                             // We allow IntPtr and UIntPtr to use non-standard explicit casts as long as they don't involve pointer types.
-                                             // This is because the framework uses it and RTM allowed it.
-                                             (!fIntPtrStandard || typeDst is PointerType || typeTo is PointerType || !canCast(typeTo, typeDst, CONVERTTYPE.NOUDC))))
+                        bool fToImplicit = canConvert(
+                            typeTo,
+                            typeDst,
+                            CONVERTTYPE.STANDARDANDNOUDC
+                        );
+                        if (
+                            !fToImplicit
+                            && (
+                                fNeedImplicit
+                                || !canConvert(typeDst, typeTo, CONVERTTYPE.STANDARDANDNOUDC)
+                                    &&
+                                    // We allow IntPtr and UIntPtr to use non-standard explicit casts as long as they don't involve pointer types.
+                                    // This is because the framework uses it and RTM allowed it.
+                                    (
+                                        !fIntPtrStandard
+                                        || typeDst is PointerType
+                                        || typeTo is PointerType
+                                        || !canCast(typeTo, typeDst, CONVERTTYPE.NOUDC)
+                                    )
+                            )
+                        )
                         {
                             continue;
                         }
@@ -800,7 +1518,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                         // The conversion is applicable so it affects the best types.
 
-                        prguci.Add(new UdConvInfo(new MethWithType(convCur, atsCur), fFromImplicit, fToImplicit));
+                        prguci.Add(
+                            new UdConvInfo(
+                                new MethWithType(convCur, atsCur),
+                                fFromImplicit,
+                                fToImplicit
+                            )
+                        );
 
                         if (!fBestSrcExact)
                         {
@@ -821,7 +1545,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             else if (typeBestSrc != typeFrom)
                             {
                                 Debug.Assert(0 <= iuciBestSrc && iuciBestSrc < prguci.Count - 1);
-                                int n = CompareSrcTypesBased(typeBestSrc, prguci[iuciBestSrc].SrcImplicit, typeFrom, fFromImplicit);
+                                int n = CompareSrcTypesBased(
+                                    typeBestSrc,
+                                    prguci[iuciBestSrc].SrcImplicit,
+                                    typeFrom,
+                                    fFromImplicit
+                                );
                                 if (n > 0)
                                 {
                                     typeBestSrc = typeFrom;
@@ -848,7 +1577,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             else if (typeBestDst != typeTo)
                             {
                                 Debug.Assert(0 <= iuciBestDst && iuciBestDst < prguci.Count - 1);
-                                int n = CompareDstTypesBased(typeBestDst, prguci[iuciBestDst].DstImplicit, typeTo, fToImplicit);
+                                int n = CompareDstTypesBased(
+                                    typeBestDst,
+                                    prguci[iuciBestDst].DstImplicit,
+                                    typeTo,
+                                    fToImplicit
+                                );
                                 if (n > 0)
                                 {
                                     typeBestDst = typeTo;
@@ -937,7 +1671,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // convertible to each other (eg, int? and int??) and hence not distinguishable by CompareXxxTypesBase.
                 if (!fBestSrcExact && typeFrom != typeBestSrc)
                 {
-                    int n = CompareSrcTypesBased(typeBestSrc, prguci[iuciBestSrc].SrcImplicit, typeFrom, uci.SrcImplicit);
+                    int n = CompareSrcTypesBased(
+                        typeBestSrc,
+                        prguci[iuciBestSrc].SrcImplicit,
+                        typeFrom,
+                        uci.SrcImplicit
+                    );
                     Debug.Assert(n <= 0);
                     if (n >= 0)
                     {
@@ -951,7 +1690,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 }
                 if (!fBestDstExact && typeTo != typeBestDst)
                 {
-                    int n = CompareDstTypesBased(typeBestDst, prguci[iuciBestDst].DstImplicit, typeTo, uci.DstImplicit);
+                    int n = CompareDstTypesBased(
+                        typeBestDst,
+                        prguci[iuciBestDst].DstImplicit,
+                        typeTo,
+                        uci.DstImplicit
+                    );
                     Debug.Assert(n <= 0);
                     if (n >= 0)
                     {
@@ -977,7 +1721,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 throw HandleAmbiguity(typeSrc, typeDst, prguci, iuciBest, iuciAmbig);
             }
 
-            MethWithInst mwiBest = new MethWithInst(prguci[iuciBest].Meth.Meth(), prguci[iuciBest].Meth.GetType(), null);
+            MethWithInst mwiBest = new MethWithInst(
+                prguci[iuciBest].Meth.Meth(),
+                prguci[iuciBest].Meth.GetType(),
+                null
+            );
 
             Debug.Assert(ctypeLiftBest <= 2);
 
@@ -1000,7 +1748,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // We want to bind the unlifted conversion first.
                 Expr nonLiftedArg = mustCast(exprSrc, typeFrom);
                 MarkAsIntermediateConversion(nonLiftedArg);
-                Expr nonLiftedResult = BindUDConversionCore(nonLiftedArg, typeFrom, typeTo, typeDst, mwiBest);
+                Expr nonLiftedResult = BindUDConversionCore(
+                    nonLiftedArg,
+                    typeFrom,
+                    typeTo,
+                    typeDst,
+                    mwiBest
+                );
 
                 call.CastOfNonLiftedResultToLiftedType = mustCast(nonLiftedResult, typeDst);
                 call.NullableCallLiftKind = NullableCallLiftKind.UserDefinedConversion;
@@ -1032,31 +1786,67 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     }
 
                     Debug.Assert(pConversionArgument != null);
-                    ExprCall pConversionCall = ExprFactory.CreateCall(0, typeDst, pConversionArgument, pMemGroup, mwiBest);
-                    pConversionCall.NullableCallLiftKind = NullableCallLiftKind.NotLiftedIntermediateConversion;
+                    ExprCall pConversionCall = ExprFactory.CreateCall(
+                        0,
+                        typeDst,
+                        pConversionArgument,
+                        pMemGroup,
+                        mwiBest
+                    );
+                    pConversionCall.NullableCallLiftKind =
+                        NullableCallLiftKind.NotLiftedIntermediateConversion;
                     call.PConversions = pConversionCall;
                 }
                 else
                 {
-                    Expr pConversionCall = BindUDConversionCore(nonLiftedArg, typeFrom, typeTo, typeDst, mwiBest);
+                    Expr pConversionCall = BindUDConversionCore(
+                        nonLiftedArg,
+                        typeFrom,
+                        typeTo,
+                        typeDst,
+                        mwiBest
+                    );
                     MarkAsIntermediateConversion(pConversionCall);
                     call.PConversions = pConversionCall;
                 }
             }
             else
             {
-                exprDst = BindUDConversionCore(exprSrc, typeFrom, typeTo, typeDst, mwiBest, out pTransformedArgument);
+                exprDst = BindUDConversionCore(
+                    exprSrc,
+                    typeFrom,
+                    typeTo,
+                    typeDst,
+                    mwiBest,
+                    out pTransformedArgument
+                );
             }
 
-            pexprDst = ExprFactory.CreateUserDefinedConversion(pTransformedArgument, exprDst, mwiBest);
+            pexprDst = ExprFactory.CreateUserDefinedConversion(
+                pTransformedArgument,
+                exprDst,
+                mwiBest
+            );
             return true;
         }
 
-        private static RuntimeBinderException HandleAmbiguity(CType typeSrc, CType typeDst, List<UdConvInfo> prguci, int iuciBestSrc, int iuciBestDst)
+        private static RuntimeBinderException HandleAmbiguity(
+            CType typeSrc,
+            CType typeDst,
+            List<UdConvInfo> prguci,
+            int iuciBestSrc,
+            int iuciBestDst
+        )
         {
             Debug.Assert(0 <= iuciBestSrc && iuciBestSrc < prguci.Count);
             Debug.Assert(0 <= iuciBestDst && iuciBestDst < prguci.Count);
-            return ErrorHandling.Error(ErrorCode.ERR_AmbigUDConv, prguci[iuciBestSrc].Meth, prguci[iuciBestDst].Meth, typeSrc, typeDst);
+            return ErrorHandling.Error(
+                ErrorCode.ERR_AmbigUDConv,
+                prguci[iuciBestSrc].Meth,
+                prguci[iuciBestDst].Meth,
+                typeSrc,
+                typeDst
+            );
         }
 
         private static void MarkAsIntermediateConversion(Expr pExpr)
@@ -1069,10 +1859,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     switch (call.NullableCallLiftKind)
                     {
                         case NullableCallLiftKind.NotLifted:
-                            call.NullableCallLiftKind = NullableCallLiftKind.NotLiftedIntermediateConversion;
+                            call.NullableCallLiftKind =
+                                NullableCallLiftKind.NotLiftedIntermediateConversion;
                             break;
                         case NullableCallLiftKind.NullableConversion:
-                            call.NullableCallLiftKind = NullableCallLiftKind.NullableIntermediateConversion;
+                            call.NullableCallLiftKind =
+                                NullableCallLiftKind.NullableIntermediateConversion;
                             break;
                         case NullableCallLiftKind.NullableConversionConstructor:
                             pExpr = call.OptionalArguments;
@@ -1090,18 +1882,44 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private Expr BindUDConversionCore(Expr pFrom, CType pTypeFrom, CType pTypeTo, CType pTypeDestination, MethWithInst mwiBest)
+        private Expr BindUDConversionCore(
+            Expr pFrom,
+            CType pTypeFrom,
+            CType pTypeTo,
+            CType pTypeDestination,
+            MethWithInst mwiBest
+        )
         {
-            return BindUDConversionCore(pFrom, pTypeFrom, pTypeTo, pTypeDestination, mwiBest, out _);
+            return BindUDConversionCore(
+                pFrom,
+                pTypeFrom,
+                pTypeTo,
+                pTypeDestination,
+                mwiBest,
+                out _
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private Expr BindUDConversionCore(Expr pFrom, CType pTypeFrom, CType pTypeTo, CType pTypeDestination, MethWithInst mwiBest, out Expr ppTransformedArgument)
+        private Expr BindUDConversionCore(
+            Expr pFrom,
+            CType pTypeFrom,
+            CType pTypeTo,
+            CType pTypeDestination,
+            MethWithInst mwiBest,
+            out Expr ppTransformedArgument
+        )
         {
             Expr pTransformedArgument = mustCastCore(pFrom, pTypeFrom, CONVERTTYPE.NOUDC);
             Debug.Assert(pTransformedArgument != null);
             ExprMemberGroup pMemGroup = ExprFactory.CreateMemGroup(null, mwiBest);
-            ExprCall pCall = ExprFactory.CreateCall(0, pTypeTo, pTransformedArgument, pMemGroup, mwiBest);
+            ExprCall pCall = ExprFactory.CreateCall(
+                0,
+                pTypeTo,
+                pTransformedArgument,
+                pMemGroup,
+                mwiBest
+            );
             Expr pCast = mustCastCore(pCall, pTypeDestination, CONVERTTYPE.NOUDC);
             Debug.Assert(pCast != null);
             ppTransformedArgument = pTransformedArgument;
@@ -1112,7 +1930,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
          * Fold a constant cast. Returns true if the constant could be folded.
          */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private ConstCastResult bindConstantCast(Expr exprSrc, CType typeDest, bool needExprDest, out Expr pexprDest, bool explicitConversion)
+        private ConstCastResult bindConstantCast(
+            Expr exprSrc,
+            CType typeDest,
+            bool needExprDest,
+            out Expr pexprDest,
+            bool explicitConversion
+        )
         {
             pexprDest = null;
             long valueInt = 0;
@@ -1142,7 +1966,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 return ConstCastResult.Success;
             }
 
-            if (explicitConversion && Context.Checked && !isConstantInRange(constSrc, typeDest, true))
+            if (
+                explicitConversion
+                && Context.Checked
+                && !isConstantInRange(constSrc, typeDest, true)
+            )
             {
                 return ConstCastResult.CheckFailure;
             }
@@ -1151,7 +1979,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 return ConstCastResult.Success;
             }
-
 
             // Get the source constant value into valueInt or valueFlt.
             if (srcIntegral)
@@ -1412,7 +2239,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         result = Convert.ToDecimal(src.Val.Int64Val);
                         break;
                     default:
-                        return null;  // Not supported cast.
+                        return null; // Not supported cast.
                 }
 
                 cv = ConstVal.Get(result);
@@ -1482,10 +2309,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private bool CanExplicitConversionBeBoundInUncheckedContext(Expr exprSrc, CType typeSrc, CType typeDest, CONVERTTYPE flags)
+        private bool CanExplicitConversionBeBoundInUncheckedContext(
+            Expr exprSrc,
+            CType typeSrc,
+            CType typeDest,
+            CONVERTTYPE flags
+        )
         {
             Debug.Assert(typeDest != null);
-            return new ExpressionBinder(new BindingContext(Context)).BindExplicitConversion(exprSrc, typeSrc, typeDest, flags);
+            return new ExpressionBinder(new BindingContext(Context)).BindExplicitConversion(
+                exprSrc,
+                typeSrc,
+                typeDest,
+                flags
+            );
         }
     }
 
@@ -1495,10 +2332,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             return list == null || list.Count == 0;
         }
+
         public static T Head<T>(this List<T> list)
         {
             return list[0];
         }
+
         public static List<T> Tail<T>(this List<T> list)
         {
             T[] array = new T[list.Count];

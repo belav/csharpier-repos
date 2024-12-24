@@ -8,7 +8,11 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
-internal sealed record JwtAuthenticationSchemeSettings(string SchemeName, List<string> Audiences, string ClaimsIssuer)
+internal sealed record JwtAuthenticationSchemeSettings(
+    string SchemeName,
+    List<string> Audiences,
+    string ClaimsIssuer
+)
 {
     private const string AuthenticationKey = "Authentication";
     private const string SchemesKey = "Schemes";
@@ -26,8 +30,10 @@ internal sealed record JwtAuthenticationSchemeSettings(string SchemeName, List<s
 
         var settingsObject = new JsonObject
         {
-            [nameof(TokenValidationParameters.ValidAudiences)] = new JsonArray(Audiences.Select(aud => JsonValue.Create(aud)).ToArray()),
-            [nameof(TokenValidationParameters.ValidIssuer)] = ClaimsIssuer
+            [nameof(TokenValidationParameters.ValidAudiences)] = new JsonArray(
+                Audiences.Select(aud => JsonValue.Create(aud)).ToArray()
+            ),
+            [nameof(TokenValidationParameters.ValidIssuer)] = ClaimsIssuer,
         };
 
         if (config[AuthenticationKey] is JsonObject authentication)
@@ -40,24 +46,22 @@ internal sealed record JwtAuthenticationSchemeSettings(string SchemeName, List<s
             }
             else
             {
-                authentication.Add(SchemesKey, new JsonObject
-                {
-                    [SchemeName] = settingsObject
-                });
+                authentication.Add(SchemesKey, new JsonObject { [SchemeName] = settingsObject });
             }
         }
         else
         {
             config[AuthenticationKey] = new JsonObject
             {
-                [SchemesKey] = new JsonObject
-                {
-                    [SchemeName] = settingsObject
-                }
+                [SchemesKey] = new JsonObject { [SchemeName] = settingsObject },
             };
         }
 
-        var streamOptions = new FileStreamOptions { Access = FileAccess.Write, Mode = FileMode.Create };
+        var streamOptions = new FileStreamOptions
+        {
+            Access = FileAccess.Write,
+            Mode = FileMode.Create,
+        };
         if (!OperatingSystem.IsWindows())
         {
             streamOptions.UnixCreateMode = UnixFileMode.UserRead | UnixFileMode.UserWrite;
@@ -72,8 +76,10 @@ internal sealed record JwtAuthenticationSchemeSettings(string SchemeName, List<s
         var config = JsonSerializer.Deserialize<JsonObject>(reader);
         reader.Close();
 
-        if (config[AuthenticationKey] is JsonObject authentication &&
-            authentication[SchemesKey] is JsonObject schemes)
+        if (
+            config[AuthenticationKey] is JsonObject authentication
+            && authentication[SchemesKey] is JsonObject schemes
+        )
         {
             schemes.Remove(name);
         }

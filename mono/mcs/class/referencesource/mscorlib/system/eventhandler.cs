@@ -1,11 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System {
-    
+namespace System
+{
     using System;
+
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
     public delegate void EventHandler(Object sender, EventArgs e);

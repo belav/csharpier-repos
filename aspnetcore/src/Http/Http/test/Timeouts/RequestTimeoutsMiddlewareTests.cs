@@ -46,7 +46,9 @@ public class RequestTimeoutsMiddlewareTests
         var context = new DefaultHttpContext();
         var originalToken = context.RequestAborted;
 
-        var endpoint = CreateEndpoint(new RequestTimeoutPolicy { Timeout = TimeSpan.FromSeconds(47) });
+        var endpoint = CreateEndpoint(
+            new RequestTimeoutPolicy { Timeout = TimeSpan.FromSeconds(47) }
+        );
         context.SetEndpoint(endpoint);
 
         await middleware.Invoke(context);
@@ -92,7 +94,8 @@ public class RequestTimeoutsMiddlewareTests
         var middleware = CreateMiddleware(
             originalCancellationToken: context.RequestAborted,
             linkerCalled: false,
-            timeoutFeatureExists: false);
+            timeoutFeatureExists: false
+        );
 
         var originalToken = context.RequestAborted;
 
@@ -141,7 +144,10 @@ public class RequestTimeoutsMiddlewareTests
         var context = new DefaultHttpContext();
         var originalToken = context.RequestAborted;
 
-        var endpoint = CreateEndpoint(new RequestTimeoutPolicy { Timeout = TimeSpan.FromSeconds(47) }, new RequestTimeoutAttribute("policy1"));
+        var endpoint = CreateEndpoint(
+            new RequestTimeoutPolicy { Timeout = TimeSpan.FromSeconds(47) },
+            new RequestTimeoutAttribute("policy1")
+        );
         context.SetEndpoint(endpoint);
 
         await middleware.Invoke(context);
@@ -155,14 +161,18 @@ public class RequestTimeoutsMiddlewareTests
         var context = new DefaultHttpContext();
         var originalToken = context.RequestAborted;
 
-        var middleware = CreateMiddleware(defaultTimeout: 10,
+        var middleware = CreateMiddleware(
+            defaultTimeout: 10,
             originalCancellationToken: originalToken,
             linkerCalled: false,
-            timeoutFeatureExists: false);
+            timeoutFeatureExists: false
+        );
 
-        var endpoint = CreateEndpoint(new DisableRequestTimeoutAttribute(),
+        var endpoint = CreateEndpoint(
+            new DisableRequestTimeoutAttribute(),
             new RequestTimeoutPolicy { Timeout = TimeSpan.FromSeconds(47) },
-            new RequestTimeoutAttribute("policy1"));
+            new RequestTimeoutAttribute("policy1")
+        );
         context.SetEndpoint(endpoint);
 
         await middleware.Invoke(context);
@@ -239,7 +249,11 @@ public class RequestTimeoutsMiddlewareTests
     [Fact]
     public async Task SkipHandleTimeoutException()
     {
-        var middleware = CreateMiddlewareWithCancel(expectedTimeSpan: 10, defaultTimeout: 10, cancelledCts: false);
+        var middleware = CreateMiddlewareWithCancel(
+            expectedTimeSpan: 10,
+            defaultTimeout: 10,
+            cancelledCts: false
+        );
 
         var context = new DefaultHttpContext();
         context.Response.Headers.Add("NotGonnaBeCleared", "Not Today!");
@@ -258,18 +272,20 @@ public class RequestTimeoutsMiddlewareTests
         double? defaultTimeout = null,
         bool cancelledCts = true,
         CancellationToken originalCancellationToken = default,
-        bool linkerCalled = true)
+        bool linkerCalled = true
+    )
     {
-        return CreateMiddleware(context =>
-        {
-
-            throw new OperationCanceledException(context.RequestAborted);
-        },
-        expectedTimeSpan,
-        defaultTimeout,
-        cancelledCts,
-        originalCancellationToken,
-        linkerCalled);
+        return CreateMiddleware(
+            context =>
+            {
+                throw new OperationCanceledException(context.RequestAborted);
+            },
+            expectedTimeSpan,
+            defaultTimeout,
+            cancelledCts,
+            originalCancellationToken,
+            linkerCalled
+        );
     }
 
     private static RequestTimeoutsMiddleware CreateMiddleware(
@@ -279,46 +295,63 @@ public class RequestTimeoutsMiddlewareTests
         bool cancelledCts = false,
         CancellationToken originalCancellationToken = default,
         bool linkerCalled = true,
-        bool timeoutFeatureExists = true)
+        bool timeoutFeatureExists = true
+    )
     {
-        var ctsLinker = new MockCancellationTokenSourceProvider(expectedTimeSpan.HasValue ? TimeSpan.FromSeconds(expectedTimeSpan.Value) : null, cancelledCts);
+        var ctsLinker = new MockCancellationTokenSourceProvider(
+            expectedTimeSpan.HasValue ? TimeSpan.FromSeconds(expectedTimeSpan.Value) : null,
+            cancelledCts
+        );
         var options = new RequestTimeoutOptions
         {
-            DefaultPolicy = defaultTimeout.HasValue ? new RequestTimeoutPolicy
+            DefaultPolicy = defaultTimeout.HasValue
+                ? new RequestTimeoutPolicy
+                {
+                    Timeout = TimeSpan.FromSeconds(defaultTimeout.Value),
+                    TimeoutStatusCode = StatusCodes.Status418ImATeapot,
+                    WriteTimeoutResponse = context =>
+                    {
+                        context.Items["SetFrom"] = "default";
+                        return Task.CompletedTask;
+                    },
+                }
+                : null,
+        };
+        options.Policies.Add(
+            "policy1",
+            new RequestTimeoutPolicy
             {
-                Timeout = TimeSpan.FromSeconds(defaultTimeout.Value),
-                TimeoutStatusCode = StatusCodes.Status418ImATeapot,
+                Timeout = TimeSpan.FromSeconds(1),
+                TimeoutStatusCode = 111,
                 WriteTimeoutResponse = context =>
                 {
-                    context.Items["SetFrom"] = "default";
+                    context.Items["SetFrom"] = "policy1";
                     return Task.CompletedTask;
-                }
-            } : null,
-        };
-        options.Policies.Add("policy1", new RequestTimeoutPolicy
-        {
-            Timeout = TimeSpan.FromSeconds(1),
-            TimeoutStatusCode = 111,
-            WriteTimeoutResponse = context =>
-            {
-                context.Items["SetFrom"] = "policy1";
-                return Task.CompletedTask;
+                },
             }
-        });
-        options.Policies.Add("policy2", new RequestTimeoutPolicy
-        {
-            Timeout = TimeSpan.FromSeconds(2),
-            TimeoutStatusCode = 222,
-            WriteTimeoutResponse = context =>
+        );
+        options.Policies.Add(
+            "policy2",
+            new RequestTimeoutPolicy
             {
-                context.Items["SetFrom"] = "policy2";
-                return Task.CompletedTask;
+                Timeout = TimeSpan.FromSeconds(2),
+                TimeoutStatusCode = 222,
+                WriteTimeoutResponse = context =>
+                {
+                    context.Items["SetFrom"] = "policy2";
+                    return Task.CompletedTask;
+                },
             }
-        });
+        );
 
         var optionsMonitor = new MiddlewareOptions(options);
 
-        return new RequestTimeoutsMiddleware(requestDelegate ?? next, ctsLinker, NullLogger<RequestTimeoutsMiddleware>.Instance, optionsMonitor);
+        return new RequestTimeoutsMiddleware(
+            requestDelegate ?? next,
+            ctsLinker,
+            NullLogger<RequestTimeoutsMiddleware>.Instance,
+            optionsMonitor
+        );
 
         Task next(HttpContext context)
         {
@@ -359,7 +392,14 @@ public class RequestTimeoutsMiddlewareTests
             _cancelledCts = cancelledCts;
         }
 
-        public (CancellationTokenSource linkedCts, CancellationTokenSource timeoutCts) GetLinkedCancellationTokenSource(HttpContext httpContext, CancellationToken originalToken, TimeSpan timeSpan)
+        public (
+            CancellationTokenSource linkedCts,
+            CancellationTokenSource timeoutCts
+        ) GetLinkedCancellationTokenSource(
+            HttpContext httpContext,
+            CancellationToken originalToken,
+            TimeSpan timeSpan
+        )
         {
             Assert.Equal(_expectedTimeSpan, timeSpan);
 
@@ -384,6 +424,7 @@ public class RequestTimeoutsMiddlewareTests
         {
             _options = options;
         }
+
         public RequestTimeoutOptions CurrentValue => _options;
 
         public RequestTimeoutOptions Get(string name) => _options;

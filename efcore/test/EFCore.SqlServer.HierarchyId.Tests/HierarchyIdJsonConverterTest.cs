@@ -9,18 +9,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer;
 public class HierarchyIdJsonConverterTest
 {
     [ConditionalFact]
-    public void Read_works()
-        => Assert.Equal("/1/", JsonSerializer.Deserialize<HierarchyId>("\"/1/\"").ToString());
+    public void Read_works() =>
+        Assert.Equal("/1/", JsonSerializer.Deserialize<HierarchyId>("\"/1/\"").ToString());
 
     [ConditionalFact]
-    public void Read_works_when_null()
-        => Assert.Null(JsonSerializer.Deserialize<HierarchyId>("null"));
+    public void Read_works_when_null() =>
+        Assert.Null(JsonSerializer.Deserialize<HierarchyId>("null"));
 
     [ConditionalFact]
-    public void Write_works()
-        => Assert.Equal("\"/1/\"", JsonSerializer.Serialize(new HierarchyId("/1/")));
+    public void Write_works() =>
+        Assert.Equal("\"/1/\"", JsonSerializer.Serialize(new HierarchyId("/1/")));
 
     [ConditionalFact]
-    public void Write_works_when_null()
-        => Assert.Equal("null", JsonSerializer.Serialize<HierarchyId>(null));
+    public void Write_works_when_null() =>
+        Assert.Equal("null", JsonSerializer.Serialize<HierarchyId>(null));
 }

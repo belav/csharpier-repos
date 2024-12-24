@@ -40,6 +40,6 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// include all namespace, type and member
         /// </summary>
-        All = Namespace | Type | Member
+        All = Namespace | Type | Member,
     }
 }

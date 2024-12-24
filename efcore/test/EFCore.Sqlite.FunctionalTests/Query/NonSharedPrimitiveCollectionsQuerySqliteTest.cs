@@ -3,7 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NonSharedPrimitiveCollectionsQuerySqliteTest : NonSharedPrimitiveCollectionsQueryRelationalTestBase
+public class NonSharedPrimitiveCollectionsQuerySqliteTest
+    : NonSharedPrimitiveCollectionsQueryRelationalTestBase
 {
     #region Support for specific element types
 
@@ -20,7 +21,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = 1) = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_long()
@@ -36,7 +38,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = 1) = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_short()
@@ -52,7 +55,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = 1) = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_double()
@@ -68,7 +72,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = 1.0) = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_float()
@@ -84,7 +89,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = 1) = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     // The JSON representation for decimal is e.g. 1 (JSON int), whereas our literal representation is "1.0" (string).
@@ -102,7 +108,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '1.0') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateTime()
@@ -118,7 +125,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '2023-01-01 12:30:00') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateTime_with_milliseconds()
@@ -134,7 +142,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '2023-01-01 12:30:00.123') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateTime_with_microseconds()
@@ -150,7 +159,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '2023-01-01 12:30:00.123456') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateOnly()
@@ -166,7 +176,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '2023-01-01') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     [ConditionalFact(Skip = "Issue #30730: TODO: SQLite is not matching elements here.")]
@@ -183,7 +194,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '12:30:00') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_TimeOnly_with_milliseconds()
@@ -199,7 +211,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '12:30:00.1230000') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_TimeOnly_with_microseconds()
@@ -215,7 +228,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '12:30:00.1234560') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateTimeOffset()
@@ -231,7 +245,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = '2023-01-01 12:30:00+02:00') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_bool()
@@ -247,7 +262,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value") = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_Guid()
@@ -263,7 +279,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = 'DC8C903D-D655-4144-A0FD-358099D40AE1') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_byte_array()
@@ -279,7 +296,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE unhex("s"."value") = X'0102') = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_enum()
@@ -295,7 +313,8 @@ WHERE (
     FROM json_each("t"."SomeArray") AS "s"
     WHERE "s"."value" = 0) = 2
 LIMIT 2
-""");
+"""
+        );
     }
 
     #endregion Support for specific element types
@@ -317,9 +336,9 @@ SELECT "t"."Id", "t"."Owned"
 FROM "TestOwner" AS "t"
 WHERE "t"."Owned" ->> 'Strings' ->> 1 = 'bar'
 LIMIT 2
-""");
+"""
+        );
     }
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 }

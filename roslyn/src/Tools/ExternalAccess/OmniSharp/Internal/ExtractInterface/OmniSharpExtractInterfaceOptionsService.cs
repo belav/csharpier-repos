@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Internal.ExtractInterf
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OmniSharpExtractInterfaceOptionsService(IOmniSharpExtractInterfaceOptionsService omniSharpExtractInterfaceOptionsService)
+        public OmniSharpExtractInterfaceOptionsService(
+            IOmniSharpExtractInterfaceOptionsService omniSharpExtractInterfaceOptionsService
+        )
         {
             _omniSharpExtractInterfaceOptionsService = omniSharpExtractInterfaceOptionsService;
         }
@@ -44,16 +46,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Internal.ExtractInterf
             string generatedNameTypeParameterSuffix,
             string languageName,
             CleanCodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var result = await _omniSharpExtractInterfaceOptionsService.GetExtractInterfaceOptionsAsync(extractableMembers, defaultInterfaceName).ConfigureAwait(false);
+            var result = await _omniSharpExtractInterfaceOptionsService
+                .GetExtractInterfaceOptionsAsync(extractableMembers, defaultInterfaceName)
+                .ConfigureAwait(false);
             return new(
                 result.IsCancelled,
                 result.IncludedMembers,
                 result.InterfaceName,
                 result.FileName,
                 (ExtractInterfaceOptionsResult.ExtractLocation)result.Location,
-                fallbackOptions);
+                fallbackOptions
+            );
         }
     }
 }

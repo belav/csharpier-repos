@@ -110,7 +110,6 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             scenario.AssertExact(matchesExpected);
         }
 
-
         [Theory]
         [InlineData(@"*mm*/*", new[] { "gamma/hello.txt" })]
         [InlineData(@"/*mm*/*", new[] { "gamma/hello.txt" })]
@@ -135,10 +134,22 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         [InlineData(@"", new string[] { })]
         [InlineData(@"./", new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" })]
         [InlineData(@"./alpha/hello.txt", new string[] { "alpha/hello.txt" })]
-        [InlineData(@"./**/hello.txt", new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" })]
-        [InlineData(@"././**/hello.txt", new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" })]
-        [InlineData(@"././**/./hello.txt", new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" })]
-        [InlineData(@"././**/./**/hello.txt", new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" })]
+        [InlineData(
+            @"./**/hello.txt",
+            new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" }
+        )]
+        [InlineData(
+            @"././**/hello.txt",
+            new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" }
+        )]
+        [InlineData(
+            @"././**/./hello.txt",
+            new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" }
+        )]
+        [InlineData(
+            @"././**/./**/hello.txt",
+            new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" }
+        )]
         [InlineData(@"./*mm*/hello.txt", new string[] { "gamma/hello.txt" })]
         [InlineData(@"./*mm*/*", new string[] { "gamma/hello.txt" })]
         public void PatternMatchingCurrent(string includePattern, string[] matchesExpected)
@@ -227,7 +238,6 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             scenario.AssertExact("one/x.cs", "one/two/x.cs");
         }
 
-
         [Fact]
         public void ExcludeMayEndInDirectoryName()
         {
@@ -241,7 +251,6 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             scenario.AssertExact("one/x.cs", "two/x.cs", "x.cs");
         }
 
-
         [Fact]
         public void RecursiveWildcardSurroundingContainsWith()
         {
@@ -253,7 +262,6 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
 
             scenario.AssertExact("x/1", "1/x/2");
         }
-
 
         [Fact]
         public void SequentialFoldersMayBeRequired()
@@ -314,7 +322,15 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             var scenario = new FileSystemGlobbingTestContext(@"c:\files\", matcher)
                 .Include("*.cs")
                 .Include("../2/**/*.cs")
-                .Files("1/x.cs", "1/x.txt", "2/x.cs", "2/x.txt", "2/3/x.cs", "2/3/4/z.cs", "2/3/x.txt")
+                .Files(
+                    "1/x.cs",
+                    "1/x.txt",
+                    "2/x.cs",
+                    "2/x.txt",
+                    "2/3/x.cs",
+                    "2/3/4/z.cs",
+                    "2/3/x.txt"
+                )
                 .SubDirectory("1")
                 .Execute();
 
@@ -330,7 +346,15 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 .Include("../sibling/**/*.*")
                 .Exclude("../sibling/exc/**/*.*")
                 .Exclude("../sibling/inc/2.txt")
-                .Files("main/1.txt", "main/2.txt", "sibling/1.txt", "sibling/inc/1.txt", "sibling/inc/2.txt", "sibling/exc/1.txt", "sibling/exc/2.txt")
+                .Files(
+                    "main/1.txt",
+                    "main/2.txt",
+                    "sibling/1.txt",
+                    "sibling/inc/1.txt",
+                    "sibling/inc/2.txt",
+                    "sibling/exc/1.txt",
+                    "sibling/exc/2.txt"
+                )
                 .SubDirectory("main")
                 .Execute();
 
@@ -346,7 +370,15 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 .Include("../sibling/**/*.*")
                 .Exclude("../sibling/exc/")
                 .Exclude("../sibling/inc/2.txt")
-                .Files("main/1.txt", "main/2.txt", "sibling/1.txt", "sibling/inc/1.txt", "sibling/inc/2.txt", "sibling/exc/1.txt", "sibling/exc/2.txt")
+                .Files(
+                    "main/1.txt",
+                    "main/2.txt",
+                    "sibling/1.txt",
+                    "sibling/inc/1.txt",
+                    "sibling/inc/2.txt",
+                    "sibling/exc/1.txt",
+                    "sibling/exc/2.txt"
+                )
                 .SubDirectory("main")
                 .Execute();
 
@@ -359,14 +391,30 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             var matcher = new Matcher();
             var scenario = new FileSystemGlobbingTestContext(@"c:\files\", matcher)
                 .Include("sub/**/bar/**/*.txt")
-                .Files("root.txt", "sub/one.txt", "sub/two.txt", "sub/sub2/bar/baz/three.txt", "sub/sub3/sub4/bar/three.txt")
+                .Files(
+                    "root.txt",
+                    "sub/one.txt",
+                    "sub/two.txt",
+                    "sub/sub2/bar/baz/three.txt",
+                    "sub/sub3/sub4/bar/three.txt"
+                )
                 .Execute();
 
             // Check the stem of the matched items
-            Assert.Equal(new[] {
-                new FilePatternMatch(path: "sub/sub2/bar/baz/three.txt", stem: "sub2/bar/baz/three.txt"),
-                new FilePatternMatch(path: "sub/sub3/sub4/bar/three.txt", stem: "sub3/sub4/bar/three.txt")
-            }, scenario.Result.Files.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    new FilePatternMatch(
+                        path: "sub/sub2/bar/baz/three.txt",
+                        stem: "sub2/bar/baz/three.txt"
+                    ),
+                    new FilePatternMatch(
+                        path: "sub/sub3/sub4/bar/three.txt",
+                        stem: "sub3/sub4/bar/three.txt"
+                    ),
+                },
+                scenario.Result.Files.ToArray()
+            );
         }
 
         [Fact]
@@ -379,11 +427,15 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 .Execute();
 
             // Check the stem of the matched items
-            Assert.Equal(new[] {
-                new FilePatternMatch(path: "sub/one.txt", stem: "one.txt"),
-                new FilePatternMatch(path: "sub/two.txt", stem: "two.txt"),
-                new FilePatternMatch(path: "sub/sub2/three.txt", stem: "sub2/three.txt")
-            }, scenario.Result.Files.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    new FilePatternMatch(path: "sub/one.txt", stem: "one.txt"),
+                    new FilePatternMatch(path: "sub/two.txt", stem: "two.txt"),
+                    new FilePatternMatch(path: "sub/sub2/three.txt", stem: "sub2/three.txt"),
+                },
+                scenario.Result.Files.ToArray()
+            );
         }
 
         [Fact]
@@ -396,10 +448,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 .Execute();
 
             // Check the stem of the matched items
-            Assert.Equal(new[] {
-                new FilePatternMatch(path: "sub/woah.txt", stem: "woah.txt"),
-                new FilePatternMatch(path: "sub/wow.txt", stem: "wow.txt")
-            }, scenario.Result.Files.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    new FilePatternMatch(path: "sub/woah.txt", stem: "woah.txt"),
+                    new FilePatternMatch(path: "sub/wow.txt", stem: "wow.txt"),
+                },
+                scenario.Result.Files.ToArray()
+            );
         }
 
         [Fact]
@@ -412,9 +468,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 .Execute();
 
             // Check the stem of the matched items
-            Assert.Equal(new[] {
-                new FilePatternMatch(path: "sub/sub/three.txt", stem: "three.txt"),
-            }, scenario.Result.Files.ToArray());
+            Assert.Equal(
+                new[] { new FilePatternMatch(path: "sub/sub/three.txt", stem: "three.txt") },
+                scenario.Result.Files.ToArray()
+            );
         }
 
         [Fact]
@@ -427,10 +484,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 .Execute();
 
             // Check the stem of the matched items
-            Assert.Equal(new[] {
-                new FilePatternMatch(path: "sub/one.txt", stem: "one.txt"),
-                new FilePatternMatch(path: "sub/two.txt", stem: "two.txt")
-            }, scenario.Result.Files.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    new FilePatternMatch(path: "sub/one.txt", stem: "one.txt"),
+                    new FilePatternMatch(path: "sub/two.txt", stem: "two.txt"),
+                },
+                scenario.Result.Files.ToArray()
+            );
         }
 
         [Fact]
@@ -443,10 +504,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 .Execute();
 
             // Check the stem of the matched items
-            Assert.Equal(new[] {
-                new FilePatternMatch(path: "sub/one.txt", stem: "one.txt"),
-                new FilePatternMatch(path: "sub/two.txt", stem: "two.txt")
-            }, scenario.Result.Files.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    new FilePatternMatch(path: "sub/one.txt", stem: "one.txt"),
+                    new FilePatternMatch(path: "sub/two.txt", stem: "two.txt"),
+                },
+                scenario.Result.Files.ToArray()
+            );
         }
 
         [Fact]
@@ -459,10 +524,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 .Execute();
 
             // Check the stem of the matched items
-            Assert.Equal(new[] {
-                new FilePatternMatch(path: "../files/sub/one.txt", stem: "one.txt"),
-                new FilePatternMatch(path: "../files/sub/two.txt", stem: "two.txt")
-            }, scenario.Result.Files.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    new FilePatternMatch(path: "../files/sub/one.txt", stem: "one.txt"),
+                    new FilePatternMatch(path: "../files/sub/two.txt", stem: "two.txt"),
+                },
+                scenario.Result.Files.ToArray()
+            );
         }
 
         // exclude: **/.*/**

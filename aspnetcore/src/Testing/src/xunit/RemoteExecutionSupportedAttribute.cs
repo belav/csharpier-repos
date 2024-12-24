@@ -9,7 +9,10 @@ using Microsoft.DotNet.RemoteExecutor;
 
 namespace Microsoft.AspNetCore.InternalTesting;
 
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
+    AllowMultiple = true
+)]
 public class RemoteExecutionSupportedAttribute : Attribute, ITestCondition
 {
 #if NETSTANDARD2_0

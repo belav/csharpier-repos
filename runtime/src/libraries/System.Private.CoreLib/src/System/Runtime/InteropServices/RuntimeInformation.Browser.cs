@@ -10,7 +10,7 @@ namespace System.Runtime.InteropServices
 #elif TARGET_WASI
         public static string OSDescription => "WASI";
 #else
-    #error
+#error
 #endif
 
         public static Architecture OSArchitecture => Architecture.Wasm;

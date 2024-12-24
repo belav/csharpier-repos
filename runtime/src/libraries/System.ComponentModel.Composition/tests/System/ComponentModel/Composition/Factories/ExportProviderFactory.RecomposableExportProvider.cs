@@ -13,7 +13,8 @@ namespace System.ComponentModel.Composition.Factories
     {
         public class RecomposableExportProvider : ExportProvider
         {
-            public static Dictionary<string, object> EmptyMetadataDictionary = new Dictionary<string, object>();
+            public static Dictionary<string, object> EmptyMetadataDictionary =
+                new Dictionary<string, object>();
             public List<Export> _exports = new List<Export>();
 
             public void AddExport(string contractName, object value)
@@ -57,13 +58,23 @@ namespace System.ComponentModel.Composition.Factories
                     atomicComposition.AddCompleteAction(() => this._exports = newExports);
                     atomicComposition.SetValue(this, newExports);
 
-                    var addedExports = newExports.Except(this._exports).Select(export => export.Definition);
-                    var removedExports = this._exports.Except(newExports).Select(export => export.Definition);
+                    var addedExports = newExports
+                        .Except(this._exports)
+                        .Select(export => export.Definition);
+                    var removedExports = this
+                        ._exports.Except(newExports)
+                        .Select(export => export.Definition);
 
-                    this.OnExportsChanging(new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition));
+                    this.OnExportsChanging(
+                        new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition)
+                    );
 
-                    atomicComposition.AddCompleteAction(() => this.OnExportsChanged(
-                        new ExportsChangeEventArgs(addedExports, removedExports, null)));
+                    atomicComposition.AddCompleteAction(
+                        () =>
+                            this.OnExportsChanged(
+                                new ExportsChangeEventArgs(addedExports, removedExports, null)
+                            )
+                    );
 
                     atomicComposition.Complete();
                 }
@@ -83,10 +94,16 @@ namespace System.ComponentModel.Composition.Factories
 
             private Export CreateExport(string contractName, object value)
             {
-                return new Export(new ExportDefinition(contractName, EmptyMetadataDictionary), () => value);
+                return new Export(
+                    new ExportDefinition(contractName, EmptyMetadataDictionary),
+                    () => value
+                );
             }
 
-            protected override IEnumerable<Export> GetExportsCore(ImportDefinition importDefinition, AtomicComposition context)
+            protected override IEnumerable<Export> GetExportsCore(
+                ImportDefinition importDefinition,
+                AtomicComposition context
+            )
             {
                 IEnumerable<Export> contextExports;
 

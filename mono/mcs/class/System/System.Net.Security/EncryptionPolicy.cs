@@ -27,10 +27,10 @@
 //
 namespace System.Net.Security
 {
-	public enum EncryptionPolicy
-	{
-		RequireEncryption = 0,  
-		AllowNoEncryption,
-		NoEncryption
-	}
+    public enum EncryptionPolicy
+    {
+        RequireEncryption = 0,
+        AllowNoEncryption,
+        NoEncryption,
+    }
 }

@@ -4,7 +4,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -32,32 +32,24 @@ using System.Collections;
 
 namespace Microsoft.Build.Framework
 {
-	[System.Runtime.InteropServices.GuidAttribute ("8661674F-2148-4F71-A92A-49875511C528")]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface ITaskItem
-	{
-		IDictionary CloneCustomMetadata ();
+    [System.Runtime.InteropServices.GuidAttribute("8661674F-2148-4F71-A92A-49875511C528")]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface ITaskItem
+    {
+        IDictionary CloneCustomMetadata();
 
-		void CopyMetadataTo (ITaskItem destinationItem);
+        void CopyMetadataTo(ITaskItem destinationItem);
 
-		string GetMetadata (string metadataName);
+        string GetMetadata(string metadataName);
 
-		void RemoveMetadata (string metadataName);
+        void RemoveMetadata(string metadataName);
 
-		void SetMetadata (string metadataName, string metadataValue);
+        void SetMetadata(string metadataName, string metadataValue);
 
-		string ItemSpec {
-			get;
-			set;
-		}
+        string ItemSpec { get; set; }
 
-		int MetadataCount {
-			get;
-		}
+        int MetadataCount { get; }
 
-		ICollection MetadataNames {
-			get;
-		}
-	}
+        ICollection MetadataNames { get; }
+    }
 }
-

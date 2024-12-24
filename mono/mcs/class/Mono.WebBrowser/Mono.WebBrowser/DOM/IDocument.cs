@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,43 +28,43 @@ using Mono.WebBrowser;
 
 namespace Mono.WebBrowser.DOM
 {
-	public interface IDocument : INode
-	{
-		IElement 			Active { get; }
-		string 				ActiveLinkColor { get; set;}
-		IElementCollection 	Anchors { get; }
-		IElementCollection 	Applets { get; }
-		string 				Background { get; set; }
-		string 				BackColor { get; set; }
-		IElement 			Body { get; }
-		string 				Charset { get; set; }
-		string 				Cookie { get; set; }
-		IElement 			DocumentElement { get; }
-		IDocumentType		DocType { get; }		
-		string 				Domain { get; }
-		string 				ForeColor { get; set; }
-		IElementCollection 	Forms { get; }
-		IElementCollection 	Images { get; }
-		IDOMImplementation	Implementation { get; }
-		string 				LinkColor { get; set; }
-		IElementCollection 	Links { get; }
-		IStylesheetList 	Stylesheets {get;}
-		string 				Title { get; set;}
-		string 				Url { get; }
-		string 				VisitedLinkColor { get; set; }
-		IWindow 			Window { get; }
+    public interface IDocument : INode
+    {
+        IElement Active { get; }
+        string ActiveLinkColor { get; set; }
+        IElementCollection Anchors { get; }
+        IElementCollection Applets { get; }
+        string Background { get; set; }
+        string BackColor { get; set; }
+        IElement Body { get; }
+        string Charset { get; set; }
+        string Cookie { get; set; }
+        IElement DocumentElement { get; }
+        IDocumentType DocType { get; }
+        string Domain { get; }
+        string ForeColor { get; set; }
+        IElementCollection Forms { get; }
+        IElementCollection Images { get; }
+        IDOMImplementation Implementation { get; }
+        string LinkColor { get; set; }
+        IElementCollection Links { get; }
+        IStylesheetList Stylesheets { get; }
+        string Title { get; set; }
+        string Url { get; }
+        string VisitedLinkColor { get; set; }
+        IWindow Window { get; }
 
-		IAttribute 			CreateAttribute (string name);
-		IElement 			CreateElement (string tagName);
-		IElement 			GetElementById (string id);
-		IElement 			GetElement (int x, int y);
-		IElementCollection 	GetElementsByTagName (string id);
-		void 				Write (string text);
-		
-		string InvokeScript (string script);
+        IAttribute CreateAttribute(string name);
+        IElement CreateElement(string tagName);
+        IElement GetElementById(string id);
+        IElement GetElement(int x, int y);
+        IElementCollection GetElementsByTagName(string id);
+        void Write(string text);
 
-		int GetHashCode ();
-		
-		event EventHandler LoadStopped;
-	}
+        string InvokeScript(string script);
+
+        int GetHashCode();
+
+        event EventHandler LoadStopped;
+    }
 }

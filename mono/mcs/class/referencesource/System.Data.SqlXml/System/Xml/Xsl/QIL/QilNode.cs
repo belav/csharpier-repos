@@ -13,8 +13,8 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Xsl;
 
-namespace System.Xml.Xsl.Qil {    
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// A node in the QIL tree.
     /// </summary>
@@ -22,7 +22,8 @@ namespace System.Xml.Xsl.Qil {
     /// Don't construct QIL nodes directly; instead, use the <see cref="QilFactory">QilFactory</see>.
     /// This base internal class is not abstract and may be instantiated in some cases (for example, true/false boolean literals).
     /// </remarks>
-    internal class QilNode : IList<QilNode> {
+    internal class QilNode : IList<QilNode>
+    {
         protected QilNodeType nodeType;
         protected XmlQueryType xmlType;
         protected ISourceLineInfo sourceLine;
@@ -35,18 +36,19 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilNode(QilNodeType nodeType) {
+        public QilNode(QilNodeType nodeType)
+        {
             this.nodeType = nodeType;
         }
 
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilNode(QilNodeType nodeType, XmlQueryType xmlType) {
+        public QilNode(QilNodeType nodeType, XmlQueryType xmlType)
+        {
             this.nodeType = nodeType;
             this.xmlType = xmlType;
         }
-
 
         //-----------------------------------------------
         // QilNode methods
@@ -55,7 +57,8 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Access the QIL node type.
         /// </summary>
-        public QilNodeType NodeType {
+        public QilNodeType NodeType
+        {
             get { return this.nodeType; }
             set { this.nodeType = value; }
         }
@@ -63,7 +66,8 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Access the QIL type.
         /// </summary>
-        public virtual XmlQueryType XmlType {
+        public virtual XmlQueryType XmlType
+        {
             get { return this.xmlType; }
             set { this.xmlType = value; }
         }
@@ -71,7 +75,8 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Line info information for tools support.
         /// </summary>
-        public ISourceLineInfo SourceLine {
+        public ISourceLineInfo SourceLine
+        {
             get { return this.sourceLine; }
             set { this.sourceLine = value; }
         }
@@ -79,7 +84,8 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Access an annotation which may have been attached to this node.
         /// </summary>
-        public object Annotation {
+        public object Annotation
+        {
             get { return this.annotation; }
             set { this.annotation = value; }
         }
@@ -87,98 +93,112 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Create a new deep copy of this node.
         /// </summary>
-        public virtual QilNode DeepClone(QilFactory f) {
+        public virtual QilNode DeepClone(QilFactory f)
+        {
             return new QilCloneVisitor(f).Clone(this);
         }
 
         /// <summary>
         /// Create a shallow copy of this node, copying all the fields.
         /// </summary>
-        public virtual QilNode ShallowClone(QilFactory f) {
-            QilNode n = (QilNode) MemberwiseClone();
+        public virtual QilNode ShallowClone(QilFactory f)
+        {
+            QilNode n = (QilNode)MemberwiseClone();
             f.TraceNode(n);
             return n;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override
         //-----------------------------------------------
 
-        public virtual int Count {
+        public virtual int Count
+        {
             get { return 0; }
         }
 
-        public virtual QilNode this[int index] {
+        public virtual QilNode this[int index]
+        {
             get { throw new IndexOutOfRangeException(); }
             set { throw new IndexOutOfRangeException(); }
         }
 
-        public virtual void Insert(int index, QilNode node) {
+        public virtual void Insert(int index, QilNode node)
+        {
             throw new NotSupportedException();
         }
 
-        public virtual void RemoveAt(int index) {
+        public virtual void RemoveAt(int index)
+        {
             throw new NotSupportedException();
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- no need to override
         //-----------------------------------------------
 
-        public IEnumerator<QilNode> GetEnumerator() {
+        public IEnumerator<QilNode> GetEnumerator()
+        {
             return new IListEnumerator<QilNode>(this);
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return new IListEnumerator<QilNode>(this);
         }
 
-        public virtual bool IsReadOnly {
+        public virtual bool IsReadOnly
+        {
             get { return false; }
         }
 
-        public virtual void Add(QilNode node) {
+        public virtual void Add(QilNode node)
+        {
             Insert(Count, node);
         }
 
-        public virtual void Add(IList<QilNode> list) {
+        public virtual void Add(IList<QilNode> list)
+        {
             for (int i = 0; i < list.Count; i++)
                 Insert(Count, list[i]);
         }
 
-        public virtual void Clear() {
+        public virtual void Clear()
+        {
             for (int index = Count - 1; index >= 0; index--)
                 RemoveAt(index);
         }
 
-        public virtual bool Contains(QilNode node) {
+        public virtual bool Contains(QilNode node)
+        {
             return IndexOf(node) != -1;
         }
 
-        public virtual void CopyTo(QilNode[] array, int index) {
+        public virtual void CopyTo(QilNode[] array, int index)
+        {
             for (int i = 0; i < Count; i++)
                 array[index + i] = this[i];
         }
 
-        public virtual bool Remove(QilNode node) {
+        public virtual bool Remove(QilNode node)
+        {
             int index = IndexOf(node);
-            if (index >= 0) {
+            if (index >= 0)
+            {
                 RemoveAt(index);
                 return true;
             }
             return false;
         }
 
-        public virtual int IndexOf(QilNode node) {
+        public virtual int IndexOf(QilNode node)
+        {
             for (int i = 0; i < Count; i++)
                 if (node.Equals(this[i]))
                     return i;
 
             return -1;
         }
-
 
         //-----------------------------------------------
         // Debug
@@ -188,12 +208,14 @@ namespace System.Xml.Xsl.Qil {
         private int nodeId;
         private string nodeLoc;
 
-        public int NodeId {
+        public int NodeId
+        {
             get { return nodeId; }
             set { nodeId = value; }
         }
 
-        public string NodeLocation {
+        public string NodeLocation
+        {
             get { return nodeLoc; }
             set { nodeLoc = value; }
         }

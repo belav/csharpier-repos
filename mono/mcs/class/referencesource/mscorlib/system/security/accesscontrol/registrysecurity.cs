@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -15,12 +15,12 @@
 
 using System;
 using System.Collections;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Security.Principal;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Runtime.InteropServices;
-using System.IO;
 
 namespace System.Security.AccessControl
 {
@@ -31,52 +31,87 @@ namespace System.Security.AccessControl
     public enum RegistryRights
     {
         // No None field - An ACE with the value 0 cannot grant nor deny.
-        QueryValues          = Win32Native.KEY_QUERY_VALUE,          // 0x0001 query the values of a registry key
-        SetValue             = Win32Native.KEY_SET_VALUE,            // 0x0002 create, delete, or set a registry value
-        CreateSubKey         = Win32Native.KEY_CREATE_SUB_KEY,       // 0x0004 required to create a subkey of a specific key
-        EnumerateSubKeys     = Win32Native.KEY_ENUMERATE_SUB_KEYS,   // 0x0008 required to enumerate sub keys of a key
-        Notify               = Win32Native.KEY_NOTIFY,               // 0x0010 needed to request change notifications
-        CreateLink           = Win32Native.KEY_CREATE_LINK,          // 0x0020 reserved for system use
-///
-/// The Windows Kernel team agrees that it was a bad design to expose the WOW64_n options as permissions.
-/// in the .NET Framework these options are exposed via the RegistryView enum
-///
-///        Reg64             = Win32Native.KEY_WOW64_64KEY,          // 0x0100 operate on the 64-bit registry view
-///        Reg32             = Win32Native.KEY_WOW64_32KEY,          // 0x0200 operate on the 32-bit registry view
-        ExecuteKey           = ReadKey,
-        ReadKey              = Win32Native.STANDARD_RIGHTS_READ | QueryValues | EnumerateSubKeys | Notify,
-        WriteKey             = Win32Native.STANDARD_RIGHTS_WRITE | SetValue | CreateSubKey,
-        Delete               = 0x10000,
-        ReadPermissions      = 0x20000,
-        ChangePermissions    = 0x40000,
-        TakeOwnership        = 0x80000,
-        FullControl          = 0xF003F | Win32Native.STANDARD_RIGHTS_READ | Win32Native.STANDARD_RIGHTS_WRITE
-    }
+        QueryValues = Win32Native.KEY_QUERY_VALUE, // 0x0001 query the values of a registry key
+        SetValue = Win32Native.KEY_SET_VALUE, // 0x0002 create, delete, or set a registry value
+        CreateSubKey = Win32Native.KEY_CREATE_SUB_KEY, // 0x0004 required to create a subkey of a specific key
+        EnumerateSubKeys = Win32Native.KEY_ENUMERATE_SUB_KEYS, // 0x0008 required to enumerate sub keys of a key
+        Notify = Win32Native.KEY_NOTIFY, // 0x0010 needed to request change notifications
+        CreateLink = Win32Native.KEY_CREATE_LINK, // 0x0020 reserved for system use
 
+        ///
+        /// The Windows Kernel team agrees that it was a bad design to expose the WOW64_n options as permissions.
+        /// in the .NET Framework these options are exposed via the RegistryView enum
+        ///
+        ///        Reg64             = Win32Native.KEY_WOW64_64KEY,          // 0x0100 operate on the 64-bit registry view
+        ///        Reg32             = Win32Native.KEY_WOW64_32KEY,          // 0x0200 operate on the 32-bit registry view
+        ExecuteKey = ReadKey,
+        ReadKey = Win32Native.STANDARD_RIGHTS_READ | QueryValues | EnumerateSubKeys | Notify,
+        WriteKey = Win32Native.STANDARD_RIGHTS_WRITE | SetValue | CreateSubKey,
+        Delete = 0x10000,
+        ReadPermissions = 0x20000,
+        ChangePermissions = 0x40000,
+        TakeOwnership = 0x80000,
+        FullControl =
+            0xF003F | Win32Native.STANDARD_RIGHTS_READ | Win32Native.STANDARD_RIGHTS_WRITE,
+    }
 
     public sealed class RegistryAccessRule : AccessRule
     {
         // Constructor for creating access rules for registry objects
 
-        public RegistryAccessRule(IdentityReference identity, RegistryRights registryRights, AccessControlType type) 
-            : this(identity, (int) registryRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+        public RegistryAccessRule(
+            IdentityReference identity,
+            RegistryRights registryRights,
+            AccessControlType type
+        )
+            : this(
+                identity,
+                (int)registryRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
-        public RegistryAccessRule(String identity, RegistryRights registryRights, AccessControlType type) 
-            : this(new NTAccount(identity), (int) registryRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+        public RegistryAccessRule(
+            String identity,
+            RegistryRights registryRights,
+            AccessControlType type
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
-        public RegistryAccessRule(IdentityReference identity, RegistryRights registryRights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
-            : this(identity, (int) registryRights, false, inheritanceFlags, propagationFlags, type)
-        {
-        }
+        public RegistryAccessRule(
+            IdentityReference identity,
+            RegistryRights registryRights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
+            : this(identity, (int)registryRights, false, inheritanceFlags, propagationFlags, type)
+        { }
 
-        public RegistryAccessRule(string identity, RegistryRights registryRights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
-            : this(new NTAccount(identity), (int) registryRights, false, inheritanceFlags, propagationFlags, type)
-        {
-        }
+        public RegistryAccessRule(
+            string identity,
+            RegistryRights registryRights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -88,52 +123,64 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type )
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                type )
-        {
-        }
+            AccessControlType type
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
-        public RegistryRights RegistryRights { 
-            get { return (RegistryRights) base.AccessMask; }
+        public RegistryRights RegistryRights
+        {
+            get { return (RegistryRights)base.AccessMask; }
         }
     }
-
 
     public sealed class RegistryAuditRule : AuditRule
     {
-        public RegistryAuditRule(IdentityReference identity, RegistryRights registryRights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-            : this(identity, (int) registryRights, false, inheritanceFlags, propagationFlags, flags)
-        {
-        }
+        public RegistryAuditRule(
+            IdentityReference identity,
+            RegistryRights registryRights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : this(identity, (int)registryRights, false, inheritanceFlags, propagationFlags, flags)
+        { }
 
-        public RegistryAuditRule(string identity, RegistryRights registryRights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-            : this(new NTAccount(identity), (int) registryRights, false, inheritanceFlags, propagationFlags, flags)
-        {
-        }
+        public RegistryAuditRule(
+            string identity,
+            RegistryRights registryRights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            ) { }
 
-        internal RegistryAuditRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags)
+        internal RegistryAuditRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+
+        public RegistryRights RegistryRights
         {
-        }
-        
-        public RegistryRights RegistryRights { 
-            get { return (RegistryRights) base.AccessMask; }
+            get { return (RegistryRights)base.AccessMask; }
         }
     }
-
 
     public sealed class RegistrySecurity : NativeObjectSecurity
     {
         public RegistrySecurity()
-            : base(true, ResourceType.RegistryKey)
-        {
-        }
+            : base(true, ResourceType.RegistryKey) { }
 
         /*
         // The name of registry key must start with a predefined string,
@@ -147,47 +194,95 @@ namespace System.Security.AccessControl
         }
         */
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermission(SecurityAction.Assert, UnmanagedCode=true)]
-        internal RegistrySecurity(SafeRegistryHandle hKey, String name, AccessControlSections includeSections)
-            : base(true, ResourceType.RegistryKey, hKey, includeSections, _HandleErrorCode, null )
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
+        internal RegistrySecurity(
+            SafeRegistryHandle hKey,
+            String name,
+            AccessControlSections includeSections
+        )
+            : base(true, ResourceType.RegistryKey, hKey, includeSections, _HandleErrorCode, null)
         {
-            new RegistryPermission(RegistryPermissionAccess.NoAccess, AccessControlActions.View, name).Demand();
+            new RegistryPermission(
+                RegistryPermissionAccess.NoAccess,
+                AccessControlActions.View,
+                name
+            ).Demand();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private static Exception _HandleErrorCode(int errorCode, string name, SafeHandle handle, object context)
+        [System.Security.SecurityCritical] // auto-generated
+        private static Exception _HandleErrorCode(
+            int errorCode,
+            string name,
+            SafeHandle handle,
+            object context
+        )
         {
             System.Exception exception = null;
-            
-            switch (errorCode) {
-            case Win32Native.ERROR_FILE_NOT_FOUND:
-                exception = new IOException(Environment.GetResourceString("Arg_RegKeyNotFound", errorCode));
-                break;
 
-            case Win32Native.ERROR_INVALID_NAME:
-                exception = new ArgumentException(Environment.GetResourceString("Arg_RegInvalidKeyName", "name"));
-                break;
+            switch (errorCode)
+            {
+                case Win32Native.ERROR_FILE_NOT_FOUND:
+                    exception = new IOException(
+                        Environment.GetResourceString("Arg_RegKeyNotFound", errorCode)
+                    );
+                    break;
 
-            case Win32Native.ERROR_INVALID_HANDLE:
-                exception = new ArgumentException(Environment.GetResourceString("AccessControl_InvalidHandle"));
-                break;
+                case Win32Native.ERROR_INVALID_NAME:
+                    exception = new ArgumentException(
+                        Environment.GetResourceString("Arg_RegInvalidKeyName", "name")
+                    );
+                    break;
 
-            default:
-                break;
+                case Win32Native.ERROR_INVALID_HANDLE:
+                    exception = new ArgumentException(
+                        Environment.GetResourceString("AccessControl_InvalidHandle")
+                    );
+                    break;
+
+                default:
+                    break;
             }
 
             return exception;
         }
 
-        public override AccessRule AccessRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
+        public override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
         {
-            return new RegistryAccessRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type);
+            return new RegistryAccessRule(
+                identityReference,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            );
         }
 
-        public override AuditRule AuditRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
+        public override AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
         {
-            return new RegistryAuditRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags);
+            return new RegistryAuditRule(
+                identityReference,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            );
         }
 
         internal AccessControlSections GetAccessControlSectionsFromChanges()
@@ -206,7 +301,7 @@ namespace System.Security.AccessControl
 
         /*
         // See SetNamedSecurityInfo docs - we must start strings
-        // with names like CURRENT_USER, MACHINE, CLASSES_ROOT, etc.  
+        // with names like CURRENT_USER, MACHINE, CLASSES_ROOT, etc.
         // (Look at SE_OBJECT_TYPE, then the docs for SE_REGISTRY_KEY)
         internal static String HKeyNameToWindowsName(String keyName)
         {
@@ -233,11 +328,15 @@ namespace System.Security.AccessControl
         }
         */
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermission(SecurityAction.Assert, UnmanagedCode=true)]
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
         internal void Persist(SafeRegistryHandle hKey, String keyName)
         {
-            new RegistryPermission(RegistryPermissionAccess.NoAccess, AccessControlActions.Change, keyName).Demand();
+            new RegistryPermission(
+                RegistryPermissionAccess.NoAccess,
+                AccessControlActions.Change,
+                keyName
+            ).Demand();
 
             WriteLock();
 
@@ -245,7 +344,7 @@ namespace System.Security.AccessControl
             {
                 AccessControlSections persistRules = GetAccessControlSectionsFromChanges();
                 if (persistRules == AccessControlSections.None)
-                    return;  // Don't need to persist anything.
+                    return; // Don't need to persist anything.
 
                 base.Persist(hKey, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
@@ -285,7 +384,7 @@ namespace System.Security.AccessControl
         {
             base.RemoveAccessRuleSpecific(rule);
         }
-                
+
         public void AddAuditRule(RegistryAuditRule rule)
         {
             base.AddAuditRule(rule);
@@ -315,12 +414,12 @@ namespace System.Security.AccessControl
         {
             get { return typeof(RegistryRights); }
         }
-        
+
         public override Type AccessRuleType
         {
             get { return typeof(RegistryAccessRule); }
         }
-        
+
         public override Type AuditRuleType
         {
             get { return typeof(RegistryAuditRule); }

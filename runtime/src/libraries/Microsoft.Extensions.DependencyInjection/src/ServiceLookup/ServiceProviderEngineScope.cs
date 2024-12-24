@@ -12,7 +12,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     [DebuggerDisplay("{DebuggerToString(),nq}")]
     [DebuggerTypeProxy(typeof(ServiceProviderEngineScopeDebugView))]
-    internal sealed class ServiceProviderEngineScope : IServiceScope, IServiceProvider, IKeyedServiceProvider, IAsyncDisposable, IServiceScopeFactory
+    internal sealed class ServiceProviderEngineScope
+        : IServiceScope,
+            IServiceProvider,
+            IKeyedServiceProvider,
+            IAsyncDisposable,
+            IServiceScopeFactory
     {
         // For testing and debugging only
         internal IList<object> Disposables => _disposables ?? (IList<object>)Array.Empty<object>();
@@ -77,7 +82,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         [return: NotNullIfNotNull(nameof(service))]
         internal object? CaptureDisposable(object? service)
         {
-            if (ReferenceEquals(this, service) || !(service is IDisposable || service is IAsyncDisposable))
+            if (
+                ReferenceEquals(this, service)
+                || !(service is IDisposable || service is IAsyncDisposable)
+            )
             {
                 return service;
             }
@@ -108,7 +116,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 {
                     // sync over async, for the rare case that an object only implements IAsyncDisposable and may end up starving the thread pool.
                     object? localService = service; // copy to avoid closure on other paths
-                    Task.Run(() => ((IAsyncDisposable)localService).DisposeAsync().AsTask()).GetAwaiter().GetResult();
+                    Task.Run(() => ((IAsyncDisposable)localService).DisposeAsync().AsTask())
+                        .GetAwaiter()
+                        .GetResult();
                 }
 
                 ThrowHelper.ThrowObjectDisposedException();
@@ -131,7 +141,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     }
                     else
                     {
-                        throw new InvalidOperationException(SR.Format(SR.AsyncDisposableServiceDispose, TypeNameHelper.GetTypeDisplayName(toDispose[i])));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.AsyncDisposableServiceDispose,
+                                TypeNameHelper.GetTypeDisplayName(toDispose[i])
+                            )
+                        );
                     }
                 }
             }
@@ -206,13 +221,16 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 }
 
                 // Track statistics about the scope (number of disposable objects and number of disposed services)
-                DependencyInjectionEventSource.Log.ScopeDisposed(RootProvider.GetHashCode(), ResolvedServices.Count, _disposables?.Count ?? 0);
+                DependencyInjectionEventSource.Log.ScopeDisposed(
+                    RootProvider.GetHashCode(),
+                    ResolvedServices.Count,
+                    _disposables?.Count ?? 0
+                );
 
                 // We've transitioned to the disposed state, so future calls to
                 // CaptureDisposable will immediately dispose the object.
                 // No further changes to _state.Disposables, are allowed.
                 _disposed = true;
-
             }
 
             if (IsRootScope && !RootProvider.IsDisposed())
@@ -231,7 +249,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         internal string DebuggerToString()
         {
-            string debugText = $"ServiceDescriptors = {RootProvider.CallSiteFactory.Descriptors.Length}";
+            string debugText =
+                $"ServiceDescriptors = {RootProvider.CallSiteFactory.Descriptors.Length}";
             if (!IsRootScope)
             {
                 debugText += $", IsScope = true";
@@ -252,7 +271,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 _serviceProvider = serviceProvider;
             }
 
-            public List<ServiceDescriptor> ServiceDescriptors => new List<ServiceDescriptor>(_serviceProvider.RootProvider.CallSiteFactory.Descriptors);
+            public List<ServiceDescriptor> ServiceDescriptors =>
+                new List<ServiceDescriptor>(
+                    _serviceProvider.RootProvider.CallSiteFactory.Descriptors
+                );
             public List<object> Disposables => new List<object>(_serviceProvider.Disposables);
             public bool Disposed => _serviceProvider._disposed;
             public bool IsScope => !_serviceProvider.IsRootScope;

@@ -13,9 +13,7 @@ namespace Microsoft.TestCommon.Types
         private int id;
         private string name;
 
-        public ISerializableType()
-        {
-        }
+        public ISerializableType() { }
 
         public ISerializableType(int id, string name)
         {
@@ -31,11 +29,7 @@ namespace Microsoft.TestCommon.Types
 
         public int Id
         {
-            get
-            {
-                return this.id;
-            }
-
+            get { return this.id; }
             set
             {
                 this.IdSet = true;
@@ -45,17 +39,12 @@ namespace Microsoft.TestCommon.Types
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-
+            get { return this.name; }
             set
             {
                 this.NameSet = true;
                 this.name = value;
             }
-
         }
 
         public bool IdSet { get; private set; }
@@ -70,7 +59,11 @@ namespace Microsoft.TestCommon.Types
 
         public static IEnumerable<ISerializableType> GetTestData()
         {
-            return new ISerializableType[] { new ISerializableType(), new ISerializableType(1, "SomeName") };
+            return new ISerializableType[]
+            {
+                new ISerializableType(),
+                new ISerializableType(1, "SomeName"),
+            };
         }
     }
 }

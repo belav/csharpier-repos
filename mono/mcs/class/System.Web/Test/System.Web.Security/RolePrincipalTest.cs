@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,98 +32,90 @@ using System;
 using System.Configuration.Provider;
 using System.Security.Principal;
 using System.Web.Security;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.Security {
+namespace MonoTests.System.Web.Security
+{
+    public class TestRoleProvider : RoleProvider
+    {
+        public override void AddUsersToRoles(string[] usernames, string[] roleNames)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-	public class TestRoleProvider : RoleProvider {
+        public override string ApplicationName
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+            set { throw new Exception("The method or operation is not implemented."); }
+        }
 
-		public override void AddUsersToRoles (string[] usernames, string[] roleNames)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        public override void CreateRole(string roleName)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public override string ApplicationName
-		{
-			get
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
-			set
-			{
-				throw new Exception ("The method or operation is not implemented.");
-			}
-		}
+        public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public override void CreateRole (string roleName)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        public override string[] FindUsersInRole(string roleName, string usernameToMatch)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public override bool DeleteRole (string roleName, bool throwOnPopulatedRole)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        public override string[] GetAllRoles()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public override string[] FindUsersInRole (string roleName, string usernameToMatch)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        public override string[] GetRolesForUser(string username)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public override string[] GetAllRoles ()
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        public override string[] GetUsersInRole(string roleName)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public override string[] GetRolesForUser (string username)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        public override bool IsUserInRole(string username, string roleName)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public override string[] GetUsersInRole (string roleName)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public override bool IsUserInRole (string username, string roleName)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        public override bool RoleExists(string roleName)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+    }
 
-		public override void RemoveUsersFromRoles (string[] usernames, string[] roleNames)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+    [TestFixture]
+    public class RolePrincipalTest
+    {
+        private IIdentity GetGenericIdentity(string name)
+        {
+            return new GenericIdentity(name);
+        }
 
-		public override bool RoleExists (string roleName)
-		{
-			throw new Exception ("The method or operation is not implemented.");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Contructor_Identity_Null()
+        {
+            RolePrincipal rp = new RolePrincipal(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ProviderException))]
+        [Category("NotWorking")]
+        public void Contructor_Identity()
+        {
+            RolePrincipal rp = new RolePrincipal(GetGenericIdentity("me"));
+        }
+    }
 }
-
-	[TestFixture]
-	public class RolePrincipalTest {
-
-		private IIdentity GetGenericIdentity (string name)
-		{
-			return new GenericIdentity (name);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Contructor_Identity_Null ()
-		{
-			RolePrincipal rp = new RolePrincipal (null);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ProviderException))]
-		[Category ("NotWorking")]
-		public void Contructor_Identity ()
-		{
-			RolePrincipal rp = new RolePrincipal (GetGenericIdentity ("me"));
-		}
-	}
-}
-
