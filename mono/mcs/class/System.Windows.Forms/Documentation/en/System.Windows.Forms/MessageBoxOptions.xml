@@ -17,12 +17,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="T:System.Windows.Forms.MessageBox" /> class.</para>
-      <para>If you do not want to specify this parameter when calling methods on <see cref="T:System.Windows.Forms.MessageBox" />, you can pass in 0 instead.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="T:System.Windows.Forms.MessageBox" />
+
+         class.</para
+      >
+      <para
+        >If you do not want to specify this parameter when calling methods on <see
+         cref="T:System.Windows.Forms.MessageBox" />
+
+        , you can pass in 0 instead.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies options on a <see cref="T:System.Windows.Forms.MessageBox" />.</para>
+      <para
+        >Specifies options on a <see
+         cref="T:System.Windows.Forms.MessageBox" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -37,7 +52,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constant is the same as ServiceNotification except that the system displays the message box only on the default desktop of the interactive window station</para>
           <para>
-            <see cref="F:System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly" /> will cause the application that raised the <see cref="T:System.Windows.Forms.MessageBox" /> to lose focus. The <see cref="T:System.Windows.Forms.MessageBox" /> that is displayed will not use visual styles. For more information, see <format type="text/html"><a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a></format>.</para>
+            <see cref="F:System.Windows.Forms.MessageBoxOptions.DefaultDesktopOnly" />
+
+             will cause the application that raised the <see
+             cref="T:System.Windows.Forms.MessageBox" />
+
+             to lose focus. The <see
+             cref="T:System.Windows.Forms.MessageBox" />
+
+             that is displayed will not use visual styles. For more information, see <format
+             type="text/html">
+              <a href="a5b178ba-610e-46c4-a6c0-509c0886a744"
+                >Rendering Controls with Visual Styles</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

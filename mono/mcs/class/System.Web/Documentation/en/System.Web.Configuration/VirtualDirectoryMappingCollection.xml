@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="VirtualDirectoryMappingCollection" FullName="System.Web.Configuration.VirtualDirectoryMappingCollection">
-  <TypeSignature Language="C#" Value="public sealed class VirtualDirectoryMappingCollection : System.Collections.Specialized.NameObjectCollectionBase" />
+<Type
+  Name="VirtualDirectoryMappingCollection"
+  FullName="System.Web.Configuration.VirtualDirectoryMappingCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class VirtualDirectoryMappingCollection : System.Collections.Specialized.NameObjectCollectionBase"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,11 +19,24 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" /> class allows you to programmatically access a collection of <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> objects. The collection can be accessed with either the key or the index.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+         class allows you to programmatically access a collection of <see
+         cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+         objects. The collection can be accessed with either the key or the index.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains a collection of <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> objects. This class cannot be inherited.</para>
+      <para
+        >Contains a collection of <see
+         cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+         objects. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +49,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" /> class.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -38,7 +62,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (string virtualDirectory, System.Web.Configuration.VirtualDirectoryMapping mapping);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (string virtualDirectory, System.Web.Configuration.VirtualDirectoryMapping mapping);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -52,19 +79,42 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object to the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" /> instance.</para>
+          <para
+            >Adds a <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             object to the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+             instance.</para
+          >
         </summary>
         <param name="virtualDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the virtual directory path.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the virtual directory path.</param
+        >
         <param name="mapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+           object.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AllKeys">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection AllKeys { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection AllKeys { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ICollection</ReturnType>
@@ -75,7 +125,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a string array that contains all the keys in the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" /> instance.</para>
+          <para
+            >Returns a string array that contains all the keys in the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -94,7 +149,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Clears all <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> objects from the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" /> instance.</para>
+          <para
+            >Clears all <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             objects from the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -102,7 +165,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (System.Web.Configuration.VirtualDirectoryMapping[] array, int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (System.Web.Configuration.VirtualDirectoryMapping[] array, int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -116,19 +182,48 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the entire <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" /> collection to a compatible one-dimensional <see cref="T:System.Array" />, starting at the specified index of the target array.</para>
+          <para
+            >Copies the entire <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+             collection to a compatible one-dimensional <see
+             cref="T:System.Array" />
+
+            , starting at the specified index of the target array.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />A one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A one-dimensional <see
+           cref="T:System.Array" />
+
+           that is the destination of the elements copied from the <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+          . The <see
+           cref="T:System.Array" />
+
+           must have zero-based indexing.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.VirtualDirectoryMapping Get (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.VirtualDirectoryMapping Get (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.VirtualDirectoryMapping</ReturnType>
@@ -141,21 +236,43 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the specified <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> collection element at the specified index.</para>
+          <para
+            >Gets the specified <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             collection element at the specified index.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> element at the specified index.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             element at the specified index.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />An integer value that specifies a particular <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object within the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An integer value that specifies a particular <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+           object within the <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.VirtualDirectoryMapping Get (string virtualDirectory);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.VirtualDirectoryMapping Get (string virtualDirectory);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.VirtualDirectoryMapping</ReturnType>
@@ -168,14 +285,30 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> collection element based on the specified virtual-directory name.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             collection element based on the specified virtual-directory name.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> element based on the specified virtual-directory name.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             element based on the specified virtual-directory name.</para
+          >
         </returns>
         <param name="virtualDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that contains the name of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that contains the name of the <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+           object.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -195,21 +328,43 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key of the entry at the specified index of the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" /> instance.</para>
+          <para
+            >Gets the key of the entry at the specified index of the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string that contains the name of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object.</para>
+          <para
+            >A string that contains the name of the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             object.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />An integer value that specifies a particular <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object within the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An integer value that specifies a particular <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+           object within the <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.VirtualDirectoryMapping this[int index] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.VirtualDirectoryMapping this[int index] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.VirtualDirectoryMapping</ReturnType>
@@ -229,7 +384,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.VirtualDirectoryMapping this[string virtualDirectory] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.VirtualDirectoryMapping this[string virtualDirectory] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.VirtualDirectoryMapping</ReturnType>
@@ -262,10 +420,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object from the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" /> instance.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             object from the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+             instance.</para
+          >
         </summary>
         <param name="virtualDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that contains the name of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that contains the name of the <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+           object.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -285,10 +457,27 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object at the specified index from the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             object at the specified index from the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+            .</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />An integer value that specifies a particular <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> object within the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An integer value that specifies a particular <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+           object within the <see
+           cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

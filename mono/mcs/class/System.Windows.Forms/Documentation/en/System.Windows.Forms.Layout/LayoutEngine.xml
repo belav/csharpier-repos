@@ -13,7 +13,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class when you want to create custom layout behavior at run time. Derive your own class from the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class and override the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.Layout(System.Object,System.Windows.Forms.LayoutEventArgs)" /> method to define your custom layout behavior. </para>
+      <para
+        >Use the <see
+         cref="T:System.Windows.Forms.Layout.LayoutEngine" />
+
+         class when you want to create custom layout behavior at run time. Derive your own class from the <see
+         cref="T:System.Windows.Forms.Layout.LayoutEngine" />
+
+         class and override the <see
+         cref="M:System.Windows.Forms.Layout.LayoutEngine.Layout(System.Object,System.Windows.Forms.LayoutEventArgs)" />
+
+         method to define your custom layout behavior. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +41,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Layout.LayoutEngine" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -38,7 +54,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="InitLayout">
-      <MemberSignature Language="C#" Value="public virtual void InitLayout (object child, System.Windows.Forms.BoundsSpecified specified);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void InitLayout (object child, System.Windows.Forms.BoundsSpecified specified);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -51,23 +70,37 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Optionally provide initialization logic in the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.InitLayout(System.Object,System.Windows.Forms.BoundsSpecified)" /> method. </para>
+          <para
+            >Optionally provide initialization logic in the <see
+             cref="M:System.Windows.Forms.Layout.LayoutEngine.InitLayout(System.Object,System.Windows.Forms.BoundsSpecified)" />
+
+             method. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Initializes the layout engine.</para>
         </summary>
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />The container on which the layout engine will operate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The container on which the layout engine will operate.</param
+        >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />The bounds defining the container's size and position.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The bounds defining the container's size and position.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Layout">
-      <MemberSignature Language="C#" Value="public virtual bool Layout (object container, System.Windows.Forms.LayoutEventArgs layoutEventArgs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool Layout (object container, System.Windows.Forms.LayoutEventArgs layoutEventArgs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -80,7 +113,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is called when the layout engine is to perform a layout operation on the <paramref name="container" /> parameter. You can check the value of the <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />, <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedComponent" />, and <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" /> properties on <paramref name="layoutEventArgs" /> to decide if a layout operation is necessary.</para>
+          <para
+            >This method is called when the layout engine is to perform a layout operation on the <paramref
+             name="container" />
+
+             parameter. You can check the value of the <see
+             cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />
+
+            , <see
+             cref="P:System.Windows.Forms.LayoutEventArgs.AffectedComponent" />
+
+            , and <see
+             cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" />
+
+             properties on <paramref
+             name="layoutEventArgs" />
+
+             to decide if a layout operation is necessary.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -88,12 +138,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if layout should be performed again by the parent of <paramref name="container" />; otherwise, false.</para>
+          <para
+            >true if layout should be performed again by the parent of <paramref
+             name="container" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />The container on which the layout engine will operate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The container on which the layout engine will operate.</param
+        >
         <param name="layoutEventArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />An event argument from a <see cref="E:System.Windows.Forms.Control.Layout" /> event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An event argument from a <see
+           cref="E:System.Windows.Forms.Control.Layout" />
+
+           event.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

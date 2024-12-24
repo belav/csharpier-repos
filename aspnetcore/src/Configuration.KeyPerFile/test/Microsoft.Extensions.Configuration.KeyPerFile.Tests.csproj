@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);$(DefaultNetFxTargetFramework)</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions" />
     <Reference Include="Microsoft.Extensions.Configuration.Binder" />
@@ -14,5 +12,4 @@
     <Reference Include="Microsoft.Extensions.FileProviders.Physical" />
     <Reference Include="Microsoft.Extensions.Primitives" />
   </ItemGroup>
-
 </Project>

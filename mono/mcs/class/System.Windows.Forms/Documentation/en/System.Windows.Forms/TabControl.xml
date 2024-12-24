@@ -30,8 +30,30 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:System.Windows.Forms.TabControl" /> contains tab pages, which are represented by <see cref="T:System.Windows.Forms.TabPage" /> objects that you add through the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> property. The order of tab pages in this collection reflects the order the tabs appear in the control.</para>
-      <para>The user can change the current <see cref="T:System.Windows.Forms.TabPage" /> by clicking one of the tabs in the control. You can also programmatically change the current <see cref="T:System.Windows.Forms.TabPage" /> by using one of the following <see cref="T:System.Windows.Forms.TabControl" /> properties:</para>
+      <para
+        >A <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+         contains tab pages, which are represented by <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         objects that you add through the <see
+         cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+         property. The order of tab pages in this collection reflects the order the tabs appear in the control.</para
+      >
+      <para
+        >The user can change the current <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         by clicking one of the tabs in the control. You can also programmatically change the current <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         by using one of the following <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+         properties:</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -80,12 +102,145 @@
           </para>
         </item>
       </list>
-      <para>The tabs in a <see cref="T:System.Windows.Forms.TabControl" /> are part of the <see cref="T:System.Windows.Forms.TabControl" />, but not parts of the individual <see cref="T:System.Windows.Forms.TabPage" /> controls. Members of the <see cref="T:System.Windows.Forms.TabPage" /> class, such as the <see cref="P:System.Windows.Forms.Control.ForeColor" /> property, affect only the client rectangle of the tab page, but not the tabs. Additionally, the <see cref="M:System.Windows.Forms.Control.Hide" /> method of the <see cref="T:System.Windows.Forms.TabPage" /> will not hide the tab. To hide the tab, you must remove the <see cref="T:System.Windows.Forms.TabPage" /> control from the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> collection.</para>
-      <para>In dnprdnlong, the tab is considered part of the tab page for determining when the <see cref="E:System.Windows.Forms.Control.Enter" /> and <see cref="E:System.Windows.Forms.Control.Leave" /> events of the <see cref="T:System.Windows.Forms.TabPage" /> occur. In earlier versions of the .NET Framework, the <see cref="E:System.Windows.Forms.Control.Enter" /> and <see cref="E:System.Windows.Forms.Control.Leave" /> events of the <see cref="T:System.Windows.Forms.TabPage" /> do not occur when focus enters or leaves a tab, but only when focus enters or leaves the client rectangle of the tab page.</para>
-      <para>The following events are not raised for the <see cref="T:System.Windows.Forms.TabControl" /> class unless there is at least one <see cref="T:System.Windows.Forms.TabPage" /> in the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> collection: <see cref="E:System.Windows.Forms.Control.Click" />, <see cref="E:System.Windows.Forms.Control.DoubleClick" />, <see cref="E:System.Windows.Forms.Control.MouseDown" />, <see cref="E:System.Windows.Forms.Control.MouseUp" />, <see cref="E:System.Windows.Forms.Control.MouseHover" />, <see cref="E:System.Windows.Forms.Control.MouseEnter" />, <see cref="E:System.Windows.Forms.Control.MouseLeave" /> and <see cref="E:System.Windows.Forms.Control.MouseMove" />. If there is at least one <see cref="T:System.Windows.Forms.TabPage" /> in the collection, and the user interacts with the tab control's header (where the <see cref="T:System.Windows.Forms.TabPage" /> names appear), the <see cref="T:System.Windows.Forms.TabControl" /> raises the appropriate event. However, if the user interaction is within the <see cref="P:System.Windows.Forms.Control.ClientRectangle" /> of the tab page, the <see cref="T:System.Windows.Forms.TabPage" /> raises the appropriate event.</para>
-      <para>Controls contained in a <see cref="T:System.Windows.Forms.TabPage" /> are not created until the tab page is shown, and any data bindings in these controls are not activated until the tab page is shown.</para>
-      <para>When visual styles are enabled, and the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property is set to a value other than <see cref="F:System.Windows.Forms.TabAlignment.Top" />, the tab contents might not render correctly. To work around this issue, you can paint the tab contents yourself using owner drawing. For more information, see <format type="text/html"><a href="110d5abd-3ae3-4ded-95bf-778aaac798a0">How to: Display Side-Aligned Tabs with TabControl</a></format>. </para>
-      <para>When the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property is set to a value other than <see cref="F:System.Windows.Forms.TabAlignment.Top" /> and the <see cref="P:System.Windows.Forms.TabControl.Appearance" /> property is set to a value other than <see cref="F:System.Windows.Forms.TabAppearance.Normal" />, the tab page contents might not render correctly. </para>
+      <para
+        >The tabs in a <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+         are part of the <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+        , but not parts of the individual <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         controls. Members of the <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         class, such as the <see
+         cref="P:System.Windows.Forms.Control.ForeColor" />
+
+         property, affect only the client rectangle of the tab page, but not the tabs. Additionally, the <see
+         cref="M:System.Windows.Forms.Control.Hide" />
+
+         method of the <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         will not hide the tab. To hide the tab, you must remove the <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         control from the <see
+         cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+         collection.</para
+      >
+      <para
+        >In dnprdnlong, the tab is considered part of the tab page for determining when the <see
+         cref="E:System.Windows.Forms.Control.Enter" />
+
+         and <see
+         cref="E:System.Windows.Forms.Control.Leave" />
+
+         events of the <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         occur. In earlier versions of the .NET Framework, the <see
+         cref="E:System.Windows.Forms.Control.Enter" />
+
+         and <see
+         cref="E:System.Windows.Forms.Control.Leave" />
+
+         events of the <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         do not occur when focus enters or leaves a tab, but only when focus enters or leaves the client rectangle of the tab page.</para
+      >
+      <para
+        >The following events are not raised for the <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+         class unless there is at least one <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         in the <see
+         cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+         collection: <see
+         cref="E:System.Windows.Forms.Control.Click" />
+
+        , <see
+         cref="E:System.Windows.Forms.Control.DoubleClick" />
+
+        , <see
+         cref="E:System.Windows.Forms.Control.MouseDown" />
+
+        , <see
+         cref="E:System.Windows.Forms.Control.MouseUp" />
+
+        , <see
+         cref="E:System.Windows.Forms.Control.MouseHover" />
+
+        , <see
+         cref="E:System.Windows.Forms.Control.MouseEnter" />
+
+        , <see
+         cref="E:System.Windows.Forms.Control.MouseLeave" />
+
+         and <see
+         cref="E:System.Windows.Forms.Control.MouseMove" />
+
+        . If there is at least one <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         in the collection, and the user interacts with the tab control's header (where the <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         names appear), the <see
+         cref="T:System.Windows.Forms.TabControl" />
+
+         raises the appropriate event. However, if the user interaction is within the <see
+         cref="P:System.Windows.Forms.Control.ClientRectangle" />
+
+         of the tab page, the <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         raises the appropriate event.</para
+      >
+      <para
+        >Controls contained in a <see
+         cref="T:System.Windows.Forms.TabPage" />
+
+         are not created until the tab page is shown, and any data bindings in these controls are not activated until the tab page is shown.</para
+      >
+      <para
+        >When visual styles are enabled, and the <see
+         cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+         property is set to a value other than <see
+         cref="F:System.Windows.Forms.TabAlignment.Top" />
+
+        , the tab contents might not render correctly. To work around this issue, you can paint the tab contents yourself using owner drawing. For more information, see <format
+         type="text/html">
+          <a href="110d5abd-3ae3-4ded-95bf-778aaac798a0"
+            >How to: Display Side-Aligned Tabs with TabControl</a
+          >
+        </format>
+
+        . </para
+      >
+      <para
+        >When the <see
+         cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+         property is set to a value other than <see
+         cref="F:System.Windows.Forms.TabAlignment.Top" />
+
+         and the <see
+         cref="P:System.Windows.Forms.TabControl.Appearance" />
+
+         property is set to a value other than <see
+         cref="F:System.Windows.Forms.TabAppearance.Normal" />
+
+        , the tab page contents might not render correctly. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -101,7 +256,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.TabControl" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -110,7 +270,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Alignment">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.TabAlignment Alignment { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.TabAlignment Alignment { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -130,11 +293,73 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property is set to <see cref="F:System.Windows.Forms.TabAlignment.Left" /> or <see cref="F:System.Windows.Forms.TabAlignment.Right" />, the <see cref="P:System.Windows.Forms.TabControl.Multiline" /> property is automatically set to true.</para>
-          <para>When you set the <see cref="P:System.Windows.Forms.TabControl.Appearance" /> property to <see cref="F:System.Windows.Forms.TabAppearance.FlatButtons" />, it only appears as such when the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property is set to <see cref="F:System.Windows.Forms.TabAlignment.Top" />. Otherwise, the <see cref="P:System.Windows.Forms.TabControl.Appearance" /> property displays as if set to the <see cref="F:System.Windows.Forms.TabAppearance.Buttons" /> value.</para>
-          <para>When you set the <see cref="P:System.Windows.Forms.TabControl.Appearance" /> property to <see cref="F:System.Windows.Forms.TabAppearance.Buttons" />, you must also set the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property to <see cref="F:System.Windows.Forms.TabAlignment.Top" /> so that the buttons display correctly.</para>
+          <para
+            >When the <see
+             cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+             property is set to <see
+             cref="F:System.Windows.Forms.TabAlignment.Left" />
+
+             or <see
+             cref="F:System.Windows.Forms.TabAlignment.Right" />
+
+            , the <see
+             cref="P:System.Windows.Forms.TabControl.Multiline" />
+
+             property is automatically set to true.</para
+          >
+          <para
+            >When you set the <see
+             cref="P:System.Windows.Forms.TabControl.Appearance" />
+
+             property to <see
+             cref="F:System.Windows.Forms.TabAppearance.FlatButtons" />
+
+            , it only appears as such when the <see
+             cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+             property is set to <see
+             cref="F:System.Windows.Forms.TabAlignment.Top" />
+
+            . Otherwise, the <see
+             cref="P:System.Windows.Forms.TabControl.Appearance" />
+
+             property displays as if set to the <see
+             cref="F:System.Windows.Forms.TabAppearance.Buttons" />
+
+             value.</para
+          >
+          <para
+            >When you set the <see
+             cref="P:System.Windows.Forms.TabControl.Appearance" />
+
+             property to <see
+             cref="F:System.Windows.Forms.TabAppearance.Buttons" />
+
+            , you must also set the <see
+             cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+             property to <see
+             cref="F:System.Windows.Forms.TabAlignment.Top" />
+
+             so that the buttons display correctly.</para
+          >
           <block subset="none" type="note">
-            <para>When you set the <see cref="P:System.Windows.Forms.TabControl.Appearance" /> property to Buttons, you must also set the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property to Top so that the tab page contents display correctly. Additionally, when visual styles are enabled, and the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property is set to a value other than <see cref="F:System.Windows.Forms.TabAlignment.Top" />, the tab contents may not render correctly. </para>
+            <para
+              >When you set the <see
+               cref="P:System.Windows.Forms.TabControl.Appearance" />
+
+               property to Buttons, you must also set the <see
+               cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+               property to Top so that the tab page contents display correctly. Additionally, when visual styles are enabled, and the <see
+               cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+               property is set to a value other than <see
+               cref="F:System.Windows.Forms.TabAlignment.Top" />
+
+              , the tab contents may not render correctly. </para
+            >
           </block>
         </remarks>
         <summary>
@@ -148,7 +373,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Appearance">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.TabAppearance Appearance { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.TabAppearance Appearance { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -165,9 +393,28 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you set the <see cref="P:System.Windows.Forms.TabControl.Appearance" /> property to FlatButtons, it only appears as such when the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property is set to Top. Otherwise, the <see cref="P:System.Windows.Forms.TabControl.Appearance" /> property appears as if set to the Buttons value.</para>
+          <para
+            >When you set the <see
+             cref="P:System.Windows.Forms.TabControl.Appearance" />
+
+             property to FlatButtons, it only appears as such when the <see
+             cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+             property is set to Top. Otherwise, the <see
+             cref="P:System.Windows.Forms.TabControl.Appearance" />
+
+             property appears as if set to the Buttons value.</para
+          >
           <block subset="none" type="note">
-            <para>When you set the <see cref="P:System.Windows.Forms.TabControl.Appearance" /> property to Buttons, you must also set the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property to Top so that the tab page contents display correctly.</para>
+            <para
+              >When you set the <see
+               cref="P:System.Windows.Forms.TabControl.Appearance" />
+
+               property to Buttons, you must also set the <see
+               cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+               property to Top so that the tab page contents display correctly.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -181,7 +428,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BackColor">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Color BackColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Color BackColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -234,7 +484,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BackgroundImage">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Image BackgroundImage { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Image BackgroundImage { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -277,11 +530,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.TabControl.BackgroundImage" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabControl.BackgroundImageChanged" /> event to detect the change. </para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.TabControl.BackgroundImage" />
+
+             property is not meaningful for this control, although you can change its value and handle the <see
+             cref="E:System.Windows.Forms.TabControl.BackgroundImageChanged" />
+
+             event to detect the change. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.TabControl.BackgroundImage" /> property changes.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.TabControl.BackgroundImage" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -290,7 +556,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BackgroundImageLayout">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.ImageLayout BackgroundImageLayout { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.ImageLayout BackgroundImageLayout { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -316,7 +585,10 @@
       </Docs>
     </Member>
     <Member MemberName="BackgroundImageLayoutChanged">
-      <MemberSignature Language="C#" Value="public event EventHandler BackgroundImageLayoutChanged;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event EventHandler BackgroundImageLayoutChanged;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -335,16 +607,32 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.TabControl.BackgroundImageLayout" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabControl.BackgroundImageLayoutChanged" /> event to detect the change.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.TabControl.BackgroundImageLayout" />
+
+             property is not meaningful for this control, although you can change its value and handle the <see
+             cref="E:System.Windows.Forms.TabControl.BackgroundImageLayoutChanged" />
+
+             event to detect the change.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.TabControl.BackgroundImageLayout" /> property changes.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.TabControl.BackgroundImageLayout" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CreateControlsInstance">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.Control.ControlCollection CreateControlsInstance ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.Control.ControlCollection CreateControlsInstance ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.Control+ControlCollection</ReturnType>
@@ -354,11 +642,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member overrides <see cref="M:System.Windows.Forms.Control.CreateControlsInstance" />.</para>
+          <para
+            >This member overrides <see
+             cref="M:System.Windows.Forms.Control.CreateControlsInstance" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.Windows.Forms.Control.ControlCollection" /> assigned to the control.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+             assigned to the control.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -377,7 +675,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member overrides <see cref="M:System.Windows.Forms.Control.CreateHandle" />.</para>
+          <para
+            >This member overrides <see
+             cref="M:System.Windows.Forms.Control.CreateHandle" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -386,7 +689,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateParams">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.CreateParams CreateParams { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.CreateParams CreateParams { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.CreateParams</ReturnType>
@@ -396,7 +702,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member overrides <see cref="P:System.Windows.Forms.Control.CreateParams" />.</para>
+          <para
+            >This member overrides <see
+             cref="P:System.Windows.Forms.Control.CreateParams" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -405,7 +716,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DefaultSize">
-      <MemberSignature Language="C#" Value="protected override System.Drawing.Size DefaultSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Drawing.Size DefaultSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -424,7 +738,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Deselected">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.TabControlEventHandler Deselected;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.TabControlEventHandler Deselected;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -435,7 +752,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the current tab changes in a <see cref="T:System.Windows.Forms.TabControl" />, the following events occur in the following order.</para>
+          <para
+            >When the current tab changes in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            , the following events occur in the following order.</para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -458,8 +780,30 @@
               </para>
             </item>
           </list>
-          <para>These events let you perform tasks such as canceling a tab change if a <see cref="T:System.Windows.Forms.TabPage" /> is in an invalid state or updating the state of a newly displayed <see cref="T:System.Windows.Forms.TabPage" />. </para>
-          <para>The current tab changes when the user clicks a tab, when you call the <see cref="Overload:System.Windows.Forms.TabControl.DeselectTab" /> or <see cref="Overload:System.Windows.Forms.TabControl.SelectTab" /> method, or when you change the value of the <see cref="P:System.Windows.Forms.TabControl.SelectedIndex" /> or <see cref="P:System.Windows.Forms.TabControl.SelectedTab" /> property.</para>
+          <para
+            >These events let you perform tasks such as canceling a tab change if a <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             is in an invalid state or updating the state of a newly displayed <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            . </para
+          >
+          <para
+            >The current tab changes when the user clicks a tab, when you call the <see
+             cref="Overload:System.Windows.Forms.TabControl.DeselectTab" />
+
+             or <see
+             cref="Overload:System.Windows.Forms.TabControl.SelectTab" />
+
+             method, or when you change the value of the <see
+             cref="P:System.Windows.Forms.TabControl.SelectedIndex" />
+
+             or <see
+             cref="P:System.Windows.Forms.TabControl.SelectedTab" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -468,7 +812,10 @@
       </Docs>
     </Member>
     <Member MemberName="Deselecting">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.TabControlCancelEventHandler Deselecting;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.TabControlCancelEventHandler Deselecting;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -479,7 +826,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the current tab changes in a <see cref="T:System.Windows.Forms.TabControl" />, the following events occur in the following order.</para>
+          <para
+            >When the current tab changes in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            , the following events occur in the following order.</para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -502,8 +854,30 @@
               </para>
             </item>
           </list>
-          <para>These events let you perform tasks such as canceling a tab change if a <see cref="T:System.Windows.Forms.TabPage" /> is in an invalid state or updating the state of a newly displayed <see cref="T:System.Windows.Forms.TabPage" />. </para>
-          <para>The current tab changes when the user clicks a tab, when you call the <see cref="Overload:System.Windows.Forms.TabControl.DeselectTab" /> or <see cref="Overload:System.Windows.Forms.TabControl.SelectTab" /> method, or when you change the value of the <see cref="P:System.Windows.Forms.TabControl.SelectedIndex" /> or <see cref="P:System.Windows.Forms.TabControl.SelectedTab" /> property.</para>
+          <para
+            >These events let you perform tasks such as canceling a tab change if a <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             is in an invalid state or updating the state of a newly displayed <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            . </para
+          >
+          <para
+            >The current tab changes when the user clicks a tab, when you call the <see
+             cref="Overload:System.Windows.Forms.TabControl.DeselectTab" />
+
+             or <see
+             cref="Overload:System.Windows.Forms.TabControl.SelectTab" />
+
+             method, or when you change the value of the <see
+             cref="P:System.Windows.Forms.TabControl.SelectedIndex" />
+
+             or <see
+             cref="P:System.Windows.Forms.TabControl.SelectedTab" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -526,14 +900,25 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this method to programmatically deselect a particular tab in a <see cref="T:System.Windows.Forms.TabControl" />. If there are at least two tabs in the control, the tab following the specified tab becomes the current tab. If the specified tab is the last tab in the control, the first tab becomes the current tab.</para>
+          <para
+            >Use this method to programmatically deselect a particular tab in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            . If there are at least two tabs in the control, the tab following the specified tab becomes the current tab. If the specified tab is the last tab in the control, the first tab becomes the current tab.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Makes the tab following the tab with the specified index the current tab.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index in the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> collection of the tab to deselect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index in the <see
+           cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+           collection of the tab to deselect.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DeselectTab">
@@ -551,18 +936,32 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this method to programmatically deselect a particular tab in a <see cref="T:System.Windows.Forms.TabControl" />. If there are at least two tabs in the control, the tab following the specified tab becomes the current tab. If the specified tab is the last tab in the control, the first tab becomes the current tab.</para>
+          <para
+            >Use this method to programmatically deselect a particular tab in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            . If there are at least two tabs in the control, the tab following the specified tab becomes the current tab. If the specified tab is the last tab in the control, the first tab becomes the current tab.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Makes the tab following the tab with the specified name the current tab.</para>
         </summary>
         <param name="tabPageName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Windows.Forms.Control.Name" /> of the tab to deselect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Windows.Forms.Control.Name" />
+
+           of the tab to deselect.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DeselectTab">
-      <MemberSignature Language="C#" Value="public void DeselectTab (System.Windows.Forms.TabPage tabPage);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void DeselectTab (System.Windows.Forms.TabPage tabPage);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -576,18 +975,37 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this method to programmatically deselect a particular tab in a <see cref="T:System.Windows.Forms.TabControl" />. If there are at least two tabs in the control, the tab following the specified tab becomes the current tab. If the specified tab is the last tab in the control, the first tab becomes the current tab.</para>
+          <para
+            >Use this method to programmatically deselect a particular tab in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            . If there are at least two tabs in the control, the tab following the specified tab becomes the current tab. If the specified tab is the last tab in the control, the first tab becomes the current tab.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Makes the tab following the specified <see cref="T:System.Windows.Forms.TabPage" /> the current tab.</para>
+          <para
+            >Makes the tab following the specified <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             the current tab.</para
+          >
         </summary>
         <param name="tabPage">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.TabPage" /> to deselect.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.TabPage" />
+
+           to deselect.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DisplayRectangle">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Rectangle DisplayRectangle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Rectangle DisplayRectangle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -618,10 +1036,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.Control" /> and its child controls and optionally releases the managed resources.</para>
+          <para
+            >Releases the unmanaged resources used by the <see
+             cref="T:System.Windows.Forms.Control" />
+
+             and its child controls and optionally releases the managed resources.</para
+          >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to release both managed and unmanaged resources; false to release only unmanaged resources.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -652,7 +1078,10 @@
       </Docs>
     </Member>
     <Member MemberName="DrawItem">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.DrawItemEventHandler DrawItem;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.DrawItemEventHandler DrawItem;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DrawItemEventHandler</ReturnType>
@@ -660,13 +1089,55 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you set the <see cref="P:System.Windows.Forms.TabControl.DrawMode" /> property to <see cref="F:System.Windows.Forms.TabDrawMode.OwnerDrawFixed" />, the <see cref="T:System.Windows.Forms.TabControl" /> raises the <see cref="E:System.Windows.Forms.TabControl.DrawItem" /> event whenever it needs to paint one of its tabs. To customize the appearance of the tabs, provide your own painting code in a handler for the <see cref="E:System.Windows.Forms.TabControl.DrawItem" /> event. </para>
-          <para>The <see cref="T:System.Windows.Forms.TabControl" /> does not support variable tab sizes with owner drawing.</para>
-          <para>For more information about handling events, see <format type="text/html"><a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a></format>.</para>
+          <para
+            >When you set the <see
+             cref="P:System.Windows.Forms.TabControl.DrawMode" />
+
+             property to <see
+             cref="F:System.Windows.Forms.TabDrawMode.OwnerDrawFixed" />
+
+            , the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             raises the <see
+             cref="E:System.Windows.Forms.TabControl.DrawItem" />
+
+             event whenever it needs to paint one of its tabs. To customize the appearance of the tabs, provide your own painting code in a handler for the <see
+             cref="E:System.Windows.Forms.TabControl.DrawItem" />
+
+             event. </para
+          >
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             does not support variable tab sizes with owner drawing.</para
+          >
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
+                >[&lt;topic://cpconEventsOverview&gt;]</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="T:System.Windows.Forms.TabControl" /> needs to paint each of its tabs if the <see cref="P:System.Windows.Forms.TabControl.DrawMode" /> property is set to <see cref="F:System.Windows.Forms.TabDrawMode.OwnerDrawFixed" />.</para>
+          <para
+            >Occurs when the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             needs to paint each of its tabs if the <see
+             cref="P:System.Windows.Forms.TabControl.DrawMode" />
+
+             property is set to <see
+             cref="F:System.Windows.Forms.TabDrawMode.OwnerDrawFixed" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -675,7 +1146,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawMode">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.TabDrawMode DrawMode { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.TabDrawMode DrawMode { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -689,8 +1163,30 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you set the <see cref="P:System.Windows.Forms.TabControl.DrawMode" /> property to <see cref="F:System.Windows.Forms.TabDrawMode.OwnerDrawFixed" />, the <see cref="T:System.Windows.Forms.TabControl" /> raises the <see cref="E:System.Windows.Forms.TabControl.DrawItem" /> event whenever it needs to paint one of its tabs. To customize the appearance of the tabs, provide your own painting code in a handler for the <see cref="E:System.Windows.Forms.TabControl.DrawItem" /> event. </para>
-          <para>The <see cref="T:System.Windows.Forms.TabControl" /> does not support variable tab sizes with owner drawing.</para>
+          <para
+            >When you set the <see
+             cref="P:System.Windows.Forms.TabControl.DrawMode" />
+
+             property to <see
+             cref="F:System.Windows.Forms.TabDrawMode.OwnerDrawFixed" />
+
+            , the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             raises the <see
+             cref="E:System.Windows.Forms.TabControl.DrawItem" />
+
+             event whenever it needs to paint one of its tabs. To customize the appearance of the tabs, provide your own painting code in a handler for the <see
+             cref="E:System.Windows.Forms.TabControl.DrawItem" />
+
+             event. </para
+          >
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             does not support variable tab sizes with owner drawing.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -703,7 +1199,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ForeColor">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Color ForeColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Color ForeColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -746,11 +1245,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.TabControl.ForeColor" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabControl.ForeColorChanged" /> event to detect the change.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.TabControl.ForeColor" />
+
+             property is not meaningful for this control, although you can change its value and handle the <see
+             cref="E:System.Windows.Forms.TabControl.ForeColorChanged" />
+
+             event to detect the change.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.TabControl.ForeColor" /> property changes.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.TabControl.ForeColor" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -759,7 +1271,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetControl">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Control GetControl (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Control GetControl (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.Control</ReturnType>
@@ -771,14 +1286,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.TabPage" /> control at the specified location.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             control at the specified location.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.TabPage" /> at the specified location.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             at the specified location.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the <see cref="T:System.Windows.Forms.TabPage" /> to get.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the <see
+           cref="T:System.Windows.Forms.TabPage" />
+
+           to get.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -796,11 +1327,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an array of <see cref="T:System.Windows.Forms.TabPage" /> controls that belong to the <see cref="T:System.Windows.Forms.TabControl" /> control.</para>
+          <para
+            >Gets an array of <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             controls that belong to the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             control.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of <see cref="T:System.Windows.Forms.TabPage" /> controls that belong to the <see cref="T:System.Windows.Forms.TabControl" />.</para>
+          <para
+            >An array of <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             controls that belong to the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -821,14 +1368,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the <see cref="T:System.Windows.Forms.TabPage" /> controls in the <see cref="T:System.Windows.Forms.TabControl" /> to an array of the specified type.</para>
+          <para
+            >Copies the <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             controls in the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             to an array of the specified type.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.TabPage" /> controls that belong to the <see cref="T:System.Windows.Forms.TabControl" /> as an array of the specified type.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             controls that belong to the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             as an array of the specified type.</para
+          >
         </returns>
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of the array to create.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of the array to create.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -836,7 +1405,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetTabRect">
-      <MemberSignature Language="C#" Value="public System.Drawing.Rectangle GetTabRect (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Rectangle GetTabRect (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -852,10 +1424,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Rectangle" /> that represents the bounds of the specified tab.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Rectangle" />
+
+             that represents the bounds of the specified tab.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index of the tab you want. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index of the tab you want. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -875,14 +1455,25 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the ToolTip for the specified <see cref="T:System.Windows.Forms.TabPage" />.</para>
+          <para
+            >Gets the ToolTip for the specified <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The ToolTip text.</para>
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.TabPage" /> that owns the desired ToolTip.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.TabPage" />
+
+           that owns the desired ToolTip.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -917,7 +1508,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ImageList">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ImageList ImageList { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ImageList ImageList { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -934,7 +1528,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To display an image on a tab, set the <see cref="P:System.Windows.Forms.TabPage.ImageIndex" /> property of that <see cref="T:System.Windows.Forms.TabPage" />. The <see cref="P:System.Windows.Forms.TabPage.ImageIndex" /> acts as the index into the <see cref="P:System.Windows.Forms.TabControl.ImageList" />.</para>
+          <para
+            >To display an image on a tab, set the <see
+             cref="P:System.Windows.Forms.TabPage.ImageIndex" />
+
+             property of that <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            . The <see
+             cref="P:System.Windows.Forms.TabPage.ImageIndex" />
+
+             acts as the index into the <see
+             cref="P:System.Windows.Forms.TabControl.ImageList" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -947,7 +1555,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsInputKey">
-      <MemberSignature Language="C#" Value="protected override bool IsInputKey (System.Windows.Forms.Keys keyData);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool IsInputKey (System.Windows.Forms.Keys keyData);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -969,7 +1580,13 @@
           <para>true if the specified key is a regular input key; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.Keys" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.Keys" />
+
+           values. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -991,7 +1608,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To change the <see cref="P:System.Drawing.Size.Width" /> property of the <see cref="P:System.Windows.Forms.TabControl.ItemSize" /> property, the <see cref="P:System.Windows.Forms.TabControl.SizeMode" /> property must be set to Fixed.</para>
+          <para
+            >To change the <see
+             cref="P:System.Drawing.Size.Width" />
+
+             property of the <see
+             cref="P:System.Windows.Forms.TabControl.ItemSize" />
+
+             property, the <see
+             cref="P:System.Windows.Forms.TabControl.SizeMode" />
+
+             property must be set to Fixed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1018,8 +1646,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <see cref="P:System.Windows.Forms.TabControl.Multiline" /> is false, only one row of tabs is displayed, even if all the tabs do not fit in the available space. In that case, however, arrows are displayed that enable the user to navigate to the undisplayed tabs.</para>
-          <para>If the <see cref="P:System.Windows.Forms.TabControl.Multiline" /> property is changed to false while the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property is set to Left or Right, the <see cref="P:System.Windows.Forms.TabControl.Alignment" /> property is automatically reset to Top.</para>
+          <para
+            >If <see
+             cref="P:System.Windows.Forms.TabControl.Multiline" />
+
+             is false, only one row of tabs is displayed, even if all the tabs do not fit in the available space. In that case, however, arrows are displayed that enable the user to navigate to the undisplayed tabs.</para
+          >
+          <para
+            >If the <see
+             cref="P:System.Windows.Forms.TabControl.Multiline" />
+
+             property is changed to false while the <see
+             cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+             property is set to Left or Right, the <see
+             cref="P:System.Windows.Forms.TabControl.Alignment" />
+
+             property is automatically reset to Top.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1032,7 +1676,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnDeselected">
-      <MemberSignature Language="C#" Value="protected virtual void OnDeselected (System.Windows.Forms.TabControlEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnDeselected (System.Windows.Forms.TabControlEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1046,19 +1693,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnDeselected(System.Windows.Forms.TabControlEventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnDeselected(System.Windows.Forms.TabControlEventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.TabControl.Deselected" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.TabControl.Deselected" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.TabControlEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.TabControlEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnDeselecting">
-      <MemberSignature Language="C#" Value="protected virtual void OnDeselecting (System.Windows.Forms.TabControlCancelEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnDeselecting (System.Windows.Forms.TabControlCancelEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1072,19 +1745,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnDeselecting(System.Windows.Forms.TabControlCancelEventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnDeselecting(System.Windows.Forms.TabControlCancelEventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.TabControl.Deselecting" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.TabControl.Deselecting" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.TabControlCancelEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.TabControlCancelEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnDrawItem">
-      <MemberSignature Language="C#" Value="protected virtual void OnDrawItem (System.Windows.Forms.DrawItemEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnDrawItem (System.Windows.Forms.DrawItemEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1095,15 +1794,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">[&lt;topic://cpconProvidingEventFunctionality&gt;]</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.TabControl.DrawItem" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.TabControl.DrawItem" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DrawItemEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1125,16 +1849,68 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>In dnprdnext, this method also raises the <see cref="E:System.Windows.Forms.Control.Enter" /> event of the current <see cref="T:System.Windows.Forms.TabPage" />. In dnprdnlong, the tab is considered part of the tab page for determining when the <see cref="E:System.Windows.Forms.Control.Enter" /> and <see cref="E:System.Windows.Forms.Control.Leave" /> events of the <see cref="T:System.Windows.Forms.TabPage" /> occur. In earlier versions of the .NET Framework, the <see cref="E:System.Windows.Forms.Control.Enter" /> and <see cref="E:System.Windows.Forms.Control.Leave" /> events of the <see cref="T:System.Windows.Forms.TabPage" /> do not occur when focus enters or leaves a tab, but only when focus enters or leaves the client rectangle of the tab page.</para>
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnEnter(System.EventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >In dnprdnext, this method also raises the <see
+             cref="E:System.Windows.Forms.Control.Enter" />
+
+             event of the current <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            . In dnprdnlong, the tab is considered part of the tab page for determining when the <see
+             cref="E:System.Windows.Forms.Control.Enter" />
+
+             and <see
+             cref="E:System.Windows.Forms.Control.Leave" />
+
+             events of the <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             occur. In earlier versions of the .NET Framework, the <see
+             cref="E:System.Windows.Forms.Control.Enter" />
+
+             and <see
+             cref="E:System.Windows.Forms.Control.Leave" />
+
+             events of the <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             do not occur when focus enters or leaves a tab, but only when focus enters or leaves the client rectangle of the tab page.</para
+          >
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnEnter(System.EventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.Enter" /> event of the <see cref="T:System.Windows.Forms.TabControl" />.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.Enter" />
+
+             event of the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            .</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnFontChanged">
@@ -1149,15 +1925,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">[&lt;topic://cpconProvidingEventFunctionality&gt;]</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnFontChanged(System.EventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnFontChanged(System.EventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.FontChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1165,7 +1966,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnHandleCreated">
-      <MemberSignature Language="C#" Value="protected override void OnHandleCreated (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnHandleCreated (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1177,10 +1981,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member overrides <see cref="M:System.Windows.Forms.Control.OnHandleCreated(System.EventArgs)" />.</para>
+          <para
+            >This member overrides <see
+             cref="M:System.Windows.Forms.Control.OnHandleCreated(System.EventArgs)" />
+
+            .</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1188,7 +2003,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnHandleDestroyed">
-      <MemberSignature Language="C#" Value="protected override void OnHandleDestroyed (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnHandleDestroyed (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1199,15 +2017,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">[&lt;topic://cpconProvidingEventFunctionality&gt;]</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnHandleDestroyed(System.EventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnHandleDestroyed(System.EventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.HandleDestroyed" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1215,7 +2058,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnKeyDown">
-      <MemberSignature Language="C#" Value="protected override void OnKeyDown (System.Windows.Forms.KeyEventArgs ke);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnKeyDown (System.Windows.Forms.KeyEventArgs ke);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1226,7 +2072,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.TabControl" /> control enables the user to use the keyboard to switch between <see cref="T:System.Windows.Forms.TabPage" /> controls. The following table describes how the <see cref="T:System.Windows.Forms.TabControl" /> switches between the selected <see cref="T:System.Windows.Forms.TabPage" /> controls, depending on which keys are pressed.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             control enables the user to use the keyboard to switch between <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             controls. The following table describes how the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             switches between the selected <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             controls, depending on which keys are pressed.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1241,47 +2101,97 @@
             <item>
               <term>
                 <para>
-                  <see cref="F:System.Windows.Forms.Keys.Control" /> + <see cref="F:System.Windows.Forms.Keys.Tab" /></para>
+                  <see cref="F:System.Windows.Forms.Keys.Control" />
+
+                   + <see
+                   cref="F:System.Windows.Forms.Keys.Tab" />
+                </para>
               </term>
               <description>
-                <para>Selects the next <see cref="T:System.Windows.Forms.TabPage" />.</para>
+                <para
+                  >Selects the next <see
+                   cref="T:System.Windows.Forms.TabPage" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="F:System.Windows.Forms.Keys.Control" /> + <see cref="F:System.Windows.Forms.Keys.Shift" /> + <see cref="F:System.Windows.Forms.Keys.Tab" /> </para>
+                  <see cref="F:System.Windows.Forms.Keys.Control" />
+
+                   + <see
+                   cref="F:System.Windows.Forms.Keys.Shift" />
+
+                   + <see
+                   cref="F:System.Windows.Forms.Keys.Tab" />
+                </para>
               </term>
               <description>
-                <para>Selects the previous <see cref="T:System.Windows.Forms.TabPage" />.</para>
+                <para
+                  >Selects the previous <see
+                   cref="T:System.Windows.Forms.TabPage" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="F:System.Windows.Forms.Keys.Control" /> + <see cref="F:System.Windows.Forms.Keys.PageDown" /></para>
+                  <see cref="F:System.Windows.Forms.Keys.Control" />
+
+                   + <see
+                   cref="F:System.Windows.Forms.Keys.PageDown" />
+                </para>
               </term>
               <description>
-                <para>Selects the next <see cref="T:System.Windows.Forms.TabPage" />.</para>
+                <para
+                  >Selects the next <see
+                   cref="T:System.Windows.Forms.TabPage" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="F:System.Windows.Forms.Keys.Control" /> + <see cref="F:System.Windows.Forms.Keys.PageUp" /> </para>
+                  <see cref="F:System.Windows.Forms.Keys.Control" />
+
+                   + <see
+                   cref="F:System.Windows.Forms.Keys.PageUp" />
+                </para>
               </term>
               <description>
-                <para>Selects the previous <see cref="T:System.Windows.Forms.TabPage" />.</para>
+                <para
+                  >Selects the previous <see
+                   cref="T:System.Windows.Forms.TabPage" />
+
+                  .</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.KeyDown" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.KeyDown" />
+
+             event. </para
+          >
         </summary>
         <param name="ke">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.KeyEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1303,16 +2213,68 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>In dnprdnext, this method also raises the <see cref="E:System.Windows.Forms.Control.Leave" /> event of the current <see cref="T:System.Windows.Forms.TabPage" />. In dnprdnlong, the tab is considered part of the tab page for determining when the <see cref="E:System.Windows.Forms.Control.Enter" /> and <see cref="E:System.Windows.Forms.Control.Leave" /> events of the <see cref="T:System.Windows.Forms.TabPage" /> occur. In earlier versions of the .NET Framework, the <see cref="E:System.Windows.Forms.Control.Enter" /> and <see cref="E:System.Windows.Forms.Control.Leave" /> events of the <see cref="T:System.Windows.Forms.TabPage" /> do not occur when focus enters or leaves a tab, but only when focus enters or leaves the client rectangle of the tab page.</para>
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnLeave(System.EventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >In dnprdnext, this method also raises the <see
+             cref="E:System.Windows.Forms.Control.Leave" />
+
+             event of the current <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            . In dnprdnlong, the tab is considered part of the tab page for determining when the <see
+             cref="E:System.Windows.Forms.Control.Enter" />
+
+             and <see
+             cref="E:System.Windows.Forms.Control.Leave" />
+
+             events of the <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             occur. In earlier versions of the .NET Framework, the <see
+             cref="E:System.Windows.Forms.Control.Enter" />
+
+             and <see
+             cref="E:System.Windows.Forms.Control.Leave" />
+
+             events of the <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             do not occur when focus enters or leaves a tab, but only when focus enters or leaves the client rectangle of the tab page.</para
+          >
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnLeave(System.EventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.Leave" /> event of the <see cref="T:System.Windows.Forms.TabControl" />.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.Leave" />
+
+             event of the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            .</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnResize">
@@ -1328,10 +2290,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member overrides <see cref="M:System.Windows.Forms.Control.OnResize(System.EventArgs)" />.</para>
+          <para
+            >This member overrides <see
+             cref="M:System.Windows.Forms.Control.OnResize(System.EventArgs)" />
+
+            .</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1339,7 +2312,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRightToLeftLayoutChanged">
-      <MemberSignature Language="C#" Value="protected virtual void OnRightToLeftLayoutChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnRightToLeftLayoutChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1358,19 +2334,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnRightToLeftLayoutChanged(System.EventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnRightToLeftLayoutChanged(System.EventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.TabControl.RightToLeftLayoutChanged" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.TabControl.RightToLeftLayoutChanged" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnSelected">
-      <MemberSignature Language="C#" Value="protected virtual void OnSelected (System.Windows.Forms.TabControlEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnSelected (System.Windows.Forms.TabControlEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1384,19 +2386,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnSelected(System.Windows.Forms.TabControlEventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnSelected(System.Windows.Forms.TabControlEventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.TabControl.Selected" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.TabControl.Selected" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.TabControlEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.TabControlEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnSelectedIndexChanged">
-      <MemberSignature Language="C#" Value="protected virtual void OnSelectedIndexChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnSelectedIndexChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1407,15 +2435,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">[&lt;topic://cpconProvidingEventFunctionality&gt;]</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnSelectedIndexChanged(System.EventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.TabControl.SelectedIndexChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.TabControl.SelectedIndexChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1423,7 +2476,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnSelecting">
-      <MemberSignature Language="C#" Value="protected virtual void OnSelecting (System.Windows.Forms.TabControlCancelEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnSelecting (System.Windows.Forms.TabControlCancelEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1437,19 +2493,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.TabControl.OnSelecting(System.Windows.Forms.TabControlCancelEventArgs)" /> method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.TabControl.OnSelecting(System.Windows.Forms.TabControlCancelEventArgs)" />
+
+             method also enables derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.TabControl.Selecting" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.TabControl.Selecting" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.TabControlCancelEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.TabControlCancelEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnStyleChanged">
-      <MemberSignature Language="C#" Value="protected override void OnStyleChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnStyleChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1461,10 +2543,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member overrides <see cref="M:System.Windows.Forms.Control.OnStyleChanged(System.EventArgs)" />.</para>
+          <para
+            >This member overrides <see
+             cref="M:System.Windows.Forms.Control.OnStyleChanged(System.EventArgs)" />
+
+            .</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1496,7 +2589,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Paint">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.PaintEventHandler Paint;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.PaintEventHandler Paint;"
+      />
       <MemberType>Event</MemberType>
       <Attributes>
         <Attribute>
@@ -1522,13 +2618,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProcessKeyPreview">
-      <MemberSignature Language="C#" Value="protected override bool ProcessKeyPreview (ref System.Windows.Forms.Message m);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool ProcessKeyPreview (ref System.Windows.Forms.Message m);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="m" Type="System.Windows.Forms.Message&amp;" RefType="ref" />
+        <Parameter Name="m" Type="System.Windows.Forms.Message&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="m">To be added.</param>
@@ -1584,9 +2683,34 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.TabControl.RightToLeftLayout" /> property is primarily useful for developing forms for worldwide audiences. Many containers are designed so that controls are laid out in the container in a left-to-right fashion. These containers are compatible with languages that follow this writing direction. However, when you display the same containers to users of right-to-left languages, it is often preferable to reverse the order of the controls on the form. If both the <see cref="P:System.Windows.Forms.Form.RightToLeftLayout" /> and <see cref="P:System.Windows.Forms.Control.RightToLeft" /> properties are true, mirroring will be turned on for the container and control placement and text flow will be right-to-left.</para>
-          <para>Changing the value of this property raises the <see cref="E:System.Windows.Forms.TabControl.RightToLeftLayoutChanged" /> event.</para>
-          <para>For more information about globalization issues, see <format type="text/html"><a href="f08169c7-aad8-4ec3-9a21-9ebd3b89986c">Best Practices for Developing World-Ready Applications</a></format>.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.TabControl.RightToLeftLayout" />
+
+             property is primarily useful for developing forms for worldwide audiences. Many containers are designed so that controls are laid out in the container in a left-to-right fashion. These containers are compatible with languages that follow this writing direction. However, when you display the same containers to users of right-to-left languages, it is often preferable to reverse the order of the controls on the form. If both the <see
+             cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
+
+             and <see
+             cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+             properties are true, mirroring will be turned on for the container and control placement and text flow will be right-to-left.</para
+          >
+          <para
+            >Changing the value of this property raises the <see
+             cref="E:System.Windows.Forms.TabControl.RightToLeftLayoutChanged" />
+
+             event.</para
+          >
+          <para
+            >For more information about globalization issues, see <format
+             type="text/html">
+              <a href="f08169c7-aad8-4ec3-9a21-9ebd3b89986c"
+                >Best Practices for Developing World-Ready Applications</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1606,11 +2730,23 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.TabControl.RightToLeftLayout" /> property changes.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.TabControl.RightToLeftLayout" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -1632,7 +2768,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.TabControl.RowCount" /> property when the <see cref="P:System.Windows.Forms.TabControl.Multiline" /> property is true and you want to know the number of rows that the tabs occupy.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.TabControl.RowCount" />
+
+             property when the <see
+             cref="P:System.Windows.Forms.TabControl.Multiline" />
+
+             property is true and you want to know the number of rows that the tabs occupy.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1645,7 +2789,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ScaleCore">
-      <MemberSignature Language="C#" Value="protected override void ScaleCore (float dx, float dy);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void ScaleCore (float dx, float dy);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1666,16 +2813,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member overrides <see cref="M:System.Windows.Forms.Control.ScaleCore(System.Single,System.Single)" />.</para>
+          <para
+            >This member overrides <see
+             cref="M:System.Windows.Forms.Control.ScaleCore(System.Single,System.Single)" />
+
+            .</para
+          >
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />The horizontal scaling factor. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The horizontal scaling factor. </param
+        >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />The vertical scaling factor. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The vertical scaling factor. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Selected">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.TabControlEventHandler Selected;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.TabControlEventHandler Selected;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1686,7 +2847,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the current tab changes in a <see cref="T:System.Windows.Forms.TabControl" />, the following events occur in the following order.</para>
+          <para
+            >When the current tab changes in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            , the following events occur in the following order.</para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -1709,8 +2875,30 @@
               </para>
             </item>
           </list>
-          <para>These events let you perform tasks such as canceling a tab change if a <see cref="T:System.Windows.Forms.TabPage" /> is in an invalid state or updating the state of a newly displayed <see cref="T:System.Windows.Forms.TabPage" />. </para>
-          <para>The current tab changes when the user clicks a tab, when you call the <see cref="Overload:System.Windows.Forms.TabControl.DeselectTab" /> or <see cref="Overload:System.Windows.Forms.TabControl.SelectTab" /> method, or when you change the value of the <see cref="P:System.Windows.Forms.TabControl.SelectedIndex" /> or <see cref="P:System.Windows.Forms.TabControl.SelectedTab" /> property.</para>
+          <para
+            >These events let you perform tasks such as canceling a tab change if a <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             is in an invalid state or updating the state of a newly displayed <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            . </para
+          >
+          <para
+            >The current tab changes when the user clicks a tab, when you call the <see
+             cref="Overload:System.Windows.Forms.TabControl.DeselectTab" />
+
+             or <see
+             cref="Overload:System.Windows.Forms.TabControl.SelectTab" />
+
+             method, or when you change the value of the <see
+             cref="P:System.Windows.Forms.TabControl.SelectedIndex" />
+
+             or <see
+             cref="P:System.Windows.Forms.TabControl.SelectedTab" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1754,12 +2942,37 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When this event occurs, you can check the <see cref="P:System.Windows.Forms.TabControl.SelectedIndex" /> property to determine its new value. Alternatively, you can handle the <see cref="E:System.Windows.Forms.TabControl.Selected" /> event and use the <see cref="P:System.Windows.Forms.TabControlEventArgs.TabPageIndex" /> property to determine the index of the selected tab page. </para>
-          <para>For more information about handling events, see <format type="text/html"><a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a></format>.</para>
+          <para
+            >When this event occurs, you can check the <see
+             cref="P:System.Windows.Forms.TabControl.SelectedIndex" />
+
+             property to determine its new value. Alternatively, you can handle the <see
+             cref="E:System.Windows.Forms.TabControl.Selected" />
+
+             event and use the <see
+             cref="P:System.Windows.Forms.TabControlEventArgs.TabPageIndex" />
+
+             property to determine the index of the selected tab page. </para
+          >
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
+                >[&lt;topic://cpconEventsOverview&gt;]</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="P:System.Windows.Forms.TabControl.SelectedIndex" /> property has changed.</para>
+          <para
+            >Occurs when the <see
+             cref="P:System.Windows.Forms.TabControl.SelectedIndex" />
+
+             property has changed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1768,7 +2981,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SelectedTab">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.TabPage SelectedTab { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.TabPage SelectedTab { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -1785,7 +3001,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The tab page must be in the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> collection to make it the current tab page.</para>
+          <para
+            >The tab page must be in the <see
+             cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+             collection to make it the current tab page.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1798,7 +3019,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Selecting">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.TabControlCancelEventHandler Selecting;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.TabControlCancelEventHandler Selecting;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1809,7 +3033,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the current tab changes in a <see cref="T:System.Windows.Forms.TabControl" />, the following events occur in the following order.</para>
+          <para
+            >When the current tab changes in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            , the following events occur in the following order.</para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -1832,8 +3061,30 @@
               </para>
             </item>
           </list>
-          <para>These events let you perform tasks such as canceling a tab change if a <see cref="T:System.Windows.Forms.TabPage" /> is in an invalid state or updating the state of a newly displayed <see cref="T:System.Windows.Forms.TabPage" />. </para>
-          <para>The current tab changes when the user clicks a tab, when you call the <see cref="Overload:System.Windows.Forms.TabControl.DeselectTab" /> or <see cref="Overload:System.Windows.Forms.TabControl.SelectTab" /> method, or when you change the value of the <see cref="P:System.Windows.Forms.TabControl.SelectedIndex" /> or <see cref="P:System.Windows.Forms.TabControl.SelectedTab" /> property.</para>
+          <para
+            >These events let you perform tasks such as canceling a tab change if a <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             is in an invalid state or updating the state of a newly displayed <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            . </para
+          >
+          <para
+            >The current tab changes when the user clicks a tab, when you call the <see
+             cref="Overload:System.Windows.Forms.TabControl.DeselectTab" />
+
+             or <see
+             cref="Overload:System.Windows.Forms.TabControl.SelectTab" />
+
+             method, or when you change the value of the <see
+             cref="P:System.Windows.Forms.TabControl.SelectedIndex" />
+
+             or <see
+             cref="P:System.Windows.Forms.TabControl.SelectedTab" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1856,14 +3107,25 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this method to programmatically select a particular tab in a <see cref="T:System.Windows.Forms.TabControl" />.</para>
+          <para
+            >Use this method to programmatically select a particular tab in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Makes the tab with the specified index the current tab.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index in the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> collection of the tab to select.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index in the <see
+           cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+           collection of the tab to select.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SelectTab">
@@ -1881,18 +3143,32 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this method to programmatically select a particular tab in a <see cref="T:System.Windows.Forms.TabControl" />.</para>
+          <para
+            >Use this method to programmatically select a particular tab in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Makes the tab with the specified name the current tab.</para>
         </summary>
         <param name="tabPageName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Windows.Forms.Control.Name" /> of the tab to select.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Windows.Forms.Control.Name" />
+
+           of the tab to select.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SelectTab">
-      <MemberSignature Language="C#" Value="public void SelectTab (System.Windows.Forms.TabPage tabPage);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SelectTab (System.Windows.Forms.TabPage tabPage);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1906,14 +3182,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this method to programmatically select a particular tab in a <see cref="T:System.Windows.Forms.TabControl" />.</para>
+          <para
+            >Use this method to programmatically select a particular tab in a <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Makes the specified <see cref="T:System.Windows.Forms.TabPage" /> the current tab.</para>
+          <para
+            >Makes the specified <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             the current tab.</para
+          >
         </summary>
         <param name="tabPage">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.TabPage" /> to select.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.TabPage" />
+
+           to select.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ShowToolTips">
@@ -1934,7 +3226,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To create a ToolTip for a tab, set the <see cref="P:System.Windows.Forms.TabPage.ToolTipText" /> property of the <see cref="T:System.Windows.Forms.TabPage" />.</para>
+          <para
+            >To create a ToolTip for a tab, set the <see
+             cref="P:System.Windows.Forms.TabPage.ToolTipText" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1947,7 +3247,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SizeMode">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.TabSizeMode SizeMode { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.TabSizeMode SizeMode { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -2001,7 +3304,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TabPages">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.TabControl.TabPageCollection TabPages { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.TabControl.TabPageCollection TabPages { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -2080,11 +3386,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.TabControl.Text" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabControl.TextChanged" /> event to detect the change.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.TabControl.Text" />
+
+             property is not meaningful for this control, although you can change its value and handle the <see
+             cref="E:System.Windows.Forms.TabControl.TextChanged" />
+
+             event to detect the change.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.TabControl.Text" /> property changes.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.TabControl.Text" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2102,15 +3421,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The string includes the type and the <see cref="P:System.Windows.Forms.TabControl.TabPageCollection.Count" /> property of the control. If there is at least one <see cref="T:System.Windows.Forms.TabPage" /> control on the <see cref="T:System.Windows.Forms.TabControl" />, this method returns a string that includes the string returned by the <see cref="M:System.Windows.Forms.TabPage.ToString" /> method for the first <see cref="T:System.Windows.Forms.TabPage" />.</para>
+          <para
+            >The string includes the type and the <see
+             cref="P:System.Windows.Forms.TabControl.TabPageCollection.Count" />
+
+             property of the control. If there is at least one <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             control on the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            , this method returns a string that includes the string returned by the <see
+             cref="M:System.Windows.Forms.TabPage.ToString" />
+
+             method for the first <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a string that represents the <see cref="T:System.Windows.Forms.TabControl" /> control.</para>
+          <para
+            >Returns a string that represents the <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+             control.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string that represents the current <see cref="T:System.Windows.Forms.TabControl" />. </para>
+          <para
+            >A string that represents the current <see
+             cref="T:System.Windows.Forms.TabControl" />
+
+            . </para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -2119,7 +3465,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UpdateTabSelection">
-      <MemberSignature Language="C#" Value="protected void UpdateTabSelection (bool updateFocus);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void UpdateTabSelection (bool updateFocus);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2130,14 +3479,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method ensures the appropriate <see cref="P:System.Windows.Forms.TabControlEventArgs.TabPage" /> is visible. If you want the tab control to set the <see cref="P:System.Windows.Forms.TabPage.Visible" /> property to true for the next <see cref="T:System.Windows.Forms.TabPage" /> in the tab order, call this method with <paramref name="updateFocus" /> set to true.</para>
+          <para
+            >This method ensures the appropriate <see
+             cref="P:System.Windows.Forms.TabControlEventArgs.TabPage" />
+
+             is visible. If you want the tab control to set the <see
+             cref="P:System.Windows.Forms.TabPage.Visible" />
+
+             property to true for the next <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             in the tab order, call this method with <paramref
+             name="updateFocus" />
+
+             set to true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="P:System.Windows.Forms.TabPage.Visible" /> property to true for the appropriate <see cref="T:System.Windows.Forms.TabPage" /> control in the <see cref="P:System.Windows.Forms.TabControl.TabPages" /> collection.</para>
+          <para
+            >Sets the <see
+             cref="P:System.Windows.Forms.TabPage.Visible" />
+
+             property to true for the appropriate <see
+             cref="T:System.Windows.Forms.TabPage" />
+
+             control in the <see
+             cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+             collection.</para
+          >
         </summary>
         <param name="updateFocus">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to change focus to the next <see cref="T:System.Windows.Forms.TabPage" />; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to change focus to the next <see
+           cref="T:System.Windows.Forms.TabPage" />
+
+          ; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2145,13 +3525,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WndProc">
-      <MemberSignature Language="C#" Value="protected override void WndProc (ref System.Windows.Forms.Message m);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void WndProc (ref System.Windows.Forms.Message m);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="m" Type="System.Windows.Forms.Message&amp;" RefType="ref" />
+        <Parameter Name="m" Type="System.Windows.Forms.Message&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="m">To be added.</param>

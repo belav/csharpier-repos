@@ -12,7 +12,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Windows.Forms.Form.FormClosing" /> and <see cref="E:System.Windows.Forms.Form.FormClosed" /> events are raised when a <see cref="T:System.Windows.Forms.Form" /> is closed, either through user action or programmatically. Handlers for these events receive parameters of type <see cref="T:System.Windows.Forms.FormClosingEventArgs" /> and <see cref="T:System.Windows.Forms.FormClosedEventArgs" />, respectively. Both of these event argument classes use the <see cref="T:System.Windows.Forms.CloseReason" /> enumeration.</para>
+      <para
+        >The <see
+         cref="E:System.Windows.Forms.Form.FormClosing" />
+
+         and <see
+         cref="E:System.Windows.Forms.Form.FormClosed" />
+
+         events are raised when a <see
+         cref="T:System.Windows.Forms.Form" />
+
+         is closed, either through user action or programmatically. Handlers for these events receive parameters of type <see
+         cref="T:System.Windows.Forms.FormClosingEventArgs" />
+
+         and <see
+         cref="T:System.Windows.Forms.FormClosedEventArgs" />
+
+        , respectively. Both of these event argument classes use the <see
+         cref="T:System.Windows.Forms.CloseReason" />
+
+         enumeration.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +50,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Windows.Forms.Application.Exit" /> method of the <see cref="T:System.Windows.Forms.Application" /> class was invoked. </para>
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Application.Exit" />
+
+             method of the <see
+             cref="T:System.Windows.Forms.Application" />
+
+             class was invoked. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -115,7 +143,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The user is closing the form through the user interface (UI), for example by clicking the <ui>Close</ui> button on the form window, selecting <ui>Close</ui> from the window's control menu, or pressing ALT+F4.</para>
+          <para
+            >The user is closing the form through the user interface (UI), for example by clicking the <ui
+            >Close</ui>
+
+             button on the form window, selecting <ui
+            >Close</ui>
+
+             from the window's control menu, or pressing ALT+F4.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

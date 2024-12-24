@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpSessionStateContainer" FullName="System.Web.SessionState.HttpSessionStateContainer">
-  <TypeSignature Language="C#" Value="public class HttpSessionStateContainer : System.Web.SessionState.IHttpSessionState" />
+  <TypeSignature
+    Language="C#"
+    Value="public class HttpSessionStateContainer : System.Web.SessionState.IHttpSessionState"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,9 +19,66 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>ASP.NET provides session-state management to enable you to store information associated with a unique browser session across multiple requests. You can store a collection of values referenced by a key name or by numerical index. Access to session values and functionality is available using the <see cref="T:System.Web.SessionState.HttpSessionState" /> class, which is accessible through the <see cref="P:System.Web.HttpContext.Session" /> property of the current <see cref="T:System.Web.HttpContext" /> or the <see cref="P:System.Web.UI.Page.Session" /> property of the <see cref="T:System.Web.UI.Page" />. The <see cref="T:System.Web.SessionState.HttpSessionState" /> class accesses session-state values and session-level settings by referencing a session-state container, which is an implementation of the <see cref="T:System.Web.SessionState.IHttpSessionState" /> interface that has been populated with session-state data and added to the <see cref="T:System.Web.HttpContext" /> of the current request by the session-state module for the <see cref="T:System.Web.HttpApplication" />.</para>
-      <para>The <see cref="T:System.Web.SessionState.HttpSessionState" /> class calls the <see cref="T:System.Web.SessionState.HttpSessionStateContainer" /> class, which manages session settings and values in memory.</para>
-      <para>The <see cref="T:System.Web.SessionState.HttpSessionStateContainer" /> class is the ASP.NET implementation of the <see cref="T:System.Web.SessionState.IHttpSessionState" /> interface. The <see cref="T:System.Web.SessionState.HttpSessionStateContainer" /> class is not intended to be called from application code. If you replace the <see cref="T:System.Web.SessionState.SessionStateModule" /> with a custom session-state module, you can use the <see cref="T:System.Web.SessionState.HttpSessionStateContainer" /> class, or supply your own implementation of the <see cref="T:System.Web.SessionState.IHttpSessionState" /> interface.</para>
+      <para
+        >ASP.NET provides session-state management to enable you to store information associated with a unique browser session across multiple requests. You can store a collection of values referenced by a key name or by numerical index. Access to session values and functionality is available using the <see
+         cref="T:System.Web.SessionState.HttpSessionState" />
+
+         class, which is accessible through the <see
+         cref="P:System.Web.HttpContext.Session" />
+
+         property of the current <see
+         cref="T:System.Web.HttpContext" />
+
+         or the <see
+         cref="P:System.Web.UI.Page.Session" />
+
+         property of the <see
+         cref="T:System.Web.UI.Page" />
+
+        . The <see
+         cref="T:System.Web.SessionState.HttpSessionState" />
+
+         class accesses session-state values and session-level settings by referencing a session-state container, which is an implementation of the <see
+         cref="T:System.Web.SessionState.IHttpSessionState" />
+
+         interface that has been populated with session-state data and added to the <see
+         cref="T:System.Web.HttpContext" />
+
+         of the current request by the session-state module for the <see
+         cref="T:System.Web.HttpApplication" />
+
+        .</para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.SessionState.HttpSessionState" />
+
+         class calls the <see
+         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+         class, which manages session settings and values in memory.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+         class is the ASP.NET implementation of the <see
+         cref="T:System.Web.SessionState.IHttpSessionState" />
+
+         interface. The <see
+         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+         class is not intended to be called from application code. If you replace the <see
+         cref="T:System.Web.SessionState.SessionStateModule" />
+
+         with a custom session-state module, you can use the <see
+         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+         class, or supply your own implementation of the <see
+         cref="T:System.Web.SessionState.IHttpSessionState" />
+
+         interface.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +87,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HttpSessionStateContainer (string id, System.Web.SessionState.ISessionStateItemCollection sessionItems, System.Web.HttpStaticObjectsCollection staticObjects, int timeout, bool newSession, System.Web.HttpCookieMode cookieMode, System.Web.SessionState.SessionStateMode mode, bool isReadonly);" />
+      <MemberSignature
+        Language="C#"
+        Value="public HttpSessionStateContainer (string id, System.Web.SessionState.ISessionStateItemCollection sessionItems, System.Web.HttpStaticObjectsCollection staticObjects, int timeout, bool newSession, System.Web.HttpCookieMode cookieMode, System.Web.SessionState.SessionStateMode mode, bool isReadonly);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -46,24 +109,68 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.Web.SessionState.HttpSessionStateContainer" /> object and initializes it with the specified settings and values.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+             object and initializes it with the specified settings and values.</para
+          >
         </summary>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />A session identifier for the new session. If null, an <see cref="T:System.ArgumentException" /> is thrown.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A session identifier for the new session. If null, an <see
+           cref="T:System.ArgumentException" />
+
+           is thrown.</param
+        >
         <param name="sessionItems">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Web.SessionState.ISessionStateItemCollection" /> that contains the session values for the new session-state provider.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+           that contains the session values for the new session-state provider.</param
+        >
         <param name="staticObjects">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Web.HttpStaticObjectsCollection" /> that specifies the objects declared by &lt;object Runat="Server" Scope="Session"/&gt; tags within the ASP.NET application file Global.asax.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Web.HttpStaticObjectsCollection" />
+
+           that specifies the objects declared by &lt;object Runat="Server" Scope="Session"/&gt; tags within the ASP.NET application file Global.asax.</param
+        >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />The amount of time, in minutes, allowed between requests before the session-state provider terminates the session.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The amount of time, in minutes, allowed between requests before the session-state provider terminates the session.</param
+        >
         <param name="newSession">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to indicate the session was created with the current request; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to indicate the session was created with the current request; otherwise, false. </param
+        >
         <param name="cookieMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Web.SessionState.HttpSessionStateContainer.CookieMode" /> for the new session-state provider.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Web.SessionState.HttpSessionStateContainer.CookieMode" />
+
+           for the new session-state provider.</param
+        >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Web.SessionState.SessionStateMode" /> values that specifies the current session-state mode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Web.SessionState.SessionStateMode" />
+
+           values that specifies the current session-state mode. </param
+        >
         <param name="isReadonly">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to indicate the session is read-only; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to indicate the session is read-only; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Abandon">
@@ -79,7 +186,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.SessionState.HttpSessionStateContainer.Abandon" /> method of the <see cref="T:System.Web.SessionState.HttpSessionStateContainer" /> marks the <see cref="P:System.Web.SessionState.HttpSessionStateContainer.IsAbandoned" /> property as true. A custom session module can then query the <see cref="P:System.Web.SessionState.HttpSessionStateContainer.IsAbandoned" /> property and remove the session information if the <see cref="P:System.Web.SessionState.HttpSessionStateContainer.IsAbandoned" /> property is true.</para>
+          <para
+            >The <see
+             cref="M:System.Web.SessionState.HttpSessionStateContainer.Abandon" />
+
+             method of the <see
+             cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+
+             marks the <see
+             cref="P:System.Web.SessionState.HttpSessionStateContainer.IsAbandoned" />
+
+             property as true. A custom session module can then query the <see
+             cref="P:System.Web.SessionState.HttpSessionStateContainer.IsAbandoned" />
+
+             property and remove the session information if the <see
+             cref="P:System.Web.SessionState.HttpSessionStateContainer.IsAbandoned" />
+
+             property is true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -103,16 +227,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <paramref name="name" /> parameter refers to an existing session-state item, the existing item is overwritten with the specified <paramref name="value" />.</para>
+          <para
+            >If the <paramref
+             name="name" />
+
+             parameter refers to an existing session-state item, the existing item is overwritten with the specified <paramref
+             name="value" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Adds a new item to the session-state collection.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the item to add to the session-state collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the item to add to the session-state collection. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the item to add to the session-state collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the item to add to the session-state collection. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -147,7 +285,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A character set (code page) is used to interpret multibyte character data, determining character value, and therefore sort order. Code-page settings apply only to multibyte character data, not to Unicode character data.</para>
-          <para>This <see cref="P:System.Web.SessionState.HttpSessionStateContainer.CodePage" /> property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see cref="P:System.Web.HttpResponse.ContentEncoding" /> property instead.</para>
+          <para
+            >This <see
+             cref="P:System.Web.SessionState.HttpSessionStateContainer.CodePage" />
+
+             property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
+             cref="P:System.Web.HttpResponse.ContentEncoding" />
+
+             property instead.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -168,7 +314,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When <see cref="P:System.Web.SessionState.HttpSessionState.IsCookieless" /> is true, the <see cref="P:System.Web.SessionState.HttpSessionState.CookieMode" /> property returns <see cref="F:System.Web.HttpCookieMode.UseUri" />; otherwise, the <see cref="P:System.Web.SessionState.HttpSessionState.CookieMode" /> property returns <see cref="F:System.Web.HttpCookieMode.UseCookies" />.</para>
+          <para
+            >When <see
+             cref="P:System.Web.SessionState.HttpSessionState.IsCookieless" />
+
+             is true, the <see
+             cref="P:System.Web.SessionState.HttpSessionState.CookieMode" />
+
+             property returns <see
+             cref="F:System.Web.HttpCookieMode.UseUri" />
+
+            ; otherwise, the <see
+             cref="P:System.Web.SessionState.HttpSessionState.CookieMode" />
+
+             property returns <see
+             cref="F:System.Web.HttpCookieMode.UseCookies" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -196,9 +359,21 @@
           <para>Copies the collection of session-state values to a one-dimensional array, starting at the specified index in the array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Array" /> that receives the session values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Array" />
+
+           that receives the session values. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> from which copying starts. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           from which copying starts. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -220,7 +395,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -237,7 +415,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IEnumerator" /> that can iterate through the variable names in the session-state collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IEnumerator" />
+
+             that can iterate through the variable names in the session-state collection.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -272,7 +455,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a discussion of cookieless sessions, see the <see cref="P:System.Web.SessionState.HttpSessionState.IsCookieless" /> property of the <see cref="T:System.Web.SessionState.HttpSessionState" /> class.</para>
+          <para
+            >For a discussion of cookieless sessions, see the <see
+             cref="P:System.Web.SessionState.HttpSessionState.IsCookieless" />
+
+             property of the <see
+             cref="T:System.Web.SessionState.HttpSessionState" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -350,8 +541,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.SessionState.HttpSessionStateContainer.LCID" /> property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see cref="P:System.Globalization.CultureInfo.LCID" /> property instead.</para>
-          <para>ASP.NET does not store the locale identifier in session state. The <see cref="P:System.Web.SessionState.HttpSessionStateContainer.LCID" /> property accesses the <see cref="P:System.Globalization.CultureInfo.LCID" /> property to get and set the identifier.</para>
+          <para
+            >The <see
+             cref="P:System.Web.SessionState.HttpSessionStateContainer.LCID" />
+
+             property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
+             cref="P:System.Globalization.CultureInfo.LCID" />
+
+             property instead.</para
+          >
+          <para
+            >ASP.NET does not store the locale identifier in session state. The <see
+             cref="P:System.Web.SessionState.HttpSessionStateContainer.LCID" />
+
+             property accesses the <see
+             cref="P:System.Globalization.CultureInfo.LCID" />
+
+             property to get and set the identifier.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -360,7 +567,10 @@
       </Docs>
     </Member>
     <Member MemberName="Mode">
-      <MemberSignature Language="C#" Value="public System.Web.SessionState.SessionStateMode Mode { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.SessionState.SessionStateMode Mode { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -372,7 +582,20 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For information about how to configure your server for <see cref="F:System.Web.SessionState.SessionStateMode.StateServer" /> or <see cref="F:System.Web.SessionState.SessionStateMode.SQLServer" /> session-state storage mode, see <format type="text/html"><a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a></format>.</para>
+          <para
+            >For information about how to configure your server for <see
+             cref="F:System.Web.SessionState.SessionStateMode.StateServer" />
+
+             or <see
+             cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+             session-state storage mode, see <format
+             type="text/html">
+              <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -395,14 +618,22 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the session-state collection does not contain an element with the specified <paramref name="name" />, the collection remains unchanged. No exception is thrown.</para>
+          <para
+            >If the session-state collection does not contain an element with the specified <paramref
+             name="name" />
+
+            , the collection remains unchanged. No exception is thrown.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Deletes an item from the session-state collection.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the item to delete from the session-state collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the item to delete from the session-state collection. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveAll">
@@ -419,7 +650,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Web.SessionState.HttpSessionStateContainer.RemoveAll" /> performs the same function as <see cref="M:System.Web.SessionState.HttpSessionStateContainer.Clear" />.</para>
+            <see cref="M:System.Web.SessionState.HttpSessionStateContainer.RemoveAll" />
+
+             performs the same function as <see
+             cref="M:System.Web.SessionState.HttpSessionStateContainer.Clear" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -446,7 +683,10 @@
           <para>Deletes an item at a specified index from the session-state collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the item to remove from the session-state collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the item to remove from the session-state collection. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SessionID">
@@ -468,7 +708,10 @@
       </Docs>
     </Member>
     <Member MemberName="StaticObjects">
-      <MemberSignature Language="C#" Value="public System.Web.HttpStaticObjectsCollection StaticObjects { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.HttpStaticObjectsCollection StaticObjects { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -480,9 +723,23 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If an object on a page does not support serialization and <see cref="P:System.Web.SessionState.HttpSessionStateContainer.Mode" /> is out-of-process (<see cref="F:System.Web.SessionState.SessionStateMode.SQLServer" /> or <see cref="F:System.Web.SessionState.SessionStateMode.StateServer" />), the object will not be created and will not be added to this collection.</para>
+          <para
+            >If an object on a page does not support serialization and <see
+             cref="P:System.Web.SessionState.HttpSessionStateContainer.Mode" />
+
+             is out-of-process (<see
+             cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+             or <see
+             cref="F:System.Web.SessionState.SessionStateMode.StateServer" />
+
+            ), the object will not be created and will not be added to this collection.</para
+          >
           <para>
-            <see cref="P:System.Web.SessionState.HttpSessionStateContainer.StaticObjects" /> is provided for compatibility with earlier versions of ASP.</para>
+            <see cref="P:System.Web.SessionState.HttpSessionStateContainer.StaticObjects" />
+
+             is provided for compatibility with earlier versions of ASP.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -509,7 +766,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Web.SessionState.IHttpSessionState.Item">
-      <MemberSignature Language="C#" Value="object System.Web.SessionState.IHttpSessionState.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Web.SessionState.IHttpSessionState.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -528,7 +788,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Web.SessionState.IHttpSessionState.Item">
-      <MemberSignature Language="C#" Value="object System.Web.SessionState.IHttpSessionState.Item[string name] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Web.SessionState.IHttpSessionState.Item[string name] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -547,7 +810,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Web.SessionState.IHttpSessionState.Keys">
-      <MemberSignature Language="C#" Value="System.Collections.Specialized.NameObjectCollectionBase.KeysCollection System.Web.SessionState.IHttpSessionState.Keys { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.Specialized.NameObjectCollectionBase.KeysCollection System.Web.SessionState.IHttpSessionState.Keys { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

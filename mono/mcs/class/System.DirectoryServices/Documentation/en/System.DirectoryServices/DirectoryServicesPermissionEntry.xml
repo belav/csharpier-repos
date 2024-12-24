@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DirectoryServicesPermissionEntry" FullName="System.DirectoryServices.DirectoryServicesPermissionEntry">
+<Type
+  Name="DirectoryServicesPermissionEntry"
+  FullName="System.DirectoryServices.DirectoryServicesPermissionEntry"
+>
   <TypeSignature Language="C#" Value="public class DirectoryServicesPermissionEntry" />
   <AssemblyInfo>
     <AssemblyName>System.DirectoryServices</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../msfinal.pub")</AttributeName>
@@ -60,10 +62,16 @@
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DirectoryServicesPermissionEntry(System.DirectoryServices.DirectoryServicesPermissionAccess access, string path)" />
+      <MemberSignature
+        Language="C#"
+        Value="public DirectoryServicesPermissionEntry(System.DirectoryServices.DirectoryServicesPermissionAccess access, string path)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
-        <Parameter Name="access" Type="System.DirectoryServices.DirectoryServicesPermissionAccess" />
+        <Parameter
+          Name="access"
+          Type="System.DirectoryServices.DirectoryServicesPermissionAccess"
+        />
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
@@ -71,10 +79,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.DirectoryServices.DirectoryServicesPermissionEntry.#ctor(System.DirectoryServices.DirectoryServicesPermissionAccess,System.String)" /> constructor initializes a new instance of the <see cref="M:System.DirectoryServices.DirectoryServicesPermissionEntry.#ctor(System.DirectoryServices.DirectoryServicesPermissionAccess,System.String)" /> class.</para>
+          <para
+            >The <see
+             cref="M:System.DirectoryServices.DirectoryServicesPermissionEntry.#ctor(System.DirectoryServices.DirectoryServicesPermissionAccess,System.String)" />
+
+             constructor initializes a new instance of the <see
+             cref="M:System.DirectoryServices.DirectoryServicesPermissionEntry.#ctor(System.DirectoryServices.DirectoryServicesPermissionAccess,System.String)" />
+
+             class.</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path of the Active Directory Domain Services node to which the permissions apply.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path of the Active Directory Domain Services node to which the permissions apply.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Path">
@@ -88,12 +107,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.DirectoryServices.DirectoryServicesPermissionEntry.Path" /> property gets a path to an Active Directory Domain Services node to which the permissions apply.</para>
+          <para
+            >The <see
+             cref="P:System.DirectoryServices.DirectoryServicesPermissionEntry.Path" />
+
+             property gets a path to an Active Directory Domain Services node to which the permissions apply.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="PermissionAccess">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.DirectoryServicesPermissionAccess PermissionAccess { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.DirectoryServicesPermissionAccess PermissionAccess { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.DirectoryServices.DirectoryServicesPermissionAccess</ReturnType>
@@ -103,7 +130,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.DirectoryServices.DirectoryServicesPermissionEntry.PermissionAccess" /> property gets the access levels used in creating permissions.</para>
+          <para
+            >The <see
+             cref="P:System.DirectoryServices.DirectoryServicesPermissionEntry.PermissionAccess" />
+
+             property gets the access levels used in creating permissions.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -112,7 +144,15 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> class defines the smallest unit of a code access security permission set for <see cref="N:System.DirectoryServices" />.</para>
+      <para
+        >The <see
+         cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+         class defines the smallest unit of a code access security permission set for <see
+         cref="N:System.DirectoryServices" />
+
+        .</para
+      >
     </summary>
   </Docs>
 </Type>

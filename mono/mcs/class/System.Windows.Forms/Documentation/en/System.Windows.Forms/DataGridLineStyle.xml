@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.DataGrid.GridLineStyle" /> property of the <see cref="T:System.Windows.Forms.DataGrid" /> class. The default is Solid.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.DataGrid.GridLineStyle" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.DataGrid" />
+
+         class. The default is Solid.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the style of gridlines in a <see cref="T:System.Windows.Forms.DataGrid" />.</para>
+      <para
+        >Specifies the style of gridlines in a <see
+         cref="T:System.Windows.Forms.DataGrid" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>

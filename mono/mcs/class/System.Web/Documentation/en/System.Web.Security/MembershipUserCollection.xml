@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MembershipUserCollection" FullName="System.Web.Security.MembershipUserCollection">
-  <TypeSignature Language="C#" Value="public sealed class MembershipUserCollection : System.Collections.ICollection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class MembershipUserCollection : System.Collections.ICollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -17,14 +20,75 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:System.Web.Security.MembershipUserCollection" /> is returned from the <see cref="Overload:System.Web.Security.Membership.GetAllUsers" />, <see cref="Overload:System.Web.Security.Membership.FindUsersByName" />, and <see cref="Overload:System.Web.Security.Membership.FindUsersByEmail" /> methods of the <see cref="T:System.Web.Security.Membership" /> class. The <see cref="T:System.Web.Security.MembershipUserCollection" /> objects returned by the <see cref="Overload:System.Web.Security.Membership.GetAllUsers" />, <see cref="Overload:System.Web.Security.Membership.FindUsersByName" />, and <see cref="Overload:System.Web.Security.Membership.FindUsersByEmail" /> methods contain a snapshot of user information in the membership data store. That is, changes to the membership user information in a <see cref="T:System.Web.Security.MembershipUserCollection" /> are not reflected in the membership data store. To modify membership user information in the membership data store, use the <see cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" />, <see cref="Overload:System.Web.Security.Membership.CreateUser" /> and <see cref="M:System.Web.Security.Membership.DeleteUser(System.String)" /> methods of the <see cref="T:System.Web.Security.Membership" /> class.</para>
+      <para
+        >A <see
+         cref="T:System.Web.Security.MembershipUserCollection" />
+
+         is returned from the <see
+         cref="Overload:System.Web.Security.Membership.GetAllUsers" />
+
+        , <see
+         cref="Overload:System.Web.Security.Membership.FindUsersByName" />
+
+        , and <see
+         cref="Overload:System.Web.Security.Membership.FindUsersByEmail" />
+
+         methods of the <see
+         cref="T:System.Web.Security.Membership" />
+
+         class. The <see
+         cref="T:System.Web.Security.MembershipUserCollection" />
+
+         objects returned by the <see
+         cref="Overload:System.Web.Security.Membership.GetAllUsers" />
+
+        , <see
+         cref="Overload:System.Web.Security.Membership.FindUsersByName" />
+
+        , and <see
+         cref="Overload:System.Web.Security.Membership.FindUsersByEmail" />
+
+         methods contain a snapshot of user information in the membership data store. That is, changes to the membership user information in a <see
+         cref="T:System.Web.Security.MembershipUserCollection" />
+
+         are not reflected in the membership data store. To modify membership user information in the membership data store, use the <see
+         cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" />
+
+        , <see
+         cref="Overload:System.Web.Security.Membership.CreateUser" />
+
+         and <see
+         cref="M:System.Web.Security.Membership.DeleteUser(System.String)" />
+
+         methods of the <see
+         cref="T:System.Web.Security.Membership" />
+
+         class.</para
+      >
       <block subset="none" type="note">
-        <para>If you are not familiar with the membership features of ASP.NET, see <format type="text/html"><a href="79184d17-f4c7-4c9f-a073-cec4f5543980">Introduction to Membership</a></format> before continuing. For a list of other topics related to membership, see <format type="text/html"><a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a></format>.</para>
+        <para
+          >If you are not familiar with the membership features of ASP.NET, see <format
+           type="text/html">
+            <a href="79184d17-f4c7-4c9f-a073-cec4f5543980">Introduction to Membership</a>
+          </format>
+
+           before continuing. For a list of other topics related to membership, see <format
+           type="text/html">
+            <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
+          </format>
+
+          .</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A collection of <see cref="T:System.Web.Security.MembershipUser" /> objects.</para>
+      <para
+        >A collection of <see
+         cref="T:System.Web.Security.MembershipUser" />
+
+         objects.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -36,7 +100,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Web.Security.MembershipUserCollection" /> is constructed by membership provider implementers and returned from the <see cref="M:System.Web.Security.MembershipProvider.GetAllUsers(System.Int32,System.Int32,System.Int32@)" /> and <see cref="M:System.Web.Security.MembershipProvider.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)" /> methods of the <see cref="T:System.Web.Security.MembershipProvider" /> abstract class.</para>
+          <para
+            >A <see
+             cref="T:System.Web.Security.MembershipUserCollection" />
+
+             is constructed by membership provider implementers and returned from the <see
+             cref="M:System.Web.Security.MembershipProvider.GetAllUsers(System.Int32,System.Int32,System.Int32@)" />
+
+             and <see
+             cref="M:System.Web.Security.MembershipProvider.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)" />
+
+             methods of the <see
+             cref="T:System.Web.Security.MembershipProvider" />
+
+             abstract class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,7 +126,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Web.Security.MembershipUser user);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Web.Security.MembershipUser user);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -60,14 +141,37 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Security.MembershipUserCollection.Add(System.Web.Security.MembershipUser)" /> method is commonly used by membership provider implementations of the <see cref="M:System.Web.Security.MembershipProvider.GetAllUsers(System.Int32,System.Int32,System.Int32@)" />, <see cref="M:System.Web.Security.MembershipProvider.FindUsersByEmail(System.String,System.Int32,System.Int32,System.Int32@)" />, and <see cref="M:System.Web.Security.MembershipProvider.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)" /> methods of the <see cref="T:System.Web.Security.MembershipProvider" /> abstract class.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Security.MembershipUserCollection.Add(System.Web.Security.MembershipUser)" />
+
+             method is commonly used by membership provider implementations of the <see
+             cref="M:System.Web.Security.MembershipProvider.GetAllUsers(System.Int32,System.Int32,System.Int32@)" />
+
+            , <see
+             cref="M:System.Web.Security.MembershipProvider.FindUsersByEmail(System.String,System.Int32,System.Int32,System.Int32@)" />
+
+            , and <see
+             cref="M:System.Web.Security.MembershipProvider.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)" />
+
+             methods of the <see
+             cref="T:System.Web.Security.MembershipProvider" />
+
+             abstract class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Adds the specified membership user to the collection.</para>
         </summary>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Security.MembershipUser" /> object to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Security.MembershipUser" />
+
+           object to add to the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -93,7 +197,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (System.Web.Security.MembershipUser[] array, int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (System.Web.Security.MembershipUser[] array, int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -110,9 +217,21 @@
           <para>Copies the membership user collection to a one-dimensional array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />A one-dimensional array of type <see cref="T:System.Web.Security.MembershipUser" /> that is the destination of the elements copied from the <see cref="T:System.Web.Security.MembershipUserCollection" />. The array must have zero-based indexing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A one-dimensional array of type <see
+           cref="T:System.Web.Security.MembershipUser" />
+
+           that is the destination of the elements copied from the <see
+           cref="T:System.Web.Security.MembershipUserCollection" />
+
+          . The array must have zero-based indexing.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in the array at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in the array at which copying begins.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -138,7 +257,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -148,7 +270,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Enumerators only allow reading the data in the collection. Enumerators cannot be used to modify the underlying collection. For more information, see <see cref="T:System.Collections.IEnumerator" />.</para>
+          <para
+            >Enumerators only allow reading the data in the collection. Enumerators cannot be used to modify the underlying collection. For more information, see <see
+             cref="T:System.Collections.IEnumerator" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -156,7 +283,15 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IEnumerator" /> for the entire <see cref="T:System.Web.Security.MembershipUserCollection" />.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IEnumerator" />
+
+             for the entire <see
+             cref="T:System.Web.Security.MembershipUserCollection" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -186,7 +321,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Security.MembershipUser this[string name] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Security.MembershipUser this[string name] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Security.MembershipUser</ReturnType>
@@ -222,7 +360,13 @@
           <para>Removes the membership user object with the specified user name from the collection.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The user name of the <see cref="T:System.Web.Security.MembershipUser" /> object to remove from the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The user name of the <see
+           cref="T:System.Web.Security.MembershipUser" />
+
+           object to remove from the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -239,7 +383,42 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The contents of a <see cref="T:System.Web.Security.MembershipUserCollection" /> are considered read-only, as they are a snapshot of the membership user information in the membership data store. Membership user information is modified using the <see cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" />, <see cref="Overload:System.Web.Security.Membership.CreateUser" /> and <see cref="M:System.Web.Security.Membership.DeleteUser(System.String)" /> methods. The <see cref="M:System.Web.Security.MembershipUserCollection.SetReadOnly" /> method marks the <see cref="T:System.Web.Security.MembershipUserCollection" /> as read-only so that <see cref="T:System.Web.Security.MembershipUser" /> objects cannot be added to or removed from the collection. Property values for the <see cref="T:System.Web.Security.MembershipUser" /> objects are not marked as read-only. That is, you can modify the property values of a <see cref="T:System.Web.Security.MembershipUser" /> in the <see cref="T:System.Web.Security.MembershipUserCollection" /> regardless of whether the collection has been marked as read-only by the <see cref="M:System.Web.Security.MembershipUserCollection.SetReadOnly" /> method.</para>
+          <para
+            >The contents of a <see
+             cref="T:System.Web.Security.MembershipUserCollection" />
+
+             are considered read-only, as they are a snapshot of the membership user information in the membership data store. Membership user information is modified using the <see
+             cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" />
+
+            , <see
+             cref="Overload:System.Web.Security.Membership.CreateUser" />
+
+             and <see
+             cref="M:System.Web.Security.Membership.DeleteUser(System.String)" />
+
+             methods. The <see
+             cref="M:System.Web.Security.MembershipUserCollection.SetReadOnly" />
+
+             method marks the <see
+             cref="T:System.Web.Security.MembershipUserCollection" />
+
+             as read-only so that <see
+             cref="T:System.Web.Security.MembershipUser" />
+
+             objects cannot be added to or removed from the collection. Property values for the <see
+             cref="T:System.Web.Security.MembershipUser" />
+
+             objects are not marked as read-only. That is, you can modify the property values of a <see
+             cref="T:System.Web.Security.MembershipUser" />
+
+             in the <see
+             cref="T:System.Web.Security.MembershipUserCollection" />
+
+             regardless of whether the collection has been marked as read-only by the <see
+             cref="M:System.Web.Security.MembershipUserCollection.SetReadOnly" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -289,12 +468,41 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the contents of the <see cref="T:System.Web.Security.MembershipUserCollection" /> object to an <see cref="T:System.Array" />, starting at a particular <see cref="T:System.Array" /> index.</para>
+          <para
+            >Copies the contents of the <see
+             cref="T:System.Web.Security.MembershipUserCollection" />
+
+             object to an <see
+             cref="T:System.Array" />
+
+            , starting at a particular <see
+             cref="T:System.Array" />
+
+             index.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The one-dimensional <see cref="T:System.Array" /> that is the destination for the objects copied from the <see cref="T:System.Web.Security.MembershipUserCollection" /> object. The <see cref="T:System.Array" /> must have zero-based indexing. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The one-dimensional <see
+           cref="T:System.Array" />
+
+           that is the destination for the objects copied from the <see
+           cref="T:System.Web.Security.MembershipUserCollection" />
+
+           object. The <see
+           cref="T:System.Array" />
+
+           must have zero-based indexing. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
     </Member>
   </Members>

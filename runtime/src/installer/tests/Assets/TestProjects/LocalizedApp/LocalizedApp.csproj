@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -7,7 +6,6 @@
     <RuntimeFrameworkVersion>$(MNAVersion)</RuntimeFrameworkVersion>
     <SelfContained>true</SelfContained>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Update="Hello.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -15,7 +13,6 @@
       <DependentUpon>Hello.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Hello.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -29,5 +26,4 @@
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

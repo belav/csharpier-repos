@@ -12,7 +12,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration defines the values you can use when setting the <see cref="P:System.Web.Configuration.TraceSection.TraceMode" /> property. </para>
+      <para
+        >This enumeration defines the values you can use when setting the <see
+         cref="P:System.Web.Configuration.TraceSection.TraceMode" />
+
+         property. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XElement" FullName="System.Xml.Linq.XElement">
-  <TypeSignature Language="C#" Value="public class XElement : System.Xml.Linq.XContainer, System.Xml.Serialization.IXmlSerializable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XElement extends System.Xml.Linq.XContainer implements class System.Xml.Serialization.IXmlSerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class XElement : System.Xml.Linq.XContainer, System.Xml.Serialization.IXmlSerializable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XElement extends System.Xml.Linq.XContainer implements class System.Xml.Serialization.IXmlSerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml.Linq</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -26,8 +32,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class represents an XML element, the fundamental XML construct.</para>
-      <para>An element has an <see cref="T:System.Xml.Linq.XName" />, optionally one or more attributes, and can optionally contain content (for more information, see <see cref="M:System.Xml.Linq.XContainer.Nodes" />).</para>
-      <para>An <see cref="T:System.Xml.Linq.XElement" /> can contain the following types of content: </para>
+      <para
+        >An element has an <see
+         cref="T:System.Xml.Linq.XName" />
+
+        , optionally one or more attributes, and can optionally contain content (for more information, see <see
+         cref="M:System.Xml.Linq.XContainer.Nodes" />
+
+        ).</para
+      >
+      <para
+        >An <see
+         cref="T:System.Xml.Linq.XElement" />
+
+         can contain the following types of content: </para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -50,10 +69,41 @@
           </para>
         </item>
       </list>
-      <para>For details about the valid content of an <see cref="T:System.Xml.Linq.XElement" />, see <format type="text/html"><a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae">Valid Content of XElement and XDocument Objects</a></format>.</para>
+      <para
+        >For details about the valid content of an <see
+         cref="T:System.Xml.Linq.XElement" />
+
+        , see <format
+         type="text/html">
+          <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
+            >Valid Content of XElement and XDocument Objects</a
+          >
+        </format>
+
+        .</para
+      >
       <para>
-        <see cref="T:System.Xml.Linq.XElement" /> derives from <see cref="T:System.Xml.Linq.XContainer" />, which derives from <see cref="T:System.Xml.Linq.XNode" />.</para>
-      <para>Some <see cref="T:System.Xml.Linq.XElement" /> methods can be used from XAML. For more information, see <format type="text/html"><a href="0455f47c-4a68-4f2e-a3f8-dd1d85b99012">LINQ to XML Dynamic Properties</a></format>.</para>
+        <see cref="T:System.Xml.Linq.XElement" />
+
+         derives from <see
+         cref="T:System.Xml.Linq.XContainer" />
+
+        , which derives from <see
+         cref="T:System.Xml.Linq.XNode" />
+
+        .</para
+      >
+      <para
+        >Some <see
+         cref="T:System.Xml.Linq.XElement" />
+
+         methods can be used from XAML. For more information, see <format
+         type="text/html">
+          <a href="0455f47c-4a68-4f2e-a3f8-dd1d85b99012">LINQ to XML Dynamic Properties</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,7 +113,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XElement (System.Xml.Linq.XElement other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XElement other) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XElement other) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -78,15 +131,32 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class from another <see cref="T:System.Xml.Linq.XElement" /> object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             class from another <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             object.</para
+          >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XElement" /> object to copy from.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XElement" />
+
+           object to copy from.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XElement (System.Xml.Linq.XName name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XName name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XName name) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,19 +168,55 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates an element with no content and no attributes.</para>
-          <para>There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />. Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />. When creating an element in a namespace, typical use is to use the addition operator overload with an <see cref="T:System.Xml.Linq.XNamespace" /> and a string to create an <see cref="T:System.Xml.Linq.XName" />. For more information, see <format type="text/html"><a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a></format>.</para>
+          <para
+            >There is an implicit conversion from string to <see
+             cref="T:System.Xml.Linq.XName" />
+
+            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
+             cref="T:System.Xml.Linq.XName" />
+
+            . When creating an element in a namespace, typical use is to use the addition operator overload with an <see
+             cref="T:System.Xml.Linq.XNamespace" />
+
+             and a string to create an <see
+             cref="T:System.Xml.Linq.XName" />
+
+            . For more information, see <format
+             type="text/html">
+              <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             class with the specified name. </para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XName" />
+
+           that contains the name of the element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XElement (System.Xml.Linq.XStreamingElement other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XStreamingElement other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public XElement (System.Xml.Linq.XStreamingElement other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XStreamingElement other) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -121,19 +227,47 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor iterates through the contents of the specified <see cref="T:System.Xml.Linq.XStreamingElement" />, and creates an element with its contents.</para>
+          <para
+            >This constructor iterates through the contents of the specified <see
+             cref="T:System.Xml.Linq.XStreamingElement" />
+
+            , and creates an element with its contents.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class from an <see cref="T:System.Xml.Linq.XStreamingElement" /> object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             class from an <see
+             cref="T:System.Xml.Linq.XStreamingElement" />
+
+             object.</para
+          >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XStreamingElement" /> that contains unevaluated queries that will be iterated for the contents of this <see cref="T:System.Xml.Linq.XElement" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XStreamingElement" />
+
+           that contains unevaluated queries that will be iterated for the contents of this <see
+           cref="T:System.Xml.Linq.XElement" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XElement (System.Xml.Linq.XName name, object content);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XName name, object content) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public XElement (System.Xml.Linq.XName name, object content);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XName name, object content) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -146,23 +280,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates an element with the specified content and attributes.</para>
-          <para>There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />. Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />.</para>
-          <para>When creating an element in a namespace, typical use is to use the addition operator overload with an <see cref="T:System.Xml.Linq.XNamespace" /> and a string to create an <see cref="T:System.Xml.Linq.XName" />. For more information, see <format type="text/html"><a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a></format>.</para>
-          <para>For details about the valid content that can be passed to this constructor, see <format type="text/html"><a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae">Valid Content of XElement and XDocument Objects</a></format>.</para>
+          <para
+            >There is an implicit conversion from string to <see
+             cref="T:System.Xml.Linq.XName" />
+
+            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
+             cref="T:System.Xml.Linq.XName" />
+
+            .</para
+          >
+          <para
+            >When creating an element in a namespace, typical use is to use the addition operator overload with an <see
+             cref="T:System.Xml.Linq.XNamespace" />
+
+             and a string to create an <see
+             cref="T:System.Xml.Linq.XName" />
+
+            . For more information, see <format
+             type="text/html">
+              <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >For details about the valid content that can be passed to this constructor, see <format
+             type="text/html">
+              <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
+                >Valid Content of XElement and XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name and content.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             class with the specified name and content.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XName" /> that contains the element name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XName" />
+
+           that contains the element name.</param
+        >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />The contents of the element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The contents of the element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XElement (System.Xml.Linq.XName name, object[] content);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XName name, object[] content) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public XElement (System.Xml.Linq.XName name, object[] content);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.Linq.XName name, object[] content) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -181,23 +365,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates an element with the specified content and attributes.</para>
-          <para>There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />. Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />.</para>
-          <para>When creating an element in a namespace, typical use is to use the addition operator overload with an <see cref="T:System.Xml.Linq.XNamespace" /> and a string to create an <see cref="T:System.Xml.Linq.XName" />. For more information, see <format type="text/html"><a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a></format>.</para>
-          <para>For details about the valid content that can be passed to this constructor, see <format type="text/html"><a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae">Valid Content of XElement and XDocument Objects</a></format>.</para>
+          <para
+            >There is an implicit conversion from string to <see
+             cref="T:System.Xml.Linq.XName" />
+
+            . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
+             cref="T:System.Xml.Linq.XName" />
+
+            .</para
+          >
+          <para
+            >When creating an element in a namespace, typical use is to use the addition operator overload with an <see
+             cref="T:System.Xml.Linq.XNamespace" />
+
+             and a string to create an <see
+             cref="T:System.Xml.Linq.XName" />
+
+            . For more information, see <format
+             type="text/html">
+              <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >For details about the valid content that can be passed to this constructor, see <format
+             type="text/html">
+              <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
+                >Valid Content of XElement and XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name and content.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             class with the specified name and content.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XName" /> that contains the element name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XName" />
+
+           that contains the element name.</param
+        >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />The initial content of the element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The initial content of the element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AncestorsAndSelf">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; AncestorsAndSelf ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; AncestorsAndSelf() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> AncestorsAndSelf() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -218,13 +452,27 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> of elements that contain this element, and the ancestors of this element. </para>
+          <para
+            >An <see
+             cref="T:System.Collections.Generic.IEnumerable`1" />
+
+             of <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             of elements that contain this element, and the ancestors of this element. </para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="AncestorsAndSelf">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; AncestorsAndSelf (System.Xml.Linq.XName name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; AncestorsAndSelf(class System.Xml.Linq.XName name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf (System.Xml.Linq.XName name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> AncestorsAndSelf(class System.Xml.Linq.XName name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -243,19 +491,47 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a filtered collection of elements that contain this element, and the ancestors of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
+          <para
+            >Returns a filtered collection of elements that contain this element, and the ancestors of this element. Only elements that have a matching <see
+             cref="T:System.Xml.Linq.XName" />
+
+             are included in the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> that contain this element, and the ancestors of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.Generic.IEnumerable`1" />
+
+             of <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that contain this element, and the ancestors of this element. Only elements that have a matching <see
+             cref="T:System.Xml.Linq.XName" />
+
+             are included in the collection.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.Linq.XName" /> to match.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.Linq.XName" />
+
+           to match.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Attribute">
-      <MemberSignature Language="C#" Value="public System.Xml.Linq.XAttribute Attribute (System.Xml.Linq.XName name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Xml.Linq.XAttribute Attribute(class System.Xml.Linq.XName name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Linq.XAttribute Attribute (System.Xml.Linq.XName name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Xml.Linq.XAttribute Attribute(class System.Xml.Linq.XName name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -269,24 +545,66 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Some axis methods return collections of elements or attributes. This method returns only a single attribute. Sometimes this is referred to as a <newTerm>singleton</newTerm> (in contrast to a <newTerm>collection</newTerm>).</para>
+          <para
+            >Some axis methods return collections of elements or attributes. This method returns only a single attribute. Sometimes this is referred to as a <newTerm
+            >singleton</newTerm>
+
+             (in contrast to a <newTerm
+            >collection</newTerm>
+
+            ).</para
+          >
           <para>Visual Basic users can use the integrated attribute axis to retrieve the value of an attribute with a specified name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the <see cref="T:System.Xml.Linq.XAttribute" /> of this <see cref="T:System.Xml.Linq.XElement" /> that has the specified <see cref="T:System.Xml.Linq.XName" />.</para>
+          <para
+            >Returns the <see
+             cref="T:System.Xml.Linq.XAttribute" />
+
+             of this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that has the specified <see
+             cref="T:System.Xml.Linq.XName" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XAttribute" /> that has the specified <see cref="T:System.Xml.Linq.XName" />; null if there is no attribute with the specified name.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XAttribute" />
+
+             that has the specified <see
+             cref="T:System.Xml.Linq.XName" />
+
+            ; null if there is no attribute with the specified name.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.Linq.XName" /> of the <see cref="T:System.Xml.Linq.XAttribute" /> to get.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.Linq.XName" />
+
+           of the <see
+           cref="T:System.Xml.Linq.XAttribute" />
+
+           to get.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XAttribute&gt; Attributes ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XAttribute&gt; Attributes() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> Attributes ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XAttribute> Attributes() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -307,13 +625,27 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XAttribute" /> of attributes of this element.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.Generic.IEnumerable`1" />
+
+             of <see
+             cref="T:System.Xml.Linq.XAttribute" />
+
+             of attributes of this element.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XAttribute&gt; Attributes (System.Xml.Linq.XName name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XAttribute&gt; Attributes(class System.Xml.Linq.XName name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> Attributes (System.Xml.Linq.XName name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XAttribute> Attributes(class System.Xml.Linq.XName name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -332,19 +664,47 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a filtered collection of attributes of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
+          <para
+            >Returns a filtered collection of attributes of this element. Only elements that have a matching <see
+             cref="T:System.Xml.Linq.XName" />
+
+             are included in the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XAttribute" /> that contains the attributes of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.Generic.IEnumerable`1" />
+
+             of <see
+             cref="T:System.Xml.Linq.XAttribute" />
+
+             that contains the attributes of this element. Only elements that have a matching <see
+             cref="T:System.Xml.Linq.XName" />
+
+             are included in the collection.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.Linq.XName" /> to match.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.Linq.XName" />
+
+           to match.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DescendantNodesAndSelf">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XNode&gt; DescendantNodesAndSelf ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XNode&gt; DescendantNodesAndSelf() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> DescendantNodesAndSelf ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XNode> DescendantNodesAndSelf() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -364,13 +724,27 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XNode" /> that contain this element, and all descendant nodes of this element, in document order.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.Generic.IEnumerable`1" />
+
+             of <see
+             cref="T:System.Xml.Linq.XNode" />
+
+             that contain this element, and all descendant nodes of this element, in document order.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="DescendantsAndSelf">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; DescendantsAndSelf ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; DescendantsAndSelf() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> DescendantsAndSelf ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> DescendantsAndSelf() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -390,13 +764,27 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> of elements that contain this element, and all descendant elements of this element, in document order.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.Generic.IEnumerable`1" />
+
+             of <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             of elements that contain this element, and all descendant elements of this element, in document order.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="DescendantsAndSelf">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; DescendantsAndSelf (System.Xml.Linq.XName name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; DescendantsAndSelf(class System.Xml.Linq.XName name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> DescendantsAndSelf (System.Xml.Linq.XName name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> DescendantsAndSelf(class System.Xml.Linq.XName name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -414,19 +802,47 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a filtered collection of elements that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
+          <para
+            >Returns a filtered collection of elements that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see
+             cref="T:System.Xml.Linq.XName" />
+
+             are included in the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.Generic.IEnumerable`1" />
+
+             of <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see
+             cref="T:System.Xml.Linq.XName" />
+
+             are included in the collection.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.Linq.XName" /> to match.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.Linq.XName" />
+
+           to match.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="EmptySequence">
-      <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; EmptySequence { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; EmptySequence" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> EmptySequence { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> EmptySequence"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -438,7 +854,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is typically used by class implementers when writing a method that returns a collection of elements. If the method must return no elements, it can use this property to get an empty collection of <see cref="T:System.Xml.Linq.XElement" /> objects.</para>
+          <para
+            >This property is typically used by class implementers when writing a method that returns a collection of elements. If the method must return no elements, it can use this property to get an empty collection of <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             objects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -447,8 +868,14 @@
       </Docs>
     </Member>
     <Member MemberName="FirstAttribute">
-      <MemberSignature Language="C#" Value="public System.Xml.Linq.XAttribute FirstAttribute { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Linq.XAttribute FirstAttribute" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Linq.XAttribute FirstAttribute { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Linq.XAttribute FirstAttribute"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -469,8 +896,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetDefaultNamespace">
-      <MemberSignature Language="C#" Value="public System.Xml.Linq.XNamespace GetDefaultNamespace ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Xml.Linq.XNamespace GetDefaultNamespace() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Linq.XNamespace GetDefaultNamespace ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Xml.Linq.XNamespace GetDefaultNamespace() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -482,24 +915,56 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Namespace declarations may be persisted as attributes in the XML tree. These special attributes declare namespaces, including default namespaces. This method finds the namespace declaration that declares the default namespace, if there is one, and returns the <see cref="T:System.Xml.Linq.XNamespace" /> for the default namespace.</para>
-          <para>If there is no attribute that declares the default namespace, then this method returns <see cref="P:System.Xml.Linq.XNamespace.None" />.</para>
+          <para
+            >Namespace declarations may be persisted as attributes in the XML tree. These special attributes declare namespaces, including default namespaces. This method finds the namespace declaration that declares the default namespace, if there is one, and returns the <see
+             cref="T:System.Xml.Linq.XNamespace" />
+
+             for the default namespace.</para
+          >
+          <para
+            >If there is no attribute that declares the default namespace, then this method returns <see
+             cref="P:System.Xml.Linq.XNamespace.None" />
+
+            .</para
+          >
           <para>When creating XML trees using C#, even if an XML tree would be serialized with a default namespace, if the namespace is not persisted in the XML tree as an attribute, this method will not report the namespace as the default namespace.</para>
           <para>When creating XML trees using Visual Basic and XML literals, if you create the XML in a default namespace using the Imports statement, then a namespace attribute will be created in the tree by the Visual Basic compiler, and this method will report that namespace.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the default <see cref="T:System.Xml.Linq.XNamespace" /> of this <see cref="T:System.Xml.Linq.XElement" />.</para>
+          <para
+            >Gets the default <see
+             cref="T:System.Xml.Linq.XNamespace" />
+
+             of this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XNamespace" /> that contains the default namespace of this <see cref="T:System.Xml.Linq.XElement" />.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XNamespace" />
+
+             that contains the default namespace of this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetNamespaceOfPrefix">
-      <MemberSignature Language="C#" Value="public System.Xml.Linq.XNamespace GetNamespaceOfPrefix (string prefix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Xml.Linq.XNamespace GetNamespaceOfPrefix(string prefix) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Linq.XNamespace GetNamespaceOfPrefix (string prefix);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Xml.Linq.XNamespace GetNamespaceOfPrefix(string prefix) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -517,19 +982,41 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the namespace associated with a particular prefix for this <see cref="T:System.Xml.Linq.XElement" />.</para>
+          <para
+            >Gets the namespace associated with a particular prefix for this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XNamespace" /> for the namespace associated with the prefix for this <see cref="T:System.Xml.Linq.XElement" />.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XNamespace" />
+
+             for the namespace associated with the prefix for this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            .</para
+          >
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that contains the namespace prefix to look up.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that contains the namespace prefix to look up.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetPrefixOfNamespace">
-      <MemberSignature Language="C#" Value="public string GetPrefixOfNamespace (System.Xml.Linq.XNamespace ns);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetPrefixOfNamespace(class System.Xml.Linq.XNamespace ns) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public string GetPrefixOfNamespace (System.Xml.Linq.XNamespace ns);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance string GetPrefixOfNamespace(class System.Xml.Linq.XNamespace ns) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -548,14 +1035,30 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the prefix associated with a namespace for this <see cref="T:System.Xml.Linq.XElement" />.</para>
+          <para
+            >Gets the prefix associated with a namespace for this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that contains the namespace prefix.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that contains the namespace prefix.</para
+          >
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XNamespace" /> to look up.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XNamespace" />
+
+           to look up.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="HasAttributes">
@@ -619,8 +1122,14 @@
       </Docs>
     </Member>
     <Member MemberName="LastAttribute">
-      <MemberSignature Language="C#" Value="public System.Xml.Linq.XAttribute LastAttribute { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Linq.XAttribute LastAttribute" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Linq.XAttribute LastAttribute { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Linq.XAttribute LastAttribute"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -641,8 +1150,14 @@
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Load (System.IO.Stream stream);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.IO.Stream stream) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Load (System.IO.Stream stream);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.IO.Stream stream) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -656,33 +1171,101 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you want to control load options, use the <see cref="Overload:System.Xml.Linq.XElement.Load" /> overload that takes <see cref="T:System.Xml.Linq.LoadOptions" /> as a parameter.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document. </para>
-          <para>If you have to modify <see cref="T:System.Xml.XmlReaderSettings" />, following these steps:</para>
+          <para
+            >If you want to control load options, use the <see
+             cref="Overload:System.Xml.Linq.XElement.Load" />
+
+             overload that takes <see
+             cref="T:System.Xml.Linq.LoadOptions" />
+
+             as a parameter.</para
+          >
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document. </para
+          >
+          <para
+            >If you have to modify <see
+             cref="T:System.Xml.XmlReaderSettings" />
+
+            , following these steps:</para
+          >
           <list type="ordered">
             <item>
-              <para>Create an <see cref="T:System.Xml.XmlReader" /> by calling one of the <see cref="Overload:System.Xml.XmlReader.Create" /> overloads that take <see cref="T:System.Xml.XmlReaderSettings" /> as a parameter.</para>
+              <para
+                >Create an <see
+                 cref="T:System.Xml.XmlReader" />
+
+                 by calling one of the <see
+                 cref="Overload:System.Xml.XmlReader.Create" />
+
+                 overloads that take <see
+                 cref="T:System.Xml.XmlReaderSettings" />
+
+                 as a parameter.</para
+              >
             </item>
             <item>
-              <para>Pass the <see cref="T:System.Xml.XmlReader" /> to one of the <see cref="T:System.Xml.Linq.XElement" />'s <see cref="Overload:System.Xml.Linq.XElement.Load" /> overloads that takes <see cref="T:System.Xml.XmlReader" /> as a parameter.</para>
+              <para
+                >Pass the <see
+                 cref="T:System.Xml.XmlReader" />
+
+                 to one of the <see
+                 cref="T:System.Xml.Linq.XElement" />
+
+                's <see
+                 cref="Overload:System.Xml.Linq.XElement.Load" />
+
+                 overloads that takes <see
+                 cref="T:System.Xml.XmlReader" />
+
+                 as a parameter.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.Xml.Linq.XElement" /> instance by using the specified stream.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             instance by using the specified stream.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> object used to read the data that is contained in the stream.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             object used to read the data that is contained in the stream.</para
+          >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The stream that contains the XML data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The stream that contains the XML data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Load (System.IO.TextReader textReader);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.IO.TextReader textReader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Load (System.IO.TextReader textReader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.IO.TextReader textReader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -697,23 +1280,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method reads the raw XML into the XML tree. It discards all insignificant white space in the file.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads an <see cref="T:System.Xml.Linq.XElement" /> from a <see cref="T:System.IO.TextReader" />. </para>
+          <para
+            >Loads an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a <see
+             cref="T:System.IO.TextReader" />
+
+            . </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.IO.TextReader" />.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that contains the XML that was read from the specified <see
+             cref="T:System.IO.TextReader" />
+
+            .</para
+          >
         </returns>
         <param name="textReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.IO.TextReader" /> that will be read for the <see cref="T:System.Xml.Linq.XElement" /> content.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.IO.TextReader" />
+
+           that will be read for the <see
+           cref="T:System.Xml.Linq.XElement" />
+
+           content.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Load (string uri);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Load(string uri) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Load (string uri);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Load(string uri) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -728,23 +1353,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method reads the raw XML into the XML tree. It discards all insignificant white space in the file.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads an <see cref="T:System.Xml.Linq.XElement" /> from a file.</para>
+          <para
+            >Loads an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a file.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> that contains the contents of the specified file.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that contains the contents of the specified file.</para
+          >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />A URI string referencing the file to load into a new <see cref="T:System.Xml.Linq.XElement" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A URI string referencing the file to load into a new <see
+           cref="T:System.Xml.Linq.XElement" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Load (System.Xml.XmlReader reader);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.Xml.XmlReader reader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Load (System.Xml.XmlReader reader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.Xml.XmlReader reader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -758,24 +1416,77 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By creating an <see cref="T:System.Xml.XmlNodeReader" /> from a DOM document, and then using the <see cref="T:System.Xml.XmlNodeReader" /> to create an <see cref="T:System.Xml.Linq.XElement" />, this method can be used to create a copy of a DOM document in a LINQ to XML tree.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
+          <para
+            >By creating an <see
+             cref="T:System.Xml.XmlNodeReader" />
+
+             from a DOM document, and then using the <see
+             cref="T:System.Xml.XmlNodeReader" />
+
+             to create an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            , this method can be used to create a copy of a DOM document in a LINQ to XML tree.</para
+          >
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads an <see cref="T:System.Xml.Linq.XElement" /> from an <see cref="T:System.Xml.XmlReader" />. </para>
+          <para
+            >Loads an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from an <see
+             cref="T:System.Xml.XmlReader" />
+
+            . </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.Xml.XmlReader" />.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that contains the XML that was read from the specified <see
+             cref="T:System.Xml.XmlReader" />
+
+            .</para
+          >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.XmlReader" /> that will be read for the content of the <see cref="T:System.Xml.Linq.XElement" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.XmlReader" />
+
+           that will be read for the content of the <see
+           cref="T:System.Xml.Linq.XElement" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Load (System.IO.Stream stream, System.Xml.Linq.LoadOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.IO.Stream stream, valuetype System.Xml.Linq.LoadOptions options) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Load (System.IO.Stream stream, System.Xml.Linq.LoadOptions options);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.IO.Stream stream, valuetype System.Xml.Linq.LoadOptions options) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -790,34 +1501,100 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document. </para>
-          <para>If you have to modify <see cref="T:System.Xml.XmlReaderSettings" />, following these steps:</para>
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document. </para
+          >
+          <para
+            >If you have to modify <see
+             cref="T:System.Xml.XmlReaderSettings" />
+
+            , following these steps:</para
+          >
           <list type="ordered">
             <item>
-              <para>Create an <see cref="T:System.Xml.XmlReader" /> by calling one of the <see cref="Overload:System.Xml.XmlReader.Create" /> overloads that take <see cref="T:System.Xml.XmlReaderSettings" /> as a parameter.</para>
+              <para
+                >Create an <see
+                 cref="T:System.Xml.XmlReader" />
+
+                 by calling one of the <see
+                 cref="Overload:System.Xml.XmlReader.Create" />
+
+                 overloads that take <see
+                 cref="T:System.Xml.XmlReaderSettings" />
+
+                 as a parameter.</para
+              >
             </item>
             <item>
-              <para>Pass the <see cref="T:System.Xml.XmlReader" /> to one of the <see cref="T:System.Xml.Linq.XElement" />'s <see cref="Overload:System.Xml.Linq.XElement.Load" /> overloads that takes <see cref="T:System.Xml.XmlReader" /> as a parameter.</para>
+              <para
+                >Pass the <see
+                 cref="T:System.Xml.XmlReader" />
+
+                 to one of the <see
+                 cref="T:System.Xml.Linq.XElement" />
+
+                's <see
+                 cref="Overload:System.Xml.Linq.XElement.Load" />
+
+                 overloads that takes <see
+                 cref="T:System.Xml.XmlReader" />
+
+                 as a parameter.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.Xml.Linq.XElement" /> instance by using the specified stream, optionally preserving white space, setting the base URI, and retaining line information.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             instance by using the specified stream, optionally preserving white space, setting the base URI, and retaining line information.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> object used to read the data that the stream contains.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             object used to read the data that the stream contains.</para
+          >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The stream containing the XML data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The stream containing the XML data.</param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.Linq.LoadOptions" /> object that specifies whether to load base URI and line information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.Linq.LoadOptions" />
+
+           object that specifies whether to load base URI and line information.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Load (System.IO.TextReader textReader, System.Xml.Linq.LoadOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.IO.TextReader textReader, valuetype System.Xml.Linq.LoadOptions options) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Load (System.IO.TextReader textReader, System.Xml.Linq.LoadOptions options);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.IO.TextReader textReader, valuetype System.Xml.Linq.LoadOptions options) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -832,33 +1609,145 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para>
-          <para>If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para>
-          <para>If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para>
-          <para>For more information, see <format type="text/html"><a href="093a7169-a04e-4638-b08c-d1cb98aa650d">Preserving White Space while Loading or Parsing XML</a></format> and <format type="text/html"><a href="fb146217-0a49-4efc-ac84-7265b91d3939">Preserving White Space While Serializing</a></format>.</para>
-          <para>Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para>
-          <para>Setting <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> will have no effect when loading from a <see cref="T:System.IO.TextReader" />.</para>
-          <para>There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para>
+          <para
+            >If the source XML is indented, setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             causes the reader to read all white space in the source XML. Nodes of type <see
+             cref="T:System.Xml.Linq.XText" />
+
+             are created for both significant and insignificant white space.</para
+          >
+          <para
+            >If the source XML is indented, not setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para
+          >
+          <para
+            >If the source XML is not indented, setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para
+          >
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
+                >Preserving White Space while Loading or Parsing XML</a
+              >
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
+                >Preserving White Space While Serializing</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >Use <see
+             cref="Overload:System.Xml.Linq.XElement.Parse" />
+
+             to create an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a string that contains XML.</para
+          >
+          <para
+            >Setting <see
+             cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
+
+             will have no effect when loading from a <see
+             cref="T:System.IO.TextReader" />
+
+            .</para
+          >
+          <para
+            >There is a performance penalty if you set the <see
+             cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+             flag.</para
+          >
           <para>The line information is accurate immediately after loading the XML document. If you modify the XML tree after loading the document, the line information may become meaningless.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads an <see cref="T:System.Xml.Linq.XElement" /> from a <see cref="T:System.IO.TextReader" />, optionally preserving white space and retaining line information. </para>
+          <para
+            >Loads an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a <see
+             cref="T:System.IO.TextReader" />
+
+            , optionally preserving white space and retaining line information. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.IO.TextReader" />.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that contains the XML that was read from the specified <see
+             cref="T:System.IO.TextReader" />
+
+            .</para
+          >
         </returns>
         <param name="textReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.IO.TextReader" /> that will be read for the <see cref="T:System.Xml.Linq.XElement" /> content.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.IO.TextReader" />
+
+           that will be read for the <see
+           cref="T:System.Xml.Linq.XElement" />
+
+           content.</param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.Linq.LoadOptions" />
+
+           that specifies white space behavior, and whether to load base URI and line information.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Load (string uri, System.Xml.Linq.LoadOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Load(string uri, valuetype System.Xml.Linq.LoadOptions options) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Load (string uri, System.Xml.Linq.LoadOptions options);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Load(string uri, valuetype System.Xml.Linq.LoadOptions options) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -873,32 +1762,130 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para>
-          <para>If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para>
-          <para>If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para>
-          <para>For more information, see <format type="text/html"><a href="093a7169-a04e-4638-b08c-d1cb98aa650d">Preserving White Space while Loading or Parsing XML</a></format> and <format type="text/html"><a href="fb146217-0a49-4efc-ac84-7265b91d3939">Preserving White Space While Serializing</a></format>.</para>
-          <para>Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para>
-          <para>There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> and the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flags.</para>
+          <para
+            >If the source XML is indented, setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             causes the reader to read all white space in the source XML. Nodes of type <see
+             cref="T:System.Xml.Linq.XText" />
+
+             are created for both significant and insignificant white space.</para
+          >
+          <para
+            >If the source XML is indented, not setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para
+          >
+          <para
+            >If the source XML is not indented, setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para
+          >
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
+                >Preserving White Space while Loading or Parsing XML</a
+              >
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
+                >Preserving White Space While Serializing</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >Use <see
+             cref="Overload:System.Xml.Linq.XElement.Parse" />
+
+             to create an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a string that contains XML.</para
+          >
+          <para
+            >There is a performance penalty if you set the <see
+             cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
+
+             and the <see
+             cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+             flags.</para
+          >
           <para>The base URI and the line information are accurate immediately after loading the XML document. If you modify the XML tree after loading the document, the base URI and line information may become meaningless.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads an <see cref="T:System.Xml.Linq.XElement" /> from a file, optionally preserving white space, setting the base URI, and retaining line information.</para>
+          <para
+            >Loads an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a file, optionally preserving white space, setting the base URI, and retaining line information.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> that contains the contents of the specified file.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that contains the contents of the specified file.</para
+          >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />A URI string referencing the file to load into an <see cref="T:System.Xml.Linq.XElement" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A URI string referencing the file to load into an <see
+           cref="T:System.Xml.Linq.XElement" />
+
+          .</param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.Linq.LoadOptions" />
+
+           that specifies white space behavior, and whether to load base URI and line information.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Load (System.Xml.XmlReader reader, System.Xml.Linq.LoadOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.Xml.XmlReader reader, valuetype System.Xml.Linq.LoadOptions options) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Load (System.Xml.XmlReader reader, System.Xml.Linq.LoadOptions options);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Load(class System.Xml.XmlReader reader, valuetype System.Xml.Linq.LoadOptions options) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -913,32 +1900,137 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By creating an <see cref="T:System.Xml.XmlNodeReader" /> from a DOM document, and then using the <see cref="T:System.Xml.XmlNodeReader" /> to create an <see cref="T:System.Xml.Linq.XElement" />, this method can be used to create a copy of a DOM document in a LINQ to XML tree.</para>
-          <para>Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para>
-          <para>Setting <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> is not valid when loading from a <see cref="T:System.Xml.XmlReader" />. The <see cref="T:System.Xml.XmlReader" /> will be configured to either read whitespace or not. The LINQ to XML tree will be populated with the whitespace nodes that the reader surfaces. This will be the behavior regardless of whether <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> is set or not.</para>
-          <para>The <see cref="T:System.Xml.XmlReader" /> may have a valid base URI or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />, the base URI will be set in the XML tree from the base URI that is reported by the <see cref="T:System.Xml.XmlReader" />.</para>
-          <para>The <see cref="T:System.Xml.XmlReader" /> may have a valid line information or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />, the line information will be set in the XML tree from the line information that is reported by the <see cref="T:System.Xml.XmlReader" />.</para>
-          <para>There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para>
+          <para
+            >By creating an <see
+             cref="T:System.Xml.XmlNodeReader" />
+
+             from a DOM document, and then using the <see
+             cref="T:System.Xml.XmlNodeReader" />
+
+             to create an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            , this method can be used to create a copy of a DOM document in a LINQ to XML tree.</para
+          >
+          <para
+            >Use <see
+             cref="Overload:System.Xml.Linq.XElement.Parse" />
+
+             to create an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a string that contains XML.</para
+          >
+          <para
+            >Setting <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             is not valid when loading from a <see
+             cref="T:System.Xml.XmlReader" />
+
+            . The <see
+             cref="T:System.Xml.XmlReader" />
+
+             will be configured to either read whitespace or not. The LINQ to XML tree will be populated with the whitespace nodes that the reader surfaces. This will be the behavior regardless of whether <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             is set or not.</para
+          >
+          <para
+            >The <see
+             cref="T:System.Xml.XmlReader" />
+
+             may have a valid base URI or not. If you set <see
+             cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
+
+            , the base URI will be set in the XML tree from the base URI that is reported by the <see
+             cref="T:System.Xml.XmlReader" />
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="T:System.Xml.XmlReader" />
+
+             may have a valid line information or not. If you set <see
+             cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            , the line information will be set in the XML tree from the line information that is reported by the <see
+             cref="T:System.Xml.XmlReader" />
+
+            .</para
+          >
+          <para
+            >There is a performance penalty if you set the <see
+             cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+             flag.</para
+          >
           <para>The line information is accurate immediately after loading the XML document. If you modify the XML tree after loading the document, the line information may become meaningless.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads an <see cref="T:System.Xml.Linq.XElement" /> from an <see cref="T:System.Xml.XmlReader" />, optionally preserving white space, setting the base URI, and retaining line information.</para>
+          <para
+            >Loads an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from an <see
+             cref="T:System.Xml.XmlReader" />
+
+            , optionally preserving white space, setting the base URI, and retaining line information.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.Xml.XmlReader" />.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             that contains the XML that was read from the specified <see
+             cref="T:System.Xml.XmlReader" />
+
+            .</para
+          >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.XmlReader" /> that will be read for the content of the <see cref="T:System.Xml.Linq.XElement" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.XmlReader" />
+
+           that will be read for the content of the <see
+           cref="T:System.Xml.Linq.XElement" />
+
+          .</param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.Linq.LoadOptions" />
+
+           that specifies white space behavior, and whether to load base URI and line information.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Name">
       <MemberSignature Language="C#" Value="public System.Xml.Linq.XName Name { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Linq.XName Name" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Linq.XName Name"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -950,7 +2042,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
+          <para
+            >Setting this property will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -959,8 +2059,14 @@
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override System.Xml.XmlNodeType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.XmlNodeType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Xml.XmlNodeType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.XmlNodeType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -972,7 +2078,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" /> contain a <see cref="P:System.Xml.Linq.XObject.NodeType" /> property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />. Your code can then test for the node type of each node in the collection.</para>
+          <para
+            >Because all classes that derive from <see
+             cref="T:System.Xml.Linq.XObject" />
+
+             contain a <see
+             cref="P:System.Xml.Linq.XObject.NodeType" />
+
+             property, you can write code that operates on collections of concrete subclass of <see
+             cref="T:System.Xml.Linq.XObject" />
+
+            . Your code can then test for the node type of each node in the collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -981,8 +2098,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static bool op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1006,8 +2129,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static DateTime op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.DateTime op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static DateTime op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.DateTime op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1031,8 +2160,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static DateTimeOffset op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.DateTimeOffset op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static DateTimeOffset op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.DateTimeOffset op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1056,8 +2191,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static decimal op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Decimal op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static decimal op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Decimal op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1081,8 +2222,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static double op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname float64 op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static double op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname float64 op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1106,8 +2253,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Guid op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Guid op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Guid op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Guid op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1131,8 +2284,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static int op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname int32 op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname int32 op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1156,8 +2315,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static long op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname int64 op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static long op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname int64 op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1181,8 +2346,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;bool&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;bool&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<bool> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<bool> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1206,8 +2377,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;DateTime&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;valuetype System.DateTime&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<DateTime> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<valuetype System.DateTime> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1231,8 +2408,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;DateTimeOffset&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<DateTimeOffset> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<valuetype System.DateTimeOffset> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1256,8 +2439,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;decimal&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;valuetype System.Decimal&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<decimal> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<valuetype System.Decimal> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1281,8 +2470,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;double&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;float64&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<double> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<float64> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1306,8 +2501,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;Guid&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;valuetype System.Guid&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<Guid> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<valuetype System.Guid> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1331,8 +2532,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;int&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;int32&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<int> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<int32> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1356,8 +2563,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;long&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;int64&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<long> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<int64> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1381,8 +2594,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;float&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;float32&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<float> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<float32> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1406,8 +2625,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;TimeSpan&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<TimeSpan> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<valuetype System.TimeSpan> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1431,8 +2656,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;uint&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;unsigned int32&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<uint> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<unsigned int32> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1456,8 +2687,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Nullable&lt;ulong&gt; op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Nullable`1&lt;unsigned int64&gt; op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Nullable<ulong> op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Nullable`1<unsigned int64> op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1481,8 +2718,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static float op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname float32 op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static float op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname float32 op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1506,8 +2749,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static string op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname string op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname string op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1531,8 +2780,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static TimeSpan op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.TimeSpan op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static TimeSpan op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.TimeSpan op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1556,8 +2811,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static uint op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname unsigned int32 op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static uint op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname unsigned int32 op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1581,8 +2842,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static ulong op_Explicit (System.Xml.Linq.XElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname unsigned int64 op_Explicit(class System.Xml.Linq.XElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static ulong op_Explicit (System.Xml.Linq.XElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname unsigned int64 op_Explicit(class System.Xml.Linq.XElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1606,8 +2873,14 @@
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Parse (string text);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Parse(string text) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Parse (string text);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Parse(string text) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1621,24 +2894,79 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method does not preserve white space. If you want to preserve white space in the XML tree, use the overload of the <see cref="Overload:System.Xml.Linq.XElement.Parse" /> method that takes <see cref="T:System.Xml.Linq.LoadOptions" /> as a parameter. For more information, see <format type="text/html"><a href="093a7169-a04e-4638-b08c-d1cb98aa650d">Preserving White Space while Loading or Parsing XML</a></format> and <format type="text/html"><a href="fb146217-0a49-4efc-ac84-7265b91d3939">Preserving White Space While Serializing</a></format>.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
+          <para
+            >This method does not preserve white space. If you want to preserve white space in the XML tree, use the overload of the <see
+             cref="Overload:System.Xml.Linq.XElement.Parse" />
+
+             method that takes <see
+             cref="T:System.Xml.Linq.LoadOptions" />
+
+             as a parameter. For more information, see <format
+             type="text/html">
+              <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
+                >Preserving White Space while Loading or Parsing XML</a
+              >
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
+                >Preserving White Space While Serializing</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Load an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para>
+          <para
+            >Load an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a string that contains XML.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> populated from the string that contains XML.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             populated from the string that contains XML.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains XML.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains XML.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement Parse (string text, System.Xml.Linq.LoadOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement Parse(string text, valuetype System.Xml.Linq.LoadOptions options) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.Linq.XElement Parse (string text, System.Xml.Linq.LoadOptions options);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Xml.Linq.XElement Parse(string text, valuetype System.Xml.Linq.LoadOptions options) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1653,33 +2981,136 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para>
-          <para>If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para>
-          <para>If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para>
-          <para>For more information, see <format type="text/html"><a href="093a7169-a04e-4638-b08c-d1cb98aa650d">Preserving White Space while Loading or Parsing XML</a></format> and <format type="text/html"><a href="fb146217-0a49-4efc-ac84-7265b91d3939">Preserving White Space While Serializing</a></format>.</para>
-          <para>Setting <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> will have no effect when parsing from a <see cref="T:System.String" />.</para>
-          <para>The <see cref="T:System.Xml.XmlReader" /> may have a valid line information or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />, the line information will be set in the XML tree from the line information that is reported by the <see cref="T:System.Xml.XmlReader" />.</para>
-          <para>There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para>
+          <para
+            >If the source XML is indented, setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             causes the reader to read all white space in the source XML. Nodes of type <see
+             cref="T:System.Xml.Linq.XText" />
+
+             are created for both significant and insignificant white space.</para
+          >
+          <para
+            >If the source XML is indented, not setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para
+          >
+          <para
+            >If the source XML is not indented, setting the <see
+             cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" />
+
+             flag in <paramref
+             name="options" />
+
+             has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para
+          >
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
+                >Preserving White Space while Loading or Parsing XML</a
+              >
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
+                >Preserving White Space While Serializing</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >Setting <see
+             cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
+
+             will have no effect when parsing from a <see
+             cref="T:System.String" />
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="T:System.Xml.XmlReader" />
+
+             may have a valid line information or not. If you set <see
+             cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+            , the line information will be set in the XML tree from the line information that is reported by the <see
+             cref="T:System.Xml.XmlReader" />
+
+            .</para
+          >
+          <para
+            >There is a performance penalty if you set the <see
+             cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+             flag.</para
+          >
           <para>The line information is accurate immediately after loading the XML document. If you modify the XML tree after loading the document, the line information may become meaningless.</para>
-          <para>LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
+          <para
+            >LINQ to XML's loading functionality is built upon <see
+             cref="T:System.Xml.XmlReader" />
+
+            . Therefore, you might catch any exceptions that are thrown by the <see
+             cref="Overload:System.Xml.XmlReader.Create" />
+
+             overload methods and the <see
+             cref="T:System.Xml.XmlReader" />
+
+             methods that read and parse the document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Load an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML, optionally preserving white space and retaining line information.</para>
+          <para
+            >Load an <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             from a string that contains XML, optionally preserving white space and retaining line information.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Linq.XElement" /> populated from the string that contains XML.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             populated from the string that contains XML.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains XML.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains XML.</param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.Linq.LoadOptions" />
+
+           that specifies white space behavior, and whether to load base URI and line information.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveAll">
       <MemberSignature Language="C#" Value="public void RemoveAll ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAll() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void RemoveAll() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1691,17 +3122,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
+          <para
+            >This method will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes nodes and attributes from this <see cref="T:System.Xml.Linq.XElement" />.</para>
+          <para
+            >Removes nodes and attributes from this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="RemoveAttributes">
       <MemberSignature Language="C#" Value="public void RemoveAttributes ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAttributes() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void RemoveAttributes() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1713,17 +3160,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
+          <para
+            >This method will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the attributes of this <see cref="T:System.Xml.Linq.XElement" />.</para>
+          <para
+            >Removes the attributes of this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReplaceAll">
       <MemberSignature Language="C#" Value="public void ReplaceAll (object content);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReplaceAll(object content) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void ReplaceAll(object content) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1737,22 +3200,50 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method first removes existing content and attributes. It then adds the specified <paramref name="content" />.</para>
+          <para
+            >This method first removes existing content and attributes. It then adds the specified <paramref
+             name="content" />
+
+            .</para
+          >
           <para>This method uses snapshot semantics—that is, it creates a separate copy of the new content before replacing the contents of the current element with the new content. This means that you can query the contents of the current element and use the results of the query as the specified new content.</para>
-          <para>For details about the valid content that can be passed to this function, see <format type="text/html"><a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae">Valid Content of XElement and XDocument Objects</a></format>.</para>
-          <para>This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
+          <para
+            >For details about the valid content that can be passed to this function, see <format
+             type="text/html">
+              <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
+                >Valid Content of XElement and XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >This method will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Replaces the child nodes and the attributes of this element with the specified content.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />The content that will replace the child nodes and attributes of this element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The content that will replace the child nodes and attributes of this element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReplaceAll">
       <MemberSignature Language="C#" Value="public void ReplaceAll (object[] content);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReplaceAll(object[] content) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void ReplaceAll(object[] content) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1772,22 +3263,50 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method first removes existing content and attributes. It then adds the specified <paramref name="content" />.</para>
+          <para
+            >This method first removes existing content and attributes. It then adds the specified <paramref
+             name="content" />
+
+            .</para
+          >
           <para>This method uses snapshot semantics—that is, it creates a separate copy of the new content before replacing the contents of the current element with the new content. This means that you can query the contents of the current element and use the results of the query as the specified new content.</para>
-          <para>For details about the valid content that can be passed to this function, see <format type="text/html"><a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae">Valid Content of XElement and XDocument Objects</a></format>.</para>
-          <para>This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
+          <para
+            >For details about the valid content that can be passed to this function, see <format
+             type="text/html">
+              <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
+                >Valid Content of XElement and XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >This method will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Replaces the child nodes and the attributes of this element with the specified content.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />A parameter list of content objects.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A parameter list of content objects.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReplaceAttributes">
       <MemberSignature Language="C#" Value="public void ReplaceAttributes (object content);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReplaceAttributes(object content) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void ReplaceAttributes(object content) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1801,21 +3320,49 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method first removes existing attributes. It then adds the specified <paramref name="content" />.</para>
-          <para>For details about the valid content that can be passed to this function, see <format type="text/html"><a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae">Valid Content of XElement and XDocument Objects</a></format>.</para>
-          <para>This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
+          <para
+            >This method first removes existing attributes. It then adds the specified <paramref
+             name="content" />
+
+            .</para
+          >
+          <para
+            >For details about the valid content that can be passed to this function, see <format
+             type="text/html">
+              <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
+                >Valid Content of XElement and XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >This method will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Replaces the attributes of this element with the specified content.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />The content that will replace the attributes of this element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The content that will replace the attributes of this element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReplaceAttributes">
       <MemberSignature Language="C#" Value="public void ReplaceAttributes (object[] content);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReplaceAttributes(object[] content) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void ReplaceAttributes(object[] content) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1835,21 +3382,49 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method first removes existing attributes. It then adds the specified <paramref name="content" />.</para>
-          <para>For details about the valid content that can be passed to this function, see <format type="text/html"><a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae">Valid Content of XElement and XDocument Objects</a></format>.</para>
-          <para>This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
+          <para
+            >This method first removes existing attributes. It then adds the specified <paramref
+             name="content" />
+
+            .</para
+          >
+          <para
+            >For details about the valid content that can be passed to this function, see <format
+             type="text/html">
+              <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
+                >Valid Content of XElement and XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
+          <para
+            >This method will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Replaces the attributes of this element with the specified content.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />A parameter list of content objects.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A parameter list of content objects.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
       <MemberSignature Language="C#" Value="public void Save (System.IO.Stream stream);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(class System.IO.Stream stream) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(class System.IO.Stream stream) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1864,20 +3439,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The serialized XML will be indented. All insignificant white space will be removed, and additional white space will be added so that the XML will be properly indented. The behavior of this method is that insignificant white space will not be preserved.</para>
-          <para>If you want to control white space, use the overload of <see cref="Overload:System.Xml.Linq.XElement.Save" /> that takes <see cref="T:System.Xml.Linq.SaveOptions" /> as a parameter. Use the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> option to save unindented XML. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para>
-          <para>Use the <see cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" /> option if you want to remove duplicate namespace declarations.</para>
+          <para
+            >If you want to control white space, use the overload of <see
+             cref="Overload:System.Xml.Linq.XElement.Save" />
+
+             that takes <see
+             cref="T:System.Xml.Linq.SaveOptions" />
+
+             as a parameter. Use the <see
+             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+
+             option to save unindented XML. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
+          >
+          <para
+            >Use the <see
+             cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+
+             option if you want to remove duplicate namespace declarations.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Outputs this <see cref="T:System.Xml.Linq.XElement" /> to the specified <see cref="T:System.IO.Stream" />.</para>
+          <para
+            >Outputs this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             to the specified <see
+             cref="T:System.IO.Stream" />
+
+            .</para
+          >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The stream to output this <see cref="T:System.Xml.Linq.XElement" /> to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The stream to output this <see
+           cref="T:System.Xml.Linq.XElement" />
+
+           to.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
       <MemberSignature Language="C#" Value="public void Save (System.IO.TextWriter textWriter);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(class System.IO.TextWriter textWriter) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(class System.IO.TextWriter textWriter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1892,19 +3500,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The serialized XML will be indented. All insignificant white space will be removed, and additional white space will be added so that the XML will be properly indented. The behavior of this method is that white space will not be preserved.</para>
-          <para>If you want to control white space, use the overload of <see cref="Overload:System.Xml.Linq.XElement.Save" /> that allows you to specify <see cref="T:System.Xml.Linq.SaveOptions" /> as a parameter. For more information, see <format type="text/html"><a href="093a7169-a04e-4638-b08c-d1cb98aa650d">Preserving White Space while Loading or Parsing XML</a></format> and <format type="text/html"><a href="fb146217-0a49-4efc-ac84-7265b91d3939">Preserving White Space While Serializing</a></format>.</para>
+          <para
+            >If you want to control white space, use the overload of <see
+             cref="Overload:System.Xml.Linq.XElement.Save" />
+
+             that allows you to specify <see
+             cref="T:System.Xml.Linq.SaveOptions" />
+
+             as a parameter. For more information, see <format
+             type="text/html">
+              <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
+                >Preserving White Space while Loading or Parsing XML</a
+              >
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
+                >Preserving White Space While Serializing</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Serialize this element to a <see cref="T:System.IO.TextWriter" />.</para>
+          <para
+            >Serialize this element to a <see
+             cref="T:System.IO.TextWriter" />
+
+            .</para
+          >
         </summary>
         <param name="textWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.IO.TextWriter" /> that the <see cref="T:System.Xml.Linq.XElement" /> will be written to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.IO.TextWriter" />
+
+           that the <see
+           cref="T:System.Xml.Linq.XElement" />
+
+           will be written to.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
       <MemberSignature Language="C#" Value="public void Save (string fileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(string fileName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(string fileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1919,19 +3566,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The serialized XML will be indented. All insignificant white space will be removed, and additional white space will be added so that the XML will be properly indented. The behavior of this method is that insignificant white space nodes in the XML tree will not be preserved.</para>
-          <para>If you want to control white space, use the overload of <see cref="Overload:System.Xml.Linq.XElement.Save" /> that allows you to specify <see cref="T:System.Xml.Linq.SaveOptions" /> as a parameter. For more information, see <format type="text/html"><a href="093a7169-a04e-4638-b08c-d1cb98aa650d">Preserving White Space while Loading or Parsing XML</a></format> and <format type="text/html"><a href="fb146217-0a49-4efc-ac84-7265b91d3939">Preserving White Space While Serializing</a></format>.</para>
+          <para
+            >If you want to control white space, use the overload of <see
+             cref="Overload:System.Xml.Linq.XElement.Save" />
+
+             that allows you to specify <see
+             cref="T:System.Xml.Linq.SaveOptions" />
+
+             as a parameter. For more information, see <format
+             type="text/html">
+              <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
+                >Preserving White Space while Loading or Parsing XML</a
+              >
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
+                >Preserving White Space While Serializing</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Serialize this element to a file.</para>
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the name of the file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the name of the file.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
       <MemberSignature Language="C#" Value="public void Save (System.Xml.XmlWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(class System.Xml.XmlWriter writer) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(class System.Xml.XmlWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1946,15 +3624,35 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Serialize this element to an <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Serialize this element to an <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.XmlWriter" /> that the <see cref="T:System.Xml.Linq.XElement" /> will be written to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.XmlWriter" />
+
+           that the <see
+           cref="T:System.Xml.Linq.XElement" />
+
+           will be written to.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
-      <MemberSignature Language="C#" Value="public void Save (System.IO.Stream stream, System.Xml.Linq.SaveOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(class System.IO.Stream stream, valuetype System.Xml.Linq.SaveOptions options) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Save (System.IO.Stream stream, System.Xml.Linq.SaveOptions options);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(class System.IO.Stream stream, valuetype System.Xml.Linq.SaveOptions options) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1969,23 +3667,70 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default the <paramref name="options" /> are set to <see cref="F:System.Xml.Linq.SaveOptions.None" />. This option will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. </para>
-          <para>If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para>
-          <para>Use <see cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" /> option if you want to remove duplicate namespace declarations.</para>
+          <para
+            >By default the <paramref
+             name="options" />
+
+             are set to <see
+             cref="F:System.Xml.Linq.SaveOptions.None" />
+
+            . This option will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. </para
+          >
+          <para
+            >If you want to save unindented XML, specify the <see
+             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+
+             flag for <paramref
+             name="options" />
+
+            . This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
+          >
+          <para
+            >Use <see
+             cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+
+             option if you want to remove duplicate namespace declarations.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Outputs this <see cref="T:System.Xml.Linq.XElement" /> to the specified <see cref="T:System.IO.Stream" />, optionally specifying formatting behavior.</para>
+          <para
+            >Outputs this <see
+             cref="T:System.Xml.Linq.XElement" />
+
+             to the specified <see
+             cref="T:System.IO.Stream" />
+
+            , optionally specifying formatting behavior.</para
+          >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The stream to output this <see cref="T:System.Xml.Linq.XElement" /> to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The stream to output this <see
+           cref="T:System.Xml.Linq.XElement" />
+
+           to.</param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.Linq.SaveOptions" /> object that specifies formatting behavior.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.Linq.SaveOptions" />
+
+           object that specifies formatting behavior.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
-      <MemberSignature Language="C#" Value="public void Save (System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(class System.IO.TextWriter textWriter, valuetype System.Xml.Linq.SaveOptions options) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Save (System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(class System.IO.TextWriter textWriter, valuetype System.Xml.Linq.SaveOptions options) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2000,23 +3745,84 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white space exactly as represented in the XML tree.</para>
-          <para>If you want to save indented XML, do not specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see cref="Overload:System.Xml.Linq.XElement.Save" /> methods that do not take <paramref name="options" /> as a parameter.</para>
-          <para>For more information, see <format type="text/html"><a href="093a7169-a04e-4638-b08c-d1cb98aa650d">Preserving White Space while Loading or Parsing XML</a></format> and <format type="text/html"><a href="fb146217-0a49-4efc-ac84-7265b91d3939">Preserving White Space While Serializing</a></format>.</para>
+          <para
+            >If you want to save unindented XML, specify the <see
+             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+
+             flag for <paramref
+             name="options" />
+
+            . This will cause the writer to write all white space exactly as represented in the XML tree.</para
+          >
+          <para
+            >If you want to save indented XML, do not specify the <see
+             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+
+             flag for <paramref
+             name="options" />
+
+            . This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see
+             cref="Overload:System.Xml.Linq.XElement.Save" />
+
+             methods that do not take <paramref
+             name="options" />
+
+             as a parameter.</para
+          >
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
+                >Preserving White Space while Loading or Parsing XML</a
+              >
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
+                >Preserving White Space While Serializing</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Serialize this element to a <see cref="T:System.IO.TextWriter" />, optionally disabling formatting.</para>
+          <para
+            >Serialize this element to a <see
+             cref="T:System.IO.TextWriter" />
+
+            , optionally disabling formatting.</para
+          >
         </summary>
         <param name="textWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.IO.TextWriter" /> to output the XML to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.IO.TextWriter" />
+
+           to output the XML to.</param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.Linq.SaveOptions" /> that specifies formatting behavior.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.Linq.SaveOptions" />
+
+           that specifies formatting behavior.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
-      <MemberSignature Language="C#" Value="public void Save (string fileName, System.Xml.Linq.SaveOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(string fileName, valuetype System.Xml.Linq.SaveOptions options) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Save (string fileName, System.Xml.Linq.SaveOptions options);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(string fileName, valuetype System.Xml.Linq.SaveOptions options) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2031,23 +3837,79 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white space exactly as represented in the XML tree.</para>
-          <para>If you want to save indented XML, do not specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see cref="Overload:System.Xml.Linq.XElement.Save" /> methods that do not take <paramref name="options" /> as a parameter.</para>
-          <para>For more information, see <format type="text/html"><a href="093a7169-a04e-4638-b08c-d1cb98aa650d">Preserving White Space while Loading or Parsing XML</a></format> and <format type="text/html"><a href="fb146217-0a49-4efc-ac84-7265b91d3939">Preserving White Space While Serializing</a></format>.</para>
+          <para
+            >If you want to save unindented XML, specify the <see
+             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+
+             flag for <paramref
+             name="options" />
+
+            . This will cause the writer to write all white space exactly as represented in the XML tree.</para
+          >
+          <para
+            >If you want to save indented XML, do not specify the <see
+             cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" />
+
+             flag for <paramref
+             name="options" />
+
+            . This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see
+             cref="Overload:System.Xml.Linq.XElement.Save" />
+
+             methods that do not take <paramref
+             name="options" />
+
+             as a parameter.</para
+          >
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
+                >Preserving White Space while Loading or Parsing XML</a
+              >
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
+                >Preserving White Space While Serializing</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Serialize this element to a file, optionally disabling formatting.</para>
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the name of the file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the name of the file.</param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Xml.Linq.SaveOptions" /> that specifies formatting behavior.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Xml.Linq.SaveOptions" />
+
+           that specifies formatting behavior.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetAttributeValue">
-      <MemberSignature Language="C#" Value="public void SetAttributeValue (System.Xml.Linq.XName name, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetAttributeValue(class System.Xml.Linq.XName name, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetAttributeValue (System.Xml.Linq.XName name, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetAttributeValue(class System.Xml.Linq.XName name, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2062,24 +3924,62 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is designed to make it easy to maintain a list of name/value pairs as a set of attributes. When maintaining the list, you need to add pairs, modify pairs, or delete pairs. If you call this method passing a name that does not exist as an attribute, this method creates an attribute for you. If you call this method passing the name of an existing attribute, this method modifies the value of the attribute to the value that you specify. If you pass null for <paramref name="value" />, this method removes the attribute.</para>
-          <para>This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
+          <para
+            >This method is designed to make it easy to maintain a list of name/value pairs as a set of attributes. When maintaining the list, you need to add pairs, modify pairs, or delete pairs. If you call this method passing a name that does not exist as an attribute, this method creates an attribute for you. If you call this method passing the name of an existing attribute, this method modifies the value of the attribute to the value that you specify. If you pass null for <paramref
+             name="value" />
+
+            , this method removes the attribute.</para
+          >
+          <para
+            >This method will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
           <para>The value is assigned to the attribute with the specified name. If no attribute with the specified name exists, a new attribute is added. If the value is null, the attribute with the specified name, if any, is deleted.</para>
-          <para>For more information, see <format type="text/html"><a href="fe9798bf-b5e2-4a3c-a86c-7f8638912691">Maintaining Name/Value Pairs</a></format>.</para>
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="fe9798bf-b5e2-4a3c-a86c-7f8638912691">Maintaining Name/Value Pairs</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the value of an attribute, adds an attribute, or removes an attribute. </para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the attribute to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XName" />
+
+           that contains the name of the attribute to change.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign to the attribute. The attribute is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XAttribute.Value" /> property of the attribute.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign to the attribute. The attribute is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see
+           cref="P:System.Xml.Linq.XAttribute.Value" />
+
+           property of the attribute.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetElementValue">
-      <MemberSignature Language="C#" Value="public void SetElementValue (System.Xml.Linq.XName name, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetElementValue(class System.Xml.Linq.XName name, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetElementValue (System.Xml.Linq.XName name, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetElementValue(class System.Xml.Linq.XName name, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2094,25 +3994,60 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is designed to make it easy to maintain a list of name/value pairs as a set of children elements. When maintaining the list, you need to add pairs, modify pairs, or delete pairs. If you call this method passing a name that does not exist as a child element, this method creates a child element for you. If you call this method passing the name of an existing child element, this method modifies the value of the child element to the value that you specify. If you pass null for <paramref name="value" />, this method removes the child element.</para>
+          <para
+            >This method is designed to make it easy to maintain a list of name/value pairs as a set of children elements. When maintaining the list, you need to add pairs, modify pairs, or delete pairs. If you call this method passing a name that does not exist as a child element, this method creates a child element for you. If you call this method passing the name of an existing child element, this method modifies the value of the child element to the value that you specify. If you pass null for <paramref
+             name="value" />
+
+            , this method removes the child element.</para
+          >
           <para>This method will raise events.</para>
           <para>The value is assigned to the first child element with the specified name. If no child element with the specified name exists, a new child element is added. If the value is null, the first child element with the specified name, if any, is deleted.</para>
-          <para>This method does not add child nodes or attributes to the specified child element. This method throws an exception if any object that derives from <see cref="T:System.Xml.Linq.XObject" /> is passed as <paramref name="value" />.</para>
-          <para>For more information, see <format type="text/html"><a href="fe9798bf-b5e2-4a3c-a86c-7f8638912691">Maintaining Name/Value Pairs</a></format>.</para>
+          <para
+            >This method does not add child nodes or attributes to the specified child element. This method throws an exception if any object that derives from <see
+             cref="T:System.Xml.Linq.XObject" />
+
+             is passed as <paramref
+             name="value" />
+
+            .</para
+          >
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="fe9798bf-b5e2-4a3c-a86c-7f8638912691">Maintaining Name/Value Pairs</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the value of a child element, adds a child element, or removes a child element.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the child element to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XName" />
+
+           that contains the name of the child element to change.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign to the child element. The child element is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XElement.Value" /> property of the child element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign to the child element. The child element is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see
+           cref="P:System.Xml.Linq.XElement.Value" />
+
+           property of the child element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetValue">
       <MemberSignature Language="C#" Value="public void SetValue (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetValue(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetValue(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2126,20 +4061,48 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
-          <para>It is invalid to pass an instance of a class that derives from <see cref="T:System.Xml.Linq.XObject" />, such as <see cref="T:System.Xml.Linq.XElement" />.</para>
+          <para
+            >This method will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
+          <para
+            >It is invalid to pass an instance of a class that derives from <see
+             cref="T:System.Xml.Linq.XObject" />
+
+            , such as <see
+             cref="T:System.Xml.Linq.XElement" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the value of this element.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign to this element. The value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XElement.Value" /> property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign to this element. The value is converted to its string representation and assigned to the <see
+           cref="P:System.Xml.Linq.XElement.Value" />
+
+           property.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.GetSchema">
-      <MemberSignature Language="C#" Value="System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Xml.Schema.XmlSchema System.Xml.Serialization.IXmlSerializable.GetSchema() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Xml.Schema.XmlSchema System.Xml.Serialization.IXmlSerializable.GetSchema() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2151,8 +4114,22 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is part of implementation of the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface.</para>
-          <para>This method is used internally for serializing object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format type="text/html"><a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5">Serializing Object Graphs that Contain XElement or XDocument Objects</a></format>.</para>
+          <para
+            >This method is part of implementation of the <see
+             cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+             interface.</para
+          >
+          <para
+            >This method is used internally for serializing object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format
+             type="text/html">
+              <a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5"
+                >Serializing Object Graphs that Contain XElement or XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2160,13 +4137,30 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.Schema.XmlSchema" />
+
+             that describes the XML representation of the object that is produced by the <see
+             cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
+
+             method and consumed by the <see
+             cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+
+             method.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.ReadXml">
-      <MemberSignature Language="C#" Value="void IXmlSerializable.ReadXml (System.Xml.XmlReader reader);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Xml.Serialization.IXmlSerializable.ReadXml(class System.Xml.XmlReader reader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IXmlSerializable.ReadXml (System.Xml.XmlReader reader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Xml.Serialization.IXmlSerializable.ReadXml(class System.Xml.XmlReader reader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2180,20 +4174,46 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is part of implementation of the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface.</para>
-          <para>This method is used internally for serializing object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format type="text/html"><a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5">Serializing Object Graphs that Contain XElement or XDocument Objects</a></format>.</para>
+          <para
+            >This method is part of implementation of the <see
+             cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+             interface.</para
+          >
+          <para
+            >This method is used internally for serializing object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format
+             type="text/html">
+              <a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5"
+                >Serializing Object Graphs that Contain XElement or XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Generates an object from its XML representation.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlReader" /> from which the object is deserialized.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlReader" />
+
+           from which the object is deserialized.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.WriteXml">
-      <MemberSignature Language="C#" Value="void IXmlSerializable.WriteXml (System.Xml.XmlWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Xml.Serialization.IXmlSerializable.WriteXml(class System.Xml.XmlWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IXmlSerializable.WriteXml (System.Xml.XmlWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Xml.Serialization.IXmlSerializable.WriteXml(class System.Xml.XmlWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2207,14 +4227,29 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is used internally for marshaling object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format type="text/html"><a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5">Serializing Object Graphs that Contain XElement or XDocument Objects</a></format>.</para>
+          <para
+            >This method is used internally for marshaling object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format
+             type="text/html">
+              <a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5"
+                >Serializing Object Graphs that Contain XElement or XDocument Objects</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Converts an object into its XML representation.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlWriter" /> to which this object is serialized.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlWriter" />
+
+           to which this object is serialized.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -2232,8 +4267,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Using this property, you can get or set the value of an element.</para>
-          <para>Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
-          <para>If you want to get the value of an element but you are not sure that it exists, it is more convenient to use the explicit conversion operators, and assign the element to a nullable type such as string or <see cref="T:System.Nullable`1" /> of <see cref="T:System.Int32" />. If the element does not exist, the nullable type is set to null. By contrast, if you want to use this property, you must make sure that the <see cref="M:System.Xml.Linq.XContainer.Element(System.Xml.Linq.XName)" /> method does not return null before you access this property.</para>
+          <para
+            >Setting this property will raise the <see
+             cref="E:System.Xml.Linq.XObject.Changed" />
+
+             and the <see
+             cref="E:System.Xml.Linq.XObject.Changing" />
+
+             events.</para
+          >
+          <para
+            >If you want to get the value of an element but you are not sure that it exists, it is more convenient to use the explicit conversion operators, and assign the element to a nullable type such as string or <see
+             cref="T:System.Nullable`1" />
+
+             of <see
+             cref="T:System.Int32" />
+
+            . If the element does not exist, the nullable type is set to null. By contrast, if you want to use this property, you must make sure that the <see
+             cref="M:System.Xml.Linq.XContainer.Element(System.Xml.Linq.XName)" />
+
+             method does not return null before you access this property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2242,8 +4296,14 @@
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
-      <MemberSignature Language="C#" Value="public override void WriteTo (System.Xml.XmlWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void WriteTo(class System.Xml.XmlWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void WriteTo (System.Xml.XmlWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void WriteTo(class System.Xml.XmlWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -2258,10 +4318,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Write this element to an <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Write this element to an <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.XmlWriter" /> into which this method will write.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.XmlWriter" />
+
+           into which this method will write.</param
+        >
       </Docs>
     </Member>
   </Members>

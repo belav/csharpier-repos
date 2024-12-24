@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="LocalServiceSecuritySettingsElement" FullName="System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement">
-  <TypeSignature Language="C#" Value="public sealed class LocalServiceSecuritySettingsElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed LocalServiceSecuritySettingsElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="LocalServiceSecuritySettingsElement"
+  FullName="System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class LocalServiceSecuritySettingsElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed LocalServiceSecuritySettingsElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public LocalServiceSecuritySettingsElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,7 +42,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -60,7 +77,10 @@
     </Member>
     <Member MemberName="InactivityTimeout">
       <MemberSignature Language="C#" Value="public TimeSpan InactivityTimeout { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan InactivityTimeout" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan InactivityTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -81,13 +101,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration of inactivity the channel waits before it times out. </para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that specifies the duration of inactivity the channel waits before it times out. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IssuedCookieLifetime">
       <MemberSignature Language="C#" Value="public TimeSpan IssuedCookieLifetime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan IssuedCookieLifetime" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan IssuedCookieLifetime"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -111,7 +139,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the lifetime issued to all new security cookies.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that specifies the lifetime issued to all new security cookies.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -144,7 +177,10 @@
     </Member>
     <Member MemberName="MaxClockSkew">
       <MemberSignature Language="C#" Value="public TimeSpan MaxClockSkew { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan MaxClockSkew" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan MaxClockSkew"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -164,11 +200,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When this property is set to the default, the receiver accepts messages with send-time timestamps up to 5 minutes later or earlier than the time the message was received. Messages that do not pass the send-time test are rejected. This setting is used in conjunction with the <see cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.ReplayWindow" /> property.</para>
+          <para
+            >When this property is set to the default, the receiver accepts messages with send-time timestamps up to 5 minutes later or earlier than the time the message was received. Messages that do not pass the send-time test are rejected. This setting is used in conjunction with the <see
+             cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.ReplayWindow" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the maximum time difference between the system clocks of the two communicating parties.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that specifies the maximum time difference between the system clocks of the two communicating parties.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -234,7 +280,10 @@
     </Member>
     <Member MemberName="NegotiationTimeout">
       <MemberSignature Language="C#" Value="public TimeSpan NegotiationTimeout { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan NegotiationTimeout" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan NegotiationTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -258,13 +307,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the maximum duration for the security negotiation phase between server and client.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that specifies the maximum duration for the security negotiation phase between server and client.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -279,8 +339,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReconnectTransportOnFailure">
-      <MemberSignature Language="C#" Value="public bool ReconnectTransportOnFailure { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool ReconnectTransportOnFailure" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool ReconnectTransportOnFailure { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool ReconnectTransportOnFailure"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -337,7 +403,10 @@
     </Member>
     <Member MemberName="ReplayWindow">
       <MemberSignature Language="C#" Value="public TimeSpan ReplayWindow { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan ReplayWindow" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan ReplayWindow"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -357,17 +426,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>After the time specified by this property, a message sent with the same nonce as the one sent before is not accepted. This property is used in conjunction with the <see cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.MaxClockSkew" /> property to prevent replay attacks. An attacker can replay a message after its replay window has expired. This message, however, fails the maxClockSkew test that rejects messages with send-time timestamps up to a specified time later or earlier than the time the message was received. </para>
+          <para
+            >After the time specified by this property, a message sent with the same nonce as the one sent before is not accepted. This property is used in conjunction with the <see
+             cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.MaxClockSkew" />
+
+             property to prevent replay attacks. An attacker can replay a message after its replay window has expired. This message, however, fails the maxClockSkew test that rejects messages with send-time timestamps up to a specified time later or earlier than the time the message was received. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration in which individual message nonces are valid.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that specifies the duration in which individual message nonces are valid.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SessionKeyRenewalInterval">
-      <MemberSignature Language="C#" Value="public TimeSpan SessionKeyRenewalInterval { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan SessionKeyRenewalInterval" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan SessionKeyRenewalInterval { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan SessionKeyRenewalInterval"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -388,13 +473,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration after which the initiator renews the key for the security session.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that specifies the duration after which the initiator renews the key for the security session.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SessionKeyRolloverInterval">
-      <MemberSignature Language="C#" Value="public TimeSpan SessionKeyRolloverInterval { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan SessionKeyRolloverInterval" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan SessionKeyRolloverInterval { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan SessionKeyRolloverInterval"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -418,13 +514,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the time interval a previous session key is valid on incoming messages during a key renewal. The default is "00:05:00".</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that specifies the time interval a previous session key is valid on incoming messages during a key renewal. The default is "00:05:00".</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="TimestampValidityDuration">
-      <MemberSignature Language="C#" Value="public TimeSpan TimestampValidityDuration { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan TimestampValidityDuration" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan TimestampValidityDuration { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan TimestampValidityDuration"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -445,7 +552,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration in which a time stamp is valid.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that specifies the duration in which a time stamp is valid.</para
+          >
         </summary>
       </Docs>
     </Member>

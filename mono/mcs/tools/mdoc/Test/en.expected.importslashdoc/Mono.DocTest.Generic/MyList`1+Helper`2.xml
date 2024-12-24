@@ -1,6 +1,9 @@
-<Type Name="MyList&lt;T&gt;+Helper&lt;U,V&gt;" FullName="Mono.DocTest.Generic.MyList&lt;T&gt;+Helper&lt;U,V&gt;">
-  <TypeSignature Language="C#" Value="public class MyList&lt;T&gt;.Helper&lt;U,V&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class nested public auto ansi beforefieldinit MyList`1/Helper`2&lt;T, U, V&gt; extends System.Object" />
+<Type Name="MyList<T>+Helper<U,V>" FullName="Mono.DocTest.Generic.MyList<T>+Helper<U,V>">
+  <TypeSignature Language="C#" Value="public class MyList<T>.Helper<U,V>" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public auto ansi beforefieldinit MyList`1/Helper`2<T, U, V> extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -22,15 +25,26 @@
   <Interfaces />
   <Docs>
     <typeparam name="U">Seriously!</typeparam>
-    <typeparam name="V">Too <c>many</c> docs!</typeparam>
+    <typeparam name="V"
+      >Too <c
+      >many</c>
+
+       docs!</typeparam
+    >
     <summary>To be added.</summary>
     <remarks>
-      <c>T:Mono.DocTest.MyList`1.Helper`2</c>.</remarks>
+      <c>T:Mono.DocTest.MyList`1.Helper`2</c>
+
+      .</remarks
+    >
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Helper ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -43,7 +57,10 @@
     </Member>
     <Member MemberName="UseT">
       <MemberSignature Language="C#" Value="public void UseT (T a, U b, V c);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void UseT(!T a, !U b, !V c) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void UseT(!T a, !U b, !V c) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -62,7 +79,10 @@
         <param name="c">cko</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.MyList`1.Helper`2.UseT(`0,`1,`2)</c>.</remarks>
+          <c>M:Mono.DocTest.MyList`1.Helper`2.UseT(`0,`1,`2)</c>
+
+          .</remarks
+        >
       </Docs>
     </Member>
   </Members>

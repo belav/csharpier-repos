@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DeploymentSection" FullName="System.Web.Configuration.DeploymentSection">
-  <TypeSignature Language="C#" Value="public sealed class DeploymentSection : System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DeploymentSection : System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -26,11 +29,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.DeploymentSection" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para>
+          <para
+            >This constructor is called by the ASP.NET configuration system. You obtain an instance of the <see
+             cref="T:System.Web.Configuration.DeploymentSection" />
+
+             class by using the <see
+             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.DeploymentSection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.DeploymentSection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -38,7 +54,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -69,9 +88,22 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When <see cref="P:System.Web.Configuration.DeploymentSection.Retail" /> is true, ASP.NET disables trace output, disables debug capabilities, and disables detailed system-generated error messages for remote users. For applications that have a customErrors element in the application Web.config file, the mode attribute is forced to On. These settings override any settings that are made in application Web.config files.</para>
+          <para
+            >When <see
+             cref="P:System.Web.Configuration.DeploymentSection.Retail" />
+
+             is true, ASP.NET disables trace output, disables debug capabilities, and disables detailed system-generated error messages for remote users. For applications that have a customErrors element in the application Web.config file, the mode attribute is forced to On. These settings override any settings that are made in application Web.config files.</para
+          >
           <block subset="none" type="note">
-            <para>When you use the retail setting, you should continue to set the debug attribute to false in application Web.config files that are deployed to the server. The debug setting disables request execution timeout, and this is not overridden by the retail setting. For more information, see. <see cref="http://www.hanselman.com/blog/MostCommonASPNETSupportIssuesReportingFromDeepInsideMicrosoftDeveloperSupport.aspx">Most Common ASP.NET Support issues - Reporting from deep inside Microsoft Developer Support</see> on Scott Hanselman's blog.</para>
+            <para
+              >When you use the retail setting, you should continue to set the debug attribute to false in application Web.config files that are deployed to the server. The debug setting disables request execution timeout, and this is not overridden by the retail setting. For more information, see. <see
+
+                cref="http://www.hanselman.com/blog/MostCommonASPNETSupportIssuesReportingFromDeepInsideMicrosoftDeveloperSupport.aspx"
+                >Most Common ASP.NET Support issues - Reporting from deep inside Microsoft Developer Support</see
+              >
+
+               on Scott Hanselman's blog.</para
+            >
           </block>
         </remarks>
         <summary>

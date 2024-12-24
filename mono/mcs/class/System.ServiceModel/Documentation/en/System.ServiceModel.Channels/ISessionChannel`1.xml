@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ISessionChannel&lt;TSession&gt;" FullName="System.ServiceModel.Channels.ISessionChannel&lt;TSession&gt;">
-  <TypeSignature Language="C#" Value="public interface ISessionChannel&lt;TSession&gt; where TSession : ISession" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ISessionChannel`1&lt;(class System.ServiceModel.Channels.ISession) TSession&gt;" />
+<Type
+  Name="ISessionChannel<TSession>"
+  FullName="System.ServiceModel.Channels.ISessionChannel<TSession>"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public interface ISessionChannel<TSession> where TSession : ISession"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ISessionChannel`1<(class System.ServiceModel.Channels.ISession) TSession>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,8 +27,39 @@
     <typeparam name="TSession">To be added.</typeparam>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.Channels.ISessionChannel`1" /> interface is the base interface for session-based channels. It associates the type of session with the channel by setting the generic type parameter <paramref name="TSession" /> to a type that implements the <see cref="T:System.ServiceModel.Channels.ISession" /> interface in a way that reflects its role in the message exchange. For example, the <paramref name="TSession" /> is set to <see cref="T:System.ServiceModel.Channels.IInputSession" /> for an incoming session on the receiving side of a one-way communication, to <see cref="T:System.ServiceModel.Channels.IOutputSession" /> for an outgoing session on the sending side of a one-way communication, and to <see cref="T:System.ServiceModel.Channels.IDuplexSession" /> for a duplex session for a bi-directional communication pattern. </para>
-      <para>The <see cref="T:System.ServiceModel.Channels.ISessionChannel`1" /> interface provides a <see cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" /> property to retrieve the session with which the channel is associated. </para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Channels.ISessionChannel`1" />
+
+         interface is the base interface for session-based channels. It associates the type of session with the channel by setting the generic type parameter <paramref
+         name="TSession" />
+
+         to a type that implements the <see
+         cref="T:System.ServiceModel.Channels.ISession" />
+
+         interface in a way that reflects its role in the message exchange. For example, the <paramref
+         name="TSession" />
+
+         is set to <see
+         cref="T:System.ServiceModel.Channels.IInputSession" />
+
+         for an incoming session on the receiving side of a one-way communication, to <see
+         cref="T:System.ServiceModel.Channels.IOutputSession" />
+
+         for an outgoing session on the sending side of a one-way communication, and to <see
+         cref="T:System.ServiceModel.Channels.IDuplexSession" />
+
+         for a duplex session for a bi-directional communication pattern. </para
+      >
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Channels.ISessionChannel`1" />
+
+         interface provides a <see
+         cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
+
+         property to retrieve the session with which the channel is associated. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -41,7 +81,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This returns the generic parameter <paramref name="TSession" /> used to define the interface.</para>
+          <para
+            >This returns the generic parameter <paramref
+             name="TSession" />
+
+             used to define the interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

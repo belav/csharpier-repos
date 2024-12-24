@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="InversePropertyAttribute" FullName="System.ComponentModel.DataAnnotations.Schema.InversePropertyAttribute">
+<Type
+  Name="InversePropertyAttribute"
+  FullName="System.ComponentModel.DataAnnotations.Schema.InversePropertyAttribute"
+>
   <TypeSignature Language="C#" Value="public class InversePropertyAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit InversePropertyAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit InversePropertyAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -25,7 +31,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public InversePropertyAttribute (string property);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string property) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string property) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,10 +46,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.Schema.InversePropertyAttribute" /> class using the specified property.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.Schema.InversePropertyAttribute" />
+
+             class using the specified property.</para
+          >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property of the attribute.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property of the attribute.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Property">

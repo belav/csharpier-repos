@@ -12,10 +12,58 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by <see cref="T:System.Windows.Forms.ContextMenu" />, <see cref="T:System.Windows.Forms.MainMenu" />, <see cref="T:System.Windows.Forms.ProgressBar" />, <see cref="T:System.Text.RegularExpressions.Regex" /> and <see cref="T:System.Windows.Forms.Control" />.</para>
-      <para>When you retrieve the value of the RightToLeft property from <see cref="T:System.Windows.Forms.ContextMenu" />, <see cref="T:System.Windows.Forms.MainMenu" />, and <see cref="T:System.Windows.Forms.ProgressBar" /> you will get the value of <see cref="T:System.Windows.Forms.RightToLeft" /> you assigned. In contrast, if you are deriving your own class from <see cref="T:System.Windows.Forms.Control" />, and you assign a value of Inherit to the <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property, the value returned will be the setting of the <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property of the parent control. If there is no parent control, it will return a value of No. Otherwise, it will return a value of Yes or No, depending on the value that you assigned to the <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property of your derived class.</para>
+      <para
+        >This enumeration is used by <see
+         cref="T:System.Windows.Forms.ContextMenu" />
+
+        , <see
+         cref="T:System.Windows.Forms.MainMenu" />
+
+        , <see
+         cref="T:System.Windows.Forms.ProgressBar" />
+
+        , <see
+         cref="T:System.Text.RegularExpressions.Regex" />
+
+         and <see
+         cref="T:System.Windows.Forms.Control" />
+
+        .</para
+      >
+      <para
+        >When you retrieve the value of the RightToLeft property from <see
+         cref="T:System.Windows.Forms.ContextMenu" />
+
+        , <see
+         cref="T:System.Windows.Forms.MainMenu" />
+
+        , and <see
+         cref="T:System.Windows.Forms.ProgressBar" />
+
+         you will get the value of <see
+         cref="T:System.Windows.Forms.RightToLeft" />
+
+         you assigned. In contrast, if you are deriving your own class from <see
+         cref="T:System.Windows.Forms.Control" />
+
+        , and you assign a value of Inherit to the <see
+         cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+         property, the value returned will be the setting of the <see
+         cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+         property of the parent control. If there is no parent control, it will return a value of No. Otherwise, it will return a value of Yes or No, depending on the value that you assigned to the <see
+         cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+         property of your derived class.</para
+      >
       <block subset="none" type="note">
-        <para>For more information about how enabling right-to-left alignment affects Windows Forms controls, see the <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property.</para>
+        <para
+          >For more information about how enabling right-to-left alignment affects Windows Forms controls, see the <see
+           cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+           property.</para
+        >
       </block>
     </remarks>
     <summary>

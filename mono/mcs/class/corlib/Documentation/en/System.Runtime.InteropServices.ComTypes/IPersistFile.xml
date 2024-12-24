@@ -21,7 +21,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For more information, see the existing documentation for IPersistFile and IPersist in the MSDN library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,7 +38,10 @@
   <Members>
     <Member MemberName="GetClassID">
       <MemberSignature Language="C#" Value="public void GetClassID (out Guid pClassID);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetClassID(valuetype System.Guid pClassID) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetClassID(valuetype System.Guid pClassID) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -41,7 +51,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="pClassID" Type="System.Guid&amp;" RefType="out" />
+        <Parameter Name="pClassID" Type="System.Guid&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="pClassID">To be added.</param>
@@ -52,7 +62,10 @@
     </Member>
     <Member MemberName="GetCurFile">
       <MemberSignature Language="C#" Value="public void GetCurFile (out string ppszFileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetCurFile(string ppszFileName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetCurFile(string ppszFileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,7 +75,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="ppszFileName" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="ppszFileName" Type="System.String&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="ppszFileName">To be added.</param>
@@ -73,7 +86,10 @@
     </Member>
     <Member MemberName="IsDirty">
       <MemberSignature Language="C#" Value="public int IsDirty ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 IsDirty() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 IsDirty() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,7 +117,10 @@
     </Member>
     <Member MemberName="Load">
       <MemberSignature Language="C#" Value="public void Load (string pszFileName, int dwMode);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Load(string pszFileName, int32 dwMode) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Load(string pszFileName, int32 dwMode) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -126,14 +145,29 @@
           <para>Opens the specified file and initializes an object from the file contents.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A zero-terminated string containing the absolute path of the file to open. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A zero-terminated string containing the absolute path of the file to open. </param
+        >
         <param name="dwMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref name="pszFileName" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref
+           name="pszFileName" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
-      <MemberSignature Language="C#" Value="public void Save (string pszFileName, bool fRemember);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Save(string pszFileName, bool fRemember) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Save (string pszFileName, bool fRemember);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Save(string pszFileName, bool fRemember) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -157,14 +191,26 @@
           <para>Saves a copy of the object into the specified file.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A zero-terminated string containing the absolute path of the file to which the object is saved. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A zero-terminated string containing the absolute path of the file to which the object is saved. </param
+        >
         <param name="fRemember">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to used the <paramref name="pszFileName" /> parameter as the current working file; otherwise false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to used the <paramref
+           name="pszFileName" />
+
+           parameter as the current working file; otherwise false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SaveCompleted">
       <MemberSignature Language="C#" Value="public void SaveCompleted (string pszFileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SaveCompleted(string pszFileName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void SaveCompleted(string pszFileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -187,7 +233,10 @@
           <para>Notifies the object that it can write to its file.</para>
         </summary>
         <param name="pszFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The absolute path of the file where the object was previously saved. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The absolute path of the file where the object was previously saved. </param
+        >
       </Docs>
     </Member>
   </Members>

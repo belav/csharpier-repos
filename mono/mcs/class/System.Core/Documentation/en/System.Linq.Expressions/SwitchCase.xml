@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SwitchCase" FullName="System.Linq.Expressions.SwitchCase">
   <TypeSignature Language="C#" Value="public sealed class SwitchCase" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SwitchCase extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SwitchCase extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,13 +22,24 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents one case of a <see cref="T:System.Linq.Expressions.SwitchExpression" />.</para>
+      <para
+        >Represents one case of a <see
+         cref="T:System.Linq.Expressions.SwitchExpression" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Body">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.Expression Body { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.Expression Body" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.Expression Body { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.Expression Body"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -43,8 +57,14 @@
       </Docs>
     </Member>
     <Member MemberName="TestValues">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;System.Linq.Expressions.Expression&gt; TestValues { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class System.Linq.Expressions.Expression&gt; TestValues" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> TestValues { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1<class System.Linq.Expressions.Expression> TestValues"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -57,13 +77,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the values of this case. This case is selected for execution when the <see cref="P:System.Linq.Expressions.SwitchExpression.SwitchValue" /> matches any of these values.</para>
+          <para
+            >Gets the values of this case. This case is selected for execution when the <see
+             cref="P:System.Linq.Expressions.SwitchExpression.SwitchValue" />
+
+             matches any of these values.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -76,17 +104,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.</para>
+          <para
+            >Returns a <see
+             cref="T:System.String" />
+
+             that represents the current <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that represents the current <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Update">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.SwitchCase Update (System.Collections.Generic.IEnumerable&lt;System.Linq.Expressions.Expression&gt; testValues, System.Linq.Expressions.Expression body);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Linq.Expressions.SwitchCase Update(class System.Collections.Generic.IEnumerable`1&lt;class System.Linq.Expressions.Expression&gt; testValues, class System.Linq.Expressions.Expression body) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.SwitchCase Update (System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression> testValues, System.Linq.Expressions.Expression body);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Linq.Expressions.SwitchCase Update(class System.Collections.Generic.IEnumerable`1<class System.Linq.Expressions.Expression> testValues, class System.Linq.Expressions.Expression body) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -95,7 +145,10 @@
         <ReturnType>System.Linq.Expressions.SwitchCase</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="testValues" Type="System.Collections.Generic.IEnumerable&lt;System.Linq.Expressions.Expression&gt;" />
+        <Parameter
+          Name="testValues"
+          Type="System.Collections.Generic.IEnumerable<System.Linq.Expressions.Expression>"
+        />
         <Parameter Name="body" Type="System.Linq.Expressions.Expression" />
       </Parameters>
       <Docs>
@@ -109,9 +162,21 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="testValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.SwitchCase.TestValues" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.SwitchCase.TestValues" />
+
+           property of the result.</param
+        >
         <param name="body">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.SwitchCase.Body" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.SwitchCase.Body" />
+
+           property of the result.</param
+        >
       </Docs>
     </Member>
   </Members>

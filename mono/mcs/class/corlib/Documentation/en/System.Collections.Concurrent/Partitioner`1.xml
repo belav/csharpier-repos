@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="Partitioner&lt;TSource&gt;" FullName="System.Collections.Concurrent.Partitioner&lt;TSource&gt;">
-  <TypeSignature Language="C#" Value="public abstract class Partitioner&lt;TSource&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit Partitioner`1&lt;TSource&gt; extends System.Object" />
+<Type Name="Partitioner<TSource>" FullName="System.Collections.Concurrent.Partitioner<TSource>">
+  <TypeSignature Language="C#" Value="public abstract class Partitioner<TSource>" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit Partitioner`1<TSource> extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +20,14 @@
     <typeparam name="TSource">To be added.</typeparam>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information, see <format type="text/html"><a href="96153688-9a01-47c4-8430-909cee9a2887">Custom Partitioners for PLINQ and TPL</a></format>.</para>
+      <para
+        >For more information, see <format
+         type="text/html">
+          <a href="96153688-9a01-47c4-8430-909cee9a2887">Custom Partitioners for PLINQ and TPL</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +37,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected Partitioner ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -42,8 +55,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetDynamicPartitions">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.Generic.IEnumerable&lt;TSource&gt; GetDynamicPartitions ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IEnumerable`1&lt;!TSource&gt; GetDynamicPartitions() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.Generic.IEnumerable<TSource> GetDynamicPartitions ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IEnumerable`1<!TSource> GetDynamicPartitions() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,8 +74,31 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para> The returned object implements the <see cref="T:System.Collections.Generic.IEnumerable`1" />interface. Calling <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" /> on the object creates another partition over the sequence.</para>
-          <para>  The <see cref="M:System.Collections.Concurrent.Partitioner`1.GetDynamicPartitions" /> method is only supported if the <see cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" /> property returns true. For more information, see <format type="text/html"><a href="96153688-9a01-47c4-8430-909cee9a2887">Custom Partitioners for PLINQ and TPL</a></format>. </para>
+          <para
+            > The returned object implements the <see
+             cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            interface. Calling <see
+             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+             on the object creates another partition over the sequence.</para
+          >
+          <para
+            >  The <see
+             cref="M:System.Collections.Concurrent.Partitioner`1.GetDynamicPartitions" />
+
+             method is only supported if the <see
+             cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+
+             property returns true. For more information, see <format
+             type="text/html">
+              <a href="96153688-9a01-47c4-8430-909cee9a2887"
+                >Custom Partitioners for PLINQ and TPL</a
+              >
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -69,8 +111,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetPartitions">
-      <MemberSignature Language="C#" Value="public abstract System.Collections.Generic.IList&lt;System.Collections.Generic.IEnumerator&lt;TSource&gt;&gt; GetPartitions (int partitionCount);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IList`1&lt;class System.Collections.Generic.IEnumerator`1&lt;!TSource&gt;&gt; GetPartitions(int32 partitionCount) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Collections.Generic.IList<System.Collections.Generic.IEnumerator<TSource>> GetPartitions (int partitionCount);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IList`1<class System.Collections.Generic.IEnumerator`1<!TSource>> GetPartitions(int32 partitionCount) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -84,7 +132,19 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A class that implements this method is expected to return exactly the number of partitions that are specified in <paramref name="partitionCount" />. If a partition contains no elements, then return an empty enumerator rather than null (Nothing in Visual Basic). For more information, see <format type="text/html"><a href="96153688-9a01-47c4-8430-909cee9a2887">Custom Partitioners for PLINQ and TPL</a></format>.</para>
+          <para
+            >A class that implements this method is expected to return exactly the number of partitions that are specified in <paramref
+             name="partitionCount" />
+
+            . If a partition contains no elements, then return an empty enumerator rather than null (Nothing in Visual Basic). For more information, see <format
+             type="text/html">
+              <a href="96153688-9a01-47c4-8430-909cee9a2887"
+                >Custom Partitioners for PLINQ and TPL</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -92,14 +152,25 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A list containing <paramref name="partitionCount" /> enumerators.</para>
+          <para
+            >A list containing <paramref
+             name="partitionCount" />
+
+             enumerators.</para
+          >
         </returns>
         <param name="partitionCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of partitions to create.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of partitions to create.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SupportsDynamicPartitions">
-      <MemberSignature Language="C#" Value="public virtual bool SupportsDynamicPartitions { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool SupportsDynamicPartitions { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance bool SupportsDynamicPartitions" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -112,8 +183,26 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para> If a derived class does not override and implement <see cref="M:System.Collections.Concurrent.Partitioner`1.GetDynamicPartitions" />, <see cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" /> should return false. The value of <see cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" /> should not vary over the lifetime of this instance. For more information, see <format type="text/html"><a href="96153688-9a01-47c4-8430-909cee9a2887">Custom Partitioners for PLINQ and TPL</a></format>.</para>
-          <para> </para>
+          <para
+            > If a derived class does not override and implement <see
+             cref="M:System.Collections.Concurrent.Partitioner`1.GetDynamicPartitions" />
+
+            , <see
+             cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+
+             should return false. The value of <see
+             cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+
+             should not vary over the lifetime of this instance. For more information, see <format
+             type="text/html">
+              <a href="96153688-9a01-47c4-8430-909cee9a2887"
+                >Custom Partitioners for PLINQ and TPL</a
+              >
+            </format>
+
+            .</para
+          >
+          <para></para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

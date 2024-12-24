@@ -1,6 +1,9 @@
 <Type Name="CSnziNode" FullName="Mono.Threading.CSnziNode">
   <TypeSignature Language="C#" Value="public abstract class CSnziNode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit CSnziNode extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit CSnziNode extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Parallel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,7 +19,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected CSnziNode ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

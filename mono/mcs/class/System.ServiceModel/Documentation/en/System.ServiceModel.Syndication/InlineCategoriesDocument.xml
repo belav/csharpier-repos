@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="InlineCategoriesDocument" FullName="System.ServiceModel.Syndication.InlineCategoriesDocument">
-  <TypeSignature Language="C#" Value="public class InlineCategoriesDocument : System.ServiceModel.Syndication.CategoriesDocument" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit InlineCategoriesDocument extends System.ServiceModel.Syndication.CategoriesDocument" />
+<Type
+  Name="InlineCategoriesDocument"
+  FullName="System.ServiceModel.Syndication.InlineCategoriesDocument"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class InlineCategoriesDocument : System.ServiceModel.Syndication.CategoriesDocument"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit InlineCategoriesDocument extends System.ServiceModel.Syndication.CategoriesDocument"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public InlineCategoriesDocument ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,39 +42,70 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public InlineCategoriesDocument (System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Syndication.SyndicationCategory&gt; categories);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;class System.ServiceModel.Syndication.SyndicationCategory&gt; categories) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public InlineCategoriesDocument (System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.SyndicationCategory> categories);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1<class System.ServiceModel.Syndication.SyndicationCategory> categories) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="categories" Type="System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Syndication.SyndicationCategory&gt;" />
+        <Parameter
+          Name="categories"
+          Type="System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.SyndicationCategory>"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class.  </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+             class.  </para
+          >
         </summary>
         <param name="categories">
-          <attribution license="cc4" from="Microsoft" modified="false" />A collection of syndication categories.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A collection of syndication categories.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public InlineCategoriesDocument (System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Syndication.SyndicationCategory&gt; categories, bool isFixed, string scheme);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;class System.ServiceModel.Syndication.SyndicationCategory&gt; categories, bool isFixed, string scheme) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public InlineCategoriesDocument (System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.SyndicationCategory> categories, bool isFixed, string scheme);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1<class System.ServiceModel.Syndication.SyndicationCategory> categories, bool isFixed, string scheme) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="categories" Type="System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Syndication.SyndicationCategory&gt;" />
+        <Parameter
+          Name="categories"
+          Type="System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.SyndicationCategory>"
+        />
         <Parameter Name="isFixed" Type="System.Boolean" />
         <Parameter Name="scheme" Type="System.String" />
       </Parameters>
@@ -70,19 +113,45 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+             class. </para
+          >
         </summary>
         <param name="categories">
-          <attribution license="cc4" from="Microsoft" modified="false" />A collection of syndication categories.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A collection of syndication categories.</param
+        >
         <param name="isFixed">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether syndication categories can be added to the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether syndication categories can be added to the <see
+           cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+          .</param
+        >
         <param name="scheme">
-          <attribution license="cc4" from="Microsoft" modified="false" />The scheme of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The scheme of the <see
+           cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Categories">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;System.ServiceModel.Syndication.SyndicationCategory&gt; Categories { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.Collection`1&lt;class System.ServiceModel.Syndication.SyndicationCategory&gt; Categories" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<System.ServiceModel.Syndication.SyndicationCategory> Categories { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.Collection`1<class System.ServiceModel.Syndication.SyndicationCategory> Categories"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -95,13 +164,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection of syndication categories associated with the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.</para>
+          <para
+            >Gets the collection of syndication categories associated with the <see
+             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CreateCategory">
-      <MemberSignature Language="C#" Value="protected virtual System.ServiceModel.Syndication.SyndicationCategory CreateCategory ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.ServiceModel.Syndication.SyndicationCategory CreateCategory() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.ServiceModel.Syndication.SyndicationCategory CreateCategory ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.ServiceModel.Syndication.SyndicationCategory CreateCategory() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -114,13 +194,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> instance.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>
-Returns a new  <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> instance.
-</para>
+          <para
+            >
+Returns a new  <see
+             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+             instance.
+</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -139,7 +229,12 @@ Returns a new  <see cref="T:System.ServiceModel.Syndication.SyndicationCategory"
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets and sets a value that specifies whether syndication categories can be added to the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.</para>
+          <para
+            >Gets and sets a value that specifies whether syndication categories can be added to the <see
+             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -158,7 +253,12 @@ Returns a new  <see cref="T:System.ServiceModel.Syndication.SyndicationCategory"
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets and sets the scheme of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.</para>
+          <para
+            >Gets and sets the scheme of the <see
+             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

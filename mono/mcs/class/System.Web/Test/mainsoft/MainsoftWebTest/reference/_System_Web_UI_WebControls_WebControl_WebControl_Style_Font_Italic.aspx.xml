@@ -33,20 +33,16 @@
     </span>
   </div>
   <div id="GHTSubTest9" testname="System.Web.UI.WebControls.HyperLink: Italic = true.">
-    <a id="ctrl_8" style="font-style:italic">
-    </a>
+    <a id="ctrl_8" style="font-style:italic"></a>
   </div>
   <div id="GHTSubTest10" testname="System.Web.UI.WebControls.HyperLink: Italic = False.">
-    <a id="ctrl_9">
-    </a>
+    <a id="ctrl_9"></a>
   </div>
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.HyperLink: Set twice.">
-    <a id="ctrl_10">
-    </a>
+    <a id="ctrl_10"></a>
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.HyperLink: Set Italic + CssClass.">
-    <a id="ctrl_11" class="CssClass1">
-    </a>
+    <a id="ctrl_11" class="CssClass1"></a>
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.Image: Italic = true.">
     <img id="ctrl_12" alt="" border="0" style="font-style:italic" />
@@ -73,52 +69,40 @@
     <input id="ctrl_19" alt="" border="0" type="image" name="ctrl_19" class="CssClass1" />
   </div>
   <div id="GHTSubTest21" testname="System.Web.UI.WebControls.Label: Italic = true.">
-    <span id="ctrl_20" style="font-style:italic">
-    </span>
+    <span id="ctrl_20" style="font-style:italic"></span>
   </div>
   <div id="GHTSubTest22" testname="System.Web.UI.WebControls.Label: Italic = False.">
-    <span id="ctrl_21">
-    </span>
+    <span id="ctrl_21"></span>
   </div>
   <div id="GHTSubTest23" testname="System.Web.UI.WebControls.Label: Set twice.">
-    <span id="ctrl_22">
-    </span>
+    <span id="ctrl_22"></span>
   </div>
   <div id="GHTSubTest24" testname="System.Web.UI.WebControls.Label: Set Italic + CssClass.">
-    <span id="ctrl_23" class="CssClass1">
-    </span>
+    <span id="ctrl_23" class="CssClass1"></span>
   </div>
   <div id="GHTSubTest25" testname="System.Web.UI.WebControls.LinkButton: Italic = true.">
-    <a href="javascript:__doPostBack('ctrl_24','')" id="ctrl_24" style="font-style:italic">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_24','')" id="ctrl_24" style="font-style:italic"></a>
   </div>
   <div id="GHTSubTest26" testname="System.Web.UI.WebControls.LinkButton: Italic = False.">
-    <a href="javascript:__doPostBack('ctrl_25','')" id="ctrl_25">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_25','')" id="ctrl_25"></a>
   </div>
   <div id="GHTSubTest27" testname="System.Web.UI.WebControls.LinkButton: Set twice.">
-    <a href="javascript:__doPostBack('ctrl_26','')" id="ctrl_26">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_26','')" id="ctrl_26"></a>
   </div>
   <div id="GHTSubTest28" testname="System.Web.UI.WebControls.LinkButton: Set Italic + CssClass.">
-    <a href="javascript:__doPostBack('ctrl_27','')" id="ctrl_27" class="CssClass1">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_27','')" id="ctrl_27" class="CssClass1"></a>
   </div>
   <div id="GHTSubTest29" testname="System.Web.UI.WebControls.Panel: Italic = true.">
-    <div id="ctrl_28" style="font-style:italic">
-    </div>
+    <div id="ctrl_28" style="font-style:italic"></div>
   </div>
   <div id="GHTSubTest30" testname="System.Web.UI.WebControls.Panel: Italic = False.">
-    <div id="ctrl_29">
-    </div>
+    <div id="ctrl_29"></div>
   </div>
   <div id="GHTSubTest31" testname="System.Web.UI.WebControls.Panel: Set twice.">
-    <div id="ctrl_30">
-    </div>
+    <div id="ctrl_30"></div>
   </div>
   <div id="GHTSubTest32" testname="System.Web.UI.WebControls.Panel: Set Italic + CssClass.">
-    <div id="ctrl_31" class="CssClass1">
-    </div>
+    <div id="ctrl_31" class="CssClass1"></div>
   </div>
   <div id="GHTSubTest33" testname="System.Web.UI.WebControls.RadioButton: Italic = true.">
     <span style="font-style:italic">
@@ -154,75 +138,171 @@
   </div>
   <div id="GHTSubTest41" testname="System.Web.UI.WebControls.DropDownList: Italic = true.">
     <select id="ctrl_40" style="font-style:italic" name="ctrl_40">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest42" testname="System.Web.UI.WebControls.DropDownList: Italic = False.">
     <select id="ctrl_41" name="ctrl_41">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest43" testname="System.Web.UI.WebControls.DropDownList: Set twice.">
     <select id="ctrl_42" name="ctrl_42">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest44" testname="System.Web.UI.WebControls.DropDownList: Set Italic + CssClass.">
     <select id="ctrl_43" name="ctrl_43" class="CssClass1">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest45" testname="System.Web.UI.WebControls.ListBox: Italic = true.">
     <select id="ctrl_44" style="font-style:italic" size="4" name="ctrl_44">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest46" testname="System.Web.UI.WebControls.ListBox: Italic = False.">
     <select id="ctrl_45" size="4" name="ctrl_45">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest47" testname="System.Web.UI.WebControls.ListBox: Set twice.">
     <select id="ctrl_46" size="4" name="ctrl_46">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest48" testname="System.Web.UI.WebControls.ListBox: Set Italic + CssClass.">
     <select id="ctrl_47" size="4" name="ctrl_47" class="CssClass1">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest49" testname="System.Web.UI.WebControls.RadioButtonList: Italic = true.">
     <table id="ctrl_48" style="font-style:italic" border="0">
@@ -308,7 +388,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest52" testname="System.Web.UI.WebControls.RadioButtonList: Set Italic + CssClass.">
+  <div
+    id="GHTSubTest52"
+    testname="System.Web.UI.WebControls.RadioButtonList: Set Italic + CssClass."
+  >
     <table id="ctrl_51" border="0" class="CssClass1">
       <tr>
         <td>
@@ -449,7 +532,13 @@
     </table>
   </div>
   <div id="GHTSubTest57" testname="System.Web.UI.WebControls.DataGrid: Italic = true.">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;font-style:italic" rules="all" id="ctrl_56">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;font-style:italic"
+      rules="all"
+      id="ctrl_56"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -521,7 +610,14 @@
     </table>
   </div>
   <div id="GHTSubTest60" testname="System.Web.UI.WebControls.DataGrid: Set Italic + CssClass.">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" class="CssClass1" id="ctrl_59">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      rules="all"
+      class="CssClass1"
+      id="ctrl_59"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -641,7 +737,12 @@
     </table>
   </div>
   <div id="GHTSubTest65" testname="System.Web.UI.WebControls.DataList: Italic = true.">
-    <table id="ctrl_68" cellspacing="0" border="0" style="border-collapse:collapse;font-style:italic">
+    <table
+      id="ctrl_68"
+      cellspacing="0"
+      border="0"
+      style="border-collapse:collapse;font-style:italic"
+    >
       <tr>
         <td>
           <div>

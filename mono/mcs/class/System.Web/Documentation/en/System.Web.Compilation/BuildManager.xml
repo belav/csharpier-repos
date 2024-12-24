@@ -13,9 +13,17 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Compilation.BuildManager" /> class manages the process of compiling assemblies and pages for an application. It is a sealed class and cannot be inherited. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Compilation.BuildManager" />
+
+         class manages the process of compiling assemblies and pages for an application. It is a sealed class and cannot be inherited. </para
+      >
       <para>
-        <see cref="T:System.Web.Compilation.BuildManager" /> contains static members that provide information about the compiled assemblies.</para>
+        <see cref="T:System.Web.Compilation.BuildManager" />
+
+         contains static members that provide information about the compiled assemblies.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -36,7 +44,10 @@
       </Docs>
     </Member>
     <Member MemberName="CodeAssemblies">
-      <MemberSignature Language="C#" Value="public static System.Collections.IList CodeAssemblies { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.IList CodeAssemblies { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IList</ReturnType>
@@ -55,7 +66,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateInstanceFromVirtualPath">
-      <MemberSignature Language="C#" Value="public static object CreateInstanceFromVirtualPath (string virtualPath, Type requiredBaseType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static object CreateInstanceFromVirtualPath (string virtualPath, Type requiredBaseType);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -68,7 +82,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(System.String,System.Type)" /> method works for compiled and non-compile pages.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(System.String,System.Type)" />
+
+             method works for compiled and non-compile pages.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -76,19 +95,33 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Object" /> that represents the instance of the processed file.</para>
+          <para
+            >The <see
+             cref="T:System.Object" />
+
+             that represents the instance of the processed file.</para
+          >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path of the file to create an instance of.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path of the file to create an instance of.</param
+        >
         <param name="requiredBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base type that defines the object to be created.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The base type that defines the object to be created.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetCachedBuildDependencySet">
-      <MemberSignature Language="C#" Value="public static System.Web.Compilation.BuildDependencySet GetCachedBuildDependencySet (System.Web.HttpContext context, string virtualPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Web.Compilation.BuildDependencySet GetCachedBuildDependencySet (System.Web.HttpContext context, string virtualPath);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Compilation.BuildDependencySet</ReturnType>
@@ -106,19 +139,36 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Web.Compilation.BuildDependencySet" /> object that is stored in the cache, or null if the <see cref="T:System.Web.Compilation.BuildDependencySet" /> object cannot be retrieved from the cache.</para>
+          <para
+            >A <see
+             cref="T:System.Web.Compilation.BuildDependencySet" />
+
+             object that is stored in the cache, or null if the <see
+             cref="T:System.Web.Compilation.BuildDependencySet" />
+
+             object cannot be retrieved from the cache.</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The context of the request.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The context of the request.</param
+        >
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path from which to determine the build dependency set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path from which to determine the build dependency set.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetCompiledAssembly">
-      <MemberSignature Language="C#" Value="public static System.Reflection.Assembly GetCompiledAssembly (string virtualPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.Assembly GetCompiledAssembly (string virtualPath);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Reflection.Assembly</ReturnType>
@@ -135,17 +185,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Reflection.Assembly" /> object that is compiled from the specified virtual path, which is cached to either memory or to disk.</para>
+          <para
+            >An <see
+             cref="T:System.Reflection.Assembly" />
+
+             object that is compiled from the specified virtual path, which is cached to either memory or to disk.</para
+          >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path to build into an assembly.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path to build into an assembly.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetCompiledCustomString">
-      <MemberSignature Language="C#" Value="public static string GetCompiledCustomString (string virtualPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetCompiledCustomString (string virtualPath);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -162,17 +223,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string, as returned by the <see cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" /> method, that is cached to disk or memory.</para>
+          <para
+            >A string, as returned by the <see
+             cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
+
+             method, that is cached to disk or memory.</para
+          >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path of the file to build.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path of the file to build.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetCompiledType">
-      <MemberSignature Language="C#" Value="public static Type GetCompiledType (string virtualPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Type GetCompiledType (string virtualPath);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Type</ReturnType>
@@ -189,17 +261,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Type" /> object that represents the type generated from compiling the virtual path.</para>
+          <para
+            >A <see
+             cref="T:System.Type" />
+
+             object that represents the type generated from compiling the virtual path.</para
+          >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path to build into a type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path to build into a type.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetReferencedAssemblies">
-      <MemberSignature Language="C#" Value="public static System.Collections.ICollection GetReferencedAssemblies ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.ICollection GetReferencedAssemblies ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -211,9 +294,27 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The collection of assemblies that is returned from the <see cref="M:System.Web.Compilation.BuildManager.GetReferencedAssemblies" /> method includes assemblies specified in the <format type="text/html"><a href="3811c448-af1c-498d-be2b-6ed2634c51e9">assemblies</a></format> element of the Web.config file, assemblies built from custom code in the App_Code directory, and assemblies in other top-level folders.</para>
+          <para
+            >The collection of assemblies that is returned from the <see
+             cref="M:System.Web.Compilation.BuildManager.GetReferencedAssemblies" />
+
+             method includes assemblies specified in the <format
+             type="text/html">
+              <a href="3811c448-af1c-498d-be2b-6ed2634c51e9">assemblies</a>
+            </format>
+
+             element of the Web.config file, assemblies built from custom code in the App_Code directory, and assemblies in other top-level folders.</para
+          >
           <para>
-            <see cref="M:System.Web.Compilation.BuildManager.GetReferencedAssemblies" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html"><a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a></format>.</para>
+            <see cref="M:System.Web.Compilation.BuildManager.GetReferencedAssemblies" />
+
+             is introduced in the .NET Framework version 3.5.  For more information, see <format
+             type="text/html">
+              <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -221,12 +322,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.ICollection" /> collection of assembly references.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.ICollection" />
+
+             collection of assembly references.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetType">
-      <MemberSignature Language="C#" Value="public static Type GetType (string typeName, bool throwOnError);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Type GetType (string typeName, bool throwOnError);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Type</ReturnType>
@@ -247,19 +356,39 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Type" /> object that represents the requested <paramref name="typeName" /> parameter.</para>
+          <para
+            >A <see
+             cref="T:System.Type" />
+
+             object that represents the requested <paramref
+             name="typeName" />
+
+             parameter.</para
+          >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the type.</param
+        >
         <param name="throwOnError">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to throw an exception if a <see cref="T:System.Type" /> object cannot be generated for the type name; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to throw an exception if a <see
+           cref="T:System.Type" />
+
+           object cannot be generated for the type name; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetType">
-      <MemberSignature Language="C#" Value="public static Type GetType (string typeName, bool throwOnError, bool ignoreCase);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Type GetType (string typeName, bool throwOnError, bool ignoreCase);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Type</ReturnType>
@@ -281,21 +410,47 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Type" /> object that represents the requested <paramref name="typeName" /> parameter.</para>
+          <para
+            >A <see
+             cref="T:System.Type" />
+
+             object that represents the requested <paramref
+             name="typeName" />
+
+             parameter.</para
+          >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the type.</param
+        >
         <param name="throwOnError">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to throw an exception if a <see cref="T:System.Type" /> cannot be generated for the type name; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to throw an exception if a <see
+           cref="T:System.Type" />
+
+           cannot be generated for the type name; otherwise, false.</param
+        >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if <paramref name="typeName" /> is case-sensitive; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if <paramref
+           name="typeName" />
+
+           is case-sensitive; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetVirtualPathDependencies">
-      <MemberSignature Language="C#" Value="public static System.Collections.ICollection GetVirtualPathDependencies (string virtualPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.ICollection GetVirtualPathDependencies (string virtualPath);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ICollection</ReturnType>
@@ -312,10 +467,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.ICollection" /> collection of files represented by virtual paths that are caching dependencies for the virtual path.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.ICollection" />
+
+             collection of files represented by virtual paths that are caching dependencies for the virtual path.</para
+          >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path used to determine the dependencies.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path used to determine the dependencies.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

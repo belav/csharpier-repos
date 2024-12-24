@@ -12,7 +12,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.Common.GroupByBehavior" /> values are mutually exclusive.</para>
+      <para
+        >The <see
+         cref="T:System.Data.Common.GroupByBehavior" />
+
+         values are mutually exclusive.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

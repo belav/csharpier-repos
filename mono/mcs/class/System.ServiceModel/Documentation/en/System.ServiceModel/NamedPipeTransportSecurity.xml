@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NamedPipeTransportSecurity" FullName="System.ServiceModel.NamedPipeTransportSecurity">
   <TypeSignature Language="C#" Value="public sealed class NamedPipeTransportSecurity" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit NamedPipeTransportSecurity extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit NamedPipeTransportSecurity extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +16,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class is used by <see cref="P:System.ServiceModel.NetNamedPipeSecurity.Transport" /> to set the transport-level security settings for a binding.</para>
+      <para
+        >This class is used by <see
+         cref="P:System.ServiceModel.NetNamedPipeSecurity.Transport" />
+
+         to set the transport-level security settings for a binding.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,8 +30,14 @@
   </Docs>
   <Members>
     <Member MemberName="ProtectionLevel">
-      <MemberSignature Language="C#" Value="public System.Net.Security.ProtectionLevel ProtectionLevel { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Security.ProtectionLevel ProtectionLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Security.ProtectionLevel ProtectionLevel { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Security.ProtectionLevel ProtectionLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

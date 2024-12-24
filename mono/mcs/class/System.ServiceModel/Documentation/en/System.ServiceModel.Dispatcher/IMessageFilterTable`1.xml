@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IMessageFilterTable&lt;TFilterData&gt;" FullName="System.ServiceModel.Dispatcher.IMessageFilterTable&lt;TFilterData&gt;">
-  <TypeSignature Language="C#" Value="public interface IMessageFilterTable&lt;TFilterData&gt; : System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;System.ServiceModel.Dispatcher.MessageFilter,TFilterData&gt;&gt;, System.Collections.Generic.IDictionary&lt;System.ServiceModel.Dispatcher.MessageFilter,TFilterData&gt;, System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;System.ServiceModel.Dispatcher.MessageFilter,TFilterData&gt;&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IMessageFilterTable`1&lt;TFilterData&gt; implements class System.Collections.Generic.ICollection`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;class System.ServiceModel.Dispatcher.MessageFilter, !TFilterData&gt;&gt;, class System.Collections.Generic.IDictionary`2&lt;class System.ServiceModel.Dispatcher.MessageFilter, !TFilterData&gt;, class System.Collections.Generic.IEnumerable`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;class System.ServiceModel.Dispatcher.MessageFilter, !TFilterData&gt;&gt;, class System.Collections.IEnumerable" />
+<Type
+  Name="IMessageFilterTable<TFilterData>"
+  FullName="System.ServiceModel.Dispatcher.IMessageFilterTable<TFilterData>"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public interface IMessageFilterTable<TFilterData> : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.ServiceModel.Dispatcher.MessageFilter,TFilterData>>, System.Collections.Generic.IDictionary<System.ServiceModel.Dispatcher.MessageFilter,TFilterData>, System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.ServiceModel.Dispatcher.MessageFilter,TFilterData>>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IMessageFilterTable`1<TFilterData> implements class System.Collections.Generic.ICollection`1<valuetype System.Collections.Generic.KeyValuePair`2<class System.ServiceModel.Dispatcher.MessageFilter, !TFilterData>>, class System.Collections.Generic.IDictionary`2<class System.ServiceModel.Dispatcher.MessageFilter, !TFilterData>, class System.Collections.Generic.IEnumerable`1<valuetype System.Collections.Generic.KeyValuePair`2<class System.ServiceModel.Dispatcher.MessageFilter, !TFilterData>>, class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -25,10 +34,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The filter table is a core component of the filter engine. The primary use of the filter engine in indigo1 is to match application logic to messages by finding all the filters that match a message. </para>
-      <para>A filter table allows multiple filters to be matched against a single message more efficiently than they can be matched separately. A filter table associates filter data with filters. The table is a collection of key-value pairs, where the key is the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />, and the value is the associated filter data. Filter data can be any data of the type specified in the generic parameter and can be used to specify what actions to take if a message is matched by a filter in the table. </para>
-      <para>Filter table entries can be accessed using the <see cref="T:System.Collections.Generic.IDictionary`2" /> functionality that <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" /> inherits. </para>
-      <para>Note that a filter instance can only be added to a given <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" /> once. To add multiple instances of this filter to the same filter table, use a filter constructor to create additional instances.</para>
-      <para>A filter matches a message when the message satisfies the query criteria of the filter. There are four overloaded matching methods. The data returned is either the filter data or the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" /> objects themselves. This data is returned whether multiple matches are allowed or only a single match. The following table shows this information for each overload.</para>
+      <para
+        >A filter table allows multiple filters to be matched against a single message more efficiently than they can be matched separately. A filter table associates filter data with filters. The table is a collection of key-value pairs, where the key is the <see
+         cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+        , and the value is the associated filter data. Filter data can be any data of the type specified in the generic parameter and can be used to specify what actions to take if a message is matched by a filter in the table. </para
+      >
+      <para
+        >Filter table entries can be accessed using the <see
+         cref="T:System.Collections.Generic.IDictionary`2" />
+
+         functionality that <see
+         cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+
+         inherits. </para
+      >
+      <para
+        >Note that a filter instance can only be added to a given <see
+         cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+
+         once. To add multiple instances of this filter to the same filter table, use a filter constructor to create additional instances.</para
+      >
+      <para
+        >A filter matches a message when the message satisfies the query criteria of the filter. There are four overloaded matching methods. The data returned is either the filter data or the <see
+         cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+         objects themselves. This data is returned whether multiple matches are allowed or only a single match. The following table shows this information for each overload.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -99,13 +131,29 @@
           </description>
           <description>
             <para>
-              <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" /> objects</para>
+              <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+               objects</para
+            >
           </description>
         </item>
       </list>
-      <para>Each method contains two overloads. The difference between the two overloads is that one takes a <see cref="T:System.ServiceModel.Channels.Message" /> parameter and is not permitted to examine the contents of the body; the other takes a <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> parameter and can examine any part of the message. If you call a method with the message parameter, and the filter table contains a filter that examines the content of the message body, an exception is thrown. If you are unsure about the filters in a table, call the overload that takes a message buffer.</para>
+      <para
+        >Each method contains two overloads. The difference between the two overloads is that one takes a <see
+         cref="T:System.ServiceModel.Channels.Message" />
+
+         parameter and is not permitted to examine the contents of the body; the other takes a <see
+         cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+         parameter and can examine any part of the message. If you call a method with the message parameter, and the filter table contains a filter that examines the content of the message body, an exception is thrown. If you are unsure about the filters in a table, call the overload that takes a message buffer.</para
+      >
       <para>Message headers are automatically buffered and can be inspected by a filter without being consumed. But if the body is to be inspected by a filter, then the entire message must be buffered because an unbuffered message body is consumed by a query and its contents destroyed.</para>
-      <para>The following classes implement <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />: </para>
+      <para
+        >The following classes implement <see
+         cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+
+        : </para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -114,7 +162,8 @@
         </item>
         <item>
           <para>
-            <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" /> </para>
+            <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" />
+          </para>
         </item>
       </list>
     </remarks>
@@ -125,8 +174,14 @@
   </Docs>
   <Members>
     <Member MemberName="GetMatchingFilter">
-      <MemberSignature Language="C#" Value="public bool GetMatchingFilter (System.ServiceModel.Channels.Message message, out System.ServiceModel.Dispatcher.MessageFilter result);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool GetMatchingFilter(class System.ServiceModel.Channels.Message message, class System.ServiceModel.Dispatcher.MessageFilter result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool GetMatchingFilter (System.ServiceModel.Channels.Message message, out System.ServiceModel.Dispatcher.MessageFilter result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool GetMatchingFilter(class System.ServiceModel.Channels.Message message, class System.ServiceModel.Dispatcher.MessageFilter result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -136,7 +191,11 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="message" Type="System.ServiceModel.Channels.Message" />
-        <Parameter Name="result" Type="System.ServiceModel.Dispatcher.MessageFilter&amp;" RefType="out" />
+        <Parameter
+          Name="result"
+          Type="System.ServiceModel.Dispatcher.MessageFilter&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="message">To be added.</param>
@@ -147,8 +206,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetMatchingFilter">
-      <MemberSignature Language="C#" Value="public bool GetMatchingFilter (System.ServiceModel.Channels.MessageBuffer buffer, out System.ServiceModel.Dispatcher.MessageFilter result);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool GetMatchingFilter(class System.ServiceModel.Channels.MessageBuffer buffer, class System.ServiceModel.Dispatcher.MessageFilter result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool GetMatchingFilter (System.ServiceModel.Channels.MessageBuffer buffer, out System.ServiceModel.Dispatcher.MessageFilter result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool GetMatchingFilter(class System.ServiceModel.Channels.MessageBuffer buffer, class System.ServiceModel.Dispatcher.MessageFilter result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -158,7 +223,11 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="buffer" Type="System.ServiceModel.Channels.MessageBuffer" />
-        <Parameter Name="result" Type="System.ServiceModel.Dispatcher.MessageFilter&amp;" RefType="out" />
+        <Parameter
+          Name="result"
+          Type="System.ServiceModel.Dispatcher.MessageFilter&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="buffer">To be added.</param>
@@ -169,8 +238,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetMatchingFilters">
-      <MemberSignature Language="C#" Value="public bool GetMatchingFilters (System.ServiceModel.Channels.Message message, System.Collections.Generic.ICollection&lt;System.ServiceModel.Dispatcher.MessageFilter&gt; results);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool GetMatchingFilters(class System.ServiceModel.Channels.Message message, class System.Collections.Generic.ICollection`1&lt;class System.ServiceModel.Dispatcher.MessageFilter&gt; results) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool GetMatchingFilters (System.ServiceModel.Channels.Message message, System.Collections.Generic.ICollection<System.ServiceModel.Dispatcher.MessageFilter> results);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool GetMatchingFilters(class System.ServiceModel.Channels.Message message, class System.Collections.Generic.ICollection`1<class System.ServiceModel.Dispatcher.MessageFilter> results) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -180,7 +255,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="message" Type="System.ServiceModel.Channels.Message" />
-        <Parameter Name="results" Type="System.Collections.Generic.ICollection&lt;System.ServiceModel.Dispatcher.MessageFilter&gt;" />
+        <Parameter
+          Name="results"
+          Type="System.Collections.Generic.ICollection<System.ServiceModel.Dispatcher.MessageFilter>"
+        />
       </Parameters>
       <Docs>
         <remarks>
@@ -193,17 +271,43 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the match criterion of at least one filter in the table is satisfied by <paramref name="message" />; false if no filter is satisfied.</para>
+          <para
+            >true if the match criterion of at least one filter in the table is satisfied by <paramref
+             name="message" />
+
+            ; false if no filter is satisfied.</para
+          >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.Message" /> to test.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.Message" />
+
+           to test.</param
+        >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />Reference parameter that stores the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" /> objects that match in <see cref="T:System.Collections.Generic.ICollection`1" />&lt;Filter&gt;.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Reference parameter that stores the <see
+           cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+           objects that match in <see
+           cref="T:System.Collections.Generic.ICollection`1" />
+
+          &lt;Filter&gt;.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetMatchingFilters">
-      <MemberSignature Language="C#" Value="public bool GetMatchingFilters (System.ServiceModel.Channels.MessageBuffer buffer, System.Collections.Generic.ICollection&lt;System.ServiceModel.Dispatcher.MessageFilter&gt; results);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool GetMatchingFilters(class System.ServiceModel.Channels.MessageBuffer buffer, class System.Collections.Generic.ICollection`1&lt;class System.ServiceModel.Dispatcher.MessageFilter&gt; results) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool GetMatchingFilters (System.ServiceModel.Channels.MessageBuffer buffer, System.Collections.Generic.ICollection<System.ServiceModel.Dispatcher.MessageFilter> results);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool GetMatchingFilters(class System.ServiceModel.Channels.MessageBuffer buffer, class System.Collections.Generic.ICollection`1<class System.ServiceModel.Dispatcher.MessageFilter> results) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -213,7 +317,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="buffer" Type="System.ServiceModel.Channels.MessageBuffer" />
-        <Parameter Name="results" Type="System.Collections.Generic.ICollection&lt;System.ServiceModel.Dispatcher.MessageFilter&gt;" />
+        <Parameter
+          Name="results"
+          Type="System.Collections.Generic.ICollection<System.ServiceModel.Dispatcher.MessageFilter>"
+        />
       </Parameters>
       <Docs>
         <param name="buffer">To be added.</param>
@@ -227,15 +334,35 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the match criterion of at least one filter in the table is satisfied by <paramref name="messageBuffer" />; false if no filter is satisfied.</para>
+          <para
+            >true if the match criterion of at least one filter in the table is satisfied by <paramref
+             name="messageBuffer" />
+
+            ; false if no filter is satisfied.</para
+          >
         </returns>
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />Reference parameter that stores the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" /> objects that match in <see cref="T:System.Collections.Generic.ICollection`1" />&lt;Filter&gt;.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Reference parameter that stores the <see
+           cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+           objects that match in <see
+           cref="T:System.Collections.Generic.ICollection`1" />
+
+          &lt;Filter&gt;.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetMatchingValue">
-      <MemberSignature Language="C#" Value="public bool GetMatchingValue (System.ServiceModel.Channels.Message message, out TFilterData data);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool GetMatchingValue(class System.ServiceModel.Channels.Message message, !TFilterData data) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool GetMatchingValue (System.ServiceModel.Channels.Message message, out TFilterData data);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool GetMatchingValue(class System.ServiceModel.Channels.Message message, !TFilterData data) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -245,7 +372,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="message" Type="System.ServiceModel.Channels.Message" />
-        <Parameter Name="data" Type="TFilterData&amp;" RefType="out" />
+        <Parameter Name="data" Type="TFilterData&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="message">To be added.</param>
@@ -256,8 +383,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetMatchingValue">
-      <MemberSignature Language="C#" Value="public bool GetMatchingValue (System.ServiceModel.Channels.MessageBuffer buffer, out TFilterData data);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool GetMatchingValue(class System.ServiceModel.Channels.MessageBuffer buffer, !TFilterData data) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool GetMatchingValue (System.ServiceModel.Channels.MessageBuffer buffer, out TFilterData data);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool GetMatchingValue(class System.ServiceModel.Channels.MessageBuffer buffer, !TFilterData data) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -267,7 +400,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="buffer" Type="System.ServiceModel.Channels.MessageBuffer" />
-        <Parameter Name="data" Type="TFilterData&amp;" RefType="out" />
+        <Parameter Name="data" Type="TFilterData&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="buffer">To be added.</param>
@@ -278,8 +411,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetMatchingValues">
-      <MemberSignature Language="C#" Value="public bool GetMatchingValues (System.ServiceModel.Channels.Message message, System.Collections.Generic.ICollection&lt;TFilterData&gt; results);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool GetMatchingValues(class System.ServiceModel.Channels.Message message, class System.Collections.Generic.ICollection`1&lt;!TFilterData&gt; results) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool GetMatchingValues (System.ServiceModel.Channels.Message message, System.Collections.Generic.ICollection<TFilterData> results);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool GetMatchingValues(class System.ServiceModel.Channels.Message message, class System.Collections.Generic.ICollection`1<!TFilterData> results) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -289,7 +428,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="message" Type="System.ServiceModel.Channels.Message" />
-        <Parameter Name="results" Type="System.Collections.Generic.ICollection&lt;TFilterData&gt;" />
+        <Parameter Name="results" Type="System.Collections.Generic.ICollection<TFilterData>" />
       </Parameters>
       <Docs>
         <param name="message">To be added.</param>
@@ -300,8 +439,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetMatchingValues">
-      <MemberSignature Language="C#" Value="public bool GetMatchingValues (System.ServiceModel.Channels.MessageBuffer buffer, System.Collections.Generic.ICollection&lt;TFilterData&gt; results);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool GetMatchingValues(class System.ServiceModel.Channels.MessageBuffer buffer, class System.Collections.Generic.ICollection`1&lt;!TFilterData&gt; results) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool GetMatchingValues (System.ServiceModel.Channels.MessageBuffer buffer, System.Collections.Generic.ICollection<TFilterData> results);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool GetMatchingValues(class System.ServiceModel.Channels.MessageBuffer buffer, class System.Collections.Generic.ICollection`1<!TFilterData> results) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -311,7 +456,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="buffer" Type="System.ServiceModel.Channels.MessageBuffer" />
-        <Parameter Name="results" Type="System.Collections.Generic.ICollection&lt;TFilterData&gt;" />
+        <Parameter Name="results" Type="System.Collections.Generic.ICollection<TFilterData>" />
       </Parameters>
       <Docs>
         <param name="buffer">To be added.</param>

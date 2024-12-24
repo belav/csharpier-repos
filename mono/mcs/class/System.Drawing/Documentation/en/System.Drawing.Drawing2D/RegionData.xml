@@ -17,7 +17,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Encapsulates the data that makes up a <see cref="T:System.Drawing.Region" /> object. This class cannot be inherited.</para>
+      <para
+        >Encapsulates the data that makes up a <see
+         cref="T:System.Drawing.Region" />
+
+         object. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,14 +32,18 @@
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'byte []'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an array of bytes that specify the <see cref="T:System.Drawing.Region" /> object.</para>
+          <para
+            >Gets or sets an array of bytes that specify the <see
+             cref="T:System.Drawing.Region" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

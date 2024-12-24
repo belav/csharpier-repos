@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ExpressionVisitor" FullName="System.Linq.Expressions.ExpressionVisitor">
   <TypeSignature Language="C#" Value="public abstract class ExpressionVisitor" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ExpressionVisitor extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ExpressionVisitor extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +26,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected ExpressionVisitor ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +39,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of <see cref="T:System.Linq.Expressions.ExpressionVisitor" />.</para>
+          <para
+            >Initializes a new instance of <see
+             cref="T:System.Linq.Expressions.ExpressionVisitor" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Visit">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;System.Linq.Expressions.Expression&gt; Visit (System.Collections.ObjectModel.ReadOnlyCollection&lt;System.Linq.Expressions.Expression&gt; nodes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class System.Linq.Expressions.Expression&gt; Visit(class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class System.Linq.Expressions.Expression&gt; nodes) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> Visit (System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression> nodes);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.ObjectModel.ReadOnlyCollection`1<class System.Linq.Expressions.Expression> Visit(class System.Collections.ObjectModel.ReadOnlyCollection`1<class System.Linq.Expressions.Expression> nodes) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -48,7 +65,10 @@
         <ReturnType>System.Collections.ObjectModel.ReadOnlyCollection&lt;System.Linq.Expressions.Expression&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="nodes" Type="System.Collections.ObjectModel.ReadOnlyCollection&lt;System.Linq.Expressions.Expression&gt;" />
+        <Parameter
+          Name="nodes"
+          Type="System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -61,12 +81,21 @@
           <para>The modified expression list, if any one of the elements were modified; otherwise, returns the original expression list.</para>
         </returns>
         <param name="nodes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expressions to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expressions to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Visit">
-      <MemberSignature Language="C#" Value="public virtual System.Linq.Expressions.Expression Visit (System.Linq.Expressions.Expression node);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Linq.Expressions.Expression Visit(class System.Linq.Expressions.Expression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Linq.Expressions.Expression Visit (System.Linq.Expressions.Expression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Linq.Expressions.Expression Visit(class System.Linq.Expressions.Expression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -88,12 +117,21 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
-    <Member MemberName="Visit&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt; Visit&lt;T&gt; (System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt; nodes, Func&lt;T,T&gt; elementVisitor);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;!!T&gt; Visit&lt;T&gt;(class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;!!T&gt; nodes, class System.Func`2&lt;!!T, !!T&gt; elementVisitor) cil managed" />
+    <Member MemberName="Visit<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.ObjectModel.ReadOnlyCollection<T> Visit<T> (System.Collections.ObjectModel.ReadOnlyCollection<T> nodes, Func<T,T> elementVisitor);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Collections.ObjectModel.ReadOnlyCollection`1<!!T> Visit<T>(class System.Collections.ObjectModel.ReadOnlyCollection`1<!!T> nodes, class System.Func`2<!!T, !!T> elementVisitor) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -105,8 +143,8 @@
         <TypeParameter Name="T" />
       </TypeParameters>
       <Parameters>
-        <Parameter Name="nodes" Type="System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt;" />
-        <Parameter Name="elementVisitor" Type="System.Func&lt;T,T&gt;" />
+        <Parameter Name="nodes" Type="System.Collections.ObjectModel.ReadOnlyCollection<T>" />
+        <Parameter Name="elementVisitor" Type="System.Func<T,T>" />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -119,16 +157,31 @@
           <para>The modified node list, if any of the elements were modified; otherwise, returns the original node list.</para>
         </returns>
         <param name="nodes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The nodes to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The nodes to visit.</param
+        >
         <param name="elementVisitor">
-          <attribution license="cc4" from="Microsoft" modified="false" />A delegate that visits a single element, optionally replacing it with a new element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A delegate that visits a single element, optionally replacing it with a new element.</param
+        >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the nodes.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the nodes.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="VisitAndConvert&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt; VisitAndConvert&lt;T&gt; (System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt; nodes, string callerName) where T : System.Linq.Expressions.Expression;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;!!T&gt; VisitAndConvert&lt;(class System.Linq.Expressions.Expression) T&gt;(class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;!!T&gt; nodes, string callerName) cil managed" />
+    <Member MemberName="VisitAndConvert<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.ReadOnlyCollection<T> VisitAndConvert<T> (System.Collections.ObjectModel.ReadOnlyCollection<T> nodes, string callerName) where T : System.Linq.Expressions.Expression;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.ObjectModel.ReadOnlyCollection`1<!!T> VisitAndConvert<(class System.Linq.Expressions.Expression) T>(class System.Collections.ObjectModel.ReadOnlyCollection`1<!!T> nodes, string callerName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -144,7 +197,7 @@
         </TypeParameter>
       </TypeParameters>
       <Parameters>
-        <Parameter Name="nodes" Type="System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt;" />
+        <Parameter Name="nodes" Type="System.Collections.ObjectModel.ReadOnlyCollection<T>" />
         <Parameter Name="callerName" Type="System.String" />
       </Parameters>
       <Docs>
@@ -158,16 +211,31 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="nodes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
         <param name="callerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the calling method; used to report to report a better error message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the calling method; used to report to report a better error message.</param
+        >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the expression.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the expression.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="VisitAndConvert&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public T VisitAndConvert&lt;T&gt; (T node, string callerName) where T : System.Linq.Expressions.Expression;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T VisitAndConvert&lt;(class System.Linq.Expressions.Expression) T&gt;(!!T node, string callerName) cil managed" />
+    <Member MemberName="VisitAndConvert<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public T VisitAndConvert<T> (T node, string callerName) where T : System.Linq.Expressions.Expression;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !!T VisitAndConvert<(class System.Linq.Expressions.Expression) T>(!!T node, string callerName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -196,8 +264,14 @@
       </Docs>
     </Member>
     <Member MemberName="VisitBinary">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitBinary (System.Linq.Expressions.BinaryExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitBinary(class System.Linq.Expressions.BinaryExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitBinary (System.Linq.Expressions.BinaryExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitBinary(class System.Linq.Expressions.BinaryExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -212,19 +286,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.BinaryExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.BinaryExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitBlock">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitBlock (System.Linq.Expressions.BlockExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitBlock(class System.Linq.Expressions.BlockExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitBlock (System.Linq.Expressions.BlockExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitBlock(class System.Linq.Expressions.BlockExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -239,19 +327,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.BlockExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.BlockExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitCatchBlock">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.CatchBlock VisitCatchBlock (System.Linq.Expressions.CatchBlock node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.CatchBlock VisitCatchBlock(class System.Linq.Expressions.CatchBlock node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.CatchBlock VisitCatchBlock (System.Linq.Expressions.CatchBlock node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.CatchBlock VisitCatchBlock(class System.Linq.Expressions.CatchBlock node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -266,19 +368,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.CatchBlock" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.CatchBlock" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitConditional">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitConditional (System.Linq.Expressions.ConditionalExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitConditional(class System.Linq.Expressions.ConditionalExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitConditional (System.Linq.Expressions.ConditionalExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitConditional(class System.Linq.Expressions.ConditionalExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -293,19 +409,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.ConditionalExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.ConditionalExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitConstant">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitConstant (System.Linq.Expressions.ConstantExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitConstant(class System.Linq.Expressions.ConstantExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitConstant (System.Linq.Expressions.ConstantExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitConstant(class System.Linq.Expressions.ConstantExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -320,19 +450,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the <see cref="T:System.Linq.Expressions.ConstantExpression" />.</para>
+          <para
+            >Visits the <see
+             cref="T:System.Linq.Expressions.ConstantExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitDebugInfo">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitDebugInfo (System.Linq.Expressions.DebugInfoExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitDebugInfo(class System.Linq.Expressions.DebugInfoExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitDebugInfo (System.Linq.Expressions.DebugInfoExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitDebugInfo(class System.Linq.Expressions.DebugInfoExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -347,19 +491,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the <see cref="T:System.Linq.Expressions.DebugInfoExpression" />.</para>
+          <para
+            >Visits the <see
+             cref="T:System.Linq.Expressions.DebugInfoExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitDefault">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitDefault (System.Linq.Expressions.DefaultExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitDefault(class System.Linq.Expressions.DefaultExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitDefault (System.Linq.Expressions.DefaultExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitDefault(class System.Linq.Expressions.DefaultExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -374,19 +532,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the <see cref="T:System.Linq.Expressions.DefaultExpression" />.</para>
+          <para
+            >Visits the <see
+             cref="T:System.Linq.Expressions.DefaultExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitDynamic">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitDynamic (System.Linq.Expressions.DynamicExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitDynamic(class System.Linq.Expressions.DynamicExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitDynamic (System.Linq.Expressions.DynamicExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitDynamic(class System.Linq.Expressions.DynamicExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -401,19 +573,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.DynamicExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.DynamicExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitElementInit">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.ElementInit VisitElementInit (System.Linq.Expressions.ElementInit node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.ElementInit VisitElementInit(class System.Linq.Expressions.ElementInit node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.ElementInit VisitElementInit (System.Linq.Expressions.ElementInit node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.ElementInit VisitElementInit(class System.Linq.Expressions.ElementInit node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -428,19 +614,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.ElementInit" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.ElementInit" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitExtension">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitExtension (System.Linq.Expressions.Expression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitExtension(class System.Linq.Expressions.Expression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitExtension (System.Linq.Expressions.Expression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitExtension(class System.Linq.Expressions.Expression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -455,7 +655,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This can be overridden to visit or rewrite specific extension nodes.</para>
-          <para> If it is not overridden, this method will call <see cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />, which gives the node a chance to walk its children. By default, <see cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" /> will try to reduce the node.</para>
+          <para
+            > If it is not overridden, this method will call <see
+             cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />
+
+            , which gives the node a chance to walk its children. By default, <see
+             cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />
+
+             will try to reduce the node.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -466,12 +674,21 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitGoto">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitGoto (System.Linq.Expressions.GotoExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitGoto(class System.Linq.Expressions.GotoExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitGoto (System.Linq.Expressions.GotoExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitGoto(class System.Linq.Expressions.GotoExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -486,19 +703,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.GotoExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.GotoExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitIndex">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitIndex (System.Linq.Expressions.IndexExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitIndex(class System.Linq.Expressions.IndexExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitIndex (System.Linq.Expressions.IndexExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitIndex(class System.Linq.Expressions.IndexExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -513,19 +744,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.IndexExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.IndexExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitInvocation">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitInvocation (System.Linq.Expressions.InvocationExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitInvocation(class System.Linq.Expressions.InvocationExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitInvocation (System.Linq.Expressions.InvocationExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitInvocation(class System.Linq.Expressions.InvocationExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -540,19 +785,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.InvocationExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.InvocationExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitLabel">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitLabel (System.Linq.Expressions.LabelExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitLabel(class System.Linq.Expressions.LabelExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitLabel (System.Linq.Expressions.LabelExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitLabel(class System.Linq.Expressions.LabelExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -567,19 +826,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.LabelExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.LabelExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitLabelTarget">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.LabelTarget VisitLabelTarget (System.Linq.Expressions.LabelTarget node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.LabelTarget VisitLabelTarget(class System.Linq.Expressions.LabelTarget node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.LabelTarget VisitLabelTarget (System.Linq.Expressions.LabelTarget node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.LabelTarget VisitLabelTarget(class System.Linq.Expressions.LabelTarget node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -594,19 +867,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the <see cref="T:System.Linq.Expressions.LabelTarget" />.</para>
+          <para
+            >Visits the <see
+             cref="T:System.Linq.Expressions.LabelTarget" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
-    <Member MemberName="VisitLambda&lt;T&gt;">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitLambda&lt;T&gt; (System.Linq.Expressions.Expression&lt;T&gt; node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitLambda&lt;T&gt;(class System.Linq.Expressions.Expression`1&lt;!!T&gt; node) cil managed" />
+    <Member MemberName="VisitLambda<T>">
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitLambda<T> (System.Linq.Expressions.Expression<T> node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitLambda<T>(class System.Linq.Expressions.Expression`1<!!T> node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -618,27 +905,44 @@
         <TypeParameter Name="T" />
       </TypeParameters>
       <Parameters>
-        <Parameter Name="node" Type="System.Linq.Expressions.Expression&lt;T&gt;" />
+        <Parameter Name="node" Type="System.Linq.Expressions.Expression<T>" />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.Expression`1" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.Expression`1" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the delegate.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the delegate.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitListInit">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitListInit (System.Linq.Expressions.ListInitExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitListInit(class System.Linq.Expressions.ListInitExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitListInit (System.Linq.Expressions.ListInitExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitListInit(class System.Linq.Expressions.ListInitExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -653,19 +957,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.ListInitExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.ListInitExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitLoop">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitLoop (System.Linq.Expressions.LoopExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitLoop(class System.Linq.Expressions.LoopExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitLoop (System.Linq.Expressions.LoopExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitLoop(class System.Linq.Expressions.LoopExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -680,19 +998,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.LoopExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.LoopExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitMember">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitMember (System.Linq.Expressions.MemberExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitMember(class System.Linq.Expressions.MemberExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitMember (System.Linq.Expressions.MemberExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitMember(class System.Linq.Expressions.MemberExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -707,19 +1039,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.MemberExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.MemberExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitMemberAssignment">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.MemberAssignment VisitMemberAssignment (System.Linq.Expressions.MemberAssignment node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.MemberAssignment VisitMemberAssignment(class System.Linq.Expressions.MemberAssignment node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.MemberAssignment VisitMemberAssignment (System.Linq.Expressions.MemberAssignment node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.MemberAssignment VisitMemberAssignment(class System.Linq.Expressions.MemberAssignment node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -734,19 +1080,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.MemberAssignment" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.MemberAssignment" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitMemberBinding">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.MemberBinding VisitMemberBinding (System.Linq.Expressions.MemberBinding node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.MemberBinding VisitMemberBinding(class System.Linq.Expressions.MemberBinding node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.MemberBinding VisitMemberBinding (System.Linq.Expressions.MemberBinding node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.MemberBinding VisitMemberBinding(class System.Linq.Expressions.MemberBinding node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -761,19 +1121,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.MemberBinding" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.MemberBinding" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitMemberInit">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitMemberInit (System.Linq.Expressions.MemberInitExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitMemberInit(class System.Linq.Expressions.MemberInitExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitMemberInit (System.Linq.Expressions.MemberInitExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitMemberInit(class System.Linq.Expressions.MemberInitExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -788,19 +1162,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.MemberInitExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.MemberInitExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitMemberListBinding">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.MemberListBinding VisitMemberListBinding (System.Linq.Expressions.MemberListBinding node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.MemberListBinding VisitMemberListBinding(class System.Linq.Expressions.MemberListBinding node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.MemberListBinding VisitMemberListBinding (System.Linq.Expressions.MemberListBinding node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.MemberListBinding VisitMemberListBinding(class System.Linq.Expressions.MemberListBinding node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -815,19 +1203,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.MemberListBinding" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.MemberListBinding" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitMemberMemberBinding">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.MemberMemberBinding VisitMemberMemberBinding (System.Linq.Expressions.MemberMemberBinding node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.MemberMemberBinding VisitMemberMemberBinding(class System.Linq.Expressions.MemberMemberBinding node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.MemberMemberBinding VisitMemberMemberBinding (System.Linq.Expressions.MemberMemberBinding node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.MemberMemberBinding VisitMemberMemberBinding(class System.Linq.Expressions.MemberMemberBinding node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -842,19 +1244,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.MemberMemberBinding" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.MemberMemberBinding" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitMethodCall">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitMethodCall (System.Linq.Expressions.MethodCallExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitMethodCall(class System.Linq.Expressions.MethodCallExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitMethodCall (System.Linq.Expressions.MethodCallExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitMethodCall(class System.Linq.Expressions.MethodCallExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -869,19 +1285,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.MethodCallExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.MethodCallExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitNew">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitNew (System.Linq.Expressions.NewExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitNew(class System.Linq.Expressions.NewExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitNew (System.Linq.Expressions.NewExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitNew(class System.Linq.Expressions.NewExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -896,19 +1326,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.NewExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.NewExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitNewArray">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitNewArray (System.Linq.Expressions.NewArrayExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitNewArray(class System.Linq.Expressions.NewArrayExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitNewArray (System.Linq.Expressions.NewArrayExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitNewArray(class System.Linq.Expressions.NewArrayExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -923,19 +1367,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.NewArrayExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.NewArrayExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitParameter">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitParameter (System.Linq.Expressions.ParameterExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitParameter(class System.Linq.Expressions.ParameterExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitParameter (System.Linq.Expressions.ParameterExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitParameter(class System.Linq.Expressions.ParameterExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -950,19 +1408,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the <see cref="T:System.Linq.Expressions.ParameterExpression" />.</para>
+          <para
+            >Visits the <see
+             cref="T:System.Linq.Expressions.ParameterExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitRuntimeVariables">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitRuntimeVariables (System.Linq.Expressions.RuntimeVariablesExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitRuntimeVariables(class System.Linq.Expressions.RuntimeVariablesExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitRuntimeVariables (System.Linq.Expressions.RuntimeVariablesExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitRuntimeVariables(class System.Linq.Expressions.RuntimeVariablesExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -977,19 +1449,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitSwitch">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitSwitch (System.Linq.Expressions.SwitchExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitSwitch(class System.Linq.Expressions.SwitchExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitSwitch (System.Linq.Expressions.SwitchExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitSwitch(class System.Linq.Expressions.SwitchExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1004,19 +1490,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.SwitchExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.SwitchExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitSwitchCase">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.SwitchCase VisitSwitchCase (System.Linq.Expressions.SwitchCase node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.SwitchCase VisitSwitchCase(class System.Linq.Expressions.SwitchCase node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.SwitchCase VisitSwitchCase (System.Linq.Expressions.SwitchCase node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.Linq.Expressions.SwitchCase VisitSwitchCase(class System.Linq.Expressions.SwitchCase node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1031,19 +1531,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.SwitchCase" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.SwitchCase" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitTry">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitTry (System.Linq.Expressions.TryExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitTry(class System.Linq.Expressions.TryExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitTry (System.Linq.Expressions.TryExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitTry(class System.Linq.Expressions.TryExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1058,19 +1572,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.TryExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.TryExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitTypeBinary">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitTypeBinary (System.Linq.Expressions.TypeBinaryExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitTypeBinary(class System.Linq.Expressions.TypeBinaryExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitTypeBinary (System.Linq.Expressions.TypeBinaryExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitTypeBinary(class System.Linq.Expressions.TypeBinaryExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1085,19 +1613,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.TypeBinaryExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.TypeBinaryExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="VisitUnary">
-      <MemberSignature Language="C#" Value="protected virtual System.Linq.Expressions.Expression VisitUnary (System.Linq.Expressions.UnaryExpression node);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitUnary(class System.Linq.Expressions.UnaryExpression node) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Linq.Expressions.Expression VisitUnary (System.Linq.Expressions.UnaryExpression node);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.Linq.Expressions.Expression VisitUnary(class System.Linq.Expressions.UnaryExpression node) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1112,14 +1654,22 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visits the children of the <see cref="T:System.Linq.Expressions.UnaryExpression" />.</para>
+          <para
+            >Visits the children of the <see
+             cref="T:System.Linq.Expressions.UnaryExpression" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to visit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to visit.</param
+        >
       </Docs>
     </Member>
   </Members>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="EditableAttribute" FullName="System.ComponentModel.DataAnnotations.EditableAttribute">
   <TypeSignature Language="C#" Value="public sealed class EditableAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit EditableAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit EditableAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,7 +21,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The presence of the <see cref="T:System.ComponentModel.DataAnnotations.EditableAttribute" /> attribute on a data field indicates whether the user should be able to change the field's value.</para>
+      <para
+        >The presence of the <see
+         cref="T:System.ComponentModel.DataAnnotations.EditableAttribute" />
+
+         attribute on a data field indicates whether the user should be able to change the field's value.</para
+      >
       <para>This class neither enforces nor guarantees that a field is editable. The underlying data store might allow the field to be changed regardless of the presence of this attribute.</para>
     </remarks>
     <summary>
@@ -29,7 +37,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public EditableAttribute (bool allowEdit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool allowEdit) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool allowEdit) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -41,10 +52,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.EditableAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.EditableAttribute" />
+
+             class.</para
+          >
         </summary>
         <param name="allowEdit">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to specify that field is editable; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to specify that field is editable; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AllowEdit">
@@ -80,7 +99,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property defaults to the value that is specified in the <see cref="M:System.ComponentModel.DataAnnotations.EditableAttribute.#ctor(System.Boolean)" /> constructor.</para>
+          <para
+            >This property defaults to the value that is specified in the <see
+             cref="M:System.ComponentModel.DataAnnotations.EditableAttribute.#ctor(System.Boolean)" />
+
+             constructor.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

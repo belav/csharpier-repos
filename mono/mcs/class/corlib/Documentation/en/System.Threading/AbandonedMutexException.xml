@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AbandonedMutexException" FullName="System.Threading.AbandonedMutexException">
   <TypeSignature Language="C#" Value="public class AbandonedMutexException : SystemException" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit AbandonedMutexException extends System.SystemException" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit AbandonedMutexException extends System.SystemException"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -21,18 +24,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When a thread abandons a mutex, the exception is thrown in the next thread that acquires the mutex. The thread might acquire the mutex because it was already waiting on the mutex or because it enters the mutex at a later time.</para>
-      <para>An abandoned mutex indicates a serious programming error. When a thread exits without releasing the mutex, the data structures protected by the mutex might not be in a consistent state. Prior to version 2.0 of the .NET Framework, such problems were hard to discover because no exception was thrown if a wait completed as the result of an abandoned mutex. For more information, see the <see cref="T:System.Threading.Mutex" /> class.</para>
+      <para
+        >An abandoned mutex indicates a serious programming error. When a thread exits without releasing the mutex, the data structures protected by the mutex might not be in a consistent state. Prior to version 2.0 of the .NET Framework, such problems were hard to discover because no exception was thrown if a wait completed as the result of an abandoned mutex. For more information, see the <see
+         cref="T:System.Threading.Mutex" />
+
+         class.</para
+      >
       <para>The next thread to request ownership of the mutex can handle this exception and proceed, provided that the integrity of the data structures can be verified.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The exception that is thrown when one thread acquires a <see cref="T:System.Threading.Mutex" /> object that another thread has abandoned by exiting without releasing it.</para>
+      <para
+        >The exception that is thrown when one thread acquires a <see
+         cref="T:System.Threading.Mutex" />
+
+         object that another thread has abandoned by exiting without releasing it.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public AbandonedMutexException ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,8 +59,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "The wait completed due to an abandoned mutex." This message takes into account the current system culture.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.Threading.AbandonedMutexException" />.</para>
+          <para
+            >This constructor initializes the <see
+             cref="P:System.Exception.Message" />
+
+             property of the new instance to a system-supplied message that describes the error, such as "The wait completed due to an abandoned mutex." This message takes into account the current system culture.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -59,7 +85,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>null.</para>
@@ -68,7 +95,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>The system-supplied error message string. </para>
@@ -98,13 +126,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Threading.AbandonedMutexException" /> class with default values.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             class with default values.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public AbandonedMutexException (string message);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -117,8 +153,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.Threading.AbandonedMutexException" /> initialized with this constructor.</para>
+          <para
+            >The content of <paramref
+             name="message" />
+
+             is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             initialized with this constructor.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -133,7 +179,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>null. </para>
@@ -142,11 +189,15 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>
-                  <paramref name="message" />. </para>
+                  <paramref name="message" />
+
+                  . </para
+                >
               </description>
             </item>
             <item>
@@ -173,15 +224,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Threading.AbandonedMutexException" /> class with a specified error message.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             class with a specified error message.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />An error message that explains the reason for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An error message that explains the reason for the exception.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AbandonedMutexException (int location, System.Threading.WaitHandle handle);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 location, class System.Threading.WaitHandle handle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public AbandonedMutexException (int location, System.Threading.WaitHandle handle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 location, class System.Threading.WaitHandle handle) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -195,8 +260,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "The wait completed due to an abandoned mutex." This message takes into account the current system culture.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.Threading.AbandonedMutexException" /> initialized with this constructor.</para>
+          <para
+            >This constructor initializes the <see
+             cref="P:System.Exception.Message" />
+
+             property of the new instance to a system-supplied message that describes the error, such as "The wait completed due to an abandoned mutex." This message takes into account the current system culture.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             initialized with this constructor.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -211,7 +286,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>null. </para>
@@ -220,7 +296,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>A system-supplied error message string.</para>
@@ -234,7 +311,10 @@
               </term>
               <description>
                 <para>
-                  <paramref name="handle" />.</para>
+                  <paramref name="handle" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -245,24 +325,59 @@
               </term>
               <description>
                 <para>
-                  <paramref name="location" />.</para>
+                  <paramref name="location" />
+
+                  .</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Threading.AbandonedMutexException" /> class with a specified index for the abandoned mutex, if applicable, and a <see cref="T:System.Threading.Mutex" /> object that represents the mutex.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             class with a specified index for the abandoned mutex, if applicable, and a <see
+             cref="T:System.Threading.Mutex" />
+
+             object that represents the mutex.</para
+          >
         </summary>
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method, or –1 if the exception is thrown for the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> or <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> methods.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see
+           cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+           method, or –1 if the exception is thrown for the <see
+           cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+           or <see
+           cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+           methods.</param
+        >
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Threading.Mutex" /> object that represents the abandoned mutex.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Threading.Mutex" />
+
+           object that represents the abandoned mutex.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected AbandonedMutexException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected AbandonedMutexException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -276,21 +391,51 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html"><a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a></format>.</para>
+          <para
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
+             type="text/html">
+              <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Threading.AbandonedMutexException" /> class with serialized data.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             class with serialized data.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that holds the serialized object data about the exception being thrown. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+           object that holds the serialized object data about the exception being thrown. </param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains contextual information about the source or destination.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.StreamingContext" />
+
+           object that contains contextual information about the source or destination.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AbandonedMutexException (string message, Exception inner);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception inner) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public AbandonedMutexException (string message, Exception inner);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception inner) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -304,9 +449,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
-          <para>An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.Threading.AbandonedMutexException" /> initialized with this constructor.</para>
+          <para
+            >The content of <paramref
+             name="message" />
+
+             is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
+          >
+          <para
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
+             cref="P:System.Exception.InnerException" />
+
+             property. The <see
+             cref="P:System.Exception.InnerException" />
+
+             property returns the same value that is passed into the constructor, or null if the <see
+             cref="P:System.Exception.InnerException" />
+
+             property does not supply the inner exception value to the constructor.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             initialized with this constructor.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -321,21 +487,29 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>
-                  <paramref name="inner" />.</para>
+                  <paramref name="inner" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>
-                  <paramref name="message" />.</para>
+                  <paramref name="message" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -362,17 +536,37 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Threading.AbandonedMutexException" /> class with a specified error message and inner exception. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             class with a specified error message and inner exception. </para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />An error message that explains the reason for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An error message that explains the reason for the exception.</param
+        >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception that is the cause of the current exception. If the <paramref
+           name="inner" />
+
+           parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AbandonedMutexException (string message, int location, System.Threading.WaitHandle handle);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, int32 location, class System.Threading.WaitHandle handle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public AbandonedMutexException (string message, int location, System.Threading.WaitHandle handle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, int32 location, class System.Threading.WaitHandle handle) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -387,8 +581,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.Threading.AbandonedMutexException" /> initialized with this constructor.</para>
+          <para
+            >The content of <paramref
+             name="message" />
+
+             is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             initialized with this constructor.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -403,7 +607,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>null. </para>
@@ -412,11 +617,15 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>
-                  <paramref name="message" />.</para>
+                  <paramref name="message" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -427,7 +636,10 @@
               </term>
               <description>
                 <para>
-                  <paramref name="handle" />.</para>
+                  <paramref name="handle" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -438,26 +650,61 @@
               </term>
               <description>
                 <para>
-                  <paramref name="location" />.</para>
+                  <paramref name="location" />
+
+                  .</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Threading.AbandonedMutexException" /> class with a specified error message, the index of the abandoned mutex, if applicable, and the abandoned mutex. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             class with a specified error message, the index of the abandoned mutex, if applicable, and the abandoned mutex. </para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />An error message that explains the reason for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An error message that explains the reason for the exception.</param
+        >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method, or –1 if the exception is thrown for the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> or <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> methods.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see
+           cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+           method, or –1 if the exception is thrown for the <see
+           cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+           or <see
+           cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+           methods.</param
+        >
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Threading.Mutex" /> object that represents the abandoned mutex.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Threading.Mutex" />
+
+           object that represents the abandoned mutex.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AbandonedMutexException (string message, Exception inner, int location, System.Threading.WaitHandle handle);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception inner, int32 location, class System.Threading.WaitHandle handle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public AbandonedMutexException (string message, Exception inner, int location, System.Threading.WaitHandle handle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception inner, int32 location, class System.Threading.WaitHandle handle) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -473,9 +720,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The content of <paramref name="message" /> is a text string intended to inform the user about the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
-          <para>An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.Threading.AbandonedMutexException" /> initialized with this constructor.</para>
+          <para
+            >The content of <paramref
+             name="message" />
+
+             is a text string intended to inform the user about the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
+          >
+          <para
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
+             cref="P:System.Exception.InnerException" />
+
+             property. The <see
+             cref="P:System.Exception.InnerException" />
+
+             property returns the same value that is passed into the constructor, or null if the <see
+             cref="P:System.Exception.InnerException" />
+
+             property does not supply the inner exception value to the constructor.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             initialized with this constructor.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -490,21 +758,29 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>
-                  <paramref name="inner" />. </para>
+                  <paramref name="inner" />
+
+                  . </para
+                >
               </description>
             </item>
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>
-                  <paramref name="message" />.</para>
+                  <paramref name="message" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -515,7 +791,10 @@
               </term>
               <description>
                 <para>
-                  <paramref name="handle" />.</para>
+                  <paramref name="handle" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -526,28 +805,69 @@
               </term>
               <description>
                 <para>
-                  <paramref name="location" />.</para>
+                  <paramref name="location" />
+
+                  .</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Threading.AbandonedMutexException" /> class with a specified error message, the inner exception, the index for the abandoned mutex, if applicable, and a <see cref="T:System.Threading.Mutex" /> object that represents the mutex.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Threading.AbandonedMutexException" />
+
+             class with a specified error message, the inner exception, the index for the abandoned mutex, if applicable, and a <see
+             cref="T:System.Threading.Mutex" />
+
+             object that represents the mutex.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />An error message that explains the reason for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An error message that explains the reason for the exception.</param
+        >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception that is the cause of the current exception. If the <paramref
+           name="inner" />
+
+           parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param
+        >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method, or –1 if the exception is thrown for the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> or <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> methods.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the abandoned mutex in the array of wait handles if the exception is thrown for the <see
+           cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+           method, or –1 if the exception is thrown for the <see
+           cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+           or <see
+           cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+           methods.</param
+        >
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Threading.Mutex" /> object that represents the abandoned mutex.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Threading.Mutex" />
+
+           object that represents the abandoned mutex.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Mutex">
       <MemberSignature Language="C#" Value="public System.Threading.Mutex Mutex { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Threading.Mutex Mutex" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Threading.Mutex Mutex"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -561,7 +881,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the exception is thrown on a call to the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method, the <see cref="T:System.Threading.Mutex" /> returned is the abandoned mutex with the lowest index in the array of <see cref="T:System.Threading.WaitHandle" /> objects that was passed to <see cref="Overload:System.Threading.WaitHandle.WaitAny" />, or null if the abandoned mutex could not be identified. If the exception is thrown on a call to <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> or <see cref="Overload:System.Threading.WaitHandle.WaitAll" />, this property always returns null.</para>
+          <para
+            >If the exception is thrown on a call to the <see
+             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+             method, the <see
+             cref="T:System.Threading.Mutex" />
+
+             returned is the abandoned mutex with the lowest index in the array of <see
+             cref="T:System.Threading.WaitHandle" />
+
+             objects that was passed to <see
+             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            , or null if the abandoned mutex could not be identified. If the exception is thrown on a call to <see
+             cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+             or <see
+             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            , this property always returns null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -585,7 +925,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the exception is thrown on a call to the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method, this property returns the index of the abandoned mutex with the lowest index in the array of <see cref="T:System.Threading.WaitHandle" /> objects that was passed to <see cref="Overload:System.Threading.WaitHandle.WaitAny" />, or –1 if the abandoned mutex could not be identified. If the exception is thrown on a call to <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> or <see cref="Overload:System.Threading.WaitHandle.WaitAll" />, this property always returns –1.</para>
+          <para
+            >If the exception is thrown on a call to the <see
+             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+             method, this property returns the index of the abandoned mutex with the lowest index in the array of <see
+             cref="T:System.Threading.WaitHandle" />
+
+             objects that was passed to <see
+             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            , or –1 if the abandoned mutex could not be identified. If the exception is thrown on a call to <see
+             cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+             or <see
+             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            , this property always returns –1.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

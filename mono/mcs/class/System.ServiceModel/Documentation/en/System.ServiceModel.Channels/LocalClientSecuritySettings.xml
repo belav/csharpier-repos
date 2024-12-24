@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="LocalClientSecuritySettings" FullName="System.ServiceModel.Channels.LocalClientSecuritySettings">
+<Type
+  Name="LocalClientSecuritySettings"
+  FullName="System.ServiceModel.Channels.LocalClientSecuritySettings"
+>
   <TypeSignature Language="C#" Value="public sealed class LocalClientSecuritySettings" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit LocalClientSecuritySettings extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit LocalClientSecuritySettings extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +19,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class contains the local security settings used by the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> (and classes derived from it) to build the security channel. These settings are local to the client and are not determined from the service's security policy.</para>
+      <para
+        >This class contains the local security settings used by the <see
+         cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+         (and classes derived from it) to build the security channel. These settings are local to the client and are not determined from the service's security policy.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -23,7 +34,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public LocalClientSecuritySettings ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,7 +47,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -57,8 +76,14 @@
       </Docs>
     </Member>
     <Member MemberName="Clone">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.LocalClientSecuritySettings Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ServiceModel.Channels.LocalClientSecuritySettings Clone() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.LocalClientSecuritySettings Clone ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ServiceModel.Channels.LocalClientSecuritySettings Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -75,13 +100,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CookieRenewalThresholdPercentage">
-      <MemberSignature Language="C#" Value="public int CookieRenewalThresholdPercentage { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 CookieRenewalThresholdPercentage" />
+      <MemberSignature
+        Language="C#"
+        Value="public int CookieRenewalThresholdPercentage { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 CookieRenewalThresholdPercentage"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -121,8 +157,14 @@
       </Docs>
     </Member>
     <Member MemberName="IdentityVerifier">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.IdentityVerifier IdentityVerifier { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.IdentityVerifier IdentityVerifier" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.IdentityVerifier IdentityVerifier { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.IdentityVerifier IdentityVerifier"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -134,7 +176,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is used to verify that the remote endpoint that the client channel is communicating with matches the identity specified in the <see cref="T:System.ServiceModel.EndpointAddress" /> that the channel is targeted for.</para>
+          <para
+            >This property is used to verify that the remote endpoint that the client channel is communicating with matches the identity specified in the <see
+             cref="T:System.ServiceModel.EndpointAddress" />
+
+             that the channel is targeted for.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -144,7 +191,10 @@
     </Member>
     <Member MemberName="MaxClockSkew">
       <MemberSignature Language="C#" Value="public TimeSpan MaxClockSkew { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan MaxClockSkew" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan MaxClockSkew"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -157,8 +207,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Messages between systems whose clocks' difference exceeds the value specified in this property are rejected.</para>
-          <para>This property is used in conjunction with the message time stamp verification and the <see cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.ReplayWindow" /> property.</para>
-          <para>crdefault <format type="text/html"><a href="491d1705-eb29-43c2-a44c-c0cf996f74eb">How To: Set a Max Clock Skew</a></format>.</para>
+          <para
+            >This property is used in conjunction with the message time stamp verification and the <see
+             cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.ReplayWindow" />
+
+             property.</para
+          >
+          <para
+            >crdefault <format
+             type="text/html">
+              <a href="491d1705-eb29-43c2-a44c-c0cf996f74eb">How To: Set a Max Clock Skew</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -168,7 +230,10 @@
     </Member>
     <Member MemberName="MaxCookieCachingTime">
       <MemberSignature Language="C#" Value="public TimeSpan MaxCookieCachingTime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan MaxCookieCachingTime" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan MaxCookieCachingTime"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -186,8 +251,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReconnectTransportOnFailure">
-      <MemberSignature Language="C#" Value="public bool ReconnectTransportOnFailure { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool ReconnectTransportOnFailure" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool ReconnectTransportOnFailure { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool ReconnectTransportOnFailure"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -221,8 +292,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <newTerm>nonce</newTerm> is a "number used once", often a random number used in an authentication protocol to ensure that old communications cannot be used in an attack by using replays.</para>
-          <para>If the nonce count is exceeded, the incoming message is rejected and a <see cref="T:System.ServiceModel.Security.MessageSecurityException" /> is thrown. Old nonces are removed in a timely manner.</para>
+          <para
+            >A <newTerm
+            >nonce</newTerm>
+
+             is a "number used once", often a random number used in an authentication protocol to ensure that old communications cannot be used in an attack by using replays.</para
+          >
+          <para
+            >If the nonce count is exceeded, the incoming message is rejected and a <see
+             cref="T:System.ServiceModel.Security.MessageSecurityException" />
+
+             is thrown. Old nonces are removed in a timely manner.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -232,7 +313,10 @@
     </Member>
     <Member MemberName="ReplayWindow">
       <MemberSignature Language="C#" Value="public TimeSpan ReplayWindow { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan ReplayWindow" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan ReplayWindow"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -244,7 +328,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <newTerm>nonce</newTerm> is a "number used once", often a random number used in an authentication protocol to ensure that old communications cannot be used in an attack by using replays.</para>
+          <para
+            >A <newTerm
+            >nonce</newTerm>
+
+             is a "number used once", often a random number used in an authentication protocol to ensure that old communications cannot be used in an attack by using replays.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -253,8 +342,14 @@
       </Docs>
     </Member>
     <Member MemberName="SessionKeyRenewalInterval">
-      <MemberSignature Language="C#" Value="public TimeSpan SessionKeyRenewalInterval { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan SessionKeyRenewalInterval" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan SessionKeyRenewalInterval { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan SessionKeyRenewalInterval"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -269,25 +364,82 @@
           <para>Session settings such as this one are applicable under any of the following conditions:</para>
           <list type="bullet">
             <item>
-              <para>All client credential types for <see cref="T:System.ServiceModel.WSDualHttpBinding" /> and <see cref="T:System.ServiceModel.NetTcpBinding" />.</para>
+              <para
+                >All client credential types for <see
+                 cref="T:System.ServiceModel.WSDualHttpBinding" />
+
+                 and <see
+                 cref="T:System.ServiceModel.NetTcpBinding" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>If <format type="text/html"><a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a></format> is enabled.</para>
+              <para
+                >If <format
+                 type="text/html">
+                  <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
+                </format>
+
+                 is enabled.</para
+              >
             </item>
             <item>
-              <para>If <format type="text/html"><a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a></format> is not enabled, on <see cref="T:System.ServiceModel.WSHttpBinding" /> with <see cref="P:System.ServiceModel.Description.ClientCredentials.UserName" /> = true or <see cref="P:System.ServiceModel.Description.ClientCredentials.Windows" /> = true.</para>
+              <para
+                >If <format
+                 type="text/html">
+                  <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
+                </format>
+
+                 is not enabled, on <see
+                 cref="T:System.ServiceModel.WSHttpBinding" />
+
+                 with <see
+                 cref="P:System.ServiceModel.Description.ClientCredentials.UserName" />
+
+                 = true or <see
+                 cref="P:System.ServiceModel.Description.ClientCredentials.Windows" />
+
+                 = true.</para
+              >
             </item>
           </list>
           <para>Session settings such as this one are not applicable under any of the following conditions:</para>
           <list type="bullet">
             <item>
-              <para>For <see cref="T:System.ServiceModel.BasicHttpBinding" />.</para>
+              <para
+                >For <see
+                 cref="T:System.ServiceModel.BasicHttpBinding" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>For <see cref="T:System.ServiceModel.NetNamedPipeBinding" />.</para>
+              <para
+                >For <see
+                 cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>If <format type="text/html"><a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a></format> is not enabled, on <see cref="T:System.ServiceModel.WSHttpBinding" /> with <see cref="P:System.ServiceModel.Description.ClientCredentials.ClientCertificate" /> = true or with none of the <see cref="T:System.ServiceModel.Description.ClientCredentials" /> properties set to true.</para>
+              <para
+                >If <format
+                 type="text/html">
+                  <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
+                </format>
+
+                 is not enabled, on <see
+                 cref="T:System.ServiceModel.WSHttpBinding" />
+
+                 with <see
+                 cref="P:System.ServiceModel.Description.ClientCredentials.ClientCertificate" />
+
+                 = true or with none of the <see
+                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+                 properties set to true.</para
+              >
             </item>
           </list>
         </remarks>
@@ -298,8 +450,14 @@
       </Docs>
     </Member>
     <Member MemberName="SessionKeyRolloverInterval">
-      <MemberSignature Language="C#" Value="public TimeSpan SessionKeyRolloverInterval { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan SessionKeyRolloverInterval" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan SessionKeyRolloverInterval { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan SessionKeyRolloverInterval"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -315,25 +473,82 @@
           <para>Session settings such as this one are applicable under any of the following conditions:</para>
           <list type="bullet">
             <item>
-              <para>All client credential types for <see cref="T:System.ServiceModel.WSDualHttpBinding" /> and <see cref="T:System.ServiceModel.NetTcpBinding" />.</para>
+              <para
+                >All client credential types for <see
+                 cref="T:System.ServiceModel.WSDualHttpBinding" />
+
+                 and <see
+                 cref="T:System.ServiceModel.NetTcpBinding" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>If <format type="text/html"><a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a></format> is enabled.</para>
+              <para
+                >If <format
+                 type="text/html">
+                  <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
+                </format>
+
+                 is enabled.</para
+              >
             </item>
             <item>
-              <para>If <format type="text/html"><a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a></format> is not enabled, on <see cref="T:System.ServiceModel.WSHttpBinding" /> with <see cref="P:System.ServiceModel.Description.ClientCredentials.UserName" /> = true or  <see cref="P:System.ServiceModel.Description.ClientCredentials.windows" /> = true.</para>
+              <para
+                >If <format
+                 type="text/html">
+                  <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
+                </format>
+
+                 is not enabled, on <see
+                 cref="T:System.ServiceModel.WSHttpBinding" />
+
+                 with <see
+                 cref="P:System.ServiceModel.Description.ClientCredentials.UserName" />
+
+                 = true or  <see
+                 cref="P:System.ServiceModel.Description.ClientCredentials.windows" />
+
+                 = true.</para
+              >
             </item>
           </list>
           <para>Session settings such as this one are not applicable under any of the following conditions:</para>
           <list type="bullet">
             <item>
-              <para>For <see cref="T:System.ServiceModel.BasicHttpBinding" />.</para>
+              <para
+                >For <see
+                 cref="T:System.ServiceModel.BasicHttpBinding" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>For <see cref="T:System.ServiceModel.NetNamedPipeBinding" />.</para>
+              <para
+                >For <see
+                 cref="T:System.ServiceModel.NetNamedPipeBinding" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>If <format type="text/html"><a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a></format> is not enabled, on <see cref="T:System.ServiceModel.WSHttpBinding" /> with <see cref="P:System.ServiceModel.Description.ClientCredentials.ClientCertificate" /> = true or with none of the <see cref="T:System.ServiceModel.Description.ClientCredentials" /> properties set to true.</para>
+              <para
+                >If <format
+                 type="text/html">
+                  <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
+                </format>
+
+                 is not enabled, on <see
+                 cref="T:System.ServiceModel.WSHttpBinding" />
+
+                 with <see
+                 cref="P:System.ServiceModel.Description.ClientCredentials.ClientCertificate" />
+
+                 = true or with none of the <see
+                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+                 properties set to true.</para
+              >
             </item>
           </list>
         </remarks>
@@ -344,8 +559,14 @@
       </Docs>
     </Member>
     <Member MemberName="TimestampValidityDuration">
-      <MemberSignature Language="C#" Value="public TimeSpan TimestampValidityDuration { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan TimestampValidityDuration" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan TimestampValidityDuration { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan TimestampValidityDuration"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PropertyDescriptor" FullName="System.ComponentModel.PropertyDescriptor">
-  <TypeSignature Language="C#" Value="public abstract class PropertyDescriptor : System.ComponentModel.MemberDescriptor" Maintainer="auto" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit PropertyDescriptor extends System.ComponentModel.MemberDescriptor" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class PropertyDescriptor : System.ComponentModel.MemberDescriptor"
+    Maintainer="auto"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit PropertyDescriptor extends System.ComponentModel.MemberDescriptor"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -25,58 +32,107 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A description of a property consists of a name, its attributes, the component class that the property is associated with, and the type of the property.</para>
       <para>
-        <see cref="T:System.ComponentModel.PropertyDescriptor" /> provides the following properties and methods: </para>
+        <see cref="T:System.ComponentModel.PropertyDescriptor" />
+
+         provides the following properties and methods: </para
+      >
       <list type="bullet">
         <item>
           <para>
-            <see cref="P:System.ComponentModel.PropertyDescriptor.Converter" /> contains the <see cref="T:System.ComponentModel.TypeConverter" /> for this property.</para>
+            <see cref="P:System.ComponentModel.PropertyDescriptor.Converter" />
+
+             contains the <see
+             cref="T:System.ComponentModel.TypeConverter" />
+
+             for this property.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="P:System.ComponentModel.PropertyDescriptor.IsLocalizable" /> indicates whether this property should be localized.</para>
+            <see cref="P:System.ComponentModel.PropertyDescriptor.IsLocalizable" />
+
+             indicates whether this property should be localized.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="M:System.ComponentModel.PropertyDescriptor.GetEditor(System.Type)" /> returns an editor of the specified type.</para>
+            <see cref="M:System.ComponentModel.PropertyDescriptor.GetEditor(System.Type)" />
+
+             returns an editor of the specified type.</para
+          >
         </item>
       </list>
       <para>
-        <see cref="T:System.ComponentModel.PropertyDescriptor" /> also provides the following abstract properties and methods: </para>
+        <see cref="T:System.ComponentModel.PropertyDescriptor" />
+
+         also provides the following abstract properties and methods: </para
+      >
       <list type="bullet">
         <item>
           <para>
-            <see cref="P:System.ComponentModel.PropertyDescriptor.ComponentType" /> contains the type of component this property is bound to.</para>
+            <see cref="P:System.ComponentModel.PropertyDescriptor.ComponentType" />
+
+             contains the type of component this property is bound to.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="P:System.ComponentModel.PropertyDescriptor.IsReadOnly" /> indicates whether this property is read-only.</para>
+            <see cref="P:System.ComponentModel.PropertyDescriptor.IsReadOnly" />
+
+             indicates whether this property is read-only.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="P:System.ComponentModel.PropertyDescriptor.PropertyType" /> gets the type of the property.</para>
+            <see cref="P:System.ComponentModel.PropertyDescriptor.PropertyType" />
+
+             gets the type of the property.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="M:System.ComponentModel.PropertyDescriptor.CanResetValue(System.Object)" /> indicates whether resetting the component changes the value of the component.</para>
+            <see cref="M:System.ComponentModel.PropertyDescriptor.CanResetValue(System.Object)" />
+
+             indicates whether resetting the component changes the value of the component.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)" /> returns the current value of the property on a component.</para>
+            <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)" />
+
+             returns the current value of the property on a component.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="M:System.ComponentModel.PropertyDescriptor.ResetValue(System.Object)" /> resets the value for this property of the component.</para>
+            <see cref="M:System.ComponentModel.PropertyDescriptor.ResetValue(System.Object)" />
+
+             resets the value for this property of the component.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" /> sets the value of the component to a different value.</para>
+            <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" />
+
+             sets the value of the component to a different value.</para
+          >
         </item>
         <item>
           <para>
-            <see cref="M:System.ComponentModel.PropertyDescriptor.ShouldSerializeValue(System.Object)" /> indicates whether the value of this property needs to be persisted.</para>
+            <see cref="M:System.ComponentModel.PropertyDescriptor.ShouldSerializeValue(System.Object)" />
+
+             indicates whether the value of this property needs to be persisted.</para
+          >
         </item>
       </list>
-      <para>Typically, the abstract members are implemented through reflection. For more information about reflection, see the topics in <format type="text/html"><a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">Reflection</a></format>.</para>
+      <para
+        >Typically, the abstract members are implemented through reflection. For more information about reflection, see the topics in <format
+         type="text/html">
+          <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">Reflection</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,8 +141,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected PropertyDescriptor (System.ComponentModel.MemberDescriptor reference);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ComponentModel.MemberDescriptor reference) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected PropertyDescriptor (System.ComponentModel.MemberDescriptor reference);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ComponentModel.MemberDescriptor reference) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -102,13 +164,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyDescriptor" /> class with the name and attributes in the specified <see cref="T:System.ComponentModel.MemberDescriptor" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.PropertyDescriptor" />
+
+             class with the name and attributes in the specified <see
+             cref="T:System.ComponentModel.MemberDescriptor" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected PropertyDescriptor (System.ComponentModel.MemberDescriptor reference, Attribute[] attrs);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ComponentModel.MemberDescriptor reference, class System.Attribute[] attrs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected PropertyDescriptor (System.ComponentModel.MemberDescriptor reference, Attribute[] attrs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ComponentModel.MemberDescriptor reference, class System.Attribute[] attrs) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -124,19 +200,53 @@
         <param name="reference">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor appends the attributes in the <see cref="T:System.Attribute" /> array to the attributes in the <see cref="T:System.ComponentModel.MemberDescriptor" />.</para>
+          <para
+            >This constructor appends the attributes in the <see
+             cref="T:System.Attribute" />
+
+             array to the attributes in the <see
+             cref="T:System.ComponentModel.MemberDescriptor" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyDescriptor" /> class with the name in the specified <see cref="T:System.ComponentModel.MemberDescriptor" /> and the attributes in both the <see cref="T:System.ComponentModel.MemberDescriptor" /> and the <see cref="T:System.Attribute" /> array.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.PropertyDescriptor" />
+
+             class with the name in the specified <see
+             cref="T:System.ComponentModel.MemberDescriptor" />
+
+             and the attributes in both the <see
+             cref="T:System.ComponentModel.MemberDescriptor" />
+
+             and the <see
+             cref="T:System.Attribute" />
+
+             array.</para
+          >
         </summary>
         <param name="attrs">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Attribute" /> array containing the attributes you want to associate with the property. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Attribute" />
+
+           array containing the attributes you want to associate with the property. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected PropertyDescriptor (string name, Attribute[] attrs);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(string name, class System.Attribute[] attrs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected PropertyDescriptor (string name, Attribute[] attrs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(string name, class System.Attribute[] attrs) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -152,17 +262,37 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyDescriptor" /> class with the specified name and attributes.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.PropertyDescriptor" />
+
+             class with the specified name and attributes.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property. </param
+        >
         <param name="attrs">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Attribute" /> that contains the property attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Attribute" />
+
+           that contains the property attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddValueChanged">
-      <MemberSignature Language="C#" Value="public virtual void AddValueChanged (object component, EventHandler handler);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void AddValueChanged(object component, class System.EventHandler handler) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void AddValueChanged (object component, EventHandler handler);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void AddValueChanged(object component, class System.EventHandler handler) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -183,14 +313,26 @@
           <para>Enables other objects to be notified when this property changes.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component to add the handler for. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component to add the handler for. </param
+        >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delegate to add as a listener. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delegate to add as a listener. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CanResetValue">
-      <MemberSignature Language="C#" Value="public abstract bool CanResetValue (object component);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool CanResetValue(object component) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool CanResetValue (object component);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool CanResetValue(object component) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -217,12 +359,18 @@
           <para>true if resetting the component changes its value; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component to test for reset capability. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component to test for reset capability. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ComponentType">
       <MemberSignature Language="C#" Value="public abstract Type ComponentType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type ComponentType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type ComponentType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -245,8 +393,14 @@
       </Docs>
     </Member>
     <Member MemberName="Converter">
-      <MemberSignature Language="C#" Value="public virtual System.ComponentModel.TypeConverter Converter { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ComponentModel.TypeConverter Converter" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.ComponentModel.TypeConverter Converter { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ComponentModel.TypeConverter Converter"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -267,7 +421,10 @@
     </Member>
     <Member MemberName="CreateInstance">
       <MemberSignature Language="C#" Value="protected object CreateInstance (Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance object CreateInstance(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance object CreateInstance(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -284,7 +441,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.ComponentModel.PropertyDescriptor.CreateInstance(System.Type)" /> looks for a constructor that takes the specified type. If it finds a constructor, the type of the property is passed in.</para>
+            <see cref="M:System.ComponentModel.PropertyDescriptor.CreateInstance(System.Type)" />
+
+             looks for a constructor that takes the specified type. If it finds a constructor, the type of the property is passed in.</para
+          >
           <para>Converters and editors use this method to create versions of a component. This method enables a single component to be reused for more than one type.</para>
         </remarks>
         <summary>
@@ -296,12 +456,21 @@
           <para>A new instance of the type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Type" /> that represents the type to create. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Type" />
+
+           that represents the type to create. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -325,12 +494,24 @@
           <para>true if the values are equivalent; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare to this <see cref="T:System.ComponentModel.PropertyDescriptor" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to compare to this <see
+           cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="FillAttributes">
-      <MemberSignature Language="C#" Value="protected override void FillAttributes (System.Collections.IList attributeList);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void FillAttributes(class System.Collections.IList attributeList) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void FillAttributes (System.Collections.IList attributeList);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void FillAttributes(class System.Collections.IList attributeList) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -349,15 +530,32 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the attributes of the <see cref="T:System.ComponentModel.PropertyDescriptor" /> to the specified list of attributes in the parent class.</para>
+          <para
+            >Adds the attributes of the <see
+             cref="T:System.ComponentModel.PropertyDescriptor" />
+
+             to the specified list of attributes in the parent class.</para
+          >
         </summary>
         <param name="attributeList">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Collections.IList" /> that lists the attributes in the parent class. Initially, this is empty.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Collections.IList" />
+
+           that lists the attributes in the parent class. Initially, this is empty.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetChildProperties">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.PropertyDescriptorCollection GetChildProperties ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ComponentModel.PropertyDescriptorCollection GetChildProperties() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.PropertyDescriptorCollection GetChildProperties ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ComponentModel.PropertyDescriptorCollection GetChildProperties() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -371,27 +569,85 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method passes null for both the <paramref name="instance" /> parameter and the <paramref name="filter" /> parameter.</para>
-          <para>The properties for the <paramref name="instance" /> parameter can differ from the properties of a class, because the container can add or remove properties if the <paramref name="instance" /> parameter is sited.</para>
-          <para>The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para>
+          <para
+            >This method passes null for both the <paramref
+             name="instance" />
+
+             parameter and the <paramref
+             name="filter" />
+
+             parameter.</para
+          >
+          <para
+            >The properties for the <paramref
+             name="instance" />
+
+             parameter can differ from the properties of a class, because the container can add or remove properties if the <paramref
+             name="instance" />
+
+             parameter is sited.</para
+          >
+          <para
+            >The <paramref
+             name="filter" />
+
+             parameter can mix <see
+             cref="T:System.Type" />
+
+             and <see
+             cref="T:System.Attribute" />
+
+             objects. Filtering is defined by the following rules: </para
+          >
           <list type="bullet">
             <item>
-              <para>A <see cref="T:System.Type" /> object is treated as a wildcard; it matches any property that has the <see cref="T:System.Type" /> in its set of attributes.</para>
+              <para
+                >A <see
+                 cref="T:System.Type" />
+
+                 object is treated as a wildcard; it matches any property that has the <see
+                 cref="T:System.Type" />
+
+                 in its set of attributes.</para
+              >
             </item>
             <item>
-              <para>If a property does not have an <see cref="T:System.Attribute" /> of the same class, the property will not be included in the returned array.</para>
+              <para
+                >If a property does not have an <see
+                 cref="T:System.Attribute" />
+
+                 of the same class, the property will not be included in the returned array.</para
+              >
             </item>
             <item>
-              <para>If the attribute is an instance of <see cref="T:System.Attribute" />, the property must be an exact match to be included in the returned array.</para>
+              <para
+                >If the attribute is an instance of <see
+                 cref="T:System.Attribute" />
+
+                , the property must be an exact match to be included in the returned array.</para
+              >
             </item>
             <item>
-              <para>If you specify an <see cref="T:System.Attribute" /> and it is the default property, it will be included in the returned array, even if there is no instance of <see cref="T:System.Attribute" /> in the property.</para>
+              <para
+                >If you specify an <see
+                 cref="T:System.Attribute" />
+
+                 and it is the default property, it will be included in the returned array, even if there is no instance of <see
+                 cref="T:System.Attribute" />
+
+                 in the property.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the default <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />.</para>
+          <para
+            >Returns the default <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -400,8 +656,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetChildProperties">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.PropertyDescriptorCollection GetChildProperties (Attribute[] filter);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ComponentModel.PropertyDescriptorCollection GetChildProperties(class System.Attribute[] filter) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.PropertyDescriptorCollection GetChildProperties (Attribute[] filter);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ComponentModel.PropertyDescriptorCollection GetChildProperties(class System.Attribute[] filter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -417,39 +679,111 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method passes null for the <paramref name="instance" /> parameter.</para>
-          <para>The properties for the <paramref name="instance" /> parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" /> parameter is sited.</para>
-          <para>The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para>
+          <para
+            >This method passes null for the <paramref
+             name="instance" />
+
+             parameter.</para
+          >
+          <para
+            >The properties for the <paramref
+             name="instance" />
+
+             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref
+             name="instance" />
+
+             parameter is sited.</para
+          >
+          <para
+            >The <paramref
+             name="filter" />
+
+             parameter can mix <see
+             cref="T:System.Type" />
+
+             and <see
+             cref="T:System.Attribute" />
+
+             objects. Filtering is defined by the following rules: </para
+          >
           <list type="bullet">
             <item>
-              <para>A <see cref="T:System.Type" /> object is treated as a wildcard; it matches any property that has the <see cref="T:System.Type" /> in its set of attributes.</para>
+              <para
+                >A <see
+                 cref="T:System.Type" />
+
+                 object is treated as a wildcard; it matches any property that has the <see
+                 cref="T:System.Type" />
+
+                 in its set of attributes.</para
+              >
             </item>
             <item>
-              <para>If a property does not have an <see cref="T:System.Attribute" /> of the same class, the property will not be included in the returned array.</para>
+              <para
+                >If a property does not have an <see
+                 cref="T:System.Attribute" />
+
+                 of the same class, the property will not be included in the returned array.</para
+              >
             </item>
             <item>
-              <para>If the attribute is an instance of <see cref="T:System.Attribute" />, the property must be an exact match to be included in the returned array.</para>
+              <para
+                >If the attribute is an instance of <see
+                 cref="T:System.Attribute" />
+
+                , the property must be an exact match to be included in the returned array.</para
+              >
             </item>
             <item>
-              <para>If you specify an <see cref="T:System.Attribute" /> instance and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" /> in the property.</para>
+              <para
+                >If you specify an <see
+                 cref="T:System.Attribute" />
+
+                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see
+                 cref="T:System.Attribute" />
+
+                 in the property.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> using a specified array of attributes as a filter.</para>
+          <para
+            >Returns a <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             using a specified array of attributes as a filter.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> with the properties that match the specified attributes.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             with the properties that match the specified attributes.</para
+          >
         </returns>
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Attribute" /> to use as a filter. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Attribute" />
+
+           to use as a filter. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetChildProperties">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.PropertyDescriptorCollection GetChildProperties (object instance);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ComponentModel.PropertyDescriptorCollection GetChildProperties(object instance) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.PropertyDescriptorCollection GetChildProperties (object instance);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ComponentModel.PropertyDescriptorCollection GetChildProperties(object instance) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -465,39 +799,108 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method passes null for the <paramref name="filter" /> parameter.</para>
-          <para>The properties for the <paramref name="instance" /> parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" /> parameter is sited.</para>
-          <para>The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para>
+          <para
+            >This method passes null for the <paramref
+             name="filter" />
+
+             parameter.</para
+          >
+          <para
+            >The properties for the <paramref
+             name="instance" />
+
+             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref
+             name="instance" />
+
+             parameter is sited.</para
+          >
+          <para
+            >The <paramref
+             name="filter" />
+
+             parameter can mix <see
+             cref="T:System.Type" />
+
+             and <see
+             cref="T:System.Attribute" />
+
+             objects. Filtering is defined by the following rules: </para
+          >
           <list type="bullet">
             <item>
-              <para>A <see cref="T:System.Type" /> object is treated as a wildcard; it matches any property that has the <see cref="T:System.Type" /> in its set of attributes.</para>
+              <para
+                >A <see
+                 cref="T:System.Type" />
+
+                 object is treated as a wildcard; it matches any property that has the <see
+                 cref="T:System.Type" />
+
+                 in its set of attributes.</para
+              >
             </item>
             <item>
-              <para>If a property does not have an <see cref="T:System.Attribute" /> of the same class, the property will not be included in the returned array.</para>
+              <para
+                >If a property does not have an <see
+                 cref="T:System.Attribute" />
+
+                 of the same class, the property will not be included in the returned array.</para
+              >
             </item>
             <item>
-              <para>If the attribute is an instance of <see cref="T:System.Attribute" />, the property must be an exact match to be included in the returned array.</para>
+              <para
+                >If the attribute is an instance of <see
+                 cref="T:System.Attribute" />
+
+                , the property must be an exact match to be included in the returned array.</para
+              >
             </item>
             <item>
-              <para>If you specify an <see cref="T:System.Attribute" /> instance and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" /> in the property.</para>
+              <para
+                >If you specify an <see
+                 cref="T:System.Attribute" />
+
+                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see
+                 cref="T:System.Attribute" />
+
+                 in the property.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> for a given object.</para>
+          <para
+            >Returns a <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             for a given object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> with the properties for the specified component.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             with the properties for the specified component.</para
+          >
         </returns>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />A component to get the properties for. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A component to get the properties for. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetChildProperties">
-      <MemberSignature Language="C#" Value="public virtual System.ComponentModel.PropertyDescriptorCollection GetChildProperties (object instance, Attribute[] filter);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.PropertyDescriptorCollection GetChildProperties(object instance, class System.Attribute[] filter) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.ComponentModel.PropertyDescriptorCollection GetChildProperties (object instance, Attribute[] filter);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.PropertyDescriptorCollection GetChildProperties(object instance, class System.Attribute[] filter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -514,41 +917,119 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The properties for the <paramref name="instance" /> parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" /> parameter is sited.</para>
-          <para>The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para>
+          <para
+            >The properties for the <paramref
+             name="instance" />
+
+             parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref
+             name="instance" />
+
+             parameter is sited.</para
+          >
+          <para
+            >The <paramref
+             name="filter" />
+
+             parameter can mix <see
+             cref="T:System.Type" />
+
+             and <see
+             cref="T:System.Attribute" />
+
+             objects. Filtering is defined by the following rules: </para
+          >
           <list type="bullet">
             <item>
-              <para>A <see cref="T:System.Type" /> object is treated as a wildcard; it matches any property that has the <see cref="T:System.Type" /> in its set of attributes.</para>
+              <para
+                >A <see
+                 cref="T:System.Type" />
+
+                 object is treated as a wildcard; it matches any property that has the <see
+                 cref="T:System.Type" />
+
+                 in its set of attributes.</para
+              >
             </item>
             <item>
-              <para>If a property does not have an <see cref="T:System.Attribute" /> of the same class, the property will not be included in the returned array.</para>
+              <para
+                >If a property does not have an <see
+                 cref="T:System.Attribute" />
+
+                 of the same class, the property will not be included in the returned array.</para
+              >
             </item>
             <item>
-              <para>If the attribute is an instance of <see cref="T:System.Attribute" />, the property must be an exact match to be included in the returned array.</para>
+              <para
+                >If the attribute is an instance of <see
+                 cref="T:System.Attribute" />
+
+                , the property must be an exact match to be included in the returned array.</para
+              >
             </item>
             <item>
-              <para>If you specify an <see cref="T:System.Attribute" /> instance and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" /> in the property.</para>
+              <para
+                >If you specify an <see
+                 cref="T:System.Attribute" />
+
+                 instance and it is the default property, it will be included in the returned array even if there is no instance of the <see
+                 cref="T:System.Attribute" />
+
+                 in the property.</para
+              >
             </item>
           </list>
-          <para>Generally, child properties should be returned by implementing the <see cref="M:System.ComponentModel.TypeConverter.GetProperties(System.Object)" /> member of the <see cref="T:System.ComponentModel.TypeConverter" /> returned from this property.</para>
+          <para
+            >Generally, child properties should be returned by implementing the <see
+             cref="M:System.ComponentModel.TypeConverter.GetProperties(System.Object)" />
+
+             member of the <see
+             cref="T:System.ComponentModel.TypeConverter" />
+
+             returned from this property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> for a given object using a specified array of attributes as a filter.</para>
+          <para
+            >Returns a <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             for a given object using a specified array of attributes as a filter.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> with the properties that match the specified attributes for the specified component.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             with the properties that match the specified attributes for the specified component.</para
+          >
         </returns>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />A component to get the properties for. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A component to get the properties for. </param
+        >
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Attribute" /> to use as a filter. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Attribute" />
+
+           to use as a filter. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetEditor">
-      <MemberSignature Language="C#" Value="public virtual object GetEditor (Type editorBaseType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetEditor(class System.Type editorBaseType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual object GetEditor (Type editorBaseType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetEditor(class System.Type editorBaseType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -572,12 +1053,18 @@
           <para>An instance of the requested editor type, or null if an editor cannot be found.</para>
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base type of editor, which is used to differentiate between multiple editors that a property supports. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The base type of editor, which is used to differentiate between multiple editors that a property supports. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -601,8 +1088,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetInvocationTarget">
-      <MemberSignature Language="C#" Value="protected override object GetInvocationTarget (Type type, object instance);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object GetInvocationTarget(class System.Type type, object instance) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetInvocationTarget (Type type, object instance);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance object GetInvocationTarget(class System.Type type, object instance) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -618,7 +1111,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Typically, the return value will be the same as the <paramref name="instance" /> passed in. If someone associated another object with this instance, or if the instance is a custom type descriptor, the <see cref="M:System.ComponentModel.PropertyDescriptor.GetInvocationTarget(System.Type,System.Object)" /> method may return a different value.</para>
+          <para
+            >Typically, the return value will be the same as the <paramref
+             name="instance" />
+
+             passed in. If someone associated another object with this instance, or if the instance is a custom type descriptor, the <see
+             cref="M:System.ComponentModel.PropertyDescriptor.GetInvocationTarget(System.Type,System.Object)" />
+
+             method may return a different value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -626,17 +1127,34 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Object" /> that should be used during invocation of members.</para>
+          <para
+            >The <see
+             cref="T:System.Object" />
+
+             that should be used during invocation of members.</para
+          >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of the invocation target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of the invocation target.</param
+        >
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />The potential invocation target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The potential invocation target.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetTypeFromName">
       <MemberSignature Language="C#" Value="protected Type GetTypeFromName (string typeName);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class System.Type GetTypeFromName(string typeName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance class System.Type GetTypeFromName(string typeName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -652,7 +1170,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To find the appropriate type, this method first checks the assembly of the type that this <see cref="T:System.ComponentModel.PropertyDescriptor" /> references. If it does not find the type in the assembly, it calls <see cref="M:System.Type.GetType" />.</para>
+          <para
+            >To find the appropriate type, this method first checks the assembly of the type that this <see
+             cref="T:System.ComponentModel.PropertyDescriptor" />
+
+             references. If it does not find the type in the assembly, it calls <see
+             cref="M:System.Type.GetType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -660,15 +1186,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Type" /> that matches the given type name, or null if a match cannot be found.</para>
+          <para
+            >A <see
+             cref="T:System.Type" />
+
+             that matches the given type name, or null if a match cannot be found.</para
+          >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The assembly-qualified name of the type to retrieve. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The assembly-qualified name of the type to retrieve. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetValue">
       <MemberSignature Language="C#" Value="public abstract object GetValue (object component);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetValue(object component) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetValue(object component) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -685,7 +1222,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Typically, this method is implemented through reflection.</para>
-          <para>This method automatically calls the pre-change method, <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />, and post-change method, <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />, of the <see cref="T:System.ComponentModel.Design.IComponentChangeService" />.</para>
+          <para
+            >This method automatically calls the pre-change method, <see
+             cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+
+            , and post-change method, <see
+             cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+
+            , of the <see
+             cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -696,12 +1244,21 @@
           <para>The value of a property for a given component.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component with the property for which to retrieve the value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component with the property for which to retrieve the value. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetValueChangedHandler">
-      <MemberSignature Language="C#" Value="protected EventHandler GetValueChangedHandler (object component);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig instance class System.EventHandler GetValueChangedHandler(object component) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected EventHandler GetValueChangedHandler (object component);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig instance class System.EventHandler GetValueChangedHandler(object component) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -721,10 +1278,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A combined multicast event handler, or null if no event handlers are currently assigned to <paramref name="component" />.</para>
+          <para
+            >A combined multicast event handler, or null if no event handlers are currently assigned to <paramref
+             name="component" />
+
+            .</para
+          >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component for which to retrieve event handlers.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component for which to retrieve event handlers.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsLocalizable">
@@ -743,11 +1308,21 @@
         <value>To be added: an object of type 'bool'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When a property is marked with the <see cref="T:System.ComponentModel.LocalizableAttribute" /> set to true and used in a visual designer, its values are saved in a resource file. If you mark a property with the attribute and then set the property in code, resource files are not used.</para>
+          <para
+            >When a property is marked with the <see
+             cref="T:System.ComponentModel.LocalizableAttribute" />
+
+             set to true and used in a visual designer, its values are saved in a resource file. If you mark a property with the attribute and then set the property in code, resource files are not used.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether this property should be localized, as specified in the <see cref="T:System.ComponentModel.LocalizableAttribute" />.</para>
+          <para
+            >Gets a value indicating whether this property should be localized, as specified in the <see
+             cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -773,8 +1348,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnValueChanged">
-      <MemberSignature Language="C#" Value="protected virtual void OnValueChanged (object component, EventArgs e);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnValueChanged(object component, class System.EventArgs e) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnValueChanged (object component, EventArgs e);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void OnValueChanged(object component, class System.EventArgs e) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -798,9 +1379,18 @@
           <para>Raises the ValueChanged event that you implemented.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that raises the event. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that raises the event. </param
+        >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="PropertyType">
@@ -828,8 +1418,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveValueChanged">
-      <MemberSignature Language="C#" Value="public virtual void RemoveValueChanged (object component, EventHandler handler);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveValueChanged(object component, class System.EventHandler handler) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void RemoveValueChanged (object component, EventHandler handler);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RemoveValueChanged(object component, class System.EventHandler handler) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -850,14 +1446,23 @@
           <para>Enables other objects to be notified when this property changes.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component to remove the handler for. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component to remove the handler for. </param
+        >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delegate to remove as a listener. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delegate to remove as a listener. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ResetValue">
       <MemberSignature Language="C#" Value="public abstract void ResetValue (object component);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ResetValue(object component) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void ResetValue(object component) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -880,28 +1485,61 @@
               <para>There is a shadowed property for this property.</para>
             </item>
             <item>
-              <para>There is a <see cref="T:System.ComponentModel.DefaultValueAttribute" /> for this property.</para>
+              <para
+                >There is a <see
+                 cref="T:System.ComponentModel.DefaultValueAttribute" />
+
+                 for this property.</para
+              >
             </item>
             <item>
               <para>There is a "ResetMyProperty" method that you have implemented, where "MyProperty" is the name of the property you pass to it.</para>
             </item>
           </list>
-          <para>This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" /> automatically in the following order: </para>
+          <para
+            >This method creates a <see
+             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+             automatically in the following order: </para
+          >
           <list type="ordered">
             <item>
-              <para>The method calls the <see cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" /> method to create a new <see cref="T:System.ComponentModel.Design.DesignerTransaction" /> to represent the changes.</para>
+              <para
+                >The method calls the <see
+                 cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
+
+                 method to create a new <see
+                 cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+                 to represent the changes.</para
+              >
             </item>
             <item>
-              <para>The method calls the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" /> method to indicate that the transaction has begun and the changes are about to occur.</para>
+              <para
+                >The method calls the <see
+                 cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+
+                 method to indicate that the transaction has begun and the changes are about to occur.</para
+              >
             </item>
             <item>
               <para>The method resets the property to the value determined by this method's checking order.</para>
             </item>
             <item>
-              <para>The method calls the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" /> method to indicate that the changes have occurred.</para>
+              <para
+                >The method calls the <see
+                 cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+
+                 method to indicate that the changes have occurred.</para
+              >
             </item>
             <item>
-              <para>The method calls <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" /> to indicate that the transaction is completed.</para>
+              <para
+                >The method calls <see
+                 cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+
+                 to indicate that the transaction is completed.</para
+              >
             </item>
           </list>
           <para>The purpose of the transaction is to support Undo and Redo functionality.</para>
@@ -911,12 +1549,21 @@
           <para>When overridden in a derived class, resets the value for this property of the component to the default value.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component with the property value that is to be reset to the default value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component with the property value that is to be reset to the default value. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SerializationVisibility">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.DesignerSerializationVisibility SerializationVisibility { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ComponentModel.DesignerSerializationVisibility SerializationVisibility" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.DesignerSerializationVisibility SerializationVisibility { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ComponentModel.DesignerSerializationVisibility SerializationVisibility"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -931,13 +1578,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether this property should be serialized, as specified in the <see cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />.</para>
+          <para
+            >Gets a value indicating whether this property should be serialized, as specified in the <see
+             cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SetValue">
-      <MemberSignature Language="C#" Value="public abstract void SetValue (object component, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetValue(object component, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void SetValue (object component, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void SetValue(object component, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -955,22 +1613,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Typically, this method is implemented through reflection.</para>
-          <para>This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" /> automatically in the following order: </para>
+          <para
+            >This method creates a <see
+             cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+             automatically in the following order: </para
+          >
           <list type="ordered">
             <item>
-              <para>The method calls the <see cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" /> method to create a new <see cref="T:System.ComponentModel.Design.DesignerTransaction" /> to represent the changes.</para>
+              <para
+                >The method calls the <see
+                 cref="M:System.ComponentModel.Design.IDesignerHost.CreateTransaction" />
+
+                 method to create a new <see
+                 cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+                 to represent the changes.</para
+              >
             </item>
             <item>
-              <para>The method calls the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" /> method to indicate that the transaction has begun and the changes are about to occur.</para>
+              <para
+                >The method calls the <see
+                 cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+
+                 method to indicate that the transaction has begun and the changes are about to occur.</para
+              >
             </item>
             <item>
               <para>The method resets the property to the value determined by this method's checking order.</para>
             </item>
             <item>
-              <para>The method calls the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" /> method to indicate that the changes have occurred.</para>
+              <para
+                >The method calls the <see
+                 cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+
+                 method to indicate that the changes have occurred.</para
+              >
             </item>
             <item>
-              <para>The method calls <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" /> to indicate that the transaction is complete.</para>
+              <para
+                >The method calls <see
+                 cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+
+                 to indicate that the transaction is complete.</para
+              >
             </item>
           </list>
           <para>The purpose of the transaction is to support Undo and Redo functionality.</para>
@@ -980,14 +1666,26 @@
           <para>When overridden in a derived class, sets the value of the component to a different value.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component with the property value that is to be set. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component with the property value that is to be set. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new value. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ShouldSerializeValue">
-      <MemberSignature Language="C#" Value="public abstract bool ShouldSerializeValue (object component);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ShouldSerializeValue(object component) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool ShouldSerializeValue (object component);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool ShouldSerializeValue(object component) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1014,7 +1712,10 @@
           <para>true if the property should be persisted; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component with the property to be examined for persistence. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component with the property to be examined for persistence. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SupportsChangeEvents">
@@ -1032,7 +1733,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ComponentModel.PropertyDescriptor.SupportsChangeEvents" /> property indicates whether value change notifications for this property may originate from outside the property descriptor, such as from the component itself, or whether notifications will only originate from direct calls made to the <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" /> method. For example, the component may implement the <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> interface, or may have an explicit <paramref name="name" />Changed event for this property.</para>
+          <para
+            >The <see
+             cref="P:System.ComponentModel.PropertyDescriptor.SupportsChangeEvents" />
+
+             property indicates whether value change notifications for this property may originate from outside the property descriptor, such as from the component itself, or whether notifications will only originate from direct calls made to the <see
+             cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" />
+
+             method. For example, the component may implement the <see
+             cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+             interface, or may have an explicit <paramref
+             name="name" />
+
+            Changed event for this property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

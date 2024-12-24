@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="TransportType" FullName="System.Net.TransportType" FullNameSP="System_Net_TransportType" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public sealed serializable TransportType extends System.Enum" />
+<Type
+  Name="TransportType"
+  FullName="System.Net.TransportType"
+  FullNameSP="System_Net_TransportType"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public sealed serializable TransportType extends System.Enum"
+  />
   <TypeSignature Language="C#" Value="public enum TransportType" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed TransportType extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed TransportType extends System.Enum"
+  />
   <MemberOfLibrary>Networking</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
@@ -18,18 +29,43 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Net.TransportType" /> enumeration defines transport types for the <see cref="T:System.Net.SocketPermission" /> and <see cref="T:System.Net.Sockets.Socket" /> classes.</para>
+      <para
+        >The <see
+         cref="T:System.Net.TransportType" />
+
+         enumeration defines transport types for the <see
+         cref="T:System.Net.SocketPermission" />
+
+         and <see
+         cref="T:System.Net.Sockets.Socket" />
+
+         classes.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines transport types for the <see cref="T:System.Net.SocketPermission" /> and <see cref="T:System.Net.Sockets.Socket" /> classes.</para>
+      <para
+        >Defines transport types for the <see
+         cref="T:System.Net.SocketPermission" />
+
+         and <see
+         cref="T:System.Net.Sockets.Socket" />
+
+         classes.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="All">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.TransportType All = 3" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.TransportType All = 3"
+      />
       <MemberSignature Language="C#" Value="All" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.TransportType All = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.TransportType All = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -50,9 +86,15 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Connectionless">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.TransportType Connectionless = 1" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.TransportType Connectionless = 1"
+      />
       <MemberSignature Language="C#" Value="Connectionless" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.TransportType Connectionless = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.TransportType Connectionless = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -67,15 +109,26 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The transport type is connectionless, such as UDP. Specifying this value has the same effect as specifying <see cref="F:System.Net.TransportType.Udp" />.</para>
+          <para
+            >The transport type is connectionless, such as UDP. Specifying this value has the same effect as specifying <see
+             cref="F:System.Net.TransportType.Udp" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="ConnectionOriented">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.TransportType ConnectionOriented = 2" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.TransportType ConnectionOriented = 2"
+      />
       <MemberSignature Language="C#" Value="ConnectionOriented" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.TransportType ConnectionOriented = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.TransportType ConnectionOriented = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -90,15 +143,26 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The transport is connection oriented, such as TCP. Specifying this value has the same effect as specifying <see cref="F:System.Net.TransportType.Tcp" />.</para>
+          <para
+            >The transport is connection oriented, such as TCP. Specifying this value has the same effect as specifying <see
+             cref="F:System.Net.TransportType.Tcp" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Tcp">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.TransportType Tcp = 2" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.TransportType Tcp = 2"
+      />
       <MemberSignature Language="C#" Value="Tcp" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.TransportType Tcp = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.TransportType Tcp = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -119,9 +183,15 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Udp">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.TransportType Udp = 1" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.TransportType Udp = 1"
+      />
       <MemberSignature Language="C#" Value="Udp" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.TransportType Udp = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.TransportType Udp = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

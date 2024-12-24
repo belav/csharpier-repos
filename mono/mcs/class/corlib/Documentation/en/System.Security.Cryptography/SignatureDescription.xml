@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SignatureDescription" FullName="System.Security.Cryptography.SignatureDescription">
   <TypeSignature Maintainer="auto" Language="C#" Value="public class SignatureDescription" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SignatureDescription extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SignatureDescription extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -29,7 +32,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SignatureDescription ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -42,13 +48,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.SignatureDescription" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.SignatureDescription" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SignatureDescription (System.Security.SecurityElement el);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Security.SecurityElement el) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SignatureDescription (System.Security.SecurityElement el);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Security.SecurityElement el) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -63,15 +80,35 @@
         <remarks>Invalid data is rejected silently.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.SignatureDescription" /> class from the specified <see cref="T:System.Security.SecurityElement" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.SignatureDescription" />
+
+             class from the specified <see
+             cref="T:System.Security.SecurityElement" />
+
+            .</para
+          >
         </summary>
         <param name="el">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Security.SecurityElement" /> from which to get the algorithms for the signature description. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Security.SecurityElement" />
+
+           from which to get the algorithms for the signature description. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateDeformatter">
-      <MemberSignature Language="C#" Value="public virtual System.Security.Cryptography.AsymmetricSignatureDeformatter CreateDeformatter (System.Security.Cryptography.AsymmetricAlgorithm key);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Security.Cryptography.AsymmetricSignatureDeformatter CreateDeformatter(class System.Security.Cryptography.AsymmetricAlgorithm key) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Security.Cryptography.AsymmetricSignatureDeformatter CreateDeformatter (System.Security.Cryptography.AsymmetricAlgorithm key);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Security.Cryptography.AsymmetricSignatureDeformatter CreateDeformatter(class System.Security.Cryptography.AsymmetricAlgorithm key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -88,19 +125,44 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" /> instance with the specified key using the <see cref="P:System.Security.Cryptography.SignatureDescription.DeformatterAlgorithm" /> property.</para>
+          <para
+            >Creates an <see
+             cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+
+             instance with the specified key using the <see
+             cref="P:System.Security.Cryptography.SignatureDescription.DeformatterAlgorithm" />
+
+             property.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The newly created <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" /> instance.</para>
+          <para
+            >The newly created <see
+             cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+
+             instance.</para
+          >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key to use in the <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key to use in the <see
+           cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateDigest">
-      <MemberSignature Language="C#" Value="public virtual System.Security.Cryptography.HashAlgorithm CreateDigest ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Security.Cryptography.HashAlgorithm CreateDigest() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Security.Cryptography.HashAlgorithm CreateDigest ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Security.Cryptography.HashAlgorithm CreateDigest() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -115,17 +177,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> instance using the <see cref="P:System.Security.Cryptography.SignatureDescription.DigestAlgorithm" /> property.</para>
+          <para
+            >Creates a <see
+             cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+             instance using the <see
+             cref="P:System.Security.Cryptography.SignatureDescription.DigestAlgorithm" />
+
+             property.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The newly created <see cref="T:System.Security.Cryptography.HashAlgorithm" /> instance.</para>
+          <para
+            >The newly created <see
+             cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+             instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateFormatter">
-      <MemberSignature Language="C#" Value="public virtual System.Security.Cryptography.AsymmetricSignatureFormatter CreateFormatter (System.Security.Cryptography.AsymmetricAlgorithm key);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Security.Cryptography.AsymmetricSignatureFormatter CreateFormatter(class System.Security.Cryptography.AsymmetricAlgorithm key) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Security.Cryptography.AsymmetricSignatureFormatter CreateFormatter (System.Security.Cryptography.AsymmetricAlgorithm key);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Security.Cryptography.AsymmetricSignatureFormatter CreateFormatter(class System.Security.Cryptography.AsymmetricAlgorithm key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -142,14 +223,33 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" /> instance with the specified key using the <see cref="P:System.Security.Cryptography.SignatureDescription.FormatterAlgorithm" /> property.</para>
+          <para
+            >Creates an <see
+             cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+
+             instance with the specified key using the <see
+             cref="P:System.Security.Cryptography.SignatureDescription.FormatterAlgorithm" />
+
+             property.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The newly created <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" /> instance.</para>
+          <para
+            >The newly created <see
+             cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+
+             instance.</para
+          >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key to use in the <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key to use in the <see
+           cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DeformatterAlgorithm">

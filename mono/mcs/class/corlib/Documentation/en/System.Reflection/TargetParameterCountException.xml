@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="TargetParameterCountException" FullName="System.Reflection.TargetParameterCountException" FullNameSP="System_Reflection_TargetParameterCountException" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public sealed serializable TargetParameterCountException extends System.ApplicationException" />
-  <TypeSignature Language="C#" Value="public sealed class TargetParameterCountException : ApplicationException" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit TargetParameterCountException extends System.ApplicationException" />
+<Type
+  Name="TargetParameterCountException"
+  FullName="System.Reflection.TargetParameterCountException"
+  FullNameSP="System_Reflection_TargetParameterCountException"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public sealed serializable TargetParameterCountException extends System.ApplicationException"
+  />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class TargetParameterCountException : ApplicationException"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit TargetParameterCountException extends System.ApplicationException"
+  />
   <MemberOfLibrary>Reflection</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
@@ -33,9 +47,15 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor()" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor()"
+      />
       <MemberSignature Language="C#" Value="public TargetParameterCountException ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -47,7 +67,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>TargetParameterCountException inherits from <see cref="T:System.Exception" />. This constructor sets the properties of the Exception object as shown in the following table.</para>
+          <para
+            >TargetParameterCountException inherits from <see
+             cref="T:System.Exception" />
+
+            . This constructor sets the properties of the Exception object as shown in the following table.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -62,7 +87,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>null </para>
@@ -71,7 +97,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>The empty string (""). </para>
@@ -81,15 +108,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with an empty message string and the root cause of the exception.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Reflection.TargetParameterCountException" />
+
+             class with an empty message string and the root cause of the exception.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message)" />
-      <MemberSignature Language="C#" Value="public TargetParameterCountException (string message);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(string message)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public TargetParameterCountException (string message);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -103,7 +144,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>TargetParmeterCountException inherits from <see cref="T:System.Exception" />. This constructor sets the properties of the Exception object as shown in the following table.</para>
+          <para
+            >TargetParmeterCountException inherits from <see
+             cref="T:System.Exception" />
+
+            . This constructor sets the properties of the Exception object as shown in the following table.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -118,7 +164,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>null </para>
@@ -127,7 +174,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>The message string. </para>
@@ -137,17 +185,34 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with its message string set to the given message and the root cause exception.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Reflection.TargetParameterCountException" />
+
+             class with its message string set to the given message and the root cause exception.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A String describing the reason this exception was thrown. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A String describing the reason this exception was thrown. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message, class System.Exception inner)" />
-      <MemberSignature Language="C#" Value="public TargetParameterCountException (string message, Exception inner);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception inner) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(string message, class System.Exception inner)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public TargetParameterCountException (string message, Exception inner);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception inner) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -162,8 +227,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.Reflection.TargetParameterCountException" />.</para>
+          <para
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
+             cref="P:System.Exception.InnerException" />
+
+             property. The <see
+             cref="P:System.Exception.InnerException" />
+
+             property returns the same value that is passed into the constructor, or null if the <see
+             cref="P:System.Exception.InnerException" />
+
+             property does not supply the inner exception value to the constructor.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.Reflection.TargetParameterCountException" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -178,7 +259,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>The inner exception reference. </para>
@@ -187,7 +269,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>The error message string. </para>
@@ -197,12 +280,26 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Reflection.TargetParameterCountException" />
+
+             class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message that explains the reason for the exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message that explains the reason for the exception. </param
+        >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception that is the cause of the current exception. If the <paramref
+           name="inner" />
+
+           parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>

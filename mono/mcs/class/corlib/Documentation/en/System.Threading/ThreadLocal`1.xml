@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ThreadLocal&lt;T&gt;" FullName="System.Threading.ThreadLocal&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public class ThreadLocal&lt;T&gt; : IDisposable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ThreadLocal`1&lt;T&gt; extends System.Object implements class System.IDisposable" />
+<Type Name="ThreadLocal<T>" FullName="System.Threading.ThreadLocal<T>">
+  <TypeSignature Language="C#" Value="public class ThreadLocal<T> : IDisposable" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ThreadLocal`1<T> extends System.Object implements class System.IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,7 +36,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ThreadLocal ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -42,17 +48,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The default value is used to initialize the instance when <see cref="P:System.Threading.ThreadLocal`1.Value" /> is accessed for the first time</para>
+          <para
+            >The default value is used to initialize the instance when <see
+             cref="P:System.Threading.ThreadLocal`1.Value" />
+
+             is accessed for the first time</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes the <see cref="T:System.Threading.ThreadLocal`1" /> instance.</para>
+          <para
+            >Initializes the <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ThreadLocal (bool trackAllValues);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool trackAllValues) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool trackAllValues) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -64,21 +83,35 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes the <see cref="T:System.Threading.ThreadLocal`1" /> instance.</para>
+          <para
+            >Initializes the <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+             instance.</para
+          >
         </summary>
         <param name="trackAllValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />Whether to track all values set on the instance and expose them through the <see cref="P:System.Threading.ThreadLocal`1.Values" /> property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Whether to track all values set on the instance and expose them through the <see
+           cref="P:System.Threading.ThreadLocal`1.Values" />
+
+           property.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ThreadLocal (Func&lt;T&gt; valueFactory);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Func`1&lt;!T&gt; valueFactory) cil managed" />
+      <MemberSignature Language="C#" Value="public ThreadLocal (Func<T> valueFactory);" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Func`1<!T> valueFactory) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="valueFactory" Type="System.Func&lt;T&gt;" />
+        <Parameter Name="valueFactory" Type="System.Func<T>" />
       </Parameters>
       <Docs>
         <param name="valueFactory">To be added.</param>
@@ -87,14 +120,20 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ThreadLocal (Func&lt;T&gt; valueFactory, bool trackAllValues);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Func`1&lt;!T&gt; valueFactory, bool trackAllValues) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ThreadLocal (Func<T> valueFactory, bool trackAllValues);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Func`1<!T> valueFactory, bool trackAllValues) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="valueFactory" Type="System.Func&lt;T&gt;" />
+        <Parameter Name="valueFactory" Type="System.Func<T>" />
         <Parameter Name="trackAllValues" Type="System.Boolean" />
       </Parameters>
       <Docs>
@@ -106,7 +145,10 @@
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="public void Dispose ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Dispose() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -118,21 +160,63 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Call Dispose when you are finished using the <see cref="T:System.Threading.ThreadLocal`1" />. The Dispose method leaves the <see cref="T:System.Threading.ThreadLocal`1" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.ThreadLocal`1" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.ThreadLocal`1" /> was occupying.</para>
-          <para>For more information, see <format type="text/html"><a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a></format> and <format type="text/html"><a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a></format>.</para>
+          <para
+            >Call Dispose when you are finished using the <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+            . The Dispose method leaves the <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+             in an unusable state. After calling Dispose, you must release all references to the <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+             so the garbage collector can reclaim the memory that the <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+             was occupying.</para
+          >
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
+            </format>
+
+            .</para
+          >
           <block subset="none" type="note">
-            <para>Always call Dispose before you release your last reference to the <see cref="T:System.Threading.ThreadLocal`1" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.ThreadLocal`1" /> object's Finalize method.</para>
+            <para
+              >Always call Dispose before you release your last reference to the <see
+               cref="T:System.Threading.ThreadLocal`1" />
+
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
+               cref="T:System.Threading.ThreadLocal`1" />
+
+               object's Finalize method.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases all resources used by the current instance of the <see cref="T:System.Threading.ThreadLocal`1" /> class.</para>
+          <para
+            >Releases all resources used by the current instance of the <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected virtual void Dispose (bool disposing);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void Dispose(bool disposing) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -146,19 +230,38 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Unlike most of the members of <see cref="T:System.Threading.ThreadLocal`1" />, this method is not thread-safe.</para>
+          <para
+            >Unlike most of the members of <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+            , this method is not thread-safe.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the resources used by this <see cref="T:System.Threading.ThreadLocal`1" /> instance.</para>
+          <para
+            >Releases the resources used by this <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+             instance.</para
+          >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Boolean value that indicates whether this method is being called due to a call to <see cref="M:System.Threading.ThreadLocal`1.Dispose" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A Boolean value that indicates whether this method is being called due to a call to <see
+           cref="M:System.Threading.ThreadLocal`1.Dispose" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Finalize">
       <MemberSignature Language="C#" Value="~ThreadLocal`1 ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Finalize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void Finalize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -171,7 +274,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the resources used by this <see cref="T:System.Threading.ThreadLocal`1" /> instance.</para>
+          <para
+            >Releases the resources used by this <see
+             cref="T:System.Threading.ThreadLocal`1" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -190,13 +298,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets whether <see cref="P:System.Threading.ThreadLocal`1.Value" /> is initialized on the current thread.</para>
+          <para
+            >Gets whether <see
+             cref="P:System.Threading.ThreadLocal`1.Value" />
+
+             is initialized on the current thread.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -208,7 +324,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Calling this method forces initialization for the current thread, as is the case with accessing <see cref="P:System.Threading.ThreadLocal`1.Value" /> directly.</para>
+          <para
+            >Calling this method forces initialization for the current thread, as is the case with accessing <see
+             cref="P:System.Threading.ThreadLocal`1.Value" />
+
+             directly.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,7 +337,15 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The result of calling <see cref="M:System.Object.ToString" /> on the <see cref="P:System.Threading.ThreadLocal`1.Value" />.</para>
+          <para
+            >The result of calling <see
+             cref="M:System.Object.ToString" />
+
+             on the <see
+             cref="P:System.Threading.ThreadLocal`1.Value" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -239,7 +368,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If this instance was not previously initialized for the current thread, accessing <see cref="P:System.Threading.ThreadLocal`1.Value" /> will attempt to initialize it. If an initialization function was supplied during the construction, that initialization will happen by invoking the function to retrieve the initial value for <see cref="P:System.Threading.ThreadLocal`1.Value" />. Otherwise, the default value of will be used. If an exception is thrown, that exception is cached and thrown on each subsequent access of the property.</para>
+          <para
+            >If this instance was not previously initialized for the current thread, accessing <see
+             cref="P:System.Threading.ThreadLocal`1.Value" />
+
+             will attempt to initialize it. If an initialization function was supplied during the construction, that initialization will happen by invoking the function to retrieve the initial value for <see
+             cref="P:System.Threading.ThreadLocal`1.Value" />
+
+            . Otherwise, the default value of will be used. If an exception is thrown, that exception is cached and thrown on each subsequent access of the property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -248,8 +385,14 @@
       </Docs>
     </Member>
     <Member MemberName="Values">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;T&gt; Values { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;!T&gt; Values" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IList<T> Values { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IList`1<!T> Values"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

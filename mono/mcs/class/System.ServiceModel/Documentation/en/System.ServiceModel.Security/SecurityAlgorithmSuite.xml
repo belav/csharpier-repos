@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SecurityAlgorithmSuite" FullName="System.ServiceModel.Security.SecurityAlgorithmSuite">
   <TypeSignature Language="C#" Value="public abstract class SecurityAlgorithmSuite" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract SecurityAlgorithmSuite extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract SecurityAlgorithmSuite extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -24,7 +27,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected SecurityAlgorithmSuite ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,13 +43,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Basic128">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic128 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic128" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic128 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic128"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -64,8 +81,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic128Rsa15">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Rsa15 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Rsa15" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Rsa15 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Rsa15"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,7 +100,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -86,8 +114,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic128Sha256">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Sha256 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Sha256" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Sha256 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Sha256"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -99,7 +133,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -108,8 +147,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic128Sha256Rsa15">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Sha256Rsa15 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Sha256Rsa15" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Sha256Rsa15 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic128Sha256Rsa15"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -121,7 +166,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -130,8 +180,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic192">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic192 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic192" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic192 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic192"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -152,8 +208,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic192Rsa15">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Rsa15 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Rsa15" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Rsa15 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Rsa15"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -165,7 +227,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -174,8 +241,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic192Sha256">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Sha256 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Sha256" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Sha256 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Sha256"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -187,7 +260,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -196,8 +274,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic192Sha256Rsa15">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Sha256Rsa15 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Sha256Rsa15" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Sha256Rsa15 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic192Sha256Rsa15"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -209,7 +293,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -218,8 +307,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic256">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic256 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic256" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic256 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic256"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -240,8 +335,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic256Rsa15">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Rsa15 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Rsa15" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Rsa15 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Rsa15"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -253,7 +354,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -262,8 +368,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic256Sha256">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Sha256 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Sha256" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Sha256 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Sha256"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -275,7 +387,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -284,8 +401,14 @@
       </Docs>
     </Member>
     <Member MemberName="Basic256Sha256Rsa15">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Sha256Rsa15 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Sha256Rsa15" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Sha256Rsa15 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Basic256Sha256Rsa15"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -297,7 +420,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -306,8 +434,14 @@
       </Docs>
     </Member>
     <Member MemberName="Default">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Default { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Default" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite Default { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite Default"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -319,7 +453,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides the properties specifying default values as well as the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides the properties specifying default values as well as the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -328,8 +467,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultAsymmetricKeyWrapAlgorithm">
-      <MemberSignature Language="C#" Value="public abstract string DefaultAsymmetricKeyWrapAlgorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string DefaultAsymmetricKeyWrapAlgorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract string DefaultAsymmetricKeyWrapAlgorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string DefaultAsymmetricKeyWrapAlgorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -341,7 +486,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricKeyWrapAlgorithmSupported(System.String)" /> method.</para>
+          <para
+            >When overridden, provides a string value that will be used for comparison in the <see
+             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricKeyWrapAlgorithmSupported(System.String)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -350,8 +500,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultAsymmetricSignatureAlgorithm">
-      <MemberSignature Language="C#" Value="public abstract string DefaultAsymmetricSignatureAlgorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string DefaultAsymmetricSignatureAlgorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract string DefaultAsymmetricSignatureAlgorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string DefaultAsymmetricSignatureAlgorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -363,7 +519,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricSignatureAlgorithmSupported(System.String)" /> method.</para>
+          <para
+            >When overridden, provides a string value that will be used for comparison in the <see
+             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricSignatureAlgorithmSupported(System.String)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -372,8 +533,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultCanonicalizationAlgorithm">
-      <MemberSignature Language="C#" Value="public abstract string DefaultCanonicalizationAlgorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string DefaultCanonicalizationAlgorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract string DefaultCanonicalizationAlgorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string DefaultCanonicalizationAlgorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -385,7 +552,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden, provides a string value that will be used for comparison in the method <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsCanonicalizationAlgorithmSupported(System.String)" />.</para>
+          <para
+            >When overridden, provides a string value that will be used for comparison in the method <see
+             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsCanonicalizationAlgorithmSupported(System.String)" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -394,7 +566,10 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultDigestAlgorithm">
-      <MemberSignature Language="C#" Value="public abstract string DefaultDigestAlgorithm { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract string DefaultDigestAlgorithm { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance string DefaultDigestAlgorithm" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -407,7 +582,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsDigestAlgorithmSupported(System.String)" /> method.</para>
+          <para
+            >When overridden, provides a string value that will be used for comparison in the <see
+             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsDigestAlgorithmSupported(System.String)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -416,8 +596,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultEncryptionAlgorithm">
-      <MemberSignature Language="C#" Value="public abstract string DefaultEncryptionAlgorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string DefaultEncryptionAlgorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract string DefaultEncryptionAlgorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string DefaultEncryptionAlgorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -429,7 +615,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsEncryptionAlgorithmSupported(System.String)" /> method.</para>
+          <para
+            >When overridden, provides a string value that will be used for comparison in the <see
+             cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsEncryptionAlgorithmSupported(System.String)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -438,8 +629,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultEncryptionKeyDerivationLength">
-      <MemberSignature Language="C#" Value="public abstract int DefaultEncryptionKeyDerivationLength { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 DefaultEncryptionKeyDerivationLength" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract int DefaultEncryptionKeyDerivationLength { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 DefaultEncryptionKeyDerivationLength"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -455,13 +652,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the default encryption key derivation length as an <see cref="T:System.Int32" /> value.</para>
+          <para
+            >Gets the default encryption key derivation length as an <see
+             cref="T:System.Int32" />
+
+             value.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DefaultSignatureKeyDerivationLength">
-      <MemberSignature Language="C#" Value="public abstract int DefaultSignatureKeyDerivationLength { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 DefaultSignatureKeyDerivationLength" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract int DefaultSignatureKeyDerivationLength { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 DefaultSignatureKeyDerivationLength"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -477,13 +685,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the default signature key derivation length as an <see cref="T:System.Int32" /> value.</para>
+          <para
+            >Gets the default signature key derivation length as an <see
+             cref="T:System.Int32" />
+
+             value.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DefaultSymmetricKeyLength">
-      <MemberSignature Language="C#" Value="public abstract int DefaultSymmetricKeyLength { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 DefaultSymmetricKeyLength" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract int DefaultSymmetricKeyLength { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 DefaultSymmetricKeyLength"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -499,13 +718,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the default symmetric key length as an <see cref="T:System.Int32" /> value.</para>
+          <para
+            >Gets the default symmetric key length as an <see
+             cref="T:System.Int32" />
+
+             value.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DefaultSymmetricKeyWrapAlgorithm">
-      <MemberSignature Language="C#" Value="public abstract string DefaultSymmetricKeyWrapAlgorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string DefaultSymmetricKeyWrapAlgorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract string DefaultSymmetricKeyWrapAlgorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string DefaultSymmetricKeyWrapAlgorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -523,8 +753,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultSymmetricSignatureAlgorithm">
-      <MemberSignature Language="C#" Value="public abstract string DefaultSymmetricSignatureAlgorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string DefaultSymmetricSignatureAlgorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract string DefaultSymmetricSignatureAlgorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string DefaultSymmetricSignatureAlgorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -542,8 +778,14 @@
       </Docs>
     </Member>
     <Member MemberName="IsAsymmetricKeyLengthSupported">
-      <MemberSignature Language="C#" Value="public abstract bool IsAsymmetricKeyLengthSupported (int length);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsAsymmetricKeyLengthSupported(int32 length) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool IsAsymmetricKeyLengthSupported (int length);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsAsymmetricKeyLengthSupported(int32 length) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -568,12 +810,21 @@
           <para>true if the key length is supported by the asymmetric algorithm; otherwise, false.</para>
         </returns>
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key length to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key length to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsAsymmetricKeyWrapAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsAsymmetricKeyWrapAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsAsymmetricKeyWrapAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsAsymmetricKeyWrapAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsAsymmetricKeyWrapAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -588,7 +839,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricKeyWrapAlgorithm" />.</para>
+            <paramref name="algorithm" />
+
+             gets compared to the string returned from <see
+             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricKeyWrapAlgorithm" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -599,12 +856,21 @@
           <para>true if the asymmetric key wrap algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsAsymmetricSignatureAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsAsymmetricSignatureAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsAsymmetricSignatureAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsAsymmetricSignatureAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsAsymmetricSignatureAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -619,7 +885,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricSignatureAlgorithm" />.</para>
+            <paramref name="algorithm" />
+
+             gets compared to the string returned from <see
+             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricSignatureAlgorithm" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -630,12 +902,21 @@
           <para>true if the asymmetric signature algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm name to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsCanonicalizationAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsCanonicalizationAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsCanonicalizationAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsCanonicalizationAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsCanonicalizationAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -650,7 +931,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultCanonicalizationAlgorithm" />.</para>
+            <paramref name="algorithm" />
+
+             gets compared to the string returned from <see
+             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultCanonicalizationAlgorithm" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -661,12 +948,21 @@
           <para>true if the canonicalization algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm name to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsDigestAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsDigestAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsDigestAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsDigestAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsDigestAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -681,7 +977,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultDigestAlgorithm" />.</para>
+            <paramref name="algorithm" />
+
+             gets compared to the string returned from <see
+             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultDigestAlgorithm" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -692,12 +994,21 @@
           <para>true if the digest algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm name to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsEncryptionAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsEncryptionAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsEncryptionAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsEncryptionAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsEncryptionAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -712,7 +1023,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultEncryptionAlgorithm" />.</para>
+            <paramref name="algorithm" />
+
+             gets compared to the string returned from <see
+             cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultEncryptionAlgorithm" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -723,12 +1040,21 @@
           <para>true if the encryption algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm name to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsEncryptionKeyDerivationAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsEncryptionKeyDerivationAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsEncryptionKeyDerivationAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsEncryptionKeyDerivationAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsEncryptionKeyDerivationAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -750,12 +1076,21 @@
           <para>true if the encryption key derivation algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm name to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSignatureKeyDerivationAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsSignatureKeyDerivationAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsSignatureKeyDerivationAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsSignatureKeyDerivationAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsSignatureKeyDerivationAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -777,12 +1112,21 @@
           <para>true if the signature key derivation algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm name to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSymmetricKeyLengthSupported">
-      <MemberSignature Language="C#" Value="public abstract bool IsSymmetricKeyLengthSupported (int length);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsSymmetricKeyLengthSupported(int32 length) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool IsSymmetricKeyLengthSupported (int length);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsSymmetricKeyLengthSupported(int32 length) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -796,7 +1140,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="length" /> is compared to a range of values depending on the subclass. For example, in the TripleDES subclass, this method verifies that <paramref name="length" /> is between 192 and 256, inclusive.</para>
+          <para
+            >The <paramref
+             name="length" />
+
+             is compared to a range of values depending on the subclass. For example, in the TripleDES subclass, this method verifies that <paramref
+             name="length" />
+
+             is between 192 and 256, inclusive.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -807,12 +1159,21 @@
           <para>true if the symmetric key length is supported; otherwise, false.</para>
         </returns>
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key length to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key length to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSymmetricKeyWrapAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsSymmetricKeyWrapAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsSymmetricKeyWrapAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsSymmetricKeyWrapAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsSymmetricKeyWrapAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -834,12 +1195,21 @@
           <para>true if the symmetric key wrap algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm name to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSymmetricSignatureAlgorithmSupported">
-      <MemberSignature Language="C#" Value="public virtual bool IsSymmetricSignatureAlgorithmSupported (string algorithm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsSymmetricSignatureAlgorithmSupported(string algorithm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsSymmetricSignatureAlgorithmSupported (string algorithm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsSymmetricSignatureAlgorithmSupported(string algorithm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -861,12 +1231,21 @@
           <para>true if the symmetric signature algorithm is supported; otherwise, false.</para>
         </returns>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm name to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="TripleDes">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite TripleDes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite TripleDes" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite TripleDes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite TripleDes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -878,7 +1257,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -887,8 +1271,14 @@
       </Docs>
     </Member>
     <Member MemberName="TripleDesRsa15">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesRsa15 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesRsa15" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesRsa15 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesRsa15"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -900,7 +1290,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -909,8 +1304,14 @@
       </Docs>
     </Member>
     <Member MemberName="TripleDesSha256">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesSha256 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesSha256" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesSha256 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesSha256"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -922,7 +1323,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -931,8 +1337,14 @@
       </Docs>
     </Member>
     <Member MemberName="TripleDesSha256Rsa15">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesSha256Rsa15 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesSha256Rsa15" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesSha256Rsa15 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.Security.SecurityAlgorithmSuite TripleDesSha256Rsa15"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -944,7 +1356,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

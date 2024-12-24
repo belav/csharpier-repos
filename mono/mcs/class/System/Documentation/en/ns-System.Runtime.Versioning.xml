@@ -3,7 +3,12 @@
   <Docs>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:System.Runtime.Versioning" /> namespace contains advanced types that support versioning in side by side implementations of the .NET Framework.</para>
+      <para
+        >The <see
+         cref="N:System.Runtime.Versioning" />
+
+         namespace contains advanced types that support versioning in side by side implementations of the .NET Framework.</para
+      >
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

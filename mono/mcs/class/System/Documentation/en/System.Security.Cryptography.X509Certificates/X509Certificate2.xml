@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="X509Certificate2" FullName="System.Security.Cryptography.X509Certificates.X509Certificate2">
-  <TypeSignature Language="C#" Value="public class X509Certificate2 : System.Security.Cryptography.X509Certificates.X509Certificate" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit X509Certificate2 extends System.Security.Cryptography.X509Certificates.X509Certificate" />
+<Type
+  Name="X509Certificate2"
+  FullName="System.Security.Cryptography.X509Certificates.X509Certificate2"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class X509Certificate2 : System.Security.Cryptography.X509Certificates.X509Certificate"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit X509Certificate2 extends System.Security.Cryptography.X509Certificates.X509Certificate"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +24,17 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The X.509 structure originated in the International Organization for Standardization (ISO) working groups. This structure can be used to represent various types of information including identity, entitlement, and holder attributes (permissions, age, sex, location, affiliation, and so forth). Although the ISO specifications are most informative on the structure itself, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class is designed to model the usage scenarios defined in specifications issued by the Internet Engineering Task Force (IETF) Public Key Infrastructure, X.509 (PKIX) working group. The most informative of these specifications is RFC 3280, "<see cref="http://go.microsoft.com/fwlink/?LinkId=45286">Certificate and Certificate Revocation List (CRL) Profile</see>."</para>
+      <para
+        >The X.509 structure originated in the International Organization for Standardization (ISO) working groups. This structure can be used to represent various types of information including identity, entitlement, and holder attributes (permissions, age, sex, location, affiliation, and so forth). Although the ISO specifications are most informative on the structure itself, the <see
+         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+         class is designed to model the usage scenarios defined in specifications issued by the Internet Engineering Task Force (IETF) Public Key Infrastructure, X.509 (PKIX) working group. The most informative of these specifications is RFC 3280, "<see
+         cref="http://go.microsoft.com/fwlink/?LinkId=45286"
+          >Certificate and Certificate Revocation List (CRL) Profile</see
+        >
+
+        ."</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +44,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public X509Certificate2 ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,17 +58,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates an empty <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object, unlike the other constructors for this class that use certificate information from a byte array, a pointer, or a certificate file.</para>
+          <para
+            >This constructor creates an empty <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object, unlike the other constructors for this class that use certificate information from a byte array, a pointer, or a certificate file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public X509Certificate2 (byte[] rawData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -59,20 +94,47 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using certificate information from a byte array. The byte array can be binary (DER) encoded or Base64-encoded X.509 data. The byte array can also be a PKCS7 (Authenticode) signed file; the signer certificate is used to create the object.</para>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >This constructor creates a new <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using certificate information from a byte array. The byte array can be binary (DER) encoded or Base64-encoded X.509 data. The byte array can also be a PKCS7 (Authenticode) signed file; the signer certificate is used to create the object.</para
+          >
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="rawData" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using information from a byte array.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using information from a byte array.</para
+          >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array containing data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array containing data from an X.509 certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public X509Certificate2 (IntPtr handle);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(native int handle) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(native int handle) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -85,48 +147,103 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using a handle for the Microsoft Cryptographic API certificate context, PCCERT_CONTEXT. Note that the immediate caller of this constructor requires unmanaged code permission.</para>
+          <para
+            >This constructor creates a new <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using a handle for the Microsoft Cryptographic API certificate context, PCCERT_CONTEXT. Note that the immediate caller of this constructor requires unmanaged code permission.</para
+          >
           <block subset="none" type="note">
-            <para>The constructor creates a copy of the certificate context. Do not assume that the context structure you passed to the constructor is valid; it may have been released. You can get a copy of the current PCCERT_CONTEXT structure from the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate.Handle" /> property, but it is valid only during the lifetime of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object.</para>
+            <para
+              >The constructor creates a copy of the certificate context. Do not assume that the context structure you passed to the constructor is valid; it may have been released. You can get a copy of the current PCCERT_CONTEXT structure from the <see
+               cref="P:System.Security.Cryptography.X509Certificates.X509Certificate.Handle" />
+
+               property, but it is valid only during the lifetime of the <see
+               cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+               object.</para
+            >
           </block>
           <para />
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using an unmanaged handle.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using an unmanaged handle.</para
+          >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to a certificate context in unmanaged code. The C structure is called PCCERT_CONTEXT.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to a certificate context in unmanaged code. The C structure is called PCCERT_CONTEXT.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (System.Security.Cryptography.X509Certificates.X509Certificate certificate);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Security.Cryptography.X509Certificates.X509Certificate certificate) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (System.Security.Cryptography.X509Certificates.X509Certificate certificate);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Security.Cryptography.X509Certificates.X509Certificate certificate) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="certificate" Type="System.Security.Cryptography.X509Certificates.X509Certificate" />
+        <Parameter
+          Name="certificate"
+          Type="System.Security.Cryptography.X509Certificates.X509Certificate"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object. </para>
+          <para
+            >This method creates a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             object. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             object.</para
+          >
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+           object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public X509Certificate2 (string fileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -139,20 +256,50 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using a certificate file name. It supports binary (DER) encoding or Base64 encoding.</para>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >This constructor creates a new <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using a certificate file name. It supports binary (DER) encoding or Base64 encoding.</para
+          >
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="fileName" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a certificate file name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a certificate file name.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate file. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (byte[] rawData, System.Security.SecureString password);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData, class System.Security.SecureString password) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (byte[] rawData, System.Security.SecureString password);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData, class System.Security.SecureString password) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -168,23 +315,58 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para>
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="rawData" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a byte array and a password.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a byte array and a password.</para
+          >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array that contains data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array that contains data from an X.509 certificate. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (byte[] rawData, string password);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData, string password) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (byte[] rawData, string password);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData, string password) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -198,25 +380,65 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using a byte array and a password that is needed to access the certificate data. It is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para>
+          <para
+            >This constructor creates a new <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using a byte array and a password that is needed to access the certificate data. It is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para
+          >
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="rawData" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a byte array and a password.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a byte array and a password.</para
+          >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array containing data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array containing data from an X.509 certificate. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (string fileName, System.Security.SecureString password);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, class System.Security.SecureString password) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (string fileName, System.Security.SecureString password);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, class System.Security.SecureString password) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -232,23 +454,58 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para>
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="fileName" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a certificate file name and a password.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a certificate file name and a password.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate file. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (string fileName, string password);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, string password) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (string fileName, string password);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, string password) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -262,25 +519,65 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using a certificate file name and a password needed to access the certificate. It is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para>
+          <para
+            >This constructor creates a new <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using a certificate file name and a password needed to access the certificate. It is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para
+          >
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="fileName" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a certificate file name and a password used to access the certificate.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a certificate file name and a password used to access the certificate.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate file. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (byte[] rawData, System.Security.SecureString password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData, class System.Security.SecureString password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (byte[] rawData, System.Security.SecureString password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData, class System.Security.SecureString password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -289,7 +586,10 @@
       <Parameters>
         <Parameter Name="rawData" Type="System.Byte[]" />
         <Parameter Name="password" Type="System.Security.SecureString" />
-        <Parameter Name="keyStorageFlags" Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+        <Parameter
+          Name="keyStorageFlags"
+          Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
@@ -297,25 +597,63 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a Microsoft Cryptographic API Cryptographic Service Provider (CSP).</para>
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="rawData" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a byte array, a password, and a key storage flag.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a byte array, a password, and a key storage flag.</para
+          >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array that contains data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array that contains data from an X.509 certificate. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the enumeration values that control where and how to import the certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the enumeration values that control where and how to import the certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (byte[] rawData, string password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData, string password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (byte[] rawData, string password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] rawData, string password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -324,33 +662,79 @@
       <Parameters>
         <Parameter Name="rawData" Type="System.Byte[]" />
         <Parameter Name="password" Type="System.String" />
-        <Parameter Name="keyStorageFlags" Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+        <Parameter
+          Name="keyStorageFlags"
+          Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using a byte array, a password that is needed to access the certificate data, and a key storage flag. It is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a Microsoft Cryptographic API Cryptographic Service Provider (CSP).</para>
+          <para
+            >This constructor creates a new <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using a byte array, a password that is needed to access the certificate data, and a key storage flag. It is used with PKCS12 (PFX) files that contain the certificate's private key. Calling this constructor with the correct password decrypts the private key and saves it to a Microsoft Cryptographic API Cryptographic Service Provider (CSP).</para
+          >
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="rawData" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a byte array, a password, and a key storage flag.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a byte array, a password, and a key storage flag.</para
+          >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array containing data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array containing data from an X.509 certificate. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the enumeration values that control where and how to import the certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the enumeration values that control where and how to import the certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (string fileName, System.Security.SecureString password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, class System.Security.SecureString password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (string fileName, System.Security.SecureString password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, class System.Security.SecureString password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -359,29 +743,63 @@
       <Parameters>
         <Parameter Name="fileName" Type="System.String" />
         <Parameter Name="password" Type="System.Security.SecureString" />
-        <Parameter Name="keyStorageFlags" Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+        <Parameter
+          Name="keyStorageFlags"
+          Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="fileName" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a certificate file name, a password, and a key storage flag.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a certificate file name, a password, and a key storage flag.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate file. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the enumeration values that control where and how to import the certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the enumeration values that control where and how to import the certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509Certificate2 (string fileName, string password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, string password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509Certificate2 (string fileName, string password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, string password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -390,28 +808,68 @@
       <Parameters>
         <Parameter Name="fileName" Type="System.String" />
         <Parameter Name="password" Type="System.String" />
-        <Parameter Name="keyStorageFlags" Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+        <Parameter
+          Name="keyStorageFlags"
+          Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using a certificate file name, a password needed to access the certificate, and a key storage flag.</para>
+          <para
+            >This constructor creates a new <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using a certificate file name, a password needed to access the certificate, and a key storage flag.</para
+          >
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
-          <para>If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para>
+          <para
+            >If you create an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             certificate by specifying a PKCS7 signed file store for <paramref
+             name="fileName" />
+
+            , the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             is created for the certificate that signed the store rather than for any of the certificates within the store. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class using a certificate file name, a password used to access the certificate, and a key storage flag.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             class using a certificate file name, a password used to access the certificate, and a key storage flag.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate file. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the enumeration values that control where and how to import the certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the enumeration values that control where and how to import the certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Archived">
@@ -431,7 +889,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is set only on a certificate that is associated with a store. If the property is set and the certificate is added to a certificate store, the value is persisted. If the property is set on a certificate retrieved from a store, the value is persisted immediately.</para>
-          <para>In an X.509 store, archived certificates are not included in the returned <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object unless the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Archived" /> property is set to true. No physical archival activity occurs when the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Archived" /> value is set or unset.</para>
+          <para
+            >In an X.509 store, archived certificates are not included in the returned <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+             object unless the <see
+             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Archived" />
+
+             property is set to true. No physical archival activity occurs when the <see
+             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.Archived" />
+
+             value is set or unset.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -440,8 +909,14 @@
       </Docs>
     </Member>
     <Member MemberName="Extensions">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.X509Certificates.X509ExtensionCollection Extensions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.X509Certificates.X509ExtensionCollection Extensions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.X509Certificates.X509ExtensionCollection Extensions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.X509Certificates.X509ExtensionCollection Extensions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -455,11 +930,29 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The extensions defined in the X.509 v3 certificate format allow additional data to be included in the certificate. A number of extensions are defined by ISO in the X.509 v3 definition as well as by PKIX in RFC 3280, "<see cref="http://go.microsoft.com/fwlink/?LinkId=45286">Certificate and Certificate Revocation List (CRL) Profile</see>." Common extensions include information regarding key usage (<see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />), key identifiers (<see cref="T:System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension" />), certificate policies, revocation information (CRL Distribution Point extension), and other uses.</para>
+          <para
+            >The extensions defined in the X.509 v3 certificate format allow additional data to be included in the certificate. A number of extensions are defined by ISO in the X.509 v3 definition as well as by PKIX in RFC 3280, "<see
+             cref="http://go.microsoft.com/fwlink/?LinkId=45286"
+              >Certificate and Certificate Revocation List (CRL) Profile</see
+            >
+
+            ." Common extensions include information regarding key usage (<see
+             cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
+
+            ), key identifiers (<see
+             cref="T:System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension" />
+
+            ), certificate policies, revocation information (CRL Distribution Point extension), and other uses.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects.</para>
+          <para
+            >Gets a collection of <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+
+             objects.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -489,8 +982,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetCertContentType">
-      <MemberSignature Language="C#" Value="public static System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType (byte[] rawData);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType(unsigned int8[] rawData) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType (byte[] rawData);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig valuetype System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType(unsigned int8[] rawData) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -519,15 +1018,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> object.</para>
+          <para
+            >An <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+             object.</para
+          >
         </returns>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array containing data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array containing data from an X.509 certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetCertContentType">
-      <MemberSignature Language="C#" Value="public static System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType (string fileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType(string fileName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType (string fileName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig valuetype System.Security.Cryptography.X509Certificates.X509ContentType GetCertContentType(string fileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -556,15 +1069,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> object.</para>
+          <para
+            >An <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+             object.</para
+          >
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate file. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetNameInfo">
-      <MemberSignature Language="C#" Value="public string GetNameInfo (System.Security.Cryptography.X509Certificates.X509NameType nameType, bool forIssuer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetNameInfo(valuetype System.Security.Cryptography.X509Certificates.X509NameType nameType, bool forIssuer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public string GetNameInfo (System.Security.Cryptography.X509Certificates.X509NameType nameType, bool forIssuer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance string GetNameInfo(valuetype System.Security.Cryptography.X509Certificates.X509NameType nameType, bool forIssuer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -579,7 +1106,10 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="nameType" Type="System.Security.Cryptography.X509Certificates.X509NameType" />
+        <Parameter
+          Name="nameType"
+          Type="System.Security.Cryptography.X509Certificates.X509NameType"
+        />
         <Parameter Name="forIssuer" Type="System.Boolean" />
       </Parameters>
       <Docs>
@@ -597,9 +1127,18 @@
           <para>The name of the certificate.</para>
         </returns>
         <param name="nameType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Security.Cryptography.X509Certificates.X509NameType" /> value for the subject. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Security.Cryptography.X509Certificates.X509NameType" />
+
+           value for the subject. </param
+        >
         <param name="forIssuer">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to include the issuer name; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to include the issuer name; otherwise, false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="HasPrivateKey">
@@ -619,13 +1158,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object contains a private key. </para>
+          <para
+            >Gets a value that indicates whether an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object contains a private key. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Import">
       <MemberSignature Language="C#" Value="public override void Import (byte[] rawData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Import(unsigned int8[] rawData) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Import(unsigned int8[] rawData) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -641,20 +1188,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method can be used to take a raw byte array of an X.509 certificate and populate the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object with its associated values.</para>
+          <para
+            >This method can be used to take a raw byte array of an X.509 certificate and populate the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object with its associated values.</para
+          >
           <para>Since this method accepts only a byte array, it can be used only for certificate types that do not require a password, including a Base64-encoded or DER-encoded X.509 certificate or a PFX/PKCS12 certificate. Note that a PFX/PKCS12 certificate can contain more than one certificate. In that case, the first certificate associated with a private key is used or, if no private key is found, the first certificate is used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object with data from a byte array.</para>
+          <para
+            >Populates an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object with data from a byte array.</para
+          >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array containing data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array containing data from an X.509 certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Import">
       <MemberSignature Language="C#" Value="public override void Import (string fileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Import(string fileName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Import(string fileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -670,20 +1233,39 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses a certificate file, such as a file with a .cer extension, that represents an X.509 certificate and populates the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object with the certificate the file contains.</para>
+          <para
+            >This method uses a certificate file, such as a file with a .cer extension, that represents an X.509 certificate and populates the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object with the certificate the file contains.</para
+          >
           <para>This method can be used with several certificate types, including Base64-encoded or DER-encoded X.509 certificates, PFX/PKCS12 certificates, and signer certificates such as Authenticode. Note that a PFX/PKCS12 certificate can contain more than one certificate. In that case, the first certificate associated with a private key is used or, if no private key is found, the first certificate is used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object with information from a certificate file.</para>
+          <para
+            >Populates an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object with information from a certificate file.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Import">
-      <MemberSignature Language="C#" Value="public override void Import (byte[] rawData, System.Security.SecureString password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Import(unsigned int8[] rawData, class System.Security.SecureString password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Import (byte[] rawData, System.Security.SecureString password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Import(unsigned int8[] rawData, class System.Security.SecureString password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -700,7 +1282,10 @@
       <Parameters>
         <Parameter Name="rawData" Type="System.Byte[]" />
         <Parameter Name="password" Type="System.Security.SecureString" />
-        <Parameter Name="keyStorageFlags" Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+        <Parameter
+          Name="keyStorageFlags"
+          Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
@@ -708,24 +1293,51 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can use this method for certificate types such as Base64-encoded or DER-encoded X.509 certificates, or PFX/PKCS12 certificates. Note that a PFX/PKCS12 certificate can contain more than one certificate. In that case, the first certificate associated with a private key is used or, if no private key is found, the first certificate is used.</para>
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using data from a byte array, a password, and a key storage flag.</para>
+          <para
+            >Populates an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using data from a byte array, a password, and a key storage flag.</para
+          >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array that contains data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array that contains data from an X.509 certificate. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the enumeration values that control where and how to import the certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the enumeration values that control where and how to import the certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Import">
-      <MemberSignature Language="C#" Value="public override void Import (byte[] rawData, string password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Import(unsigned int8[] rawData, string password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Import (byte[] rawData, string password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Import(unsigned int8[] rawData, string password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -742,33 +1354,71 @@
       <Parameters>
         <Parameter Name="rawData" Type="System.Byte[]" />
         <Parameter Name="password" Type="System.String" />
-        <Parameter Name="keyStorageFlags" Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+        <Parameter
+          Name="keyStorageFlags"
+          Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method can be used to populate an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using a password for the certificate represented by the byte array. The <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" /> value can be used to control where and how to import the private key.</para>
+          <para
+            >This method can be used to populate an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using a password for the certificate represented by the byte array. The <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+
+             value can be used to control where and how to import the private key.</para
+          >
           <para>This method accepts a byte array and can be used for certificate types such as Base64-encoded or DER-encoded X.509 certificates or PFX/PKCS12 certificates. Note that a PFX/PKCS12 certificate can contain more than one certificate. In that case, the first certificate associated with a private key is used or, if no private key is found, the first certificate is used.</para>
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object using data from a byte array, a password, and flags for determining how to import the private key.</para>
+          <para
+            >Populates an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object using data from a byte array, a password, and flags for determining how to import the private key.</para
+          >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte array containing data from an X.509 certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte array containing data from an X.509 certificate. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the enumeration values that control where and how to import the certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the enumeration values that control where and how to import the certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Import">
-      <MemberSignature Language="C#" Value="public override void Import (string fileName, System.Security.SecureString password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Import(string fileName, class System.Security.SecureString password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Import (string fileName, System.Security.SecureString password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Import(string fileName, class System.Security.SecureString password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -785,29 +1435,59 @@
       <Parameters>
         <Parameter Name="fileName" Type="System.String" />
         <Parameter Name="password" Type="System.Security.SecureString" />
-        <Parameter Name="keyStorageFlags" Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+        <Parameter
+          Name="keyStorageFlags"
+          Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Security Note   Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+          <para
+            >Security Note   Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+             type="text/html">
+              <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+            </format>
+
+            , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object with information from a certificate file, a password, and a key storage flag.</para>
+          <para
+            >Populates an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object with information from a certificate file, a password, and a key storage flag.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate file. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the enumeration values that control where and how to import the certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the enumeration values that control where and how to import the certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Import">
-      <MemberSignature Language="C#" Value="public override void Import (string fileName, string password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Import(string fileName, string password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Import (string fileName, string password, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Import(string fileName, string password, valuetype System.Security.Cryptography.X509Certificates.X509KeyStorageFlags keyStorageFlags) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -824,32 +1504,73 @@
       <Parameters>
         <Parameter Name="fileName" Type="System.String" />
         <Parameter Name="password" Type="System.String" />
-        <Parameter Name="keyStorageFlags" Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+        <Parameter
+          Name="keyStorageFlags"
+          Type="System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method can be used populate an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object with information from a certificate file, a password, and an <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" /> value.</para>
+          <para
+            >This method can be used populate an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object with information from a certificate file, a password, and an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+
+             value.</para
+          >
           <block subset="none" type="note">
-            <para>Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html"><a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a></format>, a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para>
+            <para
+              >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format
+               type="text/html">
+                <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
+              </format>
+
+              , a hex editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Populates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object with information from a certificate file, a password, and a <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" /> value.</para>
+          <para
+            >Populates an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object with information from a certificate file, a password, and a <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+
+             value.</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of a certificate file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of a certificate file. </param
+        >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />The password required to access the X.509 certificate data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The password required to access the X.509 certificate data. </param
+        >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the enumeration values that control where and how to import the certificate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the enumeration values that control where and how to import the certificate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IssuerName">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.X509Certificates.X500DistinguishedName IssuerName { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.X509Certificates.X500DistinguishedName IssuerName" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.X509Certificates.X500DistinguishedName IssuerName { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.X509Certificates.X500DistinguishedName IssuerName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -863,7 +1584,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property contains the name of the certificate authority (CA) that issued the certificate. To obtain the name of a certificate, use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.GetNameInfo(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)" /> method.</para>
+          <para
+            >This property contains the name of the certificate authority (CA) that issued the certificate. To obtain the name of a certificate, use the <see
+             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.GetNameInfo(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)" />
+
+             method.</para
+          >
           <para>The distinguished name for the certificate is a textual representation of the certificate subject or issuer. This representation consists of name attributes (for example, "CN=MyName, OU=MyOrgUnit, C=US").</para>
         </remarks>
         <summary>
@@ -874,7 +1600,10 @@
     </Member>
     <Member MemberName="NotAfter">
       <MemberSignature Language="C#" Value="public DateTime NotAfter { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime NotAfter" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.DateTime NotAfter"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -898,7 +1627,10 @@
     </Member>
     <Member MemberName="NotBefore">
       <MemberSignature Language="C#" Value="public DateTime NotBefore { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime NotBefore" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.DateTime NotBefore"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -921,8 +1653,14 @@
       </Docs>
     </Member>
     <Member MemberName="PrivateKey">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.AsymmetricAlgorithm PrivateKey { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.AsymmetricAlgorithm PrivateKey" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.AsymmetricAlgorithm PrivateKey { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.AsymmetricAlgorithm PrivateKey"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -936,21 +1674,45 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Currently this property supports only RSA or DSA keys, so it returns either an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> or a <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> object. If no private key is associated with the certificate, it returns null.</para>
+          <para
+            >Currently this property supports only RSA or DSA keys, so it returns either an <see
+             cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+             or a <see
+             cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+             object. If no private key is associated with the certificate, it returns null.</para
+          >
           <block subset="none" type="note">
             <para>If you set this property to null or to another key without first deleting it, a private key file is left on the disk.</para>
           </block>
-          <para>To properly delete the private key associated with this property, set PersistKeyInCsp to false, and then call the <see cref="M:System.Security.Cryptography.AsymmetricAlgorithm.Clear" /> method.</para>
+          <para
+            >To properly delete the private key associated with this property, set PersistKeyInCsp to false, and then call the <see
+             cref="M:System.Security.Cryptography.AsymmetricAlgorithm.Clear" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object that represents the private key associated with a certificate.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+             object that represents the private key associated with a certificate.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="PublicKey">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.X509Certificates.PublicKey PublicKey { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.X509Certificates.PublicKey PublicKey" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.X509Certificates.PublicKey PublicKey { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.X509Certificates.PublicKey PublicKey"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -964,12 +1726,39 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property returns a <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" /> object, which contains the object identifier (<see cref="T:System.Security.Cryptography.Oid" />) representing the public key algorithm, the ASN.1-encoded parameters, and the ASN.1-encoded key value.</para>
-          <para>You can also obtain the key as an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object by referencing the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" /> property. This property supports only RSA or DSA keys, so it returns either an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> or a <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> object that represents the public key.</para>
+          <para
+            >This property returns a <see
+             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
+
+             object, which contains the object identifier (<see
+             cref="T:System.Security.Cryptography.Oid" />
+
+            ) representing the public key algorithm, the ASN.1-encoded parameters, and the ASN.1-encoded key value.</para
+          >
+          <para
+            >You can also obtain the key as an <see
+             cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+             object by referencing the <see
+             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
+
+             property. This property supports only RSA or DSA keys, so it returns either an <see
+             cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />
+
+             or a <see
+             cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+             object that represents the public key.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" /> object associated with a certificate.</para>
+          <para
+            >Gets a <see
+             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.PublicKey" />
+
+             object associated with a certificate.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -996,7 +1785,10 @@
     </Member>
     <Member MemberName="Reset">
       <MemberSignature Language="C#" Value="public override void Reset ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Reset() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Reset() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1014,7 +1806,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Resets the state of an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object.</para>
+          <para
+            >Resets the state of an <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -1043,8 +1840,14 @@
       </Docs>
     </Member>
     <Member MemberName="SignatureAlgorithm">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.Oid SignatureAlgorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.Oid SignatureAlgorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.Oid SignatureAlgorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.Oid SignatureAlgorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1058,7 +1861,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The object identifier (<see cref="T:System.Security.Cryptography.Oid" />) identifies the type of signature algorithm used by the certificate.</para>
+          <para
+            >The object identifier (<see
+             cref="T:System.Security.Cryptography.Oid" />
+
+            ) identifies the type of signature algorithm used by the certificate.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1067,8 +1875,14 @@
       </Docs>
     </Member>
     <Member MemberName="SubjectName">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.X509Certificates.X500DistinguishedName SubjectName { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.X509Certificates.X500DistinguishedName SubjectName" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.X509Certificates.X500DistinguishedName SubjectName { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.X509Certificates.X500DistinguishedName SubjectName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1116,7 +1930,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1130,7 +1947,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>As with all ToString methods, the output might not be consistent across versions of the .NET Framework, so the method results should not be parsed for content. Use the properties on the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object to obtain precise information about the content or use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.ToString(System.Boolean)" /> method to obtain information about the certificate.</para>
+          <para
+            >As with all ToString methods, the output might not be consistent across versions of the .NET Framework, so the method results should not be parsed for content. Use the properties on the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object to obtain precise information about the content or use the <see
+             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.ToString(System.Boolean)" />
+
+             method to obtain information about the certificate.</para
+          >
           <para>This method displays the certificate in text format.</para>
         </remarks>
         <summary>
@@ -1145,7 +1970,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString (bool verbose);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString(bool verbose) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString(bool verbose) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1161,8 +1989,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>As with all ToString methods, the output might not be consistent across versions of the .NET Framework, so the method results should not be parsed for content. Use the properties on the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object to obtain precise information.</para>
-          <para>This method displays the certificate in text format. If the <paramref name="verbose" /> parameter is set to true, the text display includes the public key, private key, and extensions. If <paramref name="verbose" /> is set to false, the text display includes those fields available from the X.509 certificate, including thumbprint, serial number, subject and issuer names, and validity date information.</para>
+          <para
+            >As with all ToString methods, the output might not be consistent across versions of the .NET Framework, so the method results should not be parsed for content. Use the properties on the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+             object to obtain precise information.</para
+          >
+          <para
+            >This method displays the certificate in text format. If the <paramref
+             name="verbose" />
+
+             parameter is set to true, the text display includes the public key, private key, and extensions. If <paramref
+             name="verbose" />
+
+             is set to false, the text display includes those fields available from the X.509 certificate, including thumbprint, serial number, subject and issuer names, and validity date information.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1173,12 +2014,21 @@
           <para>The certificate information.</para>
         </returns>
         <param name="verbose">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to display the public key, private key, extensions, and so forth; false to display information that is similar to the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> class, including thumbprint, serial number, subject and issuer names, and so on. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to display the public key, private key, extensions, and so forth; false to display information that is similar to the <see
+           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+           class, including thumbprint, serial number, subject and issuer names, and so on. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Verify">
       <MemberSignature Language="C#" Value="public bool Verify ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Verify() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool Verify() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1197,8 +2047,23 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method builds a simple chain for the certificate and applies the base policy to that chain. If you need more information about a failure, validate the certificate directly using the <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object.</para>
-          <para>Note that the default chaining engine can be overridden using the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. On Microsoft Windows Server 2003, the default engine conforms to the specification described in RFC3280, "<see cref="http://go.microsoft.com/fwlink/?LinkId=45286">Certificate and Certificate Revocation List (CRL) Profile</see>." </para>
+          <para
+            >This method builds a simple chain for the certificate and applies the base policy to that chain. If you need more information about a failure, validate the certificate directly using the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Chain" />
+
+             object.</para
+          >
+          <para
+            >Note that the default chaining engine can be overridden using the <see
+             cref="T:System.Security.Cryptography.CryptoConfig" />
+
+             class. On Microsoft Windows Server 2003, the default engine conforms to the specification described in RFC3280, "<see
+             cref="http://go.microsoft.com/fwlink/?LinkId=45286"
+              >Certificate and Certificate Revocation List (CRL) Profile</see
+            >
+
+            ." </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

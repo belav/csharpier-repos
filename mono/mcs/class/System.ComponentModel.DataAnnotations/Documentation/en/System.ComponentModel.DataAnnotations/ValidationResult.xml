@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ValidationResult" FullName="System.ComponentModel.DataAnnotations.ValidationResult">
   <TypeSignature Language="C#" Value="public class ValidationResult" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ValidationResult extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ValidationResult extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,31 +22,59 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ValidationResult (System.ComponentModel.DataAnnotations.ValidationResult validationResult);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ComponentModel.DataAnnotations.ValidationResult validationResult) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ValidationResult (System.ComponentModel.DataAnnotations.ValidationResult validationResult);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ComponentModel.DataAnnotations.ValidationResult validationResult) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="validationResult" Type="System.ComponentModel.DataAnnotations.ValidationResult" />
+        <Parameter
+          Name="validationResult"
+          Type="System.ComponentModel.DataAnnotations.ValidationResult"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The method creates a copy of an exiting <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" /> object.</para>
+          <para
+            >The method creates a copy of an exiting <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" /> class by using a <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" /> object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+             class by using a <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+             object.</para
+          >
         </summary>
         <param name="validationResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />The validation result object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The validation result object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ValidationResult (string errorMessage);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string errorMessage) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string errorMessage) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,33 +86,61 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" /> class by using an error message.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+             class by using an error message.</para
+          >
         </summary>
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ValidationResult (string errorMessage, System.Collections.Generic.IEnumerable&lt;string&gt; memberNames);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string errorMessage, class System.Collections.Generic.IEnumerable`1&lt;string&gt; memberNames) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ValidationResult (string errorMessage, System.Collections.Generic.IEnumerable<string> memberNames);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string errorMessage, class System.Collections.Generic.IEnumerable`1<string> memberNames) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="errorMessage" Type="System.String" />
-        <Parameter Name="memberNames" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter
+          Name="memberNames"
+          Type="System.Collections.Generic.IEnumerable<System.String>"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" /> class by using an error message and a list of members that have validation errors.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+             class by using an error message and a list of members that have validation errors.</para
+          >
         </summary>
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message.</param
+        >
         <param name="memberNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The list of member names that have validation errors.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The list of member names that have validation errors.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ErrorMessage">
@@ -98,7 +157,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can set the <see cref="P:System.ComponentModel.DataAnnotations.ValidationResult.ErrorMessage" /> property to null.</para>
+          <para
+            >You can set the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationResult.ErrorMessage" />
+
+             property to null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -107,8 +171,14 @@
       </Docs>
     </Member>
     <Member MemberName="MemberNames">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;string&gt; MemberNames { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IEnumerable`1&lt;string&gt; MemberNames" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<string> MemberNames { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IEnumerable`1<string> MemberNames"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -129,8 +199,14 @@
       </Docs>
     </Member>
     <Member MemberName="Success">
-      <MemberSignature Language="C#" Value="public static readonly System.ComponentModel.DataAnnotations.ValidationResult Success;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class System.ComponentModel.DataAnnotations.ValidationResult Success" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.ComponentModel.DataAnnotations.ValidationResult Success;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class System.ComponentModel.DataAnnotations.ValidationResult Success"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -148,7 +224,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

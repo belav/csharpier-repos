@@ -13,7 +13,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.DataGridViewRowEventArgs" /> class provides data for the following <see cref="T:System.Windows.Forms.DataGridView" /> events:</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.DataGridViewRowEventArgs" />
+
+         class provides data for the following <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         events:</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -79,12 +87,20 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for row-related <see cref="T:System.Windows.Forms.DataGridView" /> events. </para>
+      <para
+        >Provides data for row-related <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         events. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataGridViewRowEventArgs (System.Windows.Forms.DataGridViewRow dataGridViewRow);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DataGridViewRowEventArgs (System.Windows.Forms.DataGridViewRow dataGridViewRow);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="dataGridViewRow" Type="System.Windows.Forms.DataGridViewRow" />
@@ -93,21 +109,43 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor uses the <paramref name="dataGridViewRow" /> parameter value to initialize the <see cref="P:System.Windows.Forms.DataGridViewRowEventArgs.Row" /> property.</para>
+          <para
+            >This constructor uses the <paramref
+             name="dataGridViewRow" />
+
+             parameter value to initialize the <see
+             cref="P:System.Windows.Forms.DataGridViewRowEventArgs.Row" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.DataGridViewRowEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="dataGridViewRow">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.DataGridViewRow" /> that the event occurred for.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.DataGridViewRow" />
+
+           that the event occurred for.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Row">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataGridViewRow Row { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DataGridViewRow Row { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DataGridViewRow</ReturnType>
@@ -118,7 +156,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.DataGridViewRow" /> associated with the event.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.DataGridViewRow" />
+
+             associated with the event.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

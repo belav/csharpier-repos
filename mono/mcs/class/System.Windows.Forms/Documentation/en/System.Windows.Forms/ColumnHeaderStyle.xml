@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.ListView.HeaderStyle" /> property of the <see cref="T:System.Windows.Forms.ListView" /> control.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.ListView.HeaderStyle" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the styles of the column headers in a <see cref="T:System.Windows.Forms.ListView" /> control.</para>
+      <para
+        >Specifies the styles of the column headers in a <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>

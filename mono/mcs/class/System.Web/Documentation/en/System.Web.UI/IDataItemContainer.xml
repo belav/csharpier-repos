@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IDataItemContainer" FullName="System.Web.UI.IDataItemContainer">
-  <TypeSignature Language="C#" Value="public interface IDataItemContainer : System.Web.UI.INamingContainer" />
+  <TypeSignature
+    Language="C#"
+    Value="public interface IDataItemContainer : System.Web.UI.INamingContainer"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +17,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Container classes that implement the <see cref="T:System.Web.UI.IDataItemContainer" /> interface can specify which of their properties identifies the data item for data-binding operations, such as late binding with the <see cref="T:System.Web.UI.DataBinder" /> class.</para>
+      <para
+        >Container classes that implement the <see
+         cref="T:System.Web.UI.IDataItemContainer" />
+
+         interface can specify which of their properties identifies the data item for data-binding operations, such as late binding with the <see
+         cref="T:System.Web.UI.DataBinder" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -33,7 +44,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.IDataItemContainer.DataItem" /> property identifies an object that is used in data-binding operations and late-binding expressions. </para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+
+             property identifies an object that is used in data-binding operations and late-binding expressions. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,7 +71,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>In implementing classes such as <see cref="T:System.Web.UI.WebControls.FormView" />, <see cref="T:System.Web.UI.WebControls.GridViewRow" />, and <see cref="T:System.Web.UI.WebControls.DetailsView" />, the <see cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" /> property is used to determine the index of the data item bound to the control from the data source. The <see cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" /> property does not refer to the index of the data item as displayed by the data control.</para>
+          <para
+            >In implementing classes such as <see
+             cref="T:System.Web.UI.WebControls.FormView" />
+
+            , <see
+             cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            , and <see
+             cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            , the <see
+             cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+
+             property is used to determine the index of the data item bound to the control from the data source. The <see
+             cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+
+             property does not refer to the index of the data item as displayed by the data control.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -77,7 +110,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>In implementing classes such as <see cref="T:System.Windows.Forms.DataGridViewColumn" />, the <see cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" /> property is set according to the index of the row among the displayed rows.</para>
+          <para
+            >In implementing classes such as <see
+             cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+            , the <see
+             cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+
+             property is set according to the index of the row among the displayed rows.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

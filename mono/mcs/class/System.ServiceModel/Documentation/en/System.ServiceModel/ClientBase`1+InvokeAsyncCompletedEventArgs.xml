@@ -1,6 +1,15 @@
-<Type Name="ClientBase&lt;TChannel&gt;+InvokeAsyncCompletedEventArgs" FullName="System.ServiceModel.ClientBase&lt;TChannel&gt;+InvokeAsyncCompletedEventArgs">
-  <TypeSignature Language="C#" Value="protected class ClientBase&lt;TChannel&gt;.InvokeAsyncCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs where TChannel : class" />
-  <TypeSignature Language="ILAsm" Value=".class nested protected auto ansi beforefieldinit ClientBase`1/InvokeAsyncCompletedEventArgs&lt;class TChannel&gt; extends System.ComponentModel.AsyncCompletedEventArgs" />
+<Type
+  Name="ClientBase<TChannel>+InvokeAsyncCompletedEventArgs"
+  FullName="System.ServiceModel.ClientBase<TChannel>+InvokeAsyncCompletedEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="protected class ClientBase<TChannel>.InvokeAsyncCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs where TChannel : class"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested protected auto ansi beforefieldinit ClientBase`1/InvokeAsyncCompletedEventArgs<class TChannel> extends System.ComponentModel.AsyncCompletedEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>

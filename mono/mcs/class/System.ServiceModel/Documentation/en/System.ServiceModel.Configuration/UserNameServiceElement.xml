@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="UserNameServiceElement" FullName="System.ServiceModel.Configuration.UserNameServiceElement">
-  <TypeSignature Language="C#" Value="public sealed class UserNameServiceElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit UserNameServiceElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="UserNameServiceElement"
+  FullName="System.ServiceModel.Configuration.UserNameServiceElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class UserNameServiceElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit UserNameServiceElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public UserNameServiceElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +42,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.UserNameServiceElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.UserNameServiceElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CachedLogonTokenLifetime">
-      <MemberSignature Language="C#" Value="public TimeSpan CachedLogonTokenLifetime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan CachedLogonTokenLifetime" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan CachedLogonTokenLifetime { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan CachedLogonTokenLifetime"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -83,8 +106,14 @@
       </Docs>
     </Member>
     <Member MemberName="CustomUserNamePasswordValidatorType">
-      <MemberSignature Language="C#" Value="public string CustomUserNamePasswordValidatorType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string CustomUserNamePasswordValidatorType" />
+      <MemberSignature
+        Language="C#"
+        Value="public string CustomUserNamePasswordValidatorType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string CustomUserNamePasswordValidatorType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -185,7 +214,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When using username ClientCredentialType on a binding, the usernames are mapped to Windows accounts by default. It is possible to override this behavior using this property, which provides the name of the <see cref="T:System.Web.Security.MembershipProvider" /> that specifies the relevant password validation logic.</para>
+          <para
+            >When using username ClientCredentialType on a binding, the usernames are mapped to Windows accounts by default. It is possible to override this behavior using this property, which provides the name of the <see
+             cref="T:System.Web.Security.MembershipProvider" />
+
+             that specifies the relevant password validation logic.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -194,8 +228,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -210,8 +250,14 @@
       </Docs>
     </Member>
     <Member MemberName="UserNamePasswordValidationMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.UserNamePasswordValidationMode UserNamePasswordValidationMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Security.UserNamePasswordValidationMode UserNamePasswordValidationMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.UserNamePasswordValidationMode UserNamePasswordValidationMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Security.UserNamePasswordValidationMode UserNamePasswordValidationMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

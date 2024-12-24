@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="UriSchemeKeyedCollection" FullName="System.ServiceModel.UriSchemeKeyedCollection">
-  <TypeSignature Language="C#" Value="public class UriSchemeKeyedCollection : System.Collections.Generic.SynchronizedKeyedCollection&lt;string,Uri&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UriSchemeKeyedCollection extends System.Collections.Generic.SynchronizedKeyedCollection`2&lt;string, class System.Uri&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public class UriSchemeKeyedCollection : System.Collections.Generic.SynchronizedKeyedCollection<string,Uri>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit UriSchemeKeyedCollection extends System.Collections.Generic.SynchronizedKeyedCollection`2<string, class System.Uri>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -27,7 +33,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public UriSchemeKeyedCollection (Uri[] uris);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri[] uris) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri[] uris) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -46,13 +55,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.UriSchemeKeyedCollection" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetKeyForItem">
       <MemberSignature Language="C#" Value="protected override string GetKeyForItem (Uri item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance string GetKeyForItem(class System.Uri item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance string GetKeyForItem(class System.Uri item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -74,12 +91,24 @@
           <para>The key for the specified URI from the collection.</para>
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Uri" /> whose key is being retrieved.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Uri" />
+
+           whose key is being retrieved.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="InsertItem">
-      <MemberSignature Language="C#" Value="protected override void InsertItem (int index, Uri item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void InsertItem(int32 index, class System.Uri item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InsertItem (int index, Uri item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void InsertItem(int32 index, class System.Uri item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,14 +127,29 @@
           <para>Inserts a URI into the collection at a specified location.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index that specifies the insertion location for the item in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index that specifies the insertion location for the item in the collection.</param
+        >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Uri" /> to be inserted into the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Uri" />
+
+           to be inserted into the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetItem">
-      <MemberSignature Language="C#" Value="protected override void SetItem (int index, Uri item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void SetItem(int32 index, class System.Uri item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetItem (int index, Uri item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void SetItem(int32 index, class System.Uri item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -124,9 +168,18 @@
           <para>Replaces a URI at a specified location of the collection with a new URI.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index that specifies the insertion location for the URI in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index that specifies the insertion location for the URI in the collection.</param
+        >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Uri" /> to be placed into the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Uri" />
+
+           to be placed into the collection.</param
+        >
       </Docs>
     </Member>
   </Members>

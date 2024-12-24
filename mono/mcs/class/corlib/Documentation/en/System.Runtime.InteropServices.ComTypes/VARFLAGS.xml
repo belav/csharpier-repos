@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="VARFLAGS" FullName="System.Runtime.InteropServices.ComTypes.VARFLAGS">
   <TypeSignature Language="C#" Value="public enum VARFLAGS" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed VARFLAGS extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed VARFLAGS extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,7 +23,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For additional information about VARFLAGS, see the MSDN Library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +40,10 @@
   <Members>
     <Member MemberName="VARFLAG_FBINDABLE">
       <MemberSignature Language="C#" Value="VARFLAG_FBINDABLE" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FBINDABLE = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FBINDABLE = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,7 +62,10 @@
     </Member>
     <Member MemberName="VARFLAG_FDEFAULTBIND">
       <MemberSignature Language="C#" Value="VARFLAG_FDEFAULTBIND" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FDEFAULTBIND = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FDEFAULTBIND = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -68,7 +84,10 @@
     </Member>
     <Member MemberName="VARFLAG_FDEFAULTCOLLELEM">
       <MemberSignature Language="C#" Value="VARFLAG_FDEFAULTCOLLELEM" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FDEFAULTCOLLELEM = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FDEFAULTCOLLELEM = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -87,7 +106,10 @@
     </Member>
     <Member MemberName="VARFLAG_FDISPLAYBIND">
       <MemberSignature Language="C#" Value="VARFLAG_FDISPLAYBIND" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FDISPLAYBIND = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FDISPLAYBIND = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,13 +122,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The variable is displayed to the user as bindable. <see cref="F:System.Runtime.InteropServices.VARFLAGS.VARFLAG_FBINDABLE" /> must also be set.</para>
+          <para
+            >The variable is displayed to the user as bindable. <see
+             cref="F:System.Runtime.InteropServices.VARFLAGS.VARFLAG_FBINDABLE" />
+
+             must also be set.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="VARFLAG_FHIDDEN">
       <MemberSignature Language="C#" Value="VARFLAG_FHIDDEN" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FHIDDEN = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FHIDDEN = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -125,7 +155,10 @@
     </Member>
     <Member MemberName="VARFLAG_FIMMEDIATEBIND">
       <MemberSignature Language="C#" Value="VARFLAG_FIMMEDIATEBIND" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FIMMEDIATEBIND = int32(4096)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FIMMEDIATEBIND = int32(4096)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -144,7 +177,10 @@
     </Member>
     <Member MemberName="VARFLAG_FNONBROWSABLE">
       <MemberSignature Language="C#" Value="VARFLAG_FNONBROWSABLE" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FNONBROWSABLE = int32(1024)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FNONBROWSABLE = int32(1024)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -163,7 +199,10 @@
     </Member>
     <Member MemberName="VARFLAG_FREADONLY">
       <MemberSignature Language="C#" Value="VARFLAG_FREADONLY" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FREADONLY = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FREADONLY = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -182,7 +221,10 @@
     </Member>
     <Member MemberName="VARFLAG_FREPLACEABLE">
       <MemberSignature Language="C#" Value="VARFLAG_FREPLACEABLE" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FREPLACEABLE = int32(2048)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FREPLACEABLE = int32(2048)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -201,7 +243,10 @@
     </Member>
     <Member MemberName="VARFLAG_FREQUESTEDIT">
       <MemberSignature Language="C#" Value="VARFLAG_FREQUESTEDIT" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FREQUESTEDIT = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FREQUESTEDIT = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -220,7 +265,10 @@
     </Member>
     <Member MemberName="VARFLAG_FRESTRICTED">
       <MemberSignature Language="C#" Value="VARFLAG_FRESTRICTED" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FRESTRICTED = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FRESTRICTED = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -239,7 +287,10 @@
     </Member>
     <Member MemberName="VARFLAG_FSOURCE">
       <MemberSignature Language="C#" Value="VARFLAG_FSOURCE" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FSOURCE = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FSOURCE = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -258,7 +309,10 @@
     </Member>
     <Member MemberName="VARFLAG_FUIDEFAULT">
       <MemberSignature Language="C#" Value="VARFLAG_FUIDEFAULT" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FUIDEFAULT = int32(512)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.VARFLAGS VARFLAG_FUIDEFAULT = int32(512)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

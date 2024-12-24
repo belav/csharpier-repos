@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HtmlHeadBuilder" FullName="System.Web.UI.HtmlControls.HtmlHeadBuilder">
-  <TypeSignature Language="C#" Value="public class HtmlHeadBuilder : System.Web.UI.ControlBuilder" />
+  <TypeSignature
+    Language="C#"
+    Value="public class HtmlHeadBuilder : System.Web.UI.ControlBuilder"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +17,12 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Interacts with the parser to build an <see cref="T:System.Web.UI.HtmlControls.HtmlHead" /> control.</para>
+      <para
+        >Interacts with the parser to build an <see
+         cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +35,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlHeadBuilder" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlHeadBuilder" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -45,7 +58,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This implementation of the <see cref="M:System.Web.UI.HtmlControls.HtmlHeadBuilder.AllowWhitespaceLiterals" /> method is overridden to always return false.</para>
+          <para
+            >This implementation of the <see
+             cref="M:System.Web.UI.HtmlControls.HtmlHeadBuilder.AllowWhitespaceLiterals" />
+
+             method is overridden to always return false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,7 +79,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetChildControlType">
-      <MemberSignature Language="C#" Value="public override Type GetChildControlType (string tagName, System.Collections.IDictionary attribs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override Type GetChildControlType (string tagName, System.Collections.IDictionary attribs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Type</ReturnType>
@@ -74,20 +95,53 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.HtmlControls.HtmlHeadBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" /> method returns the control type for child HTML elements represented by <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />, <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />, and <see cref="T:System.Web.UI.HtmlControls.HtmlMeta" /> controls. This method returns a null reference (Nothing in Visual Basic) for all other child controls.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.HtmlControls.HtmlHeadBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
+
+             method returns the control type for child HTML elements represented by <see
+             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+
+            , <see
+             cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+
+            , and <see
+             cref="T:System.Web.UI.HtmlControls.HtmlMeta" />
+
+             controls. This method returns a null reference (Nothing in Visual Basic) for all other child controls.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Obtains the <see cref="T:System.Type" /> for the <see cref="T:System.Web.UI.HtmlControls.HtmlHead" /> control's child controls. </para>
+          <para
+            >Obtains the <see
+             cref="T:System.Type" />
+
+             for the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+
+             control's child controls. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Type" /> of the specified control's child control.</para>
+          <para
+            >The <see
+             cref="T:System.Type" />
+
+             of the specified control's child control.</para
+          >
         </returns>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The tag name of the child control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The tag name of the child control.</param
+        >
         <param name="attribs">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of attributes contained in the child control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of attributes contained in the child control.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

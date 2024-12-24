@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="RichTextBoxSelectionAttribute" FullName="System.Windows.Forms.RichTextBoxSelectionAttribute">
+<Type
+  Name="RichTextBoxSelectionAttribute"
+  FullName="System.Windows.Forms.RichTextBoxSelectionAttribute"
+>
   <TypeSignature Language="C#" Value="public enum RichTextBoxSelectionAttribute" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -12,7 +15,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.RichTextBox" /> class uses this enumeration internally.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.RichTextBox" />
+
+         class uses this enumeration internally.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

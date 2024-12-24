@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CryptoConfig" FullName="System.Security.Cryptography.CryptoConfig">
   <TypeSignature Maintainer="auto" Language="C#" Value="public class CryptoConfig" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi CryptoConfig extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi CryptoConfig extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -22,7 +25,16 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The following table shows the simple names recognized by this class and the default algorithm implementations to which they map. Alternatively, you can map other implementations to these names, as described in <format type="text/html"><a href="01327c69-c5e1-4ef6-b73f-0a58351f0492">Mapping Algorithm Names to Cryptography Classes</a></format>.</para>
+      <para
+        >The following table shows the simple names recognized by this class and the default algorithm implementations to which they map. Alternatively, you can map other implementations to these names, as described in <format
+         type="text/html">
+          <a href="01327c69-c5e1-4ef6-b73f-0a58351f0492"
+            >Mapping Algorithm Names to Cryptography Classes</a
+          >
+        </format>
+
+        .</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -219,7 +231,9 @@
             <para>MD5, System.Security.Cryptography.MD5</para>
           </term>
           <description>
-            <para> <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" /></para>
+            <para>
+              <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+            </para>
           </description>
         </item>
         <item>
@@ -227,7 +241,9 @@
             <para>System.Security.Cryptography.MD5Cng</para>
           </term>
           <description>
-            <para> <see cref="T:System.Security.Cryptography.MD5Cng" /></para>
+            <para>
+              <see cref="T:System.Security.Cryptography.MD5Cng" />
+            </para>
           </description>
         </item>
         <item>
@@ -235,7 +251,9 @@
             <para>RandomNumberGenerator</para>
           </term>
           <description>
-            <para> <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /></para>
+            <para>
+              <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
+            </para>
           </description>
         </item>
         <item>
@@ -343,7 +361,9 @@
             <para>System.Security.Cryptography.SHA384Cng </para>
           </term>
           <description>
-            <para> <see cref="T:System.Security.Cryptography.SHA384Cng" /></para>
+            <para>
+              <see cref="T:System.Security.Cryptography.SHA384Cng" />
+            </para>
           </description>
         </item>
         <item>
@@ -351,7 +371,9 @@
             <para>System.Security.Cryptography.SHA384CryptoServiceProvider</para>
           </term>
           <description>
-            <para> <see cref="T:System.Security.Cryptography.SHA384CryptoServiceProvider" /></para>
+            <para>
+              <see cref="T:System.Security.Cryptography.SHA384CryptoServiceProvider" />
+            </para>
           </description>
         </item>
         <item>
@@ -404,7 +426,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CryptoConfig ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -417,13 +442,24 @@
         <remarks>Included for compatibility with MS.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.CryptoConfig" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AddAlgorithm">
-      <MemberSignature Language="C#" Value="public static void AddAlgorithm (Type algorithm, string[] names);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void AddAlgorithm(class System.Type algorithm, string[] names) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void AddAlgorithm (Type algorithm, string[] names);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void AddAlgorithm(class System.Type algorithm, string[] names) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -451,14 +487,26 @@
           <para>Adds a set of names to algorithm mappings to be used for the current application domain.  </para>
         </summary>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The algorithm to map to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The algorithm to map to.</param
+        >
         <param name="names">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of names to map to the algorithm.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of names to map to the algorithm.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddOID">
-      <MemberSignature Language="C#" Value="public static void AddOID (string oid, string[] names);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void AddOID(string oid, string[] names) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void AddOID (string oid, string[] names);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void AddOID(string oid, string[] names) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -486,9 +534,15 @@
           <para>Adds a set of names to object identifier (OID) mappings to be used for the current application domain.  </para>
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object identifier (OID) to map to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object identifier (OID) to map to.</param
+        >
         <param name="names">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of names to map to the OID.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of names to map to the OID.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AllowOnlyFipsAlgorithms">
@@ -515,7 +569,10 @@
     </Member>
     <Member MemberName="CreateFromName">
       <MemberSignature Language="C#" Value="public static object CreateFromName (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig object CreateFromName(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig object CreateFromName(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -531,7 +588,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para>
+          <para
+            >For a list of simple names recognized by this class, see <see
+             cref="T:System.Security.Cryptography.CryptoConfig" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -542,12 +604,21 @@
           <para>A new instance of the specified cryptographic object.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The simple name of the cryptographic object of which to create an instance. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The simple name of the cryptographic object of which to create an instance. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateFromName">
-      <MemberSignature Language="C#" Value="public static object CreateFromName (string name, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig object CreateFromName(string name, object[] args) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static object CreateFromName (string name, object[] args);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig object CreateFromName(string name, object[] args) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -570,7 +641,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para>
+          <para
+            >For a list of simple names recognized by this class, see <see
+             cref="T:System.Security.Cryptography.CryptoConfig" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -581,14 +657,23 @@
           <para>A new instance of the specified cryptographic object.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The simple name of the cryptographic object of which to create an instance. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The simple name of the cryptographic object of which to create an instance. </param
+        >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments used to create the specified cryptographic object. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments used to create the specified cryptographic object. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="EncodeOID">
       <MemberSignature Language="C#" Value="public static byte[] EncodeOID (string str);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig unsigned int8[] EncodeOID(string str) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig unsigned int8[] EncodeOID(string str) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -603,12 +688,36 @@
       </Parameters>
       <Docs>
         <remarks>
-          <para>
-A <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" /> will be thrown if the OID is invalid, like: 
-<list type="bullet"><item><term>if the OID string has less than two parts (e.g. "0");</term></item><item><term>if the encoded OID would be greater than 127 bytes;</term></item></list></para>
-          <para>
-A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID is bigger than <see cref="T:System.Int32" />.<see cref="M:System.Int32.MaxValue" />.
-</para>
+          <para
+            >
+A <see
+             cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />
+
+             will be thrown if the OID is invalid, like: 
+<list
+             type="bullet">
+              <item>
+                <term>if the OID string has less than two parts (e.g. "0");</term>
+              </item>
+              <item>
+                <term>if the encoded OID would be greater than 127 bytes;</term>
+              </item>
+            </list>
+          </para>
+          <para
+            >
+A <see
+             cref="T:System.OverflowException" />
+
+             will be thrown if a part of the OID is bigger than <see
+             cref="T:System.Int32" />
+
+            .<see
+             cref="M:System.Int32.MaxValue" />
+
+            .
+</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -619,12 +728,18 @@ A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID 
           <para>A byte array containing the encoded OID.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />The OID to encode. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The OID to encode. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="MapNameToOID">
       <MemberSignature Language="C#" Value="public static string MapNameToOID (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string MapNameToOID(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig string MapNameToOID(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -640,7 +755,12 @@ A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID 
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para>
+          <para
+            >For a list of simple names recognized by this class, see <see
+             cref="T:System.Security.Cryptography.CryptoConfig" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -651,7 +771,10 @@ A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID 
           <para>The OID of the specified algorithm.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The simple name of the algorithm for which to get the OID. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The simple name of the algorithm for which to get the OID. </param
+        >
       </Docs>
     </Member>
   </Members>

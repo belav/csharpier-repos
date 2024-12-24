@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ITreeDesigner" FullName="System.ComponentModel.Design.ITreeDesigner">
-  <TypeSignature Language="C#" Value="public interface ITreeDesigner : IDisposable, System.ComponentModel.Design.IDesigner" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ITreeDesigner implements class System.ComponentModel.Design.IDesigner, class System.IDisposable" />
+  <TypeSignature
+    Language="C#"
+    Value="public interface ITreeDesigner : IDisposable, System.ComponentModel.Design.IDesigner"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ITreeDesigner implements class System.ComponentModel.Design.IDesigner, class System.IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,9 +24,32 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ComponentModel.Design.ITreeDesigner" /> interface derives from the <see cref="T:System.ComponentModel.Design.IDesigner" /> interface and provides support for flexibly navigating a hierarchy of related designers. With this interface, a programmer can supply a number of designers for the component, with the appropriate one being determined dynamically.</para>
-      <para>This interface is a simple extension of its base class, adding just two properties for navigating a tree hierarchy: <see cref="P:System.ComponentModel.Design.ITreeDesigner.Children" /> and <see cref="P:System.ComponentModel.Design.ITreeDesigner.Parent" />. </para>
-      <para>For an overview of creating design components, see <format type="text/html"><a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a></format>.</para>
+      <para
+        >The <see
+         cref="T:System.ComponentModel.Design.ITreeDesigner" />
+
+         interface derives from the <see
+         cref="T:System.ComponentModel.Design.IDesigner" />
+
+         interface and provides support for flexibly navigating a hierarchy of related designers. With this interface, a programmer can supply a number of designers for the component, with the appropriate one being determined dynamically.</para
+      >
+      <para
+        >This interface is a simple extension of its base class, adding just two properties for navigating a tree hierarchy: <see
+         cref="P:System.ComponentModel.Design.ITreeDesigner.Children" />
+
+         and <see
+         cref="P:System.ComponentModel.Design.ITreeDesigner.Parent" />
+
+        . </para
+      >
+      <para
+        >For an overview of creating design components, see <format
+         type="text/html">
+          <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,8 +58,14 @@
   </Docs>
   <Members>
     <Member MemberName="Children">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection Children { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ICollection Children" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection Children { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ICollection Children"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,7 +78,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ComponentModel.Design.ITreeDesigner.Children" /> property will return an empty collection if the <see cref="T:System.ComponentModel.Design.ITreeDesigner" /> has no child objects.</para>
+          <para
+            >The <see
+             cref="P:System.ComponentModel.Design.ITreeDesigner.Children" />
+
+             property will return an empty collection if the <see
+             cref="T:System.ComponentModel.Design.ITreeDesigner" />
+
+             has no child objects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +95,14 @@
       </Docs>
     </Member>
     <Member MemberName="Parent">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.Design.IDesigner Parent { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ComponentModel.Design.IDesigner Parent" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.Design.IDesigner Parent { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ComponentModel.Design.IDesigner Parent"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

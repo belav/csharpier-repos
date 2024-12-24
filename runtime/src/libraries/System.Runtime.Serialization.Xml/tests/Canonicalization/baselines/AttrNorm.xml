@@ -1,12 +1,12 @@
 <doc>
-   <text>First line
+  <text>First line
 Second line</text>
-   <value>&#x32;</value>
-   <compute><![CDATA[value>"0" && value<"10" ?"valid":"error"]]></compute>
-   <compute expr='value>"0" &amp;&amp; value&lt;"10" ?"valid":"error"'>valid</compute>
-   <norm attr=' &apos;   &#x20;&#13;&#xa;&#9;   &apos; '/>
-   <normNames attr='   A   &#x20;&#13;&#xa;&#9;   B   '/>
-   <normId id=' &apos;   &#x20;&#13;&#xa;&#9;   &apos; '/>
+  <value>2</value>
+  <compute>
+    <![CDATA[value>"0" && value<"10" ?"valid":"error"]]>
+  </compute>
+  <compute expr="value>&quot;0&quot; &&& value<&quot;&quot;&quot;&quot;&quot;&quot;">valid</compute>
+  <norm attr=" '    &#010;  " />
+  <normNames attr="   A    &#010;    " />
+  <normId id=" '    &#010;  " />
 </doc>
-
-

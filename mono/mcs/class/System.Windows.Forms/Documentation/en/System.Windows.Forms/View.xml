@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.ListView.View" /> property of the <see cref="T:System.Windows.Forms.ListView" /> control.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.ListView.View" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies how list items are displayed in a <see cref="T:System.Windows.Forms.ListView" /> control.</para>
+      <para
+        >Specifies how list items are displayed in a <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -98,7 +111,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Each item appears as a full-sized icon with the item label and subitem information to the right of it. The subitem information that appears is specified by the application. This view is available only on Windows XP and the Windows Server 2003 family. On earlier operating systems, this value is ignored and the <see cref="T:System.Windows.Forms.ListView" /> control displays in the <see cref="F:System.Windows.Forms.View.LargeIcon" /> view.</para>
+          <para
+            >Each item appears as a full-sized icon with the item label and subitem information to the right of it. The subitem information that appears is specified by the application. This view is available only on Windows XP and the Windows Server 2003 family. On earlier operating systems, this value is ignored and the <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control displays in the <see
+             cref="F:System.Windows.Forms.View.LargeIcon" />
+
+             view.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

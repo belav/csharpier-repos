@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IServiceChannel" FullName="System.ServiceModel.IServiceChannel">
-  <TypeSignature Language="C#" Value="public interface IServiceChannel : System.ServiceModel.IContextChannel, System.ServiceModel.IExtensibleObject&lt;System.ServiceModel.IContextChannel&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IServiceChannel implements class System.ServiceModel.Channels.IChannel, class System.ServiceModel.ICommunicationObject, class System.ServiceModel.IContextChannel, class System.ServiceModel.IExtensibleObject`1&lt;class System.ServiceModel.IContextChannel&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public interface IServiceChannel : System.ServiceModel.IContextChannel, System.ServiceModel.IExtensibleObject<System.ServiceModel.IContextChannel>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IServiceChannel implements class System.ServiceModel.Channels.IChannel, class System.ServiceModel.ICommunicationObject, class System.ServiceModel.IContextChannel, class System.ServiceModel.IExtensibleObject`1<class System.ServiceModel.IContextChannel>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>

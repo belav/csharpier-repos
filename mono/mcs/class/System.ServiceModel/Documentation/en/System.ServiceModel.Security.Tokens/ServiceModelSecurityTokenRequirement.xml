@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceModelSecurityTokenRequirement" FullName="System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement">
-  <TypeSignature Language="C#" Value="public abstract class ServiceModelSecurityTokenRequirement : System.IdentityModel.Selectors.SecurityTokenRequirement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ServiceModelSecurityTokenRequirement extends System.IdentityModel.Selectors.SecurityTokenRequirement" />
+<Type
+  Name="ServiceModelSecurityTokenRequirement"
+  FullName="System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class ServiceModelSecurityTokenRequirement : System.IdentityModel.Selectors.SecurityTokenRequirement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ServiceModelSecurityTokenRequirement extends System.IdentityModel.Selectors.SecurityTokenRequirement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,8 +22,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A security token is a cryptographically signed data unit that transfers authentication and authorization information, based on a credential. The derived class is used by a security token manager to specify what is required of a security token, such as the key size, key type, and how the key can be used. When a security token can be identified that matches the specified criteria, a <see cref="T:System.IdentityModel.Selectors.SecurityTokenProvider" /> and <see cref="T:System.IdentityModel.Selectors.SecurityTokenAuthenticator" /> can be created to provide security tokens for outgoing SOAP messages and to authenticate security tokens for incoming SOAP messages, respectively. For example, the default security token manager for outgoing SOAP messages has the CreateSecurityTokenProvider method that takes a <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> parameter that can be called to obtain a security token provider that matches the security token provider.</para>
-      <para>This class's base class, <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />, contains a dictionary, <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />, which maps property names to their values. This class has numerous properties whose name ends in the word "Property". These properties return a string, which is the key used to get or set the corresponding value from the dictionary. For example, <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.AuditLogLocationProperty" /> is the key for the value of the <see cref="P:System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement.AuditLogLocation" /> property.</para>
+      <para
+        >A security token is a cryptographically signed data unit that transfers authentication and authorization information, based on a credential. The derived class is used by a security token manager to specify what is required of a security token, such as the key size, key type, and how the key can be used. When a security token can be identified that matches the specified criteria, a <see
+         cref="T:System.IdentityModel.Selectors.SecurityTokenProvider" />
+
+         and <see
+         cref="T:System.IdentityModel.Selectors.SecurityTokenAuthenticator" />
+
+         can be created to provide security tokens for outgoing SOAP messages and to authenticate security tokens for incoming SOAP messages, respectively. For example, the default security token manager for outgoing SOAP messages has the CreateSecurityTokenProvider method that takes a <see
+         cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+         parameter that can be called to obtain a security token provider that matches the security token provider.</para
+      >
+      <para
+        >This class's base class, <see
+         cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+        , contains a dictionary, <see
+         cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
+
+        , which maps property names to their values. This class has numerous properties whose name ends in the word "Property". These properties return a string, which is the key used to get or set the corresponding value from the dictionary. For example, <see
+         cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.AuditLogLocationProperty" />
+
+         is the key for the value of the <see
+         cref="P:System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement.AuditLogLocation" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +58,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected ServiceModelSecurityTokenRequirement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,16 +70,29 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.SupportSecurityContextCancellationProperty" /> is set to false.</para>
+          <para
+            >The <see
+             cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.SupportSecurityContextCancellationProperty" />
+
+             is set to false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AuditLogLocationProperty">
-      <MemberSignature Language="C#" Value="public static string AuditLogLocationProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string AuditLogLocationProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string AuditLogLocationProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -55,19 +105,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this property name is of type <see cref="T:System.ServiceModel.AuditLogLocation" />, which is an enumeration with the following members:</para>
+          <para
+            >The value that corresponds to this property name is of type <see
+             cref="T:System.ServiceModel.AuditLogLocation" />
+
+            , which is an enumeration with the following members:</para
+          >
           <list type="bullet">
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Application" />: The Application log in the operating system Event Log.</para>
+                <see cref="F:System.ServiceModel.AuditLogLocation.Application" />
+
+                : The Application log in the operating system Event Log.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Default" />: The default location, which is determined by the operating system.</para>
+                <see cref="F:System.ServiceModel.AuditLogLocation.Default" />
+
+                : The default location, which is determined by the operating system.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Security" />: The Security log in the Event Log.</para>
+                <see cref="F:System.ServiceModel.AuditLogLocation.Security" />
+
+                : The Security log in the Event Log.</para
+              >
             </item>
           </list>
         </remarks>
@@ -78,8 +142,14 @@
       </Docs>
     </Member>
     <Member MemberName="ChannelParametersCollectionProperty">
-      <MemberSignature Language="C#" Value="public static string ChannelParametersCollectionProperty { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property string ChannelParametersCollectionProperty" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string ChannelParametersCollectionProperty { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property string ChannelParametersCollectionProperty"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -91,7 +161,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this property name is of type <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />.</para>
+          <para
+            >The value that corresponds to this property name is of type <see
+             cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -100,7 +175,10 @@
       </Docs>
     </Member>
     <Member MemberName="DuplexClientLocalAddressProperty">
-      <MemberSignature Language="C#" Value="public static string DuplexClientLocalAddressProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string DuplexClientLocalAddressProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string DuplexClientLocalAddressProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -117,12 +195,20 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that specifies the name of the index in the <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" /> collection for the DuplexClientLocalAddress property.</para>
+          <para
+            >Gets a value that specifies the name of the index in the <see
+             cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
+
+             collection for the DuplexClientLocalAddress property.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EndpointFilterTableProperty">
-      <MemberSignature Language="C#" Value="public static string EndpointFilterTableProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string EndpointFilterTableProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string EndpointFilterTableProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -135,7 +221,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />,where the generic type is <see cref="T:System.ServiceModel.EndpointAddress" />.</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+
+            ,where the generic type is <see
+             cref="T:System.ServiceModel.EndpointAddress" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -144,7 +238,10 @@
       </Docs>
     </Member>
     <Member MemberName="ExtendedProtectionPolicy">
-      <MemberSignature Language="C#" Value="public static string ExtendedProtectionPolicy { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string ExtendedProtectionPolicy { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string ExtendedProtectionPolicy" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -163,7 +260,10 @@
       </Docs>
     </Member>
     <Member MemberName="HttpAuthenticationSchemeProperty">
-      <MemberSignature Language="C#" Value="public static string HttpAuthenticationSchemeProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string HttpAuthenticationSchemeProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string HttpAuthenticationSchemeProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -176,7 +276,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.Net.AuthenticationSchemes" />.</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.Net.AuthenticationSchemes" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -226,7 +331,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsOutOfBandTokenProperty">
-      <MemberSignature Language="C#" Value="public static string IsOutOfBandTokenProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string IsOutOfBandTokenProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string IsOutOfBandTokenProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -245,8 +353,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuedSecurityTokenParametersProperty">
-      <MemberSignature Language="C#" Value="public static string IssuedSecurityTokenParametersProperty { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property string IssuedSecurityTokenParametersProperty" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string IssuedSecurityTokenParametersProperty { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property string IssuedSecurityTokenParametersProperty"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -258,17 +372,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />.</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" /> that contains information about the token if the requirement is for an issued token.</para>
+          <para
+            >Gets the key for the token requirement property whose value is the <see
+             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+             that contains information about the token if the requirement is for an issued token.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IssuerAddress">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.EndpointAddress IssuerAddress { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EndpointAddress IssuerAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.EndpointAddress IssuerAddress { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EndpointAddress IssuerAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -299,17 +429,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.ServiceModel.EndpointAddress" />.</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.ServiceModel.EndpointAddress" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.EndpointAddress" /> of the issuing party if the requirement is for an issued token.</para>
+          <para
+            >Gets the key for the token requirement property whose value is the <see
+             cref="T:System.ServiceModel.EndpointAddress" />
+
+             of the issuing party if the requirement is for an issued token.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IssuerBinding">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.Binding IssuerBinding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.Binding IssuerBinding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.Binding IssuerBinding { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.Binding IssuerBinding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -330,7 +476,10 @@
       </Docs>
     </Member>
     <Member MemberName="IssuerBindingContextProperty">
-      <MemberSignature Language="C#" Value="public static string IssuerBindingContextProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string IssuerBindingContextProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string IssuerBindingContextProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -343,11 +492,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Channels.BindingContext" />. This property is added to the token requirements relating to secure conversation and SPNEGO/TLSNEGO authentication.</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            . This property is added to the token requirements relating to secure conversation and SPNEGO/TLSNEGO authentication.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Channels.BindingContext" /> to use to talk to the issuing party if the requirement is for an issued token.</para>
+          <para
+            >Gets the key for the token requirement property whose value is the <see
+             cref="T:System.ServiceModel.Channels.BindingContext" />
+
+             to use to talk to the issuing party if the requirement is for an issued token.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -365,7 +524,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value corresponding to this key is of type <see cref="T:System.ServiceModel.Channels.Binding" />.</para>
+          <para
+            >The value corresponding to this key is of type <see
+             cref="T:System.ServiceModel.Channels.Binding" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -393,8 +557,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageAuthenticationAuditLevelProperty">
-      <MemberSignature Language="C#" Value="public static string MessageAuthenticationAuditLevelProperty { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property string MessageAuthenticationAuditLevelProperty" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string MessageAuthenticationAuditLevelProperty { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property string MessageAuthenticationAuditLevelProperty"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -406,23 +576,40 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.ServiceModel.AuditLevel" />, which is an enumeration with the following members:</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.ServiceModel.AuditLevel" />
+
+            , which is an enumeration with the following members:</para
+          >
           <list type="bullet">
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.Failure" />: Only failed security-related events are recorded.</para>
+                <see cref="F:System.ServiceModel.AuditLevel.Failure" />
+
+                : Only failed security-related events are recorded.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.None" />: No events are recorded.</para>
+                <see cref="F:System.ServiceModel.AuditLevel.None" />
+
+                : No events are recorded.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.Success" />: Only successful security-related events are recorded.</para>
+                <see cref="F:System.ServiceModel.AuditLevel.Success" />
+
+                : Only successful security-related events are recorded.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />: Both failed and successful security-related events are recorded.</para>
+                <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />
+
+                : Both failed and successful security-related events are recorded.</para
+              >
             </item>
           </list>
         </remarks>
@@ -433,7 +620,10 @@
       </Docs>
     </Member>
     <Member MemberName="MessageDirectionProperty">
-      <MemberSignature Language="C#" Value="public static string MessageDirectionProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string MessageDirectionProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string MessageDirectionProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -446,17 +636,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Description.MessageDirection" />. This property can be used by credential implementations to provide different tokens for processing the request and the response. An example is a credential implementation where the endpoint can specify a different certificate that it signs outgoing messages with and a different certificate to be used by other parties to encrypt messages for it. </para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.ServiceModel.Description.MessageDirection" />
+
+            . This property can be used by credential implementations to provide different tokens for processing the request and the response. An example is a credential implementation where the endpoint can specify a different certificate that it signs outgoing messages with and a different certificate to be used by other parties to encrypt messages for it. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key for the token requirement property whose value is the member of the <see cref="T:System.ServiceModel.Description.MessageDirection" /> enumeration to use and that indicates whether the token provider is needed for messages sent from client to server or server to client. </para>
+          <para
+            >Gets the key for the token requirement property whose value is the member of the <see
+             cref="T:System.ServiceModel.Description.MessageDirection" />
+
+             enumeration to use and that indicates whether the token provider is needed for messages sent from client to server or server to client. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="MessageSecurityVersion">
-      <MemberSignature Language="C#" Value="public System.IdentityModel.Selectors.SecurityTokenVersion MessageSecurityVersion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.IdentityModel.Selectors.SecurityTokenVersion MessageSecurityVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.IdentityModel.Selectors.SecurityTokenVersion MessageSecurityVersion { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.IdentityModel.Selectors.SecurityTokenVersion MessageSecurityVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -468,7 +674,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.MessageSecurityVersion" />
+
+             contains numerous properties that specify version numbers of different components of a message.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -477,7 +688,10 @@
       </Docs>
     </Member>
     <Member MemberName="MessageSecurityVersionProperty">
-      <MemberSignature Language="C#" Value="public static string MessageSecurityVersionProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string MessageSecurityVersionProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string MessageSecurityVersionProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -490,11 +704,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message. The <see cref="T:System.ServiceModel.Channels.MessageVersion" /> can be used by token provider and token authenticator implementations to obtain a token from the endpoint (for example, for secure conversation).</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.MessageSecurityVersion" />
+
+             contains numerous properties that specify version numbers of different components of a message. The <see
+             cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+             can be used by token provider and token authenticator implementations to obtain a token from the endpoint (for example, for secure conversation).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Channels.MessageVersion" /> that the channel is configured with.</para>
+          <para
+            >Gets the key for the token requirement property whose value is the <see
+             cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+             that the channel is configured with.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -517,7 +744,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrivacyNoticeUriProperty">
-      <MemberSignature Language="C#" Value="public static string PrivacyNoticeUriProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string PrivacyNoticeUriProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string PrivacyNoticeUriProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -530,7 +760,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.Uri" />. This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.Uri" />
+
+            . This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -539,7 +774,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrivacyNoticeVersionProperty">
-      <MemberSignature Language="C#" Value="public static string PrivacyNoticeVersionProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string PrivacyNoticeVersionProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string PrivacyNoticeVersionProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -552,7 +790,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.Int32" />. This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.Int32" />
+
+            . This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -561,8 +804,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecureConversationSecurityBindingElement">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.SecurityBindingElement SecureConversationSecurityBindingElement { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.SecurityBindingElement SecureConversationSecurityBindingElement" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.SecurityBindingElement SecureConversationSecurityBindingElement { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.SecurityBindingElement SecureConversationSecurityBindingElement"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -583,8 +832,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecureConversationSecurityBindingElementProperty">
-      <MemberSignature Language="C#" Value="public static string SecureConversationSecurityBindingElementProperty { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property string SecureConversationSecurityBindingElementProperty" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string SecureConversationSecurityBindingElementProperty { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property string SecureConversationSecurityBindingElementProperty"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -596,7 +851,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" />.</para>
+          <para
+            >The value that corresponds to this key is of type <see
+             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -605,8 +865,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityAlgorithmSuite">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityAlgorithmSuite SecurityAlgorithmSuite { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite SecurityAlgorithmSuite" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityAlgorithmSuite SecurityAlgorithmSuite { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite SecurityAlgorithmSuite"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -618,7 +884,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -627,7 +898,10 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityAlgorithmSuiteProperty">
-      <MemberSignature Language="C#" Value="public static string SecurityAlgorithmSuiteProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string SecurityAlgorithmSuiteProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string SecurityAlgorithmSuiteProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -646,8 +920,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityBindingElement">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.SecurityBindingElement SecurityBindingElement { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.SecurityBindingElement SecurityBindingElement" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.SecurityBindingElement SecurityBindingElement { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.SecurityBindingElement SecurityBindingElement"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -668,7 +948,10 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityBindingElementProperty">
-      <MemberSignature Language="C#" Value="public static string SecurityBindingElementProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string SecurityBindingElementProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string SecurityBindingElementProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -687,8 +970,14 @@
       </Docs>
     </Member>
     <Member MemberName="SupportingTokenAttachmentModeProperty">
-      <MemberSignature Language="C#" Value="public static string SupportingTokenAttachmentModeProperty { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property string SupportingTokenAttachmentModeProperty" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string SupportingTokenAttachmentModeProperty { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property string SupportingTokenAttachmentModeProperty"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -700,17 +989,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The SupportingTokenAttachmentMode property is a member of the <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" /> enumeration member if the request is for a supporting token. Supporting tokens provide additional claims beyond those contained in the principal tokens for the binding.</para>
+          <para
+            >The SupportingTokenAttachmentMode property is a member of the <see
+             cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" />
+
+             enumeration member if the request is for a supporting token. Supporting tokens provide additional claims beyond those contained in the principal tokens for the binding.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key for the token requirement property whose value is the associated <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" /> enumeration member if the request is for a supporting token. </para>
+          <para
+            >Gets the key for the token requirement property whose value is the associated <see
+             cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" />
+
+             enumeration member if the request is for a supporting token. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SupportSecurityContextCancellationProperty">
-      <MemberSignature Language="C#" Value="public static string SupportSecurityContextCancellationProperty { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property string SupportSecurityContextCancellationProperty" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string SupportSecurityContextCancellationProperty { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property string SupportSecurityContextCancellationProperty"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -731,7 +1036,10 @@
       </Docs>
     </Member>
     <Member MemberName="SuppressAuditFailureProperty">
-      <MemberSignature Language="C#" Value="public static string SuppressAuditFailureProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string SuppressAuditFailureProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string SuppressAuditFailureProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -791,7 +1099,10 @@
       </Docs>
     </Member>
     <Member MemberName="TransportSchemeProperty">
-      <MemberSignature Language="C#" Value="public static string TransportSchemeProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string TransportSchemeProperty { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property string TransportSchemeProperty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -823,7 +1134,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ServiceModel.Security.Tokens.InitiatorServiceModelSecurityTokenRequirement.Via" /> property contains the URI of an intermediate destination.</para>
+          <para
+            >The <see
+             cref="P:System.ServiceModel.Security.Tokens.InitiatorServiceModelSecurityTokenRequirement.Via" />
+
+             property contains the URI of an intermediate destination.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

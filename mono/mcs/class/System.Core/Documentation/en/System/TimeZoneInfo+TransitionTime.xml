@@ -1,5 +1,8 @@
 <Type Name="TimeZoneInfo+TransitionTime" FullName="System.TimeZoneInfo+TransitionTime">
-  <TypeSignature Language="C#" Value="public struct TimeZoneInfo.TransitionTime : IEquatable&lt;TimeZoneInfo.TransitionTime&gt;, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public struct TimeZoneInfo.TransitionTime : IEquatable<TimeZoneInfo.TransitionTime>, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -24,7 +27,10 @@
   </Docs>
   <Members>
     <Member MemberName="CreateFixedDateRule">
-      <MemberSignature Language="C#" Value="public static TimeZoneInfo.TransitionTime CreateFixedDateRule (DateTime timeOfDay, int month, int day);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static TimeZoneInfo.TransitionTime CreateFixedDateRule (DateTime timeOfDay, int month, int day);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -47,7 +53,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreateFloatingDateRule">
-      <MemberSignature Language="C#" Value="public static TimeZoneInfo.TransitionTime CreateFloatingDateRule (DateTime timeOfDay, int month, int week, DayOfWeek dayOfWeek);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static TimeZoneInfo.TransitionTime CreateFloatingDateRule (DateTime timeOfDay, int month, int week, DayOfWeek dayOfWeek);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -121,7 +130,10 @@
       </Docs>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals (TimeZoneInfo.TransitionTime other);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Equals (TimeZoneInfo.TransitionTime other);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -156,7 +168,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -224,7 +239,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (TimeZoneInfo.TransitionTime t1, TimeZoneInfo.TransitionTime t2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (TimeZoneInfo.TransitionTime t1, TimeZoneInfo.TransitionTime t2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -245,7 +263,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (TimeZoneInfo.TransitionTime t1, TimeZoneInfo.TransitionTime t2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (TimeZoneInfo.TransitionTime t1, TimeZoneInfo.TransitionTime t2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>

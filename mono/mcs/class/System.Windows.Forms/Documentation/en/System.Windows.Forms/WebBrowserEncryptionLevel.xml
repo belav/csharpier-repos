@@ -12,11 +12,24 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.WebBrowser.EncryptionLevel" /> property to indicate the encryption used by a document displayed in the <see cref="T:System.Windows.Forms.WebBrowser" /> control.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.WebBrowser.EncryptionLevel" />
+
+         property to indicate the encryption used by a document displayed in the <see
+         cref="T:System.Windows.Forms.WebBrowser" />
+
+         control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies constants that define the encryption methods used by documents displayed in the <see cref="T:System.Windows.Forms.WebBrowser" /> control.</para>
+      <para
+        >Specifies constants that define the encryption methods used by documents displayed in the <see
+         cref="T:System.Windows.Forms.WebBrowser" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>

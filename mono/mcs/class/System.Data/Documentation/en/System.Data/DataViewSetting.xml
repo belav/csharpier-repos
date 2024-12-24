@@ -22,7 +22,30 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the default settings for <see cref="P:System.Data.DataView.ApplyDefaultSort" />, <see cref="P:System.Data.DataView.DataViewManager" />, <see cref="P:System.Data.DataView.RowFilter" />, <see cref="P:System.Data.DataView.RowStateFilter" />, <see cref="P:System.Data.DataView.Sort" />, and <see cref="P:System.Data.DataView.Table" /> for DataViews created from the <see cref="T:System.Data.DataViewManager" />.</para>
+      <para
+        >Represents the default settings for <see
+         cref="P:System.Data.DataView.ApplyDefaultSort" />
+
+        , <see
+         cref="P:System.Data.DataView.DataViewManager" />
+
+        , <see
+         cref="P:System.Data.DataView.RowFilter" />
+
+        , <see
+         cref="P:System.Data.DataView.RowStateFilter" />
+
+        , <see
+         cref="P:System.Data.DataView.Sort" />
+
+        , and <see
+         cref="P:System.Data.DataView.Table" />
+
+         for DataViews created from the <see
+         cref="T:System.Data.DataViewManager" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -32,8 +55,7 @@
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'bool'</value>
         <remarks>To be added</remarks>
@@ -48,7 +70,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DataViewManager">
-      <MemberSignature Language="C#" Value="public System.Data.DataViewManager DataViewManager { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.DataViewManager DataViewManager { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.DataViewManager</ReturnType>
@@ -58,7 +83,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Data.DataViewManager" /> that contains this <see cref="T:System.Data.DataViewSetting" />.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Data.DataViewManager" />
+
+             that contains this <see
+             cref="T:System.Data.DataViewSetting" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -77,14 +110,21 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the filter to apply in the <see cref="T:System.Data.DataView" />. See <see cref="P:System.Data.DataView.RowFilter" /> for a code sample using RowFilter.</para>
+          <para
+            >Gets or sets the filter to apply in the <see
+             cref="T:System.Data.DataView" />
+
+            . See <see
+             cref="P:System.Data.DataView.RowFilter" />
+
+             for a code sample using RowFilter.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -93,22 +133,34 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RowStateFilter">
-      <MemberSignature Language="C#" Value="public System.Data.DataViewRowState RowStateFilter { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.DataViewRowState RowStateFilter { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.DataViewRowState</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'DataViewRowState'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The default value of <see cref="P:System.Data.DataViewSetting.RowStateFilter" /> is DataViewRowState.CurrentRows.</para>
+          <para
+            >The default value of <see
+             cref="P:System.Data.DataViewSetting.RowStateFilter" />
+
+             is DataViewRowState.CurrentRows.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether to display Current, Deleted, Modified Current, ModifiedOriginal, New, Original, Unchanged, or no rows in the <see cref="T:System.Data.DataView" />.</para>
+          <para
+            >Gets or sets a value indicating whether to display Current, Deleted, Modified Current, ModifiedOriginal, New, Original, Unchanged, or no rows in the <see
+             cref="T:System.Data.DataView" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -122,18 +174,58 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Data.DataView.Sort" /> can have two defaults based on the value of <see cref="P:System.Data.DataView.RowFilter" /> property. If <see cref="P:System.Data.DataView.RowFilter" /> is null or empty (that is, the value is not explicitly specified), the <see cref="T:System.Data.DataRowView" /> in the <see cref="T:System.Data.DataView" /> is sorted on the position or ordinal of <see cref="T:System.Data.DataRow" /> in the <see cref="P:System.Data.DataTable.Rows" /> collection. The <see cref="P:System.Data.DataView.Sort" /> default, an empty string, causes a <see cref="T:System.Data.DataRowView" /> in <see cref="T:System.Data.DataView" /> to be sorted on the position or ordinal of <see cref="T:System.Data.DataRow" /> in the <see cref="P:System.Data.DataTable.Rows" /> collection.</para>
+            <see cref="P:System.Data.DataView.Sort" />
+
+             can have two defaults based on the value of <see
+             cref="P:System.Data.DataView.RowFilter" />
+
+             property. If <see
+             cref="P:System.Data.DataView.RowFilter" />
+
+             is null or empty (that is, the value is not explicitly specified), the <see
+             cref="T:System.Data.DataRowView" />
+
+             in the <see
+             cref="T:System.Data.DataView" />
+
+             is sorted on the position or ordinal of <see
+             cref="T:System.Data.DataRow" />
+
+             in the <see
+             cref="P:System.Data.DataTable.Rows" />
+
+             collection. The <see
+             cref="P:System.Data.DataView.Sort" />
+
+             default, an empty string, causes a <see
+             cref="T:System.Data.DataRowView" />
+
+             in <see
+             cref="T:System.Data.DataView" />
+
+             to be sorted on the position or ordinal of <see
+             cref="T:System.Data.DataRow" />
+
+             in the <see
+             cref="P:System.Data.DataTable.Rows" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating the sort to apply in the <see cref="T:System.Data.DataView" />. </para>
+          <para
+            >Gets or sets a value indicating the sort to apply in the <see
+             cref="T:System.Data.DataView" />
+
+            . </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -152,7 +244,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Data.DataTable" /> to which the <see cref="T:System.Data.DataViewSetting" /> properties apply.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Data.DataTable" />
+
+             to which the <see
+             cref="T:System.Data.DataViewSetting" />
+
+             properties apply.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

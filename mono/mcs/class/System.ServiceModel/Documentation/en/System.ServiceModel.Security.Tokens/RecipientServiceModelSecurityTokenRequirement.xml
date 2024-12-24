@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="RecipientServiceModelSecurityTokenRequirement" FullName="System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement">
-  <TypeSignature Language="C#" Value="public sealed class RecipientServiceModelSecurityTokenRequirement : System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit RecipientServiceModelSecurityTokenRequirement extends System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement" />
+<Type
+  Name="RecipientServiceModelSecurityTokenRequirement"
+  FullName="System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class RecipientServiceModelSecurityTokenRequirement : System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit RecipientServiceModelSecurityTokenRequirement extends System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,8 +32,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RecipientServiceModelSecurityTokenRequirement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public RecipientServiceModelSecurityTokenRequirement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,17 +48,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.SupportSecurityContextCancellationProperty" /> and <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.IsInitiatorProperty" /> properties are set to false.</para>
+          <para
+            >The <see
+             cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.SupportSecurityContextCancellationProperty" />
+
+             and <see
+             cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.IsInitiatorProperty" />
+
+             properties are set to false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AuditLogLocation">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.AuditLogLocation AuditLogLocation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.AuditLogLocation AuditLogLocation" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.AuditLogLocation AuditLogLocation { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.AuditLogLocation AuditLogLocation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,19 +89,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.AuditLogLocation" /> is an enumeration with the following members:</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.AuditLogLocation" />
+
+             is an enumeration with the following members:</para
+          >
           <list type="bullet">
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Application" />: The application log in the operating system Event Log.</para>
+                <see cref="F:System.ServiceModel.AuditLogLocation.Application" />
+
+                : The application log in the operating system Event Log.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Default" />: The default location, which is determined by the operating system.</para>
+                <see cref="F:System.ServiceModel.AuditLogLocation.Default" />
+
+                : The default location, which is determined by the operating system.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Security" />: The security log in the event log.</para>
+                <see cref="F:System.ServiceModel.AuditLogLocation.Security" />
+
+                : The security log in the event log.</para
+              >
             </item>
           </list>
         </remarks>
@@ -97,8 +145,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageAuthenticationAuditLevel">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.AuditLevel MessageAuthenticationAuditLevel { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.AuditLevel MessageAuthenticationAuditLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.AuditLevel MessageAuthenticationAuditLevel { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.AuditLevel MessageAuthenticationAuditLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -110,23 +164,40 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.AuditLevel" /> is an enumeration with the following members:</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.AuditLevel" />
+
+             is an enumeration with the following members:</para
+          >
           <list type="bullet">
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.Failure" />: Only failed security-related events are recorded.</para>
+                <see cref="F:System.ServiceModel.AuditLevel.Failure" />
+
+                : Only failed security-related events are recorded.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.None" />: No events are recorded.</para>
+                <see cref="F:System.ServiceModel.AuditLevel.None" />
+
+                : No events are recorded.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.Success" />: Only successful security-related events are recorded.</para>
+                <see cref="F:System.ServiceModel.AuditLevel.Success" />
+
+                : Only successful security-related events are recorded.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />: Both failed and successful security-related events are recorded.</para>
+                <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />
+
+                : Both failed and successful security-related events are recorded.</para
+              >
             </item>
           </list>
         </remarks>
@@ -157,7 +228,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

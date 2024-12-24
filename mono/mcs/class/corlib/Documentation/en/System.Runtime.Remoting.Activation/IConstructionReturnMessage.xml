@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IConstructionReturnMessage" FullName="System.Runtime.Remoting.Activation.IConstructionReturnMessage">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public interface IConstructionReturnMessage : System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IConstructionReturnMessage implements class System.Runtime.Remoting.Messaging.IMessage, class System.Runtime.Remoting.Messaging.IMethodMessage, class System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+<Type
+  Name="IConstructionReturnMessage"
+  FullName="System.Runtime.Remoting.Activation.IConstructionReturnMessage"
+>
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public interface IConstructionReturnMessage : System.Runtime.Remoting.Messaging.IMethodReturnMessage"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IConstructionReturnMessage implements class System.Runtime.Remoting.Messaging.IMessage, class System.Runtime.Remoting.Messaging.IMethodMessage, class System.Runtime.Remoting.Messaging.IMethodReturnMessage"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -23,11 +33,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The message that implements <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" /> returns the result of the construction request sent with the <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />.</para>
+      <para
+        >The message that implements <see
+         cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+
+         returns the result of the construction request sent with the <see
+         cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Identifies a <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" /> that is returned after attempting to activate a remote object.</para>
+      <para
+        >Identifies a <see
+         cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+         that is returned after attempting to activate a remote object.</para
+      >
     </summary>
   </Docs>
   <Members />

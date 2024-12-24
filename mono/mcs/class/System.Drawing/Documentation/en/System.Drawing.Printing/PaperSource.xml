@@ -16,8 +16,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class is used by <see cref="P:System.Drawing.Printing.PrinterSettings.PaperSources" /> and <see cref="P:System.Drawing.Printing.PageSettings.PaperSource" /> properties to get the paper source trays that are available on the printer and to set the paper source for a page, respectively.</para>
-      <para>For more information about printing, see the <see cref="N:System.Drawing.Printing" /> namespace overview.</para>
+      <para
+        >This class is used by <see
+         cref="P:System.Drawing.Printing.PrinterSettings.PaperSources" />
+
+         and <see
+         cref="P:System.Drawing.Printing.PageSettings.PaperSource" />
+
+         properties to get the paper source trays that are available on the printer and to set the paper source for a page, respectively.</para
+      >
+      <para
+        >For more information about printing, see the <see
+         cref="N:System.Drawing.Printing" />
+
+         namespace overview.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -35,7 +48,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows initial property values for an instance of <see cref="T:System.Drawing.Printing.PaperSource" /> class.</para>
+          <para
+            >The following table shows initial property values for an instance of <see
+             cref="T:System.Drawing.Printing.PaperSource" />
+
+             class.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -75,12 +93,20 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Drawing.Printing.PaperSource" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Drawing.Printing.PaperSource" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Kind">
-      <MemberSignature Language="C#" Value="public System.Drawing.Printing.PaperSourceKind Kind { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Printing.PaperSourceKind Kind { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Printing.PaperSourceKind</ReturnType>
@@ -111,7 +137,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows integer value for each <see cref="T:System.Drawing.Printing.PaperSourceKind" /> member. Anything larger than 256 maps to <see cref="F:System.Drawing.Printing.PaperSourceKind.Custom" /> in the <see cref="T:System.Drawing.Printing.PaperSourceKind" /> enumeration, but the <see cref="P:System.Drawing.Printing.PaperSource.RawKind" /> property returns the actual integer value.</para>
+          <para
+            >The following table shows integer value for each <see
+             cref="T:System.Drawing.Printing.PaperSourceKind" />
+
+             member. Anything larger than 256 maps to <see
+             cref="F:System.Drawing.Printing.PaperSourceKind.Custom" />
+
+             in the <see
+             cref="T:System.Drawing.Printing.PaperSourceKind" />
+
+             enumeration, but the <see
+             cref="P:System.Drawing.Printing.PaperSource.RawKind" />
+
+             property returns the actual integer value.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -129,7 +169,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Upper" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Upper" />
+                </para>
               </description>
             </item>
             <item>
@@ -138,7 +179,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Lower" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Lower" />
+                </para>
               </description>
             </item>
             <item>
@@ -147,7 +189,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Middle" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Middle" />
+                </para>
               </description>
             </item>
             <item>
@@ -156,7 +199,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Manual" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Manual" />
+                </para>
               </description>
             </item>
             <item>
@@ -165,7 +209,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Envelope" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Envelope" />
+                </para>
               </description>
             </item>
             <item>
@@ -174,7 +219,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.ManualFeed" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.ManualFeed" />
+                </para>
               </description>
             </item>
             <item>
@@ -183,7 +229,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.AutomaticFeed" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.AutomaticFeed" />
+                </para>
               </description>
             </item>
             <item>
@@ -192,7 +239,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.TractorFeed" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.TractorFeed" />
+                </para>
               </description>
             </item>
             <item>
@@ -201,7 +249,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.SmallFormat" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.SmallFormat" />
+                </para>
               </description>
             </item>
             <item>
@@ -210,7 +259,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.LargeFormat" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.LargeFormat" />
+                </para>
               </description>
             </item>
             <item>
@@ -219,7 +269,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.LargeCapacity" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.LargeCapacity" />
+                </para>
               </description>
             </item>
             <item>
@@ -228,7 +279,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Cassette" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.Cassette" />
+                </para>
               </description>
             </item>
             <item>
@@ -237,7 +289,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Drawing.Printing.PaperSourceKind.FormSource" /> </para>
+                  <see cref="F:System.Drawing.Printing.PaperSourceKind.FormSource" />
+                </para>
               </description>
             </item>
             <item>
@@ -254,7 +307,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the integer representing one of the <see cref="T:System.Drawing.Printing.PaperSourceKind" /> values or a custom value.</para>
+          <para
+            >Gets or sets the integer representing one of the <see
+             cref="T:System.Drawing.Printing.PaperSourceKind" />
+
+             values or a custom value.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -268,7 +326,12 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Call this property when the paper source needs to be displayed. The name of the paper source is generated based upon the <see cref="P:System.Drawing.Printing.PaperSource.Kind" /> property.</para>
+          <para
+            >Call this property when the paper source needs to be displayed. The name of the paper source is generated based upon the <see
+             cref="P:System.Drawing.Printing.PaperSource.Kind" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -291,7 +354,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Provides information about the <see cref="T:System.Drawing.Printing.PaperSource" /> in string form.</para>
+          <para
+            >Provides information about the <see
+             cref="T:System.Drawing.Printing.PaperSource" />
+
+             in string form.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

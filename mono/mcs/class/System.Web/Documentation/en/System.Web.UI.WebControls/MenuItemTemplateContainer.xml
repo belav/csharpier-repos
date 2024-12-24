@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MenuItemTemplateContainer" FullName="System.Web.UI.WebControls.MenuItemTemplateContainer">
-  <TypeSignature Language="C#" Value="public sealed class MenuItemTemplateContainer : System.Web.UI.Control, System.Web.UI.IDataItemContainer" />
+<Type
+  Name="MenuItemTemplateContainer"
+  FullName="System.Web.UI.WebControls.MenuItemTemplateContainer"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class MenuItemTemplateContainer : System.Web.UI.Control, System.Web.UI.IDataItemContainer"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -17,21 +23,61 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" /> class is used by the <see cref="T:System.Web.UI.WebControls.Menu" /> control as a container for the contents of the menu items that are rendered using a custom template.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+
+         class is used by the <see
+         cref="T:System.Web.UI.WebControls.Menu" />
+
+         control as a container for the contents of the menu items that are rendered using a custom template.</para
+      >
       <block subset="none" type="note">
-        <para>This class is used by control developers primarily when extending the <see cref="T:System.Web.UI.WebControls.Menu" /> class to create a container for a templated menu item.</para>
+        <para
+          >This class is used by control developers primarily when extending the <see
+           cref="T:System.Web.UI.WebControls.Menu" />
+
+           class to create a container for a templated menu item.</para
+        >
       </block>
-      <para>You can define a custom template for the dynamic and static menu items of a <see cref="T:System.Web.UI.WebControls.Menu" /> control by using the <see cref="P:System.Web.UI.WebControls.Menu.DynamicItemTemplate" /> and <see cref="P:System.Web.UI.WebControls.Menu.StaticItemTemplate" /> properties, respectively.</para>
-      <para>For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" /> class, see the <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" /> constructor. </para>
+      <para
+        >You can define a custom template for the dynamic and static menu items of a <see
+         cref="T:System.Web.UI.WebControls.Menu" />
+
+         control by using the <see
+         cref="P:System.Web.UI.WebControls.Menu.DynamicItemTemplate" />
+
+         and <see
+         cref="P:System.Web.UI.WebControls.Menu.StaticItemTemplate" />
+
+         properties, respectively.</para
+      >
+      <para
+        >For a list of initial property values for an instance of the <see
+         cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+
+         class, see the <see
+         cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+
+         constructor. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a container that holds the contents of a templated menu item in a <see cref="T:System.Web.UI.WebControls.Menu" /> control.</para>
+      <para
+        >Represents a container that holds the contents of a templated menu item in a <see
+         cref="T:System.Web.UI.WebControls.Menu" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MenuItemTemplateContainer (int itemIndex, System.Web.UI.WebControls.MenuItem menuItem);" />
+      <MemberSignature
+        Language="C#"
+        Value="public MenuItemTemplateContainer (int itemIndex, System.Web.UI.WebControls.MenuItem menuItem);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="itemIndex" Type="System.Int32" />
@@ -42,8 +88,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this constructor to create a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" /> class using the specified menu item index and menu item.</para>
-          <para>The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" /> class.</para>
+          <para
+            >Use this constructor to create a new instance of the <see
+             cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+
+             class using the specified menu item index and menu item.</para
+          >
+          <para
+            >The following table shows initial property values for an instance of <see
+             cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+
+             class.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -62,7 +118,12 @@
                 </para>
               </term>
               <description>
-                <para>The value of the <paramref name="dataItem" /> parameter.</para>
+                <para
+                  >The value of the <paramref
+                   name="dataItem" />
+
+                   parameter.</para
+                >
               </description>
             </item>
             <item>
@@ -72,17 +133,30 @@
                 </para>
               </term>
               <description>
-                <para>The value of the <paramref name="itemIndex" /> parameter.</para>
+                <para
+                  >The value of the <paramref
+                   name="itemIndex" />
+
+                   parameter.</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" /> class using the specified menu item index and menu item.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+
+             class using the specified menu item index and menu item.</para
+          >
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the menu item.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the menu item.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -99,9 +173,19 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Web.UI.WebControls.MenuItemTemplateContainer.DataItem" /> property to specify or determine the menu item associated with the container.</para>
+          <para
+            >Use the <see
+             cref="P:System.Web.UI.WebControls.MenuItemTemplateContainer.DataItem" />
+
+             property to specify or determine the menu item associated with the container.</para
+          >
           <block subset="none" type="note">
-            <para>This property is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" /> class.</para>
+            <para
+              >This property is used primarily by control developers when extending the <see
+               cref="T:System.Web.UI.WebControls.Menu" />
+
+               class.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -124,9 +208,19 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Web.UI.WebControls.MenuItemTemplateContainer.ItemIndex" /> property to determine the index of the menu item associated with the container.</para>
+          <para
+            >Use the <see
+             cref="P:System.Web.UI.WebControls.MenuItemTemplateContainer.ItemIndex" />
+
+             property to determine the index of the menu item associated with the container.</para
+          >
           <block subset="none" type="note">
-            <para>This property is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" /> class.</para>
+            <para
+              >This property is used primarily by control developers when extending the <see
+               cref="T:System.Web.UI.WebControls.Menu" />
+
+               class.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -139,7 +233,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnBubbleEvent">
-      <MemberSignature Language="C#" Value="protected override bool OnBubbleEvent (object source, EventArgs args);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool OnBubbleEvent (object source, EventArgs args);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -153,9 +250,19 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Web.UI.WebControls.MenuItemTemplateContainer.OnBubbleEvent(System.Object,System.EventArgs)" /> method to pass an event raised by a control within the container up the page's UI server control hierarchy.</para>
+          <para
+            >Use the <see
+             cref="M:System.Web.UI.WebControls.MenuItemTemplateContainer.OnBubbleEvent(System.Object,System.EventArgs)" />
+
+             method to pass an event raised by a control within the container up the page's UI server control hierarchy.</para
+          >
           <block subset="none" type="note">
-            <para>This method is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" /> class.</para>
+            <para
+              >This method is used primarily by control developers when extending the <see
+               cref="T:System.Web.UI.WebControls.Menu" />
+
+               class.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -167,14 +274,20 @@
           <para>true to indicate that this method is passing an event raised by a control within the container up the page's UI server control hierarchy; otherwise, false.</para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The source of the event. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Render">
-      <MemberSignature Language="C#" Value="protected override void Render (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void Render (System.Web.UI.HtmlTextWriter writer);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -192,7 +305,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IDataItemContainer.DataItemIndex">
-      <MemberSignature Language="C#" Value="int System.Web.UI.IDataItemContainer.DataItemIndex { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="int System.Web.UI.IDataItemContainer.DataItemIndex { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -205,12 +321,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the index value of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> object associated with the container.</para>
+          <para
+            >Gets the index value of the <see
+             cref="T:System.Web.UI.WebControls.MenuItem" />
+
+             object associated with the container.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IDataItemContainer.DisplayIndex">
-      <MemberSignature Language="C#" Value="int System.Web.UI.IDataItemContainer.DisplayIndex { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="int System.Web.UI.IDataItemContainer.DisplayIndex { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

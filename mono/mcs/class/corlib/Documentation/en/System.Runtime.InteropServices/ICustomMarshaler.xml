@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ICustomMarshaler" FullName="System.Runtime.InteropServices.ICustomMarshaler">
   <TypeSignature Maintainer="auto" Language="C#" Value="public interface ICustomMarshaler" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ICustomMarshaler" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ICustomMarshaler"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -52,10 +55,20 @@ library OldLib {
       <format type="text/html">
         <h2>Implementing the ICustomMarshaler Interface</h2>
       </format>
-      <para>Your custom marshaler must implement the <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" /> interface to provide the appropriate wrappers to the runtime. </para>
+      <para
+        >Your custom marshaler must implement the <see
+         cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+
+         interface to provide the appropriate wrappers to the runtime. </para
+      >
       <para>The following C# code displays the base interface that must be implemented by all custom marshalers. </para>
       <para>code reference: System.Runtime.InteropServices.ICustomMarshaler#2</para>
-      <para>The <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" /> interface includes methods that provide conversion support, cleanup support, and information about the data to be marshaled. </para>
+      <para
+        >The <see
+         cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+
+         interface includes methods that provide conversion support, cleanup support, and information about the data to be marshaled. </para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -106,7 +119,12 @@ library OldLib {
             </para>
           </description>
           <description>
-            <para>Enables the marshaler to clean up the native data (the CCW) that is returned by the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" /> method.</para>
+            <para
+              >Enables the marshaler to clean up the native data (the CCW) that is returned by the <see
+               cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
+
+               method.</para
+            >
           </description>
         </item>
         <item>
@@ -119,7 +137,12 @@ library OldLib {
             </para>
           </description>
           <description>
-            <para>Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" /> method.</para>
+            <para
+              >Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see
+               cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
+
+               method.</para
+            >
           </description>
         </item>
         <item>
@@ -153,11 +176,21 @@ library OldLib {
       <para>
         <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.CleanUpNativeData(System.IntPtr)" />
       </para>
-      <para>Enables the marshaler to clean up the native data (the CCW) that is returned by the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" /> method.</para>
+      <para
+        >Enables the marshaler to clean up the native data (the CCW) that is returned by the <see
+         cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
+
+         method.</para
+      >
       <para>
         <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.CleanUpManagedData(System.Object)" />
       </para>
-      <para>Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" /> method.</para>
+      <para
+        >Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see
+         cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
+
+         method.</para
+      >
       <format type="text/html">
         <h2>Size Information</h2>
       </format>
@@ -168,28 +201,85 @@ library OldLib {
       <format type="text/html">
         <h2>Implementing the GetInstance Method</h2>
       </format>
-      <para>In addition to implementing the <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" /> interface, custom marshalers must implement a static method called GetInstance that accepts a <see cref="T:System.String" /> as a parameter and has a return type of <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" />. This static method is called by the common language runtime's COM interop layer to instantiate an instance of the custom marshaler. The string that is passed to GetInstance is a cookie that the method can use to customize the returned custom marshaler.</para>
+      <para
+        >In addition to implementing the <see
+         cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+
+         interface, custom marshalers must implement a static method called GetInstance that accepts a <see
+         cref="T:System.String" />
+
+         as a parameter and has a return type of <see
+         cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+
+        . This static method is called by the common language runtime's COM interop layer to instantiate an instance of the custom marshaler. The string that is passed to GetInstance is a cookie that the method can use to customize the returned custom marshaler.</para
+      >
       <code>static ICustomMarshaler *GetInstance(String *pstrCookie);</code>
       <format type="text/html">
         <h2>Applying MarshalAsAttribute</h2>
       </format>
-      <para>To use a custom marshaler, you must apply the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> attribute to the parameter or field that is being marshaled.</para>
-      <para>You must also pass the <see cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" /> enumeration value to the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> constructor. In addition, you must specify the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" /> field with one of the following named parameters:</para>
+      <para
+        >To use a custom marshaler, you must apply the <see
+         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+         attribute to the parameter or field that is being marshaled.</para
+      >
+      <para
+        >You must also pass the <see
+         cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
+
+         enumeration value to the <see
+         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+         constructor. In addition, you must specify the <see
+         cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+         field with one of the following named parameters:</para
+      >
       <list type="bullet">
         <item>
           <para>
-            <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" /> (required): The assembly-qualified name of the custom marshaler. The name should include the namespace and class of the custom marshaler. If the custom marshaler is not defined in the assembly it is used in, you must specify the name of the assembly in which it is defined.</para>
+            <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+             (required): The assembly-qualified name of the custom marshaler. The name should include the namespace and class of the custom marshaler. If the custom marshaler is not defined in the assembly it is used in, you must specify the name of the assembly in which it is defined.</para
+          >
           <block subset="none" type="note">
-            <para>You can use the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" /> field instead of the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" /> field. <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" /> takes a type that is easier to specify.</para>
+            <para
+              >You can use the <see
+               cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+
+               field instead of the <see
+               cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+               field. <see
+               cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+
+               takes a type that is easier to specify.</para
+            >
           </block>
         </item>
         <item>
           <para>
-            <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalCookie" /> (optional): A cookie that is passed to the custom marshaler. You can use the cookie to provide additional information to the marshaler. For example, if the same marshaler is used to provide a number of wrappers, the cookie identifies a specific wrapper. The cookie is passed to the GetInstance method of the marshaler.</para>
+            <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalCookie" />
+
+             (optional): A cookie that is passed to the custom marshaler. You can use the cookie to provide additional information to the marshaler. For example, if the same marshaler is used to provide a number of wrappers, the cookie identifies a specific wrapper. The cookie is passed to the GetInstance method of the marshaler.</para
+          >
         </item>
       </list>
-      <para>The <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> attribute identifies the custom marshaler so it can activate the appropriate wrapper. The common language runtime's interop service then examines the attribute and creates the custom marshaler the first time the argument (parameter or field) needs to be marshaled.</para>
-      <para>The runtime then calls the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" /> and <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" /> methods on the custom marshaler to activate the correct wrapper to handle the call.</para>
+      <para
+        >The <see
+         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+         attribute identifies the custom marshaler so it can activate the appropriate wrapper. The common language runtime's interop service then examines the attribute and creates the custom marshaler the first time the argument (parameter or field) needs to be marshaled.</para
+      >
+      <para
+        >The runtime then calls the <see
+         cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
+
+         and <see
+         cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
+
+         methods on the custom marshaler to activate the correct wrapper to handle the call.</para
+      >
       <format type="text/html">
         <h2>Using a Custom Marshaler</h2>
       </format>
@@ -202,11 +292,29 @@ library UserLib {
      interface IUserData : IUnknown
          HRESULT DoSomeStuff(IUnknown* pIOld);
 }</code>
-      <para>The type library that is generated by exporting the managed definition of IUserData yields the unmanaged definition shown in this example instead of the standard definition. The <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> attribute applied to the INew argument in the managed definition of the DoSomeStuff method indicates that the argument uses a custom marshaler, as the following example shows.</para>
+      <para
+        >The type library that is generated by exporting the managed definition of IUserData yields the unmanaged definition shown in this example instead of the standard definition. The <see
+         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+         attribute applied to the INew argument in the managed definition of the DoSomeStuff method indicates that the argument uses a custom marshaler, as the following example shows.</para
+      >
       <para>code reference: System.Runtime.InteropServices.ICustomMarshaler#4</para>
       <para>code reference: System.Runtime.InteropServices.ICustomMarshaler#5</para>
-      <para>In the previous examples, the first parameter provided to the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> attribute is the <see cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" /> enumeration value UnmanagedType.CustomMarshaler.</para>
-      <para>The second parameter is the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" /> field, which provides the assembly-qualified name of the custom marshaler. This name consists of the namespace and class of the custom marshaler (MarshalType="MyCompany.NewOldMarshaler").</para>
+      <para
+        >In the previous examples, the first parameter provided to the <see
+         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+         attribute is the <see
+         cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
+
+         enumeration value UnmanagedType.CustomMarshaler.</para
+      >
+      <para
+        >The second parameter is the <see
+         cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+         field, which provides the assembly-qualified name of the custom marshaler. This name consists of the namespace and class of the custom marshaler (MarshalType="MyCompany.NewOldMarshaler").</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,7 +324,10 @@ library UserLib {
   <Members>
     <Member MemberName="CleanUpManagedData">
       <MemberSignature Language="C#" Value="public void CleanUpManagedData (object ManagedObj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CleanUpManagedData(object ManagedObj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void CleanUpManagedData(object ManagedObj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -236,12 +347,18 @@ library UserLib {
           <para>Performs necessary cleanup of the managed data when it is no longer needed.</para>
         </summary>
         <param name="ManagedObj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The managed object to be destroyed. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The managed object to be destroyed. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CleanUpNativeData">
       <MemberSignature Language="C#" Value="public void CleanUpNativeData (IntPtr pNativeData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CleanUpNativeData(native int pNativeData) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void CleanUpNativeData(native int pNativeData) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -261,12 +378,18 @@ library UserLib {
           <para>Performs necessary cleanup of the unmanaged data when it is no longer needed.</para>
         </summary>
         <param name="pNativeData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the unmanaged data to be destroyed. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the unmanaged data to be destroyed. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetNativeDataSize">
       <MemberSignature Language="C#" Value="public int GetNativeDataSize ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 GetNativeDataSize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 GetNativeDataSize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -290,8 +413,14 @@ library UserLib {
       </Docs>
     </Member>
     <Member MemberName="MarshalManagedToNative">
-      <MemberSignature Language="C#" Value="public IntPtr MarshalManagedToNative (object ManagedObj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance native int MarshalManagedToNative(object ManagedObj) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public IntPtr MarshalManagedToNative (object ManagedObj);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance native int MarshalManagedToNative(object ManagedObj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -315,12 +444,21 @@ library UserLib {
           <para>A pointer to the COM view of the managed object.</para>
         </returns>
         <param name="ManagedObj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The managed object to be converted. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The managed object to be converted. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="MarshalNativeToManaged">
-      <MemberSignature Language="C#" Value="public object MarshalNativeToManaged (IntPtr pNativeData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object MarshalNativeToManaged(native int pNativeData) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public object MarshalNativeToManaged (IntPtr pNativeData);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object MarshalNativeToManaged(native int pNativeData) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -344,7 +482,10 @@ library UserLib {
           <para>An object that represents the managed view of the COM data.</para>
         </returns>
         <param name="pNativeData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the unmanaged data to be wrapped. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the unmanaged data to be wrapped. </param
+        >
       </Docs>
     </Member>
   </Members>

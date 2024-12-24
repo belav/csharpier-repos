@@ -9,7 +9,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.Design.IControlDesignerTag" /> interface is the contract between the control designer and a design host that enables the design host to manipulate the HTML tag at design time.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.Design.IControlDesignerTag" />
+
+         interface is the contract between the control designer and a design host that enables the design host to manipulate the HTML tag at design time.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -40,7 +45,10 @@
           <para>A string containing the value of the attribute.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the attribute.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the attribute.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetContent">
@@ -124,11 +132,17 @@
           <para>Deletes the specified attribute from the tag.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the attribute.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the attribute.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetAttribute">
-      <MemberSignature Language="C#" Value="public void SetAttribute (string name, string value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetAttribute (string name, string value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -147,9 +161,15 @@
           <para>Sets the value of the specified attribute and creates the attribute, if necessary.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The attribute name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The attribute name.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The attribute value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The attribute value.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetContent">
@@ -171,7 +191,10 @@
           <para>Sets the HTML markup for the content of the tag.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />The HTML markup for the content of the tag.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The HTML markup for the content of the tag.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetDirty">
@@ -190,10 +213,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" /> property of the tag.</para>
+          <para
+            >Sets the <see
+             cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
+
+             property of the tag.</para
+          >
         </summary>
         <param name="dirty">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value for the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" /> property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value for the <see
+           cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" />
+
+           property.</param
+        >
       </Docs>
     </Member>
   </Members>

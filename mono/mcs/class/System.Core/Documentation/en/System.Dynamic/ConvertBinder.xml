@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ConvertBinder" FullName="System.Dynamic.ConvertBinder">
-  <TypeSignature Language="C#" Value="public abstract class ConvertBinder : System.Dynamic.DynamicMetaObjectBinder" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ConvertBinder extends System.Dynamic.DynamicMetaObjectBinder" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class ConvertBinder : System.Dynamic.DynamicMetaObjectBinder"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ConvertBinder extends System.Dynamic.DynamicMetaObjectBinder"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected ConvertBinder (Type type, bool explicit);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Type type, bool explicit) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Type type, bool explicit) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,17 +42,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Dynamic.ConvertBinder" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Dynamic.ConvertBinder" />
+
+            .</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to convert to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to convert to.</param
+        >
         <param name="explicit">
-          <attribution license="cc4" from="Microsoft" modified="false" />Is true if the conversion should consider explicit conversions; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Is true if the conversion should consider explicit conversions; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public override sealed System.Dynamic.DynamicMetaObject Bind (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Dynamic.DynamicMetaObject Bind(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] args) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Dynamic.DynamicMetaObject Bind (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] args);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Dynamic.DynamicMetaObject Bind(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] args) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -63,12 +89,23 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic convert operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic convert operation.</param
+        >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of arguments of the dynamic convert operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of arguments of the dynamic convert operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Explicit">
@@ -91,8 +128,14 @@
       </Docs>
     </Member>
     <Member MemberName="FallbackConvert">
-      <MemberSignature Language="C#" Value="public System.Dynamic.DynamicMetaObject FallbackConvert (System.Dynamic.DynamicMetaObject target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Dynamic.DynamicMetaObject FallbackConvert(class System.Dynamic.DynamicMetaObject target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Dynamic.DynamicMetaObject FallbackConvert (System.Dynamic.DynamicMetaObject target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Dynamic.DynamicMetaObject FallbackConvert(class System.Dynamic.DynamicMetaObject target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -111,15 +154,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic convert operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic convert operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="FallbackConvert">
-      <MemberSignature Language="C#" Value="public abstract System.Dynamic.DynamicMetaObject FallbackConvert (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject errorSuggestion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Dynamic.DynamicMetaObject FallbackConvert(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject errorSuggestion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Dynamic.DynamicMetaObject FallbackConvert (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject errorSuggestion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Dynamic.DynamicMetaObject FallbackConvert(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject errorSuggestion) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -139,12 +196,23 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic convert operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic convert operation.</param
+        >
         <param name="errorSuggestion">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding result to use if binding fails, or null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The binding result to use if binding fails, or null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReturnType">

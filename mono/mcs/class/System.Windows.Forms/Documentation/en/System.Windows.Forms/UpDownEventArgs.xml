@@ -13,11 +13,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.UpDownEventArgs" /> is used when the user clicks a button on a control that derives from the <see cref="T:System.Windows.Forms.UpDownBase" /> control. The <see cref="T:System.Windows.Forms.UpDownEventArgs" /> contains information on which button was clicked.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.UpDownEventArgs" />
+
+         is used when the user clicks a button on a control that derives from the <see
+         cref="T:System.Windows.Forms.UpDownBase" />
+
+         control. The <see
+         cref="T:System.Windows.Forms.UpDownEventArgs" />
+
+         contains information on which button was clicked.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for controls that derive from the <see cref="T:System.Windows.Forms.UpDownBase" /> control.</para>
+      <para
+        >Provides data for controls that derive from the <see
+         cref="T:System.Windows.Forms.UpDownBase" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +46,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table describes the values that are valid for <paramref name="buttonPushed" />.</para>
+          <para
+            >The following table describes the values that are valid for <paramref
+             name="buttonPushed" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -70,10 +91,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.UpDownEventArgs" /> class</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.UpDownEventArgs" />
+
+             class</para
+          >
         </summary>
         <param name="buttonPushed">
-          <attribution license="cc4" from="Microsoft" modified="false" />The button that was clicked on the <see cref="T:System.Windows.Forms.UpDownBase" /> control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The button that was clicked on the <see
+           cref="T:System.Windows.Forms.UpDownBase" />
+
+           control.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -90,7 +122,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table describes the values that the <see cref="P:System.Windows.Forms.UpDownEventArgs.ButtonID" /> returns.</para>
+          <para
+            >The following table describes the values that the <see
+             cref="P:System.Windows.Forms.UpDownEventArgs.ButtonID" />
+
+             returns.</para
+          >
           <list type="table">
             <listheader>
               <item>

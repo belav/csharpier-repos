@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="UdpStatistics" FullName="System.Net.NetworkInformation.UdpStatistics">
   <TypeSignature Language="C#" Value="public abstract class UdpStatistics" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit UdpStatistics extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit UdpStatistics extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +18,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Instances of this class are returned by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetUdpIPv4Statistics" /> and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetUdpIPv6Statistics" /> methods to give applications access to UDP traffic information.</para>
-      <para>The information in this class correlates to the management information objects described in <see cref="http://www.ietf.org/rfc/rfc2013.txt">http://www.ietf.org/rfc/rfc2013.txt</see>.</para>
+      <para
+        >Instances of this class are returned by the <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetUdpIPv4Statistics" />
+
+         and <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetUdpIPv6Statistics" />
+
+         methods to give applications access to UDP traffic information.</para
+      >
+      <para
+        >The information in this class correlates to the management information objects described in <see
+         cref="http://www.ietf.org/rfc/rfc2013.txt">http://www.ietf.org/rfc/rfc2013.txt</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -26,7 +42,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected UdpStatistics ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,11 +56,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.UdpStatistics" />.</para>
+          <para
+            >This constructor can be called only by classes that derive from <see
+             cref="T:System.Net.NetworkInformation.UdpStatistics" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.UdpStatistics" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.UdpStatistics" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -91,8 +120,14 @@
       </Docs>
     </Member>
     <Member MemberName="IncomingDatagramsDiscarded">
-      <MemberSignature Language="C#" Value="public abstract long IncomingDatagramsDiscarded { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 IncomingDatagramsDiscarded" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long IncomingDatagramsDiscarded { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 IncomingDatagramsDiscarded"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -106,7 +141,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To find the total number of datagrams that could not be delivered, add the values that were returned by this property and the <see cref="P:System.Net.NetworkInformation.UdpStatistics.IncomingDatagramsWithErrors" /> property.</para>
+          <para
+            >To find the total number of datagrams that could not be delivered, add the values that were returned by this property and the <see
+             cref="P:System.Net.NetworkInformation.UdpStatistics.IncomingDatagramsWithErrors" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -115,8 +155,14 @@
       </Docs>
     </Member>
     <Member MemberName="IncomingDatagramsWithErrors">
-      <MemberSignature Language="C#" Value="public abstract long IncomingDatagramsWithErrors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 IncomingDatagramsWithErrors" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long IncomingDatagramsWithErrors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 IncomingDatagramsWithErrors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -130,7 +176,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To find the total number of datagrams that could not be delivered, add the values that were returned by this property and the <see cref="P:System.Net.NetworkInformation.UdpStatistics.IncomingDatagramsDiscarded" /> property.</para>
+          <para
+            >To find the total number of datagrams that could not be delivered, add the values that were returned by this property and the <see
+             cref="P:System.Net.NetworkInformation.UdpStatistics.IncomingDatagramsDiscarded" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -154,7 +205,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <see cref="T:System.Net.Sockets.UdpClient" /> and <see cref="T:System.Net.Sockets.Socket" /> classes to create UDP listener applications.</para>
+          <para
+            >You can use the <see
+             cref="T:System.Net.Sockets.UdpClient" />
+
+             and <see
+             cref="T:System.Net.Sockets.Socket" />
+
+             classes to create UDP listener applications.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

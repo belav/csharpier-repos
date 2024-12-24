@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DefaultProxySection" FullName="System.Net.Configuration.DefaultProxySection">
-  <TypeSignature Language="C#" Value="public sealed class DefaultProxySection : System.Configuration.ConfigurationSection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed DefaultProxySection extends System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DefaultProxySection : System.Configuration.ConfigurationSection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed DefaultProxySection extends System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +21,26 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class corresponds to the <format type="text/html"><a href="9d663c4b-07b4-4f6f-9b12-efbd3630354f">DefaultProxy Element (Network Settings)</a></format> configuration element.</para>
-      <para>This class is used to access information about the Web proxy server used for requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. The following table describes the configuration elements contained in the <see cref="T:System.Net.Configuration.DefaultProxySection" /> configuration section.</para>
+      <para
+        >This class corresponds to the <format
+         type="text/html">
+          <a href="9d663c4b-07b4-4f6f-9b12-efbd3630354f">DefaultProxy Element (Network Settings)</a>
+        </format>
+
+         configuration element.</para
+      >
+      <para
+        >This class is used to access information about the Web proxy server used for requests made with the <see
+         cref="T:System.Net.WebRequest" />
+
+         and <see
+         cref="T:System.Net.WebClient" />
+
+         classes. The following table describes the configuration elements contained in the <see
+         cref="T:System.Net.Configuration.DefaultProxySection" />
+
+         configuration section.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -55,12 +79,22 @@
             </para>
           </term>
           <description>
-            <para>Identifies a custom <see cref="T:System.Net.IWebProxy" /> implementation.</para>
+            <para
+              >Identifies a custom <see
+               cref="T:System.Net.IWebProxy" />
+
+               implementation.</para
+            >
           </description>
         </item>
       </list>
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
-      <para>The <see cref="T:System.Net.Configuration.DefaultProxySection" /> settings apply only to the default proxy server.</para>
+      <para
+        >The <see
+         cref="T:System.Net.Configuration.DefaultProxySection" />
+
+         settings apply only to the default proxy server.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,7 +104,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DefaultProxySection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,13 +119,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Configuration.DefaultProxySection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Configuration.DefaultProxySection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BypassList">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.BypassElementCollection BypassList { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.BypassElementCollection BypassList" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.BypassElementCollection BypassList { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.BypassElementCollection BypassList"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -107,7 +155,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Net.Configuration.BypassElementCollection" /> returned by this property contains one <see cref="T:System.Net.Configuration.BypassElement" /> for each resource that bypasses the Web Proxy server. </para>
+          <para
+            >The <see
+             cref="T:System.Net.Configuration.BypassElementCollection" />
+
+             returned by this property contains one <see
+             cref="T:System.Net.Configuration.BypassElement" />
+
+             for each resource that bypasses the Web Proxy server. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -142,8 +198,14 @@
       </Docs>
     </Member>
     <Member MemberName="Module">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.ModuleElement Module { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.ModuleElement Module" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.ModuleElement Module { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.ModuleElement Module"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -162,7 +224,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Net.Configuration.ModuleElement" /> returned by this property identifies the type, assembly, and version of a custom <see cref="T:System.Net.IWebProxy" /> implementation. </para>
+          <para
+            >The <see
+             cref="T:System.Net.Configuration.ModuleElement" />
+
+             returned by this property identifies the type, assembly, and version of a custom <see
+             cref="T:System.Net.IWebProxy" />
+
+             implementation. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -172,7 +242,10 @@
     </Member>
     <Member MemberName="PostDeserialize">
       <MemberSignature Language="C#" Value="protected override void PostDeserialize ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -194,8 +267,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -212,8 +291,14 @@
       </Docs>
     </Member>
     <Member MemberName="Proxy">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.ProxyElement Proxy { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.ProxyElement Proxy" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.ProxyElement Proxy { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.ProxyElement Proxy"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -232,7 +317,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Net.Configuration.ProxyElement" /> returned by this property identifies the Web proxy server to use for resources that are not in the <see cref="P:System.Net.Configuration.DefaultProxySection.BypassList" /> collection.</para>
+          <para
+            >The <see
+             cref="T:System.Net.Configuration.ProxyElement" />
+
+             returned by this property identifies the Web proxy server to use for resources that are not in the <see
+             cref="P:System.Net.Configuration.DefaultProxySection.BypassList" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -241,8 +334,14 @@
       </Docs>
     </Member>
     <Member MemberName="Reset">
-      <MemberSignature Language="C#" Value="protected override void Reset (System.Configuration.ConfigurationElement parentElement);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Reset(class System.Configuration.ConfigurationElement parentElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void Reset (System.Configuration.ConfigurationElement parentElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void Reset(class System.Configuration.ConfigurationElement parentElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

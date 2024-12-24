@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  ToolsVersion="4.0"
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),Runtime.sln))\tools\WebStack.settings.targets" />
   <PropertyGroup>
     <ProjectGuid>{C23F02FC-4538-43F5-ABBA-38BA069AEA8F}</ProjectGuid>
@@ -169,7 +173,9 @@
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  
   <!-- Note: RazorGenerator.MsBuild uses Razor 3.0 \ Mvc 5.0 for generating views. In the event we update the Mvc parser, we'll need to ensure this package references the updated Mvc build -->
-  <Import Project="..\..\packages\RazorGenerator.MsBuild.2.2.0\build\RazorGenerator.MsBuild.targets" Condition="Exists('..\..\packages\RazorGenerator.MsBuild.2.2.0\build\RazorGenerator.MsBuild.targets')" />
+  <Import
+    Project="..\..\packages\RazorGenerator.MsBuild.2.2.0\build\RazorGenerator.MsBuild.targets"
+    Condition="Exists('..\..\packages\RazorGenerator.MsBuild.2.2.0\build\RazorGenerator.MsBuild.targets')"
+  />
 </Project>

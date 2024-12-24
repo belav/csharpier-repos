@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -17,7 +22,10 @@
   </Docs>
   <Members>
     <Member MemberName="FromString">
-      <MemberSignature Language="C#" Value="public static Mono.Security.ASN1 FromString (string rdn);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.ASN1 FromString (string rdn);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.ASN1</ReturnType>
@@ -26,9 +34,15 @@
         <Parameter Name="rdn" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="rdn">a <see cref="T:System.String" /></param>
+        <param name="rdn"
+          >a <see
+           cref="T:System.String" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
+        <returns
+          >a <see
+           cref="T:Mono.Security.ASN1" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -37,7 +51,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToString">
-      <MemberSignature Language="C#" Value="public static string ToString (Mono.Security.ASN1 seq);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string ToString (Mono.Security.ASN1 seq);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -46,9 +63,15 @@
         <Parameter Name="seq" Type="Mono.Security.ASN1" />
       </Parameters>
       <Docs>
-        <param name="seq">a <see cref="T:Mono.Security.ASN1" /></param>
+        <param name="seq"
+          >a <see
+           cref="T:Mono.Security.ASN1" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:System.String" /></returns>
+        <returns
+          >a <see
+           cref="T:System.String" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -57,7 +80,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToString">
-      <MemberSignature Language="C#" Value="public static string ToString (Mono.Security.ASN1 seq, bool reversed, string separator, bool quotes);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string ToString (Mono.Security.ASN1 seq, bool reversed, string separator, bool quotes);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

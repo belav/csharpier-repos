@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ExceptionDispatchInfo" FullName="System.Runtime.ExceptionServices.ExceptionDispatchInfo">
+<Type
+  Name="ExceptionDispatchInfo"
+  FullName="System.Runtime.ExceptionServices.ExceptionDispatchInfo"
+>
   <TypeSignature Language="C#" Value="public sealed class ExceptionDispatchInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ExceptionDispatchInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ExceptionDispatchInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,9 +19,23 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" /> object stores the stack trace information and Watson information that the exception contains at the point where it is captured. The exception can be thrown at another time and possibly on another thread by calling the <see cref="M:System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw" /> method. The exception is thrown as if it had flowed from the point where it was captured to the point where the <see cref="M:System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw" /> method is called.</para>
+      <para
+        >The <see
+         cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" />
+
+         object stores the stack trace information and Watson information that the exception contains at the point where it is captured. The exception can be thrown at another time and possibly on another thread by calling the <see
+         cref="M:System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw" />
+
+         method. The exception is thrown as if it had flowed from the point where it was captured to the point where the <see
+         cref="M:System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw" />
+
+         method is called.</para
+      >
       <para>
-        <see cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" /> cannot be serialized and is not intended to cross application domain boundaries. </para>
+        <see cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" />
+
+         cannot be serialized and is not intended to cross application domain boundaries. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,8 +44,14 @@
   </Docs>
   <Members>
     <Member MemberName="Capture">
-      <MemberSignature Language="C#" Value="public static System.Runtime.ExceptionServices.ExceptionDispatchInfo Capture (Exception source);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Runtime.ExceptionServices.ExceptionDispatchInfo Capture(class System.Exception source) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Runtime.ExceptionServices.ExceptionDispatchInfo Capture (Exception source);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Runtime.ExceptionServices.ExceptionDispatchInfo Capture(class System.Exception source) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,24 +65,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <see cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" /> object that is returned by this method at another time and possibly on another thread to rethrow the specified exception, as if the exception had flowed from this point where it was captured to the point where it is rethrown. </para>
+          <para
+            >You can use the <see
+             cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" />
+
+             object that is returned by this method at another time and possibly on another thread to rethrow the specified exception, as if the exception had flowed from this point where it was captured to the point where it is rethrown. </para
+          >
           <para>If the exception is active when it is captured, the current stack trace information and Watson information that is contained in the exception is stored.  If it is inactive, that is, if it has not been thrown, it will not have any stack trace information or Watson information. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an <see cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" /> object that represents the specified exception at the current point in code. </para>
+          <para
+            >Creates an <see
+             cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" />
+
+             object that represents the specified exception at the current point in code. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An object that represents the specified exception at the current point in code. </para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception whose state is captured, and which is represented by the returned object. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception whose state is captured, and which is represented by the returned object. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SourceException">
       <MemberSignature Language="C#" Value="public Exception SourceException { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Exception SourceException" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Exception SourceException"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -68,7 +110,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is used by the Task Parallel Library, for example, to combine multiple exceptions in an <see cref="T:System.AggregateException" /> object. It is not intended to be used by application code. Use the <see cref="M:System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw" /> method to restore the state of the captured exception and throw it. </para>
+          <para
+            >This property is used by the Task Parallel Library, for example, to combine multiple exceptions in an <see
+             cref="T:System.AggregateException" />
+
+             object. It is not intended to be used by application code. Use the <see
+             cref="M:System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw" />
+
+             method to restore the state of the captured exception and throw it. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,7 +128,10 @@
     </Member>
     <Member MemberName="Throw">
       <MemberSignature Language="C#" Value="public void Throw ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Throw() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Throw() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -94,7 +147,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Throws the exception that is represented by the current <see cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" /> object, after restoring the state that was saved when the exception was captured. </para>
+          <para
+            >Throws the exception that is represented by the current <see
+             cref="T:System.Runtime.ExceptionServices.ExceptionDispatchInfo" />
+
+             object, after restoring the state that was saved when the exception was captured. </para
+          >
         </summary>
       </Docs>
     </Member>

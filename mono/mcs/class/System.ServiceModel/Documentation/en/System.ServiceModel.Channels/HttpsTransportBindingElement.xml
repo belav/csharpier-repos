@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="HttpsTransportBindingElement" FullName="System.ServiceModel.Channels.HttpsTransportBindingElement">
-  <TypeSignature Language="C#" Value="public class HttpsTransportBindingElement : System.ServiceModel.Channels.HttpTransportBindingElement, System.ServiceModel.Channels.ITransportTokenAssertionProvider" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit HttpsTransportBindingElement extends System.ServiceModel.Channels.HttpTransportBindingElement implements class System.ServiceModel.Channels.ITransportTokenAssertionProvider, class System.ServiceModel.Description.IPolicyExportExtension, class System.ServiceModel.Description.IWsdlExportExtension" />
+<Type
+  Name="HttpsTransportBindingElement"
+  FullName="System.ServiceModel.Channels.HttpsTransportBindingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class HttpsTransportBindingElement : System.ServiceModel.Channels.HttpTransportBindingElement, System.ServiceModel.Channels.ITransportTokenAssertionProvider"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit HttpsTransportBindingElement extends System.ServiceModel.Channels.HttpTransportBindingElement implements class System.ServiceModel.Channels.ITransportTokenAssertionProvider, class System.ServiceModel.Description.IPolicyExportExtension, class System.ServiceModel.Description.IWsdlExportExtension"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,11 +26,57 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" /> class is the starting point for creating a custom binding that implements the HTTPS transport protocol. HTTPS is the primary transport used for secure interoperability purposes. HTTPS is supported by the indigo1 to ensure interoperability with other Web services stacks.</para>
-      <para>The indigo2 service model uses this class to create factory objects that implement the <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> and <see cref="T:System.ServiceModel.Channels.IChannelListener" /> interfaces. These factory objects, in turn, create the channels and listeners that transmit SOAP messages using the HTTPS protocol. </para>
-      <para>You control the configuration of the factories that this class creates by setting its properties, such as: <see cref="P:System.ServiceModel.Channels.HttpsTransportBindingElement.RequireClientCertificate" />.</para>
-      <para>You can also set properties on the base class, <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />, such as: <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.AuthenticationScheme" />, <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.HostnameComparisonMode" />, and <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.MaxBufferSize" />. </para>
-      <para>You can also set properties on the base class <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />, such as: <see cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" />, and <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />. For a complete list of properties, see <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />.</para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+
+         class is the starting point for creating a custom binding that implements the HTTPS transport protocol. HTTPS is the primary transport used for secure interoperability purposes. HTTPS is supported by the indigo1 to ensure interoperability with other Web services stacks.</para
+      >
+      <para
+        >The indigo2 service model uses this class to create factory objects that implement the <see
+         cref="T:System.ServiceModel.Channels.IChannelFactory" />
+
+         and <see
+         cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+         interfaces. These factory objects, in turn, create the channels and listeners that transmit SOAP messages using the HTTPS protocol. </para
+      >
+      <para
+        >You control the configuration of the factories that this class creates by setting its properties, such as: <see
+         cref="P:System.ServiceModel.Channels.HttpsTransportBindingElement.RequireClientCertificate" />
+
+        .</para
+      >
+      <para
+        >You can also set properties on the base class, <see
+         cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+
+        , such as: <see
+         cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.AuthenticationScheme" />
+
+        , <see
+         cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.HostnameComparisonMode" />
+
+        , and <see
+         cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.MaxBufferSize" />
+
+        . </para
+      >
+      <para
+        >You can also set properties on the base class <see
+         cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+        , such as: <see
+         cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" />
+
+        , and <see
+         cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />
+
+        . For a complete list of properties, see <see
+         cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,7 +86,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public HttpsTransportBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -41,13 +99,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected HttpsTransportBindingElement (System.ServiceModel.Channels.HttpsTransportBindingElement other);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.HttpsTransportBindingElement other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected HttpsTransportBindingElement (System.ServiceModel.Channels.HttpsTransportBindingElement other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.HttpsTransportBindingElement other) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -63,13 +132,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
-    <Member MemberName="BuildChannelFactory&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public override System.ServiceModel.Channels.IChannelFactory&lt;TChannel&gt; BuildChannelFactory&lt;TChannel&gt; (System.ServiceModel.Channels.BindingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.IChannelFactory`1&lt;!!TChannel&gt; BuildChannelFactory&lt;TChannel&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="BuildChannelFactory<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ServiceModel.Channels.IChannelFactory<TChannel> BuildChannelFactory<TChannel> (System.ServiceModel.Channels.BindingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.IChannelFactory`1<!!TChannel> BuildChannelFactory<TChannel>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,14 +178,26 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param>
+          <see cref="T:System.ServiceModel.Channels.BindingContext" />
+
+           members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
+        >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />Type of channel.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Type of channel.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public override System.ServiceModel.Channels.IChannelListener&lt;TChannel&gt; BuildChannelListener&lt;TChannel&gt; (System.ServiceModel.Channels.BindingContext context) where TChannel : class, System.ServiceModel.Channels.IChannel;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.IChannelListener`1&lt;!!TChannel&gt; BuildChannelListener&lt;class (class System.ServiceModel.Channels.IChannel) TChannel&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="BuildChannelListener<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ServiceModel.Channels.IChannelListener<TChannel> BuildChannelListener<TChannel> (System.ServiceModel.Channels.BindingContext context) where TChannel : class, System.ServiceModel.Channels.IChannel;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.IChannelListener`1<!!TChannel> BuildChannelListener<class (class System.ServiceModel.Channels.IChannel) TChannel>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -139,14 +231,26 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param>
+          <see cref="T:System.ServiceModel.Channels.BindingContext" />
+
+           members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
+        >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />Type of channel.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Type of channel.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="Clone">
-      <MemberSignature Language="C#" Value="public override System.ServiceModel.Channels.BindingElement Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.BindingElement Clone() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ServiceModel.Channels.BindingElement Clone ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.BindingElement Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -167,9 +271,15 @@
         </returns>
       </Docs>
     </Member>
-    <Member MemberName="GetProperty&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public override T GetProperty&lt;T&gt; (System.ServiceModel.Channels.BindingContext context) where T : class;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance !!T GetProperty&lt;class T&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="GetProperty<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public override T GetProperty<T> (System.ServiceModel.Channels.BindingContext context) where T : class;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance !!T GetProperty<class T>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -190,25 +300,55 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method gets the specified object from the base class, or from one of that class's ancestors. The object returned is usually a collection of properties, for example an object that implements <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />.</para>
+          <para
+            >This method gets the specified object from the base class, or from one of that class's ancestors. The object returned is usually a collection of properties, for example an object that implements <see
+             cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para>
+          <para
+            >Gets a specified object from the <see
+             cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />, or null if the object isn't found.</para>
+          <para
+            >The specified object from the <see
+             cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            , or null if the object isn't found.</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.ServiceModel.Channels.BindingContext" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          .</param
+        >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to get.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to get.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="GetTransportTokenAssertion">
-      <MemberSignature Language="C#" Value="public System.Xml.XmlElement GetTransportTokenAssertion ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Xml.XmlElement GetTransportTokenAssertion() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.XmlElement GetTransportTokenAssertion ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Xml.XmlElement GetTransportTokenAssertion() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -224,11 +364,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.XmlElement" /> that represents the transport token used in the security binding.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.XmlElement" />
+
+             that represents the transport token used in the security binding.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Xml.XmlElement" /> that represents the transport token used in the security binding.</para>
+          <para
+            >An <see
+             cref="T:System.Xml.XmlElement" />
+
+             that represents the transport token used in the security binding.</para
+          >
         </returns>
       </Docs>
     </Member>

@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceMetadataPublishingElement" FullName="System.ServiceModel.Configuration.ServiceMetadataPublishingElement">
-  <TypeSignature Language="C#" Value="public sealed class ServiceMetadataPublishingElement : System.ServiceModel.Configuration.BehaviorExtensionElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ServiceMetadataPublishingElement extends System.ServiceModel.Configuration.BehaviorExtensionElement" />
+<Type
+  Name="ServiceMetadataPublishingElement"
+  FullName="System.ServiceModel.Configuration.ServiceMetadataPublishingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ServiceMetadataPublishingElement : System.ServiceModel.Configuration.BehaviorExtensionElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ServiceMetadataPublishingElement extends System.ServiceModel.Configuration.BehaviorExtensionElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +32,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ServiceMetadataPublishingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,7 +45,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceMetadataPublishingElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.ServiceMetadataPublishingElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -58,7 +75,10 @@
     </Member>
     <Member MemberName="CreateBehavior">
       <MemberSignature Language="C#" Value="protected override object CreateBehavior ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance object CreateBehavior() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance object CreateBehavior() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -75,7 +95,10 @@
     </Member>
     <Member MemberName="ExternalMetadataLocation">
       <MemberSignature Language="C#" Value="public Uri ExternalMetadataLocation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri ExternalMetadataLocation" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Uri ExternalMetadataLocation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -131,8 +154,14 @@
       </Docs>
     </Member>
     <Member MemberName="HttpGetBindingConfiguration">
-      <MemberSignature Language="C#" Value="public string HttpGetBindingConfiguration { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string HttpGetBindingConfiguration" />
+      <MemberSignature
+        Language="C#"
+        Value="public string HttpGetBindingConfiguration { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string HttpGetBindingConfiguration"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -153,7 +182,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetBinding" />.</para>
+          <para
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see
+             cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetBinding" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -176,7 +210,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl" /> property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "http://localhost:8080/CalculatorService", the HTTP/Get metadata address is "http://localhost:8080/CalculatorService?wsdl". </para>
+          <para
+            >If the <see
+             cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl" />
+
+             property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "http://localhost:8080/CalculatorService", the HTTP/Get metadata address is "http://localhost:8080/CalculatorService?wsdl". </para
+          >
           <para>If this property is false, or the address of the service is not based on HTTP or HTTPS, “?wsdl” is ignored. </para>
         </remarks>
         <summary>
@@ -240,8 +279,14 @@
       </Docs>
     </Member>
     <Member MemberName="HttpsGetBindingConfiguration">
-      <MemberSignature Language="C#" Value="public string HttpsGetBindingConfiguration { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string HttpsGetBindingConfiguration" />
+      <MemberSignature
+        Language="C#"
+        Value="public string HttpsGetBindingConfiguration { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string HttpsGetBindingConfiguration"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -262,7 +307,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement..HttpsGetBinding" />.</para>
+          <para
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see
+             cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement..HttpsGetBinding" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -285,7 +335,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl" /> property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "https://localhost:8080/CalculatorService", the HTTP/Get metadata address is "https://localhost:8080/CalculatorService?wsdl". </para>
+          <para
+            >If the <see
+             cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl" />
+
+             property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "https://localhost:8080/CalculatorService", the HTTP/Get metadata address is "https://localhost:8080/CalculatorService?wsdl". </para
+          >
           <para>If this property is false, or the address of the service is not based on HTTP or HTTPS, “?wsdl” is ignored. </para>
         </remarks>
         <summary>
@@ -319,8 +374,14 @@
       </Docs>
     </Member>
     <Member MemberName="PolicyVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Description.PolicyVersion PolicyVersion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Description.PolicyVersion PolicyVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Description.PolicyVersion PolicyVersion { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Description.PolicyVersion PolicyVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -346,8 +407,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

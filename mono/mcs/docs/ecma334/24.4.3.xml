@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <clause number="24.4.3" title="The Obsolete attribute">
-  <paragraph>The attribute Obsolete is used to mark types and members of types that should no longer be used. <code_example><![CDATA[
+  <paragraph
+    >The attribute Obsolete is used to mark types and members of types that should no longer be used. <code_example
+    >
+      <![CDATA[
 using System;  
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |  
 AttributeTargets.Enum | AttributeTargets.Interface |  
@@ -15,10 +18,15 @@ public class ObsoleteAttribute: Attribute
    public string Message { get {...} }  
    public bool IsError{ get {...} }  
 }  
-]]></code_example></paragraph>
+]]>
+    </code_example>
+  </paragraph>
   <paragraph>If a program uses a type or member that is decorated with the Obsolete attribute, then the compiler shall issue a warning or error in order to alert the developer, so the offending code can be fixed. Specifically, the compiler shall issue a warning if no error parameter is provided, or if the error parameter is provided and has the value false. The compiler shall issue a compile-time error if the error parameter is specified and has the value true. </paragraph>
   <paragraph>
-    <example>[Example: In the example <code_example><![CDATA[
+    <example
+      >[Example: In the example <code_example
+      >
+        <![CDATA[
 [Obsolete("This class is obsolete; use class B instead")]  
 class A  
 {  
@@ -35,7 +43,11 @@ class Test
       a.F();  
    }  
 }  
-]]></code_example>the class A is decorated with the Obsolete attribute. Each use of A in Main results in a warning that includes the specified message, &quot;This class is obsolete; use class B instead.&quot; end example]</example>
-    <table_line/>
+]]>
+      </code_example>
+
+      the class A is decorated with the Obsolete attribute. Each use of A in Main results in a warning that includes the specified message, "This class is obsolete; use class B instead." end example]</example
+    >
+    <table_line />
   </paragraph>
 </clause>

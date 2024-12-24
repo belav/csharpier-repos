@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NetTcpBindingElement" FullName="System.ServiceModel.Configuration.NetTcpBindingElement">
-  <TypeSignature Language="C#" Value="public class NetTcpBindingElement : System.ServiceModel.Configuration.StandardBindingElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NetTcpBindingElement extends System.ServiceModel.Configuration.StandardBindingElement implements class System.ServiceModel.Configuration.IBindingConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NetTcpBindingElement : System.ServiceModel.Configuration.StandardBindingElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit NetTcpBindingElement extends System.ServiceModel.Configuration.StandardBindingElement implements class System.ServiceModel.Configuration.IBindingConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NetTcpBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +42,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NetTcpBindingElement (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -51,15 +68,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" /> class with the specified configuration name. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" />
+
+             class with the specified configuration name. </para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The configuration name of the binding. This value should be unique because it is used as identification for the binding.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The configuration name of the binding. This value should be unique because it is used as identification for the binding.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="protected override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,8 +105,14 @@
       </Docs>
     </Member>
     <Member MemberName="HostNameComparisonMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -180,7 +214,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the buffer is full, excess data remains in the underlying socket until the buffer has space again. </para>
-          <para>This value cannot be less than <see cref="P:System.ServiceModel.Configuration.NetTcpBindingElement.MaxReceivedMessageSize" />, whose default value is also 65,536 (64 KB). </para>
+          <para
+            >This value cannot be less than <see
+             cref="P:System.ServiceModel.Configuration.NetTcpBindingElement.MaxReceivedMessageSize" />
+
+            , whose default value is also 65,536 (64 KB). </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,8 +285,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnApplyConfiguration">
-      <MemberSignature Language="C#" Value="protected override void OnApplyConfiguration (System.ServiceModel.Channels.Binding binding);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnApplyConfiguration(class System.ServiceModel.Channels.Binding binding) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnApplyConfiguration (System.ServiceModel.Channels.Binding binding);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void OnApplyConfiguration(class System.ServiceModel.Channels.Binding binding) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -262,10 +307,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Applies the specified binding to this <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> instance.</para>
+          <para
+            >Applies the specified binding to this <see
+             cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" />
+
+             instance.</para
+          >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding to be applied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The binding to be applied.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PortSharingEnabled">
@@ -293,8 +346,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -307,13 +366,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+             instance that contains a collection of <see
+             cref="T:System.Configuration.ConfigurationProperty" />
+
+             objects that can be attributes or <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             objects of this configuration element.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReaderQuotas">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -339,8 +415,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReliableSession">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement ReliableSession { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement ReliableSession" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement ReliableSession { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement ReliableSession"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -363,8 +445,14 @@
       </Docs>
     </Member>
     <Member MemberName="Security">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.NetTcpSecurityElement Security { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.NetTcpSecurityElement Security" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.NetTcpSecurityElement Security { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.NetTcpSecurityElement Security"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -411,8 +499,14 @@
       </Docs>
     </Member>
     <Member MemberName="TransactionProtocol">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.TransactionProtocol TransactionProtocol { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.TransactionProtocol TransactionProtocol" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.TransactionProtocol TransactionProtocol { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.TransactionProtocol TransactionProtocol"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -438,8 +532,14 @@
       </Docs>
     </Member>
     <Member MemberName="TransferMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.TransferMode TransferMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.TransferMode TransferMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.TransferMode TransferMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.TransferMode TransferMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

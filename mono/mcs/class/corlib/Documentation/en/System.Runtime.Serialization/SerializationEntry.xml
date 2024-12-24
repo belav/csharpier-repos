@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SerializationEntry" FullName="System.Runtime.Serialization.SerializationEntry">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct SerializationEntry" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SerializationEntry extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit SerializationEntry extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -23,7 +26,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Holds the value, <see cref="T:System.Type" />, and name of a serialized object. </para>
+      <para
+        >Holds the value, <see
+         cref="T:System.Type" />
+
+        , and name of a serialized object. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -64,11 +72,21 @@
         <value>To be added: an object of type 'Type'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the serialized object is null, this property returns the <see cref="T:System.Object" /> type.</para>
+          <para
+            >If the serialized object is null, this property returns the <see
+             cref="T:System.Object" />
+
+             type.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Type" /> of the object.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Type" />
+
+             of the object.</para
+          >
         </summary>
       </Docs>
     </Member>

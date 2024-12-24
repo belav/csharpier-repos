@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ListBindingConverter" FullName="System.Windows.Forms.ListBindingConverter">
-  <TypeSignature Language="C#" Value="public class ListBindingConverter : System.ComponentModel.TypeConverter" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ListBindingConverter : System.ComponentModel.TypeConverter"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13,16 +16,64 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.ListBindingConverter" /> is used to evaluate and convert a property of an object into a <see cref="T:System.Windows.Forms.Binding" />.</para>
-      <para>The <see cref="T:System.ComponentModel.TypeConverterAttribute" /> is applied to the <see cref="T:System.Windows.Forms.Binding" /> class with the type of the <see cref="T:System.Windows.Forms.ListBindingConverter" /> as an argument.</para>
-      <para>For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" /> base class and <format type="text/html"><a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a></format>.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.ListBindingConverter" />
+
+         is used to evaluate and convert a property of an object into a <see
+         cref="T:System.Windows.Forms.Binding" />
+
+        .</para
+      >
+      <para
+        >The <see
+         cref="T:System.ComponentModel.TypeConverterAttribute" />
+
+         is applied to the <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         class with the type of the <see
+         cref="T:System.Windows.Forms.ListBindingConverter" />
+
+         as an argument.</para
+      >
+      <para
+        >For more information about type converters, see the <see
+         cref="T:System.ComponentModel.TypeConverter" />
+
+         base class and <format
+         type="text/html">
+          <a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a>
+        </format>
+
+        .</para
+      >
       <block subset="none" type="note">
-        <para>You should never create an instance of the <see cref="T:System.Windows.Forms.ListBindingConverter" /> class. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of <see cref="T:System.ComponentModel.TypeDescriptor" />. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para>
+        <para
+          >You should never create an instance of the <see
+           cref="T:System.Windows.Forms.ListBindingConverter" />
+
+           class. Instead, call the <see
+           cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+           method of <see
+           cref="T:System.ComponentModel.TypeDescriptor" />
+
+          . For more information, see the examples in the <see
+           cref="T:System.ComponentModel.TypeConverter" />
+
+           base class.</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides a type converter to convert <see cref="T:System.Windows.Forms.Binding" /> objects to and from various other representations.</para>
+      <para
+        >Provides a type converter to convert <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         objects to and from various other representations.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -34,7 +85,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ListBindingConverter" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ListBindingConverter" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -43,7 +99,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CanConvertTo">
-      <MemberSignature Language="C#" Value="public override bool CanConvertTo (System.ComponentModel.ITypeDescriptorContext context, Type destinationType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanConvertTo (System.ComponentModel.ITypeDescriptorContext context, Type destinationType);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -65,7 +124,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ConvertTo">
-      <MemberSignature Language="C#" Value="public override object ConvertTo (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object ConvertTo (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -91,7 +153,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateInstance">
-      <MemberSignature Language="C#" Value="public override object CreateInstance (System.ComponentModel.ITypeDescriptorContext context, System.Collections.IDictionary propertyValues);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object CreateInstance (System.ComponentModel.ITypeDescriptorContext context, System.Collections.IDictionary propertyValues);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -113,7 +178,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetCreateInstanceSupported">
-      <MemberSignature Language="C#" Value="public override bool GetCreateInstanceSupported (System.ComponentModel.ITypeDescriptorContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool GetCreateInstanceSupported (System.ComponentModel.ITypeDescriptorContext context);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>

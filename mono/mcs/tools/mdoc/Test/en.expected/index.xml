@@ -32,25 +32,37 @@
       <Type Name="Widget+Direction" Kind="Enumeration" />
       <Type Name="Widget+IMenuItem" Kind="Interface" />
       <Type Name="Widget+NestedClass" Kind="Class" />
-      <Type Name="Widget+NestedClass`1" DisplayName="Widget+NestedClass&lt;T&gt;" Kind="Class" />
+      <Type Name="Widget+NestedClass`1" DisplayName="Widget+NestedClass<T>" Kind="Class" />
       <Type Name="Widget+NestedClass+Double" Kind="Class" />
       <Type Name="Widget+NestedClass+Double+Triple" Kind="Class" />
       <Type Name="Widget+NestedClass+Double+Triple+Quadruple" Kind="Class" />
     </Namespace>
     <Namespace Name="Mono.DocTest.Generic">
       <Type Name="Extensions" Kind="Class" />
-      <Type Name="Func`2" DisplayName="Func&lt;TArg,TRet&gt;" Kind="Delegate" />
-      <Type Name="GenericBase`1" DisplayName="GenericBase&lt;U&gt;" Kind="Class" />
-      <Type Name="GenericBase`1+FooEventArgs" DisplayName="GenericBase&lt;U&gt;+FooEventArgs" Kind="Class" />
-      <Type Name="GenericBase`1+NestedCollection" DisplayName="GenericBase&lt;U&gt;+NestedCollection" Kind="Class" />
-      <Type Name="GenericBase`1+NestedCollection+Enumerator" DisplayName="GenericBase&lt;U&gt;+NestedCollection+Enumerator" Kind="Structure" />
-      <Type Name="IFoo`1" DisplayName="IFoo&lt;T&gt;" Kind="Interface" />
-      <Type Name="MyList`1" DisplayName="MyList&lt;T&gt;" Kind="Class" />
-      <Type Name="MyList`1+Helper`2" DisplayName="MyList&lt;T&gt;+Helper&lt;U,V&gt;" Kind="Class" />
-      <Type Name="MyList`2" DisplayName="MyList&lt;A,B&gt;" Kind="Class" />
+      <Type Name="Func`2" DisplayName="Func<TArg,TRet>" Kind="Delegate" />
+      <Type Name="GenericBase`1" DisplayName="GenericBase<U>" Kind="Class" />
+      <Type
+        Name="GenericBase`1+FooEventArgs"
+        DisplayName="GenericBase<U>+FooEventArgs"
+        Kind="Class"
+      />
+      <Type
+        Name="GenericBase`1+NestedCollection"
+        DisplayName="GenericBase<U>+NestedCollection"
+        Kind="Class"
+      />
+      <Type
+        Name="GenericBase`1+NestedCollection+Enumerator"
+        DisplayName="GenericBase<U>+NestedCollection+Enumerator"
+        Kind="Structure"
+      />
+      <Type Name="IFoo`1" DisplayName="IFoo<T>" Kind="Interface" />
+      <Type Name="MyList`1" DisplayName="MyList<T>" Kind="Class" />
+      <Type Name="MyList`1+Helper`2" DisplayName="MyList<T>+Helper<U,V>" Kind="Class" />
+      <Type Name="MyList`2" DisplayName="MyList<A,B>" Kind="Class" />
     </Namespace>
     <Namespace Name="System">
-      <Type Name="Action`1" DisplayName="Action&lt;T&gt;" Kind="Delegate" />
+      <Type Name="Action`1" DisplayName="Action<T>" Kind="Delegate" />
       <Type Name="Array" Kind="Class" />
       <Type Name="AsyncCallback" Kind="Delegate" />
       <Type Name="Environment" Kind="Class" />
@@ -63,14 +75,36 @@
       <Targets>
         <Target Type="T:Mono.DocTest.Generic.IFoo`1" />
       </Targets>
-      <Member MemberName="Bar&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static void Bar&lt;T&gt; (this Mono.DocTest.Generic.IFoo&lt;T&gt; self, string s);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Bar&lt;T&gt;(class Mono.DocTest.Generic.IFoo`1&lt;!!T&gt; self, string s) cil managed" />
-        <MemberSignature Language="DocId" Value="M:Mono.DocTest.Generic.Extensions.Bar``1(Mono.DocTest.Generic.IFoo{``0},System.String)" />
-        <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Sub Bar(Of T) (self As IFoo(Of T), s As String)" />
-        <MemberSignature Language="F#" Value="static member Bar : Mono.DocTest.Generic.IFoo&lt;'T&gt; * string -&gt; unit" Usage="Mono.DocTest.Generic.Extensions.Bar (self, s)" />
-        <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void Bar(Mono::DocTest::Generic::IFoo&lt;T&gt; ^ self, System::String ^ s);" />
-        <MemberSignature Language="C++ CX" Value="public:&#xA;generic &lt;typename T&gt;&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void Bar(Mono::DocTest::Generic::IFoo&lt;T&gt; ^ self, Platform::String ^ s);" />
+      <Member MemberName="Bar<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static void Bar<T> (this Mono.DocTest.Generic.IFoo<T> self, string s);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Bar<T>(class Mono.DocTest.Generic.IFoo`1<!!T> self, string s) cil managed"
+        />
+        <MemberSignature
+          Language="DocId"
+          Value="M:Mono.DocTest.Generic.Extensions.Bar``1(Mono.DocTest.Generic.IFoo{``0},System.String)"
+        />
+        <MemberSignature
+          Language="VB.NET"
+          Value="<Extension()>&#010;Public Sub Bar(Of T) (self As IFoo(Of T), s As String)"
+        />
+        <MemberSignature
+          Language="F#"
+          Value="static member Bar : Mono.DocTest.Generic.IFoo<'T> * string -> unit"
+          Usage="Mono.DocTest.Generic.Extensions.Bar (self, s)"
+        />
+        <MemberSignature
+          Language="C++ CLI"
+          Value="public:&#010;generic <typename T>&#010;[System::Runtime::CompilerServices::Extension]&#010; static void Bar(Mono::DocTest::Generic::IFoo<T> ^ self, System::String ^ s);"
+        />
+        <MemberSignature
+          Language="C++ CX"
+          Value="public:&#010;generic <typename T>&#010;[System::Runtime::CompilerServices::Extension]&#010; static void Bar(Mono::DocTest::Generic::IFoo<T> ^ self, Platform::String ^ s);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -79,7 +113,7 @@
           <TypeParameter Name="T" />
         </TypeParameters>
         <Parameters>
-          <Parameter Name="self" Type="Mono.DocTest.Generic.IFoo&lt;T&gt;" RefType="this" />
+          <Parameter Name="self" Type="Mono.DocTest.Generic.IFoo<T>" RefType="this" />
           <Parameter Name="s" Type="System.String" />
         </Parameters>
         <Docs>
@@ -88,20 +122,42 @@
           <param name="s">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.Bar``1(Mono.DocTest.Generic.IFoo{``0},System.String)" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.Bar``1(Mono.DocTest.Generic.IFoo{``0},System.String)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="ForEach&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static void ForEach&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; self, Action&lt;T&gt; a);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ForEach&lt;T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; self, class System.Action`1&lt;!!T&gt; a) cil managed" />
-        <MemberSignature Language="DocId" Value="M:Mono.DocTest.Generic.Extensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})" />
-        <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Sub ForEach(Of T) (self As IEnumerable(Of T), a As Action(Of T))" />
-        <MemberSignature Language="F#" Value="static member ForEach : seq&lt;'T&gt; * Action&lt;'T&gt; -&gt; unit" Usage="Mono.DocTest.Generic.Extensions.ForEach (self, a)" />
-        <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void ForEach(System::Collections::Generic::IEnumerable&lt;T&gt; ^ self, Action&lt;T&gt; ^ a);" />
+      <Member MemberName="ForEach<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static void ForEach<T> (this System.Collections.Generic.IEnumerable<T> self, Action<T> a);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void ForEach<T>(class System.Collections.Generic.IEnumerable`1<!!T> self, class System.Action`1<!!T> a) cil managed"
+        />
+        <MemberSignature
+          Language="DocId"
+          Value="M:Mono.DocTest.Generic.Extensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})"
+        />
+        <MemberSignature
+          Language="VB.NET"
+          Value="<Extension()>&#010;Public Sub ForEach(Of T) (self As IEnumerable(Of T), a As Action(Of T))"
+        />
+        <MemberSignature
+          Language="F#"
+          Value="static member ForEach : seq<'T> * Action<'T> -> unit"
+          Usage="Mono.DocTest.Generic.Extensions.ForEach (self, a)"
+        />
+        <MemberSignature
+          Language="C++ CLI"
+          Value="public:&#010;generic <typename T>&#010;[System::Runtime::CompilerServices::Extension]&#010; static void ForEach(System::Collections::Generic::IEnumerable<T> ^ self, Action<T> ^ a);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -110,8 +166,8 @@
           <TypeParameter Name="T" />
         </TypeParameters>
         <Parameters>
-          <Parameter Name="self" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
-          <Parameter Name="a" Type="System.Action&lt;T&gt;" />
+          <Parameter Name="self" Type="System.Collections.Generic.IEnumerable<T>" RefType="this" />
+          <Parameter Name="a" Type="System.Action<T>" />
         </Parameters>
         <Docs>
           <typeparam name="T">To be added.</typeparam>
@@ -119,7 +175,10 @@
           <param name="a">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -127,39 +186,91 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="ToDouble">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;double&gt; ToDouble (this System.Collections.Generic.IEnumerable&lt;int&gt; list);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;float64&gt; ToDouble(class System.Collections.Generic.IEnumerable`1&lt;int32&gt; list) cil managed" />
-        <MemberSignature Language="DocId" Value="M:Mono.DocTest.Generic.Extensions.ToDouble(System.Collections.Generic.IEnumerable{System.Int32})" />
-        <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Function ToDouble (list As IEnumerable(Of Integer)) As IEnumerable(Of Double)" />
-        <MemberSignature Language="F#" Value="static member ToDouble : seq&lt;int&gt; -&gt; seq&lt;double&gt;" Usage="Mono.DocTest.Generic.Extensions.ToDouble list" />
-        <MemberSignature Language="JavaScript" Value="function toDouble(list)" Usage="var iEnumerable = Mono.DocTest.Generic.Extensions.toDouble(list)" />
-        <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static System::Collections::Generic::IEnumerable&lt;double&gt; ^ ToDouble(System::Collections::Generic::IEnumerable&lt;int&gt; ^ list);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<double> ToDouble (this System.Collections.Generic.IEnumerable<int> list);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<float64> ToDouble(class System.Collections.Generic.IEnumerable`1<int32> list) cil managed"
+        />
+        <MemberSignature
+          Language="DocId"
+          Value="M:Mono.DocTest.Generic.Extensions.ToDouble(System.Collections.Generic.IEnumerable{System.Int32})"
+        />
+        <MemberSignature
+          Language="VB.NET"
+          Value="<Extension()>&#010;Public Function ToDouble (list As IEnumerable(Of Integer)) As IEnumerable(Of Double)"
+        />
+        <MemberSignature
+          Language="F#"
+          Value="static member ToDouble : seq<int> -> seq<double>"
+          Usage="Mono.DocTest.Generic.Extensions.ToDouble list"
+        />
+        <MemberSignature
+          Language="JavaScript"
+          Value="function toDouble(list)"
+          Usage="var iEnumerable = Mono.DocTest.Generic.Extensions.toDouble(list)"
+        />
+        <MemberSignature
+          Language="C++ CLI"
+          Value="public:&#010;[System::Runtime::CompilerServices::Extension]&#010; static System::Collections::Generic::IEnumerable<double> ^ ToDouble(System::Collections::Generic::IEnumerable<int> ^ list);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Double&gt;</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="list" Type="System.Collections.Generic.IEnumerable&lt;System.Int32&gt;" RefType="this" />
+          <Parameter
+            Name="list"
+            Type="System.Collections.Generic.IEnumerable<System.Int32>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <param name="list">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.ToDouble(System.Collections.Generic.IEnumerable{System.Int32})" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.ToDouble(System.Collections.Generic.IEnumerable{System.Int32})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:Mono.DocTest.Generic.IFoo`1" />
       </Targets>
-      <Member MemberName="ToDouble&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static double ToDouble&lt;T&gt; (this T val) where T : Mono.DocTest.Generic.IFoo&lt;T&gt;;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig float64 ToDouble&lt;(class Mono.DocTest.Generic.IFoo`1&lt;!!T&gt;) T&gt;(!!T val) cil managed" />
-        <MemberSignature Language="DocId" Value="M:Mono.DocTest.Generic.Extensions.ToDouble``1(``0)" />
-        <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Function ToDouble(Of T As IFoo(Of T)) (val As T) As Double" />
-        <MemberSignature Language="F#" Value="static member ToDouble : 'T -&gt; double (requires 'T :&gt; Mono.DocTest.Generic.IFoo&lt;'T&gt;)" Usage="Mono.DocTest.Generic.Extensions.ToDouble val" />
-        <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA; where T : Mono::DocTest::Generic::IFoo&lt;T&gt;[System::Runtime::CompilerServices::Extension]&#xA; static double ToDouble(T val);" />
-        <MemberSignature Language="C++ CX" Value="public:&#xA;generic &lt;typename T&gt;&#xA; where T : Mono::DocTest::Generic::IFoo&lt;T&gt;[System::Runtime::CompilerServices::Extension]&#xA; static double ToDouble(T val);" />
+      <Member MemberName="ToDouble<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static double ToDouble<T> (this T val) where T : Mono.DocTest.Generic.IFoo<T>;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig float64 ToDouble<(class Mono.DocTest.Generic.IFoo`1<!!T>) T>(!!T val) cil managed"
+        />
+        <MemberSignature
+          Language="DocId"
+          Value="M:Mono.DocTest.Generic.Extensions.ToDouble``1(``0)"
+        />
+        <MemberSignature
+          Language="VB.NET"
+          Value="<Extension()>&#010;Public Function ToDouble(Of T As IFoo(Of T)) (val As T) As Double"
+        />
+        <MemberSignature
+          Language="F#"
+          Value="static member ToDouble : 'T -> double (requires 'T :> Mono.DocTest.Generic.IFoo<'T>)"
+          Usage="Mono.DocTest.Generic.Extensions.ToDouble val"
+        />
+        <MemberSignature
+          Language="C++ CLI"
+          Value="public:&#010;generic <typename T>&#010; where T : Mono::DocTest::Generic::IFoo<T>[System::Runtime::CompilerServices::Extension]&#010; static double ToDouble(T val);"
+        />
+        <MemberSignature
+          Language="C++ CX"
+          Value="public:&#010;generic <typename T>&#010; where T : Mono::DocTest::Generic::IFoo<T>[System::Runtime::CompilerServices::Extension]&#010; static double ToDouble(T val);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Double</ReturnType>
@@ -179,20 +290,42 @@
           <param name="val">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.ToDouble``1(``0)" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.ToDouble``1(``0)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="System.Object" />
       </Targets>
-      <Member MemberName="ToEnumerable&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;T&gt; ToEnumerable&lt;T&gt; (this T self);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; ToEnumerable&lt;T&gt;(!!T self) cil managed" />
-        <MemberSignature Language="DocId" Value="M:Mono.DocTest.Generic.Extensions.ToEnumerable``1(``0)" />
-        <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Iterator Function ToEnumerable(Of T) (self As T) As IEnumerable(Of T)" />
-        <MemberSignature Language="F#" Value="static member ToEnumerable : 'T -&gt; seq&lt;'T&gt;" Usage="Mono.DocTest.Generic.Extensions.ToEnumerable self" />
-        <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static System::Collections::Generic::IEnumerable&lt;T&gt; ^ ToEnumerable(T self);" />
+      <Member MemberName="ToEnumerable<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<T> ToEnumerable<T> (this T self);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<!!T> ToEnumerable<T>(!!T self) cil managed"
+        />
+        <MemberSignature
+          Language="DocId"
+          Value="M:Mono.DocTest.Generic.Extensions.ToEnumerable``1(``0)"
+        />
+        <MemberSignature
+          Language="VB.NET"
+          Value="<Extension()>&#010;Public Iterator Function ToEnumerable(Of T) (self As T) As IEnumerable(Of T)"
+        />
+        <MemberSignature
+          Language="F#"
+          Value="static member ToEnumerable : 'T -> seq<'T>"
+          Usage="Mono.DocTest.Generic.Extensions.ToEnumerable self"
+        />
+        <MemberSignature
+          Language="C++ CLI"
+          Value="public:&#010;generic <typename T>&#010;[System::Runtime::CompilerServices::Extension]&#010; static System::Collections::Generic::IEnumerable<T> ^ ToEnumerable(T self);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Collections.Generic.IEnumerable&lt;T&gt;</ReturnType>
@@ -208,7 +341,10 @@
           <param name="self">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.DocTest.Generic.Extensions" Member="M:Mono.DocTest.Generic.Extensions.ToEnumerable``1(``0)" />
+        <Link
+          Type="Mono.DocTest.Generic.Extensions"
+          Member="M:Mono.DocTest.Generic.Extensions.ToEnumerable``1(``0)"
+        />
       </Member>
     </ExtensionMethod>
   </ExtensionMethods>

@@ -10,13 +10,19 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Extends <see cref="T:Cairo.Gradient" /> by providing a linear gradient along the line defined by (x0, y0) and (x1, y1).  </summary>
+    <summary
+      >Extends <see
+       cref="T:Cairo.Gradient" />
+
+       by providing a linear gradient along the line defined by (x0, y0) and (x1, y1).  </summary
+    >
     <remarks>
       <para>Before using the gradient pattern, a number of color stops should be defined using AddColorStop() or AddColorStopRgb().
 </para>
       <para>
         <example>
-          <code lang="C#">
+          <code lang="C#"
+            >
 Pattern pat;
 
 pat = new LinearGradient (0.0, 0.0,  0.0, 1.0);
@@ -28,14 +34,18 @@ gr.Pattern =  pat;
 gr.Fill ();
 
 pat.Destroy ();
-  </code>
+  </code
+          >
         </example>
       </para>
     </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LinearGradient (double x0, double y0, double x1, double y1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public LinearGradient (double x0, double y0, double x1, double y1);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="x0" Type="System.Double" />
@@ -48,7 +58,12 @@ pat.Destroy ();
         <param name="y0">y coordinate of the start point</param>
         <param name="x1">x coordinate of the end point</param>
         <param name="y1">y coordinate of the end point</param>
-        <summary>Create a new linear gradient <see cref="T:Cairo.Pattern" /> along the line defined by (x0, y0) and (x1, y1). </summary>
+        <summary
+          >Create a new linear gradient <see
+           cref="T:Cairo.Pattern" />
+
+           along the line defined by (x0, y0) and (x1, y1). </summary
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -68,7 +83,12 @@ pat.Destroy ();
       </ReturnValue>
       <Docs>
         <summary>Gets the gradient endpoints for a linear gradient</summary>
-        <value>A Array of <see cref="t:Cairo.PointD" /> with the Start- and Endpoint</value>
+        <value
+          >A Array of <see
+           cref="t:Cairo.PointD" />
+
+           with the Start- and Endpoint</value
+        >
         <remarks />
       </Docs>
     </Member>

@@ -12,11 +12,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by <see cref="T:System.Windows.Forms.ErrorProvider" />.</para>
+      <para
+        >This enumeration is used by <see
+         cref="T:System.Windows.Forms.ErrorProvider" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies constants indicating when the error icon, supplied by an <see cref="T:System.Windows.Forms.ErrorProvider" />, should blink to alert the user that an error has occurred.</para>
+      <para
+        >Specifies constants indicating when the error icon, supplied by an <see
+         cref="T:System.Windows.Forms.ErrorProvider" />
+
+        , should blink to alert the user that an error has occurred.</para
+      >
     </summary>
   </Docs>
   <Members>

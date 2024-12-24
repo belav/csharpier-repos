@@ -59,11 +59,18 @@
       </tr>
       <tr>
         <td colspan="3">
-          <span>&lt;</span>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid1$_ctl14$_ctl1','')">&gt;</a></td>
+          <span>&lt;</span>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid1$_ctl14$_ctl1','')">&gt;</a>
+        </td>
       </tr>
     </table>
     <span>
-      <br />10</span>
+      <br />
+
+      10</span
+    >
   </div>
   <div id="GHTSubTest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
@@ -124,11 +131,18 @@
       </tr>
       <tr>
         <td colspan="3">
-          <span>&lt;</span>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid2$_ctl14$_ctl1','')">&gt;</a></td>
+          <span>&lt;</span>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid2$_ctl14$_ctl1','')">&gt;</a>
+        </td>
       </tr>
     </table>
     <span>
-      <br />10</span>
+      <br />
+
+      10</span
+    >
   </div>
   <div id="GHTSubTest3" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid3">
@@ -149,19 +163,32 @@
       </tr>
       <tr>
         <td colspan="3">
-          <span>&lt;</span>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid3$_ctl6$_ctl1','')">&gt;</a></td>
+          <span>&lt;</span>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid3$_ctl6$_ctl1','')">&gt;</a>
+        </td>
       </tr>
     </table>
     <span>
-      <br />2</span>
+      <br />
+
+      2</span
+    >
   </div>
   <div id="GHTSubTest4" style="height:120px;width:553px">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest5" style="height:120px;width:553px">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest6" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid6">
@@ -322,10 +349,17 @@
       </tr>
       <tr>
         <td colspan="3">
-          <span>&lt;</span>&amp;nbsp;<span>&gt;</span></td>
+          <span>&lt;</span>
+
+          &amp;nbsp;<span
+          >&gt;</span>
+        </td>
       </tr>
     </table>
     <span>
-      <br />150</span>
+      <br />
+
+      150</span
+    >
   </div>
 </testresults>

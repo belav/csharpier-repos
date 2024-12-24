@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HtmlInputControl" FullName="System.Web.UI.HtmlControls.HtmlInputControl">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public abstract class HtmlInputControl : System.Web.UI.HtmlControls.HtmlControl" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public abstract class HtmlInputControl : System.Web.UI.HtmlControls.HtmlControl"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -12,8 +15,7 @@
   <Base>
     <BaseTypeName>System.Web.UI.HtmlControls.HtmlControl</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>System.Web.UI.ControlBuilder(typeof(System.Web.UI.HtmlControls.HtmlEmptyTagControlBuilder))</AttributeName>
@@ -22,8 +24,42 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You cannot create an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" /> class directly. Instead, this class is inherited by other classes, such as the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />, <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />, <see cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />, <see cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />, <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />, <see cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />, and <see cref="T:System.Web.UI.HtmlControls.HtmlInputFile" /> classes, to provide common basic functionality.</para>
-      <para>For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />, see the <see cref="M:System.Web.UI.HtmlControls.HtmlInputControl.#ctor(System.String)" /> constructor.</para>
+      <para
+        >You cannot create an instance of the <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+         class directly. Instead, this class is inherited by other classes, such as the <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+        , <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+
+        , <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+        , <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+
+        , <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+        , <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+        , and <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+         classes, to provide common basic functionality.</para
+      >
+      <para
+        >For a list of initial property values for an instance of <see
+         cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+        , see the <see
+         cref="M:System.Web.UI.HtmlControls.HtmlInputControl.#ctor(System.String)" />
+
+         constructor.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -41,11 +77,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor is used to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" /> class using the specified input control.</para>
+          <para
+            >This constructor is used to create and initialize a new instance of the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+             class using the specified input control.</para
+          >
           <block subset="none" type="note">
             <para>A new instance of this class is not created directly. This constructor is called from the constructor of other HTML control classes to initialize properties defined in this class.</para>
           </block>
-          <para>The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />.</para>
+          <para
+            >The following table shows the initial property value for an instance of <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -60,14 +106,25 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Type" /> </para>
+                  <see cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Type" />
+                </para>
               </term>
               <description>
-                <para>The value of the <paramref name="type" /> parameter. </para>
+                <para
+                  >The value of the <paramref
+                   name="type" />
+
+                   parameter. </para
+                >
               </description>
             </item>
           </list>
-          <para>The following table shows the different possible values for <paramref name="type" />.</para>
+          <para
+            >The following table shows the different possible values for <paramref
+             name="type" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -163,10 +220,18 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+             class.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of input control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of input control. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -184,15 +249,44 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Name" /> property to determine the unique identifier name for an <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />. In this implementation, the get accessor returns the value of the <see cref="P:System.Web.UI.Control.UniqueID" /> property. However, the set accessor does not assign a value to this property.</para>
+          <para
+            >Use the <see
+             cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Name" />
+
+             property to determine the unique identifier name for an <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+            . In this implementation, the get accessor returns the value of the <see
+             cref="P:System.Web.UI.Control.UniqueID" />
+
+             property. However, the set accessor does not assign a value to this property.</para
+          >
           <block subset="none" type="note">
-            <para>The set accessor does not assign a value to this property because the <see cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Name" /> property must have the same value as the <see cref="P:System.Web.UI.Control.UniqueID" /> property for most controls to work properly.</para>
+            <para
+              >The set accessor does not assign a value to this property because the <see
+               cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Name" />
+
+               property must have the same value as the <see
+               cref="P:System.Web.UI.Control.UniqueID" />
+
+               property for most controls to work properly.</para
+            >
           </block>
-          <para>Classes that inherit from the <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" /> class can override this implementation, if necessary.</para>
+          <para
+            >Classes that inherit from the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+             class can override this implementation, if necessary.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the unique identifier name for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" /> control.</para>
+          <para
+            >Gets or sets the unique identifier name for the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -209,7 +303,10 @@
       </Attributes>
     </Member>
     <Member MemberName="RenderAttributes">
-      <MemberSignature Language="C#" Value="protected override void RenderAttributes (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void RenderAttributes (System.Web.UI.HtmlTextWriter writer);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -220,14 +317,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.HtmlControls.HtmlInputControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" /> method renders a <paramref name="name" /> attribute and <paramref name="type" /> attribute before calling the base class's <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" /> method.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.HtmlControls.HtmlInputControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+             method renders a <paramref
+             name="name" />
+
+             attribute and <paramref
+             name="type" />
+
+             attribute before calling the base class's <see
+             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Renders the attributes of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" /> control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> object.</para>
+          <para
+            >Renders the attributes of the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+             control to the specified <see
+             cref="T:System.Web.UI.HtmlTextWriter" />
+
+             object.</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.HtmlTextWriter" /> that contains the output stream to render to the client.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.HtmlTextWriter" />
+
+           that contains the output stream to render to the client.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -244,8 +369,18 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this property get the type of an <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />.</para>
-          <para>The following table shows the different possible values for the <see cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Type" /> property.</para>
+          <para
+            >Use this property get the type of an <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+            .</para
+          >
+          <para
+            >The following table shows the different possible values for the <see
+             cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Type" />
+
+             property.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -341,7 +476,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the type of an <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />.</para>
+          <para
+            >Gets the type of an <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -368,11 +508,24 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this property to specify or determine the value associated with the <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" /> control. The <see cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Value" /> property is equivalent to the value attribute of HTML elements.</para>
+          <para
+            >Use this property to specify or determine the value associated with the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+             control. The <see
+             cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Value" />
+
+             property is equivalent to the value attribute of HTML elements.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the value associated with the <see cref="T:System.Web.UI.HtmlControls.HtmlInputControl" /> control.</para>
+          <para
+            >Gets or sets the value associated with the <see
+             cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

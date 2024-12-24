@@ -13,7 +13,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Hosting.ApplicationInfo" /> object is used by the <see cref="T:System.Web.Hosting.ApplicationManager" /> class for information about running applications. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Hosting.ApplicationInfo" />
+
+         object is used by the <see
+         cref="T:System.Web.Hosting.ApplicationManager" />
+
+         class for information about running applications. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,7 +62,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Hosting.ApplicationInfo.PhysicalPath" /> property is the path that was passed to the <see cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" /> method when the application was created.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Hosting.ApplicationInfo.PhysicalPath" />
+
+             property is the path that was passed to the <see
+             cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
+
+             method when the application was created.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -76,7 +92,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Hosting.ApplicationInfo.VirtualPath" /> property is the virtual path that was passed to the <see cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" /> method when the application was created.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Hosting.ApplicationInfo.VirtualPath" />
+
+             property is the virtual path that was passed to the <see
+             cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
+
+             method when the application was created.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

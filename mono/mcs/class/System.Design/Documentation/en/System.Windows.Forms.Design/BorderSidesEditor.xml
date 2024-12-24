@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BorderSidesEditor" FullName="System.Windows.Forms.Design.BorderSidesEditor">
-  <TypeSignature Language="C#" Value="public class BorderSidesEditor : System.Drawing.Design.UITypeEditor" />
+  <TypeSignature
+    Language="C#"
+    Value="public class BorderSidesEditor : System.Drawing.Design.UITypeEditor"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides an editor for setting the <see cref="P:System.Windows.Forms.ToolStripStatusLabel.BorderSides" /> property.</para>
+      <para
+        >Provides an editor for setting the <see
+         cref="P:System.Windows.Forms.ToolStripStatusLabel.BorderSides" />
+
+         property.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -28,12 +36,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.BorderSidesEditor" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Design.BorderSidesEditor" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EditValue">
-      <MemberSignature Language="C#" Value="public override object EditValue (System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object EditValue (System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -50,22 +66,45 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Edits the given object value using the editor style provided by <see cref="M:System.Windows.Forms.Design.BorderSidesEditor.GetEditStyle(System.ComponentModel.ITypeDescriptorContext)" />.</para>
+          <para
+            >Edits the given object value using the editor style provided by <see
+             cref="M:System.Windows.Forms.Design.BorderSidesEditor.GetEditStyle(System.ComponentModel.ITypeDescriptorContext)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The edited object.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> providing information about the control or component.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           providing information about the control or component.</param
+        >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.IServiceProvider" /> providing custom support to other objects.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.IServiceProvider" />
+
+           providing custom support to other objects.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object value to edit.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object value to edit.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetEditStyle">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Design.UITypeEditorEditStyle GetEditStyle (System.ComponentModel.ITypeDescriptorContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Design.UITypeEditorEditStyle GetEditStyle (System.ComponentModel.ITypeDescriptorContext context);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -84,10 +123,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Drawing.Design.UITypeEditorEditStyle" /> values. If the method is not supported, this method returns <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />.</para>
+          <para
+            >One of the <see
+             cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+
+             values. If the method is not supported, this method returns <see
+             cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            .</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> providing information about the control or component.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           providing information about the control or component.</param
+        >
       </Docs>
     </Member>
   </Members>

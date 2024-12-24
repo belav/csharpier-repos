@@ -21,7 +21,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the available verbosity levels of a <see cref="T:Microsoft.Build.Utilities.Logger" />. </para>
+      <para
+        >Specifies the available verbosity levels of a <see
+         cref="T:Microsoft.Build.Utilities.Logger" />
+
+        . </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -35,7 +40,18 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Detailed verbosity, which displays errors, warnings, messages with <see cref="T:Microsoft.Build.Framework.MessageImportance" /> values of <see cref="F:Microsoft.Build.Framework.MessageImportance.High" /> or <see cref="F:Microsoft.Build.Framework.MessageImportance.Normal" />, all status events, and a build summary.</para>
+          <para
+            >Detailed verbosity, which displays errors, warnings, messages with <see
+             cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+             values of <see
+             cref="F:Microsoft.Build.Framework.MessageImportance.High" />
+
+             or <see
+             cref="F:Microsoft.Build.Framework.MessageImportance.Normal" />
+
+            , all status events, and a build summary.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -69,7 +85,15 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Minimal verbosity, which displays errors, warnings, messages with <see cref="T:Microsoft.Build.Framework.MessageImportance" /> values of <see cref="F:Microsoft.Build.Framework.MessageImportance.High" />, and a build summary.</para>
+          <para
+            >Minimal verbosity, which displays errors, warnings, messages with <see
+             cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+             values of <see
+             cref="F:Microsoft.Build.Framework.MessageImportance.High" />
+
+            , and a build summary.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -86,7 +110,15 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Normal verbosity, which displays errors, warnings, messages with <see cref="T:Microsoft.Build.Framework.MessageImportance" /> values of <see cref="F:Microsoft.Build.Framework.MessageImportance.High" />, some status events, and a build summary.</para>
+          <para
+            >Normal verbosity, which displays errors, warnings, messages with <see
+             cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+             values of <see
+             cref="F:Microsoft.Build.Framework.MessageImportance.High" />
+
+            , some status events, and a build summary.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

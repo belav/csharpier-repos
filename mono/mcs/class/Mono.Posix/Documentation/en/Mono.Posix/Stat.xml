@@ -1,6 +1,9 @@
 <Type Name="Stat" FullName="Mono.Posix.Stat">
   <TypeSignature Language="C#" Maintainer="auto" Value="public struct Stat" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit Stat extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit Stat extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 79 15 99 77 D2 D0 3A 8E 6B EA 7A 2E 74 E8 D1 AF CC 93 E8 85 19 74 95 2B B4 80 A1 2C 91 34 47 4D 04 06 24 47 C3 7E 0E 68 C0 80 53 6F CF 3C 3F BE 2F F9 C9 79 CE 99 84 75 E5 06 E8 CE 82 DD 5B 0F 35 0D C1 0E 93 BF 2E EE CF 87 4B 24 77 0C 50 81 DB EA 74 47 FD DA FA 27 7B 22 DE 47 D6 FF EA 44 96 74 A4 F9 FC CF 84 D1 50 69 08 93 80 28 4D BD D3 5F 46 CD FF 12 A1 BD 78 E4 EF 00 65 D0 16 DF]</AssemblyPublicKey>
@@ -8,7 +11,12 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
@@ -22,15 +30,23 @@
     <summary>Every file has a unique INODE data structure. Mono's managed representation is the Stat struct. the Syscall.stat and Syscall.lstat methods return the Stat struct as an output parameter.</summary>
     <remarks>
       <para>See 'man stat(2)' for more information. Not all filesystems implement all of the time fields and certain mount types can affect the ATime value as well. See 'man mount(8)' for more information.</para>
-      <para>This type is obsolete.  Please use 
-    <see cref="T:Mono.Unix.Native.Stat" /> instead.</para>
+      <para
+        >This type is obsolete.  Please use 
+    <see
+         cref="T:Mono.Unix.Native.Stat" />
+
+         instead.</para
+      >
     </remarks>
     <altmember cref="T:Mono.Unix.Native.Stat" />
   </Docs>
   <Members>
     <Member MemberName="ATime">
       <MemberSignature Language="C#" Value="public readonly DateTime ATime;" />
-      <MemberSignature Language="ILAsm" Value=".field public initonly valuetype System.DateTime ATime" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public initonly valuetype System.DateTime ATime"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -45,8 +61,7 @@
       <ReturnValue>
         <ReturnType>System.DateTime</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Last access time.</summary>
         <remarks />
@@ -69,8 +84,7 @@
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Blocks gives the size of the file in 512-byte blocks. </summary>
         <remarks>This may be smaller than Size/512 e.g. when the file has holes.</remarks>
@@ -93,8 +107,7 @@
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Contains the preferred block size for efficient file system I/O.</summary>
         <remarks />
@@ -102,7 +115,10 @@
     </Member>
     <Member MemberName="CTime">
       <MemberSignature Language="C#" Value="public readonly DateTime CTime;" />
-      <MemberSignature Language="ILAsm" Value=".field public initonly valuetype System.DateTime CTime" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public initonly valuetype System.DateTime CTime"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -117,8 +133,7 @@
       <ReturnValue>
         <ReturnType>System.DateTime</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Creation time.</summary>
         <remarks />
@@ -141,8 +156,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>A device number on which the file resides.</summary>
         <remarks>To be added</remarks>
@@ -165,8 +179,7 @@
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>For a character or block device, the device major and minor numbers.</summary>
         <remarks />
@@ -189,8 +202,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Group ID</summary>
         <remarks />
@@ -213,8 +225,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>The inode number of file on disk.</summary>
         <remarks />
@@ -222,7 +233,10 @@
     </Member>
     <Member MemberName="Mode">
       <MemberSignature Language="C#" Value="public readonly Mono.Posix.StatMode Mode;" />
-      <MemberSignature Language="ILAsm" Value=".field public initonly valuetype Mono.Posix.StatMode Mode" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public initonly valuetype Mono.Posix.StatMode Mode"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -237,8 +251,7 @@
       <ReturnValue>
         <ReturnType>Mono.Posix.StatMode</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>The file mode as defined by the StatMode enumeration.</summary>
         <remarks>To be added</remarks>
@@ -246,7 +259,10 @@
     </Member>
     <Member MemberName="MTime">
       <MemberSignature Language="C#" Value="public readonly DateTime MTime;" />
-      <MemberSignature Language="ILAsm" Value=".field public initonly valuetype System.DateTime MTime" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public initonly valuetype System.DateTime MTime"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -261,8 +277,7 @@
       <ReturnValue>
         <ReturnType>System.DateTime</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>File last modified.</summary>
         <remarks />
@@ -285,8 +300,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>The number of pathnames or links that reference this inode.</summary>
         <remarks />
@@ -309,8 +323,7 @@
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Size gives the size of the file in bytes.</summary>
         <remarks>If the file is a symlink then this is the length of the pathname it contains without trailing null.</remarks>
@@ -333,8 +346,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>The owner user ID</summary>
         <remarks />
@@ -342,7 +354,10 @@
     </Member>
     <Member MemberName="UnixEpoch">
       <MemberSignature Language="C#" Value="public static readonly DateTime UnixEpoch;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly valuetype System.DateTime UnixEpoch" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly valuetype System.DateTime UnixEpoch"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -357,8 +372,7 @@
       <ReturnValue>
         <ReturnType>System.DateTime</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <MemberValue>1/1/1970 12:00:00 AM</MemberValue>
       <Docs>
         <summary>DateTime value corresponding to Unix Epoch (1/1/1970)</summary>
@@ -367,7 +381,10 @@
     </Member>
     <Member MemberName="UnixToDateTime">
       <MemberSignature Language="C#" Value="public static DateTime UnixToDateTime (long unix);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.DateTime UnixToDateTime(int64 unix) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig valuetype System.DateTime UnixToDateTime(int64 unix) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -386,9 +403,18 @@
         <Parameter Name="unix" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="unix">a <see cref="T:System.Int64" /></param>
-        <summary>Convert unix epoch time value to <see cref="T:System.DateTime" /></summary>
-        <returns>a <see cref="T:System.DateTime" /></returns>
+        <param name="unix"
+          >a <see
+           cref="T:System.Int64" />
+        </param>
+        <summary
+          >Convert unix epoch time value to <see
+           cref="T:System.DateTime" />
+        </summary>
+        <returns
+          >a <see
+           cref="T:System.DateTime" />
+        </returns>
         <remarks />
       </Docs>
     </Member>

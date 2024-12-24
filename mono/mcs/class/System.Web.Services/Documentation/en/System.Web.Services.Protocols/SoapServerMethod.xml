@@ -27,7 +27,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +40,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SoapServerMethod (Type serverType, System.Web.Services.Protocols.LogicalMethodInfo methodInfo);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SoapServerMethod (Type serverType, System.Web.Services.Protocols.LogicalMethodInfo methodInfo);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="serverType" Type="System.Type" />
@@ -46,12 +54,32 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+
+            .</para
+          >
         </summary>
         <param name="serverType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> to which this method belongs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           to which this method belongs.</param
+        >
         <param name="methodInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" /> with which to initialize this <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+           with which to initialize this <see
+           cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -77,7 +105,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BindingUse">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.SoapBindingUse BindingUse { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.SoapBindingUse BindingUse { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.SoapBindingUse</ReturnType>
@@ -88,7 +119,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Services.Description.SoapBindingUse" /> value that specifies whether the parts of SOAP messages sent to this XML Web service method are encoded as abstract type definitions or concrete schema definitions.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Services.Description.SoapBindingUse" />
+
+             value that specifies whether the parts of SOAP messages sent to this XML Web service method are encoded as abstract type definitions or concrete schema definitions.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -96,7 +132,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="InHeaderMappings">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Protocols.SoapHeaderMapping[] InHeaderMappings { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Protocols.SoapHeaderMapping[] InHeaderMappings { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Protocols.SoapHeaderMapping[]</ReturnType>
@@ -107,7 +146,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> used with SOAP requests to this Web service method.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+
+             used with SOAP requests to this Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -115,7 +159,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="InHeaderSerializer">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlSerializer InHeaderSerializer { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlSerializer InHeaderSerializer { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Xml.Serialization.XmlSerializer</ReturnType>
@@ -126,7 +173,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with SOAP requests to this Web service method.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             used with SOAP requests to this Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -134,7 +186,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MethodInfo">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Protocols.LogicalMethodInfo MethodInfo { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Protocols.LogicalMethodInfo MethodInfo { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Protocols.LogicalMethodInfo</ReturnType>
@@ -145,7 +200,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" /> associated with this XML Web service method.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+             associated with this XML Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -164,7 +224,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> that indicates whether an XML Web service client waits for the Web server to finish processing this XML Web service method.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             that indicates whether an XML Web service client waits for the Web server to finish processing this XML Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -172,7 +237,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OutHeaderMappings">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Protocols.SoapHeaderMapping[] OutHeaderMappings { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Protocols.SoapHeaderMapping[] OutHeaderMappings { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Protocols.SoapHeaderMapping[]</ReturnType>
@@ -183,7 +251,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> used with SOAP responses from this Web service method.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+
+             used with SOAP responses from this Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -191,7 +264,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OutHeaderSerializer">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlSerializer OutHeaderSerializer { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlSerializer OutHeaderSerializer { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Xml.Serialization.XmlSerializer</ReturnType>
@@ -202,7 +278,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with SOAP responses from this Web service method.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             used with SOAP responses from this Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -210,7 +291,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParameterSerializer">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlSerializer ParameterSerializer { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlSerializer ParameterSerializer { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Xml.Serialization.XmlSerializer</ReturnType>
@@ -221,7 +305,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with parameters that are passed to this Web service method.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             used with parameters that are passed to this Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -229,7 +318,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParameterStyle">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Protocols.SoapParameterStyle ParameterStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Protocols.SoapParameterStyle ParameterStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Protocols.SoapParameterStyle</ReturnType>
@@ -240,7 +332,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Services.Protocols.SoapParameterStyle" /> object that specifies how parameters are formatted in SOAP messages sent to this XML Web service method.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
+
+             object that specifies how parameters are formatted in SOAP messages sent to this XML Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -248,7 +345,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ReturnSerializer">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlSerializer ReturnSerializer { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlSerializer ReturnSerializer { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Xml.Serialization.XmlSerializer</ReturnType>
@@ -259,7 +359,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with return values from this Web service method.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             used with return values from this Web service method.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -278,7 +383,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> that indicates whether SOAP messages sent to and from this XML Web service method use RPC formatting.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             that indicates whether SOAP messages sent to and from this XML Web service method use RPC formatting.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -286,7 +396,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WsiClaims">
-      <MemberSignature Language="C#" Value="public System.Web.Services.WsiProfiles WsiClaims { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.WsiProfiles WsiClaims { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.WsiProfiles</ReturnType>
@@ -297,7 +410,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Services.WsiProfiles" /> value that indicates the Web Services Interoperability (WSI) specification to which this Web service claims to conform.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Services.WsiProfiles" />
+
+             value that indicates the Web Services Interoperability (WSI) specification to which this Web service claims to conform.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

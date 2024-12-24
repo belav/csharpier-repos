@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ViaHeaderValue" FullName="System.Net.Http.Headers.ViaHeaderValue">
   <TypeSignature Language="C#" Value="public class ViaHeaderValue : ICloneable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ViaHeaderValue extends System.Object implements class System.ICloneable" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ViaHeaderValue extends System.Object implements class System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Net.Http</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,8 +26,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ViaHeaderValue (string protocolVersion, string receivedBy);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string protocolVersion, string receivedBy) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ViaHeaderValue (string protocolVersion, string receivedBy);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string protocolVersion, string receivedBy) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,17 +46,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ViaHeaderValue" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+             class.</para
+          >
         </summary>
         <param name="protocolVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />The protocol version of the received protocol.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The protocol version of the received protocol.</param
+        >
         <param name="receivedBy">
-          <attribution license="cc4" from="Microsoft" modified="false" />The host and port that the request or response was received by.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The host and port that the request or response was received by.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ViaHeaderValue (string protocolVersion, string receivedBy, string protocolName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string protocolVersion, string receivedBy, string protocolName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ViaHeaderValue (string protocolVersion, string receivedBy, string protocolName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string protocolVersion, string receivedBy, string protocolName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -61,19 +87,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ViaHeaderValue" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+             class.</para
+          >
         </summary>
         <param name="protocolVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />The protocol version of the received protocol.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The protocol version of the received protocol.</param
+        >
         <param name="receivedBy">
-          <attribution license="cc4" from="Microsoft" modified="false" />The host and port that the request or response was received by.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The host and port that the request or response was received by.</param
+        >
         <param name="protocolName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The protocol name of the received protocol.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The protocol name of the received protocol.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ViaHeaderValue (string protocolVersion, string receivedBy, string protocolName, string comment);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string protocolVersion, string receivedBy, string protocolName, string comment) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ViaHeaderValue (string protocolVersion, string receivedBy, string protocolName, string comment);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string protocolVersion, string receivedBy, string protocolName, string comment) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -88,16 +134,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ViaHeaderValue" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+             class.</para
+          >
         </summary>
         <param name="protocolVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />The protocol version of the received protocol.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The protocol version of the received protocol.</param
+        >
         <param name="receivedBy">
-          <attribution license="cc4" from="Microsoft" modified="false" />The host and port that the request or response was received by.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The host and port that the request or response was received by.</param
+        >
         <param name="protocolName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The protocol name of the received protocol.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The protocol name of the received protocol.</param
+        >
         <param name="comment">
-          <attribution license="cc4" from="Microsoft" modified="false" />The comment field used to identify the software of the recipient proxy or gateway.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The comment field used to identify the software of the recipient proxy or gateway.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Comment">
@@ -121,7 +184,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -136,20 +202,44 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />object.</para>
+          <para
+            >Determines whether the specified <see
+             cref="T:System.Object" />
+
+             is equal to the current <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+            object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
-          <para>true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
+          <para
+            >true if the specified <see
+             cref="T:System.Object" />
+
+             is equal to the current object; otherwise, false.</para
+          >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare with the current object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to compare with the current object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -162,22 +252,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.</para>
-          <para>The <see cref="M:System.Net.Http.Headers.ViaHeaderValue.GetHashCode" /> method is suitable for use in hashing algorithms and data structures such as a hash table.</para>
+          <para
+            >The <see
+             cref="M:System.Net.Http.Headers.ViaHeaderValue.GetHashCode" />
+
+             method is suitable for use in hashing algorithms and data structures such as a hash table.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Serves as a hash function for an <see cref="T:System.Net.Http.Headers.ViaHeaderValue" /> object.</para>
+          <para
+            >Serves as a hash function for an <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Int32" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Int32" />
+
+            .</para
+          >
           <para>Returns a hash code for the current object.</para>
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public static System.Net.Http.Headers.ViaHeaderValue Parse (string input);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Net.Http.Headers.ViaHeaderValue Parse(string input) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Http.Headers.ViaHeaderValue Parse (string input);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Net.Http.Headers.ViaHeaderValue Parse(string input) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -192,15 +303,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts a string to an <see cref="T:System.Net.Http.Headers.ViaHeaderValue" /> instance.</para>
+          <para
+            >Converts a string to an <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Net.Http.Headers.ViaHeaderValue" />.</para>
-          <para>An <see cref="T:System.Net.Http.Headers.ViaHeaderValue" /> instance.</para>
+          <para
+            >Returns <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+            .</para
+          >
+          <para
+            >An <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+             instance.</para
+          >
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that represents via header value information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that represents via header value information.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ProtocolName">
@@ -265,7 +394,10 @@
     </Member>
     <Member MemberName="System.ICloneable.Clone">
       <MemberSignature Language="C#" Value="object ICloneable.Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance object System.ICloneable.Clone() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance object System.ICloneable.Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -278,18 +410,31 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.ViaHeaderValue" /> instance.</para>
+          <para
+            >Creates a new object that is a copy of the current <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Object" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Object" />
+
+            .</para
+          >
           <para>A copy of the current instance.</para>
         </returns>
       </Docs>
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -302,18 +447,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a string that represents the current <see cref="T:System.Net.Http.Headers.ViaHeaderValue" /> object.</para>
+          <para
+            >Returns a string that represents the current <see
+             cref="T:System.Net.Http.Headers.ViaHeaderValue" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.String" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.String" />
+
+            .</para
+          >
           <para>A string that represents the current object.</para>
         </returns>
       </Docs>
     </Member>
     <Member MemberName="TryParse">
-      <MemberSignature Language="C#" Value="public static bool TryParse (string input, out System.Net.Http.Headers.ViaHeaderValue parsedValue);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool TryParse(string input, class System.Net.Http.Headers.ViaHeaderValue parsedValue) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool TryParse (string input, out System.Net.Http.Headers.ViaHeaderValue parsedValue);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool TryParse(string input, class System.Net.Http.Headers.ViaHeaderValue parsedValue) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -323,7 +484,11 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="input" Type="System.String" />
-        <Parameter Name="parsedValue" Type="System.Net.Http.Headers.ViaHeaderValue&amp;" RefType="out" />
+        <Parameter
+          Name="parsedValue"
+          Type="System.Net.Http.Headers.ViaHeaderValue&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="input">To be added.</param>

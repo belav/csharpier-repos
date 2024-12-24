@@ -15,11 +15,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.MappingType" /> enumeration is used when getting or setting the <see cref="P:System.Data.DataColumn.ColumnMapping" /> property of the <see cref="T:System.Data.DataColumn" />. The property determines how a column's values will be written when the <see cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" /> method is called on a <see cref="T:System.Data.DataSet" /> to write the data and schema out as an XML document.</para>
+      <para
+        >The <see
+         cref="T:System.Data.MappingType" />
+
+         enumeration is used when getting or setting the <see
+         cref="P:System.Data.DataColumn.ColumnMapping" />
+
+         property of the <see
+         cref="T:System.Data.DataColumn" />
+
+        . The property determines how a column's values will be written when the <see
+         cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
+
+         method is called on a <see
+         cref="T:System.Data.DataSet" />
+
+         to write the data and schema out as an XML document.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies how a <see cref="T:System.Data.DataColumn" /> is mapped.</para>
+      <para
+        >Specifies how a <see
+         cref="T:System.Data.DataColumn" />
+
+         is mapped.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -91,7 +113,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The column is mapped to an <see cref="T:System.Xml.XmlText" /> node.</para>
+          <para
+            >The column is mapped to an <see
+             cref="T:System.Xml.XmlText" />
+
+             node.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

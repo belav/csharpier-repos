@@ -18,7 +18,7 @@
   <Copyright>To be added.</Copyright>
   <Types>
     <Namespace Name="System">
-      <Type Name="Action`1" DisplayName="Action&lt;T&gt;" Kind="Delegate" />
+      <Type Name="Action`1" DisplayName="Action<T>" Kind="Delegate" />
       <Type Name="Array" Kind="Class" />
       <Type Name="AsyncCallback" Kind="Delegate" />
       <Type Name="Environment" Kind="Class" />

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="InternalDataCollectionBase" FullName="System.Data.InternalDataCollectionBase">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class InternalDataCollectionBase : System.Collections.ICollection" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class InternalDataCollectionBase : System.Collections.ICollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -20,7 +24,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.BaseCollection" />
+
+         class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -36,11 +45,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BaseCollection" />
+
+             class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.InternalDataCollectionBase" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.InternalDataCollectionBase" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -62,16 +81,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be overridden by a derived class.</para>
-          <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BaseCollection" />
+
+             class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies all the elements of the current <see cref="T:System.Data.InternalDataCollectionBase" /> to a one-dimensional <see cref="T:System.Array" />, starting at the specified <see cref="T:System.Data.InternalDataCollectionBase" /> index.</para>
+          <para
+            >Copies all the elements of the current <see
+             cref="T:System.Data.InternalDataCollectionBase" />
+
+             to a one-dimensional <see
+             cref="T:System.Array" />
+
+            , starting at the specified <see
+             cref="T:System.Data.InternalDataCollectionBase" />
+
+             index.</para
+          >
         </summary>
         <param name="ar">
-          <attribution license="cc4" from="Microsoft" modified="false" />The one-dimensional <see cref="T:System.Array" /> to copy the current <see cref="T:System.Data.InternalDataCollectionBase" /> object's elements into. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The one-dimensional <see
+           cref="T:System.Array" />
+
+           to copy the current <see
+           cref="T:System.Data.InternalDataCollectionBase" />
+
+           object's elements into. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The destination <see cref="T:System.Array" /> index to start copying into. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The destination <see
+           cref="T:System.Array" />
+
+           index to start copying into. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -88,7 +138,12 @@
         <value>To be added: an object of type 'int'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BaseCollection" />
+
+             class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -106,7 +161,10 @@
       </Attributes>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -115,15 +173,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BaseCollection" />
+
+             class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Collections.IEnumerator" /> for the collection.</para>
+          <para
+            >Gets an <see
+             cref="T:System.Collections.IEnumerator" />
+
+             for the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IEnumerator" /> for the collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IEnumerator" />
+
+             for the collection.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -141,11 +214,21 @@
         <value>To be added: an object of type 'bool'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BaseCollection" />
+
+             class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether the <see cref="T:System.Data.InternalDataCollectionBase" /> is read-only.</para>
+          <para
+            >Gets a value that indicates whether the <see
+             cref="T:System.Data.InternalDataCollectionBase" />
+
+             is read-only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -168,11 +251,21 @@
         <value>To be added: an object of type 'bool'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BaseCollection" />
+
+             class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether the <see cref="T:System.Data.InternalDataCollectionBase" /> is synchonized.</para>
+          <para
+            >Gets a value that indicates whether the <see
+             cref="T:System.Data.InternalDataCollectionBase" />
+
+             is synchonized.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -186,7 +279,10 @@
       </Attributes>
     </Member>
     <Member MemberName="List">
-      <MemberSignature Language="C#" Value="protected virtual System.Collections.ArrayList List { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Collections.ArrayList List { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ArrayList</ReturnType>
@@ -195,7 +291,12 @@
         <value>To be added: an object of type 'Collections.ArrayList'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BaseCollection" />
+
+             class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -217,7 +318,12 @@
         <value>To be added: an object of type 'object'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.BaseCollection" /> class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BaseCollection" />
+
+             class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

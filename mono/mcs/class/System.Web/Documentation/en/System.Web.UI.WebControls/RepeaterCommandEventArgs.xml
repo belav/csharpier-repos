@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RepeaterCommandEventArgs" FullName="System.Web.UI.WebControls.RepeaterCommandEventArgs">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class RepeaterCommandEventArgs : System.Web.UI.WebControls.CommandEventArgs" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class RepeaterCommandEventArgs : System.Web.UI.WebControls.CommandEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -16,16 +19,40 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />, see the <see cref="M:System.Web.UI.WebControls.RepeaterCommandEventArgs.#ctor(System.Web.UI.WebControls.RepeaterItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" /> constructor. For more information about handling events, see <format type="text/html"><a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a></format>.</para>
+      <para
+        >For a list of initial property values for an instance of <see
+         cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+
+        , see the <see
+         cref="M:System.Web.UI.WebControls.RepeaterCommandEventArgs.#ctor(System.Web.UI.WebControls.RepeaterItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
+
+         constructor. For more information about handling events, see <format
+         type="text/html">
+          <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" /> event of a <see cref="T:System.Web.UI.WebControls.Repeater" />. This class cannot be inherited.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
+
+         event of a <see
+         cref="T:System.Web.UI.WebControls.Repeater" />
+
+        . This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RepeaterCommandEventArgs (System.Web.UI.WebControls.RepeaterItem item, object source, System.Web.UI.WebControls.CommandEventArgs args);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RepeaterCommandEventArgs (System.Web.UI.WebControls.RepeaterItem item, object source, System.Web.UI.WebControls.CommandEventArgs args);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -38,7 +65,12 @@
         <param name="args">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />.</para>
+          <para
+            >The following table shows initial property values for an instance of <see
+             cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -56,7 +88,10 @@
               </term>
               <description>
                 <para>
-                  <paramref name="item" /> parameter </para>
+                  <paramref name="item" />
+
+                   parameter </para
+                >
               </description>
             </item>
             <item>
@@ -65,17 +100,37 @@
               </term>
               <description>
                 <para>
-                  <paramref name="commandSource" /> parameter </para>
+                  <paramref name="commandSource" />
+
+                   parameter </para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.UI.WebControls.RepeaterItem" /> that represents an item in the <see cref="T:System.Web.UI.WebControls.Repeater" />. The <see cref="P:System.Web.UI.WebControls.RepeaterCommandEventArgs.Item" /> property is set to this value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+           that represents an item in the <see
+           cref="T:System.Web.UI.WebControls.Repeater" />
+
+          . The <see
+           cref="P:System.Web.UI.WebControls.RepeaterCommandEventArgs.Item" />
+
+           property is set to this value. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -105,7 +160,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.RepeaterItem Item { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.RepeaterItem Item { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.RepeaterItem</ReturnType>
@@ -114,11 +172,21 @@
         <value>To be added: an object of type 'RepeaterItem'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this property to access the properties of the <see cref="T:System.Web.UI.WebControls.RepeaterItem" /> associated with this event.</para>
+          <para
+            >Use this property to access the properties of the <see
+             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+             associated with this event.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.UI.WebControls.RepeaterItem" /> associated with the event.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+             associated with the event.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

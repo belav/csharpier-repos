@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpRequestHeaders" FullName="System.Net.Http.Headers.HttpRequestHeaders">
-  <TypeSignature Language="C#" Value="public sealed class HttpRequestHeaders : System.Net.Http.Headers.HttpHeaders" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit HttpRequestHeaders extends System.Net.Http.Headers.HttpHeaders" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class HttpRequestHeaders : System.Net.Http.Headers.HttpHeaders"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit HttpRequestHeaders extends System.Net.Http.Headers.HttpHeaders"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Net.Http</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +19,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This type is derived from <see cref="T:System.Net.Http.Headers.HttpHeaders" />.</para>
+      <para
+        >This type is derived from <see
+         cref="T:System.Net.Http.Headers.HttpHeaders" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,8 +33,14 @@
   </Docs>
   <Members>
     <Member MemberName="Accept">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.MediaTypeWithQualityHeaderValue&gt; Accept { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.MediaTypeWithQualityHeaderValue&gt; Accept" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.MediaTypeWithQualityHeaderValue> Accept { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.MediaTypeWithQualityHeaderValue> Accept"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -41,8 +58,14 @@
       </Docs>
     </Member>
     <Member MemberName="AcceptCharset">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.StringWithQualityHeaderValue&gt; AcceptCharset { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.StringWithQualityHeaderValue&gt; AcceptCharset" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.StringWithQualityHeaderValue> AcceptCharset { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.StringWithQualityHeaderValue> AcceptCharset"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -60,8 +83,14 @@
       </Docs>
     </Member>
     <Member MemberName="AcceptEncoding">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.StringWithQualityHeaderValue&gt; AcceptEncoding { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.StringWithQualityHeaderValue&gt; AcceptEncoding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.StringWithQualityHeaderValue> AcceptEncoding { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.StringWithQualityHeaderValue> AcceptEncoding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -79,8 +108,14 @@
       </Docs>
     </Member>
     <Member MemberName="AcceptLanguage">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.StringWithQualityHeaderValue&gt; AcceptLanguage { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.StringWithQualityHeaderValue&gt; AcceptLanguage" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.StringWithQualityHeaderValue> AcceptLanguage { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.StringWithQualityHeaderValue> AcceptLanguage"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,8 +133,14 @@
       </Docs>
     </Member>
     <Member MemberName="Authorization">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.AuthenticationHeaderValue Authorization { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.AuthenticationHeaderValue Authorization" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.AuthenticationHeaderValue Authorization { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.AuthenticationHeaderValue Authorization"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -117,8 +158,14 @@
       </Docs>
     </Member>
     <Member MemberName="CacheControl">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.CacheControlHeaderValue CacheControl { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.CacheControlHeaderValue CacheControl" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.CacheControlHeaderValue CacheControl { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.CacheControlHeaderValue CacheControl"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -136,8 +183,14 @@
       </Docs>
     </Member>
     <Member MemberName="Connection">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;string&gt; Connection { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;string&gt; Connection" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<string> Connection { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<string> Connection"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -155,8 +208,11 @@
       </Docs>
     </Member>
     <Member MemberName="ConnectionClose">
-      <MemberSignature Language="C#" Value="public Nullable&lt;bool&gt; ConnectionClose { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;bool&gt; ConnectionClose" />
+      <MemberSignature Language="C#" Value="public Nullable<bool> ConnectionClose { get; set; }" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<bool> ConnectionClose"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -174,8 +230,11 @@
       </Docs>
     </Member>
     <Member MemberName="Date">
-      <MemberSignature Language="C#" Value="public Nullable&lt;DateTimeOffset&gt; Date { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; Date" />
+      <MemberSignature Language="C#" Value="public Nullable<DateTimeOffset> Date { get; set; }" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<valuetype System.DateTimeOffset> Date"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -193,8 +252,14 @@
       </Docs>
     </Member>
     <Member MemberName="Expect">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.NameValueWithParametersHeaderValue&gt; Expect { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.NameValueWithParametersHeaderValue&gt; Expect" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.NameValueWithParametersHeaderValue> Expect { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.NameValueWithParametersHeaderValue> Expect"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -212,8 +277,11 @@
       </Docs>
     </Member>
     <Member MemberName="ExpectContinue">
-      <MemberSignature Language="C#" Value="public Nullable&lt;bool&gt; ExpectContinue { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;bool&gt; ExpectContinue" />
+      <MemberSignature Language="C#" Value="public Nullable<bool> ExpectContinue { get; set; }" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<bool> ExpectContinue"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -269,8 +337,14 @@
       </Docs>
     </Member>
     <Member MemberName="IfMatch">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.EntityTagHeaderValue&gt; IfMatch { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.EntityTagHeaderValue&gt; IfMatch" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.EntityTagHeaderValue> IfMatch { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.EntityTagHeaderValue> IfMatch"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -288,8 +362,14 @@
       </Docs>
     </Member>
     <Member MemberName="IfModifiedSince">
-      <MemberSignature Language="C#" Value="public Nullable&lt;DateTimeOffset&gt; IfModifiedSince { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; IfModifiedSince" />
+      <MemberSignature
+        Language="C#"
+        Value="public Nullable<DateTimeOffset> IfModifiedSince { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<valuetype System.DateTimeOffset> IfModifiedSince"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -307,8 +387,14 @@
       </Docs>
     </Member>
     <Member MemberName="IfNoneMatch">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.EntityTagHeaderValue&gt; IfNoneMatch { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.EntityTagHeaderValue&gt; IfNoneMatch" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.EntityTagHeaderValue> IfNoneMatch { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.EntityTagHeaderValue> IfNoneMatch"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -326,8 +412,14 @@
       </Docs>
     </Member>
     <Member MemberName="IfRange">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.RangeConditionHeaderValue IfRange { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.RangeConditionHeaderValue IfRange" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.RangeConditionHeaderValue IfRange { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.RangeConditionHeaderValue IfRange"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -345,8 +437,14 @@
       </Docs>
     </Member>
     <Member MemberName="IfUnmodifiedSince">
-      <MemberSignature Language="C#" Value="public Nullable&lt;DateTimeOffset&gt; IfUnmodifiedSince { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; IfUnmodifiedSince" />
+      <MemberSignature
+        Language="C#"
+        Value="public Nullable<DateTimeOffset> IfUnmodifiedSince { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<valuetype System.DateTimeOffset> IfUnmodifiedSince"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -364,8 +462,11 @@
       </Docs>
     </Member>
     <Member MemberName="MaxForwards">
-      <MemberSignature Language="C#" Value="public Nullable&lt;int&gt; MaxForwards { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int32&gt; MaxForwards" />
+      <MemberSignature Language="C#" Value="public Nullable<int> MaxForwards { get; set; }" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<int32> MaxForwards"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -383,8 +484,14 @@
       </Docs>
     </Member>
     <Member MemberName="Pragma">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.NameValueHeaderValue&gt; Pragma { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.NameValueHeaderValue&gt; Pragma" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.NameValueHeaderValue> Pragma { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.NameValueHeaderValue> Pragma"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -402,8 +509,14 @@
       </Docs>
     </Member>
     <Member MemberName="ProxyAuthorization">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.AuthenticationHeaderValue ProxyAuthorization { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.AuthenticationHeaderValue ProxyAuthorization" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.AuthenticationHeaderValue ProxyAuthorization { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.AuthenticationHeaderValue ProxyAuthorization"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -421,8 +534,14 @@
       </Docs>
     </Member>
     <Member MemberName="Range">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.RangeHeaderValue Range { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.RangeHeaderValue Range" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.RangeHeaderValue Range { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.RangeHeaderValue Range"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -459,8 +578,14 @@
       </Docs>
     </Member>
     <Member MemberName="TE">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.TransferCodingWithQualityHeaderValue&gt; TE { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.TransferCodingWithQualityHeaderValue&gt; TE" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.TransferCodingWithQualityHeaderValue> TE { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.TransferCodingWithQualityHeaderValue> TE"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -478,8 +603,14 @@
       </Docs>
     </Member>
     <Member MemberName="Trailer">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;string&gt; Trailer { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;string&gt; Trailer" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<string> Trailer { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<string> Trailer"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -497,8 +628,14 @@
       </Docs>
     </Member>
     <Member MemberName="TransferEncoding">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.TransferCodingHeaderValue&gt; TransferEncoding { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.TransferCodingHeaderValue&gt; TransferEncoding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.TransferCodingHeaderValue> TransferEncoding { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.TransferCodingHeaderValue> TransferEncoding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -516,8 +653,14 @@
       </Docs>
     </Member>
     <Member MemberName="TransferEncodingChunked">
-      <MemberSignature Language="C#" Value="public Nullable&lt;bool&gt; TransferEncodingChunked { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;bool&gt; TransferEncodingChunked" />
+      <MemberSignature
+        Language="C#"
+        Value="public Nullable<bool> TransferEncodingChunked { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<bool> TransferEncodingChunked"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -535,8 +678,14 @@
       </Docs>
     </Member>
     <Member MemberName="Upgrade">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.ProductHeaderValue&gt; Upgrade { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.ProductHeaderValue&gt; Upgrade" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.ProductHeaderValue> Upgrade { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.ProductHeaderValue> Upgrade"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -554,8 +703,14 @@
       </Docs>
     </Member>
     <Member MemberName="UserAgent">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.ProductInfoHeaderValue&gt; UserAgent { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.ProductInfoHeaderValue&gt; UserAgent" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.ProductInfoHeaderValue> UserAgent { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.ProductInfoHeaderValue> UserAgent"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -573,8 +728,14 @@
       </Docs>
     </Member>
     <Member MemberName="Via">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.ViaHeaderValue&gt; Via { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.ViaHeaderValue&gt; Via" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.ViaHeaderValue> Via { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.ViaHeaderValue> Via"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -592,8 +753,14 @@
       </Docs>
     </Member>
     <Member MemberName="Warning">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.HttpHeaderValueCollection&lt;System.Net.Http.Headers.WarningHeaderValue&gt; Warning { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1&lt;class System.Net.Http.Headers.WarningHeaderValue&gt; Warning" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.HttpHeaderValueCollection<System.Net.Http.Headers.WarningHeaderValue> Warning { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.HttpHeaderValueCollection`1<class System.Net.Http.Headers.WarningHeaderValue> Warning"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

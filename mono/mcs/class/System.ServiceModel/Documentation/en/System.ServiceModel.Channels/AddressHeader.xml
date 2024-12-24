@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AddressHeader" FullName="System.ServiceModel.Channels.AddressHeader">
   <TypeSignature Language="C#" Value="public abstract class AddressHeader" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit AddressHeader extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit AddressHeader extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +16,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An <see cref="T:System.ServiceModel.Channels.AddressHeader" /> is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Name" /> property and the namespace by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" /> property. </para>
+      <para
+        >An <see
+         cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+         is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see
+         cref="P:System.ServiceModel.Channels.AddressHeader.Name" />
+
+         property and the namespace by the <see
+         cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" />
+
+         property. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -23,7 +37,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected AddressHeader ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -32,17 +49,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="Overload:System.ServiceModel.Channels.AddressHeader.CreateAddressHeader" /> to create new <see cref="T:System.ServiceModel.Channels.AddressHeader" /> objects.</para>
+          <para
+            >Use the <see
+             cref="Overload:System.ServiceModel.Channels.AddressHeader.CreateAddressHeader" />
+
+             to create new <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             objects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CreateAddressHeader">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Channels.AddressHeader CreateAddressHeader (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Channels.AddressHeader CreateAddressHeader(object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Channels.AddressHeader CreateAddressHeader (object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Channels.AddressHeader CreateAddressHeader(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -57,19 +93,41 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified value.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             class with a specified value.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> that contains the information item specified by the <paramref name="value" /> parameter.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             that contains the information item specified by the <paramref
+             name="value" />
+
+             parameter.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The information item for the address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The information item for the address header.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateAddressHeader">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Channels.AddressHeader CreateAddressHeader (object value, System.Runtime.Serialization.XmlObjectSerializer formatter);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Channels.AddressHeader CreateAddressHeader(object value, class System.Runtime.Serialization.XmlObjectSerializer formatter) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Channels.AddressHeader CreateAddressHeader (object value, System.Runtime.Serialization.XmlObjectSerializer formatter);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Channels.AddressHeader CreateAddressHeader(object value, class System.Runtime.Serialization.XmlObjectSerializer formatter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -86,19 +144,38 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class using a specified formatter to serialize the information item from a specified object.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             class using a specified formatter to serialize the information item from a specified object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> that contains the information item specified by the value parameter.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             that contains the information item specified by the value parameter.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The information item for the address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The information item for the address header.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateAddressHeader">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Channels.AddressHeader CreateAddressHeader (string name, string ns, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Channels.AddressHeader CreateAddressHeader(string name, string ns, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Channels.AddressHeader CreateAddressHeader (string name, string ns, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Channels.AddressHeader CreateAddressHeader(string name, string ns, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,23 +192,57 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified value, name and namespace.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             class with a specified value, name and namespace.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> with the specified <paramref name="name" /> and <paramref name="ns" /> that contains the information item specified by <paramref name="value" />.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             with the specified <paramref
+             name="name" />
+
+             and <paramref
+             name="ns" />
+
+             that contains the information item specified by <paramref
+             name="value" />
+
+            .</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the address header.</param
+        >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace of the address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace of the address header.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The information item for the address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The information item for the address header.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateAddressHeader">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Channels.AddressHeader CreateAddressHeader (string name, string ns, object value, System.Runtime.Serialization.XmlObjectSerializer formatter);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Channels.AddressHeader CreateAddressHeader(string name, string ns, object value, class System.Runtime.Serialization.XmlObjectSerializer formatter) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Channels.AddressHeader CreateAddressHeader (string name, string ns, object value, System.Runtime.Serialization.XmlObjectSerializer formatter);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Channels.AddressHeader CreateAddressHeader(string name, string ns, object value, class System.Runtime.Serialization.XmlObjectSerializer formatter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -150,23 +261,54 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified name and namespace that uses a specified formatter to serialize the information item from a specified object.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             class with a specified name and namespace that uses a specified formatter to serialize the information item from a specified object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> with the specified <paramref name="name" /> and <paramref name="ns" /> that contains the information item specified by <paramref name="value" />.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.AddressHeader" />
+
+             with the specified <paramref
+             name="name" />
+
+             and <paramref
+             name="ns" />
+
+             that contains the information item specified by <paramref
+             name="value" />
+
+            .</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the address header.</param
+        >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace of the address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace of the address header.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The information item for the address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The information item for the address header.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -188,15 +330,35 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the information item in a specified <paramref name="obj" /> is equivalent to the information item contained in the current address header; otherwise, false. In particular, returns false if <paramref name="obj" /> is null.</para>
+          <para
+            >true if the information item in a specified <paramref
+             name="obj" />
+
+             is equivalent to the information item contained in the current address header; otherwise, false. In particular, returns false if <paramref
+             name="obj" />
+
+             is null.</para
+          >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> to compare with the object contained in the current address header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           to compare with the object contained in the current address header.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetAddressHeaderReader">
-      <MemberSignature Language="C#" Value="public virtual System.Xml.XmlDictionaryReader GetAddressHeaderReader ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Xml.XmlDictionaryReader GetAddressHeaderReader() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Xml.XmlDictionaryReader GetAddressHeaderReader ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Xml.XmlDictionaryReader GetAddressHeaderReader() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -213,13 +375,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can serialize the current address header object.</para>
+          <para
+            >An instance of <see
+             cref="T:System.Xml.XmlDictionaryReader" />
+
+             that can serialize the current address header object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -233,7 +403,10 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This is the string-based implementation.</para>
           <para>
-            <see cref="M:System.ServiceModel.Channels.AddressHeader.GetHashCode" /> is suitable for use in hashing algorithms and data structures like a hash table.</para>
+            <see cref="M:System.ServiceModel.Channels.AddressHeader.GetHashCode" />
+
+             is suitable for use in hashing algorithms and data structures like a hash table.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -245,9 +418,12 @@
         </returns>
       </Docs>
     </Member>
-    <Member MemberName="GetValue&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public T GetValue&lt;T&gt; ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T GetValue&lt;T&gt;() cil managed" />
+    <Member MemberName="GetValue<T>">
+      <MemberSignature Language="C#" Value="public T GetValue<T> ();" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !!T GetValue<T>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -262,8 +438,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When using this overload, you must supply a type for the generic parameter <paramref name="T" />. The type of the return value is determined by the generic type parameter. </para>
-          <para>Use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1(System.Runtime.Serialization.XmlObjectSerializer)" /> overload if you want to use a customized XML formatter.</para>
+          <para
+            >When using this overload, you must supply a type for the generic parameter <paramref
+             name="T" />
+
+            . The type of the return value is determined by the generic type parameter. </para
+          >
+          <para
+            >Use the <see
+             cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1(System.Runtime.Serialization.XmlObjectSerializer)" />
+
+             overload if you want to use a customized XML formatter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -271,15 +457,32 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of a class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</para>
+          <para
+            >An instance of a class of type <paramref
+             name="T" />
+
+             with its fields and properties set to the values supplied by the current address header object.</para
+          >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />A class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A class of type <paramref
+           name="T" />
+
+           with its fields and properties set to the values supplied by the current address header object.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="GetValue&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public T GetValue&lt;T&gt; (System.Runtime.Serialization.XmlObjectSerializer formatter);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T GetValue&lt;T&gt;(class System.Runtime.Serialization.XmlObjectSerializer formatter) cil managed" />
+    <Member MemberName="GetValue<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public T GetValue<T> (System.Runtime.Serialization.XmlObjectSerializer formatter);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !!T GetValue<T>(class System.Runtime.Serialization.XmlObjectSerializer formatter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -297,8 +500,18 @@
         <param name="formatter">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When using this overload, you must supply a type for the generic parameter <paramref name="T" />. The type of the return value is determined by the generic type parameter.</para>
-          <para>Use this overload only if you want to use a customized XML formatter; otherwise use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1" /> overload.</para>
+          <para
+            >When using this overload, you must supply a type for the generic parameter <paramref
+             name="T" />
+
+            . The type of the return value is determined by the generic type parameter.</para
+          >
+          <para
+            >Use this overload only if you want to use a customized XML formatter; otherwise use the <see
+             cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1" />
+
+             overload.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -306,10 +519,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of a class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</para>
+          <para
+            >An instance of a class of type <paramref
+             name="T" />
+
+             with its fields and properties set to the values supplied by the current address header object.</para
+          >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />A class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A class of type <paramref
+           name="T" />
+
+           with its fields and properties set to the values supplied by the current address header object.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -351,8 +575,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnWriteAddressHeaderContents">
-      <MemberSignature Language="C#" Value="protected abstract void OnWriteAddressHeaderContents (System.Xml.XmlDictionaryWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnWriteAddressHeaderContents(class System.Xml.XmlDictionaryWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract void OnWriteAddressHeaderContents (System.Xml.XmlDictionaryWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void OnWriteAddressHeaderContents(class System.Xml.XmlDictionaryWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -370,12 +600,24 @@
           <para>When overridden in a derived class, is invoked when the address header contents are written to a stream or file.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header contents to a stream or file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlDictionaryWriter" />
+
+           used to write the address header contents to a stream or file.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnWriteStartAddressHeader">
-      <MemberSignature Language="C#" Value="protected virtual void OnWriteStartAddressHeader (System.Xml.XmlDictionaryWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnWriteStartAddressHeader(class System.Xml.XmlDictionaryWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnWriteStartAddressHeader (System.Xml.XmlDictionaryWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void OnWriteStartAddressHeader(class System.Xml.XmlDictionaryWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -393,12 +635,24 @@
           <para>When overridden in a derived class, is invoked when the address header contents begin to be written to a stream or file.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlDictionaryWriter" />
+
+           used to write the address header to a stream or file.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToMessageHeader">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.MessageHeader ToMessageHeader ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ServiceModel.Channels.MessageHeader ToMessageHeader() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.MessageHeader ToMessageHeader ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ServiceModel.Channels.MessageHeader ToMessageHeader() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -415,13 +669,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Channels.MessageHeader" /> that wraps the current address header.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.MessageHeader" />
+
+             that wraps the current address header.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="WriteAddressHeader">
-      <MemberSignature Language="C#" Value="public void WriteAddressHeader (System.Xml.XmlDictionaryWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WriteAddressHeader(class System.Xml.XmlDictionaryWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void WriteAddressHeader (System.Xml.XmlDictionaryWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WriteAddressHeader(class System.Xml.XmlDictionaryWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -437,19 +702,39 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This overload calls the abstract </para>
           <para>
-            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method, so users must provide an implementation of that method to use this method. </para>
+            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" />
+
+             method, so users must provide an implementation of that method to use this method. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the address header to a stream or file using a specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
+          <para
+            >Writes the address header to a stream or file using a specified <see
+             cref="T:System.Xml.XmlDictionaryWriter" />
+
+            .</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlDictionaryWriter" />
+
+           used to write the address header to a stream or file.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="WriteAddressHeader">
-      <MemberSignature Language="C#" Value="public void WriteAddressHeader (System.Xml.XmlWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WriteAddressHeader(class System.Xml.XmlWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void WriteAddressHeader (System.Xml.XmlWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WriteAddressHeader(class System.Xml.XmlWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -463,21 +748,49 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This overload wraps <see cref="T:System.Xml.XmlWriter" /> as a <see cref="T:System.Xml.XmlDictionaryWriter" /> and then the calls the abstract </para>
+          <para
+            >This overload wraps <see
+             cref="T:System.Xml.XmlWriter" />
+
+             as a <see
+             cref="T:System.Xml.XmlDictionaryWriter" />
+
+             and then the calls the abstract </para
+          >
           <para>
-            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method. Users must provide an implementation for that abstract method to use this overload.</para>
+            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" />
+
+             method. Users must provide an implementation for that abstract method to use this overload.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the address header to a stream or file using a specified <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Writes the address header to a stream or file using a specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlWriter" /> used to write the address header to a stream or file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlWriter" />
+
+           used to write the address header to a stream or file.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="WriteAddressHeaderContents">
-      <MemberSignature Language="C#" Value="public void WriteAddressHeaderContents (System.Xml.XmlDictionaryWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WriteAddressHeaderContents(class System.Xml.XmlDictionaryWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void WriteAddressHeaderContents (System.Xml.XmlDictionaryWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WriteAddressHeaderContents(class System.Xml.XmlDictionaryWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -495,12 +808,24 @@
           <para>Writes the address header contents to a stream or file.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header contents to a stream or file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlDictionaryWriter" />
+
+           used to write the address header contents to a stream or file.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="WriteStartAddressHeader">
-      <MemberSignature Language="C#" Value="public void WriteStartAddressHeader (System.Xml.XmlDictionaryWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WriteStartAddressHeader(class System.Xml.XmlDictionaryWriter writer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void WriteStartAddressHeader (System.Xml.XmlDictionaryWriter writer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WriteStartAddressHeader(class System.Xml.XmlDictionaryWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -518,7 +843,13 @@
           <para>Starts to write the address header contents to a stream or file.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlDictionaryWriter" />
+
+           used to write the address header to a stream or file.</param
+        >
       </Docs>
     </Member>
   </Members>

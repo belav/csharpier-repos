@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="KeyContainerPermissionAttribute" FullName="System.Security.Permissions.KeyContainerPermissionAttribute">
-  <TypeSignature Language="C#" Value="public sealed class KeyContainerPermissionAttribute : System.Security.Permissions.CodeAccessSecurityAttribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit KeyContainerPermissionAttribute extends System.Security.Permissions.CodeAccessSecurityAttribute" />
+<Type
+  Name="KeyContainerPermissionAttribute"
+  FullName="System.Security.Permissions.KeyContainerPermissionAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class KeyContainerPermissionAttribute : System.Security.Permissions.CodeAccessSecurityAttribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit KeyContainerPermissionAttribute extends System.Security.Permissions.CodeAccessSecurityAttribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -23,18 +32,42 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" /> value that is used.</para>
-      <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. <see cref="T:System.Security.Permissions.KeyContainerPermissionAttribute" /> is used only for declarative security. For imperative security, use the <see cref="T:System.Security.Permissions.KeyContainerPermission" /> class.</para>
+      <para
+        >The scope of the declaration that is allowed depends on the <see
+         cref="T:System.Security.Permissions.SecurityAction" />
+
+         value that is used.</para
+      >
+      <para
+        >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. <see
+         cref="T:System.Security.Permissions.KeyContainerPermissionAttribute" />
+
+         is used only for declarative security. For imperative security, use the <see
+         cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Allows security actions for <see cref="T:System.Security.Permissions.KeyContainerPermission" /> to be applied to code using declarative security. This class cannot be inherited.</para>
+      <para
+        >Allows security actions for <see
+         cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+         to be applied to code using declarative security. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public KeyContainerPermissionAttribute (System.Security.Permissions.SecurityAction action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.SecurityAction action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public KeyContainerPermissionAttribute (System.Security.Permissions.SecurityAction action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.SecurityAction action) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,15 +81,32 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermissionAttribute" /> class with the specified security action.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.KeyContainerPermissionAttribute" />
+
+             class with the specified security action.</para
+          >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Permissions.SecurityAction" />
+
+           values. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreatePermission">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission CreatePermission ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission CreatePermission() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission CreatePermission ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission CreatePermission() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -75,17 +125,33 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates and returns a new <see cref="T:System.Security.Permissions.KeyContainerPermission" />.</para>
+          <para
+            >Creates and returns a new <see
+             cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Security.Permissions.KeyContainerPermission" /> that corresponds to the attribute.</para>
+          <para
+            >A <see
+             cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+             that corresponds to the attribute.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Flags">
-      <MemberSignature Language="C#" Value="public System.Security.Permissions.KeyContainerPermissionFlags Flags { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Permissions.KeyContainerPermissionFlags Flags" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Permissions.KeyContainerPermissionFlags Flags { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Permissions.KeyContainerPermissionFlags Flags"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,7 +168,30 @@
           <block subset="none" type="note">
             <para>Many of these flags are powerful and permit access to key containers that should be granted only to highly trusted code.</para>
           </block>
-          <para>The most powerful of the flags are <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Create" />, <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Delete" />, <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Import" />, <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Export" />, <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Sign" />, <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Decrypt" />, and <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" />. For specific threats posed by the use of these flags, see individual flag descriptions.</para>
+          <para
+            >The most powerful of the flags are <see
+             cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Create" />
+
+            , <see
+             cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Delete" />
+
+            , <see
+             cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Import" />
+
+            , <see
+             cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Export" />
+
+            , <see
+             cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Sign" />
+
+            , <see
+             cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Decrypt" />
+
+            , and <see
+             cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" />
+
+            . For specific threats posed by the use of these flags, see individual flag descriptions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

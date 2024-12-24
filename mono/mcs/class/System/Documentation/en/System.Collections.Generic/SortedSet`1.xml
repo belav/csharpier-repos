@@ -1,6 +1,12 @@
-<Type Name="SortedSet&lt;T&gt;" FullName="System.Collections.Generic.SortedSet&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public class SortedSet&lt;T&gt; : System.Collections.Generic.ICollection&lt;T&gt;, System.Collections.Generic.IEnumerable&lt;T&gt;, System.Collections.Generic.ISet&lt;T&gt;, System.Collections.ICollection, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit SortedSet`1&lt;T&gt; extends System.Object implements class System.Collections.Generic.ICollection`1&lt;!T&gt;, class System.Collections.Generic.IEnumerable`1&lt;!T&gt;, class System.Collections.Generic.ISet`1&lt;!T&gt;, class System.Collections.ICollection, class System.Collections.IEnumerable, class System.Runtime.Serialization.IDeserializationCallback, class System.Runtime.Serialization.ISerializable" />
+<Type Name="SortedSet<T>" FullName="System.Collections.Generic.SortedSet<T>">
+  <TypeSignature
+    Language="C#"
+    Value="public class SortedSet<T> : System.Collections.Generic.ICollection<T>, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.ISet<T>, System.Collections.ICollection, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit SortedSet`1<T> extends System.Object implements class System.Collections.Generic.ICollection`1<!T>, class System.Collections.Generic.IEnumerable`1<!T>, class System.Collections.Generic.ISet`1<!T>, class System.Collections.ICollection, class System.Collections.IEnumerable, class System.Runtime.Serialization.IDeserializationCallback, class System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -47,7 +53,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SortedSet ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,14 +68,20 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SortedSet (System.Collections.Generic.IComparer&lt;T&gt; comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IComparer`1&lt;!T&gt; comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SortedSet (System.Collections.Generic.IComparer<T> comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IComparer`1<!T> comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="comparer" Type="System.Collections.Generic.IComparer&lt;T&gt;" />
+        <Parameter Name="comparer" Type="System.Collections.Generic.IComparer<T>" />
       </Parameters>
       <Docs>
         <param name="comparer">To be added.</param>
@@ -75,14 +90,20 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SortedSet (System.Collections.Generic.IEnumerable&lt;T&gt; collection);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; collection) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SortedSet (System.Collections.Generic.IEnumerable<T> collection);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1<!T> collection) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="collection" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="collection" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="collection">To be added.</param>
@@ -91,15 +112,21 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SortedSet (System.Collections.Generic.IEnumerable&lt;T&gt; collection, System.Collections.Generic.IComparer&lt;T&gt; comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; collection, class System.Collections.Generic.IComparer`1&lt;!T&gt; comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SortedSet (System.Collections.Generic.IEnumerable<T> collection, System.Collections.Generic.IComparer<T> comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1<!T> collection, class System.Collections.Generic.IComparer`1<!T> comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="collection" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
-        <Parameter Name="comparer" Type="System.Collections.Generic.IComparer&lt;T&gt;" />
+        <Parameter Name="collection" Type="System.Collections.Generic.IEnumerable<T>" />
+        <Parameter Name="comparer" Type="System.Collections.Generic.IComparer<T>" />
       </Parameters>
       <Docs>
         <param name="collection">To be added.</param>
@@ -109,8 +136,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected SortedSet (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected SortedSet (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -128,7 +161,10 @@
     </Member>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="public bool Add (T item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Add(!T item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Add(!T item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -148,7 +184,10 @@
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public virtual void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -163,8 +202,14 @@
       </Docs>
     </Member>
     <Member MemberName="Comparer">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IComparer&lt;T&gt; Comparer { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IComparer`1&lt;!T&gt; Comparer" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IComparer<T> Comparer { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IComparer`1<!T> Comparer"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -180,7 +225,10 @@
     </Member>
     <Member MemberName="Contains">
       <MemberSignature Language="C#" Value="public virtual bool Contains (T item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Contains(!T item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Contains(!T item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -200,7 +248,10 @@
     </Member>
     <Member MemberName="CopyTo">
       <MemberSignature Language="C#" Value="public void CopyTo (T[] array);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CopyTo(!T[] array) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void CopyTo(!T[] array) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -219,7 +270,10 @@
     </Member>
     <Member MemberName="CopyTo">
       <MemberSignature Language="C#" Value="public void CopyTo (T[] array, int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CopyTo(!T[] array, int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void CopyTo(!T[] array, int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -239,8 +293,14 @@
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (T[] array, int index, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CopyTo(!T[] array, int32 index, int32 count) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (T[] array, int index, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void CopyTo(!T[] array, int32 index, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -278,8 +338,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateSetComparer">
-      <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEqualityComparer&lt;System.Collections.Generic.SortedSet&lt;T&gt;&gt; CreateSetComparer ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEqualityComparer`1&lt;class System.Collections.Generic.SortedSet`1&lt;!T&gt;&gt; CreateSetComparer() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.Generic.IEqualityComparer<System.Collections.Generic.SortedSet<T>> CreateSetComparer ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Collections.Generic.IEqualityComparer`1<class System.Collections.Generic.SortedSet`1<!T>> CreateSetComparer() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -295,8 +361,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateSetComparer">
-      <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEqualityComparer&lt;System.Collections.Generic.SortedSet&lt;T&gt;&gt; CreateSetComparer (System.Collections.Generic.IEqualityComparer&lt;T&gt; memberEqualityComparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEqualityComparer`1&lt;class System.Collections.Generic.SortedSet`1&lt;!T&gt;&gt; CreateSetComparer(class System.Collections.Generic.IEqualityComparer`1&lt;!T&gt; memberEqualityComparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.Generic.IEqualityComparer<System.Collections.Generic.SortedSet<T>> CreateSetComparer (System.Collections.Generic.IEqualityComparer<T> memberEqualityComparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Collections.Generic.IEqualityComparer`1<class System.Collections.Generic.SortedSet`1<!T>> CreateSetComparer(class System.Collections.Generic.IEqualityComparer`1<!T> memberEqualityComparer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -310,7 +382,10 @@
         <ReturnType>System.Collections.Generic.IEqualityComparer&lt;System.Collections.Generic.SortedSet&lt;T&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="memberEqualityComparer" Type="System.Collections.Generic.IEqualityComparer&lt;T&gt;" />
+        <Parameter
+          Name="memberEqualityComparer"
+          Type="System.Collections.Generic.IEqualityComparer<T>"
+        />
       </Parameters>
       <Docs>
         <param name="memberEqualityComparer">To be added.</param>
@@ -320,8 +395,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExceptWith">
-      <MemberSignature Language="C#" Value="public void ExceptWith (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ExceptWith(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void ExceptWith (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void ExceptWith(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -335,7 +416,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -344,8 +425,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.SortedSet&lt;T&gt;.Enumerator GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Collections.Generic.SortedSet`1/Enumerator&lt;!T&gt; GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.SortedSet<T>.Enumerator GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance valuetype System.Collections.Generic.SortedSet`1/Enumerator<!T> GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -361,8 +448,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="protected virtual void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -387,8 +480,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetViewBetween">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.Generic.SortedSet&lt;T&gt; GetViewBetween (T lowerValue, T upperValue);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.SortedSet`1&lt;!T&gt; GetViewBetween(!T lowerValue, !T upperValue) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.Generic.SortedSet<T> GetViewBetween (T lowerValue, T upperValue);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.SortedSet`1<!T> GetViewBetween(!T lowerValue, !T upperValue) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -409,8 +508,14 @@
       </Docs>
     </Member>
     <Member MemberName="IntersectWith">
-      <MemberSignature Language="C#" Value="public virtual void IntersectWith (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void IntersectWith(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void IntersectWith (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void IntersectWith(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -424,7 +529,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -433,8 +538,14 @@
       </Docs>
     </Member>
     <Member MemberName="IsProperSubsetOf">
-      <MemberSignature Language="C#" Value="public bool IsProperSubsetOf (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsProperSubsetOf(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsProperSubsetOf (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsProperSubsetOf(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -443,7 +554,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -453,8 +564,14 @@
       </Docs>
     </Member>
     <Member MemberName="IsProperSupersetOf">
-      <MemberSignature Language="C#" Value="public bool IsProperSupersetOf (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsProperSupersetOf(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsProperSupersetOf (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsProperSupersetOf(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -463,7 +580,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -473,8 +590,14 @@
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
-      <MemberSignature Language="C#" Value="public bool IsSubsetOf (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsSubsetOf(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsSubsetOf (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsSubsetOf(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -483,7 +606,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -493,8 +616,14 @@
       </Docs>
     </Member>
     <Member MemberName="IsSupersetOf">
-      <MemberSignature Language="C#" Value="public bool IsSupersetOf (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsSupersetOf(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsSupersetOf (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsSupersetOf(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -503,7 +632,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -545,8 +674,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnDeserialization">
-      <MemberSignature Language="C#" Value="protected virtual void OnDeserialization (object sender);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnDeserialization(object sender) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnDeserialization (object sender);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void OnDeserialization(object sender) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -569,8 +704,14 @@
       </Docs>
     </Member>
     <Member MemberName="Overlaps">
-      <MemberSignature Language="C#" Value="public bool Overlaps (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Overlaps(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Overlaps (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Overlaps(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -579,7 +720,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -590,7 +731,10 @@
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="public bool Remove (T item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Remove(!T item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Remove(!T item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -609,8 +753,11 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveWhere">
-      <MemberSignature Language="C#" Value="public int RemoveWhere (Predicate&lt;T&gt; match);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 RemoveWhere(class System.Predicate`1&lt;!T&gt; match) cil managed" />
+      <MemberSignature Language="C#" Value="public int RemoveWhere (Predicate<T> match);" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int32 RemoveWhere(class System.Predicate`1<!T> match) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -619,7 +766,7 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="match" Type="System.Predicate&lt;T&gt;" />
+        <Parameter Name="match" Type="System.Predicate<T>" />
       </Parameters>
       <Docs>
         <param name="match">To be added.</param>
@@ -629,8 +776,14 @@
       </Docs>
     </Member>
     <Member MemberName="Reverse">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;T&gt; Reverse ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;!T&gt; Reverse() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<T> Reverse ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1<!T> Reverse() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -646,8 +799,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetEquals">
-      <MemberSignature Language="C#" Value="public bool SetEquals (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool SetEquals(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool SetEquals (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool SetEquals(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -656,7 +815,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -666,8 +825,14 @@
       </Docs>
     </Member>
     <Member MemberName="SymmetricExceptWith">
-      <MemberSignature Language="C#" Value="public void SymmetricExceptWith (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SymmetricExceptWith(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SymmetricExceptWith (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void SymmetricExceptWith(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -681,7 +846,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>
@@ -689,9 +854,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.ICollection&lt;T&gt;.Add">
-      <MemberSignature Language="C#" Value="void ICollection&lt;T&gt;.Add (T item);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Collections.Generic.ICollection&lt;T&gt;.Add(!T item) cil managed" />
+    <Member MemberName="System.Collections.Generic.ICollection<T>.Add">
+      <MemberSignature Language="C#" Value="void ICollection<T>.Add (T item);" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Collections.Generic.ICollection<T>.Add(!T item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -708,9 +876,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.ICollection&lt;T&gt;.IsReadOnly">
-      <MemberSignature Language="C#" Value="bool System.Collections.Generic.ICollection&lt;T&gt;.IsReadOnly { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.Generic.ICollection&lt;T&gt;.IsReadOnly" />
+    <Member MemberName="System.Collections.Generic.ICollection<T>.IsReadOnly">
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.Generic.ICollection<T>.IsReadOnly { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.Generic.ICollection<T>.IsReadOnly"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -724,9 +898,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.Generic.IEnumerator&lt;T&gt; IEnumerable&lt;T&gt;.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1&lt;!T&gt; System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator() cil managed" />
+    <Member MemberName="System.Collections.Generic.IEnumerable<T>.GetEnumerator">
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.Generic.IEnumerator<T> IEnumerable<T>.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1<!T> System.Collections.Generic.IEnumerable<T>.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -743,7 +923,10 @@
     </Member>
     <Member MemberName="System.Collections.ICollection.CopyTo">
       <MemberSignature Language="C#" Value="void ICollection.CopyTo (Array array, int index);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Collections.ICollection.CopyTo(class System.Array array, int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Collections.ICollection.CopyTo(class System.Array array, int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -763,8 +946,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.ICollection.IsSynchronized" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.ICollection.IsSynchronized"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -779,8 +968,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance object System.Collections.ICollection.SyncRoot" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance object System.Collections.ICollection.SyncRoot"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -795,8 +990,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -812,8 +1013,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Serialization.IDeserializationCallback.OnDeserialization">
-      <MemberSignature Language="C#" Value="void IDeserializationCallback.OnDeserialization (object sender);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object sender) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IDeserializationCallback.OnDeserialization (object sender);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object sender) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -831,8 +1038,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Serialization.ISerializable.GetObjectData">
-      <MemberSignature Language="C#" Value="void ISerializable.GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.Serialization.ISerializable.GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void ISerializable.GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.Serialization.ISerializable.GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -852,8 +1065,14 @@
       </Docs>
     </Member>
     <Member MemberName="UnionWith">
-      <MemberSignature Language="C#" Value="public void UnionWith (System.Collections.Generic.IEnumerable&lt;T&gt; other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UnionWith(class System.Collections.Generic.IEnumerable`1&lt;!T&gt; other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void UnionWith (System.Collections.Generic.IEnumerable<T> other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void UnionWith(class System.Collections.Generic.IEnumerable`1<!T> other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -867,7 +1086,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        <Parameter Name="other" Type="System.Collections.Generic.IEnumerable<T>" />
       </Parameters>
       <Docs>
         <param name="other">To be added.</param>

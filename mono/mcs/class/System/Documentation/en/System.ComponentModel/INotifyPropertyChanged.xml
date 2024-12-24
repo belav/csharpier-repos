@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="INotifyPropertyChanged" FullName="System.ComponentModel.INotifyPropertyChanged">
   <TypeSignature Language="C#" Value="public interface INotifyPropertyChanged" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract INotifyPropertyChanged" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract INotifyPropertyChanged"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -12,12 +15,30 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> interface is used to notify clients, typically binding clients, that a property value has changed.</para>
-      <para>For example, consider a Person object with a property called FirstName. To provide generic property-change notification, the Person type implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> interface and raises a <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" /> event when FirstName is changed.</para>
+      <para
+        >The <see
+         cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+         interface is used to notify clients, typically binding clients, that a property value has changed.</para
+      >
+      <para
+        >For example, consider a Person object with a property called FirstName. To provide generic property-change notification, the Person type implements the <see
+         cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+         interface and raises a <see
+         cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+
+         event when FirstName is changed.</para
+      >
       <para>For change notification to occur in a binding between a bound client and a data source, your bound type should either:</para>
       <list type="bullet">
         <item>
-          <para>Implement the <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> interface (preferred).</para>
+          <para
+            >Implement the <see
+             cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+             interface (preferred).</para
+          >
         </item>
         <item>
           <para>Provide a change event for each property of the bound type.</para>
@@ -32,8 +53,14 @@
   </Docs>
   <Members>
     <Member MemberName="PropertyChanged">
-      <MemberSignature Language="C#" Value="public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.ComponentModel.PropertyChangedEventHandler PropertyChanged" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".event class System.ComponentModel.PropertyChangedEventHandler PropertyChanged"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -46,7 +73,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" /> event can indicate all properties on the object have changed by using either null or <see cref="F:System.String.Empty" /> as the property name in the <see cref="T:System.ComponentModel.PropertyChangedEventArgs" />.</para>
+          <para
+            >The <see
+             cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+
+             event can indicate all properties on the object have changed by using either null or <see
+             cref="F:System.String.Empty" />
+
+             as the property name in the <see
+             cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

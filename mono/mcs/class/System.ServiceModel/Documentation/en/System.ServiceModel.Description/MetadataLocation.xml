@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MetadataLocation" FullName="System.ServiceModel.Description.MetadataLocation">
   <TypeSignature Language="C#" Value="public class MetadataLocation" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MetadataLocation extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit MetadataLocation extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -28,7 +31,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MetadataLocation ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,17 +43,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Description.MetadataLocation" />.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Description.MetadataLocation" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataLocation" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.MetadataLocation" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MetadataLocation (string location);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string location) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string location) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,14 +77,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Description.MetadataLocation" /> from the <paramref name="location" /> value.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Description.MetadataLocation" />
+
+             from the <paramref
+             name="location" />
+
+             value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataLocation" /> class that assigns the specified metadata location to the <see cref="P:System.ServiceModel.Description.MetadataLocation.Location" /> property. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.MetadataLocation" />
+
+             class that assigns the specified metadata location to the <see
+             cref="P:System.ServiceModel.Description.MetadataLocation.Location" />
+
+             property. </para
+          >
         </summary>
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />The address of the metadata documents.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The address of the metadata documents.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Location">

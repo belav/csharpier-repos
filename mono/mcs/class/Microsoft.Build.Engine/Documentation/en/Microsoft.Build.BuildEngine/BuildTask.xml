@@ -14,12 +14,22 @@
     <since version="2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a <format type="text/html"><a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a></format> element in a project. </para>
+      <para
+        >Represents a <format
+         type="text/html">
+          <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
+        </format>
+
+         element in a project. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="AddOutputItem">
-      <MemberSignature Language="C#" Value="public void AddOutputItem (string taskParameter, string itemName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddOutputItem (string taskParameter, string itemName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -33,19 +43,46 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an <format type="text/html"><a href="34bc7cd1-efd3-4b57-b691-4584eeb6a0e9">Output</a></format> element with the specified <unmanagedCodeEntityReference>TaskParameter</unmanagedCodeEntityReference> and <unmanagedCodeEntityReference>ItemName</unmanagedCodeEntityReference> attributes to the <format type="text/html"><a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a></format> element.</para>
+          <para
+            >Adds an <format
+             type="text/html">
+              <a href="34bc7cd1-efd3-4b57-b691-4584eeb6a0e9">Output</a>
+            </format>
+
+             element with the specified <unmanagedCodeEntityReference
+            >TaskParameter</unmanagedCodeEntityReference>
+
+             and <unmanagedCodeEntityReference
+            >ItemName</unmanagedCodeEntityReference>
+
+             attributes to the <format
+             type="text/html">
+              <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
+            </format>
+
+             element.</para
+          >
         </summary>
         <param name="taskParameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the TaskParameter attribute of the Output element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the TaskParameter attribute of the Output element.</param
+        >
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the ItemName attribute of the Output element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the ItemName attribute of the Output element.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddOutputProperty">
-      <MemberSignature Language="C#" Value="public void AddOutputProperty (string taskParameter, string propertyName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddOutputProperty (string taskParameter, string propertyName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -59,12 +96,36 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an <format type="text/html"><a href="34bc7cd1-efd3-4b57-b691-4584eeb6a0e9">Output</a></format> element with the specified <unmanagedCodeEntityReference>TaskParameter</unmanagedCodeEntityReference> and <unmanagedCodeEntityReference>PropertyName</unmanagedCodeEntityReference> attributes to the <format type="text/html"><a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a></format> element.</para>
+          <para
+            >Adds an <format
+             type="text/html">
+              <a href="34bc7cd1-efd3-4b57-b691-4584eeb6a0e9">Output</a>
+            </format>
+
+             element with the specified <unmanagedCodeEntityReference
+            >TaskParameter</unmanagedCodeEntityReference>
+
+             and <unmanagedCodeEntityReference
+            >PropertyName</unmanagedCodeEntityReference>
+
+             attributes to the <format
+             type="text/html">
+              <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
+            </format>
+
+             element.</para
+          >
         </summary>
         <param name="taskParameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the TaskParameter attribute of the Output element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the TaskParameter attribute of the Output element.</param
+        >
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the PropertyName attribute of the Output element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the PropertyName attribute of the Output element.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,7 +143,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the <format type="text/html"><a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a></format> element.</para>
+          <para
+            >Gets or sets the <unmanagedCodeEntityReference
+            >Condition</unmanagedCodeEntityReference>
+
+             attribute value of the <format
+             type="text/html">
+              <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
+            </format>
+
+             element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -101,7 +172,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <unmanagedCodeEntityReference>ContinueOnError</unmanagedCodeEntityReference> attribute value of the <format type="text/html"><a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a></format> element.</para>
+          <para
+            >Gets or sets the <unmanagedCodeEntityReference
+            >ContinueOnError</unmanagedCodeEntityReference>
+
+             attribute value of the <format
+             type="text/html">
+              <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
+            </format>
+
+             element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -120,7 +201,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Runs the task represented by this <see cref="T:Microsoft.Build.BuildEngine.BuildTask" /> object.</para>
+          <para
+            >Runs the task represented by this <see
+             cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -142,7 +228,15 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The returned array excludes the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> and <unmanagedCodeEntityReference>ContinueOnError</unmanagedCodeEntityReference> parameters.</para>
+          <para
+            >The returned array excludes the <unmanagedCodeEntityReference
+            >Condition</unmanagedCodeEntityReference>
+
+             and <unmanagedCodeEntityReference
+            >ContinueOnError</unmanagedCodeEntityReference>
+
+             parameters.</para
+          >
           <para>If no parameters are passed to the task, this method returns an empty array.</para>
         </remarks>
         <summary>
@@ -159,7 +253,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetParameterValue">
-      <MemberSignature Language="C#" Value="public string GetParameterValue (string attributeName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string GetParameterValue (string attributeName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -179,14 +276,20 @@
           <para>The value of the specified task parameter.</para>
         </returns>
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parameter name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parameter name.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="HostObject">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.Framework.ITaskHost HostObject { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.Framework.ITaskHost HostObject { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.ITaskHost</ReturnType>
@@ -224,7 +327,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetParameterValue">
-      <MemberSignature Language="C#" Value="public void SetParameterValue (string parameterName, string parameterValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetParameterValue (string parameterName, string parameterValue);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -241,16 +347,28 @@
           <para>Sets the value of the specified task parameter.</para>
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parameter name to set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parameter name to set.</param
+        >
         <param name="parameterValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign to <paramref name="parameterName" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign to <paramref
+           name="parameterName" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetParameterValue">
-      <MemberSignature Language="C#" Value="public void SetParameterValue (string parameterName, string parameterValue, bool treatParameterValueAsLiteral);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetParameterValue (string parameterName, string parameterValue, bool treatParameterValueAsLiteral);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -268,11 +386,26 @@
           <para>Sets the value of the specified task parameter.</para>
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parameter name to set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parameter name to set.</param
+        >
         <param name="parameterValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign to <paramref name="parameterName" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign to <paramref
+           name="parameterName" />
+
+          .</param
+        >
         <param name="treatParameterValueAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to treat <paramref name="parameterValue" /> as a literal value; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to treat <paramref
+           name="parameterValue" />
+
+           as a literal value; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -290,7 +423,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Type" /> of the class that implements the task.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Type" />
+
+             of the class that implements the task.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

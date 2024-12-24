@@ -13,16 +13,35 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Windows.Forms.ListView.CacheVirtualItems" /> event occurs when a new area of a <see cref="T:System.Windows.Forms.ListView" /> in virtual mode is exposed and the <see cref="T:System.Windows.Forms.ListView" /> determines a new range of items is needed.</para>
+      <para
+        >The <see
+         cref="E:System.Windows.Forms.ListView.CacheVirtualItems" />
+
+         event occurs when a new area of a <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         in virtual mode is exposed and the <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         determines a new range of items is needed.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ListView.CacheVirtualItems" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ListView.CacheVirtualItems" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CacheVirtualItemsEventArgs (int startIndex, int endIndex);" />
+      <MemberSignature
+        Language="C#"
+        Value="public CacheVirtualItemsEventArgs (int startIndex, int endIndex);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="startIndex" Type="System.Int32" />
@@ -33,12 +52,35 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.CacheVirtualItemsEventArgs" /> class with the specified starting and ending indices.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.CacheVirtualItemsEventArgs" />
+
+             class with the specified starting and ending indices.</para
+          >
         </summary>
         <param name="startIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The starting index of a range of items needed by the <see cref="T:System.Windows.Forms.ListView" /> for the next <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" /> event that occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The starting index of a range of items needed by the <see
+           cref="T:System.Windows.Forms.ListView" />
+
+           for the next <see
+           cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+
+           event that occurs.</param
+        >
         <param name="endIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The ending index of a range of items needed by the <see cref="T:System.Windows.Forms.ListView" /> for the next <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" /> event that occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The ending index of a range of items needed by the <see
+           cref="T:System.Windows.Forms.ListView" />
+
+           for the next <see
+           cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+
+           event that occurs.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -55,11 +97,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The range of values specified by the <see cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.StartIndex" /> and <see cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" /> properties represents the range of values most likely needed by a virtual <see cref="T:System.Windows.Forms.ListView" /> control for the next occurrence of a <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" /> event.</para>
+          <para
+            >The range of values specified by the <see
+             cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.StartIndex" />
+
+             and <see
+             cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" />
+
+             properties represents the range of values most likely needed by a virtual <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control for the next occurrence of a <see
+             cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+
+             event.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the ending index for the range of values needed by a <see cref="T:System.Windows.Forms.ListView" /> control in virtual mode.</para>
+          <para
+            >Gets the ending index for the range of values needed by a <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control in virtual mode.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -77,11 +138,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The range of values specified by the <see cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.StartIndex" /> and <see cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" /> properties represents the range of values most likely needed by a virtual <see cref="T:System.Windows.Forms.ListView" /> control for the next occurrence of a <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" /> event.</para>
+          <para
+            >The range of values specified by the <see
+             cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.StartIndex" />
+
+             and <see
+             cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" />
+
+             properties represents the range of values most likely needed by a virtual <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control for the next occurrence of a <see
+             cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+
+             event.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the starting index for a range of values needed by a <see cref="T:System.Windows.Forms.ListView" /> control in virtual mode.</para>
+          <para
+            >Gets the starting index for a range of values needed by a <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control in virtual mode.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TrustLevel" FullName="System.Web.Configuration.TrustLevel">
-  <TypeSignature Language="C#" Value="public sealed class TrustLevel : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class TrustLevel : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You can extend the security of your Web application by creating your own named <see cref="T:System.Web.Configuration.TrustLevel" /> object that is mapped to a file specified by the policyFile attribute. </para>
+      <para
+        >You can extend the security of your Web application by creating your own named <see
+         cref="T:System.Web.Configuration.TrustLevel" />
+
+         object that is mapped to a file specified by the policyFile attribute. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -32,16 +40,35 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Configuration.TrustLevel.#ctor(System.String,System.String)" /> constructor creates a <see cref="T:System.Web.Configuration.TrustLevel" /> object by using the supplied parameters.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Configuration.TrustLevel.#ctor(System.String,System.String)" />
+
+             constructor creates a <see
+             cref="T:System.Web.Configuration.TrustLevel" />
+
+             object by using the supplied parameters.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of the <see cref="T:System.Web.Configuration.TrustLevel" /> class that is initialized based on the provided values, which define the mapping of specific security levels to named policy files.</para>
+          <para
+            >Creates an instance of the <see
+             cref="T:System.Web.Configuration.TrustLevel" />
+
+             class that is initialized based on the provided values, which define the mapping of specific security levels to named policy files.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />A named security level that is mapped to a policy file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A named security level that is mapped to a policy file.</param
+        >
         <param name="policyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The configuration file that contains security policy settings for the named security level.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The configuration file that contains security policy settings for the named security level.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -99,7 +126,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="JsonValue" FullName="System.Json.JsonValue">
-  <TypeSignature Language="C#" Value="public abstract class JsonValue : System.Collections.IEnumerable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit JsonValue extends System.Object implements class System.Collections.IEnumerable" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class JsonValue : System.Collections.IEnumerable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit JsonValue extends System.Object implements class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Json</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -24,7 +30,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected JsonValue ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,7 +46,10 @@
     </Member>
     <Member MemberName="ContainsKey">
       <MemberSignature Language="C#" Value="public virtual bool ContainsKey (string key);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ContainsKey(string key) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool ContainsKey(string key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,7 +71,10 @@
           <para>True if the operation exception is invalid; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -82,8 +97,14 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public virtual System.Json.JsonValue this[int index] { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Json.JsonValue Item(int32)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Json.JsonValue this[int index] { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Json.JsonValue Item(int32)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -102,8 +123,14 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public virtual System.Json.JsonValue this[string key] { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Json.JsonValue Item(string)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Json.JsonValue this[string key] { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Json.JsonValue Item(string)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -122,8 +149,14 @@
       </Docs>
     </Member>
     <Member MemberName="JsonType">
-      <MemberSignature Language="C#" Value="public abstract System.Json.JsonType JsonType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Json.JsonType JsonType" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Json.JsonType JsonType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Json.JsonType JsonType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -141,8 +174,14 @@
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue Load (System.IO.Stream stream);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Json.JsonValue Load(class System.IO.Stream stream) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue Load (System.IO.Stream stream);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Json.JsonValue Load(class System.IO.Stream stream) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -164,12 +203,21 @@
           <para>The text-based JSON from a stream.</para>
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />A stream that contains text-based JSON content.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A stream that contains text-based JSON content.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Load">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue Load (System.IO.TextReader textReader);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Json.JsonValue Load(class System.IO.TextReader textReader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue Load (System.IO.TextReader textReader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Json.JsonValue Load(class System.IO.TextReader textReader) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -191,12 +239,21 @@
           <para>The text-based JSON from a text reader.</para>
         </returns>
         <param name="textReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />A TextReader over text-based JSON content.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A TextReader over text-based JSON content.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (bool value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(bool value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (bool value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(bool value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -215,8 +272,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (byte value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(unsigned int8 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (byte value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(unsigned int8 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -235,8 +298,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (char value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(char value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (char value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(char value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -255,8 +324,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (DateTime value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.DateTime value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (DateTime value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.DateTime value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -275,8 +350,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (DateTimeOffset value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.DateTimeOffset value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (DateTimeOffset value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.DateTimeOffset value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -295,8 +376,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (decimal value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.Decimal value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (decimal value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.Decimal value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -315,8 +402,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (double value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(float64 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (double value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(float64 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -335,8 +428,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (Guid value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.Guid value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (Guid value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.Guid value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -355,8 +454,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (short value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(int16 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (short value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(int16 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -375,8 +480,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (int value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(int32 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (int value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(int32 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -395,8 +506,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (long value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(int64 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (long value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(int64 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -415,8 +532,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static bool op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -435,8 +558,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static byte op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname unsigned int8 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname unsigned int8 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -455,8 +584,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static char op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname char op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static char op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname char op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -475,8 +610,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static DateTime op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.DateTime op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static DateTime op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.DateTime op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -495,8 +636,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static DateTimeOffset op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.DateTimeOffset op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static DateTimeOffset op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.DateTimeOffset op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -515,8 +662,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static decimal op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Decimal op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static decimal op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Decimal op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -535,8 +688,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static double op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname float64 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static double op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname float64 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -555,8 +714,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static Guid op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.Guid op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Guid op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.Guid op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -575,8 +740,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static short op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname int16 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static short op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname int16 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -595,8 +766,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static int op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname int32 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname int32 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -615,8 +792,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static long op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname int64 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static long op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname int64 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -635,8 +818,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static sbyte op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname int8 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static sbyte op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname int8 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -655,8 +844,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static float op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname float32 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static float op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname float32 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -675,8 +870,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static string op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname string op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname string op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -695,8 +896,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static TimeSpan op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype System.TimeSpan op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static TimeSpan op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname valuetype System.TimeSpan op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -715,8 +922,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static ushort op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname unsigned int16 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static ushort op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname unsigned int16 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -735,8 +948,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static uint op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname unsigned int32 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static uint op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname unsigned int32 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -755,8 +974,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static ulong op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname unsigned int64 op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static ulong op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname unsigned int64 op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -775,8 +1000,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static Uri op_Implicit (System.Json.JsonValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Uri op_Implicit(class System.Json.JsonValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Uri op_Implicit (System.Json.JsonValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Uri op_Implicit(class System.Json.JsonValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -795,8 +1026,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (sbyte value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(int8 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (sbyte value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(int8 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -815,8 +1052,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (float value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(float32 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (float value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(float32 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -835,8 +1078,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (string value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(string value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (string value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(string value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -855,8 +1104,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (TimeSpan value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.TimeSpan value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (TimeSpan value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(valuetype System.TimeSpan value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -875,8 +1130,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (ushort value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(unsigned int16 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (ushort value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(unsigned int16 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -895,8 +1156,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (uint value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(unsigned int32 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (uint value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(unsigned int32 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -915,8 +1182,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (ulong value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(unsigned int64 value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (ulong value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(unsigned int64 value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -935,8 +1208,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue op_Implicit (Uri value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(class System.Uri value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue op_Implicit (Uri value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname class System.Json.JsonValue op_Implicit(class System.Uri value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -955,8 +1234,14 @@
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public static System.Json.JsonValue Parse (string jsonString);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Json.JsonValue Parse(string jsonString) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Json.JsonValue Parse (string jsonString);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Json.JsonValue Parse(string jsonString) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -982,7 +1267,10 @@
     </Member>
     <Member MemberName="Save">
       <MemberSignature Language="C#" Value="public virtual void Save (System.IO.Stream stream);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Save(class System.IO.Stream stream) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Save(class System.IO.Stream stream) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1000,12 +1288,21 @@
           <para>Serializes the JsonValue CLR type into text-based JSON using a stream.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />Stream to which to write text-based JSON.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Stream to which to write text-based JSON.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
-      <MemberSignature Language="C#" Value="public virtual void Save (System.IO.TextWriter textWriter);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Save(class System.IO.TextWriter textWriter) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Save (System.IO.TextWriter textWriter);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Save(class System.IO.TextWriter textWriter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1023,12 +1320,21 @@
           <para>Serializes the JsonValue CLR type into text-based JSON using a text writer.</para>
         </summary>
         <param name="textWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The TextWriter used to write text-based JSON.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The TextWriter used to write text-based JSON.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1041,7 +1347,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Json.JsonValue" /> enumerator.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Json.JsonValue" />
+
+             enumerator.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1051,7 +1362,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

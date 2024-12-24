@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <testresults name="">
   <div id="Ghtsubtest1" style="height:120px;width:553px">
-    <table border="1" cellspacing="0" style="background-color:#ffffcc;border-collapse:collapse;border-color:black;border-style:solid;border-width:1px" bordercolor="Black" rules="all" id="DataGrid1">
+    <table
+      border="1"
+      cellspacing="0"
+      style="background-color:#ffffcc;border-collapse:collapse;border-color:black;border-style:solid;border-width:1px"
+      bordercolor="Black"
+      rules="all"
+      id="DataGrid1"
+    >
       <tr style="background-color:#cccccc">
         <td>Added on ItemDataBound event</td>
         <td>Name</td>

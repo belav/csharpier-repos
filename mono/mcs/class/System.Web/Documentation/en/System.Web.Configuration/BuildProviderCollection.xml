@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BuildProviderCollection" FullName="System.Web.Configuration.BuildProviderCollection">
-  <TypeSignature Language="C#" Value="public sealed class BuildProviderCollection : System.Configuration.ConfigurationElementCollection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class BuildProviderCollection : System.Configuration.ConfigurationElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,11 +21,24 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.BuildProviderCollection" /> is used to compile custom resource files. You can have any number of build providers. The <see cref="T:System.Web.Configuration.BuildProviderCollection" /> does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the compilation information it contains.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+         is used to compile custom resource files. You can have any number of build providers. The <see
+         cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+         does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the compilation information it contains.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a collection of <see cref="T:System.Web.Configuration.BuildProvider" /> objects. This class cannot be inherited.</para>
+      <para
+        >Represents a collection of <see
+         cref="T:System.Web.Configuration.BuildProvider" />
+
+         objects. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -35,7 +51,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.BuildProviderCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -43,7 +64,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Web.Configuration.BuildProvider buildProvider);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Web.Configuration.BuildProvider buildProvider);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -55,14 +79,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="T:System.Web.Configuration.BuildProvider" /> object already exists in the collection, the build provider is ignored.</para>
+          <para
+            >If the <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             object already exists in the collection, the build provider is ignored.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a <see cref="T:System.Web.Configuration.BuildProvider" /> object to the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para>
+          <para
+            >Adds a <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             object to the <see
+             cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            .</para
+          >
         </summary>
         <param name="buildProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Configuration.BuildProvider" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Configuration.BuildProvider" />
+
+           object.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -80,7 +123,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Clears all <see cref="T:System.Web.Configuration.BuildProvider" /> objects from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para>
+          <para
+            >Clears all <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             objects from the <see
+             cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -88,7 +139,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElement</ReturnType>
@@ -105,7 +159,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -125,7 +182,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.BuildProvider this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.BuildProvider this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.BuildProvider</ReturnType>
@@ -145,7 +205,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.BuildProvider this[string name] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.BuildProvider this[string name] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.BuildProvider</ReturnType>
@@ -165,7 +228,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -193,14 +259,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="T:System.Web.Configuration.BuildProvider" /> does not exist in the collection, the build provider is ignored.</para>
+          <para
+            >If the <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             does not exist in the collection, the build provider is ignored.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Web.Configuration.BuildProvider" /> object from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             object from the <see
+             cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            .</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string value specifying the <see cref="T:System.Web.Configuration.BuildProvider" /> reference.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string value specifying the <see
+           cref="T:System.Web.Configuration.BuildProvider" />
+
+           reference.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -219,14 +304,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the index does not specify a <see cref="T:System.Web.Configuration.BuildProvider" /> in the collection, an out-of-range exception is thrown. </para>
+          <para
+            >If the index does not specify a <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             in the collection, an out-of-range exception is thrown. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the <see cref="T:System.Web.Configuration.BuildProvider" /> object at the specified index from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para>
+          <para
+            >Removes the <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             object at the specified index from the <see
+             cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+            .</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />An integer value specifying the location of a specific <see cref="T:System.Web.Configuration.BuildProvider" /> object within the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An integer value specifying the location of a specific <see
+           cref="T:System.Web.Configuration.BuildProvider" />
+
+           object within the <see
+           cref="T:System.Web.Configuration.BuildProviderCollection" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

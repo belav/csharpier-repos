@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MulticastIPAddressInformation" FullName="System.Net.NetworkInformation.MulticastIPAddressInformation">
-  <TypeSignature Language="C#" Value="public abstract class MulticastIPAddressInformation : System.Net.NetworkInformation.IPAddressInformation" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit MulticastIPAddressInformation extends System.Net.NetworkInformation.IPAddressInformation" />
+<Type
+  Name="MulticastIPAddressInformation"
+  FullName="System.Net.NetworkInformation.MulticastIPAddressInformation"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class MulticastIPAddressInformation : System.Net.NetworkInformation.IPAddressInformation"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit MulticastIPAddressInformation extends System.Net.NetworkInformation.IPAddressInformation"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +24,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You do not create instances of this class; instances are returned in the array returned by the <see cref="P:System.Net.NetworkInformation.IPInterfaceProperties.MulticastAddresses" /> property.</para>
+      <para
+        >You do not create instances of this class; instances are returned in the array returned by the <see
+         cref="P:System.Net.NetworkInformation.IPInterfaceProperties.MulticastAddresses" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +39,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected MulticastIPAddressInformation ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,16 +53,29 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" /> class.</para>
+          <para
+            >This constructor can be called only by classes that derive from the <see
+             cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.MulticastIPAddressInformation" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AddressPreferredLifetime">
-      <MemberSignature Language="C#" Value="public abstract long AddressPreferredLifetime { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long AddressPreferredLifetime { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 AddressPreferredLifetime" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -60,7 +90,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the value returned by this property to determine how long the preferred address remains valid. Whenever possible, applications should use a preferred address. Use <see cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" /> to determine the preferred address.</para>
+          <para
+            >Use the value returned by this property to determine how long the preferred address remains valid. Whenever possible, applications should use a preferred address. Use <see
+             cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" />
+
+             to determine the preferred address.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -84,7 +119,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the value returned by this property to determine whether this address can be used by your application. Whenever possible, applications should use a preferred address. Use <see cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" /> to determine the preferred address.</para>
+          <para
+            >Use the value returned by this property to determine whether this address can be used by your application. Whenever possible, applications should use a preferred address. Use <see
+             cref="P:System.Net.NetworkInformation.MulticastIPAddressInformation.DuplicateAddressDetectionState" />
+
+             to determine the preferred address.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -109,7 +149,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Dynamic Host Configuration Protocol (DHCP) allows a computer to obtain a network address from a DHCP server, as opposed to using a static (fixed) network address. The DHCP server does not permanently assign addresses; instead, it "leases" one of a number of available addresses to the computer. Within a specified amount of time, known as the lease lifetime for the address, the computer releases the address, leaving the DHCP server free to assign it to a different computer.</para>
-          <para>This property returns the number of seconds left in the lease lifetime for the IP address identified in the <see cref="P:System.Net.NetworkInformation.IPAddressInformation.Address" /> property. Note that the computer can send requests to the DHCP server to extend its lease, so the lease lifetime can increase over time.</para>
+          <para
+            >This property returns the number of seconds left in the lease lifetime for the IP address identified in the <see
+             cref="P:System.Net.NetworkInformation.IPAddressInformation.Address" />
+
+             property. Note that the computer can send requests to the DHCP server to extend its lease, so the lease lifetime can increase over time.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,8 +163,14 @@
       </Docs>
     </Member>
     <Member MemberName="DuplicateAddressDetectionState">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.DuplicateAddressDetectionState DuplicateAddressDetectionState { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.NetworkInformation.DuplicateAddressDetectionState DuplicateAddressDetectionState" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.DuplicateAddressDetectionState DuplicateAddressDetectionState { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.NetworkInformation.DuplicateAddressDetectionState DuplicateAddressDetectionState"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -142,8 +193,14 @@
       </Docs>
     </Member>
     <Member MemberName="PrefixOrigin">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.PrefixOrigin PrefixOrigin { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.NetworkInformation.PrefixOrigin PrefixOrigin" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.PrefixOrigin PrefixOrigin { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.NetworkInformation.PrefixOrigin PrefixOrigin"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -166,8 +223,14 @@
       </Docs>
     </Member>
     <Member MemberName="SuffixOrigin">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.SuffixOrigin SuffixOrigin { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.NetworkInformation.SuffixOrigin SuffixOrigin" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.SuffixOrigin SuffixOrigin { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.NetworkInformation.SuffixOrigin SuffixOrigin"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

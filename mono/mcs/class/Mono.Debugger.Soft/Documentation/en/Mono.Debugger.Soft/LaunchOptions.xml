@@ -1,6 +1,9 @@
 <Type Name="LaunchOptions" FullName="Mono.Debugger.Soft.LaunchOptions">
   <TypeSignature Language="C#" Value="public class LaunchOptions" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit LaunchOptions extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit LaunchOptions extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -10,13 +13,21 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Options used to control <see cref="M:Mono.Debugger.Soft.VirtualMachineManager.Launch(System.String[],Mono.Debugger.Soft.LaunchOptions)" />.</summary>
+    <summary
+      >Options used to control <see
+       cref="M:Mono.Debugger.Soft.VirtualMachineManager.Launch(System.String[],Mono.Debugger.Soft.LaunchOptions)" />
+
+      .</summary
+    >
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public LaunchOptions ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -44,8 +55,14 @@
       </Docs>
     </Member>
     <Member MemberName="CustomProcessLauncher">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.LaunchOptions.ProcessLauncher CustomProcessLauncher { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.LaunchOptions/ProcessLauncher CustomProcessLauncher" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.LaunchOptions.ProcessLauncher CustomProcessLauncher { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.LaunchOptions/ProcessLauncher CustomProcessLauncher"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -60,8 +77,14 @@
       </Docs>
     </Member>
     <Member MemberName="CustomTargetProcessLauncher">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.LaunchOptions.TargetProcessLauncher CustomTargetProcessLauncher { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.LaunchOptions/TargetProcessLauncher CustomTargetProcessLauncher" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.LaunchOptions.TargetProcessLauncher CustomTargetProcessLauncher { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.LaunchOptions/TargetProcessLauncher CustomTargetProcessLauncher"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

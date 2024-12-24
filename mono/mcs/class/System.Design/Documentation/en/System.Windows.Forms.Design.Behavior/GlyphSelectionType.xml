@@ -12,7 +12,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Describes the designer selection state of a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />.</para>
+      <para
+        >Describes the designer selection state of a <see
+         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -28,7 +33,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is not selected.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+             is not selected.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -44,7 +54,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is selected.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+             is selected.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -60,7 +75,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is the primary selection. </para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+             is the primary selection. </para
+          >
         </summary>
       </Docs>
     </Member>

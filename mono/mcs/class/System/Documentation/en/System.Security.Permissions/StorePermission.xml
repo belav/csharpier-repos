@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="StorePermission" FullName="System.Security.Permissions.StorePermission">
-  <TypeSignature Language="C#" Value="public sealed class StorePermission : System.Security.CodeAccessPermission, System.Security.Permissions.IUnrestrictedPermission" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit StorePermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IUnrestrictedPermission" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class StorePermission : System.Security.CodeAccessPermission, System.Security.Permissions.IUnrestrictedPermission"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit StorePermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IUnrestrictedPermission"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,7 +26,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Security.Permissions.StorePermission" /> controls the access that code is granted to X.509 stores. The permission is based on flags representing the access levels that apply to every store.</para>
+        <see cref="T:System.Security.Permissions.StorePermission" />
+
+         controls the access that code is granted to X.509 stores. The permission is based on flags representing the access levels that apply to every store.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,8 +38,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public StorePermission (System.Security.Permissions.PermissionState state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public StorePermission (System.Security.Permissions.PermissionState state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,19 +58,41 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The permission object provides either fully restricted (None) or Unrestricted access to X.509 stores. If fully restricted (None), the <see cref="P:System.Security.Permissions.StorePermission.Flags" /> property can then be set to specify the type of access allowed.</para>
+          <para
+            >The permission object provides either fully restricted (None) or Unrestricted access to X.509 stores. If fully restricted (None), the <see
+             cref="P:System.Security.Permissions.StorePermission.Flags" />
+
+             property can then be set to specify the type of access allowed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermission" /> class with either fully restricted or unrestricted permission state.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.StorePermission" />
+
+             class with either fully restricted or unrestricted permission state.</para
+          >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Permissions.PermissionState" />
+
+           values. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public StorePermission (System.Security.Permissions.StorePermissionFlags flags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.StorePermissionFlags flags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public StorePermission (System.Security.Permissions.StorePermissionFlags flags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.StorePermissionFlags flags) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -69,17 +106,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="flag" /> parameter specifies the permitted access to X.509 stores. The specified permitted access applies to all stores. It is not possible to specify access to an individual store.</para>
+          <para
+            >The <paramref
+             name="flag" />
+
+             parameter specifies the permitted access to X.509 stores. The specified permitted access applies to all stores. It is not possible to specify access to an individual store.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermission" /> class with the specified access.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.StorePermission" />
+
+             class with the specified access.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Copy">
       <MemberSignature Language="C#" Value="public override System.Security.IPermission Copy ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -106,8 +156,14 @@
       </Docs>
     </Member>
     <Member MemberName="Flags">
-      <MemberSignature Language="C#" Value="public System.Security.Permissions.StorePermissionFlags Flags { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Permissions.StorePermissionFlags Flags" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Permissions.StorePermissionFlags Flags { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Permissions.StorePermissionFlags Flags"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -121,17 +177,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Permissions.StorePermission.Flags" /> property specifies the permitted access to X.509 stores. X.509 stores are physical stores used to persist and manage X.509 certificates.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Permissions.StorePermission.Flags" />
+
+             property specifies the permitted access to X.509 stores. X.509 stores are physical stores used to persist and manage X.509 certificates.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the type of <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" /> access allowed by the current permission.</para>
+          <para
+            >Gets or sets the type of <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+
+             access allowed by the current permission.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
-      <MemberSignature Language="C#" Value="public override void FromXml (System.Security.SecurityElement e);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement e) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void FromXml (System.Security.SecurityElement e);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement e) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -148,7 +220,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Security.Permissions.StorePermission" /> object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class. Use the <see cref="M:System.Security.Permissions.StorePermission.ToXml" /> method to XML-encode the <see cref="T:System.Security.Permissions.StorePermission" />, including state information.</para>
+          <para
+            >The <see
+             cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" />
+
+             method reconstructs a <see
+             cref="T:System.Security.Permissions.StorePermission" />
+
+             object from an XML encoding defined by the <see
+             cref="T:System.Security.SecurityElement" />
+
+             class. Use the <see
+             cref="M:System.Security.Permissions.StorePermission.ToXml" />
+
+             method to XML-encode the <see
+             cref="T:System.Security.Permissions.StorePermission" />
+
+            , including state information.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -157,8 +246,14 @@
       </Docs>
     </Member>
     <Member MemberName="Intersect">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -185,12 +280,21 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission to intersect with the current permission. It must be of the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission to intersect with the current permission. It must be of the same type as the current permission. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
-      <MemberSignature Language="C#" Value="public override bool IsSubsetOf (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsSubsetOf (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -217,12 +321,18 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission to test for the subset relationship. This permission must be of the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission to test for the subset relationship. This permission must be of the same type as the current permission. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
       <MemberSignature Language="C#" Value="public bool IsUnrestricted ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsUnrestricted() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsUnrestricted() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -249,8 +359,14 @@
       </Docs>
     </Member>
     <Member MemberName="ToXml">
-      <MemberSignature Language="C#" Value="public override System.Security.SecurityElement ToXml ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.SecurityElement ToXml ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -264,7 +380,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" />.</para>
+          <para
+            >Use the <see
+             cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" />
+
+             method to restore the state information from a <see
+             cref="T:System.Security.SecurityElement" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -272,13 +396,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Security.SecurityElement" /> that contains an XML encoding of the permission, including any state information.</para>
+          <para
+            >A <see
+             cref="T:System.Security.SecurityElement" />
+
+             that contains an XML encoding of the permission, including any state information.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Union">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission Union (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission Union (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -294,7 +429,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The result of a call to <see cref="M:System.Security.Permissions.StorePermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
+          <para
+            >The result of a call to <see
+             cref="M:System.Security.Permissions.StorePermission.Union(System.Security.IPermission)" />
+
+             is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -305,7 +445,10 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission to combine with the current permission. It must be of the same type as the current permission. </param
+        >
       </Docs>
     </Member>
   </Members>

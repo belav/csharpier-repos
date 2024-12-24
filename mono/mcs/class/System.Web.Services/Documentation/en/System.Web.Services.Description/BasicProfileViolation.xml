@@ -19,7 +19,10 @@
   </Docs>
   <Members>
     <Member MemberName="Claims">
-      <MemberSignature Language="C#" Value="public System.Web.Services.WsiProfiles Claims { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.WsiProfiles Claims { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.WsiProfiles</ReturnType>
@@ -30,7 +33,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Services.WsiProfiles" /> object that specifies whether the Web service declares that it conforms to the WSI Basic Profile version 1.1.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Services.WsiProfiles" />
+
+             object that specifies whether the Web service declares that it conforms to the WSI Basic Profile version 1.1.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -49,7 +57,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.String" /> that provides a detailed description of the WSDL violation of the Basic Profile.</para>
+          <para
+            >Gets a <see
+             cref="T:System.String" />
+
+             that provides a detailed description of the WSDL violation of the Basic Profile.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -57,7 +70,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Elements">
-      <MemberSignature Language="C#" Value="public System.Collections.Specialized.StringCollection Elements { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Specialized.StringCollection Elements { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.Specialized.StringCollection</ReturnType>
@@ -106,7 +122,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.String" /> object that describes the WSDL violation of the Basic Profile version 1.1 specification.</para>
+          <para
+            >Gets a <see
+             cref="T:System.String" />
+
+             object that describes the WSDL violation of the Basic Profile version 1.1 specification.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -125,11 +146,39 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.String" /> that comprises information from <see cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />, <see cref="P:System.Web.Services.Description.BasicProfileViolation.Details" />, and <see cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />.</para>
+          <para
+            >Returns a <see
+             cref="T:System.String" />
+
+             that comprises information from <see
+             cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />
+
+            , <see
+             cref="P:System.Web.Services.Description.BasicProfileViolation.Details" />
+
+            , and <see
+             cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that comprises information from <see cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />, <see cref="P:System.Web.Services.Description.BasicProfileViolation.Details" />, and <see cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that comprises information from <see
+             cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />
+
+            , <see
+             cref="P:System.Web.Services.Description.BasicProfileViolation.Details" />
+
+            , and <see
+             cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>

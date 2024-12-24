@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceAuthorizationElement" FullName="System.ServiceModel.Configuration.ServiceAuthorizationElement">
-  <TypeSignature Language="C#" Value="public sealed class ServiceAuthorizationElement : System.ServiceModel.Configuration.BehaviorExtensionElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ServiceAuthorizationElement extends System.ServiceModel.Configuration.BehaviorExtensionElement" />
+<Type
+  Name="ServiceAuthorizationElement"
+  FullName="System.ServiceModel.Configuration.ServiceAuthorizationElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ServiceAuthorizationElement : System.ServiceModel.Configuration.BehaviorExtensionElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ServiceAuthorizationElement extends System.ServiceModel.Configuration.BehaviorExtensionElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ServiceAuthorizationElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +42,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceAuthorizationElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.ServiceAuthorizationElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AuthorizationPolicies">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.AuthorizationPolicyTypeElementCollection AuthorizationPolicies { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.AuthorizationPolicyTypeElementCollection AuthorizationPolicies" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.AuthorizationPolicyTypeElementCollection AuthorizationPolicies { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.AuthorizationPolicyTypeElementCollection AuthorizationPolicies"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -81,8 +104,14 @@
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
-      <MemberSignature Language="C#" Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement from);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement from) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement from);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement from) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -91,7 +120,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="from" Type="System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+        <Parameter
+          Name="from"
+          Type="System.ServiceModel.Configuration.ServiceModelExtensionElement"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -100,12 +132,18 @@
           <para>Copies the content of a specified configuration element to this configuration element.</para>
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />The configuration element to be copied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The configuration element to be copied.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateBehavior">
       <MemberSignature Language="C#" Value="protected override object CreateBehavior ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance object CreateBehavior() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance object CreateBehavior() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -121,8 +159,14 @@
       </Docs>
     </Member>
     <Member MemberName="ImpersonateCallerForAllOperations">
-      <MemberSignature Language="C#" Value="public bool ImpersonateCallerForAllOperations { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool ImpersonateCallerForAllOperations" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool ImpersonateCallerForAllOperations { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool ImpersonateCallerForAllOperations"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -148,8 +192,14 @@
       </Docs>
     </Member>
     <Member MemberName="PrincipalPermissionMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Description.PrincipalPermissionMode PrincipalPermissionMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Description.PrincipalPermissionMode PrincipalPermissionMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Description.PrincipalPermissionMode PrincipalPermissionMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Description.PrincipalPermissionMode PrincipalPermissionMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -172,8 +222,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -218,8 +274,14 @@
       </Docs>
     </Member>
     <Member MemberName="ServiceAuthorizationManagerType">
-      <MemberSignature Language="C#" Value="public string ServiceAuthorizationManagerType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string ServiceAuthorizationManagerType" />
+      <MemberSignature
+        Language="C#"
+        Value="public string ServiceAuthorizationManagerType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string ServiceAuthorizationManagerType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TypeLibFuncFlags" FullName="System.Runtime.InteropServices.TypeLibFuncFlags">
   <TypeSignature Maintainer="auto" Language="C#" Value="public enum TypeLibFuncFlags" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed TypeLibFuncFlags extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed TypeLibFuncFlags extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -25,7 +28,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Runtime.InteropServices.TypeLibFuncFlags" /> is used with the <see cref="T:System.Runtime.InteropServices.TypeLibFuncAttribute" />. The flags are retained for reference only. They are not used by the common language runtime.</para>
+        <see cref="T:System.Runtime.InteropServices.TypeLibFuncFlags" />
+
+         is used with the <see
+         cref="T:System.Runtime.InteropServices.TypeLibFuncAttribute" />
+
+        . The flags are retained for reference only. They are not used by the common language runtime.</para
+      >
       <para>For more information about FUNCFLAGS, see the MSDN library.</para>
     </remarks>
     <summary>
@@ -36,7 +45,10 @@
   <Members>
     <Member MemberName="FBindable">
       <MemberSignature Language="C#" Value="FBindable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FBindable = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FBindable = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -57,7 +69,10 @@
     </Member>
     <Member MemberName="FDefaultBind">
       <MemberSignature Language="C#" Value="FDefaultBind" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FDefaultBind = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FDefaultBind = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -78,7 +93,10 @@
     </Member>
     <Member MemberName="FDefaultCollelem">
       <MemberSignature Language="C#" Value="FDefaultCollelem" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FDefaultCollelem = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FDefaultCollelem = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -99,7 +117,10 @@
     </Member>
     <Member MemberName="FDisplayBind">
       <MemberSignature Language="C#" Value="FDisplayBind" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FDisplayBind = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FDisplayBind = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -114,13 +135,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The function that is displayed to the user as bindable. <see cref="F:System.Runtime.InteropServices.TypeLibFuncFlags.FBindable" /> must also be set.</para>
+          <para
+            >The function that is displayed to the user as bindable. <see
+             cref="F:System.Runtime.InteropServices.TypeLibFuncFlags.FBindable" />
+
+             must also be set.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="FHidden">
       <MemberSignature Language="C#" Value="FHidden" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FHidden = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FHidden = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -141,7 +170,10 @@
     </Member>
     <Member MemberName="FImmediateBind">
       <MemberSignature Language="C#" Value="FImmediateBind" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FImmediateBind = int32(4096)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FImmediateBind = int32(4096)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -162,7 +194,10 @@
     </Member>
     <Member MemberName="FNonBrowsable">
       <MemberSignature Language="C#" Value="FNonBrowsable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FNonBrowsable = int32(1024)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FNonBrowsable = int32(1024)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -183,7 +218,10 @@
     </Member>
     <Member MemberName="FReplaceable">
       <MemberSignature Language="C#" Value="FReplaceable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FReplaceable = int32(2048)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FReplaceable = int32(2048)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -204,7 +242,10 @@
     </Member>
     <Member MemberName="FRequestEdit">
       <MemberSignature Language="C#" Value="FRequestEdit" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FRequestEdit = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FRequestEdit = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -225,7 +266,10 @@
     </Member>
     <Member MemberName="FRestricted">
       <MemberSignature Language="C#" Value="FRestricted" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FRestricted = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FRestricted = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -246,7 +290,10 @@
     </Member>
     <Member MemberName="FSource">
       <MemberSignature Language="C#" Value="FSource" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FSource = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FSource = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -267,7 +314,10 @@
     </Member>
     <Member MemberName="FUiDefault">
       <MemberSignature Language="C#" Value="FUiDefault" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FUiDefault = int32(512)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FUiDefault = int32(512)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -288,7 +338,10 @@
     </Member>
     <Member MemberName="FUsesGetLastError">
       <MemberSignature Language="C#" Value="FUsesGetLastError" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FUsesGetLastError = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.TypeLibFuncFlags FUsesGetLastError = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

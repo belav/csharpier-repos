@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Namespace Name="System.Runtime.Remoting.Lifetime" FullName="System.Runtime.Remoting.Lifetime" FullNameSP="System.Runtime.Remoting.Lifetime" Maintainer="Mono">
+<Namespace
+  Name="System.Runtime.Remoting.Lifetime"
+  FullName="System.Runtime.Remoting.Lifetime"
+  FullNameSP="System.Runtime.Remoting.Lifetime"
+  Maintainer="Mono"
+>
   <Docs>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:System.Runtime.Remoting.Lifetime" /> namespace contains classes that manage the lifetime of remote objects.</para>
+      <para
+        >The <see
+         cref="N:System.Runtime.Remoting.Lifetime" />
+
+         namespace contains classes that manage the lifetime of remote objects.</para
+      >
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

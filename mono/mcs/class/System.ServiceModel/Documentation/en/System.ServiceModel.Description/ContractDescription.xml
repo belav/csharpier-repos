@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ContractDescription" FullName="System.ServiceModel.Description.ContractDescription">
   <TypeSignature Language="C#" Value="public class ContractDescription" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ContractDescription extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ContractDescription extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,8 +22,39 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A indigo2 contract is a collection of operations that specifies what the endpoint communicates to the outside world. Each operation is a message exchange. For example, a request message and an associated reply message form a request/reply message exchange. </para>
-      <para>A <see cref="T:System.ServiceModel.Description.ContractDescription" /> object is used to describe indigo2 contracts and their operations. Within a <see cref="T:System.ServiceModel.Description.ContractDescription" />, each contract operation has a corresponding <see cref="T:System.ServiceModel.Description.OperationDescription" /> that describes aspects of the each operation that is part of the contract, such as whether the operation is one-way or request/reply. Each <see cref="T:System.ServiceModel.Description.OperationDescription" /> also describes the messages that make up the operation using a <see cref="T:System.ServiceModel.Description.MessageDescriptionCollection" />. <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to an interface that defines the contract using the programming model. This interface is marked with <see cref="T:System.ServiceModel.ServiceContractAttribute" /> and its methods that correspond to endpoint operations are marked with the <see cref="T:System.ServiceModel.OperationContractAttribute" />. </para>
-      <para>A <newTerm>duplex</newTerm> contract defines the following logical sets of operations: </para>
+      <para
+        >A <see
+         cref="T:System.ServiceModel.Description.ContractDescription" />
+
+         object is used to describe indigo2 contracts and their operations. Within a <see
+         cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        , each contract operation has a corresponding <see
+         cref="T:System.ServiceModel.Description.OperationDescription" />
+
+         that describes aspects of the each operation that is part of the contract, such as whether the operation is one-way or request/reply. Each <see
+         cref="T:System.ServiceModel.Description.OperationDescription" />
+
+         also describes the messages that make up the operation using a <see
+         cref="T:System.ServiceModel.Description.MessageDescriptionCollection" />
+
+        . <see
+         cref="T:System.ServiceModel.Description.ContractDescription" />
+
+         contains a reference to an interface that defines the contract using the programming model. This interface is marked with <see
+         cref="T:System.ServiceModel.ServiceContractAttribute" />
+
+         and its methods that correspond to endpoint operations are marked with the <see
+         cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        . </para
+      >
+      <para
+        >A <newTerm
+        >duplex</newTerm>
+
+         contract defines the following logical sets of operations: </para
+      >
       <list type="bullet">
         <item>
           <para>A set that the service exposes for the client to call. </para>
@@ -29,8 +63,21 @@
           <para>A set that the client exposes for the service to call. </para>
         </item>
       </list>
-      <para>The programming model for defining a duplex contract is to split each set in a separate interface and apply attributes to each interface. In this case, <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to each of the interfaces that groups them into one duplex contract. </para>
-      <para>Similar to bindings, each contract has a <see cref="P:System.ServiceModel.Description.ContractDescription.Name" /> and <see cref="P:System.ServiceModel.Description.ContractDescription.Namespace" /> that uniquely identify it in the metadata of the service.</para>
+      <para
+        >The programming model for defining a duplex contract is to split each set in a separate interface and apply attributes to each interface. In this case, <see
+         cref="T:System.ServiceModel.Description.ContractDescription" />
+
+         contains a reference to each of the interfaces that groups them into one duplex contract. </para
+      >
+      <para
+        >Similar to bindings, each contract has a <see
+         cref="P:System.ServiceModel.Description.ContractDescription.Name" />
+
+         and <see
+         cref="P:System.ServiceModel.Description.ContractDescription.Namespace" />
+
+         that uniquely identify it in the metadata of the service.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -40,7 +87,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ContractDescription (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -52,15 +102,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ContractDescription" /> class with a specified name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             class with a specified name.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the contract.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the contract.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ContractDescription (string name, string ns);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, string ns) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, string ns) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -76,17 +137,34 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ContractDescription" /> class with a namespace-qualified name specified.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             class with a namespace-qualified name specified.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the contract.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the contract.</param
+        >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace that contains the name of the contract.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace that contains the name of the contract.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Behaviors">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.KeyedByTypeCollection&lt;System.ServiceModel.Description.IContractBehavior&gt; Behaviors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.KeyedByTypeCollection`1&lt;class System.ServiceModel.Description.IContractBehavior&gt; Behaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.KeyedByTypeCollection<System.ServiceModel.Description.IContractBehavior> Behaviors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.KeyedByTypeCollection`1<class System.ServiceModel.Description.IContractBehavior> Behaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -105,7 +183,10 @@
     </Member>
     <Member MemberName="CallbackContractType">
       <MemberSignature Language="C#" Value="public Type CallbackContractType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type CallbackContractType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type CallbackContractType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -117,7 +198,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ServiceModel.Description.ContractDescription.CallbackContractType" /> property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para>
+          <para
+            >The <see
+             cref="P:System.ServiceModel.Description.ContractDescription.CallbackContractType" />
+
+             property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -145,8 +231,14 @@
       </Docs>
     </Member>
     <Member MemberName="ContractBehaviors">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.KeyedCollection&lt;Type,System.ServiceModel.Description.IContractBehavior&gt; ContractBehaviors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.KeyedCollection`2&lt;class System.Type, class System.ServiceModel.Description.IContractBehavior&gt; ContractBehaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.KeyedCollection<Type,System.ServiceModel.Description.IContractBehavior> ContractBehaviors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.KeyedCollection`2<class System.Type, class System.ServiceModel.Description.IContractBehavior> ContractBehaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -177,7 +269,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" /> property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para>
+          <para
+            >The <see
+             cref="P:System.ServiceModel.Description.ContractDescription.ContractType" />
+
+             property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -186,8 +283,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetContract">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Description.ContractDescription GetContract (Type contractType);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Description.ContractDescription GetContract(class System.Type contractType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Description.ContractDescription GetContract (Type contractType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Description.ContractDescription GetContract(class System.Type contractType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -201,7 +304,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para>
+          <para
+            >The difference between the <see
+             cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" />
+
+             overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see
+             cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+            ).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -209,15 +320,32 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             for the specified type of contract.</para
+          >
         </returns>
         <param name="contractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of contract.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of contract.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetContract">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Description.ContractDescription GetContract (Type contractType, object serviceImplementation);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Description.ContractDescription GetContract(class System.Type contractType, object serviceImplementation) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Description.ContractDescription GetContract (Type contractType, object serviceImplementation);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Description.ContractDescription GetContract(class System.Type contractType, object serviceImplementation) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -232,7 +360,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para>
+          <para
+            >The difference between the <see
+             cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" />
+
+             overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see
+             cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+            ).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -240,17 +376,40 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract and service implementation.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             for the specified type of contract and service implementation.</para
+          >
         </returns>
         <param name="contractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of contract.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of contract.</param
+        >
         <param name="serviceImplementation">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> that implements the service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           that implements the service.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetContract">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Description.ContractDescription GetContract (Type contractType, Type serviceType);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Description.ContractDescription GetContract(class System.Type contractType, class System.Type serviceType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Description.ContractDescription GetContract (Type contractType, Type serviceType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Description.ContractDescription GetContract(class System.Type contractType, class System.Type serviceType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -265,7 +424,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para>
+          <para
+            >The difference between the <see
+             cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" />
+
+             overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see
+             cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+            ).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -273,17 +440,40 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract and type of service.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             for the specified type of contract and type of service.</para
+          >
         </returns>
         <param name="contractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of contract.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of contract.</param
+        >
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of service.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of service.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetInheritedContracts">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;System.ServiceModel.Description.ContractDescription&gt; GetInheritedContracts ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ObjectModel.Collection`1&lt;class System.ServiceModel.Description.ContractDescription&gt; GetInheritedContracts() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<System.ServiceModel.Description.ContractDescription> GetInheritedContracts ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.ObjectModel.Collection`1<class System.ServiceModel.Description.ContractDescription> GetInheritedContracts() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -300,7 +490,15 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Collections.ObjectModel.Collection`1" /> of type <see cref="T:System.ServiceModel.Description.ContractDescription" /> that is inherited by the current contract description.</para>
+          <para
+            >The <see
+             cref="T:System.Collections.ObjectModel.Collection`1" />
+
+             of type <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             that is inherited by the current contract description.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -318,7 +516,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the <see cref="P:System.ServiceModel.Description.ContractDescription.ProtectionLevel" /> is set, the <see cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" /> property is set to true.</para>
+          <para
+            >When the <see
+             cref="P:System.ServiceModel.Description.ContractDescription.ProtectionLevel" />
+
+             is set, the <see
+             cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" />
+
+             property is set to true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -368,8 +574,14 @@
       </Docs>
     </Member>
     <Member MemberName="Operations">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Description.OperationDescriptionCollection Operations { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Description.OperationDescriptionCollection Operations" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Description.OperationDescriptionCollection Operations { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Description.OperationDescriptionCollection Operations"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -387,8 +599,14 @@
       </Docs>
     </Member>
     <Member MemberName="ProtectionLevel">
-      <MemberSignature Language="C#" Value="public System.Net.Security.ProtectionLevel ProtectionLevel { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Security.ProtectionLevel ProtectionLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Security.ProtectionLevel ProtectionLevel { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Security.ProtectionLevel ProtectionLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -400,7 +618,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the <see cref="P:System.ServiceModel.Description.ContractDescription.ProtectionLevel" /> is set, the <see cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" /> property is set to true.</para>
+          <para
+            >When the <see
+             cref="P:System.ServiceModel.Description.ContractDescription.ProtectionLevel" />
+
+             is set, the <see
+             cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" />
+
+             property is set to true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -409,8 +635,14 @@
       </Docs>
     </Member>
     <Member MemberName="SessionMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.SessionMode SessionMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.SessionMode SessionMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.SessionMode SessionMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.SessionMode SessionMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -422,7 +654,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A reliable session is a way of correlating a set of messages exchanged between two or more endpoints (using the <see cref="http://go.microsoft.com/fwlink/?LinkId=96680">WS-ReliableMessaging</see> specification) to provide assurances of the reliability of the connection. </para>
+          <para
+            >A reliable session is a way of correlating a set of messages exchanged between two or more endpoints (using the <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=96680">WS-ReliableMessaging</see>
+
+             specification) to provide assurances of the reliability of the connection. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

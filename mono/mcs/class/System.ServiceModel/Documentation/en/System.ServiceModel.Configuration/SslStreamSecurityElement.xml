@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SslStreamSecurityElement" FullName="System.ServiceModel.Configuration.SslStreamSecurityElement">
-  <TypeSignature Language="C#" Value="public sealed class SslStreamSecurityElement : System.ServiceModel.Configuration.BindingElementExtensionElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SslStreamSecurityElement extends System.ServiceModel.Configuration.BindingElementExtensionElement" />
+<Type
+  Name="SslStreamSecurityElement"
+  FullName="System.ServiceModel.Configuration.SslStreamSecurityElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SslStreamSecurityElement : System.ServiceModel.Configuration.BindingElementExtensionElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SslStreamSecurityElement extends System.ServiceModel.Configuration.BindingElementExtensionElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SslStreamSecurityElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +42,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.SslStreamSecurityElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.SslStreamSecurityElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="public override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -54,8 +74,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElement">
-      <MemberSignature Language="C#" Value="protected override System.ServiceModel.Channels.BindingElement CreateBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.ServiceModel.Channels.BindingElement CreateBindingElement() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.ServiceModel.Channels.BindingElement CreateBindingElement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.ServiceModel.Channels.BindingElement CreateBindingElement() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -71,8 +97,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

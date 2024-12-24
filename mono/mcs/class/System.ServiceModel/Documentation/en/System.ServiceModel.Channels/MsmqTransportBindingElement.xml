@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MsmqTransportBindingElement" FullName="System.ServiceModel.Channels.MsmqTransportBindingElement">
-  <TypeSignature Language="C#" Value="public sealed class MsmqTransportBindingElement : System.ServiceModel.Channels.MsmqBindingElementBase" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit MsmqTransportBindingElement extends System.ServiceModel.Channels.MsmqBindingElementBase" />
+<Type
+  Name="MsmqTransportBindingElement"
+  FullName="System.ServiceModel.Channels.MsmqTransportBindingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class MsmqTransportBindingElement : System.ServiceModel.Channels.MsmqBindingElementBase"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit MsmqTransportBindingElement extends System.ServiceModel.Channels.MsmqBindingElementBase"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,8 +22,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" /> enables the user to set the properties of the queued communication channel. The queued communication channel uses Message Queuing for its transport.</para>
-      <para>This binding element is the default binding element used by the Message Queuing standard binding (<see cref="T:System.ServiceModel.NetMsmqBinding" />). </para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />
+
+         enables the user to set the properties of the queued communication channel. The queued communication channel uses Message Queuing for its transport.</para
+      >
+      <para
+        >This binding element is the default binding element used by the Message Queuing standard binding (<see
+         cref="T:System.ServiceModel.NetMsmqBinding" />
+
+        ). </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +43,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MsmqTransportBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,13 +56,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
-    <Member MemberName="BuildChannelFactory&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public override System.ServiceModel.Channels.IChannelFactory&lt;TChannel&gt; BuildChannelFactory&lt;TChannel&gt; (System.ServiceModel.Channels.BindingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.IChannelFactory`1&lt;!!TChannel&gt; BuildChannelFactory&lt;TChannel&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="BuildChannelFactory<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ServiceModel.Channels.IChannelFactory<TChannel> BuildChannelFactory<TChannel> (System.ServiceModel.Channels.BindingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.IChannelFactory`1<!!TChannel> BuildChannelFactory<TChannel>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -68,14 +101,35 @@
           <para>A Message Queuing (MSMQ) channel factory that can be used to create channels to send messages to existing Message Queuing applications.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> with which to build the channel factory.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingContext" />
+
+           with which to build the channel factory.</param
+        >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.ServiceModel.Channels.IOutputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> class. </typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
+
+           or a <see
+           cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+           class. </typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public override System.ServiceModel.Channels.IChannelListener&lt;TChannel&gt; BuildChannelListener&lt;TChannel&gt; (System.ServiceModel.Channels.BindingContext context) where TChannel : class, System.ServiceModel.Channels.IChannel;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.IChannelListener`1&lt;!!TChannel&gt; BuildChannelListener&lt;class (class System.ServiceModel.Channels.IChannel) TChannel&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="BuildChannelListener<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ServiceModel.Channels.IChannelListener<TChannel> BuildChannelListener<TChannel> (System.ServiceModel.Channels.BindingContext context) where TChannel : class, System.ServiceModel.Channels.IChannel;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.IChannelListener`1<!!TChannel> BuildChannelListener<class (class System.ServiceModel.Channels.IChannel) TChannel>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -105,14 +159,35 @@
           <para>A Message Queuing (MSMQ) channel listener that can be used to create channels to receive messages from existing MSMQ applications.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> with which to build the channel listener.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingContext" />
+
+           with which to build the channel listener.</param
+        >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IInputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IInputChannel" /> class. </typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The channel type to be used to build the channel listener. Permitted channel types are <see
+           cref="T:System.ServiceModel.Channels.IInputSessionChannel" />
+
+           or a <see
+           cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+           class. </typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="CanBuildChannelFactory&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public override bool CanBuildChannelFactory&lt;TChannel&gt; (System.ServiceModel.Channels.BindingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool CanBuildChannelFactory&lt;TChannel&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="CanBuildChannelFactory<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanBuildChannelFactory<TChannel> (System.ServiceModel.Channels.BindingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool CanBuildChannelFactory<TChannel>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -134,17 +209,49 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if you can build a channel factory with the context provided; otherwise, false. The binding element returns true only when <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> or <see cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />.</para>
+          <para
+            >true if you can build a channel factory with the context provided; otherwise, false. The binding element returns true only when <paramref
+             name="TChannel" />
+
+             is <see
+             cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+             or <see
+             cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
+
+            .</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> with which to build the channel factory.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingContext" />
+
+           with which to build the channel factory.</param
+        >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IOutputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> class. </typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The channel type to be used to build the channel listener. Permitted channel types are <see
+           cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
+
+           or a <see
+           cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+           class. </typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="CanBuildChannelListener&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public override bool CanBuildChannelListener&lt;TChannel&gt; (System.ServiceModel.Channels.BindingContext context) where TChannel : class, System.ServiceModel.Channels.IChannel;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool CanBuildChannelListener&lt;class (class System.ServiceModel.Channels.IChannel) TChannel&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="CanBuildChannelListener<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanBuildChannelListener<TChannel> (System.ServiceModel.Channels.BindingContext context) where TChannel : class, System.ServiceModel.Channels.IChannel;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool CanBuildChannelListener<class (class System.ServiceModel.Channels.IChannel) TChannel>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -172,17 +279,49 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if you can build a channel listener with the context provided; otherwise, false.</para>
-          <para>The binding returns true only when <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IInputChannel" /> or <see cref="T:System.ServiceModel.Channels.IInputSessionChannel" />.</para>
+          <para
+            >The binding returns true only when <paramref
+             name="TChannel" />
+
+             is <see
+             cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+             or <see
+             cref="T:System.ServiceModel.Channels.IInputSessionChannel" />
+
+            .</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> with which to build the channel listener.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingContext" />
+
+           with which to build the channel listener.</param
+        >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IInputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IInputChannel" /> class. </typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The channel type to be used to build the channel listener. Permitted channel types are <see
+           cref="T:System.ServiceModel.Channels.IInputSessionChannel" />
+
+           or a <see
+           cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+           class. </typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="Clone">
-      <MemberSignature Language="C#" Value="public override System.ServiceModel.Channels.BindingElement Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.BindingElement Clone() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ServiceModel.Channels.BindingElement Clone ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.BindingElement Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -226,8 +365,14 @@
       </Docs>
     </Member>
     <Member MemberName="QueueTransferProtocol">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.QueueTransferProtocol QueueTransferProtocol { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.QueueTransferProtocol QueueTransferProtocol" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.QueueTransferProtocol QueueTransferProtocol { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.QueueTransferProtocol QueueTransferProtocol"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -239,7 +384,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Message Queuing (MSMQ) does not support Active Directory addressing when using SOAP Reliable Messaging Protocol (SRMP), so do not set <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.QueueTransferProtocol" /> to <see cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" /> or <see cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" /> when <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" /> is set to true.</para>
+          <para
+            >Message Queuing (MSMQ) does not support Active Directory addressing when using SOAP Reliable Messaging Protocol (SRMP), so do not set <see
+             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.QueueTransferProtocol" />
+
+             to <see
+             cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
+
+             or <see
+             cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
+
+             when <see
+             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+
+             is set to true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -261,12 +420,22 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.Scheme" /> property returns the string "net.msmq".</para>
+          <para
+            >The <see
+             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.Scheme" />
+
+             property returns the string "net.msmq".</para
+          >
           <para>The Message Queuing (MSMQ) queued transport supports several addressing schemes, including net.msmq.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.String" /> that contains the addressing scheme that is used by this transport binding element.</para>
+          <para
+            >Returns a <see
+             cref="T:System.String" />
+
+             that contains the addressing scheme that is used by this transport binding element.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -285,7 +454,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Message Queuing (MSMQ) queue addresses can consist of path names or direct format names. With a direct format name, MSMQ resolves the queue name using DNS, NetBIOS, or IP. With a path name, MSMQ resolves the queue name using Active Directory.</para>
-          <para>By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" /> property to true, an application can specify that the queued transport should resolve the computer name using Active Directory rather than DNS, NetBIOS, or IP.</para>
+          <para
+            >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see
+             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+
+             property to true, an application can specify that the queued transport should resolve the computer name using Active Directory rather than DNS, NetBIOS, or IP.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

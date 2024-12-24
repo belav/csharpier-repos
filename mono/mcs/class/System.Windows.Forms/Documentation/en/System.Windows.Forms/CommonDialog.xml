@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CommonDialog" FullName="System.Windows.Forms.CommonDialog">
-  <TypeSignature Language="C#" Value="public abstract class CommonDialog : System.ComponentModel.Component" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class CommonDialog : System.ComponentModel.Component"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -18,7 +21,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Inherited classes are required to implement <see cref="M:System.Windows.Forms.CommonDialog.RunDialog(System.IntPtr)" /> by invoking <see cref="M:System.Windows.Forms.CommonDialog.ShowDialog" /> to create a specific common dialog box. Inherited classes can optionally override <see cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" /> to implement specific dialog box hook functionality.</para>
+      <para
+        >Inherited classes are required to implement <see
+         cref="M:System.Windows.Forms.CommonDialog.RunDialog(System.IntPtr)" />
+
+         by invoking <see
+         cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+         to create a specific common dialog box. Inherited classes can optionally override <see
+         cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
+
+         to implement specific dialog box hook functionality.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -34,7 +48,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.CommonDialog" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.CommonDialog" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -51,7 +70,16 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For information about handling events, see <format type="text/html"><a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a></format>.</para>
+          <para
+            >For information about handling events, see <format
+             type="text/html">
+              <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
+                >[&lt;topic://cpconEventsOverview&gt;]</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,7 +92,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HookProc">
-      <MemberSignature Language="C#" Value="protected virtual IntPtr HookProc (IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual IntPtr HookProc (IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
@@ -78,12 +109,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A hook procedure is a mechanism by which a function can intercept events before they reach an application. When you override the <see cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" /> method for a <see cref="T:System.Windows.Forms.CommonDialog" /> class, the operating system invokes your override of the function to post operating system messages to the window.</para>
+          <para
+            >A hook procedure is a mechanism by which a function can intercept events before they reach an application. When you override the <see
+             cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
+
+             method for a <see
+             cref="T:System.Windows.Forms.CommonDialog" />
+
+             class, the operating system invokes your override of the function to post operating system messages to the window.</para
+          >
           <para>By default, the hook procedure centers the dialog box on the screen in response to a WM_INITDIALOG message.</para>
           <block subset="none" type="note">
-            <para>This method uses <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" /> to prevent it from being called from untrusted code; only the immediate caller is required to have <see cref="P:System.Security.Permissions.SecurityPermissionAttribute.UnmanagedCode" /> permission. If your code can be called from partially trusted code, do not pass user input to <see cref="T:System.Runtime.InteropServices.Marshal" /> class methods without validation. For important limitations on using the LinkDemand member, see <format type="text/html"><a href="1AB877F2-70F4-4E0D-8116-943999DFE8F5">[&lt;topic://cpcondemandvslinkdemand&gt;]</a></format>.</para>
+            <para
+              >This method uses <see
+               cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+
+               to prevent it from being called from untrusted code; only the immediate caller is required to have <see
+               cref="P:System.Security.Permissions.SecurityPermissionAttribute.UnmanagedCode" />
+
+               permission. If your code can be called from partially trusted code, do not pass user input to <see
+               cref="T:System.Runtime.InteropServices.Marshal" />
+
+               class methods without validation. For important limitations on using the LinkDemand member, see <format
+               type="text/html">
+                <a href="1AB877F2-70F4-4E0D-8116-943999DFE8F5"
+                  >[&lt;topic://cpcondemandvslinkdemand&gt;]</a
+                >
+              </format>
+
+              .</para
+            >
           </block>
-          <para>This property also uses the <see cref="F:System.Security.Permissions.SecurityAction.InheritanceDemand" /> security attribute; to override this member, the derived class must have the CustomPermission permission.</para>
+          <para
+            >This property also uses the <see
+             cref="F:System.Security.Permissions.SecurityAction.InheritanceDemand" />
+
+             security attribute; to override this member, the derived class must have the CustomPermission permission.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -94,13 +156,25 @@
           <para>A zero value if the default dialog box procedure processes the message; a nonzero value if the default dialog box procedure ignores the message.</para>
         </returns>
         <param name="hWnd">
-          <attribution license="cc4" from="Microsoft" modified="false" />The handle to the dialog box window. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The handle to the dialog box window. </param
+        >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message being received. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message being received. </param
+        >
         <param name="wparam">
-          <attribution license="cc4" from="Microsoft" modified="false" />Additional information about the message. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Additional information about the message. </param
+        >
         <param name="lparam">
-          <attribution license="cc4" from="Microsoft" modified="false" />Additional information about the message. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Additional information about the message. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -123,10 +197,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.CommonDialog.HelpRequest" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.CommonDialog.HelpRequest" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Windows.Forms.HelpEventArgs" /> that provides the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Windows.Forms.HelpEventArgs" />
+
+           that provides the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -134,7 +219,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OwnerWndProc">
-      <MemberSignature Language="C#" Value="protected virtual IntPtr OwnerWndProc (IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual IntPtr OwnerWndProc (IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
@@ -159,13 +247,31 @@
           <para>The result of the message processing, which is dependent on the message sent.</para>
         </returns>
         <param name="hWnd">
-          <attribution license="cc4" from="Microsoft" modified="false" />The window handle of the message to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The window handle of the message to send. </param
+        >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Win32 message to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Win32 message to send. </param
+        >
         <param name="wparam">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <paramref name="wparam" /> to send with the message. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <paramref
+           name="wparam" />
+
+           to send with the message. </param
+        >
         <param name="lparam">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <paramref name="lparam" /> to send with the message. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <paramref
+           name="lparam" />
+
+           to send with the message. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -192,7 +298,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RunDialog">
-      <MemberSignature Language="C#" Value="protected abstract bool RunDialog (IntPtr hwndOwner);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract bool RunDialog (IntPtr hwndOwner);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -203,7 +312,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is invoked when the user of a common dialog box calls <see cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />, and it must be overridden by inherited classes of <see cref="T:System.Windows.Forms.CommonDialog" /> to implement a specific common dialog box.</para>
+          <para
+            >This method is invoked when the user of a common dialog box calls <see
+             cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+            , and it must be overridden by inherited classes of <see
+             cref="T:System.Windows.Forms.CommonDialog" />
+
+             to implement a specific common dialog box.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -214,7 +331,10 @@
           <para>true if the dialog box was successfully run; otherwise, false.</para>
         </returns>
         <param name="hwndOwner">
-          <attribution license="cc4" from="Microsoft" modified="false" />A value that represents the window handle of the owner window for the common dialog box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A value that represents the window handle of the owner window for the common dialog box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -222,7 +342,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ShowDialog">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DialogResult ShowDialog ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DialogResult ShowDialog ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -231,7 +354,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method implements <see cref="M:System.Windows.Forms.CommonDialog.RunDialog(System.IntPtr)" />.</para>
+          <para
+            >This method implements <see
+             cref="M:System.Windows.Forms.CommonDialog.RunDialog(System.IntPtr)" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -240,7 +368,13 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Windows.Forms.DialogResult.OK" /> if the user clicks OK in the dialog box; otherwise, <see cref="F:System.Windows.Forms.DialogResult.Cancel" />.</para>
+            <see cref="F:System.Windows.Forms.DialogResult.OK" />
+
+             if the user clicks OK in the dialog box; otherwise, <see
+             cref="F:System.Windows.Forms.DialogResult.Cancel" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -249,7 +383,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ShowDialog">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DialogResult ShowDialog (System.Windows.Forms.IWin32Window owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DialogResult ShowDialog (System.Windows.Forms.IWin32Window owner);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -260,7 +397,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This version of the <see cref="M:System.Windows.Forms.CommonDialog.ShowDialog" /> method allows you to specify a specific form or control that will own the dialog box that is shown. If you use the version of this method that has no parameters, the dialog box being shown would be owned automatically by the currently active window of your application.</para>
+          <para
+            >This version of the <see
+             cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+             method allows you to specify a specific form or control that will own the dialog box that is shown. If you use the version of this method that has no parameters, the dialog box being shown would be owned automatically by the currently active window of your application.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,10 +411,25 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Windows.Forms.DialogResult.OK" /> if the user clicks <ui>OK</ui> in the dialog box; otherwise, <see cref="F:System.Windows.Forms.DialogResult.Cancel" />.</para>
+            <see cref="F:System.Windows.Forms.DialogResult.OK" />
+
+             if the user clicks <ui
+            >OK</ui>
+
+             in the dialog box; otherwise, <see
+             cref="F:System.Windows.Forms.DialogResult.Cancel" />
+
+            .</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />Any object that implements <see cref="T:System.Windows.Forms.IWin32Window" /> that represents the top-level window that will own the modal dialog box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Any object that implements <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that represents the top-level window that will own the modal dialog box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

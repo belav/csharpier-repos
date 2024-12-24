@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DesignerRegionCollection" FullName="System.Web.UI.Design.DesignerRegionCollection">
-  <TypeSignature Language="C#" Value="public class DesignerRegionCollection : System.Collections.IList" />
+  <TypeSignature
+    Language="C#"
+    Value="public class DesignerRegionCollection : System.Collections.IList"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,40 +19,117 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.Design.ControlDesigner" /> class, and any derived class, uses the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> class to contain and enumerate the designer regions for the control in a design host, such as vsprvslong. </para>
-      <para>For example, the <see cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" /> method can be used to define and add regions to the collection.</para>
-      <para>Use the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" /> property to access the control designer object that contains the designer region collection. Use the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> methods and properties to examine and maintain the <see cref="T:System.Web.UI.Design.DesignerRegion" /> objects that are in the collection.</para>
-      <para>The collection dynamically increases as objects are added. Indexes in this collection are zero-based. Use the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" /> property to determine how many designer regions are in the collection. Use the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> members to provide the following functionality: </para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.Design.ControlDesigner" />
+
+         class, and any derived class, uses the <see
+         cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+         class to contain and enumerate the designer regions for the control in a design host, such as vsprvslong. </para
+      >
+      <para
+        >For example, the <see
+         cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" />
+
+         method can be used to define and add regions to the collection.</para
+      >
+      <para
+        >Use the <see
+         cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" />
+
+         property to access the control designer object that contains the designer region collection. Use the <see
+         cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+         methods and properties to examine and maintain the <see
+         cref="T:System.Web.UI.Design.DesignerRegion" />
+
+         objects that are in the collection.</para
+      >
+      <para
+        >The collection dynamically increases as objects are added. Indexes in this collection are zero-based. Use the <see
+         cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+         property to determine how many designer regions are in the collection. Use the <see
+         cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+         members to provide the following functionality: </para
+      >
       <list type="bullet">
         <item>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" /> method to add a single designer region to the collection. </para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" />
+
+             method to add a single designer region to the collection. </para
+          >
         </item>
         <item>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" /> method to add a designer region at a particular index within the collection. </para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+             method to add a designer region at a particular index within the collection. </para
+          >
         </item>
         <item>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" /> method to remove a designer region. </para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" />
+
+             method to remove a designer region. </para
+          >
         </item>
         <item>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" /> method to remove the designer region at a particular index.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" />
+
+             method to remove the designer region at a particular index.</para
+          >
         </item>
         <item>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Contains(System.Web.UI.Design.DesignerRegion)" /> method to determine whether a particular designer region is already in the collection. </para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Contains(System.Web.UI.Design.DesignerRegion)" />
+
+             method to determine whether a particular designer region is already in the collection. </para
+          >
         </item>
         <item>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" /> method to retrieve the index of a designer region within the collection. </para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" />
+
+             method to retrieve the index of a designer region within the collection. </para
+          >
         </item>
         <item>
-          <para>The <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Item(System.Int32)" /> indexer to get or set the designer region at a particular index, using array notation.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Item(System.Int32)" />
+
+             indexer to get or set the designer region at a particular index, using array notation.</para
+          >
         </item>
         <item>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" /> method to remove all designer regions from the collection.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" />
+
+             method to remove all designer regions from the collection.</para
+          >
         </item>
       </list>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a collection of <see cref="T:System.Web.UI.Design.DesignerRegion" /> objects within a control designer.</para>
+      <para
+        >Represents a collection of <see
+         cref="T:System.Web.UI.Design.DesignerRegion" />
+
+         objects within a control designer.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -63,16 +143,35 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.#ctor" /> constructor to create an empty collection. You can add elements to the collection by using the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" /> or <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" /> method.</para>
+          <para
+            >Use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.#ctor" />
+
+             constructor to create an empty collection. You can add elements to the collection by using the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" />
+
+             or <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DesignerRegionCollection (System.Web.UI.Design.ControlDesigner owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DesignerRegionCollection (System.Web.UI.Design.ControlDesigner owner);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -83,19 +182,49 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.#ctor(System.Web.UI.Design.ControlDesigner)" /> constructor creates an empty collection and sets the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" /> property to the specified control designer object. The visual designer, such as vsprvslong, uses the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.#ctor(System.Web.UI.Design.ControlDesigner)" /> constructor to initialize a designer region collection for a specific control designer.</para>
-          <para>You can add elements to the collection by using the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" /> or <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" /> method.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.#ctor(System.Web.UI.Design.ControlDesigner)" />
+
+             constructor creates an empty collection and sets the <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" />
+
+             property to the specified control designer object. The visual designer, such as vsprvslong, uses the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.#ctor(System.Web.UI.Design.ControlDesigner)" />
+
+             constructor to initialize a designer region collection for a specific control designer.</para
+          >
+          <para
+            >You can add elements to the collection by using the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" />
+
+             or <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> class for the specified control designer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             class for the specified control designer.</para
+          >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The control designer that owns this collection of designer regions.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The control designer that owns this collection of designer regions.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public int Add (System.Web.UI.Design.DesignerRegion region);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int Add (System.Web.UI.Design.DesignerRegion region);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -109,18 +238,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" /> method adds the specified <see cref="T:System.Web.UI.Design.DesignerRegion" /> object to the end of the collection. To add a <see cref="T:System.Web.UI.Design.DesignerRegion" /> object to the collection at a specific index location, use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" /> method.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" />
+
+             method adds the specified <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object to the end of the collection. To add a <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object to the collection at a specific index location, use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <see cref="T:System.Web.UI.Design.DesignerRegion" /> object to the end of the collection.</para>
+          <para
+            >Adds the specified <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object to the end of the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The index at which the region was added to the collection.</para>
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           to add to the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -136,7 +290,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" /> method to remove all regions from the collection. To remove a specific region from the collection, use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" /> method. To remove a region at a particular index, use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" /> method.</para>
+          <para
+            >Use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" />
+
+             method to remove all regions from the collection. To remove a specific region from the collection, use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" />
+
+             method. To remove a region at a particular index, use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -145,7 +310,10 @@
       </Docs>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains (System.Web.UI.Design.DesignerRegion region);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains (System.Web.UI.Design.DesignerRegion region);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -159,8 +327,27 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Contains(System.Web.UI.Design.DesignerRegion)" /> method determines equality by using the <see cref="M:System.Object.Equals(System.Object)" /> method on the <see cref="T:System.Web.UI.Design.DesignerRegion" /> objects.</para>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Contains(System.Web.UI.Design.DesignerRegion)" /> method performs a linear search; therefore, the average execution time is proportional to the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" /> property. Because template region collections are typically small, the performance of the linear search operation is not critical.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Contains(System.Web.UI.Design.DesignerRegion)" />
+
+             method determines equality by using the <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+             method on the <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             objects.</para
+          >
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Contains(System.Web.UI.Design.DesignerRegion)" />
+
+             method performs a linear search; therefore, the average execution time is proportional to the <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+             property. Because template region collections are typically small, the performance of the linear search operation is not critical.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -171,7 +358,13 @@
           <para>true, if the region is in the collection; otherwise, false.</para>
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to locate within the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           to locate within the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -190,16 +383,50 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" /> or <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" /> method to add the design regions to the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> collection.</para>
+          <para
+            >Use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" />
+
+             or <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+             method to add the design regions to the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the elements of the collection to an <see cref="T:System.Array" /> object, starting at a particular <see cref="T:System.Array" /> index.</para>
+          <para
+            >Copies the elements of the collection to an <see
+             cref="T:System.Array" />
+
+             object, starting at a particular <see
+             cref="T:System.Array" />
+
+             index.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Array" /> that is the destination of the copied regions. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Array" />
+
+           that is the destination of the copied regions. The <see
+           cref="T:System.Array" />
+
+           must have zero-based indexing.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -215,16 +442,29 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" /> property is commonly used to determine the upper boundary index when iterating through objects in the collection. Because the collection indexes are zero-based, the first element is at index 0 and the last element is at index Count-1.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+             property is commonly used to determine the upper boundary index when iterating through objects in the collection. Because the collection indexes are zero-based, the first element is at index 0 and the last element is at index Count-1.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of <see cref="T:System.Web.UI.Design.DesignerRegion" /> objects in the collection.</para>
+          <para
+            >Gets the number of <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             objects in the collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -236,7 +476,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" /> property together with a loop construct, such as while, for, or foreach statements, to enumerate through the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> object.</para>
+          <para
+            >Use the <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+             property together with a loop construct, such as while, for, or foreach statements, to enumerate through the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -244,12 +492,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IEnumerator" />
+
+             that can be used to iterate through the collection.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf (System.Web.UI.Design.DesignerRegion region);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf (System.Web.UI.Design.DesignerRegion region);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -263,23 +519,64 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" /> method determines equality by using the <see cref="M:System.Object.Equals(System.Object)" /> method on the <see cref="T:System.Web.UI.Design.DesignerRegion" /> objects.</para>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" /> method performs a linear search; therefore, the average execution time is proportional to the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" /> property. Because template region collections are typically small, the performance of the linear search operation is not critical.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" />
+
+             method determines equality by using the <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+             method on the <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             objects.</para
+          >
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" />
+
+             method performs a linear search; therefore, the average execution time is proportional to the <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+             property. Because template region collections are typically small, the performance of the linear search operation is not critical.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the index of the specified <see cref="T:System.Web.UI.Design.DesignerRegion" /> object within the collection.</para>
+          <para
+            >Returns the index of the specified <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object within the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The zero-based index of the first occurrence of <paramref name="region" /> within the collection; otherwise, -1, if <paramref name="region" /> is not in the collection.</para>
+          <para
+            >The zero-based index of the first occurrence of <paramref
+             name="region" />
+
+             within the collection; otherwise, -1, if <paramref
+             name="region" />
+
+             is not in the collection.</para
+          >
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to locate within the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           to locate within the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, System.Web.UI.Design.DesignerRegion region);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, System.Web.UI.Design.DesignerRegion region);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -294,19 +591,47 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" /> method adds a <see cref="T:System.Web.UI.Design.DesignerRegion" /> object to the collection at a specific index location. To add a single <see cref="T:System.Web.UI.Design.DesignerRegion" /> to the end of the collection, use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" /> method.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+             method adds a <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object to the collection at a specific index location. To add a single <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             to the end of the collection, use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" />
+
+             method.</para
+          >
           <block subset="none" type="note">
             <para>When you insert an item into the collection, the indexes change for subsequent items in the collection.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Inserts a <see cref="T:System.Web.UI.Design.DesignerRegion" /> object into the collection at the specified index.</para>
+          <para
+            >Inserts a <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object into the collection at the specified index.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index within the collection at which to insert the region.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index within the collection at which to insert the region.</param
+        >
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to insert into the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           to insert into the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsFixedSize">
@@ -323,7 +648,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> object has a fixed size.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             object has a fixed size.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -341,7 +671,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> object is read-only.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             object is read-only.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -359,16 +694,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Enumerating through a collection is not a thread-safe procedure intrinsically. Even when a collection is synchronized, other threads can still modify the collection. This causes exceptions during enumeration.</para>
-          <para>Lock the collection by using the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.SyncRoot" /> method during the whole enumeration to guarantee thread safety.</para>
+          <para
+            >Lock the collection by using the <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.SyncRoot" />
+
+             method during the whole enumeration to guarantee thread safety.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether access to the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> object is synchronized (thread safe).</para>
+          <para
+            >Gets a value indicating whether access to the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             object is synchronized (thread safe).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.DesignerRegion this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.DesignerRegion this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -387,7 +735,10 @@
       </Docs>
     </Member>
     <Member MemberName="Owner">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.ControlDesigner Owner { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.ControlDesigner Owner { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -399,7 +750,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" /> property provides a convenient means to access the control designer object for a designer region collection. For example, you can use the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" /> property to determine the type of control designer that owns the collection and to access the properties and methods of the control designer.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" />
+
+             property provides a convenient means to access the control designer object for a designer region collection. For example, you can use the <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" />
+
+             property to determine the type of control designer that owns the collection and to access the properties and methods of the control designer.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -408,7 +767,10 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (System.Web.UI.Design.DesignerRegion region);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (System.Web.UI.Design.DesignerRegion region);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -422,20 +784,69 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" /> method removes the first occurrence of the specified region from the collection. If the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> object does not contain the specified <paramref name="region" />, the collection remains unchanged. No exception is thrown.</para>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" /> method determines equality by using the <see cref="M:System.Object.Equals(System.Object)" /> method on the <see cref="T:System.Web.UI.Design.DesignerRegion" /> object.</para>
-          <para>The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" /> method performs a linear search; therefore, the average execution time is proportional to the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" /> property. Because template region collections are typically small, the performance of the linear search operation is not critical.</para>
-          <para>To remove a region at a particular index from the collection, use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" /> method. To remove all regions from the collection, use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" /> method.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" />
+
+             method removes the first occurrence of the specified region from the collection. If the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             object does not contain the specified <paramref
+             name="region" />
+
+            , the collection remains unchanged. No exception is thrown.</para
+          >
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" />
+
+             method determines equality by using the <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+             method on the <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object.</para
+          >
+          <para
+            >The <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" />
+
+             method performs a linear search; therefore, the average execution time is proportional to the <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+             property. Because template region collections are typically small, the performance of the linear search operation is not critical.</para
+          >
+          <para
+            >To remove a region at a particular index from the collection, use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" />
+
+             method. To remove all regions from the collection, use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" />
+
+             method.</para
+          >
           <block subset="none" type="note">
             <para>When you remove an item from the collection, the indexes change for subsequent items in the collection.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the specified <see cref="T:System.Web.UI.Design.DesignerRegion" /> object from the collection. </para>
+          <para
+            >Removes the specified <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object from the collection. </para
+          >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to remove from the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           to remove from the collection. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -453,17 +864,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" /> method to remove a region at a particular index from the collection. To remove a specified region from the collection, use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" /> method. To remove all regions from the collection, use the <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" /> method.</para>
+          <para
+            >Use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" />
+
+             method to remove a region at a particular index from the collection. To remove a specified region from the collection, use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" />
+
+             method. To remove all regions from the collection, use the <see
+             cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" />
+
+             method.</para
+          >
           <block subset="none" type="note">
             <para>When you remove an item from the collection, the indexes change for subsequent items in the collection.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the <see cref="T:System.Web.UI.Design.DesignerRegion" /> object at the specified index within the collection.</para>
+          <para
+            >Removes the <see
+             cref="T:System.Web.UI.Design.DesignerRegion" />
+
+             object at the specified index within the collection.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index within the collection of the <see cref="T:System.Web.UI.Design.DesignerRegion" /> to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index within the collection of the <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           to remove.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">
@@ -480,11 +913,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Enumerating through a collection is not a thread-safe procedure intrinsically. Even when a collection is synchronized, other threads can still modify the collection. This causes exceptions during enumeration.</para>
-          <para>Lock the collection by using the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.SyncRoot" /> method during the whole enumeration to guarantee thread safety. For detailed information about locking collections for thread-safe access, see <see cref="P:System.Collections.ICollection.SyncRoot" />.</para>
+          <para
+            >Lock the collection by using the <see
+             cref="P:System.Web.UI.Design.DesignerRegionCollection.SyncRoot" />
+
+             method during the whole enumeration to guarantee thread safety. For detailed information about locking collections for thread-safe access, see <see
+             cref="P:System.Collections.ICollection.SyncRoot" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an object that can be used to synchronize access to the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> object.</para>
+          <para
+            >Gets an object that can be used to synchronize access to the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -504,16 +950,44 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.ICollection" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+
+            .</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Array" /> that is the destination of the copied regions. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Array" />
+
+           that is the destination of the copied regions. The <see
+           cref="T:System.Array" />
+
+           must have zero-based indexing.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.Count">
@@ -529,16 +1003,32 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.ICollection" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="P:System.Collections.ICollection.Count" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="P:System.Collections.ICollection.Count" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -550,16 +1040,32 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.ICollection" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="P:System.Collections.ICollection.IsSynchronized" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -571,16 +1077,32 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.ICollection" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="P:System.Collections.ICollection.SyncRoot" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="P:System.Collections.ICollection.SyncRoot" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -592,15 +1114,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IEnumerable" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IEnumerable" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.IEnumerable.GetEnumerator" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IEnumerator" />
+
+             that can be used to iterate through the collection.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -619,18 +1159,34 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.IList.Add(System.Object)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.IList.Add(System.Object)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The index at which the item was added to the collection.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item to add to the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Clear">
@@ -646,11 +1202,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.IList.Clear" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.IList.Clear" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -669,18 +1238,37 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.IList.Contains(System.Object)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.IList.Contains(System.Object)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true, if the region is in the collection; otherwise, false.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to locate within the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           to locate within the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IndexOf">
@@ -698,18 +1286,37 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.IList.IndexOf(System.Object)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.IList.IndexOf(System.Object)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The zero-based index of the first occurrence of the object within the collection; otherwise, -1, if the object is not in the collection.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to locate within the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           to locate within the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Insert">
@@ -728,16 +1335,35 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
+
+            .</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index within the collection at which to insert the object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index within the collection at which to insert the object.</param
+        >
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to insert into the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to insert into the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IsFixedSize">
@@ -753,11 +1379,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="P:System.Collections.IList.IsFixedSize" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="P:System.Collections.IList.IsFixedSize" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -774,16 +1413,32 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="P:System.Collections.IList.IsReadOnly" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="P:System.Collections.IList.IsReadOnly" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IList.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IList.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -816,14 +1471,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.IList.Remove(System.Object)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.IList.Remove(System.Object)" />
+
+            .</para
+          >
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to remove from the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to remove from the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.RemoveAt">
@@ -841,14 +1512,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Collections.IList.RemoveAt(System.Int32)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+
+            .</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index within the collection of the object to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index within the collection of the object to remove.</param
+        >
       </Docs>
     </Member>
   </Members>

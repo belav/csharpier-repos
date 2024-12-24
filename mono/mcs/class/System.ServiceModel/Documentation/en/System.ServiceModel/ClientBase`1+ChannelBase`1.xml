@@ -1,6 +1,15 @@
-<Type Name="ClientBase&lt;TChannel&gt;+ChannelBase&lt;T&gt;" FullName="System.ServiceModel.ClientBase&lt;TChannel&gt;+ChannelBase&lt;T&gt;">
-  <TypeSignature Language="C#" Value="protected class ClientBase&lt;TChannel&gt;.ChannelBase&lt;T&gt; : IDisposable, System.ServiceModel.Channels.IOutputChannel, System.ServiceModel.Channels.IRequestChannel, System.ServiceModel.IClientChannel, System.ServiceModel.IExtensibleObject&lt;System.ServiceModel.IContextChannel&gt; where TChannel : class where T : class" />
-  <TypeSignature Language="ILAsm" Value=".class nested protected auto ansi beforefieldinit ClientBase`1/ChannelBase`1&lt;class TChannel, class T&gt; extends System.Object implements class System.IDisposable, class System.ServiceModel.Channels.IChannel, class System.ServiceModel.Channels.IOutputChannel, class System.ServiceModel.Channels.IRequestChannel, class System.ServiceModel.IClientChannel, class System.ServiceModel.ICommunicationObject, class System.ServiceModel.IContextChannel, class System.ServiceModel.IExtensibleObject`1&lt;class System.ServiceModel.IContextChannel&gt;" />
+<Type
+  Name="ClientBase<TChannel>+ChannelBase<T>"
+  FullName="System.ServiceModel.ClientBase<TChannel>+ChannelBase<T>"
+>
+  <TypeSignature
+    Language="C#"
+    Value="protected class ClientBase<TChannel>.ChannelBase<T> : IDisposable, System.ServiceModel.Channels.IOutputChannel, System.ServiceModel.Channels.IRequestChannel, System.ServiceModel.IClientChannel, System.ServiceModel.IExtensibleObject<System.ServiceModel.IContextChannel> where TChannel : class where T : class"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested protected auto ansi beforefieldinit ClientBase`1/ChannelBase`1<class TChannel, class T> extends System.Object implements class System.IDisposable, class System.ServiceModel.Channels.IChannel, class System.ServiceModel.Channels.IOutputChannel, class System.ServiceModel.Channels.IRequestChannel, class System.ServiceModel.IClientChannel, class System.ServiceModel.ICommunicationObject, class System.ServiceModel.IContextChannel, class System.ServiceModel.IExtensibleObject`1<class System.ServiceModel.IContextChannel>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -44,14 +53,20 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ChannelBase (System.ServiceModel.ClientBase&lt;T&gt; client);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.ClientBase`1&lt;!T&gt; client) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ChannelBase (System.ServiceModel.ClientBase<T> client);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.ClientBase`1<!T> client) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="client" Type="System.ServiceModel.ClientBase&lt;T&gt;" />
+        <Parameter Name="client" Type="System.ServiceModel.ClientBase<T>" />
       </Parameters>
       <Docs>
         <param name="client">To be added.</param>
@@ -92,8 +107,14 @@
       </Docs>
     </Member>
     <Member MemberName="BeginDisplayInitializationUI">
-      <MemberSignature Language="C#" Value="public IAsyncResult BeginDisplayInitializationUI (AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginDisplayInitializationUI(class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public IAsyncResult BeginDisplayInitializationUI (AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginDisplayInitializationUI(class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -114,8 +135,14 @@
       </Docs>
     </Member>
     <Member MemberName="BeginInvoke">
-      <MemberSignature Language="C#" Value="protected IAsyncResult BeginInvoke (string methodName, object[] args, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class System.IAsyncResult BeginInvoke(string methodName, object[] args, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected IAsyncResult BeginInvoke (string methodName, object[] args, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance class System.IAsyncResult BeginInvoke(string methodName, object[] args, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -141,7 +168,10 @@
     </Member>
     <Member MemberName="DidInteractiveInitialization">
       <MemberSignature Language="C#" Value="public bool DidInteractiveInitialization { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool DidInteractiveInitialization" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool DidInteractiveInitialization"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -157,7 +187,10 @@
     </Member>
     <Member MemberName="DisplayInitializationUI">
       <MemberSignature Language="C#" Value="public void DisplayInitializationUI ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DisplayInitializationUI() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void DisplayInitializationUI() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -173,7 +206,10 @@
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="public void Dispose ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Dispose() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -188,8 +224,14 @@
       </Docs>
     </Member>
     <Member MemberName="EndDisplayInitializationUI">
-      <MemberSignature Language="C#" Value="public void EndDisplayInitializationUI (IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void EndDisplayInitializationUI(class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void EndDisplayInitializationUI (IAsyncResult result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void EndDisplayInitializationUI(class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -207,8 +249,14 @@
       </Docs>
     </Member>
     <Member MemberName="EndInvoke">
-      <MemberSignature Language="C#" Value="protected object EndInvoke (string methodName, object[] args, IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance object EndInvoke(string methodName, object[] args, class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected object EndInvoke (string methodName, object[] args, IAsyncResult result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance object EndInvoke(string methodName, object[] args, class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -231,8 +279,14 @@
       </Docs>
     </Member>
     <Member MemberName="InputSession">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.IInputSession InputSession { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.IInputSession InputSession" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.IInputSession InputSession { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.IInputSession InputSession"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -247,8 +301,14 @@
       </Docs>
     </Member>
     <Member MemberName="Invoke">
-      <MemberSignature Language="C#" Value="protected object Invoke (string methodName, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance object Invoke(string methodName, object[] args) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected object Invoke (string methodName, object[] args);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance object Invoke(string methodName, object[] args) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -269,8 +329,14 @@
       </Docs>
     </Member>
     <Member MemberName="LocalAddress">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.EndpointAddress LocalAddress { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EndpointAddress LocalAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.EndpointAddress LocalAddress { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EndpointAddress LocalAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -286,7 +352,10 @@
     </Member>
     <Member MemberName="OperationTimeout">
       <MemberSignature Language="C#" Value="public TimeSpan OperationTimeout { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan OperationTimeout" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan OperationTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -301,8 +370,14 @@
       </Docs>
     </Member>
     <Member MemberName="OutputSession">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.IOutputSession OutputSession { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.IOutputSession OutputSession" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.IOutputSession OutputSession { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.IOutputSession OutputSession"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -317,8 +392,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemoteAddress">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.EndpointAddress RemoteAddress { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EndpointAddress RemoteAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.EndpointAddress RemoteAddress { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EndpointAddress RemoteAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -348,9 +429,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.ServiceModel.Channels.IChannel.GetProperty&lt;TProperty&gt;">
-      <MemberSignature Language="C#" Value="TProperty IChannel.GetProperty&lt;TProperty&gt; () where TProperty : class;" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance !!TProperty System.ServiceModel.Channels.IChannel.GetProperty&lt;class TProperty&gt;() cil managed" />
+    <Member MemberName="System.ServiceModel.Channels.IChannel.GetProperty<TProperty>">
+      <MemberSignature
+        Language="C#"
+        Value="TProperty IChannel.GetProperty<TProperty> () where TProperty : class;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance !!TProperty System.ServiceModel.Channels.IChannel.GetProperty<class TProperty>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -374,8 +461,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IOutputChannel.BeginSend">
-      <MemberSignature Language="C#" Value="IAsyncResult IOutputChannel.BeginSend (System.ServiceModel.Channels.Message message, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.Channels.IOutputChannel.BeginSend(class System.ServiceModel.Channels.Message message, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="IAsyncResult IOutputChannel.BeginSend (System.ServiceModel.Channels.Message message, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.Channels.IOutputChannel.BeginSend(class System.ServiceModel.Channels.Message message, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -398,8 +491,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IOutputChannel.BeginSend">
-      <MemberSignature Language="C#" Value="IAsyncResult IOutputChannel.BeginSend (System.ServiceModel.Channels.Message message, TimeSpan timeout, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.Channels.IOutputChannel.BeginSend(class System.ServiceModel.Channels.Message message, valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="IAsyncResult IOutputChannel.BeginSend (System.ServiceModel.Channels.Message message, TimeSpan timeout, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.Channels.IOutputChannel.BeginSend(class System.ServiceModel.Channels.Message message, valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -425,7 +524,10 @@
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IOutputChannel.EndSend">
       <MemberSignature Language="C#" Value="void IOutputChannel.EndSend (IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Channels.IOutputChannel.EndSend(class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Channels.IOutputChannel.EndSend(class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -443,8 +545,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IOutputChannel.Send">
-      <MemberSignature Language="C#" Value="void IOutputChannel.Send (System.ServiceModel.Channels.Message message);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Channels.IOutputChannel.Send(class System.ServiceModel.Channels.Message message) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IOutputChannel.Send (System.ServiceModel.Channels.Message message);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Channels.IOutputChannel.Send(class System.ServiceModel.Channels.Message message) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -462,8 +570,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IOutputChannel.Send">
-      <MemberSignature Language="C#" Value="void IOutputChannel.Send (System.ServiceModel.Channels.Message message, TimeSpan timeout);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Channels.IOutputChannel.Send(class System.ServiceModel.Channels.Message message, valuetype System.TimeSpan timeout) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IOutputChannel.Send (System.ServiceModel.Channels.Message message, TimeSpan timeout);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Channels.IOutputChannel.Send(class System.ServiceModel.Channels.Message message, valuetype System.TimeSpan timeout) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -483,8 +597,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IRequestChannel.BeginRequest">
-      <MemberSignature Language="C#" Value="IAsyncResult IRequestChannel.BeginRequest (System.ServiceModel.Channels.Message message, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.Channels.IRequestChannel.BeginRequest(class System.ServiceModel.Channels.Message message, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="IAsyncResult IRequestChannel.BeginRequest (System.ServiceModel.Channels.Message message, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.Channels.IRequestChannel.BeginRequest(class System.ServiceModel.Channels.Message message, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -507,8 +627,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IRequestChannel.BeginRequest">
-      <MemberSignature Language="C#" Value="IAsyncResult IRequestChannel.BeginRequest (System.ServiceModel.Channels.Message message, TimeSpan timeout, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.Channels.IRequestChannel.BeginRequest(class System.ServiceModel.Channels.Message message, valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="IAsyncResult IRequestChannel.BeginRequest (System.ServiceModel.Channels.Message message, TimeSpan timeout, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.Channels.IRequestChannel.BeginRequest(class System.ServiceModel.Channels.Message message, valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -533,8 +659,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IRequestChannel.EndRequest">
-      <MemberSignature Language="C#" Value="System.ServiceModel.Channels.Message IRequestChannel.EndRequest (IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.ServiceModel.Channels.Message System.ServiceModel.Channels.IRequestChannel.EndRequest(class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ServiceModel.Channels.Message IRequestChannel.EndRequest (IAsyncResult result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.ServiceModel.Channels.Message System.ServiceModel.Channels.IRequestChannel.EndRequest(class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -553,8 +685,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IRequestChannel.RemoteAddress">
-      <MemberSignature Language="C#" Value="System.ServiceModel.EndpointAddress System.ServiceModel.Channels.IRequestChannel.RemoteAddress { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EndpointAddress System.ServiceModel.Channels.IRequestChannel.RemoteAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ServiceModel.EndpointAddress System.ServiceModel.Channels.IRequestChannel.RemoteAddress { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EndpointAddress System.ServiceModel.Channels.IRequestChannel.RemoteAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -569,8 +707,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IRequestChannel.Request">
-      <MemberSignature Language="C#" Value="System.ServiceModel.Channels.Message IRequestChannel.Request (System.ServiceModel.Channels.Message message);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.ServiceModel.Channels.Message System.ServiceModel.Channels.IRequestChannel.Request(class System.ServiceModel.Channels.Message message) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ServiceModel.Channels.Message IRequestChannel.Request (System.ServiceModel.Channels.Message message);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.ServiceModel.Channels.Message System.ServiceModel.Channels.IRequestChannel.Request(class System.ServiceModel.Channels.Message message) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -589,8 +733,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IRequestChannel.Request">
-      <MemberSignature Language="C#" Value="System.ServiceModel.Channels.Message IRequestChannel.Request (System.ServiceModel.Channels.Message message, TimeSpan timeout);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.ServiceModel.Channels.Message System.ServiceModel.Channels.IRequestChannel.Request(class System.ServiceModel.Channels.Message message, valuetype System.TimeSpan timeout) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ServiceModel.Channels.Message IRequestChannel.Request (System.ServiceModel.Channels.Message message, TimeSpan timeout);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.ServiceModel.Channels.Message System.ServiceModel.Channels.IRequestChannel.Request(class System.ServiceModel.Channels.Message message, valuetype System.TimeSpan timeout) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -611,8 +761,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Channels.IRequestChannel.Via">
-      <MemberSignature Language="C#" Value="Uri System.ServiceModel.Channels.IRequestChannel.Via { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri System.ServiceModel.Channels.IRequestChannel.Via" />
+      <MemberSignature
+        Language="C#"
+        Value="Uri System.ServiceModel.Channels.IRequestChannel.Via { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Uri System.ServiceModel.Channels.IRequestChannel.Via"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -628,7 +784,10 @@
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.Abort">
       <MemberSignature Language="C#" Value="void ICommunicationObject.Abort ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Abort() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Abort() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -643,8 +802,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.BeginClose">
-      <MemberSignature Language="C#" Value="IAsyncResult ICommunicationObject.BeginClose (AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.ICommunicationObject.BeginClose(class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="IAsyncResult ICommunicationObject.BeginClose (AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.ICommunicationObject.BeginClose(class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -665,8 +830,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.BeginClose">
-      <MemberSignature Language="C#" Value="IAsyncResult ICommunicationObject.BeginClose (TimeSpan timeout, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.ICommunicationObject.BeginClose(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="IAsyncResult ICommunicationObject.BeginClose (TimeSpan timeout, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.ICommunicationObject.BeginClose(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -689,8 +860,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.BeginOpen">
-      <MemberSignature Language="C#" Value="IAsyncResult ICommunicationObject.BeginOpen (AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.ICommunicationObject.BeginOpen(class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="IAsyncResult ICommunicationObject.BeginOpen (AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.ICommunicationObject.BeginOpen(class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -711,8 +888,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.BeginOpen">
-      <MemberSignature Language="C#" Value="IAsyncResult ICommunicationObject.BeginOpen (TimeSpan timeout, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.ICommunicationObject.BeginOpen(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="IAsyncResult ICommunicationObject.BeginOpen (TimeSpan timeout, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.IAsyncResult System.ServiceModel.ICommunicationObject.BeginOpen(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -736,7 +919,10 @@
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.Close">
       <MemberSignature Language="C#" Value="void ICommunicationObject.Close ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Close() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Close() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -752,7 +938,10 @@
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.Close">
       <MemberSignature Language="C#" Value="void ICommunicationObject.Close (TimeSpan timeout);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Close(valuetype System.TimeSpan timeout) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Close(valuetype System.TimeSpan timeout) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -770,8 +959,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.EndClose">
-      <MemberSignature Language="C#" Value="void ICommunicationObject.EndClose (IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.EndClose(class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void ICommunicationObject.EndClose (IAsyncResult result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.EndClose(class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -789,8 +984,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.EndOpen">
-      <MemberSignature Language="C#" Value="void ICommunicationObject.EndOpen (IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.EndOpen(class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void ICommunicationObject.EndOpen (IAsyncResult result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.EndOpen(class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -809,7 +1010,10 @@
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.Open">
       <MemberSignature Language="C#" Value="void ICommunicationObject.Open ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Open() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Open() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -825,7 +1029,10 @@
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.Open">
       <MemberSignature Language="C#" Value="void ICommunicationObject.Open (TimeSpan timeout);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Open(valuetype System.TimeSpan timeout) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.ICommunicationObject.Open(valuetype System.TimeSpan timeout) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -843,8 +1050,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.ICommunicationObject.State">
-      <MemberSignature Language="C#" Value="System.ServiceModel.CommunicationState System.ServiceModel.ICommunicationObject.State { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.CommunicationState System.ServiceModel.ICommunicationObject.State" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ServiceModel.CommunicationState System.ServiceModel.ICommunicationObject.State { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.CommunicationState System.ServiceModel.ICommunicationObject.State"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -858,9 +1071,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.ServiceModel.IExtensibleObject&lt;System.ServiceModel.IContextChannel&gt;.Extensions">
-      <MemberSignature Language="C#" Value="System.ServiceModel.IExtensionCollection&lt;System.ServiceModel.IContextChannel&gt; System.ServiceModel.IExtensibleObject&lt;System.ServiceModel.IContextChannel&gt;.Extensions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.IExtensionCollection`1&lt;class System.ServiceModel.IContextChannel&gt; System.ServiceModel.IExtensibleObject&lt;System.ServiceModel.IContextChannel&gt;.Extensions" />
+    <Member MemberName="System.ServiceModel.IExtensibleObject<System.ServiceModel.IContextChannel>.Extensions">
+      <MemberSignature
+        Language="C#"
+        Value="System.ServiceModel.IExtensionCollection<System.ServiceModel.IContextChannel> System.ServiceModel.IExtensibleObject<System.ServiceModel.IContextChannel>.Extensions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.IExtensionCollection`1<class System.ServiceModel.IContextChannel> System.ServiceModel.IExtensibleObject<System.ServiceModel.IContextChannel>.Extensions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -875,8 +1094,14 @@
       </Docs>
     </Member>
     <Member MemberName="UnknownMessageReceived">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;System.ServiceModel.UnknownMessageReceivedEventArgs&gt; UnknownMessageReceived;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class System.ServiceModel.UnknownMessageReceivedEventArgs&gt; UnknownMessageReceived" />
+      <MemberSignature
+        Language="C#"
+        Value="public event EventHandler<System.ServiceModel.UnknownMessageReceivedEventArgs> UnknownMessageReceived;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".event class System.EventHandler`1<class System.ServiceModel.UnknownMessageReceivedEventArgs> UnknownMessageReceived"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

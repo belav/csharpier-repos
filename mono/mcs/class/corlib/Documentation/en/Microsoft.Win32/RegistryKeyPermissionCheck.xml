@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RegistryKeyPermissionCheck" FullName="Microsoft.Win32.RegistryKeyPermissionCheck">
   <TypeSignature Language="C#" Value="public enum RegistryKeyPermissionCheck" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed RegistryKeyPermissionCheck extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed RegistryKeyPermissionCheck extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersions>
@@ -36,11 +39,13 @@
         <item>
           <term>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" />
+            </para>
           </term>
           <description>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" />
+            </para>
           </description>
           <description>
             <para>A security check is performed when accessing any value in the current key, or when attempting to access a subkey. This is the behavior in the .NET Framework versions 1.0 and 1.1.</para>
@@ -49,11 +54,13 @@
         <item>
           <term>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" />
+            </para>
           </term>
           <description>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+            </para>
           </description>
           <description>
             <para>A security check is performed when trying to open the current key.</para>
@@ -62,11 +69,13 @@
         <item>
           <term>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" />
+            </para>
           </term>
           <description>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+            </para>
           </description>
           <description>
             <para>A security check is performed when trying to open the current key.</para>
@@ -75,11 +84,16 @@
         <item>
           <term>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+            </para>
           </term>
           <description>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" /> or <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.Default" />
+
+               or <see
+               cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+            </para>
           </description>
           <description>
             <para>No security checks are performed when opening the current key or its values.</para>
@@ -88,11 +102,13 @@
         <item>
           <term>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+            </para>
           </term>
           <description>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+            </para>
           </description>
           <description>
             <para>A security check is performed when trying to open the current key.</para>
@@ -101,7 +117,8 @@
         <item>
           <term>
             <para>
-              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" /> </para>
+              <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+            </para>
           </term>
           <description>
             <para>Any </para>
@@ -120,7 +137,10 @@
   <Members>
     <Member MemberName="Default">
       <MemberSignature Language="C#" Value="Default" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.RegistryKeyPermissionCheck Default = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.RegistryKeyPermissionCheck Default = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -133,13 +153,24 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The registry key inherits the mode of its parent. Security checks are performed when trying to access subkeys or values, unless the parent was opened with <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" /> or <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" /> mode.</para>
+          <para
+            >The registry key inherits the mode of its parent. Security checks are performed when trying to access subkeys or values, unless the parent was opened with <see
+             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+
+             or <see
+             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+
+             mode.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReadSubTree">
       <MemberSignature Language="C#" Value="ReadSubTree" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.RegistryKeyPermissionCheck ReadSubTree = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.RegistryKeyPermissionCheck ReadSubTree = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -152,13 +183,24 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" /> or <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />.</para>
+          <para
+            >Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see
+             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+
+             or <see
+             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReadWriteSubTree">
       <MemberSignature Language="C#" Value="ReadWriteSubTree" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.RegistryKeyPermissionCheck ReadWriteSubTree = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.RegistryKeyPermissionCheck ReadWriteSubTree = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -171,7 +213,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />.</para>
+          <para
+            >Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see
+             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

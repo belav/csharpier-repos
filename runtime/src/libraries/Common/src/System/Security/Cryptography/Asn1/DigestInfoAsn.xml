@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <asn:Sequence
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="DigestInfoAsn"
-  namespace="System.Security.Cryptography.Asn1">
-
+  namespace="System.Security.Cryptography.Asn1"
+>
   <!--
     https://tools.ietf.org/html/rfc2313#section-10.1.2
 
@@ -15,6 +15,9 @@
     DigestAlgorithmIdentifier ::= AlgorithmIdentifier
     Digest ::= OCTET STRING
   -->
-  <asn:AsnType name="DigestAlgorithm" typeName="System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn" />
+  <asn:AsnType
+    name="DigestAlgorithm"
+    typeName="System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn"
+  />
   <asn:OctetString name="Digest" />
 </asn:Sequence>

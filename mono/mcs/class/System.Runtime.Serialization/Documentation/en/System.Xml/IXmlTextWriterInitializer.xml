@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IXmlTextWriterInitializer" FullName="System.Xml.IXmlTextWriterInitializer">
   <TypeSignature Language="C#" Value="public interface IXmlTextWriterInitializer" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IXmlTextWriterInitializer" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IXmlTextWriterInitializer"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Serialization</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,8 +19,14 @@
   </Docs>
   <Members>
     <Member MemberName="SetOutput">
-      <MemberSignature Language="C#" Value="public void SetOutput (System.IO.Stream stream, System.Text.Encoding encoding, bool ownsStream);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetOutput(class System.IO.Stream stream, class System.Text.Encoding encoding, bool ownsStream) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetOutput (System.IO.Stream stream, System.Text.Encoding encoding, bool ownsStream);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void SetOutput(class System.IO.Stream stream, class System.Text.Encoding encoding, bool ownsStream) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,11 +46,20 @@
           <para>Specifies initialization requirements for XML text writers that implement this method.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The stream to write to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The stream to write to.</param
+        >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The character encoding of the stream.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The character encoding of the stream.</param
+        >
         <param name="ownsStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />If true, stream is closed by the writer when done; otherwise false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          If true, stream is closed by the writer when done; otherwise false.</param
+        >
       </Docs>
     </Member>
   </Members>

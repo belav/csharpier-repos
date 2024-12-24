@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="Closure" FullName="System.Runtime.CompilerServices.Closure">
   <TypeSignature Language="C#" Value="public sealed class Closure" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit Closure extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit Closure extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -27,8 +30,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Closure (object[] constants, object[] locals);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(object[] constants, object[] locals) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Closure (object[] constants, object[] locals);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(object[] constants, object[] locals) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -44,9 +53,15 @@
           <para>Creates an object to hold state of a dynamically generated method.</para>
         </summary>
         <param name="constants">
-          <attribution license="cc4" from="Microsoft" modified="false" />The constant values that are used by the method.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The constant values that are used by the method.</param
+        >
         <param name="locals">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hoisted local variables from the parent context.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The hoisted local variables from the parent context.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Constants">

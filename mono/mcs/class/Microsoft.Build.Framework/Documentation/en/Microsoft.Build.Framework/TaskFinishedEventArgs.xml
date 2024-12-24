@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TaskFinishedEventArgs" FullName="Microsoft.Build.Framework.TaskFinishedEventArgs">
-  <TypeSignature Language="C#" Value="public class TaskFinishedEventArgs : Microsoft.Build.Framework.BuildStatusEventArgs" />
+  <TypeSignature
+    Language="C#"
+    Value="public class TaskFinishedEventArgs : Microsoft.Build.Framework.BuildStatusEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Build.Framework</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +17,12 @@
     <since version="2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.TaskFinished" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:Microsoft.Build.Framework.IEventSource.TaskFinished" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +35,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.TaskFinishedEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Framework.TaskFinishedEventArgs" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +48,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TaskFinishedEventArgs (string message, string helpKeyword, string projectFile, string taskFile, string taskName, bool succeeded);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TaskFinishedEventArgs (string message, string helpKeyword, string projectFile, string taskFile, string taskName, bool succeeded);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -50,20 +66,43 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.TaskFinishedEventArgs" /> class with the specified values.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Framework.TaskFinishedEventArgs" />
+
+             class with the specified values.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text for the message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text for the message.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword associated with the event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword associated with the event.</param
+        >
         <param name="projectFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The project file name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The project file name.</param
+        >
         <param name="taskFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file in which the task is defined.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file in which the task is defined.</param
+        >
         <param name="taskName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the task.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the task.</param
+        >
         <param name="succeeded">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to indicate the task succeeded; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to indicate the task succeeded; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

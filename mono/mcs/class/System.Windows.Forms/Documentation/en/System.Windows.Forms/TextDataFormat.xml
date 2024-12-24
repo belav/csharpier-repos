@@ -12,7 +12,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration contains values that are similar to the text-related fields of the <see cref="T:System.Windows.Forms.DataFormats" /> type.</para>
+      <para
+        >This enumeration contains values that are similar to the text-related fields of the <see
+         cref="T:System.Windows.Forms.DataFormats" />
+
+         type.</para
+      >
       <para>This enumeration is used with the following methods:</para>
       <list type="bullet">
         <item>
@@ -49,7 +54,15 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the formats used with text-related methods of the <see cref="T:System.Windows.Forms.Clipboard" /> and <see cref="T:System.Windows.Forms.DataObject" /> classes.</para>
+      <para
+        >Specifies the formats used with text-related methods of the <see
+         cref="T:System.Windows.Forms.Clipboard" />
+
+         and <see
+         cref="T:System.Windows.Forms.DataObject" />
+
+         classes.</para
+      >
     </summary>
   </Docs>
   <Members>

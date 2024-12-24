@@ -26,11 +26,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use one of the DbProviderFactories.GetFactory methods to get an instance of <see cref="T:System.Data.Common.DbProviderFactory" />.</para>
+          <para
+            >Use one of the DbProviderFactories.GetFactory methods to get an instance of <see
+             cref="T:System.Data.Common.DbProviderFactory" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of a <see cref="T:System.Data.Common.DbProviderFactory" /> class.</para>
+          <para
+            >Initializes a new instance of a <see
+             cref="T:System.Data.Common.DbProviderFactory" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -38,7 +48,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CanCreateDataSourceEnumerator">
-      <MemberSignature Language="C#" Value="public virtual bool CanCreateDataSourceEnumerator { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool CanCreateDataSourceEnumerator { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -49,7 +62,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies whether the specific <see cref="T:System.Data.Common.DbProviderFactory" /> supports the <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class.</para>
+          <para
+            >Specifies whether the specific <see
+             cref="T:System.Data.Common.DbProviderFactory" />
+
+             supports the <see
+             cref="T:System.Data.Common.DbDataSourceEnumerator" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -57,7 +78,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateCommand">
-      <MemberSignature Language="C#" Value="public virtual System.Data.Common.DbCommand CreateCommand ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Data.Common.DbCommand CreateCommand ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbCommand</ReturnType>
@@ -68,11 +92,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbCommand" /> class.</para>
+          <para
+            >Returns a new instance of the provider's class that implements the <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.Data.Common.DbCommand" />.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.Data.Common.DbCommand" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +114,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateCommandBuilder">
-      <MemberSignature Language="C#" Value="public virtual System.Data.Common.DbCommandBuilder CreateCommandBuilder ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Data.Common.DbCommandBuilder CreateCommandBuilder ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbCommandBuilder</ReturnType>
@@ -91,11 +128,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbCommandBuilder" /> class.</para>
+          <para
+            >Returns a new instance of the provider's class that implements the <see
+             cref="T:System.Data.Common.DbCommandBuilder" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.Data.Common.DbCommandBuilder" />.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.Data.Common.DbCommandBuilder" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -103,7 +150,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateConnection">
-      <MemberSignature Language="C#" Value="public virtual System.Data.Common.DbConnection CreateConnection ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Data.Common.DbConnection CreateConnection ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbConnection</ReturnType>
@@ -114,11 +164,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbConnection" /> class.</para>
+          <para
+            >Returns a new instance of the provider's class that implements the <see
+             cref="T:System.Data.Common.DbConnection" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.Data.Common.DbConnection" />.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.Data.Common.DbConnection" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -126,7 +186,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateConnectionStringBuilder">
-      <MemberSignature Language="C#" Value="public virtual System.Data.Common.DbConnectionStringBuilder CreateConnectionStringBuilder ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Data.Common.DbConnectionStringBuilder CreateConnectionStringBuilder ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbConnectionStringBuilder</ReturnType>
@@ -137,11 +200,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class.</para>
+          <para
+            >Returns a new instance of the provider's class that implements the <see
+             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.Data.Common.DbConnectionStringBuilder" />.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -149,7 +222,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateDataAdapter">
-      <MemberSignature Language="C#" Value="public virtual System.Data.Common.DbDataAdapter CreateDataAdapter ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Data.Common.DbDataAdapter CreateDataAdapter ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbDataAdapter</ReturnType>
@@ -160,11 +236,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbDataAdapter" /> class.</para>
+          <para
+            >Returns a new instance of the provider's class that implements the <see
+             cref="T:System.Data.Common.DbDataAdapter" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.Data.Common.DbDataAdapter" />.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.Data.Common.DbDataAdapter" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -172,7 +258,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateDataSourceEnumerator">
-      <MemberSignature Language="C#" Value="public virtual System.Data.Common.DbDataSourceEnumerator CreateDataSourceEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Data.Common.DbDataSourceEnumerator CreateDataSourceEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbDataSourceEnumerator</ReturnType>
@@ -183,11 +272,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class.</para>
+          <para
+            >Returns a new instance of the provider's class that implements the <see
+             cref="T:System.Data.Common.DbDataSourceEnumerator" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.Data.Common.DbDataSourceEnumerator" />.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.Data.Common.DbDataSourceEnumerator" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -195,7 +294,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateParameter">
-      <MemberSignature Language="C#" Value="public virtual System.Data.Common.DbParameter CreateParameter ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Data.Common.DbParameter CreateParameter ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbParameter</ReturnType>
@@ -206,11 +308,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbParameter" /> class.</para>
+          <para
+            >Returns a new instance of the provider's class that implements the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of <see cref="T:System.Data.Common.DbParameter" />.</para>
+          <para
+            >A new instance of <see
+             cref="T:System.Data.Common.DbParameter" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -218,7 +330,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreatePermission">
-      <MemberSignature Language="C#" Value="public virtual System.Security.CodeAccessPermission CreatePermission (System.Security.Permissions.PermissionState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Security.CodeAccessPermission CreatePermission (System.Security.Permissions.PermissionState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Security.CodeAccessPermission</ReturnType>
@@ -231,14 +346,33 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the provider's class that implements the provider's version of the <see cref="T:System.Security.CodeAccessPermission" /> class.</para>
+          <para
+            >Returns a new instance of the provider's class that implements the provider's version of the <see
+             cref="T:System.Security.CodeAccessPermission" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Security.CodeAccessPermission" /> object for the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para>
+          <para
+            >A <see
+             cref="T:System.Security.CodeAccessPermission" />
+
+             object for the specified <see
+             cref="T:System.Security.Permissions.PermissionState" />
+
+            .</para
+          >
         </returns>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Permissions.PermissionState" />
+
+           values.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

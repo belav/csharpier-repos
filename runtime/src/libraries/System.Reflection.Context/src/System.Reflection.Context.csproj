@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.1;netstandard2.0</TargetFrameworks>
     <EnableAOTAnalyzer>false</EnableAOTAnalyzer>
@@ -12,12 +11,13 @@
 Commonly Used Types:
 System.Reflection.Context.CustomReflectionContext</PackageDescription>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
-    <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetFramework)' == 'netstandard2.0'">SR.PlatformNotSupported_ReflectionContext</GeneratePlatformNotSupportedAssemblyMessage>
+    <GeneratePlatformNotSupportedAssemblyMessage
+      Condition="'$(TargetFramework)' == 'netstandard2.0'"
+      >SR.PlatformNotSupported_ReflectionContext</GeneratePlatformNotSupportedAssemblyMessage
+    >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
     <Compile Include="System\Reflection\Context\CollectionServices.cs" />
     <Compile Include="System\Reflection\Context\CustomReflectionContext.cs" />
@@ -75,10 +75,8 @@ System.Reflection.Context.CustomReflectionContext</PackageDescription>
     <Compile Include="System\Reflection\Context\Virtual\VirtualPropertyInfo.PropertySetter.cs" />
     <Compile Include="System\Reflection\Context\Virtual\VirtualReturnParameter.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\RequiresAssemblyFilesAttribute.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\RequiresUnreferencedCodeAttribute.cs" />
   </ItemGroup>
-
 </Project>

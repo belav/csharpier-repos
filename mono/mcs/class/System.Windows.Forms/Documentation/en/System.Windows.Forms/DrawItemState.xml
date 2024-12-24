@@ -17,7 +17,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by members such as <see cref="P:System.Windows.Forms.DrawItemEventArgs.State" />.</para>
+      <para
+        >This enumeration is used by members such as <see
+         cref="P:System.Windows.Forms.DrawItemEventArgs.State" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -51,7 +56,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The item is the editing portion of a <see cref="T:System.Windows.Forms.ComboBox" />.</para>
+          <para
+            >The item is the editing portion of a <see
+             cref="T:System.Windows.Forms.ComboBox" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

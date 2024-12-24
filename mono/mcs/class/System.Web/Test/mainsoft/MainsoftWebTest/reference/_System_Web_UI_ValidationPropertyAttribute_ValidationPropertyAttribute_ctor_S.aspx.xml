@@ -4,6 +4,9 @@
     <input id="MyTextBox2" type="text" name="MyTextBox2" />
     <input type="text" name="_ctl1" />
     <span>
-      <br />GHTSubTest1</span>
+      <br />
+
+      GHTSubTest1</span
+    >
   </div>
 </testresults>

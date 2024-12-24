@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="GetMemberBinder" FullName="System.Dynamic.GetMemberBinder">
-  <TypeSignature Language="C#" Value="public abstract class GetMemberBinder : System.Dynamic.DynamicMetaObjectBinder" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit GetMemberBinder extends System.Dynamic.DynamicMetaObjectBinder" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class GetMemberBinder : System.Dynamic.DynamicMetaObjectBinder"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit GetMemberBinder extends System.Dynamic.DynamicMetaObjectBinder"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,8 +25,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected GetMemberBinder (string name, bool ignoreCase);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(string name, bool ignoreCase) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected GetMemberBinder (string name, bool ignoreCase);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(string name, bool ignoreCase) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,17 +45,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Dynamic.GetMemberBinder" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Dynamic.GetMemberBinder" />
+
+            .</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member to obtain.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the member to obtain.</param
+        >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />Is true if the name should be matched ignoring case; false otherwise.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Is true if the name should be matched ignoring case; false otherwise.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public override sealed System.Dynamic.DynamicMetaObject Bind (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Dynamic.DynamicMetaObject Bind(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] args) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Dynamic.DynamicMetaObject Bind (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] args);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Dynamic.DynamicMetaObject Bind(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] args) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -69,17 +98,34 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic get member operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic get member operation.</param
+        >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of arguments of the dynamic get member operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of arguments of the dynamic get member operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="FallbackGetMember">
-      <MemberSignature Language="C#" Value="public System.Dynamic.DynamicMetaObject FallbackGetMember (System.Dynamic.DynamicMetaObject target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Dynamic.DynamicMetaObject FallbackGetMember(class System.Dynamic.DynamicMetaObject target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Dynamic.DynamicMetaObject FallbackGetMember (System.Dynamic.DynamicMetaObject target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Dynamic.DynamicMetaObject FallbackGetMember(class System.Dynamic.DynamicMetaObject target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,15 +144,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic get member operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic get member operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="FallbackGetMember">
-      <MemberSignature Language="C#" Value="public abstract System.Dynamic.DynamicMetaObject FallbackGetMember (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject errorSuggestion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Dynamic.DynamicMetaObject FallbackGetMember(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject errorSuggestion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Dynamic.DynamicMetaObject FallbackGetMember (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject errorSuggestion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Dynamic.DynamicMetaObject FallbackGetMember(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject errorSuggestion) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -126,12 +186,23 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic get member operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic get member operation.</param
+        >
         <param name="errorSuggestion">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding result to use if binding fails, or null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The binding result to use if binding fails, or null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IgnoreCase">

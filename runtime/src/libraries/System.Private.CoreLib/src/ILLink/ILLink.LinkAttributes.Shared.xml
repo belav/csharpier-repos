@@ -1,6 +1,10 @@
 <linker>
   <!-- The following attributes are only necessary when debugging is supported -->
-  <assembly fullname="System.Private.CoreLib" feature="System.Diagnostics.Debugger.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Diagnostics.Debugger.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Diagnostics.DebuggableAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -29,14 +33,20 @@
       <attribute internal="RemoveAttributeInstances" />
     </type>
   </assembly>
-
-  <assembly fullname="System.Private.CoreLib" feature="System.Reflection.Metadata.MetadataUpdater.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Reflection.Metadata.MetadataUpdater.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Reflection.Metadata.MetadataUpdateHandlerAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
   </assembly>
-
-  <assembly fullname="System.Private.CoreLib" feature="System.Diagnostics.Tracing.EventSource.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Diagnostics.Tracing.EventSource.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Diagnostics.Tracing.EventSourceAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -56,12 +66,15 @@
       <attribute internal="RemoveAttributeInstances" />
     </type>
   </assembly>
-
   <!--
     The following attributes are necessary when NullabilityInfoContext is supported.
     Note these attributes are allowed to be in any assembly.
      -->
-  <assembly fullname="*" feature="System.Reflection.NullabilityInfoContext.IsSupported" featurevalue="false">
+  <assembly
+    fullname="*"
+    feature="System.Reflection.NullabilityInfoContext.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Diagnostics.CodeAnalysis.AllowNullAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -87,9 +100,12 @@
       <attribute internal="RemoveAttributeInstances" />
     </type>
   </assembly>
-
   <!-- The following attributes are only necessary when COM is supported -->
-  <assembly fullname="System.Private.CoreLib" feature="System.Runtime.InteropServices.BuiltInComInterop.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Runtime.InteropServices.BuiltInComInterop.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Runtime.InteropServices.ClassInterfaceAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -115,13 +131,15 @@
       <attribute internal="RemoveAttributeInstances" />
     </type>
   </assembly>
-
   <!--
     Attributes listed below here should be behind the 'System.AggressiveAttributeTrimming' feature switch, which
     is only enabled by default on app models that need as much size savings as possible.
    -->
-
-  <assembly fullname="System.Private.CoreLib" feature="System.AggressiveAttributeTrimming" featurevalue="true">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.AggressiveAttributeTrimming"
+    featurevalue="true"
+  >
     <!-- System -->
     <type fullname="System.CLSCompliantAttribute">
       <attribute internal="RemoveAttributeInstances" />
@@ -136,7 +154,6 @@
         -->
       <attribute internal="RemoveAttributeInstances" />
     </type>
-
     <!-- System.Diagnostics.CodeAnalysis -->
     <type fullname="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute">
       <attribute internal="RemoveAttributeInstances" />
@@ -144,7 +161,6 @@
     <type fullname="System.Diagnostics.CodeAnalysis.ExperimentalAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
-
     <!-- System.Reflection -->
     <type fullname="System.Reflection.AssemblyCompanyAttribute">
       <attribute internal="RemoveAttributeInstances" />
@@ -167,7 +183,6 @@
     <type fullname="System.Reflection.AssemblyTitleAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
-
     <!-- System.Runtime.CompilerServices -->
     <type fullname="System.Runtime.CompilerServices.AsyncMethodBuilderAttribute">
       <attribute internal="RemoveAttributeInstances" />
@@ -214,7 +229,6 @@
     <type fullname="System.Runtime.CompilerServices.TupleElementNamesAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
-
     <!-- System.Runtime.Versioning -->
     <type fullname="System.Runtime.Versioning.SupportedOSPlatformAttribute">
       <attribute internal="RemoveAttributeInstances" />
@@ -237,13 +251,11 @@
     <type fullname="System.Runtime.Versioning.TargetPlatformAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
-
     <!-- System.ComponentModel -->
     <type fullname="System.ComponentModel.EditorBrowsableAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
   </assembly>
-
   <!-- Attributes that are allowed to be in any assembly -->
   <assembly fullname="*" feature="System.AggressiveAttributeTrimming" featurevalue="true">
     <!-- Attributes that tooling allows to be in any assembly to support earlier TFMs -->
@@ -307,9 +319,7 @@
     <type fullname="System.CodeDom.Compiler.GeneratedCodeAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
-
     <!-- The following attributes are generated by the compiler, so they could be in any assembly -->
-
     <!-- System.Runtime.CompilerServices -->
     <type fullname="System.Runtime.CompilerServices.IsUnmanagedAttribute">
       <attribute internal="RemoveAttributeInstances" />
@@ -323,12 +333,10 @@
     <type fullname="System.Runtime.CompilerServices.RefSafetyRulesAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
-
     <!-- Microsoft.CodeAnalysis -->
     <type fullname="Microsoft.CodeAnalysis.EmbeddedAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
-
     <!-- Metadata attributes present in most core SDKs assemblies -->
     <type fullname="System.Reflection.AssemblyMetadataAttribute">
       <attribute internal="RemoveAttributeInstances">

@@ -18,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName="ContainingRegion">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.DesignerRegion ContainingRegion { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.DesignerRegion ContainingRegion { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,7 +39,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetBounds">
-      <MemberSignature Language="C#" Value="public System.Drawing.Rectangle GetBounds (System.Web.UI.Design.DesignerRegion region);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Rectangle GetBounds (System.Web.UI.Design.DesignerRegion region);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -55,14 +61,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Rectangle" /> containing information about the location and measurements of the view at design time.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Rectangle" />
+
+             containing information about the location and measurements of the view at design time.</para
+          >
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> for which you want to retrieve the bounds.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           for which you want to retrieve the bounds.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Invalidate">
-      <MemberSignature Language="C#" Value="public void Invalidate (System.Drawing.Rectangle rectangle);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Invalidate (System.Drawing.Rectangle rectangle);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -80,11 +100,20 @@
           <para>Notifies the design host that the area represented by the provided rectangle needs to be repainted on the design surface.</para>
         </summary>
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Rectangle" /> representing the location and outer measurements of the view on the design surface. The coordinate-system origin for this rectangle is the top-left corner of the element to which the behavior is attached.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Rectangle" />
+
+           representing the location and outer measurements of the view on the design surface. The coordinate-system origin for this rectangle is the top-left corner of the element to which the behavior is attached.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="NamingContainerDesigner">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.Design.IDesigner NamingContainerDesigner { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.Design.IDesigner NamingContainerDesigner { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,7 +131,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetFlags">
-      <MemberSignature Language="C#" Value="public void SetFlags (System.Web.UI.Design.ViewFlags viewFlags, bool setFlag);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetFlags (System.Web.UI.Design.ViewFlags viewFlags, bool setFlag);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -118,16 +150,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Web.UI.Design.IControlDesignerView.SetFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Web.UI.Design.IControlDesignerView.SetFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
+
+            .</para
+          >
         </summary>
         <param name="viewFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A member of the <see cref="T:System.Web.UI.Design.ViewFlags" /> enumeration.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A member of the <see
+           cref="T:System.Web.UI.Design.ViewFlags" />
+
+           enumeration.</param
+        >
         <param name="setFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to set the flag, false to cancel the flag.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to set the flag, false to cancel the flag.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetRegionContent">
-      <MemberSignature Language="C#" Value="public void SetRegionContent (System.Web.UI.Design.EditableDesignerRegion region, string content);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetRegionContent (System.Web.UI.Design.EditableDesignerRegion region, string content);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -146,9 +195,18 @@
           <para>Puts the provided content into the provided designer region.</para>
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.UI.Design.DesignerRegion" /> into which the content is to be put.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.UI.Design.DesignerRegion" />
+
+           into which the content is to be put.</param
+        >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />The HTML markup to be put into the designer region.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The HTML markup to be put into the designer region.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SupportsRegions">
@@ -188,7 +246,10 @@
       </Docs>
     </Member>
     <Member MemberName="ViewEvent">
-      <MemberSignature Language="C#" Value="public event System.Web.UI.Design.ViewEventHandler ViewEvent;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Web.UI.Design.ViewEventHandler ViewEvent;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -199,7 +260,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" /> is raised by the design host if any of the following occur:</para>
+          <para
+            >The <see
+             cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+             is raised by the design host if any of the following occur:</para
+          >
           <list type="bullet">
             <item>
               <para>The user clicks on the view in the design host,</para>

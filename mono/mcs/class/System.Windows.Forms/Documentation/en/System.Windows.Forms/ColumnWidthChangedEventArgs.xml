@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ColumnWidthChangedEventArgs" FullName="System.Windows.Forms.ColumnWidthChangedEventArgs">
+<Type
+  Name="ColumnWidthChangedEventArgs"
+  FullName="System.Windows.Forms.ColumnWidthChangedEventArgs"
+>
   <TypeSignature Language="C#" Value="public class ColumnWidthChangedEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -14,12 +17,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanged" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ListView.ColumnWidthChanged" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ColumnWidthChangedEventArgs (int columnIndex);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ColumnWidthChangedEventArgs (int columnIndex);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="columnIndex" Type="System.Int32" />
@@ -28,14 +39,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can determine the column whose width is being change by checking the <see cref="P:System.Windows.Forms.ColumnWidthChangedEventArgs.ColumnIndex" /> property.</para>
+          <para
+            >You can determine the column whose width is being change by checking the <see
+             cref="P:System.Windows.Forms.ColumnWidthChangedEventArgs.ColumnIndex" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnWidthChangedEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ColumnWidthChangedEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the column whose width is being changed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the column whose width is being changed.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -12,11 +12,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> property. The <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> property specifies how a <see cref="T:System.Windows.Forms.StatusBarPanel" /> is autosized on a <see cref="T:System.Windows.Forms.StatusBar" /> control.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
+
+         property. The <see
+         cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
+
+         property specifies how a <see
+         cref="T:System.Windows.Forms.StatusBarPanel" />
+
+         is autosized on a <see
+         cref="T:System.Windows.Forms.StatusBar" />
+
+         control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies how a <see cref="T:System.Windows.Forms.StatusBarPanel" /> on a <see cref="T:System.Windows.Forms.StatusBar" /> control behaves when the control resizes.</para>
+      <para
+        >Specifies how a <see
+         cref="T:System.Windows.Forms.StatusBarPanel" />
+
+         on a <see
+         cref="T:System.Windows.Forms.StatusBar" />
+
+         control behaves when the control resizes.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -29,7 +51,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The width of the <see cref="T:System.Windows.Forms.StatusBarPanel" /> is determined by its contents.</para>
+          <para
+            >The width of the <see
+             cref="T:System.Windows.Forms.StatusBarPanel" />
+
+             is determined by its contents.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -46,7 +73,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.StatusBarPanel" /> does not change size when the <see cref="T:System.Windows.Forms.StatusBar" /> control resizes.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.StatusBarPanel" />
+
+             does not change size when the <see
+             cref="T:System.Windows.Forms.StatusBar" />
+
+             control resizes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -63,7 +98,30 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.StatusBarPanel" /> shares the available space on the <see cref="T:System.Windows.Forms.StatusBar" /> (the space not taken up by other panels whose <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> property is set to <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.None" /> or <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" />) with other panels that have their <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> property set to <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" />.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.StatusBarPanel" />
+
+             shares the available space on the <see
+             cref="T:System.Windows.Forms.StatusBar" />
+
+             (the space not taken up by other panels whose <see
+             cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
+
+             property is set to <see
+             cref="F:System.Windows.Forms.StatusBarPanelAutoSize.None" />
+
+             or <see
+             cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" />
+
+            ) with other panels that have their <see
+             cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
+
+             property set to <see
+             cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

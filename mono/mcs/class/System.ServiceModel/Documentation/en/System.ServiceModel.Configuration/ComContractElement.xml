@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ComContractElement" FullName="System.ServiceModel.Configuration.ComContractElement">
-  <TypeSignature Language="C#" Value="public sealed class ComContractElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ComContractElement extends System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ComContractElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ComContractElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ComContractElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,7 +42,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ComContractElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.ComContractElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -65,8 +79,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExposedMethods">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ComMethodElementCollection ExposedMethods { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ComMethodElementCollection ExposedMethods" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ComMethodElementCollection ExposedMethods { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ComMethodElementCollection ExposedMethods"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -152,8 +172,14 @@
       </Docs>
     </Member>
     <Member MemberName="PersistableTypes">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ComPersistableTypeElementCollection PersistableTypes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ComPersistableTypeElementCollection PersistableTypes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ComPersistableTypeElementCollection PersistableTypes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ComPersistableTypeElementCollection PersistableTypes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -176,8 +202,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -219,8 +251,14 @@
       </Docs>
     </Member>
     <Member MemberName="UserDefinedTypes">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ComUdtElementCollection UserDefinedTypes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ComUdtElementCollection UserDefinedTypes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ComUdtElementCollection UserDefinedTypes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ComUdtElementCollection UserDefinedTypes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ActivationArguments" FullName="System.Runtime.Hosting.ActivationArguments">
-  <TypeSignature Language="C#" Value="public sealed class ActivationArguments : System.Security.Policy.EvidenceBase" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit ActivationArguments extends System.Security.Policy.EvidenceBase" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ActivationArguments : System.Security.Policy.EvidenceBase"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit ActivationArguments extends System.Security.Policy.EvidenceBase"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,7 +26,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Runtime.Hosting.ActivationArguments" /> class is used by the <see cref="T:System.AppDomainSetup" /> class. </para>
+      <para
+        >The <see
+         cref="T:System.Runtime.Hosting.ActivationArguments" />
+
+         class is used by the <see
+         cref="T:System.AppDomainSetup" />
+
+         class. </para
+      >
       <para>The manifest-based activation model uses an application manifest rather than an assembly for activation. A manifest fully describes the application, its dependencies, security requirements, and so forth. The manifest model has several advantages over the assembly-based activation model, especially for Web applications. For example, the manifest contains the security requirements of the application, which enables the user to decide whether to allow the application to execute before downloading the code. The manifest also contains information about the application dependencies. </para>
     </remarks>
     <summary>
@@ -30,8 +44,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ActivationArguments (ActivationContext activationData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ActivationContext activationData) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ActivationArguments (ActivationContext activationData);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ActivationContext activationData) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,19 +64,44 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ActivationContext" /> object represented by the <paramref name="activationData" /> parameter contains the <see cref="T:System.ApplicationIdentity" /> and context information for manifest-based activation. </para>
+          <para
+            >The <see
+             cref="T:System.ActivationContext" />
+
+             object represented by the <paramref
+             name="activationData" />
+
+             parameter contains the <see
+             cref="T:System.ApplicationIdentity" />
+
+             and context information for manifest-based activation. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Hosting.ActivationArguments" /> class with the specified activation context. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Hosting.ActivationArguments" />
+
+             class with the specified activation context. </para
+          >
         </summary>
         <param name="activationData">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that identifies the manifest-based activation application.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that identifies the manifest-based activation application.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ActivationArguments (ApplicationIdentity applicationIdentity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ApplicationIdentity applicationIdentity) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ActivationArguments (ApplicationIdentity applicationIdentity);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ApplicationIdentity applicationIdentity) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -73,15 +118,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Hosting.ActivationArguments" /> class with the specified application identity.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Hosting.ActivationArguments" />
+
+             class with the specified application identity.</para
+          >
         </summary>
         <param name="applicationIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that identifies the manifest-based activation application.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that identifies the manifest-based activation application.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ActivationArguments (ActivationContext activationContext, string[] activationData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ActivationContext activationContext, string[] activationData) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ActivationArguments (ActivationContext activationContext, string[] activationData);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ActivationContext activationContext, string[] activationData) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -95,21 +154,49 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ActivationContext" /> object represented by the <paramref name="activationContext" /> parameter contains the <see cref="T:System.ApplicationIdentity" /> and context information for manifest-based activation. The activation data consists of information such as the query string portion of a URL.</para>
+          <para
+            >The <see
+             cref="T:System.ActivationContext" />
+
+             object represented by the <paramref
+             name="activationContext" />
+
+             parameter contains the <see
+             cref="T:System.ApplicationIdentity" />
+
+             and context information for manifest-based activation. The activation data consists of information such as the query string portion of a URL.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Hosting.ActivationArguments" /> class with the specified activation context and activation data.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Hosting.ActivationArguments" />
+
+             class with the specified activation context and activation data.</para
+          >
         </summary>
         <param name="activationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that identifies the manifest-based activation application.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that identifies the manifest-based activation application.</param
+        >
         <param name="activationData">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of strings containing host-provided activation data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of strings containing host-provided activation data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ActivationArguments (ApplicationIdentity applicationIdentity, string[] activationData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ApplicationIdentity applicationIdentity, string[] activationData) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ActivationArguments (ApplicationIdentity applicationIdentity, string[] activationData);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ApplicationIdentity applicationIdentity, string[] activationData) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -127,17 +214,31 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Hosting.ActivationArguments" /> class with the specified application identity and activation data.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Hosting.ActivationArguments" />
+
+             class with the specified application identity and activation data.</para
+          >
         </summary>
         <param name="applicationIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that identifies the manifest-based activation application.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that identifies the manifest-based activation application.</param
+        >
         <param name="activationData">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of strings containing host-provided activation data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of strings containing host-provided activation data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ActivationContext">
       <MemberSignature Language="C#" Value="public ActivationContext ActivationContext { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ActivationContext ActivationContext" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ActivationContext ActivationContext"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -151,7 +252,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ActivationContext" /> object contains an <see cref="T:System.ApplicationIdentity" /> and provides internal-only access to the application manifest. The activation context is used during manifest-based activation to set up the domain policy and provide an application-based security model.</para>
+          <para
+            >The <see
+             cref="T:System.ActivationContext" />
+
+             object contains an <see
+             cref="T:System.ApplicationIdentity" />
+
+             and provides internal-only access to the application manifest. The activation context is used during manifest-based activation to set up the domain policy and provide an application-based security model.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -184,8 +293,14 @@
       </Docs>
     </Member>
     <Member MemberName="ApplicationIdentity">
-      <MemberSignature Language="C#" Value="public ApplicationIdentity ApplicationIdentity { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ApplicationIdentity ApplicationIdentity" />
+      <MemberSignature
+        Language="C#"
+        Value="public ApplicationIdentity ApplicationIdentity { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ApplicationIdentity ApplicationIdentity"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

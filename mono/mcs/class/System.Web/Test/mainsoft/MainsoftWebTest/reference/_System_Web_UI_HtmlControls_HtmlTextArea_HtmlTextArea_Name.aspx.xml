@@ -15,11 +15,17 @@
   <div id="GHTSubTest5" style="height:56px;width:553px">
     <textarea cols="20" id="TEXTAREA5" rows="2" name="TEXTAREA5">Sample Text</textarea>
     <span>
-      <br />TEXTAREA5</span>
+      <br />
+
+      TEXTAREA5</span
+    >
   </div>
   <div id="GHTSubTest6" style="height:56px;width:553px">
     <textarea cols="20" id="Textarea6" rows="2" name="Textarea6">Sample Text</textarea>
     <span>
-      <br />Textarea6</span>
+      <br />
+
+      Textarea6</span
+    >
   </div>
 </testresults>

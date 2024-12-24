@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="FormsAuthenticationUserCollection" FullName="System.Web.Configuration.FormsAuthenticationUserCollection">
-  <TypeSignature Language="C#" Value="public sealed class FormsAuthenticationUserCollection : System.Configuration.ConfigurationElementCollection" />
+<Type
+  Name="FormsAuthenticationUserCollection"
+  FullName="System.Web.Configuration.FormsAuthenticationUserCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class FormsAuthenticationUserCollection : System.Configuration.ConfigurationElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,13 +24,37 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" /> uses the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" /> to programmatically access and modify the users element of the credentials section in the forms section of the authorization configuration section. </para>
-      <para>This type is part of a group that includes the <see cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />, the <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />, and the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> types.</para>
-      <para>  </para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
+
+         uses the <see
+         cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+         to programmatically access and modify the users element of the credentials section in the forms section of the authorization configuration section. </para
+      >
+      <para
+        >This type is part of a group that includes the <see
+         cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />
+
+        , the <see
+         cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
+
+        , and the <see
+         cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+         types.</para
+      >
+      <para></para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a collection of <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> objects. This class cannot be inherited.</para>
+      <para
+        >Represents a collection of <see
+         cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+         objects. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -37,7 +67,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -45,7 +80,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Web.Configuration.FormsAuthenticationUser user);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Web.Configuration.FormsAuthenticationUser user);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -57,14 +95,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The collection must not contain a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object with the same name.</para>
+          <para
+            >The collection must not contain a <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             object with the same name.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to the collection.</para>
+          <para
+            >Adds a <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             object to the collection.</para
+          >
         </summary>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to add to the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+           object to add to the collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -81,7 +135,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use this method to access the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> objects contained in the collection.</para>
+          <para
+            >You can use this method to access the <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             objects contained in the collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -107,7 +166,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> objects from the collection.</para>
+          <para
+            >Removes all <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             objects from the collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -115,7 +179,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CollectionType">
-      <MemberSignature Language="C#" Value="public override System.Configuration.ConfigurationElementCollectionType CollectionType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Configuration.ConfigurationElementCollectionType CollectionType { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElementCollectionType</ReturnType>
@@ -126,7 +193,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the type of the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />.</para>
+          <para
+            >Gets the type of the <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -134,7 +206,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElement</ReturnType>
@@ -167,7 +242,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.FormsAuthenticationUser Get (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.FormsAuthenticationUser Get (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.FormsAuthenticationUser</ReturnType>
@@ -180,21 +258,37 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> collection element at the specified index.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             collection element at the specified index.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> that contains the user name and password.</para>
+          <para
+            >A <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             that contains the user name and password.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The collection user's index. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The collection user's index. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.FormsAuthenticationUser Get (string name);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.FormsAuthenticationUser Get (string name);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.FormsAuthenticationUser</ReturnType>
@@ -207,21 +301,37 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> collection element with the specified name.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             collection element with the specified name.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object that contains the user name and password.</para>
+          <para
+            >A <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             object that contains the user name and password.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The user's name. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The user's name. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -254,21 +364,37 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key at the specified <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" /> collection index.</para>
+          <para
+            >Gets the key at the specified <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+             collection index.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The key at the specified index of the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />.</para>
+          <para
+            >The key at the specified index of the <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+            .</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.FormsAuthenticationUser this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.FormsAuthenticationUser this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.FormsAuthenticationUser</ReturnType>
@@ -288,7 +414,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.FormsAuthenticationUser this[string name] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.FormsAuthenticationUser this[string name] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.FormsAuthenticationUser</ReturnType>
@@ -308,7 +437,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -340,10 +472,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object from the collection.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to remove from the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+           object to remove from the collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -366,17 +509,31 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object at the specified index from the collection.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             object at the specified index from the collection.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to remove from the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the <see
+           cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+           object to remove from the collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Set">
-      <MemberSignature Language="C#" Value="public void Set (System.Web.Configuration.FormsAuthenticationUser user);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Set (System.Web.Configuration.FormsAuthenticationUser user);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -389,10 +546,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Modifies the specified <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object contained in the collection.</para>
+          <para
+            >Modifies the specified <see
+             cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+             object contained in the collection.</para
+          >
         </summary>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" /> object that must be changed. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+           object that must be changed. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

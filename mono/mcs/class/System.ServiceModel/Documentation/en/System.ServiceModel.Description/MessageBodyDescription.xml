@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MessageBodyDescription" FullName="System.ServiceModel.Description.MessageBodyDescription">
+<Type
+  Name="MessageBodyDescription"
+  FullName="System.ServiceModel.Description.MessageBodyDescription"
+>
   <TypeSignature Language="C#" Value="public class MessageBodyDescription" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MessageBodyDescription extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit MessageBodyDescription extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +19,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="T:System.ServiceModel.Description.MessageBodyDescription" /> class to construct or modify a SOAP message body when added to the description tree. </para>
+      <para
+        >Use the <see
+         cref="T:System.ServiceModel.Description.MessageBodyDescription" />
+
+         class to construct or modify a SOAP message body when added to the description tree. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -23,7 +34,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MessageBodyDescription ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +47,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessageBodyDescription" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.MessageBodyDescription" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Parts">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Description.MessagePartDescriptionCollection Parts { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Description.MessagePartDescriptionCollection Parts" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Description.MessagePartDescriptionCollection Parts { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Description.MessagePartDescriptionCollection Parts"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -57,8 +82,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReturnValue">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Description.MessagePartDescription ReturnValue { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Description.MessagePartDescription ReturnValue" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Description.MessagePartDescription ReturnValue { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Description.MessagePartDescription ReturnValue"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

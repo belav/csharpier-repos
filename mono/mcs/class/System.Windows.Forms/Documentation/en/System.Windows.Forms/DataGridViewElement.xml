@@ -13,11 +13,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The .NET Framework supplies two specialized classes that derive from <see cref="T:System.Windows.Forms.DataGridViewElement" />: <see cref="T:System.Windows.Forms.DataGridViewCell" />, which represents individual elements, and <see cref="T:System.Windows.Forms.DataGridViewBand" />, which represents a series of grouped subelements.</para>
+      <para
+        >The .NET Framework supplies two specialized classes that derive from <see
+         cref="T:System.Windows.Forms.DataGridViewElement" />
+
+        : <see
+         cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        , which represents individual elements, and <see
+         cref="T:System.Windows.Forms.DataGridViewBand" />
+
+        , which represents a series of grouped subelements.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides the base class for elements of a <see cref="T:System.Windows.Forms.DataGridView" /> control.</para>
+      <para
+        >Provides the base class for elements of a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -29,11 +45,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor sets the <see cref="P:System.Windows.Forms.DataGridViewElement.DataGridView" /> property to null.</para>
+          <para
+            >This constructor sets the <see
+             cref="P:System.Windows.Forms.DataGridViewElement.DataGridView" />
+
+             property to null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.DataGridViewElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -41,7 +67,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DataGridView">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataGridView DataGridView { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DataGridView DataGridView { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DataGridView</ReturnType>
@@ -52,7 +81,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.DataGridView" /> control associated with this element.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.DataGridView" />
+
+             control associated with this element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -79,7 +113,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Called when the element is associated with a different <see cref="T:System.Windows.Forms.DataGridView" />.</para>
+          <para
+            >Called when the element is associated with a different <see
+             cref="T:System.Windows.Forms.DataGridView" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -87,7 +126,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RaiseCellClick">
-      <MemberSignature Language="C#" Value="protected void RaiseCellClick (System.Windows.Forms.DataGridViewCellEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void RaiseCellClick (System.Windows.Forms.DataGridViewCellEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -100,17 +142,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.DataGridView.CellClick" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RaiseCellContentClick">
-      <MemberSignature Language="C#" Value="protected void RaiseCellContentClick (System.Windows.Forms.DataGridViewCellEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void RaiseCellContentClick (System.Windows.Forms.DataGridViewCellEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -123,17 +179,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.DataGridView.CellContentClick" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RaiseCellContentDoubleClick">
-      <MemberSignature Language="C#" Value="protected void RaiseCellContentDoubleClick (System.Windows.Forms.DataGridViewCellEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void RaiseCellContentDoubleClick (System.Windows.Forms.DataGridViewCellEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -146,17 +216,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RaiseCellValueChanged">
-      <MemberSignature Language="C#" Value="protected void RaiseCellValueChanged (System.Windows.Forms.DataGridViewCellEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void RaiseCellValueChanged (System.Windows.Forms.DataGridViewCellEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -169,17 +253,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RaiseDataError">
-      <MemberSignature Language="C#" Value="protected void RaiseDataError (System.Windows.Forms.DataGridViewDataErrorEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void RaiseDataError (System.Windows.Forms.DataGridViewDataErrorEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -192,17 +290,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.DataGridView.DataError" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.DataGridView.DataError" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RaiseMouseWheel">
-      <MemberSignature Language="C#" Value="protected void RaiseMouseWheel (System.Windows.Forms.MouseEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void RaiseMouseWheel (System.Windows.Forms.MouseEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -215,17 +327,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.MouseWheel" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.MouseEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="State">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.DataGridViewElementStates State { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.DataGridViewElementStates State { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DataGridViewElementStates</ReturnType>
@@ -235,7 +361,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The states specified by the <see cref="T:System.Windows.Forms.DataGridViewElementStates" /> values are enforced by the UI but may be programmatically overruled.</para>
+          <para
+            >The states specified by the <see
+             cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+             values are enforced by the UI but may be programmatically overruled.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

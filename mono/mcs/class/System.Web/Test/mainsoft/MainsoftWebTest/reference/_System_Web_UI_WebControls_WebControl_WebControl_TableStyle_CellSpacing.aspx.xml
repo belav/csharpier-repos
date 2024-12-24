@@ -84,7 +84,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest4" testname="System.Web.UI.WebControls.RadioButtonList: check that default is -1.">
+  <div
+    id="GHTSubTest4"
+    testname="System.Web.UI.WebControls.RadioButtonList: check that default is -1."
+  >
     <table id="ctrl_3" border="0">
       <tr>
         <td>
@@ -112,9 +115,15 @@
       </tr>
     </table>
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
-  <div id="GHTSubTest5" testname="System.Web.UI.WebControls.RadioButtonList: Throws an exception if set to less then -1.">
+  <div
+    id="GHTSubTest5"
+    testname="System.Web.UI.WebControls.RadioButtonList: Throws an exception if set to less then -1."
+  >
     <table id="ctrl_4" border="0">
       <tr>
         <td>
@@ -142,7 +151,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.CheckBoxList: Legal value.">
     <table id="ctrl_5" cellspacing="10" border="0">
@@ -228,7 +240,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest9" testname="System.Web.UI.WebControls.CheckBoxList: check that default is -1.">
+  <div
+    id="GHTSubTest9"
+    testname="System.Web.UI.WebControls.CheckBoxList: check that default is -1."
+  >
     <table id="ctrl_8" border="0">
       <tr>
         <td>
@@ -256,9 +271,15 @@
       </tr>
     </table>
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
-  <div id="GHTSubTest10" testname="System.Web.UI.WebControls.CheckBoxList: Throws an exception if set to less then -1.">
+  <div
+    id="GHTSubTest10"
+    testname="System.Web.UI.WebControls.CheckBoxList: Throws an exception if set to less then -1."
+  >
     <table id="ctrl_9" border="0">
       <tr>
         <td>
@@ -286,7 +307,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.DataGrid: Legal value.">
     <table border="1" cellspacing="10" rules="all" id="ctrl_10">
@@ -384,9 +408,15 @@
       </tr>
     </table>
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
-  <div id="GHTSubTest15" testname="System.Web.UI.WebControls.DataGrid: Throws an exception if set to less then -1.">
+  <div
+    id="GHTSubTest15"
+    testname="System.Web.UI.WebControls.DataGrid: Throws an exception if set to less then -1."
+  >
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_14">
       <tr>
         <td>Id</td>
@@ -410,7 +440,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest16" testname="System.Web.UI.WebControls.DataList: Legal value.">
     <table id="ctrl_15" cellspacing="10" border="0">

@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="RankException" FullName="System.RankException" FullNameSP="System_RankException" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public serializable RankException extends System.SystemException" />
+<Type
+  Name="RankException"
+  FullName="System.RankException"
+  FullNameSP="System_RankException"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public serializable RankException extends System.SystemException"
+  />
   <TypeSignature Language="C#" Value="public class RankException : SystemException" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit RankException extends System.SystemException" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit RankException extends System.SystemException"
+  />
   <MemberOfLibrary>BCL</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
@@ -23,10 +34,16 @@
   </Attributes>
   <Docs>
     <example>
-      <para>The following example demonstrates an error that causes 
-      a <see cref="T:System.RankException" />
-      exception.</para>
-      <code lang="C#">using System;
+      <para
+        >The following example demonstrates an error that causes 
+      a <see
+         cref="T:System.RankException" />
+
+        
+      exception.</para
+      >
+      <code lang="C#"
+        >using System;
 public class RankExample {
    public static void Main() {
       int[] oneDAry = new int[5];
@@ -42,7 +59,8 @@ public class RankExample {
       }
    }
 }
-   </code>
+   </code
+      >
       <para>The output is</para>
       <code>
 Error caught: System.RankException: The specified arrays must have the same number of dimensions.
@@ -54,8 +72,19 @@ Error caught: System.RankException: The specified arrays must have the same numb
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.RankException" /> uses the HRESULT COR_E_RANK, that has the value 0x80131517.</para>
-      <para>For a list of initial property values for an instance of <see cref="T:System.RankException" />, see the <see cref="M:System.RankException.#ctor" /> constructors.</para>
+        <see cref="T:System.RankException" />
+
+         uses the HRESULT COR_E_RANK, that has the value 0x80131517.</para
+      >
+      <para
+        >For a list of initial property values for an instance of <see
+         cref="T:System.RankException" />
+
+        , see the <see
+         cref="M:System.RankException.#ctor" />
+
+         constructors.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,9 +93,15 @@ Error caught: System.RankException: The specified arrays must have the same numb
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor()" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor()"
+      />
       <MemberSignature Language="C#" Value="public RankException ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -78,8 +113,18 @@ Error caught: System.RankException: The specified arrays must have the same numb
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "The two arrays must have the same number of dimensions." This message takes into account the current system culture.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.RankException" />.</para>
+          <para
+            >This constructor initializes the <see
+             cref="P:System.Exception.Message" />
+
+             property of the new instance to a system-supplied message that describes the error, such as "The two arrays must have the same number of dimensions." This message takes into account the current system culture.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.RankException" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -94,7 +139,8 @@ Error caught: System.RankException: The specified arrays must have the same numb
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>A null reference (Nothing in Visual Basic). </para>
@@ -103,7 +149,8 @@ Error caught: System.RankException: The specified arrays must have the same numb
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>The localized error message string. </para>
@@ -113,15 +160,26 @@ Error caught: System.RankException: The specified arrays must have the same numb
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.RankException" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.RankException" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message)" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(string message)"
+      />
       <MemberSignature Language="C#" Value="public RankException (string message);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -135,8 +193,18 @@ Error caught: System.RankException: The specified arrays must have the same numb
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The content of the <paramref name="message" /> parameter shoulf be understandable to the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.RankException" />.</para>
+          <para
+            >The content of the <paramref
+             name="message" />
+
+             parameter shoulf be understandable to the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.RankException" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -151,7 +219,8 @@ Error caught: System.RankException: The specified arrays must have the same numb
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>A null reference (Nothing in Visual Basic). </para>
@@ -160,7 +229,8 @@ Error caught: System.RankException: The specified arrays must have the same numb
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>The error message string. </para>
@@ -170,16 +240,33 @@ Error caught: System.RankException: The specified arrays must have the same numb
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.RankException" /> class with a specified error message.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.RankException" />
+
+             class with a specified error message.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that describes the error. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that describes the error. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected RankException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected RankException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -193,22 +280,49 @@ Error caught: System.RankException: The specified arrays must have the same numb
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html"><a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and Soap Serialization</a></format>.</para>
+          <para
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
+             type="text/html">
+              <a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and Soap Serialization</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.RankException" /> class with serialized data.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.RankException" />
+
+             class with serialized data.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that holds the serialized object data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that holds the serialized object data. </param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The contextual information about the source or destination. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The contextual information about the source or destination. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message, class System.Exception innerException)" />
-      <MemberSignature Language="C#" Value="public RankException (string message, Exception innerException);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception innerException) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(string message, class System.Exception innerException)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public RankException (string message, Exception innerException);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception innerException) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -223,8 +337,24 @@ Error caught: System.RankException: The specified arrays must have the same numb
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.RankException" />.</para>
+          <para
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
+             cref="P:System.Exception.InnerException" />
+
+             property. The <see
+             cref="P:System.Exception.InnerException" />
+
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
+             cref="P:System.Exception.InnerException" />
+
+             property does not supply the inner exception value to the constructor.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.RankException" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -239,7 +369,8 @@ Error caught: System.RankException: The specified arrays must have the same numb
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>The inner exception reference. </para>
@@ -248,7 +379,8 @@ Error caught: System.RankException: The specified arrays must have the same numb
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.Message" /> </para>
+                  <see cref="P:System.Exception.Message" />
+                </para>
               </term>
               <description>
                 <para>The error message string. </para>
@@ -258,12 +390,26 @@ Error caught: System.RankException: The specified arrays must have the same numb
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.RankException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.RankException" />
+
+             class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message that explains the reason for the exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message that explains the reason for the exception. </param
+        >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception that is the cause of the current exception. If the <paramref
+           name="innerException" />
+
+           parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>

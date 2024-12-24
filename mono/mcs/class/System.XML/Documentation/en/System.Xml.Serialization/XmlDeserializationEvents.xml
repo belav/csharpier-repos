@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlDeserializationEvents" FullName="System.Xml.Serialization.XmlDeserializationEvents">
   <TypeSignature Language="C#" Value="public struct XmlDeserializationEvents" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit XmlDeserializationEvents extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit XmlDeserializationEvents extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,13 +19,27 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains fields that can be used to pass event delegates to a thread-safe <see cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" /> method of the <see cref="T:System.Xml.Serialization.XmlSerializer" />.</para>
+      <para
+        >Contains fields that can be used to pass event delegates to a thread-safe <see
+         cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" />
+
+         method of the <see
+         cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="OnUnknownAttribute">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlAttributeEventHandler OnUnknownAttribute { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Serialization.XmlAttributeEventHandler OnUnknownAttribute" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlAttributeEventHandler OnUnknownAttribute { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Serialization.XmlAttributeEventHandler OnUnknownAttribute"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,13 +54,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an object that represents the method that handles the <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" /> event.</para>
+          <para
+            >Gets or sets an object that represents the method that handles the <see
+             cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
+
+             event.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OnUnknownElement">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlElementEventHandler OnUnknownElement { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Serialization.XmlElementEventHandler OnUnknownElement" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlElementEventHandler OnUnknownElement { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Serialization.XmlElementEventHandler OnUnknownElement"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -58,13 +86,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an object that represents the method that handles the <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" /> event.</para>
+          <para
+            >Gets or sets an object that represents the method that handles the <see
+             cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
+
+             event.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OnUnknownNode">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlNodeEventHandler OnUnknownNode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Serialization.XmlNodeEventHandler OnUnknownNode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlNodeEventHandler OnUnknownNode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Serialization.XmlNodeEventHandler OnUnknownNode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -79,13 +118,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an object that represents the method that handles the <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" /> event.</para>
+          <para
+            >Gets or sets an object that represents the method that handles the <see
+             cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" />
+
+             event.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OnUnreferencedObject">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.UnreferencedObjectEventHandler OnUnreferencedObject { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Serialization.UnreferencedObjectEventHandler OnUnreferencedObject" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.UnreferencedObjectEventHandler OnUnreferencedObject { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Serialization.UnreferencedObjectEventHandler OnUnreferencedObject"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,7 +150,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an object that represents the method that handles the <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event.</para>
+          <para
+            >Gets or sets an object that represents the method that handles the <see
+             cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" />
+
+             event.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -27,7 +27,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of this field and the value of the <see cref="F:System.Data.Common.CatalogLocation.Start" /> field are mutually exclusive.</para>
+          <para
+            >The value of this field and the value of the <see
+             cref="F:System.Data.Common.CatalogLocation.Start" />
+
+             field are mutually exclusive.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,7 +53,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of this field and the value of the <see cref="F:System.Data.Common.CatalogLocation.End" /> field are mutually exclusive. </para>
+          <para
+            >The value of this field and the value of the <see
+             cref="F:System.Data.Common.CatalogLocation.End" />
+
+             field are mutually exclusive. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

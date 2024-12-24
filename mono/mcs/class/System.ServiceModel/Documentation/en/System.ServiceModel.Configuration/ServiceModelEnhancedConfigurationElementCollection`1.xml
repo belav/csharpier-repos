@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceModelEnhancedConfigurationElementCollection&lt;TConfigurationElement&gt;" FullName="System.ServiceModel.Configuration.ServiceModelEnhancedConfigurationElementCollection&lt;TConfigurationElement&gt;">
-  <TypeSignature Language="C#" Value="public abstract class ServiceModelEnhancedConfigurationElementCollection&lt;TConfigurationElement&gt; : System.ServiceModel.Configuration.ServiceModelConfigurationElementCollection&lt;TConfigurationElement&gt;, System.Collections.ICollection where TConfigurationElement : ConfigurationElementnew()" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ServiceModelEnhancedConfigurationElementCollection`1&lt;.ctor (class System.Configuration.ConfigurationElement) TConfigurationElement&gt; extends System.ServiceModel.Configuration.ServiceModelConfigurationElementCollection`1&lt;!TConfigurationElement&gt; implements class System.Collections.ICollection, class System.Collections.IEnumerable" />
+<Type
+  Name="ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement>"
+  FullName="System.ServiceModel.Configuration.ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement>"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement> : System.ServiceModel.Configuration.ServiceModelConfigurationElementCollection<TConfigurationElement>, System.Collections.ICollection where TConfigurationElement : ConfigurationElementnew()"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ServiceModelEnhancedConfigurationElementCollection`1<.ctor (class System.Configuration.ConfigurationElement) TConfigurationElement> extends System.ServiceModel.Configuration.ServiceModelConfigurationElementCollection`1<!TConfigurationElement> implements class System.Collections.ICollection, class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +26,9 @@
   <Base>
     <BaseTypeName>System.ServiceModel.Configuration.ServiceModelConfigurationElementCollection&lt;TConfigurationElement&gt;</BaseTypeName>
     <BaseTypeArguments>
-      <BaseTypeArgument TypeParamName="ConfigurationElementType">TConfigurationElement</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="ConfigurationElementType"
+        >TConfigurationElement</BaseTypeArgument
+      >
     </BaseTypeArguments>
   </Base>
   <Interfaces>
@@ -30,13 +41,27 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An abstract base class for a <see cref="T:System.Configuration.ConfigurationElementCollection" /> looking for a merge semantic similar to an <see cref="F:System.Configuration.ConfigurationElementCollectionType.AddRemoveClearMap" /> that allows duplicates, but throws an exception when duplicates are found in the same configuration scope (e.g. same configuration file).</para>
+      <para
+        >An abstract base class for a <see
+         cref="T:System.Configuration.ConfigurationElementCollection" />
+
+         looking for a merge semantic similar to an <see
+         cref="F:System.Configuration.ConfigurationElementCollectionType.AddRemoveClearMap" />
+
+         that allows duplicates, but throws an exception when duplicates are found in the same configuration scope (e.g. same configuration file).</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="BaseAdd">
-      <MemberSignature Language="C#" Value="protected override void BaseAdd (System.Configuration.ConfigurationElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void BaseAdd(class System.Configuration.ConfigurationElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void BaseAdd (System.Configuration.ConfigurationElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void BaseAdd(class System.Configuration.ConfigurationElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -51,10 +76,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a <see cref="T:System.Configuration.ConfigurationElement" /> to this collection.</para>
+          <para
+            >Adds a <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             to this collection.</para
+          >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Configuration.ConfigurationElement" /> to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Configuration.ConfigurationElement" />
+
+           to add.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ThrowOnDuplicate">
@@ -72,7 +108,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a Boolean value that indicates whether an attempt to add a duplicate <see cref="T:System.Configuration.ConfigurationElement" /> to this collection causes an exception to be thrown. </para>
+          <para
+            >Gets a Boolean value that indicates whether an attempt to add a duplicate <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             to this collection causes an exception to be thrown. </para
+          >
         </summary>
       </Docs>
     </Member>

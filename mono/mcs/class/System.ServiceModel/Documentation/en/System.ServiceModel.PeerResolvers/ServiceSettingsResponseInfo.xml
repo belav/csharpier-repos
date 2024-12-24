@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceSettingsResponseInfo" FullName="System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo">
+<Type
+  Name="ServiceSettingsResponseInfo"
+  FullName="System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo"
+>
   <TypeSignature Language="C#" Value="public class ServiceSettingsResponseInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ServiceSettingsResponseInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ServiceSettingsResponseInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -28,7 +34,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ServiceSettingsResponseInfo ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,17 +46,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The default value of <paramref name="control" /> is set to true.</para>
+          <para
+            >The default value of <paramref
+             name="control" />
+
+             is set to true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" /> class. </para>
+          <para
+            >Initializes a new default instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ServiceSettingsResponseInfo (bool control);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool control) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool control) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,11 +81,19 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" /> class with the supplied referral policy value.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.ServiceSettingsResponseInfo" />
+
+             class with the supplied referral policy value.</para
+          >
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Boolean" /> that indicates whether referrals are passed by the resolver service.</param>
+          <see cref="T:System.Boolean" />
+
+           that indicates whether referrals are passed by the resolver service.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ControlMeshShape">
@@ -87,7 +117,10 @@
     </Member>
     <Member MemberName="HasBody">
       <MemberSignature Language="C#" Value="public bool HasBody ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool HasBody() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool HasBody() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

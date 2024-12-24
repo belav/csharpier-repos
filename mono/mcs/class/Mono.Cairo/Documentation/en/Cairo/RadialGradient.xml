@@ -10,14 +10,20 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Extends  <see cref="T:Cairo.Gradient" /> to create a new radial gradient between the two circles defined by (cx0, cxy0, radius0) and (cx1, cy1, radius1).  
-</summary>
+    <summary
+      >Extends  <see
+       cref="T:Cairo.Gradient" />
+
+       to create a new radial gradient between the two circles defined by (cx0, cxy0, radius0) and (cx1, cy1, radius1).  
+</summary
+    >
     <remarks>
       <para>Before using the gradient pattern, a number of color stops
   should be defined using AddColorStop() or AddColorStopRgb().</para>
       <para>
         <example>
-          <code lang="C#">
+          <code lang="C#"
+            >
 pat = new RadialGradient (0.45, 0.4, 0.1, 0.4,  0.4, 0.5);
 
 pat.AddColorStop (0, new Color (1, 1, 1, 1) );
@@ -27,14 +33,18 @@ gr.Arc (0.5, 0.5, 0.3, 0, 2 * Math.PI);
 gr.Fill ();
 
 pat.Destroy ();
-  </code>
+  </code
+          >
         </example>
       </para>
     </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RadialGradient (double cx0, double cy0, double radius0, double cx1, double cy1, double radius1);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RadialGradient (double cx0, double cy0, double radius0, double cx1, double cy1, double radius1);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="cx0" Type="System.Double" />
@@ -51,7 +61,12 @@ pat.Destroy ();
         <param name="cx1">x coordinate for the center of the end circle</param>
         <param name="cy1">y coordinate for the center of the end circle</param>
         <param name="radius1">radius of the end cirle</param>
-        <summary>Create a new radial gradient <see cref="T:Cairo.Pattern" /> between the two circles defined by (cx0, cy0, radius0) and (cx1, cy1, radius1)</summary>
+        <summary
+          >Create a new radial gradient <see
+           cref="T:Cairo.Pattern" />
+
+           between the two circles defined by (cx0, cy0, radius0) and (cx1, cy1, radius1)</summary
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>

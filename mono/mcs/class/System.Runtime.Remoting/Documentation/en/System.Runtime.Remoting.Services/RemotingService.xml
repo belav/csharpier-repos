@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RemotingService" FullName="System.Runtime.Remoting.Services.RemotingService">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class RemotingService : System.ComponentModel.Component" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class RemotingService : System.ComponentModel.Component"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Remoting</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -12,12 +16,19 @@
   <Base>
     <BaseTypeName>System.ComponentModel.Component</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Runtime.Remoting.Services.RemotingService" /> is used to access ASP.NET from within a remoting XML Web service that derives from the <see cref="T:System.Runtime.Remoting.Services.RemotingService" /> class.</para>
+      <para
+        >The <see
+         cref="T:System.Runtime.Remoting.Services.RemotingService" />
+
+         is used to access ASP.NET from within a remoting XML Web service that derives from the <see
+         cref="T:System.Runtime.Remoting.Services.RemotingService" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -34,7 +45,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of <see cref="T:System.Runtime.Remoting.Services.RemotingService" />.</para>
+          <para
+            >Creates an instance of <see
+             cref="T:System.Runtime.Remoting.Services.RemotingService" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -43,7 +59,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Application">
-      <MemberSignature Language="C#" Value="public System.Web.HttpApplicationState Application { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.HttpApplicationState Application { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.HttpApplicationState</ReturnType>
@@ -91,7 +110,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.HttpServerUtility" /> for the current request.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.HttpServerUtility" />
+
+             for the current request.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -100,7 +124,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Session">
-      <MemberSignature Language="C#" Value="public System.Web.SessionState.HttpSessionState Session { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.SessionState.HttpSessionState Session { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.SessionState.HttpSessionState</ReturnType>
@@ -110,7 +137,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.SessionState.HttpSessionState" /> for the current request.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.SessionState.HttpSessionState" />
+
+             for the current request.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -119,7 +151,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="User">
-      <MemberSignature Language="C#" Value="public System.Security.Principal.IPrincipal User { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Principal.IPrincipal User { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Security.Principal.IPrincipal</ReturnType>
@@ -128,7 +163,12 @@
         <value>To be added: an object of type 'Security.Principal.IPrincipal'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information about identities, see <see cref="T:System.Security.Principal.IIdentity" />.</para>
+          <para
+            >For more information about identities, see <see
+             cref="T:System.Security.Principal.IIdentity" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

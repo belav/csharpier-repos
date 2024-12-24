@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RowUpdatingEventArgs" FullName="System.Data.Common.RowUpdatingEventArgs">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class RowUpdatingEventArgs : EventArgs" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class RowUpdatingEventArgs : EventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -16,7 +20,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The RowUpdating event is typically raised just before an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" /> to a row begins.</para>
+      <para
+        >The RowUpdating event is typically raised just before an <see
+         cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+         to a row begins.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +34,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RowUpdatingEventArgs (System.Data.DataRow dataRow, System.Data.IDbCommand command, System.Data.StatementType statementType, System.Data.Common.DataTableMapping tableMapping);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RowUpdatingEventArgs (System.Data.DataRow dataRow, System.Data.IDbCommand command, System.Data.StatementType statementType, System.Data.Common.DataTableMapping tableMapping);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -38,16 +50,51 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.Common.RowUpdatingEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.Common.RowUpdatingEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="dataRow">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Data.DataRow" /> to <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Data.DataRow" />
+
+           to <see
+           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+          . </param
+        >
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Data.IDbCommand" /> to execute when <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" /> is called. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Data.IDbCommand" />
+
+           to execute when <see
+           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+           is called. </param
+        >
         <param name="statementType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of SQL statement to execute. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of SQL statement to execute. </param
+        >
         <param name="tableMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Data.Common.DataTableMapping" /> to send through an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Data.Common.DataTableMapping" />
+
+           to send through an <see
+           cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -55,7 +102,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BaseCommand">
-      <MemberSignature Language="C#" Value="protected virtual System.Data.IDbCommand BaseCommand { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.Data.IDbCommand BaseCommand { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,11 +117,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method allows implementations to perform type checking for the <see cref="T:System.Data.IDbCommand" /> object assignment. Only valid <see cref="T:System.Data.IDbCommand" /> objects, for example a <see cref="T:System.Data.SqlClient.SqlCommand" /> object, should be permitted.</para>
+          <para
+            >This method allows implementations to perform type checking for the <see
+             cref="T:System.Data.IDbCommand" />
+
+             object assignment. Only valid <see
+             cref="T:System.Data.IDbCommand" />
+
+             objects, for example a <see
+             cref="T:System.Data.SqlClient.SqlCommand" />
+
+             object, should be permitted.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Data.IDbCommand" /> object for an instance of this class.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Data.IDbCommand" />
+
+             object for an instance of this class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -81,14 +147,21 @@
       <ReturnValue>
         <ReturnType>System.Data.IDbCommand</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Data.IDbCommand'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Data.IDbCommand" /> to execute during the <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" /> operation.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Data.IDbCommand" />
+
+             to execute during the <see
+             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+             operation.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -102,14 +175,18 @@
       <ReturnValue>
         <ReturnType>System.Exception</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Exception'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets any errors generated by the .NET Framework data provider when the <see cref="P:System.Data.Common.RowUpdatedEventArgs.Command" /> executes.</para>
+          <para
+            >Gets any errors generated by the .NET Framework data provider when the <see
+             cref="P:System.Data.Common.RowUpdatedEventArgs.Command" />
+
+             executes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -128,7 +205,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Data.DataRow" /> that will be sent to the server as part of an insert, update, or delete operation.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Data.DataRow" />
+
+             that will be sent to the server as part of an insert, update, or delete operation.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -137,7 +219,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="StatementType">
-      <MemberSignature Language="C#" Value="public System.Data.StatementType StatementType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.StatementType StatementType { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.StatementType</ReturnType>
@@ -147,7 +232,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Data.Common.RowUpdatingEventArgs.StatementType" /> can be one of the following values: </para>
+            <see cref="P:System.Data.Common.RowUpdatingEventArgs.StatementType" />
+
+             can be one of the following values: </para
+          >
           <list type="bullet">
             <item>
               <para>Select </para>
@@ -179,14 +267,21 @@
       <ReturnValue>
         <ReturnType>System.Data.UpdateStatus</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Data.UpdateStatus'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Data.UpdateStatus" /> of the <see cref="P:System.Data.Common.RowUpdatedEventArgs.Command" /> property.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Data.UpdateStatus" />
+
+             of the <see
+             cref="P:System.Data.Common.RowUpdatedEventArgs.Command" />
+
+             property.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -195,7 +290,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TableMapping">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DataTableMapping TableMapping { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DataTableMapping TableMapping { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DataTableMapping</ReturnType>
@@ -205,7 +303,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Data.Common.DataTableMapping" /> to send through the <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Data.Common.DataTableMapping" />
+
+             to send through the <see
+             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="InvalidProjectFileException" FullName="Microsoft.Build.BuildEngine.InvalidProjectFileException">
-  <TypeSignature Language="C#" Value="public sealed class InvalidProjectFileException : Exception" />
+<Type
+  Name="InvalidProjectFileException"
+  FullName="Microsoft.Build.BuildEngine.InvalidProjectFileException"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class InvalidProjectFileException : Exception"
+  />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Build.Engine</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -27,7 +33,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of <see cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" /> class. </para>
+          <para
+            >Initializes a new instance of <see
+             cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -45,17 +56,28 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of <see cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" /> class using the specified message.</para>
+          <para
+            >Initializes a new instance of <see
+             cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" />
+
+             class using the specified message.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message that explains the reason for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message that explains the reason for the exception.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public InvalidProjectFileException (string message, Exception innerException);" />
+      <MemberSignature
+        Language="C#"
+        Value="public InvalidProjectFileException (string message, Exception innerException);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -66,19 +88,36 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of <see cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" /> class using the specified error message and inner exception.</para>
+          <para
+            >Initializes a new instance of <see
+             cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" />
+
+             class using the specified error message and inner exception.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message that explains the reason for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message that explains the reason for the exception.</param
+        >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception that is the cause of the current excpetion. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in vbprvb), the current exception is raised in a catch block that handles the inner exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception that is the cause of the current excpetion. If the <paramref
+           name="innerException" />
+
+           parameter is not a null reference (Nothing in vbprvb), the current exception is raised in a catch block that handles the inner exception.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public InvalidProjectFileException (System.Xml.XmlNode xmlNode, string message, string errorSubcategory, string errorCode, string helpKeyword);" />
+      <MemberSignature
+        Language="C#"
+        Value="public InvalidProjectFileException (System.Xml.XmlNode xmlNode, string message, string errorSubcategory, string errorCode, string helpKeyword);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="xmlNode" Type="System.Xml.XmlNode" />
@@ -95,25 +134,48 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of <see cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" /> class using rich error information.</para>
+          <para
+            >Initializes a new instance of <see
+             cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" />
+
+             class using rich error information.</para
+          >
         </summary>
         <param name="xmlNode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XML node where the error is located. Can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The XML node where the error is located. Can be null.</param
+        >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message text for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message text for the exception.</param
+        >
         <param name="errorSubcategory">
-          <attribution license="cc4" from="Microsoft" modified="false" />A description for the error. This parameter can be a null reference (Nothing in vbprvb).</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A description for the error. This parameter can be a null reference (Nothing in vbprvb).</param
+        >
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error code. This parameter can be a null reference (Nothing).</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error code. This parameter can be a null reference (Nothing).</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The F1-help keyword for the host IDE. Can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The F1-help keyword for the host IDE. Can be null.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public InvalidProjectFileException (string projectFile, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string message, string errorSubcategory, string errorCode, string helpKeyword);" />
+      <MemberSignature
+        Language="C#"
+        Value="public InvalidProjectFileException (string projectFile, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string message, string errorSubcategory, string errorCode, string helpKeyword);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="projectFile" Type="System.String" />
@@ -134,26 +196,58 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of <see cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" /> class using rich error information.</para>
+          <para
+            >Initializes a new instance of <see
+             cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" />
+
+             class using rich error information.</para
+          >
         </summary>
         <param name="projectFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The invalid project file. Can be an empty string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The invalid project file. Can be an empty string.</param
+        >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The invalid line number in the project. Set to zero if not available.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The invalid line number in the project. Set to zero if not available.</param
+        >
         <param name="columnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The invalid column number in the project. Set to zero if not available.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The invalid column number in the project. Set to zero if not available.</param
+        >
         <param name="endLineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end of a range of invalid lines in the project. Set to zero if not available.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end of a range of invalid lines in the project. Set to zero if not available.</param
+        >
         <param name="endColumnNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />The end of a range of invalid columns in the project. Set to zero if not available.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The end of a range of invalid columns in the project. Set to zero if not available.</param
+        >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message text for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message text for the exception.</param
+        >
         <param name="errorSubcategory">
-          <attribution license="cc4" from="Microsoft" modified="false" />The description of the error. This parameter can be a null reference (Nothing in vbprvb).</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The description of the error. This parameter can be a null reference (Nothing in vbprvb).</param
+        >
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error code. This parameter can be a null reference (Nothing).</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error code. This parameter can be a null reference (Nothing).</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The F1-help keyword for the host IDE. This parameter can be a null reference (Nothing).</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The F1-help keyword for the host IDE. This parameter can be a null reference (Nothing).</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -274,7 +368,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -290,12 +387,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception.</para>
+          <para
+            >Sets the <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             with information about the exception.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+           that holds the serialized object data about the exception being thrown.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.StreamingContext" />
+
+           that contains contextual information about the source or destination.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="HelpKeyword">

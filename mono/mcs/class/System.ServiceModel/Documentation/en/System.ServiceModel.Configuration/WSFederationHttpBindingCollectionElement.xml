@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WSFederationHttpBindingCollectionElement" FullName="System.ServiceModel.Configuration.WSFederationHttpBindingCollectionElement">
-  <TypeSignature Language="C#" Value="public class WSFederationHttpBindingCollectionElement : System.ServiceModel.Configuration.StandardBindingCollectionElement&lt;System.ServiceModel.WSFederationHttpBinding,System.ServiceModel.Configuration.WSFederationHttpBindingElement&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit WSFederationHttpBindingCollectionElement extends System.ServiceModel.Configuration.StandardBindingCollectionElement`2&lt;class System.ServiceModel.WSFederationHttpBinding, class System.ServiceModel.Configuration.WSFederationHttpBindingElement&gt;" />
+<Type
+  Name="WSFederationHttpBindingCollectionElement"
+  FullName="System.ServiceModel.Configuration.WSFederationHttpBindingCollectionElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class WSFederationHttpBindingCollectionElement : System.ServiceModel.Configuration.StandardBindingCollectionElement<System.ServiceModel.WSFederationHttpBinding,System.ServiceModel.Configuration.WSFederationHttpBindingElement>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit WSFederationHttpBindingCollectionElement extends System.ServiceModel.Configuration.StandardBindingCollectionElement`2<class System.ServiceModel.WSFederationHttpBinding, class System.ServiceModel.Configuration.WSFederationHttpBindingElement>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -9,8 +18,12 @@
   <Base>
     <BaseTypeName>System.ServiceModel.Configuration.StandardBindingCollectionElement&lt;System.ServiceModel.WSFederationHttpBinding,System.ServiceModel.Configuration.WSFederationHttpBindingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
-      <BaseTypeArgument TypeParamName="TStandardBinding">System.ServiceModel.WSFederationHttpBinding</BaseTypeArgument>
-      <BaseTypeArgument TypeParamName="TBindingConfiguration">System.ServiceModel.Configuration.WSFederationHttpBindingElement</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="TStandardBinding"
+        >System.ServiceModel.WSFederationHttpBinding</BaseTypeArgument
+      >
+      <BaseTypeArgument TypeParamName="TBindingConfiguration"
+        >System.ServiceModel.Configuration.WSFederationHttpBindingElement</BaseTypeArgument
+      >
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -18,13 +31,21 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a configuration element that contains a collection of <see cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingElement" /> instances.</para>
+      <para
+        >Represents a configuration element that contains a collection of <see
+         cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingElement" />
+
+         instances.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public WSFederationHttpBindingCollectionElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,7 +55,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingCollectionElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingCollectionElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>

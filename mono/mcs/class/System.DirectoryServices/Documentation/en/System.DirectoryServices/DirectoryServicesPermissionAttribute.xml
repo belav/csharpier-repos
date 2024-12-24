@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DirectoryServicesPermissionAttribute" FullName="System.DirectoryServices.DirectoryServicesPermissionAttribute">
-  <TypeSignature Language="C#" Value="public class DirectoryServicesPermissionAttribute : System.Security.Permissions.CodeAccessSecurityAttribute" />
+<Type
+  Name="DirectoryServicesPermissionAttribute"
+  FullName="System.DirectoryServices.DirectoryServicesPermissionAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DirectoryServicesPermissionAttribute : System.Security.Permissions.CodeAccessSecurityAttribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.DirectoryServices</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../msfinal.pub")</AttributeName>
@@ -65,7 +70,10 @@
   </Attributes>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DirectoryServicesPermissionAttribute(System.Security.Permissions.SecurityAction action)" />
+      <MemberSignature
+        Language="C#"
+        Value="public DirectoryServicesPermissionAttribute(System.Security.Permissions.SecurityAction action)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="action" Type="System.Security.Permissions.SecurityAction" />
@@ -74,10 +82,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="M:System.DirectoryServices.DirectoryServicesPermissionAttribute.#ctor(System.Security.Permissions.SecurityAction)" /> class.          </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="M:System.DirectoryServices.DirectoryServicesPermissionAttribute.#ctor(System.Security.Permissions.SecurityAction)" />
+
+             class.          </para
+          >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Permissions.SecurityAction" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Path">
@@ -96,7 +115,10 @@
       </Docs>
     </Member>
     <Member MemberName="PermissionAccess">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.DirectoryServicesPermissionAccess PermissionAccess { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.DirectoryServicesPermissionAccess PermissionAccess { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.DirectoryServices.DirectoryServicesPermissionAccess</ReturnType>
@@ -115,7 +137,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Allows declarative <see cref="N:System.DirectoryServices" /> permission checks.          </para>
+      <para
+        >Allows declarative <see
+         cref="N:System.DirectoryServices" />
+
+         permission checks.          </para
+      >
     </summary>
   </Docs>
 </Type>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XObjectChangeEventArgs" FullName="System.Xml.Linq.XObjectChangeEventArgs">
   <TypeSignature Language="C#" Value="public class XObjectChangeEventArgs : EventArgs" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XObjectChangeEventArgs extends System.EventArgs" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XObjectChangeEventArgs extends System.EventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml.Linq</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,13 +20,27 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Xml.Linq.XObject.Changing" /> and <see cref="E:System.Xml.Linq.XObject.Changed" /> events.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Xml.Linq.XObject.Changing" />
+
+         and <see
+         cref="E:System.Xml.Linq.XObject.Changed" />
+
+         events.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XObjectChangeEventArgs (System.Xml.Linq.XObjectChange objectChange);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Xml.Linq.XObjectChange objectChange) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public XObjectChangeEventArgs (System.Xml.Linq.XObjectChange objectChange);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Xml.Linq.XObjectChange objectChange) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,19 +51,50 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The read-only fields <see cref="F:System.Xml.Linq.XObjectChangeEventArgs.Add" />, <see cref="F:System.Xml.Linq.XObjectChangeEventArgs.Remove" />, <see cref="F:System.Xml.Linq.XObjectChangeEventArgs.Name" />, and <see cref="F:System.Xml.Linq.XObjectChangeEventArgs.Value" /> provide predefined instances for all the event arguments that are raised in sqltecxlinq. A typical user will not need to construct event arguments.</para>
+          <para
+            >The read-only fields <see
+             cref="F:System.Xml.Linq.XObjectChangeEventArgs.Add" />
+
+            , <see
+             cref="F:System.Xml.Linq.XObjectChangeEventArgs.Remove" />
+
+            , <see
+             cref="F:System.Xml.Linq.XObjectChangeEventArgs.Name" />
+
+            , and <see
+             cref="F:System.Xml.Linq.XObjectChangeEventArgs.Value" />
+
+             provide predefined instances for all the event arguments that are raised in sqltecxlinq. A typical user will not need to construct event arguments.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XObjectChangeEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XObjectChangeEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="objectChange">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Linq.XObjectChange" /> that contains the event arguments for sqltecxlinq events.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Linq.XObjectChange" />
+
+           that contains the event arguments for sqltecxlinq events.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public static readonly System.Xml.Linq.XObjectChangeEventArgs Add;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class System.Xml.Linq.XObjectChangeEventArgs Add" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Xml.Linq.XObjectChangeEventArgs Add;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class System.Xml.Linq.XObjectChangeEventArgs Add"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -57,17 +105,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When sqltecxlinq raises an <see cref="F:System.Xml.Linq.XObjectChange.Add" /> event, it passes the instance returned by this property as an argument.</para>
+          <para
+            >When sqltecxlinq raises an <see
+             cref="F:System.Xml.Linq.XObjectChange.Add" />
+
+             event, it passes the instance returned by this property as an argument.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Event argument for an <see cref="F:System.Xml.Linq.XObjectChange.Add" /> change event.</para>
+          <para
+            >Event argument for an <see
+             cref="F:System.Xml.Linq.XObjectChange.Add" />
+
+             change event.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Name">
-      <MemberSignature Language="C#" Value="public static readonly System.Xml.Linq.XObjectChangeEventArgs Name;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class System.Xml.Linq.XObjectChangeEventArgs Name" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Xml.Linq.XObjectChangeEventArgs Name;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class System.Xml.Linq.XObjectChangeEventArgs Name"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -78,17 +142,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When sqltecxlinq raises an <see cref="F:System.Xml.Linq.XObjectChange.Name" /> event, it passes the instance returned by this property as an argument.</para>
+          <para
+            >When sqltecxlinq raises an <see
+             cref="F:System.Xml.Linq.XObjectChange.Name" />
+
+             event, it passes the instance returned by this property as an argument.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Event argument for a <see cref="F:System.Xml.Linq.XObjectChange.Name" /> change event.</para>
+          <para
+            >Event argument for a <see
+             cref="F:System.Xml.Linq.XObjectChange.Name" />
+
+             change event.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ObjectChange">
-      <MemberSignature Language="C#" Value="public System.Xml.Linq.XObjectChange ObjectChange { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.Linq.XObjectChange ObjectChange" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Linq.XObjectChange ObjectChange { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.Linq.XObjectChange ObjectChange"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -106,8 +186,14 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public static readonly System.Xml.Linq.XObjectChangeEventArgs Remove;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class System.Xml.Linq.XObjectChangeEventArgs Remove" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Xml.Linq.XObjectChangeEventArgs Remove;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class System.Xml.Linq.XObjectChangeEventArgs Remove"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -118,17 +204,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When sqltecxlinq raises an <see cref="F:System.Xml.Linq.XObjectChange.Remove" /> event, it passes the instance returned by this property as an argument.</para>
+          <para
+            >When sqltecxlinq raises an <see
+             cref="F:System.Xml.Linq.XObjectChange.Remove" />
+
+             event, it passes the instance returned by this property as an argument.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Event argument for a <see cref="F:System.Xml.Linq.XObjectChange.Remove" /> change event.</para>
+          <para
+            >Event argument for a <see
+             cref="F:System.Xml.Linq.XObjectChange.Remove" />
+
+             change event.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Value">
-      <MemberSignature Language="C#" Value="public static readonly System.Xml.Linq.XObjectChangeEventArgs Value;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class System.Xml.Linq.XObjectChangeEventArgs Value" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Xml.Linq.XObjectChangeEventArgs Value;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class System.Xml.Linq.XObjectChangeEventArgs Value"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -139,11 +241,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When sqltecxlinq raises an <see cref="F:System.Xml.Linq.XObjectChange.Value" /> event, it passes the instance returned by this property as an argument.</para>
+          <para
+            >When sqltecxlinq raises an <see
+             cref="F:System.Xml.Linq.XObjectChange.Value" />
+
+             event, it passes the instance returned by this property as an argument.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Event argument for a <see cref="F:System.Xml.Linq.XObjectChange.Value" /> change event.</para>
+          <para
+            >Event argument for a <see
+             cref="F:System.Xml.Linq.XObjectChange.Value" />
+
+             change event.</para
+          >
         </summary>
       </Docs>
     </Member>

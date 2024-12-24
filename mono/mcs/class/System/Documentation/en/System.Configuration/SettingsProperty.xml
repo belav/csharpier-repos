@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SettingsProperty" FullName="System.Configuration.SettingsProperty">
   <TypeSignature Language="C#" Value="public class SettingsProperty" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SettingsProperty extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SettingsProperty extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,9 +19,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Configuration.SettingsProperty" /> is used to describe settings properties of a class derived from <see cref="T:System.Configuration.SettingsBase" />. The Settings API allows a collection of settings properties to be grouped into a common language runtime class. </para>
-      <para>When persisting settings, the <see cref="T:System.Configuration.SettingsBase" /> base class asks for a collection of <see cref="T:System.Configuration.SettingsProperty" /> objects, grouped in a collection of type <see cref="T:System.Configuration.SettingsPropertyCollection" />. It does this by calling its own Properties member. Inherited classes should return a collection of properties to persist.</para>
-      <para>Each <see cref="T:System.Configuration.SettingsProperty" /> object includes metadata about the property, including the following:</para>
+        <see cref="T:System.Configuration.SettingsProperty" />
+
+         is used to describe settings properties of a class derived from <see
+         cref="T:System.Configuration.SettingsBase" />
+
+        . The Settings API allows a collection of settings properties to be grouped into a common language runtime class. </para
+      >
+      <para
+        >When persisting settings, the <see
+         cref="T:System.Configuration.SettingsBase" />
+
+         base class asks for a collection of <see
+         cref="T:System.Configuration.SettingsProperty" />
+
+         objects, grouped in a collection of type <see
+         cref="T:System.Configuration.SettingsPropertyCollection" />
+
+        . It does this by calling its own Properties member. Inherited classes should return a collection of properties to persist.</para
+      >
+      <para
+        >Each <see
+         cref="T:System.Configuration.SettingsProperty" />
+
+         object includes metadata about the property, including the following:</para
+      >
       <list type="bullet">
         <item>
           <para>Name.</para>
@@ -47,8 +72,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SettingsProperty (System.Configuration.SettingsProperty propertyToCopy);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Configuration.SettingsProperty propertyToCopy) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SettingsProperty (System.Configuration.SettingsProperty propertyToCopy);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Configuration.SettingsProperty propertyToCopy) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,15 +93,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Configuration.SettingsProperty" /> class, based on the supplied parameter.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+             class, based on the supplied parameter.</para
+          >
         </summary>
         <param name="propertyToCopy">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies a copy of an existing <see cref="T:System.Configuration.SettingsProperty" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies a copy of an existing <see
+           cref="T:System.Configuration.SettingsProperty" />
+
+           object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SettingsProperty (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -84,15 +129,32 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Configuration.SettingsProperty" /> class. based on the supplied parameter.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+             class. based on the supplied parameter.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies the name of an existing <see cref="T:System.Configuration.SettingsProperty" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies the name of an existing <see
+           cref="T:System.Configuration.SettingsProperty" />
+
+           object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SettingsProperty (string name, Type propertyType, System.Configuration.SettingsProvider provider, bool isReadOnly, object defaultValue, System.Configuration.SettingsSerializeAs serializeAs, System.Configuration.SettingsAttributeDictionary attributes, bool throwOnErrorDeserializing, bool throwOnErrorSerializing);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, class System.Type propertyType, class System.Configuration.SettingsProvider provider, bool isReadOnly, object defaultValue, valuetype System.Configuration.SettingsSerializeAs serializeAs, class System.Configuration.SettingsAttributeDictionary attributes, bool throwOnErrorDeserializing, bool throwOnErrorSerializing) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SettingsProperty (string name, Type propertyType, System.Configuration.SettingsProvider provider, bool isReadOnly, object defaultValue, System.Configuration.SettingsSerializeAs serializeAs, System.Configuration.SettingsAttributeDictionary attributes, bool throwOnErrorDeserializing, bool throwOnErrorSerializing);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, class System.Type propertyType, class System.Configuration.SettingsProvider provider, bool isReadOnly, object defaultValue, valuetype System.Configuration.SettingsSerializeAs serializeAs, class System.Configuration.SettingsAttributeDictionary attributes, bool throwOnErrorDeserializing, bool throwOnErrorSerializing) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -114,31 +176,93 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Configuration.SettingsProperty" /> class based on the supplied parameters.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+             class based on the supplied parameters.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Configuration.SettingsProperty" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Configuration.SettingsProperty" />
+
+           object.</param
+        >
         <param name="propertyType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of <see cref="T:System.Configuration.SettingsProperty" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of <see
+           cref="T:System.Configuration.SettingsProperty" />
+
+           object.</param
+        >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Configuration.SettingsProvider" /> object to use for persistence.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Configuration.SettingsProvider" />
+
+           object to use for persistence.</param
+        >
         <param name="isReadOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Boolean" /> value specifying whether the <see cref="T:System.Configuration.SettingsProperty" /> object is read-only.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Boolean" />
+
+           value specifying whether the <see
+           cref="T:System.Configuration.SettingsProperty" />
+
+           object is read-only.</param
+        >
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The default value of the <see cref="T:System.Configuration.SettingsProperty" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The default value of the <see
+           cref="T:System.Configuration.SettingsProperty" />
+
+           object.</param
+        >
         <param name="serializeAs">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Configuration.SettingsSerializeAs" /> object. This object is an enumeration used to set the serialization scheme for storing application settings.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Configuration.SettingsSerializeAs" />
+
+           object. This object is an enumeration used to set the serialization scheme for storing application settings.</param
+        >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Configuration.SettingsAttributeDictionary" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Configuration.SettingsAttributeDictionary" />
+
+           object.</param
+        >
         <param name="throwOnErrorDeserializing">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Boolean value specifying whether an error will be thrown when the property is unsuccessfully deserialized.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A Boolean value specifying whether an error will be thrown when the property is unsuccessfully deserialized.</param
+        >
         <param name="throwOnErrorSerializing">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Boolean value specifying whether an error will be thrown when the property is unsuccessfully serialized.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A Boolean value specifying whether an error will be thrown when the property is unsuccessfully serialized.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public virtual System.Configuration.SettingsAttributeDictionary Attributes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.SettingsAttributeDictionary Attributes" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Configuration.SettingsAttributeDictionary Attributes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.SettingsAttributeDictionary Attributes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -152,11 +276,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a collection of attributes used to describe a <see cref="T:System.Configuration.SettingsProperty" /> object.</para>
+          <para
+            >Returns a collection of attributes used to describe a <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.SettingsAttributeDictionary" /> object containing the attributes of the <see cref="T:System.Configuration.SettingsProperty" /> object.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.SettingsAttributeDictionary" />
+
+             object containing the attributes of the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -177,7 +314,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the default value of the <see cref="T:System.Configuration.SettingsProperty" /> object.</para>
+          <para
+            >Gets or sets the default value of the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -201,7 +343,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value specifying whether a <see cref="T:System.Configuration.SettingsProperty" /> object is read-only. </para>
+          <para
+            >Gets or sets a value specifying whether a <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+             object is read-only. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -221,11 +368,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Configuration.SettingsProperty.Name" /> cannot be an empty string or null. If the <see cref="T:System.Configuration.SettingsProperty" /> does not exist in the data provider, nothing can be returned.</para>
+          <para
+            >The <see
+             cref="P:System.Configuration.SettingsProperty.Name" />
+
+             cannot be an empty string or null. If the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+             does not exist in the data provider, nothing can be returned.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the <see cref="T:System.Configuration.SettingsProperty" />.</para>
+          <para
+            >Gets or sets the name of the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -246,13 +406,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the type for the <see cref="T:System.Configuration.SettingsProperty" />.</para>
+          <para
+            >Gets or sets the type for the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Provider">
-      <MemberSignature Language="C#" Value="public virtual System.Configuration.SettingsProvider Provider { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.SettingsProvider Provider" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Configuration.SettingsProvider Provider { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.SettingsProvider Provider"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -267,13 +438,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the provider for the <see cref="T:System.Configuration.SettingsProperty" />.</para>
+          <para
+            >Gets or sets the provider for the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SerializeAs">
-      <MemberSignature Language="C#" Value="public virtual System.Configuration.SettingsSerializeAs SerializeAs { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Configuration.SettingsSerializeAs SerializeAs" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Configuration.SettingsSerializeAs SerializeAs { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Configuration.SettingsSerializeAs SerializeAs"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -287,11 +469,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Configuration.SettingsSerializeAs" /> object is an enumeration used as the serialization scheme to store application settings.</para>
+          <para
+            >The <see
+             cref="T:System.Configuration.SettingsSerializeAs" />
+
+             object is an enumeration used as the serialization scheme to store application settings.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.Configuration.SettingsSerializeAs" /> object for the <see cref="T:System.Configuration.SettingsProperty" />.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.Configuration.SettingsSerializeAs" />
+
+             object for the <see
+             cref="T:System.Configuration.SettingsProperty" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

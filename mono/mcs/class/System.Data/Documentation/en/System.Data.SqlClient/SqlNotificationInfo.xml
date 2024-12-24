@@ -12,7 +12,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.SqlClient.SqlNotificationInfo" /> enumeration is referenced by an instance of the <see cref="T:System.Data.SqlClient.SqlNotificationEventArgs" /> class.</para>
+      <para
+        >The <see
+         cref="T:System.Data.SqlClient.SqlNotificationInfo" />
+
+         enumeration is referenced by an instance of the <see
+         cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -16,16 +16,47 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Better performance is achieved by using the properties of the <see cref="T:System.Drawing.SystemPens" /> or <see cref="T:System.Drawing.SystemBrushes" /> classes rather than creating a new pen or brush based on a value from <see cref="T:System.Drawing.SystemColors" />. For example, if you wanted to get a brush for the face color of a 3-D element, use the <see cref="P:System.Drawing.SystemBrushes.Control" /> property because it gets a brush that already exists, whereas calling the <see cref="M:System.Drawing.SolidBrush.#ctor(System.Drawing.Color)" /> constructor with a parameter value of <see cref="P:System.Drawing.SystemColors.Control" /> will create a new brush.</para>
+      <para
+        >Better performance is achieved by using the properties of the <see
+         cref="T:System.Drawing.SystemPens" />
+
+         or <see
+         cref="T:System.Drawing.SystemBrushes" />
+
+         classes rather than creating a new pen or brush based on a value from <see
+         cref="T:System.Drawing.SystemColors" />
+
+        . For example, if you wanted to get a brush for the face color of a 3-D element, use the <see
+         cref="P:System.Drawing.SystemBrushes.Control" />
+
+         property because it gets a brush that already exists, whereas calling the <see
+         cref="M:System.Drawing.SolidBrush.#ctor(System.Drawing.Color)" />
+
+         constructor with a parameter value of <see
+         cref="P:System.Drawing.SystemColors.Control" />
+
+         will create a new brush.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Each property of the <see cref="T:System.Drawing.SystemColors" /> class is a <see cref="T:System.Drawing.Color" /> structure that is the color of a Windows display element.</para>
+      <para
+        >Each property of the <see
+         cref="T:System.Drawing.SystemColors" />
+
+         class is a <see
+         cref="T:System.Drawing.Color" />
+
+         structure that is the color of a Windows display element.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="ActiveBorder">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ActiveBorder { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ActiveBorder { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -35,7 +66,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the active window's border.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the active window's border.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -44,7 +80,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ActiveCaption">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ActiveCaption { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ActiveCaption { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -54,7 +93,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the background of the active window's title bar.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the background of the active window's title bar.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -63,7 +107,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ActiveCaptionText">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ActiveCaptionText { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ActiveCaptionText { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -73,7 +120,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the text in the active window's title bar.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the text in the active window's title bar.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -82,7 +134,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppWorkspace">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color AppWorkspace { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color AppWorkspace { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -95,7 +150,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the application workspace. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the application workspace. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -104,7 +164,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ButtonFace">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ButtonFace { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ButtonFace { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -117,12 +180,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the face color of a 3-D element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the face color of a 3-D element.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ButtonHighlight">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ButtonHighlight { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ButtonHighlight { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -138,12 +209,20 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the highlight color of a 3-D element. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the highlight color of a 3-D element. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ButtonShadow">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ButtonShadow { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ButtonShadow { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -159,7 +238,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the shadow color of a 3-D element. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the shadow color of a 3-D element. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -174,7 +258,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the face color of a 3-D element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the face color of a 3-D element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -183,7 +272,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ControlDark">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ControlDark { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ControlDark { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -196,7 +288,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the shadow color of a 3-D element. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the shadow color of a 3-D element. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -205,7 +302,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ControlDarkDark">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ControlDarkDark { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ControlDarkDark { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -218,7 +318,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the dark shadow color of a 3-D element. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the dark shadow color of a 3-D element. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -227,7 +332,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ControlLight">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ControlLight { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ControlLight { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -240,7 +348,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the light color of a 3-D element. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the light color of a 3-D element. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -249,7 +362,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ControlLightLight">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ControlLightLight { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ControlLightLight { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -262,7 +378,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the highlight color of a 3-D element. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the highlight color of a 3-D element. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -271,7 +392,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ControlText">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ControlText { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ControlText { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -281,7 +405,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of text in a 3-D element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of text in a 3-D element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -300,7 +429,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the desktop.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the desktop.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -309,7 +443,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GradientActiveCaption">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color GradientActiveCaption { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color GradientActiveCaption { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -322,12 +459,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the lightest color in the color gradient of an active window's title bar.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the lightest color in the color gradient of an active window's title bar.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GradientInactiveCaption">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color GradientInactiveCaption { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color GradientInactiveCaption { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -340,7 +485,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the lightest color in the color gradient of an inactive window's title bar.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the lightest color in the color gradient of an inactive window's title bar.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -358,7 +508,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of dimmed text. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of dimmed text. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -367,7 +522,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Highlight">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color Highlight { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color Highlight { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -376,11 +534,21 @@
         <value>To be added: an object of type 'Color'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Selected items may include menu items as well as selected text. For example, the <see cref="T:System.Drawing.Color" /> structure may be the color used for the background of selected items in a list box.</para>
+          <para
+            >Selected items may include menu items as well as selected text. For example, the <see
+             cref="T:System.Drawing.Color" />
+
+             structure may be the color used for the background of selected items in a list box.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the background of selected items.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the background of selected items.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -389,7 +557,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HighlightText">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color HighlightText { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color HighlightText { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -402,7 +573,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the text of selected items.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the text of selected items.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -424,7 +600,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color used to designate a hot-tracked item. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color used to designate a hot-tracked item. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -433,7 +614,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="InactiveBorder">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color InactiveBorder { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color InactiveBorder { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -443,7 +627,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of an inactive window's border.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of an inactive window's border.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -452,7 +641,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="InactiveCaption">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color InactiveCaption { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color InactiveCaption { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -462,7 +654,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the background of an inactive window's title bar.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the background of an inactive window's title bar.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -471,7 +668,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="InactiveCaptionText">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color InactiveCaptionText { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color InactiveCaptionText { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -481,7 +681,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the text in an inactive window's title bar.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the text in an inactive window's title bar.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -500,7 +705,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the background of a ToolTip.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the background of a ToolTip.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -519,7 +729,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the text of a ToolTip.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the text of a ToolTip.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -538,7 +753,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of a menu's background.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of a menu's background.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -560,12 +780,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the background of a menu bar.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the background of a menu bar.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="MenuHighlight">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color MenuHighlight { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color MenuHighlight { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -578,7 +806,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color used to highlight menu items when the menu appears as a flat menu.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color used to highlight menu items when the menu appears as a flat menu.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -593,7 +826,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of a menu's text.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of a menu's text.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -602,7 +840,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ScrollBar">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ScrollBar { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ScrollBar { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -612,7 +853,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the background of a scroll bar.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the background of a scroll bar.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -631,7 +877,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the background in the client area of a window.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the background in the client area of a window.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -640,7 +891,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WindowFrame">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color WindowFrame { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color WindowFrame { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -650,7 +904,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of a window frame.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of a window frame.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -659,7 +918,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WindowText">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color WindowText { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color WindowText { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -669,7 +931,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the text in the client area of a window.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Color" />
+
+             structure that is the color of the text in the client area of a window.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

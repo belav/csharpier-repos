@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WSDualHttpBindingElement" FullName="System.ServiceModel.Configuration.WSDualHttpBindingElement">
-  <TypeSignature Language="C#" Value="public class WSDualHttpBindingElement : System.ServiceModel.Configuration.StandardBindingElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi WSDualHttpBindingElement extends System.ServiceModel.Configuration.StandardBindingElement implements class System.ServiceModel.Configuration.IBindingConfigurationElement" />
+<Type
+  Name="WSDualHttpBindingElement"
+  FullName="System.ServiceModel.Configuration.WSDualHttpBindingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class WSDualHttpBindingElement : System.ServiceModel.Configuration.StandardBindingElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi WSDualHttpBindingElement extends System.ServiceModel.Configuration.StandardBindingElement implements class System.ServiceModel.Configuration.IBindingConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -24,7 +33,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public WSDualHttpBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,13 +46,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSDualHttpBindingElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.WSDualHttpBindingElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="protected override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -83,7 +103,10 @@
     </Member>
     <Member MemberName="ClientBaseAddress">
       <MemberSignature Language="C#" Value="public Uri ClientBaseAddress { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri ClientBaseAddress" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Uri ClientBaseAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -109,8 +132,14 @@
       </Docs>
     </Member>
     <Member MemberName="HostNameComparisonMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -181,8 +210,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The size of the messages that can be received on the wire by services using the <see cref="T:System.ServiceModel.WsDualHttpBinding" /> class is bounded by the amount of memory allocated for each message. This bound on message size is intended to limit exposure to DoS-style attacks. </para>
-          <para>Note that the settings for <see cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxBufferPoolSize" /> and <see cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxReceivedMessageSize" />, are local behavioral settings. This means that they are not transmitted to other endpoints in metadata. If you generate a proxy to a service with a maximum message size of 2GB from metadata, the proxy still has a default value 64K. This leaves control of the appropriate bounds for message and message buffer size in the scope of local administrators.</para>
+          <para
+            >The size of the messages that can be received on the wire by services using the <see
+             cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+             class is bounded by the amount of memory allocated for each message. This bound on message size is intended to limit exposure to DoS-style attacks. </para
+          >
+          <para
+            >Note that the settings for <see
+             cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxBufferPoolSize" />
+
+             and <see
+             cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxReceivedMessageSize" />
+
+            , are local behavioral settings. This means that they are not transmitted to other endpoints in metadata. If you generate a proxy to a service with a maximum message size of 2GB from metadata, the proxy still has a default value 64K. This leaves control of the appropriate bounds for message and message buffer size in the scope of local administrators.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -191,8 +233,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageEncoding">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.WSMessageEncoding MessageEncoding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.WSMessageEncoding MessageEncoding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.WSMessageEncoding MessageEncoding { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.WSMessageEncoding MessageEncoding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -215,8 +263,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnApplyConfiguration">
-      <MemberSignature Language="C#" Value="protected override void OnApplyConfiguration (System.ServiceModel.Channels.Binding binding);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnApplyConfiguration(class System.ServiceModel.Channels.Binding binding) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnApplyConfiguration (System.ServiceModel.Channels.Binding binding);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void OnApplyConfiguration(class System.ServiceModel.Channels.Binding binding) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -234,12 +288,21 @@
           <para>Called when the content of a specified binding collection is applied to this binding configuration element.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding to be applied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The binding to be applied.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -252,7 +315,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+             instance that contains a collection of <see
+             cref="T:System.Configuration.ConfigurationProperty" />
+
+             objects that can be attributes or <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             objects of this configuration element.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -275,7 +349,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.ServiceModel.WSDualHttpBinding.UseDefaultWebProxy" /> property is set to true, the value of this property is ignored.</para>
+          <para
+            >If the <see
+             cref="P:System.ServiceModel.WSDualHttpBinding.UseDefaultWebProxy" />
+
+             property is set to true, the value of this property is ignored.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -284,8 +363,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReaderQuotas">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -311,8 +396,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReliableSession">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.StandardBindingReliableSessionElement ReliableSession { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.StandardBindingReliableSessionElement ReliableSession" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.StandardBindingReliableSessionElement ReliableSession { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.StandardBindingReliableSessionElement ReliableSession"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -338,8 +429,14 @@
       </Docs>
     </Member>
     <Member MemberName="Security">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.WSDualHttpSecurityElement Security { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.WSDualHttpSecurityElement Security" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.WSDualHttpSecurityElement Security { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.WSDualHttpSecurityElement Security"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -362,8 +459,14 @@
       </Docs>
     </Member>
     <Member MemberName="TextEncoding">
-      <MemberSignature Language="C#" Value="public System.Text.Encoding TextEncoding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Text.Encoding TextEncoding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Text.Encoding TextEncoding { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Text.Encoding TextEncoding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

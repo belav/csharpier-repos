@@ -12,8 +12,33 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.DockingBehavior" /> enumeration is used by the <see cref="T:System.Windows.Forms.DockingAttribute" /> class.</para>
-      <para>The <see cref="T:System.Windows.Forms.SplitContainer" /> and <see cref="T:System.Windows.Forms.WebBrowser" /> controls are set to <see cref="F:System.Windows.Forms.DockingBehavior.AutoDock" />. The <see cref="T:System.Windows.Forms.DataGridView" /> control is set to <see cref="F:System.Windows.Forms.DockingBehavior.Ask" />.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.DockingBehavior" />
+
+         enumeration is used by the <see
+         cref="T:System.Windows.Forms.DockingAttribute" />
+
+         class.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.SplitContainer" />
+
+         and <see
+         cref="T:System.Windows.Forms.WebBrowser" />
+
+         controls are set to <see
+         cref="F:System.Windows.Forms.DockingBehavior.AutoDock" />
+
+        . The <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         control is set to <see
+         cref="F:System.Windows.Forms.DockingBehavior.Ask" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,7 +73,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Set the control's <see cref="P:System.Windows.Forms.Control.Dock" /> property to <see cref="F:System.Windows.Forms.DockStyle.Fill" />  when it is dropped into a container with no other child controls.</para>
+          <para
+            >Set the control's <see
+             cref="P:System.Windows.Forms.Control.Dock" />
+
+             property to <see
+             cref="F:System.Windows.Forms.DockStyle.Fill" />
+
+              when it is dropped into a container with no other child controls.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

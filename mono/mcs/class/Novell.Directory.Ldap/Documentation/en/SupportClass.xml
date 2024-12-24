@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -98,7 +97,10 @@
       </Docs>
     </Member>
     <Member MemberName="ToByteArray">
-      <MemberSignature Language="C#" Value="public static byte[] ToByteArray(string sourceString)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] ToByteArray(string sourceString)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -114,7 +116,10 @@
       </Docs>
     </Member>
     <Member MemberName="ToByteArray">
-      <MemberSignature Language="C#" Value="public static byte[] ToByteArray(object[] tempObjectArray)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] ToByteArray(object[] tempObjectArray)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -130,7 +135,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReadInput">
-      <MemberSignature Language="C#" Value="public static int ReadInput(System.IO.Stream sourceStream, ref sbyte[] target, int start, int count)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int ReadInput(System.IO.Stream sourceStream, ref sbyte[] target, int start, int count)"
+      />
       <MemberType>Method</MemberType>
       <Attributes>
         <Attribute>
@@ -142,7 +150,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="sourceStream" Type="System.IO.Stream" />
-        <Parameter Name="target" Type="System.SByte[]&amp;" RefType="ref" />
+        <Parameter Name="target" Type="System.SByte[]&" RefType="ref" />
         <Parameter Name="start" Type="System.Int32" />
         <Parameter Name="count" Type="System.Int32" />
       </Parameters>
@@ -157,7 +165,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReadInput">
-      <MemberSignature Language="C#" Value="public static int ReadInput(System.IO.TextReader sourceTextReader, ref sbyte[] target, int start, int count)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int ReadInput(System.IO.TextReader sourceTextReader, ref sbyte[] target, int start, int count)"
+      />
       <MemberType>Method</MemberType>
       <Attributes>
         <Attribute>
@@ -169,7 +180,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="sourceTextReader" Type="System.IO.TextReader" />
-        <Parameter Name="target" Type="System.SByte[]&amp;" RefType="ref" />
+        <Parameter Name="target" Type="System.SByte[]&" RefType="ref" />
         <Parameter Name="start" Type="System.Int32" />
         <Parameter Name="count" Type="System.Int32" />
       </Parameters>
@@ -253,7 +264,10 @@
       </Docs>
     </Member>
     <Member MemberName="FormatDateTime">
-      <MemberSignature Language="C#" Value="public static string FormatDateTime(System.Globalization.DateTimeFormatInfo format, System.DateTime date)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string FormatDateTime(System.Globalization.DateTimeFormatInfo format, System.DateTime date)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -271,7 +285,10 @@
       </Docs>
     </Member>
     <Member MemberName="PutElement">
-      <MemberSignature Language="C#" Value="public static object PutElement(System.Collections.IDictionary collection, object key, object newValue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static object PutElement(System.Collections.IDictionary collection, object key, object newValue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -291,7 +308,10 @@
       </Docs>
     </Member>
     <Member MemberName="VectorRemoveElement">
-      <MemberSignature Language="C#" Value="public static bool VectorRemoveElement(System.Collections.ArrayList arrayList, object element)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool VectorRemoveElement(System.Collections.ArrayList arrayList, object element)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -309,7 +329,10 @@
       </Docs>
     </Member>
     <Member MemberName="HashtableRemove">
-      <MemberSignature Language="C#" Value="public static object HashtableRemove(System.Collections.Hashtable hashtable, object key)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static object HashtableRemove(System.Collections.Hashtable hashtable, object key)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -327,7 +350,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetSize">
-      <MemberSignature Language="C#" Value="public static void SetSize(System.Collections.ArrayList arrayList, int newSize)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SetSize(System.Collections.ArrayList arrayList, int newSize)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -344,7 +370,10 @@
       </Docs>
     </Member>
     <Member MemberName="StackPush">
-      <MemberSignature Language="C#" Value="public static object StackPush(System.Collections.Stack stack, object element)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static object StackPush(System.Collections.Stack stack, object element)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -362,7 +391,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetCharsFromString">
-      <MemberSignature Language="C#" Value="public static void GetCharsFromString(string sourceString, int sourceStart, int sourceEnd, ref char[] destinationArray, int destinationStart)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void GetCharsFromString(string sourceString, int sourceStart, int sourceEnd, ref char[] destinationArray, int destinationStart)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -371,7 +403,7 @@
         <Parameter Name="sourceString" Type="System.String" />
         <Parameter Name="sourceStart" Type="System.Int32" />
         <Parameter Name="sourceEnd" Type="System.Int32" />
-        <Parameter Name="destinationArray" Type="System.Char[]&amp;" RefType="ref" />
+        <Parameter Name="destinationArray" Type="System.Char[]&" RefType="ref" />
         <Parameter Name="destinationStart" Type="System.Int32" />
       </Parameters>
       <Docs>
@@ -385,7 +417,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetFileStream">
-      <MemberSignature Language="C#" Value="public static System.IO.FileStream GetFileStream(string FileName, bool Append)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.IO.FileStream GetFileStream(string FileName, bool Append)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.IO.FileStream</ReturnType>
@@ -440,7 +475,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreateNewInstance">
-      <MemberSignature Language="C#" Value="public static object CreateNewInstance(System.Type classType)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static object CreateNewInstance(System.Type classType)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -456,7 +494,10 @@
       </Docs>
     </Member>
     <Member MemberName="WriteStackTrace">
-      <MemberSignature Language="C#" Value="public static void WriteStackTrace(System.Exception throwable, System.IO.TextWriter stream)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void WriteStackTrace(System.Exception throwable, System.IO.TextWriter stream)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -473,7 +514,10 @@
       </Docs>
     </Member>
     <Member MemberName="EqualsSupport">
-      <MemberSignature Language="C#" Value="public static bool EqualsSupport(System.Collections.ICollection source, System.Collections.ICollection target)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool EqualsSupport(System.Collections.ICollection source, System.Collections.ICollection target)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -491,7 +535,10 @@
       </Docs>
     </Member>
     <Member MemberName="EqualsSupport">
-      <MemberSignature Language="C#" Value="public static bool EqualsSupport(System.Collections.ICollection source, object target)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool EqualsSupport(System.Collections.ICollection source, object target)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -509,7 +556,10 @@
       </Docs>
     </Member>
     <Member MemberName="EqualsSupport">
-      <MemberSignature Language="C#" Value="public static bool EqualsSupport(System.Collections.IDictionaryEnumerator source, object target)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool EqualsSupport(System.Collections.IDictionaryEnumerator source, object target)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -527,7 +577,10 @@
       </Docs>
     </Member>
     <Member MemberName="EqualsSupport">
-      <MemberSignature Language="C#" Value="public static bool EqualsSupport(System.Collections.IDictionaryEnumerator source, System.Collections.IDictionaryEnumerator target)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool EqualsSupport(System.Collections.IDictionaryEnumerator source, System.Collections.IDictionaryEnumerator target)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -545,7 +598,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReverseStack">
-      <MemberSignature Language="C#" Value="public static System.Collections.IEnumerator ReverseStack(System.Collections.ICollection collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.IEnumerator ReverseStack(System.Collections.ICollection collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>

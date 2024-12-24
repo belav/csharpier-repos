@@ -3,11 +3,23 @@
   <Docs>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:Microsoft.VisualBasic" /> namespace contains types that support the vbprvb Runtime in vbprvb.</para>
+      <para
+        >The <see
+         cref="N:Microsoft.VisualBasic" />
+
+         namespace contains types that support the vbprvb Runtime in vbprvb.</para
+      >
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information about the language elements in the vbprvb Runtime, see <format type="text/html"><a href="5c6bd31a-9542-4f3e-bfd5-e951af58f0f2">Visual Basic Reference</a></format>.</para>
+      <para
+        >For more information about the language elements in the vbprvb Runtime, see <format
+         type="text/html">
+          <a href="5c6bd31a-9542-4f3e-bfd5-e951af58f0f2">Visual Basic Reference</a>
+        </format>
+
+        .</para
+      >
     </remarks>
   </Docs>
 </Namespace>

@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -17,7 +22,10 @@
   </Docs>
   <Members>
     <Member MemberName="RabinMillerTest">
-      <MemberSignature Language="C#" Value="public static bool RabinMillerTest (Mono.Math.BigInteger n, Mono.Math.Prime.ConfidenceFactor confidence);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool RabinMillerTest (Mono.Math.BigInteger n, Mono.Math.Prime.ConfidenceFactor confidence);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -28,9 +36,15 @@
       </Parameters>
       <Docs>
         <param name="n">To be added.</param>
-        <param name="confidence">a <see cref="T:System.Int32" /></param>
+        <param name="confidence"
+          >a <see
+           cref="T:System.Int32" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:System.Boolean" /></returns>
+        <returns
+          >a <see
+           cref="T:System.Boolean" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -39,7 +53,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SmallPrimeSppTest">
-      <MemberSignature Language="C#" Value="public static bool SmallPrimeSppTest (Mono.Math.BigInteger bi, Mono.Math.Prime.ConfidenceFactor confidence);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool SmallPrimeSppTest (Mono.Math.BigInteger bi, Mono.Math.Prime.ConfidenceFactor confidence);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -49,10 +66,19 @@
         <Parameter Name="confidence" Type="Mono.Math.Prime.ConfidenceFactor" />
       </Parameters>
       <Docs>
-        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
-        <param name="confidence">a <see cref="T:System.Int32" /></param>
+        <param name="bi"
+          >a <see
+           cref="T:Mono.Math.BigInteger" />
+        </param>
+        <param name="confidence"
+          >a <see
+           cref="T:System.Int32" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:System.Boolean" /></returns>
+        <returns
+          >a <see
+           cref="T:System.Boolean" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -61,7 +87,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Test">
-      <MemberSignature Language="C#" Value="public static bool Test (Mono.Math.BigInteger n, Mono.Math.Prime.ConfidenceFactor confidence);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool Test (Mono.Math.BigInteger n, Mono.Math.Prime.ConfidenceFactor confidence);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

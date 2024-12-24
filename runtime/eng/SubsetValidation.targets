@@ -12,35 +12,38 @@
       signing that isn't (can't be?) supported by Arcade's single pass, such as MSIs and bundles:
       https://github.com/dotnet/arcade/issues/388
   -->
-
   <Target Name="FindInvalidSpecifiedSubsetNames">
     <ItemGroup>
       <SpecifiedSubsetName Include="$([MSBuild]::Unescape($(Subset.Replace('+', ';').Replace('-', ';'))))" />
-
       <!-- MSBuild Exclude is case-insensitive, which matches intended behavior. -->
       <InvalidSpecifiedSubsetName Include="@(SpecifiedSubsetName)" Exclude="@(SubsetName)" />
     </ItemGroup>
-
     <PropertyGroup>
-      <UserRequestedHelp Condition="'%(InvalidSpecifiedSubsetName.Identity)' == 'help'">true</UserRequestedHelp>
+      <UserRequestedHelp Condition="'%(InvalidSpecifiedSubsetName.Identity)' == 'help'"
+        >true</UserRequestedHelp
+      >
     </PropertyGroup>
   </Target>
-
-  <Target Name="ReportValidSubsetList"
-          Condition="'@(InvalidSpecifiedSubsetName)' != ''">
+  <Target Name="ReportValidSubsetList" Condition="'@(InvalidSpecifiedSubsetName)' != ''">
     <ItemGroup>
       <SubsetName Text="- %(Identity)" />
-      <SubsetName Text="%(Text) [only runs on demand]" Condition="'%(SubsetName.OnDemand)' == 'true'" />
+      <SubsetName
+        Text="%(Text) [only runs on demand]"
+        Condition="'%(SubsetName.OnDemand)' == 'true'"
+      />
       <SubsetName Text="%(Text)%0A    %(Description)" />
     </ItemGroup>
-
-    <Message Text="%0AAccepted Subset values:%0A@(SubsetName->'%(Text)', '%0A')%0A" Importance="High" />
-
-    <Error Text="Subset not recognized: @(InvalidSpecifiedSubsetName, ' ')"
-           Condition="'$(UserRequestedHelp)' != 'true'" />
-
-    <Error Text="This is not an error. These are the available subsets. You can choose one or none at all for a full build."
-           Condition="'$(UserRequestedHelp)' == 'true'" />
+    <Message
+      Text="%0AAccepted Subset values:%0A@(SubsetName->'%(Text)', '%0A')%0A"
+      Importance="High"
+    />
+    <Error
+      Text="Subset not recognized: @(InvalidSpecifiedSubsetName, ' ')"
+      Condition="'$(UserRequestedHelp)' != 'true'"
+    />
+    <Error
+      Text="This is not an error. These are the available subsets. You can choose one or none at all for a full build."
+      Condition="'$(UserRequestedHelp)' == 'true'"
+    />
   </Target>
-
 </Project>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RowStyle" FullName="System.Windows.Forms.RowStyle">
-  <TypeSignature Language="C#" Value="public class RowStyle : System.Windows.Forms.TableLayoutStyle" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RowStyle : System.Windows.Forms.TableLayoutStyle"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,8 +16,30 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.RowStyle" /> class represents the user interface (UI) characteristics of a row in a <see cref="T:System.Windows.Forms.TableLayoutPanel" />. The styles for all the rows in a <see cref="T:System.Windows.Forms.TableLayoutPanel" /> are collected in the <see cref="P:System.Windows.Forms.TableLayoutPanel.RowStyles" /> property.</para>
-      <para>This simple class offers the <see cref="P:System.Windows.Forms.RowStyle.Height" /> and <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> for a row.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.RowStyle" />
+
+         class represents the user interface (UI) characteristics of a row in a <see
+         cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        . The styles for all the rows in a <see
+         cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+         are collected in the <see
+         cref="P:System.Windows.Forms.TableLayoutPanel.RowStyles" />
+
+         property.</para
+      >
+      <para
+        >This simple class offers the <see
+         cref="P:System.Windows.Forms.RowStyle.Height" />
+
+         and <see
+         cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+         for a row.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,11 +55,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor sets the <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> property to <see cref="F:System.Windows.Forms.SizeType.AutoSize" /> and the <see cref="P:System.Windows.Forms.RowStyle.Height" /> property to 0.</para>
+          <para
+            >This constructor sets the <see
+             cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+             property to <see
+             cref="F:System.Windows.Forms.SizeType.AutoSize" />
+
+             and the <see
+             cref="P:System.Windows.Forms.RowStyle.Height" />
+
+             property to 0.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes an instance of the <see cref="T:System.Windows.Forms.RowStyle" /> class to its default state.</para>
+          <para
+            >Initializes an instance of the <see
+             cref="T:System.Windows.Forms.RowStyle" />
+
+             class to its default state.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -42,7 +83,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RowStyle (System.Windows.Forms.SizeType sizeType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RowStyle (System.Windows.Forms.SizeType sizeType);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="sizeType" Type="System.Windows.Forms.SizeType" />
@@ -51,21 +95,43 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor sets the <see cref="P:System.Windows.Forms.RowStyle.Height" /> property to 0.</para>
+          <para
+            >This constructor sets the <see
+             cref="P:System.Windows.Forms.RowStyle.Height" />
+
+             property to 0.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes an instance of the <see cref="T:System.Windows.Forms.RowStyle" /> class using the supplied <see cref="T:System.Windows.Forms.SizeType" /> value.</para>
+          <para
+            >Initializes an instance of the <see
+             cref="T:System.Windows.Forms.RowStyle" />
+
+             class using the supplied <see
+             cref="T:System.Windows.Forms.SizeType" />
+
+             value.</para
+          >
         </summary>
         <param name="sizeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> indicating how the row should be should be sized relative to its containing table.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+           indicating how the row should be should be sized relative to its containing table.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RowStyle (System.Windows.Forms.SizeType sizeType, float height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RowStyle (System.Windows.Forms.SizeType sizeType, float height);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="sizeType" Type="System.Windows.Forms.SizeType" />
@@ -75,16 +141,50 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="height" /> parameter will take on different meanings depending on the <paramref name="sizeType" /> parameter. For more information, see the <see cref="P:System.Windows.Forms.RowStyle.Height" /> property.</para>
+          <para
+            >The <paramref
+             name="height" />
+
+             parameter will take on different meanings depending on the <paramref
+             name="sizeType" />
+
+             parameter. For more information, see the <see
+             cref="P:System.Windows.Forms.RowStyle.Height" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes an instance of the <see cref="T:System.Windows.Forms.RowStyle" /> class using the supplied <see cref="T:System.Windows.Forms.SizeType" /> and height values.</para>
+          <para
+            >Initializes an instance of the <see
+             cref="T:System.Windows.Forms.RowStyle" />
+
+             class using the supplied <see
+             cref="T:System.Windows.Forms.SizeType" />
+
+             and height values.</para
+          >
         </summary>
         <param name="sizeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> indicating how the row should be should be sized relative to its containing table.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+           indicating how the row should be should be sized relative to its containing table.</param
+        >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />The preferred height in pixels or percentage of the <see cref="T:System.Windows.Forms.TableLayoutPanel" />, depending on <paramref name="sizeType" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The preferred height in pixels or percentage of the <see
+           cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          , depending on <paramref
+           name="sizeType" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,7 +201,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.RowStyle.Height" /> property will take on different meanings depending on the <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> property. The following table describes the possible meanings of <see cref="P:System.Windows.Forms.RowStyle.Height" />.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.RowStyle.Height" />
+
+             property will take on different meanings depending on the <see
+             cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+
+             property. The following table describes the possible meanings of <see
+             cref="P:System.Windows.Forms.RowStyle.Height" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -130,7 +241,12 @@
                 </para>
               </term>
               <description>
-                <para>Not applicable—the <see cref="P:System.Windows.Forms.RowStyle.Height" /> property is ignored.</para>
+                <para
+                  >Not applicable—the <see
+                   cref="P:System.Windows.Forms.RowStyle.Height" />
+
+                   property is ignored.</para
+                >
               </description>
             </item>
             <item>

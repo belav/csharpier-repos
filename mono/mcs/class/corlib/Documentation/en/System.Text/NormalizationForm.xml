@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NormalizationForm" FullName="System.Text.NormalizationForm">
   <TypeSignature Language="C#" Value="public enum NormalizationForm" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed NormalizationForm extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed NormalizationForm extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -35,7 +38,14 @@
       <para>Each composite Unicode character is mapped to a more basic sequence of one or more characters. The process of decomposition replaces composite characters in a string with their more basic mappings. A full decomposition recursively performs this replacement until none of the characters in the string can be decomposed further.</para>
       <para>Unicode defines two types of decompositions: compatibility decomposition and canonical decomposition. In compatibility decomposition, formatting information might be lost. In canonical decomposition, which is a subset of compatibility decomposition, formatting information is preserved.</para>
       <para>Two sets of characters are considered to have canonical equivalence if their full canonical decompositions are identical. Likewise, two sets of characters are considered to have compatibility equivalence if their full compatibility decompositions are identical.</para>
-      <para>For more information about normalization, decompositions and equivalence, see <see cref="http://unicode.org/reports/tr15/">Unicode Standard Annex #15: Unicode Normalization Forms</see> at unicode.org.</para>
+      <para
+        >For more information about normalization, decompositions and equivalence, see <see
+         cref="http://unicode.org/reports/tr15/"
+          >Unicode Standard Annex #15: Unicode Normalization Forms</see
+        >
+
+         at unicode.org.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,7 +55,10 @@
   <Members>
     <Member MemberName="FormC">
       <MemberSignature Language="C#" Value="FormC" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Text.NormalizationForm FormC = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Text.NormalizationForm FormC = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -64,7 +77,10 @@
     </Member>
     <Member MemberName="FormD">
       <MemberSignature Language="C#" Value="FormD" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Text.NormalizationForm FormD = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Text.NormalizationForm FormD = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -83,7 +99,10 @@
     </Member>
     <Member MemberName="FormKC">
       <MemberSignature Language="C#" Value="FormKC" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Text.NormalizationForm FormKC = int32(5)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Text.NormalizationForm FormKC = int32(5)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,7 +121,10 @@
     </Member>
     <Member MemberName="FormKD">
       <MemberSignature Language="C#" Value="FormKD" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Text.NormalizationForm FormKD = int32(6)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Text.NormalizationForm FormKD = int32(6)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

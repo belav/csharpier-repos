@@ -204,7 +204,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest7" style="height:128px;width:120px">
     <table id="DataList7" cellspacing="0" border="0" style="border-collapse:collapse">
@@ -374,6 +377,9 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

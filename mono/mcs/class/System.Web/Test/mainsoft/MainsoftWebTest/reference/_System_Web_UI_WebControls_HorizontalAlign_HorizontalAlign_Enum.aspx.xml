@@ -2,6 +2,9 @@
 <testresults name="">
   <div id="GHTSubTest1" testname="System.Web.UI.WebControls.HorizontalAlign">
     <span>
-      <br />NotSet; Left; Center; Right; Justify; 0; 1; 2; 3; 4; </span>
+      <br />
+
+      NotSet; Left; Center; Right; Justify; 0; 1; 2; 3; 4; </span
+    >
   </div>
 </testresults>

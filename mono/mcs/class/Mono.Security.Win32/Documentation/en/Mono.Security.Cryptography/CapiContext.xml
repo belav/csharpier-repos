@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -36,14 +41,22 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CapiContext (System.Security.Cryptography.CspParameters csp);" />
+      <MemberSignature
+        Language="C#"
+        Value="public CapiContext (System.Security.Cryptography.CspParameters csp);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
         <Parameter Name="csp" Type="System.Security.Cryptography.CspParameters" />
       </Parameters>
       <Docs>
-        <param name="csp">a <see cref="T:System.Security.Cryptography.CspParameters" /> which includes the informations required to select a specific CSP (name) or the default provider for a category of CSP (type).</param>
+        <param name="csp"
+          >a <see
+           cref="T:System.Security.Cryptography.CspParameters" />
+
+           which includes the informations required to select a specific CSP (name) or the default provider for a category of CSP (type).</param
+        >
         <summary>Return a context to the specified Cryptographic Service Provider (CSP). </summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -77,7 +90,12 @@
       <Parameters />
       <Docs>
         <summary>Return the error code of the last operation.</summary>
-        <value>a <see cref="T:System.Int32" /> representing the Win32 error code returned in the last operation (cryptographic or not).</value>
+        <value
+          >a <see
+           cref="T:System.Int32" />
+
+           representing the Win32 error code returned in the last operation (cryptographic or not).</value
+        >
         <remarks>This returns Win32's GetLastError result. So this will only be result of the last cryptographic operation is checked right after the operation (as further operation can change this value).</remarks>
       </Docs>
       <AssemblyInfo>
@@ -110,7 +128,12 @@
       <Parameters />
       <Docs>
         <summary>Return the HCRYPTPROV handle managed by the class.</summary>
-        <value>a <see cref="T:System.IntPtr" /> representing the CryptoAPI HCRYPTPROV handle.</value>
+        <value
+          >a <see
+           cref="T:System.IntPtr" />
+
+           representing the CryptoAPI HCRYPTPROV handle.</value
+        >
         <remarks>This property is useful if you need to directly call some unmanaged CryptoAPI functions without managing yourself the context.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -127,7 +150,12 @@
       <Parameters />
       <Docs>
         <summary>Return the result of the last cryptographic operation made using this context.</summary>
-        <value>a <see cref="T:System.Boolean" /> which is true if the last operation succeeded or false if the last operation failed.</value>
+        <value
+          >a <see
+           cref="T:System.Boolean" />
+
+           which is true if the last operation succeeded or false if the last operation failed.</value
+        >
         <remarks>You can't only trust the Error property to know the result of an operation. Some error codes are warnings or even success codes in special circumstances.</remarks>
       </Docs>
       <AssemblyInfo>

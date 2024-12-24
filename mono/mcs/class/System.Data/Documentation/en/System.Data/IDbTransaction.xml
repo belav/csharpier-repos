@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IDbTransaction" FullName="System.Data.IDbTransaction">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public interface IDbTransaction : IDisposable" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public interface IDbTransaction : IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -17,9 +21,46 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.IDbTransaction" /> interface allows an inheriting class to implement a Transaction class, which represents the transaction to be performed at a data source. For more information about Transaction classes, see <format type="text/html"><a href="F46570DE-9E50-4FE6-8710-A8C31FA8569B">[&lt;topic://cpconperformingtransactions&gt;]</a></format>. </para>
-      <para>An application does not create an instance of the <see cref="T:System.Data.IDbTransaction" /> interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDbTransaction" />.</para>
-      <para>Classes that inherit <see cref="T:System.Data.IDbTransaction" /> must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see cref="T:System.Data.IDbTransaction" /> interface defines the <see cref="M:System.Data.IDbTransaction.Commit" /> method. In turn, the <see cref="T:System.Data.OleDb.OleDbTransaction" /> class inherits this property, and also defines the <see cref="M:System.Data.OleDb.OleDbTransaction.Begin(System.Data.IsolationLevel)" /> method.</para>
+      <para
+        >The <see
+         cref="T:System.Data.IDbTransaction" />
+
+         interface allows an inheriting class to implement a Transaction class, which represents the transaction to be performed at a data source. For more information about Transaction classes, see <format
+         type="text/html">
+          <a href="F46570DE-9E50-4FE6-8710-A8C31FA8569B"
+            >[&lt;topic://cpconperformingtransactions&gt;]</a
+          >
+        </format>
+
+        . </para
+      >
+      <para
+        >An application does not create an instance of the <see
+         cref="T:System.Data.IDbTransaction" />
+
+         interface directly, but creates an instance of a class that inherits <see
+         cref="T:System.Data.IDbTransaction" />
+
+        .</para
+      >
+      <para
+        >Classes that inherit <see
+         cref="T:System.Data.IDbTransaction" />
+
+         must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
+         cref="T:System.Data.IDbTransaction" />
+
+         interface defines the <see
+         cref="M:System.Data.IDbTransaction.Commit" />
+
+         method. In turn, the <see
+         cref="T:System.Data.OleDb.OleDbTransaction" />
+
+         class inherits this property, and also defines the <see
+         cref="M:System.Data.OleDb.OleDbTransaction.Begin(System.Data.IsolationLevel)" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -69,7 +110,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsolationLevel">
-      <MemberSignature Language="C#" Value="public System.Data.IsolationLevel IsolationLevel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.IsolationLevel IsolationLevel { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.IsolationLevel</ReturnType>
@@ -78,11 +122,21 @@
         <value>To be added: an object of type 'IsolationLevel'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Parallel transactions are not supported. Therefore, the <see cref="T:System.Data.IsolationLevel" /> applies to the entire transaction.</para>
+          <para
+            >Parallel transactions are not supported. Therefore, the <see
+             cref="T:System.Data.IsolationLevel" />
+
+             applies to the entire transaction.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the <see cref="T:System.Data.IsolationLevel" /> for this transaction.</para>
+          <para
+            >Specifies the <see
+             cref="T:System.Data.IsolationLevel" />
+
+             for this transaction.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -100,7 +154,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The transaction can only be rolled back from a pending state (after <see cref="M:System.Data.IDbConnection.BeginTransaction" /> has been called, but before <see cref="M:System.Data.IDbTransaction.Commit" /> is called).</para>
+          <para
+            >The transaction can only be rolled back from a pending state (after <see
+             cref="M:System.Data.IDbConnection.BeginTransaction" />
+
+             has been called, but before <see
+             cref="M:System.Data.IDbTransaction.Commit" />
+
+             is called).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

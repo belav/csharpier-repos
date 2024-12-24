@@ -13,11 +13,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.ArrowDirection" /> works with <see cref="T:System.Windows.Forms.Orientation" /> so you can quickly determine an orientation from a direction.</para>
+        <see cref="T:System.Windows.Forms.ArrowDirection" />
+
+         works with <see
+         cref="T:System.Windows.Forms.Orientation" />
+
+         so you can quickly determine an orientation from a direction.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the direction to move when getting items with the <see cref="M:System.Windows.Forms.ToolStrip.GetNextItem(System.Windows.Forms.ToolStripItem,System.Windows.Forms.ArrowDirection)" /> method.</para>
+      <para
+        >Specifies the direction to move when getting items with the <see
+         cref="M:System.Windows.Forms.ToolStrip.GetNextItem(System.Windows.Forms.ToolStripItem,System.Windows.Forms.ArrowDirection)" />
+
+         method.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -31,7 +42,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The direction is down (<see cref="F:System.Windows.Forms.Orientation.Vertical" />).</para>
+          <para
+            >The direction is down (<see
+             cref="F:System.Windows.Forms.Orientation.Vertical" />
+
+            ).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -48,7 +64,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The direction is left (<see cref="F:System.Windows.Forms.Orientation.Horizontal" />).</para>
+          <para
+            >The direction is left (<see
+             cref="F:System.Windows.Forms.Orientation.Horizontal" />
+
+            ).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -65,7 +86,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The direction is right (<see cref="F:System.Windows.Forms.Orientation.Horizontal" />).</para>
+          <para
+            >The direction is right (<see
+             cref="F:System.Windows.Forms.Orientation.Horizontal" />
+
+            ).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -82,7 +108,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The direction is up (<see cref="F:System.Windows.Forms.Orientation.Vertical" />).</para>
+          <para
+            >The direction is up (<see
+             cref="F:System.Windows.Forms.Orientation.Vertical" />
+
+            ).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IPv4InterfaceProperties" FullName="System.Net.NetworkInformation.IPv4InterfaceProperties">
+<Type
+  Name="IPv4InterfaceProperties"
+  FullName="System.Net.NetworkInformation.IPv4InterfaceProperties"
+>
   <TypeSignature Language="C#" Value="public abstract class IPv4InterfaceProperties" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit IPv4InterfaceProperties extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit IPv4InterfaceProperties extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +21,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class provides access to configuration and address information for network interfaces that support IPv4. You do not create instances of this class; they are returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" /> method.</para>
-      <para>For IPV6 properties, see <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />.</para>
+      <para
+        >This class provides access to configuration and address information for network interfaces that support IPv4. You do not create instances of this class; they are returned by the <see
+         cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
+
+         method.</para
+      >
+      <para
+        >For IPV6 properties, see <see
+         cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -26,7 +42,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected IPv4InterfaceProperties ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,11 +56,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />.</para>
+          <para
+            >This constructor can be called only by classes that derive from <see
+             cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -70,8 +99,14 @@
       </Docs>
     </Member>
     <Member MemberName="IsAutomaticPrivateAddressingActive">
-      <MemberSignature Language="C#" Value="public abstract bool IsAutomaticPrivateAddressingActive { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool IsAutomaticPrivateAddressingActive" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool IsAutomaticPrivateAddressingActive { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool IsAutomaticPrivateAddressingActive"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -89,13 +124,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether this interface has an automatic private IP addressing (APIPA) address.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether this interface has an automatic private IP addressing (APIPA) address.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IsAutomaticPrivateAddressingEnabled">
-      <MemberSignature Language="C#" Value="public abstract bool IsAutomaticPrivateAddressingEnabled { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool IsAutomaticPrivateAddressingEnabled" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool IsAutomaticPrivateAddressingEnabled { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool IsAutomaticPrivateAddressingEnabled"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -113,7 +159,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether this interface has automatic private IP addressing (APIPA) enabled.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether this interface has automatic private IP addressing (APIPA) enabled.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -137,7 +188,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether the interface is configured to use a Dynamic Host Configuration Protocol (DHCP) server to obtain an IP address.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether the interface is configured to use a Dynamic Host Configuration Protocol (DHCP) server to obtain an IP address.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -161,7 +217,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether this interface can forward (route) packets.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether this interface can forward (route) packets.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -209,7 +270,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether an interface uses Windows Internet Name Service (WINS).</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether an interface uses Windows Internet Name Service (WINS).</para
+          >
         </summary>
       </Docs>
     </Member>

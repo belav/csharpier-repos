@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OverflowAction" FullName="System.Diagnostics.OverflowAction">
   <TypeSignature Language="C#" Value="public enum OverflowAction" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed OverflowAction extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed OverflowAction extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -26,7 +29,21 @@
           <para>New entries will either be discarded or will overwrite existing entries depending upon the age of the existing entries.</para>
         </item>
       </list>
-      <para>Use the <see cref="M:System.Diagnostics.EventLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction,System.Int32)" /> method to set the overflow behavior for an <see cref="T:System.Diagnostics.EventLog" />. Check the current configured behavior of an <see cref="T:System.Diagnostics.EventLog" /> through its <see cref="P:System.Diagnostics.EventLog.OverflowAction" /> property.</para>
+      <para
+        >Use the <see
+         cref="M:System.Diagnostics.EventLog.ModifyOverflowPolicy(System.Diagnostics.OverflowAction,System.Int32)" />
+
+         method to set the overflow behavior for an <see
+         cref="T:System.Diagnostics.EventLog" />
+
+        . Check the current configured behavior of an <see
+         cref="T:System.Diagnostics.EventLog" />
+
+         through its <see
+         cref="P:System.Diagnostics.EventLog.OverflowAction" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -36,7 +53,10 @@
   <Members>
     <Member MemberName="DoNotOverwrite">
       <MemberSignature Language="C#" Value="DoNotOverwrite" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Diagnostics.OverflowAction DoNotOverwrite = int32(-1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Diagnostics.OverflowAction DoNotOverwrite = int32(-1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -55,7 +75,10 @@
     </Member>
     <Member MemberName="OverwriteAsNeeded">
       <MemberSignature Language="C#" Value="OverwriteAsNeeded" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Diagnostics.OverflowAction OverwriteAsNeeded = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Diagnostics.OverflowAction OverwriteAsNeeded = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -74,7 +97,10 @@
     </Member>
     <Member MemberName="OverwriteOlder">
       <MemberSignature Language="C#" Value="OverwriteOlder" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Diagnostics.OverflowAction OverwriteOlder = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Diagnostics.OverflowAction OverwriteOlder = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -87,7 +113,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates that new events overwrite events older than specified by the <see cref="P:System.Diagnostics.EventLog.MinimumRetentionDays" /> property value when the event log is full. New events are discarded if the event log is full and there are no events older than specified by the <see cref="P:System.Diagnostics.EventLog.MinimumRetentionDays" /> property value.</para>
+          <para
+            >Indicates that new events overwrite events older than specified by the <see
+             cref="P:System.Diagnostics.EventLog.MinimumRetentionDays" />
+
+             property value when the event log is full. New events are discarded if the event log is full and there are no events older than specified by the <see
+             cref="P:System.Diagnostics.EventLog.MinimumRetentionDays" />
+
+             property value.</para
+          >
         </summary>
       </Docs>
     </Member>

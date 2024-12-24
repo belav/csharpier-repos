@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TYPEDESC" FullName="System.Runtime.InteropServices.TYPEDESC">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct TYPEDESC" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential sealed beforefieldinit TYPEDESC extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential sealed beforefieldinit TYPEDESC extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -26,7 +29,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use <see cref="T:System.Runtime.InteropServices.ComTypes.TYPEDESC" /> instead.</para>
+      <para
+        >Use <see
+         cref="T:System.Runtime.InteropServices.ComTypes.TYPEDESC" />
+
+         instead.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -50,7 +58,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the variable is VT_SAFEARRAY or VT_PTR, the <see cref="F:System.Runtime.InteropServices.TYPEDESC.lpValue" /> field contains a pointer to a TYPEDESC that specifies the element type.</para>
+          <para
+            >If the variable is VT_SAFEARRAY or VT_PTR, the <see
+             cref="F:System.Runtime.InteropServices.TYPEDESC.lpValue" />
+
+             field contains a pointer to a TYPEDESC that specifies the element type.</para
+          >
         </summary>
       </Docs>
     </Member>

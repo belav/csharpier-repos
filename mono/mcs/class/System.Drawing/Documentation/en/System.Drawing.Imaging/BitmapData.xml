@@ -17,7 +17,21 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the attributes of a bitmap image. The <see cref="T:System.Drawing.Imaging.BitmapData" /> class is used by the <see cref="Overload:System.Drawing.Bitmap.LockBits" /> and <see cref="M:System.Drawing.Bitmap.UnlockBits(System.Drawing.Imaging.BitmapData)" /> methods of the <see cref="T:System.Drawing.Bitmap" /> class. Not inheritable. </para>
+      <para
+        >Specifies the attributes of a bitmap image. The <see
+         cref="T:System.Drawing.Imaging.BitmapData" />
+
+         class is used by the <see
+         cref="Overload:System.Drawing.Bitmap.LockBits" />
+
+         and <see
+         cref="M:System.Drawing.Bitmap.UnlockBits(System.Drawing.Imaging.BitmapData)" />
+
+         methods of the <see
+         cref="T:System.Drawing.Bitmap" />
+
+         class. Not inheritable. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +44,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Drawing.Imaging.BitmapData" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Drawing.Imaging.BitmapData" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -44,14 +63,18 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'int'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the pixel height of the <see cref="T:System.Drawing.Bitmap" /> object. Also sometimes referred to as the number of scan lines.</para>
+          <para
+            >Gets or sets the pixel height of the <see
+             cref="T:System.Drawing.Bitmap" />
+
+             object. Also sometimes referred to as the number of scan lines.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -60,13 +83,15 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PixelFormat">
-      <MemberSignature Language="C#" Value="public System.Drawing.Imaging.PixelFormat PixelFormat { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Imaging.PixelFormat PixelFormat { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.PixelFormat</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'PixelFormat'</value>
         <remarks>
@@ -75,7 +100,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the format of the pixel information in the <see cref="T:System.Drawing.Bitmap" /> object that returned this <see cref="T:System.Drawing.Imaging.BitmapData" /> object.</para>
+          <para
+            >Gets or sets the format of the pixel information in the <see
+             cref="T:System.Drawing.Bitmap" />
+
+             object that returned this <see
+             cref="T:System.Drawing.Imaging.BitmapData" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -89,8 +122,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'int'</value>
         <remarks>To be added</remarks>
@@ -110,8 +142,7 @@
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'IntPtr'</value>
         <remarks>To be added</remarks>
@@ -131,8 +162,7 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'int'</value>
         <remarks>
@@ -141,7 +171,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the stride width (also called scan width) of the <see cref="T:System.Drawing.Bitmap" /> object.</para>
+          <para
+            >Gets or sets the stride width (also called scan width) of the <see
+             cref="T:System.Drawing.Bitmap" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -155,14 +190,18 @@
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'int'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the pixel width of the <see cref="T:System.Drawing.Bitmap" /> object. This can also be thought of as the number of pixels in one scan line.</para>
+          <para
+            >Gets or sets the pixel width of the <see
+             cref="T:System.Drawing.Bitmap" />
+
+             object. This can also be thought of as the number of pixels in one scan line.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

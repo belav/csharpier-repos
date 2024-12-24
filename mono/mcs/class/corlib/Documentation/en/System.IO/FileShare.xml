@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="FileShare" FullName="System.IO.FileShare" FullNameSP="System_IO_FileShare" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public sealed serializable FileShare extends System.Enum" />
+<Type
+  Name="FileShare"
+  FullName="System.IO.FileShare"
+  FullNameSP="System_IO_FileShare"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public sealed serializable FileShare extends System.Enum"
+  />
   <TypeSignature Language="C#" Value="public enum FileShare" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed FileShare extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed FileShare extends System.Enum"
+  />
   <MemberOfLibrary>BCL</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
@@ -25,19 +36,72 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For an example of creating a file and writing text to a file, see <format type="text/html"><a href="060CBE06-2ADF-4337-9E7B-961A5C840208">[&lt;topic://cpconwritingtexttofile&gt;]</a></format>. For an example of reading text from a file, see <format type="text/html"><a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27">[&lt;topic://cpconreadingtextfromfile&gt;]</a></format>. For an example of reading from and writing to a binary file, see <format type="text/html"><a href="E209D949-31E8-44EA-8E38-87F9093F3093">[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a></format>.</para>
-      <para>A typical use of this enumeration is to define whether two processes can simultaneously read from the same file. For example, if a file is opened and <see cref="F:System.IO.FileShare.Read" /> is specified, other users can open the file for reading but not for writing.</para>
-      <para>A <see cref="T:System.IO.FileShare" /> parameter is specified in some of the constructors for <see cref="T:System.IO.FileStream" />, <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />, and in some of the Open methods of <see cref="T:System.IO.File" /> and <see cref="T:System.IO.FileInfo" /> to control how a file is opened.</para>
+      <para
+        >For an example of creating a file and writing text to a file, see <format
+         type="text/html">
+          <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
+            >[&lt;topic://cpconwritingtexttofile&gt;]</a
+          >
+        </format>
+
+        . For an example of reading text from a file, see <format
+         type="text/html">
+          <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
+            >[&lt;topic://cpconreadingtextfromfile&gt;]</a
+          >
+        </format>
+
+        . For an example of reading from and writing to a binary file, see <format
+         type="text/html">
+          <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
+            >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
+          >
+        </format>
+
+        .</para
+      >
+      <para
+        >A typical use of this enumeration is to define whether two processes can simultaneously read from the same file. For example, if a file is opened and <see
+         cref="F:System.IO.FileShare.Read" />
+
+         is specified, other users can open the file for reading but not for writing.</para
+      >
+      <para
+        >A <see
+         cref="T:System.IO.FileShare" />
+
+         parameter is specified in some of the constructors for <see
+         cref="T:System.IO.FileStream" />
+
+        , <see
+         cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />
+
+        , and in some of the Open methods of <see
+         cref="T:System.IO.File" />
+
+         and <see
+         cref="T:System.IO.FileInfo" />
+
+         to control how a file is opened.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains constants for controlling the kind of access other <see cref="T:System.IO.FileStream" /> objects can have to the same file.</para>
+      <para
+        >Contains constants for controlling the kind of access other <see
+         cref="T:System.IO.FileStream" />
+
+         objects can have to the same file.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Delete">
       <MemberSignature Language="C#" Value="Delete" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.FileShare Delete = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.FileShare Delete = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -56,7 +120,10 @@
     </Member>
     <Member MemberName="Inheritable">
       <MemberSignature Language="C#" Value="Inheritable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.FileShare Inheritable = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.FileShare Inheritable = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -76,9 +143,15 @@
       </Docs>
     </Member>
     <Member MemberName="None">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.IO.FileShare None = 0x0" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.IO.FileShare None = 0x0"
+      />
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.FileShare None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.FileShare None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -100,9 +173,15 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Read">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.IO.FileShare Read = 0x1" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.IO.FileShare Read = 0x1"
+      />
       <MemberSignature Language="C#" Value="Read" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.FileShare Read = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.FileShare Read = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -124,9 +203,15 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="ReadWrite">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.IO.FileShare ReadWrite = Read | Write" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.IO.FileShare ReadWrite = Read | Write"
+      />
       <MemberSignature Language="C#" Value="ReadWrite" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.FileShare ReadWrite = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.FileShare ReadWrite = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -148,9 +233,15 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Write">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.IO.FileShare Write = 0x2" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.IO.FileShare Write = 0x2"
+      />
       <MemberSignature Language="C#" Value="Write" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.FileShare Write = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.FileShare Write = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

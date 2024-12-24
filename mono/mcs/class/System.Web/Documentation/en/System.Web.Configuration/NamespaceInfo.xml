@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NamespaceInfo" FullName="System.Web.Configuration.NamespaceInfo">
-  <TypeSignature Language="C#" Value="public sealed class NamespaceInfo : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class NamespaceInfo : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.NamespaceCollection" /> contains <see cref="T:System.Web.Configuration.NamespaceInfo" /> objects, which correspond to the add elements within the namespaces section. Each <see cref="T:System.Web.Configuration.NamespaceInfo" /> object is the same as an Import (&lt;%@ Import %&gt;) directive that applies to all pages and controls in the scope of the configuration file. The Import directive allows you to import a namespace into your ASP.NET page, making all its classes available for use on your page. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.NamespaceCollection" />
+
+         contains <see
+         cref="T:System.Web.Configuration.NamespaceInfo" />
+
+         objects, which correspond to the add elements within the namespaces section. Each <see
+         cref="T:System.Web.Configuration.NamespaceInfo" />
+
+         object is the same as an Import (&lt;%@ Import %&gt;) directive that applies to all pages and controls in the scope of the configuration file. The Import directive allows you to import a namespace into your ASP.NET page, making all its classes available for use on your page. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -35,17 +49,31 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.NamespaceInfo" /> class with the specified namespace reference.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.NamespaceInfo" />
+
+             class with the specified namespace reference.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />A namespace reference for the new <see cref="T:System.Web.Configuration.NamespaceInfo" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A namespace reference for the new <see
+           cref="T:System.Web.Configuration.NamespaceInfo" />
+
+           object.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public override bool Equals (object namespaceInformation);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool Equals (object namespaceInformation);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -58,14 +86,25 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Compares the current instance to the passed <see cref="T:System.Web.Configuration.NamespaceInfo" /> object.</para>
+          <para
+            >Compares the current instance to the passed <see
+             cref="T:System.Web.Configuration.NamespaceInfo" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the two objects are identical. </para>
         </returns>
         <param name="namespaceInformation">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Web.Configuration.NamespaceInfo" /> object to compare to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Web.Configuration.NamespaceInfo" />
+
+           object to compare to.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -125,7 +164,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -136,7 +178,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of all the properties belonging to this <see cref="T:System.Web.Configuration.NamespaceInfo" />.</para>
+          <para
+            >Gets a collection of all the properties belonging to this <see
+             cref="T:System.Web.Configuration.NamespaceInfo" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

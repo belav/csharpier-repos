@@ -3,7 +3,12 @@
   <Docs>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:System.Security.Authentication.ExtendedProtection" /> namespace provides support for authentication using extended protection for applications. </para>
+      <para
+        >The <see
+         cref="N:System.Security.Authentication.ExtendedProtection" />
+
+         namespace provides support for authentication using extended protection for applications. </para
+      >
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

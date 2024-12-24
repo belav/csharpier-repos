@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="LabelExpression" FullName="System.Linq.Expressions.LabelExpression">
-  <TypeSignature Language="C#" Value="public sealed class LabelExpression : System.Linq.Expressions.Expression" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit LabelExpression extends System.Linq.Expressions.Expression" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class LabelExpression : System.Linq.Expressions.Expression"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit LabelExpression extends System.Linq.Expressions.Expression"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,13 +25,33 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a label, which can be put in any <see cref="T:System.Linq.Expressions.Expression" /> context. If it is jumped to, it will get the value provided by the corresponding <see cref="T:System.Linq.Expressions.GotoExpression" />. Otherwise, it receives the value in <see cref="P:System.Linq.Expressions.LabelExpression.DefaultValue" />. If the <see cref="T:System.Type" /> equals System.Void, no value should be provided.</para>
+      <para
+        >Represents a label, which can be put in any <see
+         cref="T:System.Linq.Expressions.Expression" />
+
+         context. If it is jumped to, it will get the value provided by the corresponding <see
+         cref="T:System.Linq.Expressions.GotoExpression" />
+
+        . Otherwise, it receives the value in <see
+         cref="P:System.Linq.Expressions.LabelExpression.DefaultValue" />
+
+        . If the <see
+         cref="T:System.Type" />
+
+         equals System.Void, no value should be provided.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Accept">
-      <MemberSignature Language="C#" Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -44,8 +70,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultValue">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.Expression DefaultValue { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.Expression DefaultValue" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.Expression DefaultValue { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.Expression DefaultValue"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,13 +90,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of the <see cref="T:System.Linq.Expressions.LabelExpression" /> when the label is reached through regular control flow (for example, is not jumped to).</para>
+          <para
+            >The value of the <see
+             cref="T:System.Linq.Expressions.LabelExpression" />
+
+             when the label is reached through regular control flow (for example, is not jumped to).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,13 +120,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para>
+          <para
+            >Returns the node type of this <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Target">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.LabelTarget Target { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.LabelTarget Target" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.LabelTarget Target { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.LabelTarget Target"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -96,7 +150,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Linq.Expressions.LabelTarget" /> which this label is associated with.</para>
+          <para
+            >The <see
+             cref="T:System.Linq.Expressions.LabelTarget" />
+
+             which this label is associated with.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -115,13 +174,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
+          <para
+            >Gets the static type of the expression that this <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+             represents.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Update">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.LabelExpression Update (System.Linq.Expressions.LabelTarget target, System.Linq.Expressions.Expression defaultValue);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Linq.Expressions.LabelExpression Update(class System.Linq.Expressions.LabelTarget target, class System.Linq.Expressions.Expression defaultValue) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.LabelExpression Update (System.Linq.Expressions.LabelTarget target, System.Linq.Expressions.Expression defaultValue);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Linq.Expressions.LabelExpression Update(class System.Linq.Expressions.LabelTarget target, class System.Linq.Expressions.Expression defaultValue) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -144,9 +214,21 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.LabelExpression.Target" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.LabelExpression.Target" />
+
+           property of the result.</param
+        >
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.LabelExpression.DefaultValue" /> property of the result</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.LabelExpression.DefaultValue" />
+
+           property of the result</param
+        >
       </Docs>
     </Member>
   </Members>

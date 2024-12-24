@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OperationBinding" FullName="System.Web.Services.Description.OperationBinding">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public sealed class OperationBinding : System.Web.Services.Description.NamedItem" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public sealed class OperationBinding : System.Web.Services.Description.NamedItem"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -21,7 +24,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The OperationBinding class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see cref="T:System.Web.Services.Description.Binding" /> class. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para>
+      <para
+        >The OperationBinding class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see
+         cref="T:System.Web.Services.Description.Binding" />
+
+         class. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,7 +46,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.OperationBinding" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.OperationBinding" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -47,7 +60,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Binding">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.Binding Binding { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.Binding Binding { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.Binding</ReturnType>
@@ -56,11 +72,27 @@
         <value>To be added: an object of type 'Binding'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The current <see cref="T:System.Web.Services.Description.OperationBinding" /> is a member of the <see cref="P:System.Web.Services.Description.Binding.Operations" /> collection.</para>
+          <para
+            >The current <see
+             cref="T:System.Web.Services.Description.OperationBinding" />
+
+             is a member of the <see
+             cref="P:System.Web.Services.Description.Binding.Operations" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Services.Description.Binding" /> of which the current <see cref="T:System.Web.Services.Description.OperationBinding" /> is a member.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Services.Description.Binding" />
+
+             of which the current <see
+             cref="T:System.Web.Services.Description.OperationBinding" />
+
+             is a member.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -69,7 +101,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Extensions">
-      <MemberSignature Language="C#" Value="public override System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection Extensions { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection Extensions { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection</ReturnType>
@@ -82,7 +117,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection of extensibility elements specific to the current <see cref="T:System.Web.Services.Description.OperationBinding" />.</para>
+          <para
+            >Gets the collection of extensibility elements specific to the current <see
+             cref="T:System.Web.Services.Description.OperationBinding" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -96,7 +136,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Faults">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.FaultBindingCollection Faults { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.FaultBindingCollection Faults { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.FaultBindingCollection</ReturnType>
@@ -106,7 +149,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Services.Description.FaultBindingCollection" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" /> instance.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Services.Description.FaultBindingCollection" />
+
+             associated with the <see
+             cref="T:System.Web.Services.Description.OperationBinding" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -120,7 +171,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Input">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.InputBinding Input { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.InputBinding Input { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.InputBinding</ReturnType>
@@ -134,7 +188,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.Services.Description.InputBinding" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.Services.Description.InputBinding" />
+
+             associated with the <see
+             cref="T:System.Web.Services.Description.OperationBinding" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -170,7 +232,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Output">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.OutputBinding Output { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.OutputBinding Output { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.OutputBinding</ReturnType>
@@ -184,7 +249,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.Services.Description.OutputBinding" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.Services.Description.OutputBinding" />
+
+             associated with the <see
+             cref="T:System.Web.Services.Description.OperationBinding" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

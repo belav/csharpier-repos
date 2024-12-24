@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SmtpStatusCode" FullName="System.Net.Mail.SmtpStatusCode">
   <TypeSignature Language="C#" Value="public enum SmtpStatusCode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SmtpStatusCode extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SmtpStatusCode extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,18 +17,48 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The values in the <see cref="T:System.Net.Mail.SmtpStatusCode" /> enumeration specify reply status values sent by a Simple Mail Transfer Protocol (SMTP) server. The <see cref="T:System.Net.Mail.SmtpException" /> and <see cref="T:System.Net.Mail.SmtpFailedRecipientsException" /> classes contain <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> properties that return <see cref="T:System.Net.Mail.SmtpStatusCode" /> values.</para>
-      <para>SMTP is defined in RFC 2821 available at <see cref="http://www.ietf.org/">http://www.ietf.org</see>.</para>
+      <para
+        >The values in the <see
+         cref="T:System.Net.Mail.SmtpStatusCode" />
+
+         enumeration specify reply status values sent by a Simple Mail Transfer Protocol (SMTP) server. The <see
+         cref="T:System.Net.Mail.SmtpException" />
+
+         and <see
+         cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+         classes contain <see
+         cref="P:System.Net.Mail.SmtpException.StatusCode" />
+
+         properties that return <see
+         cref="T:System.Net.Mail.SmtpStatusCode" />
+
+         values.</para
+      >
+      <para
+        >SMTP is defined in RFC 2821 available at <see
+         cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the outcome of sending e-mail by using the <see cref="T:System.Net.Mail.SmtpClient" /> class.</para>
+      <para
+        >Specifies the outcome of sending e-mail by using the <see
+         cref="T:System.Net.Mail.SmtpClient" />
+
+         class.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="BadCommandSequence">
       <MemberSignature Language="C#" Value="BadCommandSequence" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode BadCommandSequence = int32(503)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode BadCommandSequence = int32(503)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,7 +77,10 @@
     </Member>
     <Member MemberName="CannotVerifyUserWillAttemptDelivery">
       <MemberSignature Language="C#" Value="CannotVerifyUserWillAttemptDelivery" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode CannotVerifyUserWillAttemptDelivery = int32(252)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode CannotVerifyUserWillAttemptDelivery = int32(252)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -57,13 +93,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The specified user is not local, but the receiving SMTP service accepted the message and attempted to deliver it. This status code is defined in RFC 1123, which is available at <see cref="http://www.ietf.org/">http://www.ietf.org</see>.</para>
+          <para
+            >The specified user is not local, but the receiving SMTP service accepted the message and attempted to deliver it. This status code is defined in RFC 1123, which is available at <see
+             cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ClientNotPermitted">
       <MemberSignature Language="C#" Value="ClientNotPermitted" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ClientNotPermitted = int32(454)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ClientNotPermitted = int32(454)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,7 +126,10 @@
     </Member>
     <Member MemberName="CommandNotImplemented">
       <MemberSignature Language="C#" Value="CommandNotImplemented" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode CommandNotImplemented = int32(502)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode CommandNotImplemented = int32(502)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,7 +148,10 @@
     </Member>
     <Member MemberName="CommandParameterNotImplemented">
       <MemberSignature Language="C#" Value="CommandParameterNotImplemented" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode CommandParameterNotImplemented = int32(504)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode CommandParameterNotImplemented = int32(504)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,7 +170,10 @@
     </Member>
     <Member MemberName="CommandUnrecognized">
       <MemberSignature Language="C#" Value="CommandUnrecognized" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode CommandUnrecognized = int32(500)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode CommandUnrecognized = int32(500)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -139,7 +192,10 @@
     </Member>
     <Member MemberName="ExceededStorageAllocation">
       <MemberSignature Language="C#" Value="ExceededStorageAllocation" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ExceededStorageAllocation = int32(552)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ExceededStorageAllocation = int32(552)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -158,7 +214,10 @@
     </Member>
     <Member MemberName="GeneralFailure">
       <MemberSignature Language="C#" Value="GeneralFailure" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode GeneralFailure = int32(-1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode GeneralFailure = int32(-1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -177,7 +236,10 @@
     </Member>
     <Member MemberName="HelpMessage">
       <MemberSignature Language="C#" Value="HelpMessage" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode HelpMessage = int32(214)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode HelpMessage = int32(214)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -196,7 +258,10 @@
     </Member>
     <Member MemberName="InsufficientStorage">
       <MemberSignature Language="C#" Value="InsufficientStorage" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode InsufficientStorage = int32(452)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode InsufficientStorage = int32(452)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -215,7 +280,10 @@
     </Member>
     <Member MemberName="LocalErrorInProcessing">
       <MemberSignature Language="C#" Value="LocalErrorInProcessing" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode LocalErrorInProcessing = int32(451)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode LocalErrorInProcessing = int32(451)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -228,13 +296,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The SMTP service cannot complete the request. This error can occur if the client's IP address cannot be resolved (that is, a reverse lookup failed). You can also receive this error if the client domain has been identified as an open relay or source for unsolicited e-mail (spam). For details, see RFC 2505, which is available at <see cref="http://www.ietf.org/">http://www.ietf.org</see>.</para>
+          <para
+            >The SMTP service cannot complete the request. This error can occur if the client's IP address cannot be resolved (that is, a reverse lookup failed). You can also receive this error if the client domain has been identified as an open relay or source for unsolicited e-mail (spam). For details, see RFC 2505, which is available at <see
+             cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="MailboxBusy">
       <MemberSignature Language="C#" Value="MailboxBusy" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode MailboxBusy = int32(450)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode MailboxBusy = int32(450)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -253,7 +329,10 @@
     </Member>
     <Member MemberName="MailboxNameNotAllowed">
       <MemberSignature Language="C#" Value="MailboxNameNotAllowed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode MailboxNameNotAllowed = int32(553)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode MailboxNameNotAllowed = int32(553)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -272,7 +351,10 @@
     </Member>
     <Member MemberName="MailboxUnavailable">
       <MemberSignature Language="C#" Value="MailboxUnavailable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode MailboxUnavailable = int32(550)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode MailboxUnavailable = int32(550)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -291,7 +373,10 @@
     </Member>
     <Member MemberName="MustIssueStartTlsFirst">
       <MemberSignature Language="C#" Value="MustIssueStartTlsFirst" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode MustIssueStartTlsFirst = int32(530)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode MustIssueStartTlsFirst = int32(530)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -310,7 +395,10 @@
     </Member>
     <Member MemberName="Ok">
       <MemberSignature Language="C#" Value="Ok" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode Ok = int32(250)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode Ok = int32(250)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -329,7 +417,10 @@
     </Member>
     <Member MemberName="ServiceClosingTransmissionChannel">
       <MemberSignature Language="C#" Value="ServiceClosingTransmissionChannel" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ServiceClosingTransmissionChannel = int32(221)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ServiceClosingTransmissionChannel = int32(221)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -348,7 +439,10 @@
     </Member>
     <Member MemberName="ServiceNotAvailable">
       <MemberSignature Language="C#" Value="ServiceNotAvailable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ServiceNotAvailable = int32(421)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ServiceNotAvailable = int32(421)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -367,7 +461,10 @@
     </Member>
     <Member MemberName="ServiceReady">
       <MemberSignature Language="C#" Value="ServiceReady" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ServiceReady = int32(220)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode ServiceReady = int32(220)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -386,7 +483,10 @@
     </Member>
     <Member MemberName="StartMailInput">
       <MemberSignature Language="C#" Value="StartMailInput" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode StartMailInput = int32(354)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode StartMailInput = int32(354)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -405,7 +505,10 @@
     </Member>
     <Member MemberName="SyntaxError">
       <MemberSignature Language="C#" Value="SyntaxError" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode SyntaxError = int32(501)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode SyntaxError = int32(501)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -424,7 +527,10 @@
     </Member>
     <Member MemberName="SystemStatus">
       <MemberSignature Language="C#" Value="SystemStatus" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode SystemStatus = int32(211)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode SystemStatus = int32(211)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -443,7 +549,10 @@
     </Member>
     <Member MemberName="TransactionFailed">
       <MemberSignature Language="C#" Value="TransactionFailed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode TransactionFailed = int32(554)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode TransactionFailed = int32(554)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -462,7 +571,10 @@
     </Member>
     <Member MemberName="UserNotLocalTryAlternatePath">
       <MemberSignature Language="C#" Value="UserNotLocalTryAlternatePath" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode UserNotLocalTryAlternatePath = int32(551)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode UserNotLocalTryAlternatePath = int32(551)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -481,7 +593,10 @@
     </Member>
     <Member MemberName="UserNotLocalWillForward">
       <MemberSignature Language="C#" Value="UserNotLocalWillForward" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode UserNotLocalWillForward = int32(251)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.SmtpStatusCode UserNotLocalWillForward = int32(251)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

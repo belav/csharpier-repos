@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-    <UsingTask TaskName="GetVersionsFromConfigureAC" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-      <ParameterGroup>
-        <ConfigFileRoot ParameterType="System.String" Required="true" />
-        <MonoVersion ParameterType="System.String" Output="true" />
-        <MonoCorlibVersion ParameterType="System.String" Output="true" />
-      </ParameterGroup>
-        <Task>
-            <Using Namespace="System" />
-            <Using Namespace="System.Text.RegularExpressions" />
-            <Using Namespace="System.IO" />
-            <Code Type="Fragment" Language="cs">
-            <![CDATA[
+<Project
+  DefaultTargets="Build"
+  ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
+  <UsingTask
+    TaskName="GetVersionsFromConfigureAC"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll"
+  >
+    <ParameterGroup>
+      <ConfigFileRoot ParameterType="System.String" Required="true" />
+      <MonoVersion ParameterType="System.String" Output="true" />
+      <MonoCorlibVersion ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Using Namespace="System.IO" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
                 MonoVersion = null;
                 MonoCorlibVersion = null;
 
@@ -56,22 +63,25 @@
                     }
                 }
             ]]>
-            </Code>
-        </Task>
-    </UsingTask>
-
-    <UsingTask TaskName="WinConfigSetup" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-      <ParameterGroup>
-        <ConfigFileRoot ParameterType="System.String" Required="true" />
-        <MonoVersion ParameterType="System.String" Required="true" />
-        <MonoCorlibVersion ParameterType="System.String" Required="true" />
-        <DisableDefines ParameterType="System.String" Required="false" />
-        <EnableDefines ParameterType="System.String" Required="false" />
-        <HaveDefines ParameterType="System.String" Required="false" />
-      </ParameterGroup>
-        <Task>
-            <Code Type="Class" Language="cs">
-            <![CDATA[
+      </Code>
+    </Task>
+  </UsingTask>
+  <UsingTask
+    TaskName="WinConfigSetup"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll"
+  >
+    <ParameterGroup>
+      <ConfigFileRoot ParameterType="System.String" Required="true" />
+      <MonoVersion ParameterType="System.String" Required="true" />
+      <MonoCorlibVersion ParameterType="System.String" Required="true" />
+      <DisableDefines ParameterType="System.String" Required="false" />
+      <EnableDefines ParameterType="System.String" Required="false" />
+      <HaveDefines ParameterType="System.String" Required="false" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Class" Language="cs">
+        <![CDATA[
                 using System;
                 using System.IO;
                 using System.Text;
@@ -343,22 +353,21 @@
                   }
                 }
             ]]>
-            </Code>
-        </Task>
-    </UsingTask>
-
-    <Target Name="RunWinConfigSetup">
-        <GetVersionsFromConfigureAC ConfigFileRoot="$(MSBuildThisFileDirectory)..\">
-            <Output TaskParameter="MonoVersion" PropertyName="_MonoVersion" />
-            <Output TaskParameter="MonoCorlibVersion" PropertyName="_MonoCorlibVersion" />
-        </GetVersionsFromConfigureAC>
-
-        <WinConfigSetup ConfigFileRoot="$(MSBuildThisFileDirectory)..\"
-                        MonoVersion="$(_MonoVersion)"
-                        MonoCorlibVersion="$(_MonoCorlibVersion)"
-                        DisableDefines=""
-                        EnableDefines=""
-                        HaveDefines=""/>
-    </Target>
-
+      </Code>
+    </Task>
+  </UsingTask>
+  <Target Name="RunWinConfigSetup">
+    <GetVersionsFromConfigureAC ConfigFileRoot="$(MSBuildThisFileDirectory)..\">
+      <Output TaskParameter="MonoVersion" PropertyName="_MonoVersion" />
+      <Output TaskParameter="MonoCorlibVersion" PropertyName="_MonoCorlibVersion" />
+    </GetVersionsFromConfigureAC>
+    <WinConfigSetup
+      ConfigFileRoot="$(MSBuildThisFileDirectory)..\"
+      MonoVersion="$(_MonoVersion)"
+      MonoCorlibVersion="$(_MonoCorlibVersion)"
+      DisableDefines=""
+      EnableDefines=""
+      HaveDefines=""
+    />
+  </Target>
 </Project>

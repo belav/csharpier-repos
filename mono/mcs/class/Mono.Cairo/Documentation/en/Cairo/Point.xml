@@ -25,7 +25,12 @@
         <param name="x">x coordinate.</param>
         <param name="y">y coordinate.</param>
         <summary>Default constructor that accepts a pair of x, y coordinates.</summary>
-        <remarks>This class is most probably not what you want. Most classes use the <see cref="T:Cairo.PointD" />.</remarks>
+        <remarks
+          >This class is most probably not what you want. Most classes use the <see
+           cref="T:Cairo.PointD" />
+
+          .</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -41,8 +46,7 @@
       <Docs>
         <summary>Access to the X coordinate.</summary>
         <value>The X coordinate</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -58,8 +62,7 @@
       <Docs>
         <summary>Access to the Y coordinate.</summary>
         <value>The Y coordinate</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

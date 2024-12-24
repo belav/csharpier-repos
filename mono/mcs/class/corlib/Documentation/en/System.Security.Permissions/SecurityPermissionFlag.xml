@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SecurityPermissionFlag" FullName="System.Security.Permissions.SecurityPermissionFlag" FullNameSP="System_Security_Permissions_SecurityPermissionFlag" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public sealed serializable SecurityPermissionFlag extends System.Enum" />
+<Type
+  Name="SecurityPermissionFlag"
+  FullName="System.Security.Permissions.SecurityPermissionFlag"
+  FullNameSP="System_Security_Permissions_SecurityPermissionFlag"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public sealed serializable SecurityPermissionFlag extends System.Enum"
+  />
   <TypeSignature Language="C#" Value="public enum SecurityPermissionFlag" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed SecurityPermissionFlag extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed SecurityPermissionFlag extends System.Enum"
+  />
   <MemberOfLibrary>BCL</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
@@ -25,8 +36,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration has a <see cref="T:System.FlagsAttribute" /> attribute that allows a bitwise combination of its member values.</para>
-      <para>This enumeration is used by <see cref="T:System.Security.Permissions.SecurityPermission" />.</para>
+      <para
+        >This enumeration has a <see
+         cref="T:System.FlagsAttribute" />
+
+         attribute that allows a bitwise combination of its member values.</para
+      >
+      <para
+        >This enumeration is used by <see
+         cref="T:System.Security.Permissions.SecurityPermission" />
+
+        .</para
+      >
       <block subset="none" type="note">
         <para>Many of these flags are powerful and should only be granted to highly trusted code.</para>
       </block>
@@ -39,7 +60,10 @@
   <Members>
     <Member MemberName="AllFlags">
       <MemberSignature Language="C#" Value="AllFlags" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag AllFlags = int32(16383)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag AllFlags = int32(16383)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -59,9 +83,15 @@
       </Docs>
     </Member>
     <Member MemberName="Assertion">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Assertion = 0x1" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Assertion = 0x1"
+      />
       <MemberSignature Language="C#" Value="Assertion" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Assertion = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Assertion = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -84,7 +114,10 @@
     </Member>
     <Member MemberName="BindingRedirects">
       <MemberSignature Language="C#" Value="BindingRedirects" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag BindingRedirects = int32(8192)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag BindingRedirects = int32(8192)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -105,7 +138,10 @@
     </Member>
     <Member MemberName="ControlAppDomain">
       <MemberSignature Language="C#" Value="ControlAppDomain" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlAppDomain = int32(1024)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlAppDomain = int32(1024)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -120,13 +156,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Ability to create and manipulate an <see cref="T:System.AppDomain" />.</para>
+          <para
+            >Ability to create and manipulate an <see
+             cref="T:System.AppDomain" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ControlDomainPolicy">
       <MemberSignature Language="C#" Value="ControlDomainPolicy" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlDomainPolicy = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlDomainPolicy = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -147,7 +191,10 @@
     </Member>
     <Member MemberName="ControlEvidence">
       <MemberSignature Language="C#" Value="ControlEvidence" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlEvidence = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlEvidence = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -171,7 +218,10 @@
     </Member>
     <Member MemberName="ControlPolicy">
       <MemberSignature Language="C#" Value="ControlPolicy" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlPolicy = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlPolicy = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -195,7 +245,10 @@
     </Member>
     <Member MemberName="ControlPrincipal">
       <MemberSignature Language="C#" Value="ControlPrincipal" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlPrincipal = int32(512)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlPrincipal = int32(512)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -215,9 +268,15 @@
       </Docs>
     </Member>
     <Member MemberName="ControlThread">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlThread = 0x10" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlThread = 0x10"
+      />
       <MemberSignature Language="C#" Value="ControlThread" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlThread = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag ControlThread = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -239,9 +298,15 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Execution">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Execution = 0x8" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Execution = 0x8"
+      />
       <MemberSignature Language="C#" Value="Execution" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Execution = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Execution = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -256,7 +321,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This flag has no effect when used dynamically with stack modifiers such as <see cref="M:System.Security.CodeAccessPermission.Deny" />, <see cref="M:System.Security.CodeAccessPermission.Assert" />, and <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />.</para>
+          <para
+            >This flag has no effect when used dynamically with stack modifiers such as <see
+             cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            , <see
+             cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            , and <see
+             cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -267,7 +343,10 @@
     </Member>
     <Member MemberName="Infrastructure">
       <MemberSignature Language="C#" Value="Infrastructure" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Infrastructure = int32(4096)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag Infrastructure = int32(4096)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -287,9 +366,15 @@
       </Docs>
     </Member>
     <Member MemberName="NoFlags">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag NoFlags = 0x0" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag NoFlags = 0x0"
+      />
       <MemberSignature Language="C#" Value="NoFlags" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag NoFlags = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag NoFlags = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -312,7 +397,10 @@
     </Member>
     <Member MemberName="RemotingConfiguration">
       <MemberSignature Language="C#" Value="RemotingConfiguration" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag RemotingConfiguration = int32(2048)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag RemotingConfiguration = int32(2048)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -333,7 +421,10 @@
     </Member>
     <Member MemberName="SerializationFormatter">
       <MemberSignature Language="C#" Value="SerializationFormatter" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag SerializationFormatter = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag SerializationFormatter = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -353,9 +444,15 @@
       </Docs>
     </Member>
     <Member MemberName="SkipVerification">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag SkipVerification = 0x4" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag SkipVerification = 0x4"
+      />
       <MemberSignature Language="C#" Value="SkipVerification" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag SkipVerification = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag SkipVerification = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -371,7 +468,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This is a powerful permission that should be granted only to highly trusted code.</para>
-          <para>This flag has no effect when used dynamically with stack modifiers such as <see cref="M:System.Security.CodeAccessPermission.Deny" />, <see cref="M:System.Security.CodeAccessPermission.Assert" />, and <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />.</para>
+          <para
+            >This flag has no effect when used dynamically with stack modifiers such as <see
+             cref="M:System.Security.CodeAccessPermission.Deny" />
+
+            , <see
+             cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            , and <see
+             cref="M:System.Security.CodeAccessPermission.PermitOnly" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -381,9 +489,15 @@
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="UnmanagedCode">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag UnmanagedCode = 0x2" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag UnmanagedCode = 0x2"
+      />
       <MemberSignature Language="C#" Value="UnmanagedCode" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag UnmanagedCode = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Permissions.SecurityPermissionFlag UnmanagedCode = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

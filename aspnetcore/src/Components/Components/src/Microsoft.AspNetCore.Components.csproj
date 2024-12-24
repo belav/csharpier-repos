@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <Description>Components feature for ASP.NET Core.</Description>
@@ -12,7 +11,6 @@
     <!-- TODO: Address Native AOT analyzer warnings https://github.com/dotnet/aspnetcore/issues/45473 -->
     <EnableAOTAnalyzer>false</EnableAOTAnalyzer>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(ComponentsSharedSourceRoot)src\ArrayBuilder.cs" LinkBase="RenderTree" />
     <Compile Include="$(ComponentsSharedSourceRoot)src\JsonSerializerOptionsProvider.cs" />
@@ -20,14 +18,11 @@
     <Compile Include="$(SharedSourceRoot)LinkerFlags.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)QueryStringEnumerable.cs" LinkBase="Shared" />
   </ItemGroup>
-
   <Import Project="Microsoft.AspNetCore.Components.Routing.targets" />
-  
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
-
   <!--
     These references exist only in the .nuspec files and baseline checks are not aware of them. Keep suppressions
     in sync with the two .nuspec files:
@@ -36,20 +31,26 @@
       Major.Minor during previews. After RTM (and baseline updates), remove suppressions entirely.
   -->
   <ItemGroup>
-    <SuppressBaselineReference Include="Microsoft.AspNetCore.Components.Analyzers" InNuspecFile="true" />
+    <SuppressBaselineReference
+      Include="Microsoft.AspNetCore.Components.Analyzers"
+      InNuspecFile="true"
+    />
     <SuppressBaselineReference Include="Microsoft.AspNetCore.Authorization" InNuspecFile="true" />
   </ItemGroup>
-
   <ItemGroup>
-    <EmbeddedResource Include="Properties\ILLink.Substitutions.xml" LogicalName="ILLink.Substitutions.xml" />
+    <EmbeddedResource
+      Include="Properties\ILLink.Substitutions.xml"
+      LogicalName="ILLink.Substitutions.xml"
+    />
   </ItemGroup>
-
   <Target Name="_GetNuspecDependencyPackageVersions">
-    <MSBuild Targets="_GetPackageVersionInfo"
-        BuildInParallel="$(BuildInParallel)"
-        Projects="
+    <MSBuild
+      Targets="_GetPackageVersionInfo"
+      BuildInParallel="$(BuildInParallel)"
+      Projects="
           ../../Analyzers/src/Microsoft.AspNetCore.Components.Analyzers.csproj;
-          ../../../Security/Authorization/Core/src/Microsoft.AspNetCore.Authorization.csproj">
+          ../../../Security/Authorization/Core/src/Microsoft.AspNetCore.Authorization.csproj"
+    >
       <Output TaskParameter="TargetOutputs" ItemName="_ProjectPathWithVersion" />
     </MSBuild>
     <ItemGroup>
@@ -57,21 +58,21 @@
       <NuspecProperty Include="@(_ProjectPathWithVersion->WithMetadataValue('PackageId', 'Microsoft.AspnetCore.Authorization')->'authorizationVersion=%(PackageVersion)')" />
     </ItemGroup>
   </Target>
-
   <!-- Pack settings -->
   <PropertyGroup>
     <NuspecFile>Microsoft.AspNetCore.Components.netcoreapp.nuspec</NuspecFile>
     <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);_GetNuspecDependencyPackageVersions</GenerateNuspecDependsOn>
   </PropertyGroup>
-
   <ItemGroup>
-    <NuspecProperty Condition="'$(DotNetBuildFromSource)' != 'true'" Include="systemComponentModelAnnotationsVersion=$(SystemComponentModelAnnotationsVersion)" />
+    <NuspecProperty
+      Condition="'$(DotNetBuildFromSource)' != 'true'"
+      Include="systemComponentModelAnnotationsVersion=$(SystemComponentModelAnnotationsVersion)"
+    />
     <NuspecProperty Include="AssemblyName=$(AssemblyName)" />
     <NuspecProperty Include="DefaultNetCoreTargetFramework=$(DefaultNetCoreTargetFramework)" />
     <NuspecProperty Include="OutputPath=$(OutputPath)" />
     <NuspecProperty Include="PackageThirdPartyNoticesFile=$(PackageThirdPartyNoticesFile)" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.Web" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Blazor.Build.Tests" />

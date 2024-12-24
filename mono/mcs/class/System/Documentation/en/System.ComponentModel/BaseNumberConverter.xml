@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BaseNumberConverter" FullName="System.ComponentModel.BaseNumberConverter">
-  <TypeSignature Language="C#" Value="public abstract class BaseNumberConverter : System.ComponentModel.TypeConverter" Maintainer="auto" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit BaseNumberConverter extends System.ComponentModel.TypeConverter" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class BaseNumberConverter : System.ComponentModel.TypeConverter"
+    Maintainer="auto"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit BaseNumberConverter extends System.ComponentModel.TypeConverter"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -25,7 +32,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected BaseNumberConverter ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -38,13 +48,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.BaseNumberConverter" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.BaseNumberConverter" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CanConvertFrom">
-      <MemberSignature Language="C#" Value="public override bool CanConvertFrom (System.ComponentModel.ITypeDescriptorContext context, Type sourceType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool CanConvertFrom(class System.ComponentModel.ITypeDescriptorContext context, class System.Type sourceType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanConvertFrom (System.ComponentModel.ITypeDescriptorContext context, Type sourceType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool CanConvertFrom(class System.ComponentModel.ITypeDescriptorContext context, class System.Type sourceType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -69,14 +90,32 @@
           <para>true if this converter can perform the operation; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that provides a format context. </param
+        >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Type" /> that represents the type from which you want to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Type" />
+
+           that represents the type from which you want to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CanConvertTo">
-      <MemberSignature Language="C#" Value="public override bool CanConvertTo (System.ComponentModel.ITypeDescriptorContext context, Type t);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool CanConvertTo(class System.ComponentModel.ITypeDescriptorContext context, class System.Type t) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanConvertTo (System.ComponentModel.ITypeDescriptorContext context, Type t);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool CanConvertTo(class System.ComponentModel.ITypeDescriptorContext context, class System.Type t) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -101,14 +140,32 @@
           <para>true if this converter can perform the operation; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that provides a format context. </param
+        >
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Type" /> that represents the type to which you want to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Type" />
+
+           that represents the type to which you want to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
-      <MemberSignature Language="C#" Value="public override object ConvertFrom (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object ConvertFrom(class System.ComponentModel.ITypeDescriptorContext context, class System.Globalization.CultureInfo culture, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object ConvertFrom (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object ConvertFrom(class System.ComponentModel.ITypeDescriptorContext context, class System.Globalization.CultureInfo culture, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -131,19 +188,45 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" /> that represents the converted value.</para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+             that represents the converted value.</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that provides a format context. </param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the number. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Globalization.CultureInfo" />
+
+           that specifies the culture to represent the number. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
-      <MemberSignature Language="C#" Value="public override object ConvertTo (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object ConvertTo(class System.ComponentModel.ITypeDescriptorContext context, class System.Globalization.CultureInfo culture, object value, class System.Type destinationType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object ConvertTo (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object ConvertTo(class System.ComponentModel.ITypeDescriptorContext context, class System.Globalization.CultureInfo culture, object value, class System.Type destinationType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -167,16 +250,39 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" /> that represents the converted value.</para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+             that represents the converted value.</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           that provides a format context. </param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the number. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Globalization.CultureInfo" />
+
+           that specifies the culture to represent the number. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to convert the object to. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to convert the object to. </param
+        >
       </Docs>
     </Member>
   </Members>

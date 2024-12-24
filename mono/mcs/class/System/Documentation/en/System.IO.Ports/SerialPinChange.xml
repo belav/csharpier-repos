@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SerialPinChange" FullName="System.IO.Ports.SerialPinChange">
   <TypeSignature Language="C#" Value="public enum SerialPinChange" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SerialPinChange extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SerialPinChange extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,18 +17,31 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used with the <see cref="E:System.IO.Ports.SerialPort.PinChanged" /> event.</para>
+      <para
+        >This enumeration is used with the <see
+         cref="E:System.IO.Ports.SerialPort.PinChanged" />
+
+         event.</para
+      >
       <para>A serial port pin changes state when it is asserted or unasserted.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the type of change that occurred on the <see cref="T:System.IO.Ports.SerialPort" /> object.</para>
+      <para
+        >Specifies the type of change that occurred on the <see
+         cref="T:System.IO.Ports.SerialPort" />
+
+         object.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Break">
       <MemberSignature Language="C#" Value="Break" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.SerialPinChange Break = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.SerialPinChange Break = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,7 +60,10 @@
     </Member>
     <Member MemberName="CDChanged">
       <MemberSignature Language="C#" Value="CDChanged" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.SerialPinChange CDChanged = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.SerialPinChange CDChanged = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,7 +82,10 @@
     </Member>
     <Member MemberName="CtsChanged">
       <MemberSignature Language="C#" Value="CtsChanged" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.SerialPinChange CtsChanged = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.SerialPinChange CtsChanged = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,7 +104,10 @@
     </Member>
     <Member MemberName="DsrChanged">
       <MemberSignature Language="C#" Value="DsrChanged" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.SerialPinChange DsrChanged = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.SerialPinChange DsrChanged = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,7 +126,10 @@
     </Member>
     <Member MemberName="Ring">
       <MemberSignature Language="C#" Value="Ring" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.SerialPinChange Ring = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.SerialPinChange Ring = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

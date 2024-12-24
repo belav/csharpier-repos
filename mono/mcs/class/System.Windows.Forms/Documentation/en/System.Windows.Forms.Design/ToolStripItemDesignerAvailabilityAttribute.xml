@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripItemDesignerAvailabilityAttribute" FullName="System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute">
-  <TypeSignature Language="C#" Value="public sealed class ToolStripItemDesignerAvailabilityAttribute : Attribute" />
+<Type
+  Name="ToolStripItemDesignerAvailabilityAttribute"
+  FullName="System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ToolStripItemDesignerAvailabilityAttribute : Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,16 +24,38 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Available types are <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.ContextMenuStrip" />, and <see cref="T:System.Windows.Forms.StatusStrip" />.</para>
+      <para
+        >Available types are <see
+         cref="T:System.Windows.Forms.ToolStrip" />
+
+        , <see
+         cref="T:System.Windows.Forms.MenuStrip" />
+
+        , <see
+         cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        , and <see
+         cref="T:System.Windows.Forms.StatusStrip" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies which types a <see cref="T:System.Windows.Forms.ToolStripItem" /> can appear in. This class cannot be inherited.</para>
+      <para
+        >Specifies which types a <see
+         cref="T:System.Windows.Forms.ToolStripItem" />
+
+         can appear in. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripItemDesignerAvailabilityAttribute ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripItemDesignerAvailabilityAttribute ();"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters />
       <Docs>
@@ -35,7 +63,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new default instance of the <see cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute" /> class. </para>
+          <para
+            >Initializes a new default instance of the <see
+             cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -43,27 +76,47 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripItemDesignerAvailabilityAttribute (System.Windows.Forms.Design.ToolStripItemDesignerAvailability visibility);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripItemDesignerAvailabilityAttribute (System.Windows.Forms.Design.ToolStripItemDesignerAvailability visibility);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
-        <Parameter Name="visibility" Type="System.Windows.Forms.Design.ToolStripItemDesignerAvailability" />
+        <Parameter
+          Name="visibility"
+          Type="System.Windows.Forms.Design.ToolStripItemDesignerAvailability"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute" /> class with the specified visibility. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute" />
+
+             class with the specified visibility. </para
+          >
         </summary>
         <param name="visibility">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailability" /> value specifying the visibility.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailability" />
+
+           value specifying the visibility.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Default">
-      <MemberSignature Language="C#" Value="public static readonly System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute Default;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute Default;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute</ReturnType>
@@ -73,7 +126,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the default value of the <see cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute" />. This field is read-only.</para>
+          <para
+            >Specifies the default value of the <see
+             cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute" />
+
+            . This field is read-only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -141,7 +199,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ItemAdditionVisibility">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Design.ToolStripItemDesignerAvailability ItemAdditionVisibility { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Design.ToolStripItemDesignerAvailability ItemAdditionVisibility { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.Design.ToolStripItemDesignerAvailability</ReturnType>
@@ -152,7 +213,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the visibility of a <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
+          <para
+            >Gets the visibility of a <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

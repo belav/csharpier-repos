@@ -16,7 +16,10 @@
   </Docs>
   <Members>
     <Member MemberName="OnDragDrop">
-      <MemberSignature Language="C#" Value="public void OnDragDrop (System.Windows.Forms.DragEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void OnDragDrop (System.Windows.Forms.DragEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -30,19 +33,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.IDropTarget.OnDragDrop(System.Windows.Forms.DragEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.IDropTarget.OnDragDrop(System.Windows.Forms.DragEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.DragDrop" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.DragDrop" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DragEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnDragEnter">
-      <MemberSignature Language="C#" Value="public void OnDragEnter (System.Windows.Forms.DragEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void OnDragEnter (System.Windows.Forms.DragEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -56,15 +85,38 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.IDropTarget.OnDragEnter(System.Windows.Forms.DragEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.IDropTarget.OnDragEnter(System.Windows.Forms.DragEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.DragEnter" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.DragEnter" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DragEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnDragLeave">
@@ -82,19 +134,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.IDropTarget.OnDragLeave(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.IDropTarget.OnDragLeave(System.EventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.DragLeave" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.DragLeave" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnDragOver">
-      <MemberSignature Language="C#" Value="public void OnDragOver (System.Windows.Forms.DragEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void OnDragOver (System.Windows.Forms.DragEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -108,15 +186,38 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.IDropTarget.OnDragOver(System.Windows.Forms.DragEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.IDropTarget.OnDragOver(System.Windows.Forms.DragEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.DragOver" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.DragOver" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DragEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
     </Member>
   </Members>

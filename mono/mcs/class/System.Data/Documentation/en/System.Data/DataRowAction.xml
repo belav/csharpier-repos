@@ -20,12 +20,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:System.Data.DataRowAction" /> is returned as part of the <see cref="T:System.Data.DataRowChangeEventArgs" /> to indicate the action that was taken on a row to raise the event.</para>
-      <para>Use the members of this enumeration to determine the action that has occurred on a <see cref="T:System.Data.DataRow" /> with regard to the <see cref="T:System.Data.DataTable" /> to which it belongs.</para>
+      <para
+        >A <see
+         cref="T:System.Data.DataRowAction" />
+
+         is returned as part of the <see
+         cref="T:System.Data.DataRowChangeEventArgs" />
+
+         to indicate the action that was taken on a row to raise the event.</para
+      >
+      <para
+        >Use the members of this enumeration to determine the action that has occurred on a <see
+         cref="T:System.Data.DataRow" />
+
+         with regard to the <see
+         cref="T:System.Data.DataTable" />
+
+         to which it belongs.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Describes an action performed on a <see cref="T:System.Data.DataRow" />.</para>
+      <para
+        >Describes an action performed on a <see
+         cref="T:System.Data.DataRow" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>

@@ -19,7 +19,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BuildProperty (string propertyName, string propertyValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BuildProperty (string propertyName, string propertyValue);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="propertyName" Type="System.String" />
@@ -30,19 +33,33 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> class with the specified name and value.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+             class with the specified name and value.</para
+          >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property name.</param
+        >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property value.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Clone">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildProperty Clone (bool deepClone);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildProperty Clone (bool deepClone);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildProperty</ReturnType>
@@ -54,19 +71,51 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A shallow copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> references the same XML element as the original. Modifications to the name or value of a shallow copy will be reflected in both copies. However, depending on property evaluation, the two copies could have different <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.FinalValue" /> property values.</para>
-          <para>A deep copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> creates a new XML element to reference so that both copies of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> can be independently modified.</para>
+          <para
+            >A shallow copy of a <see
+             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+             references the same XML element as the original. Modifications to the name or value of a shallow copy will be reflected in both copies. However, depending on property evaluation, the two copies could have different <see
+             cref="P:Microsoft.Build.BuildEngine.BuildProperty.FinalValue" />
+
+             property values.</para
+          >
+          <para
+            >A deep copy of a <see
+             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+             creates a new XML element to reference so that both copies of the <see
+             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+             can be independently modified.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a deep or shallow copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />.</para>
+          <para
+            >Creates a deep or shallow copy of the <see
+             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />.</para>
+          <para
+            >A copy of the <see
+             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+            .</para
+          >
         </returns>
         <param name="deepClone">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to create a deep copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to create a deep copy of the <see
+           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          ; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -84,7 +133,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the property.</para>
+          <para
+            >Gets or sets the <unmanagedCodeEntityReference
+            >Condition</unmanagedCodeEntityReference>
+
+             attribute value of the property.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -149,7 +203,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static string op_Explicit (Microsoft.Build.BuildEngine.BuildProperty propertyToCast);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string op_Explicit (Microsoft.Build.BuildEngine.BuildProperty propertyToCast);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -182,11 +239,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the string that represents the property <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />.</para>
+          <para
+            >Returns the string that represents the property <see
+             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The string that represents the property <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />.</para>
+          <para
+            >The string that represents the property <see
+             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>

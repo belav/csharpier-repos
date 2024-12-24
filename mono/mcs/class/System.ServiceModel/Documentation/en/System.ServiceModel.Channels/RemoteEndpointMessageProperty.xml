@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="RemoteEndpointMessageProperty" FullName="System.ServiceModel.Channels.RemoteEndpointMessageProperty">
+<Type
+  Name="RemoteEndpointMessageProperty"
+  FullName="System.ServiceModel.Channels.RemoteEndpointMessageProperty"
+>
   <TypeSignature Language="C#" Value="public sealed class RemoteEndpointMessageProperty" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit RemoteEndpointMessageProperty extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit RemoteEndpointMessageProperty extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -26,8 +32,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RemoteEndpointMessageProperty (string address, int port);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string address, int32 port) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public RemoteEndpointMessageProperty (string address, int port);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string address, int32 port) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -43,12 +55,23 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.RemoteEndpointMessageProperty" /> class for a specified IP address and port that identify the client from which the message was sent.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.RemoteEndpointMessageProperty" />
+
+             class for a specified IP address and port that identify the client from which the message was sent.</para
+          >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />The IP address of the remote endpoint associated with the message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The IP address of the remote endpoint associated with the message.</param
+        >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />The port number of the remote endpoint associated with the message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The port number of the remote endpoint associated with the message.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Address">

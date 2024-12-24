@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WebPartsPersonalizationAuthorization" FullName="System.Web.Configuration.WebPartsPersonalizationAuthorization">
-  <TypeSignature Language="C#" Value="public sealed class WebPartsPersonalizationAuthorization : System.Configuration.ConfigurationElement" />
+<Type
+  Name="WebPartsPersonalizationAuthorization"
+  FullName="System.Web.Configuration.WebPartsPersonalizationAuthorization"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class WebPartsPersonalizationAuthorization : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +19,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" /> class provides configuration support for personalization authorizations for Web Parts. This class can be used to allow or deny access to Web Parts resources.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
+
+         class provides configuration support for personalization authorizations for Web Parts. This class can be used to allow or deny access to Web Parts resources.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,11 +40,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. An instance of this class is available from the <see cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" /> property.</para>
+          <para
+            >This constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. An instance of this class is available from the <see
+             cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -41,7 +62,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -57,7 +81,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Rules">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AuthorizationRuleCollection Rules { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AuthorizationRuleCollection Rules { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -72,7 +99,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> consists of <see cref="T:System.Web.Configuration.AuthorizationRule" /> objects. An <see cref="T:System.Web.Configuration.AuthorizationRule" /> object contains an <see cref="P:System.Web.Configuration.AuthorizationRule.Action" /> property, a <see cref="P:System.Web.Configuration.AuthorizationRule.Users" /> property, and a <see cref="P:System.Web.Configuration.AuthorizationRule.Verbs" /> property. These properties can be set to allow or deny access to a Web Parts resource.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+
+             consists of <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             objects. An <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             object contains an <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Action" />
+
+             property, a <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Users" />
+
+             property, and a <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Verbs" />
+
+             property. These properties can be set to allow or deny access to a Web Parts resource.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

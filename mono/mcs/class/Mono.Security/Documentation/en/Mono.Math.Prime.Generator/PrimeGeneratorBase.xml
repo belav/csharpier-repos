@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -31,7 +36,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Confidence">
-      <MemberSignature Language="C#" Value="public virtual Mono.Math.Prime.ConfidenceFactor Confidence { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Mono.Math.Prime.ConfidenceFactor Confidence { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.ConfidenceFactor</ReturnType>
@@ -39,7 +47,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Math.Prime.ConfidenceFactor" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Math.Prime.ConfidenceFactor" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -48,7 +59,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GenerateNewPrime">
-      <MemberSignature Language="C#" Value="public abstract Mono.Math.BigInteger GenerateNewPrime (int bits);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract Mono.Math.BigInteger GenerateNewPrime (int bits);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -57,9 +71,15 @@
         <Parameter Name="bits" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="bits">a <see cref="T:System.Int32" /></param>
+        <param name="bits"
+          >a <see
+           cref="T:System.Int32" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
+        <returns
+          >a <see
+           cref="T:Mono.Math.BigInteger" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +88,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PostTrialDivisionTests">
-      <MemberSignature Language="C#" Value="protected bool PostTrialDivisionTests (Mono.Math.BigInteger bi);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected bool PostTrialDivisionTests (Mono.Math.BigInteger bi);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -77,9 +100,15 @@
         <Parameter Name="bi" Type="Mono.Math.BigInteger" />
       </Parameters>
       <Docs>
-        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="bi"
+          >a <see
+           cref="T:Mono.Math.BigInteger" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:System.Boolean" /></returns>
+        <returns
+          >a <see
+           cref="T:System.Boolean" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -88,7 +117,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PrimalityTest">
-      <MemberSignature Language="C#" Value="public virtual Mono.Math.Prime.PrimalityTest PrimalityTest { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Mono.Math.Prime.PrimalityTest PrimalityTest { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.PrimalityTest</ReturnType>
@@ -96,7 +128,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:Mono.Math.Prime.PrimalityTest" /></value>
+        <value
+          >a <see
+           cref="T:Mono.Math.Prime.PrimalityTest" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -113,7 +148,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value>a <see cref="T:System.Int32" /></value>
+        <value
+          >a <see
+           cref="T:System.Int32" />
+        </value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

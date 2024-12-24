@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="BehaviorExtensionElement" FullName="System.ServiceModel.Configuration.BehaviorExtensionElement">
-  <TypeSignature Language="C#" Value="public abstract class BehaviorExtensionElement : System.ServiceModel.Configuration.ServiceModelExtensionElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit BehaviorExtensionElement extends System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+<Type
+  Name="BehaviorExtensionElement"
+  FullName="System.ServiceModel.Configuration.BehaviorExtensionElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class BehaviorExtensionElement : System.ServiceModel.Configuration.ServiceModelExtensionElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit BehaviorExtensionElement extends System.ServiceModel.Configuration.ServiceModelExtensionElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected BehaviorExtensionElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,7 +42,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -55,7 +72,10 @@
     </Member>
     <Member MemberName="CreateBehavior">
       <MemberSignature Language="C#" Value="protected abstract object CreateBehavior ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance object CreateBehavior() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance object CreateBehavior() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
