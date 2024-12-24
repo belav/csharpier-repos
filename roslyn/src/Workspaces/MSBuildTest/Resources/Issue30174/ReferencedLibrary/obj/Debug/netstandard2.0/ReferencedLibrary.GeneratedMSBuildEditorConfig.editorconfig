@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = ReferencedLibrary
+build_property.ProjectDir = C:\projects\csharpier-repos\roslyn\src\Workspaces\MSBuildTest\Resources\Issue30174\ReferencedLibrary\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

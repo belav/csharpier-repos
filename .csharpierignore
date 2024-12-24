@@ -261,3 +261,5 @@
 /mono/mcs/class/System/System.Net.Mail/SmtpClient.cs
 /runtime/src/libraries/Common/src/Interop/Windows/BCrypt/Interop.BCryptAlgPseudoHandle.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/Unsafe.cs
+
+*.aspx.xml

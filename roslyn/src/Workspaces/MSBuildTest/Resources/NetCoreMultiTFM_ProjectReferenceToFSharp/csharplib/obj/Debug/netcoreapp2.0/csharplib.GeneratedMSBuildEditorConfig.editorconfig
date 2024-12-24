@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = csharplib
+build_property.ProjectDir = C:\projects\csharpier-repos\roslyn\src\Workspaces\MSBuildTest\Resources\NetCoreMultiTFM_ProjectReferenceToFSharp\csharplib\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

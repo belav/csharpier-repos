@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = Castle.Services.Logging.Log4netIntegration
+build_property.ProjectDir = C:\projects\csharpier-repos\Core\src\Castle.Services.Logging.log4netIntegration\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

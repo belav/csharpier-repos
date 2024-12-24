@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = generated_project
+build_property.ProjectDir = C:\projects\csharpier-repos\format\tests\projects\for_code_formatter\generated_project\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 
