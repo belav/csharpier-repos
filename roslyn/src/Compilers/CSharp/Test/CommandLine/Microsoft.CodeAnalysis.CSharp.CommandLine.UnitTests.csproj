@@ -13,14 +13,25 @@
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\..\Test\Core\Microsoft.CodeAnalysis.Test.Utilities.csproj" />
     <ProjectReference Include="..\..\..\Test\Utilities\CSharp\Microsoft.CodeAnalysis.CSharp.Test.Utilities.csproj" />
-    <ProjectReference Include="..\..\csc\AnyCpu\csc.csproj" ReferenceOutputAssembly="false" OutputItemType="RoslynReferenceToDependencyDirectory" />
-    <ProjectReference Include="..\..\..\..\Interactive\csi\csi.csproj" ReferenceOutputAssembly="false" OutputItemType="CsiReferenceToDependencyDirectory" />
+    <ProjectReference
+      Include="..\..\csc\AnyCpu\csc.csproj"
+      ReferenceOutputAssembly="false"
+      OutputItemType="RoslynReferenceToDependencyDirectory"
+    />
+    <ProjectReference
+      Include="..\..\..\..\Interactive\csi\csi.csproj"
+      ReferenceOutputAssembly="false"
+      OutputItemType="CsiReferenceToDependencyDirectory"
+    />
     <ProjectReference Include="..\..\..\Core\Portable\Microsoft.CodeAnalysis.csproj" />
     <ProjectReference Include="..\..\..\Test\Resources\Core\Microsoft.CodeAnalysis.Compiler.Test.Resources.csproj" />
     <ProjectReference Include="..\..\Portable\Microsoft.CodeAnalysis.CSharp.csproj" />
     <ProjectReference Include="..\..\..\VisualBasic\Portable\Microsoft.CodeAnalysis.VisualBasic.vbproj" />
     <ProjectReference Include="..\..\..\..\Test\PdbUtilities\Roslyn.Test.PdbUtilities.csproj" />
-    <PackageReference Include="Basic.Reference.Assemblies.NetStandard13" Version="$(BasicReferenceAssembliesNetStandard13Version)" />
+    <PackageReference
+      Include="Basic.Reference.Assemblies.NetStandard13"
+      Version="$(BasicReferenceAssembliesNetStandard13Version)"
+    />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\csc\csc.rsp" LogicalName="csc.rsp" />
@@ -31,13 +42,21 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <Target Name="CopyCsiReferencedProjectToDependenciesDirectory" Condition="'@(CsiReferenceToDependencyDirectory)' != ''" AfterTargets="ResolveProjectReferences">
+  <Target
+    Name="CopyCsiReferencedProjectToDependenciesDirectory"
+    Condition="'@(CsiReferenceToDependencyDirectory)' != ''"
+    AfterTargets="ResolveProjectReferences"
+  >
     <PropertyGroup>
-      <_CsiReferenceOutputPath>@(CsiReferenceToDependencyDirectory->'%(RootDir)%(Directory)*.*')</_CsiReferenceOutputPath>
+      <_CsiReferenceOutputPath>@(CsiReferenceToDependencyDirectory-&gt;'%(RootDir)%(Directory)*.*')</_CsiReferenceOutputPath>
     </PropertyGroup>
     <ItemGroup>
       <_CsiReferenceContent Include="$(_CsiReferenceOutputPath)" />
-      <Content Include="@(_CsiReferenceContent)" Link="dependency\csi\%(_CsiReferenceContent.Filename)%(_CsiReferenceContent.Extension)" CopyToOutputDirectory="PreserveNewest" />
+      <Content
+        Include="@(_CsiReferenceContent)"
+        Link="dependency\csi\%(_CsiReferenceContent.Filename)%(_CsiReferenceContent.Extension)"
+        CopyToOutputDirectory="PreserveNewest"
+      />
     </ItemGroup>
   </Target>
 </Project>

@@ -1,6 +1,5 @@
 <!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. See the LICENSE file in the project root for more information. -->
 <Project>
-
   <PropertyGroup>
     <!-- 
       Ensure the binaries using DiaSymReader.Native are marked as AnyCPU unless they specify 
@@ -12,7 +11,6 @@
     -->
     <PlatformTarget Condition="'$(PlatformTarget)' == ''">AnyCPU</PlatformTarget>
   </PropertyGroup>
-
   <!-- 
     This is adding the diasymreader native assets to the output directory of our binaries. The 
     package can't be referenced directly but rather has to have it's assets manually copied 
@@ -34,7 +32,10 @@
       <Visible>false</Visible>
       <Pack>false</Pack>
     </Content>
-
-    <PackageReference Include="Microsoft.DiaSymReader.Native" Version="$(MicrosoftDiaSymReaderNativeVersion)" ExcludeAssets="all"/>
+    <PackageReference
+      Include="Microsoft.DiaSymReader.Native"
+      Version="$(MicrosoftDiaSymReaderNativeVersion)"
+      ExcludeAssets="all"
+    />
   </ItemGroup>
 </Project>

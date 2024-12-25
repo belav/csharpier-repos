@@ -6,7 +6,9 @@
     <RootNamespace>Microsoft.CodeAnalysis.Editor.CSharp</RootNamespace>
     <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'">full</ApplyNgenOptimization>
+    <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
+      >full</ApplyNgenOptimization
+    >
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageDescription>
@@ -35,7 +37,10 @@
     <InternalsVisibleTo Include="Microsoft.VisualStudio.LanguageServices.LiveShare" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="$(MicrosoftVisualStudioThreadingVersion)" />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Threading"
+      Version="$(MicrosoftVisualStudioThreadingVersion)"
+    />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="CSharpEditorResources.resx" GenerateSource="true" />

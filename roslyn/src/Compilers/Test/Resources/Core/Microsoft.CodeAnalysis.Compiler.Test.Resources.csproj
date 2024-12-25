@@ -16,7 +16,10 @@
     <ProjectReference Include="..\..\..\Core\Portable\Microsoft.CodeAnalysis.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ExpressionCompiler\*.*" LogicalName="ExpressionCompiler.%(FileName)%(Extension)" />
+    <EmbeddedResource
+      Include="ExpressionCompiler\*.*"
+      LogicalName="ExpressionCompiler.%(FileName)%(Extension)"
+    />
     <EmbeddedResource Include="DiagnosticTests\badresfile.res" />
     <Content Include="DiagnosticTests\ErrTestLib01.cs" />
     <EmbeddedResource Include="DiagnosticTests\ErrTestLib01.dll" />

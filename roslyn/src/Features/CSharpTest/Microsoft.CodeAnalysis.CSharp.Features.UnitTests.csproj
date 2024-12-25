@@ -10,7 +10,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\EditorFeatures\CSharpTest\Diagnostics\AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest.cs" Link="AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest.cs" />
+    <Compile
+      Include="..\..\EditorFeatures\CSharpTest\Diagnostics\AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest.cs"
+      Link="AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest.cs"
+    />
   </ItemGroup>
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\Compilers\Core\Portable\Microsoft.CodeAnalysis.csproj" />
@@ -38,17 +41,33 @@
     <ProjectReference Include="..\..\Workspaces\CoreTestUtilities\Microsoft.CodeAnalysis.Workspaces.Test.Utilities.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.DiaSymReader.PortablePdb" Version="$(MicrosoftDiaSymReaderPortablePdbVersion)" />
-    <PackageReference Include="Xunit.Combinatorial" Version="$(XunitCombinatorialVersion)" PrivateAssets="all" />
-    <PackageReference Include="Basic.Reference.Assemblies.Net60" Version="$(BasicReferenceAssembliesNet60Version)" />
+    <PackageReference
+      Include="Microsoft.DiaSymReader.PortablePdb"
+      Version="$(MicrosoftDiaSymReaderPortablePdbVersion)"
+    />
+    <PackageReference
+      Include="Xunit.Combinatorial"
+      Version="$(XunitCombinatorialVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Basic.Reference.Assemblies.Net60"
+      Version="$(BasicReferenceAssembliesNet60Version)"
+    />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Debugging\Resources\*.*" />
-    <EmbeddedResource Include="Debugging\Resources\*.*" LogicalName="Debugging/%(FileName)%(Extension)" />
+    <EmbeddedResource
+      Include="Debugging\Resources\*.*"
+      LogicalName="Debugging/%(FileName)%(Extension)"
+    />
   </ItemGroup>
-  <Import Project="..\..\Analyzers\CSharp\Tests\CSharpAnalyzers.UnitTests.projitems" Label="Shared" />
+  <Import
+    Project="..\..\Analyzers\CSharp\Tests\CSharpAnalyzers.UnitTests.projitems"
+    Label="Shared"
+  />
   <Import Project="$(RepositoryEngineeringDir)targets\ILAsm.targets" />
 </Project>
