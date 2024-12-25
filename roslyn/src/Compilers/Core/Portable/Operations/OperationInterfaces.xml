@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. See the LICENSE file in the project root for more information. -->
 <Tree Root="IOperation">
-
   <!--
       To regenerate the operation nodes, run eng/generate-compiler-code.cmd
 
@@ -18,18 +17,18 @@
       You can test with `Build.cmd -testIOperation`.
       Or to repro in VS, you can do `set ROSLYN_TEST_IOPERATION=true` then `devenv`.
         -->
-
   <UnusedOperationKinds>
-    <Entry Value="0x1D"/>
-    <Entry Value="0x62"/>
-    <Entry Value="0x64"/>
+    <Entry Value="0x1D" />
+    <Entry Value="0x62" />
+    <Entry Value="0x64" />
   </UnusedOperationKinds>
-
   <Node Name="IInvalidOperation" Base="IOperation" SkipClassGeneration="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an invalid operation with one or more child operations.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# invalid expression or invalid statement.
          (2) VB invalid expression or invalid statement.
@@ -39,9 +38,11 @@
   </Node>
   <Node Name="IBlockOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a block containing a sequence of operations and local declarations.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# "{ ... }" block statement.
          (2) VB implicit block statement for method bodies and other block scoped statements.
@@ -75,17 +76,24 @@
     <Property Name="Declarations" Type="ImmutableArray&lt;IVariableDeclarationOperation&gt;">
       <Comments>
         <summary>Variable declaration in the statement.</summary>
-        <remarks>
-          In C#, this will always be a single declaration, with all variables in <see cref="IVariableDeclarationOperation.Declarators" />.
-        </remarks>
+        <remarks
+          >
+          In C#, this will always be a single declaration, with all variables in <see
+           cref="IVariableDeclarationOperation.Declarators" />
+
+          .
+        </remarks
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="ISwitchOperation" Base="IOperation" ChildrenOrder="Value,Cases">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a switch operation with a value to be switched upon and switch cases.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# switch statement.
          (2) VB Select Case statement.
@@ -94,9 +102,14 @@
     </Comments>
     <Property Name="Locals" Type="ImmutableArray&lt;ILocalSymbol&gt;">
       <Comments>
-        <summary>
-          Locals declared within the switch operation with scope spanning across all <see cref="Cases" />.
-        </summary>
+        <summary
+          >
+          Locals declared within the switch operation with scope spanning across all <see
+           cref="Cases" />
+
+          .
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Value" Type="IOperation">
@@ -116,11 +129,16 @@
     </Property>
   </Node>
   <AbstractNode Name="ILoopOperation" Base="IOperation">
-    <OperationKind Include="true" ExtraDescription="This is further differentiated by &lt;see cref=&quot;ILoopOperation.LoopKind&quot;/&gt;." />
+    <OperationKind
+      Include="true"
+      ExtraDescription="This is further differentiated by &lt;see cref=&quot;ILoopOperation.LoopKind&quot;/&gt;."
+    />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a loop operation.
-        <para>
+        <para
+        >
         Current usage:
           (1) C# 'while', 'for', 'foreach' and 'do' loop statements
           (2) VB 'While', 'ForTo', 'ForEach', 'Do While' and 'Do Until' loop statements
@@ -153,12 +171,18 @@
       </Comments>
     </Property>
   </AbstractNode>
-  <Node Name="IForEachLoopOperation" Base="ILoopOperation" ChildrenOrder="Collection,LoopControlVariable,Body,NextVariables">
+  <Node
+    Name="IForEachLoopOperation"
+    Base="ILoopOperation"
+    ChildrenOrder="Collection,LoopControlVariable,Body,NextVariables"
+  >
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a for each loop.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# 'foreach' loop statement
          (2) VB 'For Each' loop statement
@@ -193,12 +217,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IForLoopOperation" Base="ILoopOperation" ChildrenOrder="Before,Condition,Body,AtLoopBottom">
+  <Node
+    Name="IForLoopOperation"
+    Base="ILoopOperation"
+    ChildrenOrder="Before,Condition,Body,AtLoopBottom"
+  >
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a for loop.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# 'for' loop statement
         </para>
@@ -211,11 +241,22 @@
     </Property>
     <Property Name="ConditionLocals" Type="ImmutableArray&lt;ILocalSymbol&gt;">
       <Comments>
-        <summary>
-          Locals declared within the loop Condition and are in scope throughout the <see cref="Condition" />,
-          <see cref="ILoopOperation.Body" /> and <see cref="AtLoopBottom" />.
+        <summary
+          >
+          Locals declared within the loop Condition and are in scope throughout the <see
+           cref="Condition" />
+
+          ,
+          <see
+           cref="ILoopOperation.Body" />
+
+           and <see
+           cref="AtLoopBottom" />
+
+          .
           They are considered to be declared per iteration.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Condition" Type="IOperation?">
@@ -229,12 +270,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IForToLoopOperation" Base="ILoopOperation" ChildrenOrder="LoopControlVariable,InitialValue,LimitValue,StepValue,Body,NextVariables">
+  <Node
+    Name="IForToLoopOperation"
+    Base="ILoopOperation"
+    ChildrenOrder="LoopControlVariable,InitialValue,LimitValue,StepValue,Body,NextVariables"
+  >
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a for to loop with loop control variable and initial, limit and step values for the control variable.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB 'For ... To ... Step' loop statement
         </para>
@@ -266,7 +313,10 @@
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
-          <code>true</code> if arithmetic operations behind this loop are 'checked'.</summary>
+          <code>true</code>
+
+           if arithmetic operations behind this loop are 'checked'.</summary
+        >
       </Comments>
     </Property>
     <Property Name="NextVariables" Type="ImmutableArray&lt;IOperation&gt;">
@@ -274,14 +324,20 @@
         <summary>Optional list of comma separated next variables at loop bottom.</summary>
       </Comments>
     </Property>
-    <Property Name="Info"  Type="(ILocalSymbol LoopObject, ForToLoopOperationUserDefinedInfo UserDefinedInfo)" Internal="true" />
+    <Property
+      Name="Info"
+      Type="(ILocalSymbol LoopObject, ForToLoopOperationUserDefinedInfo UserDefinedInfo)"
+      Internal="true"
+    />
   </Node>
   <Node Name="IWhileLoopOperation" Base="ILoopOperation" SkipChildrenGeneration="true">
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a while or do while loop.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# 'while' and 'do while' loop statements.
          (2) VB 'While', 'Do While' and 'Do Until' loop statements.
@@ -295,33 +351,50 @@
     </Property>
     <Property Name="ConditionIsTop" Type="bool">
       <Comments>
-        <summary>
-          True if the <see cref="Condition" /> is evaluated at start of each loop iteration.
+        <summary
+          >
+          True if the <see
+           cref="Condition" />
+
+           is evaluated at start of each loop iteration.
           False if it is evaluated at the end of each loop iteration.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="ConditionIsUntil" Type="bool">
       <Comments>
-        <summary>True if the loop has 'Until' loop semantics and the loop is executed while <see cref="Condition" /> is false.</summary>
+        <summary
+          >True if the loop has 'Until' loop semantics and the loop is executed while <see
+           cref="Condition" />
+
+           is false.</summary
+        >
       </Comments>
     </Property>
     <Property Name="IgnoredCondition" Type="IOperation?">
       <Comments>
-        <summary>
+        <summary
+          >
           Additional conditional supplied for loop in error cases, which is ignored by the compiler.
           For example, for VB 'Do While' or 'Do Until' loop with syntax errors where both the top and bottom conditions are provided.
-          The top condition is preferred and exposed as <see cref="Condition" /> and the bottom condition is ignored and exposed by this property.
+          The top condition is preferred and exposed as <see
+           cref="Condition" />
+
+           and the bottom condition is ignored and exposed by this property.
           This property should be null for all non-error cases.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="ILabeledOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation with a label.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# labeled statement.
          (2) VB label statement.
@@ -341,9 +414,11 @@
   </Node>
   <Node Name="IBranchOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a branch operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# goto, break, or continue statement.
          (2) VB GoTo, Exit ***, or Continue *** statement.
@@ -363,9 +438,11 @@
   </Node>
   <Node Name="IEmptyOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an empty or no-op operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# empty statement.
         </para>
@@ -374,14 +451,16 @@
   </Node>
   <Node Name="IReturnOperation" Base="IOperation">
     <OperationKind>
-      <Entry Name="Return" Value="0x9"/>
-      <Entry Name="YieldBreak" Value="0xa" ExtraDescription="This has yield break semantics."/>
-      <Entry Name="YieldReturn" Value="0xe" ExtraDescription="This has yield return semantics."/>
+      <Entry Name="Return" Value="0x9" />
+      <Entry Name="YieldBreak" Value="0xa" ExtraDescription="This has yield break semantics." />
+      <Entry Name="YieldReturn" Value="0xe" ExtraDescription="This has yield return semantics." />
     </OperationKind>
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a return from the method with an optional return value.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# return statement and yield statement.
          (2) VB Return statement.
@@ -396,9 +475,17 @@
   </Node>
   <Node Name="ILockOperation" Base="IOperation" ChildrenOrder="LockedValue,Body">
     <Comments>
-      <summary>
-        Represents a <see cref="Body" /> of operations that are executed while holding a lock onto the <see cref="LockedValue" />.
-        <para>
+      <summary
+        >
+        Represents a <see
+         cref="Body" />
+
+         of operations that are executed while holding a lock onto the <see
+         cref="LockedValue" />
+
+        .
+        <para
+        >
         Current usage:
          (1) C# lock statement.
          (2) VB SyncLock statement.
@@ -415,13 +502,15 @@
         <summary>Body of the lock, to be executed while holding the lock.</summary>
       </Comments>
     </Property>
-    <Property Name="LockTakenSymbol" Type="ILocalSymbol?" Internal="true"/>
+    <Property Name="LockTakenSymbol" Type="ILocalSymbol?" Internal="true" />
   </Node>
   <Node Name="ITryOperation" Base="IOperation" ChildrenOrder="Body,Catches,Finally">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a try operation for exception handling code with a body, catch clauses and a finally handler.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# try statement.
          (2) VB Try statement.
@@ -451,9 +540,17 @@
   </Node>
   <Node Name="IUsingOperation" Base="IOperation" ChildrenOrder="Resources,Body">
     <Comments>
-      <summary>
-        Represents a <see cref="Body" /> of operations that are executed while using disposable <see cref="Resources" />.
-        <para>
+      <summary
+        >
+        Represents a <see
+         cref="Body" />
+
+         of operations that are executed while using disposable <see
+         cref="Resources" />
+
+        .
+        <para
+        >
         Current usage:
          (1) C# using statement.
          (2) VB Using statement.
@@ -472,9 +569,17 @@
     </Property>
     <Property Name="Locals" Type="ImmutableArray&lt;ILocalSymbol&gt;">
       <Comments>
-        <summary>
-          Locals declared within the <see cref="Resources" /> with scope spanning across this entire <see cref="IUsingOperation" />.
-        </summary>
+        <summary
+          >
+          Locals declared within the <see
+           cref="Resources" />
+
+           with scope spanning across this entire <see
+           cref="IUsingOperation" />
+
+          .
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsAsynchronous" Type="bool">
@@ -487,15 +592,25 @@
     </Property>
     <Property Name="DisposeInfo" Type="DisposeOperationInfo" Internal="true">
       <Comments>
-        <summary>Information about the method that will be invoked to dispose the <see cref="Resources" /> when pattern based disposal is used.</summary>
+        <summary
+          >Information about the method that will be invoked to dispose the <see
+           cref="Resources" />
+
+           when pattern based disposal is used.</summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IExpressionStatementOperation" Base="IOperation">
     <Comments>
-      <summary>
-        Represents an operation that drops the resulting value and the type of the underlying wrapped <see cref="Operation" />.
-        <para>
+      <summary
+        >
+        Represents an operation that drops the resulting value and the type of the underlying wrapped <see
+         cref="Operation" />
+
+        .
+        <para
+        >
         Current usage:
          (1) C# expression statement.
          (2) VB expression statement.
@@ -510,9 +625,11 @@
   </Node>
   <Node Name="ILocalFunctionOperation" Base="IOperation" ChildrenOrder="Body,IgnoredBody">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a local function defined within a method.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# local function statement.
         </para>
@@ -538,9 +655,11 @@
   </Node>
   <Node Name="IStopOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation to stop or suspend execution of code.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB Stop statement.
         </para>
@@ -549,9 +668,11 @@
   </Node>
   <Node Name="IEndOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation that stops the execution of code abruptly.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB End Statement.
         </para>
@@ -560,9 +681,11 @@
   </Node>
   <Node Name="IRaiseEventOperation" Base="IOperation" ChildrenOrder="EventReference,Arguments">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation for raising an event.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB raise event statement.
         </para>
@@ -585,9 +708,11 @@
   </Node>
   <Node Name="ILiteralOperation" Base="IOperation" HasType="true" HasConstantValue="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a textual literal numeric, string, etc.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# literal expression.
          (2) VB literal expression.
@@ -597,9 +722,11 @@
   </Node>
   <Node Name="IConversionOperation" Base="IOperation" HasType="true" HasConstantValue="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a type conversion.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# conversion expression.
          (2) VB conversion expression.
@@ -618,28 +745,55 @@
     </Property>
     <Property Name="ConstrainedToType" Type="ITypeSymbol?" SkipGeneration="true">
       <Comments>
-        <summary>
-          Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
-          Null if <see cref="OperatorMethod" /> is resolved statically, or is null.
-        </summary>
+        <summary
+          >
+          Type parameter which runtime type will be used to resolve virtual invocation of the <see
+           cref="OperatorMethod" />
+
+          , if any.
+          Null if <see
+           cref="OperatorMethod" />
+
+           is resolved statically, or is null.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Conversion" Type="CommonConversion">
       <Comments>
         <summary>Gets the underlying common conversion information.</summary>
-        <remarks>
+        <remarks
+          >
           If you need conversion information that is language specific, use either
-          <see cref="T:Microsoft.CodeAnalysis.CSharp.CSharpExtensions.GetConversion(IConversionOperation)" /> or
-          <see cref="T:Microsoft.CodeAnalysis.VisualBasic.VisualBasicExtensions.GetConversion(IConversionOperation)" />.
-        </remarks>
+          <see
+           cref="T:Microsoft.CodeAnalysis.CSharp.CSharpExtensions.GetConversion(IConversionOperation)" />
+
+           or
+          <see
+           cref="T:Microsoft.CodeAnalysis.VisualBasic.VisualBasicExtensions.GetConversion(IConversionOperation)" />
+
+          .
+        </remarks
+        >
       </Comments>
     </Property>
     <Property Name="IsTryCast" Type="bool">
       <Comments>
-        <summary>
-          False if the conversion will fail with a <see cref="InvalidCastException" /> at runtime if the cast fails. This is true for C#'s
-          <c>as</c> operator and for VB's <c>TryCast</c> operator.
-        </summary>
+        <summary
+          >
+          False if the conversion will fail with a <see
+           cref="InvalidCastException" />
+
+           at runtime if the cast fails. This is true for C#'s
+          <c
+          >as</c>
+
+           operator and for VB's <c
+          >TryCast</c>
+
+           operator.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
@@ -648,22 +802,43 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IInvocationOperation" Base="IOperation" ChildrenOrder="Instance,Arguments" HasType="true">
+  <Node
+    Name="IInvocationOperation"
+    Base="IOperation"
+    ChildrenOrder="Instance,Arguments"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an invocation of a method.
-        <para>
+        <para
+
+          >
         Current usage:
          (1) C# method invocation expression.
          (2) C# collection element initializer.
-             For example, in the following collection initializer: <code>new C() { 1, 2, 3 }</code>, we will have
-             3 <see cref="IInvocationOperation" /> nodes, each of which will be a call to the corresponding Add method
+             For example, in the following collection initializer: <code
+          >new C() { 1, 2, 3 }</code>
+
+          , we will have
+             3 <see
+           cref="IInvocationOperation" />
+
+           nodes, each of which will be a call to the corresponding Add method
              with either 1, 2, 3 as the argument.
          (3) VB method invocation expression.
          (4) VB collection element initializer.
-             Similar to the C# example, <code>New C() From {1, 2, 3}</code> will have 3 <see cref="IInvocationOperation" />
+             Similar to the C# example, <code
+          >New C() From {1, 2, 3}</code>
+
+           will have 3 <see
+           cref="IInvocationOperation" />
+
+          
              nodes with 1, 2, and 3 as their arguments, respectively.
-        </para>
+        </para
+        >
       </summary>
     </Comments>
     <Property Name="TargetMethod" Type="IMethodSymbol">
@@ -673,10 +848,18 @@
     </Property>
     <Property Name="ConstrainedToType" Type="ITypeSymbol?">
       <Comments>
-        <summary>
-          Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="TargetMethod" />.
-          Null if <see cref="TargetMethod" /> is resolved statically, or is an instance method.
-        </summary>
+        <summary
+          >
+          Type parameter which runtime type will be used to resolve virtual invocation of the <see
+           cref="TargetMethod" />
+
+          .
+          Null if <see
+           cref="TargetMethod" />
+
+           is resolved statically, or is an instance method.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Instance" Type="IOperation?">
@@ -699,11 +882,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IArrayElementReferenceOperation" Base="IOperation" ChildrenOrder="ArrayReference,Indices" HasType="true">
+  <Node
+    Name="IArrayElementReferenceOperation"
+    Base="IOperation"
+    ChildrenOrder="ArrayReference,Indices"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to an array element.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# array element reference expression.
          (2) VB array element reference expression.
@@ -723,9 +913,11 @@
   </Node>
   <Node Name="ILocalReferenceOperation" Base="IOperation" HasType="true" HasConstantValue="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to a declared local variable.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# local reference expression.
          (2) VB local reference expression.
@@ -748,9 +940,11 @@
   </Node>
   <Node Name="IParameterReferenceOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to a parameter.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# parameter reference expression.
          (2) VB parameter reference expression.
@@ -763,11 +957,13 @@
       </Comments>
     </Property>
   </Node>
-  <AbstractNode Name="IMemberReferenceOperation" Base="IOperation" >
+  <AbstractNode Name="IMemberReferenceOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to a member of a class, struct, or interface.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# member reference expression.
          (2) VB member reference expression.
@@ -786,18 +982,33 @@
     </Property>
     <Property Name="ConstrainedToType" Type="ITypeSymbol?" MakeAbstract="true">
       <Comments>
-        <summary>
-          Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="Member" />.
-          Null if <see cref="Member" /> is resolved statically, or is an instance member.
-        </summary>
+        <summary
+          >
+          Type parameter which runtime type will be used to resolve virtual invocation of the <see
+           cref="Member" />
+
+          .
+          Null if <see
+           cref="Member" />
+
+           is resolved statically, or is an instance member.
+        </summary
+        >
       </Comments>
     </Property>
   </AbstractNode>
-  <Node Name="IFieldReferenceOperation" Base="IMemberReferenceOperation" HasType="true" HasConstantValue="true">
+  <Node
+    Name="IFieldReferenceOperation"
+    Base="IMemberReferenceOperation"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to a field.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# field reference expression.
          (2) VB field reference expression.
@@ -821,9 +1032,11 @@
   </Node>
   <Node Name="IMethodReferenceOperation" Base="IMemberReferenceOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to a method other than as the target of an invocation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# method reference expression.
          (2) VB method reference expression.
@@ -835,18 +1048,25 @@
         <summary>Referenced method.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true"/>
+    <Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true" />
     <Property Name="IsVirtual" Type="bool">
       <Comments>
         <summary>Indicates whether the reference uses virtual semantics.</summary>
       </Comments>
     </Property>
   </Node>
-  <Node Name="IPropertyReferenceOperation" Base="IMemberReferenceOperation" ChildrenOrder="Instance,Arguments" HasType="true">
+  <Node
+    Name="IPropertyReferenceOperation"
+    Base="IMemberReferenceOperation"
+    ChildrenOrder="Instance,Arguments"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to a property.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# property reference expression.
          (2) VB property reference expression.
@@ -858,7 +1078,7 @@
         <summary>Referenced property.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true"/>
+    <Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true" />
     <Property Name="Arguments" Type="ImmutableArray&lt;IArgumentOperation&gt;">
       <Comments>
         <summary>Arguments of the indexer property reference, excluding the instance argument. Arguments are in evaluation order.</summary>
@@ -871,9 +1091,11 @@
   </Node>
   <Node Name="IEventReferenceOperation" Base="IMemberReferenceOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to an event.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# event reference expression.
          (2) VB event reference expression.
@@ -885,17 +1107,30 @@
         <summary>Referenced event.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true"/>
+    <Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true" />
   </Node>
-  <Node Name="IUnaryOperation" Base="IOperation" VisitorName="VisitUnaryOperator" HasType="true" HasConstantValue="true">
+  <Node
+    Name="IUnaryOperation"
+    Base="IOperation"
+    VisitorName="VisitUnaryOperator"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <OperationKind>
       <Entry Name="Unary" Value="0x1f" />
-      <Entry Name="UnaryOperator" Value="0x1f" EditorBrowsable="false" ExtraDescription="Use &lt;see cref=&quot;Unary&quot;/&gt; instead." />
+      <Entry
+        Name="UnaryOperator"
+        Value="0x1f"
+        EditorBrowsable="false"
+        ExtraDescription="Use &lt;see cref=&quot;Unary&quot;/&gt; instead."
+      />
     </OperationKind>
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation with one operand and a unary operator.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# unary operation expression.
          (2) VB unary operation expression.
@@ -915,18 +1150,27 @@
     <Property Name="IsLifted" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if this is a 'lifted' unary operator.  When there is an
+          <see langword="true" />
+
+           if this is a 'lifted' unary operator.  When there is an
           operator that is defined to work on a value type, 'lifted' operators are
-          created to work on the <see cref="System.Nullable{T}" /> versions of those
+          created to work on the <see
+           cref="System.Nullable{T}" />
+
+           versions of those
           value types.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if overflow checking is performed for the arithmetic operation.
-        </summary>
+          <see langword="true" />
+
+           if overflow checking is performed for the arithmetic operation.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="OperatorMethod" Type="IMethodSymbol?">
@@ -936,22 +1180,44 @@
     </Property>
     <Property Name="ConstrainedToType" Type="ITypeSymbol?">
       <Comments>
-        <summary>
-          Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
-          Null if <see cref="OperatorMethod" /> is resolved statically, or is null.
-        </summary>
+        <summary
+          >
+          Type parameter which runtime type will be used to resolve virtual invocation of the <see
+           cref="OperatorMethod" />
+
+          , if any.
+          Null if <see
+           cref="OperatorMethod" />
+
+           is resolved statically, or is null.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
-  <Node Name="IBinaryOperation" Base="IOperation" VisitorName="VisitBinaryOperator" ChildrenOrder="LeftOperand,RightOperand" HasType="true" HasConstantValue="true">
+  <Node
+    Name="IBinaryOperation"
+    Base="IOperation"
+    VisitorName="VisitBinaryOperator"
+    ChildrenOrder="LeftOperand,RightOperand"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <OperationKind>
       <Entry Name="Binary" Value="0x20" />
-      <Entry Name="BinaryOperator" Value="0x20" EditorBrowsable="false" ExtraDescription="Use &lt;see cref=&quot;Binary&quot;/&gt; instead." />
+      <Entry
+        Name="BinaryOperator"
+        Value="0x20"
+        EditorBrowsable="false"
+        ExtraDescription="Use &lt;see cref=&quot;Binary&quot;/&gt; instead."
+      />
     </OperationKind>
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation with two operands and a binary operator that produces a result with a non-null type.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# binary operator expression.
          (2) VB binary operator expression.
@@ -976,25 +1242,37 @@
     <Property Name="IsLifted" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if this is a 'lifted' binary operator.  When there is an
+          <see langword="true" />
+
+           if this is a 'lifted' binary operator.  When there is an
           operator that is defined to work on a value type, 'lifted' operators are
-          created to work on the <see cref="System.Nullable{T}" /> versions of those
+          created to work on the <see
+           cref="System.Nullable{T}" />
+
+           versions of those
           value types.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if this is a 'checked' binary operator.
-        </summary>
+          <see langword="true" />
+
+           if this is a 'checked' binary operator.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsCompareText" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if the comparison is text based for string or object comparison in VB.
-        </summary>
+          <see langword="true" />
+
+           if the comparison is text based for string or object comparison in VB.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="OperatorMethod" Type="IMethodSymbol?">
@@ -1004,11 +1282,16 @@
     </Property>
     <Property Name="ConstrainedToType" Type="ITypeSymbol?">
       <Comments>
-        <summary>
-          Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />
+        <summary
+          >
+          Type parameter which runtime type will be used to resolve virtual invocation of the <see
+           cref="OperatorMethod" />
+
+          
           or corresponding true/false operator, if any.
           Null if operators are resolved statically, or are not used.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="UnaryOperatorMethod" Type="IMethodSymbol?" Internal="true">
@@ -1020,14 +1303,37 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IConditionalOperation" Base="IOperation" ChildrenOrder="Condition,WhenTrue,WhenFalse" HasType="true" HasConstantValue="true">
+  <Node
+    Name="IConditionalOperation"
+    Base="IOperation"
+    ChildrenOrder="Condition,WhenTrue,WhenFalse"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a conditional operation with:
-        (1) <see cref="Condition" /> to be tested,
-        (2) <see cref="WhenTrue" /> operation to be executed when <see cref="Condition" /> is true and
-        (3) <see cref="WhenFalse" /> operation to be executed when the <see cref="Condition" /> is false.
-        <para>
+        (1) <see
+         cref="Condition" />
+
+         to be tested,
+        (2) <see
+         cref="WhenTrue" />
+
+         operation to be executed when <see
+         cref="Condition" />
+
+         is true and
+        (3) <see
+         cref="WhenFalse" />
+
+         operation to be executed when the <see
+         cref="Condition" />
+
+         is false.
+        <para
+        >
         Current usage:
          (1) C# ternary expression "a ? b : c" and if statement.
          (2) VB ternary expression "If(a, b, c)" and If Else statement.
@@ -1041,16 +1347,26 @@
     </Property>
     <Property Name="WhenTrue" Type="IOperation">
       <Comments>
-        <summary>
-          Operation to be executed if the <see cref="Condition" /> is true.
-        </summary>
+        <summary
+          >
+          Operation to be executed if the <see
+           cref="Condition" />
+
+           is true.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="WhenFalse" Type="IOperation?">
       <Comments>
-        <summary>
-          Operation to be executed if the <see cref="Condition" /> is false.
-        </summary>
+        <summary
+          >
+          Operation to be executed if the <see
+           cref="Condition" />
+
+           is false.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsRef" Type="bool">
@@ -1059,13 +1375,30 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="ICoalesceOperation" Base="IOperation" ChildrenOrder="Value,WhenNull" HasType="true" HasConstantValue="true">
+  <Node
+    Name="ICoalesceOperation"
+    Base="IOperation"
+    ChildrenOrder="Value,WhenNull"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a coalesce operation with two operands:
-        (1) <see cref="Value" />, which is the first operand that is unconditionally evaluated and is the result of the operation if non null.
-        (2) <see cref="WhenNull" />, which is the second operand that is conditionally evaluated and is the result of the operation if <see cref="Value" /> is null.
-        <para>
+        (1) <see
+         cref="Value" />
+
+        , which is the first operand that is unconditionally evaluated and is the result of the operation if non null.
+        (2) <see
+         cref="WhenNull" />
+
+        , which is the second operand that is conditionally evaluated and is the result of the operation if <see
+         cref="Value" />
+
+         is null.
+        <para
+        >
         Current usage:
          (1) C# null-coalescing expression "Value ?? WhenNull".
          (2) VB binary conditional expression "If(Value, WhenNull)".
@@ -1079,20 +1412,42 @@
     </Property>
     <Property Name="WhenNull" Type="IOperation">
       <Comments>
-        <summary>
-          Operation to be conditionally evaluated if <see cref="Value" /> evaluates to null/Nothing.
-        </summary>
+        <summary
+          >
+          Operation to be conditionally evaluated if <see
+           cref="Value" />
+
+           evaluates to null/Nothing.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="ValueConversion" Type="CommonConversion">
       <Comments>
-        <summary>
-          Conversion associated with <see cref="Value" /> when it is not null/Nothing.
+        <summary
+          >
+          Conversion associated with <see
+           cref="Value" />
 
-          Identity if result type of the operation is the same as type of <see cref="Value" />.
-          Otherwise, if type of <see cref="Value" /> is nullable, then conversion is applied to an
-          unwrapped <see cref="Value" />, otherwise to the <see cref="Value" /> itself.
-        </summary>
+           when it is not null/Nothing.
+
+          Identity if result type of the operation is the same as type of <see
+           cref="Value" />
+
+          .
+          Otherwise, if type of <see
+           cref="Value" />
+
+           is nullable, then conversion is applied to an
+          unwrapped <see
+           cref="Value" />
+
+          , otherwise to the <see
+           cref="Value" />
+
+           itself.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
@@ -1102,9 +1457,11 @@
       on top of this node to get the type of lambda, matching SemanticModel.GetType behavior.
     -->
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an anonymous function operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# lambda expression.
          (2) VB anonymous delegate expression.
@@ -1122,11 +1479,19 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IObjectCreationOperation" Base="IOperation" ChildrenOrder="Arguments,Initializer" HasType="true" HasConstantValue="true">
+  <Node
+    Name="IObjectCreationOperation"
+    Base="IOperation"
+    ChildrenOrder="Arguments,Initializer"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents creation of an object instance.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# new expression.
          (2) VB New expression.
@@ -1155,9 +1520,11 @@
   </Node>
   <Node Name="ITypeParameterObjectCreationOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a creation of a type parameter object, i.e. new T(), where T is a type parameter with new constraint.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# type parameter object creation expression.
          (2) VB type parameter object creation expression.
@@ -1170,11 +1537,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IArrayCreationOperation" Base="IOperation" ChildrenOrder="DimensionSizes,Initializer" HasType="true">
+  <Node
+    Name="IArrayCreationOperation"
+    Base="IOperation"
+    ChildrenOrder="DimensionSizes,Initializer"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents the creation of an array instance.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# array creation expression.
          (2) VB array creation expression.
@@ -1194,9 +1568,11 @@
   </Node>
   <Node Name="IInstanceReferenceOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an implicit/explicit reference to an instance.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# this or base expression.
          (2) VB Me, MyClass, or MyBase expression.
@@ -1213,9 +1589,11 @@
   </Node>
   <Node Name="IIsTypeOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation that tests if a value is of a specific type.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# "is" operator expression.
          (2) VB "TypeOf" and "TypeOf IsNot" expression.
@@ -1244,9 +1622,11 @@
   </Node>
   <Node Name="IAwaitOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an await operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# await expression.
          (2) VB await expression.
@@ -1261,9 +1641,11 @@
   </Node>
   <AbstractNode Name="IAssignmentOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a base interface for assignments.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# simple, compound and deconstruction assignment expressions.
          (2) VB simple and compound assignment expressions.
@@ -1281,11 +1663,19 @@
       </Comments>
     </Property>
   </AbstractNode>
-  <Node Name="ISimpleAssignmentOperation" Base="IAssignmentOperation" ChildrenOrder="Target,Value" HasType="true" HasConstantValue="true">
+  <Node
+    Name="ISimpleAssignmentOperation"
+    Base="IAssignmentOperation"
+    ChildrenOrder="Target,Value"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a simple assignment operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# simple assignment expression.
          (2) VB simple assignment expression.
@@ -1298,11 +1688,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="ICompoundAssignmentOperation" Base="IAssignmentOperation" ChildrenOrder="Target,Value" HasType="true">
+  <Node
+    Name="ICompoundAssignmentOperation"
+    Base="IAssignmentOperation"
+    ChildrenOrder="Target,Value"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a compound assignment that mutates the target with the result of a binary operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# compound assignment expression.
          (2) VB compound assignment expression.
@@ -1311,17 +1708,27 @@
     </Comments>
     <Property Name="InConversion" Type="CommonConversion">
       <Comments>
-        <summary>
-          Conversion applied to <see cref="IAssignmentOperation.Target" /> before the operation occurs.
-        </summary>
+        <summary
+          >
+          Conversion applied to <see
+           cref="IAssignmentOperation.Target" />
+
+           before the operation occurs.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="OutConversion" Type="CommonConversion">
       <Comments>
-        <summary>
+        <summary
+          >
           Conversion applied to the result of the binary operation, before it is assigned back to
-          <see cref="IAssignmentOperation.Target" />.
-        </summary>
+          <see
+           cref="IAssignmentOperation.Target" />
+
+          .
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="OperatorKind" Type="BinaryOperatorKind">
@@ -1332,15 +1739,21 @@
     <Property Name="IsLifted" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if this assignment contains a 'lifted' binary operation.
-        </summary>
+          <see langword="true" />
+
+           if this assignment contains a 'lifted' binary operation.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if overflow checking is performed for the arithmetic operation.
-        </summary>
+          <see langword="true" />
+
+           if overflow checking is performed for the arithmetic operation.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="OperatorMethod" Type="IMethodSymbol?">
@@ -1350,18 +1763,28 @@
     </Property>
     <Property Name="ConstrainedToType" Type="ITypeSymbol?">
       <Comments>
-        <summary>
-          Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
-          Null if <see cref="OperatorMethod" /> is resolved statically, or is null.
-        </summary>
+        <summary
+          >
+          Type parameter which runtime type will be used to resolve virtual invocation of the <see
+           cref="OperatorMethod" />
+
+          , if any.
+          Null if <see
+           cref="OperatorMethod" />
+
+           is resolved statically, or is null.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IParenthesizedOperation" Base="IOperation" HasType="true" HasConstantValue="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a parenthesized operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB parenthesized expression.
         </para>
@@ -1373,11 +1796,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IEventAssignmentOperation" Base="IOperation" ChildrenOrder="EventReference,HandlerValue" HasType="true">
+  <Node
+    Name="IEventAssignmentOperation"
+    Base="IOperation"
+    ChildrenOrder="EventReference,HandlerValue"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a binding of an event.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# event assignment expression.
          (2) VB Add/Remove handler statement.
@@ -1400,12 +1830,28 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IConditionalAccessOperation" Base="IOperation" ChildrenOrder="Operation,WhenNotNull" HasType="true">
+  <Node
+    Name="IConditionalAccessOperation"
+    Base="IOperation"
+    ChildrenOrder="Operation,WhenNotNull"
+    HasType="true"
+  >
     <Comments>
-      <summary>
-        Represents a conditionally accessed operation. Note that <see cref="IConditionalAccessInstanceOperation" /> is used to refer to the value
-        of <see cref="Operation" /> within <see cref="WhenNotNull" />.
-        <para>
+      <summary
+        >
+        Represents a conditionally accessed operation. Note that <see
+         cref="IConditionalAccessInstanceOperation" />
+
+         is used to refer to the value
+        of <see
+         cref="Operation" />
+
+         within <see
+         cref="WhenNotNull" />
+
+        .
+        <para
+        >
         Current usage:
          (1) C# conditional access expression (? or ?. operator).
          (2) VB conditional access expression (? or ?. operator).
@@ -1419,19 +1865,35 @@
     </Property>
     <Property Name="WhenNotNull" Type="IOperation">
       <Comments>
-        <summary>
-          Operation to be evaluated if <see cref="Operation" /> is non null.
-        </summary>
+        <summary
+          >
+          Operation to be evaluated if <see
+           cref="Operation" />
+
+           is non null.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IConditionalAccessInstanceOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
-        Represents the value of a conditionally-accessed operation within <see cref="IConditionalAccessOperation.WhenNotNull" />.
-        For a conditional access operation of the form <c>someExpr?.Member</c>, this operation is used as the InstanceReceiver for the right operation <c>Member</c>.
+      <summary
+        >
+        Represents the value of a conditionally-accessed operation within <see
+         cref="IConditionalAccessOperation.WhenNotNull" />
+
+        .
+        For a conditional access operation of the form <c
+        >someExpr?.Member</c>
+
+        , this operation is used as the InstanceReceiver for the right operation <c
+        >Member</c>
+
+        .
         See https://github.com/dotnet/roslyn/issues/21279#issuecomment-323153041 for more details.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# conditional access instance expression.
          (2) VB conditional access instance expression.
@@ -1439,11 +1901,18 @@
       </summary>
     </Comments>
   </Node>
-  <Node Name="IInterpolatedStringOperation" Base="IOperation" HasType="true" HasConstantValue="true">
+  <Node
+    Name="IInterpolatedStringOperation"
+    Base="IOperation"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an interpolated string.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# interpolated string expression.
          (2) VB interpolated string expression.
@@ -1452,17 +1921,24 @@
     </Comments>
     <Property Name="Parts" Type="ImmutableArray&lt;IInterpolatedStringContentOperation&gt;">
       <Comments>
-        <summary>
-          Constituent parts of interpolated string, each of which is an <see cref="IInterpolatedStringContentOperation" />.
-        </summary>
+        <summary
+          >
+          Constituent parts of interpolated string, each of which is an <see
+           cref="IInterpolatedStringContentOperation" />
+
+          .
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IAnonymousObjectCreationOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a creation of anonymous object.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# "new { ... }" expression
          (2) VB "New With { ... }" expression
@@ -1471,19 +1947,35 @@
     </Comments>
     <Property Name="Initializers" Type="ImmutableArray&lt;IOperation&gt;">
       <Comments>
-        <summary>
+        <summary
+          >
           Property initializers.
-          Each initializer is an <see cref="ISimpleAssignmentOperation" />, with an <see cref="IPropertyReferenceOperation" />
-          as the target whose Instance is an <see cref="IInstanceReferenceOperation" /> with <see cref="InstanceReferenceKind.ImplicitReceiver" /> kind.
-        </summary>
+          Each initializer is an <see
+           cref="ISimpleAssignmentOperation" />
+
+          , with an <see
+           cref="IPropertyReferenceOperation" />
+
+          
+          as the target whose Instance is an <see
+           cref="IInstanceReferenceOperation" />
+
+           with <see
+           cref="InstanceReferenceKind.ImplicitReceiver" />
+
+           kind.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IObjectOrCollectionInitializerOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an initialization for an object or collection creation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# object or collection initializer expression.
          (2) VB object or collection initializer expression.
@@ -1498,11 +1990,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IMemberInitializerOperation" Base="IOperation" ChildrenOrder="InitializedMember,Initializer" HasType="true">
+  <Node
+    Name="IMemberInitializerOperation"
+    Base="IOperation"
+    ChildrenOrder="InitializedMember,Initializer"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an initialization of member within an object initializer with a nested object or collection initializer.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# nested member initializer expression.
           For example, given an object creation with initializer "new Class() { X = x, Y = { x, y, 3 }, Z = { X = z } }",
@@ -1512,9 +2011,14 @@
     </Comments>
     <Property Name="InitializedMember" Type="IOperation">
       <Comments>
-        <summary>
-          Initialized member reference <see cref="IMemberReferenceOperation" /> or an invalid operation for error cases.
-        </summary>
+        <summary
+          >
+          Initialized member reference <see
+           cref="IMemberReferenceOperation" />
+
+           or an invalid operation for error cases.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Initializer" Type="IObjectOrCollectionInitializerOperation">
@@ -1524,15 +2028,33 @@
     </Property>
   </Node>
   <Node Name="ICollectionElementInitializerOperation" Base="IOperation" SkipClassGeneration="true">
-    <Obsolete Error="true">"ICollectionElementInitializerOperation has been replaced with " + nameof(IInvocationOperation) + " and " + nameof(IDynamicInvocationOperation)</Obsolete>
+    <Obsolete Error="true"
+      >"ICollectionElementInitializerOperation has been replaced with " + nameof(IInvocationOperation) + " and " + nameof(IDynamicInvocationOperation)</Obsolete
+    >
     <Comments>
-      <summary>
+      <summary
+        >
         Obsolete interface that used to represent a collection element initializer. It has been replaced by
-        <see cref="IInvocationOperation" /> and <see cref="IDynamicInvocationOperation" />, as appropriate.
-        <para>
+        <see
+         cref="IInvocationOperation" />
+
+         and <see
+         cref="IDynamicInvocationOperation" />
+
+        , as appropriate.
+        <para
+
+          >
         Current usage:
-          None. This API has been obsoleted in favor of <see cref="IInvocationOperation" /> and <see cref="IDynamicInvocationOperation" />.
-        </para>
+          None. This API has been obsoleted in favor of <see
+           cref="IInvocationOperation" />
+
+           and <see
+           cref="IDynamicInvocationOperation" />
+
+          .
+        </para
+        >
       </summary>
     </Comments>
     <Property Name="AddMethod" Type="IMethodSymbol" />
@@ -1541,9 +2063,14 @@
   </Node>
   <Node Name="INameOfOperation" Base="IOperation" HasType="true" HasConstantValue="true">
     <Comments>
-      <summary>
-        Represents an operation that gets a string value for the <see cref="Argument" /> name.
-        <para>
+      <summary
+        >
+        Represents an operation that gets a string value for the <see
+         cref="Argument" />
+
+         name.
+        <para
+        >
         Current usage:
          (1) C# nameof expression.
          (2) VB NameOf expression.
@@ -1558,9 +2085,11 @@
   </Node>
   <Node Name="ITupleOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a tuple with one or more elements.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# tuple expression.
          (2) VB tuple expression.
@@ -1574,19 +2103,26 @@
     </Property>
     <Property Name="NaturalType" Type="ITypeSymbol?">
       <Comments>
-        <summary>
+        <summary
+          >
           Natural type of the tuple, or null if tuple doesn't have a natural type.
-          Natural type can be different from <see cref="IOperation.Type" /> depending on the
+          Natural type can be different from <see
+           cref="IOperation.Type" />
+
+           depending on the
           conversion context, in which the tuple is used.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IDynamicObjectCreationOperation" Base="IOperation" SkipClassGeneration="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an object creation with a dynamically bound constructor.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# "new" expression with dynamic argument(s).
          (2) VB late bound "New" expression.
@@ -1606,9 +2142,11 @@
   </Node>
   <Node Name="IDynamicMemberReferenceOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to a member of a class, struct, or module that is dynamically bound.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# dynamic member reference expression.
          (2) VB late bound member reference expression.
@@ -1632,28 +2170,49 @@
     </Property>
     <Property Name="ContainingType" Type="ITypeSymbol?">
       <Comments>
-        <summary>
-          The containing type of the referenced member, if different from type of the <see cref="Instance" />.
-        </summary>
+        <summary
+          >
+          The containing type of the referenced member, if different from type of the <see
+           cref="Instance" />
+
+          .
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IDynamicInvocationOperation" Base="IOperation" SkipClassGeneration="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a invocation that is dynamically bound.
-        <para>
+        <para
+
+          >
         Current usage:
          (1) C# dynamic invocation expression.
          (2) C# dynamic collection element initializer.
-             For example, in the following collection initializer: <code>new C() { do1, do2, do3 }</code> where
-             the doX objects are of type dynamic, we'll have 3 <see cref="IDynamicInvocationOperation" /> with do1, do2, and
+             For example, in the following collection initializer: <code
+          >new C() { do1, do2, do3 }</code>
+
+           where
+             the doX objects are of type dynamic, we'll have 3 <see
+           cref="IDynamicInvocationOperation" />
+
+           with do1, do2, and
              do3 as their arguments.
          (3) VB late bound invocation expression.
          (4) VB dynamic collection element initializer.
-             Similar to the C# example, <code>New C() From {do1, do2, do3}</code> will generate 3 <see cref="IDynamicInvocationOperation" />
+             Similar to the C# example, <code
+          >New C() From {do1, do2, do3}</code>
+
+           will generate 3 <see
+           cref="IDynamicInvocationOperation" />
+
+          
              nodes with do1, do2, and do3 as their arguments, respectively.
-        </para>
+        </para
+        >
       </summary>
     </Comments>
     <Property Name="Operation" Type="IOperation">
@@ -1669,9 +2228,11 @@
   </Node>
   <Node Name="IDynamicIndexerAccessOperation" Base="IOperation" SkipClassGeneration="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an indexer access that is dynamically bound.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# dynamic indexer access expression.
         </para>
@@ -1690,14 +2251,16 @@
   </Node>
   <Node Name="ITranslatedQueryOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an unrolled/lowered query operation.
         For example, for a C# query expression "from x in set where x.Name != null select x.Name", the Operation tree has the following shape:
           ITranslatedQueryExpression
             IInvocationExpression ('Select' invocation for "select x.Name")
               IInvocationExpression ('Where' invocation for "where x.Name != null")
                 IInvocationExpression ('From' invocation for "from x in set")
-        <para>
+        <para
+        >
         Current usage:
          (1) C# query expression.
          (2) VB query expression.
@@ -1712,9 +2275,11 @@
   </Node>
   <Node Name="IDelegateCreationOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a delegate creation. This is created whenever a new delegate is created.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# delegate creation expression.
          (2) VB delegate creation expression.
@@ -1729,9 +2294,11 @@
   </Node>
   <Node Name="IDefaultValueOperation" Base="IOperation" HasType="true" HasConstantValue="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a default value operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# default value expression.
         </para>
@@ -1740,9 +2307,17 @@
   </Node>
   <Node Name="ITypeOfOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
-        Represents an operation that gets <see cref="System.Type" /> for the given <see cref="TypeOperand" />.
-        <para>
+      <summary
+        >
+        Represents an operation that gets <see
+         cref="System.Type" />
+
+         for the given <see
+         cref="TypeOperand" />
+
+        .
+        <para
+        >
         Current usage:
          (1) C# typeof expression.
          (2) VB GetType expression.
@@ -1757,9 +2332,11 @@
   </Node>
   <Node Name="ISizeOfOperation" Base="IOperation" HasType="true" HasConstantValue="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation to compute the size of a given type.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# sizeof expression.
         </para>
@@ -1773,9 +2350,11 @@
   </Node>
   <Node Name="IAddressOfOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation that creates a pointer value by taking the address of a reference.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# address of expression
         </para>
@@ -1789,9 +2368,11 @@
   </Node>
   <Node Name="IIsPatternOperation" Base="IOperation" ChildrenOrder="Value,Pattern" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation that tests if a value matches a specific pattern.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# is pattern expression. For example, "x is int i".
         </para>
@@ -1810,15 +2391,37 @@
   </Node>
   <Node Name="IIncrementOrDecrementOperation" Base="IOperation" HasType="true">
     <OperationKind>
-      <Entry Name="Increment" Value="0x42" ExtraDescription="This is used as an increment operator"/>
-      <Entry Name="Decrement" Value="0x44" ExtraDescription="This is used as a decrement operator"/>
+      <Entry
+        Name="Increment"
+        Value="0x42"
+        ExtraDescription="This is used as an increment operator"
+      />
+      <Entry
+        Name="Decrement"
+        Value="0x44"
+        ExtraDescription="This is used as a decrement operator"
+      />
     </OperationKind>
     <Comments>
-      <summary>
-        Represents an <see cref="OperationKind.Increment" /> or <see cref="OperationKind.Decrement" /> operation.
-        Note that this operation is different from an <see cref="IUnaryOperation" /> as it mutates the <see cref="Target" />,
+      <summary
+        >
+        Represents an <see
+         cref="OperationKind.Increment" />
+
+         or <see
+         cref="OperationKind.Decrement" />
+
+         operation.
+        Note that this operation is different from an <see
+         cref="IUnaryOperation" />
+
+         as it mutates the <see
+         cref="Target" />
+
+        ,
         while unary operator expression does not mutate it's operand.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# increment expression or decrement expression.
         </para>
@@ -1827,25 +2430,40 @@
     <Property Name="IsPostfix" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if this is a postfix expression. <see langword="false" /> if this is a prefix expression.
-        </summary>
+          <see langword="true" />
+
+           if this is a postfix expression. <see
+           langword="false" />
+
+           if this is a prefix expression.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsLifted" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if this is a 'lifted' increment operator.  When there
+          <see langword="true" />
+
+           if this is a 'lifted' increment operator.  When there
           is an operator that is defined to work on a value type, 'lifted' operators are
-          created to work on the <see cref="System.Nullable{T}" /> versions of those
+          created to work on the <see
+           cref="System.Nullable{T}" />
+
+           versions of those
           value types.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
-          <see langword="true" /> if overflow checking is performed for the arithmetic operation.
-        </summary>
+          <see langword="true" />
+
+           if overflow checking is performed for the arithmetic operation.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Target" Type="IOperation">
@@ -1860,18 +2478,28 @@
     </Property>
     <Property Name="ConstrainedToType" Type="ITypeSymbol?">
       <Comments>
-        <summary>
-          Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
-          Null if <see cref="OperatorMethod" /> is resolved statically, or is null.
-        </summary>
+        <summary
+          >
+          Type parameter which runtime type will be used to resolve virtual invocation of the <see
+           cref="OperatorMethod" />
+
+          , if any.
+          Null if <see
+           cref="OperatorMethod" />
+
+           is resolved statically, or is null.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IThrowOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an operation to throw an exception.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# throw expression.
          (2) C# throw statement.
@@ -1885,11 +2513,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IDeconstructionAssignmentOperation" Base="IAssignmentOperation" ChildrenOrder="Target,Value" HasType="true">
+  <Node
+    Name="IDeconstructionAssignmentOperation"
+    Base="IAssignmentOperation"
+    ChildrenOrder="Target,Value"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a assignment with a deconstruction.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# deconstruction assignment expression.
         </para>
@@ -1898,9 +2533,17 @@
   </Node>
   <Node Name="IDeclarationExpressionOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
-        Represents a declaration expression operation. Unlike a regular variable declaration <see cref="IVariableDeclaratorOperation" /> and <see cref="IVariableDeclarationOperation" />, this operation represents an "expression" declaring a variable.
-        <para>
+      <summary
+        >
+        Represents a declaration expression operation. Unlike a regular variable declaration <see
+         cref="IVariableDeclaratorOperation" />
+
+         and <see
+         cref="IVariableDeclarationOperation" />
+
+        , this operation represents an "expression" declaring a variable.
+        <para
+        >
         Current usage:
          (1) C# declaration expression. For example,
          (a) "var (x, y)" is a deconstruction declaration expression with variables x and y.
@@ -1917,9 +2560,11 @@
   </Node>
   <Node Name="IOmittedArgumentOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an argument value that has been omitted in an invocation.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB omitted argument in an invocation expression.
         </para>
@@ -1928,9 +2573,11 @@
   </Node>
   <AbstractNode Name="ISymbolInitializerOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an initializer for a field, property, parameter or a local variable declaration.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# field, property, parameter or local variable initializer.
          (2) VB field(s), property, parameter or local variable initializer.
@@ -1939,9 +2586,14 @@
     </Comments>
     <Property Name="Locals" Type="ImmutableArray&lt;ILocalSymbol&gt;">
       <Comments>
-        <summary>
-          Local declared in and scoped to the <see cref="Value" />.
-        </summary>
+        <summary
+          >
+          Local declared in and scoped to the <see
+           cref="Value" />
+
+          .
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Value" Type="IOperation">
@@ -1952,9 +2604,11 @@
   </AbstractNode>
   <Node Name="IFieldInitializerOperation" Base="ISymbolInitializerOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an initialization of a field.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# field initializer with equals value clause.
          (2) VB field(s) initializer with equals value clause or AsNew clause. Multiple fields can be initialized with AsNew clause in VB.
@@ -1969,9 +2623,11 @@
   </Node>
   <Node Name="IVariableInitializerOperation" Base="ISymbolInitializerOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an initialization of a local variable.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# local variable initializer with equals value clause.
          (2) VB local variable initializer with equals value clause or AsNew clause.
@@ -1981,9 +2637,11 @@
   </Node>
   <Node Name="IPropertyInitializerOperation" Base="ISymbolInitializerOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an initialization of a property.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# property initializer with equals value clause.
          (2) VB property initializer with equals value clause or AsNew clause. Multiple properties can be initialized with 'WithEvents' declaration with AsNew clause in VB.
@@ -1998,9 +2656,11 @@
   </Node>
   <Node Name="IParameterInitializerOperation" Base="ISymbolInitializerOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an initialization of a parameter at the point of declaration.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# parameter initializer with equals value clause.
          (2) VB parameter initializer with equals value clause.
@@ -2015,9 +2675,11 @@
   </Node>
   <Node Name="IArrayInitializerOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents the initialization of an array instance.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# array initializer.
          (2) VB array initializer.
@@ -2030,7 +2692,11 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IVariableDeclaratorOperation" Base="IOperation" ChildrenOrder="IgnoredArguments,Initializer">
+  <Node
+    Name="IVariableDeclaratorOperation"
+    Base="IOperation"
+    ChildrenOrder="IgnoredArguments,Initializer"
+  >
     <Comments>
       <summary>Represents a single variable declarator and initializer.</summary>
       <para>
@@ -2053,11 +2719,19 @@
     <Property Name="Initializer" Type="IVariableInitializerOperation?">
       <Comments>
         <summary>Optional initializer of the variable.</summary>
-        <remarks>
-          If this variable is in an <see cref="IVariableDeclarationOperation" />, the initializer may be located
-          in the parent operation. Call <see cref="OperationExtensions.GetVariableInitializer(IVariableDeclaratorOperation)" />
+        <remarks
+          >
+          If this variable is in an <see
+           cref="IVariableDeclarationOperation" />
+
+          , the initializer may be located
+          in the parent operation. Call <see
+           cref="OperationExtensions.GetVariableInitializer(IVariableDeclaratorOperation)" />
+
+          
           to check in all locations. It is only possible to have initializers in both locations in VB invalid code scenarios.
-        </remarks>
+        </remarks
+        >
       </Comments>
     </Property>
     <Property Name="IgnoredArguments" Type="ImmutableArray&lt;IOperation&gt;">
@@ -2069,7 +2743,11 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IVariableDeclarationOperation" Base="IOperation" ChildrenOrder="IgnoredDimensions,Declarators,Initializer">
+  <Node
+    Name="IVariableDeclarationOperation"
+    Base="IOperation"
+    ChildrenOrder="IgnoredDimensions,Declarators,Initializer"
+  >
     <Comments>
       <summary>Represents a declarator that declares multiple individual variables.</summary>
       <para>
@@ -2079,20 +2757,33 @@
           (3) VB Dim statement declaration groups
           (4) VB Using statement variable declarations
       </para>
-      <remarks>
-        The initializer of this node is applied to all individual declarations in <see cref="Declarators" />. There cannot
+      <remarks
+        >
+        The initializer of this node is applied to all individual declarations in <see
+         cref="Declarators" />
+
+        . There cannot
         be initializers in both locations except in invalid code scenarios.
         In C#, this node will never have an initializer.
         This corresponds to the VariableDeclarationSyntax in C#, and the VariableDeclaratorSyntax in Visual Basic.
-      </remarks>
+      </remarks
+      >
     </Comments>
     <Property Name="Declarators" Type="ImmutableArray&lt;IVariableDeclaratorOperation&gt;">
       <Comments>
         <summary>Individual variable declarations declared by this multiple declaration.</summary>
-        <remarks>
-          All <see cref="IVariableDeclarationGroupOperation" /> will have at least 1 <see cref="IVariableDeclarationOperation" />,
+        <remarks
+          >
+          All <see
+           cref="IVariableDeclarationGroupOperation" />
+
+           will have at least 1 <see
+           cref="IVariableDeclarationOperation" />
+
+          ,
           even if the declaration group only declares 1 variable.
-        </remarks>
+        </remarks
+        >
       </Comments>
     </Property>
     <Property Name="Initializer" Type="IVariableInitializerOperation?">
@@ -2112,9 +2803,11 @@
   </Node>
   <Node Name="IArgumentOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an argument to a method invocation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# argument to an invocation expression, object creation expression, etc.
          (2) VB argument to an invocation expression, object creation expression, etc.
@@ -2147,11 +2840,17 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="ICatchClauseOperation" Base="IOperation" ChildrenOrder="ExceptionDeclarationOrExpression,Filter,Handler">
+  <Node
+    Name="ICatchClauseOperation"
+    Base="IOperation"
+    ChildrenOrder="ExceptionDeclarationOrExpression,Filter,Handler"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a catch clause.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# catch clause.
          (2) VB Catch clause.
@@ -2176,9 +2875,17 @@
     </Property>
     <Property Name="Locals" Type="ImmutableArray&lt;ILocalSymbol&gt;">
       <Comments>
-        <summary>
-          Locals declared by the <see cref="ExceptionDeclarationOrExpression" /> and/or <see cref="Filter" /> clause.
-        </summary>
+        <summary
+          >
+          Locals declared by the <see
+           cref="ExceptionDeclarationOrExpression" />
+
+           and/or <see
+           cref="Filter" />
+
+           clause.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Filter" Type="IOperation?">
@@ -2194,9 +2901,11 @@
   </Node>
   <Node Name="ISwitchCaseOperation" Base="IOperation" ChildrenOrder="Clauses,Body">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a switch case section with one or more case clauses to match and one or more operations to execute within the section.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# switch section for one or more case clause and set of statements to execute.
          (2) VB case block with a case statement for one or more case clause and set of statements to execute.
@@ -2220,24 +2929,52 @@
     </Property>
     <Property Name="Condition" Type="IOperation?" Internal="true">
       <Comments>
-        <summary>
-          Optional combined logical condition that accounts for all <see cref="Clauses"/>.
-          An instance of <see cref="IPlaceholderOperation"/> with kind <see cref="PlaceholderKind.SwitchOperationExpression"/>
-          is used to refer to the <see cref="ISwitchOperation.Value"/> in context of this expression.
-          It is not part of <see cref="Children"/> list and likely contains duplicate nodes for
-          nodes exposed by <see cref="Clauses"/>, like <see cref="ISingleValueCaseClauseOperation.Value"/>,
+        <summary
+          >
+          Optional combined logical condition that accounts for all <see
+           cref="Clauses" />
+
+          .
+          An instance of <see
+           cref="IPlaceholderOperation" />
+
+           with kind <see
+           cref="PlaceholderKind.SwitchOperationExpression" />
+
+          
+          is used to refer to the <see
+           cref="ISwitchOperation.Value" />
+
+           in context of this expression.
+          It is not part of <see
+           cref="Children" />
+
+           list and likely contains duplicate nodes for
+          nodes exposed by <see
+           cref="Clauses" />
+
+          , like <see
+           cref="ISingleValueCaseClauseOperation.Value" />
+
+          ,
           etc.
           Never set for C# at the moment.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <AbstractNode Name="ICaseClauseOperation" Base="IOperation">
-    <OperationKind Include="true" ExtraDescription="This is further differentiated by &lt;see cref=&quot;ICaseClauseOperation.CaseKind&quot;/&gt;." />
+    <OperationKind
+      Include="true"
+      ExtraDescription="This is further differentiated by &lt;see cref=&quot;ICaseClauseOperation.CaseKind&quot;/&gt;."
+    />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a case clause.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# case clause.
          (2) VB Case clause.
@@ -2258,9 +2995,11 @@
   <Node Name="IDefaultCaseClauseOperation" Base="ICaseClauseOperation">
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a default case clause.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# default clause.
          (2) VB Case Else clause.
@@ -2268,12 +3007,18 @@
       </summary>
     </Comments>
   </Node>
-  <Node Name="IPatternCaseClauseOperation" Base="ICaseClauseOperation" ChildrenOrder="Pattern,Guard">
+  <Node
+    Name="IPatternCaseClauseOperation"
+    Base="ICaseClauseOperation"
+    ChildrenOrder="Pattern,Guard"
+  >
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a case clause with a pattern and an optional guard operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# pattern case clause.
         </para>
@@ -2298,12 +3043,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IRangeCaseClauseOperation" Base="ICaseClauseOperation" ChildrenOrder="MinimumValue,MaximumValue">
+  <Node
+    Name="IRangeCaseClauseOperation"
+    Base="ICaseClauseOperation"
+    ChildrenOrder="MinimumValue,MaximumValue"
+  >
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a case clause with range of values for comparison.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB range case clause of the form "Case x To y".
         </para>
@@ -2323,9 +3074,11 @@
   <Node Name="IRelationalCaseClauseOperation" Base="ICaseClauseOperation">
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a case clause with custom relational operator for comparison.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB relational case clause of the form "Case Is op x".
         </para>
@@ -2345,9 +3098,11 @@
   <Node Name="ISingleValueCaseClauseOperation" Base="ICaseClauseOperation">
     <OperationKind Include="false" />
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a case clause with a single value for comparison.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# case clause of the form "case x"
          (2) VB case clause of the form "Case x".
@@ -2362,9 +3117,11 @@
   </Node>
   <AbstractNode Name="IInterpolatedStringContentOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a constituent part of an interpolated string.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# interpolated string content.
          (2) VB interpolated string content.
@@ -2374,9 +3131,11 @@
   </AbstractNode>
   <Node Name="IInterpolatedStringTextOperation" Base="IInterpolatedStringContentOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a constituent string literal part of an interpolated string operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# interpolated string text.
          (2) VB interpolated string text.
@@ -2389,11 +3148,17 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IInterpolationOperation" Base="IInterpolatedStringContentOperation" ChildrenOrder="Expression,Alignment,FormatString">
+  <Node
+    Name="IInterpolationOperation"
+    Base="IInterpolatedStringContentOperation"
+    ChildrenOrder="Expression,Alignment,FormatString"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a constituent interpolation part of an interpolated string operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# interpolation part.
          (2) VB interpolation part.
@@ -2418,9 +3183,11 @@
   </Node>
   <AbstractNode Name="IPatternOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a pattern matching operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# pattern.
         </para>
@@ -2439,9 +3206,11 @@
   </AbstractNode>
   <Node Name="IConstantPatternOperation" Base="IPatternOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a pattern with a constant value.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# constant pattern.
         </para>
@@ -2455,9 +3224,11 @@
   </Node>
   <Node Name="IDeclarationPatternOperation" Base="IPatternOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a pattern that declares a symbol.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# declaration pattern.
         </para>
@@ -2465,9 +3236,14 @@
     </Comments>
     <Property Name="MatchedType" Type="ITypeSymbol?">
       <Comments>
-        <summary>
-          The type explicitly specified, or null if it was inferred (e.g. using <code>var</code> in C#).
-        </summary>
+        <summary
+          >
+          The type explicitly specified, or null if it was inferred (e.g. using <code
+          >var</code>
+
+           in C#).
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="MatchesNull" Type="bool">
@@ -2485,15 +3261,28 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="ITupleBinaryOperation" Base="IOperation" VisitorName="VisitTupleBinaryOperator" ChildrenOrder="LeftOperand,RightOperand" HasType="true">
+  <Node
+    Name="ITupleBinaryOperation"
+    Base="IOperation"
+    VisitorName="VisitTupleBinaryOperator"
+    ChildrenOrder="LeftOperand,RightOperand"
+    HasType="true"
+  >
     <OperationKind>
       <Entry Name="TupleBinary" Value="0x57" />
-      <Entry Name="TupleBinaryOperator" Value="0x57" EditorBrowsable="false" ExtraDescription="Use &lt;see cref=&quot;TupleBinary&quot;/&gt; instead." />
+      <Entry
+        Name="TupleBinaryOperator"
+        Value="0x57"
+        EditorBrowsable="false"
+        ExtraDescription="Use &lt;see cref=&quot;TupleBinary&quot;/&gt; instead."
+      />
     </OperationKind>
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a comparison of two operands that returns a bool type.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# tuple binary operator expression.
         </para>
@@ -2517,9 +3306,11 @@
   </Node>
   <AbstractNode Name="IMethodBodyBaseOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a method body operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# method body
         </para>
@@ -2536,30 +3327,54 @@
       </Comments>
     </Property>
   </AbstractNode>
-  <Node Name="IMethodBodyOperation" Base="IMethodBodyBaseOperation" VisitorName="VisitMethodBodyOperation" ChildrenOrder="BlockBody,ExpressionBody">
+  <Node
+    Name="IMethodBodyOperation"
+    Base="IMethodBodyBaseOperation"
+    VisitorName="VisitMethodBodyOperation"
+    ChildrenOrder="BlockBody,ExpressionBody"
+  >
     <OperationKind>
       <Entry Name="MethodBody" Value="0x58" />
-      <Entry Name="MethodBodyOperation" Value="0x58" EditorBrowsable="false" ExtraDescription="Use &lt;see cref=&quot;MethodBody&quot;/&gt; instead." />
+      <Entry
+        Name="MethodBodyOperation"
+        Value="0x58"
+        EditorBrowsable="false"
+        ExtraDescription="Use &lt;see cref=&quot;MethodBody&quot;/&gt; instead."
+      />
     </OperationKind>
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a method body operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# method body for non-constructor
         </para>
       </summary>
     </Comments>
   </Node>
-  <Node Name="IConstructorBodyOperation" Base="IMethodBodyBaseOperation" VisitorName="VisitConstructorBodyOperation" ChildrenOrder="Initializer,BlockBody,ExpressionBody">
+  <Node
+    Name="IConstructorBodyOperation"
+    Base="IMethodBodyBaseOperation"
+    VisitorName="VisitConstructorBodyOperation"
+    ChildrenOrder="Initializer,BlockBody,ExpressionBody"
+  >
     <OperationKind>
       <Entry Name="ConstructorBody" Value="0x59" />
-      <Entry Name="ConstructorBodyOperation" Value="0x59" EditorBrowsable="false" ExtraDescription="Use &lt;see cref=&quot;ConstructorBody&quot;/&gt; instead." />
+      <Entry
+        Name="ConstructorBodyOperation"
+        Value="0x59"
+        EditorBrowsable="false"
+        ExtraDescription="Use &lt;see cref=&quot;ConstructorBody&quot;/&gt; instead."
+      />
     </OperationKind>
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a constructor method body operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# method body for constructor declaration
         </para>
@@ -2567,7 +3382,12 @@
     </Comments>
     <Property Name="Locals" Type="ImmutableArray&lt;ILocalSymbol&gt;">
       <Comments>
-        <summary>Local declarations contained within the <see cref="Initializer" />.</summary>
+        <summary
+          >Local declarations contained within the <see
+           cref="Initializer" />
+
+          .</summary
+        >
       </Comments>
     </Property>
     <Property Name="Initializer" Type="IOperation?">
@@ -2576,11 +3396,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IDiscardOperation" Base="IOperation" VisitorName="VisitDiscardOperation" HasType="true">
+  <Node
+    Name="IDiscardOperation"
+    Base="IOperation"
+    VisitorName="VisitDiscardOperation"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a discard operation.
-        <para>
+        <para
+        >
         Current usage: C# discard expressions
         </para>
       </summary>
@@ -2593,10 +3420,15 @@
   </Node>
   <Node Name="IFlowCaptureOperation" Base="IOperation" Namespace="FlowAnalysis" SkipInCloner="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents that an intermediate result is being captured.
-        This node is produced only as part of a <see cref="ControlFlowGraph" />.
-      </summary>
+        This node is produced only as part of a <see
+         cref="ControlFlowGraph" />
+
+        .
+      </summary
+      >
     </Comments>
     <Property Name="Id" Type="CaptureId">
       <Comments>
@@ -2609,13 +3441,27 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IFlowCaptureReferenceOperation" Base="IOperation" Namespace="FlowAnalysis" HasType="true" HasConstantValue="true">
+  <Node
+    Name="IFlowCaptureReferenceOperation"
+    Base="IOperation"
+    Namespace="FlowAnalysis"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a point of use of an intermediate result captured earlier.
-        The fact of capturing the result is represented by <see cref="IFlowCaptureOperation" />.
-        This node is produced only as part of a <see cref="ControlFlowGraph" />.
-      </summary>
+        The fact of capturing the result is represented by <see
+         cref="IFlowCaptureOperation" />
+
+        .
+        This node is produced only as part of a <see
+         cref="ControlFlowGraph" />
+
+        .
+      </summary
+      >
     </Comments>
     <Property Name="Id" Type="CaptureId">
       <Comments>
@@ -2624,19 +3470,48 @@
     </Property>
     <Property Name="IsInitialization" Type="bool">
       <Comments>
-        <summary>True if this reference to the capture initializes the capture. Used when the capture is being initialized by being passed as an <code>out</code> parameter.</summary>
+        <summary
+          >True if this reference to the capture initializes the capture. Used when the capture is being initialized by being passed as an <code
+          >out</code>
+
+           parameter.</summary
+        >
       </Comments>
     </Property>
   </Node>
-  <Node Name="IIsNullOperation" Base="IOperation" Namespace="FlowAnalysis" SkipInCloner="true" HasType="true" HasConstantValue="true">
+  <Node
+    Name="IIsNullOperation"
+    Base="IOperation"
+    Namespace="FlowAnalysis"
+    SkipInCloner="true"
+    HasType="true"
+    HasConstantValue="true"
+  >
     <Comments>
-      <summary>
-        Represents result of checking whether the <see cref="Operand" /> is null.
-        For reference types this checks if the <see cref="Operand" /> is a null reference,
-        for nullable types this checks if the <see cref="Operand" /> doesn’t have a value.
-        The node is produced as part of a flow graph during rewrite of <see cref="ICoalesceOperation" />
-        and <see cref="IConditionalAccessOperation" /> nodes.
-      </summary>
+      <summary
+        >
+        Represents result of checking whether the <see
+         cref="Operand" />
+
+         is null.
+        For reference types this checks if the <see
+         cref="Operand" />
+
+         is a null reference,
+        for nullable types this checks if the <see
+         cref="Operand" />
+
+         doesn’t have a value.
+        The node is produced as part of a flow graph during rewrite of <see
+         cref="ICoalesceOperation" />
+
+        
+        and <see
+         cref="IConditionalAccessOperation" />
+
+         nodes.
+      </summary
+      >
     </Comments>
     <Property Name="Operand" Type="IOperation">
       <Comments>
@@ -2644,22 +3519,44 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="ICaughtExceptionOperation" Base="IOperation" Namespace="FlowAnalysis" SkipInCloner="true" HasType="true">
+  <Node
+    Name="ICaughtExceptionOperation"
+    Base="IOperation"
+    Namespace="FlowAnalysis"
+    SkipInCloner="true"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a exception instance passed by an execution environment to an exception filter or handler.
-        This node is produced only as part of a <see cref="ControlFlowGraph" />.
-      </summary>
+        This node is produced only as part of a <see
+         cref="ControlFlowGraph" />
+
+        .
+      </summary
+      >
     </Comments>
   </Node>
-  <Node Name="IStaticLocalInitializationSemaphoreOperation" Base="IOperation" Namespace="FlowAnalysis" SkipInCloner="true" HasType="true">
+  <Node
+    Name="IStaticLocalInitializationSemaphoreOperation"
+    Base="IOperation"
+    Namespace="FlowAnalysis"
+    SkipInCloner="true"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents the check during initialization of a VB static local that is initialized on the first call of the function, and never again.
         If the semaphore operation returns true, the static local has not yet been initialized, and the initializer will be run. If it returns
         false, then the local has already been initialized, and the static local initializer region will be skipped.
-        This node is produced only as part of a <see cref="ControlFlowGraph" />.
-      </summary>
+        This node is produced only as part of a <see
+         cref="ControlFlowGraph" />
+
+        .
+      </summary
+      >
     </Comments>
     <Property Name="Local" Type="ILocalSymbol">
       <Comments>
@@ -2667,18 +3564,37 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IFlowAnonymousFunctionOperation" Base="IOperation" Namespace="FlowAnalysis" SkipClassGeneration="true">
+  <Node
+    Name="IFlowAnonymousFunctionOperation"
+    Base="IOperation"
+    Namespace="FlowAnalysis"
+    SkipClassGeneration="true"
+  >
     <Comments>
-      <summary>
-        Represents an anonymous function operation in context of a <see cref="ControlFlowGraph" />.
-        <para>
+      <summary
+        >
+        Represents an anonymous function operation in context of a <see
+         cref="ControlFlowGraph" />
+
+        .
+        <para
+        >
         Current usage:
          (1) C# lambda expression.
          (2) VB anonymous delegate expression.
         </para>
-        A <see cref="ControlFlowGraph" /> for the body of the anonymous function is available from
-        the enclosing <see cref="ControlFlowGraph" />.
-      </summary>
+
+        
+        A <see
+         cref="ControlFlowGraph" />
+
+         for the body of the anonymous function is available from
+        the enclosing <see
+         cref="ControlFlowGraph" />
+
+        .
+      </summary
+      >
     </Comments>
     <Property Name="Symbol" Type="IMethodSymbol">
       <Comments>
@@ -2686,25 +3602,63 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="ICoalesceAssignmentOperation" Base="IAssignmentOperation" ChildrenOrder="Target,Value" HasType="true">
+  <Node
+    Name="ICoalesceAssignmentOperation"
+    Base="IAssignmentOperation"
+    ChildrenOrder="Target,Value"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a coalesce assignment operation with a target and a conditionally-evaluated value:
-        (1) <see cref="IAssignmentOperation.Target" /> is evaluated for null. If it is null, <see cref="IAssignmentOperation.Value" /> is evaluated and assigned to target.
-        (2) <see cref="IAssignmentOperation.Value" /> is conditionally evaluated if <see cref="IAssignmentOperation.Target" /> is null, and the result is assigned into <see cref="IAssignmentOperation.Target" />.
-        The result of the entire expression is<see cref="IAssignmentOperation.Target" />, which is only evaluated once.
-        <para>
+        (1) <see
+         cref="IAssignmentOperation.Target" />
+
+         is evaluated for null. If it is null, <see
+         cref="IAssignmentOperation.Value" />
+
+         is evaluated and assigned to target.
+        (2) <see
+         cref="IAssignmentOperation.Value" />
+
+         is conditionally evaluated if <see
+         cref="IAssignmentOperation.Target" />
+
+         is null, and the result is assigned into <see
+         cref="IAssignmentOperation.Target" />
+
+        .
+        The result of the entire expression is<see
+         cref="IAssignmentOperation.Target" />
+
+        , which is only evaluated once.
+        <para
+
+          >
         Current usage:
-         (1) C# null-coalescing assignment operation <code>Target ??= Value</code>.
-        </para>
+         (1) C# null-coalescing assignment operation <code
+          >Target ??= Value</code>
+
+          .
+        </para
+        >
       </summary>
     </Comments>
   </Node>
-  <Node Name="IRangeOperation" Base="IOperation" VisitorName="VisitRangeOperation" ChildrenOrder="LeftOperand,RightOperand" HasType="true">
+  <Node
+    Name="IRangeOperation"
+    Base="IOperation"
+    VisitorName="VisitRangeOperation"
+    ChildrenOrder="LeftOperand,RightOperand"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a range operation.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# range expressions
         </para>
@@ -2723,11 +3677,17 @@
     <Property Name="IsLifted" Type="bool">
       <Comments>
         <summary>
-          <code>true</code> if this is a 'lifted' range operation.  When there is an
+          <code>true</code>
+
+           if this is a 'lifted' range operation.  When there is an
           operator that is defined to work on a value type, 'lifted' operators are
-          created to work on the <see cref="System.Nullable{T}" /> versions of those
+          created to work on the <see
+           cref="System.Nullable{T}" />
+
+           versions of those
           value types.
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Method" Type="IMethodSymbol?">
@@ -2741,9 +3701,11 @@
   </Node>
   <Node Name="IReDimOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents the ReDim operation to re-allocate storage space for array variables.
-        <para>
+        <para
+        >
         Current usage:
          (1) VB ReDim statement.
         </para>
@@ -2762,9 +3724,14 @@
   </Node>
   <Node Name="IReDimClauseOperation" Base="IOperation" ChildrenOrder="Operand,DimensionSizes">
     <Comments>
-      <summary>
-        Represents an individual clause of an <see cref="IReDimOperation" /> to re-allocate storage space for a single array variable.
-        <para>
+      <summary
+        >
+        Represents an individual clause of an <see
+         cref="IReDimOperation" />
+
+         to re-allocate storage space for a single array variable.
+        <para
+        >
         Current usage:
          (1) VB ReDim clause.
         </para>
@@ -2781,7 +3748,11 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IRecursivePatternOperation" Base="IPatternOperation" ChildrenOrder="DeconstructionSubpatterns,PropertySubpatterns">
+  <Node
+    Name="IRecursivePatternOperation"
+    Base="IPatternOperation"
+    ChildrenOrder="DeconstructionSubpatterns,PropertySubpatterns"
+  >
     <Comments>
       <summary>Represents a C# recursive pattern.</summary>
     </Comments>
@@ -2792,11 +3763,19 @@
     </Property>
     <Property Name="DeconstructSymbol" Type="ISymbol?">
       <Comments>
-        <summary>
-          The symbol, if any, used for the fetching values for subpatterns. This is either a <code>Deconstruct</code>
-          method, the type <code>System.Runtime.CompilerServices.ITuple</code>, or null (for example, in
+        <summary
+          >
+          The symbol, if any, used for the fetching values for subpatterns. This is either a <code
+          >Deconstruct</code>
+
+          
+          method, the type <code
+          >System.Runtime.CompilerServices.ITuple</code>
+
+          , or null (for example, in
           error cases or when matching a tuple type).
-        </summary>
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="DeconstructionSubpatterns" Type="ImmutableArray&lt;IPatternOperation&gt;">
@@ -2817,19 +3796,28 @@
   </Node>
   <Node Name="IDiscardPatternOperation" Base="IPatternOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a discard pattern.
-        <para>
+        <para
+        >
         Current usage: C# discard pattern
         </para>
       </summary>
     </Comments>
   </Node>
-  <Node Name="ISwitchExpressionOperation" Base="IOperation" ChildrenOrder="Value,Arms" HasType="true">
+  <Node
+    Name="ISwitchExpressionOperation"
+    Base="IOperation"
+    ChildrenOrder="Value,Arms"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a switch expression.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# switch expression.
         </para>
@@ -2846,9 +3834,9 @@
       </Comments>
     </Property>
     <Property Name="IsExhaustive" Type="bool">
-        <Comments>
-            <summary>True if the switch expressions arms cover every possible input value.</summary>
-        </Comments>
+      <Comments>
+        <summary>True if the switch expressions arms cover every possible input value.</summary>
+      </Comments>
     </Property>
   </Node>
   <Node Name="ISwitchExpressionArmOperation" Base="IOperation" ChildrenOrder="Pattern,Guard,Value">
@@ -2885,10 +3873,18 @@
     </Comments>
     <Property Name="Member" Type="IOperation">
       <Comments>
-        <summary>
-          The member being matched in a property subpattern.  This can be a <see cref="IMemberReferenceOperation" />
-          in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.
-        </summary>
+        <summary
+          >
+          The member being matched in a property subpattern.  This can be a <see
+           cref="IMemberReferenceOperation" />
+
+          
+          in non-error cases, or an <see
+           cref="IInvalidOperation" />
+
+           in error cases.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Pattern" Type="IPatternOperation">
@@ -2897,14 +3893,26 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IAggregateQueryOperation" Base="IOperation" Internal="true" ChildrenOrder="Group,Aggregation" HasType="true">
+  <Node
+    Name="IAggregateQueryOperation"
+    Base="IOperation"
+    Internal="true"
+    ChildrenOrder="Group,Aggregation"
+    HasType="true"
+  >
     <Comments>
       <summary>Represents a standalone VB query Aggregate operation with more than one item in Into clause.</summary>
     </Comments>
     <Property Name="Group" Type="IOperation" />
     <Property Name="Aggregation" Type="IOperation" />
   </Node>
-  <Node Name="IFixedOperation" Base="IOperation" Internal="true" SkipInVisitor="true" ChildrenOrder="Variables,Body">
+  <Node
+    Name="IFixedOperation"
+    Base="IOperation"
+    Internal="true"
+    SkipInVisitor="true"
+    ChildrenOrder="Variables,Body"
+  >
     <!-- Making this public is tracked by https://github.com/dotnet/roslyn/issues/21281 -->
     <Comments>
       <summary>Represents a C# fixed statement.</summary>
@@ -2927,9 +3935,11 @@
   </Node>
   <Node Name="INoPiaObjectCreationOperation" Base="IOperation" Internal="true" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a creation of an instance of a NoPia interface, i.e. new I(), where I is an embedded NoPia interface.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# NoPia interface instance creation expression.
          (2) VB NoPia interface instance creation expression.
@@ -2951,11 +3961,19 @@
     </Comments>
     <Property Name="PlaceholderKind" Type="PlaceholderKind" />
   </Node>
-  <Node Name="IPointerIndirectionReferenceOperation" Base="IOperation" SkipClassGeneration="true" Internal="true" HasType="true">
+  <Node
+    Name="IPointerIndirectionReferenceOperation"
+    Base="IOperation"
+    SkipClassGeneration="true"
+    Internal="true"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference through a pointer.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# pointer indirection reference expression.
         </para>
@@ -2969,9 +3987,17 @@
   </Node>
   <Node Name="IWithStatementOperation" Base="IOperation" Internal="true" ChildrenOrder="Value,Body">
     <Comments>
-      <summary>
-        Represents a <see cref="Body" /> of operations that are executed with implicit reference to the <see cref="Value" /> for member references.
-        <para>
+      <summary
+        >
+        Represents a <see
+         cref="Body" />
+
+         of operations that are executed with implicit reference to the <see
+         cref="Value" />
+
+         for member references.
+        <para
+        >
         Current usage:
          (1) VB With statement.
         </para>
@@ -2990,9 +4016,14 @@
   </Node>
   <Node Name="IUsingDeclarationOperation" Base="IOperation">
     <Comments>
-      <summary>
-        Represents using variable declaration, with scope spanning across the parent <see cref="IBlockOperation"/>.
-        <para>
+      <summary
+        >
+        Represents using variable declaration, with scope spanning across the parent <see
+         cref="IBlockOperation" />
+
+        .
+        <para
+        >
         Current Usage:
          (1) C# using declaration
          (1) C# asynchronous using declaration
@@ -3017,9 +4048,11 @@
   </Node>
   <Node Name="INegatedPatternOperation" Base="IPatternOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a negated pattern.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# negated pattern.
         </para>
@@ -3031,11 +4064,17 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IBinaryPatternOperation" Base="IPatternOperation" ChildrenOrder="LeftPattern,RightPattern">
+  <Node
+    Name="IBinaryPatternOperation"
+    Base="IPatternOperation"
+    ChildrenOrder="LeftPattern,RightPattern"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a binary ("and" or "or") pattern.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# "and" and "or" patterns.
         </para>
@@ -3043,7 +4082,15 @@
     </Comments>
     <Property Name="OperatorKind" Type="BinaryOperatorKind">
       <Comments>
-        <summary>Kind of binary pattern; either <see cref="BinaryOperatorKind.And"/> or <see cref="BinaryOperatorKind.Or"/>.</summary>
+        <summary
+          >Kind of binary pattern; either <see
+           cref="BinaryOperatorKind.And" />
+
+           or <see
+           cref="BinaryOperatorKind.Or" />
+
+          .</summary
+        >
       </Comments>
     </Property>
     <Property Name="LeftPattern" Type="IPatternOperation">
@@ -3059,9 +4106,11 @@
   </Node>
   <Node Name="ITypePatternOperation" Base="IPatternOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a pattern comparing the input with a given type.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# type pattern.
         </para>
@@ -3069,17 +4118,24 @@
     </Comments>
     <Property Name="MatchedType" Type="ITypeSymbol">
       <Comments>
-        <summary>
-          The type explicitly specified, or null if it was inferred (e.g. using <code>var</code> in C#).
-        </summary>
+        <summary
+          >
+          The type explicitly specified, or null if it was inferred (e.g. using <code
+          >var</code>
+
+           in C#).
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IRelationalPatternOperation" Base="IPatternOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a pattern comparing the input with a constant value using a relational operator.
-        <para>
+        <para
+        >
         Current usage:
          (1) C# relational pattern.
         </para>
@@ -3098,9 +4154,11 @@
   </Node>
   <Node Name="IWithOperation" Base="IOperation" ChildrenOrder="Operand,Initializer" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents cloning of an object instance.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# with expression.
         </para>
@@ -3122,47 +4180,104 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IInterpolatedStringHandlerCreationOperation" Base="IOperation" ChildrenOrder="HandlerCreation,Content" HasType="true">
+  <Node
+    Name="IInterpolatedStringHandlerCreationOperation"
+    Base="IOperation"
+    ChildrenOrder="HandlerCreation,Content"
+    HasType="true"
+  >
     <Comments>
       <summary>Represents an interpolated string converted to a custom interpolated string handler type.</summary>
     </Comments>
     <Property Name="HandlerCreation" Type="IOperation">
       <Comments>
-        <summary>
-          The construction of the interpolated string handler instance. This can be an <see cref="IObjectCreationOperation"/> for valid code, and
-          <see cref="IDynamicObjectCreationOperation"/> or <see cref="IInvalidOperation"/> for invalid code.
-        </summary>
+        <summary
+          >
+          The construction of the interpolated string handler instance. This can be an <see
+           cref="IObjectCreationOperation" />
+
+           for valid code, and
+          <see
+           cref="IDynamicObjectCreationOperation" />
+
+           or <see
+           cref="IInvalidOperation" />
+
+           for invalid code.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="HandlerCreationHasSuccessParameter" Type="bool">
       <Comments>
-        <summary>
-          True if the last parameter of <see cref="HandlerCreation"/> is an out <see langword="bool"/> parameter that will be checked before executing the code in
-          <see cref="Content"/>. False otherwise.
-        </summary>
+        <summary
+          >
+          True if the last parameter of <see
+           cref="HandlerCreation" />
+
+           is an out <see
+           langword="bool" />
+
+           parameter that will be checked before executing the code in
+          <see
+           cref="Content" />
+
+          . False otherwise.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="HandlerAppendCallsReturnBool" Type="bool">
       <Comments>
-        <summary>
-          True if the AppendLiteral or AppendFormatted calls in nested <see cref="IInterpolatedStringOperation.Parts"/> return <see langword="bool"/>. When that is true, each part
+        <summary
+          >
+          True if the AppendLiteral or AppendFormatted calls in nested <see
+           cref="IInterpolatedStringOperation.Parts" />
+
+           return <see
+           langword="bool" />
+
+          . When that is true, each part
           will be conditional on the return of the part before it, only being executed when the Append call returns true. False otherwise.
-        </summary>
-        <remarks>
-          when this is true and <see cref="HandlerCreationHasSuccessParameter"/> is true, then the first part in nested <see cref="IInterpolatedStringOperation.Parts"/> is conditionally
-          run. If this is true and <see cref="HandlerCreationHasSuccessParameter"/> is false, then the first part is unconditionally run.
-          <br/>
+        </summary
+        >
+        <remarks
+          >
+          when this is true and <see
+           cref="HandlerCreationHasSuccessParameter" />
+
+           is true, then the first part in nested <see
+           cref="IInterpolatedStringOperation.Parts" />
+
+           is conditionally
+          run. If this is true and <see
+           cref="HandlerCreationHasSuccessParameter" />
+
+           is false, then the first part is unconditionally run.
+          <br
+           />
+
+          
           Just because this is true or false does not guarantee that all Append calls actually do return boolean values, as there could be dynamic calls or errors.
           It only governs what the compiler was expecting, based on the first calls it did see.
-        </remarks>
+        </remarks
+        >
       </Comments>
     </Property>
     <Property Name="Content" Type="IOperation">
       <Comments>
-        <summary>
-          The interpolated string expression or addition operation that makes up the content of this string. This is either an <see cref="IInterpolatedStringOperation"/>
-          or an <see cref="IInterpolatedStringAdditionOperation"/> operation.
-        </summary>
+        <summary
+          >
+          The interpolated string expression or addition operation that makes up the content of this string. This is either an <see
+           cref="IInterpolatedStringOperation" />
+
+          
+          or an <see
+           cref="IInterpolatedStringAdditionOperation" />
+
+           operation.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
@@ -3174,49 +4289,99 @@
     </Comments>
     <Property Name="Left" Type="IOperation">
       <Comments>
-        <summary>
-          The interpolated string expression or addition operation on the left side of the operator. This is either an <see cref="IInterpolatedStringOperation"/>
-          or an <see cref="IInterpolatedStringAdditionOperation"/> operation.
-        </summary>
+        <summary
+          >
+          The interpolated string expression or addition operation on the left side of the operator. This is either an <see
+           cref="IInterpolatedStringOperation" />
+
+          
+          or an <see
+           cref="IInterpolatedStringAdditionOperation" />
+
+           operation.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Right" Type="IOperation">
       <Comments>
-        <summary>
-          The interpolated string expression or addition operation on the right side of the operator. This is either an <see cref="IInterpolatedStringOperation"/>
-          or an <see cref="IInterpolatedStringAdditionOperation"/> operation.
-        </summary>
+        <summary
+          >
+          The interpolated string expression or addition operation on the right side of the operator. This is either an <see
+           cref="IInterpolatedStringOperation" />
+
+          
+          or an <see
+           cref="IInterpolatedStringAdditionOperation" />
+
+           operation.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IInterpolatedStringAppendOperation" Base="IInterpolatedStringContentOperation">
     <OperationKind>
-      <Entry Name="InterpolatedStringAppendLiteral" Value="0x74" ExtraDescription="This append is of a literal component"/>
-      <Entry Name="InterpolatedStringAppendFormatted" Value="0x75" ExtraDescription="This append is of an interpolation component"/>
-      <Entry Name="InterpolatedStringAppendInvalid" Value="0x76" ExtraDescription="This append is invalid"/>
+      <Entry
+        Name="InterpolatedStringAppendLiteral"
+        Value="0x74"
+        ExtraDescription="This append is of a literal component"
+      />
+      <Entry
+        Name="InterpolatedStringAppendFormatted"
+        Value="0x75"
+        ExtraDescription="This append is of an interpolation component"
+      />
+      <Entry
+        Name="InterpolatedStringAppendInvalid"
+        Value="0x76"
+        ExtraDescription="This append is invalid"
+      />
     </OperationKind>
     <Comments>
       <summary>Represents a call to either AppendLiteral or AppendFormatted as part of an interpolated string handler conversion.</summary>
     </Comments>
     <Property Name="AppendCall" Type="IOperation">
       <Comments>
-        <summary>
+        <summary
+          >
           If this interpolated string is subject to an interpolated string handler conversion, the construction of the interpolated string handler instance.
-          This can be an <see cref="IInvocationOperation"/>  or <see cref="IDynamicInvocationOperation"/> for valid code, and <see cref="IInvalidOperation"/> for invalid code.
-        </summary>
+          This can be an <see
+           cref="IInvocationOperation" />
+
+            or <see
+           cref="IDynamicInvocationOperation" />
+
+           for valid code, and <see
+           cref="IInvalidOperation" />
+
+           for invalid code.
+        </summary
+        >
       </Comments>
     </Property>
   </Node>
   <Node Name="IInterpolatedStringHandlerArgumentPlaceholderOperation" Base="IOperation">
     <Comments>
-      <summary>Represents an argument from the method call, indexer access, or constructor invocation that is creating the containing <see cref="IInterpolatedStringHandlerCreationOperation"/></summary>
+      <summary
+        >Represents an argument from the method call, indexer access, or constructor invocation that is creating the containing <see
+         cref="IInterpolatedStringHandlerCreationOperation" />
+      </summary>
     </Comments>
     <Property Name="ArgumentIndex" Type="int">
       <Comments>
-        <summary>
+        <summary
+          >
           The index of the argument of the method call, indexer, or object creation containing the interpolated string handler conversion this placeholder is referencing.
-          -1 if <see cref="PlaceholderKind" /> is anything other than <see cref="InterpolatedStringArgumentPlaceholderKind.CallsiteArgument"/>.
-        </summary>
+          -1 if <see
+           cref="PlaceholderKind" />
+
+           is anything other than <see
+           cref="InterpolatedStringArgumentPlaceholderKind.CallsiteArgument" />
+
+          .
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="PlaceholderKind" Type="InterpolatedStringArgumentPlaceholderKind">
@@ -3227,13 +4392,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IFunctionPointerInvocationOperation" Base="IOperation" ChildrenOrder="Target,Arguments" HasType="true">
+  <Node
+    Name="IFunctionPointerInvocationOperation"
+    Base="IOperation"
+    ChildrenOrder="Target,Arguments"
+    HasType="true"
+  >
     <Comments>
       <summary>
         Represents an invocation of a function pointer.
       </summary>
     </Comments>
-	<Property Name="Target" Type="IOperation">
+    <Property Name="Target" Type="IOperation">
       <Comments>
         <summary>Invoked pointer.</summary>
       </Comments>
@@ -3250,18 +4420,34 @@
     </Comments>
     <Property Name="LengthSymbol" Type="ISymbol?">
       <Comments>
-        <summary>
-          The <c>Length</c> or <c>Count</c> property that is used to fetch the length value.
-          Returns <c>null</c> if no such property is found.
-        </summary>
+        <summary
+          >
+          The <c
+          >Length</c>
+
+           or <c
+          >Count</c>
+
+           property that is used to fetch the length value.
+          Returns <c
+          >null</c>
+
+           if no such property is found.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IndexerSymbol" Type="ISymbol?">
       <Comments>
-        <summary>
+        <summary
+          >
           The indexer that is used to fetch elements.
-          Returns <c>null</c> for an array input.
-        </summary>
+          Returns <c
+          >null</c>
+
+           for an array input.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Patterns" Type="ImmutableArray&lt;IPatternOperation&gt;">
@@ -3285,9 +4471,14 @@
     </Comments>
     <Property Name="SliceSymbol" Type="ISymbol?">
       <Comments>
-        <summary>
-          The range indexer or the <c>Slice</c> method used to fetch the slice value.
-        </summary>
+        <summary
+          >
+          The range indexer or the <c
+          >Slice</c>
+
+           method used to fetch the slice value.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="Pattern" Type="IPatternOperation?">
@@ -3298,11 +4489,18 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IImplicitIndexerReferenceOperation" Base="IOperation" ChildrenOrder="Instance,Argument" HasType="true">
+  <Node
+    Name="IImplicitIndexerReferenceOperation"
+    Base="IOperation"
+    ChildrenOrder="Instance,Argument"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a reference to an implicit System.Index or System.Range indexer over a non-array type.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# implicit System.Index or System.Range indexer reference expression.
         </para>
@@ -3320,9 +4518,17 @@
     </Property>
     <Property Name="LengthSymbol" Type="ISymbol">
       <Comments>
-        <summary>
-          The <c>Length</c> or <c>Count</c> property that might be used to fetch the length value.
-        </summary>
+        <summary
+          >
+          The <c
+          >Length</c>
+
+           or <c
+          >Count</c>
+
+           property that might be used to fetch the length value.
+        </summary
+        >
       </Comments>
     </Property>
     <Property Name="IndexerSymbol" Type="ISymbol">
@@ -3335,9 +4541,11 @@
   </Node>
   <Node Name="IUtf8StringOperation" Base="IOperation" HasType="true" HasConstantValue="false">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a UTF-8 encoded byte representation of a string.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# UTF-8 string literal expression.
         </para>
@@ -3351,9 +4559,11 @@
   </Node>
   <Node Name="IAttributeOperation" Base="IOperation">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents the application of an attribute.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# attribute application.
           (2) VB attribute application.
@@ -3362,15 +4572,30 @@
     </Comments>
     <Property Name="Operation" Type="IOperation">
       <Comments>
-        <summary>The operation representing the attribute. This can be a <see cref="IObjectCreationOperation" /> in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.</summary>
+        <summary
+          >The operation representing the attribute. This can be a <see
+           cref="IObjectCreationOperation" />
+
+           in non-error cases, or an <see
+           cref="IInvalidOperation" />
+
+           in error cases.</summary
+        >
       </Comments>
     </Property>
   </Node>
-  <Node Name="IInlineArrayAccessOperation" Base="IOperation" ChildrenOrder="Instance,Argument" HasType="true">
+  <Node
+    Name="IInlineArrayAccessOperation"
+    Base="IOperation"
+    ChildrenOrder="Instance,Argument"
+    HasType="true"
+  >
     <Comments>
-      <summary>
+      <summary
+        >
         Represents an element reference or a slice operation over an inline array type.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# inline array access.
         </para>
@@ -3387,11 +4612,13 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="ICollectionExpressionOperation" Base="IOperation"  HasType="true">
+  <Node Name="ICollectionExpressionOperation" Base="IOperation" HasType="true">
     <Comments>
-      <summary>
+      <summary
+        >
         Represents a collection expression.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# collection expression.
         </para>
@@ -3399,9 +4626,11 @@
     </Comments>
     <Property Name="ConstructMethod" Type="IMethodSymbol?">
       <Comments>
-        <summary>
+        <summary
+          >
           Method used to construct the collection.
-          <para>
+          <para
+          >
             If the collection type is an array, span, array interface, or type parameter, the method is null;
             if the collection type has a [CollectionBuilder] attribute, the method is the builder method;
             otherwise, the method is the collection type constructor.
@@ -3411,9 +4640,11 @@
     </Property>
     <Property Name="Elements" Type="ImmutableArray&lt;IOperation&gt;">
       <Comments>
-        <summary>
+        <summary
+          >
           Collection expression elements.
-          <para>
+          <para
+          >
             If the element is an expression, the entry is the expression, with a conversion to
             the target element type if necessary;
             otherwise, the entry is an ISpreadOperation.
@@ -3423,10 +4654,12 @@
     </Property>
   </Node>
   <Node Name="ISpreadOperation" Base="IOperation" HasType="false">
-      <Comments>
-      <summary>
+    <Comments>
+      <summary
+        >
         Represents a collection expression spread element.
-        <para>
+        <para
+        >
           Current usage:
           (1) C# spread element.
         </para>
