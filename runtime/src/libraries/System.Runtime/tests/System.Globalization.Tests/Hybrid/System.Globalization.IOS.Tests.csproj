@@ -120,11 +120,18 @@
     <Compile Include="..\System\Globalization\TextElementEnumeratorTests.cs" />
     <Compile Include="..\System\Globalization\UnicodeCategoryTests.cs" />
     <!-- Helpers -->
-    <Compile Include="$(CommonTestPath)System\RandomDataGenerator.cs"
-             Link="..\Common\System\RandomDataGenerator.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\RandomDataGenerator.cs"
+      Link="..\Common\System\RandomDataGenerator.cs"
+    />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Private.Runtime.UnicodeData" Version="$(SystemPrivateRuntimeUnicodeDataVersion)" ExcludeAssets="contentFiles" GeneratePathProperty="true" />
+    <PackageReference
+      Include="System.Private.Runtime.UnicodeData"
+      Version="$(SystemPrivateRuntimeUnicodeDataVersion)"
+      ExcludeAssets="contentFiles"
+      GeneratePathProperty="true"
+    />
     <EmbeddedResource Include="$(PkgSystem_Private_Runtime_UnicodeData)\contentFiles\any\any\$(UnicodeUcdVersion).0\ucd\UnicodeData.txt">
       <Link>CharUnicodeInfo\UnicodeData.$(UnicodeUcdVersion).txt</Link>
       <LogicalName>UnicodeData.txt</LogicalName>

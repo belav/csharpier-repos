@@ -2,7 +2,8 @@
   <PropertyGroup>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
-    <Nullable>disable</Nullable> <!-- Disable nullable attributes as some tests depend on them not being present. -->
+    <Nullable>disable</Nullable>
+    <!-- Disable nullable attributes as some tests depend on them not being present. -->
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -21,7 +22,10 @@
     <Compile Include="System\ComponentModel\DataAnnotations\DataTypeAttributeTests.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\DisplayColumnAttributeTests.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\DisplayFormatAttributeTests.cs" />
-    <Compile Include="System\ComponentModel\DataAnnotations\DisplayFormatAttributeTests.netcoreapp.cs" Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'" />
+    <Compile
+      Include="System\ComponentModel\DataAnnotations\DisplayFormatAttributeTests.netcoreapp.cs"
+      Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'"
+    />
     <Compile Include="System\ComponentModel\DataAnnotations\EditableAttributeTests.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\EmailAddressAttributeTests.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\EnumDataTypeAttributeTests.cs" />
@@ -30,9 +34,15 @@
     <Compile Include="System\ComponentModel\DataAnnotations\MetadataTypeAttributeTests.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\MinLengthAttributeTests.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\PhoneAttributeTests.cs" />
-    <Compile Include="System\ComponentModel\DataAnnotations\RangeAttributeTests.cs" Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'" />
+    <Compile
+      Include="System\ComponentModel\DataAnnotations\RangeAttributeTests.cs"
+      Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'"
+    />
     <Compile Include="System\ComponentModel\DataAnnotations\RegularExpressionAttributeTests.cs" />
-    <Compile Include="System\ComponentModel\DataAnnotations\RegularExpressionAttributeTests.Core.cs" Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'" />
+    <Compile
+      Include="System\ComponentModel\DataAnnotations\RegularExpressionAttributeTests.Core.cs"
+      Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'"
+    />
     <Compile Include="System\ComponentModel\DataAnnotations\RequiredAttributeTests.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\ScaffoldColumnAttributeTests.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\Schema\ColumnAttributeTests.cs" />

@@ -2,24 +2,22 @@
 Description:  content with a type of jpeg and a value that is valid base64 produces no error
 Expect:       !Error
 -->
-
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title>Example Feed</title>
-  <link href="http://contoso.com/"/>
+  <link href="http://contoso.com/" />
   <updated>2003-12-13T18:30:02Z</updated>
   <author>
     <name>Author Name</name>
   </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
-
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
-    <link href="http://contoso.com/2003/12/13/atom03"/>
+    <link href="http://contoso.com/2003/12/13/atom03" />
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
-    <content type="image/jpeg">
+    <content type="image/jpeg"
+      >
     /9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
     HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
     MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABYAGoDAREA
@@ -47,7 +45,7 @@ Expect:       !Error
     HE2A/O9dqX0mmG6gP5bzXSMppGwnTh5q8pobDoOHmnKDYTpw805TQ2E6cPNOU0yqeiAPQOHmudsm
     zT1Iowxthbh5rhM7VaLdqirGrIsQI5BWQT2qgsdUClt+lXYgxA9qbRHohqrtR6Iap3A9CNU7gehG
     qbDBgHRdTYbKe0qAAOqCxqgdBBF0ClvwQRlCoLBAZQgMoQFggMoQGUIDKEBlHYgMqgYCyBkH/9k=
-    </content>
+    </content
+    >
   </entry>
-
 </feed>
