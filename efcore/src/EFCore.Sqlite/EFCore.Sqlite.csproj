@@ -1,7 +1,5 @@
 <Project>
-
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
-
   <PropertyGroup>
     <Description>SQLite database provider for Entity Framework Core.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -13,7 +11,6 @@
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Data.Common" />
     <Using Include="System.Diagnostics" />
@@ -40,26 +37,28 @@
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\EFCore.Sqlite.Core\EFCore.Sqlite.Core.csproj" PrivateAssets="contentfiles;build" />
-    <ProjectReference Condition="'$(BuildingByReSharper)' != 'true'" Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj" ReferenceOutputAssembly="False" OutputItemType="Analyzer" />
+    <ProjectReference
+      Include="..\EFCore.Sqlite.Core\EFCore.Sqlite.Core.csproj"
+      PrivateAssets="contentfiles;build"
+    />
+    <ProjectReference
+      Condition="'$(BuildingByReSharper)' != 'true'"
+      Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj"
+      ReferenceOutputAssembly="False"
+      OutputItemType="Analyzer"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.6" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="lib\**\*">
       <Pack>True</Pack>
       <PackagePath>lib</PackagePath>
     </None>
   </ItemGroup>
-
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-
   <Target Name="Compile" />
   <Target Name="CopyFilesToOutputDirectory" />
-
 </Project>

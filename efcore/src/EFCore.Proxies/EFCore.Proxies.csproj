@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Lazy loading proxies for Entity Framework Core.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -10,7 +9,6 @@
     <PackageTags>$(PackageTags);Lazy loading</PackageTags>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -33,20 +31,21 @@
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Shared\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="5.1.1" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\EFCore\EFCore.csproj" PrivateAssets="contentfiles;build" />
-    <ProjectReference Condition="'$(BuildingByReSharper)' != 'true'" Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj" ReferenceOutputAssembly="False" OutputItemType="Analyzer" />
+    <ProjectReference
+      Condition="'$(BuildingByReSharper)' != 'true'"
+      Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj"
+      ReferenceOutputAssembly="False"
+      OutputItemType="Analyzer"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\ProxiesStrings.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -54,11 +53,9 @@
       <CustomToolNamespace>Microsoft.EntityFrameworkCore.Internal</CustomToolNamespace>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\ProxiesStrings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -66,5 +63,4 @@
       <DependentUpon>ProxiesStrings.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>
