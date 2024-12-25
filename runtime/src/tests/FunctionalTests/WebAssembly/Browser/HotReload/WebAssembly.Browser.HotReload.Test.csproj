@@ -10,31 +10,39 @@
   <ItemGroup>
     <ProjectReference Include="ApplyUpdateReferencedAssembly\ApplyUpdateReferencedAssembly.csproj" />
   </ItemGroup>
-
-  <Target Name="PreserveEnCAssembliesFromLinking"
-          Condition="'$(TargetOS)' == 'browser' and '$(EnableAggressiveTrimming)' == 'true'"
-          BeforeTargets="ConfigureTrimming">
+  <Target
+    Name="PreserveEnCAssembliesFromLinking"
+    Condition="'$(TargetOS)' == 'browser' and '$(EnableAggressiveTrimming)' == 'true'"
+    BeforeTargets="ConfigureTrimming"
+  >
     <ItemGroup>
       <!-- Don't modify EnC test assemblies -->
       <TrimmerRootAssembly
-          Condition="$([System.String]::Copy('%(ResolvedFileToPublish.FileName)%(ResolvedFileToPublish.Extension)').EndsWith('ApplyUpdateReferencedAssembly.dll'))"
-          Include="%(ResolvedFileToPublish.FullPath)" />
+        Condition="$([System.String]::Copy('%(ResolvedFileToPublish.FileName)%(ResolvedFileToPublish.Extension)').EndsWith('ApplyUpdateReferencedAssembly.dll'))"
+        Include="%(ResolvedFileToPublish.FullPath)"
+      />
     </ItemGroup>
   </Target>
-
-  <Target Name="IncludeDeltasInWasmBundle"
-          BeforeTargets="PrepareForWasmBuildApp"
-          Condition="'$(TargetOS)' == 'browser'">
+  <Target
+    Name="IncludeDeltasInWasmBundle"
+    BeforeTargets="PrepareForWasmBuildApp"
+    Condition="'$(TargetOS)' == 'browser'"
+  >
     <ItemGroup>
       <!-- FIXME: this belongs in eng/testing/tests.wasm.targets -->
       <!-- FIXME: Can we do something on the Content items in the referenced projects themselves to get this for free? -->
-      <WasmFilesToIncludeInFileSystem Include="@(PublishItemsOutputGroupOutputs)"
-                                      Condition="$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.dmeta'))" />
-      <WasmFilesToIncludeInFileSystem Include="@(PublishItemsOutputGroupOutputs)"
-                                      Condition="$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.dil'))" />
-      <WasmFilesToIncludeInFileSystem Include="@(PublishItemsOutputGroupOutputs)"
-                                      Condition="$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.dpdb'))" />
+      <WasmFilesToIncludeInFileSystem
+        Include="@(PublishItemsOutputGroupOutputs)"
+        Condition="$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.dmeta'))"
+      />
+      <WasmFilesToIncludeInFileSystem
+        Include="@(PublishItemsOutputGroupOutputs)"
+        Condition="$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.dil'))"
+      />
+      <WasmFilesToIncludeInFileSystem
+        Include="@(PublishItemsOutputGroupOutputs)"
+        Condition="$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.dpdb'))"
+      />
     </ItemGroup>
   </Target>
-  
 </Project>

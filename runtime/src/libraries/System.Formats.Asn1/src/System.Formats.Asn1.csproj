@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -12,7 +11,6 @@ Commonly Used Types:
 System.Formats.Asn1.AsnReader
 System.Formats.Asn1.AsnWriter</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(CommonPath)System\Security\Cryptography\CryptoPool.cs">
       <Link>Common\System\Security\Cryptography\CryptoPool.cs</Link>
@@ -57,7 +55,6 @@ System.Formats.Asn1.AsnWriter</PackageDescription>
     <Compile Include="System\Formats\Asn1\WellKnownOids.cs" />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'">
     <Reference Include="System.Collections" />
     <Reference Include="System.Memory" />
@@ -66,15 +63,12 @@ System.Formats.Asn1.AsnWriter</PackageDescription>
     <Reference Include="System.Runtime.Numerics" />
     <Reference Include="System.Text.Encoding.Extensions" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="System.Buffers" Version="$(SystemBuffersVersion)" />
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.ValueTuple" Version="$(SystemValueTupleVersion)" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
-
 </Project>

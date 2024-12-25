@@ -5,13 +5,17 @@
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Management.ManagementClassGenerator.InitializeCodeGenerator(System.Management.CodeLanguage)</property>
+      <property name="Target"
+        >M:System.Management.ManagementClassGenerator.InitializeCodeGenerator(System.Management.CodeLanguage)</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2057</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Management.ManagementClassGenerator.ProcessNamespaceAndClassName</property>
+      <property name="Target"
+        >M:System.Management.ManagementClassGenerator.ProcessNamespaceAndClassName</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
@@ -23,7 +27,9 @@
       <argument>ILLink</argument>
       <argument>IL2072</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Management.ManagementClassGenerator.InitializeCodeGenerator(System.Management.CodeLanguage)</property>
+      <property name="Target"
+        >M:System.Management.ManagementClassGenerator.InitializeCodeGenerator(System.Management.CodeLanguage)</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>

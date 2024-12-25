@@ -2,7 +2,6 @@
   <PropertyGroup>
     <!-- Only needed to run GCStress out-of-proc -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
-
     <CLRTestPriority>1</CLRTestPriority>
   </PropertyGroup>
   <PropertyGroup>

@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <CLRTestPriority>1</CLRTestPriority>
-
     <!-- The test is an empty Main method, so explicitly don't reference the generator
          and run it as an executable -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>

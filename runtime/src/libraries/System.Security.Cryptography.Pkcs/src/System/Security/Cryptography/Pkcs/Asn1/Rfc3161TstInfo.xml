@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <asn:Sequence
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="Rfc3161TstInfo"
-  namespace="System.Security.Cryptography.Pkcs.Asn1">
-
+  namespace="System.Security.Cryptography.Pkcs.Asn1"
+>
   <!--
     https://tools.ietf.org/html/rfc3161#section-2.4.2
 
@@ -28,13 +28,26 @@
   -->
   <asn:Integer name="Version" backingType="int" />
   <asn:ObjectIdentifier name="Policy" />
-  <asn:AsnType name="MessageImprint" typeName="System.Security.Cryptography.Pkcs.Asn1.MessageImprint" />
-  <asn:Integer name="SerialNumber"  backingType="ReadOnlyMemory" />
+  <asn:AsnType
+    name="MessageImprint"
+    typeName="System.Security.Cryptography.Pkcs.Asn1.MessageImprint"
+  />
+  <asn:Integer name="SerialNumber" backingType="ReadOnlyMemory" />
   <asn:GeneralizedTime name="GenTime" />
-  <asn:AsnType name="Accuracy" typeName="System.Security.Cryptography.Pkcs.Asn1.Rfc3161Accuracy" optional="true" rebind="false" />
+  <asn:AsnType
+    name="Accuracy"
+    typeName="System.Security.Cryptography.Pkcs.Asn1.Rfc3161Accuracy"
+    optional="true"
+    rebind="false"
+  />
   <asn:Boolean name="Ordering" defaultDerInit="0x01, 0x01, 0x00" />
-  <asn:Integer name="Nonce"  backingType="ReadOnlyMemory" optional="true" />
-  <asn:AsnType name="Tsa" typeName="System.Security.Cryptography.Asn1.GeneralNameAsn" explicitTag="0" optional="true" />
+  <asn:Integer name="Nonce" backingType="ReadOnlyMemory" optional="true" />
+  <asn:AsnType
+    name="Tsa"
+    typeName="System.Security.Cryptography.Asn1.GeneralNameAsn"
+    explicitTag="0"
+    optional="true"
+  />
   <asn:SequenceOf name="Extensions" implicitTag="1" optional="true">
     <asn:AsnType typeName="System.Security.Cryptography.Asn1.X509ExtensionAsn" />
   </asn:SequenceOf>

@@ -4,16 +4,13 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CLSCompliant>false</CLSCompliant>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System.Reflection.Metadata.cs" />
     <Compile Include="System.Reflection.Metadata.Manual.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Collections.Immutable\ref\System.Collections.Immutable.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'">
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime\ref\System.Runtime.csproj" />
   </ItemGroup>

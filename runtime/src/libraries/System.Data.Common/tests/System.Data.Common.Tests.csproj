@@ -57,7 +57,10 @@
     <Compile Include="System\Data\DataSetWriteXMLTest.cs" />
     <Compile Include="System\Data\DataTableCollectionTest.cs" />
     <Compile Include="System\Data\DataTableCollectionTest2.cs" />
-    <Compile Include="System\Data\DataTableExtensionsTest.cs" Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'" />
+    <Compile
+      Include="System\Data\DataTableExtensionsTest.cs"
+      Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'"
+    />
     <Compile Include="System\Data\DataTableLoadRowTest.cs" />
     <Compile Include="System\Data\DataTableReaderTest.cs" />
     <Compile Include="System\Data\DataTableReadWriteXmlTest.cs" />
@@ -114,14 +117,21 @@
     <Compile Include="System\Data\XmlDataReaderTest.cs" />
     <Compile Include="System\Data\RestrictedTypeHandlingTests.cs" />
     <Compile Include="System\Xml\XmlDataDocumentTests.cs" />
-    <Compile Include="$(CommonTestPath)System\Diagnostics\Tracing\TestEventListener.cs"
-             Link="Common\System\Diagnostics\Tracing\TestEventListener.cs" />
-    <Compile Include="$(CommonTestPath)System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs"
-             Link="Common\System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Diagnostics\Tracing\TestEventListener.cs"
+      Link="Common\System\Diagnostics\Tracing\TestEventListener.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs"
+      Link="Common\System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs"
+    />
   </ItemGroup>
   <!-- S.D.SqlClient isn't live built anymore. -->
   <ItemGroup>
-    <PackageReference Include="System.Data.Common.TestData" Version="$(SystemDataCommonTestDataVersion)" />
+    <PackageReference
+      Include="System.Data.Common.TestData"
+      Version="$(SystemDataCommonTestDataVersion)"
+    />
     <PackageReference Include="System.Data.SqlClient" Version="$(SystemDataSqlClientVersion)" />
   </ItemGroup>
 </Project>

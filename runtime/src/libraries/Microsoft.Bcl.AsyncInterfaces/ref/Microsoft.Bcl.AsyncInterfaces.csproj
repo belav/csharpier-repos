@@ -9,6 +9,9 @@
     <Compile Include="Microsoft.Bcl.AsyncInterfaces.Forwards.cs" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.1'">
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="$(SystemThreadingTasksExtensionsVersion)" />
+    <PackageReference
+      Include="System.Threading.Tasks.Extensions"
+      Version="$(SystemThreadingTasksExtensionsVersion)"
+    />
   </ItemGroup>
 </Project>

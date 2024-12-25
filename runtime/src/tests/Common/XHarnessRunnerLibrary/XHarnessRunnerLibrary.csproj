@@ -8,9 +8,11 @@
     <Nullable>enable</Nullable>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="../XUnitWrapperLibrary/XUnitWrapperLibrary.csproj" />
-    <PackageReference Include="Microsoft.DotNet.XHarness.TestRunners.Common" Version="$(MicrosoftDotNetXHarnessTestRunnersCommonVersion)" />
+    <PackageReference
+      Include="Microsoft.DotNet.XHarness.TestRunners.Common"
+      Version="$(MicrosoftDotNetXHarnessTestRunnersCommonVersion)"
+    />
   </ItemGroup>
 </Project>

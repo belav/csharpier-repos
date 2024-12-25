@@ -17,15 +17,14 @@ WARNING:   When setting properties based on their current state (for example:
 ***********************************************************************************************
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
   <PropertyGroup>
     <BashScriptSnippetGen>$(BashScriptSnippetGen);GetCrossgenBashScript</BashScriptSnippetGen>
     <BatchScriptSnippetGen>$(BatchScriptSnippetGen);GetCrossgenBatchScript</BatchScriptSnippetGen>
-
     <!-- Crossgen2 testing is incompatible with the ilasm/ildasm round trip testing. -->
-    <IlasmRoundTripIncompatible Condition="'$(AlwaysUseCrossGen2)' == 'true'">true</IlasmRoundTripIncompatible>
+    <IlasmRoundTripIncompatible Condition="'$(AlwaysUseCrossGen2)' == 'true'"
+      >true</IlasmRoundTripIncompatible
+    >
   </PropertyGroup>
-
   <!--
     This returns the portion of the execution script that generates the required lines to crossgen the test executable.
 
@@ -34,11 +33,14 @@ WARNING:   When setting properties based on their current state (for example:
       <CrossGenTest>false</CrossGenTest>
   -->
   <Target Name="GetCrossgenBashScript">
-
-    <Error Text="Setting both AlwaysUseCrossGen2 to true and CrossGenTest to false is non-sensical" Condition="'$(CrossGenTest)' == 'false' and '$(AlwaysUseCrossGen2)' == 'true'"/>
-
+    <Error
+      Text="Setting both AlwaysUseCrossGen2 to true and CrossGenTest to false is non-sensical"
+      Condition="'$(CrossGenTest)' == 'false' and '$(AlwaysUseCrossGen2)' == 'true'"
+    />
     <PropertyGroup>
-      <CrossgenBashScript Condition="'$(CLRTestKind)' == 'BuildAndRun' and '$(CrossGenTest)' != 'false'">
+      <CrossgenBashScript
+        Condition="'$(CLRTestKind)' == 'BuildAndRun' and '$(CrossGenTest)' != 'false'"
+      >
         <![CDATA[
 
 if [ "$(AlwaysUseCrossGen2)" == "true" ]; then
@@ -171,14 +173,14 @@ if [ ! -z ${RunCrossGen2+x} ]%3B then
 fi
         ]]>
       </CrossgenBashScript>
-
       <CLRTestBashPreCommands>$(CLRTestBashPreCommands);$(CrossgenBashScript)</CLRTestBashPreCommands>
     </PropertyGroup>
   </Target>
-
   <Target Name="GetCrossgenBatchScript">
     <PropertyGroup>
-      <CrossgenBatchScript Condition="'$(CLRTestKind)' == 'BuildAndRun' and '$(CrossGenTest)' != 'false'">
+      <CrossgenBatchScript
+        Condition="'$(CLRTestKind)' == 'BuildAndRun' and '$(CrossGenTest)' != 'false'"
+      >
         <![CDATA[
 
 if /i "$(AlwaysUseCrossGen2)" == "true" (
@@ -323,7 +325,6 @@ if defined RunCrossGen2 (
 )
         ]]>
       </CrossgenBatchScript>
-
       <CLRTestBatchPreCommands>$(CLRTestBatchPreCommands);$(CrossgenBatchScript)</CLRTestBatchPreCommands>
     </PropertyGroup>
   </Target>

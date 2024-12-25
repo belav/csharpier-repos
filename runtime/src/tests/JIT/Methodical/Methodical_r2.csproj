@@ -7,6 +7,5 @@
     <MergedWrapperProjectReference Remove="d*/**/*_r.??proj" />
     <MergedWrapperProjectReference Remove="e*/**/*_r.??proj" />
   </ItemGroup>
-
   <Import Project="$(TestSourceDir)MergedTestRunner.targets" />
 </Project>

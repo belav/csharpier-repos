@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>$(MSBuildThisFileName)</AssemblyName>
@@ -12,14 +11,21 @@
     <CLSCompliant>false</CLSCompliant>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(RoslynApiVersion)" PrivateAssets="all" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
+      Version="$(RoslynApiVersion)"
+      PrivateAssets="all"
+    />
   </ItemGroup>
-
   <ItemGroup>
-    <Compile Include="$(CommonPath)\Roslyn\DiagnosticDescriptorHelper.cs" Link="Common\Roslyn\DiagnosticDescriptorHelper.cs" />
-    <Compile Include="$(CommonPath)\Roslyn\GetBestTypeByMetadataName.cs" Link="Common\Roslyn\GetBestTypeByMetadataName.cs" />
+    <Compile
+      Include="$(CommonPath)\Roslyn\DiagnosticDescriptorHelper.cs"
+      Link="Common\Roslyn\DiagnosticDescriptorHelper.cs"
+    />
+    <Compile
+      Include="$(CommonPath)\Roslyn\GetBestTypeByMetadataName.cs"
+      Link="Common\Roslyn\GetBestTypeByMetadataName.cs"
+    />
   </ItemGroup>
-
 </Project>

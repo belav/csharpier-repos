@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ExternallyShipping>false</ExternallyShipping>
@@ -7,25 +6,36 @@
          SYSLIB0037: AssemblyName members HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete. -->
     <NoWarn>$(NoWarn);436;SYSLIB0037</NoWarn>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
-    <DefineConstants Condition="'$(TargetOS)' == 'browser'">$(DefineConstants);TARGET_BROWSER</DefineConstants>
+    <DefineConstants Condition="'$(TargetOS)' == 'browser'"
+      >$(DefineConstants);TARGET_BROWSER</DefineConstants
+    >
   </PropertyGroup>
-
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)System\Security\Cryptography\SignatureSupport.cs"
-             Link="CommonTest\System\Security\Cryptography\SignatureSupport.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
-             Link="Common\Interop\Windows\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FreeLibrary.cs"
-             Link="Common\Interop\Windows\Interop.FreeLibrary.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GetModuleHandle.cs"
-             Link="Common\Interop\Windows\Interop.GetModuleHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.LoadLibraryEx.cs"
-             Link="Common\Interop\Windows\Interop.LoadLibraryEx.cs" />
-    <Compile Include="$(CommonPath)Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs"
-             Link="Common\Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\TempFile.cs"
-             Link="Common\System\IO\TempFile.cs" />
-
+    <Compile
+      Include="$(CommonTestPath)System\Security\Cryptography\SignatureSupport.cs"
+      Link="CommonTest\System\Security\Cryptography\SignatureSupport.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
+      Link="Common\Interop\Windows\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FreeLibrary.cs"
+      Link="Common\Interop\Windows\Interop.FreeLibrary.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GetModuleHandle.cs"
+      Link="Common\Interop\Windows\Interop.GetModuleHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.LoadLibraryEx.cs"
+      Link="Common\Interop\Windows\Interop.LoadLibraryEx.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs"
+      Link="Common\Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs"
+    />
+    <Compile Include="$(CommonTestPath)System\IO\TempFile.cs" Link="Common\System\IO\TempFile.cs" />
     <Compile Include="Metadata\BlobContentIdTests.cs" />
     <Compile Include="Metadata\BlobTests.cs" />
     <Compile Include="Metadata\BlobUtilitiesTests.cs" />
@@ -92,7 +102,6 @@
     <Compile Include="Utilities\MemoryBlockTests.cs" />
     <Compile Include="Utilities\OrderByTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="Resources\Namespace\NamespaceForwardedCS.cs" />
     <None Include="Resources\Namespace\NamespaceTests.cs" />
@@ -138,19 +147,18 @@
     <None Include="Resources\Misc\Signed.cs" />
     <EmbeddedResource Include="Resources\Misc\Signed.exe" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Some internal types are needed, so we reference the implementation assembly, rather than the reference assembly. -->
-    <ProjectReference Include="..\src\System.Reflection.Metadata.csproj" SkipUseReferenceAssembly="true" />
+    <ProjectReference
+      Include="..\src\System.Reflection.Metadata.csproj"
+      SkipUseReferenceAssembly="true"
+    />
   </ItemGroup>
-
-    <!-- For IncrementalHash -->
+  <!-- For IncrementalHash -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.ValueTuple" Version="$(SystemValueTupleVersion)" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetOS)' == 'browser'">
     <WasmFilesToIncludeFromPublishDir Include="$(AssemblyName).dll" />
   </ItemGroup>
-
 </Project>

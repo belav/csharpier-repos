@@ -9,13 +9,18 @@
     <IncludeOOBLibraries>true</IncludeOOBLibraries>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Diagnostics.Tools.RuntimeClient" Version="$(MicrosoftDiagnosticsToolsRuntimeClientVersion)" />
+    <PackageReference
+      Include="Microsoft.Diagnostics.Tools.RuntimeClient"
+      Version="$(MicrosoftDiagnosticsToolsRuntimeClientVersion)"
+    />
     <PackageReference Include="xunit.analyzers" Version="$(XUnitAnalyzersVersion)" />
   </ItemGroup>
-
   <Target Name="Build" DependsOnTargets="$(TraversalBuildDependsOn)" />
-
-  <Target Name="AddLibrariesToCoreRoot" BeforeTargets="CopyDependencyToCoreRoot" DependsOnTargets="ResolveLibrariesFromLocalBuild">
+  <Target
+    Name="AddLibrariesToCoreRoot"
+    BeforeTargets="CopyDependencyToCoreRoot"
+    DependsOnTargets="ResolveLibrariesFromLocalBuild"
+  >
     <ItemGroup>
       <RuntimeCopyLocalItems Include="@(LibrariesRuntimeFiles)" />
     </ItemGroup>

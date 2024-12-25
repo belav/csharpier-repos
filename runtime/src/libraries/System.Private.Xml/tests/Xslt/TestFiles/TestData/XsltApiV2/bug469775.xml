@@ -2,5 +2,5 @@
   <!ENTITY number "123">
 ]>
 <root>
-  &number;
+  123
 </root>

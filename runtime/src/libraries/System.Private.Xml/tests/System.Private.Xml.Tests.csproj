@@ -3,11 +3,9 @@
     <RootNamespace>System.Xml.Tests</RootNamespace>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <RdXmlFile Include="default.rd.xml" />
   </ItemGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'browser'">
     <!-- This doesn't run on V8 shell because https://bugs.chromium.org/p/v8/issues/detail?id=12541 -->
     <Scenario>WasmTestOnBrowser</Scenario>
@@ -16,19 +14,19 @@
     <DefineConstants>$(DefineConstants);TARGET_BROWSER</DefineConstants>
     <WasmXHarnessMonoArgs>--setenv=XHARNESS_LOG_TEST_START=true --no-memory-snapshot</WasmXHarnessMonoArgs>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="AllowDefaultResolverContext.cs" />
     <Compile Include="ExceptionVerifier.cs" />
-    <Compile Include="$(CommonTestPath)\TestUtilities\System\DisableParallelizationPerAssembly.cs" Link="Common\TestUtilities\System\DisableParallelizationPerAssembly.cs" />
+    <Compile
+      Include="$(CommonTestPath)\TestUtilities\System\DisableParallelizationPerAssembly.cs"
+      Link="Common\TestUtilities\System\DisableParallelizationPerAssembly.cs"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Misc\XmlThrowingResolverTests.cs" />
     <Compile Include="Misc\XmlSecureResolverTests.cs" />
     <Compile Include="Misc\XmlUrlResolverTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Readers\CharCheckingReader\CharReaderTests.cs" />
     <Compile Include="Readers\CharCheckingReader\InheritedCases.cs" />
@@ -80,7 +78,6 @@
     <Compile Include="Readers\WrappedReader\InheritedCases.cs" />
     <Compile Include="Readers\WrappedReader\WrappedReaderTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Writers\RwFactory\CFactoryModule.cs" />
     <Compile Include="Writers\RwFactory\CModCmdLine.cs" />
@@ -128,7 +125,6 @@
     <Compile Include="Writers\XmlWriterApi\WriteEndDocumentOnCloseTest.cs" />
     <Compile Include="Writers\XmlWriterApi\XmlWriterTestCaseBase.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlConvert\EncodeDecodeTests.cs" />
     <Compile Include="XmlConvert\MiscellaneousTests.cs" />
@@ -165,7 +161,6 @@
     <Compile Include="XmlConvert\XmlIdeographicCharConvertTests2.cs" />
     <Compile Include="XmlConvert\XmlIdeographicCharConvertTests3.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlDocument\XmlDocumentTests\LoadTests.cs" />
     <Compile Include="XmlDocument\XmlAttributeCollectionTests\AppendTests.cs" />
@@ -256,7 +251,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlNodeReader\System.Xml.XmlNodeReader.Tests\NodeReaderTestHelper.cs" />
     <Compile Include="XmlNodeReader\System.Xml.XmlNodeReader.Tests\XmlNodeReaderConstructionTests.cs" />
@@ -265,7 +259,6 @@
     <Compile Include="XmlNodeReader\System.Xml.XmlNodeReader.Tests\XmlNodeReaderMoveToAttributeTests.cs" />
     <Compile Include="XmlNodeReader\System.Xml.XmlNodeReader.Tests\XmlNodeReaderReadTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlReader\ReadContentAs\ReadAsArrayTests.cs" />
     <Compile Include="XmlReader\ReadContentAs\ReadAsBooleanAttributeTests.cs" />
@@ -328,9 +321,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="XmlReader\XmlResolver\XmlSystemPathResolverTests.cs" />
-    <Content Include="XmlReader\TestFiles\**\*" Link="TestFiles\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <Content
+      Include="XmlReader\TestFiles\**\*"
+      Link="TestFiles\%(RecursiveDir)%(Filename)%(Extension)"
+      CopyToOutputDirectory="PreserveNewest"
+      Visible="false"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlResolver\System.Xml.XmlResolver.Tests\DummyStream.cs" />
     <Compile Include="XmlResolver\System.Xml.XmlResolver.Tests\XmlPreloadedResolverAddRemoveTests.cs" />
@@ -367,7 +364,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlSchema\XmlSchemaSet\CError.cs" />
     <Compile Include="XmlSchema\XmlSchemaSet\TC_SchemaSet.cs" />
@@ -419,9 +415,13 @@
     <Compile Include="XmlSchema\XmlSchemaValidatorApi\ValidatorModule.cs" />
     <Compile Include="XmlSchema\XmlSchemaValidatorApi\XmlTestSettings.cs" />
     <Compile Include="XmlSchema\XmlSchemaValidatorApi\CXmlTestResolver.cs" />
-    <Content Include="XmlSchema\TestFiles\**\*" Link="XmlSchema\TestFiles\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <Content
+      Include="XmlSchema\TestFiles\**\*"
+      Link="XmlSchema\TestFiles\%(RecursiveDir)%(Filename)%(Extension)"
+      CopyToOutputDirectory="PreserveNewest"
+      Visible="false"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlSerializer\XmlSerializerTests.cs" />
     <Compile Include="XmlSerializer\XmlSerializerTests.Internal.cs" />
@@ -429,7 +429,6 @@
     <Compile Include="..\..\System.Runtime.Serialization.Xml\tests\SerializationTypes.RuntimeOnly.cs" />
     <None Include="..\..\System.Runtime.Serialization.Xml\tests\SerializationTypes.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlWriter\DisposeTests.cs" />
     <Compile Include="XmlWriter\WriteWithEncoding.cs" />
@@ -438,59 +437,208 @@
     <Compile Include="XmlWriter\WriteWithXmlnsNewLine.cs" />
     <Compile Include="XmlWriter\XmlTextWriterTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XPath\XPathDocument\CreateNavigatorFromXmlReader.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\XmlDocument\CreateNavigatorFromXmlDocument.cs" Link="Common\System\Xml\XPath\XmlDocument\CreateNavigatorFromXmlDocument.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\XDocument\CreateNavigatorComparer.cs" Link="Common\System\Xml\XPath\XDocument\CreateNavigatorComparer.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\XDocument\CreateNavigatorFromXDocument.cs" Link="Common\System\Xml\XPath\XDocument\CreateNavigatorFromXDocument.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\XDocument\NavigatorComparer.cs" Link="Common\System\Xml\XPath\XDocument\NavigatorComparer.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\Common\FileHelper.cs" Link="Common\System\Xml\XPath\Common\FileHelper.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\Common\ICreateNavigator.cs" Link="Common\System\Xml\XPath\Common\ICreateNavigator.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\Common\Utils.cs" Link="Common\System\Xml\XPath\Common\Utils.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\Common\XPathResult.cs" Link="Common\System\Xml\XPath\Common\XPathResult.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\Common\XPathResultToken.cs" Link="Common\System\Xml\XPath\Common\XPathResultToken.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\BooleanFunctionsTests.cs" Link="Common\System\Xml\XPath\CoreFunctionLibrary\BooleanFunctionsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\ComplexExpressionsTests.cs" Link="Common\System\Xml\XPath\CoreFunctionLibrary\ComplexExpressionsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\NodeSetFunctionsTests.cs" Link="Common\System\Xml\XPath\CoreFunctionLibrary\NodeSetFunctionsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\NodeSetMatchesTests.cs" Link="Common\System\Xml\XPath\CoreFunctionLibrary\NodeSetMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\NumberFunctionsTests.cs" Link="Common\System\Xml\XPath\CoreFunctionLibrary\NumberFunctionsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\ParameterTypeCoercionTests.cs" Link="Common\System\Xml\XPath\CoreFunctionLibrary\ParameterTypeCoercionTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\StringFunctionsTests.cs" Link="Common\System\Xml\XPath\CoreFunctionLibrary\StringFunctionsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CustomerScenarios\CustomerScenariosTests.cs" Link="Common\System\Xml\XPath\CustomerScenarios\CustomerScenariosTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\CustomerScenarios\MatchesTests.cs" Link="Common\System\Xml\XPath\CustomerScenarios\MatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\BasicMatchesTests.cs" Link="Common\System\Xml\XPath\FuncExpressions\BasicMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\BasicsTests.cs" Link="Common\System\Xml\XPath\FuncExpressions\BasicsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\BooleansTests.cs" Link="Common\System\Xml\XPath\FuncExpressions\BooleansTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\NodeSetsMatchesTests.cs" Link="Common\System\Xml\XPath\FuncExpressions\NodeSetsMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\NodeSetsTests.cs" Link="Common\System\Xml\XPath\FuncExpressions\NodeSetsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\NumbersTests.cs" Link="Common\System\Xml\XPath\FuncExpressions\NumbersTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\SetContextFunctionalTests.cs" Link="Common\System\Xml\XPath\FuncExpressions\SetContextFunctionalTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\SetContextMatchesTests.cs" Link="Common\System\Xml\XPath\FuncExpressions\SetContextMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAbbreviatedSyntaxMatchesTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathAbbreviatedSyntaxMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAbbreviatedSyntaxTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathAbbreviatedSyntaxTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxeCombinationsTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathAxeCombinationsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxeComplexExprMatchesTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathAxeComplexExprMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxeComplexExprTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathAxeComplexExprTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxeMatchesTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathAxeMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxesTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathAxesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathNodeMatchesTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathNodeMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathNodeTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathNodeTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathPredicateComplexExprTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathPredicateComplexExprTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathPredicateMatchesTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathPredicateMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathPredicatePositionTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathPredicatePositionTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathPredicatesTests.cs" Link="Common\System\Xml\XPath\FuncLocation\PathPredicatesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\StepMatchesTests.cs" Link="Common\System\Xml\XPath\FuncLocation\StepMatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\StepsTests.cs" Link="Common\System\Xml\XPath\FuncLocation\StepsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\GlobalizationTests.cs" Link="Common\System\Xml\XPath\MiscellaneousCases\GlobalizationTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\LexicalStructureTests.cs" Link="Common\System\Xml\XPath\MiscellaneousCases\LexicalStructureTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\MatchesTests.cs" Link="Common\System\Xml\XPath\MiscellaneousCases\MatchesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\MiscellaneousCasesTests.cs" Link="Common\System\Xml\XPath\MiscellaneousCases\MiscellaneousCasesTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\NodeSetsTests.cs" Link="Common\System\Xml\XPath\MiscellaneousCases\NodeSetsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\RegressionTestsTests.cs" Link="Common\System\Xml\XPath\MiscellaneousCases\RegressionTestsTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\TestsWithEncoding\MiscWithEncodings.cs" Link="Common\System\Xml\XPath\TestsWithEncoding\MiscWithEncodings.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\XPathExpressionTests\CompileTests.cs" Link="Common\System\Xml\XPath\XPathExpressionTests\CompileTests.cs" />
-    <Compile Include="$(CommonTestPath)\System\Xml\XPath\XPathExpressionTests\EvaluateTests.cs" Link="Common\System\Xml\XPath\XPathExpressionTests\EvaluateTests.cs" />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\XmlDocument\CreateNavigatorFromXmlDocument.cs"
+      Link="Common\System\Xml\XPath\XmlDocument\CreateNavigatorFromXmlDocument.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\XDocument\CreateNavigatorComparer.cs"
+      Link="Common\System\Xml\XPath\XDocument\CreateNavigatorComparer.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\XDocument\CreateNavigatorFromXDocument.cs"
+      Link="Common\System\Xml\XPath\XDocument\CreateNavigatorFromXDocument.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\XDocument\NavigatorComparer.cs"
+      Link="Common\System\Xml\XPath\XDocument\NavigatorComparer.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\Common\FileHelper.cs"
+      Link="Common\System\Xml\XPath\Common\FileHelper.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\Common\ICreateNavigator.cs"
+      Link="Common\System\Xml\XPath\Common\ICreateNavigator.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\Common\Utils.cs"
+      Link="Common\System\Xml\XPath\Common\Utils.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\Common\XPathResult.cs"
+      Link="Common\System\Xml\XPath\Common\XPathResult.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\Common\XPathResultToken.cs"
+      Link="Common\System\Xml\XPath\Common\XPathResultToken.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\BooleanFunctionsTests.cs"
+      Link="Common\System\Xml\XPath\CoreFunctionLibrary\BooleanFunctionsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\ComplexExpressionsTests.cs"
+      Link="Common\System\Xml\XPath\CoreFunctionLibrary\ComplexExpressionsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\NodeSetFunctionsTests.cs"
+      Link="Common\System\Xml\XPath\CoreFunctionLibrary\NodeSetFunctionsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\NodeSetMatchesTests.cs"
+      Link="Common\System\Xml\XPath\CoreFunctionLibrary\NodeSetMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\NumberFunctionsTests.cs"
+      Link="Common\System\Xml\XPath\CoreFunctionLibrary\NumberFunctionsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\ParameterTypeCoercionTests.cs"
+      Link="Common\System\Xml\XPath\CoreFunctionLibrary\ParameterTypeCoercionTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CoreFunctionLibrary\StringFunctionsTests.cs"
+      Link="Common\System\Xml\XPath\CoreFunctionLibrary\StringFunctionsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CustomerScenarios\CustomerScenariosTests.cs"
+      Link="Common\System\Xml\XPath\CustomerScenarios\CustomerScenariosTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\CustomerScenarios\MatchesTests.cs"
+      Link="Common\System\Xml\XPath\CustomerScenarios\MatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\BasicMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncExpressions\BasicMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\BasicsTests.cs"
+      Link="Common\System\Xml\XPath\FuncExpressions\BasicsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\BooleansTests.cs"
+      Link="Common\System\Xml\XPath\FuncExpressions\BooleansTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\NodeSetsMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncExpressions\NodeSetsMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\NodeSetsTests.cs"
+      Link="Common\System\Xml\XPath\FuncExpressions\NodeSetsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\NumbersTests.cs"
+      Link="Common\System\Xml\XPath\FuncExpressions\NumbersTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\SetContextFunctionalTests.cs"
+      Link="Common\System\Xml\XPath\FuncExpressions\SetContextFunctionalTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncExpressions\SetContextMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncExpressions\SetContextMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAbbreviatedSyntaxMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathAbbreviatedSyntaxMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAbbreviatedSyntaxTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathAbbreviatedSyntaxTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxeCombinationsTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathAxeCombinationsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxeComplexExprMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathAxeComplexExprMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxeComplexExprTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathAxeComplexExprTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxeMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathAxeMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathAxesTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathAxesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathNodeMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathNodeMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathNodeTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathNodeTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathPredicateComplexExprTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathPredicateComplexExprTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathPredicateMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathPredicateMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathPredicatePositionTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathPredicatePositionTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\PathPredicatesTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\PathPredicatesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\StepMatchesTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\StepMatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\FuncLocation\StepsTests.cs"
+      Link="Common\System\Xml\XPath\FuncLocation\StepsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\GlobalizationTests.cs"
+      Link="Common\System\Xml\XPath\MiscellaneousCases\GlobalizationTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\LexicalStructureTests.cs"
+      Link="Common\System\Xml\XPath\MiscellaneousCases\LexicalStructureTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\MatchesTests.cs"
+      Link="Common\System\Xml\XPath\MiscellaneousCases\MatchesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\MiscellaneousCasesTests.cs"
+      Link="Common\System\Xml\XPath\MiscellaneousCases\MiscellaneousCasesTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\NodeSetsTests.cs"
+      Link="Common\System\Xml\XPath\MiscellaneousCases\NodeSetsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\MiscellaneousCases\RegressionTestsTests.cs"
+      Link="Common\System\Xml\XPath\MiscellaneousCases\RegressionTestsTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\TestsWithEncoding\MiscWithEncodings.cs"
+      Link="Common\System\Xml\XPath\TestsWithEncoding\MiscWithEncodings.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\XPathExpressionTests\CompileTests.cs"
+      Link="Common\System\Xml\XPath\XPathExpressionTests\CompileTests.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Xml\XPath\XPathExpressionTests\EvaluateTests.cs"
+      Link="Common\System\Xml\XPath\XPathExpressionTests\EvaluateTests.cs"
+    />
     <EmbeddedResource Include="$(CommonTestPath)System\Xml\XPath\TestData\91893.xml">
       <Link>TestData\91893.xml</Link>
     </EmbeddedResource>
@@ -624,7 +772,6 @@
       <Link>TestData\xpC001.xml</Link>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Xslt\XslCompiledTransformApi\Errata4.cs" />
     <Compile Include="Xslt\XslCompiledTransformApi\OutputSettings.cs" />
@@ -648,16 +795,31 @@
     <Compile Include="Xslt\XslTransformApi\MyNavigator.cs" />
     <Compile Include="Xslt\XslTransformApi\ReaderType.cs" />
     <Compile Include="Xslt\XslTransformApi\ThreadFunc.cs" />
-    <Content Include="Xslt\TestFiles\**\*" Link="TestFiles\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <Content
+      Include="Xslt\TestFiles\**\*"
+      Link="TestFiles\%(RecursiveDir)%(Filename)%(Extension)"
+      CopyToOutputDirectory="PreserveNewest"
+      Visible="false"
+    />
   </ItemGroup>
-
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)\System\ShouldNotBeInvokedException.cs" Link="Common\System\ShouldNotBeInvokedException.cs" />
-    <Compile Include="$(CommonTestPath)\System\IO\TempDirectory.cs" Link="Common\System\IO\TempDirectory.cs" />
-    <Compile Include="$(CommonTestPath)\System\Runtime\Serialization\Utils.cs" Link="Common\System\Runtime\Serialization\Utils.cs" />
-    <Compile Include="$(CommonTestPath)\System\Threading\TrackingSynchronizationContext.cs" Link="Common\System\Threading\TrackingSynchronizationContext.cs" />
+    <Compile
+      Include="$(CommonTestPath)\System\ShouldNotBeInvokedException.cs"
+      Link="Common\System\ShouldNotBeInvokedException.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\IO\TempDirectory.cs"
+      Link="Common\System\IO\TempDirectory.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Runtime\Serialization\Utils.cs"
+      Link="Common\System\Runtime\Serialization\Utils.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)\System\Threading\TrackingSynchronizationContext.cs"
+      Link="Common\System\Threading\TrackingSynchronizationContext.cs"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Microsoft.XmlSerializer.Generator\tests\SerializableAssembly.csproj" />
     <PackageReference Include="xunit.extensibility.execution" Version="$(XUnitVersion)" />
@@ -667,11 +829,9 @@
     <ProjectReference Include="$(CommonTestPath)System\Xml\XmlDiff\XmlDiff.csproj" />
     <ProjectReference Include="XmlReaderLib\System.Xml.RW.XmlReaderLib.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <TrimmerRootAssembly Include="SerializableAssembly" />
     <TrimmerRootDescriptor Include="$(ILLinkDescriptorsPath)ILLink.Descriptors.Serialization.xml" />
     <TrimmerRootDescriptor Include="ILLink.Descriptors.ModuleCore.xml" />
   </ItemGroup>
-
 </Project>

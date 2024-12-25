@@ -4,7 +4,6 @@
          This serves to split them. -->
     <NumberOfStripesToUseInStress>3</NumberOfStripesToUseInStress>
   </PropertyGroup>
-
   <ItemGroup>
     <MergedWrapperProjectReference Include="*/**/*.??proj" />
     <MergedWrapperProjectReference Remove="$(MSBuildProjectName).csproj" />
@@ -14,6 +13,5 @@
     <MergedWrapperProjectReference Remove="classloader/StaticVirtualMethods/GenericContext/Generator/**/*.??proj" />
     <MergedWrapperProjectReference Remove="classloader/StaticVirtualMethods/TypeHierarchy/Generator/**/*.??proj" />
   </ItemGroup>
-
   <Import Project="$(TestSourceDir)MergedTestRunner.targets" />
 </Project>

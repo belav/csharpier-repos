@@ -10,9 +10,7 @@
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\nativeaot\Test.CoreLib\src\Test.CoreLib.csproj" />
   </ItemGroup>
-
 </Project>

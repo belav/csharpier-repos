@@ -3,6 +3,5 @@
     <MergedWrapperProjectReference Include="JitBlue/**/*.??proj" />
     <MergedWrapperProjectReference Remove="JitBlue/Runtime_*/**/*.??proj" />
   </ItemGroup>
-
   <Import Project="$(TestSourceDir)MergedTestRunner.targets" />
 </Project>

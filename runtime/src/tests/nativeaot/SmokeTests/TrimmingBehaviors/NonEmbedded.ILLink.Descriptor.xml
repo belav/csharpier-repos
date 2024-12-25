@@ -1,7 +1,7 @@
 <linker>
   <assembly fullname="TrimmingBehaviors">
     <type fullname="ILLinkDescriptor">
-      <method name="methodKeptViaStandaloneDescriptor"/>
+      <method name="methodKeptViaStandaloneDescriptor" />
     </type>
   </assembly>
 </linker>

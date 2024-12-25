@@ -6,8 +6,10 @@
   <ItemGroup>
     <Compile Include="ProtectedDataTests.cs" />
     <Compile Include="ProtectedDataUnsupportedTests.cs" />
-    <Compile Include="$(CommonTestPath)System\Security\Cryptography\ByteUtils.cs"
-             Link="CommonTest\System\Security\Cryptography\ByteUtils.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Security\Cryptography\ByteUtils.cs"
+      Link="CommonTest\System\Security\Cryptography\ByteUtils.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\System.Security.Cryptography.ProtectedData.csproj" />

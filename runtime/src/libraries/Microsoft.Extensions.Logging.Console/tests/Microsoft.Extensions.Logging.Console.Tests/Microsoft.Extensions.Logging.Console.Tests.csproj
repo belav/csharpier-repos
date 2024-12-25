@@ -1,15 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
     <TestRuntime>true</TestRuntime>
     <EnableDefaultItems>true</EnableDefaultItems>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
-    <_WasmPThreadPoolSize Condition="'$(MonoWasmBuildVariant)' == 'multithread'">100</_WasmPThreadPoolSize>
+    <_WasmPThreadPoolSize Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
+      >100</_WasmPThreadPoolSize
+    >
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Logging.Console\src\Microsoft.Extensions.Logging.Console.csproj" SkipUseReferenceAssembly="true" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)Microsoft.Extensions.Logging.Console\src\Microsoft.Extensions.Logging.Console.csproj"
+      SkipUseReferenceAssembly="true"
+    />
   </ItemGroup>
-
 </Project>

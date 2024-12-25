@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="System.Security.AccessControl.EventWaitHandleAccessRule" />
     <ForwardedType Include="System.Security.AccessControl.EventWaitHandleAuditRule" />
@@ -18,5 +16,4 @@
     <ForwardedType Include="System.Security.AccessControl.SemaphoreRights" />
     <ForwardedType Include="System.Security.AccessControl.SemaphoreSecurity" />
   </ItemGroup>
-
 </Project>

@@ -8,7 +8,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);Windows</DefineConstants>
     <!-- There is a Windows and a non-Windows version of this test to allow it to be compiled for all targets -->
-    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
+      >true</CLRTestTargetUnsupported
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GlobalInstance.cs" />

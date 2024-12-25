@@ -1,4 +1,7 @@
-﻿<test xsi:noNamespaceSchemaLocation="XMLSchema1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+﻿<test
+  xsi:noNamespaceSchemaLocation="XMLSchema1.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
   <listitem>
     <item>
       item
@@ -9,14 +12,18 @@
   </listitem>
   <!--start: remove this part and you won't get the error-->
   <listitem>
-    <item lang="nl-BE">
+    <item lang="nl-BE"
+      >
       item_nl-BE
-      <subitem checked="false">item_subitem1_fr-BE</subitem>
+      <subitem
+       checked="false">item_subitem1_fr-BE</subitem>
       <subitem checked="true">item_subitem2_fr-BE</subitem>
     </item>
-    <item lang="fr-BE">
+    <item lang="fr-BE"
+      >
       item_fr-BE
-      <subitem checked="true">item_subitem1_fr-BE</subitem>
+      <subitem
+       checked="true">item_subitem1_fr-BE</subitem>
       <subitem checked="false">item_subitem2_fr-BE</subitem>
     </item>
   </listitem>

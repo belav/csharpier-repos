@@ -4,7 +4,6 @@
     <Nullable>enable</Nullable>
     <IgnoreForCI Condition="'$(TargetOS)' == 'browser'">true</IgnoreForCI>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(CommonTestPath)System\Security\Cryptography\ByteUtils.cs">
       <Link>CommonTest\System\Security\Cryptography\ByteUtils.cs</Link>
@@ -31,11 +30,9 @@
     <Compile Include="CoseSignerTests.cs" />
     <Compile Include="CoseTestHelpers.cs" />
   </ItemGroup>
-  
   <ItemGroup>
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.0" />
   </ItemGroup>
-  
   <ItemGroup>
     <ProjectReference Include="..\src\System.Security.Cryptography.Cose.csproj" />
   </ItemGroup>

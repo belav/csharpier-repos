@@ -1,4 +1,4 @@
-<?xml version='1.0'?>
+<?xml version="1.0"?>
 <FruitRack>
   <apple>
     <color>Red</color>
@@ -8,4 +8,4 @@
     <color>Orange</color>
     <calories>25</calories>
   </orange>
-</FruitRack>	
+</FruitRack>

@@ -8,8 +8,11 @@
     <foo>
       <bar>baz</bar>
     </foo>
+
+    
                     some text                  
-                </test2>
+                </test2
+  >
   <test3>
     <foo bar="value">text</foo>
   </test3>

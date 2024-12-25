@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildProjectName).cs" />
-
     <CLRTestEnvironmentVariable Include="DOTNET_EnableSSE2" Value="0" />
     <CLRTestEnvironmentVariable Include="DOTNET_OSR_HitLimit" Value="1" />
     <CLRTestEnvironmentVariable Include="DOTNET_TC_OnStackReplacement" Value="1" />

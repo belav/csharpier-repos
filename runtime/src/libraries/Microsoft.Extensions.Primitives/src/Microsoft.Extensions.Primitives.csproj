@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -12,22 +11,30 @@ Microsoft.Extensions.Primitives.IChangeToken
 Microsoft.Extensions.Primitives.StringValues
 Microsoft.Extensions.Primitives.StringSegment</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
-    <Compile Include="$(CoreLibSharedDir)\System\Numerics\Hashing\HashHelpers.cs"
-             Link="System\Numerics\Hashing\HashHelpers.cs" />
-    <Compile Include="$(CommonPath)System\Text\ValueStringBuilder.cs"
-             Link="Common\System\Text\ValueStringBuilder.cs"
-             Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
-    <Compile Include="$(CommonPath)Extensions\ChangeCallbackRegistrar.cs"
-             Link="Common\src\Extensions\ChangeCallbackRegistrar.cs" />
-    <Compile Include="$(CommonPath)Extensions\EmptyDisposable.cs"
-             Link="Common\src\Extensions\EmptyDisposable.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)\System\Numerics\Hashing\HashHelpers.cs"
+      Link="System\Numerics\Hashing\HashHelpers.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Text\ValueStringBuilder.cs"
+      Link="Common\System\Text\ValueStringBuilder.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
+    />
+    <Compile
+      Include="$(CommonPath)Extensions\ChangeCallbackRegistrar.cs"
+      Link="Common\src\Extensions\ChangeCallbackRegistrar.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Extensions\EmptyDisposable.cs"
+      Link="Common\src\Extensions\EmptyDisposable.cs"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="$(SystemRuntimeCompilerServicesUnsafeVersion)" />
+    <PackageReference
+      Include="System.Runtime.CompilerServices.Unsafe"
+      Version="$(SystemRuntimeCompilerServicesUnsafeVersion)"
+    />
   </ItemGroup>
-
 </Project>

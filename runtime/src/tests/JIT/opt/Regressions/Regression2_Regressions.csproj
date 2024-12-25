@@ -4,7 +4,6 @@
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <!-- Test simply runs for too long under GCStress -->
     <GCStressIncompatible>true</GCStressIncompatible>
-
     <DisableProjectBuild Condition="'$(RuntimeFlavor)' == 'Mono'">true</DisableProjectBuild>
   </PropertyGroup>
   <PropertyGroup>

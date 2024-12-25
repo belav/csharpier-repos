@@ -9,13 +9,10 @@
     <DefineConstants>ILVERIFY;$(DefineConstants)</DefineConstants>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <Import Project="..\ILVerification\ILVerification.projitems" />
-
   <ItemGroup>
     <Compile Include="..\Common\CommandLineHelpers.cs" Link="CommandLineHelpers.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>

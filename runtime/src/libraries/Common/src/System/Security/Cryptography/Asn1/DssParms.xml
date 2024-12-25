@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <asn:Sequence
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="DssParms"
   namespace="System.Security.Cryptography.Asn1"
-  rebind="false">
-
+  rebind="false"
+>
   <!--
     https://tools.ietf.org/html/rfc3279#section-2.3.2
 

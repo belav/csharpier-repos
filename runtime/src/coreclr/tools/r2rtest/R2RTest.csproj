@@ -9,18 +9,18 @@
     <OutputPath>$(RuntimeBinDir)\R2RTest</OutputPath>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\Common\CommandLineHelpers.cs" Link="CommandLineHelpers.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\aot\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" Version="$(MicrosoftBuildVersion)" />
-    <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="$(TraceEventVersion)" />
+    <PackageReference
+      Include="Microsoft.Diagnostics.Tracing.TraceEvent"
+      Version="$(TraceEventVersion)"
+    />
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>
 </Project>

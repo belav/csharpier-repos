@@ -14,14 +14,14 @@
     <OutputPath>$(RuntimeBinDir)/R2RDump</OutputPath>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
-  <Import Project="$(RepositoryEngineeringDir)coredistools.targets" Condition="'$(DotNetBuildFromSource)' != 'true'" />
+  <Import
+    Project="$(RepositoryEngineeringDir)coredistools.targets"
+    Condition="'$(DotNetBuildFromSource)' != 'true'"
+  />
   <Import Project="$(RepositoryEngineeringDir)DiaSymReaderNative.targets" />
-
   <ItemGroup>
     <Compile Include="..\Common\CommandLineHelpers.cs" Link="CommandLineHelpers.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="System.CommandLine">
       <Version>$(SystemCommandLineVersion)</Version>

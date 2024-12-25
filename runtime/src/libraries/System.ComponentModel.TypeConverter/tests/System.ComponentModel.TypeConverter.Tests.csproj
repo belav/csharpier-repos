@@ -158,13 +158,17 @@
     <Compile Include="Design\DesignerTransactionTests.cs" />
     <Compile Include="Security\Authentication\ExtendedProtection\ExtendedProtectionPolicyTypeConverterTests.cs" />
     <Compile Include="XTypeDescriptionProviderTests.cs" />
-
-    <Compile Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs"
-        Link="Common\TestUtilities\System\DisableParallelization.cs" />
+    <Compile
+      Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs"
+      Link="Common\TestUtilities\System\DisableParallelization.cs"
+    />
     <TrimmerRootDescriptor Include="$(ILLinkDescriptorsPath)ILLink.Descriptors.Castle.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.TypeConverter.TestData" Version="$(SystemComponentModelTypeConverterTestDataVersion)" />
+    <PackageReference
+      Include="System.ComponentModel.TypeConverter.TestData"
+      Version="$(SystemComponentModelTypeConverterTestDataVersion)"
+    />
     <PackageReference Include="Moq" Version="$(MoqVersion)" />
   </ItemGroup>
   <ItemGroup>

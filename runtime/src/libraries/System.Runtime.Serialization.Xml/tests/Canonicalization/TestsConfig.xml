@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <testcases>
   <testcase name="test">
     <input>
@@ -46,7 +46,7 @@
       <argu name="ReaderWriterType" value="Text" />
       <argu name="Encoding" value="unicodeFFFE" />
       <argu name="MustSupportC14N" value="true" />
-    </input>    
+    </input>
   </testcase>
   <testcase name="C14NWriterNegativeTests">
     <input>
@@ -55,7 +55,7 @@
     </input>
     <input>
       <argu name="TestType" value="Null element in IncludePrefixes" />
-      <argu name="Result" value="System.ArgumentException"/>
+      <argu name="Result" value="System.ArgumentException" />
     </input>
   </testcase>
   <testcase name="ReaderWriter_C14N_DifferentReadersWriters_ParamGroup1">
@@ -94,7 +94,7 @@
       <argu name="Encoding" value="unicodeFFFE" />
       <argu name="MustSupportC14N" value="true" />
     </input>
-    </testcase>
+  </testcase>
   <testcase name="ReaderWriter_C14N_DifferentReadersWriters_ParamGroup2">
     <!--another set-->
     <input>
@@ -219,7 +219,7 @@
       <argu name="StartAtElement" value="" />
       <argu name="Result1" value="True" />
       <argu name="Result2" value="True" />
-      <argu name="Result3" value="True" />     
+      <argu name="Result3" value="True" />
     </input>
     <input>
       <argu name="FilePath" value="ExcC14nSpecExample2.xml" />
@@ -237,7 +237,7 @@
       <argu name="StartAtElement" value="" />
       <argu name="Result1" value="True" />
       <argu name="Result2" value="True" />
-      <argu name="Result3" value="True" />      
+      <argu name="Result3" value="True" />
     </input>
     <input>
       <argu name="FilePath" value="SoapMessage1.xml" />
