@@ -1,4 +1,3 @@
-# crazy recursion
 /runtime/src/libraries/System.Security.Cryptography.Pkcs/tests/SignedCms/SignedDocuments.cs
 /runtime/src/libraries/System.Text.Encoding.CodePages/src/System/Text/EncodingTable.Data.cs
 /runtime/src/tests/JIT/jit64/opt/cse/HugeArray.cs
@@ -15,102 +14,50 @@
 /runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericClasses.cs
 /runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericStructs.cs
 /runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericTypesMix.cs
-
-# missing ) inside in #if
 /aspnetcore/src/Http/Routing/src/Matching/ILEmitTrieFactory.cs
-
-# doesn't compile
 /mono/mcs/class/referencesource/System.Web.DataVisualization/Common/General/Axis.cs
-
-# has #error in an #else we can handle these probably
 /efcore/test/Microsoft.Data.Sqlite.Tests/TestUtilities/SqliteTestFramework.cs
 /roslyn/src/Compilers/Test/Core/Assert/ConditionalFactAttribute.cs
 /roslyn/src/Compilers/Test/Core/Compilation/RuntimeUtilities.cs
-
-# uses #elseif which is not valid
-# these are project templates, so it is valid there
 /aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Server/Controllers/WeatherForecastController.cs
 /aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/Pages/Index.cshtml.cs
 /aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/Controllers/HomeController.cs
 /aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/WebApi-CSharp/Controllers/WeatherForecastController.cs
 /aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/WebApi-CSharp/Program.MinimalAPIs.OrgOrIndividualB2CAuth.cs
-
 /aspnetcore/src/Components/Shared/src/WebRootComponentManager.cs
-
-# this may be real? the file is massive
-# /roslyn/src/Compilers/CSharp/Test/Emit/CodeGen/CodeGenDynamicTests.cs
-
-# no idea what is going on here
 /roslyn/src/Compilers/Test/Resources/Core/SymbolsTests/Metadata/public-and-private.cs
-
-# this is VB
 /roslyn/src/EditorFeatures/VisualBasicTest/Rename/VisualBasicRenamerTests.cs
-
-# this appears valid??
 /runtime/src/libraries/System.Collections/tests/Generic/Comparers/Comparer.Tests.cs
-
-
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.ComponentModel.TypeConverter/src/System/ComponentModel/ReflectTypeDescriptionProvider.cs
 /runtime/src/libraries/System.ComponentModel.TypeConverter/src/System/ComponentModel/ReflectTypeDescriptionProvider.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Net.Primitives/tests/FunctionalTests/SocketAddressTest.cs
 /runtime/src/libraries/System.Net.Primitives/tests/FunctionalTests/SocketAddressTest.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Byte.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Byte.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Char.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Char.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/DateOnly.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/DateOnly.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/DateTime.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/DateTime.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/DateTimeOffset.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/DateTimeOffset.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Decimal.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Decimal.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Diagnostics/Tracing/TraceLogging/EnumHelper.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Diagnostics/Tracing/TraceLogging/EnumHelper.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Double.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Double.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Guid.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Guid.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Half.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Half.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Int16.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Int16.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Int32.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Int32.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Int64.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Int64.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/IntPtr.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/IntPtr.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/SByte.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/SByte.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/Single.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/Single.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/TimeOnly.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/TimeOnly.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/TimeSpan.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/TimeSpan.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/UInt16.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/UInt16.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/UInt32.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/UInt32.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/UInt64.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/UInt64.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.CoreLib/src/System/UIntPtr.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/UIntPtr.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Private.Xml.Linq/tests/XPath/XDocument/NavigatorComparer.cs
 /runtime/src/libraries/System.Private.Xml.Linq/tests/XPath/XDocument/NavigatorComparer.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Runtime/ref/System.Runtime.cs
 /runtime/src/libraries/System.Runtime/ref/System.Runtime.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Text.Json/tests/System.Text.Json.Tests/TrimmingTests/Collections/ICollection.cs
 /runtime/src/libraries/System.Text.Json/tests/System.Text.Json.Tests/TrimmingTests/Collections/ICollection.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/libraries/System.Text.Json/tests/TrimmingTests/Collections/ICollection.cs
 /runtime/src/libraries/System.Text.Json/tests/TrimmingTests/Collections/ICollection.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/mono/mono/tests/array-coop-2.cs
 /runtime/src/mono/mono/tests/array-coop-2.cs
-#https://raw.githubusercontent.com/belav/csharpier-repos/main//runtime/src/tests/JIT/Performance/CodeQuality/Bytemark/bitops.cs
 /runtime/src/tests/JIT/Performance/CodeQuality/Bytemark/bitops.cs
-
 /runtime/src/tests/Interop/PInvoke/BestFitMapping/LPStr/Assembly_False_True/Assembly_False_True.cs
 /runtime/src/tests/Interop/PInvoke/BestFitMapping/LPStr/ATF_PFT/ATF_PFT.cs
 /runtime/src/tests/Interop/PInvoke/BestFitMapping/LPStr/AFF_PFT/AFF_PFT.cs
@@ -138,7 +85,6 @@
 /mono/mcs/errors/*.cs
 /mono/mcs/jay/skeleton.cs
 /runtime/src/libraries/Common/tests/System/Xml/XPath/XDocument/NavigatorComparer.cs
-
 /mono/mcs/tests/test-547.cs 
 /mono/mcs/tests/test-564.cs 
 /mono/mcs/tests/test-666.cs 
@@ -213,7 +159,8 @@
 /roslyn/src/Compilers/Test/Resources/Core/Encoding/sjis.cs 
 /runtime/src/libraries/System.Private.CoreLib/src/System/Globalization/IcuLocaleData.cs
 /runtime/src/libraries/System.Private.Xml/src/System/Xml/MTNameTable.cs 
-/runtime/src/tests/Loader/classloader/StaticVirtualMethods/DiamondShape/svm_diamondshape.cs 
+/runtime/src/tests/Loader/classloader/StaticVirtualMethods/DiamondShape/svm_diamondshape.cs
+/runtime/src/coreclr/System.Private.CoreLib/src/System/Runtime/ExceptionServices/AsmOffsets.cs
 /mono/mcs/class/referencesource/mscorlib/system/security/principal/windowsidentity.cs 
 /mono/mcs/class/referencesource/System.Core/System/Security/Cryptography/BCryptNative.cs 
 /mono/mcs/class/referencesource/System.Runtime.Serialization/System/Runtime/Serialization/CodeGenerator.cs 
@@ -243,17 +190,12 @@
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/Table.cs 
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/WriteTest.cs 
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/ReadTests_Join.cs 
-
-# donno
 /mono/mcs/class/referencesource/mscorlib/system/resources/looselylinkedresourcereference.cs
 /mono/mcs/class/System/Mono.Net.Security/MonoSslServerAuthenticationOptions.cs
 /mono/mcs/class/System/Mono.Net.Security/MonoTlsStream.cs
 /mono/mcs/class/System/Mono.Net.Security/MonoSslAuthenticationOptions.cs
 /mono/mcs/class/referencesource/mscorlib/system/runtime/serialization/formatters/isoapmessage.cs
 /mono/mcs/class/referencesource/mscorlib/system/diagnostics/eventing/TraceLogging/FieldMetadata.cs
-
-
-# funky #if in usings
 /mono/mcs/class/System/Mono.AppleTls/X509CertificateImplApple.cs
 /mono/mcs/class/System/Mono.Net.Security/MonoSslClientAuthenticationOptions.cs
 /mono/mcs/class/System/System.Security.Cryptography.X509Certificates/X509Helper2.cs
