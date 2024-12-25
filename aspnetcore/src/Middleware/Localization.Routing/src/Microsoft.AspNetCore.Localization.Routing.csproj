@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Product>Microsoft ASP.NET Core</Product>
     <Description>Provides a request culture provider which gets culture and ui-culture from request's route data.</Description>
@@ -10,10 +9,8 @@
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Localization" />
     <Reference Include="Microsoft.AspNetCore.Routing.Abstractions" />
   </ItemGroup>
-
 </Project>

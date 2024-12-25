@@ -11,7 +11,6 @@ and are generated based on the last package release.
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
-
   <ItemGroup Label=".NET team dependencies">
     <LatestPackageReference Include="Microsoft.AspNetCore.Razor.Language" />
     <LatestPackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" />
@@ -98,7 +97,6 @@ and are generated based on the last package release.
     <LatestPackageReference Include="System.Threading.Channels" />
     <LatestPackageReference Include="System.Threading.RateLimiting" />
     <LatestPackageReference Include="System.ValueTuple" />
-
     <!-- Runtime packages required for crossgen -->
     <LatestPackageReference Include="Microsoft.NETCore.App.Runtime.win-x64" />
     <LatestPackageReference Include="Microsoft.NETCore.App.Runtime.win-x86" />
@@ -113,8 +111,10 @@ and are generated based on the last package release.
     <LatestPackageReference Include="Microsoft.NETCore.App.Runtime.linux-musl-arm" />
     <LatestPackageReference Include="Microsoft.NETCore.App.Runtime.linux-musl-arm64" />
     <LatestPackageReference Include="Microsoft.NETCore.App.Runtime.freebsd-x64" />
-    <LatestPackageReference Include="Microsoft.NETCore.App.Runtime.$(TargetRuntimeIdentifier)" Condition=" '$(PortableBuild)' == 'false' " />
-
+    <LatestPackageReference
+      Include="Microsoft.NETCore.App.Runtime.$(TargetRuntimeIdentifier)"
+      Condition=" '$(PortableBuild)' == 'false' "
+    />
     <!-- Crossgen2 compiler -->
     <LatestPackageReference Include="Microsoft.NETCore.App.Crossgen2.osx-x64" />
     <LatestPackageReference Include="Microsoft.NETCore.App.Crossgen2.osx-arm64" />
@@ -129,10 +129,15 @@ and are generated based on the last package release.
     <LatestPackageReference Include="Microsoft.NETCore.App.Crossgen2.win-arm" />
     <LatestPackageReference Include="Microsoft.NETCore.App.Crossgen2.win-arm64" />
     <LatestPackageReference Include="Microsoft.NETCore.App.Crossgen2.freebsd-x64" />
-    <LatestPackageReference Include="Microsoft.NETCore.App.Crossgen2.$(TargetRuntimeIdentifier)" Condition=" '$(PortableBuild)' == 'false' " />
+    <LatestPackageReference
+      Include="Microsoft.NETCore.App.Crossgen2.$(TargetRuntimeIdentifier)"
+      Condition=" '$(PortableBuild)' == 'false' "
+    />
   </ItemGroup>
-
-  <ItemGroup Label=".NET team dependencies (Non-source-build)" Condition="'$(DotNetBuildFromSource)' != 'true'">
+  <ItemGroup
+    Label=".NET team dependencies (Non-source-build)"
+    Condition="'$(DotNetBuildFromSource)' != 'true'"
+  >
     <LatestPackageReference Include="Microsoft.AspNet.WebApi.Client" />
     <LatestPackageReference Include="Microsoft.AspNetCore.AzureAppServices.SiteExtension.2.1" />
     <LatestPackageReference Include="Microsoft.AspNetCore.AzureAppServices.SiteExtension.3.1.x64" />
@@ -174,18 +179,15 @@ and are generated based on the last package release.
     <LatestPackageReference Include="System.ServiceProcess.ServiceController" />
     <LatestPackageReference Include="System.Threading.Tasks.Extensions" />
   </ItemGroup>
-
   <ItemGroup Label="MSBuild">
     <LatestPackageReference Include="Microsoft.Build" />
     <LatestPackageReference Include="Microsoft.Build.Framework" />
     <LatestPackageReference Include="Microsoft.Build.Locator" />
     <LatestPackageReference Include="Microsoft.Build.Utilities.Core" />
   </ItemGroup>
-
-  <ItemGroup Label="External dependencies available in source build" >
+  <ItemGroup Label="External dependencies available in source build">
     <LatestPackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
-
   <ItemGroup Label="External dependencies" Condition="'$(DotNetBuildFromSource)' != 'true'">
     <LatestPackageReference Include="AngleSharp" />
     <LatestPackageReference Include="Azure.Identity" />
@@ -228,28 +230,26 @@ and are generated based on the last package release.
     <LatestPackageReference Include="xunit.extensibility.core" />
     <LatestPackageReference Include="xunit.extensibility.execution" />
   </ItemGroup>
-
   <ItemGroup Label="Dependencies with versions.">
     <!-- Get name prefixes for version properties. -->
     <LatestPackageReference Update="@(LatestPackageReference)">
       <VersionName>$([System.String]::new('%(Identity)').Replace('.',''))</VersionName>
     </LatestPackageReference>
-
     <!-- Get versions. -->
     <LatestPackageReference Update="@(LatestPackageReference)">
       <Version>$(%(VersionName)Version)</Version>
-
       <!-- Remove excess metadata. -->
       <VersionName />
     </LatestPackageReference>
-
     <!--
       Special case RID-specific Microsoft.NETCore.App.Runtime dependencies to ease new RID additions. Map from a
       single property to Version metadata for all RIDs.
     -->
     <LatestPackageReference Update="@(LatestPackageReference->WithMetadataValue('Version', ''))">
       <Version
-          Condition=" $([System.String]::new('%(Identity)').StartsWith('Microsoft.NETCore.App.Runtime.')) or $([System.String]::new('%(Identity)').StartsWith('Microsoft.NETCore.App.Crossgen2.'))">$(MicrosoftNETCoreAppRuntimeVersion)</Version>
+        Condition=" $([System.String]::new('%(Identity)').StartsWith('Microsoft.NETCore.App.Runtime.')) or $([System.String]::new('%(Identity)').StartsWith('Microsoft.NETCore.App.Crossgen2.'))"
+        >$(MicrosoftNETCoreAppRuntimeVersion)</Version
+      >
     </LatestPackageReference>
   </ItemGroup>
 </Project>
