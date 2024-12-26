@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);$(DefaultNetFxTargetFramework)</TargetFrameworks>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Localization.Abstractions" />
     <Reference Include="Microsoft.Extensions.Localization" />
@@ -15,5 +13,4 @@
     <Reference Include="Microsoft.Extensions.Options" />
     <Reference Include="Microsoft.Extensions.Primitives" />
   </ItemGroup>
-
 </Project>

@@ -5,7 +5,7 @@
       <conditions>
         <add input="{QUERY_STRING}" pattern="id=20" />
       </conditions>
-      <action type="Rewrite" url="app?id=10" appendQueryString="false"/>
+      <action type="Rewrite" url="app?id=10" appendQueryString="false" />
     </rule>
   </rules>
 </rewrite>

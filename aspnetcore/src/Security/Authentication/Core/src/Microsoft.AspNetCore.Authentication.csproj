@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core common types used by the various authentication middleware components.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -9,11 +8,9 @@
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)SecurityHelper\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication.Core" />
     <Reference Include="Microsoft.AspNetCore.DataProtection" />
@@ -22,5 +19,4 @@
     <Reference Include="Microsoft.Extensions.Options" />
     <Reference Include="Microsoft.Extensions.WebEncoders" />
   </ItemGroup>
-
 </Project>

@@ -1,26 +1,26 @@
 <Project>
   <!-- See https://github.com/dotnet/arcade/blob/master/Documentation/CorePackages/Signing.md for details. -->
   <Import Project="Common.props" />
-
   <ItemGroup>
     <!-- Reset Arcade's defaults. -->
     <ItemsToSign Remove="@(ItemsToSign)" />
     <ItemsToSignPostBuild Remove="@(ItemsToSignPostBuild)" />
     <FileExtensionSignInfo Remove="@(FileExtensionSignInfo)" />
   </ItemGroup>
-
   <PropertyGroup>
     <!-- Use the dotnet certificate for any remaining defaults (e.g. StrongNameSignInfo) -->
     <UseDotNetCertificate>true</UseDotNetCertificate>
   </PropertyGroup>
-
   <!-- Files that should be always be signed between in-build and post-build signing -->
   <ItemGroup Label="Common Files to Sign">
     <CommonFilesToSign Include="$(ArtifactsPackagesDir)**\*.nupkg" />
     <CommonFilesToSign Include="$(VisualStudioSetupOutputPath)**\*.vsix" />
-    <CommonFilesToSign Include="$(ArtifactsPackagesDir)**\*.jar"  />
+    <CommonFilesToSign Include="$(ArtifactsPackagesDir)**\*.jar" />
     <CommonFilesToSign Include="$(ArtifactsDir)installers\$(Configuration)\**\*.zip" />
-    <CommonFilesToSign Remove="$(ArtifactsDir)installers\$(Configuration)\**\*.wixpack.zip" Condition="'$(PostBuildSign)' != 'true'" />
+    <CommonFilesToSign
+      Remove="$(ArtifactsDir)installers\$(Configuration)\**\*.wixpack.zip"
+      Condition="'$(PostBuildSign)' != 'true'"
+    />
   </ItemGroup>
   <Choose>
     <!-- When post build signing is false - Sign as normal.
@@ -49,8 +49,6 @@
       </ItemGroup>
     </When>
   </Choose>
-
-
   <ItemGroup Label="File signing information">
     <!--
       Map file extensions to a code-sign cert.
@@ -65,9 +63,16 @@
     <FileExtensionSignInfo Include=".cab" CertificateName="None" />
     <!-- If doing post build sign, explicitly give MSIs a cert. If doing in build signing,
          this is handled by the wix targets, and .msi should be "None" -->
-    <FileExtensionSignInfo Include=".msi" CertificateName="MicrosoftDotNet500" Condition="'$(PostBuildSign)' == 'true'" />
-    <FileExtensionSignInfo Include=".msi" CertificateName="None" Condition="'$(PostBuildSign)' != 'true'" />
-
+    <FileExtensionSignInfo
+      Include=".msi"
+      CertificateName="MicrosoftDotNet500"
+      Condition="'$(PostBuildSign)' == 'true'"
+    />
+    <FileExtensionSignInfo
+      Include=".msi"
+      CertificateName="None"
+      Condition="'$(PostBuildSign)' != 'true'"
+    />
     <!-- Native .dll's. These don't have a public key token, but are from Microsoft and should be signed. -->
     <FileSignInfo Include="aspnetcore.dll" CertificateName="MicrosoftDotNet500" />
     <FileSignInfo Include="aspnetcorev2_inprocess.dll" CertificateName="MicrosoftDotNet500" />
@@ -80,9 +85,11 @@
     <FileSignInfo Include="dotnet-watch.exe" CertificateName="MicrosoftDotNet500" />
     <FileSignInfo Include="dotnet-openapi.exe" CertificateName="MicrosoftDotNet500" />
     <FileSignInfo Include="dotnet-user-jwts.exe" CertificateName="MicrosoftDotNet500" />
-    <FileSignInfo Include="Microsoft.AspNetCore.Blazor.Build.exe" CertificateName="MicrosoftDotNet500" />
+    <FileSignInfo
+      Include="Microsoft.AspNetCore.Blazor.Build.exe"
+      CertificateName="MicrosoftDotNet500"
+    />
     <FileSignInfo Include="sni.dll" CertificateName="MicrosoftDotNet500" />
-
     <!-- Third-party components which should be signed.  -->
     <FileSignInfo Include="Newtonsoft.Json.dll" CertificateName="3PartySHA2" />
     <FileSignInfo Include="AngleSharp.dll" CertificateName="3PartySHA2" />
@@ -91,12 +98,10 @@
     <FileSignInfo Include="Mono.Cecil.Pdb.dll" CertificateName="3PartySHA2" />
     <FileSignInfo Include="Mono.Cecil.Rocks.dll" CertificateName="3PartySHA2" />
   </ItemGroup>
-
   <PropertyGroup>
     <BaseRedistNetCorePath>$(ArtifactsObjDir)RedistSharedFx.Layout\$(Configuration)\</BaseRedistNetCorePath>
     <RedistNetCorePath>$(BaseRedistNetCorePath)$(TargetRuntimeIdentifier)\</RedistNetCorePath>
   </PropertyGroup>
-
   <ItemGroup Label="Code sign exclusions">
     <!-- We don't need to code sign .js files because they are not used in Windows Script Host. -->
     <FileExtensionSignInfo Include=".js" CertificateName="None" />
@@ -107,7 +112,6 @@
     <FileSignInfo Include="ancm.mof" CertificateName="None" />
     <!-- Exclude the apphost because this is expected to be code-signed by customers after the SDK modifies it. -->
     <FileSignInfo Include="apphost.exe" CertificateName="None" />
-
     <!--
       These files should already be signed by the .NET Core team. They have to be listed again here because we recreate a redistributable which includes the Microsoft.NETCore.App runtime.
       List all combinations of Windows RID's because CI may build multiple combinations of artitectures on the same machine.
@@ -118,27 +122,52 @@
 
       Do not include these with cert "None" when doing post-build signing. In that case, we will recognize that
     -->
-    <_DotNetFilesToExclude Include="$(BaseRedistNetCorePath)win-x64\shared\Microsoft.NETCore.App\**\*.dll" CertificateName="None" />
-    <_DotNetFilesToExclude Include="$(BaseRedistNetCorePath)win-x86\shared\Microsoft.NETCore.App\**\*.dll" CertificateName="None" />
-    <_DotNetFilesToExclude Include="$(BaseRedistNetCorePath)win-arm\shared\Microsoft.NETCore.App\**\*.dll" CertificateName="None" />
-    <_DotNetFilesToExclude Include="$(BaseRedistNetCorePath)win-arm64\shared\Microsoft.NETCore.App\**\*.dll" CertificateName="None" />
-    <_DotNetFilesToExclude Include="$(BaseRedistNetCorePath)win-x64\host\**\*.dll" CertificateName="None" />
-    <_DotNetFilesToExclude Include="$(BaseRedistNetCorePath)win-x86\host\**\*.dll" CertificateName="None" />
-    <_DotNetFilesToExclude Include="$(BaseRedistNetCorePath)win-arm\host\**\*.dll" CertificateName="None" />
-    <_DotNetFilesToExclude Include="$(BaseRedistNetCorePath)win-arm64\host\**\*.dll" CertificateName="None" />
+    <_DotNetFilesToExclude
+      Include="$(BaseRedistNetCorePath)win-x64\shared\Microsoft.NETCore.App\**\*.dll"
+      CertificateName="None"
+    />
+    <_DotNetFilesToExclude
+      Include="$(BaseRedistNetCorePath)win-x86\shared\Microsoft.NETCore.App\**\*.dll"
+      CertificateName="None"
+    />
+    <_DotNetFilesToExclude
+      Include="$(BaseRedistNetCorePath)win-arm\shared\Microsoft.NETCore.App\**\*.dll"
+      CertificateName="None"
+    />
+    <_DotNetFilesToExclude
+      Include="$(BaseRedistNetCorePath)win-arm64\shared\Microsoft.NETCore.App\**\*.dll"
+      CertificateName="None"
+    />
+    <_DotNetFilesToExclude
+      Include="$(BaseRedistNetCorePath)win-x64\host\**\*.dll"
+      CertificateName="None"
+    />
+    <_DotNetFilesToExclude
+      Include="$(BaseRedistNetCorePath)win-x86\host\**\*.dll"
+      CertificateName="None"
+    />
+    <_DotNetFilesToExclude
+      Include="$(BaseRedistNetCorePath)win-arm\host\**\*.dll"
+      CertificateName="None"
+    />
+    <_DotNetFilesToExclude
+      Include="$(BaseRedistNetCorePath)win-arm64\host\**\*.dll"
+      CertificateName="None"
+    />
     <_DotNetFilesToExclude Include="$(RedistNetCorePath)dotnet.exe" CertificateName="None" />
-    <FileSignInfo Include="@(_DotNetFilesToExclude->'%(FileName)%(Extension)'->Distinct())" CertificateName="None" Condition="'$(PostBuildSign)' != 'true'" />
-
+    <FileSignInfo
+      Include="@(_DotNetFilesToExclude->'%(FileName)%(Extension)'->Distinct())"
+      CertificateName="None"
+      Condition="'$(PostBuildSign)' != 'true'"
+    />
     <!-- Symbol packages should get no NuGet signature -->
     <!-- Requires https://github.com/dotnet/arcade/issues/6192 to be fixed -->
     <!-- <FileSignInfo Include="@(_SymbolPackages->'%(FileName)%(Extension)'->Distinct())" CertificateName="None" /> -->
-
     <!--
       We include the Microsoft.Build.Locator.dll assembly in our global tool 'Microsoft.dotnet-openapi'.
       It is already signed by that team, so we don't need to sign it.
     -->
     <FileSignInfo Include="Microsoft.Build.Locator.dll" CertificateName="None" />
-
     <!--
       We include the Microsoft.Data.SqlClient.dll and Microsoft.Identity.Client.dll assembly in our global tool 'dotnet-sql-cache'.
       It is already signed by that team, so we don't need to sign it.
@@ -146,5 +175,4 @@
     <FileSignInfo Include="Microsoft.Data.SqlClient.dll" CertificateName="None" />
     <FileSignInfo Include="Microsoft.Identity.Client.dll" CertificateName="None" />
   </ItemGroup>
-
 </Project>

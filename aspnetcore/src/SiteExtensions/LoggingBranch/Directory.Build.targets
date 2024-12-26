@@ -1,9 +1,6 @@
 <Project>
-
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.targets))\Directory.Build.targets" />
-
   <Import Project="..\Sdk\SiteExtension.targets" />
-
   <PropertyGroup>
     <!-- There is no build output -->
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -17,5 +14,4 @@
     <RunPackageAnalysis>false</RunPackageAnalysis>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-
 </Project>

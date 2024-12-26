@@ -1,6 +1,5 @@
 <Project>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.targets))\Directory.Build.targets" />
-
   <PropertyGroup>
     <TargetPath>$(OutputPath)$(TargetFileName)</TargetPath>
     <DebBuildDependsOn>
@@ -10,23 +9,29 @@
       GetTargetPath;
     </DebBuildDependsOn>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.Build.Tasks.Templating" Version="$(MicrosoftDotNetBuildTasksTemplatingVersion)" AllowExplicitReference="true" PrivateAssets="All" IsImplicitlyDefined="true" />
+    <PackageReference
+      Include="Microsoft.DotNet.Build.Tasks.Templating"
+      Version="$(MicrosoftDotNetBuildTasksTemplatingVersion)"
+      AllowExplicitReference="true"
+      PrivateAssets="All"
+      IsImplicitlyDefined="true"
+    />
   </ItemGroup>
-
   <Target Name="PrepareForBuild">
     <MakeDir Directories="$(IntermediateOutputPath);$(OutputPath)" />
-
-    <Error Text="Currently only linux-x64 is supported by Debian installers." Condition=" '$(TargetRuntimeIdentifier)' != 'linux-x64' " />
-    <Error Text="Missing required property: PackageContentRoot" Condition=" '$(PackageContentRoot)' == '' " />
+    <Error
+      Text="Currently only linux-x64 is supported by Debian installers."
+      Condition=" '$(TargetRuntimeIdentifier)' != 'linux-x64' "
+    />
+    <Error
+      Text="Missing required property: PackageContentRoot"
+      Condition=" '$(PackageContentRoot)' == '' "
+    />
   </Target>
-
   <Target Name="GetTargetPath" Returns="$(TargetPath)" />
-
   <Target Name="Build" DependsOnTargets="DebBuild" />
   <Target Name="Pack" />
-
   <Target Name="DebBuild" DependsOnTargets="$(DebBuildDependsOn)">
     <!-- Generate debian_config.json. We can't simply use WriteLinesToFile because of https://github.com/Microsoft/msbuild/issues/1622. Use our custom GenerateFileFromTemplate task instead -->
     <PropertyGroup>
@@ -46,19 +51,19 @@
         PackageDescription=$(PackageDescription);
       </DebianConfigProperties>
     </PropertyGroup>
-
-    <GenerateFileFromTemplate TemplateFile="debian_config.json.in"
+    <GenerateFileFromTemplate
+      TemplateFile="debian_config.json.in"
       Properties="$(DebianConfigProperties)"
-      OutputPath="$(IntermediateOutputPath)debian_config.json" />
-
+      OutputPath="$(IntermediateOutputPath)debian_config.json"
+    />
     <!-- Build SharedFx Bundle Deb package -->
-
     <Exec Command="$(DebianBuildScript) -i '$(IntermediateOutputPath)' -o '$(IntermediateOutputPath)out/' -C '$(PackageContentRoot)'" />
-
     <PropertyGroup>
       <BuildScriptOutputFileName>$(PackageId)_$(DebPackageVersion)-$(PackageRevision)_$(DebianPackageArch).deb</BuildScriptOutputFileName>
     </PropertyGroup>
-
-    <Copy SourceFiles="$(IntermediateOutputPath)out/$(BuildScriptOutputFileName)" DestinationFiles="$(TargetPath)" />
+    <Copy
+      SourceFiles="$(IntermediateOutputPath)out/$(BuildScriptOutputFileName)"
+      DestinationFiles="$(TargetPath)"
+    />
   </Target>
 </Project>

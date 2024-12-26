@@ -3,7 +3,6 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.ResponseCompression" />
     <Reference Include="Microsoft.AspNetCore.StaticFiles" />
@@ -12,5 +11,4 @@
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
     <Reference Include="Microsoft.Extensions.Logging.Console" />
   </ItemGroup>
-
 </Project>

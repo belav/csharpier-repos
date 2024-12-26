@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.Extensions.Configuration" />
@@ -12,5 +10,4 @@
     <Reference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
     <Reference Include="Microsoft.Extensions.Logging.Console" />
   </ItemGroup>
-
 </Project>

@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="FSharp.Core" />
     <Reference Include="Microsoft.AspNetCore.Http" />
@@ -16,5 +14,4 @@
     <Reference Include="Microsoft.Extensions.Hosting.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.OpenApi" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -7,13 +6,15 @@
     <IsShipping>false</IsShipping>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
   </ItemGroup>
-
   <ItemGroup>
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None
+      Include="$(OutputPath)\$(AssemblyName).dll"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false"
+    />
   </ItemGroup>
-
 </Project>

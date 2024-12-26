@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="OpenIdConnect\wellknownconfig.json" />
     <None Remove="OpenIdConnect\wellknownkeys.json" />
@@ -11,10 +9,8 @@
     <None Remove="WsFederation\InvalidToken.xml" />
     <None Remove="WsFederation\ValidToken.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)test\Certificates\Certificates.cs" />
-
     <Content Include="WsFederation\federationmetadata.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -29,12 +25,10 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="OpenIdConnect\wellknownconfig.json" />
     <EmbeddedResource Include="OpenIdConnect\wellknownkeys.json" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Authentication.BearerToken" />
@@ -52,5 +46,4 @@
     <Reference Include="Microsoft.Extensions.TimeProvider.Testing" />
     <Reference Include="Microsoft.Net.Http.Headers" />
   </ItemGroup>
-
 </Project>

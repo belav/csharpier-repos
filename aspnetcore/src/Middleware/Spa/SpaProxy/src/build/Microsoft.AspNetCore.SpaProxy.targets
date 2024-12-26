@@ -1,11 +1,12 @@
 <Project>
-
   <Target Name="WriteSpaConfigurationToDisk" BeforeTargets="AssignTargetPaths">
     <PropertyGroup>
       <_SpaProxyServerLaunchConfig>$(IntermediateOutputPath)spa.proxy.json</_SpaProxyServerLaunchConfig>
       <_SpaRootFullPath>$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '$(SpaRoot)').Replace('\','\\'))</_SpaRootFullPath>
-      <SpaProxyTimeoutInSeconds Condition="'$(SpaProxyTimeoutInSeconds)' == ''" >120</SpaProxyTimeoutInSeconds>
-      <SpaProxyKeepRunning Condition="'$(SpaProxyKeepRunning)' == ''" >false</SpaProxyKeepRunning>
+      <SpaProxyTimeoutInSeconds Condition="'$(SpaProxyTimeoutInSeconds)' == ''"
+        >120</SpaProxyTimeoutInSeconds
+      >
+      <SpaProxyKeepRunning Condition="'$(SpaProxyKeepRunning)' == ''">false</SpaProxyKeepRunning>
     </PropertyGroup>
     <ItemGroup>
       <_SpaProxyServerLaunchConfigLines Include="{" />
@@ -19,11 +20,20 @@
       <_SpaProxyServerLaunchConfigLines Include="  }" />
       <_SpaProxyServerLaunchConfigLines Include="}" />
     </ItemGroup>
-    <WriteLinesToFile File="$(_SpaProxyServerLaunchConfig)" Lines="@(_SpaProxyServerLaunchConfigLines)" WriteOnlyWhenDifferent="true" Overwrite="true" />
+    <WriteLinesToFile
+      File="$(_SpaProxyServerLaunchConfig)"
+      Lines="@(_SpaProxyServerLaunchConfigLines)"
+      WriteOnlyWhenDifferent="true"
+      Overwrite="true"
+    />
     <ItemGroup>
-      <ContentWithTargetPath Include="$(_SpaProxyServerLaunchConfig)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" TargetPath="spa.proxy.json" />
+      <ContentWithTargetPath
+        Include="$(_SpaProxyServerLaunchConfig)"
+        CopyToOutputDirectory="PreserveNewest"
+        CopyToPublishDirectory="Never"
+        TargetPath="spa.proxy.json"
+      />
       <FileWrites Include="$(_SpaProxyServerLaunchConfig)" />
     </ItemGroup>
   </Target>
-
 </Project>

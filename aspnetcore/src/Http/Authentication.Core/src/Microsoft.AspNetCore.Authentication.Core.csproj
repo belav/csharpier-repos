@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core common types used by the various authentication middleware components.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -9,11 +8,9 @@
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.Http" />
     <Reference Include="Microsoft.AspNetCore.Http.Extensions" />
   </ItemGroup>
-
 </Project>
